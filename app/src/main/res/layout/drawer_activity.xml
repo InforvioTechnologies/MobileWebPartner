@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+     <ScrollView
+         android:scrollbars="none"
+         android:layout_weight="1"
+         android:layout_width="match_parent"
+         android:layout_height="match_parent"
+         android:fillViewport="true">
+          <LinearLayout
+
+              android:background="@color/white"
+              android:orientation="vertical"
+              android:layout_gravity="center"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+               <LinearLayout
+                   android:visibility="gone"
+                   android:id="@+id/check_e"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:gravity="center"
+                   android:padding="5dp"
+                   android:layout_weight="0">
+                    <android.support.v7.widget.AppCompatTextView
+                        android:id="@+id/txt_check_e"
+                        android:textColor="@color/colorPrimaryDark"
+                        style="@style/SmallText"
+                        android:textStyle="bold"
+                        android:textSize="15dp"
+                        android:text="Check Eligibility"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+               </LinearLayout>
+               <LinearLayout
+                   android:visibility="gone"
+                   android:id="@+id/quick_apply"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:gravity="center"
+                   android:padding="5dp"
+                   android:layout_weight="0">
+                    <android.support.v7.widget.AppCompatTextView
+                        android:id="@+id/txt_quick_apply"
+                        style="@style/SmallText"
+                        android:text="Quick Apply"
+                        android:textStyle="bold"
+                        android:textSize="15dp"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+               </LinearLayout>
+
+               <LinearLayout
+                   android:visibility="gone"
+                   android:id="@+id/Ly_chat"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:gravity="center"
+                   android:padding="5dp"
+                   android:layout_weight="0">
+                    <android.support.v7.widget.AppCompatTextView
+                        android:id="@+id/txt_chat"
+                        style="@style/SmallText"
+                        android:textStyle="bold"
+                        android:textSize="15dp"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:text="chat"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+               </LinearLayout>
+               <LinearLayout
+                   android:id="@+id/Ly_profile"
+                   android:layout_width="match_parent"
+                   android:gravity="center"
+                   android:orientation="horizontal"
+                   android:layout_height="wrap_content"
+                   android:padding="5dp"
+                   android:layout_weight="0">
+                    <ImageView
+                        android:background="@drawable/ic_profile"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <android.support.v7.widget.AppCompatTextView
+                        android:id="@+id/txt_profile"
+                        android:text="Profile"
+                        android:textStyle="bold"
+                        style="@style/SmallText"
+                        android:textColor="@color/colorPrimary1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+               </LinearLayout>
+               <LinearLayout
+
+                   android:id="@+id/Ly_bank"
+                   android:layout_width="match_parent"
+                   android:gravity="center"
+                   android:layout_height="wrap_content"
+                   android:padding="5dp"
+                   android:layout_weight="0">
+                    <ImageView
+                        android:background="@drawable/ic_account"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <android.support.v7.widget.AppCompatTextView
+                        android:id="@+id/txt_bank"
+                        android:text="Bank Details"
+                        android:textStyle="bold"
+                        style="@style/SmallText"
+                        
+                        android:textColor="@color/colorPrimary1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+               </LinearLayout>
+               <LinearLayout
+
+                   android:id="@+id/Ly_contact"
+                   android:layout_width="match_parent"
+                   android:gravity="center"
+                   android:layout_height="wrap_content"
+                   android:padding="5dp"
+                   android:layout_weight="0">
+                    <ImageView
+                        android:background="@drawable/ic_call"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <android.support.v7.widget.AppCompatTextView
+                        android:id="@+id/txt_get_callback"
+                        android:text="Customer Care"
+                        android:textStyle="bold"
+                        style="@style/SmallText"
+                        android:textColor="@color/colorPrimary1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+               </LinearLayout>
+               <LinearLayout
+                   android:visibility="gone"
+                   android:id="@+id/get_callback"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:gravity="center"
+                   android:padding="5dp">
+                    <ImageView
+                        android:background="@drawable/phone"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <android.support.v7.widget.AppCompatTextView
+                        android:id="@+id/help_and_support"
+                        android:text="Rajasthan Call Center"
+                        android:textColor="@color/colorPrimary1"
+                        android:textStyle="bold"
+                        style="@style/SmallText"
+                        
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+               </LinearLayout>
+               <LinearLayout
+                   android:id="@+id/logout1"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:gravity="center"
+                   android:padding="5dp">
+                    <ImageView
+                        android:background="@drawable/logout"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <android.support.v7.widget.AppCompatTextView
+                        android:id="@+id/logout2"
+                        android:textColor="@color/colorPrimary1"
+                        android:text="Logout"
+                        android:textStyle="bold"
+                        style="@style/SmallText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+               </LinearLayout>
+          </LinearLayout>
+     </ScrollView>
+     <LinearLayout
+
+         android:elevation="4sp"
+         android:gravity="center"
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:orientation="horizontal">
+
+          <LinearLayout
+
+              android:id="@+id/Ly_chat1"
+              android:gravity="end"
+              android:layout_weight="1"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:orientation="vertical">
+               <LinearLayout
+                   android:orientation="horizontal"
+                   android:padding="5dp"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content">
+
+
+                    <android.support.v7.widget.AppCompatTextView
+                        android:id="@+id/txt_code"
+                        android:gravity="center"
+                        android:layout_marginLeft="10dp"
+                        android:textColor="@color/colorPrimary"
+                        style="@style/SmallText"
+                        android:text="Your Partner Code"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+               </LinearLayout>
+
+               <LinearLayout
+                   android:layout_marginBottom="150dp"
+                   android:orientation="horizontal"
+                   android:padding="5dp"
+                   android:id="@+id/Ly_contact1"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content">
+
+                    <android.support.v7.widget.AppCompatTextView
+                        android:id="@+id/code"
+                        android:gravity="center"
+                        android:layout_marginLeft="10dp"
+                        android:textColor="@color/colorAccent"
+                        style="@style/SmallText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+               </LinearLayout>
+
+          </LinearLayout>
+
+     </LinearLayout>
+</LinearLayout>

@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    tools:context="in.loanwiser.partnerapp.User_Account.Welcome_Page">
+    <LinearLayout
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <android.support.v7.widget.AppCompatImageView
+                android:visibility="gone"
+                android:layout_gravity="center"
+                android:background="@drawable/logo2"
+                android:layout_width="150dp"
+                android:layout_height="150dp" />
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/welcome"
+                android:layout_marginTop="20dp"
+                android:layout_gravity="center"
+                android:textSize="30dp"
+                android:textColor="@color/colorPrimary1"
+                android:text="@string/welcome"
+                style="@style/SmallText_Dashboard"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <android.support.v7.widget.AppCompatImageView
+                android:layout_gravity="center"
+                android:background="@drawable/loanwisersmall1"
+                android:id="@+id/logo"
+                android:layout_width="320dp"
+                android:layout_height="70dp" />
+            <LinearLayout
+                android:padding="20dp"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <android.support.v7.widget.AppCompatTextView
+                    android:layout_marginTop="20dp"
+                    android:id="@+id/emp2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:textColor="@color/colorPrimary1"
+                    android:textStyle="bold"
+                    android:textSize="15sp"
+                    android:text="Refer Loan Leads and earn Additional Income."/>
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/emp3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:textColor="@color/colorPrimary1"
+                    android:textStyle="bold"
+                    android:textSize="15sp"
+                    android:text="@string/proof"/>
+
+            </LinearLayout>
+        </LinearLayout>
+
+    </LinearLayout>
+    <LinearLayout
+        android:elevation="4sp"
+        android:gravity="center"
+        android:background="@color/colorBlack_overlay"
+        android:layout_width="match_parent"
+        android:layout_height="?android:attr/actionBarSize"
+        android:orientation="horizontal">
+
+
+        <LinearLayout
+            android:background="@color/white_ish"
+            android:gravity="end"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <android.support.v7.widget.AppCompatButton
+                android:layout_weight="1"
+                android:id="@+id/Bt_Register"
+                android:text="@string/registr"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="start"
+                android:textSize="12sp"
+                android:textColor="@color/colorAccent"
+                android:background="@color/white"
+                 />
+
+
+            <android.support.v7.widget.AppCompatButton
+                android:layout_marginLeft="5dp"
+                android:textColor="@color/white"
+                android:background="@drawable/capsul_button1"
+                android:layout_weight="1"
+                android:id="@+id/Bt_Login"
+                android:textSize="12sp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="start"
+                android:text="@string/login"
+
+                 />
+        </LinearLayout>
+
+    </LinearLayout>
+</LinearLayout>

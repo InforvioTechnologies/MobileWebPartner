@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="in.loanwiser.partnerapp.Documents.Applicant_Details_Single">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <include layout="@layout/ly_container" />
+
+        <ScrollView
+            android:scrollbars="none"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <android.support.v7.widget.CardView
+                    android:visibility="gone"
+                    xmlns:android="http://schemas.android.com/apk/res/android"
+                    xmlns:app="http://schemas.android.com/apk/res-auto"
+                    xmlns:card_view="http://schemas.android.com/tools"
+                    android:id="@+id/card_view_doc"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginLeft="3dp"
+                    android:layout_marginRight="3dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="70dp"
+                    card_view:cardCornerRadius="4dp">
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <LinearLayout
+                                android:gravity="center"
+                                android:orientation="horizontal"
+                                android:layout_width="80dp"
+                                android:layout_height="match_parent">
+                                <ImageView
+                                    android:id="@+id/image_property"
+                                    android:layout_gravity="center"
+                                    android:layout_width="35dp"
+                                    android:layout_height="35dp" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+
+                                android:orientation="horizontal"
+                                android:layout_width="250dp"
+                                android:layout_height="match_parent">
+
+                                <android.support.v7.widget.AppCompatTextView
+                                    android:gravity="center"
+                                    android:id="@+id/applicant_from"
+                                    style="@style/LorgeText"
+                                    android:text="Property Identified Identified"
+                                    android:textColor="@color/colorPrimaryDark"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:gravity="center"
+                                android:orientation="horizontal"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent">
+
+                                <ImageView
+                                    android:visibility="gone"
+                                    android:id="@+id/status_upload"
+                                    android:layout_gravity="center"
+                                    android:layout_width="30dp"
+                                    android:layout_height="30dp" />
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+                    </LinearLayout>
+                </android.support.v7.widget.CardView>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:orientation="vertical">
+                    <include layout="@layout/ly_swipe_recyclerview"/>
+
+                </LinearLayout>
+                <LinearLayout
+                    android:visibility="gone"
+                    android:id="@+id/Ly_DOC_Status"
+                    android:padding="10dp"
+                    android:elevation="4sp"
+                    android:gravity="center"
+                     android:layout_marginTop="20dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <LinearLayout
+                        android:layout_gravity="center"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <CheckBox
+                            android:id="@+id/check_complete"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent" />
+                        <android.support.v7.widget.AppCompatTextView
+                            android:id="@+id/dcomplete"
+                            android:gravity="center"
+                            style="@style/SmallText"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/dcomplete"/>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:padding="10dp"
+                        android:layout_marginTop="20dp"
+                        android:gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <android.support.v7.widget.AppCompatButton
+                            android:id="@+id/Completed"
+                            android:text="Submit"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="start"
+                            android:theme="@style/ButtonStyle" />
+
+
+                        <android.support.v7.widget.AppCompatTextView
+
+                            android:id="@+id/notes"
+                            android:gravity="center"
+                          android:textStyle="bold"
+                            style="@style/SmallText"
+
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/notes"/>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+
+
+
+            </LinearLayout>
+
+        </ScrollView>
+
+
+
+    </LinearLayout>
+
+</LinearLayout>

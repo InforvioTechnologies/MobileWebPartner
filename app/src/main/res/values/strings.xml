@@ -1,0 +1,329 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="app_name">Loanwiser</string>
+    <string name="welcome">Welcome to </string>
+    <string name="login">Login</string>
+    <string name="registr">Register</string>
+
+    <string name="dashboards">Lead Dashboard</string>
+    <string name="lead_details">Lead Detail Dashboard</string>
+    <string name="cinterview">Customer Interview</string>
+    <string name="list_lead">List of Leads</string>
+
+    <string name="name">Name</string>
+    <string name="mob">Mobile No</string>
+    <string name="signin">SIGN IN</string>
+    <string name="signup1">SIGN UP</string>
+    <string name="type">Business Type</string>
+    <string name="address">Address</string>
+    <string name="otp">Verify OTP</string>
+    <string name="enterotp">Enter OTP</string>
+    <string name="enterotp1">OTP Verification</string>
+    <string name="password">Name</string>
+    <string name="bussiness">Business you are in..?</string>
+    <string name="bussiness_type">Business Type</string>
+    <string name="city_you">Which City do you live in ?</string>
+    <string name="state_you">Which State are you from?</string>
+    <string name="btn_ok">OK</string>
+    <string name="door">Door No/ Unit No</string>
+    <string name="buliding">Building Name</string>
+    <string name="street">Street Name</string>
+    <string name="locality">Locality</string>
+    <string name="pincode">Pincode</string>
+    <string name="city">City</string>
+    <string name="state">State</string>
+    <string name="app_sign">Sign Up</string>
+    <string name="ur_number">Your Mobile Number</string>
+    <string name="ind">India (+91)</string>
+    <string name="listapp1">Apply For Loans </string>
+    <string name="apply">Apply Now</string>
+    <string name="error_empty_mobile1">Please enter the Loan Amount above 10,000</string>
+    <string name="error_empty_loan">Please enter the Loan Amount above 50,000 </string>
+    <string name="error_empty_mobile2">Please Enter the valid Pin code</string>
+
+    <string name="verif">Mobile Verification</string>
+    <string name="otp_enter">Enter the otp below in case if we fail to detect the SMS automatically</string>
+    <string name="pls_enter">Please enter your mobile number</string>
+    <string name="pls_enter_new">Please enter your mobile number to update with exiting number</string>
+    <string name="pls_enter1" tools:ignore="StringEscaping">Heres your list of customers application</string>
+    <string name="pls_enter_otp">Please enter your mobile number</string>
+    <string name="send_txt">We will send you a "\n" One time SMS message</string>
+    <string name="generate">Get OTP</string>
+    <string name="submit">Verify it</string>
+    <string name="upload_doc">Upload Document</string>
+    <string name="track_status">Track Status</string>
+    <string name="error_postal">Please enter the Pincode</string>
+    <string name="city_type">Select the City</string>
+    <string name="state_type">Select the State</string>
+    <string name="mobileerror">Enter a valid mobile number</string>
+    <string name="no_leads_data" tools:ignore="ExtraTranslation">No Leads found "\n" add your leads "\n" to Start with Loanwiser</string>
+    <string name="listapp">List of Applications</string>
+    <string name="error_account1">Kindly enter the Account Number</string>
+    <string name="error_name">Kindly enter the Customer Name</string>
+    <string name="error_income_monthly">Please enter the Monthly income amount</string>
+    <string name="error_property">Please enter the Property Pin code</string>
+    <string name="error_work">Please enter the Work Pin code</string>
+    <string name="error_occupation">Please enter the Occupation</string>
+    <string name="error_branch">Kindly enter the Bank Branch</string>
+    <string name="addl">Add your Leads</string>
+    <string name="update_lead">Update your Leads</string>
+    <string name="validation_state">Select the Loan Typ</string>
+    <string name="app_add_lead">Add Lead</string>
+    <string name="invalid_ifcse">Please enter a IFCS Code</string>
+    <string name="saveB">Save</string>
+    <string name="loan_type">Loan Type</string>
+    <string name="property_type">Property identified</string>
+    <string name="add_co_app">Add your Co-applicants</string>
+    <string name="Applicant11">Applicant Info</string>
+    <string name="applicant">Applicant Details</string>
+    <string name="btnTakePicture">Capture Image</string>
+    <string name="available_Operation">Please Select the Available Operational States:</string>
+    <string name="st">Tamil Nadu"\n" Karnataka"\n" Andhra"\n" Thelungana"\n" Rajasthan</string>
+    <string name="offer">Lists of offers generated</string>
+    <string name="b_holder_name">Account Holder Name</string>
+    <string name="b_ac_no">Account Number</string>
+    <string name="b_ac_type">Account Type</string>
+    <string name="bank_name">Name of the Bank</string>
+    <string name="branch">Bank Branch</string>
+    <string name="pay_mode">Mode of Payment through</string>
+    <string name="ifsc">IFSC Code</string>
+    <string name="internet">Internet</string>
+    <string name="mbank">Mobile</string>
+    <string name="internet_b">Internet Banking</string>
+    <string name="mbank_b">Mobile Banking</string>
+    <string name="open_my">Open My</string>
+    <!-- <string name="NoApplicant">No Co Applicant</string>-->
+    <string name="App1">1</string>
+    <string name="App2">2 </string>
+    <string name="App3">3 </string>
+    <string name="App4">4 </string>
+    <string name="gamil_reg">Register with Gmail</string>
+    <string name="btnUploadToServer">Upload </string>
+    <string name="upload">Upload </string>
+    <string name="NoApplicant">No Co Applicant</string>
+    <string name="Applicant1">Co Applicant 1</string>
+    <string name="Applicant2">Co Applicant 2</string>
+    <string name="Applicant3">Co Applicant 3</string>
+    <string name="Applicant4">Co Applicant 4</string>
+    <string name="prop">Generated Loan Offer</string>
+    <string name="Applicant">Applicant</string>
+    <string name="choose_one">Upload any one of these Document</string>
+    <string name="ApplicantSalary">Applicant Salary Details</string>
+    <string name="app_imge">Uploaded Documents</string>
+    <string name="error_pan">This Pan number is incorrect</string>
+    <string name="pan_note">* Pan no used in Rental Agreements and Rental receipts</string>
+    <string name="pan">Pan No</string>
+    <string name="profile">Profile</string>
+    <string name="invalid_email">Please enter a valid email</string>
+    <string name="updated">Save</string>
+    <string name="email">Email ID</string>
+    <string name="homeLoan">Home Loan</string>
+    <string name="lap">Loan Against Property</string>
+    <string name="pl">Personal Loan</string>
+    <string name="bl">Business Loan</string>
+    <string name="vehicleloan">Vehicle Loan</string>
+    <string name="loan_purpose"> Loan Against Property is a mortgage Loan and can be availed against Commercial or residential property collaterals. </string>
+
+    <string name="loan_purpose1">This loan can be used for</string>
+    <string name="loan_purpose2"> Business purpose</string>
+    <string name="loan_purpose3"> Medical treatments</string>
+    <string name="loan_purpose4"> Child\'s marriage / higher studies</string>
+
+    <string name="home_loan">At Loanwiser, we are trying to make the home loan application and the process of obtaining a simple and hassle free loan to our every client.
+        Home loan facility can be used to buy a house or flat or resale property ready to shift or under construction </string>
+
+    <string name="home_loan1">Own your dream house through Home Loan with lower interest rates. Loans starting as low as 8.5% Through Home Loan you can</string>
+
+    <string-array name="vehicle">
+        <item> -No of Co-Applicant-</item>
+        <item>Guarantor</item>
+    </string-array>
+
+
+    <string name="home_purpose2"> Purchase house</string>
+    <string name="home_purpose3"> Construct house in your land</string>
+    <string name="home_purpose4"> Improvement loan</string>
+    <string name="home_purpose5"> Purchase Plot</string>
+    <string name="home_purpose6"> Renovate/Extend your exisiting House</string>
+    <string name="home_purpose7"> Balance Transfer </string>
+
+    //personal Loan
+    <string name="personal_loan">Looking for Loan to fulfil your Personal financial needs. Then Personal Loan comes in handy to meet your expenses like</string>
+
+    <string name="personal_purpose2"> Higher Education</string>
+    <string name="personal_purpose3"> Wedding Expenses</string>
+    <string name="personal_purpose4"> Travel Expenses</string>
+
+    <string name="personal_purpose5"> For Business </string>
+
+    <string name="personal_purpose6">For financial requirements </string>
+
+
+    <string name="add_leads">Add Leads</string>
+    <string name="leads">List of Leads</string>
+    <string name="my_earings">My Earnings</string>
+    //Business Loan
+    <string name="business_loan">Need money to meet your immediate Business Expenses, Unsecured Business Loans are offered to small and medium Businesses</string>
+
+    <string name="business_purpose2"> Business Expansion</string>
+    <string name="business_purpose3"> Equipment Purchase</string>
+    <string name="business_purpose4"> Additional Working Capital</string>
+    <string name="business_purpose5">4 Self-Employed Person / Professional - CA, Doctor, etc. </string>
+
+    <string name="business_purpose6" tools:ignore="ExtraTranslation">5 Shopkeeper </string>
+    <string name="business_purpose7">6 Producer </string>
+    <string name="business_purpose8">7 Trading Trader </string>
+
+    //vehicle Loan
+
+    <string name="vehicle_loan">Planning to buy a Bike or Car. Apply to Vehicle Loan to get the best of offers from our Partner Banks </string>
+
+    <string name="vehicle_purpose2"> Two Wheeler Loan</string>
+    <string name="vehicle_purpose3"> New/Used Car Loan</string>
+    <string name="vehicle_purpose4"> Commercial Vehicle Loan</string>
+    <string name="vehicle_purpose5">4 Self-Employed Person and Doctor, etc. </string>
+
+    <string-array name="select_applicant">
+        <item> - Select Co-Applicant-</item>
+        <item>Co-Applicant 1</item>
+        <!--   <item>Co-Applicant 2</item>
+        <item>Co-Applicant 3</item>
+        <item>Co-Applicant 4</item>-->
+    </string-array>
+
+    <!--    <string-array name="applicant">
+        <item>Salaried Individual</item>
+        <item>Self Employed Professional</item>
+        <item>Self Employed Non Professional</item>
+        <item>Home Maker</item>
+        <item>Retired</item>
+    </string-array>-->
+    <string-array name="residence_type">
+        <item>Owned</item>
+        <item>Parent Owned</item>
+        <item>Rented</item>
+        <item>Rented(Hostel)</item>
+        <item>Rented(Sharing With Friends)</item>
+    </string-array>
+
+    <string-array name="applicant">
+        <item>Salaried Individual</item>
+        <item>Self Employed Business</item>
+    </string-array>
+
+    <string-array name="loan_category_array">
+
+        <item>Select Loan Type</item>
+        <item>Home Loan</item>
+        <item>Loan Against Property</item>
+        <item>Personal Loan</item>
+        <item>Business Loan</item>
+        <item>Vehicle Loan</item>
+    </string-array>
+    <string name="addess">Address</string>
+
+    <string name="chat">Questions? Chat with us!</string>
+    <string-array name="Property_Type">
+        <item>Yes</item>
+        <item>No</item>
+    </string-array>
+    <string name="app_info">Applicant Info</string>
+    <string name="app_details">Applicant Details</string>
+    <string name="app_offer_updated">Loanwiser Customer Care will call you to complete the Step</string>
+    <string name="doc_upload">Document Upload</string>
+    <string name="app_track">Track Status</string>
+    <string name="loan_type_new">Loan Type </string>
+    <string name="no_applicant">Number of Applicant </string>
+
+    <string name="applicant_type">Applicant </string>
+    <string name="co1_applicant">Co-Applicant 1 </string>
+    <string name="co2_applicant">Co-Applicant 2 </string>
+    <string name="co3_applicant">Co-Applicant 3 </string>
+    <string name="co4_applicant">Co-Applicant 4 </string>
+    <string name="pro_idfied">Property Identified </string>
+    <string name="info">User Info</string>
+
+    <string-array name="reci">
+        <item>Select Residence Type</item>
+        <item>Owned</item>
+        <item>Parent Owned</item>
+        <item>Rented</item>
+        <item>Rented(Hostel)</item>
+        <item>Rented(Sharing With Friends)</item>
+    </string-array>
+    <string-array name="applicant_list">
+        <item>  </item>
+        <item>Salaried Individual</item>
+        <item>Self Employed Business</item>
+        <item>Self Employed Business</item>
+        <item>Home Maker</item>
+        <item>Retired</item>
+    </string-array>
+
+
+    <string-array name="Property_Type_list">
+        <item>  </item>
+        <item>Yes</item>
+        <item>No</item>
+    </string-array>
+
+    <string name="Current_Address">Current Address</string>
+    <string name="Office_Address">Office Address</string>
+    <string name="Employment_Details">Employment Details</string>
+    <string name="Income">Income from other sources</string>
+    <string name="Existing_Loan">Existing Loan and EMI Details</string>
+
+    <string name="S_name">Scheme Name</string>
+    <string name="S_eli">Max Loan Eligible</string>
+    <string name="S_interest">Interest Rate</string>
+    <string name="app_offer">Offers</string>
+    <string name="app_offer_new">Track Status</string>
+    <string name="S_emi">EMI</string>
+
+    <string name="PMAY_loan">PMAY_loan</string>
+    <string name="is_PMAY_eligible">is_PMAY_eligible</string>
+    <string name="Oc_Required">Oc Required</string>
+    <string name="Affordable_price">Affordable Price</string>
+    <string name="Apply_status">Loan Status</string>
+    <string name="update">Update</string>
+    <string name="app_bank">Bank Details</string>
+    <string name="dcomplete1">Please click on the Button below once you have completed upload of documents you have</string>
+    <string name="dcomplete">I have completed upload of all the Required Documents</string>
+    <string name="validation_bank">Select Your Banks</string>
+    <string name="app_call">Customer Care</string>
+    <string name="call_coimbatore">Coimbatore Customer Care</string>
+    <string name="call_rajasthan">Rajasthan Customer Care</string>
+    <string name="call_telangana">Telangana Customer Care</string>
+    <string name="call_ap">Andhra Pradesh Customer Care</string>
+    <string name="gallery">Gallery</string>
+    <string name="camera">Camera</string>
+    <string name="pdf">PDF File</string>
+    <string name="reci_proof">Residence</string>
+    <string name="thanks_apply">Thankyou for applying in Loanwiser</string>
+    <string name="upload_fast">Please Upload your Documents for faster Loan Process</string>
+    <string name="notes">Note: Loanwiser Customer care will start processing the Loan, once you click this submit button .</string>
+    <string name="proof">Loans for Customers with Income Proof/"\n" without Income Proof.</string>
+    <string name="provide">Please provide your Bank Acccount details for Loan Commission payout processing.</string>
+    <string name="work_pincode">Work Location Pincode</string>
+    <string name="occupation">Occupation</string>
+    <string name="property_pincode">Property Location Pincode</string>
+    <string name="mothincome">Monthly Income</string>
+    <string name="income_proof">Income Proof</string>
+    <string name="applicant_business_re">Business Registration</string>
+    <string name="applicant_business_proof">Business Proof</string>
+
+    <string-array name="busines_reg">
+        <item>Select Business registration Type</item>
+        <item>Proprietorship</item>
+        <item>Partnership</item>
+        <item>Private Limited</item>
+        <item>Un Registered</item>
+    </string-array>
+    <string name="title_activity_statues__dashboard__nav">Statues_Dashboard_Nav</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_maps">Map</string>
+</resources>

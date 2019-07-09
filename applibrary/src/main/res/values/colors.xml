@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+<!--    <color name="colorPrimary">#8a2154</color>
+
+    <color name="colorAccent">#ff5a7d</color>-->
+
+    <color name="colorPrimary">#002b5d</color>
+    <color name="colorPrimaryDark">#a43c32</color>
+    <!--<color name="colorAccent">#FF4081</color>
+    <color name="colorPrimary">#FF7039</color>
+    <color name="colorPrimaryDark">#232221</color>-->
+    <color name="colorAccent">#FF9800</color>
+
+    <!-- <color name="primary">#FF5722</color>
+    <color name="primary_dark">#E64A19</color>-->
+    <color name="primary_light">#FFCCBC</color>
+    <color name="accent">#FF9800</color>
+    <color name="primary_text">#212121</color>
+    <color name="secondary_text">#757575</color>
+    <color name="icons">#FFFFFF</color>
+    <color name="divider">#BDBDBD</color>
+    <color name="bc_green">#1ab394</color>
+
+   <!-- <color name="colorPrimary">#d5d9dc</color>
+    <color name="colorPrimaryDark">@color/transparent</color>
+    <color name="colorAccent">#9E9E9E</color>
+-->
+    <color name="filpkart">#3366ff</color>
+    <color name="colorOverlay">#86252526</color>
+
+    <color name="colorHoverDark">#ce9c166f</color>
+    <color name="colorHoverBlackDark">#ce000000</color>
+    <color name="colorHoverLight">#6ea4387f</color>
+    <color name="colorHover">#86ab2c80</color>
+    <color name="colorWhite">#ffffff</color>
+    <color name="colorBlack_overlay">#EAEAEA</color>
+    <color name="colorBlackText_overlay">#8f8b8b</color>
+    <color name="colorBlackLight_overlay">#eaeaea</color>
+    <color name="colorError_overlay">#9e8787</color>
+
+    <color name="colorBlack">#000000</color>
+    <color name="colorGray">#227586</color>
+    <color name="colorGreen">#6bac26</color>
+    <color name="colorGreenDark">#2D566B</color>
+    <color name="colorRed">#fd0f02</color>
+    <color name="colorviola">#B97BAE</color>
+    <color name="transparent">#00000000</color>
+    <color name="colorFacebook">#3b5998</color>
+    <color name="colorGooglePlus">#d34836</color>
+    <color name="colorUserProfile">#edf1f2</color>
+    <color name="colorGolden">#fccf76</color>
+    <color name="colorGreenLight">#a8ac26</color>
+    <color name="colorYellow">#ac9626</color>
+    <color name="colorOrange">#ac5c26</color>
+
+
+    <color name="search_layover_bg">@color/gray</color>
+    <color name="search_field_bg">@color/white_ish</color>
+
+    <color name="white">#ffffffff</color>
+    <color name="black">#ff000000</color>
+    <color name="gray">#bcbaba</color>
+    <color name="gray1">#d5d7eb</color>
+
+    <color name="white_50">#88ffffff</color>
+    <color name="black_50">#88000000</color>
+    <color name="gray_50">#88888888</color>
+
+    <color name="white_ish">#fffefefe</color>
+
+
+
+</resources>

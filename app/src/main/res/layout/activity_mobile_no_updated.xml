@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:orientation="vertical"
+    tools:context="in.loanwiser.partnerapp.User_Account.MobileNoUpdated">
+
+
+        <ScrollView
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="230dp"
+                    android:gravity="center">
+                    <android.support.v7.widget.AppCompatImageView
+                        android:layout_width="320dp"
+                        android:layout_height="70dp"
+                        android:layout_marginTop="70dp"
+                        android:background="@drawable/loanwisersmall1"/>
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:padding="25dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <android.support.v7.widget.AppCompatTextView
+                            android:id="@+id/verif"
+                            android:gravity="center"
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:textSize="35dp"
+                            android:textStyle="bold"
+                            android:textColor="@color/colorPrimaryDark1"
+
+                            />
+                        <android.support.v7.widget.AppCompatTextView
+                            android:id="@+id/pls_enter"
+                            android:gravity="center"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            style="@style/SmallText1"
+                            android:textColor="@color/gray"
+                            android:text="@string/pls_enter_new"/>
+
+
+
+                        <com.rengwuxian.materialedittext.MaterialEditText
+                            android:visibility="gone"
+                            android:id="@+id/mob"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/mob"
+                            android:imeOptions="actionNext"
+                            android:inputType="phone"
+                            style="@style/SmallText1"
+                            android:textColor="@color/colorWhite"
+                            app:met_floatingLabel="highlight"
+                            app:met_iconLeft="@drawable/ic_mobile"
+                            app:met_iconPadding="@dimen/text_size"
+                            android:layout_marginBottom="13dp"
+                            app:met_textColorHint="@color/colorPrimary1" />
+
+                        <com.rengwuxian.materialedittext.MaterialEditText
+                            android:visibility="gone"
+                            android:id="@+id/editTextOtp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/otp"
+                            android:textColorHint="@color/gray_50"
+                            android:imeOptions="actionNext"
+                            android:inputType="phone"
+                            android:textColor="@color/gray_50"
+                            app:met_floatingLabel="highlight"
+                            app:met_iconLeft="@drawable/ic_mobile"
+                            app:met_iconPadding="@dimen/text_size"
+                            app:met_textColorHint="@color/black" />
+
+                        <LinearLayout
+                            android:layout_marginTop="10dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <android.support.v7.widget.AppCompatButton
+                                android:visibility="gone"
+                                android:id="@+id/appCompatButtonGen_OTP"
+                                android:layout_gravity="center"
+                                android:layout_width="200dp"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/capsul_button3"
+                                android:text="@string/generate"
+                                android:theme="@style/ButtonStyle"/>
+
+                            <android.support.v7.widget.AppCompatButton
+                               android:visibility="gone"
+                                android:id="@+id/appCompatVerifty"
+                                android:layout_gravity="center"
+                                android:layout_width="200dp"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/capsul_button3"
+                                android:text="@string/submit"
+                                android:theme="@style/ButtonStyle" />
+
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+
+                </LinearLayout>
+            </LinearLayout>
+
+        </ScrollView>
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:visibility="gone"
+            android:layout_margin="@dimen/fab_margin"
+            />
+    </LinearLayout>

@@ -1,0 +1,373 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/coordinatorLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="adhoc.app.applibrary.AppBaseActivity">
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".User.BankDetails">
+        <ScrollView
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:fillViewport="true"
+            android:scrollbars = "vertical"
+            android:scrollbarStyle="insideInset">
+            <LinearLayout
+                android:padding="15dp"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
+                <LinearLayout
+
+                    android:id="@+id/Ly_User_Bank_all"
+                    android:padding="20dp"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <android.support.v7.widget.AppCompatTextView
+                        android:id="@+id/provide"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="@string/provide"
+                        android:layout_marginBottom="10dp"
+                        style="@style/SmallText"/>
+
+                    <com.rengwuxian.materialedittext.MaterialEditText
+                        android:id="@+id/b_holder_name"
+                        android:inputType="textCapCharacters"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/b_holder_name"
+                        android:imeOptions="actionNext"
+                        app:met_floatingLabel="highlight"
+                        app:met_iconPadding="@dimen/text_size"
+                        android:layout_marginBottom="13dp"
+                        android:textColorHint="@color/gray_50"
+                        android:textColor="@color/gray_50"
+                        app:met_textColorHint="@color/black" />
+
+
+                    <com.rengwuxian.materialedittext.MaterialEditText
+                        android:id="@+id/b_ac_no"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/b_ac_no"
+                        android:imeOptions="actionNext"
+                        android:inputType="number"
+                        app:met_floatingLabel="highlight"
+                        app:met_iconPadding="@dimen/text_size"
+                        android:layout_marginBottom="13dp"
+                        android:textColorHint="@color/gray_50"
+                        android:textColor="@color/gray_50"
+                        app:met_textColorHint="@color/black" />
+
+
+
+                    <com.rengwuxian.materialedittext.MaterialEditText
+                        android:visibility="gone"
+                        android:id="@+id/txt_bank_name"
+                        android:layout_width="match_parent"
+                        android:editable="false"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/bank_name"
+                        app:met_floatingLabel="highlight"
+                        app:met_iconPadding="@dimen/text_size"
+                        android:layout_marginBottom="13dp"
+                        android:textColorHint="@color/gray_50"
+                        android:textColor="@color/gray_50"
+                        app:met_textColorHint="@color/black"/>
+
+                    <com.rengwuxian.materialedittext.MaterialEditText
+                        android:visibility="gone"
+                        android:id="@+id/pan"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/pan"
+                        android:imeOptions="actionNext"
+                        android:inputType="textEmailAddress"
+                        app:met_floatingLabel="highlight"
+                        android:textColorHint="@color/gray_50"
+                        android:textColor="@color/gray_50"
+                        app:met_iconPadding="@dimen/text_size"
+                        android:layout_marginBottom="13dp"
+                        app:met_textColorHint="@color/black" />
+                    <android.support.v7.widget.AppCompatTextView
+                        android:visibility="gone"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/pan_note"
+                        android:id="@+id/pan_note"
+                        android:layout_marginBottom="10dp"/>
+                    <LinearLayout
+                        android:id="@+id/spinner_bank_name"
+                        android:visibility="gone"
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <android.support.v7.widget.AppCompatTextView
+                            android:id="@+id/bank_name"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/bank_name"
+                            android:layout_marginBottom="10dp"
+                            android:textColorHint="@color/black"
+                            style="@style/SmallText"/>
+
+                        <Spinner
+                            style="@style/Base.Widget.AppCompat.Spinner.Underlined"
+                            android:backgroundTint="#ff000000"
+                            android:backgroundTintMode="src_in"
+                            android:spinnerMode="dropdown"
+                            android:id="@+id/spinner_bank"
+                            android:layout_width="match_parent"
+                            android:layout_height="80dp"></Spinner>
+
+                    </LinearLayout>
+
+                    <com.rengwuxian.materialedittext.MaterialEditText
+                        android:visibility="gone"
+                        android:id="@+id/branch"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/branch"
+                        android:imeOptions="actionNext"
+                        android:inputType="textPostalAddress"
+                        app:met_floatingLabel="highlight"
+                        app:met_iconPadding="@dimen/text_size"
+                        android:layout_marginBottom="13dp"
+                        android:textColorHint="@color/gray_50"
+                        android:textColor="@color/gray_50"
+                        app:met_textColorHint="@color/black" />
+
+
+                    <com.rengwuxian.materialedittext.MaterialEditText
+                        android:id="@+id/ifsc"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/ifsc"
+                        android:imeOptions="actionDone"
+                        android:inputType="textCapCharacters"
+                        app:met_floatingLabel="highlight"
+                        app:met_iconPadding="@dimen/text_size"
+                        android:layout_marginBottom="13dp"
+                        android:textColorHint="@color/gray_50"
+                        android:textColor="@color/gray_50"
+                        app:met_textColorHint="@color/black"/>
+
+
+                    <LinearLayout
+                        android:visibility="gone"
+                        android:id="@+id/Ly_edit_type_mode"
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <LinearLayout
+                            android:orientation="vertical"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+                            <android.support.v7.widget.AppCompatTextView
+                                android:id="@+id/b_ac_type"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="@string/b_ac_type"
+                                android:layout_marginBottom="10dp"
+                                style="@style/SmallText"/>
+
+                            <RadioGroup
+                                android:id="@+id/radio_account_type"
+                                android:layout_marginBottom="10dp"
+                                android:orientation="horizontal"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+
+                                <RadioButton
+                                    android:id="@+id/acc_savings"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Savings"
+                                    android:layout_marginRight="15dp"/>
+
+                                <RadioButton
+                                    android:id="@+id/acc_current"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Current" />
+
+                            </RadioGroup>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:orientation="vertical"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+                            <android.support.v7.widget.AppCompatTextView
+                                android:layout_width="match_parent"
+                                android:id="@+id/pay_mode"
+                                android:layout_height="wrap_content"
+                                android:text="@string/pay_mode"
+                                android:layout_marginBottom="10dp"
+                                style="@style/SmallText"/>
+
+                            <RadioGroup
+                                android:id="@+id/radio_pay_mode"
+                                android:layout_marginBottom="10dp"
+                                android:orientation="horizontal"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+
+                                <RadioButton
+                                    android:id="@+id/radio_internet"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/internet"/>
+                                <RadioButton
+                                    android:id="@+id/radio_mbank"
+                                    android:layout_marginLeft="5dp"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/mbank" />
+
+                            </RadioGroup>
+
+
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/Ly_txt_type_mode"
+                        android:visibility="gone"
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <com.rengwuxian.materialedittext.MaterialEditText
+                            android:id="@+id/txt_bank_account"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/b_ac_type"
+                            android:editable="false"
+                            app:met_floatingLabel="highlight"
+                            app:met_iconPadding="@dimen/text_size"
+                            android:layout_marginBottom="13dp"
+                            android:textColorHint="@color/gray_50"
+                            android:textColor="@color/gray_50"
+                            app:met_textColorHint="@color/black"/>
+                        <com.rengwuxian.materialedittext.MaterialEditText
+                            android:id="@+id/txt_bank_mode"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/pay_mode"
+                            android:editable="false"
+                            app:met_floatingLabel="highlight"
+                            app:met_iconPadding="@dimen/text_size"
+                            android:layout_marginBottom="13dp"
+                            android:textColorHint="@color/gray_50"
+                            android:textColor="@color/gray_50"
+                            app:met_textColorHint="@color/black"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+
+
+                        android:gravity="center"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:gravity="end"
+                            android:background="@color/white_ish"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <android.support.v7.widget.AppCompatButton
+
+                                android:visibility="gone"
+                                android:layout_weight="1"
+                                android:id="@+id/next"
+                                android:layout_width="match_parent"
+                                android:layout_height="40dp"
+                                android:layout_marginTop="20dp"
+                                android:layout_marginBottom="10dp"
+                                android:layout_marginRight="10dp"
+                                android:theme="@style/ButtonStyle"
+                                android:textColor="@color/white_ish"
+                                android:background="@color/colorPrimary"
+                                android:text="@string/saveB"
+                                />
+                            <android.support.v7.widget.AppCompatButton
+                                android:visibility="gone"
+                                android:layout_weight="1"
+                                android:id="@+id/skipe"
+                                android:layout_width="match_parent"
+                                android:layout_height="40dp"
+                                android:layout_marginTop="20dp"
+                                android:layout_marginBottom="10dp"
+                                android:layout_marginRight="10dp"
+                                android:theme="@style/ButtonStyle"
+                                android:textColor="@color/white_ish"
+                                android:background="@color/colorPrimary"
+                                android:text="Done"
+                                />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+                </LinearLayout>
+
+
+                <android.support.v7.widget.AppCompatButton
+                    android:visibility="gone"
+                    android:id="@+id/skipe1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="10dp"
+                    android:theme="@style/ButtonStyle"
+                    android:textColor="@color/white_ish"
+                    android:background="@color/colorPrimary"
+                    android:text="Done"
+                    />
+            </LinearLayout>
+
+        </ScrollView>
+    </LinearLayout>
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab"
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@android:drawable/ic_menu_edit"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="16dp"
+        app:backgroundTint="@color/colorAccent"
+
+        />
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab1"
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@android:drawable/ic_menu_edit"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="16dp"
+        app:backgroundTint="@color/colorGolden"
+        />
+</android.support.design.widget.CoordinatorLayout>

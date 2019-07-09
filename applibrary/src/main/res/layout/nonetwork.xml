@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="fill_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/colorWhite"
+    android:orientation="vertical"
+    android:layout_gravity="center"
+    android:gravity="top|center_horizontal"
+    android:visibility="gone"
+    android:id="@+id/LyNoNetwork">
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+        <LinearLayout
+            android:gravity="top|center_horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <ImageView
+                android:layout_margin="@dimen/text_margin"
+                android:layout_width="@dimen/dashboarCardSize_height"
+                android:layout_height="@dimen/dashboarCardSize_height"
+                android:id="@+id/toolbar_text"
+                android:background="@drawable/network"
+                android:layout_marginBottom="20dp">
+            </ImageView>
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/NoNetwork_text"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                style="@style/VerySmallText"
+                android:textStyle="bold"
+                android:text="@string/chkcon"
+                android:gravity="center"
+                android:textColor="@color/colorBlackText_overlay"/>
+            <Button
+                android:visibility="gone"
+                android:id="@+id/btnretry"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorWhite"
+                android:theme="@style/BtnStyle"
+                android:text="@string/btnretry"
+                android:layout_marginTop="20dp"/>
+        </LinearLayout>
+
+    </android.support.v4.widget.NestedScrollView>
+
+</LinearLayout>

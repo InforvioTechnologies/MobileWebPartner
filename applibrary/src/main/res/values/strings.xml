@@ -1,0 +1,92 @@
+<resources>
+    <string name="app_web">www.Loanwiser.in</string>
+    <string name="app_name">Loanwiser</string>
+    <string name="title">www.Loanwiser.com</string>
+    <string name="powerdby">powered by</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+
+    //Config no network and processing
+    <string name="chkcon">Please check your Wifi / Data Connection</string>
+    <string name="btnretry">Retry</string>
+    <string name="no_items">No Details found!</string>
+    <string name="loading">A moment please..</string>
+    <string name="attention">Attention</string>
+    <string name="cancel">Cancel</string>
+    <string name="skip">Skip</string>
+    <string name="ok">Ok</string>
+    <string name="oops">OOPS!</string>
+    <string name="oops_hint">Something went wrong</string>
+    <string name="err">Error details : </string>
+    <string name="no_network">No Network</string>
+    <string name="server_host_connection_failed">Server Connection failed</string>
+    <string name="title_activity_login">Sign in</string>
+
+    <!-- Strings related to login -->
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password </string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="error_invalid_email">This email address is invalid</string>
+
+    <string name="error_empty_mobile">Please enter 10 digit mobile number</string>
+    <string name="error_account">Please enter min 6 to max 18 digits of Account Number</string>
+    <string name="error_invalid_mobile">This mobile number is incorrect</string>
+    <string name="error_incorrect_password">This password is incorrect</string>
+    <string name="error_field_required">This field is required</string>
+    <string name="title_activity_grant_access">Grant Access</string>
+    <string name="req_access">We request you to allow access to your camera which help us to make serve you better.</string>
+    <string name="congratulations">Congratulations! </string>
+    <string name="welcome_hint">you have finished the setup! </string>
+    <string name="activation_hint">You can activate your account by scanning the QR code</string>
+    <string name="title_activation">Activation</string>
+    <string name="login_hint">You can login your account by scanning the QR code</string>
+    <string name="title_login">Login</string>
+    <string name="scanning">Scanning</string>
+    <string name="scanning_completed">Scanning Completed</string>
+
+
+    <string name="men">Men</string>
+    <string name="women">Women</string>
+    <string name="logout">Logout</string>
+    <string name="contact">Contact Us</string>
+    <string name="exit">Exit</string>
+    <string name="manage">Manage</string>
+    <string name="dashboard">Dashboard</string>
+    <string name="dashboard_new">Lead Detail Dashboard</string>
+    <string name="my_accunt">My account</string>
+    <string name="all_cate">All Categories</string>
+    <string name="my_order">My order</string>
+    <string name="my_wishlist">My wishlist</string>
+    <string name="add_wish">Add to Wish</string>
+    <string name="change_pic">Change profile picture</string>
+    <string name="Rs">\u20B9</string>
+    <!--searchView-->
+    <string name="bt_clearHistory">Clear history</string>
+    <string name="bt_clearSuggestions">Clear suggestions</string>
+    <string name="bt_clearAll">Clear all</string>
+    <string name="hint_prompt">Speak an item name or a number</string>
+    <string name="search_hint">Search&#8230;</string>
+    <string name="cd_up_button">UP navigation button</string>
+    <string name="cd_voice_search">Voice search</string>
+    <string name="cd_clear_button">Clear field</string>
+    <string name="home1">Home</string>
+    <string-array name="suggestions">
+        <item>Watches</item>
+        <item>Shoes</item>
+        <item>TV</item>
+        <item>Shirts</item>
+        <item>Pants</item>
+        <item>Belts</item>
+        <item>Sun glasses</item>
+        <item>Mobiles</item>
+        <item>Laptops</item>
+        <item>Computers</item>
+        <item>Mobile accessories</item>
+        <item>Wallets</item>
+        <item>Trimmers</item>
+        <item>Casuals</item>
+    </string-array>
+
+</resources>

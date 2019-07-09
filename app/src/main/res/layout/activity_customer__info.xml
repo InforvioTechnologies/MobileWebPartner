@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context="in.loanwiser.partnerapp.PartnerActivitys.Customer_Info">
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="10px" >
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="10px" >
+            <LinearLayout
+                android:padding="25dp"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <!---->
+                <!-- <android.support.v7.widget.AppCompatTextView
+
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content"
+                     android:id="@+id/pmay_textview"
+                     style="@style/SmallText"/>
+
+                  <android.support.v7.widget.AppCompatTextView
+
+                      android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:id="@+id/pmay_textview1"
+                      style="@style/SmallText"/>-->
+                <android.support.v7.widget.CardView
+                    android:background="@color/gray"
+                    android:layout_marginTop="1.5dp"
+                    xmlns:android="http://schemas.android.com/apk/res/android"
+                    xmlns:app="http://schemas.android.com/apk/res-auto"
+                    xmlns:card_view="http://schemas.android.com/tools"
+                    android:id="@+id/card_view_doc_typename"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_marginBottom="1.5dp"
+                    app:cardCornerRadius="4dp"
+                    android:clipToPadding="false"
+                    app:cardUseCompatPadding="true"
+                    app:cardElevation="4dp">
+                    <LinearLayout
+
+                        android:id="@+id/Ly_pmay_textview"
+                        android:background="@color/gray"
+                        android:layout_width="match_parent"
+                        android:orientation="horizontal"
+                        android:layout_height="match_parent">
+                        <android.support.v7.widget.AppCompatTextView
+                            android:background="@color/gray"
+                            android:layout_weight="1"
+                            android:layout_marginLeft="10dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/pmay_textview"
+                            android:onClick="hide_new"
+                            android:textColor="@color/white"
+                            android:text="PMAY Deatails"
+                            android:textSize="@dimen/text_size"
+                            android:layout_gravity="center"
+                            style="@style/SmallText"/>
+                        <ImageView
+                            android:layout_marginRight="20dp"
+                            android:layout_gravity="center"
+                            android:id="@+id/pay_img_drop"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp" />
+                    </LinearLayout>
+                </android.support.v7.widget.CardView>
+                <LinearLayout
+                    android:visibility="gone"
+
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:id="@+id/pmay_linear12"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                    </LinearLayout>
+                </LinearLayout>
+                <LinearLayout
+                    android:visibility="gone"
+                    android:id="@+id/Ly_pmay"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_weight="1"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <LinearLayout
+                            android:layout_weight="1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <LinearLayout
+                                android:orientation="vertical"
+                                android:id="@+id/pmay_linear"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+                            </LinearLayout>
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_weight="1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+                            <LinearLayout
+                                android:layout_marginLeft="20dp"
+                                android:orientation="vertical"
+                                android:id="@+id/pmay_linear1"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+                            </LinearLayout>
+
+                        </LinearLayout>
+                    </LinearLayout>
+
+                </LinearLayout>
+                <!---->
+                <!-- <android.support.v7.widget.AppCompatTextView
+                     android:visibility="gone"
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content"
+                     android:id="@+id/pdetails_textview"
+                     style="@style/SmallText"/>
+                 <android.support.v7.widget.AppCompatTextView
+                     android:visibility="gone"
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content"
+                     android:id="@+id/pdetails_textview1"
+                     style="@style/SmallText"/>-->
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                </LinearLayout>
+
+                <!---->
+
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <include layout="@layout/ly_app_pro" />
+                    <include layout="@layout/ly_applicant" />
+                    <include layout="@layout/ly_co1_applicant" />
+                    <include layout="@layout/ly_co2_applicant"/>
+                    <include layout="@layout/ly_co3_applicant"/>
+                    <include layout="@layout/ly_co4_applicant"/>
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+        </ScrollView>
+    </HorizontalScrollView>
+</LinearLayout>

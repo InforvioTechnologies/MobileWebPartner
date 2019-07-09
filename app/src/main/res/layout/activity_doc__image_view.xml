@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="in.loanwiser.partnerapp.Documents.Doc_ImageView">
+    <LinearLayout
+        android:layout_marginTop="5dp"
+        android:padding="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        xmlns:android="http://schemas.android.com/apk/res/android">
+
+        <RelativeLayout
+            android:id="@+id/Rl_pdf_reader"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            xmlns:android="http://schemas.android.com/apk/res/android">
+
+            <WebView
+                android:layout_width="match_parent"
+                android:id="@+id/webview"
+                android:layout_height="match_parent">
+            </WebView>
+
+            <ProgressBar
+                android:layout_width="wrap_content"
+                android:id="@+id/progressbar"
+                android:layout_centerInParent="true"
+                android:layout_height="wrap_content" />
+
+
+        </RelativeLayout>
+
+
+        <LinearLayout
+            android:id="@+id/Ly_image_reader"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="5dp">
+
+            <ImageView
+                android:visibility="gone"
+                android:id="@+id/image_Product"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="@dimen/activity_pading"
+
+                />
+
+
+            <ProgressBar
+                android:id="@+id/progressBarMaterial"
+                style="@style/Widget.AppCompat.ProgressBar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:theme="@style/CircularProgress" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

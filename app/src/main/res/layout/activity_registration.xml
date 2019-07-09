@@ -1,0 +1,361 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white"
+    tools:context="in.loanwiser.partnerapp.User_Account.Registration">
+    <ScrollView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_weight="1"
+        android:fillViewport="true"
+        android:scrollbars = "vertical"
+        android:scrollbarStyle="insideInset">
+
+        <LinearLayout
+            android:padding="20dp"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/name"
+                android:hint="@string/name"
+                android:imeOptions="actionNext"
+                android:inputType="textPersonName"
+                android:textColor="@color/colorWhite"
+                app:met_floatingLabel="highlight"
+                style="@style/SmallText1"
+                app:met_iconLeft="@drawable/ic_name"
+                app:met_iconPadding="@dimen/text_size"
+                android:layout_marginBottom="13dp"
+                app:met_textColorHint="@color/colorPrimary1" />
+
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/mob"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/mob"
+                android:imeOptions="actionNext"
+                android:inputType="phone"
+                style="@style/SmallText1"
+                android:textColor="@color/colorWhite"
+                app:met_floatingLabel="highlight"
+                app:met_iconLeft="@drawable/ic_mobile"
+                app:met_iconPadding="@dimen/text_size"
+                android:layout_marginBottom="13dp"
+                app:met_textColorHint="@color/colorPrimary1" />
+
+            <LinearLayout
+
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/txt_bussiness"
+                    android:layout_width="match_parent"
+                    style="@style/SmallText"
+                    android:textColor="@color/colorPrimary1"
+                    android:text="@string/bussiness"
+                    android:layout_height="wrap_content" />
+                <LinearLayout
+                    android:gravity="center"
+                    android:layout_marginTop="5dp"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp">
+
+                    <ImageView
+                        android:layout_marginLeft="10dp"
+                        android:background="@drawable/offer1"
+                        android:layout_width="35dp"
+                        android:layout_height="35dp" />
+                    <Spinner
+                        android:layout_marginLeft="6dp"
+                        style="@style/SmallText1"
+                        android:id="@+id/spinner_business_type"
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/state_you"
+                    android:layout_width="match_parent"
+                    style="@style/SmallText"
+                    android:textColor="@color/colorPrimary1"
+                    android:text="@string/state_you"
+                    android:layout_height="wrap_content" />
+                <LinearLayout
+                    android:gravity="center"
+                    android:layout_marginTop="5dp"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp">
+
+                    <ImageView
+                        android:layout_marginLeft="10dp"
+                        android:background="@drawable/ic_state"
+                        android:layout_width="35dp"
+                        android:layout_height="35dp" />
+                    <Spinner
+                        android:id="@+id/spinner_state"
+                        style="@style/SmallText1"
+                        android:layout_marginLeft="6dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"/>
+                </LinearLayout>
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/city_you"
+                    android:layout_width="match_parent"
+                    style="@style/SmallText"
+                    android:textColor="@color/colorPrimary1"
+                    android:text="@string/city_you"
+                    android:layout_height="wrap_content" />
+                <LinearLayout
+                    android:gravity="center"
+                    android:layout_marginTop="5dp"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp">
+
+                    <ImageView
+                        android:layout_marginLeft="10dp"
+                        android:background="@drawable/ic_city"
+                        android:layout_width="35dp"
+                        android:layout_height="35dp" />
+                    <Spinner
+                        android:id="@+id/spinner_city"
+                        android:layout_marginLeft="6dp"
+                        style="@style/SmallText1"
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"/>
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+
+
+            <!--  <com.rengwuxian.materialedittext.MaterialEditText
+                  android:visibility="gone"
+                  android:id="@+id/door"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:layout_weight="1"
+                  android:cursorVisible="false"
+                  android:hint="@string/door"
+                  android:imeOptions="actionNext"
+                  android:inputType="text"
+                  app:met_floatingLabel="highlight"
+                  app:met_iconPadding="@dimen/text_size"
+                  app:met_iconLeft="@drawable/ic_door"
+                  android:layout_marginBottom="13dp"
+                  app:met_textColorHint="@color/primary"
+                  android:textColor="@color/gray_50"
+                  android:textColorHint="@color/gray_50"
+                  />
+
+              <com.rengwuxian.materialedittext.MaterialEditText
+                  android:visibility="gone"
+                  android:id="@+id/buliding"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:layout_weight="1"
+                  android:cursorVisible="false"
+                  android:hint="@string/buliding"
+                  android:imeOptions="actionNext"
+                  android:inputType="text"
+                  app:met_floatingLabel="highlight"
+                  app:met_iconLeft="@drawable/ic_home"
+                  app:met_iconPadding="@dimen/text_size"
+                  android:layout_marginBottom="13dp"
+                  app:met_textColorHint="@color/primary"
+                  android:textColor="@color/gray_50"
+                  android:textColorHint="@color/gray_50" />
+
+              <LinearLayout
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:orientation="vertical">
+
+                  <com.rengwuxian.materialedittext.MaterialEditText
+                      android:visibility="gone"
+                      android:id="@+id/street"
+                      android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:layout_weight="1"
+                      android:cursorVisible="false"
+                      android:hint="@string/street"
+                      android:imeOptions="actionNext"
+                      android:inputType="textPostalAddress"
+                      app:met_floatingLabel="highlight"
+                      app:met_iconLeft="@drawable/ic_address"
+                      app:met_iconPadding="@dimen/text_size"
+                      android:layout_marginBottom="13dp"
+                      app:met_textColorHint="@color/primary"
+                      android:textColor="@color/gray_50"
+                      android:textColorHint="@color/gray_50" />
+              </LinearLayout>-->
+
+            <!-- <com.rengwuxian.materialedittext.MaterialEditText
+                 android:id="@+id/city"
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:cursorVisible="false"
+                 android:hint="@string/city"
+                 android:imeOptions="actionNext"
+                 android:inputType="text"
+                 app:met_iconLeft="@drawable/ic_city"
+                 app:met_floatingLabel="highlight"
+                 app:met_iconPadding="@dimen/text_size"
+                 android:layout_marginBottom="13dp"
+                 app:met_textColorHint="@color/primary"
+                 android:textColor="@color/gray_50"
+                 android:textColorHint="@color/gray_50" />-->
+
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:visibility="gone"
+                android:id="@+id/state"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:cursorVisible="false"
+                android:hint="@string/state"
+                android:imeOptions="actionNext"
+                android:inputType="text"
+                style="@style/SmallText1"
+                app:met_iconLeft="@drawable/ic_state"
+                app:met_floatingLabel="highlight"
+                app:met_iconPadding="@dimen/text_size"
+                android:layout_marginBottom="13dp"
+                app:met_textColorHint="@color/colorPrimary1"
+                android:textColor="@color/gray_50"
+                android:textColorHint="@color/gray_50" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:orientation="horizontal">
+
+
+                <com.rengwuxian.materialedittext.MaterialEditText
+                    android:id="@+id/pincode"
+                    android:visibility="gone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:cursorVisible="false"
+                    android:hint="@string/pincode"
+                    android:imeOptions="actionDone"
+                    android:maxLength="6"
+                    style="@style/SmallText1"
+                    android:inputType="number"
+                    app:met_floatingLabel="highlight"
+                    app:met_iconPadding="@dimen/text_size"
+                    android:layout_marginBottom="13dp"
+                    app:met_iconLeft="@drawable/ic_postal_code"
+                    app:met_textColorHint="@color/colorPrimary1"
+                    android:textColor="@color/gray_50"
+                    android:textColorHint="@color/gray_50" />
+            </LinearLayout>
+
+
+            <android.support.v7.widget.AppCompatButton
+                android:layout_marginTop="10dp"
+                android:id="@+id/appCompatButtonGen_OTP"
+                android:layout_gravity="center"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/capsul_button3"
+                android:text="@string/generate"
+                android:theme="@style/ButtonStyle" />
+
+            <android.support.v7.widget.AppCompatTextView
+                android:visibility="gone"
+                android:layout_marginTop="15dp"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                style="@style/LorgeText"
+                android:text="OR"
+                android:layout_height="wrap_content" />
+
+            <android.support.v7.widget.CardView
+                android:visibility="gone"
+                android:background="@color/gray"
+                android:layout_marginTop="15dp"
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                xmlns:card_view="http://schemas.android.com/tools"
+                android:id="@+id/Gmail_reg"
+                android:foreground="?attr/selectableItemBackgroundBorderless"
+                android:clickable="true"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginBottom="1.5dp"
+                app:cardCornerRadius="4dp"
+                android:clipToPadding="false"
+                app:cardUseCompatPadding="true"
+                app:cardElevation="4dp">
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="80dp"
+                        android:gravity="center"
+                        android:layout_height="match_parent">
+
+                        <ImageView
+
+                            android:layout_gravity="center"
+                            android:background="@drawable/search"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp" />
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:gravity="center"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <android.support.v7.widget.AppCompatTextView
+                            android:layout_gravity="center"
+                            android:layout_width="match_parent"
+                            style="@style/SmallText"
+                            android:text="@string/gamil_reg"
+                            android:layout_height="wrap_content" />
+                    </LinearLayout>
+
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

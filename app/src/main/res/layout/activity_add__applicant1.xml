@@ -1,0 +1,357 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/bg_texture">
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:padding="15dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:padding="5dp"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:background="@drawable/capsul_button6"
+                    android:layout_height="wrap_content">
+                    <LinearLayout
+
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <android.support.v7.widget.AppCompatTextView
+                            android:visibility="gone"
+                            android:id="@+id/txt_bussiness1"
+                            android:layout_width="match_parent"
+                            style="@style/SmallText"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:textColorHint="@color/colorPrimaryDark"
+                            android:hint="Loan Type"
+                            android:layout_height="wrap_content" />
+                        <LinearLayout
+                            android:gravity="center"
+                            android:layout_marginTop="5dp"
+                            android:orientation="horizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="80dp">
+
+                            <ImageView
+                                android:layout_marginLeft="10dp"
+                                android:background="@drawable/bank2"
+                                android:layout_width="30dp"
+                                android:layout_height="30dp" />
+                            <LinearLayout
+                                android:layout_marginLeft="10dp"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent">
+                                <Spinner
+                                    android:layout_marginLeft="20dp"
+                                    style="@style/Base.Widget.AppCompat.Spinner.Underlined"
+                                    android:backgroundTint="#ff000000"
+                                    android:backgroundTintMode="src_in"
+                                    android:spinnerMode="dropdown"
+                                    android:id="@+id/spinner"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="60dp" />
+                            </LinearLayout>
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:visibility="gone"
+                        android:id="@+id/occ"
+                        android:gravity="center"
+                        android:layout_marginTop="5dp"
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="80dp">
+
+                        <ImageView
+                            android:layout_marginLeft="10dp"
+                            android:background="@drawable/mailbox"
+                            android:layout_width="25dp"
+                            android:layout_height="25dp" />
+                        <AutoCompleteTextView
+                            android:layout_marginLeft="20dp"
+                            android:layout_marginTop="5dp"
+                            android:id="@+id/W_locationpincode"
+                            android:hint="Work Location Pincode"
+                            android:inputType="number"
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:visibility="gone"
+                        android:layout_marginTop="10dp"
+                        android:padding="5dp"
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <LinearLayout
+
+                            android:orientation="vertical"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+                            <android.support.v7.widget.AppCompatTextView
+                                android:gravity="start"
+                                android:id="@+id/txt_work_pincode_area"
+                                android:layout_width="match_parent"
+                                style="@style/SmallText"
+                                android:textColor="@color/colorPrimaryDark"
+                                android:textColorHint="@color/colorPrimaryDark"
+                                android:text="Select Area"
+                                android:layout_height="wrap_content" />
+                            <LinearLayout
+                                android:gravity="center"
+                                android:layout_marginTop="5dp"
+                                android:orientation="horizontal"
+                                android:layout_width="match_parent"
+                                android:layout_height="80dp">
+                                <ImageView
+                                    android:layout_marginLeft="10dp"
+                                    android:background="@drawable/ic_name2"
+                                    android:layout_width="30dp"
+                                    android:layout_height="30dp" />
+                                <LinearLayout
+                                    android:layout_marginLeft="30dp"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent">
+                                    <Spinner
+                                        style="@style/Base.Widget.AppCompat.Spinner.Underlined"
+                                        android:backgroundTint="#ff000000"
+                                        android:backgroundTintMode="src_in"
+                                        android:spinnerMode="dropdown"
+                                        android:id="@+id/SP_work_pincode_area"
+                                        android:layout_width="fill_parent"
+                                        android:layout_height="match_parent" />
+                                </LinearLayout>
+                            </LinearLayout>
+                        </LinearLayout>
+                    </LinearLayout>
+                </LinearLayout>
+                <LinearLayout
+                    android:visibility="gone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:padding="10dp"
+                    android:layout_marginLeft="20dp"
+                    android:orientation="horizontal">
+                    <LinearLayout
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+                        <android.support.v7.widget.AppCompatEditText
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:padding="07dp"
+
+                            android:background="@drawable/capsul_button4"/>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+                        <Spinner
+                            android:id="@+id/spinner01"
+                            android:textSize="16dp"
+                            style="@style/Base.Widget.AppCompat.Spinner.Underlined"
+                            android:backgroundTint="#ff000000"
+                            android:backgroundTintMode="src_in"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:hint="Select Loan"
+                            android:textColorHint="@color/colorPrimaryDark"
+                            android:inputType="textPostalAddress"
+                            android:textColor="@color/colorPrimary"
+                            android:maxLength="12"
+                            android:layout_marginRight="15dp"/>
+                    </LinearLayout>
+
+                </LinearLayout>
+
+
+
+                <LinearLayout
+                    android:visibility="gone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:padding="10dp"
+                    android:layout_marginLeft="20dp"
+                    android:orientation="horizontal">
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+                        <android.support.v7.widget.AppCompatEditText
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:padding="07dp"
+                            android:drawableLeft="@drawable/address"
+                            android:background="@drawable/capsul_button4"/>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+                        <Spinner
+                            android:id="@+id/spinner_property"
+                            android:textSize="16dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:hint="City"
+                            android:textColorHint="@color/colorPrimaryDark"
+                            android:inputType="textPostalAddress"
+                            style="@style/Base.Widget.AppCompat.Spinner.Underlined"
+                            android:backgroundTint="#ff000000"
+                            android:backgroundTintMode="src_in"
+                            android:spinnerMode="dropdown"
+                            android:maxLength="12"
+
+                            android:padding="12dp"
+                            android:layout_marginRight="15dp"/>
+                    </LinearLayout>
+
+                </LinearLayout>
+
+
+                <!-- <LinearLayout
+                     android:visibility="gone"
+                     android:id="@+id/coapplicant_details"
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content"
+                     android:layout_weight="1"
+                     android:layout_marginLeft="20dp"
+                     android:orientation="vertical">
+                     <LinearLayout
+                         android:layout_width="match_parent"
+                         android:layout_height="match_parent"
+                         android:orientation="vertical">
+                         <android.support.v7.widget.AppCompatTextView
+                             android:layout_width="wrap_content"
+                             android:layout_height="wrap_content"
+                             android:id="@+id/add_co_app"
+                             android:textColor="@color/colorPrimary"
+                             style="@style/SmallText"
+                             android:text="@string/add_co_app"/>
+                     </LinearLayout>
+                     <LinearLayout
+                         android:layout_width="match_parent"
+                         android:layout_height="match_parent"
+                         android:layout_weight="1"
+                         android:orientation="vertical">
+                         <RadioGroup
+                             android:layout_marginTop="10dp"
+                             android:id="@+id/applicant"
+                             android:layout_width="match_parent"
+                             android:layout_height="wrap_content"
+                             android:orientation="horizontal"
+                             android:layout_weight="1">
+                             <RadioButton
+                                 android:id="@+id/nca"
+                                 android:layout_width="wrap_content"
+                                 android:layout_height="wrap_content"
+                                 android:textColor="@color/colorPrimary"
+                                 android:text="@string/NoApplicant"
+                                 android:checked="true" />
+                             <RadioButton
+                                 android:id="@+id/ocp"
+                                 android:textColor="@color/colorPrimary"
+                                 android:layout_width="wrap_content"
+                                 android:layout_height="wrap_content"
+                                 android:text="@string/App1"/>
+
+                             <RadioButton
+                                 android:id="@+id/two_co_applicant"
+                                 android:layout_width="wrap_content"
+                                 android:layout_height="wrap_content"
+                                 android:textColor="@color/colorPrimary"
+                                 android:text="@string/App2" />
+                             <RadioButton
+                                 android:id="@+id/three_co_applicant"
+                                 android:textColor="@color/colorPrimary"
+                                 android:layout_width="wrap_content"
+                                 android:layout_height="wrap_content"
+                                 android:text="@string/App3" />
+                             <RadioButton
+                                 android:id="@+id/four_co_applicant"
+                                 android:layout_width="wrap_content"
+                                 android:layout_height="wrap_content"
+                                 android:textColor="@color/colorPrimary"
+                                 android:text="@string/App4" />
+                         </RadioGroup>
+                     </LinearLayout>
+                 </LinearLayout>
+ -->
+
+                <LinearLayout
+                    android:layout_marginTop="20dp"
+                    android:visibility="gone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/Ly_support1"
+                    android:orientation="horizontal">
+
+
+                    <include layout="@layout/one_co_app"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:elevation="4sp"
+                    android:gravity="center"
+                    android:layout_marginTop="5dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="?android:attr/actionBarSize"
+                    android:orientation="horizontal">
+                    <LinearLayout
+                        android:gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <android.support.v7.widget.AppCompatButton
+                            android:id="@+id/updated_applicant"
+                            android:text="@string/saveB"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="start"
+                            android:background="@drawable/capsul_button3"
+                            android:theme="@style/BtnStyleApp" />
+
+
+                    </LinearLayout>
+
+                </LinearLayout>
+                <android.support.v7.widget.AppCompatTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"/>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

@@ -1,0 +1,94 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary1</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark1</item>
+        <item name="colorAccent">@color/colorAccent1</item>
+    </style>
+
+
+    <style name="NavigationView" >
+        <item name="android:fontFamily" tools:ignore="NewApi">@font/lato_regular</item>
+    </style>
+
+    <style name="NoAction2" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary1</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark1</item>
+        <item name="colorAccent">@color/colorAccent1</item>
+        <item name="android:windowIsTranslucent">true</item>
+    </style>
+
+    <style name="ChipTextStyle_Selected">
+        <item name="android:textSize">8sp</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="Custom" parent="android:Theme.DeviceDefault.Dialog">
+        <item name="DialogTitleAppearance">@android:style/TextAppearance.Medium</item>
+        <item name="DialogTitleText">Loading...</item>
+        <item name="DialogSpotColor">@color/colorPrimary</item>
+        <item name="DialogSpotCount">8</item>
+    </style>
+
+    <style name="blinkText" parent="SmallText">
+        <item name="android:paddingLeft">@dimen/activity_pading</item>
+        <item name="android:paddingRight">@dimen/activity_pading</item>
+        <item name="android:paddingTop">@dimen/activity_pading</item>
+        <item name="android:paddingBottom">@dimen/activity_pading</item>
+        <item name="android:textColor">@color/colorHover</item>
+        <item name="android:textSize">@dimen/text_size_small</item>
+    </style>
+
+    <style name="SmallText1" parent="@android:style/TextAppearance">
+
+        <item name="android:paddingRight">@dimen/activity_pading</item>
+        <item name="android:paddingTop">@dimen/activity_pading</item>
+        <item name="android:paddingBottom">@dimen/activity_pading</item>
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:textSize">@dimen/text_size_small1</item>
+    </style>
+
+    <style name="ButtonStyle">
+        <item name="android:textSize">@dimen/header_text</item>
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@drawable/bg_cta_button</item>
+        <item name="android:clickable">true</item>
+    </style>
+
+    <style name="btn">
+        <item name="android:textColor">#ffffff</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+
+    <style name="spinner_style">
+
+        <item name="android:popupBackground">@drawable/capsul_button6</item>
+    </style>
+
+    <style name="tab_text1" parent="@android:style/TextAppearance.Widget.TabWidget">
+        <item name="android:fontFamily" tools:ignore="NewApi">@font/lato_regular</item>
+        <item name="android:textSize">@dimen/text1</item>
+    </style>
+
+    <style name="spinner_style1">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@drawable/gradient_spinner</item>
+
+    </style>
+
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+</resources>

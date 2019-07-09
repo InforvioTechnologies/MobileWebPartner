@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cardviewMenus"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    app:cardBackgroundColor="@color/colorWhite"
+    android:clickable="true"
+    app:cardElevation="3dp"
+    app:cardCornerRadius="3dp"
+    android:layout_gravity="center"
+    android:clipToPadding="true"
+    android:orientation="vertical">
+
+
+    <LinearLayout
+        android:background="@color/white"
+        android:id="@+id/Ly_item"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+
+            android:id="@+id/Ly_Rl_pdf_reader"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_gravity="center">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:gravity="center"
+                android:layout_height="@dimen/dashboarCardSize_height"
+                android:orientation="vertical">
+                <ImageView
+                    android:visibility="gone"
+                    android:layout_margin="@dimen/activity_pading"
+                    android:id="@+id/image_Pdf"
+                    android:layout_width="match_parent"
+                    android:scaleType="fitCenter"
+                    android:layout_height="200dp"
+                    android:src="@drawable/don"/>
+                <ProgressBar
+                    android:id="@+id/progressBarMaterial_pdf"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:theme="@style/CircularProgress"
+                    style="@style/Widget.AppCompat.ProgressBar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+            </RelativeLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:visibility="gone"
+            android:id="@+id/Ly_image_reader"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_gravity="center">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:gravity="center"
+                android:layout_height="@dimen/dashboarCardSize_height"
+                android:orientation="vertical">
+                <ImageView
+                    android:visibility="gone"
+                    android:layout_margin="@dimen/activity_pading"
+                    android:id="@+id/image_Product"
+                    android:layout_width="match_parent"
+                    android:scaleType="fitCenter"
+                    android:layout_height="200dp"
+                    android:src="@drawable/don"/>
+                <ProgressBar
+                    android:id="@+id/progressBarMaterial"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:theme="@style/CircularProgress"
+                    style="@style/Widget.AppCompat.ProgressBar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+            </RelativeLayout>
+
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/updated_"
+            android:gravity="center"
+            style="@style/SmallText"
+            android:layout_margin="@dimen/activity_pading"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/add_wish" />
+
+    </LinearLayout>
+
+</LinearLayout>
