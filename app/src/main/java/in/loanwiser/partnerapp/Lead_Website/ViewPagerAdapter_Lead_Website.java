@@ -1,8 +1,8 @@
 package in.loanwiser.partnerapp.Lead_Website;
 
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentStatePagerAdapter;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentStatePagerAdapter;
 
 import in.loanwiser.partnerapp.PartnerActivitys.Add_Applicant;
 import in.loanwiser.partnerapp.PartnerActivitys.Add_Home_loan;

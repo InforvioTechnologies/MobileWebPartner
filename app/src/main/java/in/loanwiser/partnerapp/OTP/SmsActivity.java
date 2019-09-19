@@ -9,10 +9,10 @@ import android.content.pm.PackageManager;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.AppCompatButton;
-import android.support.v7.widget.AppCompatEditText;
-import android.support.v7.widget.AppCompatTextView;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatButton;
+import androidx.appcompat.widget.AppCompatEditText;
+import androidx.appcompat.widget.AppCompatTextView;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Base64;
@@ -54,7 +54,6 @@ import in.loanwiser.partnerapp.Partner_Statues.Statues_Dashboard_Nav;
 import in.loanwiser.partnerapp.R;
 import in.loanwiser.partnerapp.SMSRetrieverAPI.MySMSBroadcastReceiver;
 import in.loanwiser.partnerapp.SMSRetrieverAPI.SmsListener;
-import in.loanwiser.partnerapp.User_Account.Registration;
 
 public class SmsActivity extends AppCompatActivity {
 
@@ -351,7 +350,7 @@ public class SmsActivity extends AppCompatActivity {
 
     public void ExitAlert(Context context, final String pd_code,final String u_array ) {
         //http://android.support.v7.app/
-        android.support.v7.app.AlertDialog.Builder builder = new android.support.v7.app.AlertDialog.Builder(context, R.style.MyAlertDialogStyle);
+        androidx.appcompat.app.AlertDialog.Builder builder = new androidx.appcompat.app.AlertDialog.Builder(context, R.style.MyAlertDialogStyle);
         builder.setTitle(context.getResources().getString(R.string.attention));
         builder.setIcon(context.getResources().getDrawable(R.drawable.ic_info_outline_black_24dp));
         builder.setMessage("We are currently Not Operation in this Location. We will contact you when we are Operational.");
@@ -369,7 +368,7 @@ public class SmsActivity extends AppCompatActivity {
             }
         });
         //  builder.setPositiveButton("Yes", null);
-        android.support.v7.app.AlertDialog alert = builder.create();
+        androidx.appcompat.app.AlertDialog alert = builder.create();
         alert.show();
         Objs.a.DialogStyle(context, alert);
     }

@@ -13,7 +13,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-            <android.support.v7.widget.AppCompatImageView
+            <androidx.appcompat.widget.AppCompatImageView
                 android:layout_width="match_parent"
                 android:layout_height="150dp"
                 android:background="@drawable/business_loan"
@@ -35,7 +35,7 @@
                     android:padding="5dp"
                     android:orientation="vertical"
                     android:layout_weight="1">
-                    <android.support.v7.widget.AppCompatTextView
+                    <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/title"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -52,7 +52,7 @@
                     android:padding="5dp"
                     android:orientation="vertical"
                     android:layout_weight="1">
-                    <android.support.v7.widget.AppCompatTextView
+                    <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/sub_id"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -61,7 +61,7 @@
 
                         style="@style/SmallText"
                         android:text="@string/business_loan"/>
-                    <android.support.v7.widget.AppCompatTextView
+                    <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/sub_id1"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -77,7 +77,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
 
-                        <android.support.v7.widget.AppCompatTextView
+                        <androidx.appcompat.widget.AppCompatTextView
                             android:id="@+id/sub_id3"
                             android:gravity="left"
                             android:layout_width="match_parent"
@@ -85,7 +85,7 @@
                             android:textColor="@color/black"
                             style="@style/SmallText"
                             android:text="@string/business_purpose2"/>
-                        <android.support.v7.widget.AppCompatTextView
+                        <androidx.appcompat.widget.AppCompatTextView
                             android:id="@+id/sub_id4"
                             android:gravity="left"
                             android:visibility="gone"
@@ -94,7 +94,7 @@
                             android:textColor="@color/black"
                             style="@style/SmallText"
                             android:text="@string/personal_purpose3"/>
-                        <android.support.v7.widget.AppCompatTextView
+                        <androidx.appcompat.widget.AppCompatTextView
                             android:id="@+id/sub_id5"
                             android:gravity="left"
                             android:layout_width="match_parent"
@@ -102,7 +102,7 @@
                             android:textColor="@color/black"
                             style="@style/SmallText"
                             android:text="@string/business_purpose3"/>
-                        <android.support.v7.widget.AppCompatTextView
+                        <androidx.appcompat.widget.AppCompatTextView
                             android:id="@+id/sub_id6"
                             android:gravity="left"
                             android:layout_width="match_parent"
@@ -113,7 +113,7 @@
 
 
 
-                        <android.support.v7.widget.AppCompatTextView
+                        <androidx.appcompat.widget.AppCompatTextView
                             android:visibility="gone"
                             android:id="@+id/sub_id7"
                             android:gravity="left"
@@ -122,7 +122,7 @@
                             android:textColor="@color/black"
                             style="@style/SmallText"
                             android:text="@string/business_purpose5"/>
-                        <android.support.v7.widget.AppCompatTextView
+                        <androidx.appcompat.widget.AppCompatTextView
                             android:visibility="gone"
                             android:id="@+id/sub_id9"
                             android:gravity="left"
@@ -131,7 +131,7 @@
                             android:textColor="@color/black"
                             style="@style/SmallText"
                             android:text="@string/business_purpose6"/>
-                        <android.support.v7.widget.AppCompatTextView
+                        <androidx.appcompat.widget.AppCompatTextView
                             android:visibility="gone"
                             android:id="@+id/sub_id8"
                             android:gravity="left"
@@ -144,7 +144,7 @@
                 </LinearLayout>
             </LinearLayout>
 
-            <android.support.v7.widget.AppCompatButton
+            <androidx.appcompat.widget.AppCompatButton
                 android:layout_gravity="center"
                 android:layout_marginTop="10dp"
                 android:id="@+id/apply_now3"

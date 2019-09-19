@@ -3,17 +3,14 @@ package in.loanwiser.partnerapp.Lead_Website;
 import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.design.widget.TabLayout;
-import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+import com.google.android.material.tabs.TabLayout;
+import androidx.viewpager.widget.ViewPager;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import adhoc.app.applibrary.Config.AppUtils.Objs;
 import adhoc.app.applibrary.Config.AppUtils.Pref.Pref;
-import in.loanwiser.partnerapp.PartnerActivitys.Applicant_Details_Activity;
 import in.loanwiser.partnerapp.PartnerActivitys.Dashboard_Activity;
-import in.loanwiser.partnerapp.PartnerActivitys.MainActivity_Add_Lead1;
-import in.loanwiser.partnerapp.PartnerActivitys.ViewPagerAdapter1;
 import in.loanwiser.partnerapp.R;
 
 public class MainActivity_Add_Lead_Website  extends AppCompatActivity {

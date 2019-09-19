@@ -24,7 +24,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <android.support.v7.widget.CardView
+                <androidx.cardview.widget.CardView
                     android:visibility="gone"
                     xmlns:android="http://schemas.android.com/apk/res/android"
                     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -66,7 +66,7 @@
                                 android:layout_width="250dp"
                                 android:layout_height="match_parent">
 
-                                <android.support.v7.widget.AppCompatTextView
+                                <androidx.appcompat.widget.AppCompatTextView
                                     android:gravity="center"
                                     android:id="@+id/applicant_from"
                                     style="@style/LorgeText"
@@ -93,7 +93,7 @@
 
                         </LinearLayout>
                     </LinearLayout>
-                </android.support.v7.widget.CardView>
+                </androidx.cardview.widget.CardView>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -121,7 +121,7 @@
                             android:id="@+id/check_complete"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent" />
-                        <android.support.v7.widget.AppCompatTextView
+                        <androidx.appcompat.widget.AppCompatTextView
                             android:id="@+id/dcomplete"
                             android:gravity="center"
                             style="@style/SmallText"
@@ -137,7 +137,7 @@
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
 
-                        <android.support.v7.widget.AppCompatButton
+                        <androidx.appcompat.widget.AppCompatButton
                             android:id="@+id/Completed"
                             android:text="Submit"
                             android:layout_width="match_parent"
@@ -146,7 +146,7 @@
                             android:theme="@style/ButtonStyle" />
 
 
-                        <android.support.v7.widget.AppCompatTextView
+                        <androidx.appcompat.widget.AppCompatTextView
 
                             android:id="@+id/notes"
                             android:gravity="center"

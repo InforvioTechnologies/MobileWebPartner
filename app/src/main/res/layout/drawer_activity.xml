@@ -27,7 +27,7 @@
                    android:gravity="center"
                    android:padding="5dp"
                    android:layout_weight="0">
-                    <android.support.v7.widget.AppCompatTextView
+                    <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/txt_check_e"
                         android:textColor="@color/colorPrimaryDark"
                         style="@style/SmallText"
@@ -45,7 +45,7 @@
                    android:gravity="center"
                    android:padding="5dp"
                    android:layout_weight="0">
-                    <android.support.v7.widget.AppCompatTextView
+                    <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/txt_quick_apply"
                         style="@style/SmallText"
                         android:text="Quick Apply"
@@ -64,7 +64,7 @@
                    android:gravity="center"
                    android:padding="5dp"
                    android:layout_weight="0">
-                    <android.support.v7.widget.AppCompatTextView
+                    <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/txt_chat"
                         style="@style/SmallText"
                         android:textStyle="bold"
@@ -86,7 +86,7 @@
                         android:background="@drawable/ic_profile"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
-                    <android.support.v7.widget.AppCompatTextView
+                    <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/txt_profile"
                         android:text="Profile"
                         android:textStyle="bold"
@@ -107,7 +107,7 @@
                         android:background="@drawable/ic_account"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
-                    <android.support.v7.widget.AppCompatTextView
+                    <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/txt_bank"
                         android:text="Bank Details"
                         android:textStyle="bold"
@@ -129,7 +129,7 @@
                         android:background="@drawable/ic_call"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
-                    <android.support.v7.widget.AppCompatTextView
+                    <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/txt_get_callback"
                         android:text="Customer Care"
                         android:textStyle="bold"
@@ -149,7 +149,7 @@
                         android:background="@drawable/phone"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
-                    <android.support.v7.widget.AppCompatTextView
+                    <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/help_and_support"
                         android:text="Rajasthan Call Center"
                         android:textColor="@color/colorPrimary1"
@@ -169,7 +169,7 @@
                         android:background="@drawable/logout"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
-                    <android.support.v7.widget.AppCompatTextView
+                    <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/logout2"
                         android:textColor="@color/colorPrimary1"
                         android:text="Logout"
@@ -203,7 +203,7 @@
                    android:layout_height="wrap_content">
 
 
-                    <android.support.v7.widget.AppCompatTextView
+                    <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/txt_code"
                         android:gravity="center"
                         android:layout_marginLeft="10dp"
@@ -223,7 +223,7 @@
                    android:layout_width="match_parent"
                    android:layout_height="wrap_content">
 
-                    <android.support.v7.widget.AppCompatTextView
+                    <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/code"
                         android:gravity="center"
                         android:layout_marginLeft="10dp"

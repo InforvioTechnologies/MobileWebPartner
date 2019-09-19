@@ -1,8 +1,8 @@
 package in.loanwiser.partnerapp.PartnerActivitys;
 
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentStatePagerAdapter;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentStatePagerAdapter;
 
 public class View_Vehicle_PagerAdapter extends FragmentStatePagerAdapter {
     private static int TAB_COUNT = 2;

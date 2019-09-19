@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:layout_marginTop="10dp"
     android:orientation="vertical">
-    <android.support.v7.widget.CardView
+    <androidx.cardview.widget.CardView
         android:visibility="gone"
         android:background="@color/gray"
         android:layout_marginTop="1.5dp"
@@ -27,7 +27,7 @@
             android:layout_width="match_parent"
             android:orientation="horizontal"
             android:layout_height="50dp">
-            <android.support.v7.widget.AppCompatTextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:layout_weight="1"
                 android:layout_marginLeft="10dp"
                 android:layout_width="match_parent"
@@ -46,14 +46,14 @@
                 android:layout_width="20dp"
                 android:layout_height="20dp" />
         </LinearLayout>
-    </android.support.v7.widget.CardView>
+    </androidx.cardview.widget.CardView>
     <LinearLayout
         android:visibility="gone"
         android:id="@+id/Ly_pco3_oj"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-        <android.support.v7.widget.AppCompatTextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/pco3_oj_app_User"
@@ -89,7 +89,7 @@
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
-        <android.support.v7.widget.AppCompatTextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/pco3_oj_app_Current"
@@ -124,7 +124,7 @@
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
-        <android.support.v7.widget.AppCompatTextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/pco3_oj_app_Off"
@@ -159,7 +159,7 @@
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
-        <android.support.v7.widget.AppCompatTextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/pco3_oj_app_EMP"
@@ -194,7 +194,7 @@
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
-        <android.support.v7.widget.AppCompatTextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:visibility="gone"
@@ -230,7 +230,7 @@
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
-        <android.support.v7.widget.AppCompatTextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="match_parent"
             android:visibility="gone"
             android:layout_height="wrap_content"

@@ -14,11 +14,13 @@ public class Urls {
  //   public static String Urls2 = "http://cscapiuat.propwiser.com/mobile/mortgage.php?call=";
  // public static String Urls = "http://cscapi.propwiser.com/mobile/mortgage.php?call=";
 
+ //  public static String Urls = "http://cscapitest.propwiser.com/mobile/mortgage_updated.php?call=";
 
     /*Live*/
     public static String Urls = "http://cscapi.propwiser.com/mobile/mortgage_updated.php?call=";
     /*UAT*/
-  // public static String Urls = "http://cscapiuat.propwiser.com/mobile/mortgage_updated.php?call=";
+
+  /// public static String Urls = "http://cscapiuat.propwiser.com/mobile/mortgage_updated.php?call=";
 
 
     public static  String Url_version = "http://cscapi.propwiser.com/mobile/appversion.php?call=";

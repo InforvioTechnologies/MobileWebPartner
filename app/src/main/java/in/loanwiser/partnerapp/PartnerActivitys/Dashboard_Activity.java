@@ -6,14 +6,16 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.AppCompatButton;
-import android.support.v7.widget.AppCompatImageView;
-import android.support.v7.widget.AppCompatTextView;
-import android.support.v7.widget.CardView;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
+import android.os.Handler;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatButton;
+import androidx.appcompat.widget.AppCompatImageView;
+import androidx.appcompat.widget.AppCompatTextView;
+import androidx.cardview.widget.CardView;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
+import androidx.appcompat.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -27,8 +29,10 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.Response;
+import com.android.volley.RetryPolicy;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonObjectRequest;
@@ -37,7 +41,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import adhoc.app.applibrary.Config.AppUtils.Objs;
@@ -46,6 +52,10 @@ import adhoc.app.applibrary.Config.AppUtils.Pref.Pref;
 import adhoc.app.applibrary.Config.AppUtils.Urls;
 import adhoc.app.applibrary.Config.AppUtils.VolleySignleton.AppController;
 import dmax.dialog.SpotsDialog;
+import in.loanwiser.partnerapp.Infinite_Scrollview.InfiniteScrollProvider;
+import in.loanwiser.partnerapp.Infinite_Scrollview.LeadListAdapter_Dashboard;
+import in.loanwiser.partnerapp.Infinite_Scrollview.Lead_item;
+import in.loanwiser.partnerapp.Infinite_Scrollview.OnLoadMoreListener;
 import in.loanwiser.partnerapp.Lead_Website.MainActivity_Add_Lead_Website;
 import in.loanwiser.partnerapp.Partner_Statues.Statues_Dashboard_Nav;
 import in.loanwiser.partnerapp.R;
@@ -53,7 +63,7 @@ import in.loanwiser.partnerapp.User_Account.Welcome_Page;
 
 import static adhoc.app.applibrary.Config.AppUtils.Objs.a;
 
-public class Dashboard_Activity extends AppCompatActivity {
+public class Dashboard_Activity extends AppCompatActivity implements OnLoadMoreListener {
 
     Toolbar toolbar;
   //  DrawerLayout drawerLayout;
@@ -69,19 +79,21 @@ public class Dashboard_Activity extends AppCompatActivity {
     private String TAG = Dashboard_Activity.class.getSimpleName();
     private AlertDialog progressDialog;
     String email,username,mobileno,id,step_status,status,loan_type,loan_categoryid;
-    String applicant_id,sub_taskid,transaction_id,Mobile,Mobile1,loan_typename,sub_categoryid;
+    String applicant_id,sub_taskid,transaction_id,Mobile,Mobile1,loan_typename,sub_categoryid,
+            transaction_id1,subtask_id,applicant_id1;
     AppCompatButton logout1,leads_float_chat;
     AppCompatTextView no_leads_data,txt_bank,txt_profile,txt_get_callback,label_status;
     LinearLayout Ly_no_leads_data;
     String loancatagorey_id;
     String Loan_amount,S_status_id;
     private ImageView imageView_profile;
+    private int count12 = -1;
 
-    /*@Override
-    protected void onStart() {
-        super.onStart();
-        Account_Listings_Details();
-    }*/
+    List<Lead_item> items;
+    LeadListAdapter_Dashboard leadListAdapter_dashboard;
+    RecyclerView recyclerView;
+    private ProgressBar progressBar;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -150,111 +162,19 @@ public class Dashboard_Activity extends AppCompatActivity {
 
 
 
-        //    setSupportActionBar(toolbar);
-    //    toolbar.setNavigationIcon(R.drawable.ic_hamburger);
-     //   Objs.ac.ApplyFont(toolbar, mCon);
 
-      /*  int a = Integer.parseInt(S_status_id);
-        switch(a) {
-            case 0:
-                toolbar.setTitle(R.string.list_lead);
-                break;
-            case 1:
-                toolbar.setTitle(R.string.list_lead + "Document Pending");
-                break;
-            case 2:
-                toolbar.setTitle(R.string.list_lead + "In Progress");
-                break;
-            case 3:
-                toolbar.setTitle(R.string.list_lead + "Declined");
-                break;
-            case 4:
-                toolbar.setTitle(R.string.list_lead + "Approved");
-                break;
-            case 5:
-                toolbar.setTitle(R.string.list_lead + "Disbursed");
-                break;
-            default:
-                return;
-        }*/
-
+        items = new ArrayList<>();
 
      //   drawerLayout = (DrawerLayout)findViewById(R.id.drawer_layout);
-
+        recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+        progressBar = (ProgressBar) findViewById(R.id.progress_bar);
         Get_call_back= (LinearLayout) findViewById(R.id.get_callback);
         check_eligibility= (LinearLayout) findViewById(R.id.check_e);
         quick_apply= (LinearLayout) findViewById(R.id.quick_apply);
         chat= (LinearLayout) findViewById(R.id.Ly_chat);
-      //  contact_person= (LinearLayout) findViewById(R.id.Ly_contact);
-     //   Ly_bank= (LinearLayout) findViewById(R.id.Ly_bank);
-     //   Ly_profile= (LinearLayout) findViewById(R.id.Ly_profile);
-     //   logout= (LinearLayout) findViewById(R.id.logout1);
+
         no_leads_data= (AppCompatTextView) findViewById(R.id.no_leads_data);
         label_status= (AppCompatTextView) findViewById(R.id.label_status);
-      //  txt_get_callback= (AppCompatTextView) findViewById(R.id.txt_get_callback);
-     //   txt_bank= (AppCompatTextView) findViewById(R.id.txt_bank);
-     //   txt_profile= (AppCompatTextView) findViewById(R.id.txt_profile);
-
-
-/*
-        drawerView = (View)findViewById(R.id.drawer);
-
-
-        toolbar.setNavigationOnClickListener(new View.OnClickListener(){
-
-            @Override
-            public void onClick(View arg0) {
-                drawerLayout.openDrawer(drawerView);
-            }});
-        drawerLayout.setDrawerListener(myDrawerListener);
-
-
-        Get_call_back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                drawerLayout.closeDrawer(drawerView);
-            }
-        });
-
-        contact_person.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                drawerLayout.closeDrawer(drawerView);
-                Objs.ac.StartActivity(mCon, CustomerCare.class);
-
-            }
-        });
-
-
-        logout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                drawerLayout.closeDrawer(drawerView);
-                ExitAlert(mCon);
-            }
-        });
-
-
-          Ly_profile.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                drawerLayout.closeDrawer(drawerView);
-                Objs.ac.StartActivity(mCon, ProfileSettings.class);
-               // finish();
-            }
-        });
-
-        Ly_bank.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                drawerLayout.closeDrawer(drawerView);
-                Objs.ac.StartActivity(mCon, BankDetails.class);
-               // finish();
-
-            }
-        });
-*/
 
 
         fonts();
@@ -281,6 +201,14 @@ public class Dashboard_Activity extends AppCompatActivity {
 
         Account_Listings_Details(S_status_id);
 
+        leadListAdapter_dashboard = new LeadListAdapter_Dashboard(this);
+        recyclerView.setLayoutManager(new StaggeredGridLayoutManager(1,StaggeredGridLayoutManager.VERTICAL));
+
+        recyclerView.setAdapter(leadListAdapter_dashboard);
+
+        InfiniteScrollProvider infiniteScrollProvider=new InfiniteScrollProvider();
+        infiniteScrollProvider.attach(recyclerView,this);
+
         label_status.setVisibility(View.GONE);
        /* if(S_status_id.equals("0")){
             label_status.setText("Total No. of Leads: " + Pref.getStatus_Count(mCon));
@@ -299,8 +227,6 @@ public class Dashboard_Activity extends AppCompatActivity {
         tvUserEmail.setText(mCon.getResources().getString(R.string.app_web));
         tvUserEmail.setTypeface(font);
         tvUserName.setTypeface(font);*/
-
-
 
     }
 
@@ -326,17 +252,12 @@ public class Dashboard_Activity extends AppCompatActivity {
 
     private void fonts() {
 
-     //   Objs.a.NormalFontStyle(mCon, R.id.txt_bank);
-      //  Objs.a.NormalFontStyle(mCon, R.id.txt_get_callback);
-     //   Objs.a.NormalFontStyle(mCon, R.id.txt_profile);
-      //  Objs.a.NormalFontStyle(mCon, R.id.help_and_support);
-      //  Objs.a.NormalFontStyle(mCon, R.id.logout2);
         a.NormalFontStyle(mCon, R.id.label_status);
         a.NormalFontStyle(mCon, R.id.no_leads_data);
     }
 
     public void ExitAlert(Context context) {
-        android.support.v7.app.AlertDialog.Builder builder = new  android.support.v7.app.AlertDialog.Builder(context, adhoc.app.applibrary.R.style.MyAlertDialogStyle);
+        androidx.appcompat.app.AlertDialog.Builder builder = new  androidx.appcompat.app.AlertDialog.Builder(context, adhoc.app.applibrary.R.style.MyAlertDialogStyle);
         builder.setTitle(context.getResources().getString(adhoc.app.applibrary.R.string.attention));
         builder.setIcon(context.getResources().getDrawable(adhoc.app.applibrary.R.drawable.ic_info_outline_black_24dp));
         builder.setMessage("Do you want to Logout..?");
@@ -354,60 +275,35 @@ public class Dashboard_Activity extends AppCompatActivity {
                 finish();
             }
         });
-        android.support.v7.app.AlertDialog alert = builder.create();
+        androidx.appcompat.app.AlertDialog alert = builder.create();
         alert.show();
         a.DialogStyle(context, alert);
     }
 
-
-//    DrawerLayout.DrawerListener myDrawerListener = new DrawerLayout.DrawerListener(){
-//
-//        @Override
-//        public void onDrawerClosed(View drawerView) {
-//        }
-//
-//        @Override
-//        public void onDrawerOpened(View drawerView) {
-//        }
-//
-//        @Override
-//        public void onDrawerSlide(View drawerView, float slideOffset) {
-//        }
-//
-//        @Override
-//        public void onDrawerStateChanged(int newState) {
-//            String state;
-//            switch(newState){
-//                case DrawerLayout.STATE_IDLE:
-//                    state = "STATE_IDLE";
-//                    break;
-//                case DrawerLayout.STATE_DRAGGING:
-//                    state = "STATE_DRAGGING";
-//                    break;
-//                case DrawerLayout.STATE_SETTLING:
-//                    state = "STATE_SETTLING";
-//                    break;
-//                default:
-//                    state = "unknown!";
-//            }
-//        }};
-//
-
     private void Account_Listings_Details(String id) {
+        items.clear();
+
+        count12 = count12 +1;
         JSONObject jsonObject =new JSONObject();
         JSONObject J= null;
         try {
             J =new JSONObject();
-           J.put(Params.b2b_userid, Pref.getID(mCon));
-          //  J.put(Params.b2b_userid, "20407");
+            J.put(Params.b2b_userid, Pref.getID(mCon));
             J.put(Params.status_id, id);
-        //    Log.d("response b2b_userid", String.valueOf(J));
+            J.put("count", count12);
 
         } catch (JSONException e) {
             e.printStackTrace();
         }
+        Log.e("count12 request", String.valueOf(J));
 
-        progressDialog.show();
+        if(count12 == 0)
+        {
+            progressDialog.show();
+        }else
+        {
+            progressBar.setVisibility(View.VISIBLE);
+        }
 
         JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, Urls.LEAD_LIST_POST, J,
                 new Response.Listener<JSONObject>() {
@@ -420,12 +316,40 @@ public class Dashboard_Activity extends AppCompatActivity {
                                 JSONArray ja = response.getJSONArray(Params.applicationusers_arr);
 
                                 if (ja.length()>0){
+
+                                    for(int i = 0;i<ja.length();i++){
+                                        JSONObject J = ja.getJSONObject(i);
+
+                                        String id = J.getString("id");
+                                        String loan_typename = J.getString("loan_typename");
+                                        String step_status = J.getString("step_status");
+                                        String username = J.getString("username");
+                                        String mobileno = J.getString("mobileno");
+                                        String transaction_id = J.getString("transaction_id");
+                                       // String field_status = J.getString("field_status");
+
+                                        Log.e("mobile no",mobileno);
+
+                                        items.add(new Lead_item(id,loan_typename, step_status,username,
+                                                mobileno,transaction_id));
+                                        leadListAdapter_dashboard.notifyDataSetChanged();
+                                    }
+                                    Log.e("leadListAdapter_dashboard", String.valueOf(leadListAdapter_dashboard));
+                                    leadListAdapter_dashboard.addPosts(items);
+                                   // items.clear();
+                                   // items = null;
+
+
+                                }else {
+                                    Objs.a.ShowHideNoItems(mCon,true);
+                                }
+
+                               /* if (ja.length()>0){
                                    // Log.e("Length", String.valueOf(ja.length()));
                                     Ly_no_leads_data.setVisibility(View.GONE);
                                     float_chat.setVisibility(View.VISIBLE);
                                     label_status.setVisibility(View.VISIBLE);
                                     setAdapter(ja);
-
 
                                         if (Pref.getStatus_Count(mCon) != null && !Pref.getStatus_Count(mCon).isEmpty() && !Pref.getStatus_Count(mCon).equals("null")){
 
@@ -434,24 +358,44 @@ public class Dashboard_Activity extends AppCompatActivity {
                                             label_status.setText("Total No. of Leads: " + String.valueOf(ja.length()));
                                         }
 
-                                }
+                                }*/
+
+
                             }else {
+
                                 label_status.setVisibility(View.GONE);
-                                float_chat.setVisibility(View.GONE);
-                                Ly_no_leads_data.setVisibility(View.VISIBLE);
+                                float_chat.setVisibility(View.VISIBLE);
+                                if(count12 == 0)
+                                {
+                                    float_chat.setVisibility(View.GONE);
+                                    Ly_no_leads_data.setVisibility(View.VISIBLE);
+                                }
+
 
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
 
-                        progressDialog.dismiss();
+                        if(count12 == 0)
+                        {
+                            progressDialog.dismiss();
+                        }else
+                        {
+                            progressBar.setVisibility(View.GONE);
+                        }
                     }
                 }, new Response.ErrorListener() {
 
             @Override
             public void onErrorResponse(VolleyError error) {
-                progressDialog.dismiss();
+                if(count12 == 0)
+                {
+                    progressDialog.show();
+                }else
+                {
+                    progressBar.setVisibility(View.GONE);
+                }
                 Toast.makeText(getApplicationContext(),error.getMessage(), Toast.LENGTH_SHORT).show();
             }
         }) {
@@ -463,15 +407,31 @@ public class Dashboard_Activity extends AppCompatActivity {
             }
         };
 
+        int x=2;// retry count
+        jsonObjReq.setRetryPolicy(new DefaultRetryPolicy(DefaultRetryPolicy.DEFAULT_TIMEOUT_MS * 48,
+                x, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+
         AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
 
     }
 
-    private void setAdapter(JSONArray ja) {
+   /* private void setAdapter(JSONArray ja) {
         Dashboard_Activity.ListItemAdapter adapter = new Dashboard_Activity.ListItemAdapter(mCon,ja);
         a.getRecyleview(this).setAdapter(adapter);
-    }
+    }*/
 
+    @Override
+    public void onLoadMore() {
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                items.clear();
+                Account_Listings_Details(S_status_id);
+
+            }
+        },1500);
+    }
 
 
     public class ListItemAdapter extends RecyclerView.Adapter<ListItemAdapter.ViewHolder> {
@@ -581,7 +541,7 @@ public class Dashboard_Activity extends AppCompatActivity {
                             }
                             else
                             {
-                                Applicant_Status(id);
+                                Applicant_Status(id,step_status);
                             }
 
                         } catch (JSONException e) {
@@ -635,7 +595,9 @@ public class Dashboard_Activity extends AppCompatActivity {
         }
     }
 
-    private void Applicant_Status(final String id) {
+    public void Applicant_Status(final String id, final String step_status1) {
+
+        final String step_status11 = step_status1;
         JSONObject jsonObject =new JSONObject();
         JSONObject J= null;
         try {
@@ -657,48 +619,27 @@ public class Dashboard_Activity extends AppCompatActivity {
                         Log.e("Applicant Entry", String.valueOf(response));
                         JSONObject jsonObject1 = new JSONObject();
 
-                       /* try {
-                            if(response.getBoolean(Params.status)){
-                                Objs.ac.StartActivityPutExtra(mCon, Home.class,
-                                        Params.mobileno,mobileno,
-                                        Params.user_id,id,
-                                        Params.transaction_id,transaction_id,
-                                        Params.username,username,
-                                        Params.email,email);
-                            }else if(0){
-                                // Objs.a.showToast(mCon, "Update Your Applicant Details");
-                                Objs.a.showToast(mCon, "Please Contact Call center to Update the Details");
-                               *//* Objs.ac.StartActivityPutExtra(mCon, Applicant_Entry.class,
-                                        Params.user_id,id,
-                                        Params.applicant_id,applicant_id,
-                                        Params.transaction_id,transaction_id,
-                                        Params.sub_taskid,sub_taskid);
-                                finish();*//*
-                            }
-
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }*/
-
                         try {
                             String statues = response.getString("status");
                             String statues2 = response.getString("loan_categoryid");
-                             Loan_amount = response.getString("loan_amount");
-                             sub_categoryid =   response.getString("sub_categoryid");
-                           // username =   response.getString("username");
 
-                           // String statues2 = "3";
-                            Log.d("loan_categoryid",statues2);
+                            String user_id = response.getString("user_id");
+                            Loan_amount = response.getString("loan_amount");
+                            sub_categoryid =   response.getString("sub_categoryid");
+                            transaction_id1 =  response.getString("transaction_id");
+                            subtask_id =  response.getString("subtask_id");
+                            applicant_id1 =  "APP-"+user_id;
+                            // String statues2 = "3";
+                            Log.d("applicant_id1",applicant_id1);
                             if (statues == "true")
                             {
-                                Log.d(" applicant Entry true", step_status);
+                                Log.d(" applicant Entry true", step_status11);
                                 Objs.ac.StartActivityPutExtra(mCon, Home.class,
-                                        Params.user_id,id,
-                                        Params.step_status,step_status,
-                                        Params.transaction_id,transaction_id,
-                                        Params.applicant_id,applicant_id,
-                                        Params.sub_taskid,sub_taskid);
-                                        finish();
+                                        Params.user_id,user_id,
+                                        Params.step_status,step_status11,
+                                        Params.transaction_id,transaction_id1,
+                                        Params.applicant_id,applicant_id1,
+                                        Params.sub_taskid,subtask_id);
                             }
                             else
                             {
@@ -706,51 +647,36 @@ public class Dashboard_Activity extends AppCompatActivity {
                                 Log.d("loan_categoryid123", String.valueOf(a));
                                 switch(a) {
                                     case 1:
-
-                                        if(sub_categoryid.equals("0")){
-
-                                            String all = id + "," + applicant_id+ "," +transaction_id + ","
-                                                    + sub_categoryid + "," + sub_taskid + "," + username
-                                                    + "," +mobileno ;
-                                            Pref.putALL(mCon, all);
-
-
-                                            Objs.ac.StartActivity(mCon, MainActivity_Add_Lead_Website.class);
-
-
-
-                                        }else {
-                                            Log.d(" applicant Entry 1", statues);
-                                            Objs.ac.StartActivityPutExtra(mCon, Applicant_Entry.class,
-                                                    Params.user_id, id,
-                                                    Params.applicant_id, applicant_id,
-                                                    Params.transaction_id, transaction_id,
-                                                    Params.loan_amount, Loan_amount,
-                                                    Params.sub_categoryid, sub_categoryid,
-                                                    Params.sub_taskid, sub_taskid);
-                                            finish();
-                                        }
+                                        Log.d(" applicant Entry 1", statues);
+                                        Objs.ac.StartActivityPutExtra(mCon, Applicant_Entry.class,
+                                                Params.user_id,user_id,
+                                                Params.applicant_id,applicant_id1,
+                                                Params.transaction_id,transaction_id1,
+                                                Params.loan_amount,Loan_amount,
+                                                Params.sub_categoryid,sub_categoryid,
+                                                Params.sub_taskid,subtask_id);
+                                        finish();
                                         break;
                                     case 2:
                                         Log.d(" applicant Entry 2", statues);
                                         Objs.ac.StartActivityPutExtra(mCon, Applicant_Entry1.class,
-                                                Params.user_id,id,
-                                                Params.applicant_id,applicant_id,
-                                                Params.transaction_id,transaction_id,
+                                                Params.user_id,user_id,
+                                                Params.applicant_id,applicant_id1,
+                                                Params.transaction_id,transaction_id1,
                                                 Params.loan_amount,Loan_amount,
                                                 Params.sub_categoryid,sub_categoryid,
-                                                Params.sub_taskid,sub_taskid);
+                                                Params.sub_taskid,subtask_id);
                                         finish();
                                         break;
                                     case 3:
                                         Log.d(" applicant Entry 3", statues);
                                         Objs.ac.StartActivityPutExtra(mCon, Applicant_Entry2.class,
-                                                Params.user_id,id,
-                                                Params.applicant_id,applicant_id,
-                                                Params.transaction_id,transaction_id,
+                                                Params.user_id,user_id,
+                                                Params.applicant_id,applicant_id1,
+                                                Params.transaction_id,transaction_id1,
                                                 Params.loan_amount,Loan_amount,
                                                 Params.sub_categoryid,sub_categoryid,
-                                                Params.sub_taskid,sub_taskid);
+                                                Params.sub_taskid,subtask_id);
                                         finish();
                                         break;
                                     default:
@@ -758,41 +684,8 @@ public class Dashboard_Activity extends AppCompatActivity {
                                         return;
                                 }
                             }
-                           /* else if(statues1 == "1" && statues == "false")
-                            {
-                                Log.d(" applicant Entry 1", statues);
-                                Objs.ac.StartActivityPutExtra(mCon, Applicant_Entry.class,
-                                        Params.user_id,id,
-                                        Params.applicant_id,applicant_id,
-                                        Params.transaction_id,transaction_id,
-                                        Params.sub_taskid,sub_taskid);
-                                finish();
-                            }
-                            else if(statues1 == "2" && statues == "false")
-                            {
-                                Log.d(" applicant Entry 2", statues);
-                                Objs.ac.StartActivityPutExtra(mCon, Applicant_Entry1.class,
-                                        Params.user_id,id,
-                                        Params.applicant_id,applicant_id,
-                                        Params.transaction_id,transaction_id,
-                                        Params.sub_taskid,sub_taskid);
-                                finish();
-                            }
-                            else if(statues1 == "3" && statues == "false")
-                            {
-                                Log.d(" applicant Entry 3", statues);
-                                Objs.ac.StartActivityPutExtra(mCon, Applicant_Entry2.class,
-                                        Params.user_id,id,
-                                        Params.applicant_id,applicant_id,
-                                        Params.transaction_id,transaction_id,
-                                        Params.sub_taskid,sub_taskid);
-                                finish();
-                            }
-                            else
-                            {
-                                Objs.a.showToast(mCon, "Please Contact Call center to Update the Details");
-                            }
-*/
+
+
 
                         } catch (JSONException e) {
                             e.printStackTrace();

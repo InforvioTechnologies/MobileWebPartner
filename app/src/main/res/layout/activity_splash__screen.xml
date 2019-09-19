@@ -17,20 +17,20 @@
             android:layout_height="match_parent"
             android:gravity="center"
             android:orientation="vertical">
-            <android.support.v7.widget.AppCompatImageView
+            <androidx.appcompat.widget.AppCompatImageView
                 android:layout_gravity="center"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:background="@drawable/loanwiser128"
                />
-            <android.support.v7.widget.AppCompatImageView
+            <androidx.appcompat.widget.AppCompatImageView
 
                 android:layout_gravity="center"
                 android:layout_width="300dp"
                 android:layout_height="80dp"
                 android:background="@drawable/loanwisersmall"
                />
-            <android.support.v7.widget.AppCompatTextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:visibility="gone"
                 android:id="@+id/emp1"
                 android:layout_width="match_parent"
@@ -40,7 +40,7 @@
                 android:textStyle="bold"
                 android:textSize="60sp"
                 android:text="LoanWiser"/>
-            <android.support.v7.widget.AppCompatTextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/emp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -54,7 +54,7 @@
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
-                <android.support.v7.widget.AppCompatTextView
+                <androidx.appcompat.widget.AppCompatTextView
                     android:layout_marginTop="20dp"
                     android:id="@+id/emp2"
                     android:layout_width="match_parent"
@@ -64,7 +64,7 @@
                     android:textStyle="bold"
                     android:textSize="15sp"
                     android:text="Refer Loan Leads and earn Additional Income."/>
-                <android.support.v7.widget.AppCompatTextView
+                <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/emp3"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -94,7 +94,7 @@
 
     </LinearLayout>
 
-    <android.support.design.widget.FloatingActionButton
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

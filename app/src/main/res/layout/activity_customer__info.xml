@@ -33,7 +33,7 @@
                       android:layout_height="wrap_content"
                       android:id="@+id/pmay_textview1"
                       style="@style/SmallText"/>-->
-                <android.support.v7.widget.CardView
+                <androidx.cardview.widget.CardView
                     android:background="@color/gray"
                     android:layout_marginTop="1.5dp"
                     xmlns:android="http://schemas.android.com/apk/res/android"
@@ -55,7 +55,7 @@
                         android:layout_width="match_parent"
                         android:orientation="horizontal"
                         android:layout_height="match_parent">
-                        <android.support.v7.widget.AppCompatTextView
+                        <androidx.appcompat.widget.AppCompatTextView
                             android:background="@color/gray"
                             android:layout_weight="1"
                             android:layout_marginLeft="10dp"
@@ -75,7 +75,7 @@
                             android:layout_width="20dp"
                             android:layout_height="20dp" />
                     </LinearLayout>
-                </android.support.v7.widget.CardView>
+                </androidx.cardview.widget.CardView>
                 <LinearLayout
                     android:visibility="gone"
 

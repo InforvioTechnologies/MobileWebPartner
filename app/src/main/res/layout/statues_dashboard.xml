@@ -21,7 +21,7 @@
             android:layout_gravity="center"
             android:layout_weight="1">
 
-            <android.support.v7.widget.AppCompatTextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:layout_marginTop="25dp"
                 android:gravity="center"
                 android:layout_width="match_parent"
@@ -30,7 +30,7 @@
                 android:textColor="@color/white"
                 android:textSize="15dp"
                 />
-            <android.support.v7.widget.AppCompatTextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:gravity="center"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -50,7 +50,7 @@
             android:layout_weight="1">
 
 
-            <android.support.v7.widget.AppCompatTextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:layout_marginTop="25dp"
                 android:gravity="center"
                 android:layout_width="match_parent"
@@ -59,7 +59,7 @@
                 android:textColor="@color/white"
                 android:textSize="15dp"/>
 
-            <android.support.v7.widget.AppCompatTextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:gravity="center"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -74,7 +74,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center">
-        <android.support.v7.widget.AppCompatTextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:gravity="center"
 
             android:id="@+id/Lead_details"
@@ -93,7 +93,7 @@
             android:padding="15dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-            <android.support.v7.widget.CardView
+            <androidx.cardview.widget.CardView
                 xmlns:card_view="http://schemas.android.com/apk/res-auto"
                 android:id="@+id/TA"
                 android:layout_marginTop="3dp"
@@ -133,7 +133,7 @@
                             android:layout_gravity="center"
                             android:orientation="vertical">
 
-                            <android.support.v7.widget.AppCompatTextView
+                            <androidx.appcompat.widget.AppCompatTextView
                                 android:layout_gravity="center"
 
                                 android:id="@+id/ta"
@@ -149,7 +149,7 @@
                             android:orientation="horizontal"
                             android:layout_width="80dp"
                             android:layout_height="match_parent">
-                            <android.support.v7.widget.AppCompatTextView
+                            <androidx.appcompat.widget.AppCompatTextView
                                 android:gravity="center"
                                android:text="30"
                                 android:textSize="20dp"
@@ -160,8 +160,8 @@
 
 
                 </LinearLayout>
-            </android.support.v7.widget.CardView>
-            <android.support.v7.widget.CardView
+            </androidx.cardview.widget.CardView>
+            <androidx.cardview.widget.CardView
                 xmlns:card_view="http://schemas.android.com/apk/res-auto"
                 android:id="@+id/SA"
                 android:layout_marginTop="3dp"
@@ -201,7 +201,7 @@
                             android:layout_gravity="center"
                             android:orientation="vertical">
 
-                            <android.support.v7.widget.AppCompatTextView
+                            <androidx.appcompat.widget.AppCompatTextView
                                 android:layout_gravity="center"
 
                                 android:id="@+id/sa"
@@ -216,7 +216,7 @@
                             android:orientation="horizontal"
                             android:layout_width="80dp"
                             android:layout_height="match_parent">
-                            <android.support.v7.widget.AppCompatTextView
+                            <androidx.appcompat.widget.AppCompatTextView
                                 android:gravity="center"
                                 android:text="20"
                                 android:textSize="20dp"
@@ -228,8 +228,8 @@
 
 
                 </LinearLayout>
-            </android.support.v7.widget.CardView>
-            <android.support.v7.widget.CardView
+            </androidx.cardview.widget.CardView>
+            <androidx.cardview.widget.CardView
                 xmlns:card_view="http://schemas.android.com/apk/res-auto"
                 android:id="@+id/AL"
                 android:layout_marginTop="3dp"
@@ -269,7 +269,7 @@
                             android:layout_gravity="center"
                             android:orientation="vertical">
 
-                            <android.support.v7.widget.AppCompatTextView
+                            <androidx.appcompat.widget.AppCompatTextView
                                 android:layout_gravity="center"
 
                                 android:id="@+id/al"
@@ -285,7 +285,7 @@
                             android:orientation="horizontal"
                             android:layout_width="80dp"
                             android:layout_height="match_parent">
-                            <android.support.v7.widget.AppCompatTextView
+                            <androidx.appcompat.widget.AppCompatTextView
                                 android:gravity="center"
                                 android:text="40"
                                 android:textSize="20dp"
@@ -297,8 +297,8 @@
 
 
                 </LinearLayout>
-            </android.support.v7.widget.CardView>
-            <android.support.v7.widget.CardView
+            </androidx.cardview.widget.CardView>
+            <androidx.cardview.widget.CardView
                 xmlns:card_view="http://schemas.android.com/apk/res-auto"
                 android:id="@+id/NTD"
                 android:layout_marginTop="3dp"
@@ -338,7 +338,7 @@
                             android:layout_gravity="center"
                             android:orientation="vertical">
 
-                            <android.support.v7.widget.AppCompatTextView
+                            <androidx.appcompat.widget.AppCompatTextView
                                 android:layout_gravity="center"
 
                                 android:id="@+id/ntd"
@@ -355,7 +355,7 @@
                             android:orientation="horizontal"
                             android:layout_width="80dp"
                             android:layout_height="match_parent">
-                            <android.support.v7.widget.AppCompatTextView
+                            <androidx.appcompat.widget.AppCompatTextView
                                 android:gravity="center"
                                 android:text="40"
                                 android:textSize="20dp"
@@ -366,7 +366,7 @@
 
 
                 </LinearLayout>
-            </android.support.v7.widget.CardView>
+            </androidx.cardview.widget.CardView>
 
         </LinearLayout>
 

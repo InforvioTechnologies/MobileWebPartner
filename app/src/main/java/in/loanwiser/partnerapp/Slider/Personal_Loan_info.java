@@ -2,8 +2,8 @@ package in.loanwiser.partnerapp.Slider;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.widget.AppCompatButton;
-import android.support.v7.widget.AppCompatTextView;
+import androidx.appcompat.widget.AppCompatButton;
+import androidx.appcompat.widget.AppCompatTextView;
 import android.view.View;
 
 import adhoc.app.applibrary.Config.AppUtils.Objs;

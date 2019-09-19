@@ -6,11 +6,11 @@ import android.content.DialogInterface;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.design.widget.FloatingActionButton;
-import android.support.v7.widget.AppCompatButton;
-import android.support.v7.widget.AppCompatEditText;
-import android.support.v7.widget.AppCompatImageView;
-import android.support.v7.widget.AppCompatTextView;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import androidx.appcompat.widget.AppCompatButton;
+import androidx.appcompat.widget.AppCompatEditText;
+import androidx.appcompat.widget.AppCompatImageView;
+import androidx.appcompat.widget.AppCompatTextView;
 import android.util.Log;
 import android.util.Patterns;
 import android.view.MotionEvent;
@@ -298,7 +298,7 @@ public class ProfileSettings extends SimpleActivity {
     }
 
     public void ExitAlert(Context context) {
-        android.support.v7.app.AlertDialog.Builder builder = new android.support.v7.app.AlertDialog.Builder(context, adhoc.app.applibrary.R.style.MyAlertDialogStyle);
+        androidx.appcompat.app.AlertDialog.Builder builder = new androidx.appcompat.app.AlertDialog.Builder(context, adhoc.app.applibrary.R.style.MyAlertDialogStyle);
         builder.setTitle(context.getResources().getString(adhoc.app.applibrary.R.string.attention));
         builder.setIcon(context.getResources().getDrawable(adhoc.app.applibrary.R.drawable.ic_info_outline_black_24dp));
         builder.setTitle("Are you sure you to change the number...!!");
@@ -314,7 +314,7 @@ public class ProfileSettings extends SimpleActivity {
 
             }
         });
-        android.support.v7.app.AlertDialog alert = builder.create();
+        androidx.appcompat.app.AlertDialog alert = builder.create();
         alert.show();
         Objs.a.DialogStyle(context, alert);
     }

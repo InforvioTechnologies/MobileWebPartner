@@ -8,7 +8,7 @@
     android:visibility="gone"
     android:id="@+id/LyError">
 
-    <android.support.v4.widget.NestedScrollView
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
@@ -28,7 +28,7 @@
                android:layout_width="@dimen/att_img_size"
                android:layout_height="@dimen/att_img_size"
                android:src="@drawable/att"/>
-           <android.support.v7.widget.AppCompatTextView
+           <androidx.appcompat.widget.AppCompatTextView
                android:layout_margin="@dimen/text_margin"
                android:layout_width="wrap_content"
                android:layout_height="wrap_content"
@@ -48,13 +48,13 @@
            android:layout_width="match_parent"
            android:layout_height="wrap_content"
            android:orientation="vertical">
-           <android.support.v7.widget.AppCompatTextView
+           <androidx.appcompat.widget.AppCompatTextView
                android:gravity="center_vertical"
                android:layout_width="wrap_content"
                android:layout_height="wrap_content"
                style="@style/SmallText"
                android:text="@string/err"/>
-           <android.support.v7.widget.AppCompatTextView
+           <androidx.appcompat.widget.AppCompatTextView
                android:id="@+id/err_msg"
                android:text="@string/server_host_connection_failed"
                android:layout_width="wrap_content"
@@ -64,6 +64,6 @@
                android:textStyle="bold"/>
        </LinearLayout>
    </LinearLayout>
-</android.support.v4.widget.NestedScrollView>
+</androidx.core.widget.NestedScrollView>
 
 </LinearLayout>

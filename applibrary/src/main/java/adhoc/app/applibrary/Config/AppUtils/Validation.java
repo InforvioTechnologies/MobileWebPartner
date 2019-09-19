@@ -2,9 +2,9 @@ package adhoc.app.applibrary.Config.AppUtils;
 
 import android.content.Context;
 import android.graphics.PorterDuff;
-import android.support.design.widget.TextInputLayout;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.AppCompatEditText;
+import com.google.android.material.textfield.TextInputLayout;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatEditText;
 import android.text.TextUtils;
 
 import adhoc.app.applibrary.R;

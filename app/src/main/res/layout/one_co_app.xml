@@ -25,7 +25,7 @@
                     android:orientation="vertical"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
-                    <android.support.v7.widget.AppCompatTextView
+                    <androidx.appcompat.widget.AppCompatTextView
                         android:gravity="center"
                         android:id="@+id/txt_bussiness101"
                         android:layout_width="match_parent"
@@ -49,7 +49,7 @@
                         android:layout_width="match_parent"
                         android:background="@drawable/capsul_button6"
                         android:layout_height="wrap_content">
-                        <android.support.v7.widget.AppCompatTextView
+                        <androidx.appcompat.widget.AppCompatTextView
                             android:id="@+id/txt_bussiness10"
                             android:layout_width="match_parent"
                             style="@style/SmallText1"
@@ -441,7 +441,7 @@
                     android:orientation="vertical"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
-                    <android.support.v7.widget.AppCompatTextView
+                    <androidx.appcompat.widget.AppCompatTextView
                         android:gravity="center"
                         android:id="@+id/txt_bussiness1019"
                         android:layout_width="match_parent"
@@ -465,7 +465,7 @@
                         android:orientation="vertical"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
-                        <android.support.v7.widget.AppCompatTextView
+                        <androidx.appcompat.widget.AppCompatTextView
                             android:gravity="center"
                             android:id="@+id/applicant_type"
                             android:layout_width="match_parent"
@@ -517,7 +517,7 @@
                         android:layout_width="match_parent"
                         android:background="@drawable/capsul_button6"
                         android:layout_height="wrap_content">
-                        <android.support.v7.widget.AppCompatTextView
+                        <androidx.appcompat.widget.AppCompatTextView
                             android:id="@+id/txt_bussiness11"
                             android:layout_width="match_parent"
                             style="@style/SmallText1"
@@ -830,7 +830,7 @@
                     android:orientation="vertical"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
-                    <android.support.v7.widget.AppCompatTextView
+                    <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/txt_bussiness112"
                         android:layout_width="match_parent"
                         style="@style/SmallText1"
@@ -868,7 +868,7 @@
                     android:orientation="vertical"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
-                    <android.support.v7.widget.AppCompatTextView
+                    <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/txt_bussiness131"
                         android:layout_width="match_parent"
                         style="@style/SmallText1"
@@ -907,7 +907,7 @@
                     android:orientation="vertical"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
-                    <android.support.v7.widget.AppCompatTextView
+                    <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/txt_bussiness1311"
                         android:layout_width="match_parent"
                         style="@style/SmallText1"
@@ -971,7 +971,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
                                 android:orientation="vertical">
-                                <android.support.v7.widget.AppCompatTextView
+                                <androidx.appcompat.widget.AppCompatTextView
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:id="@+id/applicant_txt"
@@ -998,7 +998,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
                                 android:orientation="vertical">
-                                <android.support.v7.widget.AppCompatEditText
+                                <androidx.appcompat.widget.AppCompatEditText
                                     android:layout_width="40dp"
                                     android:layout_height="50dp"
                                     android:padding="07dp"
@@ -1061,7 +1061,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
                                 android:orientation="vertical">
-                                <android.support.v7.widget.AppCompatTextView
+                                <androidx.appcompat.widget.AppCompatTextView
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:id="@+id/coapplicant1"
@@ -1087,7 +1087,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
                                 android:orientation="vertical">
-                                <android.support.v7.widget.AppCompatEditText
+                                <androidx.appcompat.widget.AppCompatEditText
                                     android:layout_width="40dp"
                                     android:layout_height="50dp"
                                     android:padding="07dp"
@@ -1149,7 +1149,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
                                 android:orientation="vertical">
-                                <android.support.v7.widget.AppCompatTextView
+                                <androidx.appcompat.widget.AppCompatTextView
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:id="@+id/coapplicant2"
@@ -1175,7 +1175,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
                                 android:orientation="vertical">
-                                <android.support.v7.widget.AppCompatEditText
+                                <androidx.appcompat.widget.AppCompatEditText
                                     android:layout_width="40dp"
                                     android:layout_height="50dp"
                                     android:padding="07dp"
@@ -1238,7 +1238,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
                                 android:orientation="vertical">
-                                <android.support.v7.widget.AppCompatTextView
+                                <androidx.appcompat.widget.AppCompatTextView
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:id="@+id/coapplicant3"
@@ -1264,7 +1264,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
                                 android:orientation="vertical">
-                                <android.support.v7.widget.AppCompatEditText
+                                <androidx.appcompat.widget.AppCompatEditText
                                     android:layout_width="40dp"
                                     android:layout_height="50dp"
                                     android:padding="07dp"
@@ -1326,7 +1326,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
                                 android:orientation="vertical">
-                                <android.support.v7.widget.AppCompatTextView
+                                <androidx.appcompat.widget.AppCompatTextView
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:id="@+id/coapplicant4"
@@ -1352,7 +1352,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
                                 android:orientation="vertical">
-                                <android.support.v7.widget.AppCompatEditText
+                                <androidx.appcompat.widget.AppCompatEditText
                                     android:layout_width="40dp"
                                     android:layout_height="50dp"
                                     android:padding="07dp"

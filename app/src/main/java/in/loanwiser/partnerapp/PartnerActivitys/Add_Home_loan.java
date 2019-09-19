@@ -6,11 +6,11 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewPager;
-import android.support.v7.widget.AppCompatButton;
-import android.support.v7.widget.AppCompatTextView;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.viewpager.widget.ViewPager;
+import androidx.appcompat.widget.AppCompatButton;
+import androidx.appcompat.widget.AppCompatTextView;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -26,7 +26,6 @@ import android.widget.AutoCompleteTextView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
@@ -833,7 +832,7 @@ public class Add_Home_loan extends Fragment {
     }
 
     private void Session_mobile(String name , String mob,String s_pincode, String S_loanamount) {
-
+        update();
         String stringNumber = S_loanamount;
         result = stringNumber.replace(",","");
         JSONObject jsonObject =new JSONObject();
@@ -947,10 +946,10 @@ public class Add_Home_loan extends Fragment {
 
     public void ExitAlert(Context context, final String enter_all) {
         //http://android.support.v7.app/
-        android.support.v7.app.AlertDialog.Builder builder = new android.support.v7.app.AlertDialog.Builder(context, R.style.MyAlertDialogStyle);
+        androidx.appcompat.app.AlertDialog.Builder builder = new androidx.appcompat.app.AlertDialog.Builder(context, R.style.MyAlertDialogStyle);
         builder.setTitle(context.getResources().getString(R.string.attention));
         builder.setIcon(context.getResources().getDrawable(R.drawable.ic_info_outline_black_24dp));
-        builder.setMessage("We are currently Not Operation in this Location. We will contact you when we are Operational.");
+        builder.setMessage("We are currently Not Operational in this State. We will contact you when we are Operational.");
         builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -965,7 +964,7 @@ public class Add_Home_loan extends Fragment {
             }
         });
         //  builder.setPositiveButton("Yes", null);
-        android.support.v7.app.AlertDialog alert = builder.create();
+        androidx.appcompat.app.AlertDialog alert = builder.create();
         alert.show();
         Objs.a.DialogStyle(context, alert);
     }
@@ -975,8 +974,10 @@ public class Add_Home_loan extends Fragment {
         name.setFocusable(false);
         mob.setFocusable(false);
         loanamount.setFocusable(false);
-        address.setEnabled(false);
-        address1.setEnabled(false);
+        W_locationpincode.setFocusable(false);
+        SP_work_pincode_area.setEnabled(false);
+        address.setFocusable(false);
+        address1.setFocusable (false);
         appCompatButtonAdd_Leads.setBackgroundResource(R.drawable.capsul_button7);
         appCompatButtonAdd_Leads.setEnabled(false);
         appCompatButtonAdd_Leads.setText("Completed");

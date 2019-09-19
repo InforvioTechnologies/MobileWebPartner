@@ -10,7 +10,7 @@
     android:visibility="gone"
     android:id="@+id/LyNoNetwork">
 
-    <android.support.v4.widget.NestedScrollView
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
@@ -28,7 +28,7 @@
                 android:layout_marginBottom="20dp">
             </ImageView>
 
-            <android.support.v7.widget.AppCompatTextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/NoNetwork_text"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
@@ -48,6 +48,6 @@
                 android:layout_marginTop="20dp"/>
         </LinearLayout>
 
-    </android.support.v4.widget.NestedScrollView>
+    </androidx.core.widget.NestedScrollView>
 
 </LinearLayout>

@@ -9,7 +9,7 @@
     android:background="@color/white"
     app:ignore="NamespaceTypo">
 
-    <android.support.v7.widget.CardView
+    <androidx.cardview.widget.CardView
         android:visibility="gone"
         xmlns:card_view="http://schemas.android.com/apk/res-auto"
         android:id="@+id/TA"
@@ -50,7 +50,7 @@
                     android:layout_gravity="center"
                     android:orientation="vertical">
 
-                    <android.support.v7.widget.AppCompatTextView
+                    <androidx.appcompat.widget.AppCompatTextView
                         android:layout_gravity="center"
 
                         android:id="@+id/ta"
@@ -66,7 +66,7 @@
                     android:orientation="horizontal"
                     android:layout_width="80dp"
                     android:layout_height="match_parent">
-                    <android.support.v7.widget.AppCompatTextView
+                    <androidx.appcompat.widget.AppCompatTextView
                         android:gravity="center"
                         android:text="30"
                         android:textSize="20dp"
@@ -77,8 +77,8 @@
 
 
         </LinearLayout>
-    </android.support.v7.widget.CardView>
-    <android.support.v7.widget.CardView
+    </androidx.cardview.widget.CardView>
+    <androidx.cardview.widget.CardView
         xmlns:card_view="http://schemas.android.com/apk/res-auto"
         android:id="@+id/Applyfor_loan"
         android:layout_marginTop="3dp"
@@ -119,7 +119,7 @@
                     android:layout_gravity="center"
                     android:orientation="vertical">
 
-                    <android.support.v7.widget.AppCompatTextView
+                    <androidx.appcompat.widget.AppCompatTextView
                         android:layout_gravity="center"
                         style="@style/SmallText1"
                         android:id="@+id/apply_loan"
@@ -135,7 +135,7 @@
                     android:orientation="horizontal"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent">
-                    <android.support.v7.widget.AppCompatTextView
+                    <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/count"
                         android:gravity="center"
                         android:text="6"
@@ -148,5 +148,5 @@
 
 
         </LinearLayout>
-    </android.support.v7.widget.CardView>
+    </androidx.cardview.widget.CardView>
 </LinearLayout>

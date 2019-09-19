@@ -34,7 +34,7 @@
                             android:orientation="vertical"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content">
-                            <android.support.v7.widget.AppCompatTextView
+                            <androidx.appcompat.widget.AppCompatTextView
                                 android:visibility="gone"
                                 android:id="@+id/txt_bussiness1"
                                 android:layout_width="match_parent"
@@ -76,7 +76,7 @@
                             android:orientation="vertical"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content">
-                            <android.support.v7.widget.AppCompatTextView
+                            <androidx.appcompat.widget.AppCompatTextView
 
                                 android:id="@+id/property_type"
                                 android:layout_width="match_parent"
@@ -119,7 +119,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content">
 
-                            <android.support.v7.widget.AppCompatTextView
+                            <androidx.appcompat.widget.AppCompatTextView
                                 android:layout_marginLeft="5dp"
                                 android:id="@+id/txt_property_pincode_area"
                                 android:layout_width="match_parent"
@@ -171,7 +171,7 @@
                                         android:orientation="vertical"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content">
-                                        <android.support.v7.widget.AppCompatTextView
+                                        <androidx.appcompat.widget.AppCompatTextView
                                             android:gravity="left"
                                             android:layout_marginLeft="5dp"
                                             android:id="@+id/Property_pincode_area"
@@ -272,7 +272,7 @@
                                 android:orientation="vertical"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content">
-                                <android.support.v7.widget.AppCompatTextView
+                                <androidx.appcompat.widget.AppCompatTextView
                                     android:gravity="start"
                                     android:id="@+id/txt_work_pincode_area"
                                     android:layout_width="match_parent"
@@ -334,7 +334,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:orientation="vertical">
-                        <android.support.v7.widget.AppCompatEditText
+                        <androidx.appcompat.widget.AppCompatEditText
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
                             android:padding="07dp"
@@ -374,7 +374,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:orientation="vertical">
-                        <android.support.v7.widget.AppCompatTextView
+                        <androidx.appcompat.widget.AppCompatTextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:id="@+id/add_co_app"
@@ -440,7 +440,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
-                        <android.support.v7.widget.AppCompatButton
+                        <androidx.appcompat.widget.AppCompatButton
                             android:id="@+id/updated_applicant"
                             android:text="@string/saveB"
                             android:layout_width="match_parent"
@@ -450,7 +450,7 @@
                             android:theme="@style/BtnStyleApp" />
                     </LinearLayout>
                 </LinearLayout>
-                <android.support.v7.widget.AppCompatTextView
+                <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"/>

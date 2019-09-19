@@ -1,8 +1,8 @@
 package in.loanwiser.partnerapp;
 
 import android.os.Bundle;
-import android.support.v7.widget.AppCompatTextView;
-import android.util.Log;
+import androidx.appcompat.widget.AppCompatTextView;
+
 import android.widget.Toast;
 
 import org.json.JSONArray;
@@ -11,7 +11,6 @@ import org.json.JSONObject;
 
 import adhoc.app.applibrary.Config.AppUtils.Objs;
 import in.loanwiser.partnerapp.PartnerActivitys.RemoveCommas;
-import in.loanwiser.partnerapp.R;
 
 
 public class MainActivity extends SimpleActivity {

@@ -3,13 +3,11 @@ package in.loanwiser.partnerapp.PartnerActivitys;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.webkit.WebView;
-import android.app.ProgressDialog;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.webkit.WebView;
+
+import androidx.appcompat.app.AppCompatActivity;
+
 import android.webkit.WebViewClient;
 import adhoc.app.applibrary.Config.AppUtils.Objs;
-import adhoc.app.applibrary.Config.AppUtils.Pref.Pref;
 
 import in.loanwiser.partnerapp.R;
 

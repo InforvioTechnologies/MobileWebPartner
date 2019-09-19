@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.widget.DrawerLayout
+<androidx.drawerlayout.widget.DrawerLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -9,7 +9,7 @@
     android:id="@+id/drawer_layout"
     tools:context="in.loanwiser.partnerapp.Partner_Statues.Statues_Dashboard">
 
-    <android.support.design.widget.CoordinatorLayout
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
@@ -20,11 +20,11 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
-        <android.support.design.widget.AppBarLayout
+        <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:theme="@style/AppTheme.AppBarOverlay">
-            <android.support.v7.widget.Toolbar
+            <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar"
                 app:titleMarginStart="32dp"
                 android:layout_width="match_parent"
@@ -33,9 +33,9 @@
                 app:layout_scrollFlags="scroll|enterAlways"
                 app:popupTheme="@style/AppTheme.AppBarOverlay" >
 
-            </android.support.v7.widget.Toolbar>
+            </androidx.appcompat.widget.Toolbar>
 
-        </android.support.design.widget.AppBarLayout>
+        </com.google.android.material.appbar.AppBarLayout>
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent">
@@ -103,7 +103,7 @@
                                     android:layout_height="wrap_content"
                                     android:orientation="horizontal"
                                     android:layout_weight="1">
-                                    <android.support.v7.widget.AppCompatTextView
+                                    <androidx.appcompat.widget.AppCompatTextView
                                         android:gravity="center"
                                         style="@style/SmallText"
                                         android:id="@+id/Lead_details"
@@ -112,7 +112,7 @@
                                         android:text="Total loan leads logged in -"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content" />
-                                    <android.support.v7.widget.AppCompatTextView
+                                    <androidx.appcompat.widget.AppCompatTextView
                                         android:gravity="center"
                                         android:id="@+id/total_Lead_details"
                                         style="@style/SmallText"
@@ -126,7 +126,7 @@
                                     android:layout_height="wrap_content"
                                     android:gravity="end"
                                     android:layout_weight="1">
-                                    <android.support.v7.widget.AppCompatButton
+                                    <androidx.appcompat.widget.AppCompatButton
                                         android:id="@+id/go_leads"
                                         style="@style/ButtonStyle"
                                         android:text="Go"
@@ -151,7 +151,7 @@
                                     android:orientation="vertical"
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent">
-                                    <android.support.v7.widget.CardView
+                                    <androidx.cardview.widget.CardView
                                         xmlns:card_view="http://schemas.android.com/apk/res-auto"
                                         android:id="@+id/CD_document"
                                         android:layout_marginTop="3dp"
@@ -190,7 +190,7 @@
                                                     android:layout_gravity="center"
                                                     android:orientation="vertical">
 
-                                                    <android.support.v7.widget.AppCompatTextView
+                                                    <androidx.appcompat.widget.AppCompatTextView
                                                         android:layout_gravity="center"
                                                         style="@style/SmallText"
                                                         android:id="@+id/Doc_status"
@@ -205,7 +205,7 @@
                                                     android:orientation="horizontal"
                                                     android:layout_width="wrap_content"
                                                     android:layout_height="match_parent">
-                                                    <android.support.v7.widget.AppCompatTextView
+                                                    <androidx.appcompat.widget.AppCompatTextView
                                                         android:id="@+id/document_statues"
                                                         android:gravity="center"
                                                         android:text="0"
@@ -219,9 +219,9 @@
 
 
                                         </LinearLayout>
-                                    </android.support.v7.widget.CardView>
+                                    </androidx.cardview.widget.CardView>
 
-                                    <android.support.v7.widget.CardView
+                                    <androidx.cardview.widget.CardView
                                         xmlns:card_view="http://schemas.android.com/apk/res-auto"
                                         android:id="@+id/CD_in_progress"
 
@@ -260,7 +260,7 @@
                                                     android:layout_gravity="center"
                                                     android:orientation="vertical">
 
-                                                    <android.support.v7.widget.AppCompatTextView
+                                                    <androidx.appcompat.widget.AppCompatTextView
                                                         android:layout_gravity="center"
 
                                                         android:id="@+id/In_Progress"
@@ -276,7 +276,7 @@
                                                     android:orientation="horizontal"
                                                     android:layout_width="wrap_content"
                                                     android:layout_height="match_parent">
-                                                    <android.support.v7.widget.AppCompatTextView
+                                                    <androidx.appcompat.widget.AppCompatTextView
                                                         android:id="@+id/In_Progress_count"
                                                         android:gravity="center"
                                                         android:text="0"
@@ -289,9 +289,9 @@
 
 
                                         </LinearLayout>
-                                    </android.support.v7.widget.CardView>
+                                    </androidx.cardview.widget.CardView>
 
-                                    <android.support.v7.widget.CardView
+                                    <androidx.cardview.widget.CardView
                                         xmlns:card_view="http://schemas.android.com/apk/res-auto"
                                         android:id="@+id/CD_approved"
 
@@ -330,7 +330,7 @@
                                                     android:layout_gravity="center"
                                                     android:orientation="vertical">
 
-                                                    <android.support.v7.widget.AppCompatTextView
+                                                    <androidx.appcompat.widget.AppCompatTextView
                                                         android:layout_gravity="center"
                                                         style="@style/SmallText"
                                                         android:id="@+id/Approved"
@@ -345,7 +345,7 @@
                                                     android:orientation="horizontal"
                                                     android:layout_width="wrap_content"
                                                     android:layout_height="match_parent">
-                                                    <android.support.v7.widget.AppCompatTextView
+                                                    <androidx.appcompat.widget.AppCompatTextView
                                                         android:id="@+id/Approved_count"
                                                         android:gravity="center"
                                                         android:text="0"
@@ -358,8 +358,8 @@
 
 
                                         </LinearLayout>
-                                    </android.support.v7.widget.CardView>
-                                    <android.support.v7.widget.CardView
+                                    </androidx.cardview.widget.CardView>
+                                    <androidx.cardview.widget.CardView
                                         xmlns:card_view="http://schemas.android.com/apk/res-auto"
                                         android:id="@+id/CD_disbursed"
 
@@ -398,7 +398,7 @@
                                                     android:layout_gravity="center"
                                                     android:orientation="vertical">
 
-                                                    <android.support.v7.widget.AppCompatTextView
+                                                    <androidx.appcompat.widget.AppCompatTextView
                                                         android:layout_gravity="center"
                                                         style="@style/SmallText"
                                                         android:id="@+id/Disbursed"
@@ -413,7 +413,7 @@
                                                     android:orientation="horizontal"
                                                     android:layout_width="wrap_content"
                                                     android:layout_height="match_parent">
-                                                    <android.support.v7.widget.AppCompatTextView
+                                                    <androidx.appcompat.widget.AppCompatTextView
                                                         android:id="@+id/Disbursed_count"
                                                         android:gravity="center"
                                                         android:text="0"
@@ -426,8 +426,8 @@
 
 
                                         </LinearLayout>
-                                    </android.support.v7.widget.CardView>
-                                    <android.support.v7.widget.CardView
+                                    </androidx.cardview.widget.CardView>
+                                    <androidx.cardview.widget.CardView
                                         xmlns:card_view="http://schemas.android.com/apk/res-auto"
                                         android:id="@+id/CD_declined"
 
@@ -466,7 +466,7 @@
                                                     android:layout_gravity="center"
                                                     android:orientation="vertical">
 
-                                                    <android.support.v7.widget.AppCompatTextView
+                                                    <androidx.appcompat.widget.AppCompatTextView
                                                         android:layout_gravity="center"
 
                                                         android:id="@+id/Declined"
@@ -482,7 +482,7 @@
                                                     android:orientation="horizontal"
                                                     android:layout_width="wrap_content"
                                                     android:layout_height="match_parent">
-                                                    <android.support.v7.widget.AppCompatTextView
+                                                    <androidx.appcompat.widget.AppCompatTextView
                                                         android:id="@+id/Declined_count"
                                                         android:gravity="center"
                                                         android:text="0"
@@ -495,8 +495,8 @@
 
 
                                         </LinearLayout>
-                                    </android.support.v7.widget.CardView>
-                                    <android.support.v7.widget.CardView
+                                    </androidx.cardview.widget.CardView>
+                                    <androidx.cardview.widget.CardView
                                         xmlns:card_view="http://schemas.android.com/apk/res-auto"
                                         android:id="@+id/closed"
                                         android:visibility="gone"
@@ -535,7 +535,7 @@
                                                     android:layout_gravity="center"
                                                     android:orientation="vertical">
 
-                                                    <android.support.v7.widget.AppCompatTextView
+                                                    <androidx.appcompat.widget.AppCompatTextView
                                                         android:layout_gravity="center"
                                                         style="@style/SmallText1"
                                                         android:id="@+id/Closed"
@@ -551,7 +551,7 @@
                                                     android:orientation="horizontal"
                                                     android:layout_width="wrap_content"
                                                     android:layout_height="match_parent">
-                                                    <android.support.v7.widget.AppCompatTextView
+                                                    <androidx.appcompat.widget.AppCompatTextView
                                                         android:id="@+id/Closed_count"
                                                         android:gravity="center"
                                                         android:text="0"
@@ -564,9 +564,9 @@
 
 
                                         </LinearLayout>
-                                    </android.support.v7.widget.CardView>
+                                    </androidx.cardview.widget.CardView>
                                     
-                                    <android.support.v7.widget.AppCompatTextView
+                                    <androidx.appcompat.widget.AppCompatTextView
                                         android:layout_width="match_parent"
                                         android:layout_height="70dp" />
                                 </LinearLayout>
@@ -581,7 +581,7 @@
                                 android:layout_height="wrap_content"
                                 android:orientation="vertical">
 
-                                <android.support.v7.widget.AppCompatButton
+                                <androidx.appcompat.widget.AppCompatButton
                                     android:id="@+id/addlead"
                                     android:layout_gravity="center"
                                     android:layout_width="300dp"
@@ -599,7 +599,7 @@
                                 android:layout_height="wrap_content"
                                 android:orientation="vertical">
 
-                                <android.support.v7.widget.AppCompatButton
+                                <androidx.appcompat.widget.AppCompatButton
                                     android:id="@+id/myearnings"
                                     android:layout_gravity="center"
                                     android:layout_width="300dp"
@@ -617,7 +617,7 @@
                                 android:layout_height="wrap_content"
                                 android:orientation="vertical">
 
-                                <android.support.v7.widget.AppCompatTextView
+                                <androidx.appcompat.widget.AppCompatTextView
                                     android:id="@+id/myearnings2"
                                     android:layout_gravity="center"
                                     android:layout_width="300dp"
@@ -634,7 +634,7 @@
         </ScrollView>
     </LinearLayout>
 
-        <android.support.design.widget.FloatingActionButton
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/float_add"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -715,7 +715,7 @@
                     fab:fab_size="mini" />
             </com.github.clans.fab.FloatingActionMenu>
         </RelativeLayout>-->
-    </android.support.design.widget.CoordinatorLayout>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
     <LinearLayout
 
         android:id="@+id/drawer"
@@ -729,4 +729,4 @@
 
 
     </LinearLayout>
-</android.support.v4.widget.DrawerLayout>
+</androidx.drawerlayout.widget.DrawerLayout>
