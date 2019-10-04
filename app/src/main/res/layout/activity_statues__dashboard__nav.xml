@@ -24,7 +24,6 @@
         app:menu="@menu/main_menu">
         <LinearLayout
             android:layout_gravity="bottom"
-
             android:elevation="4sp"
             android:gravity="center"
             android:layout_width="match_parent"
@@ -32,7 +31,6 @@
             android:orientation="horizontal">
 
             <LinearLayout
-
                 android:id="@+id/Ly_chat1"
                 android:gravity="end"
                 android:layout_weight="1"
@@ -44,7 +42,6 @@
                     android:padding="5dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
-
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/txt_code"
