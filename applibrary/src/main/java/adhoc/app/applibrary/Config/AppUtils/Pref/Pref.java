@@ -38,6 +38,7 @@ public final class Pref {
     public static String LOANTYPE1 = "LOANTYPE1";
     public static String NAME = "NAME";
     public static String MOBILE = "MOBILE";
+    public static String LEADMOBILE = "LEADMOBILE";
     public static String LOANTYPENAME = "LOANTYPENAME";
     public static String DOC_Status = "DOC_Status";
 
@@ -412,6 +413,21 @@ public static void putapplicant_name(final Context context, String aUserId) {
         SharedPreferences prefs = Pref.get(context);
         SharedPreferences.Editor editor = prefs.edit();
         editor.remove(MOBILE);
+        editor.commit();
+    }
+
+    public static void putMobileLead(final Context context, String aUserId) {
+        Pref.putPref(context, LEADMOBILE, aUserId);
+    }
+
+    public static String getMobileLead(final Context context) {
+        return Pref.getPref(context, LEADMOBILE, null);
+    }
+
+    public static void removeMobileLead(final Context context) {
+        SharedPreferences prefs = Pref.get(context);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.remove(LEADMOBILE);
         editor.commit();
     }
 ////

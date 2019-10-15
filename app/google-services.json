@@ -1,42 +1,34 @@
 {
   "project_info": {
-    "project_number": "910525637212",
-    "firebase_url": "https://partner-new.firebaseio.com",
-    "project_id": "partner-new",
-    "storage_bucket": "partner-new.appspot.com"
+    "project_number": "319554476042",
+    "firebase_url": "https://loanwiser-partner.firebaseio.com",
+    "project_id": "loanwiser-partner",
+    "storage_bucket": "loanwiser-partner.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:910525637212:android:eec0a2ad0c487f18",
+        "mobilesdk_app_id": "1:319554476042:android:4599b99dcf2eb6ea4d27f3",
         "android_client_info": {
           "package_name": "in.loanwiser.partnerapp"
         }
       },
       "oauth_client": [
         {
-          "client_id": "910525637212-vekpjlvqmkaafngaavbfoq8orplfqcmj.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "in.loanwiser.partnerapp",
-            "certificate_hash": "1628abdc10eaa33a4792a0ea427655a2ec0ff1ca"
-          }
-        },
-        {
-          "client_id": "910525637212-d4bm2oeu455qkgguq8qt1cv6372u356g.apps.googleusercontent.com",
+          "client_id": "319554476042-unlphucjjtjqsfbbegrchasrkijpcfd7.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCpXLLWERQRMry9O3fmE-vyn6G-43dLO68"
+          "current_key": "AIzaSyBQLqqgTzgSsgXMo-nvEFpii5aq-nCZ9js"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "910525637212-d4bm2oeu455qkgguq8qt1cv6372u356g.apps.googleusercontent.com",
+              "client_id": "319554476042-unlphucjjtjqsfbbegrchasrkijpcfd7.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

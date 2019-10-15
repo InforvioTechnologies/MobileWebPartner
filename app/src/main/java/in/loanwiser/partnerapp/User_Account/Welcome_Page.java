@@ -2,24 +2,37 @@ package in.loanwiser.partnerapp.User_Account;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.appcompat.widget.AppCompatTextView;
+
+import android.text.TextUtils;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.Toast;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.InstanceIdResult;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 import adhoc.app.applibrary.Config.AppUtils.Objs;
+import in.loanwiser.partnerapp.Push_Notification.MainActivity;
 import in.loanwiser.partnerapp.R;
+import in.loanwiser.partnerapp.app.Config;
 
 public class Welcome_Page extends AppCompatActivity implements Animation.AnimationListener {
 
@@ -61,6 +74,8 @@ public class Welcome_Page extends AppCompatActivity implements Animation.Animati
         String appSignatures = String.valueOf(signatureHelper.getAppSignatures());
         Log.e("AppSign", appSignatures);
         Toast.makeText(getApplicationContext(),appSignatures,Toast.LENGTH_LONG).show();*/
+
+        displayFirebaseRegId();
     }
 
     private void initCode() {
@@ -138,6 +153,38 @@ public class Welcome_Page extends AppCompatActivity implements Animation.Animati
 
     @Override
     public void onAnimationRepeat(Animation animation) {
+
+    }
+
+    private void displayFirebaseRegId() {
+
+
+        FirebaseInstanceId.getInstance().getInstanceId()
+                .addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<InstanceIdResult> task) {
+                        if (!task.isSuccessful()) {
+                            Log.w("TAG", "getInstanceId failed", task.getException());
+                            return;
+                        }
+
+                        // Get new Instance ID token
+                        String token = task.getResult().getToken();
+
+                        // Log and toast
+                        //  String msg = getString(R.string.msg_token_fmt, token);
+                        //  Log.d(TAG, msg);
+                       // txtRegId.setText("Firebase Reg Id: " + token);
+                        Log.e("TAG", "Firebase reg id: " + token);
+                       // Toast.makeText(Welcome_Page.this, "Firebase Reg Id: " + token, Toast.LENGTH_SHORT).show();
+                    }
+                });
+        // [END retrieve_current_token]
+
+        SharedPreferences pref = getApplicationContext().getSharedPreferences(Config.SHARED_PREF, 0);
+        String regId = pref.getString("regId", null);
+
+        Log.e("TAG", "Firebase reg id: " + regId);
 
     }
 }

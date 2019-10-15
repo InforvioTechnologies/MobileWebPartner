@@ -11,14 +11,12 @@ import java.util.Map;
  */
 public class Urls {
 
- //   public static String Urls2 = "http://cscapiuat.propwiser.com/mobile/mortgage.php?call=";
- // public static String Urls = "http://cscapi.propwiser.com/mobile/mortgage.php?call=";
-
+ /*UAT*/
  //  public static String Urls = "http://cscapitest.propwiser.com/mobile/mortgage_updated.php?call=";
 
     /*Live*/
-    public static String Urls = "http://cscapi.propwiser.com/mobile/mortgage_updated.php?call=";
-    /*UAT*/
+   public static String Urls = "http://cscapi.propwiser.com/mobile/mortgage_updated.php?call=";
+
 
   /// public static String Urls = "http://cscapiuat.propwiser.com/mobile/mortgage_updated.php?call=";
 
@@ -29,6 +27,8 @@ public class Urls {
     public static String BUSINESS_reg_POST  = Urls + "register";
     public static String BUSINESS_reg_POST1  = Urls + "register";
     public static String BUSINESS_login_POST  = Urls + "login";
+    public static String PARTNER_LEAD_MOBILE_NUMBER  = Urls + "check_mobilenumber";
+    public static String PARTNER_LEAD_MOBILE_OTP  = Urls + "verifyotp_mobilenumber";
     public static String MOBILE_UPDATE_POST  = Urls + "partner_mobileupdate";
     public static String Confirm_LOGIN_OTP_POST  = Urls + "confirmOtp";
     public static String Confirm_Upadte_OTP_POST  = Urls + "partner_mobileverify";

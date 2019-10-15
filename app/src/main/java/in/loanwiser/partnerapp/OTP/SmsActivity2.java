@@ -193,7 +193,7 @@ public class SmsActivity2 extends AppCompatActivity {
                 if(new_otp.length()==5){
                     submitForm();
                 }else {
-                    Objs.a.showToast(mCon,"Please in enter the OTP");
+                    Objs.a.showToast(mCon,"Please enter the OTP");
                 }
                 //Log.d("Comfrim :", new_otp);
 

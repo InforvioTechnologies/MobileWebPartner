@@ -10,8 +10,10 @@
     <string name="list_lead">List of Leads</string>
 
     <string name="name">Name</string>
-    <string name="mob">Mobile No</string>
+    <string name="name_cs">Customer Name</string>
+    <string name="mob">Customer Mobile No</string>
     <string name="signin">SIGN IN</string>
+    <string name="leadverif">Customer Verification</string>
     <string name="signup1">SIGN UP</string>
     <string name="type">Business Type</string>
     <string name="address">Address</string>
@@ -42,7 +44,9 @@
 
     <string name="verif">Mobile Verification</string>
     <string name="otp_enter">Enter the otp below in case if we fail to detect the SMS automatically</string>
+    <string name="otp_lead_enter">Enter the otp send to the customer to verify mobile number</string>
     <string name="pls_enter">Please enter your mobile number</string>
+    <string name="pls_enter_lead_mob">Please enter your Customer mobile number</string>
     <string name="pls_enter_new">Please enter your mobile number to update with exiting number</string>
     <string name="pls_enter1" tools:ignore="StringEscaping">Heres your list of customers application</string>
     <string name="pls_enter_otp">Please enter your mobile number</string>

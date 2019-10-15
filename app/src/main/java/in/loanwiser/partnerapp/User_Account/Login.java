@@ -347,6 +347,7 @@ public class Login extends SimpleActivity {
         Objs.ac.StartActivity(mCon, Welcome_Page.class);
         finish();
         super.onBackPressed();
+
     }
 }
 

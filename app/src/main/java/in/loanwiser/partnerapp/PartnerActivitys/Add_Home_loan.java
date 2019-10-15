@@ -381,16 +381,17 @@ public class Add_Home_loan extends Fragment {
         // email_id = (AppCompatEditText) view.findViewById(R.id.email);
         name = (MaterialEditText) view.findViewById(R.id.name);
         mob = (MaterialEditText) view.findViewById(R.id.mob);
-        Mobile = Pref.getUID(getContext());
+        Mobile = Pref.getMobileLead(getContext());
         Name = Pref.getName(getContext());
         available = (LinearLayout) view.findViewById(R.id.available);
         st1 = (LinearLayout) view.findViewById(R.id.st1);
-      //  name.setText(Name);
+        name.setText(Name);
         // name.setFocusable(false);
         //name.setClickable(false);
 
-       // mob.setText(Mobile);
-      //  mob.setFocusable(false);
+        mob.setText(Mobile);
+        mob.setFocusable(false);
+
         W_locationpincode =  (AutoCompleteTextView)view.findViewById(R.id.W_locationpincode);
         SP_work_pincode_area =  (Spinner) view.findViewById(R.id.SP_work_pincode_area);
         W_locationpincode.setTypeface(font);

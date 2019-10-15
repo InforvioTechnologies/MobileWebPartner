@@ -17,6 +17,7 @@ import android.widget.LinearLayout;
 import adhoc.app.applibrary.Config.AppUtils.Objs;
 import adhoc.app.applibrary.Config.AppUtils.Pref.Pref;
 import dmax.dialog.SpotsDialog;
+import in.loanwiser.partnerapp.Partner_Lead_OTP_Verification.Partner_Lead_OTP_Verification;
 import in.loanwiser.partnerapp.R;
 
 public class Applicant_Details_Activity extends SimpleActivity {
@@ -67,7 +68,7 @@ public class Applicant_Details_Activity extends SimpleActivity {
                 Pref.putLoanTypeSub(mCon,sub_categoryid);
                 Pref.putLoanTypename(mCon,Loantype_name);
                 //if(Loantype !="Applied") {
-                Intent intent = new Intent(Applicant_Details_Activity.this, MainActivity_Add_Lead.class);
+                Intent intent = new Intent(Applicant_Details_Activity.this, Partner_Lead_OTP_Verification.class);
                 startActivity(intent);
                 finish();
 
@@ -84,7 +85,7 @@ public class Applicant_Details_Activity extends SimpleActivity {
                 Pref.putLoanTypeSub(mCon,sub_categoryid);
                 Pref.putLoanTypename(mCon,Loantype_name);
 
-                Intent intent = new Intent(Applicant_Details_Activity.this, MainActivity_Add_Lead.class);
+                Intent intent = new Intent(Applicant_Details_Activity.this, Partner_Lead_OTP_Verification.class);
                 startActivity(intent);
                 finish();
             }
@@ -98,7 +99,7 @@ public class Applicant_Details_Activity extends SimpleActivity {
                 Pref.putLoanType(mCon,Loantype);
                 Pref.putLoanTypename(mCon,Loantype_name);
                 Pref.putLoanTypeSub(mCon,sub_categoryid);
-                Intent intent = new Intent(Applicant_Details_Activity.this, MainActivity_Add_Lead1.class);
+                Intent intent = new Intent(Applicant_Details_Activity.this, Partner_Lead_OTP_Verification.class);
                 startActivity(intent);
                 finish();
             }
@@ -113,7 +114,7 @@ public class Applicant_Details_Activity extends SimpleActivity {
                 Pref.putLoanType(mCon,Loantype);
                 Pref.putLoanTypename(mCon,Loantype_name);
                 Pref.putLoanTypeSub(mCon,sub_categoryid);
-                Intent intent = new Intent(Applicant_Details_Activity.this, MainActivity_Add_Lead1.class);
+                Intent intent = new Intent(Applicant_Details_Activity.this, Partner_Lead_OTP_Verification.class);
                 startActivity(intent);
                 finish();
             }
@@ -128,7 +129,7 @@ public class Applicant_Details_Activity extends SimpleActivity {
                 String sub_categoryid = "5";
                 Pref.putLoanType(mCon,Loantype);
                 Pref.putLoanTypeSub(mCon,sub_categoryid);
-                Intent intent = new Intent(Applicant_Details_Activity.this, MainActivity_Vehicle_Add_Lead1.class);
+                Intent intent = new Intent(Applicant_Details_Activity.this, Partner_Lead_OTP_Verification.class);
                 startActivity(intent);
                 finish();
             }

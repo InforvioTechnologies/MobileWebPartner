@@ -41,7 +41,6 @@
                     android:layout_height="match_parent">
 
                     <androidx.appcompat.widget.AppCompatTextView
-
                         android:id="@+id/verif"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -50,6 +49,7 @@
                         android:textColor="@color/colorPrimaryDark1"
                         android:textSize="35dp"
                         android:textStyle="bold" />
+
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/pls_enter"
                         android:gravity="center"

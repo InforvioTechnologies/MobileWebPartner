@@ -66,6 +66,7 @@
                         app:met_iconPadding="@dimen/text_size"
                         android:layout_marginBottom="13dp"
                         app:met_textColorHint="@color/gray" />
+
                     <com.rengwuxian.materialedittext.MaterialEditText
                         android:id="@+id/loanamount"
                         android:layout_width="match_parent"
