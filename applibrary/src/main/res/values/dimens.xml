@@ -22,6 +22,7 @@
     <dimen name="text_size_very_small1">10sp</dimen>
     <dimen name="text_size_big">22sp</dimen>
     <dimen name="text_size_big1">18sp</dimen>
+    <dimen name="text_size_big2">16sp</dimen>
    <!-- <dimen name="app_bar_height">472dp</dimen>-->
     <dimen name="app_bar_height">150dp</dimen>
 

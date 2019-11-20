@@ -32,7 +32,10 @@ public final class Pref {
     public static String CLASSID = "CLASSID";
     public static String USERTYPE = "USERTYPE";
     public static String TRANSACTIONID = "TRANSACTIONID";
+
     public static String APPLICANTNAME = "APPLICANTNAME";
+
+    public static String EMPLOYMENT = "EMPLOYMENT";
 
     public static String LOANTYPE = "LOANTYPE";
     public static String LOANTYPE1 = "LOANTYPE1";
@@ -129,7 +132,22 @@ public static void putapplicant_name(final Context context, String aUserId) {
     }
 
 
+    //employee type
 
+    public static void putEMPLOYMENT(final Context context, String aUserId) {
+        Pref.putPref(context, EMPLOYMENT, aUserId);
+    }
+
+    public static String getEMPLOYMENT(final Context context) {
+        return Pref.getPref(context, EMPLOYMENT, null);
+    }
+
+    public static void removeEMPLOYMENT(final Context context) {
+        SharedPreferences prefs = Pref.get(context);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.remove(EMPLOYMENT);
+        editor.commit();
+    }
 
     public static void putStatus_id(final Context context, String aUserId) {
         Pref.putPref(context, PID, aUserId);

@@ -119,6 +119,16 @@
         <item name="android:textColor">@android:color/black</item>
         <item name="android:textSize">@dimen/text_size_big</item>
     </style>
+
+    <style name="LorgeText2" parent="@android:style/TextAppearance">
+        <item name="android:paddingLeft">@dimen/activity_pading</item>
+        <item name="android:paddingRight">@dimen/activity_pading</item>
+        <item name="android:paddingTop">@dimen/activity_pading</item>
+        <item name="android:paddingBottom">@dimen/activity_pading</item>
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:textSize">@dimen/text_size_big2</item>
+    </style>
+
     <style name="LorgeText1" parent="@android:style/TextAppearance">
         <item name="android:paddingLeft">@dimen/activity_pading</item>
         <item name="android:paddingRight">@dimen/activity_pading</item>

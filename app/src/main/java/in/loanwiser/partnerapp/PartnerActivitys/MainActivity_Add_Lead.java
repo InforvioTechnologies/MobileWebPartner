@@ -30,7 +30,6 @@ public class MainActivity_Add_Lead extends AppCompatActivity {
         Objs.ac.ApplyFont(mToolbar, mCon);
         Objs.ac.BackButton(MainActivity_Add_Lead.this, mToolbar);
         getSupportActionBar().setTitle(R.string.addl);
-
         setViewPager();
     }
 

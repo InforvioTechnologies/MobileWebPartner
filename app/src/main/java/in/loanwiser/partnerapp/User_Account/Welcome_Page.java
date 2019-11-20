@@ -39,11 +39,11 @@ public class Welcome_Page extends AppCompatActivity implements Animation.Animati
 
     private Context mCon = this;
     Animation animFadein;
-
     private AppCompatTextView welcome, tenacy, slogan, slogan2;
     AppCompatTextView textview1,emp2,emp3;
     AppCompatImageView imageView;
     private AppCompatButton Bt_Register, Bt_Login;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,12 +69,11 @@ public class Welcome_Page extends AppCompatActivity implements Animation.Animati
 
         initCode();
 
-     /*   AppSignatureHelper signatureHelper = new AppSignatureHelper(Welcome_Page.this);
+      /*AppSignatureHelper signatureHelper = new AppSignatureHelper(Welcome_Page.this);
 
         String appSignatures = String.valueOf(signatureHelper.getAppSignatures());
         Log.e("AppSign", appSignatures);
         Toast.makeText(getApplicationContext(),appSignatures,Toast.LENGTH_LONG).show();*/
-
         displayFirebaseRegId();
     }
 
@@ -170,7 +169,6 @@ public class Welcome_Page extends AppCompatActivity implements Animation.Animati
 
                         // Get new Instance ID token
                         String token = task.getResult().getToken();
-
                         // Log and toast
                         //  String msg = getString(R.string.msg_token_fmt, token);
                         //  Log.d(TAG, msg);

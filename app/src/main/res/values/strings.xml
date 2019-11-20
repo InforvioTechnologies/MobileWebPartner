@@ -8,6 +8,9 @@
     <string name="lead_details">Lead Detail Dashboard</string>
     <string name="cinterview">Customer Interview</string>
     <string name="list_lead">List of Leads</string>
+    <string name="wt_termss">I accepts whatsapp terms and conditions</string>
+    <string name="next">Next</string>
+    <string name="lead_creation">Lead Creation</string>
 
     <string name="name">Name</string>
     <string name="name_cs">Customer Name</string>
@@ -142,14 +145,103 @@
         <item>Guarantor</item>
     </string-array>
 
+    <string-array name="loan_catogary">
+        <item>Secured Loan(HL/LAP)</item>
+        <item>Unsecured Loan(BL/PL)</item>
+        <item>Vehicle Loan</item>
+    </string-array>
 
+    <string-array name="loan_type">
+        <item>Home Loan</item>
+        <item>Loan Against Property</item>
+        <item>Personal Loan</item>
+        <item>Business Loan</item>
+    </string-array>
+
+
+    <string-array name="ressidence_typ">
+        <item>Owned</item>
+        <item>Rented</item>
+    </string-array>
+
+    <string-array name="employee_type">
+        <item>Independent worker</item>
+        <item>Farming/ Dairy/ poultry</item>
+        <item>Runs own business /Shop</item>
+    </string-array>
+
+    <string-array name="vocation_forming">
+        <item>Farming</item>
+        <item>Dairy</item>
+        <item>Poultry</item>
+    </string-array>
+
+    <string-array name="business_type">
+        <item>Retail and wholesale Business</item>
+        <item>Service Business</item>
+        <item>Manufacturing</item>
+    </string-array>
+
+
+
+    <string-array name="vocation_type">
+        <item>Plumber</item>
+        <item>Electrician</item>
+        <item>Contractor</item>
+        <item>Carpenter</item>
+        <item>Daily wage Earner</item>
+        <item>Driver</item>
+        <item>Driver come owner(LCV and HCV)</item>
+
+    </string-array>
+
+    <string-array name="emp_typ">
+        <item>--Select Salary Type--</item>
+        <item>Salaried</item>
+        <item>Self Employed</item>
+    </string-array>
+
+    <string-array name="emp_id">
+        <item>Yes</item>
+        <item>No</item>
+    </string-array>
+
+    <string-array name="salary_ctd_method">
+        <item>Cash Salaried</item>
+        <item>Bank Credited</item>
+    </string-array>
+
+    <string-array name="salary_proof">
+        <item>Payslip</item>
+        <item>Bank Statement</item>
+        <item>Salary certificate</item>
+    </string-array>
+
+    <string name="des">Designation in Company</string>
+    <string name="cmp_type">Company Type</string>
+    <string name="emp_type">Type of Employee</string>
+    <string name="emp_count">No of Employee in company</string>
+    <string name="salary_credit">Salary Credit Method</string>
+    <string name="cur_res_proof">Current residence address Proof</string>
+    <string name="perment_res_pincod">Permanent Residence Pincode</string>
+    <string name="existing_loan">Do you have any Existing Loan ?</string>
+    <string name="emi_amt">EMI Amount</string>
+    <string name="bnk_name">Bank Name</string>
+    <string name="ln_typ">Loan Type</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="rem_tnr">Remaining Tenor</string>
+    <string name="occupation_">Occupation</string>
+    <string name="montly">Monthly Net Salary</string>
+    <string name="other_income_">Other Income</string>
+    <string name="other_income">Amount</string>
     <string name="home_purpose2"> Purchase house</string>
     <string name="home_purpose3"> Construct house in your land</string>
     <string name="home_purpose4"> Improvement loan</string>
     <string name="home_purpose5"> Purchase Plot</string>
     <string name="home_purpose6"> Renovate/Extend your exisiting House</string>
     <string name="home_purpose7"> Balance Transfer </string>
-
+    <string name="viy_check">Viability Check</string>
     //personal Loan
     <string name="personal_loan">Looking for Loan to fulfil your Personal financial needs. Then Personal Loan comes in handy to meet your expenses like</string>
 
@@ -160,7 +252,7 @@
     <string name="personal_purpose5"> For Business </string>
 
     <string name="personal_purpose6">For financial requirements </string>
-
+    <string name="gst_reflect">Is GST Reflected</string>
 
     <string name="add_leads">Add Leads</string>
     <string name="leads">List of Leads</string>
@@ -330,4 +422,90 @@
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_maps">Map</string>
+
+
+    //Step changes
+    <string name="eligi_check">Eligibility Check</string>
+    <string name="emp_type1">Type of Employee</string>
+    <string name="residence_pin">Residence Pincode</string>
+    <string name="residence">Residence Type</string>
+    <string name="curr_resi">Live in current residence(months)</string>
+    <string name="assets_own">Assets own(Multiselect)</string>
+    <string name="vocation_type">Vocation Type</string>
+    <string name="business_proof">Business Income Proof</string>
+    <string name="vehicle_type">Vehicle Type(MultiSelect)</string>
+    <string name="nov">Number of vehicle</string>
+    <string name="nyw">Number of years in work</string>
+    <string name="avg">Average monthly income</string>
+    <string name="bus_proof">Business Proof(MultiSelect)</string>
+    <string name="wt_crop">What kind of crops(MultiSelect)</string>
+    <string name="ai">Annual Income</string>
+    <string name="di">Daily Income</string>
+    <string name="ami_">Average monthly income</string>
+    <string name="noanimals">Number of animals</string>
+    <string name="nobirds">Number of birds</string>
+    <string name="nol_daily">No-of liters Procured Daily</string>
+    <string name="hdus">How do you sell milk?</string>
+    <string name="supplied_by">Supplied by which company</string>
+    <string name="selling_price">Selling price</string>
+    <string name="profit_selling">Profit after selling</string>
+    <string name="business_type">Business Type</string>
+    <string name="office_shop_setup">Office/Shop Setup</string>
+    <string name="deler_type">If you are Franchise/dealer/sub dealer</string>
+    <string name="delership_cmp">Name of dealership company</string>
+    <string name="monthly_profit">Monthly Profit</string>
+    <string name="noyiw">Number of years in work</string>
+    <string name="monthly_income">Monthly Income</string>
+    <string name="no_of_employees">No-of Employees</string>
+    <string name="business_setup_investment">Business setup Investment</string>
+    <string name="vrm">Value of Stock and Raw materials</string>
+    <string name="monthly_sales">Monthly Sales</string>
+    <string name="persentage_gst">Percentage of Purchased by GST Bill based</string>
+    <string name="persentage_sale_gst">Percentage of Sales by GST Bill based</string>
+    <string name="persentage_bank">Percentage of Purchased by Bank Account based</string>
+    <string name="persentage_bank_credit_income">Percentage of Income by Bank credited</string>
+    <string name="avg_bank_balence">Average monthly income</string>
+    <string name="guaranter">Can you provide Guaranter ?</string>
+    <string name="business_refernce_name">Business Reference Name</string>
+    <string name="business_refernce_mobile">Business Reference Mobile</string>
+    <string name="do_you_have_existing_loan">Do you have any Existing Loan ?</string>
+    <string name="emi_amount">EMI Amount</string>
+    <string name="property_type_">Property identified</string>
+    <string name="property_title">Property Title</string>
+    <string name="type_of_emp">Type of employment</string>
+    <string name="saving_bank_acc">Have saving Bank Account</string>
+    <string name="salary_proof">Salary Proof</string>
+    <string name="exp_current_cmp">Experiance in Current Company(months)</string>
+    <string name="total_exp_in_cmp">Total work experience(months)</string>
+    <string name="cmp_pin">Company Pincode</string>
+    <string name="other_family_member">other Earning Members in family?</string>
+    <string name="family_member_name">Family Member Name</string>
+
+    <string name="family_member_income">What is his/her Monthly Income</string>
+    <string name="mly_aft_emi">Monthly affordable Amount to pay EMI</string>
+    <string name="prop_guidence_value">Property Guidance Value </string>
+    <string name="prop_market_value">Property Market Value</string>
+    <string name="select_purchased_from">Select Purchased from</string>
+    <string name="land_value">Land Value</string>
+    <string name="con_cost">Construction Cost</string>
+    <string name="con_plan">Construction Plan</string>
+    <string name="loan_amt">Loan Amount</string>
+    <string name="topup_amt">Top-Up Amount</string>
+    <string name="epf_deduction">EPF deducted in Salary</string>
+    <string name="current_residence">Current Residence Address Proof</string>
+    <string name="perpanent_pincode">Permanent Residence Pincode</string>
+    <string name="perpanent_residence_type">Permanent Residence Type</string>
+    <string name="business_reference_name">Business Reference -Name</string>
+    <string name="business_reference_mobile">Business Reference -Mobile</string>
+    <string name="otherincome">Other Income(if any)</string>
+    <string name="avg_bankbalence">Average Bank Balance in the Account</string>
+    <string name="current_ressidence_proof">Current Residence Address Proof</string>
+
+    <string name="top_up">Top-Up Amount</string>
+
+    <string name="persentage_of_bank_ac_based">% of Purchases are  Bank Account  based</string>
+    <string name="persentage_of_gst_ac_based">% of Purchases are  GST bill based</string>
+    <string name="persentage_of_sales_gst_ac_based">% of Purchases Sales by GST bill based</string>
+    <string name="persentage_of_income_bank_credited">% of Purchases of Income is Bank credited</string>
+
 </resources>

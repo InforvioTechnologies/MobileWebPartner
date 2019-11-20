@@ -82,6 +82,40 @@
         </receiver>
 
         <activity
+            android:name=".Step_Changes_Screen.Lead_Crration_Activity"
+            android:theme="@style/NoAction2"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".Step_Changes_Screen.Eligibility_BL"
+            android:theme="@style/NoAction2"
+            android:windowSoftInputMode="stateHidden" />
+
+        <activity android:name=".Step_Changes_Screen.Eligibility_check_LAP"
+            android:theme="@style/NoAction2"
+            android:windowSoftInputMode="stateHidden" />
+
+        <activity
+            android:name=".Step_Changes_Screen.Eligibility_HL"
+            android:theme="@style/NoAction2"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".Step_Changes_Screen.Viability_Check_PL"
+            android:theme="@style/NoAction2"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".Step_Changes_Screen.Viability_Check_BL"
+            android:theme="@style/NoAction2"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".Step_Changes_Screen.Viability_check_HL"
+            android:theme="@style/NoAction2"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".Step_Changes_Screen.Eligibility_Check_PL"
+            android:theme="@style/NoAction2"
+            android:windowSoftInputMode="stateHidden" />
+
+        <activity
             android:name=".Partner_Statues.Statues_Dashboard_Nav"
             android:label="@string/title_activity_statues__dashboard__nav"
             android:theme="@style/AppTheme.NoActionBar" />

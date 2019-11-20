@@ -105,6 +105,9 @@ dependencies {
     implementation 'com.google.firebase:firebase-auth:16.2.1'
     implementation 'com.google.android.gms:play-services-plus:8.4.0'
 
+    //STEP BAR
+    implementation 'com.kofigyan.stateprogressbar:stateprogressbar:1.0.0'
+
 
 }
 apply plugin: 'com.google.gms.google-services'
