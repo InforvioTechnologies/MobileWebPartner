@@ -2,7 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="in.loanwiser.partnerapp">
-
     <!--
          The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
          Google Maps Android API v2, but you must specify either coarse or fine
@@ -35,7 +34,7 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:replace="android:icon">
-
+        <activity android:name=".Step_Changes_Screen.Payment_Details_Activity"></activity>
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -44,13 +43,16 @@
              sign the APK for publishing.
              You can define the keys for the debug and release targets in src/debug/ and src/release/.
         -->
-      <!--  <meta-data
+        <!--
+  <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="@string/google_maps_key" />-->
-
-   <!--     <activity
+            android:value="@string/google_maps_key" />
+        -->
+        <!--
+     <activity
             android:name=".User_Account.MapsActivity"
-            android:label="@string/title_activity_maps"></activity>-->
+            android:label="@string/title_activity_maps"></activity>
+        -->
         <!-- <activity android:name=".User_Account.Main2Activity"></activity> -->
         <!-- <activity android:name=".User_Account.AppGoogleLogin"></activity> -->
         <activity
@@ -64,9 +66,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".User_Account.VerifedOTP" />
-
-        <!-- Firebase Notifications -->
+        <activity android:name=".User_Account.VerifedOTP" /> <!-- Firebase Notifications -->
         <service android:name=".service.MyFirebaseMessagingService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
@@ -86,14 +86,29 @@
             android:theme="@style/NoAction2"
             android:windowSoftInputMode="stateHidden" />
         <activity
+            android:name=".Step_Changes_Screen.Payout_Dsisbursed_Leadlist"
+            android:theme="@style/NoAction2"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".Step_Changes_Screen.Credite_report_details"
+            android:theme="@style/NoAction2"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".Step_Changes_Screen.Pay_Out_Screen"
+            android:theme="@style/NoAction2"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".Step_Changes_Screen.Creadite_Report_Activity"
+            android:theme="@style/NoAction2"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
             android:name=".Step_Changes_Screen.Eligibility_BL"
             android:theme="@style/NoAction2"
             android:windowSoftInputMode="stateHidden" />
-
-        <activity android:name=".Step_Changes_Screen.Eligibility_check_LAP"
+        <activity
+            android:name=".Step_Changes_Screen.Eligibility_check_LAP"
             android:theme="@style/NoAction2"
             android:windowSoftInputMode="stateHidden" />
-
         <activity
             android:name=".Step_Changes_Screen.Eligibility_HL"
             android:theme="@style/NoAction2"
@@ -114,7 +129,6 @@
             android:name=".Step_Changes_Screen.Eligibility_Check_PL"
             android:theme="@style/NoAction2"
             android:windowSoftInputMode="stateHidden" />
-
         <activity
             android:name=".Partner_Statues.Statues_Dashboard_Nav"
             android:label="@string/title_activity_statues__dashboard__nav"
@@ -159,7 +173,6 @@
             android:name=".OTP.SmsActivity"
             android:configChanges="screenSize|orientation"
             android:theme="@style/NoAction2" />
-
         <activity
             android:name=".Partner_Lead_OTP_Verification.Partner_Lead_OTP_Verification"
             android:configChanges="screenSize|orientation"
@@ -168,7 +181,6 @@
             android:name=".Partner_Lead_OTP_Verification.Lead_SmsActivity2"
             android:configChanges="screenSize|orientation"
             android:theme="@style/NoAction2" />
-
         <activity
             android:name=".PartnerActivitys.Home"
             android:theme="@style/NoAction2"
@@ -222,9 +234,9 @@
             android:theme="@style/NoAction2"
             android:windowSoftInputMode="stateHidden" />
         <activity
-        android:name=".Documents.Doc_ImageView"
-        android:theme="@style/NoAction2"
-        android:windowSoftInputMode="stateHidden" />
+            android:name=".Documents.Doc_ImageView"
+            android:theme="@style/NoAction2"
+            android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".CameraActivity.CustomGalleryActivity"
             android:theme="@style/NoAction2"

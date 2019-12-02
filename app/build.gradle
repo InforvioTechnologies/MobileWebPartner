@@ -3,14 +3,15 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 28
     defaultConfig {
-        applicationId "in.loanwiser.partnerapp"
 
+        applicationId "in.loanwiser.partnerapp"
         minSdkVersion 16
         targetSdkVersion 28
         versionCode 22
         versionName "1.3.19"
         multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
     }
 
     buildTypes {
@@ -104,11 +105,10 @@ dependencies {
     implementation 'com.google.android.gms:play-services-auth:16.0.1'
     implementation 'com.google.firebase:firebase-auth:16.2.1'
     implementation 'com.google.android.gms:play-services-plus:8.4.0'
-
     //STEP BAR
     implementation 'com.kofigyan.stateprogressbar:stateprogressbar:1.0.0'
-
 
 }
 apply plugin: 'com.google.gms.google-services'
 //com.google.gms.googleservices.GoogleServicesPlugin.config.disableVersionCheck = true
+

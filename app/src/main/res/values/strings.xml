@@ -92,9 +92,21 @@
     <string name="bank_name">Name of the Bank</string>
     <string name="branch">Bank Branch</string>
     <string name="pay_mode">Mode of Payment through</string>
+
+    <string name="pay_out_details">Payout Details</string>
     <string name="ifsc">IFSC Code</string>
     <string name="internet">Internet</string>
     <string name="mbank">Mobile</string>
+    <string name="d_leads">Disbursed Leads List</string>
+    <string name="d_amount">Disbursed Amount</string>
+    <string name="c_amount">Commission Amount</string>
+    <string name="d_leads_details">Disbursed Leads Details</string>
+    <string name="lead_creation1">Lead Creation</string>
+    <string name="step1_completion">Step 1 Completion</string>
+    <string name="credit_report_gen">Credit Report Generation</string>
+    <string name="doc_upload1">Document Upload</string>
+    <string name="bank_statement_anlysis_report">Bank Statement Analysis Report Generation</string>
+
     <string name="internet_b">Internet Banking</string>
     <string name="mbank_b">Mobile Banking</string>
     <string name="open_my">Open My</string>
@@ -183,7 +195,6 @@
     </string-array>
 
 
-
     <string-array name="vocation_type">
         <item>Plumber</item>
         <item>Electrician</item>
@@ -242,6 +253,10 @@
     <string name="home_purpose6"> Renovate/Extend your exisiting House</string>
     <string name="home_purpose7"> Balance Transfer </string>
     <string name="viy_check">Viability Check</string>
+    <string name="pay_out_details1">Payout Details</string>
+    <string name="disbursed_lead_list">Disbursed Lead List</string>
+    <string name="credit_report">Credit Report</string>
+    <string name="credit_report1">Know Your Credit Report</string>
     //personal Loan
     <string name="personal_loan">Looking for Loan to fulfil your Personal financial needs. Then Personal Loan comes in handy to meet your expenses like</string>
 
@@ -507,5 +522,18 @@
     <string name="persentage_of_gst_ac_based">% of Purchases are  GST bill based</string>
     <string name="persentage_of_sales_gst_ac_based">% of Purchases Sales by GST bill based</string>
     <string name="persentage_of_income_bank_credited">% of Purchases of Income is Bank credited</string>
+    <string name="have_emp_id">Have Employee ID?</string>
+    <string name="noa">Number of acres</string>
+
+    <string name="app_pan_no">Applicant PAN No</string>
+    <string name="co_app_pan_no"> Co Applicant PAN No</string>
+    <string name="mobile">Mobile No</string>
+    <string name="crt_termss">I accepts the terms and conditions</string>
+    <string name="need_cr_report">Do you Need a Credite Report ?</string>
+    <string name="need_cr_report_des"> credit report should be at the top of the
+        list of your personal financial habits.
+        A credit report can act as a shining light into
+        your financial background, helping reveal personal
+        payment history and lending and credit worthiness</string>
 
 </resources>

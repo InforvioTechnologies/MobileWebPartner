@@ -10,6 +10,7 @@ import androidx.appcompat.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -44,8 +45,10 @@ public class Home extends AppCompatActivity {
     private AlertDialog progressDialog;
     private CardView app,doc,inter,offer;
     private String tag_json_obj = "jobj_req", tag_json_arry = "jarray_req";
-    private ImageView app_doc_img,app_info_img,app_interview_img,app_offer_img,app_track_img;
+    private ImageView app_doc_img,app_info_img,app_info_img11,app_interview_img,app_offer_img,app_track_img;
     private TextView customerinterview,offerdetails,app_doc_message,app_info_message;
+    private LinearLayout lead_cr_statues;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -76,9 +79,11 @@ public class Home extends AppCompatActivity {
         //   CD_app_track = (CardView) findViewById(R.id.CD_app_track);
         inter = (CardView) findViewById(R.id.PL);
         offer = (CardView) findViewById(R.id.Blo);
+        lead_cr_statues = (LinearLayout) findViewById(R.id.lead_cr_statues);
 
         app_doc_img = (ImageView) findViewById(R.id.app_doc_img);
         app_info_img = (ImageView) findViewById(R.id.app_info_img);
+        app_info_img11 = (ImageView) findViewById(R.id.app_info_img11);
         app_interview_img = (ImageView) findViewById(R.id.app_interview_img);
         app_offer_img = (ImageView) findViewById(R.id.app_offer_img);
 
@@ -148,11 +153,11 @@ public class Home extends AppCompatActivity {
                                 if(S2.equals("1")){
                                     app.setEnabled(true);
                                     app_info_message.setTextColor(ContextCompat.getColor(mCon, R.color.colorAccent));
-                                    app_info_img.setImageDrawable(getResources().getDrawable(R.drawable.don));
+                                  //  app_info_img.setImageDrawable(getResources().getDrawable(R.drawable.don));
                                 }else{
                                     app.setEnabled(false);
                                     app_info_message.setTextColor(ContextCompat.getColor(mCon, R.color.gray));
-                                    app_info_img.setImageDrawable(getResources().getDrawable(R.drawable.notdon));
+                                  //  app_info_img.setImageDrawable(getResources().getDrawable(R.drawable.notdon));
                                 }
 
                                 if(S3.equals("1")){
@@ -227,16 +232,33 @@ public class Home extends AppCompatActivity {
         findViewById(R.id.hl).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //      Toast.makeText(mCon, "CD_app_info", Toast.LENGTH_LONG).show();
+
+              //  lead_cr_statues.setVisibility(View.VISIBLE);
+
                /* Objs.ac.StartActivityPutExtra(mCon,
                         Applicant_Info.class,
-                        Params.id,user_id);*/
-                Objs.ac.StartActivityPutExtra(mCon,
-                        Applicant_Info.class,
                         Params.id,user_id, Params.transaction_id,transaction_id,
-                        Params.applicant_id,applicant_id, Params.sub_taskid,sub_taskid);
-              //  finish();
+                        Params.applicant_id,applicant_id, Params.sub_taskid,sub_taskid);*/
 
+
+            }
+        });
+
+        app_info_img.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                lead_cr_statues.setVisibility(View.VISIBLE);
+                app_info_img.setVisibility(View.GONE);
+                app_info_img11.setVisibility(View.VISIBLE);
+            }
+        });
+
+        app_info_img11.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                lead_cr_statues.setVisibility(View.GONE);
+                app_info_img.setVisibility(View.VISIBLE);
+                app_info_img11.setVisibility(View.GONE);
             }
         });
 
@@ -271,6 +293,7 @@ public class Home extends AppCompatActivity {
                 finish();
             }
         });
+
     }
     private void Account_Listings_Details(String id) {
         JSONObject jsonObject =new JSONObject();

@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".Step_Changes_Screen.Credite_report_details">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp"
+                android:orientation="vertical"
+                android:padding="10dp">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/dcomplete"
+                    style="@style/LorgeText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="left"
+                    android:textSize="18dp"
+                    android:textStyle="bold"
+                    android:text="@string/credit_report"
+                    android:textColor="@color/colorPrimaryDark" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_marginLeft="5dp"
+                    android:id="@+id/des"
+                    style="@style/LorgeText2"
+                    android:layout_width="350dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="left"
+                    android:text="@string/need_cr_report_des"
+                    android:textColor="@color/black" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:padding="15dp"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        style="@style/LorgeText2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:gravity="left"
+                        android:text="@string/need_cr_report"
+                        android:textColor="@color/colorPrimaryDark" />
+
+                </LinearLayout>
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="end"
+                        android:layout_weight="1">
+                        <androidx.appcompat.widget.AppCompatButton
+                            android:id="@+id/cr_yes"
+                            style="@style/ButtonStyle"
+                            android:text="Yes"
+                            android:textSize="10sp"
+                            android:background="@color/colorPrimary"
+                            android:layout_width="80dp"
+                            android:layout_marginRight="10dp"
+                            android:layout_height="30dp" />
+
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="left"
+                        android:layout_weight="1">
+                        <androidx.appcompat.widget.AppCompatButton
+                            android:id="@+id/cr_no"
+                            style="@style/ButtonStyle"
+                            android:text="No"
+                            android:textSize="10sp"
+                            android:background="@color/colorPrimary"
+                            android:layout_width="80dp"
+                            android:layout_marginRight="10dp"
+                            android:layout_height="30dp" />
+
+
+                    </LinearLayout>
+
+                </LinearLayout>
+            </LinearLayout>
+
+
+
+        </LinearLayout>
+    </ScrollView>
+
+
+</LinearLayout>

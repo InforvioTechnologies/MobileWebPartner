@@ -121,7 +121,7 @@ public class Viability_check_HL extends SimpleActivity {
                 String  emp = String.valueOf(spnr_type_of_empmnt.getSelectedItemPosition());
                 Log.e("the Employe select is",emp);
                 int b = Integer.parseInt(emp);
-                if(emp.equals("0") )
+                if(emp.equals("0"))
                 {
                     salaried.setVisibility(View.GONE);
                     self_employed.setVisibility(View.GONE);
@@ -169,7 +169,6 @@ public class Viability_check_HL extends SimpleActivity {
         spinner_busines_type.setAdapter(business_type);
 
 
-
         spinner1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
@@ -190,9 +189,12 @@ public class Viability_check_HL extends SimpleActivity {
                         self_business.setVisibility(View.GONE);
                         break;
                     case 2:
-
                         String Loantype = "2";
                         Pref.putEMPLOYMENT(mCon,Loantype);
+
+                        String Lontype = Pref.getEMPLOYMENT(getApplicationContext());
+                        Log.e("Lontype",Lontype);
+
                         individual.setVisibility(View.GONE);
                         formin_dairy.setVisibility(View.GONE);
                         self_business.setVisibility(View.VISIBLE);
@@ -357,7 +359,7 @@ public class Viability_check_HL extends SimpleActivity {
     @Override
     public void onBackPressed() {
 
-        Objs.ac.StartActivity(getApplicationContext(), Lead_Crration_Activity.class);
+        Objs.ac.StartActivity(mCon, Lead_Crration_Activity.class);
         finish();
         super.onBackPressed();
 

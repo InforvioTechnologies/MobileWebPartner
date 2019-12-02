@@ -22,13 +22,14 @@
         android:theme="@style/NavigationView"
         app:headerLayout="@layout/nav_header_loanwiser"
         app:menu="@menu/main_menu">
+
         <LinearLayout
+            android:layout_marginTop="40dp"
             android:layout_gravity="bottom"
             android:elevation="4sp"
-            android:gravity="center"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="vertical">
 
             <LinearLayout
                 android:id="@+id/Ly_chat1"

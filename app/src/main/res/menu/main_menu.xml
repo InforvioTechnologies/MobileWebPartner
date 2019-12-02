@@ -9,10 +9,13 @@
             android:id="@+id/nav_bank"
             android:icon="@drawable/ic_account"
             android:title="Bank Details" />
+
         <item
-            android:id="@+id/nav_call"
-            android:icon="@drawable/ic_call"
-            android:title="Customer Care" />
+            android:id="@+id/nav_payout"
+            android:icon="@drawable/ic_account"
+            android:title="Payout Screen" />
+
+
         <item
             android:id="@+id/nav_logout"
             android:icon="@drawable/logout"

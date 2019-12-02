@@ -12,10 +12,10 @@ import java.util.Map;
 public class Urls {
 
  /*UAT*/
- //  public static String Urls = "http://cscapitest.propwiser.com/mobile/mortgage_updated.php?call=";
+   public static String Urls = "http://cscapitest.propwiser.com/mobile/mortgage_updated.php?call=";
 
     /*Live*/
-   public static String Urls = "http://cscapi.propwiser.com/mobile/mortgage_updated.php?call=";
+ //  public static String Urls = "http://cscapi.propwiser.com/mobile/mortgage_updated.php?call=";
 
 
   /// public static String Urls = "http://cscapiuat.propwiser.com/mobile/mortgage_updated.php?call=";
@@ -36,6 +36,7 @@ public class Urls {
     public static String Confirm_REG_OTP_POST1  = Urls + "confirmOtp";
     public static String SESSION_POST  = Urls + "sessionmanage";
     public static String LOAN_TYPE_POST  = Urls + "getloantypelist";
+    public static String LOAN_CATAGORY  = Urls + "loanlatlist";
     public static String LOAN_TYPE_POST11  = Urls + "getloantypelist1";
     public static String CITY_TYPE_POST  = Urls + "getDistrict";
     public static String GET_STATE_POST  = Urls + "getState";

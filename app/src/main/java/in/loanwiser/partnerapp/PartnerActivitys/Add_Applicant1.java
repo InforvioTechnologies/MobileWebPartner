@@ -465,7 +465,6 @@ public class Add_Applicant1 extends Fragment {
 
     private void Adapter_function(){
 
-
         Add_Applicant1.MySpinnerAdapter property = new Add_Applicant1.MySpinnerAdapter(getContext(), R.layout.view_spinner_item,
                 Arrays.asList(getResources().getStringArray(R.array.Property_Type)));
         spinner_property.setAdapter(property);

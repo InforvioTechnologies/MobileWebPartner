@@ -19,6 +19,7 @@ import adhoc.app.applibrary.Config.AppUtils.Pref.Pref;
 import dmax.dialog.SpotsDialog;
 import in.loanwiser.partnerapp.Partner_Lead_OTP_Verification.Partner_Lead_OTP_Verification;
 import in.loanwiser.partnerapp.R;
+import in.loanwiser.partnerapp.Step_Changes_Screen.Lead_Crration_Activity;
 
 public class Applicant_Details_Activity extends SimpleActivity {
 
@@ -61,7 +62,8 @@ public class Applicant_Details_Activity extends SimpleActivity {
         homeloan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String Loantype = "1";
+
+               /* String Loantype = "1";
                 String sub_categoryid = "1";
                 String Loantype_name = "Home Loan";
                 Pref.putLoanType(mCon,Loantype);
@@ -69,6 +71,16 @@ public class Applicant_Details_Activity extends SimpleActivity {
                 Pref.putLoanTypename(mCon,Loantype_name);
                 //if(Loantype !="Applied") {
                 Intent intent = new Intent(Applicant_Details_Activity.this, Partner_Lead_OTP_Verification.class);
+                startActivity(intent);
+                finish();*/
+
+                String Loantype = "1";
+                String sub_categoryid = "1";
+                Pref.putLoanTypeSub(mCon,sub_categoryid);
+                String Loantype_name = "Home Loan";
+                Pref.putLoanTypename(mCon,Loantype_name);
+                Pref.putLoanType(mCon,Loantype);
+                Intent intent = new Intent(Applicant_Details_Activity.this, Lead_Crration_Activity.class);
                 startActivity(intent);
                 finish();
 
@@ -88,12 +100,20 @@ public class Applicant_Details_Activity extends SimpleActivity {
                 Intent intent = new Intent(Applicant_Details_Activity.this, Partner_Lead_OTP_Verification.class);
                 startActivity(intent);
                 finish();
+
+              /*  String Loantype = "4";
+                Pref.putLoanType(mCon,Loantype);
+                Intent intent = new Intent(Applicant_Details_Activity.this, Lead_Crration_Activity.class);
+                startActivity(intent);
+                finish();*/
+
             }
         });
+
         personal_loan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String Loantype = "2";
+               /* String Loantype = "2";
                 String sub_categoryid = "3";
                 String Loantype_name = "Personal Loan [Unsecured]";
                 Pref.putLoanType(mCon,Loantype);
@@ -101,20 +121,34 @@ public class Applicant_Details_Activity extends SimpleActivity {
                 Pref.putLoanTypeSub(mCon,sub_categoryid);
                 Intent intent = new Intent(Applicant_Details_Activity.this, Partner_Lead_OTP_Verification.class);
                 startActivity(intent);
+                finish();*/
+
+                String Loantype = "3";
+                Pref.putLoanType(mCon,Loantype);
+                Intent intent = new Intent(Applicant_Details_Activity.this, Lead_Crration_Activity.class);
+                startActivity(intent);
                 finish();
+
+
             }
         });
 
         Businessloan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String Loantype = "2";
+               /* String Loantype = "2";
                 String sub_categoryid = "4";
                 String Loantype_name = "Business Loan [Unsecured]";
                 Pref.putLoanType(mCon,Loantype);
                 Pref.putLoanTypename(mCon,Loantype_name);
                 Pref.putLoanTypeSub(mCon,sub_categoryid);
                 Intent intent = new Intent(Applicant_Details_Activity.this, Partner_Lead_OTP_Verification.class);
+                startActivity(intent);
+                finish();*/
+
+                String Loantype = "2";
+                Pref.putLoanType(mCon,Loantype);
+                Intent intent = new Intent(Applicant_Details_Activity.this, Lead_Crration_Activity.class);
                 startActivity(intent);
                 finish();
             }

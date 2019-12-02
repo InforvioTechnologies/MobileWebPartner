@@ -33,10 +33,19 @@ public class Eligibility_HL extends SimpleActivity {
             self.setVisibility(View.VISIBLE);
             former.setVisibility(View.GONE);
             individual.setVisibility(View.GONE);
+        }else if(Lontype.equals("1"))
+        {
+            individual.setVisibility(View.VISIBLE);
+            self.setVisibility(View.GONE);
+            former.setVisibility(View.GONE);
+
         }else
         {
             self.setVisibility(View.GONE);
+            individual.setVisibility(View.VISIBLE);
+            former.setVisibility(View.GONE);
             individual.setVisibility(View.GONE);
+
         }
     }
 

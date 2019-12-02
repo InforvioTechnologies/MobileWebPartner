@@ -60,6 +60,7 @@ import in.loanwiser.partnerapp.Slider.Personal_Loan_info;
 import in.loanwiser.partnerapp.Slider.Vehicle_Loan;
 import in.loanwiser.partnerapp.Slider.View_More;
 import in.loanwiser.partnerapp.Slider.View_More1;
+import in.loanwiser.partnerapp.Step_Changes_Screen.Pay_Out_Screen;
 import in.loanwiser.partnerapp.User_Account.BankDetails;
 import in.loanwiser.partnerapp.User_Account.ProfileSettings;
 import in.loanwiser.partnerapp.User_Account.Welcome_Page;
@@ -142,6 +143,7 @@ public class Statues_Dashboard_Nav extends AppCompatActivity
 
             mDemoSlider.addSlider(textSliderView);
         }
+
         mDemoSlider.setPresetTransformer(SliderLayout.Transformer.Accordion);
         mDemoSlider.setPresetIndicator(SliderLayout.PresetIndicators.Center_Bottom);
         mDemoSlider.setCustomAnimation(new DescriptionAnimation());
@@ -165,10 +167,7 @@ public class Statues_Dashboard_Nav extends AppCompatActivity
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(imageView_profile);
 
-
     }
-
-
 
     @Override
     public void onBackPressed() {
@@ -345,7 +344,7 @@ public class Statues_Dashboard_Nav extends AppCompatActivity
 
 
 
-    @Override
+   /* @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.chat, menu);
@@ -363,23 +362,28 @@ public class Statues_Dashboard_Nav extends AppCompatActivity
         }
 
         return super.onOptionsItemSelected(item);
-    }
+    }*/
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
+        // Handle navigation view item clicks here.nav_payout
         int id = item.getItemId();
 
         if (id == R.id.nav_profile) {
             Objs.ac.StartActivity(mCon, ProfileSettings.class);
         } else if (id == R.id.nav_bank) {
             Objs.ac.StartActivity(mCon, BankDetails.class);
-        } else if (id == R.id.nav_call) {
-            Objs.ac.StartActivity(mCon, CustomerCare.class);
-        } else if (id == R.id.nav_logout) {
+        } else if (id == R.id.nav_payout) {
+            Objs.ac.StartActivity(mCon, Pay_Out_Screen.class);
+        }else if (id == R.id.nav_logout) {
             ExitAlert(mCon);
         }
+
+        /*
+        else if (id == R.id.nav_call) {
+            Objs.ac.StartActivity(mCon, CustomerCare.class);
+        } */
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
@@ -486,9 +490,7 @@ public class Statues_Dashboard_Nav extends AppCompatActivity
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
         progressDialog.show();
-
         JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, Urls.LEAD_STATUES_LIST, J,
                 new Response.Listener<JSONObject>() {
                     @SuppressLint("RestrictedApi")
@@ -509,7 +511,6 @@ public class Statues_Dashboard_Nav extends AppCompatActivity
                             Closed_count1 = jsonObject1.getString("closed");
 
                             total_Lead_details.setText(total_lead_count);
-
                             document_statues.setText(document_statues1);
                             In_Progress_count.setText(In_Progress_count1);
                             Disbursed_count.setText(Disbursed_count1);
@@ -533,7 +534,6 @@ public class Statues_Dashboard_Nav extends AppCompatActivity
                             }else{
                                 CD_disbursed.setEnabled(false);
                             }
-
 
                             if(!Declined_count1.equals("0")){
                                 CD_declined.setEnabled(true);

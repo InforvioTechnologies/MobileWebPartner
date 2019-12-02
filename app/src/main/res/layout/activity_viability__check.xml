@@ -190,7 +190,7 @@
                             android:gravity="left"
                             android:layout_marginLeft="2dp"
                             android:layout_width="match_parent"
-                            style="@style/LorgeText"
+                            style="@style/LorgeText2"
                             android:textColor="@color/colorPrimaryDark"
                             android:textColorHint="@color/colorPrimaryDark"
                             android:text="@string/pan"

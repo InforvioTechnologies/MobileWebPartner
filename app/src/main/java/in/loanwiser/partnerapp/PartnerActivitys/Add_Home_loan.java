@@ -376,6 +376,7 @@ public class Add_Home_loan extends Fragment {
 
 
     private void initUI(View view) {
+
         appCompatButtonAdd_Leads =(AppCompatButton)view.findViewById(R.id.appCompatButtonAdd_Leads);
         go_leads =(AppCompatButton)view.findViewById(R.id.go_leads);
         // email_id = (AppCompatEditText) view.findViewById(R.id.email);
@@ -401,6 +402,7 @@ public class Add_Home_loan extends Fragment {
         available_state1 = (AppCompatTextView) view.findViewById(R.id.available_state1);
         available_state = (AppCompatTextView) view.findViewById(R.id.available_state);
         loanamount = (MaterialEditText) view.findViewById(R.id.loanamount);
+
         loanamount.addTextChangedListener(new NumberTextWatcher(loanamount));
         pincode = (MaterialEditText) view.findViewById(R.id.pincode);
         address = (Spinner) view.findViewById(R.id.address0);
@@ -433,7 +435,7 @@ public class Add_Home_loan extends Fragment {
 
     }
     private void fonts() {
-        // Objs.a.EditTextStyle(getActivity(), email_id);
+       // Objs.a.EditTextStyle(getActivity(), email_id);
         Objs.a.OutfitREgEditTextStyle(getActivity(), name);
         Objs.a.OutfitREgEditTextStyle(getActivity(), mob);
         Objs.a.OutfitREgEditTextStyle(getActivity(), loanamount);
@@ -834,6 +836,7 @@ public class Add_Home_loan extends Fragment {
 
     private void Session_mobile(String name , String mob,String s_pincode, String S_loanamount) {
         update();
+
         String stringNumber = S_loanamount;
         result = stringNumber.replace(",","");
         JSONObject jsonObject =new JSONObject();

@@ -27,7 +27,7 @@
                     app:spb_stateNumberBackgroundColor="@color/white"
                     app:spb_stateForegroundColor="@color/colorAccent"
                     app:spb_stateNumberForegroundColor="@color/white"
-                    app:spb_stateBackgroundColor="@color/colorPrimary2"
+                    app:spb_stateBackgroundColor="@color/colorPrimary"
                     app:spb_maxStateNumber="four"/>
 
                 <LinearLayout
