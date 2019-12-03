@@ -183,7 +183,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent">
                             <androidx.appcompat.widget.AppCompatEditText
-                                android:id="@+id/loan_amount_txt"
+                                android:id="@+id/loan_amount_ext"
                                 android:textSize="16sp"
                                 android:textColor="@color/colorPrimaryDark"
                                 android:layout_width="match_parent"

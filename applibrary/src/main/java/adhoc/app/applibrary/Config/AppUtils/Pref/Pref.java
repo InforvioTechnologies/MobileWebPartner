@@ -43,6 +43,9 @@ public final class Pref {
     public static String MOBILE = "MOBILE";
     public static String LEADMOBILE = "LEADMOBILE";
     public static String LOANTYPENAME = "LOANTYPENAME";
+
+    public static String LOANCATNAME = "LOANCATNAME";
+
     public static String DOC_Status = "DOC_Status";
 
     public static SharedPreferences get(final Context context) {
@@ -308,18 +311,18 @@ public static void putapplicant_name(final Context context, String aUserId) {
         editor.commit();
     }
 
-    public static void putLoanTypes1(final Context context, String aUserId) {
-        Pref.putPref(context, LOANTYPE1, aUserId);
+    public static void putLoanCat_Name(final Context context, String aUserId) {
+        Pref.putPref(context, LOANCATNAME, aUserId);
     }
 
-    public static String getLoanTypes1(final Context context) {
-        return Pref.getPref(context, LOANTYPE1, null);
+    public static String getLoanCat_Name(final Context context) {
+        return Pref.getPref(context, LOANCATNAME, null);
     }
 
-    public static void removeLoanTypes1(final Context context) {
+    public static void removeLoanCat_Name(final Context context) {
         SharedPreferences prefs = Pref.get(context);
         SharedPreferences.Editor editor = prefs.edit();
-        editor.remove(LOANTYPE1);
+        editor.remove(LOANCATNAME);
         editor.commit();
     }
 

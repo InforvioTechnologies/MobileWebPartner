@@ -12,8 +12,10 @@ import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.AppCompatEditText;
@@ -21,8 +23,10 @@ import androidx.appcompat.widget.AppCompatTextView;
 import androidx.appcompat.widget.Toolbar;
 
 import com.android.volley.AuthFailureError;
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.Response;
+import com.android.volley.RetryPolicy;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonObjectRequest;
@@ -38,10 +42,12 @@ import java.util.List;
 import java.util.Map;
 
 import adhoc.app.applibrary.Config.AppUtils.Objs;
+import adhoc.app.applibrary.Config.AppUtils.Params;
 import adhoc.app.applibrary.Config.AppUtils.Pref.Pref;
 import adhoc.app.applibrary.Config.AppUtils.Urls;
 import adhoc.app.applibrary.Config.AppUtils.VolleySignleton.AppController;
 import dmax.dialog.SpotsDialog;
+import in.loanwiser.partnerapp.NumberTextWatcher;
 import in.loanwiser.partnerapp.PartnerActivitys.Applicant_Details_Activity;
 import in.loanwiser.partnerapp.R;
 import in.loanwiser.partnerapp.SimpleActivity;
@@ -62,11 +68,14 @@ public class Lead_Crration_Activity extends SimpleActivity {
     String[] SPINNERLIST_CAT;
     ArrayAdapter<String> Loantype_cat,Loantype1;
     private String App,CAT_ID;
-    String Lontypename,Lontype,Loan_Cat_id;
+    String Lontypename,Lontype,Loan_Cat_id,result,C_loan_amount_ext,
+            C_mobile_no_txt,C_name_txt,C_whats_app_no,LoanCat_Name;
+
     InputMethodManager imm;
-    AppCompatEditText loan_amount_txt,name_txt,mobile_no_txt,whats_app_no;
+    AppCompatEditText loan_amount_ext,name_txt,mobile_no_txt,whats_app_no;
     AppCompatTextView txt_loan_category,txt_loan_category1,loan_type,loan_type1,
                         Loan_amount,Loan_amount1,name,name1,mobile,mobile1,wt_mobile,wt_mobile11,terms_and_condition;
+    CheckBox check_complete;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,76 +92,38 @@ public class Lead_Crration_Activity extends SimpleActivity {
 
         Lontype = Pref.getLoanType(getApplicationContext());
         Lontypename = Pref.getLoanTypename(context);
+        LoanCat_Name = Pref.getLoanCat_Name(context);
+
+        Log.e("LoanCat_Name",LoanCat_Name);
+        Log.e("Loantype_Name",Lontypename);
+
         font = Typeface.createFromAsset(context.getAssets(), "Lato-Regular.ttf");
         progressDialog = new SpotsDialog(context, R.style.Custom);
         imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
 
 
 
-        if(Lontype.equals("2"))
-        {
-            lead_cr_step1.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Intent intent = new Intent(Lead_Crration_Activity.this, Viability_Check_BL.class);
-                    startActivity(intent);
-                    finish();
-                }
-            });
+        lead_cr_step1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Lead_Crration_Activity.this, Viability_Check_PL.class);
+                startActivity(intent);
+                finish();
+            }
+        });
 
-        }else if(Lontype.equals("3"))
-        {
-            lead_cr_step1.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Intent intent = new Intent(Lead_Crration_Activity.this, Viability_Check_PL.class);
-                    startActivity(intent);
-                    finish();
-                }
-            });
-
-        }else if(Lontype.equals("1"))
-        {
-            lead_cr_step1.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Intent intent = new Intent(Lead_Crration_Activity.this, Viability_check_HL.class);
-                    startActivity(intent);
-                    finish();
-                }
-            });
-
-        }else
-        {
-            lead_cr_step1.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Intent intent = new Intent(Lead_Crration_Activity.this, Viability_check_HL.class);
-                    startActivity(intent);
-                    finish();
-                }
-            });
-        }
-
-       /* MySpinnerAdapter spinner_loan_category_ad = new MySpinnerAdapter(getApplicationContext(), R.layout.view_spinner_item,
-                Arrays.asList(getResources().getStringArray(R.array.loan_catogary)));
-        spinner_loan_category.setAdapter(spinner_loan_category_ad);*/
-
-       /* MySpinnerAdapter spinner_loan_type_ad = new MySpinnerAdapter(getApplicationContext(), R.layout.view_spinner_item,
-                Arrays.asList(getResources().getStringArray(R.array.loan_type)));
-        spinner_loan_type.setAdapter(spinner_loan_type_ad);*/
-
-      //  makeJsonObjReq1();
         makeJsonObjReq_loancat();
         UI_FIELDS();
         fonts();
+      //  Click();
 
     }
 
     private void UI_FIELDS()
     {
 
-        loan_amount_txt = (AppCompatEditText) findViewById(R.id.loan_amount_txt);
+        loan_amount_ext = (AppCompatEditText) findViewById(R.id.loan_amount_ext);
+        loan_amount_ext.addTextChangedListener(new NumberTextWatcher(loan_amount_ext));
         name_txt = (AppCompatEditText) findViewById(R.id.name_txt);
         mobile_no_txt = (AppCompatEditText) findViewById(R.id.mobile_no_txt);
         whats_app_no = (AppCompatEditText) findViewById(R.id.whats_app_no);
@@ -171,12 +142,13 @@ public class Lead_Crration_Activity extends SimpleActivity {
         wt_mobile = (AppCompatTextView) findViewById(R.id.wt_mobile);
         wt_mobile11 = (AppCompatTextView) findViewById(R.id.wt_mobile1);
         terms_and_condition = (AppCompatTextView) findViewById(R.id.terms_and_condition);
+        check_complete = (CheckBox) findViewById(R.id.check_complete);
 
     }
     private void fonts() {
 
         font = Typeface.createFromAsset(getApplicationContext().getAssets(), "Lato-Regular.ttf");
-        loan_amount_txt.setTypeface(font);
+        loan_amount_ext.setTypeface(font);
         name_txt.setTypeface(font);
         mobile_no_txt.setTypeface(font);
         whats_app_no.setTypeface(font);
@@ -197,34 +169,98 @@ public class Lead_Crration_Activity extends SimpleActivity {
 
     }
 
-   /* private static class MySpinnerAdapter extends ArrayAdapter<String> {
-        // Initialise custom font, for example:
-        Typeface font = Typeface.createFromAsset(getContext().getAssets(),
-                "Lato-Regular.ttf");
+  private void Click()
+    {
+        lead_cr_step1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
-        // (In reality I used a manager which caches the Typeface objects)
-        // Typeface font = FontManager.getInstance().getFont(getContext(), BLAMBOT);
+                if(Loan_Cat_id.equals("0"))
+                {
+                    Toast.makeText(context, "Please Select Loan Category", Toast.LENGTH_SHORT).show();
+                }else
+                {
+                        if(App.equals("0"))
+                        {
+                            Toast.makeText(context, "Please Select Loan Type", Toast.LENGTH_SHORT).show();
+                        }
+                        else
+                        {
+                            if (!validateLoanamount()) {
+                                return;
+                            }
+                            if (!validateName()) {
+                                return;
+                            }
+                            if (!validateMobile()) {
+                                return;
+                            }
+                            if (!validate_wt_Mobile()) {
+                                return;
+                            }
+                            if(check_complete.isChecked())
+                            {
+                                int m = 1;
+                                C_loan_amount_ext = loan_amount_ext.getText().toString();
+                                C_mobile_no_txt = mobile_no_txt.getText().toString();
+                                C_name_txt = name_txt.getText().toString();
+                                C_whats_app_no = whats_app_no.getText().toString();
+                                lead_cr(C_loan_amount_ext,C_mobile_no_txt,C_name_txt,C_whats_app_no,m);
+                            }else
+                            {
+                                Toast.makeText(context, "Please accept the Terms and condition", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                }
 
-        private MySpinnerAdapter(Context context, int resource, List<String> items) {
-            super(context, resource, items);
+            }
+        });
+    }
+
+
+
+    private boolean validateLoanamount() {
+        if (loan_amount_ext.length() < 6 || loan_amount_ext.length() > 12) {
+            loan_amount_ext.setError(getText(R.string.error_empty_loan));
+            loan_amount_ext.requestFocus();
+            return false;
+        } else {
+            //     inputLayoutNumber.setErrorEnabled(false);
+        }
+        return true;
+    }
+
+    private boolean validateName(){
+        if (name_txt.getText().toString().trim().isEmpty() || name_txt.length() < 3) {
+            name_txt.setError(getText(R.string.error_name));
+            name_txt.requestFocus();
+            return false;
+        } else {
+
         }
 
-        // Affects default (closed) state of the spinner
-        @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
-            TextView view = (TextView) super.getView(position, convertView, parent);
-            view.setTypeface(font);
-            return view;
-        }
+        return true;
+    }
+    private boolean validateMobile() {
+        if (mobile_no_txt.length() < 10 || mobile_no_txt.length() > 10) {
+            mobile_no_txt.setError(getText(R.string.error_empty_mobile));
+            mobile_no_txt.requestFocus();
+            return false;
+        } else {
 
-        // Affects opened state of the spinner
-        @Override
-        public View getDropDownView(int position, View convertView, ViewGroup parent) {
-            TextView view = (TextView) super.getDropDownView(position, convertView, parent);
-            view.setTypeface(font);
-            return view;
         }
-    }*/
+        return true;
+    }
+    private boolean validate_wt_Mobile() {
+        if (whats_app_no.length() < 10 || whats_app_no.length() > 10) {
+            whats_app_no.setError(getText(R.string.error_empty_mobile));
+            whats_app_no.requestFocus();
+            return false;
+        } else {
+
+        }
+        return true;
+    }
 
     private void makeJsonObjReq_loancat() {
         progressDialog.show();
@@ -236,8 +272,6 @@ public class Lead_Crration_Activity extends SimpleActivity {
                     @Override
                     public void onResponse(JSONObject object) {
                         Log.e("Loan catgory", object.toString());
-                        /// msgResponse.setText(response.toString());
-                        //  Objs.a.showToast(getContext(), String.valueOf(object));
                         try {
                             ja1 = object.getJSONArray("loancatlist_arr");
                             setMainSpinner_loancat(ja1);
@@ -323,9 +357,23 @@ public class Lead_Crration_Activity extends SimpleActivity {
                     return false;
                 }
             });
+
+
         }
 
+        int loancat_name1 = Integer.parseInt(Lontype);
+        Log.e("loancat_name1", String.valueOf(loancat_name1));
+        if(loancat_name1 == -1)
+        {
+            String message = Lontypename + " : Item not found.";
 
+        }
+        else
+        {
+            spinner_loan_category.setSelection(loancat_name1);
+            String message = Lontypename + " : Item found and selected.";
+            //  Objs.a.showToast(getActivity(), message);
+        }
     }
 
     private void makeJsonObjReq1(String Loan_Cat_id) {
@@ -412,28 +460,9 @@ public class Lead_Crration_Activity extends SimpleActivity {
                     try {
                         //  City_loc_uniqueID = ja.getJSONObject(position).getString("city_id");
                         App = ja.getJSONObject(position).getString("id");
-                        CAT_ID = ja.getJSONObject(position).getString("category_id");
+                        //CAT_ID = ja.getJSONObject(position).getString("category_id");
                         Log.d("Add Applicant Info", String.valueOf(App));
                         int a = Integer.parseInt(App);
-
-                      /*  switch(a) {
-                            case 1:
-                                appl.setVisibility(View.VISIBLE);
-                                P_Location_pin.setVisibility(View.VISIBLE);
-                                break;
-                            case 3:
-                                appl.setVisibility(View.VISIBLE);
-                                P_Location_pin.setVisibility(View.VISIBLE);
-                                break;
-                            case 4:
-                                appl.setVisibility(View.VISIBLE);
-                                P_Location_pin.setVisibility(View.VISIBLE);
-                                break;
-                            default:
-                                appl.setVisibility(View.GONE);
-                                P_Location_pin.setVisibility(View.VISIBLE);
-                                return;
-                        }*/
 
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -458,15 +487,110 @@ public class Lead_Crration_Activity extends SimpleActivity {
         if(loantypename1 == -1)
         {
             String message = Lontypename + " : Item not found.";
-            //   Objs.a.showToast(getActivity(), message);
+            // Toast.makeText(context,message,Toast.LENGTH_SHORT).show();
         }
         else
         {
             spinner_loan_type.setSelection(loantypename1);
             String message = Lontypename + " : Item found and selected.";
-            //  Objs.a.showToast(getActivity(), message);
+           // Toast.makeText(context,message,Toast.LENGTH_SHORT).show();
         }
         /// loadSubLocations(ja.getJSONObject(0).getString("countryid"));
+    }
+
+    private void lead_cr(String C_loan_amount_ext , String C_mobile_no_txt,String C_name_txt, String C_whats_app_no,int m) {
+
+        String stringNumber = C_loan_amount_ext;
+        result = stringNumber.replace(",","");
+        JSONObject jsonObject =new JSONObject();
+        JSONObject J= null;
+        try {
+            J =new JSONObject();
+            //  J.put(Params.email_id,email);
+            J.put(Params.user_name,C_name_txt);
+            J.put(Params.mobile_no,C_mobile_no_txt);
+            J.put(Params.loan_amount,result);
+            J.put("C_whats_app_no",C_whats_app_no);
+            J.put("Loan_Cat_id",Loan_Cat_id);
+            J.put("App",App);
+            J.put("terms_cond",m);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        Log.e("Add Home Laoan", String.valueOf(J));
+       /* progressDialog.show();
+        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, Urls.ADD_LEAD_POST, J,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+
+                        String data = String.valueOf(response);
+                        Log.e("Add_Home_loan Partner", String.valueOf(response));
+                        try {
+
+                            if(response.getString(Params.status).equals("Ok")) {
+
+                                if(App.equals("1"))
+                                {
+                                    Intent intent = new Intent(Lead_Crration_Activity.this, Viability_check_HL.class);
+                                    startActivity(intent);
+                                    finish();
+                                }else if(App.equals("2"))
+                                {
+                                    Intent intent = new Intent(Lead_Crration_Activity.this, Viability_check_HL.class);
+                                    startActivity(intent);
+                                    finish();
+
+                                } else if(App.equals("20"))
+                                {
+                                    Intent intent = new Intent(Lead_Crration_Activity.this, Viability_Check_PL.class);
+                                    startActivity(intent);
+                                    finish();
+
+                                } else if(App.equals("21"))
+                                {
+                                    Intent intent = new Intent(Lead_Crration_Activity.this, Viability_Check_BL.class);
+                                    startActivity(intent);
+                                    finish();
+                                }
+                            }
+                            if(response.getString(Params.status).equals("error")) {
+                                Objs.a.showToast(context, "Already Registered with Propwiser");
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        progressDialog.dismiss();
+                    }
+                }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                //Log.d(TAG, error.getMessage());
+                VolleyLog.d("TAG", "Error: " + error.getMessage());
+                progressDialog.dismiss();
+
+            }
+        }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("content-type", "application/json");
+                return headers;
+            }
+        };
+
+        // AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
+        int socketTimeout = 0;
+        RetryPolicy policy = new DefaultRetryPolicy(socketTimeout,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
+
+        jsonObjReq.setRetryPolicy(policy);
+
+        AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);*/
     }
 
     @Override

@@ -76,10 +76,13 @@ public class Applicant_Details_Activity extends SimpleActivity {
 
                 String Loantype = "1";
                 String sub_categoryid = "1";
+                Pref.putLoanType(mCon,Loantype);
                 Pref.putLoanTypeSub(mCon,sub_categoryid);
+
                 String Loantype_name = "Home Loan";
                 Pref.putLoanTypename(mCon,Loantype_name);
-                Pref.putLoanType(mCon,Loantype);
+
+
                 Intent intent = new Intent(Applicant_Details_Activity.this, Lead_Crration_Activity.class);
                 startActivity(intent);
                 finish();
@@ -90,22 +93,28 @@ public class Applicant_Details_Activity extends SimpleActivity {
         loanaganstpropert.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String Loantype = "1";
+               /* String Loantype = "1";
                 String sub_categoryid = "2";
                 String Loantype_name = "Loan Against Property";
                 Pref.putLoanType(mCon,Loantype);
+
+                String Loancat_name = "Secured Loan (HL/LAP)";
+                Pref.putLoanCat_Name(mCon,Loancat_name);
+
                 Pref.putLoanTypeSub(mCon,sub_categoryid);
                 Pref.putLoanTypename(mCon,Loantype_name);
 
                 Intent intent = new Intent(Applicant_Details_Activity.this, Partner_Lead_OTP_Verification.class);
                 startActivity(intent);
-                finish();
+                finish();*/
 
-              /*  String Loantype = "4";
+                String Loantype = "1";
                 Pref.putLoanType(mCon,Loantype);
+                String Loantype_name = "Loan Against Property";
+                Pref.putLoanTypename(mCon,Loantype_name);
                 Intent intent = new Intent(Applicant_Details_Activity.this, Lead_Crration_Activity.class);
                 startActivity(intent);
-                finish();*/
+                finish();
 
             }
         });
@@ -123,7 +132,12 @@ public class Applicant_Details_Activity extends SimpleActivity {
                 startActivity(intent);
                 finish();*/
 
-                String Loantype = "3";
+
+                String sub_categoryid = "3";
+                String Loantype_name = "Personal Loan [Unsecured]";
+                Pref.putLoanTypename(mCon,Loantype_name);
+                Pref.putLoanTypeSub(mCon,sub_categoryid);
+                String Loantype = "2";
                 Pref.putLoanType(mCon,Loantype);
                 Intent intent = new Intent(Applicant_Details_Activity.this, Lead_Crration_Activity.class);
                 startActivity(intent);
@@ -148,6 +162,9 @@ public class Applicant_Details_Activity extends SimpleActivity {
 
                 String Loantype = "2";
                 Pref.putLoanType(mCon,Loantype);
+                String Loantype_name = "Business Loan [Unsecured]";
+                Pref.putLoanTypename(mCon,Loantype_name);
+
                 Intent intent = new Intent(Applicant_Details_Activity.this, Lead_Crration_Activity.class);
                 startActivity(intent);
                 finish();
@@ -159,6 +176,9 @@ public class Applicant_Details_Activity extends SimpleActivity {
         vehicle_loan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                String Loancat_name = "Vehicle Loan";
+                Pref.putLoanCat_Name(mCon,Loancat_name);
                 String Loantype = "3";
                 String sub_categoryid = "5";
                 Pref.putLoanType(mCon,Loantype);

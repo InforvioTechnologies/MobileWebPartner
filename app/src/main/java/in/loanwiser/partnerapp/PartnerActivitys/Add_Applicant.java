@@ -2171,9 +2171,6 @@ public class Add_Applicant extends Fragment {
     }
 
 
-
-
-
     private void clicks(final View view1) {
 
         applicant_type1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {

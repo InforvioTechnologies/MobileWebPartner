@@ -54,6 +54,7 @@ import in.loanwiser.partnerapp.Partner_Statues.Statues_Dashboard_Nav;
 import in.loanwiser.partnerapp.R;
 import in.loanwiser.partnerapp.SMSRetrieverAPI.MySMSBroadcastReceiver;
 import in.loanwiser.partnerapp.SMSRetrieverAPI.SmsListener;
+import in.loanwiser.partnerapp.Step_Changes_Screen.Lead_Crration_Activity;
 import in.loanwiser.partnerapp.User_Account.Login;
 
 public class Lead_SmsActivity2 extends AppCompatActivity {
@@ -253,7 +254,7 @@ public class Lead_SmsActivity2 extends AppCompatActivity {
                             if(response.getString(Params.status).equals("success")){
                                 String mobile_no =  response.getString("mobile_no");
                                 Pref.putMobileLead(mCon,mobile_no);
-                                Objs.ac.StartActivity(mCon, MainActivity_Add_Lead.class);
+                                Objs.ac.StartActivity(mCon, Lead_Crration_Activity.class);
                                 finish();
                             }
                             if(response.getString(Params.status).equals(Params.error)){
