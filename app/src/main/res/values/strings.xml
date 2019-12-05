@@ -64,13 +64,7 @@
     <string name="mobileerror">Enter a valid mobile number</string>
     <string name="no_leads_data" tools:ignore="ExtraTranslation">No Leads found "\n" add your leads "\n" to Start with Loanwiser</string>
     <string name="listapp">List of Applications</string>
-    <string name="error_account1">Kindly enter the Account Number</string>
-    <string name="error_name">Kindly enter the Customer Name</string>
-    <string name="error_income_monthly">Please enter the Monthly income amount</string>
-    <string name="error_property">Please enter the Property Pin code</string>
-    <string name="error_work">Please enter the Work Pin code</string>
-    <string name="error_occupation">Please enter the Occupation</string>
-    <string name="error_branch">Kindly enter the Bank Branch</string>
+
     <string name="addl">Add your Leads</string>
     <string name="update_lead">Update your Leads</string>
     <string name="validation_state">Select the Loan Typ</string>
@@ -529,7 +523,23 @@
     <string name="co_app_pan_no"> Co Applicant PAN No</string>
     <string name="mobile">Mobile No</string>
     <string name="crt_termss">I accepts the terms and conditions</string>
+    <string name="age_vali">Please Enter the valid age</string>
     <string name="need_cr_report">Do you Need a Credite Report ?</string>
+    <string name="error_account1">Kindly enter the Account Number</string>
+    <string name="error_name">Kindly enter the Customer Name</string>
+    <string name="error_income_monthly">Please enter the Monthly income amount</string>
+    <string name="error_property">Please enter the Property Pin code</string>
+    <string name="error_work">Please enter the Work Pin code</string>
+    <string name="error_occupation">Please enter the Occupation</string>
+    <string name="error_experience">Please enter the Experience</string>
+    <string name="error_total_experience">Please enter the Total Experience</string>
+    <string name="error_branch">Kindly enter the Bank Branch</string>
+    <string name="error_pincode">Enter the Pincode</string>
+    <string name="net_salary">Please Enter the valid amount</string>
+    <string name="err_curent">This field is required</string>
+
+
+
     <string name="need_cr_report_des"> credit report should be at the top of the
         list of your personal financial habits.
         A credit report can act as a shining light into

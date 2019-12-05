@@ -84,7 +84,6 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent">
                                     <Spinner
-
                                         style="@style/Base.Widget.AppCompat.Spinner.Underlined"
                                         android:backgroundTint="#ff000000"
                                         android:backgroundTintMode="src_in"

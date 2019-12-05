@@ -14,6 +14,8 @@ import in.loanwiser.partnerapp.SimpleActivity;
 public class Eligibility_Check_PL extends SimpleActivity {
 
     AppCompatButton lead_viy_step2;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
