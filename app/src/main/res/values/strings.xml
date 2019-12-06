@@ -532,12 +532,18 @@
     <string name="error_work">Please enter the Work Pin code</string>
     <string name="error_occupation">Please enter the Occupation</string>
     <string name="error_experience">Please enter the Experience</string>
+    <string name="error_company_name">Please enter the Company Name</string>
+    <string name="error_no_emp">Please enter the No of Employee</string>
+    <string name="error_company_desig">Please enter the Desgination</string>
     <string name="error_total_experience">Please enter the Total Experience</string>
     <string name="error_branch">Kindly enter the Bank Branch</string>
     <string name="error_pincode">Enter the Pincode</string>
     <string name="net_salary">Please Enter the valid amount</string>
     <string name="err_curent">This field is required</string>
-
+    <string name="permanent_res_type">Permanent Residence Type</string>
+    <string name="own_hous">Own house of any Blood Relative</string>
+    <string name="full_addres">Full Address (Relatives)</string>
+    <string name="epf_detected">EPF deducted in Salary</string>
 
 
     <string name="need_cr_report_des"> credit report should be at the top of the

@@ -92,9 +92,9 @@ public class Lead_Crration_Activity extends SimpleActivity {
 
         Lontype = Pref.getLoanType(getApplicationContext());
         Lontypename = Pref.getLoanTypename(context);
-        LoanCat_Name = Pref.getLoanCat_Name(context);
+       // LoanCat_Name = Pref.getLoanCat_Name(context);
 
-        Log.e("LoanCat_Name",LoanCat_Name);
+
         Log.e("Loantype_Name",Lontypename);
 
         font = Typeface.createFromAsset(context.getAssets(), "Lato-Regular.ttf");

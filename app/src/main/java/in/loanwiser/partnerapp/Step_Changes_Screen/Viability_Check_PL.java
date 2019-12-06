@@ -129,19 +129,19 @@ public class Viability_Check_PL extends SimpleActivity {
         imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
 
 
-       /* lead_viy_step2.setOnClickListener(new View.OnClickListener() {
+        lead_viy_step2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(Viability_Check_PL.this, Eligibility_Check_PL.class);
                 startActivity(intent);
                 finish();
             }
-        });*/
+        });
 
 
 
         UISCREEN();
-        Click();
+      //  Click();
         fonts();
         makeJsonObjReq1();
     }
@@ -254,19 +254,6 @@ public class Viability_Check_PL extends SimpleActivity {
     {
 
           font = Typeface.createFromAsset(context.getAssets(), "Lato-Regular.ttf");
-          /*  age,age1,pan_number_txt,pan_number_txt1,
-                occupation_txt,occupation_txt1,monthly_sal_txt,monthly_sal_txt1,emp_id,emp_id1,
-                salery_credite_method_txt,salery_credite_method_txt1,salary_proof_txt,salary_proof_txt1,Exp_in_current_txt,
-                Exp_in_current_txt1,total_workexperiecnce_txt,total_workexperiecnce_txt1,
-                cmp_pincode_txt,cmp_pincode_txt1*/
-
-        /* txt_residence_pincode,txt_residence_pincode1,txt_residence_type,
-                    txt_residence_type1,Lives_in_current_txt,Lives_in_current_txt1,any_other_family_member_txt,
-                      any_other_family_member_txt1,family_member_name_txt,family_member_name_txt1,family_member_income_txt,
-            family_member_income_txt1,monthly_afr_emi_txt,monthly_afr_emi_txt1*/
-
-
-
         age.setTypeface(font);
         age1.setTypeface(font);
         pan_number_txt.setTypeface(font);
