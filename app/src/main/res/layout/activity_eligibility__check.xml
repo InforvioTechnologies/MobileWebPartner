@@ -484,101 +484,109 @@
 
                     </LinearLayout>
                 </LinearLayout>
-                    <LinearLayout
-                    android:padding="5dp"
+                <LinearLayout
+                    android:id="@+id/relative_if_rented_ly"
                     android:orientation="vertical"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
                     <LinearLayout
-                        android:id="@+id/permanent_res_type_ly"
-                        android:orientation="horizontal"
+
+                        android:padding="5dp"
+                        android:orientation="vertical"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
-                        <androidx.appcompat.widget.AppCompatTextView
-                            android:gravity="left"
-                            android:layout_marginLeft="2dp"
-                            android:id="@+id/own_hose_relative_txt"
-                            android:layout_width="wrap_content"
-                            style="@style/LorgeText2"
-                            android:textColor="@color/colorPrimaryDark"
-                            android:textColorHint="@color/colorPrimaryDark"
-                            android:hint="8"
-                            android:layout_height="wrap_content" />
-                        <androidx.appcompat.widget.AppCompatTextView
-                            android:gravity="left"
-                            android:layout_marginLeft="2dp"
-                            android:id="@+id/own_hose_relative_txt1"
+                        <LinearLayout
+                            android:id="@+id/permanent_res_type_ly"
+                            android:orientation="horizontal"
                             android:layout_width="match_parent"
-                            style="@style/LorgeText2"
-                            android:textColor="@color/colorPrimaryDark"
-                            android:textColorHint="@color/colorPrimaryDark"
-                            android:text="@string/own_hous"
-                            android:layout_height="wrap_content" />
+                            android:layout_height="wrap_content">
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:gravity="left"
+                                android:layout_marginLeft="2dp"
+                                android:id="@+id/own_hose_relative_txt"
+                                android:layout_width="wrap_content"
+                                style="@style/LorgeText2"
+                                android:textColor="@color/colorPrimaryDark"
+                                android:textColorHint="@color/colorPrimaryDark"
+                                android:hint="8"
+                                android:layout_height="wrap_content" />
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:gravity="left"
+                                android:layout_marginLeft="2dp"
+                                android:id="@+id/own_hose_relative_txt1"
+                                android:layout_width="match_parent"
+                                style="@style/LorgeText2"
+                                android:textColor="@color/colorPrimaryDark"
+                                android:textColorHint="@color/colorPrimaryDark"
+                                android:text="@string/own_hous"
+                                android:layout_height="wrap_content" />
+                        </LinearLayout>
+                        <LinearLayout
+                            android:gravity="center"
+                            android:orientation="horizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="60dp">
+
+                            <LinearLayout
+                                android:layout_marginLeft="30dp"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent">
+                                <Spinner
+                                    style="@style/Base.Widget.AppCompat.Spinner.Underlined"
+                                    android:backgroundTint="#ff000000"
+                                    android:backgroundTintMode="src_in"
+                                    android:spinnerMode="dropdown"
+                                    android:id="@+id/own_hose_relative_spinner"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent" />
+                            </LinearLayout>
+                        </LinearLayout>
                     </LinearLayout>
                     <LinearLayout
-                        android:gravity="center"
-                        android:orientation="horizontal"
+                        android:orientation="vertical"
                         android:layout_width="match_parent"
-                        android:layout_height="60dp">
-
+                        android:layout_height="match_parent">
+                        <LinearLayout
+                            android:id="@+id/rel_full_address_ly"
+                            android:orientation="horizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:gravity="left"
+                                android:layout_marginLeft="2dp"
+                                android:id="@+id/rel_full_address_txt"
+                                android:layout_width="wrap_content"
+                                style="@style/LorgeText2"
+                                android:textColor="@color/colorPrimaryDark"
+                                android:textColorHint="@color/colorPrimaryDark"
+                                android:hint="9"
+                                android:layout_height="wrap_content" />
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:gravity="left"
+                                android:layout_marginLeft="2dp"
+                                android:layout_width="match_parent"
+                                android:id="@+id/rel_full_address_txt1"
+                                style="@style/LorgeText2"
+                                android:textColor="@color/colorPrimaryDark"
+                                android:textColorHint="@color/colorPrimaryDark"
+                                android:text="@string/full_addres"
+                                android:layout_height="wrap_content" />
+                        </LinearLayout>
                         <LinearLayout
                             android:layout_marginLeft="30dp"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent">
-                            <Spinner
-                                style="@style/Base.Widget.AppCompat.Spinner.Underlined"
-                                android:backgroundTint="#ff000000"
-                                android:backgroundTintMode="src_in"
-                                android:spinnerMode="dropdown"
-                                android:id="@+id/own_hose_relative_spinner"
+                            <androidx.appcompat.widget.AppCompatEditText
                                 android:layout_width="match_parent"
-                                android:layout_height="match_parent" />
+                                android:id="@+id/rel_full_address_edtxt"
+                                android:textColor="@color/colorPrimaryDark"
+                                android:textSize="16sp"
+                                android:inputType="text"
+                                android:layout_height="wrap_content"/>
                         </LinearLayout>
                     </LinearLayout>
                 </LinearLayout>
-                    <LinearLayout
-                    android:orientation="vertical"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-                    <LinearLayout
-                        android:id="@+id/rel_full_address_ly"
-                        android:orientation="horizontal"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-                        <androidx.appcompat.widget.AppCompatTextView
-                            android:gravity="left"
-                            android:layout_marginLeft="2dp"
-                            android:id="@+id/rel_full_address_txt"
-                            android:layout_width="wrap_content"
-                            style="@style/LorgeText2"
-                            android:textColor="@color/colorPrimaryDark"
-                            android:textColorHint="@color/colorPrimaryDark"
-                            android:hint="9"
-                            android:layout_height="wrap_content" />
-                        <androidx.appcompat.widget.AppCompatTextView
-                            android:gravity="left"
-                            android:layout_marginLeft="2dp"
-                            android:layout_width="match_parent"
-                            android:id="@+id/rel_full_address_txt1"
-                            style="@style/LorgeText2"
-                            android:textColor="@color/colorPrimaryDark"
-                            android:textColorHint="@color/colorPrimaryDark"
-                            android:text="@string/full_addres"
-                            android:layout_height="wrap_content" />
-                    </LinearLayout>
-                    <LinearLayout
-                        android:layout_marginLeft="30dp"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
-                        <androidx.appcompat.widget.AppCompatEditText
-                            android:layout_width="match_parent"
-                            android:id="@+id/rel_full_address_edtxt"
-                            android:textColor="@color/colorPrimaryDark"
-                            android:textSize="16sp"
-                            android:inputType="text"
-                            android:layout_height="wrap_content"/>
-                    </LinearLayout>
-                </LinearLayout>
+
 
             </LinearLayout>
 
@@ -617,7 +625,7 @@
                             style="@style/LorgeText2"
                             android:textColor="@color/colorPrimaryDark"
                             android:textColorHint="@color/colorPrimaryDark"
-                            android:hint="14"
+                            android:hint="10"
                             android:layout_height="wrap_content" />
                         <androidx.appcompat.widget.AppCompatTextView
                             android:gravity="left"
@@ -641,7 +649,6 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent">
                             <Spinner
-
                                 style="@style/Base.Widget.AppCompat.Spinner.Underlined"
                                 android:backgroundTint="#ff000000"
                                 android:backgroundTintMode="src_in"
@@ -650,8 +657,8 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent" />
                         </LinearLayout>
-
                     </LinearLayout>
+
                 </LinearLayout>
 
                 <LinearLayout
@@ -672,7 +679,7 @@
                             style="@style/LorgeText2"
                             android:textColor="@color/colorPrimaryDark"
                             android:textColorHint="@color/colorPrimaryDark"
-                            android:hint="15"
+                            android:hint="11"
                             android:layout_height="wrap_content" />
                         <androidx.appcompat.widget.AppCompatTextView
                             android:gravity="left"
@@ -716,7 +723,7 @@
                             style="@style/LorgeText2"
                             android:textColor="@color/colorPrimaryDark"
                             android:textColorHint="@color/colorPrimaryDark"
-                            android:hint="16"
+                            android:hint="12"
                             android:layout_height="wrap_content" />
                         <androidx.appcompat.widget.AppCompatTextView
                             android:gravity="left"
@@ -748,6 +755,7 @@
                                 android:id="@+id/spinn_is_gst_reflect"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent" />
+
                         </LinearLayout>
 
                     </LinearLayout>

@@ -92,7 +92,7 @@ public class Viability_check_HL extends SimpleActivity {
         spi_vocation_type_ =(Spinner) findViewById(R.id.spi_vocation_type_);
         spinner_residence_type =(Spinner) findViewById(R.id.spinner_residence_type);
         spi_vocation_forming =(Spinner) findViewById(R.id.spi_vocation_forming);
-        spinner_busines_type =(Spinner) findViewById(R.id.spinner_busines_type);
+        spinner_busines_type =(Spinner) findViewById(R.id.spinner_busines_type_own_business);
 
         individual = (LinearLayout) findViewById(R.id.individual);
         formin_dairy = (LinearLayout) findViewById(R.id.formin_dairy);

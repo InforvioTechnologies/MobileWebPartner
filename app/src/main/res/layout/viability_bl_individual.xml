@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -21,7 +22,7 @@
                 <androidx.appcompat.widget.AppCompatTextView
                     android:gravity="left"
                     android:layout_marginLeft="2dp"
-                    android:id="@+id/vocation_txt"
+                    android:id="@+id/vocation_indiviual_txt"
                     android:layout_width="wrap_content"
                     style="@style/LorgeText2"
                     android:textColor="@color/colorPrimaryDark"
@@ -31,7 +32,7 @@
                 <androidx.appcompat.widget.AppCompatTextView
                     android:gravity="left"
                     android:layout_marginLeft="2dp"
-                    android:id="@+id/vocation_txt1"
+                    android:id="@+id/vocation_indiviual_txt1"
                     android:layout_width="match_parent"
                     style="@style/LorgeText2"
                     android:textColor="@color/colorPrimaryDark"
@@ -73,8 +74,9 @@
                 <androidx.appcompat.widget.AppCompatTextView
                     android:gravity="left"
                     android:layout_marginLeft="2dp"
-                    android:id="@+id/busness_income_proof_txt"
+
                     android:layout_width="wrap_content"
+                    android:id="@+id/busines_inco_proof_individua_txt"
                     style="@style/LorgeText2"
                     android:textColor="@color/colorPrimaryDark"
                     android:textColorHint="@color/colorPrimaryDark"
@@ -83,7 +85,7 @@
                 <androidx.appcompat.widget.AppCompatTextView
                     android:gravity="left"
                     android:layout_marginLeft="2dp"
-                    android:id="@+id/busines_inco_proof"
+                    android:id="@+id/busines_inco_proof_individua_txt1"
                     android:layout_width="match_parent"
                     style="@style/LorgeText2"
                     android:textColor="@color/colorPrimaryDark"
@@ -131,23 +133,24 @@
                     <androidx.appcompat.widget.AppCompatTextView
                         android:gravity="left"
                         android:layout_marginLeft="2dp"
-                        android:id="@+id/vehicle_txt"
+                        android:id="@+id/vehicle_individual_txt"
                         android:layout_width="wrap_content"
                         style="@style/LorgeText2"
                         android:textColor="@color/colorPrimaryDark"
                         android:textColorHint="@color/colorPrimaryDark"
                         android:hint="7"
                         android:layout_height="wrap_content" />
+
                     <androidx.appcompat.widget.AppCompatTextView
-                        android:gravity="left"
-                        android:layout_marginLeft="2dp"
-                        android:id="@+id/vehicle_txt2"
-                        android:layout_width="match_parent"
+                        android:id="@+id/vehicle_individual_txt1"
                         style="@style/LorgeText2"
-                        android:textColor="@color/colorPrimaryDark"
-                        android:textColorHint="@color/colorPrimaryDark"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="2dp"
+                        android:gravity="left"
                         android:text="@string/vehicle_type"
-                        android:layout_height="wrap_content" />
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textColorHint="@color/colorPrimaryDark" />
                 </LinearLayout>
                 <LinearLayout
                     android:gravity="center"
@@ -183,7 +186,7 @@
                     <androidx.appcompat.widget.AppCompatTextView
                         android:gravity="left"
                         android:layout_marginLeft="2dp"
-                        android:id="@+id/number_of_vehicle"
+                        android:id="@+id/number_of_vehicle_ind_txt"
                         android:layout_width="wrap_content"
                         style="@style/LorgeText2"
                         android:textColor="@color/colorPrimaryDark"
@@ -195,6 +198,7 @@
                         android:layout_marginLeft="2dp"
                         android:layout_width="match_parent"
                         style="@style/LorgeText2"
+                        android:id="@+id/number_of_vehicle_ind_txt1"
                         android:textColor="@color/colorPrimaryDark"
                         android:textColorHint="@color/colorPrimaryDark"
                         android:text="@string/nov"
@@ -206,7 +210,10 @@
                     android:layout_height="match_parent">
                     <androidx.appcompat.widget.AppCompatEditText
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"/>
+                        android:layout_height="wrap_content"
+                        android:textSize="16sp"
+                        android:id="@+id/no_of_vehicle_edit_txt"
+                        android:textColor="@color/colorPrimaryDark"/>
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
@@ -224,7 +231,7 @@
                 <androidx.appcompat.widget.AppCompatTextView
                     android:gravity="left"
                     android:layout_marginLeft="2dp"
-                    android:id="@+id/no_of_yw_txt"
+                    android:id="@+id/no_of_year_ind_txt"
                     android:layout_width="wrap_content"
                     style="@style/LorgeText2"
                     android:textColor="@color/colorPrimaryDark"
@@ -236,6 +243,7 @@
                     android:layout_marginLeft="2dp"
                     android:layout_width="match_parent"
                     style="@style/LorgeText2"
+                    android:id="@+id/no_of_year_ind_txt1"
                     android:textColor="@color/colorPrimaryDark"
                     android:textColorHint="@color/colorPrimaryDark"
                     android:text="@string/nyw"
@@ -247,7 +255,10 @@
                 android:layout_height="match_parent">
                 <androidx.appcompat.widget.AppCompatEditText
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:id="@+id/no_of_years_ind_edit_txt"
+                    android:textColor="@color/colorPrimaryDark"/>
             </LinearLayout>
         </LinearLayout>
         <LinearLayout
@@ -262,7 +273,7 @@
                 <androidx.appcompat.widget.AppCompatTextView
                     android:gravity="left"
                     android:layout_marginLeft="2dp"
-                    android:id="@+id/busproof_txt"
+                    android:id="@+id/busproof_ind_txt"
                     android:layout_width="wrap_content"
                     style="@style/LorgeText2"
                     android:textColor="@color/colorPrimaryDark"
@@ -272,7 +283,7 @@
                 <androidx.appcompat.widget.AppCompatTextView
                     android:gravity="left"
                     android:layout_marginLeft="2dp"
-                    android:id="@+id/busproof_txt2"
+                    android:id="@+id/busproof_ind_txt1"
                     android:layout_width="match_parent"
                     style="@style/LorgeText2"
                     android:textColor="@color/colorPrimaryDark"
@@ -295,10 +306,30 @@
                         android:backgroundTint="#ff000000"
                         android:backgroundTintMode="src_in"
                         android:spinnerMode="dropdown"
-                        android:id="@+id/spi_busproof_txt"
+                        android:id="@+id/spi_busproof_individual"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent" />
                 </LinearLayout>
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingLeft="16dp"
+                android:elevation="6dp"
+                android:layout_margin="10dp"
+                android:orientation="horizontal"
+                android:background="@color/paper">
+
+                <com.doodle.android.chips.ChipsView
+                    android:id="@+id/cv_vusiness_proof_individual"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:overScrollMode="never"
+                    android:textAppearance="@style/ChipTextStyle_Selected"
+                    app:cv_max_height="100dp"
+                    app:cv_vertical_spacing="2dp"
+                    />
 
             </LinearLayout>
         </LinearLayout>
@@ -314,7 +345,7 @@
                 <androidx.appcompat.widget.AppCompatTextView
                     android:gravity="left"
                     android:layout_marginLeft="2dp"
-                    android:id="@+id/avg_txt"
+                    android:id="@+id/monthly_incom_txt"
                     android:layout_width="wrap_content"
                     style="@style/LorgeText2"
                     android:textColor="@color/colorPrimaryDark"
@@ -326,6 +357,7 @@
                     android:layout_marginLeft="2dp"
                     android:layout_width="match_parent"
                     style="@style/LorgeText2"
+                    android:id="@+id/monthly_incom_txt1"
                     android:textColor="@color/colorPrimaryDark"
                     android:textColorHint="@color/colorPrimaryDark"
                     android:text="@string/avg"
@@ -337,7 +369,10 @@
                 android:layout_height="match_parent">
                 <androidx.appcompat.widget.AppCompatEditText
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:id="@+id/avg_monthly_incom_edit_txt"
+                    android:textColor="@color/colorPrimaryDark"/>
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>

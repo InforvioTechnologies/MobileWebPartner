@@ -54,7 +54,7 @@
                         android:backgroundTint="#ff000000"
                         android:backgroundTintMode="src_in"
                         android:spinnerMode="dropdown"
-                        android:id="@+id/spinner_busines_type"
+                        android:id="@+id/spinner_busines_type_own_business"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent" />
                 </LinearLayout>

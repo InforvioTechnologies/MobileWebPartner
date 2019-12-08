@@ -114,7 +114,7 @@
                         android:backgroundTint="#ff000000"
                         android:backgroundTintMode="src_in"
                         android:spinnerMode="dropdown"
-                        android:id="@+id/business_incom_proof"
+                        android:id="@+id/business_incom_proof_forming"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent" />
                 </LinearLayout>

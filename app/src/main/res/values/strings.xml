@@ -544,6 +544,8 @@
     <string name="own_hous">Own house of any Blood Relative</string>
     <string name="full_addres">Full Address (Relatives)</string>
     <string name="epf_detected">EPF deducted in Salary</string>
+    <string name="oth_income">please Select other income</string>
+    <string name="error_full_address">please Enter full Address</string>
 
 
     <string name="need_cr_report_des"> credit report should be at the top of the

@@ -1,37 +1,114 @@
 package in.loanwiser.partnerapp.Step_Changes_Screen;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.net.Uri;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
+import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.appcompat.widget.AppCompatButton;
+import androidx.appcompat.widget.AppCompatEditText;
+import androidx.appcompat.widget.AppCompatTextView;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.VolleyLog;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.doodle.android.chips.ChipsView;
+import com.doodle.android.chips.model.Contact;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 
 import adhoc.app.applibrary.Config.AppUtils.Objs;
+import adhoc.app.applibrary.Config.AppUtils.Params;
 import adhoc.app.applibrary.Config.AppUtils.Pref.Pref;
+import adhoc.app.applibrary.Config.AppUtils.Urls;
+import adhoc.app.applibrary.Config.AppUtils.VolleySignleton.AppController;
+import dmax.dialog.SpotsDialog;
+import in.loanwiser.partnerapp.PartnerActivitys.IncomeProofPOJO;
 import in.loanwiser.partnerapp.R;
 import in.loanwiser.partnerapp.SimpleActivity;
 
 
 public class Viability_Check_BL extends SimpleActivity {
 
-    private Spinner spinner1,spi_vocation_type_,spinner_residence_type,
-                    spi_vocation_forming,spinner_busines_type;
+    private Spinner emp_type,spi_vocation_type_,spinner_residence_type,
+                    spi_vocation_forming,spinner_busines_type,
+                    has_pan_card,business_incom_proof,business_incom_proof_forming,
+            spinner_busines_type_own_business,spi_busproof_individual,
+            spinner_assets_owned;
+
     private LinearLayout individual,self_business,formin_dairy,Driver_C_owner,
              res_rented,forming,dairy,poultry,
             Retail_wholesale_business,service_business,manufacturing;
     private AppCompatButton lead_viy_step2;
+
+    Typeface font;
+    private Context context = this;
+    InputMethodManager imm;
+    JSONArray Type_of_employement,have_pan_ar,vocaton_ar,Business_income_proof_ar,
+            vocation_type_forming_ar,Residence_ownership_ar,Business_type_own_business,Business_Proof,Assets_own;
+    String[] EMPLOYEE_TYPE_SA,PAN_ID_SA,Vocation_SA,Business_income_proof_SA,vocation_type_forming__SA,
+            Residence_Type_SA,Own_business_type_SA,
+            Pincode_SA;
+    ArrayAdapter<String> Employee_Type_adapter,PAN_ID_Adapter,Vocation_Adapter,Business_income_proof_Adapter,
+            vocation_type_forming_Adapter,Residence_Adapter,Own_business_type_Adapter,
+            Pincode_Adapter;
+
+    ChipsView cv_vusiness_proof_individual,cv_Assets_Owns;
+
+    AppCompatTextView business_details_txt,emp_type1,emp_type2,age_txt,age_txt1,pan_number_txt,
+                    pan_number_txt1,residence_details,txt_residence_pincode,txt_residence_pincode1,txt_residence_type,
+            txt_residence_type1,current_recidence_txt,current_recidence_txt1,assets_owned_txt,assets_owned_txt1,
+            vocation_indiviual_txt,vocation_indiviual_txt1,busines_inco_proof_individua_txt,busines_inco_proof_individua_txt1,
+    vehicle_individual_txt,vehicle_individual_txt1,number_of_vehicle_ind_txt,number_of_vehicle_ind_txt1,no_of_year_ind_txt,
+    no_of_year_ind_txt1,monthly_incom_txt,monthly_incom_txt1;
+
+    AppCompatEditText age_edit_txt,residence_edite_txt,live_curentres_edite_txt,no_of_vehicle_edit_txt,
+            no_of_years_ind_edit_txt,busproof_ind_txt,busproof_ind_txt1,avg_monthly_incom_edit_txt;
+    AutoCompleteTextView residence_pincode_edite_txt;
+
+    private String tag_json_obj = "jobj_req", tag_json_arry = "jarray_req";
+
+    private AlertDialog progressDialog;
+    String  Employee_type_Id,Employee_type_Value,PAN_id,PAN_Value,
+            vocaton_id,vocaton_value, Business_income_proof_id,Business_income_proof_value,
+            vocation_type_forming_id, vocation_type_forming_value,business_incom_proof_forming_id,
+            business_incom_proof_forming_value, residence_id,residence_Value,
+            business_own_type_id,business_own_type_Value;
+
+    ArrayList<IncomeProofPOJO> Business_proof_individual,Assets_own_array_list;
+
+    MyCustomAdapter_Business_proof_Individual business_proof_individual_adapter = null;
+    MyCustomAdapter_Assets_own_adapter Assets_own_adapter = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,6 +118,8 @@ public class Viability_Check_BL extends SimpleActivity {
         initTools(R.string.viy_check);
 
         lead_viy_step2 = (AppCompatButton) findViewById(R.id.lead_viy_step2);
+        progressDialog = new SpotsDialog(context, R.style.Custom);
+        imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
 
         lead_viy_step2.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -52,16 +131,25 @@ public class Viability_Check_BL extends SimpleActivity {
         });
 
         UISCREEN();
+        makeJsonObjReq1();
 
+        Click();
     }
 
     private void UISCREEN()
     {
-        spinner1 =(Spinner) findViewById(R.id.emp_type);
+        emp_type =(Spinner) findViewById(R.id.emp_type);
+        has_pan_card =(Spinner) findViewById(R.id.has_pan_card);
         spi_vocation_type_ =(Spinner) findViewById(R.id.spi_vocation_type_);
         spinner_residence_type =(Spinner) findViewById(R.id.spinner_residence_type);
         spi_vocation_forming =(Spinner) findViewById(R.id.spi_vocation_forming);
-        spinner_busines_type =(Spinner) findViewById(R.id.spinner_busines_type);
+      //  spinner_busines_type =(Spinner) findViewById(R.id.spinner_busines_type);
+        spinner_busines_type_own_business =(Spinner) findViewById(R.id.spinner_busines_type_own_business);
+        business_incom_proof =(Spinner) findViewById(R.id.business_incom_proof);
+        business_incom_proof_forming =(Spinner) findViewById(R.id.business_incom_proof_forming);
+
+        spi_busproof_individual =(Spinner) findViewById(R.id.spi_busproof_individual);
+        spinner_assets_owned =(Spinner) findViewById(R.id.spinner_assets_owned);
 
         individual = (LinearLayout) findViewById(R.id.individual);
         formin_dairy = (LinearLayout) findViewById(R.id.formin_dairy);
@@ -71,219 +159,984 @@ public class Viability_Check_BL extends SimpleActivity {
         forming = (LinearLayout) findViewById(R.id.forming);
         dairy = (LinearLayout) findViewById(R.id.dairy);
         poultry = (LinearLayout) findViewById(R.id.poultry);
+        cv_vusiness_proof_individual =(ChipsView) findViewById(R.id.cv_vusiness_proof_individual);
+        cv_Assets_Owns =(ChipsView) findViewById(R.id.cv_Assets_Owns);
+
+        residence_pincode_edite_txt = (AutoCompleteTextView) findViewById(R.id.residence_pincode_edite_txt);
 
 
         Retail_wholesale_business = (LinearLayout) findViewById(R.id.Retail_wholesale_business);
         service_business = (LinearLayout) findViewById(R.id.service_business);
         manufacturing = (LinearLayout) findViewById(R.id.manufacturing);
 
-
-        MySpinnerAdapter employee_type = new MySpinnerAdapter(getApplicationContext(), R.layout.view_spinner_item,
-                Arrays.asList(getResources().getStringArray(R.array.employee_type)));
-        spinner1.setAdapter(employee_type);
-
-        MySpinnerAdapter spi_vocation_type = new MySpinnerAdapter(getApplicationContext(), R.layout.view_spinner_item,
-                Arrays.asList(getResources().getStringArray(R.array.vocation_type)));
-        spi_vocation_type_.setAdapter(spi_vocation_type);
-
-        MySpinnerAdapter residence = new MySpinnerAdapter(getApplicationContext(), R.layout.view_spinner_item,
-                Arrays.asList(getResources().getStringArray(R.array.ressidence_typ)));
-        spinner_residence_type.setAdapter(residence);
-
-        MySpinnerAdapter vocation_forming = new MySpinnerAdapter(getApplicationContext(), R.layout.view_spinner_item,
-                Arrays.asList(getResources().getStringArray(R.array.vocation_forming)));
-        spi_vocation_forming.setAdapter(vocation_forming);
-
-        MySpinnerAdapter business_type = new MySpinnerAdapter(getApplicationContext(), R.layout.view_spinner_item,
-                Arrays.asList(getResources().getStringArray(R.array.business_type)));
-        spinner_busines_type.setAdapter(business_type);
+    }
 
 
+    private void Click() {
 
-        spinner1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        residence_pincode_edite_txt.addTextChangedListener(new TextWatcher() {
             @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                Log.e("hi", "hi11");
+                String workpincode = residence_pincode_edite_txt.getText().toString();
 
-              String  emp = String.valueOf(spinner1.getSelectedItemPosition());
-                Log.e("the Employe select is",emp);
-                int b = Integer.parseInt(emp);
-                Log.e("propert value",String.valueOf(emp));
-                switch(b) {
-                    case 0:
-                        individual.setVisibility(View.VISIBLE);
-                        formin_dairy.setVisibility(View.GONE);
-                        self_business.setVisibility(View.GONE);
-                        break;
-                    case 1:
-                        individual.setVisibility(View.GONE);
-                        formin_dairy.setVisibility(View.VISIBLE);
-                        self_business.setVisibility(View.GONE);
-                        break;
-                    case 2:
-
-                        String Loantype = "2";
-                        Pref.putEMPLOYMENT(mCon,Loantype);
-                        individual.setVisibility(View.GONE);
-                        formin_dairy.setVisibility(View.GONE);
-                        self_business.setVisibility(View.VISIBLE);
-                        break;
-                }
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });
-
-        spi_vocation_type_.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-
-                String  emp = String.valueOf(spi_vocation_type_.getSelectedItemPosition());
-                Log.e("the Employe select is",emp);
-                int b = Integer.parseInt(emp);
-
-                if(emp.equals("6"))
-                {
-                    Driver_C_owner.setVisibility(View.VISIBLE);
-
-                }else
-                {
-                    Driver_C_owner.setVisibility(View.GONE);
+                if (workpincode.length() == 2) {
+                    GET_Pincode1(workpincode);
                 }
 
             }
 
             @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
 
             }
         });
+    }
 
-        spinner_residence_type.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
 
-                String  emp = String.valueOf(spinner_residence_type.getSelectedItemPosition());
-                Log.e("the Employe select is",emp);
-                int b = Integer.parseInt(emp);
+    private void GET_Pincode1(String code) {
+        // progressDialog.show();
+        JSONObject J =new JSONObject();
+        try {
+            J.put("pincode", code);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, Urls.GET_PINCODE_POST, J,
+                new Response.Listener<JSONObject>() {
 
-                if(emp.equals("1"))
-                {
-                    res_rented.setVisibility(View.VISIBLE);
+                    @Override
+                    public void onResponse(JSONObject object) {
+                        try {
+                            if (object.getString(Params.status).equals("success")) {
+                                JSONArray response = object.getJSONArray("response");
+                                // Log.e("Pincode", String.valueOf(response));
 
-                }else
-                {
-                    res_rented.setVisibility(View.GONE);
-                }
-
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });
-
-        spi_vocation_forming.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-
-                String  emp = String.valueOf(spi_vocation_forming.getSelectedItemPosition());
-                Log.e("the Employe select is",emp);
-                int b = Integer.parseInt(emp);
-
-                if(emp.equals("0"))
-                {
-                    forming.setVisibility(View.VISIBLE);
-                    dairy.setVisibility(View.GONE);
-                    poultry.setVisibility(View.GONE);
-
-                }else if(emp.equals("1"))
-                {
-                    forming.setVisibility(View.GONE);
-                    dairy.setVisibility(View.VISIBLE);
-                    poultry.setVisibility(View.GONE);
-                }else
-                {
-                    forming.setVisibility(View.GONE);
-                    dairy.setVisibility(View.GONE);
-                    poultry.setVisibility(View.VISIBLE);
-                }
-
-            }
+                                setMain_Area1(response);
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        // Toast.makeText(mCon, response.toString(),Toast.LENGTH_SHORT).show();
+                        progressDialog.dismiss();
+                    }
+                }, new Response.ErrorListener() {
 
             @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
+            public void onErrorResponse(VolleyError error) {
+                VolleyLog.d("TAG", "Error: " + error.getMessage());
+                progressDialog.dismiss();
             }
-        });
-
-        spinner_busines_type.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        }) {
             @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-
-                String  emp = String.valueOf(spinner_busines_type.getSelectedItemPosition());
-                Log.e("the Employe select is",emp);
-                int b = Integer.parseInt(emp);
-
-                if(emp.equals("0"))
-                {
-                    Retail_wholesale_business.setVisibility(View.VISIBLE);
-                    service_business.setVisibility(View.GONE);
-                    manufacturing.setVisibility(View.GONE);
-
-                }else if(emp.equals("1"))
-                {
-                    Retail_wholesale_business.setVisibility(View.GONE);
-                    service_business.setVisibility(View.VISIBLE);
-                    manufacturing.setVisibility(View.GONE);
-                }else
-                {
-                    Retail_wholesale_business.setVisibility(View.GONE);
-                    service_business.setVisibility(View.GONE);
-                    manufacturing.setVisibility(View.VISIBLE);
-                }
-
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("Content-Type", "application/json");
+                return headers;
             }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });
+        };
+        AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
 
     }
 
-    private static class MySpinnerAdapter extends ArrayAdapter<String> {
-        // Initialise custom font, for example:
-        Typeface font = Typeface.createFromAsset(getContext().getAssets(),
-                "Lato-Regular.ttf");
+    private void setMain_Area1(final JSONArray ja) throws JSONException {
 
-        // (In reality I used a manager which caches the Typeface objects)
-        // Typeface font = FontManager.getInstance().getFont(getContext(), BLAMBOT);
 
-        private MySpinnerAdapter(Context context, int resource, List<String> items) {
-            super(context, resource, items);
+        Pincode_SA = new String[ja.length()];
+
+
+        /*for (int i =occupation.length() - 1;i >= 0; i--) {
+                   occupation.remove(i);
+               }*/
+        for (int i=0;i<ja.length();i++) {
+
+
+            JSONObject J = ja.getJSONObject(i);
+            Pincode_SA[i] = J.getString("pincode");
+            final List<String> Pincode_list = new ArrayList<>(Arrays.asList(Pincode_SA));
+            HashSet<String> hashSet = new HashSet<String>();
+
+            hashSet.addAll(Pincode_list);
+            Pincode_list.clear();
+            Pincode_list.addAll(hashSet);
+            //ArrayList<Integer> newList = removeDuplicates(Pincode_list);
+            Pincode_Adapter = new ArrayAdapter<String>(context.getApplicationContext(),
+                    R.layout.view_spinner_item, Pincode_list) {
+                public View getView(int position, View convertView, ViewGroup parent) {
+                    font = Typeface.createFromAsset(context.getAssets(), "Lato-Regular.ttf");
+                    TextView v = (TextView) super.getView(position, convertView, parent);
+                    v.setTypeface(font);
+                    return v;
+                }
+
+                public View getDropDownView(int position, View convertView, ViewGroup parent) {
+                    TextView v = (TextView) super.getView(position, convertView, parent);
+                    v.setTypeface(font);
+                    return v;
+                }
+            };
+
+            residence_pincode_edite_txt.setThreshold(2);
+            residence_pincode_edite_txt.setAdapter(Pincode_Adapter);
+
+
+
+
         }
 
-        // Affects default (closed) state of the spinner
+        residence_pincode_edite_txt.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+                String code = (String)adapterView.getItemAtPosition(i);
+            }
+        });
+
+
+
+
+    }
+
+    private void makeJsonObjReq1() {
+        progressDialog.show();
+        Log.e("Request Dreopdown", "called");
+        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.GET, Urls.GET_DROPDOWN_LIST, null,
+                new Response.Listener<JSONObject>() {
+
+                    @Override
+                    public void onResponse(JSONObject object) {
+                        Log.e("respose Dreopdown", object.toString());
+                        /// msgResponse.setText(response.toString());
+                        //  Objs.a.showToast(getContext(), String.valueOf(object));
+
+                        try {
+
+                            Type_of_employement =object.getJSONArray("Type_of_employement");
+                            have_pan_ar =object.getJSONArray("have_pan");
+                            vocaton_ar =object.getJSONArray("vocaton");
+                            Business_income_proof_ar =object.getJSONArray("Business_income_proof");
+                            Residence_ownership_ar =object.getJSONArray("Residence_ownership");
+
+                            vocation_type_forming_ar =object.getJSONArray("vocation_type");
+
+                            Business_type_own_business =object.getJSONArray("Business_type");
+                            Business_Proof =object.getJSONArray("Business_Proof");
+                            Assets_own =object.getJSONArray("Assets_own");
+
+                            Log.e("Type_of_employement",String.valueOf(Type_of_employement));
+
+                            Type_of_Employeement(Type_of_employement);
+                            HAVE_PAN_Card(have_pan_ar);
+                            Vocation(vocaton_ar);
+                            Business_income_proof(Business_income_proof_ar);
+                            vocation_type_forming(vocation_type_forming_ar);
+                            Residence_Array(Residence_ownership_ar);
+                            Business_type_own_business_Array(Business_type_own_business);
+                            Business_Proof_individual(Business_Proof);
+                            Assets_own_fun(Assets_own);
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        // Toast.makeText(mCon, response.toString(),Toast.LENGTH_SHORT).show();
+                        progressDialog.dismiss();
+                    }
+                }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                VolleyLog.d("TAG", "Error: " + error.getMessage());
+                progressDialog.dismiss();
+            }
+        }) {
+
+            /**
+             * Passing some request headers
+             * */
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("Content-Type", "application/json");
+                return headers;
+            }
+        };
+
+        // Adding request to request queue
+        AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
+
+    }
+
+    private void Type_of_Employeement(final JSONArray Type_of_employement_ar) throws JSONException {
+        //   SPINNERLIST = new String[ja.length()];
+        EMPLOYEE_TYPE_SA = new String[Type_of_employement_ar.length()];
+        for (int i=0;i<Type_of_employement_ar.length();i++){
+            JSONObject J =  Type_of_employement_ar.getJSONObject(i);
+            EMPLOYEE_TYPE_SA[i] = J.getString("value");
+            final List<String> loan_type_list = new ArrayList<>(Arrays.asList(EMPLOYEE_TYPE_SA));
+            Employee_Type_adapter = new ArrayAdapter<String>(context, R.layout.view_spinner_item, loan_type_list){
+                public View getView(int position, View convertView, ViewGroup parent) {
+                    font = Typeface.createFromAsset(context.getAssets(),"Lato-Regular.ttf");
+                    TextView v = (TextView) super.getView(position, convertView, parent);
+                    v.setTypeface(font);
+                    return v;
+                }
+
+                public View getDropDownView(int position, View convertView, ViewGroup parent) {
+                    TextView v = (TextView) super.getView(position, convertView, parent);
+                    v.setTypeface(font);
+                    return v;
+                }
+            };
+
+            Employee_Type_adapter.setDropDownViewResource(R.layout.view_spinner_item);
+            emp_type.setAdapter(Employee_Type_adapter);
+            emp_type.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                    try {
+                        //  City_loc_uniqueID = ja.getJSONObject(position).getString("city_id");
+
+
+                        Employee_type_Id = Type_of_employement_ar.getJSONObject(position).getString("id");
+                        Employee_type_Value = Type_of_employement_ar.getJSONObject(position).getString("value");
+                        //CAT_ID = ja.getJSONObject(position).getString("category_id");
+                        Log.d("Salary_id", Employee_type_Id);
+                        Log.d("Salary_Value", Employee_type_Value);
+
+                        int b = Integer.parseInt(Employee_type_Id);
+
+                        switch(b) {
+                            case 1:
+                                individual.setVisibility(View.VISIBLE);
+                                formin_dairy.setVisibility(View.GONE);
+                                self_business.setVisibility(View.GONE);
+                                break;
+                            case 2:
+                                individual.setVisibility(View.GONE);
+                                formin_dairy.setVisibility(View.VISIBLE);
+                                self_business.setVisibility(View.GONE);
+                                break;
+                            case 3:
+
+                                String Loantype = "2";
+                                Pref.putEMPLOYMENT(mCon,Loantype);
+                                individual.setVisibility(View.GONE);
+                                formin_dairy.setVisibility(View.GONE);
+                                self_business.setVisibility(View.VISIBLE);
+                                break;
+                        }
+
+
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+
+                }
+            });
+            emp_type.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View view, MotionEvent motionEvent) {
+                    // imm.hideSoftInputFromWindow(edt_buyer_address.getWindowToken(), 0);
+                    return false;
+                }
+            });
+        }
+
+    }
+
+    private void HAVE_PAN_Card(final JSONArray has_pancard_ar) throws JSONException {
+        //   SPINNERLIST = new String[ja.length()];
+        PAN_ID_SA = new String[has_pancard_ar.length()];
+        for (int i=0;i<has_pancard_ar.length();i++){
+            JSONObject J =  has_pancard_ar.getJSONObject(i);
+            PAN_ID_SA[i] = J.getString("value");
+            final List<String> loan_type_list = new ArrayList<>(Arrays.asList(PAN_ID_SA));
+            PAN_ID_Adapter = new ArrayAdapter<String>(context, R.layout.view_spinner_item, loan_type_list){
+                public View getView(int position, View convertView, ViewGroup parent) {
+                    font = Typeface.createFromAsset(context.getAssets(),"Lato-Regular.ttf");
+                    TextView v = (TextView) super.getView(position, convertView, parent);
+                    v.setTypeface(font);
+                    return v;
+                }
+
+                public View getDropDownView(int position, View convertView, ViewGroup parent) {
+                    TextView v = (TextView) super.getView(position, convertView, parent);
+                    v.setTypeface(font);
+                    return v;
+                }
+            };
+
+            PAN_ID_Adapter.setDropDownViewResource(R.layout.view_spinner_item);
+            has_pan_card.setAdapter(PAN_ID_Adapter);
+            has_pan_card.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                    try {
+
+                        //  City_loc_uniqueID = ja.getJSONObject(position).getString("city_id");
+                        PAN_id = has_pancard_ar.getJSONObject(position).getString("id");
+                        PAN_Value = has_pancard_ar.getJSONObject(position).getString("value");
+                        //CAT_ID = ja.getJSONObject(position).getString("category_id");
+                        Log.d("Salary_id", PAN_id);
+                        Log.d("Salary_Value", PAN_Value);
+
+
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+
+                }
+            });
+            has_pan_card.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View view, MotionEvent motionEvent) {
+                    // imm.hideSoftInputFromWindow(edt_buyer_address.getWindowToken(), 0);
+                    return false;
+                }
+            });
+        }
+
+    }
+
+    private void Vocation(final JSONArray vocaton_ar) throws JSONException {
+        //   SPINNERLIST = new String[ja.length()];
+
+       Vocation_SA = new String[vocaton_ar.length()];
+        for (int i=0;i<vocaton_ar.length();i++){
+            JSONObject J =  vocaton_ar.getJSONObject(i);
+            Vocation_SA[i] = J.getString("value");
+            final List<String> loan_type_list = new ArrayList<>(Arrays.asList(Vocation_SA));
+            Vocation_Adapter = new ArrayAdapter<String>(context, R.layout.view_spinner_item, loan_type_list){
+                public View getView(int position, View convertView, ViewGroup parent) {
+                    font = Typeface.createFromAsset(context.getAssets(),"Lato-Regular.ttf");
+                    TextView v = (TextView) super.getView(position, convertView, parent);
+                    v.setTypeface(font);
+                    return v;
+                }
+
+                public View getDropDownView(int position, View convertView, ViewGroup parent) {
+                    TextView v = (TextView) super.getView(position, convertView, parent);
+                    v.setTypeface(font);
+                    return v;
+                }
+            };
+
+            Vocation_Adapter.setDropDownViewResource(R.layout.view_spinner_item);
+            spi_vocation_type_.setAdapter(Vocation_Adapter);
+            spi_vocation_type_.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                    try {
+
+
+                        //  City_loc_uniqueID = ja.getJSONObject(position).getString("city_id");
+                        vocaton_id = vocaton_ar.getJSONObject(position).getString("id");
+                        vocaton_value = vocaton_ar.getJSONObject(position).getString("value");
+                        //CAT_ID = ja.getJSONObject(position).getString("category_id");
+                        Log.d("vocaton_id", vocaton_id);
+                        Log.d("vocaton_value", vocaton_value);
+
+                        if(vocaton_id.equals("7"))
+                        {
+                            Driver_C_owner.setVisibility(View.VISIBLE);
+
+                        }else
+                        {
+                            Driver_C_owner.setVisibility(View.GONE);
+                        }
+
+
+
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+
+                }
+            });
+            spi_vocation_type_.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View view, MotionEvent motionEvent) {
+                    // imm.hideSoftInputFromWindow(edt_buyer_address.getWindowToken(), 0);
+                    return false;
+                }
+            });
+        }
+
+    }
+
+    private void Business_income_proof(final JSONArray Business_income_proof_ar) throws JSONException {
+        //   SPINNERLIST = new String[ja.length()];
+
+        Business_income_proof_SA = new String[Business_income_proof_ar.length()];
+        for (int i=0;i<Business_income_proof_ar.length();i++){
+            JSONObject J =  Business_income_proof_ar.getJSONObject(i);
+            Business_income_proof_SA[i] = J.getString("value");
+            final List<String> loan_type_list = new ArrayList<>(Arrays.asList(Business_income_proof_SA));
+            Business_income_proof_Adapter = new ArrayAdapter<String>(context, R.layout.view_spinner_item, loan_type_list){
+                public View getView(int position, View convertView, ViewGroup parent) {
+                    font = Typeface.createFromAsset(context.getAssets(),"Lato-Regular.ttf");
+                    TextView v = (TextView) super.getView(position, convertView, parent);
+                    v.setTypeface(font);
+                    return v;
+                }
+
+                public View getDropDownView(int position, View convertView, ViewGroup parent) {
+                    TextView v = (TextView) super.getView(position, convertView, parent);
+                    v.setTypeface(font);
+                    return v;
+                }
+            };
+
+            Business_income_proof_Adapter.setDropDownViewResource(R.layout.view_spinner_item);
+
+            business_incom_proof.setAdapter(Business_income_proof_Adapter);
+            business_incom_proof.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                    try {
+
+
+                        //  City_loc_uniqueID = ja.getJSONObject(position).getString("city_id");
+                        Business_income_proof_id = Business_income_proof_ar.getJSONObject(position).getString("id");
+                        Business_income_proof_value = Business_income_proof_ar.getJSONObject(position).getString("value");
+                        //CAT_ID = ja.getJSONObject(position).getString("category_id");
+                        Log.d("vocaton_id", Business_income_proof_id);
+                        Log.d("vocaton_value", Business_income_proof_value);
+
+
+
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+
+                }
+            });
+            business_incom_proof.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View view, MotionEvent motionEvent) {
+                    // imm.hideSoftInputFromWindow(edt_buyer_address.getWindowToken(), 0);
+                    return false;
+                }
+            });
+
+            //business_income_proof_forming
+            business_incom_proof_forming.setAdapter(Business_income_proof_Adapter);
+            business_incom_proof_forming.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                    try {
+
+
+                        //  City_loc_uniqueID = ja.getJSONObject(position).getString("city_id");
+                        business_incom_proof_forming_id = Business_income_proof_ar.getJSONObject(position).getString("id");
+                        business_incom_proof_forming_value = Business_income_proof_ar.getJSONObject(position).getString("value");
+                        //CAT_ID = ja.getJSONObject(position).getString("category_id");
+                        Log.d("vocaton_id", business_incom_proof_forming_id);
+                        Log.d("vocaton_value", business_incom_proof_forming_value);
+
+
+
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+
+                }
+            });
+            business_incom_proof_forming.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View view, MotionEvent motionEvent) {
+                    // imm.hideSoftInputFromWindow(edt_buyer_address.getWindowToken(), 0);
+                    return false;
+                }
+            });
+
+        }
+
+
+
+    }
+
+    private void vocation_type_forming(final JSONArray vocation_type_forming_ar) throws JSONException {
+        //   SPINNERLIST = new String[ja.length()];
+
+        vocation_type_forming__SA = new String[vocation_type_forming_ar.length()];
+        for (int i=0;i<vocation_type_forming_ar.length();i++){
+            JSONObject J =  vocation_type_forming_ar.getJSONObject(i);
+            vocation_type_forming__SA[i] = J.getString("value");
+            final List<String> loan_type_list = new ArrayList<>(Arrays.asList(vocation_type_forming__SA));
+            vocation_type_forming_Adapter = new ArrayAdapter<String>(context, R.layout.view_spinner_item, loan_type_list){
+                public View getView(int position, View convertView, ViewGroup parent) {
+                    font = Typeface.createFromAsset(context.getAssets(),"Lato-Regular.ttf");
+                    TextView v = (TextView) super.getView(position, convertView, parent);
+                    v.setTypeface(font);
+                    return v;
+                }
+
+                public View getDropDownView(int position, View convertView, ViewGroup parent) {
+                    TextView v = (TextView) super.getView(position, convertView, parent);
+                    v.setTypeface(font);
+                    return v;
+                }
+            };
+
+            vocation_type_forming_Adapter.setDropDownViewResource(R.layout.view_spinner_item);
+            spi_vocation_forming.setAdapter(vocation_type_forming_Adapter);
+            spi_vocation_forming.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                    try {
+
+
+                        //  City_loc_uniqueID = ja.getJSONObject(position).getString("city_id");
+                        vocation_type_forming_id = vocation_type_forming_ar.getJSONObject(position).getString("id");
+                        vocation_type_forming_value = vocation_type_forming_ar.getJSONObject(position).getString("value");
+                        //CAT_ID = ja.getJSONObject(position).getString("category_id");
+                        Log.d("vocaton_id", vocation_type_forming_id);
+                        Log.d("vocaton_value", vocation_type_forming_value);
+
+                        if(vocation_type_forming_id.equals("1"))
+                        {
+                            forming.setVisibility(View.VISIBLE);
+                            dairy.setVisibility(View.GONE);
+                            poultry.setVisibility(View.GONE);
+
+                        }else if(vocation_type_forming_id.equals("2"))
+                        {
+                            forming.setVisibility(View.GONE);
+                            dairy.setVisibility(View.VISIBLE);
+                            poultry.setVisibility(View.GONE);
+                        }else if(vocation_type_forming_id.equals("3"))
+                        {
+                            forming.setVisibility(View.GONE);
+                            dairy.setVisibility(View.GONE);
+                            poultry.setVisibility(View.VISIBLE);
+                        }
+
+
+
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+
+                }
+            });
+            spi_vocation_forming.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View view, MotionEvent motionEvent) {
+                    // imm.hideSoftInputFromWindow(edt_buyer_address.getWindowToken(), 0);
+                    return false;
+                }
+            });
+        }
+
+    }
+
+    private void Residence_Array(final JSONArray Residence_ownership_ar) throws JSONException {
+        //   SPINNERLIST = new String[ja.length()];
+        Residence_Type_SA = new String[Residence_ownership_ar.length()];
+        for (int i=0;i<Residence_ownership_ar.length();i++){
+            JSONObject J =  Residence_ownership_ar.getJSONObject(i);
+            Residence_Type_SA[i] = J.getString("value");
+            final List<String> loan_type_list = new ArrayList<>(Arrays.asList(Residence_Type_SA));
+            Residence_Adapter = new ArrayAdapter<String>(context, R.layout.view_spinner_item, loan_type_list){
+                public View getView(int position, View convertView, ViewGroup parent) {
+                    font = Typeface.createFromAsset(context.getAssets(),"Lato-Regular.ttf");
+                    TextView v = (TextView) super.getView(position, convertView, parent);
+                    v.setTypeface(font);
+                    return v;
+                }
+
+                public View getDropDownView(int position, View convertView, ViewGroup parent) {
+                    TextView v = (TextView) super.getView(position, convertView, parent);
+                    v.setTypeface(font);
+                    return v;
+                }
+            };
+
+            Residence_Adapter.setDropDownViewResource(R.layout.view_spinner_item);
+            spinner_residence_type.setAdapter(Residence_Adapter);
+            spinner_residence_type.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                    try {
+                        //  City_loc_uniqueID = ja.getJSONObject(position).getString("city_id");
+
+                        residence_id = Residence_ownership_ar.getJSONObject(position).getString("id");
+                        residence_Value = Residence_ownership_ar.getJSONObject(position).getString("value");
+                        //CAT_ID = ja.getJSONObject(position).getString("category_id");
+                        Log.d("Salary_id", residence_id);
+                        Log.d("Salary_Value", residence_Value);
+
+                        if(residence_id.equals("2"))
+                        {
+                            res_rented.setVisibility(View.VISIBLE);
+
+                        }else
+                        {
+                            res_rented.setVisibility(View.GONE);
+                        }
+
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+
+                }
+            });
+            spinner_residence_type.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View view, MotionEvent motionEvent) {
+                    // imm.hideSoftInputFromWindow(edt_buyer_address.getWindowToken(), 0);
+                    return false;
+                }
+            });
+        }
+
+    }
+
+    private void Business_type_own_business_Array(final JSONArray Business_type_own_business_ar) throws JSONException {
+        //   SPINNERLIST = new String[ja.length()];
+
+        Own_business_type_SA = new String[Business_type_own_business_ar.length()];
+        for (int i=0;i<Business_type_own_business_ar.length();i++){
+            JSONObject J =  Business_type_own_business_ar.getJSONObject(i);
+            Own_business_type_SA[i] = J.getString("value");
+            final List<String> loan_type_list = new ArrayList<>(Arrays.asList(Own_business_type_SA));
+            Own_business_type_Adapter = new ArrayAdapter<String>(context, R.layout.view_spinner_item, loan_type_list){
+                public View getView(int position, View convertView, ViewGroup parent) {
+                    font = Typeface.createFromAsset(context.getAssets(),"Lato-Regular.ttf");
+                    TextView v = (TextView) super.getView(position, convertView, parent);
+                    v.setTypeface(font);
+                    return v;
+                }
+
+                public View getDropDownView(int position, View convertView, ViewGroup parent) {
+                    TextView v = (TextView) super.getView(position, convertView, parent);
+                    v.setTypeface(font);
+                    return v;
+                }
+            };
+
+            Own_business_type_Adapter.setDropDownViewResource(R.layout.view_spinner_item);
+            spinner_busines_type_own_business.setAdapter(Own_business_type_Adapter);
+            spinner_busines_type_own_business.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                    try {
+                        //  City_loc_uniqueID = ja.getJSONObject(position).getString("city_id");
+
+                        business_own_type_id = Business_type_own_business_ar.getJSONObject(position).getString("id");
+                        business_own_type_Value = Business_type_own_business_ar.getJSONObject(position).getString("value");
+                        //CAT_ID = ja.getJSONObject(position).getString("category_id");
+                        Log.d("Salary_id", business_own_type_id);
+                        Log.d("Salary_Value", business_own_type_Value);
+
+
+                        if(business_own_type_id.equals("1"))
+                        {
+                            Retail_wholesale_business.setVisibility(View.VISIBLE);
+                            service_business.setVisibility(View.GONE);
+                            manufacturing.setVisibility(View.GONE);
+
+                        }else if(business_own_type_id.equals("2"))
+                        {
+                            Retail_wholesale_business.setVisibility(View.GONE);
+                            service_business.setVisibility(View.VISIBLE);
+                            manufacturing.setVisibility(View.GONE);
+                        }else if(business_own_type_id.equals("3"))
+                        {
+                            Retail_wholesale_business.setVisibility(View.GONE);
+                            service_business.setVisibility(View.GONE);
+                            manufacturing.setVisibility(View.VISIBLE);
+                        }
+
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+
+                }
+            });
+            spinner_busines_type_own_business.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View view, MotionEvent motionEvent) {
+                    // imm.hideSoftInputFromWindow(edt_buyer_address.getWindowToken(), 0);
+                    return false;
+                }
+            });
+        }
+
+    }
+
+    private void Business_Proof_individual(final JSONArray ja) throws JSONException {
+
+        Business_proof_individual = new ArrayList<IncomeProofPOJO>();
+
+        for (int i=0;i<ja.length();i++){
+            JSONObject J =  ja.getJSONObject(i);
+
+            String id = J.getString("id");
+            String locality = J.getString("value");
+
+            IncomeProofPOJO salary_proof = new IncomeProofPOJO(id,locality,false);
+            Business_proof_individual.add(salary_proof);
+        }
+        business_proof_individual_adapter = new MyCustomAdapter_Business_proof_Individual(context, 0,Business_proof_individual);
+        spi_busproof_individual.setAdapter(business_proof_individual_adapter);
+        business_proof_individual_adapter.notifyDataSetChanged();
+
+
+
+
+    }
+
+    private void Assets_own_fun(final JSONArray ja) throws JSONException {
+
+        Assets_own_array_list = new ArrayList<IncomeProofPOJO>();
+
+        for (int i=0;i<ja.length();i++){
+            JSONObject J =  ja.getJSONObject(i);
+
+            String id = J.getString("id");
+            String locality = J.getString("value");
+
+            IncomeProofPOJO salary_proof = new IncomeProofPOJO(id,locality,false);
+            Assets_own_array_list.add(salary_proof);
+        }
+        Assets_own_adapter = new MyCustomAdapter_Assets_own_adapter(context, 0,Assets_own_array_list);
+        spinner_assets_owned.setAdapter(Assets_own_adapter);
+        Assets_own_adapter.notifyDataSetChanged();
+
+
+
+
+    }
+
+    private class MyCustomAdapter_Business_proof_Individual extends ArrayAdapter<IncomeProofPOJO> {
+
+        private ArrayList<IncomeProofPOJO> Business_proof;
+        IncomeProofPOJO business_proof;
+        public MyCustomAdapter_Business_proof_Individual(Context context, int textViewResourceId,
+                                            ArrayList<IncomeProofPOJO> Business_proof) {
+            super(context, textViewResourceId, Business_proof);
+            this.Business_proof = new ArrayList<IncomeProofPOJO>();
+            this.Business_proof.addAll(Business_proof);
+        }
+
+        private class ViewHolder {
+            TextView code;
+            CheckBox name;
+        }
+
+        @Override
+        public View getDropDownView(int position, View convertView,
+                                    ViewGroup parent) {
+            return getCustomView(position, convertView, parent);
+        }
+
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
-            TextView view = (TextView) super.getView(position, convertView, parent);
-            view.setTypeface(font);
-            return view;
+            return getCustomView(position, convertView, parent);
         }
 
-        // Affects opened state of the spinner
-        @Override
-        public View getDropDownView(int position, View convertView, ViewGroup parent) {
-            TextView view = (TextView) super.getDropDownView(position, convertView, parent);
-            view.setTypeface(font);
-            return view;
+        public View getCustomView(int position, View convertView, ViewGroup parent) {
+
+            MyCustomAdapter_Business_proof_Individual.ViewHolder holder = null;
+
+            if (convertView == null) {
+                LayoutInflater vi = (LayoutInflater)getContext().getSystemService(
+                        Context.LAYOUT_INFLATER_SERVICE);
+                convertView = vi.inflate(R.layout.income_proof_info, null);
+                holder = new MyCustomAdapter_Business_proof_Individual.ViewHolder();
+                holder.code = (TextView) convertView.findViewById(R.id.code);
+                holder.name = (CheckBox) convertView.findViewById(R.id.checkBox1);
+
+
+                holder.name.setTypeface(font);
+                holder.name.setTextSize(13);
+                holder.code.setTypeface(font);
+                holder.code.setTextSize(13);
+                convertView.setTag(holder);
+
+                holder.name.setOnClickListener( new View.OnClickListener() {
+                    public void onClick(View v) {
+                        CheckBox cb = (CheckBox) v ;
+                        IncomeProofPOJO business_proof = (IncomeProofPOJO) cb.getTag();
+                        business_proof.setIP_selected(cb.isChecked());
+
+                        String email = business_proof.getIP_name();
+                        Uri imgUrl = Uri.parse("https://image.shutterstock.com/image-vector/green-proof-icon-check-concept-260nw-596401601.jpg");
+                        Contact contact = new Contact(null, null, null, email, imgUrl);
+                        if (cb.isChecked()) {
+                            cv_vusiness_proof_individual.addChip(email, imgUrl, contact);
+                        } else {
+                            cv_vusiness_proof_individual.removeChipBy(contact);
+                        }
+                    }
+
+                });
+            }
+            else {
+                holder = (MyCustomAdapter_Business_proof_Individual.ViewHolder) convertView.getTag();
+            }
+
+            business_proof = Business_proof.get(position);
+            holder.name.setText(business_proof.getIP_name());
+            holder.name.setChecked(business_proof.isIP_selected());
+            holder.name.setTag(business_proof);
+
+            if(business_proof.getIP_name().contains("Business Proof")){
+                holder.name.setVisibility(View.GONE);
+                holder.code.setVisibility(View.VISIBLE);
+                holder.code.setText("Select Business Proof");
+
+            }else {
+                holder.code.setVisibility(View.GONE);
+                holder.name.setVisibility(View.VISIBLE);
+            }
+            return convertView;
         }
+
     }
+
+    private class MyCustomAdapter_Assets_own_adapter extends ArrayAdapter<IncomeProofPOJO> {
+
+        private ArrayList<IncomeProofPOJO> Assets_own_;
+        IncomeProofPOJO assets_own;
+        public MyCustomAdapter_Assets_own_adapter(Context context, int textViewResourceId,
+                                                         ArrayList<IncomeProofPOJO> Assets_own_) {
+            super(context, textViewResourceId, Assets_own_);
+            this.Assets_own_ = new ArrayList<IncomeProofPOJO>();
+            this.Assets_own_.addAll(Assets_own_);
+        }
+
+        private class ViewHolder {
+            TextView code;
+            CheckBox name;
+        }
+
+        @Override
+        public View getDropDownView(int position, View convertView,
+                                    ViewGroup parent) {
+            return getCustomView(position, convertView, parent);
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            return getCustomView(position, convertView, parent);
+        }
+
+        public View getCustomView(int position, View convertView, ViewGroup parent) {
+
+            MyCustomAdapter_Assets_own_adapter.ViewHolder holder = null;
+
+            if (convertView == null) {
+                LayoutInflater vi = (LayoutInflater)getContext().getSystemService(
+                        Context.LAYOUT_INFLATER_SERVICE);
+                convertView = vi.inflate(R.layout.income_proof_info, null);
+                holder = new MyCustomAdapter_Assets_own_adapter.ViewHolder();
+                holder.code = (TextView) convertView.findViewById(R.id.code);
+                holder.name = (CheckBox) convertView.findViewById(R.id.checkBox1);
+
+
+                holder.name.setTypeface(font);
+                holder.name.setTextSize(13);
+                holder.code.setTypeface(font);
+                holder.code.setTextSize(13);
+                convertView.setTag(holder);
+
+                holder.name.setOnClickListener( new View.OnClickListener() {
+                    public void onClick(View v) {
+                        CheckBox cb = (CheckBox) v ;
+                        IncomeProofPOJO assets_own = (IncomeProofPOJO) cb.getTag();
+                        assets_own.setIP_selected(cb.isChecked());
+
+                        String email = assets_own.getIP_name();
+                        Uri imgUrl = Uri.parse("https://image.shutterstock.com/image-vector/green-proof-icon-check-concept-260nw-596401601.jpg");
+                        Contact contact = new Contact(null, null, null, email, imgUrl);
+                        if (cb.isChecked()) {
+                            cv_Assets_Owns.addChip(email, imgUrl, contact);
+                        } else {
+                            cv_Assets_Owns.removeChipBy(contact);
+                        }
+                    }
+
+                });
+            }
+            else {
+                holder = (MyCustomAdapter_Assets_own_adapter.ViewHolder) convertView.getTag();
+            }
+
+            assets_own = Assets_own_.get(position);
+            holder.name.setText(assets_own.getIP_name());
+            holder.name.setChecked(assets_own.isIP_selected());
+            holder.name.setTag(assets_own);
+
+            if(assets_own.getIP_name().contains("Assets Own")){
+                holder.name.setVisibility(View.GONE);
+                holder.code.setVisibility(View.VISIBLE);
+                holder.code.setText("Select Assets Own");
+
+            }else {
+                holder.code.setVisibility(View.GONE);
+                holder.name.setVisibility(View.VISIBLE);
+            }
+            return convertView;
+        }
+
+    }
+
 
     @Override
     public void onBackPressed() {

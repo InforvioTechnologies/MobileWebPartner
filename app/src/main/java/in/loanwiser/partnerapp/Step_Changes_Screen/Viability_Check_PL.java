@@ -587,6 +587,7 @@ public class Viability_Check_PL extends SimpleActivity {
                             other_earning_ar =object.getJSONArray("other_earning");
                             have_pan_ar =object.getJSONArray("have_pan");
 
+
                              Log.e("Residence_ownership",String.valueOf(Residence_ownership_ar));
                              Log.e("Salary_method_ar",String.valueOf(Salary_method_ar));
                              Log.e("Salary_proof_ar",String.valueOf(Salary_proof_ar));
