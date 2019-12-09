@@ -253,7 +253,8 @@ public class Viability_Check_PL extends SimpleActivity {
     private void fonts()
     {
 
-          font = Typeface.createFromAsset(context.getAssets(), "Lato-Regular.ttf");
+
+        font = Typeface.createFromAsset(context.getAssets(), "Lato-Regular.ttf");
         age.setTypeface(font);
         age1.setTypeface(font);
         pan_number_txt.setTypeface(font);
@@ -1144,8 +1145,8 @@ public class Viability_Check_PL extends SimpleActivity {
                 }
             };
 
-            company_pincode_txt.setThreshold(2);
-            company_pincode_txt.setAdapter(Pincode_Adapter);
+           // company_pincode_txt.setThreshold(2);
+          //  company_pincode_txt.setAdapter(Pincode_Adapter);
 
             String workpincode = residence_pincode1_edit_txt.getText().toString();
             String workpincode1 = residence_pincode1_edit_txt.getText().toString();

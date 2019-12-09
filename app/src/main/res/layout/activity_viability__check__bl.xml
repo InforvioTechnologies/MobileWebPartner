@@ -268,19 +268,124 @@
                                 android:text="Residence Details"
                                 android:layout_height="wrap_content" />
                         </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/ofiice_res_details"
+                            android:orientation="vertical"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+                            <LinearLayout
+                                android:orientation="vertical"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent">
+                                <LinearLayout
+                                    android:id="@+id/resi_pincode"
+                                    android:orientation="horizontal"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content">
+                                    <androidx.appcompat.widget.AppCompatTextView
+                                        android:gravity="left"
+                                        android:layout_marginLeft="2dp"
+                                        android:id="@+id/txt_residence_pincode"
+                                        android:layout_width="wrap_content"
+                                        style="@style/LorgeText2"
+                                        android:textColor="@color/colorPrimaryDark"
+                                        android:textColorHint="@color/colorPrimaryDark"
+                                        android:hint="1"
+                                        android:layout_height="wrap_content" />
+                                    <androidx.appcompat.widget.AppCompatTextView
+                                        android:gravity="left"
+                                        android:layout_marginLeft="2dp"
+                                        android:layout_width="match_parent"
+                                        style="@style/LorgeText2"
+                                        android:id="@+id/txt_residence_pincode1"
+                                        android:textColor="@color/colorPrimaryDark"
+                                        android:textColorHint="@color/colorPrimaryDark"
+                                        android:text="@string/off_shop"
+                                        android:layout_height="wrap_content" />
+                                </LinearLayout>
+                                <LinearLayout
+                                    android:layout_marginLeft="30dp"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent">
+
+                                    <androidx.appcompat.widget.AppCompatAutoCompleteTextView
+                                        android:id="@+id/office_residence_pincode_edite_txt"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:inputType="number"
+                                        android:textColor="@color/colorPrimaryDark"
+                                        android:textSize="16sp" />
+                                </LinearLayout>
+                            </LinearLayout>
+                            <LinearLayout
+                                android:padding="5dp"
+                                android:orientation="vertical"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+                                <LinearLayout
+                                    android:id="@+id/office_residence_type"
+                                    android:orientation="horizontal"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content">
+                                    <androidx.appcompat.widget.AppCompatTextView
+                                        android:gravity="left"
+                                        android:layout_marginLeft="2dp"
+                                        android:id="@+id/office_txt_residence_type"
+                                        android:layout_width="wrap_content"
+                                        style="@style/LorgeText2"
+                                        android:textColor="@color/colorPrimaryDark"
+                                        android:textColorHint="@color/colorPrimaryDark"
+                                        android:hint="2"
+                                        android:layout_height="wrap_content" />
+                                    <androidx.appcompat.widget.AppCompatTextView
+                                        android:gravity="left"
+                                        android:layout_marginLeft="2dp"
+                                        android:id="@+id/office_txt_residence_type1"
+                                        android:layout_width="match_parent"
+                                        style="@style/LorgeText2"
+                                        android:textColor="@color/colorPrimaryDark"
+                                        android:textColorHint="@color/colorPrimaryDark"
+                                        android:text="@string/off_residence"
+                                        android:layout_height="wrap_content" />
+                                </LinearLayout>
+                                <LinearLayout
+                                    android:gravity="center"
+                                    android:orientation="horizontal"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="60dp">
+
+                                    <LinearLayout
+                                        android:layout_marginLeft="30dp"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent">
+                                        <Spinner
+                                            style="@style/Base.Widget.AppCompat.Spinner.Underlined"
+                                            android:backgroundTint="#ff000000"
+                                            android:backgroundTintMode="src_in"
+                                            android:spinnerMode="dropdown"
+                                            android:id="@+id/office_spinner_residence_type"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent" />
+                                    </LinearLayout>
+
+                                </LinearLayout>
+                            </LinearLayout>
+                        </LinearLayout>
+
                         <LinearLayout
                             android:orientation="vertical"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent">
                             <LinearLayout
-                                android:id="@+id/resi_pincode"
+                                android:id="@+id/office_resi_pincode"
                                 android:orientation="horizontal"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content">
                                 <androidx.appcompat.widget.AppCompatTextView
                                     android:gravity="left"
                                     android:layout_marginLeft="2dp"
-                                    android:id="@+id/txt_residence_pincode"
+                                    android:id="@+id/office_txt_residence_pincode"
                                     android:layout_width="wrap_content"
                                     style="@style/LorgeText2"
                                     android:textColor="@color/colorPrimaryDark"
@@ -292,7 +397,7 @@
                                     android:layout_marginLeft="2dp"
                                     android:layout_width="match_parent"
                                     style="@style/LorgeText2"
-                                    android:id="@+id/txt_residence_pincode1"
+                                    android:id="@+id/office_txt_residence_pincode1"
                                     android:textColor="@color/colorPrimaryDark"
                                     android:textColorHint="@color/colorPrimaryDark"
                                     android:text="@string/residence_pin"
@@ -365,6 +470,8 @@
 
                             </LinearLayout>
                         </LinearLayout>
+
+
 
                         <LinearLayout
                             android:id="@+id/res_rented"

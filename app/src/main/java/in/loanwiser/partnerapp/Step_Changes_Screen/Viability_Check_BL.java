@@ -59,41 +59,46 @@ import in.loanwiser.partnerapp.SimpleActivity;
 
 public class Viability_Check_BL extends SimpleActivity {
 
-    private Spinner emp_type,spi_vocation_type_,spinner_residence_type,
+    private Spinner emp_type,spi_vocation_type_,spinner_residence_type,office_spinner_residence_type,
                     spi_vocation_forming,spinner_busines_type,
                     has_pan_card,business_incom_proof,business_incom_proof_forming,
             spinner_busines_type_own_business,spi_busproof_individual,
-            spinner_assets_owned;
+            spinner_assets_owned,spinner_business_proof_txt_F,spi_busproof_own_business,
+            spinner_office_shop_setup,business_proof_own_business_spinner;
+
+
 
     private LinearLayout individual,self_business,formin_dairy,Driver_C_owner,
              res_rented,forming,dairy,poultry,
-            Retail_wholesale_business,service_business,manufacturing;
+            Retail_wholesale_business,service_business,manufacturing,ofiice_res_details;
     private AppCompatButton lead_viy_step2;
 
     Typeface font;
     private Context context = this;
     InputMethodManager imm;
     JSONArray Type_of_employement,have_pan_ar,vocaton_ar,Business_income_proof_ar,
-            vocation_type_forming_ar,Residence_ownership_ar,Business_type_own_business,Business_Proof,Assets_own;
+            vocation_type_forming_ar,Residence_ownership_ar,Business_type_own_business,Business_Proof,Assets_own,
+            office_shop;
     String[] EMPLOYEE_TYPE_SA,PAN_ID_SA,Vocation_SA,Business_income_proof_SA,vocation_type_forming__SA,
             Residence_Type_SA,Own_business_type_SA,
-            Pincode_SA;
+            Pincode_SA,Office_Shop_SA;
     ArrayAdapter<String> Employee_Type_adapter,PAN_ID_Adapter,Vocation_Adapter,Business_income_proof_Adapter,
             vocation_type_forming_Adapter,Residence_Adapter,Own_business_type_Adapter,
-            Pincode_Adapter;
+            Pincode_Adapter,Office_Shop__Adapter;
 
-    ChipsView cv_vusiness_proof_individual,cv_Assets_Owns;
+    ChipsView cv_vusiness_proof_individual,cv_Assets_Owns,cv_business_proof_multiselect_forming,cv_business_proof_own;
 
     AppCompatTextView business_details_txt,emp_type1,emp_type2,age_txt,age_txt1,pan_number_txt,
                     pan_number_txt1,residence_details,txt_residence_pincode,txt_residence_pincode1,txt_residence_type,
             txt_residence_type1,current_recidence_txt,current_recidence_txt1,assets_owned_txt,assets_owned_txt1,
             vocation_indiviual_txt,vocation_indiviual_txt1,busines_inco_proof_individua_txt,busines_inco_proof_individua_txt1,
     vehicle_individual_txt,vehicle_individual_txt1,number_of_vehicle_ind_txt,number_of_vehicle_ind_txt1,no_of_year_ind_txt,
-    no_of_year_ind_txt1,monthly_incom_txt,monthly_incom_txt1;
+    no_of_year_ind_txt1,monthly_incom_txt,monthly_incom_txt1,busproof_ind_txt,busproof_ind_txt1;
 
     AppCompatEditText age_edit_txt,residence_edite_txt,live_curentres_edite_txt,no_of_vehicle_edit_txt,
-            no_of_years_ind_edit_txt,busproof_ind_txt,busproof_ind_txt1,avg_monthly_incom_edit_txt;
-    AutoCompleteTextView residence_pincode_edite_txt;
+            no_of_years_ind_edit_txt,avg_monthly_incom_edit_txt;
+
+    AutoCompleteTextView residence_pincode_edite_txt,office_residence_pincode_edite_txt;
 
     private String tag_json_obj = "jobj_req", tag_json_arry = "jarray_req";
 
@@ -102,11 +107,15 @@ public class Viability_Check_BL extends SimpleActivity {
             vocaton_id,vocaton_value, Business_income_proof_id,Business_income_proof_value,
             vocation_type_forming_id, vocation_type_forming_value,business_incom_proof_forming_id,
             business_incom_proof_forming_value, residence_id,residence_Value,
-            business_own_type_id,business_own_type_Value;
+            business_own_type_id,business_own_type_Value,
+            Office_Shop__id,Office_Shop__value,off_residence_id,off_residence_Value;
 
-    ArrayList<IncomeProofPOJO> Business_proof_individual,Assets_own_array_list;
+    ArrayList<IncomeProofPOJO> Business_proof_individual,Assets_own_array_list,Business_proof_individual_forming_array_list,
+                                Business_proof_own_array_list;
 
     MyCustomAdapter_Business_proof_Individual business_proof_individual_adapter = null;
+    MyCustomAdapter_Business_proof_Forming business_proof_Forming_adapter = null;
+    MyCustomAdapter_Business_proof_Own business_proof_Own_Business = null;
     MyCustomAdapter_Assets_own_adapter Assets_own_adapter = null;
 
     @Override
@@ -132,7 +141,7 @@ public class Viability_Check_BL extends SimpleActivity {
 
         UISCREEN();
         makeJsonObjReq1();
-
+        Font();
         Click();
     }
 
@@ -142,14 +151,20 @@ public class Viability_Check_BL extends SimpleActivity {
         has_pan_card =(Spinner) findViewById(R.id.has_pan_card);
         spi_vocation_type_ =(Spinner) findViewById(R.id.spi_vocation_type_);
         spinner_residence_type =(Spinner) findViewById(R.id.spinner_residence_type);
+        office_spinner_residence_type =(Spinner) findViewById(R.id.office_spinner_residence_type);
         spi_vocation_forming =(Spinner) findViewById(R.id.spi_vocation_forming);
       //  spinner_busines_type =(Spinner) findViewById(R.id.spinner_busines_type);
         spinner_busines_type_own_business =(Spinner) findViewById(R.id.spinner_busines_type_own_business);
         business_incom_proof =(Spinner) findViewById(R.id.business_incom_proof);
         business_incom_proof_forming =(Spinner) findViewById(R.id.business_incom_proof_forming);
+        business_proof_own_business_spinner =(Spinner) findViewById(R.id.business_proof_own_business_spinner);
 
         spi_busproof_individual =(Spinner) findViewById(R.id.spi_busproof_individual);
+        spinner_business_proof_txt_F =(Spinner) findViewById(R.id.spinner_business_proof_txt_F);
         spinner_assets_owned =(Spinner) findViewById(R.id.spinner_assets_owned);
+        spinner_office_shop_setup =(Spinner) findViewById(R.id.spinner_office_shop_setup);
+
+        spi_busproof_own_business =(Spinner) findViewById(R.id.spi_busproof_own_business);
 
         individual = (LinearLayout) findViewById(R.id.individual);
         formin_dairy = (LinearLayout) findViewById(R.id.formin_dairy);
@@ -161,17 +176,121 @@ public class Viability_Check_BL extends SimpleActivity {
         poultry = (LinearLayout) findViewById(R.id.poultry);
         cv_vusiness_proof_individual =(ChipsView) findViewById(R.id.cv_vusiness_proof_individual);
         cv_Assets_Owns =(ChipsView) findViewById(R.id.cv_Assets_Owns);
+        cv_business_proof_multiselect_forming =(ChipsView) findViewById(R.id.cv_business_proof_multiselect_forming);
+        cv_business_proof_own =(ChipsView) findViewById(R.id.cv_business_proof_own);
 
         residence_pincode_edite_txt = (AutoCompleteTextView) findViewById(R.id.residence_pincode_edite_txt);
-
-
+        office_residence_pincode_edite_txt = (AutoCompleteTextView) findViewById(R.id.office_residence_pincode_edite_txt);
         Retail_wholesale_business = (LinearLayout) findViewById(R.id.Retail_wholesale_business);
         service_business = (LinearLayout) findViewById(R.id.service_business);
         manufacturing = (LinearLayout) findViewById(R.id.manufacturing);
+        ofiice_res_details = (LinearLayout) findViewById(R.id.ofiice_res_details);
 
     }
 
+    private void Font()
+    {
 
+        business_details_txt = (AppCompatTextView) findViewById(R.id.business_details_txt);
+        emp_type1 = (AppCompatTextView) findViewById(R.id.emp_type1);
+        emp_type2 = (AppCompatTextView) findViewById(R.id.emp_type2);
+        age_txt = (AppCompatTextView) findViewById(R.id.age_txt);
+        age_txt1 = (AppCompatTextView) findViewById(R.id.age_txt1);
+        pan_number_txt = (AppCompatTextView) findViewById(R.id.pan_number_txt);
+        pan_number_txt1 = (AppCompatTextView) findViewById(R.id.pan_number_txt1);
+        residence_details = (AppCompatTextView) findViewById(R.id.residence_details);
+        txt_residence_pincode = (AppCompatTextView) findViewById(R.id.txt_residence_pincode);
+        txt_residence_pincode1 = (AppCompatTextView) findViewById(R.id.txt_residence_pincode1);
+        txt_residence_type = (AppCompatTextView) findViewById(R.id.txt_residence_type);
+        txt_residence_type1 = (AppCompatTextView) findViewById(R.id.txt_residence_type1);
+        current_recidence_txt = (AppCompatTextView) findViewById(R.id.current_recidence_txt);
+        current_recidence_txt1 = (AppCompatTextView) findViewById(R.id.current_recidence_txt1);
+        assets_owned_txt = (AppCompatTextView) findViewById(R.id.assets_owned_txt);
+        assets_owned_txt1 = (AppCompatTextView) findViewById(R.id.assets_owned_txt1);
+        vocation_indiviual_txt = (AppCompatTextView) findViewById(R.id.vocation_indiviual_txt);
+        vocation_indiviual_txt1 = (AppCompatTextView) findViewById(R.id.vocation_indiviual_txt1);
+        busines_inco_proof_individua_txt = (AppCompatTextView) findViewById(R.id.busines_inco_proof_individua_txt);
+        busines_inco_proof_individua_txt1 = (AppCompatTextView) findViewById(R.id.busines_inco_proof_individua_txt1);
+        vehicle_individual_txt = (AppCompatTextView) findViewById(R.id.vehicle_individual_txt);
+        vehicle_individual_txt1 = (AppCompatTextView) findViewById(R.id.vehicle_individual_txt1);
+        number_of_vehicle_ind_txt = (AppCompatTextView) findViewById(R.id.number_of_vehicle_ind_txt);
+        number_of_vehicle_ind_txt1 = (AppCompatTextView) findViewById(R.id.number_of_vehicle_ind_txt1);
+        no_of_year_ind_txt = (AppCompatTextView) findViewById(R.id.no_of_year_ind_txt);
+        no_of_year_ind_txt1 = (AppCompatTextView) findViewById(R.id.no_of_year_ind_txt1);
+        monthly_incom_txt = (AppCompatTextView) findViewById(R.id.monthly_incom_txt);
+        monthly_incom_txt1 = (AppCompatTextView) findViewById(R.id.monthly_incom_txt1);
+
+        busproof_ind_txt = (AppCompatTextView) findViewById(R.id.busproof_ind_txt);
+        busproof_ind_txt1 = (AppCompatTextView) findViewById(R.id.busproof_ind_txt1);
+
+
+        age_edit_txt = (AppCompatEditText) findViewById(R.id.age_edit_txt);
+       // residence_edite_txt = (AppCompatEditText) findViewById(R.id.residence_edite_txt);
+        live_curentres_edite_txt = (AppCompatEditText) findViewById(R.id.live_curentres_edite_txt);
+        no_of_vehicle_edit_txt = (AppCompatEditText) findViewById(R.id.no_of_vehicle_edit_txt);
+        no_of_years_ind_edit_txt = (AppCompatEditText) findViewById(R.id.no_of_years_ind_edit_txt);
+
+        avg_monthly_incom_edit_txt = (AppCompatEditText) findViewById(R.id.avg_monthly_incom_edit_txt);
+        residence_pincode_edite_txt = (AutoCompleteTextView) findViewById(R.id.residence_pincode_edite_txt);
+
+
+
+
+         /* AppCompatTextView business_details_txt,emp_type1,emp_type2,age_txt,age_txt1,pan_number_txt,
+                pan_number_txt1,residence_details,txt_residence_pincode,txt_residence_pincode1,txt_residence_type,
+                txt_residence_type1,current_recidence_txt,current_recidence_txt1,assets_owned_txt,assets_owned_txt1,
+                vocation_indiviual_txt,vocation_indiviual_txt1,busines_inco_proof_individua_txt,busines_inco_proof_individua_txt1,
+                vehicle_individual_txt,vehicle_individual_txt1,number_of_vehicle_ind_txt,number_of_vehicle_ind_txt1,no_of_year_ind_txt,
+                no_of_year_ind_txt1,monthly_incom_txt,monthly_incom_txt1;*/
+
+
+
+            font = Typeface.createFromAsset(context.getAssets(), "Lato-Regular.ttf");
+
+        business_details_txt.setTypeface(font);
+        emp_type1.setTypeface(font);
+        emp_type2.setTypeface(font);
+        age_txt.setTypeface(font);
+        age_txt1.setTypeface(font);
+        pan_number_txt.setTypeface(font);
+        pan_number_txt1.setTypeface(font);
+        residence_details.setTypeface(font);
+        txt_residence_pincode.setTypeface(font);
+        txt_residence_pincode1.setTypeface(font);
+        txt_residence_type.setTypeface(font);
+        txt_residence_type1.setTypeface(font);
+        current_recidence_txt.setTypeface(font);
+        current_recidence_txt1.setTypeface(font);
+        assets_owned_txt.setTypeface(font);
+        assets_owned_txt1.setTypeface(font);
+        vocation_indiviual_txt.setTypeface(font);
+        vocation_indiviual_txt1.setTypeface(font);
+        busines_inco_proof_individua_txt.setTypeface(font);
+        busines_inco_proof_individua_txt1.setTypeface(font);
+        vehicle_individual_txt.setTypeface(font);
+        vehicle_individual_txt1.setTypeface(font);
+        number_of_vehicle_ind_txt.setTypeface(font);
+        number_of_vehicle_ind_txt1.setTypeface(font);
+        no_of_year_ind_txt.setTypeface(font);
+        no_of_year_ind_txt1.setTypeface(font);
+        monthly_incom_txt.setTypeface(font);
+        monthly_incom_txt1.setTypeface(font);
+
+         /* AppCompatEditText age_edit_txt,residence_edite_txt,live_curentres_edite_txt,no_of_vehicle_edit_txt,
+                no_of_years_ind_edit_txt,busproof_ind_txt,busproof_ind_txt1,avg_monthly_incom_edit_txt;*/
+
+        age_edit_txt.setTypeface(font);
+      //  residence_edite_txt.setTypeface(font);
+        live_curentres_edite_txt.setTypeface(font);
+        no_of_vehicle_edit_txt.setTypeface(font);
+        no_of_years_ind_edit_txt.setTypeface(font);
+        busproof_ind_txt.setTypeface(font);
+        busproof_ind_txt1.setTypeface(font);
+        avg_monthly_incom_edit_txt.setTypeface(font);
+
+
+
+    }
     private void Click() {
 
         residence_pincode_edite_txt.addTextChangedListener(new TextWatcher() {
@@ -184,6 +303,28 @@ public class Viability_Check_BL extends SimpleActivity {
                     GET_Pincode1(workpincode);
                 }
 
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+
+        office_residence_pincode_edite_txt.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                Log.e("hi", "hi11");
+                String workpincode = office_residence_pincode_edite_txt.getText().toString();
+
+                if (workpincode.length() == 2) {
+                    GET_Pincode1(workpincode);
+                }
             }
 
             @Override
@@ -281,10 +422,20 @@ public class Viability_Check_BL extends SimpleActivity {
                 }
             };
 
-            residence_pincode_edite_txt.setThreshold(2);
-            residence_pincode_edite_txt.setAdapter(Pincode_Adapter);
+          //  residence_pincode_edite_txt.setThreshold(2);
+         //   residence_pincode_edite_txt.setAdapter(Pincode_Adapter);
+            String workpincode = residence_pincode_edite_txt.getText().toString();
+            String workpincode1 = office_residence_pincode_edite_txt.getText().toString();
 
+            if(workpincode.length()> 2){
+                residence_pincode_edite_txt.setThreshold(2);
+                residence_pincode_edite_txt.setAdapter(Pincode_Adapter);
+            }
 
+            if(workpincode1.length()> 2){
+                office_residence_pincode_edite_txt.setThreshold(2);
+                office_residence_pincode_edite_txt.setAdapter(Pincode_Adapter);
+            }
 
 
         }
@@ -297,8 +448,13 @@ public class Viability_Check_BL extends SimpleActivity {
             }
         });
 
+        office_residence_pincode_edite_txt.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
-
+                String code1 = (String)adapterView.getItemAtPosition(i);
+            }
+        });
 
     }
 
@@ -327,6 +483,10 @@ public class Viability_Check_BL extends SimpleActivity {
                             Business_type_own_business =object.getJSONArray("Business_type");
                             Business_Proof =object.getJSONArray("Business_Proof");
                             Assets_own =object.getJSONArray("Assets_own");
+                            office_shop =object.getJSONArray("office_shop");
+
+                           // Business_Proof =object.getJSONArray("Business_Proof");
+
 
                             Log.e("Type_of_employement",String.valueOf(Type_of_employement));
 
@@ -338,7 +498,12 @@ public class Viability_Check_BL extends SimpleActivity {
                             Residence_Array(Residence_ownership_ar);
                             Business_type_own_business_Array(Business_type_own_business);
                             Business_Proof_individual(Business_Proof);
+                            Business_Proof_individual_forming(Business_Proof);
+                            Business_Proof_Own_Business(Business_Proof);
+
                             Assets_own_fun(Assets_own);
+                            Office_Shop_(office_shop);
+
 
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -416,11 +581,13 @@ public class Viability_Check_BL extends SimpleActivity {
                                 individual.setVisibility(View.VISIBLE);
                                 formin_dairy.setVisibility(View.GONE);
                                 self_business.setVisibility(View.GONE);
+                                ofiice_res_details.setVisibility(View.GONE);
                                 break;
                             case 2:
                                 individual.setVisibility(View.GONE);
                                 formin_dairy.setVisibility(View.VISIBLE);
                                 self_business.setVisibility(View.GONE);
+                                ofiice_res_details.setVisibility(View.GONE);
                                 break;
                             case 3:
 
@@ -664,9 +831,6 @@ public class Viability_Check_BL extends SimpleActivity {
                         Log.d("vocaton_id", business_incom_proof_forming_id);
                         Log.d("vocaton_value", business_incom_proof_forming_value);
 
-
-
-
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
@@ -685,6 +849,41 @@ public class Viability_Check_BL extends SimpleActivity {
                 }
             });
 
+
+            ///Own Business income Proof
+
+            business_proof_own_business_spinner.setAdapter(Business_income_proof_Adapter);
+            business_proof_own_business_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                    try {
+
+
+                        //  City_loc_uniqueID = ja.getJSONObject(position).getString("city_id");
+                        business_incom_proof_forming_id = Business_income_proof_ar.getJSONObject(position).getString("id");
+                        business_incom_proof_forming_value = Business_income_proof_ar.getJSONObject(position).getString("value");
+                        //CAT_ID = ja.getJSONObject(position).getString("category_id");
+                        Log.d("vocaton_id", business_incom_proof_forming_id);
+                        Log.d("vocaton_value", business_incom_proof_forming_value);
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+
+                }
+            });
+            business_proof_own_business_spinner.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View view, MotionEvent motionEvent) {
+                    // imm.hideSoftInputFromWindow(edt_buyer_address.getWindowToken(), 0);
+                    return false;
+                }
+            });
         }
 
 
@@ -772,6 +971,78 @@ public class Viability_Check_BL extends SimpleActivity {
 
     }
 
+    private void Office_Shop_(final JSONArray office_shop_ar) throws JSONException {
+        //   SPINNERLIST = new String[ja.length()];
+
+        Office_Shop_SA = new String[office_shop_ar.length()];
+        for (int i=0;i<office_shop_ar.length();i++){
+            JSONObject J =  office_shop_ar.getJSONObject(i);
+            Office_Shop_SA[i] = J.getString("value");
+            final List<String> loan_type_list = new ArrayList<>(Arrays.asList(Office_Shop_SA));
+            Office_Shop__Adapter = new ArrayAdapter<String>(context, R.layout.view_spinner_item, loan_type_list){
+                public View getView(int position, View convertView, ViewGroup parent) {
+                    font = Typeface.createFromAsset(context.getAssets(),"Lato-Regular.ttf");
+                    TextView v = (TextView) super.getView(position, convertView, parent);
+                    v.setTypeface(font);
+                    return v;
+                }
+
+                public View getDropDownView(int position, View convertView, ViewGroup parent) {
+                    TextView v = (TextView) super.getView(position, convertView, parent);
+                    v.setTypeface(font);
+                    return v;
+                }
+            };
+
+            Office_Shop__Adapter.setDropDownViewResource(R.layout.view_spinner_item);
+            spinner_office_shop_setup.setAdapter(Office_Shop__Adapter);
+            spinner_office_shop_setup.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                    try {
+
+
+                        //  City_loc_uniqueID = ja.getJSONObject(position).getString("city_id");
+                        Office_Shop__id = office_shop_ar.getJSONObject(position).getString("id");
+                        Office_Shop__value = office_shop_ar.getJSONObject(position).getString("value");
+                        //CAT_ID = ja.getJSONObject(position).getString("category_id");
+                        Log.d("vocaton_id", Office_Shop__id);
+                        Log.d("vocaton_value", Office_Shop__value);
+
+                        if(Office_Shop__id.equals("2"))
+                        {
+                            ofiice_res_details.setVisibility(View.VISIBLE);
+                        }else
+                        {
+                            ofiice_res_details.setVisibility(View.GONE);
+
+                        }
+
+
+
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+
+                }
+            });
+            spi_vocation_forming.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View view, MotionEvent motionEvent) {
+                    // imm.hideSoftInputFromWindow(edt_buyer_address.getWindowToken(), 0);
+                    return false;
+                }
+            });
+        }
+
+    }
+
     private void Residence_Array(final JSONArray Residence_ownership_ar) throws JSONException {
         //   SPINNERLIST = new String[ja.length()];
         Residence_Type_SA = new String[Residence_ownership_ar.length()];
@@ -795,7 +1066,10 @@ public class Viability_Check_BL extends SimpleActivity {
             };
 
             Residence_Adapter.setDropDownViewResource(R.layout.view_spinner_item);
+
             spinner_residence_type.setAdapter(Residence_Adapter);
+            office_spinner_residence_type.setAdapter(Residence_Adapter);
+
             spinner_residence_type.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -830,6 +1104,48 @@ public class Viability_Check_BL extends SimpleActivity {
                 }
             });
             spinner_residence_type.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View view, MotionEvent motionEvent) {
+                    // imm.hideSoftInputFromWindow(edt_buyer_address.getWindowToken(), 0);
+                    return false;
+                }
+            });
+
+
+            office_spinner_residence_type.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                    try {
+                        //  City_loc_uniqueID = ja.getJSONObject(position).getString("city_id");
+
+                       off_residence_id = Residence_ownership_ar.getJSONObject(position).getString("id");
+                        off_residence_Value = Residence_ownership_ar.getJSONObject(position).getString("value");
+                        //CAT_ID = ja.getJSONObject(position).getString("category_id");
+                        Log.d("off_residence_id", off_residence_id);
+                        Log.d("off_residence_Value", off_residence_Value);
+
+                        if(off_residence_id.equals("2"))
+                        {
+                            res_rented.setVisibility(View.VISIBLE);
+
+                        }else
+                        {
+                            res_rented.setVisibility(View.GONE);
+                        }
+
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+
+                }
+            });
+            office_spinner_residence_type.setOnTouchListener(new View.OnTouchListener() {
                 @Override
                 public boolean onTouch(View view, MotionEvent motionEvent) {
                     // imm.hideSoftInputFromWindow(edt_buyer_address.getWindowToken(), 0);
@@ -941,6 +1257,44 @@ public class Viability_Check_BL extends SimpleActivity {
 
     }
 
+    private void Business_Proof_individual_forming(final JSONArray ja) throws JSONException {
+
+        Business_proof_individual_forming_array_list = new ArrayList<IncomeProofPOJO>();
+
+        for (int i=0;i<ja.length();i++){
+            JSONObject J =  ja.getJSONObject(i);
+
+            String id = J.getString("id");
+            String locality = J.getString("value");
+
+            IncomeProofPOJO salary_proof = new IncomeProofPOJO(id,locality,false);
+            Business_proof_individual_forming_array_list.add(salary_proof);
+        }
+        business_proof_Forming_adapter = new MyCustomAdapter_Business_proof_Forming(context, 0,Business_proof_individual_forming_array_list);
+        spinner_business_proof_txt_F.setAdapter(business_proof_Forming_adapter);
+        business_proof_Forming_adapter.notifyDataSetChanged();
+
+    }
+
+    private void Business_Proof_Own_Business(final JSONArray ja) throws JSONException {
+
+        Business_proof_own_array_list = new ArrayList<IncomeProofPOJO>();
+
+        for (int i=0;i<ja.length();i++){
+            JSONObject J =  ja.getJSONObject(i);
+
+            String id = J.getString("id");
+            String locality = J.getString("value");
+
+            IncomeProofPOJO salary_proof = new IncomeProofPOJO(id,locality,false);
+            Business_proof_own_array_list.add(salary_proof);
+        }
+        business_proof_Own_Business = new MyCustomAdapter_Business_proof_Own(context, 0,Business_proof_own_array_list);
+        spi_busproof_own_business.setAdapter(business_proof_Own_Business);
+        business_proof_Own_Business.notifyDataSetChanged();
+
+    }
+
     private void Assets_own_fun(final JSONArray ja) throws JSONException {
 
         Assets_own_array_list = new ArrayList<IncomeProofPOJO>();
@@ -958,10 +1312,10 @@ public class Viability_Check_BL extends SimpleActivity {
         spinner_assets_owned.setAdapter(Assets_own_adapter);
         Assets_own_adapter.notifyDataSetChanged();
 
-
-
-
     }
+
+
+    //////ADApter Multi Select
 
     private class MyCustomAdapter_Business_proof_Individual extends ArrayAdapter<IncomeProofPOJO> {
 
@@ -1137,6 +1491,254 @@ public class Viability_Check_BL extends SimpleActivity {
 
     }
 
+    private class MyCustomAdapter_Business_proof_Forming extends ArrayAdapter<IncomeProofPOJO> {
+
+        private ArrayList<IncomeProofPOJO> Assets_own_;
+        IncomeProofPOJO assets_own;
+        public MyCustomAdapter_Business_proof_Forming(Context context, int textViewResourceId,
+                                                  ArrayList<IncomeProofPOJO> Assets_own_) {
+            super(context, textViewResourceId, Assets_own_);
+            this.Assets_own_ = new ArrayList<IncomeProofPOJO>();
+            this.Assets_own_.addAll(Assets_own_);
+        }
+
+        private class ViewHolder {
+            TextView code;
+            CheckBox name;
+        }
+
+        @Override
+        public View getDropDownView(int position, View convertView,
+                                    ViewGroup parent) {
+            return getCustomView(position, convertView, parent);
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            return getCustomView(position, convertView, parent);
+        }
+
+        public View getCustomView(int position, View convertView, ViewGroup parent) {
+
+            MyCustomAdapter_Business_proof_Forming.ViewHolder holder = null;
+
+            if (convertView == null) {
+                LayoutInflater vi = (LayoutInflater)getContext().getSystemService(
+                        Context.LAYOUT_INFLATER_SERVICE);
+                convertView = vi.inflate(R.layout.income_proof_info, null);
+                holder = new MyCustomAdapter_Business_proof_Forming.ViewHolder();
+                holder.code = (TextView) convertView.findViewById(R.id.code);
+                holder.name = (CheckBox) convertView.findViewById(R.id.checkBox1);
+
+
+                holder.name.setTypeface(font);
+                holder.name.setTextSize(13);
+                holder.code.setTypeface(font);
+                holder.code.setTextSize(13);
+                convertView.setTag(holder);
+
+                holder.name.setOnClickListener( new View.OnClickListener() {
+                    public void onClick(View v) {
+                        CheckBox cb = (CheckBox) v ;
+                        IncomeProofPOJO assets_own = (IncomeProofPOJO) cb.getTag();
+                        assets_own.setIP_selected(cb.isChecked());
+
+                        String email = assets_own.getIP_name();
+                        Uri imgUrl = Uri.parse("https://image.shutterstock.com/image-vector/green-proof-icon-check-concept-260nw-596401601.jpg");
+                        Contact contact = new Contact(null, null, null, email, imgUrl);
+                        if (cb.isChecked()) {
+                            cv_business_proof_multiselect_forming.addChip(email, imgUrl, contact);
+                        } else {
+                            cv_business_proof_multiselect_forming.removeChipBy(contact);
+                        }
+                    }
+
+                });
+            }
+            else {
+                holder = (MyCustomAdapter_Business_proof_Forming.ViewHolder) convertView.getTag();
+            }
+
+            assets_own = Assets_own_.get(position);
+            holder.name.setText(assets_own.getIP_name());
+            holder.name.setChecked(assets_own.isIP_selected());
+            holder.name.setTag(assets_own);
+
+            if(assets_own.getIP_name().contains("Business Proof")){
+                holder.name.setVisibility(View.GONE);
+                holder.code.setVisibility(View.VISIBLE);
+                holder.code.setText("Select Business Proof");
+
+            }else {
+                holder.code.setVisibility(View.GONE);
+                holder.name.setVisibility(View.VISIBLE);
+            }
+            return convertView;
+        }
+
+    }
+
+    private class MyCustomAdapter_Business_proof_Own extends ArrayAdapter<IncomeProofPOJO> {
+
+        private ArrayList<IncomeProofPOJO> Assets_own_;
+        IncomeProofPOJO assets_own;
+        public MyCustomAdapter_Business_proof_Own(Context context, int textViewResourceId,
+                                                      ArrayList<IncomeProofPOJO> Assets_own_) {
+            super(context, textViewResourceId, Assets_own_);
+            this.Assets_own_ = new ArrayList<IncomeProofPOJO>();
+            this.Assets_own_.addAll(Assets_own_);
+        }
+
+        private class ViewHolder {
+            TextView code;
+            CheckBox name;
+        }
+
+        @Override
+        public View getDropDownView(int position, View convertView,
+                                    ViewGroup parent) {
+            return getCustomView(position, convertView, parent);
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            return getCustomView(position, convertView, parent);
+        }
+
+        public View getCustomView(int position, View convertView, ViewGroup parent) {
+
+            MyCustomAdapter_Business_proof_Own.ViewHolder holder = null;
+
+            if (convertView == null) {
+                LayoutInflater vi = (LayoutInflater)getContext().getSystemService(
+                        Context.LAYOUT_INFLATER_SERVICE);
+                convertView = vi.inflate(R.layout.income_proof_info, null);
+                holder = new MyCustomAdapter_Business_proof_Own.ViewHolder();
+                holder.code = (TextView) convertView.findViewById(R.id.code);
+                holder.name = (CheckBox) convertView.findViewById(R.id.checkBox1);
+
+
+                holder.name.setTypeface(font);
+                holder.name.setTextSize(13);
+                holder.code.setTypeface(font);
+                holder.code.setTextSize(13);
+                convertView.setTag(holder);
+
+                holder.name.setOnClickListener( new View.OnClickListener() {
+                    public void onClick(View v) {
+                        CheckBox cb = (CheckBox) v ;
+                        IncomeProofPOJO assets_own = (IncomeProofPOJO) cb.getTag();
+                        assets_own.setIP_selected(cb.isChecked());
+
+                        String email = assets_own.getIP_name();
+                        Uri imgUrl = Uri.parse("https://image.shutterstock.com/image-vector/green-proof-icon-check-concept-260nw-596401601.jpg");
+                        Contact contact = new Contact(null, null, null, email, imgUrl);
+                        if (cb.isChecked()) {
+                            cv_business_proof_own.addChip(email, imgUrl, contact);
+                        } else {
+                            cv_business_proof_own.removeChipBy(contact);
+                        }
+                    }
+
+                });
+            }
+            else {
+                holder = (MyCustomAdapter_Business_proof_Own.ViewHolder) convertView.getTag();
+            }
+
+            assets_own = Assets_own_.get(position);
+            holder.name.setText(assets_own.getIP_name());
+            holder.name.setChecked(assets_own.isIP_selected());
+            holder.name.setTag(assets_own);
+
+            if(assets_own.getIP_name().contains("Business Proof")){
+                holder.name.setVisibility(View.GONE);
+                holder.code.setVisibility(View.VISIBLE);
+                holder.code.setText("Select Business Proof");
+
+            }else {
+                holder.code.setVisibility(View.GONE);
+                holder.name.setVisibility(View.VISIBLE);
+            }
+            return convertView;
+        }
+
+    }
+
+
+
+    private void lead_Eligibility() {
+
+
+       // ST_monthly_afr_emi_amt_edit_txt = monthly_afr_emi_amt_edit_txt.getText().toString();
+
+
+      /*  String stringNumber = St_monthly_net_sal_edit_txt;
+        result = stringNumber.replace(",","");*/
+        JSONObject jsonObject =new JSONObject();
+        JSONObject J= null;
+        try {
+            J =new JSONObject();
+            //  J.put(Params.email_id,email);
+
+
+            J.put("residence_id",residence_id);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        Log.e("Add Home Laoan", String.valueOf(J));
+        progressDialog.show();
+      /*  JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, Urls.ADD_LEAD_POST, J,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+
+                        String data = String.valueOf(response);
+                        Log.e("Add_Home_loan Partner", String.valueOf(response));
+                        try {
+
+                            if(response.getString(Params.status).equals("Ok")) {
+
+
+                            }
+                            if(response.getString(Params.status).equals("error")) {
+                                Objs.a.showToast(context, "Already Registered with Propwiser");
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        progressDialog.dismiss();
+                    }
+                }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                //Log.d(TAG, error.getMessage());
+                VolleyLog.d("TAG", "Error: " + error.getMessage());
+                progressDialog.dismiss();
+
+            }
+        }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("content-type", "application/json");
+                return headers;
+            }
+        };
+
+        // AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
+        int socketTimeout = 0;
+        RetryPolicy policy = new DefaultRetryPolicy(socketTimeout,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
+
+        jsonObjReq.setRetryPolicy(policy);
+
+        AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);*/
+    }
 
     @Override
     public void onBackPressed() {

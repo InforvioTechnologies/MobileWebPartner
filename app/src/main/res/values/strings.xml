@@ -437,7 +437,9 @@
     <string name="eligi_check">Eligibility Check</string>
     <string name="emp_type1">Type of Employee</string>
     <string name="residence_pin">Residence Pincode</string>
+    <string name="off_shop">Office/Shop Pincode</string>
     <string name="residence">Residence Type</string>
+    <string name="off_residence">Office Residence Type</string>
     <string name="curr_resi">Live in current residence(months)</string>
     <string name="assets_own">Assets own(Multiselect)</string>
     <string name="vocation_type">Vocation Type</string>
@@ -445,6 +447,7 @@
     <string name="vehicle_type">Vehicle Type(MultiSelect)</string>
     <string name="nov">Number of vehicle</string>
     <string name="nyw">Number of years in work</string>
+    <string name="actual_business">Actual Business</string>
     <string name="avg">Average monthly income</string>
     <string name="bus_proof">Business Proof(MultiSelect)</string>
     <string name="wt_crop">What kind of crops(MultiSelect)</string>

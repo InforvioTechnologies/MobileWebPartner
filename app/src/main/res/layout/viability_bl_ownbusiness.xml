@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -67,6 +68,49 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <LinearLayout
+                android:id="@+id/actual_business_forming_ly"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:gravity="left"
+                    android:layout_marginLeft="2dp"
+                    android:id="@+id/actual_business_own_business_txt"
+                    android:layout_width="wrap_content"
+                    style="@style/LorgeText2"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textColorHint="@color/colorPrimaryDark"
+                    android:hint="6"
+                    android:layout_height="wrap_content" />
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:gravity="left"
+                    android:layout_marginLeft="2dp"
+                    android:layout_width="match_parent"
+                    style="@style/LorgeText2"
+                    android:id="@+id/actual_business_own_business_txt1"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textColorHint="@color/colorPrimaryDark"
+                    android:text="@string/actual_business"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_marginLeft="30dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:id="@+id/actual_business_edit_own_edt_txt"
+                    android:textColor="@color/colorPrimaryDark"/>
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
                 android:id="@+id/business_proof"
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
@@ -107,7 +151,7 @@
                         android:backgroundTint="#ff000000"
                         android:backgroundTintMode="src_in"
                         android:spinnerMode="dropdown"
-                        android:id="@+id/business_incom_proof"
+                        android:id="@+id/business_proof_own_business_spinner"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent" />
                 </LinearLayout>
@@ -159,7 +203,7 @@
                         android:backgroundTint="#ff000000"
                         android:backgroundTintMode="src_in"
                         android:spinnerMode="dropdown"
-                        android:id="@+id/spp_office_"
+                        android:id="@+id/spinner_office_shop_setup"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent" />
                 </LinearLayout>
@@ -922,10 +966,30 @@
                             android:backgroundTint="#ff000000"
                             android:backgroundTintMode="src_in"
                             android:spinnerMode="dropdown"
-                            android:id="@+id/spi_busproof_txt_M"
+                            android:id="@+id/spi_busproof_own_business"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent" />
                     </LinearLayout>
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:paddingLeft="16dp"
+                    android:elevation="6dp"
+                    android:layout_margin="10dp"
+                    android:orientation="horizontal"
+                    android:background="@color/paper">
+
+                    <com.doodle.android.chips.ChipsView
+                        android:id="@+id/cv_business_proof_own"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:overScrollMode="never"
+                        android:textAppearance="@style/ChipTextStyle_Selected"
+                        app:cv_max_height="100dp"
+                        app:cv_vertical_spacing="2dp"
+                        />
 
                 </LinearLayout>
             </LinearLayout>
