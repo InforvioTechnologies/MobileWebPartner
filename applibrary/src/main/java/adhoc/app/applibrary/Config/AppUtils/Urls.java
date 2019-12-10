@@ -99,7 +99,9 @@ public class Urls {
         boolean first = true;
         for (Map.Entry<String, String> entry : params.entrySet()) {
             if (first) {
+
                 first = false;
+
             }
             else
                 result.append("&");

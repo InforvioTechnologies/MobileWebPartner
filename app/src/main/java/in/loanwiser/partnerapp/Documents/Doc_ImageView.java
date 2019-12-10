@@ -2,6 +2,7 @@ package in.loanwiser.partnerapp.Documents;
 
 import android.app.AlertDialog;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -46,6 +47,7 @@ public class Doc_ImageView extends SimpleActivity {
         progressBar = (ProgressBar) findViewById(R.id.progressBarMaterial);
         type =  Objs.a.getBundle(this, Params.type);
         document =  Objs.a.getBundle(this, Params.document);
+        Log.e("pfd",document);
         hash =  Objs.a.getBundle(this, Params.transaction_id);
         if(type.equals("pdf")){
             Rl_pdf_reader.setVisibility(View.VISIBLE);

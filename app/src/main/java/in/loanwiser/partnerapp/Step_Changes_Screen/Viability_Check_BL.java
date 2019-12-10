@@ -66,8 +66,6 @@ public class Viability_Check_BL extends SimpleActivity {
             spinner_assets_owned,spinner_business_proof_txt_F,spi_busproof_own_business,
             spinner_office_shop_setup,business_proof_own_business_spinner;
 
-
-
     private LinearLayout individual,self_business,formin_dairy,Driver_C_owner,
              res_rented,forming,dairy,poultry,
             Retail_wholesale_business,service_business,manufacturing,ofiice_res_details;
@@ -186,11 +184,6 @@ public class Viability_Check_BL extends SimpleActivity {
         manufacturing = (LinearLayout) findViewById(R.id.manufacturing);
         ofiice_res_details = (LinearLayout) findViewById(R.id.ofiice_res_details);
 
-    }
-
-    private void Font()
-    {
-
         business_details_txt = (AppCompatTextView) findViewById(R.id.business_details_txt);
         emp_type1 = (AppCompatTextView) findViewById(R.id.emp_type1);
         emp_type2 = (AppCompatTextView) findViewById(R.id.emp_type2);
@@ -225,7 +218,7 @@ public class Viability_Check_BL extends SimpleActivity {
 
 
         age_edit_txt = (AppCompatEditText) findViewById(R.id.age_edit_txt);
-       // residence_edite_txt = (AppCompatEditText) findViewById(R.id.residence_edite_txt);
+        // residence_edite_txt = (AppCompatEditText) findViewById(R.id.residence_edite_txt);
         live_curentres_edite_txt = (AppCompatEditText) findViewById(R.id.live_curentres_edite_txt);
         no_of_vehicle_edit_txt = (AppCompatEditText) findViewById(R.id.no_of_vehicle_edit_txt);
         no_of_years_ind_edit_txt = (AppCompatEditText) findViewById(R.id.no_of_years_ind_edit_txt);
@@ -233,19 +226,13 @@ public class Viability_Check_BL extends SimpleActivity {
         avg_monthly_incom_edit_txt = (AppCompatEditText) findViewById(R.id.avg_monthly_incom_edit_txt);
         residence_pincode_edite_txt = (AutoCompleteTextView) findViewById(R.id.residence_pincode_edite_txt);
 
+    }
+
+    private void Font()
+    {
 
 
-
-         /* AppCompatTextView business_details_txt,emp_type1,emp_type2,age_txt,age_txt1,pan_number_txt,
-                pan_number_txt1,residence_details,txt_residence_pincode,txt_residence_pincode1,txt_residence_type,
-                txt_residence_type1,current_recidence_txt,current_recidence_txt1,assets_owned_txt,assets_owned_txt1,
-                vocation_indiviual_txt,vocation_indiviual_txt1,busines_inco_proof_individua_txt,busines_inco_proof_individua_txt1,
-                vehicle_individual_txt,vehicle_individual_txt1,number_of_vehicle_ind_txt,number_of_vehicle_ind_txt1,no_of_year_ind_txt,
-                no_of_year_ind_txt1,monthly_incom_txt,monthly_incom_txt1;*/
-
-
-
-            font = Typeface.createFromAsset(context.getAssets(), "Lato-Regular.ttf");
+       font = Typeface.createFromAsset(context.getAssets(), "Lato-Regular.ttf");
 
         business_details_txt.setTypeface(font);
         emp_type1.setTypeface(font);
@@ -395,7 +382,6 @@ public class Viability_Check_BL extends SimpleActivity {
                    occupation.remove(i);
                }*/
         for (int i=0;i<ja.length();i++) {
-
 
             JSONObject J = ja.getJSONObject(i);
             Pincode_SA[i] = J.getString("pincode");
@@ -591,8 +577,9 @@ public class Viability_Check_BL extends SimpleActivity {
                                 break;
                             case 3:
 
-                                String Loantype = "2";
-                                Pref.putEMPLOYMENT(mCon,Loantype);
+                                String Loantype = "3";
+                              //  Pref.putEMPLOYMENT(mCon,Loantype);
+                                Pref.putLoanType(mCon,Loantype);
                                 individual.setVisibility(View.GONE);
                                 formin_dairy.setVisibility(View.GONE);
                                 self_business.setVisibility(View.VISIBLE);
@@ -713,7 +700,6 @@ public class Viability_Check_BL extends SimpleActivity {
 
                     try {
 
-
                         //  City_loc_uniqueID = ja.getJSONObject(position).getString("city_id");
                         vocaton_id = vocaton_ar.getJSONObject(position).getString("id");
                         vocaton_value = vocaton_ar.getJSONObject(position).getString("value");
@@ -729,9 +715,6 @@ public class Viability_Check_BL extends SimpleActivity {
                         {
                             Driver_C_owner.setVisibility(View.GONE);
                         }
-
-
-
 
                     } catch (JSONException e) {
                         e.printStackTrace();

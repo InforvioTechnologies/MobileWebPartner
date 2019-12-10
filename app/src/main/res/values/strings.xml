@@ -228,6 +228,7 @@
     <string name="emp_count">No of Employee in company</string>
     <string name="salary_credit">Salary Credit Method</string>
     <string name="cur_res_proof">Current residence address Proof</string>
+    <string name="business_regi">Business Registration</string>
     <string name="perment_res_pincod">Permanent Residence Pincode</string>
     <string name="existing_loan">Do you have any Existing Loan ?</string>
     <string name="emi_amt">EMI Amount</string>
@@ -541,6 +542,12 @@
     <string name="error_total_experience">Please enter the Total Experience</string>
     <string name="error_branch">Kindly enter the Bank Branch</string>
     <string name="error_pincode">Enter the Pincode</string>
+
+    <string name="error_avg">Enter the Avarage Monthly Income</string>
+
+    <string name="error_bus_ref_name">Enter the Business reference name</string>
+    <string name="error_bus_ref_mobile">Enter the Business reference Mobile</string>
+
     <string name="net_salary">Please Enter the valid amount</string>
     <string name="err_curent">This field is required</string>
     <string name="permanent_res_type">Permanent Residence Type</string>
