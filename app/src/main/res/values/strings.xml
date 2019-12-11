@@ -544,9 +544,15 @@
     <string name="error_pincode">Enter the Pincode</string>
 
     <string name="error_avg">Enter the Avarage Monthly Income</string>
+    <string name="error_purchased_by_Bank">Enter the % of purchased by Bank</string>
+    <string name="error_purchased_by_gst">Enter the % of purchased by GST Based</string>
+
+    <string name="error_sales_by_gst_crdt">Enter the % of sales by GST Based</string>
+    <string name="error_sales_by_bank_crdt">Enter the % of income by Bank </string>
 
     <string name="error_bus_ref_name">Enter the Business reference name</string>
     <string name="error_bus_ref_mobile">Enter the Business reference Mobile</string>
+    <string name="error_other_income_amt">Enter the Other income amount</string>
 
     <string name="net_salary">Please Enter the valid amount</string>
     <string name="err_curent">This field is required</string>

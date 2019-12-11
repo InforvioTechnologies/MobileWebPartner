@@ -21,8 +21,10 @@ import androidx.appcompat.widget.AppCompatEditText;
 import androidx.appcompat.widget.AppCompatTextView;
 
 import com.android.volley.AuthFailureError;
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.Response;
+import com.android.volley.RetryPolicy;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonObjectRequest;
@@ -69,17 +71,22 @@ public class Eligibility_BL extends SimpleActivity {
                          Other_income_adapter,Gst_reflect_adapter,
             Business_registration_adapter;
     String Spinner_res_proof_Id,Spinner_res_proof_Value,Guarenter_Id,Guarenter_Value,
-            Gstreflect_Id,Gstreflect_Value,Business_registration_Id,Business_registration_Value;
+            Gstreflect_Id,Gstreflect_Value,Business_registration_Id,Business_registration_Value,
+            Other_income_Id,Other_income_Value;
 
     AppCompatTextView business_registration_txt,business_registration_txt1,
             avg_bank_balence_txt,avg_bank_balence_txt1,res_proof,res_proof1,guaranter_txt,guaranter_txt1,
             business_r_name_txt,business_r_name_txt1,business_refernce_txt,business_refernce_txt1,
             other_income_txt,other_income_txt1,other_incom_amt_txt,other_incom_amt_txt1,
-            is_gst_reflect_txt,is_gst_reflect_txt1;
+            is_gst_reflect_txt,is_gst_reflect_txt1,purchased_by_bank1,purchased_by_bank2,purchased_by_gst,purchased_by_gst1,
+            bank_credit1_txt,bank_credit1_txt1, gst_sales1_txt,gst_sales1_txt1;
 
     AppCompatEditText Avg_monthly_income,Business_reference_mobile,Business_refernce_name,
-            other_income_edite_txt;
+            other_income_edite_txt,purchased_by_bank_edit_txt,purchased_by_GStbill_edit_txt
+           ,sales_by_GStbill_edit_txt,bank_cridit_by_edtxt;
     AppCompatButton lead_Elegibility_Bank;
+
+    LinearLayout other_income_ifany;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -137,28 +144,49 @@ public class Eligibility_BL extends SimpleActivity {
         is_gst_reflect_txt = (AppCompatTextView) findViewById(R.id.is_gst_reflect_txt);
         is_gst_reflect_txt1 = (AppCompatTextView) findViewById(R.id.is_gst_reflect_txt1);
 
-        /* AppCompatEditText Avg_monthly_income,Business_reference_mobile,Business_refernce_name,
-            other_income_edite_txt;*/
+        /*,purchased_by_bank1,purchased_by_bank2,purchased_by_gst,purchased_by_gst1,
+            bank_credit1_txt,bank_credit1_txt1;*/
+
+        purchased_by_bank1 = (AppCompatTextView) findViewById(R.id.purchased_by_bank1);
+        purchased_by_bank2 = (AppCompatTextView) findViewById(R.id.purchased_by_bank2);
+        purchased_by_gst = (AppCompatTextView) findViewById(R.id.purchased_by_gst);
+        purchased_by_gst1 = (AppCompatTextView) findViewById(R.id.purchased_by_gst1);
+        gst_sales1_txt = (AppCompatTextView) findViewById(R.id.gst_sales1_txt);
+        gst_sales1_txt1 = (AppCompatTextView) findViewById(R.id.gst_sales1_txt1);
+        bank_credit1_txt = (AppCompatTextView) findViewById(R.id.bank_credit1_txt);
+        bank_credit1_txt1 = (AppCompatTextView) findViewById(R.id.bank_credit1_txt1);
 
         Avg_monthly_income = (AppCompatEditText) findViewById(R.id.Avg_monthly_income);
         Business_reference_mobile = (AppCompatEditText) findViewById(R.id.Business_reference_mobile);
         Business_refernce_name = (AppCompatEditText) findViewById(R.id.Business_refernce_name);
         other_income_edite_txt = (AppCompatEditText) findViewById(R.id.other_income_edite_txt);
 
+        purchased_by_bank_edit_txt = (AppCompatEditText) findViewById(R.id.purchased_by_bank_edit_txt);
+        purchased_by_GStbill_edit_txt = (AppCompatEditText) findViewById(R.id.purchased_by_GStbill_edit_txt);
+        sales_by_GStbill_edit_txt = (AppCompatEditText) findViewById(R.id.sales_by_GStbill_edit_txt);
+        bank_cridit_by_edtxt = (AppCompatEditText) findViewById(R.id.bank_cridit_by_edtxt);
+
         lead_Elegibility_Bank = (AppCompatButton) findViewById(R.id.lead_Elegibility_Bank);
 
+        other_income_ifany = (LinearLayout) findViewById(R.id.other_income_ifany);
         if(Lontype.equals("3"))
         {
             self_business.setVisibility(View.VISIBLE);
-            business_registration_txt.setText("5");
-            avg_bank_balence_txt.setText("6");
-            res_proof.setText("7");
-            guaranter_txt.setText("8");
-            business_r_name_txt.setText("9");
-            business_refernce_txt.setText("10");
-            other_income_txt.setText("11");
-            other_incom_amt_txt.setText("12");
-            is_gst_reflect_txt.setText("13");
+            business_registration_txt.setText("1");
+            purchased_by_bank1.setText("2");
+            purchased_by_gst.setText("3");
+            gst_sales1_txt.setText("4");
+            bank_credit1_txt.setText("5");
+
+            avg_bank_balence_txt.setText("5");
+            res_proof.setText("6");
+            guaranter_txt.setText("7");
+            business_r_name_txt.setText("8");
+            business_refernce_txt.setText("9");
+            other_income_txt.setText("10");
+            other_incom_amt_txt.setText("11");
+            is_gst_reflect_txt.setText("12");
+
         }else
         {
             self_business.setVisibility(View.GONE);
@@ -177,8 +205,18 @@ public class Eligibility_BL extends SimpleActivity {
 
     private void Font() {
 
-
         font = Typeface.createFromAsset(context.getAssets(), "Lato-Regular.ttf");
+
+        is_gst_reflect_txt.setTypeface(font);
+        is_gst_reflect_txt1.setTypeface(font);
+        purchased_by_bank1.setTypeface(font);
+        purchased_by_bank2.setTypeface(font);
+        purchased_by_gst.setTypeface(font);
+        purchased_by_gst1.setTypeface(font);
+        bank_credit1_txt.setTypeface(font);
+        bank_credit1_txt1.setTypeface(font);
+        gst_sales1_txt.setTypeface(font);
+        gst_sales1_txt1.setTypeface(font);
 
         business_registration_txt.setTypeface(font);
         business_registration_txt1.setTypeface(font);
@@ -212,44 +250,153 @@ public class Eligibility_BL extends SimpleActivity {
 
                 if(Business_registration_Id.equals("0"))
                 {
-                    Toast.makeText(context,"Please Select Business Registration Id",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context,"Please Select Business Registration",Toast.LENGTH_SHORT).show();
                 }else
                 {
-                    if (!residence_pincode1()) {
-                        return;
-                    }
-                    if(Spinner_res_proof_Id.equals("0"))
+                    if(Lontype.equals("3"))
                     {
-                        Toast.makeText(context,"Please Select Current Residence Addres Proof",Toast.LENGTH_SHORT).show();
+
+                        if (!Purchased_by_Bank()) {
+                            return;
+                        }
+                        if (!Purchased_by_Gst_bill()) {
+                            return;
+                        }
+                        if (!sales_by_Gst_bill()) {
+                            return;
+                        }
+
+                        if (!Sales_bank_cridit_()) {
+                            return;
+                        }
+
+                        validation();
+
                     }else
                     {
-                       if(Guarenter_Id.equals("0"))
-                       {
-                           Toast.makeText(context,"Please Select can you provide Guarenter",Toast.LENGTH_SHORT).show();
-
-                       }else
-                       {
-                           if (!residence_pincode1()) {
-                               return;
-                           }
-
-                           if (!residence_Business_reference_name()) {
-                               return;
-                           }
-
-                           if (!residence_Business_reference_phone()) {
-                               return;
-                           }
-
-
-                       }
+                        validation();
                     }
+
                 }
             }
         });
     }
 
-    private boolean residence_pincode1(){
+    private void validation()
+    {
+
+        if (!Average_monthly_income()) {
+            return;
+        }
+        if(Spinner_res_proof_Id.equals("0"))
+        {
+            Toast.makeText(context,"Please Select Current Residence Addres Proof",Toast.LENGTH_SHORT).show();
+        }else
+        {
+            if(Guarenter_Id.equals("0"))
+            {
+                Toast.makeText(context,"Please Select can you provide Guarenter",Toast.LENGTH_SHORT).show();
+
+            }else
+            {
+
+                if (!residence_Business_reference_name()) {
+                    return;
+                }
+
+                if (!residence_Business_reference_phone()) {
+                    return;
+                }
+
+                if(Other_income_Id.equals("0"))
+                {
+                    Toast.makeText(context,"Please Select Other Income",Toast.LENGTH_SHORT).show();
+
+                }else if(Other_income_Id.equals("4"))
+                {
+
+
+                }else
+                {
+
+                    if (!other_income_amount()) {
+                        return;
+                    }
+
+                    if(Gstreflect_Id.equals("0"))
+                    {
+                        Toast.makeText(context,"Please Select Gst Reflected",Toast.LENGTH_SHORT).show();
+                    }
+                    else
+                    {
+
+                    }
+
+                }
+
+            }
+        }
+
+    }
+
+    private boolean Purchased_by_Bank(){
+
+        if (purchased_by_bank_edit_txt.getText().toString().isEmpty()) {
+            purchased_by_bank_edit_txt.setError(getText(R.string.error_purchased_by_Bank));
+            purchased_by_bank_edit_txt.requestFocus();
+            return false;
+        } else {
+
+            //inputLayoutLname.setErrorEnabled(false);
+        }
+
+        return true;
+    }
+
+    private boolean Purchased_by_Gst_bill(){
+        if (purchased_by_GStbill_edit_txt.getText().toString().isEmpty()) {
+            purchased_by_GStbill_edit_txt.setError(getText(R.string.error_purchased_by_gst));
+            purchased_by_GStbill_edit_txt.requestFocus();
+            return false;
+        } else {
+
+            //inputLayoutLname.setErrorEnabled(false);
+        }
+
+        return true;
+    }
+
+
+    private boolean sales_by_Gst_bill(){
+        if (sales_by_GStbill_edit_txt.getText().toString().isEmpty()) {
+            sales_by_GStbill_edit_txt.setError(getText(R.string.error_sales_by_gst_crdt));
+            sales_by_GStbill_edit_txt.requestFocus();
+            return false;
+        } else {
+
+            //inputLayoutLname.setErrorEnabled(false);
+
+        }
+
+        return true;
+    }
+
+
+    private boolean Sales_bank_cridit_(){
+        if (bank_cridit_by_edtxt.getText().toString().isEmpty()) {
+            bank_cridit_by_edtxt.setError(getText(R.string.error_sales_by_bank_crdt));
+            bank_cridit_by_edtxt.requestFocus();
+            return false;
+        } else {
+
+            //inputLayoutLname.setErrorEnabled(false);
+
+        }
+
+        return true;
+    }
+
+    private boolean Average_monthly_income(){
         if (Avg_monthly_income.getText().toString().isEmpty()) {
             Avg_monthly_income.setError(getText(R.string.error_avg));
             Avg_monthly_income.requestFocus();
@@ -289,6 +436,20 @@ public class Eligibility_BL extends SimpleActivity {
 
         return true;
     }
+
+    private boolean other_income_amount(){
+        if (other_income_edite_txt.getText().toString().isEmpty()) {
+            other_income_edite_txt.setError(getText(R.string.error_other_income_amt));
+            other_income_edite_txt.requestFocus();
+            return false;
+        } else {
+
+            //inputLayoutLname.setErrorEnabled(false);
+        }
+
+        return true;
+    }
+
 
     private void makeJsonObjReq1() {
         progressDialog.show();
@@ -496,11 +657,24 @@ public class Eligibility_BL extends SimpleActivity {
                     try {
                         //  City_loc_uniqueID = ja.getJSONObject(position).getString("city_id");
 
-                        Guarenter_Id = Other_income_ar.getJSONObject(position).getString("id");
-                        Guarenter_Value = Other_income_ar.getJSONObject(position).getString("value");
+                        Other_income_Id = Other_income_ar.getJSONObject(position).getString("id");
+                        Other_income_Value = Other_income_ar.getJSONObject(position).getString("value");
                         //CAT_ID = ja.getJSONObject(position).getString("category_id");
                         Log.d("Salary_id", Spinner_res_proof_Id);
                         Log.d("Salary_Value", Spinner_res_proof_Value);
+
+
+                        if(Other_income_Id.equals("0"))
+                        {
+                            other_income_ifany.setVisibility(View.VISIBLE);
+
+                        }else if(Other_income_Id.equals("4"))
+                        {
+                            other_income_ifany.setVisibility(View.GONE);
+                        }else
+                        {
+                            other_income_ifany.setVisibility(View.VISIBLE);
+                        }
 
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -639,34 +813,87 @@ public class Eligibility_BL extends SimpleActivity {
 
     }
 
-  /*  private static class MySpinnerAdapter extends ArrayAdapter<String> {
-        // Initialise custom font, for example:
-        Typeface font = Typeface.createFromAsset(getContext().getAssets(),
-                "Lato-Regular.ttf");
 
-        // (In reality I used a manager which caches the Typeface objects)
-        // Typeface font = FontManager.getInstance().getFont(getContext(), BLAMBOT);
+    private void lead_Eligibility() {
 
-        private MySpinnerAdapter(Context context, int resource, List<String> items) {
-            super(context, resource, items);
+
+
+        String purchased_by_bank_edit_txt1 = purchased_by_bank_edit_txt.getText().toString();
+        String purchased_by_GStbill_edit_txt1 = purchased_by_GStbill_edit_txt.getText().toString();
+        String sales_by_GStbill_edit_txt1 = sales_by_GStbill_edit_txt.getText().toString();
+        String bank_cridit_by_edtxt1 = bank_cridit_by_edtxt.getText().toString();
+
+        String Avg_monthly_income1 = Avg_monthly_income.getText().toString();
+        String Business_refernce_name1 = Business_refernce_name.getText().toString();
+        String Business_reference_mobile1 = Business_reference_mobile.getText().toString();
+        String other_income_edite_txt1 = other_income_edite_txt.getText().toString();
+
+        JSONObject jsonObject =new JSONObject();
+        JSONObject J= null;
+        try {
+            J =new JSONObject();
+            //  J.put(Params.email_id,email);
+
+            J.put("Business_registration_Id",Business_registration_Id);
+
+            J.put("purchased_by_bank_edit_txt1",purchased_by_bank_edit_txt1);
+            J.put("purchased_by_GStbill_edit_txt1",purchased_by_GStbill_edit_txt1);
+            J.put("sales_by_GStbill_edit_txt1",sales_by_GStbill_edit_txt1);
+            J.put("bank_cridit_by_edtxt1",bank_cridit_by_edtxt1);
+            J.put("Avg_monthly_income1",Avg_monthly_income1);
+            J.put("Business_refernce_name1",Business_refernce_name1);
+            J.put("Business_reference_mobile1",Business_reference_mobile1);
+            J.put("other_income_edite_txt1",other_income_edite_txt1);
+
+            J.put("Spinner_res_proof_Id",Spinner_res_proof_Id);
+            J.put("Guarenter_Id",Guarenter_Id);
+            J.put("Other_income_Id",Other_income_Id);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
 
-        // Affects default (closed) state of the spinner
-        @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
-            TextView view = (TextView) super.getView(position, convertView, parent);
-            view.setTypeface(font);
-            return view;
-        }
+        Log.e("Add Home Laoan", String.valueOf(J));
+        progressDialog.show();
+        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, Urls.ADD_LEAD_POST, J,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
 
-        // Affects opened state of the spinner
-        @Override
-        public View getDropDownView(int position, View convertView, ViewGroup parent) {
-            TextView view = (TextView) super.getDropDownView(position, convertView, parent);
-            view.setTypeface(font);
-            return view;
-        }
-    }*/
+                        String data = String.valueOf(response);
+                        Log.e("Add_Home_loan Partner", String.valueOf(response));
+
+
+                        progressDialog.dismiss();
+                    }
+                }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                //Log.d(TAG, error.getMessage());
+                VolleyLog.d("TAG", "Error: " + error.getMessage());
+                progressDialog.dismiss();
+
+            }
+        }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("content-type", "application/json");
+                return headers;
+            }
+        };
+
+        // AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
+        int socketTimeout = 0;
+        RetryPolicy policy = new DefaultRetryPolicy(socketTimeout,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
+
+        jsonObjReq.setRetryPolicy(policy);
+
+        AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
+    }
 
     @Override
     public void onBackPressed() {

@@ -124,18 +124,10 @@ public class Viability_Check_BL extends SimpleActivity {
         Objs.a.setStubId(this,R.layout.activity_viability__check__bl);
         initTools(R.string.viy_check);
 
-        lead_viy_step2 = (AppCompatButton) findViewById(R.id.lead_viy_step2);
+
         progressDialog = new SpotsDialog(context, R.style.Custom);
         imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
 
-        lead_viy_step2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(Viability_Check_BL.this, Eligibility_BL.class);
-                startActivity(intent);
-                finish();
-            }
-        });
 
         UISCREEN();
         makeJsonObjReq1();
@@ -145,6 +137,7 @@ public class Viability_Check_BL extends SimpleActivity {
 
     private void UISCREEN()
     {
+        lead_viy_step2 = (AppCompatButton) findViewById(R.id.lead_viy_step2);
         emp_type =(Spinner) findViewById(R.id.emp_type);
         has_pan_card =(Spinner) findViewById(R.id.has_pan_card);
         spi_vocation_type_ =(Spinner) findViewById(R.id.spi_vocation_type_);
@@ -324,6 +317,22 @@ public class Viability_Check_BL extends SimpleActivity {
 
             }
         });
+
+
+
+      /*  lead_viy_step2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Viability_Check_BL.this, Eligibility_BL.class);
+                startActivity(intent);
+                finish();
+            }
+        });*/
+
+
+
+
+
     }
 
 
@@ -1650,7 +1659,7 @@ public class Viability_Check_BL extends SimpleActivity {
 
 
 
-    private void lead_Eligibility() {
+    private void lead_viability() {
 
 
        // ST_monthly_afr_emi_amt_edit_txt = monthly_afr_emi_amt_edit_txt.getText().toString();
