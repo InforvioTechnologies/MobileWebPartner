@@ -108,6 +108,7 @@
             </LinearLayout>
         </LinearLayout>
         <LinearLayout
+            android:visibility="gone"
              android:id="@+id/forming"
              android:orientation="vertical"
              android:layout_width="match_parent"
@@ -200,7 +201,10 @@
                 android:layout_height="match_parent">
                 <androidx.appcompat.widget.AppCompatEditText
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:id="@+id/no_of_acres_edit_txt"
+                    android:textColor="@color/colorPrimaryDark"/>
             </LinearLayout>
         </LinearLayout>
 
@@ -249,10 +253,30 @@
                         android:backgroundTint="#ff000000"
                         android:backgroundTintMode="src_in"
                         android:spinnerMode="dropdown"
-                        android:id="@+id/business_what_crop_ly_txt"
+                        android:id="@+id/what_crop_spinne"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent" />
                 </LinearLayout>
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingLeft="16dp"
+                android:elevation="6dp"
+                android:layout_margin="10dp"
+                android:orientation="horizontal"
+                android:background="@color/paper">
+
+                <com.doodle.android.chips.ChipsView
+                    android:id="@+id/cv_what_kindof_crop"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:overScrollMode="never"
+                    android:textAppearance="@style/ChipTextStyle_Selected"
+                    app:cv_max_height="100dp"
+                    app:cv_vertical_spacing="2dp"
+                    />
 
             </LinearLayout>
         </LinearLayout>
@@ -292,7 +316,10 @@
                 android:layout_height="match_parent">
                 <androidx.appcompat.widget.AppCompatEditText
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:id="@+id/anual_income_edit_txt"
+                    android:textColor="@color/colorPrimaryDark"/>
             </LinearLayout>
         </LinearLayout>
         <LinearLayout
@@ -331,7 +358,10 @@
                 android:layout_height="match_parent">
                 <androidx.appcompat.widget.AppCompatEditText
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:id="@+id/daily_income_f"
+                    android:textColor="@color/colorPrimaryDark"/>
             </LinearLayout>
         </LinearLayout>
             <LinearLayout
@@ -370,7 +400,10 @@
                     android:layout_height="match_parent">
                     <androidx.appcompat.widget.AppCompatEditText
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"/>
+                        android:layout_height="wrap_content"
+                        android:textSize="16sp"
+                        android:id="@+id/number_of_years_in_work"
+                        android:textColor="@color/colorPrimaryDark"/>
                 </LinearLayout>
             </LinearLayout>
             <LinearLayout
@@ -481,18 +514,20 @@
                     android:layout_height="match_parent">
                     <androidx.appcompat.widget.AppCompatEditText
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"/>
+                        android:layout_height="wrap_content"
+                        android:textSize="16sp"
+                        android:id="@+id/average_monthly_income"
+                        android:textColor="@color/colorPrimaryDark"/>
                 </LinearLayout>
             </LinearLayout>
 
 
     </LinearLayout>
         <LinearLayout
-        android:visibility="gone"
-        android:id="@+id/dairy"
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+            android:id="@+id/dairy"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
@@ -581,7 +616,10 @@
                 android:layout_height="match_parent">
                 <androidx.appcompat.widget.AppCompatEditText
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:id="@+id/no_of_animals"
+                    android:textColor="@color/colorPrimaryDark"/>
             </LinearLayout>
         </LinearLayout>
         <LinearLayout
@@ -620,7 +658,10 @@
                 android:layout_height="match_parent">
                 <androidx.appcompat.widget.AppCompatEditText
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:id="@+id/no_of_liters_edit_txt"
+                    android:textColor="@color/colorPrimaryDark"/>
             </LinearLayout>
         </LinearLayout>
         <LinearLayout
@@ -711,7 +752,10 @@
                     android:layout_height="match_parent">
                     <androidx.appcompat.widget.AppCompatEditText
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"/>
+                        android:layout_height="wrap_content"
+                        android:textSize="16sp"
+                        android:id="@+id/no_of_years_in_works"
+                        android:textColor="@color/colorPrimaryDark"/>
                 </LinearLayout>
             </LinearLayout>
             <LinearLayout
@@ -765,6 +809,26 @@
                     </LinearLayout>
 
                 </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:paddingLeft="16dp"
+                    android:elevation="6dp"
+                    android:layout_margin="10dp"
+                    android:orientation="horizontal"
+                    android:background="@color/paper">
+
+                    <com.doodle.android.chips.ChipsView
+                        android:id="@+id/cv_Business_proof_dairy"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:overScrollMode="never"
+                        android:textAppearance="@style/ChipTextStyle_Selected"
+                        app:cv_max_height="100dp"
+                        app:cv_vertical_spacing="2dp"
+                        />
+
+                </LinearLayout>
             </LinearLayout>
             <LinearLayout
                 android:orientation="vertical"
@@ -802,7 +866,10 @@
                     android:layout_height="match_parent">
                     <androidx.appcompat.widget.AppCompatEditText
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"/>
+                        android:layout_height="wrap_content"
+                        android:textSize="16sp"
+                        android:id="@+id/avg_monthly_income"
+                        android:textColor="@color/colorPrimaryDark"/>
                 </LinearLayout>
             </LinearLayout>
     </LinearLayout>

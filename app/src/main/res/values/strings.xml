@@ -545,6 +545,7 @@
 
     <string name="error_avg">Enter the Avarage Monthly Income</string>
     <string name="error_purchased_by_Bank">Enter the % of purchased by Bank</string>
+    <string name="error_age">Enter the Age</string>
     <string name="error_purchased_by_gst">Enter the % of purchased by GST Based</string>
 
     <string name="error_sales_by_gst_crdt">Enter the % of sales by GST Based</string>
@@ -553,6 +554,19 @@
     <string name="error_bus_ref_name">Enter the Business reference name</string>
     <string name="error_bus_ref_mobile">Enter the Business reference Mobile</string>
     <string name="error_other_income_amt">Enter the Other income amount</string>
+
+    <string name="error_actual_business">Enter the Actual Business</string>
+    <string name="error_no_of_years_work">Enter the no of years in work</string>
+    <string name="error_no_of_acress">Enter the no of acres</string>
+    <string name="error_no_of_vehicle">Enter the no vehicle</string>
+    <string name="error_anual_income">Enter Annual Income</string>
+    <string name="error_daily_income">Enter Daily Income</string>
+    <string name="error_no_of_years_in_work">Enter the no of years in work</string>
+    <string name="error_avg_monthly_income">Enter the average monthly income</string>
+    <string name="error_no_of_animals">Enter the no of animals</string>
+    <string name="error_no_of_liters">Enter the no of lister</string>
+    <string name="error_no_years_in_work">Enter the no years in Work</string>
+    <string name="error_avg_monthly_income_d">Enter the no years in Work</string>
 
     <string name="net_salary">Please Enter the valid amount</string>
     <string name="err_curent">This field is required</string>
