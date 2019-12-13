@@ -108,7 +108,7 @@
             </LinearLayout>
         </LinearLayout>
         <LinearLayout
-            android:visibility="gone"
+
              android:id="@+id/forming"
              android:orientation="vertical"
              android:layout_width="match_parent"
@@ -524,6 +524,7 @@
 
     </LinearLayout>
         <LinearLayout
+            android:visibility="gone"
             android:id="@+id/dairy"
             android:orientation="vertical"
             android:layout_width="match_parent"
@@ -924,7 +925,7 @@
                             android:backgroundTint="#ff000000"
                             android:backgroundTintMode="src_in"
                             android:spinnerMode="dropdown"
-                            android:id="@+id/business_incom_proof_b"
+                            android:id="@+id/business_incom_proof_p"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent" />
                     </LinearLayout>
@@ -967,7 +968,10 @@
                     android:layout_height="match_parent">
                     <androidx.appcompat.widget.AppCompatEditText
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"/>
+                        android:layout_height="wrap_content"
+                        android:textSize="16sp"
+                        android:id="@+id/no_of_birds_edit_txt"
+                        android:textColor="@color/colorPrimaryDark"/>
                 </LinearLayout>
             </LinearLayout>
             <LinearLayout
@@ -1006,7 +1010,10 @@
                     android:layout_height="match_parent">
                     <androidx.appcompat.widget.AppCompatEditText
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"/>
+                        android:layout_height="wrap_content"
+                        android:textSize="16sp"
+                        android:id="@+id/supply_by_who"
+                        android:textColor="@color/colorPrimaryDark"/>
                 </LinearLayout>
             </LinearLayout>
             <LinearLayout
@@ -1045,7 +1052,10 @@
                     android:layout_height="match_parent">
                     <androidx.appcompat.widget.AppCompatEditText
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"/>
+                        android:layout_height="wrap_content"
+                        android:textSize="16sp"
+                        android:id="@+id/Selling_Price"
+                        android:textColor="@color/colorPrimaryDark"/>
                 </LinearLayout>
             </LinearLayout>
             <LinearLayout
@@ -1084,7 +1094,10 @@
                     android:layout_height="match_parent">
                     <androidx.appcompat.widget.AppCompatEditText
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"/>
+                        android:layout_height="wrap_content"
+                        android:textSize="16sp"
+                        android:id="@+id/Profit_affter_selling"
+                        android:textColor="@color/colorPrimaryDark"/>
                 </LinearLayout>
             </LinearLayout>
 
@@ -1124,7 +1137,10 @@
                     android:layout_height="match_parent">
                     <androidx.appcompat.widget.AppCompatEditText
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"/>
+                        android:layout_height="wrap_content"
+                        android:textSize="16sp"
+                        android:id="@+id/no_of_years_in_work_P"
+                        android:textColor="@color/colorPrimaryDark"/>
                 </LinearLayout>
             </LinearLayout>
             <LinearLayout
@@ -1178,6 +1194,26 @@
                     </LinearLayout>
 
                 </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:paddingLeft="16dp"
+                    android:elevation="6dp"
+                    android:layout_margin="10dp"
+                    android:orientation="horizontal"
+                    android:background="@color/paper">
+
+                    <com.doodle.android.chips.ChipsView
+                        android:id="@+id/cv_Business_proof_poultry"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:overScrollMode="never"
+                        android:textAppearance="@style/ChipTextStyle_Selected"
+                        app:cv_max_height="100dp"
+                        app:cv_vertical_spacing="2dp"
+                        />
+
+                </LinearLayout>
             </LinearLayout>
             <LinearLayout
                 android:orientation="vertical"
@@ -1215,7 +1251,10 @@
                     android:layout_height="match_parent">
                     <androidx.appcompat.widget.AppCompatEditText
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"/>
+                        android:layout_height="wrap_content"
+                        android:textSize="16sp"
+                        android:id="@+id/avg_monthly_income_Poultry"
+                        android:textColor="@color/colorPrimaryDark"/>
                 </LinearLayout>
             </LinearLayout>
 

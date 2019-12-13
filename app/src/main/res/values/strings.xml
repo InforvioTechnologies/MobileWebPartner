@@ -472,6 +472,7 @@
     <string name="no_of_employees">No-of Employees</string>
     <string name="business_setup_investment">Business setup Investment</string>
     <string name="vrm">Value of Stock and Raw materials</string>
+    <string name="value_of_machineries">Value of machineries</string>
     <string name="monthly_sales">Monthly Sales</string>
     <string name="persentage_gst">Percentage of Purchased by GST Bill based</string>
     <string name="persentage_sale_gst">Percentage of Sales by GST Bill based</string>
@@ -556,6 +557,7 @@
     <string name="error_other_income_amt">Enter the Other income amount</string>
 
     <string name="error_actual_business">Enter the Actual Business</string>
+    <string name="error_delership_company">Enter the delership_company</string>
     <string name="error_no_of_years_work">Enter the no of years in work</string>
     <string name="error_no_of_acress">Enter the no of acres</string>
     <string name="error_no_of_vehicle">Enter the no vehicle</string>
@@ -564,9 +566,24 @@
     <string name="error_no_of_years_in_work">Enter the no of years in work</string>
     <string name="error_avg_monthly_income">Enter the average monthly income</string>
     <string name="error_no_of_animals">Enter the no of animals</string>
+    <string name="error_no_of_birds">Enter the no of birds</string>
+    <string name="error_selling_price">Enter the Selling Price</string>
+
+    <string name="error_residence_pincode">Residence Pincode</string>
+    <string name="error_office_pincode">Office Pincode</string>
+
+    <string name="error_profit_af_sel">Enter the Profit</string>
     <string name="error_no_of_liters">Enter the no of lister</string>
     <string name="error_no_years_in_work">Enter the no years in Work</string>
-    <string name="error_avg_monthly_income_d">Enter the no years in Work</string>
+    <string name="error_no_emp_in_work">Enter the no employee in Work</string>
+    <string name="error_bus_setup_invest">Enter the business set up investment</string>
+    <string name="error_value_of_machinaries">Enter the Value of machinaries</string>
+
+    <string name="error_monthly_income">Enter the no monthly income</string>
+
+    <string name="error_avg_monthly_income_d">Enter the avg Monthly income</string>
+
+
 
     <string name="net_salary">Please Enter the valid amount</string>
     <string name="err_curent">This field is required</string>

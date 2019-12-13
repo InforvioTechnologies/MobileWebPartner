@@ -67,7 +67,8 @@ public class Viability_Check_BL extends SimpleActivity {
             spinner_assets_owned,spinner_business_proof_txt_F,spi_busproof_own_business,
             spinner_office_shop_setup,business_proof_own_business_spinner,spp_vehicle_type,
             what_crop_spinne,business_incom_proof_D,spinner_business_proof_txt_D,
-            spinner_how_do_sell_milk;
+            spinner_how_do_sell_milk,business_incom_proof_p,spinner_business_proof_txt_P,
+            spinner_frenc_deler_sub;
 
     private LinearLayout individual,self_business,formin_dairy,Driver_C_owner,
              res_rented,forming,dairy,poultry,
@@ -79,16 +80,17 @@ public class Viability_Check_BL extends SimpleActivity {
     InputMethodManager imm;
     JSONArray Type_of_employement,have_pan_ar,vocaton_ar,Business_income_proof_ar,
             vocation_type_forming_ar,Residence_ownership_ar,Business_type_own_business,Business_Proof,Assets_own,
-            office_shop,vehicle_Type,crop_type,sell_milk;
+            office_shop,vehicle_Type,crop_type,sell_milk,franchise;
     String[] EMPLOYEE_TYPE_SA,PAN_ID_SA,Vocation_SA,Business_income_proof_SA,vocation_type_forming__SA,
             Residence_Type_SA,Own_business_type_SA,Selling_Milk_SA,
-            Pincode_SA,Office_Shop_SA;
+            Pincode_SA,Office_Shop_SA,franchise_SA;
     ArrayAdapter<String> Employee_Type_adapter,PAN_ID_Adapter,Vocation_Adapter,Business_income_proof_Adapter,
             vocation_type_forming_Adapter,Residence_Adapter,Own_business_type_Adapter,
-            Pincode_Adapter,Office_Shop__Adapter,Selling_Milk_Adapter;
+            Pincode_Adapter,Office_Shop__Adapter,Selling_Milk_Adapter,franchise__Adapter;
 
     ChipsView cv_vusiness_proof_individual,cv_Assets_Owns,cv_business_proof_multiselect_forming,cv_business_proof_own,
-                 cv_vehicle_type,cv_what_kindof_crop,cv_Business_proof_dairy;
+                 cv_vehicle_type,cv_what_kindof_crop,cv_Business_proof_dairy,
+            cv_Business_proof_poultry;
 
     AppCompatTextView business_details_txt,emp_type1,emp_type2,age_txt,age_txt1,pan_number_txt,
                     pan_number_txt1,residence_details,txt_residence_pincode,txt_residence_pincode1,txt_residence_type,
@@ -101,7 +103,15 @@ public class Viability_Check_BL extends SimpleActivity {
             no_of_years_ind_edit_txt,avg_monthly_incom_edit_txt,
             actual_business_ind_edit_txt,no_of_years_work_ind_edit_txt,actual_business_edit_forming_txt,
             no_of_acres_edit_txt,anual_income_edit_txt,daily_income_f,number_of_years_in_work,average_monthly_income,
-            no_of_animals,no_of_liters_edit_txt,no_of_years_in_works,avg_monthly_income;
+            no_of_animals,no_of_liters_edit_txt,no_of_years_in_works,avg_monthly_income,
+            no_of_birds_edit_txt,supply_by_who,Selling_Price,Profit_affter_selling,no_of_years_in_work_P,
+            avg_monthly_income_Poultry,actual_business_edit_own_edt_txt,
+            delership_company_edit_txt,monthly_profit_edit_txt,number_of_years_in_work_retails,
+            monthly_income_own_ser_bus_edit_txt,no_of_employee_own_ser_bus_edit_txt,business_investment_own_ser_bus_edit_txt,
+            value_of_stock_raw_material,monthly_sales_manufa,monthly_profit_manufa,
+            average_monthly_income_own_business,value_of_machineries;
+
+
 
     AutoCompleteTextView residence_pincode_edite_txt,office_residence_pincode_edite_txt;
 
@@ -116,16 +126,18 @@ public class Viability_Check_BL extends SimpleActivity {
             Office_Shop__id,Office_Shop__value,off_residence_id,off_residence_Value,
             business_incom_proof_own_business_id,business_incom_proof_own_business_value,
             business_incom_proof_Dairy_id,business_incom_proof_Dairy_value,
-            selling_milk_id,selling_milk_value;
+            selling_milk_id,selling_milk_value,business_incom_proof_Poultry_id,business_incom_proof_Poultry_value,
+            franchise__id,franchise__value;
 
     ArrayList<IncomeProofPOJO> Business_proof_individual,Assets_own_array_list,Business_proof_individual_forming_array_list,
                                 Business_proof_own_array_list,Vehicle_type_individual,crop_type_array_list,
-                                Business_proof_forming_dairy_array_list;
+                                Business_proof_forming_dairy_array_list,Business_proof_forming_poultry_array_list;
 
     MyCustomAdapter_Business_proof_Individual business_proof_individual_adapter = null;
     MyCustomAdapter_Vehicle_Type_Adapter vehicle_type_adapter = null;
     MyCustomAdapter_Business_proof_Forming business_proof_Forming_adapter = null;
     MyCustomAdapter_Business_proof_Forming_dairy business_proof_Forming_dairy_adapter = null;
+    MyCustomAdapter_Business_proof_Forming_poultry business_proof_Forming_poultry_adapter = null;
     MyCustomAdapter_Business_proof_Own business_proof_Own_Business = null;
     MyCustomAdapter_Assets_own_adapter Assets_own_adapter = null;
 
@@ -166,13 +178,16 @@ public class Viability_Check_BL extends SimpleActivity {
         business_incom_proof_forming =(Spinner) findViewById(R.id.business_incom_proof_forming);
         business_proof_own_business_spinner =(Spinner) findViewById(R.id.business_proof_own_business_spinner);
         what_crop_spinne =(Spinner) findViewById(R.id.what_crop_spinne);
+        business_incom_proof_p =(Spinner) findViewById(R.id.business_incom_proof_p);
 
         spi_busproof_individual =(Spinner) findViewById(R.id.spi_busproof_individual);
         spinner_business_proof_txt_F =(Spinner) findViewById(R.id.spinner_business_proof_txt_F);
         spinner_business_proof_txt_D =(Spinner) findViewById(R.id.spinner_business_proof_txt_D);
+        spinner_business_proof_txt_P =(Spinner) findViewById(R.id.spinner_business_proof_txt_P);
         spinner_assets_owned =(Spinner) findViewById(R.id.spinner_assets_owned);
         spp_vehicle_type =(Spinner) findViewById(R.id.spp_vehicle_type);
         spinner_office_shop_setup =(Spinner) findViewById(R.id.spinner_office_shop_setup);
+        spinner_frenc_deler_sub =(Spinner) findViewById(R.id.spinner_frenc_deler_sub);
 
         spi_busproof_own_business =(Spinner) findViewById(R.id.spi_busproof_own_business);
         business_incom_proof_D =(Spinner) findViewById(R.id.business_incom_proof_D);
@@ -186,6 +201,7 @@ public class Viability_Check_BL extends SimpleActivity {
         dairy = (LinearLayout) findViewById(R.id.dairy);
         poultry = (LinearLayout) findViewById(R.id.poultry);
         cv_vusiness_proof_individual =(ChipsView) findViewById(R.id.cv_vusiness_proof_individual);
+        cv_Business_proof_poultry =(ChipsView) findViewById(R.id.cv_Business_proof_poultry);
         cv_Assets_Owns =(ChipsView) findViewById(R.id.cv_Assets_Owns);
         cv_business_proof_multiselect_forming =(ChipsView) findViewById(R.id.cv_business_proof_multiselect_forming);
         cv_Business_proof_dairy =(ChipsView) findViewById(R.id.cv_Business_proof_dairy);
@@ -245,6 +261,9 @@ public class Viability_Check_BL extends SimpleActivity {
         number_of_years_in_work = (AppCompatEditText) findViewById(R.id.number_of_years_in_work);
         average_monthly_income = (AppCompatEditText) findViewById(R.id.average_monthly_income);
 
+        no_of_birds_edit_txt = (AppCompatEditText) findViewById(R.id.no_of_birds_edit_txt);
+        supply_by_who = (AppCompatEditText) findViewById(R.id.supply_by_who);
+
         avg_monthly_incom_edit_txt = (AppCompatEditText) findViewById(R.id.avg_monthly_incom_edit_txt);
         actual_business_ind_edit_txt = (AppCompatEditText) findViewById(R.id.actual_business_ind_edit_txt);
         actual_business_edit_forming_txt = (AppCompatEditText) findViewById(R.id.actual_business_edit_forming_txt);
@@ -253,6 +272,28 @@ public class Viability_Check_BL extends SimpleActivity {
         no_of_liters_edit_txt = (AppCompatEditText) findViewById(R.id.no_of_liters_edit_txt);
         no_of_years_in_works = (AppCompatEditText) findViewById(R.id.no_of_years_in_works);
         avg_monthly_income = (AppCompatEditText) findViewById(R.id.avg_monthly_income);
+        Selling_Price = (AppCompatEditText) findViewById(R.id.Selling_Price);
+        Profit_affter_selling = (AppCompatEditText) findViewById(R.id.Profit_affter_selling);
+        no_of_years_in_work_P = (AppCompatEditText) findViewById(R.id.no_of_years_in_work_P);
+        avg_monthly_income_Poultry = (AppCompatEditText) findViewById(R.id.avg_monthly_income_Poultry);
+
+        actual_business_edit_own_edt_txt = (AppCompatEditText) findViewById(R.id.actual_business_edit_own_edt_txt);
+        delership_company_edit_txt = (AppCompatEditText) findViewById(R.id.delership_company_edit_txt);
+        monthly_profit_edit_txt = (AppCompatEditText) findViewById(R.id.monthly_profit_edit_txt);
+
+       monthly_income_own_ser_bus_edit_txt = (AppCompatEditText) findViewById(R.id.monthly_income_own_ser_bus_edit_txt);
+       no_of_employee_own_ser_bus_edit_txt = (AppCompatEditText) findViewById(R.id.no_of_employee_own_ser_bus_edit_txt);
+        business_investment_own_ser_bus_edit_txt = (AppCompatEditText) findViewById(R.id.business_investment_own_ser_bus_edit_txt);
+
+
+
+        value_of_stock_raw_material = (AppCompatEditText) findViewById(R.id.value_of_stock_raw_material);
+        monthly_sales_manufa = (AppCompatEditText) findViewById(R.id.monthly_sales_manufa);
+        monthly_profit_manufa = (AppCompatEditText) findViewById(R.id.monthly_profit_manufa);
+        value_of_machineries = (AppCompatEditText) findViewById(R.id.value_of_machineries);
+
+        number_of_years_in_work_retails = (AppCompatEditText) findViewById(R.id.number_of_years_in_work_retails);
+        average_monthly_income_own_business = (AppCompatEditText) findViewById(R.id.average_monthly_income_own_business);
 
     }
 
@@ -311,6 +352,29 @@ public class Viability_Check_BL extends SimpleActivity {
         no_of_liters_edit_txt.setTypeface(font);
         no_of_years_in_works.setTypeface(font);
         avg_monthly_income.setTypeface(font);
+        no_of_birds_edit_txt.setTypeface(font);
+        supply_by_who.setTypeface(font);
+        Selling_Price.setTypeface(font);
+        Profit_affter_selling.setTypeface(font);
+        no_of_years_in_work_P.setTypeface(font);
+        avg_monthly_income_Poultry.setTypeface(font);
+
+        actual_business_edit_own_edt_txt.setTypeface(font);
+        delership_company_edit_txt.setTypeface(font);
+        monthly_profit_edit_txt.setTypeface(font);
+
+        monthly_income_own_ser_bus_edit_txt.setTypeface(font);
+        no_of_employee_own_ser_bus_edit_txt.setTypeface(font);
+        business_investment_own_ser_bus_edit_txt.setTypeface(font);
+
+        value_of_stock_raw_material.setTypeface(font);
+        monthly_sales_manufa.setTypeface(font);
+        monthly_profit_manufa.setTypeface(font);
+        value_of_machineries.setTypeface(font);
+
+
+        number_of_years_in_work_retails.setTypeface(font);
+        average_monthly_income_own_business.setTypeface(font);
 
 
 
@@ -397,7 +461,8 @@ public class Viability_Check_BL extends SimpleActivity {
                         {
                             validation_individual();
 
-                        }else  if(Employee_type_Id.equals("2")) {
+
+                        }else if(Employee_type_Id.equals("2")) {
 
                                 if(vocation_type_forming_id.equals("0"))
                                 {
@@ -418,10 +483,18 @@ public class Viability_Check_BL extends SimpleActivity {
 
                                 }else if(vocation_type_forming_id.equals("3"))
                                 {
-
+                                    if (!Actual_business_forming()) {
+                                        return;
+                                    }
+                                    validation_poultry();
                                 }
 
+                        }else if(Employee_type_Id.equals("3"))
+                        {
+                            Validate_own_Business();
+
                         }
+
 
                     }
 
@@ -447,7 +520,7 @@ public class Viability_Check_BL extends SimpleActivity {
 
             if(Business_income_proof_id.equals("0"))
             {
-                Toast.makeText(context,"please Select the Business proof",Toast.LENGTH_SHORT).show();
+                Toast.makeText(context,"please Select the Business income proof",Toast.LENGTH_SHORT).show();
 
             }else if(Business_income_proof_id.equals("7"))
             {
@@ -464,7 +537,7 @@ public class Viability_Check_BL extends SimpleActivity {
                     return;
                 }
 
-
+                Residence_Details_Validation();
             }else
             {
 
@@ -476,6 +549,8 @@ public class Viability_Check_BL extends SimpleActivity {
                 if (!Avg_Monthly_income()) {
                     return;
                 }
+                Residence_Details_Validation();
+
             }
 
 
@@ -489,7 +564,7 @@ public class Viability_Check_BL extends SimpleActivity {
 
         if(business_incom_proof_forming_id.equals("0"))
         {
-            Toast.makeText(context,"please Select the Business proof",Toast.LENGTH_SHORT).show();
+            Toast.makeText(context,"please Select the Business income proof",Toast.LENGTH_SHORT).show();
 
         }else
         {
@@ -549,6 +624,181 @@ public class Viability_Check_BL extends SimpleActivity {
 
         }
     }
+
+    private void validation_poultry()
+    {
+        if(business_incom_proof_Poultry_id.equals("0"))
+        {
+            Toast.makeText(context,"please Select the business income proof",Toast.LENGTH_SHORT).show();
+        }else
+        {
+            if (!No_Of_Birds()) {
+                return;
+            }
+            if (!Supplied_by_who()) {
+                return;
+            }
+
+            if (!Selling_Price()) {
+                return;
+            }
+
+            if (!Profit_after_Selling()) {
+                return;
+            }
+
+            if (!No_years_in_work_p()) {
+                return;
+            }
+
+            if (!Avg_monthly_income_p()) {
+                return;
+            }
+
+        }
+    }
+
+    private void Validate_own_Business()
+    {
+        if(business_own_type_id.equals("0"))
+        {
+            Toast.makeText(context,"please Select the business type",Toast.LENGTH_SHORT).show();
+
+        }else
+        {
+            if (!Actual_Business()) {
+                return;
+            }
+
+            if(business_incom_proof_own_business_id.equals("0"))
+            {
+                Toast.makeText(context,"please Select the business income proof",Toast.LENGTH_SHORT).show();
+
+            }else
+            {
+                if(Office_Shop__id.equals("0"))
+                {
+                    Toast.makeText(context,"please Select the office/shop typef",Toast.LENGTH_SHORT).show();
+
+                }else
+                {
+
+                    if(business_own_type_id.equals("1"))
+                    {
+                        if(franchise__id.equals("0"))
+                        {
+                            Toast.makeText(context,"please Select Franchise/dealer/sub dealer type",Toast.LENGTH_SHORT).show();
+
+                        }else
+                        {
+                            if (!Delership_Company()) {
+                                return;
+                            }
+                            if (!Monthly_Profit()) {
+                                return;
+                            }
+
+                            Own_Bus_No_year_com_validation();
+                        }
+
+                    }else if(business_own_type_id.equals("2"))
+                    {
+
+                        if (!monthly_income_own_ser_bus_Work()) {
+                            return;
+                        }
+                        if (!no_of_employee_own_ser_bus_Work()) {
+                            return;
+                        }
+                        if (!business_investment_own_ser_bus_Work()) {
+                            return;
+                        }
+                        Own_Bus_No_year_com_validation();
+
+                    }else if(business_own_type_id.equals("3"))
+                    {
+
+                        if (!value_of_stock_raw_material_Work()) {
+                            return;
+                        }
+                        if (!monthly_sales_manufa_Work()) {
+                            return;
+                        }
+                        if (!monthly_profit_manufa_Work()) {
+                            return;
+                        }
+
+                        if (!Value_of_Machinaries()) {
+                            return;
+                        }
+                        Own_Bus_No_year_com_validation();
+
+                    }
+
+                }
+            }
+
+
+        }
+    }
+
+    private void Own_Bus_No_year_com_validation()
+    {
+        if (!No_years_in_Work()) {
+            return;
+        }
+
+        if (!Avg_monthly_income_own_Bus()) {
+            return;
+        }
+
+    }
+
+    private void Residence_Details_Validation()
+    {
+        if(Employee_type_Id.equals("3"))
+        {
+
+           if(Office_Shop__id.equals("2"))
+            {
+                if (!office_pincode()) {
+                    return;
+                }
+                if(off_residence_id.equals("0"))
+                {
+                    Toast.makeText(context,"please Select office ownership type",Toast.LENGTH_SHORT).show();
+
+                }else
+                {
+                    resi_val();
+                }
+            }else
+            {
+               resi_val();
+            }
+        }else
+        {
+            resi_val();
+
+        }
+
+
+    }
+
+    private void resi_val()
+    {
+        if (!Residence_pincode()) {
+            return;
+        }
+        if(residence_id.equals("0"))
+        {
+            Toast.makeText(context,"please Select residence type",Toast.LENGTH_SHORT).show();
+        }else
+        {
+
+        }
+    }
+
     private boolean Age_validation(){
 
         if (age_edit_txt.getText().toString().isEmpty()) {
@@ -760,7 +1010,279 @@ public class Viability_Check_BL extends SimpleActivity {
         return true;
     }
 
+    private boolean No_Of_Birds(){
 
+        if (no_of_birds_edit_txt.getText().toString().isEmpty()) {
+            no_of_birds_edit_txt.setError(getText(R.string.error_no_of_birds));
+            no_of_birds_edit_txt.requestFocus();
+            return false;
+        } else {
+
+            //inputLayoutLname.setErrorEnabled(false);
+        }
+
+        return true;
+    }
+
+
+    private boolean Supplied_by_who(){
+
+        if (supply_by_who.getText().toString().isEmpty()) {
+            supply_by_who.setError(getText(R.string.error_no_of_birds));
+            supply_by_who.requestFocus();
+            return false;
+        } else {
+
+            //inputLayoutLname.setErrorEnabled(false);
+        }
+
+        return true;
+    }
+
+    private boolean Selling_Price(){
+
+        if (Selling_Price.getText().toString().isEmpty()) {
+            Selling_Price.setError(getText(R.string.error_selling_price));
+            Selling_Price.requestFocus();
+            return false;
+        } else {
+
+            //inputLayoutLname.setErrorEnabled(false);
+        }
+
+        return true;
+    }
+
+    private boolean Profit_after_Selling(){
+
+        if (Profit_affter_selling.getText().toString().isEmpty()) {
+            Profit_affter_selling.setError(getText(R.string.error_profit_af_sel));
+            Profit_affter_selling.requestFocus();
+            return false;
+        } else {
+
+            //inputLayoutLname.setErrorEnabled(false);
+        }
+
+        return true;
+    }
+
+
+
+    private boolean No_years_in_work_p(){
+
+        if (no_of_years_in_work_P.getText().toString().isEmpty()) {
+            no_of_years_in_work_P.setError(getText(R.string.error_no_of_years_in_work));
+            no_of_years_in_work_P.requestFocus();
+            return false;
+        } else {
+
+            //inputLayoutLname.setErrorEnabled(false);
+        }
+
+        return true;
+    }
+
+    private boolean Avg_monthly_income_p(){
+
+        if (avg_monthly_income_Poultry.getText().toString().isEmpty()) {
+            avg_monthly_income_Poultry.setError(getText(R.string.error_avg_monthly_income_d));
+            avg_monthly_income_Poultry.requestFocus();
+            return false;
+        } else {
+
+            //inputLayoutLname.setErrorEnabled(false);
+        }
+
+        return true;
+    }
+
+
+    private boolean Actual_Business(){
+
+        if (actual_business_edit_own_edt_txt.getText().toString().isEmpty()) {
+            actual_business_edit_own_edt_txt.setError(getText(R.string.error_actual_business));
+            actual_business_edit_own_edt_txt.requestFocus();
+            return false;
+        } else {
+
+            //inputLayoutLname.setErrorEnabled(false);
+        }
+
+        return true;
+    }
+
+    private boolean Delership_Company(){
+
+        if (delership_company_edit_txt.getText().toString().isEmpty()) {
+            delership_company_edit_txt.setError(getText(R.string.error_delership_company));
+            delership_company_edit_txt.requestFocus();
+            return false;
+        } else {
+
+            //inputLayoutLname.setErrorEnabled(false);
+        }
+
+        return true;
+    }
+    private boolean Monthly_Profit(){
+
+        if (monthly_profit_edit_txt.getText().toString().isEmpty()) {
+            monthly_profit_edit_txt.setError(getText(R.string.error_profit_af_sel));
+            monthly_profit_edit_txt.requestFocus();
+            return false;
+        } else {
+
+            //inputLayoutLname.setErrorEnabled(false);
+        }
+        return true;
+    }
+
+
+
+    private boolean monthly_income_own_ser_bus_Work(){
+
+        if (monthly_income_own_ser_bus_edit_txt.getText().toString().isEmpty()) {
+            monthly_income_own_ser_bus_edit_txt.setError(getText(R.string.error_monthly_income));
+            monthly_income_own_ser_bus_edit_txt.requestFocus();
+            return false;
+        } else {
+
+            //inputLayoutLname.setErrorEnabled(false);
+        }
+        return true;
+    }
+
+    private boolean no_of_employee_own_ser_bus_Work(){
+
+        if (no_of_employee_own_ser_bus_edit_txt.getText().toString().isEmpty()) {
+            no_of_employee_own_ser_bus_edit_txt.setError(getText(R.string.error_no_emp_in_work));
+            no_of_employee_own_ser_bus_edit_txt.requestFocus();
+            return false;
+        } else {
+
+            //inputLayoutLname.setErrorEnabled(false);
+        }
+        return true;
+    }
+
+    private boolean business_investment_own_ser_bus_Work(){
+
+        if (business_investment_own_ser_bus_edit_txt.getText().toString().isEmpty()) {
+            business_investment_own_ser_bus_edit_txt.setError(getText(R.string.error_bus_setup_invest));
+            business_investment_own_ser_bus_edit_txt.requestFocus();
+            return false;
+        } else {
+
+            //inputLayoutLname.setErrorEnabled(false);
+        }
+        return true;
+    }
+
+
+
+
+    private boolean value_of_stock_raw_material_Work(){
+
+        if (value_of_stock_raw_material.getText().toString().isEmpty()) {
+            value_of_stock_raw_material.setError(getText(R.string.error_bus_setup_invest));
+            value_of_stock_raw_material.requestFocus();
+            return false;
+        } else {
+
+            //inputLayoutLname.setErrorEnabled(false);
+        }
+        return true;
+    }
+    private boolean monthly_sales_manufa_Work(){
+
+        if (monthly_sales_manufa.getText().toString().isEmpty()) {
+            monthly_sales_manufa.setError(getText(R.string.error_bus_setup_invest));
+            monthly_sales_manufa.requestFocus();
+            return false;
+        } else {
+
+            //inputLayoutLname.setErrorEnabled(false);
+        }
+        return true;
+    }
+
+    private boolean monthly_profit_manufa_Work(){
+
+        if (monthly_profit_manufa.getText().toString().isEmpty()) {
+            monthly_profit_manufa.setError(getText(R.string.error_bus_setup_invest));
+            monthly_profit_manufa.requestFocus();
+            return false;
+        } else {
+
+            //inputLayoutLname.setErrorEnabled(false);
+        }
+        return true;
+    }
+
+    private boolean Value_of_Machinaries(){
+
+        if (value_of_machineries.getText().toString().isEmpty()) {
+            value_of_machineries.setError(getText(R.string.error_value_of_machinaries));
+            value_of_machineries.requestFocus();
+            return false;
+        } else {
+
+            //inputLayoutLname.setErrorEnabled(false);
+        }
+        return true;
+    }
+
+
+    private boolean No_years_in_Work(){
+
+        if (number_of_years_in_work_retails.getText().toString().isEmpty()) {
+            number_of_years_in_work_retails.setError(getText(R.string.error_no_years_in_work));
+            number_of_years_in_work_retails.requestFocus();
+            return false;
+        } else {
+
+            //inputLayoutLname.setErrorEnabled(false);
+        }
+        return true;
+    }
+    private boolean Avg_monthly_income_own_Bus(){
+
+        if (average_monthly_income_own_business.getText().toString().isEmpty()) {
+            average_monthly_income_own_business.setError(getText(R.string.error_avg_monthly_income));
+            average_monthly_income_own_business.requestFocus();
+            return false;
+        } else {
+
+            //inputLayoutLname.setErrorEnabled(false);
+        }
+        return true;
+    }
+
+    private boolean Residence_pincode(){
+
+        if (residence_pincode_edite_txt.getText().toString().isEmpty()) {
+            residence_pincode_edite_txt.setError(getText(R.string.error_residence_pincode));
+            residence_pincode_edite_txt.requestFocus();
+            return false;
+        } else {
+
+            //inputLayoutLname.setErrorEnabled(false);
+        }
+        return true;
+    }
+    private boolean office_pincode(){
+
+        if (office_residence_pincode_edite_txt.getText().toString().isEmpty()) {
+            office_residence_pincode_edite_txt.setError(getText(R.string.error_office_pincode));
+            office_residence_pincode_edite_txt.requestFocus();
+            return false;
+        } else {
+
+            //inputLayoutLname.setErrorEnabled(false);
+        }
+        return true;
+    }
 
 
     private void GET_Pincode1(String code) {
@@ -904,11 +1426,14 @@ public class Viability_Check_BL extends SimpleActivity {
 
                             Business_type_own_business =object.getJSONArray("Business_type");
                             Business_Proof =object.getJSONArray("Business_Proof");
+
                             Assets_own =object.getJSONArray("Assets_own");
                             office_shop =object.getJSONArray("office_shop");
                             vehicle_Type =object.getJSONArray("vehicle_Type");
                             crop_type =object.getJSONArray("crop_type");
                             sell_milk =object.getJSONArray("sell_milk");
+
+                            franchise =object.getJSONArray("franchise");
 
                            // Business_Proof =object.getJSONArray("Business_Proof");
 
@@ -927,12 +1452,18 @@ public class Viability_Check_BL extends SimpleActivity {
                             Business_Proof_individual_forming(Business_Proof);
                             Business_Proof_Own_Business(Business_Proof);
                             Business_Proof_forming_Dairy(Business_Proof);
+                            Business_Proof_forming_Poultry(Business_Proof);
 
                             Assets_own_fun(Assets_own);
                             Office_Shop_(office_shop);
                             Vehicle_Type_(vehicle_Type);
                             Crop_type_function(crop_type);
                             Selling_milk(sell_milk);
+
+                            Selling_milk(sell_milk);
+
+                            Runs_own_business_franchise(franchise);
+
 
 
                         } catch (JSONException e) {
@@ -1344,6 +1875,43 @@ public class Viability_Check_BL extends SimpleActivity {
                     return false;
                 }
             });
+
+
+
+            business_incom_proof_p.setAdapter(Business_income_proof_Adapter);
+            business_incom_proof_p.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                    try {
+
+
+
+                        //  City_loc_uniqueID = ja.getJSONObject(position).getString("city_id");
+                        business_incom_proof_Poultry_id = Business_income_proof_ar.getJSONObject(position).getString("id");
+                        business_incom_proof_Poultry_value  = Business_income_proof_ar.getJSONObject(position).getString("value");
+                        //CAT_ID = ja.getJSONObject(position).getString("category_id");
+                        Log.e("vocaton_id", business_incom_proof_Poultry_id);
+                        Log.e("vocaton_value", business_incom_proof_Poultry_value);
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+
+                }
+            });
+            business_incom_proof_p.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View view, MotionEvent motionEvent) {
+                    // imm.hideSoftInputFromWindow(edt_buyer_address.getWindowToken(), 0);
+                    return false;
+                }
+            });
+
         }
 
 
@@ -1554,7 +2122,72 @@ public class Viability_Check_BL extends SimpleActivity {
 
                 }
             });
-            spi_vocation_forming.setOnTouchListener(new View.OnTouchListener() {
+            spinner_office_shop_setup.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View view, MotionEvent motionEvent) {
+                    // imm.hideSoftInputFromWindow(edt_buyer_address.getWindowToken(), 0);
+                    return false;
+                }
+            });
+        }
+
+    }
+
+    private void Runs_own_business_franchise(final JSONArray franchise_ar) throws JSONException {
+        //   SPINNERLIST = new String[ja.length()];
+
+        franchise_SA = new String[franchise_ar.length()];
+        for (int i=0;i<franchise_ar.length();i++){
+            JSONObject J =  franchise.getJSONObject(i);
+            franchise_SA[i] = J.getString("value");
+            final List<String> loan_type_list = new ArrayList<>(Arrays.asList(franchise_SA));
+            franchise__Adapter = new ArrayAdapter<String>(context, R.layout.view_spinner_item, loan_type_list){
+                public View getView(int position, View convertView, ViewGroup parent) {
+                    font = Typeface.createFromAsset(context.getAssets(),"Lato-Regular.ttf");
+                    TextView v = (TextView) super.getView(position, convertView, parent);
+                    v.setTypeface(font);
+                    return v;
+                }
+
+                public View getDropDownView(int position, View convertView, ViewGroup parent) {
+                    TextView v = (TextView) super.getView(position, convertView, parent);
+                    v.setTypeface(font);
+                    return v;
+                }
+            };
+
+            franchise__Adapter.setDropDownViewResource(R.layout.view_spinner_item);
+            spinner_frenc_deler_sub.setAdapter(franchise__Adapter);
+            spinner_frenc_deler_sub.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                    try {
+
+
+                        //  City_loc_uniqueID = ja.getJSONObject(position).getString("city_id");
+                        franchise__id = franchise.getJSONObject(position).getString("id");
+                        franchise__value = franchise.getJSONObject(position).getString("value");
+                        //CAT_ID = ja.getJSONObject(position).getString("category_id");
+                        Log.d("vocaton_id", franchise__id);
+                        Log.d("vocaton_value", franchise__value);
+
+
+
+
+
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+
+                }
+            });
+            spinner_frenc_deler_sub.setOnTouchListener(new View.OnTouchListener() {
                 @Override
                 public boolean onTouch(View view, MotionEvent motionEvent) {
                     // imm.hideSoftInputFromWindow(edt_buyer_address.getWindowToken(), 0);
@@ -1815,6 +2448,25 @@ public class Viability_Check_BL extends SimpleActivity {
 
     }
 
+    private void Business_Proof_forming_Poultry(final JSONArray ja) throws JSONException {
+
+        Business_proof_forming_poultry_array_list = new ArrayList<IncomeProofPOJO>();
+
+        for (int i=0;i<ja.length();i++){
+            JSONObject J =  ja.getJSONObject(i);
+
+            String id = J.getString("id");
+            String locality = J.getString("value");
+
+            IncomeProofPOJO salary_proof = new IncomeProofPOJO(id,locality,false);
+            Business_proof_forming_poultry_array_list.add(salary_proof);
+        }
+        business_proof_Forming_poultry_adapter = new MyCustomAdapter_Business_proof_Forming_poultry(context, 0,Business_proof_forming_poultry_array_list);
+        spinner_business_proof_txt_P.setAdapter(business_proof_Forming_poultry_adapter);
+        business_proof_Forming_poultry_adapter.notifyDataSetChanged();
+
+    }
+
     private void Business_Proof_Own_Business(final JSONArray ja) throws JSONException {
 
         Business_proof_own_array_list = new ArrayList<IncomeProofPOJO>();
@@ -1969,6 +2621,94 @@ public class Viability_Check_BL extends SimpleActivity {
             holder.name.setTag(business_proof);
 
             if(business_proof.getIP_name().contains("Business Proof")){
+                holder.name.setVisibility(View.GONE);
+                holder.code.setVisibility(View.VISIBLE);
+                holder.code.setText("Select Business Proof");
+
+            }else {
+                holder.code.setVisibility(View.GONE);
+                holder.name.setVisibility(View.VISIBLE);
+            }
+            return convertView;
+        }
+
+    }
+
+
+    private class MyCustomAdapter_Business_proof_Forming_poultry extends ArrayAdapter<IncomeProofPOJO> {
+
+        private ArrayList<IncomeProofPOJO> Business_proof_poultry;
+        IncomeProofPOJO business_proof_poultry;
+        public MyCustomAdapter_Business_proof_Forming_poultry(Context context, int textViewResourceId,
+                                                         ArrayList<IncomeProofPOJO> Business_proof_poultry) {
+            super(context, textViewResourceId, Business_proof_poultry);
+            this.Business_proof_poultry = new ArrayList<IncomeProofPOJO>();
+            this.Business_proof_poultry.addAll(Business_proof_poultry);
+        }
+
+        private class ViewHolder {
+            TextView code;
+            CheckBox name;
+        }
+
+        @Override
+        public View getDropDownView(int position, View convertView,
+                                    ViewGroup parent) {
+            return getCustomView(position, convertView, parent);
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            return getCustomView(position, convertView, parent);
+        }
+
+        public View getCustomView(int position, View convertView, ViewGroup parent) {
+
+            MyCustomAdapter_Business_proof_Forming_poultry.ViewHolder holder = null;
+
+            if (convertView == null) {
+                LayoutInflater vi = (LayoutInflater)getContext().getSystemService(
+                        Context.LAYOUT_INFLATER_SERVICE);
+                convertView = vi.inflate(R.layout.income_proof_info, null);
+                holder = new MyCustomAdapter_Business_proof_Forming_poultry.ViewHolder();
+                holder.code = (TextView) convertView.findViewById(R.id.code);
+                holder.name = (CheckBox) convertView.findViewById(R.id.checkBox1);
+
+
+                holder.name.setTypeface(font);
+                holder.name.setTextSize(13);
+                holder.code.setTypeface(font);
+                holder.code.setTextSize(13);
+                convertView.setTag(holder);
+
+                holder.name.setOnClickListener( new View.OnClickListener() {
+                    public void onClick(View v) {
+                        CheckBox cb = (CheckBox) v ;
+                        IncomeProofPOJO business_proof = (IncomeProofPOJO) cb.getTag();
+                        business_proof.setIP_selected(cb.isChecked());
+
+                        String email = business_proof.getIP_name();
+                        Uri imgUrl = Uri.parse("https://image.shutterstock.com/image-vector/green-proof-icon-check-concept-260nw-596401601.jpg");
+                        Contact contact = new Contact(null, null, null, email, imgUrl);
+                        if (cb.isChecked()) {
+                            cv_Business_proof_poultry.addChip(email, imgUrl, contact);
+                        } else {
+                            cv_Business_proof_poultry.removeChipBy(contact);
+                        }
+                    }
+
+                });
+            }
+            else {
+                holder = (MyCustomAdapter_Business_proof_Forming_poultry.ViewHolder) convertView.getTag();
+            }
+
+            business_proof_poultry = Business_proof_poultry.get(position);
+            holder.name.setText(business_proof_poultry.getIP_name());
+            holder.name.setChecked(business_proof_poultry.isIP_selected());
+            holder.name.setTag(business_proof_poultry);
+
+            if(business_proof_poultry.getIP_name().contains("Business Proof")){
                 holder.name.setVisibility(View.GONE);
                 holder.code.setVisibility(View.VISIBLE);
                 holder.code.setText("Select Business Proof");
