@@ -2,6 +2,7 @@ package in.loanwiser.partnerapp.Step_Changes_Screen;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.Log;
@@ -244,7 +245,17 @@ public class Eligibility_BL extends SimpleActivity {
     private void Click ()
     {
 
+
         lead_Elegibility_Bank.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Eligibility_BL.this, Credite_report_details.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+
+       /* lead_Elegibility_Bank.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
@@ -279,7 +290,8 @@ public class Eligibility_BL extends SimpleActivity {
 
                 }
             }
-        });
+        });*/
+
     }
 
     private void validation()

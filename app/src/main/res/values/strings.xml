@@ -547,6 +547,11 @@
     <string name="error_avg">Enter the Avarage Monthly Income</string>
     <string name="error_purchased_by_Bank">Enter the % of purchased by Bank</string>
     <string name="error_age">Enter the Age</string>
+
+    <string name="error_emi">Enter the EMI Amount</string>
+    <string name="error_bank_name">Enter the Bank Name</string>
+    <string name="error_Loan_Type">Enter the Loan Type</string>
+    <string name="error_reming_Tenur">Enter the remaining tenor</string>
     <string name="error_purchased_by_gst">Enter the % of purchased by GST Based</string>
 
     <string name="error_sales_by_gst_crdt">Enter the % of sales by GST Based</string>

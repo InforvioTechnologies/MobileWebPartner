@@ -428,16 +428,16 @@ public class Viability_Check_BL extends SimpleActivity {
 
 
 
-      /*  lead_viy_step2.setOnClickListener(new View.OnClickListener() {
+        lead_viy_step2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(Viability_Check_BL.this, Eligibility_BL.class);
                 startActivity(intent);
                 finish();
             }
-        });*/
+        });
 
-        lead_viy_step2.setOnClickListener(new View.OnClickListener() {
+       /* lead_viy_step2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
@@ -501,7 +501,7 @@ public class Viability_Check_BL extends SimpleActivity {
                 }
 
             }
-        });
+        });*/
 
     }
 
