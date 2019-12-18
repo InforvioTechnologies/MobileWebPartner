@@ -50,6 +50,13 @@ public class Chat extends SimpleActivity {
       //  chaturl.loadUrl("https://tawk.to/chat/5c85f76fc37db86fcfcd0bea/default");
         chaturl.loadUrl("https://tawk.to/chat/5c863c95c37db86fcfcd18bb/default");
         //  chaturl.loadUrl("https://hr.my/go/");
+
+       // Crisp Chat SDK Integration
+       /* initTools(R.string.chat);
+        String mobile = Pref.getUID(mCon);
+          String mobile = "9566592196";
+
+        Crisp.User.setPhone(mobile);*/
     }
 
 }

@@ -1,1 +1,1 @@
-include ':app','applibrary'
+include ':app', 'applibrary', ':cashfreesdk-1.2-support-lib-version'

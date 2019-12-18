@@ -205,6 +205,9 @@ public class Credite_report_details extends SimpleActivity {
                      }
 
                      Payment_Option();
+                 }else if(Existing_Loan_ID.equals("2"))
+                 {
+                     Payment_Option();
                  }
              }
          });

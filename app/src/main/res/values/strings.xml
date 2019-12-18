@@ -10,7 +10,9 @@
     <string name="list_lead">List of Leads</string>
     <string name="wt_termss">I accept whatsapp terms and conditions</string>
     <string name="next">Next</string>
+
     <string name="lead_creation">Lead Creation</string>
+    <string name="payment">Payment</string>
 
     <string name="name">Name</string>
     <string name="name_cs">Customer Name</string>

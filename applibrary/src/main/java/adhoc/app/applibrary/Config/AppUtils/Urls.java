@@ -13,6 +13,7 @@ public class Urls {
 
  /*UAT*/
    public static String Urls = "http://cscapitest.propwiser.com/mobile/mortgage_updated.php?call=";
+   public static String Urls_phamplet = "http://cscapitest.propwiser.com/mobile/pamphlet_distributor.php?call=";
 
 
     /*Live*/
@@ -45,6 +46,7 @@ public class Urls {
     public static String GET_FIELDS_POST  = Urls + "GetFields";
     public static String GET_OCC_POST  = Urls + "getoccupation";
     public static String GET_PINCODE_POST  = Urls + "getpincode";
+    public static String GET_TOCKEN  = Urls_phamplet + "get_Token";
     public static String GET_AERA_POST  = Urls + "getarea";
     public static String BUSS_TYPE_POST  = Urls + "get_businesstype";
     public static String GET_CITY_POST  = Urls + "getcity&state_value=";

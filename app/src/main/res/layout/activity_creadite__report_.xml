@@ -305,7 +305,7 @@
                         android:orientation="horizontal">
 
                         <androidx.appcompat.widget.AppCompatButton
-                            android:id="@+id/lead_cr_step1"
+                            android:id="@+id/credit_det_cap_button"
                             android:text="@string/next"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
