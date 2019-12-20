@@ -551,6 +551,7 @@
     <string name="error_age">Enter the Age</string>
 
     <string name="error_emi">Enter the EMI Amount</string>
+    <string name="error_rise">This Field is Required</string>
     <string name="error_bank_name">Enter the Bank Name</string>
     <string name="error_Loan_Type">Enter the Loan Type</string>
     <string name="error_reming_Tenur">Enter the remaining tenor</string>
@@ -589,7 +590,6 @@
     <string name="error_monthly_income">Enter the no monthly income</string>
 
     <string name="error_avg_monthly_income_d">Enter the avg Monthly income</string>
-
 
 
     <string name="net_salary">Please Enter the valid amount</string>

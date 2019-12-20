@@ -139,9 +139,8 @@ public class Viability_Check_PL extends SimpleActivity {
         });
 
 
-
         UISCREEN();
-      //  Click();
+    //   Click();
         fonts();
         makeJsonObjReq1();
     }
@@ -163,27 +162,6 @@ public class Viability_Check_PL extends SimpleActivity {
         other_earning_avbl = (LinearLayout) findViewById(R.id.other_earning_avbl);
 
         residence_type.setVisibility(View.VISIBLE);
-
-     /*   has_pan_card = (RadioGroup) findViewById(R.id.has_pan_card);
-
-        yes_pan = (RadioButton) findViewById(R.id.yes_pan);
-        no_pan = (RadioButton) findViewById(R.id.no_pan);*/
-
-      /*  applicant_family_OEM = (RadioGroup) findViewById(R.id.applicant_family_OEM);
-        other__OEM_family_yes = (RadioButton) findViewById(R.id.other__OEM_family_yes);
-        other_OEM_family_no = (RadioButton) findViewById(R.id.other_OEM_family_no);*/
-
-
-      /*  age,age1,pan_number_txt,pan_number_txt1,
-                occupation_txt,occupation_txt1,monthly_sal_txt,monthly_sal_txt1,emp_id,emp_id1,
-                salery_credite_method_txt,salery_credite_method_txt1,salary_proof_txt,salary_proof_txt1,Exp_in_current_txt,
-                Exp_in_current_txt1,total_workexperiecnce_txt,total_workexperiecnce_txt1,
-                cmp_pincode_txt,cmp_pincode_txt1*/
-
-        /*txt_residence_pincode,txt_residence_pincode1,txt_residence_type,
-                    txt_residence_type1,Lives_in_current_txt,Lives_in_current_txt1,any_other_family_member_txt,
-                      any_other_family_member_txt1,family_member_name_txt,family_member_name_txt1,family_member_income_txt,
-            family_member_income_txt1,monthly_afr_emi_txt,monthly_afr_emi_txt1*/
 
 
         age = (AppCompatTextView) findViewById(R.id.age);
@@ -221,13 +199,6 @@ public class Viability_Check_PL extends SimpleActivity {
         monthly_afr_emi_txt = (AppCompatTextView) findViewById(R.id.monthly_afr_emi_txt);
         monthly_afr_emi_txt1 = (AppCompatTextView) findViewById(R.id.monthly_afr_emi_txt1);
 
-
-
-         /*age_edite_txt,pan_number_edit_txt,occupation_edit_txt,monthly_net_sal_edit_txt,
-                         experience_in_current_cmpy,total_experience_edit_txt,company_pincode_txt;*/
-
-         /*residence_pincode1_edit_txt,current_residence_edit_txt,family_member_name_edit_txt,
-            family_member_income_edit_txt,monthly_afr_emi_amt_edit_txt*/
 
         age_edite_txt = (AppCompatEditText) findViewById(R.id.age_edite_txt);
         pan_number_edit_txt = (AppCompatEditText) findViewById(R.id.pan_number_edit_txt);
@@ -290,12 +261,6 @@ public class Viability_Check_PL extends SimpleActivity {
         monthly_afr_emi_txt.setTypeface(font);
         monthly_afr_emi_txt1.setTypeface(font);
 
-
-         /*age_edite_txt,pan_number_edit_txt,occupation_edit_txt,monthly_net_sal_edit_txt,
-                         experience_in_current_cmpy,total_experience_edit_txt,company_pincode_txt;*/
-
-         /*residence_pincode1_edit_txt,current_residence_edit_txt,family_member_name_edit_txt,
-            family_member_income_edit_txt,monthly_afr_emi_amt_edit_txt*/
 
         age_edite_txt.setTypeface(font);
         pan_number_edit_txt.setTypeface(font);
@@ -587,21 +552,13 @@ public class Viability_Check_PL extends SimpleActivity {
                             employee_id_ar =object.getJSONArray("employee_id");
                             other_earning_ar =object.getJSONArray("other_earning");
                             have_pan_ar =object.getJSONArray("have_pan");
-
-
-                             Log.e("Residence_ownership",String.valueOf(Residence_ownership_ar));
-                             Log.e("Salary_method_ar",String.valueOf(Salary_method_ar));
-                             Log.e("Salary_proof_ar",String.valueOf(Salary_proof_ar));
-                             Log.e("employee_id",String.valueOf(employee_id_ar));
-                             Log.e("have_pan_ar",String.valueOf(have_pan_ar));
-                             Log.e("other_earning",String.valueOf(other_earning_ar));
-
                             Salry_method_Spinner(Salary_method_ar);
                             Salry_Proof(Salary_proof_ar);
                             Residence_Array(Residence_ownership_ar);
                             Employee_ID_Array(employee_id_ar);
                             HAVE_PAN_Card(have_pan_ar);
                             Other_Earning(other_earning_ar);
+
 
                         } catch (JSONException e) {
                             e.printStackTrace();

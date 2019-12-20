@@ -339,9 +339,7 @@ public class Eligibility_Check_PL extends SimpleActivity {
 
                              }
                          }
-
                      }
-
 
                  }
 

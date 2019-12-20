@@ -50,7 +50,7 @@
                             <androidx.appcompat.widget.AppCompatTextView
                                 android:gravity="left"
                                 android:layout_marginLeft="2dp"
-                                android:id="@+id/name"
+                                android:id="@+id/name_txt"
                                 android:layout_width="wrap_content"
                                 style="@style/LorgeText2"
                                 android:textColor="@color/colorPrimaryDark"
@@ -62,6 +62,7 @@
                                 android:layout_marginLeft="2dp"
                                 android:layout_width="match_parent"
                                 style="@style/LorgeText2"
+                                android:id="@+id/name_txt1"
                                 android:textColor="@color/colorPrimaryDark"
                                 android:textColorHint="@color/colorPrimaryDark"
                                 android:text="@string/app_pan_no"
@@ -72,6 +73,9 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent">
                             <androidx.appcompat.widget.AppCompatEditText
+                                android:id="@+id/Pan_No_Edite_text"
+                                android:textColor="@color/colorPrimaryDark"
+                                android:textSize="16sp"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"/>
                         </LinearLayout>
@@ -88,9 +92,10 @@
                             <androidx.appcompat.widget.AppCompatTextView
                                 android:gravity="left"
                                 android:layout_marginLeft="2dp"
-                                android:id="@+id/mobile"
+                                android:id="@+id/email_id_Txt"
                                 android:layout_width="wrap_content"
                                 style="@style/LorgeText2"
+
                                 android:textColor="@color/colorPrimaryDark"
                                 android:textColorHint="@color/colorPrimaryDark"
                                 android:hint="2"
@@ -100,6 +105,7 @@
                                 android:layout_marginLeft="2dp"
                                 android:layout_width="match_parent"
                                 style="@style/LorgeText2"
+                                android:id="@+id/email_id_Txt1"
                                 android:textColor="@color/colorPrimaryDark"
                                 android:textColorHint="@color/colorPrimaryDark"
                                 android:text="@string/email"
@@ -111,7 +117,10 @@
                             android:layout_height="match_parent">
                             <androidx.appcompat.widget.AppCompatEditText
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content"/>
+                                android:layout_height="wrap_content"
+                                android:id="@+id/Email_Id_Edite_text"
+                                android:textColor="@color/colorPrimaryDark"
+                                android:textSize="16sp"/>
                         </LinearLayout>
                     </LinearLayout>
                     <LinearLayout
@@ -126,7 +135,7 @@
                             <androidx.appcompat.widget.AppCompatTextView
                                 android:gravity="left"
                                 android:layout_marginLeft="2dp"
-                                android:id="@+id/wt_mobile"
+                                android:id="@+id/mobiles_txt"
                                 android:layout_width="wrap_content"
                                 style="@style/LorgeText2"
                                 android:textColor="@color/colorPrimaryDark"
@@ -138,6 +147,7 @@
                                 android:layout_marginLeft="2dp"
                                 android:layout_width="match_parent"
                                 style="@style/LorgeText2"
+                                android:id="@+id/mobiles_txt1"
                                 android:textColor="@color/colorPrimaryDark"
                                 android:textColorHint="@color/colorPrimaryDark"
                                 android:text="@string/mobile"
@@ -150,7 +160,10 @@
                             android:layout_height="match_parent">
                             <androidx.appcompat.widget.AppCompatEditText
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content"/>
+                                android:layout_height="wrap_content"
+                                android:id="@+id/Mobile_No_Edite_text"
+                                android:textColor="@color/colorPrimaryDark"
+                                android:textSize="16sp"/>
                         </LinearLayout>
                     </LinearLayout>
 
@@ -166,7 +179,7 @@
                             <androidx.appcompat.widget.AppCompatTextView
                                 android:gravity="left"
                                 android:layout_marginLeft="2dp"
-                                android:id="@+id/co_name"
+                                android:id="@+id/co_applicant_name_txt"
                                 android:layout_width="wrap_content"
                                 style="@style/LorgeText2"
                                 android:textColor="@color/colorPrimaryDark"
@@ -178,6 +191,7 @@
                                 android:layout_marginLeft="2dp"
                                 android:layout_width="match_parent"
                                 style="@style/LorgeText2"
+                                android:id="@+id/co_applicant_name_txt1"
                                 android:textColor="@color/colorPrimaryDark"
                                 android:textColorHint="@color/colorPrimaryDark"
                                 android:text="@string/co_app_pan_no"
@@ -189,7 +203,10 @@
                             android:layout_height="match_parent">
                             <androidx.appcompat.widget.AppCompatEditText
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content"/>
+                                android:layout_height="wrap_content"
+                                android:id="@+id/Co_App_Pan_No_Edite_text"
+                                android:textColor="@color/colorPrimaryDark"
+                                android:textSize="16sp"/>
                         </LinearLayout>
                     </LinearLayout>
                     <LinearLayout
@@ -204,18 +221,20 @@
                             <androidx.appcompat.widget.AppCompatTextView
                                 android:gravity="left"
                                 android:layout_marginLeft="2dp"
-                                android:id="@+id/co_mobile"
+                                android:id="@+id/Co_applicant_email_id"
                                 android:layout_width="wrap_content"
                                 style="@style/LorgeText2"
                                 android:textColor="@color/colorPrimaryDark"
                                 android:textColorHint="@color/colorPrimaryDark"
                                 android:hint="5"
                                 android:layout_height="wrap_content" />
+
                             <androidx.appcompat.widget.AppCompatTextView
                                 android:gravity="left"
                                 android:layout_marginLeft="2dp"
                                 android:layout_width="match_parent"
                                 style="@style/LorgeText2"
+                                android:id="@+id/Co_applicant_email_id1"
                                 android:textColor="@color/colorPrimaryDark"
                                 android:textColorHint="@color/colorPrimaryDark"
                                 android:text="@string/email"
@@ -227,7 +246,10 @@
                             android:layout_height="match_parent">
                             <androidx.appcompat.widget.AppCompatEditText
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content"/>
+                                android:layout_height="wrap_content"
+                                android:id="@+id/Co_Email_Id_No_Edite_text"
+                                android:textColor="@color/colorPrimaryDark"
+                                android:textSize="16sp"/>
                         </LinearLayout>
                     </LinearLayout>
                     <LinearLayout
@@ -242,7 +264,7 @@
                             <androidx.appcompat.widget.AppCompatTextView
                                 android:gravity="left"
                                 android:layout_marginLeft="2dp"
-                                android:id="@+id/co_wt_mobile"
+                                android:id="@+id/co_applicant_mobile"
                                 android:layout_width="wrap_content"
                                 style="@style/LorgeText2"
                                 android:textColor="@color/colorPrimaryDark"
@@ -254,6 +276,7 @@
                                 android:layout_marginLeft="2dp"
                                 android:layout_width="match_parent"
                                 style="@style/LorgeText2"
+                                android:id="@+id/co_applicant_mobile1"
                                 android:textColor="@color/colorPrimaryDark"
                                 android:textColorHint="@color/colorPrimaryDark"
                                 android:text="@string/mobile"
@@ -266,7 +289,10 @@
                             android:layout_height="match_parent">
                             <androidx.appcompat.widget.AppCompatEditText
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content"/>
+                                android:layout_height="wrap_content"
+                                android:id="@+id/Co_Mobile_No_Edite_text"
+                                android:textColor="@color/colorPrimaryDark"
+                                android:textSize="16sp"/>
                         </LinearLayout>
                     </LinearLayout>
 
@@ -279,7 +305,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent" />
                         <androidx.appcompat.widget.AppCompatTextView
-                            android:id="@+id/dcomplete"
+                            android:id="@+id/accept_terms_condition"
                             android:gravity="left"
                             style="@style/SmallText"
                             android:textColor="@color/colorPrimaryDark"

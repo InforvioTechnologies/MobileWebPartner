@@ -114,7 +114,7 @@ public class Payment_Details_Activity extends SimpleActivity {
 
     private void Do_payment_method() {
         // progressDialog.show();
-        order_id = "9566-0";
+        order_id = "9596-0";
         order_amt = "1";
         JSONObject J =new JSONObject();
         try {
@@ -167,7 +167,6 @@ public class Payment_Details_Activity extends SimpleActivity {
     private void Do_Cashfree_Payment(String cftoken)
     {
         String stage = "TEST";
-
         String appId = "100221d5f45db701fd6552fc722001";
         String orderNote = "Test Order";
         String customerName = "mathayan";
@@ -193,8 +192,6 @@ public class Payment_Details_Activity extends SimpleActivity {
 
        // cfPaymentService.doPayment(this, params, cftoken, stage, "#000000", "#FFFFFF");
         cfPaymentService.doPayment(this, params, cftoken, stage);
-
-
     }
 
     @Override
@@ -210,6 +207,16 @@ public class Payment_Details_Activity extends SimpleActivity {
                 for (String key : bundle.keySet()) {
                     if (bundle.getString(key) != null) {
                         Log.e("TAG", key + " : " + bundle.getString(key));
+
+                        if( key.contains("txStatus"))
+                        {
+                            String statues = bundle.getString(key);
+                            Log.e("transaction","Transaction Faild");
+                            Log.e("transaction1",statues);
+                        }else
+                        {
+                            Log.e("transaction","Transaction Sucess");
+                        }
                     }
                 }
         }

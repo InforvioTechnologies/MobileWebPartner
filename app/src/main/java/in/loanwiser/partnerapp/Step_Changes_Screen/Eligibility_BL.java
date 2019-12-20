@@ -110,7 +110,6 @@ public class Eligibility_BL extends SimpleActivity {
         makeJsonObjReq1();
         UISCREENS();
         Font();
-
         Click();
 
 
