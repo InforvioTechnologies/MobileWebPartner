@@ -66,6 +66,7 @@ import in.loanwiser.partnerapp.SimpleActivity;
 public class Viability_Check_PL extends SimpleActivity {
 
     AppCompatButton lead_viy_step2;
+
     private Spinner spinner_residence_type,spinner_employe_id,spinn_salary_crt_mtd,
             spinner_salary_proof,has_pan_card_spnr,Other_family_income_spnr;
     LinearLayout residence_type,residence_live,pan_card_available,other_earning_avbl;
@@ -90,7 +91,7 @@ public class Viability_Check_PL extends SimpleActivity {
     InputMethodManager imm;
     JSONArray ja= new JSONArray();
     JSONArray Residence_ownership_ar,Salary_method_ar,Salary_proof_ar,employee_id_ar,have_pan_ar,
-                    other_earning_ar;
+                    other_earning_ar,Property_Type;
     String[] SPINNERLIST;
     String[] SALARY_Method,Salary_Proof,Residence_Type_SA,Employe_ID_SA,PAN_ID_SA,Other_Earning_SA,Pincode_SA;
 
@@ -546,6 +547,7 @@ public class Viability_Check_PL extends SimpleActivity {
 
                         try {
 
+
                              Residence_ownership_ar =object.getJSONArray("Residence_ownership");
                              Salary_method_ar =object.getJSONArray("Salary_method");
                              Salary_proof_ar =object.getJSONArray("Salary_proof");
@@ -559,6 +561,7 @@ public class Viability_Check_PL extends SimpleActivity {
                             HAVE_PAN_Card(have_pan_ar);
                             Other_Earning(other_earning_ar);
 
+                            Log.e("Property_Type",String.valueOf(Property_Type));
 
                         } catch (JSONException e) {
                             e.printStackTrace();

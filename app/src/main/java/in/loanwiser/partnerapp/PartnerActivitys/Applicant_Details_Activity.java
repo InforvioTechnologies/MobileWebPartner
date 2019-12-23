@@ -82,7 +82,6 @@ public class Applicant_Details_Activity extends SimpleActivity {
                 String Loantype_name = "Home Loan";
                 Pref.putLoanTypename(mCon,Loantype_name);
 
-
                 Intent intent = new Intent(Applicant_Details_Activity.this, Lead_Crration_Activity.class);
                 startActivity(intent);
                 finish();

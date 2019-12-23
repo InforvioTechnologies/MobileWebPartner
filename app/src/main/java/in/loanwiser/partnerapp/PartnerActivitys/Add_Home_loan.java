@@ -95,6 +95,7 @@ public class Add_Home_loan extends Fragment {
 
         return new Add_Home_loan();
     }
+
     Spinner address,address1;
     @Nullable
 
@@ -292,8 +293,6 @@ public class Add_Home_loan extends Fragment {
 
     }
     private void setMainSpinner(final JSONArray ja) throws JSONException {
-
-
 
         SPINNERLIST = new String[ja.length()];
         for (int i=0;i<ja.length();i++){
