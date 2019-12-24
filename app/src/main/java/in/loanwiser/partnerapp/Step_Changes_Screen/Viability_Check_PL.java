@@ -158,10 +158,8 @@ public class Viability_Check_PL extends SimpleActivity {
 
         residence_type = (LinearLayout) findViewById(R.id.residence_type);
         residence_live = (LinearLayout) findViewById(R.id.residence_live);
-
         pan_card_available = (LinearLayout) findViewById(R.id.pan_card_available);
         other_earning_avbl = (LinearLayout) findViewById(R.id.other_earning_avbl);
-
         residence_type.setVisibility(View.VISIBLE);
 
 
@@ -224,7 +222,6 @@ public class Viability_Check_PL extends SimpleActivity {
 
     private void fonts()
     {
-
 
         font = Typeface.createFromAsset(context.getAssets(), "Lato-Regular.ttf");
         age.setTypeface(font);
@@ -546,7 +543,6 @@ public class Viability_Check_PL extends SimpleActivity {
                         //  Objs.a.showToast(getContext(), String.valueOf(object));
 
                         try {
-
 
                              Residence_ownership_ar =object.getJSONArray("Residence_ownership");
                              Salary_method_ar =object.getJSONArray("Salary_method");

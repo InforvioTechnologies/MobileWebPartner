@@ -66,11 +66,6 @@ public class Eligibility_Check_PL extends SimpleActivity {
     String[] Company_type_SA,Employee_type_SA,Current_res_SA,Epf_detected_SA,Permanent_SA,
             Own_house_relativ_SA,Pincode_SA,Other_income_SA,gst_reflect_SA;
 
-
-
-
-
-
     ArrayAdapter<String> Company_type_Adapter,Type_employee_Adapter,Current_residence_Adapter,
             Epf_detected_Adapter,permanent_Adapter,Own_house_Relative_Adapter,Pincode_Adapter,
             Other_income_Adapter,gst_reflect_Adapter;
@@ -340,7 +335,6 @@ public class Eligibility_Check_PL extends SimpleActivity {
                              }
                          }
                      }
-
                  }
 
              }
