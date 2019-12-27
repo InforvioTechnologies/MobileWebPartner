@@ -35,7 +35,7 @@ public final class Pref {
 
     public static String APPLICANTNAME = "APPLICANTNAME";
 
-    public static String EMPLOYMENT = "EMPLOYMENT";
+    public static String SALARYTYPE = "SALARYTYPE";
 
     public static String LOANTYPE = "LOANTYPE";
     public static String LOANTYPE1 = "LOANTYPE1";
@@ -135,20 +135,20 @@ public static void putapplicant_name(final Context context, String aUserId) {
     }
 
 
-    //employee type
+    //Salary type
 
-    public static void putEMPLOYMENT(final Context context, String aUserId) {
-        Pref.putPref(context, EMPLOYMENT, aUserId);
+    public static void putSALARYTYPE(final Context context, String aUserId) {
+        Pref.putPref(context, SALARYTYPE, aUserId);
     }
 
-    public static String getEMPLOYMENT(final Context context) {
-        return Pref.getPref(context, EMPLOYMENT, null);
+    public static String getSALARYTYPE(final Context context) {
+        return Pref.getPref(context, SALARYTYPE, null);
     }
 
-    public static void removeEMPLOYMENT(final Context context) {
+    public static void removeSALARYTYPE(final Context context) {
         SharedPreferences prefs = Pref.get(context);
         SharedPreferences.Editor editor = prefs.edit();
-        editor.remove(EMPLOYMENT);
+        editor.remove(SALARYTYPE);
         editor.commit();
     }
 

@@ -56,7 +56,7 @@ import in.loanwiser.partnerapp.SimpleActivity;
 public class Lead_Crration_Activity extends SimpleActivity {
 
     AppCompatButton lead_cr_step1;
-    private Spinner spinner_loan_category,spinner_loan_type;
+    private Spinner spinner_loan_category,spinner_loan_type,spnr_type_of_empmnt;
     private Toolbar toolbar;
     private AlertDialog progressDialog;
     private Context context = this;
@@ -64,17 +64,20 @@ public class Lead_Crration_Activity extends SimpleActivity {
     JSONArray ja= new JSONArray();
     JSONArray ja1= new JSONArray();
     Typeface font;
-    String[] SPINNERLIST;
+    String[] SPINNERLIST,Type_Of_Emp_SA;
     String[] SPINNERLIST_CAT;
-    ArrayAdapter<String> Loantype_cat,Loantype1;
+    ArrayAdapter<String> Loantype_cat,Loantype1,Type_Of_Emp_Adapter;
     private String App,CAT_ID;
     String Lontypename,Lontype,Loan_Cat_id,result,C_loan_amount_ext,
-            C_mobile_no_txt,C_name_txt,C_whats_app_no,LoanCat_Name;
+            C_mobile_no_txt,C_name_txt,C_whats_app_no,LoanCat_Name,
+            Type_of_employement_ID,Type_of_employement_Value;
 
     InputMethodManager imm;
+    JSONArray Employement;
     AppCompatEditText loan_amount_ext,name_txt,mobile_no_txt,whats_app_no;
     AppCompatTextView txt_loan_category,txt_loan_category1,loan_type,loan_type1,
-                        Loan_amount,Loan_amount1,name,name1,mobile,mobile1,wt_mobile,wt_mobile11,terms_and_condition;
+                        Loan_amount,Loan_amount1,name,name1,mobile,mobile1,wt_mobile,wt_mobile11,terms_and_condition,
+            type_of_empmnt_txt,type_of_empmnt_txt1;
     CheckBox check_complete;
 
     @Override
@@ -85,10 +88,7 @@ public class Lead_Crration_Activity extends SimpleActivity {
         Objs.a.setStubId(this,R.layout.activity_lead__crration_);
         initTools(R.string.lead_creation);
 
-        spinner_loan_category =(Spinner) findViewById(R.id.spinner_loan_category);
-        spinner_loan_type =(Spinner) findViewById(R.id.spinner_loan_type);
 
-        lead_cr_step1 = (AppCompatButton) findViewById(R.id.lead_cr_step1);
 
         Lontype = Pref.getLoanType(getApplicationContext());
         Lontypename = Pref.getLoanTypename(context);
@@ -100,8 +100,6 @@ public class Lead_Crration_Activity extends SimpleActivity {
         font = Typeface.createFromAsset(context.getAssets(), "Lato-Regular.ttf");
         progressDialog = new SpotsDialog(context, R.style.Custom);
         imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
-
-
 
       /*  lead_cr_step1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -120,11 +118,14 @@ public class Lead_Crration_Activity extends SimpleActivity {
                 finish();
             }
         });*/
+        lead_cr_step1 = (AppCompatButton) findViewById(R.id.lead_cr_step1);
 
         lead_cr_step1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(Lead_Crration_Activity.this, Viability_check_HL.class);
+                intent.putExtra("loan_type",App);
+                intent.putExtra("salary_type",Type_of_employement_ID);
                 startActivity(intent);
                 finish();
             }
@@ -133,6 +134,7 @@ public class Lead_Crration_Activity extends SimpleActivity {
         makeJsonObjReq_loancat();
         UI_FIELDS();
         fonts();
+        makeJsonObjReq1();
       //  Click();
 
     }
@@ -149,6 +151,15 @@ public class Lead_Crration_Activity extends SimpleActivity {
         //TextView
         txt_loan_category = (AppCompatTextView) findViewById(R.id.txt_loan_category);
         txt_loan_category1 = (AppCompatTextView) findViewById(R.id.txt_loan_category1);
+        type_of_empmnt_txt = (AppCompatTextView) findViewById(R.id.type_of_empmnt_txt);
+        type_of_empmnt_txt1 = (AppCompatTextView) findViewById(R.id.type_of_empmnt_txt1);
+
+        spinner_loan_category =(Spinner) findViewById(R.id.spinner_loan_category);
+        spinner_loan_type =(Spinner) findViewById(R.id.spinner_loan_type);
+
+
+        spnr_type_of_empmnt = (Spinner) findViewById(R.id.spnr_type_of_empmnt);
+
         loan_type = (AppCompatTextView) findViewById(R.id.loan_type);
         loan_type1 = (AppCompatTextView) findViewById(R.id.loan_type1);
         Loan_amount = (AppCompatTextView) findViewById(R.id.Loan_amount);
@@ -184,6 +195,8 @@ public class Lead_Crration_Activity extends SimpleActivity {
         wt_mobile.setTypeface(font);
         wt_mobile11.setTypeface(font);
         terms_and_condition.setTypeface(font);
+        type_of_empmnt_txt.setTypeface(font);
+        type_of_empmnt_txt1.setTypeface(font);
 
     }
 
@@ -204,30 +217,16 @@ public class Lead_Crration_Activity extends SimpleActivity {
                         }
                         else
                         {
-                            if (!validateLoanamount()) {
-                                return;
-                            }
-                            if (!validateName()) {
-                                return;
-                            }
-                            if (!validateMobile()) {
-                                return;
-                            }
-                            if (!validate_wt_Mobile()) {
-                                return;
-                            }
-                            if(check_complete.isChecked())
+                            if(Type_of_employement_ID.equals("0"))
                             {
-                                int m = 1;
-                                C_loan_amount_ext = loan_amount_ext.getText().toString();
-                                C_mobile_no_txt = mobile_no_txt.getText().toString();
-                                C_name_txt = name_txt.getText().toString();
-                                C_whats_app_no = whats_app_no.getText().toString();
-                                lead_cr(C_loan_amount_ext,C_mobile_no_txt,C_name_txt,C_whats_app_no,m);
+                                Toast.makeText(context, "Please Select Employement Type", Toast.LENGTH_SHORT).show();
+
                             }else
                             {
-                                Toast.makeText(context, "Please accept the Terms and condition", Toast.LENGTH_SHORT).show();
+                                validation_lead();
                             }
+
+
                         }
                 }
 
@@ -236,6 +235,156 @@ public class Lead_Crration_Activity extends SimpleActivity {
     }
 
 
+    private  void validation_lead()
+    {
+        if (!validateLoanamount()) {
+            return;
+        }
+        if (!validateName()) {
+            return;
+        }
+        if (!validateMobile()) {
+            return;
+        }
+        if (!validate_wt_Mobile()) {
+            return;
+        }
+        if(check_complete.isChecked())
+        {
+            int m = 1;
+            C_loan_amount_ext = loan_amount_ext.getText().toString();
+            C_mobile_no_txt = mobile_no_txt.getText().toString();
+            C_name_txt = name_txt.getText().toString();
+            C_whats_app_no = whats_app_no.getText().toString();
+            lead_cr(C_loan_amount_ext,C_mobile_no_txt,C_name_txt,C_whats_app_no,m);
+        }else
+        {
+            Toast.makeText(context, "Please accept the Terms and condition", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void makeJsonObjReq1() {
+        JSONObject J= null;
+        try {
+
+            J = new JSONObject();
+            J.put("state_id","28");
+
+        }catch (JSONException e)
+        {
+            e.printStackTrace();
+        }
+
+        Log.e("state_id", String.valueOf(J));
+
+        progressDialog.show();
+        Log.e("Request Dreopdown", "called");
+        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, Urls.GET_DROPDOWN_LIST, J,
+                new Response.Listener<JSONObject>() {
+
+                    @Override
+                    public void onResponse(JSONObject object) {
+                        //  Log.e("respose Dreopdown", object.toString());
+                        /// msgResponse.setText(response.toString());
+                        //  Objs.a.showToast(getContext(), String.valueOf(object));
+                        try {
+
+                            Employement =object.getJSONArray("Employement");
+
+                            Log.e("Property_title",String.valueOf(Employement));
+                            //  Salry_method_Spinner(Residence_ownership_ar);
+
+                            Type_Of_Employement_Spinner(Employement);
+
+
+
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        // Toast.makeText(mCon, response.toString(),Toast.LENGTH_SHORT).show();
+                        progressDialog.dismiss();
+                    }
+                }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                VolleyLog.d("TAG", "Error: " + error.getMessage());
+                progressDialog.dismiss();
+            }
+        }) {
+
+            /**
+             * Passing some request headers
+             * */
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("Content-Type", "application/json");
+                return headers;
+            }
+        };
+
+        // Adding request to request queue
+        AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
+
+    }
+
+    private void Type_Of_Employement_Spinner(final JSONArray Type_Of_Employement) throws JSONException {
+        //   SPINNERLIST = new String[ja.length()];
+        Type_Of_Emp_SA = new String[Type_Of_Employement.length()];
+        for (int i=0;i<Type_Of_Employement.length();i++){
+            JSONObject J =  Type_Of_Employement.getJSONObject(i);
+            Type_Of_Emp_SA[i] = J.getString("value");
+            final List<String> loan_type_list = new ArrayList<>(Arrays.asList(Type_Of_Emp_SA));
+            Type_Of_Emp_Adapter = new ArrayAdapter<String>(context, R.layout.view_spinner_item, loan_type_list){
+                public View getView(int position, View convertView, ViewGroup parent) {
+                    font = Typeface.createFromAsset(context.getAssets(),"Lato-Regular.ttf");
+                    TextView v = (TextView) super.getView(position, convertView, parent);
+                    v.setTypeface(font);
+                    return v;
+                }
+
+                public View getDropDownView(int position, View convertView, ViewGroup parent) {
+                    TextView v = (TextView) super.getView(position, convertView, parent);
+                    v.setTypeface(font);
+                    return v;
+                }
+            };
+
+            Type_Of_Emp_Adapter.setDropDownViewResource(R.layout.view_spinner_item);
+            spnr_type_of_empmnt.setAdapter(Type_Of_Emp_Adapter);
+            spnr_type_of_empmnt.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                    try {
+
+                        //  City_loc_uniqueID = ja.getJSONObject(position).getString("city_id");
+                        Type_of_employement_ID = Type_Of_Employement.getJSONObject(position).getString("id");
+                        Type_of_employement_Value = Type_Of_Employement.getJSONObject(position).getString("value");
+                        //CAT_ID = ja.getJSONObject(position).getString("category_id");
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+
+                }
+            });
+            spnr_type_of_empmnt.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View view, MotionEvent motionEvent) {
+                    // imm.hideSoftInputFromWindow(edt_buyer_address.getWindowToken(), 0);
+                    return false;
+                }
+            });
+        }
+
+    }
 
     private boolean validateLoanamount() {
         if (loan_amount_ext.length() < 6 || loan_amount_ext.length() > 12) {
@@ -479,7 +628,7 @@ public class Lead_Crration_Activity extends SimpleActivity {
                         //  City_loc_uniqueID = ja.getJSONObject(position).getString("city_id");
                         App = ja.getJSONObject(position).getString("id");
                         //CAT_ID = ja.getJSONObject(position).getString("category_id");
-                        Log.d("Add Applicant Info", String.valueOf(App));
+                        Log.e("Add Applicant Info", String.valueOf(App));
                         int a = Integer.parseInt(App);
 
                     } catch (JSONException e) {

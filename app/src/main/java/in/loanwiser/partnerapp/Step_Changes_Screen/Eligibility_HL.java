@@ -12,7 +12,9 @@ import in.loanwiser.partnerapp.SimpleActivity;
 
 public class Eligibility_HL extends SimpleActivity {
 
-    LinearLayout self,former,individual;
+    LinearLayout self,former,salaried;
+    String salary_type;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,30 +24,30 @@ public class Eligibility_HL extends SimpleActivity {
         Objs.a.setStubId(this,R.layout.activity_eligibility__hl);
         initTools(R.string.eligi_check);
 
-        String Lontype = Pref.getEMPLOYMENT(getApplicationContext());
+        salary_type = Pref.getSALARYTYPE(getApplicationContext());
 
         self =(LinearLayout) findViewById(R.id.self);
         former =(LinearLayout) findViewById(R.id.former);
-        individual =(LinearLayout) findViewById(R.id.individual);
+        salaried =(LinearLayout) findViewById(R.id.salaried);
 
-        if(Lontype.equals("2"))
+        if(salary_type.equals("2"))
         {
             self.setVisibility(View.VISIBLE);
             former.setVisibility(View.GONE);
-            individual.setVisibility(View.GONE);
-        }else if(Lontype.equals("1"))
+            salaried.setVisibility(View.GONE);
+
+        }else if(salary_type.equals("1"))
         {
-            individual.setVisibility(View.VISIBLE);
+            salaried.setVisibility(View.VISIBLE);
             self.setVisibility(View.GONE);
             former.setVisibility(View.GONE);
 
         }else
         {
             self.setVisibility(View.GONE);
-            individual.setVisibility(View.VISIBLE);
+            salaried.setVisibility(View.VISIBLE);
             former.setVisibility(View.GONE);
-            individual.setVisibility(View.GONE);
-
+            salaried.setVisibility(View.GONE);
         }
     }
 

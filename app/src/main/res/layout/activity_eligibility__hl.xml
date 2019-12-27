@@ -10,6 +10,7 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -33,11 +34,12 @@
                     app:spb_maxStateNumber="four"/>
 
                 <LinearLayout
-                    android:id="@+id/individual"
+                    android:id="@+id/salaried"
                     android:orientation="vertical"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
                     <include layout="@layout/ly_hl_eligibility_salaried"/>
+
                 </LinearLayout>
 
                 <LinearLayout

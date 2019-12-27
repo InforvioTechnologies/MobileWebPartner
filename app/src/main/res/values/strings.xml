@@ -440,6 +440,7 @@
     <string name="eligi_check">Eligibility Check</string>
     <string name="emp_type1">Type of Employee</string>
     <string name="residence_pin">Residence Pincode</string>
+    <string name="property_pin">Property Pincode</string>
     <string name="off_shop">Office/Shop Pincode</string>
     <string name="residence">Residence Type</string>
     <string name="off_residence">Office Residence Type</string>
@@ -488,6 +489,10 @@
     <string name="emi_amount">EMI Amount</string>
     <string name="property_type_">Property identified</string>
     <string name="property_title">Property Title</string>
+    <string name="property_type1">Property Type</string>
+    <string name="approval_of_land">Approval Of Land</string>
+    <string name="bulding_approval">Building Approval</string>
+    <string name="property_category">Property Category</string>
     <string name="type_of_emp">Type of employment</string>
     <string name="saving_bank_acc">Have saving Bank Account</string>
     <string name="salary_proof">Salary Proof</string>
@@ -502,7 +507,35 @@
     <string name="prop_guidence_value">Property Guidance Value </string>
     <string name="prop_market_value">Property Market Value</string>
     <string name="select_purchased_from">Select Purchased from</string>
+    <string name="property_size">Property Size</string>
     <string name="land_value">Land Value</string>
+    <string name="prop_puropose">Purpose</string>
+
+    <string name="trans_type">Transaction Type</string>
+    <string name="construction_statues">Construction Status</string>
+    <string name="property_ownership">Property Ownership</string>
+    <string name="propsed_comp_date">Proposed Completion Date</string>
+    <string name="ploat_area_sqft">Plot Area(Sq.ft)</string>
+    <string name="builtup_area">Builtup Area(Sq.ft)</string>
+    <string name="age_of_property_">Age Of Property</string>
+    <string name="plot_value">Plot Value</string>
+
+
+    <string name="carpet_area">Carpet Area(Sq.ft)</string>
+    <string name="required_loan_amt">Required Loan Amount</string>
+    <string name="property_price">Property Price</string>
+
+    <string name="estimated_cmp_date">Estimated Completion date</string>
+    <string name="cost_estimate">Cost Estimated</string>
+
+    <string name="existing_Bank">Existing Bank</string>
+    <string name="loan_variant">Loan Variant</string>
+    <string name="loan_amount">Loan Amount Taken</string>
+    <string name="original_tenure_month">Original Tenure(months</string>
+    <string name="remaing_tenure">Remaining Tenure(months)</string>
+    <string name="interest_rate">Interest Rate</string>
+
+    <string name="error_notifiy">this field is required</string>
     <string name="con_cost">Construction Cost</string>
     <string name="con_plan">Construction Plan</string>
     <string name="loan_amt">Loan Amount</string>

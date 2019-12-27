@@ -87,7 +87,6 @@ public class Viability_check_HL extends SimpleActivity {
     String  Property_Identified_ID,Property_Identified_Value,Property_Title_ID,Property_Title_Value,
             Type_of_employement_ID,Type_of_employement_Value;
 
-
     ///Salaried
 
     private Spinner spinner_employe_id,spinn_salary_crt_mtd,
@@ -239,19 +238,20 @@ public class Viability_check_HL extends SimpleActivity {
         initTools(R.string.viy_check);
 
         progressDialog = new SpotsDialog(context, R.style.Custom);
-
         lead_viy_step2 = (AppCompatButton) findViewById(R.id.lead_viy_step2);
+
         String Lontype = Pref.getLoanType(getApplicationContext());
 
         Intent intent = getIntent();
          loan_type_id = intent.getStringExtra("loan_type");
          salary_type = intent.getStringExtra("salary_type");
 
+        Pref.putLoanType(mCon,loan_type_id);
+        Pref.putSALARYTYPE(mCon,salary_type);
+
         Log.e("loan_type",loan_type_id);
 
-
-
-        if(Lontype.equals("1"))
+        if(loan_type_id.equals("1"))
         {
             lead_viy_step2.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -261,8 +261,7 @@ public class Viability_check_HL extends SimpleActivity {
                     finish();
                 }
             });
-
-        }else if(Lontype.equals("4"))
+        }else if(loan_type_id.equals("2"))
         {
             lead_viy_step2.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -276,11 +275,9 @@ public class Viability_check_HL extends SimpleActivity {
 
         }
 
-
-
         UISCREEN();
         fonts();
-        Click();
+      //  Click();
         makeJsonObjReq1();
 
         if(loan_type_id.equals("1") || loan_type_id.equals("3") || loan_type_id.equals("4"))
@@ -305,7 +302,6 @@ public class Viability_check_HL extends SimpleActivity {
             salaried.setVisibility(View.GONE);
             self_employed.setVisibility(View.VISIBLE);
         }
-
 
     }
 
@@ -580,7 +576,6 @@ public class Viability_check_HL extends SimpleActivity {
         cmp_pincode_txt.setTypeface(font);
         cmp_pincode_txt1.setTypeface(font);
 
-
         ///////////////Propert Values
         property_category_txt.setTypeface(font);
         property_category_txt1.setTypeface(font);
@@ -610,7 +605,6 @@ public class Viability_check_HL extends SimpleActivity {
         monthly_afr_emi_txt.setTypeface(font);
         monthly_afr_emi_txt1.setTypeface(font);
 
-
         age_edite_txt.setTypeface(font);
         pan_number_edit_txt.setTypeface(font);
         occupation_edit_txt.setTypeface(font);
@@ -623,8 +617,6 @@ public class Viability_check_HL extends SimpleActivity {
         family_member_name_edit_txt.setTypeface(font);
         family_member_income_edit_txt.setTypeface(font);
         monthly_afr_emi_amt_edit_txt.setTypeface(font);
-
-
 
         business_details_txt.setTypeface(font);
         emp_type1.setTypeface(font);
@@ -654,9 +646,6 @@ public class Viability_check_HL extends SimpleActivity {
         no_of_year_ind_txt1.setTypeface(font);
         monthly_incom_txt.setTypeface(font);
         monthly_incom_txt1.setTypeface(font);
-
-         /* AppCompatEditText age_edit_txt,residence_edite_txt,live_curentres_edite_txt,no_of_vehicle_edit_txt,
-                no_of_years_ind_edit_txt,busproof_ind_txt,busproof_ind_txt1,avg_monthly_incom_edit_txt;*/
 
          ////////Self Employeed
         age_edit_txt.setTypeface(font);
@@ -702,11 +691,9 @@ public class Viability_check_HL extends SimpleActivity {
 
     }
 
-
     private void makeJsonObjReq1() {
         JSONObject J= null;
         try {
-
             J = new JSONObject();
             J.put("state_id","28");
 
@@ -952,7 +939,6 @@ public class Viability_check_HL extends SimpleActivity {
     }
 
 
-
     //////Salaried
 
     private void Click()
@@ -1118,7 +1104,7 @@ public class Viability_check_HL extends SimpleActivity {
             return;
         }
 
-        if(PAN_id.equals("0"))
+         if(PAN_id.equals("0"))
         {
             Toast.makeText(context,"Please Select Having PAN Card",Toast.LENGTH_SHORT).show();
 
@@ -2859,8 +2845,6 @@ public class Viability_check_HL extends SimpleActivity {
 
                     try {
                         //  City_loc_uniqueID = ja.getJSONObject(position).getString("city_id");
-
-
                         Employee_type_Id = Type_of_employement_ar.getJSONObject(position).getString("id");
                         Employee_type_Value = Type_of_employement_ar.getJSONObject(position).getString("value");
                         //CAT_ID = ja.getJSONObject(position).getString("category_id");
@@ -2883,10 +2867,6 @@ public class Viability_check_HL extends SimpleActivity {
                                 ofiice_res_details.setVisibility(View.GONE);
                                 break;
                             case 3:
-
-                                String Loantype = "3";
-                                //  Pref.putEMPLOYMENT(mCon,Loantype);
-                                Pref.putLoanType(mCon,Loantype);
                                 individual.setVisibility(View.GONE);
                                 formin_dairy.setVisibility(View.GONE);
                                 self_business.setVisibility(View.VISIBLE);
