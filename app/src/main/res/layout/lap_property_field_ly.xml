@@ -145,7 +145,7 @@
                         android:layout_height="wrap_content"
                         android:textColor="@color/colorPrimaryDark"
                         android:textColorHint="@color/colorPrimaryDark"
-                        android:id="@+id/ploat_area_edit_txt"/>
+                        android:id="@+id/build_up_area_edit_txt"/>
                 </LinearLayout>
             </LinearLayout>
             <LinearLayout
@@ -234,6 +234,7 @@
                 </LinearLayout>
             </LinearLayout>
             <LinearLayout
+                android:visibility="gone"
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
@@ -292,7 +293,7 @@
                         style="@style/LorgeText2"
                         android:textColor="@color/colorPrimaryDark"
                         android:textColorHint="@color/colorPrimaryDark"
-                        android:hint="7"
+                        android:hint="6"
                         android:layout_height="wrap_content" />
                     <androidx.appcompat.widget.AppCompatTextView
                         android:gravity="left"

@@ -10,6 +10,7 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -33,6 +34,15 @@
                     app:spb_maxStateNumber="four"/>
 
                 <LinearLayout
+
+                    android:id="@+id/property_field"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <include layout="@layout/lap_property_field_ly"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:visibility="gone"
                     android:id="@+id/salaried"
                     android:orientation="vertical"
                     android:layout_width="match_parent"
@@ -42,13 +52,11 @@
 
                 <LinearLayout
                     android:id="@+id/former"
-                    android:visibility="gone"
                     android:orientation="vertical"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
                     <include layout="@layout/ly_hl_eligibility_self_employed"/>
                 </LinearLayout>
-
                 <LinearLayout
                     android:id="@+id/self"
                     android:visibility="gone"
@@ -56,6 +64,32 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
                     <include layout="@layout/ly_hl_eligibility_self_employed_buiness_setup"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_marginTop="10dp"
+                    android:elevation="4sp"
+                    android:gravity="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="?android:attr/actionBarSize"
+                    android:orientation="vertical">
+                    <LinearLayout
+                        android:gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <androidx.appcompat.widget.AppCompatButton
+                            android:id="@+id/lead_Eligibility_button"
+                            android:text="@string/next"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="start"
+                            android:background="@drawable/capsul_button3"
+                            android:theme="@style/BtnStyleApp" />
+
+                    </LinearLayout>
+
                 </LinearLayout>
 
             </LinearLayout>

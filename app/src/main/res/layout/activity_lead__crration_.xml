@@ -240,6 +240,9 @@
                                 android:id="@+id/loan_amount_ext"
                                 android:textSize="16sp"
                                 android:textColor="@color/colorPrimaryDark"
+                                android:inputType="number"
+                                android:maxLength="10"
+                                android:imeOptions="actionDone"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"/>
                         </LinearLayout>
@@ -283,6 +286,8 @@
                                 android:layout_height="wrap_content"
                                 android:id="@+id/name_txt"
                                 android:textSize="16sp"
+                                android:inputType="text"
+                                android:imeOptions="actionDone"
                                 android:textColor="@color/colorPrimaryDark"/>
                         </LinearLayout>
                     </LinearLayout>
@@ -326,6 +331,9 @@
                                 android:layout_height="wrap_content"
                                 android:id="@+id/mobile_no_txt"
                                 android:textSize="16sp"
+                                android:inputType="number"
+                                android:maxLength="10"
+                                android:imeOptions="actionDone"
                                 android:textColor="@color/colorPrimaryDark"/>
                         </LinearLayout>
                     </LinearLayout>
@@ -369,6 +377,9 @@
                                 android:layout_height="wrap_content"
                                 android:id="@+id/whats_app_no"
                                 android:textSize="16sp"
+                                android:maxLength="10"
+                                android:inputType="number"
+                                android:imeOptions="actionDone"
                                 android:textColor="@color/colorPrimaryDark"/>
                         </LinearLayout>
                     </LinearLayout>

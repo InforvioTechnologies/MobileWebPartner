@@ -95,7 +95,7 @@ public class Viability_check_HL extends SimpleActivity {
             spnr_da_bulding_approval;
 
     LinearLayout residence_type,residence_live,pan_card_available,other_earning_avbl,
-            propert_identified_ly;
+            propert_identified_ly,property_identified_Ly1,pro_details;
 
     RadioGroup has_pan_card,applicant_family_OEM;
     RadioButton yes_pan,no_pan,other__OEM_family_yes,other_OEM_family_no;
@@ -160,7 +160,9 @@ public class Viability_check_HL extends SimpleActivity {
 
     JSONArray Type_of_employement,have_pan_ar_self,vocaton_ar,Business_income_proof_ar,
             vocation_type_forming_ar,Residence_ownership_ar_self,Business_type_own_business,Business_Proof,Assets_own,
-            office_shop,vehicle_Type,crop_type,sell_milk,franchise;
+            office_shop,vehicle_Type,crop_type,sell_milk,franchise,property_identified,property_category,
+            land_approval,building_approval,DA_approval;
+
     String[] EMPLOYEE_TYPE_SA,PAN_ID_SA_self,Vocation_SA,Business_income_proof_SA,vocation_type_forming__SA,
             Residence_Type_SA_self,Own_business_type_SA,Selling_Milk_SA,
             Office_Shop_SA,franchise_SA,Property_Category_SA,Property_Type_SA,Approval_of_Land_SA,
@@ -228,7 +230,7 @@ public class Viability_check_HL extends SimpleActivity {
 
     MyCustomAdapter_Crop_Type crop_type_adapter = null;
 
-    String salary_type,loan_type_id;
+    String salary_type,loan_type_id,Lontype;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -240,16 +242,11 @@ public class Viability_check_HL extends SimpleActivity {
         progressDialog = new SpotsDialog(context, R.style.Custom);
         lead_viy_step2 = (AppCompatButton) findViewById(R.id.lead_viy_step2);
 
-        String Lontype = Pref.getLoanType(getApplicationContext());
-
-        Intent intent = getIntent();
-         loan_type_id = intent.getStringExtra("loan_type");
-         salary_type = intent.getStringExtra("salary_type");
-
-        Pref.putLoanType(mCon,loan_type_id);
-        Pref.putSALARYTYPE(mCon,salary_type);
+        loan_type_id = Pref.getLoanType(getApplicationContext());
+        salary_type = Pref.getSALARYTYPE(getApplicationContext());
 
         Log.e("loan_type",loan_type_id);
+      //  Log.e("salary_type",salary_type);
 
         if(loan_type_id.equals("1"))
         {
@@ -258,6 +255,8 @@ public class Viability_check_HL extends SimpleActivity {
                 public void onClick(View view) {
                     Intent intent = new Intent(Viability_check_HL.this, Eligibility_HL.class);
                     startActivity(intent);
+                   // intent.putExtraData(Property_Identified_ID);
+                    intent.putExtra("property_identified",Property_Identified_ID);
                     finish();
                 }
             });
@@ -282,10 +281,13 @@ public class Viability_check_HL extends SimpleActivity {
 
         if(loan_type_id.equals("1") || loan_type_id.equals("3") || loan_type_id.equals("4"))
         {
+            pro_details.setVisibility(View.VISIBLE);
             propert_identified_ly.setVisibility(View.VISIBLE);
         }else
         {
+            pro_details.setVisibility(View.GONE);
             propert_identified_ly.setVisibility(View.GONE);
+            property_identified_Ly1.setVisibility(View.GONE);
         }
 
         if(salary_type.equals("0"))
@@ -311,6 +313,7 @@ public class Viability_check_HL extends SimpleActivity {
         spnr_Property_Identified =(Spinner) findViewById(R.id.spnr_Property_Identified);
         salaried = (LinearLayout) findViewById(R.id.salaried);
         self_employed = (LinearLayout) findViewById(R.id.self_employed);
+        pro_details = (LinearLayout) findViewById(R.id.pro_details);
         spnr_type_of_empmnt = (Spinner) findViewById(R.id.spnr_type_of_empmnt);
 
         property_identified_typ_txt = (AppCompatTextView) findViewById(R.id.property_identified_typ_txt);
@@ -346,6 +349,7 @@ public class Viability_check_HL extends SimpleActivity {
         other_earning_avbl = (LinearLayout) findViewById(R.id.other_earning_avbl);
 
         propert_identified_ly = (LinearLayout) findViewById(R.id.propert_identified_ly);
+        property_identified_Ly1 = (LinearLayout) findViewById(R.id.property_identified_Ly1);
 
         residence_type.setVisibility(View.VISIBLE);
 
@@ -546,8 +550,6 @@ public class Viability_check_HL extends SimpleActivity {
         number_of_years_in_work_retails = (AppCompatEditText) findViewById(R.id.number_of_years_in_work_retails);
         average_monthly_income_own_business = (AppCompatEditText) findViewById(R.id.average_monthly_income_own_business);
 
-
-
         ///////////////////////////////////////////////////
 
     }
@@ -724,6 +726,14 @@ public class Viability_check_HL extends SimpleActivity {
                             Property_Type =object.getJSONArray("Property_Type");
                             Property_title =object.getJSONArray("Property_title");
                             Employement =object.getJSONArray("Employement");
+
+                            property_identified =object.getJSONArray("property_identified");
+                            property_category =object.getJSONArray("property_category");
+                            land_approval =object.getJSONArray("land_approval");
+                            building_approval =object.getJSONArray("building_approval");
+                            DA_approval =object.getJSONArray("DA_approval");
+
+
                             Salry_method_Spinner(Salary_method_ar);
                             Salry_Proof(Salary_proof_ar);
                             Residence_Array(Residence_ownership_ar);
@@ -737,8 +747,14 @@ public class Viability_check_HL extends SimpleActivity {
                             Log.e("Employement",String.valueOf(Employement));
                             Log.e("Property_title",String.valueOf(Property_title));
                           //  Salry_method_Spinner(Residence_ownership_ar);
-                            Property_Identified_Spinner(Property_Type);
+                            Property_Identified_Spinner(property_identified);
                             Property_Title_Spinner(Property_title);
+
+                            Property_Type(Property_Type);
+                            Property_Category(property_category);
+                            Approval_of_Land(land_approval);
+                            Building_Approval(building_approval);
+                            DA_Building_Approval(DA_approval);
 
                             ////SelfEmployes
                             Type_of_employement =object.getJSONArray("Type_of_employement");
@@ -760,9 +776,6 @@ public class Viability_check_HL extends SimpleActivity {
 
                             franchise =object.getJSONArray("franchise");
 
-                            // Business_Proof =object.getJSONArray("Business_Proof");
-
-
                             Log.e("Type_of_employement",String.valueOf(Type_of_employement));
 
                             Type_of_Employeement(Type_of_employement);
@@ -778,15 +791,12 @@ public class Viability_check_HL extends SimpleActivity {
                             Business_Proof_Own_Business(Business_Proof);
                             Business_Proof_forming_Dairy(Business_Proof);
                             Business_Proof_forming_Poultry(Business_Proof);
-
                             Assets_own_fun(Assets_own);
                             Office_Shop_(office_shop);
                             Vehicle_Type_(vehicle_Type);
                             Crop_type_function(crop_type);
                             Selling_milk(sell_milk);
-
                             Selling_milk(sell_milk);
-
                             Runs_own_business_franchise(franchise);
 
                         } catch (JSONException e) {
@@ -814,7 +824,6 @@ public class Viability_check_HL extends SimpleActivity {
                 return headers;
             }
         };
-
         // Adding request to request queue
         AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
 
@@ -850,12 +859,21 @@ public class Viability_check_HL extends SimpleActivity {
 
                     try {
                         //  City_loc_uniqueID = ja.getJSONObject(position).getString("city_id");
-
                         Property_Identified_ID = Property_Identified_ar.getJSONObject(position).getString("id");
                         Property_Identified_Value = Property_Identified_ar.getJSONObject(position).getString("value");
                         //CAT_ID = ja.getJSONObject(position).getString("category_id");
                         Log.d("Property_Identified_ID", Property_Identified_ID);
                         Log.d("Property_Ident_Value", Property_Identified_Value);
+
+                        Pref.putPROPERTYIDENTIFIED(context,Property_Identified_ID);
+
+                        if(Property_Identified_ID.equals("0") ||Property_Identified_ID.equals("2") )
+                        {
+                            property_identified_Ly1.setVisibility(View.GONE);
+                        }else
+                        {
+                            property_identified_Ly1.setVisibility(View.VISIBLE);
+                        }
 
 
                     } catch (JSONException e) {
@@ -937,7 +955,6 @@ public class Viability_check_HL extends SimpleActivity {
         }
 
     }
-
 
     //////Salaried
 
@@ -1241,7 +1258,6 @@ public class Viability_check_HL extends SimpleActivity {
 
                 }
 
-
             }
 
         }
@@ -1325,6 +1341,7 @@ public class Viability_check_HL extends SimpleActivity {
     }
 
     private boolean Company_locationpincode1(){
+
         if (company_pincode_txt.getText().toString().isEmpty()) {
             company_pincode_txt.setError(getText(R.string.error_pincode));
             company_pincode_txt.requestFocus();
@@ -1332,8 +1349,8 @@ public class Viability_check_HL extends SimpleActivity {
         } else {
             //inputLayoutLname.setErrorEnabled(false);
         }
-
         return true;
+
     }
 
     private boolean curennt_resi_v(){
@@ -2258,7 +2275,7 @@ public class Viability_check_HL extends SimpleActivity {
             no_of_years_work_ind_edit_txt.setError(getText(R.string.error_no_of_years_work));
             no_of_years_work_ind_edit_txt.requestFocus();
             return false;
-        } else {
+        }else {
 
             //inputLayoutLname.setErrorEnabled(false);
         }
@@ -2746,12 +2763,10 @@ public class Viability_check_HL extends SimpleActivity {
 
     private void setMain_Area1_self(final JSONArray ja) throws JSONException {
 
-
         Pincode_SA = new String[ja.length()];
         /*for (int i =occupation.length() - 1;i >= 0; i--) {
                    occupation.remove(i);
                }*/
-
         for (int i=0;i<ja.length();i++) {
             JSONObject J = ja.getJSONObject(i);
             Pincode_SA[i] = J.getString("pincode");
@@ -2792,8 +2807,6 @@ public class Viability_check_HL extends SimpleActivity {
                 office_residence_pincode_edite_txt.setThreshold(2);
                 office_residence_pincode_edite_txt.setAdapter(Pincode_Adapter);
             }
-
-
         }
 
         residence_pincode_edite_txt.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -2994,8 +3007,8 @@ public class Viability_check_HL extends SimpleActivity {
                         Propery_Category_ID = has_pancard_ar.getJSONObject(position).getString("id");
                         Propery_Category_Value = has_pancard_ar.getJSONObject(position).getString("value");
                         //CAT_ID = ja.getJSONObject(position).getString("category_id");
-                        Log.d("Salary_id", PAN_id_self);
-                        Log.d("Salary_Value", PAN_Value_self);
+                        Log.d("Salary_id", Propery_Category_ID);
+                        Log.d("Salary_Value", Propery_Category_Value);
 
 
 
@@ -3054,8 +3067,8 @@ public class Viability_check_HL extends SimpleActivity {
                         Propery_Type_ID = has_pancard_ar.getJSONObject(position).getString("id");
                         Propery_Type_Value = has_pancard_ar.getJSONObject(position).getString("value");
                         //CAT_ID = ja.getJSONObject(position).getString("category_id");
-                        Log.d("Salary_id", PAN_id_self);
-                        Log.d("Salary_Value", PAN_Value_self);
+                        Log.d("Salary_id", Propery_Type_ID);
+                        Log.d("Salary_Value", Propery_Type_Value);
 
 
 
@@ -3114,8 +3127,8 @@ public class Viability_check_HL extends SimpleActivity {
                         Approval_of_Land_ID = has_pancard_ar.getJSONObject(position).getString("id");
                         Approval_of_Land_Value = has_pancard_ar.getJSONObject(position).getString("value");
                         //CAT_ID = ja.getJSONObject(position).getString("category_id");
-                        Log.d("Salary_id", PAN_id_self);
-                        Log.d("Salary_Value", PAN_Value_self);
+                        Log.d("Approval_of_Land_ID", Approval_of_Land_ID);
+                        Log.d("Approval_of_Land_Value", Approval_of_Land_Value);
 
 
 
@@ -3175,10 +3188,8 @@ public class Viability_check_HL extends SimpleActivity {
                         Bulding_Approval_Id = has_pancard_ar.getJSONObject(position).getString("id");
                         Bulding_Approval_Value = has_pancard_ar.getJSONObject(position).getString("value");
                         //CAT_ID = ja.getJSONObject(position).getString("category_id");
-                        Log.d("Salary_id", PAN_id_self);
-                        Log.d("Salary_Value", PAN_Value_self);
-
-
+                        Log.d("Salary_id", Bulding_Approval_Id);
+                        Log.d("Salary_Value", Bulding_Approval_Value);
 
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -3235,8 +3246,8 @@ public class Viability_check_HL extends SimpleActivity {
                         DA_Bulding_ID = has_pancard_ar.getJSONObject(position).getString("id");
                         DA_Bulding_Value = has_pancard_ar.getJSONObject(position).getString("value");
                         //CAT_ID = ja.getJSONObject(position).getString("category_id");
-                        Log.d("Salary_id", PAN_id_self);
-                        Log.d("Salary_Value", PAN_Value_self);
+                        Log.d("DA_Bulding_ID", DA_Bulding_ID);
+                        Log.d("DA_Bulding_Value", DA_Bulding_Value);
 
 
 

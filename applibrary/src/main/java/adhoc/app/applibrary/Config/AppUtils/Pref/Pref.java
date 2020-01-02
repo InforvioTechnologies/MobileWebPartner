@@ -47,6 +47,7 @@ public final class Pref {
     public static String LOANCATNAME = "LOANCATNAME";
 
     public static String DOC_Status = "DOC_Status";
+    public static String IDENTIFIED = "IDENTIFIED";
 
     public static SharedPreferences get(final Context context) {
         return context.getSharedPreferences(context.getResources().getString(R.string.app_name),Context.MODE_PRIVATE);
@@ -131,6 +132,21 @@ public static void putapplicant_name(final Context context, String aUserId) {
         SharedPreferences prefs = Pref.get(context);
         SharedPreferences.Editor editor = prefs.edit();
         editor.remove(ID);
+        editor.commit();
+    }
+
+    public static void putPROPERTYIDENTIFIED(final Context context, String aUserId) {
+        Pref.putPref(context, IDENTIFIED, aUserId);
+    }
+
+    public static String getPROPERTYIDENTIFIED(final Context context) {
+        return Pref.getPref(context, IDENTIFIED, null);
+    }
+
+    public static void removePROPERTYIDENTIFIED(final Context context) {
+        SharedPreferences prefs = Pref.get(context);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.remove(IDENTIFIED);
         editor.commit();
     }
 

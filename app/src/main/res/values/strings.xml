@@ -492,6 +492,7 @@
     <string name="property_type1">Property Type</string>
     <string name="approval_of_land">Approval Of Land</string>
     <string name="bulding_approval">Building Approval</string>
+    <string name="da_approval">DA Approval</string>
     <string name="property_category">Property Category</string>
     <string name="type_of_emp">Type of employment</string>
     <string name="saving_bank_acc">Have saving Bank Account</string>

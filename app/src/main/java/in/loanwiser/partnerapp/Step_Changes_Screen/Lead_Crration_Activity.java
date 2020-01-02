@@ -88,12 +88,9 @@ public class Lead_Crration_Activity extends SimpleActivity {
         Objs.a.setStubId(this,R.layout.activity_lead__crration_);
         initTools(R.string.lead_creation);
 
-
-
         Lontype = Pref.getLoanType(getApplicationContext());
         Lontypename = Pref.getLoanTypename(context);
        // LoanCat_Name = Pref.getLoanCat_Name(context);
-
 
         Log.e("Loantype_Name",Lontypename);
 
@@ -101,46 +98,27 @@ public class Lead_Crration_Activity extends SimpleActivity {
         progressDialog = new SpotsDialog(context, R.style.Custom);
         imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
 
-      /*  lead_cr_step1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(Lead_Crration_Activity.this, Viability_Check_PL.class);
-                startActivity(intent);
-                finish();
-            }
-        });*/
-
-      /*  lead_cr_step1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(Lead_Crration_Activity.this, Viability_Check_BL.class);
-                startActivity(intent);
-                finish();
-            }
-        });*/
-        lead_cr_step1 = (AppCompatButton) findViewById(R.id.lead_cr_step1);
-
-        lead_cr_step1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(Lead_Crration_Activity.this, Viability_check_HL.class);
-                intent.putExtra("loan_type",App);
-                intent.putExtra("salary_type",Type_of_employement_ID);
-                startActivity(intent);
-                finish();
-            }
-        });
-
         makeJsonObjReq_loancat();
         UI_FIELDS();
         fonts();
         makeJsonObjReq1();
       //  Click();
 
+        lead_cr_step1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Lead_Crration_Activity.this, Viability_check_HL.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+
+
     }
 
     private void UI_FIELDS()
     {
+        lead_cr_step1 = (AppCompatButton) findViewById(R.id.lead_cr_step1);
 
         loan_amount_ext = (AppCompatEditText) findViewById(R.id.loan_amount_ext);
         loan_amount_ext.addTextChangedListener(new NumberTextWatcher(loan_amount_ext));
@@ -226,7 +204,6 @@ public class Lead_Crration_Activity extends SimpleActivity {
                                 validation_lead();
                             }
 
-
                         }
                 }
 
@@ -256,10 +233,37 @@ public class Lead_Crration_Activity extends SimpleActivity {
             C_mobile_no_txt = mobile_no_txt.getText().toString();
             C_name_txt = name_txt.getText().toString();
             C_whats_app_no = whats_app_no.getText().toString();
-            lead_cr(C_loan_amount_ext,C_mobile_no_txt,C_name_txt,C_whats_app_no,m);
+           // lead_cr(C_loan_amount_ext,C_mobile_no_txt,C_name_txt,C_whats_app_no,m);
+
+            Log.e("App",App);
+            click_action();
+
         }else
         {
             Toast.makeText(context, "Please accept the Terms and condition", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void click_action()
+    {
+
+        if(App.equals("1")|| App.equals("2"))
+        {
+                    Intent intent = new Intent(Lead_Crration_Activity.this, Viability_check_HL.class);
+                    startActivity(intent);
+                    finish();
+
+        }else if(App.equals("20"))
+        {
+                    Intent intent = new Intent(Lead_Crration_Activity.this, Viability_Check_BL.class);
+                    startActivity(intent);
+                    finish();
+
+        } else if(App.equals("21"))
+        {
+                    Intent intent = new Intent(Lead_Crration_Activity.this, Viability_Check_PL.class);
+                    startActivity(intent);
+                    finish();
         }
     }
 
@@ -284,20 +288,13 @@ public class Lead_Crration_Activity extends SimpleActivity {
 
                     @Override
                     public void onResponse(JSONObject object) {
-                        //  Log.e("respose Dreopdown", object.toString());
-                        /// msgResponse.setText(response.toString());
-                        //  Objs.a.showToast(getContext(), String.valueOf(object));
+
                         try {
 
                             Employement =object.getJSONArray("Employement");
-
                             Log.e("Property_title",String.valueOf(Employement));
-                            //  Salry_method_Spinner(Residence_ownership_ar);
 
                             Type_Of_Employement_Spinner(Employement);
-
-
-
 
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -360,9 +357,12 @@ public class Lead_Crration_Activity extends SimpleActivity {
 
                     try {
 
-                        //  City_loc_uniqueID = ja.getJSONObject(position).getString("city_id");
                         Type_of_employement_ID = Type_Of_Employement.getJSONObject(position).getString("id");
                         Type_of_employement_Value = Type_Of_Employement.getJSONObject(position).getString("value");
+
+                        Pref.putSALARYTYPE(mCon,App);
+
+                        Log.e("The salary Type",Type_of_employement_ID);
                         //CAT_ID = ja.getJSONObject(position).getString("category_id");
 
                     } catch (JSONException e) {
@@ -629,6 +629,9 @@ public class Lead_Crration_Activity extends SimpleActivity {
                         App = ja.getJSONObject(position).getString("id");
                         //CAT_ID = ja.getJSONObject(position).getString("category_id");
                         Log.e("Add Applicant Info", String.valueOf(App));
+
+                        Pref.putLoanType(mCon,App);
+
                         int a = Integer.parseInt(App);
 
                     } catch (JSONException e) {
