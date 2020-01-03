@@ -7,9 +7,27 @@
     android:orientation="vertical"
     tools:context=".Step_Changes_Screen.Viability_check_HL">
 
-    <ScrollView
+    <LinearLayout
+        android:padding="15dp"
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
+        <com.kofigyan.stateprogressbar.StateProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:spb_currentStateNumber="two"
+            app:spb_currentStateDescriptionColor="@color/bc_green"
+            app:spb_stateDescriptionColor="@color/white"
+            app:spb_stateNumberBackgroundColor="@color/white"
+            app:spb_stateForegroundColor="@color/colorPrimary"
+            app:spb_stateNumberForegroundColor="@color/white"
+            app:spb_stateBackgroundColor="@color/colorAccent"
+            app:spb_maxStateNumber="four"/>
+    </LinearLayout>
+    <ScrollView
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="0dp">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -19,18 +37,6 @@
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
-
-                <com.kofigyan.stateprogressbar.StateProgressBar
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:spb_currentStateNumber="two"
-                    app:spb_currentStateDescriptionColor="@color/bc_green"
-                    app:spb_stateDescriptionColor="@color/white"
-                    app:spb_stateNumberBackgroundColor="@color/white"
-                    app:spb_stateForegroundColor="@color/colorAccent"
-                    app:spb_stateNumberForegroundColor="@color/white"
-                    app:spb_stateBackgroundColor="@color/colorPrimary"
-                    app:spb_maxStateNumber="four"/>
 
                 <LinearLayout
                     android:layout_marginTop="10dp"
@@ -493,7 +499,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
 
-                        <include layout="@layout/viability_ly_salaried"/>
+                        <include layout="@layout/viability_ly_salaried" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -504,31 +510,7 @@
                         android:layout_height="wrap_content">
                         <include layout="@layout/ly_selfemployed"/>
                     </LinearLayout>
-                    <LinearLayout
-                        android:layout_marginTop="10dp"
-                        android:elevation="4sp"
-                        android:gravity="center"
-                        android:layout_width="match_parent"
-                        android:layout_height="?android:attr/actionBarSize"
-                        android:orientation="vertical">
-                        <LinearLayout
-                            android:gravity="center"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal">
 
-                            <androidx.appcompat.widget.AppCompatButton
-                                android:id="@+id/lead_viy_step2"
-                                android:text="@string/next"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:layout_gravity="start"
-                                android:background="@drawable/capsul_button3"
-                                android:theme="@style/BtnStyleApp" />
-
-                        </LinearLayout>
-
-                    </LinearLayout>
 
                 </LinearLayout>
 
@@ -537,4 +519,29 @@
         </LinearLayout>
     </ScrollView>
 
+    <LinearLayout
+        android:layout_marginTop="10dp"
+        android:elevation="4sp"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="?android:attr/listPreferredItemHeight"
+        android:orientation="vertical">
+        <LinearLayout
+            android:gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/lead_viy_step2"
+                android:text="@string/next"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="start"
+                android:background="@drawable/capsul_button3"
+                android:theme="@style/BtnStyleApp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
    </LinearLayout>

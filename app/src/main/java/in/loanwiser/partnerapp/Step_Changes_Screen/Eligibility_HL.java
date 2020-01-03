@@ -201,7 +201,17 @@ public class Eligibility_HL extends SimpleActivity {
         makeJsonObjReq1();
         UISCREEN();
         fonts();
-        Click();
+      //  Click();
+
+        lead_Eligibility_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intent = new Intent(Eligibility_HL.this, Credite_report_details.class);
+                startActivity(intent);
+                finish();
+            }
+        });
 
     }
 
@@ -596,6 +606,7 @@ public class Eligibility_HL extends SimpleActivity {
                                 salaried_other();
                             }
                             else {
+
 
                             }
                         }

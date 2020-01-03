@@ -56,6 +56,7 @@ import adhoc.app.applibrary.Config.AppUtils.Pref.Pref;
 import adhoc.app.applibrary.Config.AppUtils.Urls;
 import adhoc.app.applibrary.Config.AppUtils.VolleySignleton.AppController;
 import dmax.dialog.SpotsDialog;
+import in.loanwiser.partnerapp.Multi_select_checkbox.Multi_Select_checkbox;
 import in.loanwiser.partnerapp.NumberTextWatcher;
 import in.loanwiser.partnerapp.PartnerActivitys.IncomeProofPOJO;
 import in.loanwiser.partnerapp.R;
@@ -193,7 +194,7 @@ public class Viability_check_HL extends SimpleActivity {
             delership_company_edit_txt,monthly_profit_edit_txt,number_of_years_in_work_retails,
             monthly_income_own_ser_bus_edit_txt,no_of_employee_own_ser_bus_edit_txt,business_investment_own_ser_bus_edit_txt,
             value_of_stock_raw_material,monthly_sales_manufa,monthly_profit_manufa,
-            average_monthly_income_own_business,value_of_machineries;
+            average_monthly_income_own_business,value_of_machineries,salary_proof_edit_txt;
 
 
 
@@ -231,6 +232,8 @@ public class Viability_check_HL extends SimpleActivity {
     MyCustomAdapter_Crop_Type crop_type_adapter = null;
 
     String salary_type,loan_type_id,Lontype;
+    LinearLayout salary_mul_select;
+    AppCompatTextView salary_proof_edit_txt1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -242,8 +245,14 @@ public class Viability_check_HL extends SimpleActivity {
         progressDialog = new SpotsDialog(context, R.style.Custom);
         lead_viy_step2 = (AppCompatButton) findViewById(R.id.lead_viy_step2);
 
+        salary_mul_select = (LinearLayout) findViewById(R.id.salary_mul_select);
+        salary_proof_edit_txt1 = (AppCompatTextView) findViewById(R.id.salary_proof_edit_txt);
+
         loan_type_id = Pref.getLoanType(getApplicationContext());
         salary_type = Pref.getSALARYTYPE(getApplicationContext());
+
+      //  salary_proof_edit_txt = (AppCompatEditText) findViewById(R.id.salary_proof_edit_txt);
+
 
         Log.e("loan_type",loan_type_id);
       //  Log.e("salary_type",salary_type);
@@ -274,10 +283,22 @@ public class Viability_check_HL extends SimpleActivity {
 
         }
 
+
         UISCREEN();
         fonts();
       //  Click();
         makeJsonObjReq1();
+
+        salary_proof_edit_txt1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Viability_check_HL.this, Multi_Select_checkbox.class);
+                intent.putExtra("jsonArray", Salary_proof_ar.toString());
+                startActivity(intent);
+
+
+            }
+        });
 
         if(loan_type_id.equals("1") || loan_type_id.equals("3") || loan_type_id.equals("4"))
         {
@@ -519,6 +540,7 @@ public class Viability_check_HL extends SimpleActivity {
         no_of_birds_edit_txt = (AppCompatEditText) findViewById(R.id.no_of_birds_edit_txt);
         supply_by_who = (AppCompatEditText) findViewById(R.id.supply_by_who);
 
+
         avg_monthly_incom_edit_txt = (AppCompatEditText) findViewById(R.id.avg_monthly_incom_edit_txt);
         actual_business_ind_edit_txt = (AppCompatEditText) findViewById(R.id.actual_business_ind_edit_txt);
         actual_business_edit_forming_txt = (AppCompatEditText) findViewById(R.id.actual_business_edit_forming_txt);
@@ -690,6 +712,7 @@ public class Viability_check_HL extends SimpleActivity {
         number_of_years_in_work_retails.setTypeface(font);
         average_monthly_income_own_business.setTypeface(font);
         property_pincode1_edit_txt.setTypeface(font);
+     ///   salary_proof_edit_txt.setTypeface(font);
 
     }
 
@@ -735,7 +758,7 @@ public class Viability_check_HL extends SimpleActivity {
 
 
                             Salry_method_Spinner(Salary_method_ar);
-                            Salry_Proof(Salary_proof_ar);
+                           Salry_Proof(Salary_proof_ar);
                             Residence_Array(Residence_ownership_ar);
                             Employee_ID_Array(employee_id_ar);
                             HAVE_PAN_Card(have_pan_ar);
@@ -832,10 +855,12 @@ public class Viability_check_HL extends SimpleActivity {
     private void Property_Identified_Spinner(final JSONArray Property_Identified_ar) throws JSONException {
         //   SPINNERLIST = new String[ja.length()];
         Property_Identified = new String[Property_Identified_ar.length()];
+
         for (int i=0;i<Property_Identified_ar.length();i++){
             JSONObject J =  Property_Identified_ar.getJSONObject(i);
             Property_Identified[i] = J.getString("value");
             final List<String> loan_type_list = new ArrayList<>(Arrays.asList(Property_Identified));
+
             Property_Identified_Adapter = new ArrayAdapter<String>(context, R.layout.view_spinner_item, loan_type_list){
                 public View getView(int position, View convertView, ViewGroup parent) {
                     font = Typeface.createFromAsset(context.getAssets(),"Lato-Regular.ttf");
@@ -960,6 +985,7 @@ public class Viability_check_HL extends SimpleActivity {
 
     private void Click()
     {
+
 
         company_pincode_txt.addTextChangedListener(new TextWatcher() {
             @Override

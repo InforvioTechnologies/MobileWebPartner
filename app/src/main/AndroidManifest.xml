@@ -35,7 +35,7 @@
         android:usesCleartextTraffic="true"
         tools:node="merge"
         tools:replace="android:icon">
-        <activity android:name=".Step_Changes_Screen.Viability_Report_Activity"></activity>
+
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -81,6 +81,15 @@
                 <action android:name="com.google.android.gms.auth.api.phone.SMS_RETRIEVED" />
             </intent-filter>
         </receiver>
+
+
+        <activity android:name=".Multi_select_checkbox.Multi_Select_checkbox"
+            android:theme="@style/NoAction2"
+            android:windowSoftInputMode="stateHidden"/>
+
+        <activity android:name=".Step_Changes_Screen.Viability_Report_Activity"
+            android:theme="@style/NoAction2"
+            android:windowSoftInputMode="stateHidden"/>
 
         <activity
             android:name=".Step_Changes_Screen.Lead_Crration_Activity"

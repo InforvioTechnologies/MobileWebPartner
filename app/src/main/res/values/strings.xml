@@ -250,6 +250,9 @@
     <string name="home_purpose6"> Renovate/Extend your exisiting House</string>
     <string name="home_purpose7"> Balance Transfer </string>
     <string name="viy_check">Viability Check</string>
+
+    <string name="viy_check1">multi Check</string>
+
     <string name="pay_out_details1">Payout Details</string>
     <string name="disbursed_lead_list">Disbursed Lead List</string>
     <string name="credit_report">Credit Report</string>
@@ -634,6 +637,32 @@
     <string name="epf_detected">EPF deducted in Salary</string>
     <string name="oth_income">please Select other income</string>
     <string name="error_full_address">please Enter full Address</string>
+
+    <string-array name="fruit_array">
+        <item>Apple</item>
+        <item>Orange</item>
+        <item>Banana</item>
+        <item>Lime</item>
+        <item>Pear</item>
+        <item>Coconut</item>
+        <item>Coconut1</item>
+        <item>Coconut2</item>
+        <item>Coconut3</item>
+        <item>Coconut</item>
+        <item>Coconut</item>
+        <item>Coconut</item>
+        <item>Coconut</item>
+        <item>Coconut</item>
+        <item>Coconut</item>
+        <item>Coconut</item>
+        <item>Coconut</item>
+        <item>Coconut</item>
+        <item>Coconut</item>
+        <item>Coconut</item>
+        <item>Coconut</item>
+        <item>Coconut</item>
+        <item>Coconut</item>
+    </string-array>
 
 
     <string name="need_cr_report_des"> credit report should be at the top of the

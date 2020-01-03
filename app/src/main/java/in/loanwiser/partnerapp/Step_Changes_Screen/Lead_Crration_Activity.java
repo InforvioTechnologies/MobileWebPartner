@@ -90,6 +90,7 @@ public class Lead_Crration_Activity extends SimpleActivity {
 
         Lontype = Pref.getLoanType(getApplicationContext());
         Lontypename = Pref.getLoanTypename(context);
+
        // LoanCat_Name = Pref.getLoanCat_Name(context);
 
         Log.e("Loantype_Name",Lontypename);

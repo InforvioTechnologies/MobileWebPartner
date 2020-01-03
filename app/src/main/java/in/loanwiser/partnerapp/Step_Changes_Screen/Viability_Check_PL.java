@@ -139,7 +139,6 @@ public class Viability_Check_PL extends SimpleActivity {
             }
         });
 
-
         UISCREEN();
     //   Click();
         fonts();
