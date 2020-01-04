@@ -361,7 +361,7 @@ public class Lead_Crration_Activity extends SimpleActivity {
                         Type_of_employement_ID = Type_Of_Employement.getJSONObject(position).getString("id");
                         Type_of_employement_Value = Type_Of_Employement.getJSONObject(position).getString("value");
 
-                        Pref.putSALARYTYPE(mCon,App);
+                        Pref.putSALARYTYPE(context,Type_of_employement_ID);
 
                         Log.e("The salary Type",Type_of_employement_ID);
                         //CAT_ID = ja.getJSONObject(position).getString("category_id");

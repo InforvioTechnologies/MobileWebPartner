@@ -43,6 +43,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -233,7 +234,11 @@ public class Viability_check_HL extends SimpleActivity {
 
     String salary_type,loan_type_id,Lontype;
     LinearLayout salary_mul_select;
-    AppCompatTextView salary_proof_edit_txt1;
+    AppCompatTextView salary_proof_edit_txt1,self_proof_edit_txt,business_proof_type_text,vehicle_type_text,
+            self_frm_what_crop_textview,self_frm_business_proof_txt,self_own_business_proof_txt;
+
+    ArrayList<String> myList_values,Assets_myList_values,business_proof_self_list,vehicle_proof_self_list;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -247,14 +252,27 @@ public class Viability_check_HL extends SimpleActivity {
 
         salary_mul_select = (LinearLayout) findViewById(R.id.salary_mul_select);
         salary_proof_edit_txt1 = (AppCompatTextView) findViewById(R.id.salary_proof_edit_txt);
+        self_proof_edit_txt = (AppCompatTextView) findViewById(R.id.self_proof_edit_txt);
+        business_proof_type_text = (AppCompatTextView) findViewById(R.id.business_proof_type_text);
+        vehicle_type_text = (AppCompatTextView) findViewById(R.id.vehicle_type_text);
+        self_frm_what_crop_textview = (AppCompatTextView) findViewById(R.id.self_frm_what_crop_textview);
+        self_frm_business_proof_txt = (AppCompatTextView) findViewById(R.id.self_frm_business_proof_txt);
+        self_own_business_proof_txt = (AppCompatTextView) findViewById(R.id.self_own_business_proof_txt);
 
-        loan_type_id = Pref.getLoanType(getApplicationContext());
-        salary_type = Pref.getSALARYTYPE(getApplicationContext());
+        loan_type_id = Pref.getLoanType(context);
+        salary_type = Pref.getSALARYTYPE(context);
 
       //  salary_proof_edit_txt = (AppCompatEditText) findViewById(R.id.salary_proof_edit_txt);
 
 
+        myList_values = (ArrayList<String>) getIntent().getSerializableExtra("select_lid_id");
+        Assets_myList_values = (ArrayList<String>) getIntent().getSerializableExtra("select_lid_id");
+        business_proof_self_list = (ArrayList<String>) getIntent().getSerializableExtra("select_lid_id");
+        vehicle_proof_self_list = (ArrayList<String>) getIntent().getSerializableExtra("select_lid_id");
+
         Log.e("loan_type",loan_type_id);
+        Log.e("salary_type",salary_type);
+        Log.e("myList_values", String.valueOf(myList_values));
       //  Log.e("salary_type",salary_type);
 
         if(loan_type_id.equals("1"))
@@ -269,6 +287,7 @@ public class Viability_check_HL extends SimpleActivity {
                     finish();
                 }
             });
+
         }else if(loan_type_id.equals("2"))
         {
             lead_viy_step2.setOnClickListener(new View.OnClickListener() {
@@ -289,17 +308,86 @@ public class Viability_check_HL extends SimpleActivity {
       //  Click();
         makeJsonObjReq1();
 
+        //multiselect functionality
+
+
+        vehicle_type_text.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Viability_check_HL.this, Multi_Select_checkbox.class);
+                intent.putExtra("jsonArray", vehicle_Type.toString());
+                intent.putExtra("select_lid_id", (Serializable) vehicle_proof_self_list);
+                startActivity(intent);
+            }
+        });
+
+        business_proof_type_text.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Viability_check_HL.this, Multi_Select_checkbox.class);
+                intent.putExtra("jsonArray", Business_Proof.toString());
+                intent.putExtra("select_lid_id", (Serializable) business_proof_self_list);
+                startActivity(intent);
+
+            }
+        });
+
+        self_proof_edit_txt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Viability_check_HL.this, Multi_Select_checkbox.class);
+                intent.putExtra("jsonArray", Assets_own.toString());
+                intent.putExtra("select_lid_id", (Serializable) Assets_myList_values);
+                startActivity(intent);
+
+            }
+        });
+
         salary_proof_edit_txt1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(Viability_check_HL.this, Multi_Select_checkbox.class);
                 intent.putExtra("jsonArray", Salary_proof_ar.toString());
+                intent.putExtra("select_lid_id", (Serializable) myList_values);
                 startActivity(intent);
 
 
             }
         });
 
+        self_frm_what_crop_textview.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Viability_check_HL.this, Multi_Select_checkbox.class);
+                intent.putExtra("jsonArray", crop_type.toString());
+                intent.putExtra("select_lid_id", (Serializable) business_proof_self_list);
+                startActivity(intent);
+
+            }
+        });
+        self_frm_business_proof_txt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Viability_check_HL.this, Multi_Select_checkbox.class);
+                intent.putExtra("jsonArray", Business_Proof.toString());
+                intent.putExtra("select_lid_id", (Serializable) business_proof_self_list);
+                startActivity(intent);
+
+            }
+        });
+
+        self_own_business_proof_txt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Viability_check_HL.this, Multi_Select_checkbox.class);
+                intent.putExtra("jsonArray", Business_Proof.toString());
+                intent.putExtra("select_lid_id", (Serializable) business_proof_self_list);
+                startActivity(intent);
+
+            }
+        });
+
+        //
         if(loan_type_id.equals("1") || loan_type_id.equals("3") || loan_type_id.equals("4"))
         {
             pro_details.setVisibility(View.VISIBLE);
@@ -320,7 +408,7 @@ public class Viability_check_HL extends SimpleActivity {
         {
             salaried.setVisibility(View.VISIBLE);
             self_employed.setVisibility(View.GONE);
-        }else
+        }else if(salary_type.equals("2"))
         {
             salaried.setVisibility(View.GONE);
             self_employed.setVisibility(View.VISIBLE);
@@ -814,7 +902,7 @@ public class Viability_check_HL extends SimpleActivity {
                             Business_Proof_Own_Business(Business_Proof);
                             Business_Proof_forming_Dairy(Business_Proof);
                             Business_Proof_forming_Poultry(Business_Proof);
-                            Assets_own_fun(Assets_own);
+                           // Assets_own_fun(Assets_own);
                             Office_Shop_(office_shop);
                             Vehicle_Type_(vehicle_Type);
                             Crop_type_function(crop_type);
@@ -5021,6 +5109,7 @@ public class Viability_check_HL extends SimpleActivity {
 
         Objs.ac.StartActivity(mCon, Lead_Crration_Activity.class);
         finish();
+        Pref.removeSALARYTYPE(context);
         super.onBackPressed();
 
     }

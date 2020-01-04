@@ -10,10 +10,13 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import androidx.appcompat.widget.AppCompatButton;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -27,9 +30,10 @@ public class Multi_Select_checkbox extends SimpleActivity {
 
     private ListView listView;
     String [] Salary_proof;
-    private Button button;
+    private AppCompatButton button;
     List<String> result1;
     List<Integer> select_lid_id;
+    List<Integer> myList_values;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,16 +45,17 @@ public class Multi_Select_checkbox extends SimpleActivity {
         Intent intent = getIntent();
         String jsonArray = intent.getStringExtra("jsonArray");
         listView = (ListView) findViewById(R.id.list);
-        button = (Button) findViewById(R.id.button);
+        button = (AppCompatButton) findViewById(R.id.button);
 
         result1 = new ArrayList<>();
         select_lid_id = new ArrayList<Integer>();
+        myList_values = (ArrayList<Integer>) getIntent().getSerializableExtra("select_lid_id");
+
         try {
             JSONArray array = new JSONArray(jsonArray);
-
             multi_spin(array);
             Log.e("the jsonvalue",array.toString());
-        } catch (JSONException e) {
+         } catch (JSONException e) {
             e.printStackTrace();
         }
 
@@ -81,6 +86,7 @@ public class Multi_Select_checkbox extends SimpleActivity {
                 if(selected.size()>0)
                 {
                     Intent intent = new Intent(Multi_Select_checkbox.this, Viability_check_HL.class);
+                    intent.putExtra("select_lid_id", (Serializable) select_lid_id);
                     startActivity(intent);
                     finish();
                 }else
@@ -119,11 +125,16 @@ public class Multi_Select_checkbox extends SimpleActivity {
     private void set_selected_item()
     {
 
-        for (int i = 0; i < listView.getCount(); ++i) {
+        if(myList_values != null)
+        {
+            for (int i = 0; i < myList_values.size(); ++i) {
 
-           listView.setItemChecked(2,true);
-            Log.e("the list", String.valueOf(listView.getCount()));
+
+                listView.setItemChecked(myList_values.get(i),true);
+                Log.e("the list", String.valueOf(listView.getCount()));
+            }
         }
+
     }
 
     private List<String> getSelectedItems() {
@@ -131,14 +142,17 @@ public class Multi_Select_checkbox extends SimpleActivity {
 
         SparseBooleanArray checkedItems = listView.getCheckedItemPositions();
         Log.e("the list", String.valueOf(checkedItems.size()));
+        Log.e("the list", String.valueOf(checkedItems));
 
             if(checkedItems.size() > 0)
             {
-                for (int i = 0; i < listView.getCount(); ++i) {
+                for (int i = 0; i < checkedItems.size(); i++) {
 
                     if (checkedItems.valueAt(i)) {
-                        Log.e("the check id", String.valueOf(i));
+
+                        Log.e("the check id", String.valueOf(listView.getCount()));
                         result.add((String) listView.getItemAtPosition(checkedItems.keyAt(i)));
+                        Log.e("the check id-1", String.valueOf(checkedItems.keyAt(i)));
 
                     }
                 }

@@ -245,6 +245,22 @@
                 android:layout_height="60dp">
 
                 <LinearLayout
+                    android:id="@+id/self_frm_what_crop_ly"
+                    android:layout_marginLeft="30dp"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:textSize="16sp"
+                        android:background="@drawable/capsul_button_drop_down"
+                        android:inputType="number"
+                        android:id="@+id/self_frm_what_crop_textview"
+                        android:textColor="@color/colorPrimaryDark"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:visibility="gone"
                     android:layout_marginLeft="30dp"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
@@ -260,6 +276,7 @@
 
             </LinearLayout>
             <LinearLayout
+                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:paddingLeft="16dp"
@@ -443,6 +460,22 @@
                     android:layout_height="60dp">
 
                     <LinearLayout
+                        android:id="@+id/self_frm_business_proof"
+                        android:layout_marginLeft="30dp"
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            android:textSize="16sp"
+                            android:background="@drawable/capsul_button_drop_down"
+                            android:inputType="number"
+                            android:id="@+id/self_frm_business_proof_txt"
+                            android:textColor="@color/colorPrimaryDark"/>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:visibility="gone"
                         android:layout_marginLeft="30dp"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
@@ -458,6 +491,7 @@
 
                 </LinearLayout>
                 <LinearLayout
+                    android:visibility="gone"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:paddingLeft="16dp"
