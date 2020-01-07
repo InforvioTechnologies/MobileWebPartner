@@ -40,6 +40,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -53,6 +54,7 @@ import adhoc.app.applibrary.Config.AppUtils.Pref.Pref;
 import adhoc.app.applibrary.Config.AppUtils.Urls;
 import adhoc.app.applibrary.Config.AppUtils.VolleySignleton.AppController;
 import dmax.dialog.SpotsDialog;
+import in.loanwiser.partnerapp.Multi_select_checkbox.Multi_Select_checkbox;
 import in.loanwiser.partnerapp.PartnerActivitys.IncomeProofPOJO;
 import in.loanwiser.partnerapp.R;
 import in.loanwiser.partnerapp.SimpleActivity;
@@ -97,7 +99,7 @@ public class Viability_Check_BL extends SimpleActivity {
             txt_residence_type1,current_recidence_txt,current_recidence_txt1,assets_owned_txt,assets_owned_txt1,
             vocation_indiviual_txt,vocation_indiviual_txt1,busines_inco_proof_individua_txt,busines_inco_proof_individua_txt1,
     vehicle_individual_txt,vehicle_individual_txt1,number_of_vehicle_ind_txt,number_of_vehicle_ind_txt1,no_of_year_ind_txt,
-    no_of_year_ind_txt1,monthly_incom_txt,monthly_incom_txt1,busproof_ind_txt,busproof_ind_txt1;
+    no_of_year_ind_txt1,monthly_incom_txt,monthly_incom_txt1,busproof_ind_txt,busproof_ind_txt1,assets_owned_BL,vehicle_type_text;
 
     AppCompatEditText age_edit_txt,residence_edite_txt,live_curentres_edite_txt,no_of_vehicle_edit_txt,
             no_of_years_ind_edit_txt,avg_monthly_incom_edit_txt,
@@ -113,7 +115,8 @@ public class Viability_Check_BL extends SimpleActivity {
 
 
 
-    AutoCompleteTextView residence_pincode_edite_txt,office_residence_pincode_edite_txt;
+    AutoCompleteTextView residence_pincode_edite_txt,office_residence_pincode_edite_txt
+                           ;
 
     private String tag_json_obj = "jobj_req", tag_json_arry = "jarray_req";
 
@@ -143,6 +146,11 @@ public class Viability_Check_BL extends SimpleActivity {
 
     MyCustomAdapter_Crop_Type crop_type_adapter = null;
 
+    ArrayList<String> Assets_myList_values,business_proof_self_list,vehicle_proof_self_list;
+
+    AppCompatTextView self_frm_what_crop_textview,self_frm_business_proof_txt,
+            self_own_business_proof_txt,business_proof_type_text;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -155,11 +163,90 @@ public class Viability_Check_BL extends SimpleActivity {
         progressDialog = new SpotsDialog(context, R.style.Custom);
         imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
 
+       // assets_owned_BL = (AppCompatTextView) findViewById(R.id.assets_owned_BL);
+
 
         UISCREEN();
         makeJsonObjReq1();
         Font();
         Click();
+
+        vehicle_type_text = (AppCompatTextView) findViewById(R.id.vehicle_type_text);
+        assets_owned_BL = (AppCompatTextView) findViewById(R.id.assets_owned_BL);
+        self_frm_what_crop_textview = (AppCompatTextView) findViewById(R.id.self_frm_what_crop_textview);
+        self_frm_business_proof_txt = (AppCompatTextView) findViewById(R.id.self_frm_business_proof_txt);
+        self_own_business_proof_txt = (AppCompatTextView) findViewById(R.id.self_own_business_proof_txt);
+        business_proof_type_text = (AppCompatTextView) findViewById(R.id.business_proof_type_text);
+
+        Assets_myList_values = (ArrayList<String>) getIntent().getSerializableExtra("select_lid_id");
+        business_proof_self_list = (ArrayList<String>) getIntent().getSerializableExtra("select_lid_id");
+        vehicle_proof_self_list = (ArrayList<String>) getIntent().getSerializableExtra("select_lid_id");
+
+        assets_owned_BL.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Viability_Check_BL.this, Multi_Select_checkbox.class);
+                intent.putExtra("jsonArray", Assets_own.toString());
+                intent.putExtra("select_lid_id", (Serializable) Assets_myList_values);
+                startActivity(intent);
+
+            }
+        });
+
+        vehicle_type_text.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Viability_Check_BL.this, Multi_Select_checkbox.class);
+                intent.putExtra("jsonArray", vehicle_Type.toString());
+                intent.putExtra("select_lid_id", (Serializable) vehicle_proof_self_list);
+                startActivity(intent);
+            }
+        });
+
+
+        self_frm_what_crop_textview.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Viability_Check_BL.this, Multi_Select_checkbox.class);
+                intent.putExtra("jsonArray", crop_type.toString());
+                intent.putExtra("select_lid_id", (Serializable) business_proof_self_list);
+                startActivity(intent);
+
+            }
+        });
+        self_frm_business_proof_txt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Viability_Check_BL.this, Multi_Select_checkbox.class);
+                intent.putExtra("jsonArray", Business_Proof.toString());
+                intent.putExtra("select_lid_id", (Serializable) business_proof_self_list);
+                startActivity(intent);
+
+            }
+        });
+
+        self_own_business_proof_txt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Viability_Check_BL.this, Multi_Select_checkbox.class);
+                intent.putExtra("jsonArray", Business_Proof.toString());
+                intent.putExtra("select_lid_id", (Serializable) business_proof_self_list);
+                startActivity(intent);
+
+            }
+        });
+
+        business_proof_type_text.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Viability_Check_BL.this, Multi_Select_checkbox.class);
+                intent.putExtra("jsonArray", Business_Proof.toString());
+                intent.putExtra("select_lid_id", (Serializable) business_proof_self_list);
+                startActivity(intent);
+
+            }
+        });
+
     }
 
     private void UISCREEN()

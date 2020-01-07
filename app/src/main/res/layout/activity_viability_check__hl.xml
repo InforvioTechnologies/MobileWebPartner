@@ -510,7 +510,23 @@
                         android:layout_height="wrap_content">
                         <include layout="@layout/ly_selfemployed"/>
                     </LinearLayout>
+                    <LinearLayout
+                        android:visibility="gone"
+                        android:id="@+id/co_applicant_salaried_employed"
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <include layout="@layout/ly_co_applicant_viability"/>
+                    </LinearLayout>
 
+                    <LinearLayout
+                        android:visibility="gone"
+                        android:id="@+id/co_applicant_self_employed"
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <include layout="@layout/ly_co_applicant_viability_self_emp"/>
+                    </LinearLayout>
 
                 </LinearLayout>
 

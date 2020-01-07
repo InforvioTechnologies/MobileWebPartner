@@ -129,10 +129,11 @@ public class Multi_Select_checkbox extends SimpleActivity {
         {
             for (int i = 0; i < myList_values.size(); ++i) {
 
-
                 listView.setItemChecked(myList_values.get(i),true);
                 Log.e("the list", String.valueOf(listView.getCount()));
+
             }
+
         }
 
     }

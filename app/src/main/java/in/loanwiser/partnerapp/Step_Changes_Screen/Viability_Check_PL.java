@@ -44,6 +44,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -56,6 +57,7 @@ import adhoc.app.applibrary.Config.AppUtils.Params;
 import adhoc.app.applibrary.Config.AppUtils.Urls;
 import adhoc.app.applibrary.Config.AppUtils.VolleySignleton.AppController;
 import dmax.dialog.SpotsDialog;
+import in.loanwiser.partnerapp.Multi_select_checkbox.Multi_Select_checkbox;
 import in.loanwiser.partnerapp.NumberTextWatcher;
 import in.loanwiser.partnerapp.PartnerActivitys.Add_Applicant;
 import in.loanwiser.partnerapp.PartnerActivitys.IncomeProofPOJO;
@@ -79,12 +81,13 @@ public class Viability_Check_PL extends SimpleActivity {
                      cmp_pincode_txt,cmp_pincode_txt1,txt_residence_pincode,txt_residence_pincode1,txt_residence_type,
                     txt_residence_type1,Lives_in_current_txt,Lives_in_current_txt1,any_other_family_member_txt,
                       any_other_family_member_txt1,family_member_name_txt,family_member_name_txt1,family_member_income_txt,
-            family_member_income_txt1,monthly_afr_emi_txt,monthly_afr_emi_txt1;
+            family_member_income_txt1,monthly_afr_emi_txt,monthly_afr_emi_txt1,salary_proof_edit_txt_pl;
 
     AppCompatEditText age_edite_txt,pan_number_edit_txt,occupation_edit_txt,monthly_net_sal_edit_txt,
                          experience_in_current_cmpy,total_experience_edit_txt
                          ,current_residence_edit_txt,family_member_name_edit_txt,
             family_member_income_edit_txt,monthly_afr_emi_amt_edit_txt;
+
     AppCompatAutoCompleteTextView company_pincode_txt,residence_pincode1_edit_txt;
     Typeface font;
     private Context context = this;
@@ -114,7 +117,7 @@ public class Viability_Check_PL extends SimpleActivity {
     MyCustomAdapter_Salary_Proof dataAdapter_Salaried_proof = null;
     private ChipsView cv_salary_income_proof;
     StringBuffer salary_proof_list;
-
+    ArrayList<String> myList_values;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -129,6 +132,7 @@ public class Viability_Check_PL extends SimpleActivity {
         progressDialog = new SpotsDialog(context, R.style.Custom);
         imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
 
+        salary_proof_edit_txt_pl = (AppCompatTextView) findViewById(R.id.salary_proof_edit_txt_pl);
 
         lead_viy_step2.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -138,6 +142,21 @@ public class Viability_Check_PL extends SimpleActivity {
                 finish();
             }
         });
+
+        myList_values = (ArrayList<String>) getIntent().getSerializableExtra("select_lid_id");
+
+        salary_proof_edit_txt_pl.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Viability_Check_PL.this, Multi_Select_checkbox.class);
+                intent.putExtra("jsonArray", Salary_proof_ar.toString());
+                intent.putExtra("select_lid_id", (Serializable) myList_values);
+                startActivity(intent);
+
+
+            }
+        });
+
 
         UISCREEN();
     //   Click();

@@ -498,6 +498,7 @@
     <string name="da_approval">DA Approval</string>
     <string name="property_category">Property Category</string>
     <string name="type_of_emp">Type of employment</string>
+    <string name="co_applicant">Do you Have Co Applicant</string>
     <string name="saving_bank_acc">Have saving Bank Account</string>
     <string name="salary_proof">Salary Proof</string>
     <string name="exp_current_cmp">Experiance in Current Company(months)</string>
@@ -549,6 +550,9 @@
     <string name="perpanent_pincode">Permanent Residence Pincode</string>
     <string name="perpanent_residence_type">Permanent Residence Type</string>
     <string name="business_reference_name">Business Reference -Name</string>
+
+    <string name="business_registration">Business Registeration</string>
+
     <string name="business_reference_mobile">Business Reference -Mobile</string>
     <string name="otherincome">Other Income(if any)</string>
     <string name="avg_bankbalence">Average Bank Balance in the Account</string>

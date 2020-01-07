@@ -232,10 +232,13 @@ public class Viability_check_HL extends SimpleActivity {
 
     MyCustomAdapter_Crop_Type crop_type_adapter = null;
 
-    String salary_type,loan_type_id,Lontype;
+    String salary_type,loan_type_id,Lontype,Co_salary_type,is_co_available;
+
     LinearLayout salary_mul_select;
     AppCompatTextView salary_proof_edit_txt1,self_proof_edit_txt,business_proof_type_text,vehicle_type_text,
             self_frm_what_crop_textview,self_frm_business_proof_txt,self_own_business_proof_txt;
+
+    LinearLayout co_applicant_salaried_employed,co_applicant_self_employed;
 
     ArrayList<String> myList_values,Assets_myList_values,business_proof_self_list,vehicle_proof_self_list;
 
@@ -252,17 +255,45 @@ public class Viability_check_HL extends SimpleActivity {
 
         salary_mul_select = (LinearLayout) findViewById(R.id.salary_mul_select);
         salary_proof_edit_txt1 = (AppCompatTextView) findViewById(R.id.salary_proof_edit_txt);
-        self_proof_edit_txt = (AppCompatTextView) findViewById(R.id.self_proof_edit_txt);
+
+
         business_proof_type_text = (AppCompatTextView) findViewById(R.id.business_proof_type_text);
+
         vehicle_type_text = (AppCompatTextView) findViewById(R.id.vehicle_type_text);
+        self_proof_edit_txt = (AppCompatTextView) findViewById(R.id.self_proof_edit_txt);
         self_frm_what_crop_textview = (AppCompatTextView) findViewById(R.id.self_frm_what_crop_textview);
         self_frm_business_proof_txt = (AppCompatTextView) findViewById(R.id.self_frm_business_proof_txt);
         self_own_business_proof_txt = (AppCompatTextView) findViewById(R.id.self_own_business_proof_txt);
 
+        co_applicant_salaried_employed = (LinearLayout) findViewById(R.id.co_applicant_salaried_employed);
+        co_applicant_self_employed = (LinearLayout) findViewById(R.id.co_applicant_self_employed);
+
         loan_type_id = Pref.getLoanType(context);
         salary_type = Pref.getSALARYTYPE(context);
+        Co_salary_type = Pref.getCOSALARYTYPE(context);
+        is_co_available = Pref.getCoAPPAVAILABLE(context);
 
       //  salary_proof_edit_txt = (AppCompatEditText) findViewById(R.id.salary_proof_edit_txt);
+
+        if(is_co_available.equals("1"))
+        {
+
+            if(Co_salary_type.equals("1"))
+            {
+                co_applicant_salaried_employed.setVisibility(View.VISIBLE);
+                co_applicant_self_employed.setVisibility(View.GONE);
+
+            }else if(Co_salary_type.equals("2"))
+            {
+                co_applicant_salaried_employed.setVisibility(View.GONE);
+                co_applicant_self_employed.setVisibility(View.VISIBLE);
+            }
+
+        }else
+        {
+            co_applicant_salaried_employed.setVisibility(View.GONE);
+            co_applicant_self_employed.setVisibility(View.GONE);
+        }
 
 
         myList_values = (ArrayList<String>) getIntent().getSerializableExtra("select_lid_id");

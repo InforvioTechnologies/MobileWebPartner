@@ -42,7 +42,7 @@
                     <include layout="@layout/hl_property_field_ly"/>
                 </LinearLayout>
                 <LinearLayout
-                    android:visibility="gone"
+
                     android:id="@+id/salaried"
                     android:orientation="vertical"
                     android:layout_width="match_parent"
@@ -50,7 +50,10 @@
                     <include layout="@layout/ly_hl_eligibility_salaried"/>
                 </LinearLayout>
 
+
+
                 <LinearLayout
+                    android:visibility="gone"
                     android:id="@+id/former"
                     android:orientation="vertical"
                     android:layout_width="match_parent"
@@ -65,7 +68,14 @@
                     android:layout_height="wrap_content">
                     <include layout="@layout/ly_hl_eligibility_self_employed_buiness_setup"/>
                 </LinearLayout>
-
+                <LinearLayout
+                    android:visibility="gone"
+                    android:id="@+id/co_applicant_eligibility_ly"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <include layout="@layout/ly_co_applicant_eligibility_salried"/>
+                </LinearLayout>
                 <LinearLayout
                     android:layout_marginTop="10dp"
                     android:elevation="4sp"

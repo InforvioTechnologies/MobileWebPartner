@@ -426,7 +426,24 @@
                         android:text="@string/salary_proof"
                         android:layout_height="wrap_content" />
                 </LinearLayout>
+
                 <LinearLayout
+                    android:id="@+id/salary_mul_select"
+                    android:layout_marginLeft="30dp"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:textSize="16sp"
+                        android:background="@drawable/capsul_button_drop_down"
+                        android:inputType="number"
+                        android:id="@+id/salary_proof_edit_txt_pl"
+                        android:textColor="@color/colorPrimaryDark"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:visibility="gone"
                     android:gravity="center"
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
@@ -448,6 +465,7 @@
 
                 </LinearLayout>
                 <LinearLayout
+                    android:visibility="gone"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:paddingLeft="16dp"

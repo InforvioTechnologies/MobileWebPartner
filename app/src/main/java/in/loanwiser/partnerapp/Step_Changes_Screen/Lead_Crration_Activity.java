@@ -13,6 +13,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -64,21 +65,25 @@ public class Lead_Crration_Activity extends SimpleActivity {
     JSONArray ja= new JSONArray();
     JSONArray ja1= new JSONArray();
     Typeface font;
-    String[] SPINNERLIST,Type_Of_Emp_SA;
+    String[] SPINNERLIST,Type_Of_Emp_SA,CO_Type_Of_Emp_SA,Have_Co_Applicant;
     String[] SPINNERLIST_CAT;
-    ArrayAdapter<String> Loantype_cat,Loantype1,Type_Of_Emp_Adapter;
+    ArrayAdapter<String> Loantype_cat,Loantype1,Type_Of_Emp_Adapter,CO_Type_Of_Emp_Adapter,Have_Co_Adapter;
     private String App,CAT_ID;
     String Lontypename,Lontype,Loan_Cat_id,result,C_loan_amount_ext,
             C_mobile_no_txt,C_name_txt,C_whats_app_no,LoanCat_Name,
-            Type_of_employement_ID,Type_of_employement_Value;
+            Type_of_employement_ID,Type_of_employement_Value, CO_Type_of_employement_ID,CO_Type_of_employement_Value,
+            IS_CO_Applicant_Id,IS_CO_Applicant_Value;
 
     InputMethodManager imm;
-    JSONArray Employement;
+    JSONArray Employement,is_coapplicant;
     AppCompatEditText loan_amount_ext,name_txt,mobile_no_txt,whats_app_no;
     AppCompatTextView txt_loan_category,txt_loan_category1,loan_type,loan_type1,
                         Loan_amount,Loan_amount1,name,name1,mobile,mobile1,wt_mobile,wt_mobile11,terms_and_condition,
-            type_of_empmnt_txt,type_of_empmnt_txt1;
+            type_of_empmnt_txt,type_of_empmnt_txt1,do_you_have_coApp_txt,do_you_have_coApp_txt1,coApp_txt_emp_type1
+            ,coApp_txt_emp_type2;
     CheckBox check_complete;
+    Spinner co_applicant_spinner,co_applicant_emp_spinner;
+    LinearLayout type_of_empmnt,co_applicant_ly,co_applicant_emp_type;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -103,17 +108,18 @@ public class Lead_Crration_Activity extends SimpleActivity {
         UI_FIELDS();
         fonts();
         makeJsonObjReq1();
-      //  Click();
+        Click();
 
-        lead_cr_step1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(Lead_Crration_Activity.this, Viability_check_HL.class);
-                startActivity(intent);
-                finish();
-            }
-        });
+     if(Lontypename.contains("Personal Loan [Unsecured]") || Lontypename.contains("Business Loan [Unsecured]"))
+     {
 
+         type_of_empmnt.setVisibility(View.GONE);
+         co_applicant_ly.setVisibility(View.GONE);
+         co_applicant_emp_type.setVisibility(View.GONE);
+     }else
+     {
+
+     }
 
     }
 
@@ -136,8 +142,14 @@ public class Lead_Crration_Activity extends SimpleActivity {
         spinner_loan_category =(Spinner) findViewById(R.id.spinner_loan_category);
         spinner_loan_type =(Spinner) findViewById(R.id.spinner_loan_type);
 
-
         spnr_type_of_empmnt = (Spinner) findViewById(R.id.spnr_type_of_empmnt);
+
+        co_applicant_spinner = (Spinner) findViewById(R.id.co_applicant_spinner);
+        co_applicant_emp_spinner = (Spinner) findViewById(R.id.co_applicant_emp_spinner);
+
+        type_of_empmnt = (LinearLayout) findViewById(R.id.type_of_empmnt);
+        co_applicant_ly = (LinearLayout) findViewById(R.id.co_applicant_ly);
+        co_applicant_emp_type = (LinearLayout) findViewById(R.id.co_applicant_emp_type);
 
         loan_type = (AppCompatTextView) findViewById(R.id.loan_type);
         loan_type1 = (AppCompatTextView) findViewById(R.id.loan_type1);
@@ -224,25 +236,41 @@ public class Lead_Crration_Activity extends SimpleActivity {
         if (!validateMobile()) {
             return;
         }
-        if (!validate_wt_Mobile()) {
-            return;
-        }
-        if(check_complete.isChecked())
-        {
-            int m = 1;
-            C_loan_amount_ext = loan_amount_ext.getText().toString();
-            C_mobile_no_txt = mobile_no_txt.getText().toString();
-            C_name_txt = name_txt.getText().toString();
-            C_whats_app_no = whats_app_no.getText().toString();
-           // lead_cr(C_loan_amount_ext,C_mobile_no_txt,C_name_txt,C_whats_app_no,m);
 
-            Log.e("App",App);
-            click_action();
+        if(IS_CO_Applicant_Id.equals("0"))
+        {
+            Toast.makeText(context, "Please Select Co-Applicant Option", Toast.LENGTH_SHORT).show();
 
         }else
         {
-            Toast.makeText(context, "Please accept the Terms and condition", Toast.LENGTH_SHORT).show();
+            if(CO_Type_of_employement_ID.equals("0"))
+            {
+                Toast.makeText(context, "Please Select Co-Applicant Employement Type", Toast.LENGTH_SHORT).show();
+
+            }else
+            {
+                if (!validate_wt_Mobile()) {
+                    return;
+                }
+                if(check_complete.isChecked())
+                {
+                    int m = 1;
+                    C_loan_amount_ext = loan_amount_ext.getText().toString();
+                    C_mobile_no_txt = mobile_no_txt.getText().toString();
+                    C_name_txt = name_txt.getText().toString();
+                    C_whats_app_no = whats_app_no.getText().toString();
+                    // lead_cr(C_loan_amount_ext,C_mobile_no_txt,C_name_txt,C_whats_app_no,m);
+
+                    Log.e("App",App);
+                    click_action();
+
+                }else
+                {
+                    Toast.makeText(context, "Please accept the Terms and condition", Toast.LENGTH_SHORT).show();
+                }
+            }
         }
+
     }
 
     private void click_action()
@@ -293,9 +321,12 @@ public class Lead_Crration_Activity extends SimpleActivity {
                         try {
 
                             Employement =object.getJSONArray("Employement");
+                            is_coapplicant =object.getJSONArray("is_coapplicant");
                             Log.e("Property_title",String.valueOf(Employement));
 
                             Type_Of_Employement_Spinner(Employement);
+                            Co_Type_Of_Employement_Spinner(Employement);
+                            DO_Have_Co_Applicant(is_coapplicant);
 
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -377,6 +408,126 @@ public class Lead_Crration_Activity extends SimpleActivity {
                 }
             });
             spnr_type_of_empmnt.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View view, MotionEvent motionEvent) {
+                    // imm.hideSoftInputFromWindow(edt_buyer_address.getWindowToken(), 0);
+                    return false;
+                }
+            });
+        }
+
+    }
+
+    private void Co_Type_Of_Employement_Spinner(final JSONArray Type_Of_emp_ar) throws JSONException {
+        //   SPINNERLIST = new String[ja.length()];
+        CO_Type_Of_Emp_SA = new String[Type_Of_emp_ar.length()];
+        for (int i=0;i<Type_Of_emp_ar.length();i++){
+            JSONObject J =  Type_Of_emp_ar.getJSONObject(i);
+            CO_Type_Of_Emp_SA[i] = J.getString("value");
+            final List<String> loan_type_list = new ArrayList<>(Arrays.asList(CO_Type_Of_Emp_SA));
+            CO_Type_Of_Emp_Adapter = new ArrayAdapter<String>(context, R.layout.view_spinner_item, loan_type_list){
+                public View getView(int position, View convertView, ViewGroup parent) {
+                    font = Typeface.createFromAsset(context.getAssets(),"Lato-Regular.ttf");
+                    TextView v = (TextView) super.getView(position, convertView, parent);
+                    v.setTypeface(font);
+                    return v;
+                }
+
+                public View getDropDownView(int position, View convertView, ViewGroup parent) {
+                    TextView v = (TextView) super.getView(position, convertView, parent);
+                    v.setTypeface(font);
+                    return v;
+                }
+            };
+
+            CO_Type_Of_Emp_Adapter.setDropDownViewResource(R.layout.view_spinner_item);
+            co_applicant_emp_spinner.setAdapter(CO_Type_Of_Emp_Adapter);
+            co_applicant_emp_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                    try {
+
+
+                        CO_Type_of_employement_ID = Type_Of_emp_ar.getJSONObject(position).getString("id");
+                        CO_Type_of_employement_Value = Type_Of_emp_ar.getJSONObject(position).getString("value");
+
+                        Pref.putCOSALARYTYPE(context,CO_Type_of_employement_ID);
+
+                        Log.e("The salary Type",CO_Type_of_employement_Value);
+                        //CAT_ID = ja.getJSONObject(position).getString("category_id");
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+
+                }
+            });
+            co_applicant_emp_spinner.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View view, MotionEvent motionEvent) {
+                    // imm.hideSoftInputFromWindow(edt_buyer_address.getWindowToken(), 0);
+                    return false;
+                }
+            });
+        }
+
+    }
+
+    private void DO_Have_Co_Applicant(final JSONArray do_u_have_co_) throws JSONException {
+        //   SPINNERLIST = new String[ja.length()];
+        Have_Co_Applicant = new String[do_u_have_co_.length()];
+        for (int i=0;i<do_u_have_co_.length();i++){
+            JSONObject J =  do_u_have_co_.getJSONObject(i);
+            Have_Co_Applicant[i] = J.getString("value");
+            final List<String> loan_type_list = new ArrayList<>(Arrays.asList(Have_Co_Applicant));
+            Have_Co_Adapter = new ArrayAdapter<String>(context, R.layout.view_spinner_item, loan_type_list){
+                public View getView(int position, View convertView, ViewGroup parent) {
+                    font = Typeface.createFromAsset(context.getAssets(),"Lato-Regular.ttf");
+                    TextView v = (TextView) super.getView(position, convertView, parent);
+                    v.setTypeface(font);
+                    return v;
+                }
+
+                public View getDropDownView(int position, View convertView, ViewGroup parent) {
+                    TextView v = (TextView) super.getView(position, convertView, parent);
+                    v.setTypeface(font);
+                    return v;
+                }
+            };
+
+            Have_Co_Adapter.setDropDownViewResource(R.layout.view_spinner_item);
+            co_applicant_spinner.setAdapter(Have_Co_Adapter);
+            co_applicant_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                    try {
+
+
+                        IS_CO_Applicant_Id = do_u_have_co_.getJSONObject(position).getString("id");
+                        IS_CO_Applicant_Value = do_u_have_co_.getJSONObject(position).getString("value");
+
+                        Pref.putCoAPPAVAILABLE(context,IS_CO_Applicant_Id);
+
+                        Log.e("The salary Type",IS_CO_Applicant_Id);
+                        //CAT_ID = ja.getJSONObject(position).getString("category_id");
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+
+                }
+            });
+            co_applicant_spinner.setOnTouchListener(new View.OnTouchListener() {
                 @Override
                 public boolean onTouch(View view, MotionEvent motionEvent) {
                     // imm.hideSoftInputFromWindow(edt_buyer_address.getWindowToken(), 0);

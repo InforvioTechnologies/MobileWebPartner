@@ -36,6 +36,7 @@ public final class Pref {
     public static String APPLICANTNAME = "APPLICANTNAME";
 
     public static String SALARYTYPE = "SALARYTYPE";
+    public static String COSALARYTYPE = "COSALARYTYPE";
 
     public static String LOANTYPE = "LOANTYPE";
     public static String LOANTYPE1 = "LOANTYPE1";
@@ -48,6 +49,7 @@ public final class Pref {
 
     public static String DOC_Status = "DOC_Status";
     public static String IDENTIFIED = "IDENTIFIED";
+    public static String CoAPPAVAILABLE = "CoAPPAVAILABLE";
 
     public static SharedPreferences get(final Context context) {
         return context.getSharedPreferences(context.getResources().getString(R.string.app_name),Context.MODE_PRIVATE);
@@ -150,6 +152,22 @@ public static void putapplicant_name(final Context context, String aUserId) {
         editor.commit();
     }
 
+    //Is Co applicant available
+
+    public static void putCoAPPAVAILABLE(final Context context, String aUserId) {
+        Pref.putPref(context, CoAPPAVAILABLE, aUserId);
+    }
+
+    public static String getCoAPPAVAILABLE(final Context context) {
+        return Pref.getPref(context, CoAPPAVAILABLE, null);
+    }
+
+    public static void removeCoAPPAVAILABLE(final Context context) {
+        SharedPreferences prefs = Pref.get(context);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.remove(CoAPPAVAILABLE);
+        editor.commit();
+    }
 
     //Salary type
 
@@ -165,6 +183,24 @@ public static void putapplicant_name(final Context context, String aUserId) {
         SharedPreferences prefs = Pref.get(context);
         SharedPreferences.Editor editor = prefs.edit();
         editor.remove(SALARYTYPE);
+        editor.commit();
+    }
+
+
+
+    //Co Salary Type
+    public static void putCOSALARYTYPE(final Context context, String aUserId) {
+        Pref.putPref(context, COSALARYTYPE, aUserId);
+    }
+
+    public static String getCOSALARYTYPE(final Context context) {
+        return Pref.getPref(context, COSALARYTYPE, null);
+    }
+
+    public static void removeCOSALARYTYPE(final Context context) {
+        SharedPreferences prefs = Pref.get(context);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.remove(COSALARYTYPE);
         editor.commit();
     }
 

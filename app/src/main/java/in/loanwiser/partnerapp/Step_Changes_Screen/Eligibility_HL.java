@@ -86,7 +86,7 @@ public class Eligibility_HL extends SimpleActivity {
             construction_statues_txt,construction_statues_txt1,property_ownership_txt,property_ownership_txt1,
             proposed_comp_list_txt,proposed_comp_list_txt1,plot_area_txt,plot_area_txt1,build_up_area_txt,
             build_up_area_txt1,carpet_area_txt1,carpet_area_txt,property_price_txt,property_price_txt1,cmp_typ_txt,
-    cmp_typ_txt1,Cmp_name,Cmp_name1,property_guidence_value,property_guidence_value1,
+            cmp_typ_txt1,Cmp_name,Cmp_name1,property_guidence_value,property_guidence_value1,
             select_purchase_txt,select_purchase_txt1,select_construction_cost_txt,select_construction_cost_txt1,
             prop_market_value,prop_market_value1,contruction_plan_txt,contruction_plan_txt1,
             designation_in_company_txt,designation_in_company_txt1,type_emp_txt,type_emp_txt1,no_ofEmployees_txt
@@ -127,10 +127,10 @@ public class Eligibility_HL extends SimpleActivity {
 
     AppCompatButton lead_Eligibility_button;
 
-    LinearLayout salaried_other_income_YN,self_other_income_YN;
+    LinearLayout salaried_other_income_YN,self_other_income_YN,co_applicant_eligibility_ly;
 
     AppCompatAutoCompleteTextView self_permanent_res_edit_txt;
-    String property_identified;
+    String property_identified,is_co_available;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -154,8 +154,20 @@ public class Eligibility_HL extends SimpleActivity {
 
         salaried_other_income_YN = (LinearLayout) findViewById(R.id.salaried_other_income_YN);
         self_other_income_YN = (LinearLayout) findViewById(R.id.self_other_income_YN);
+        co_applicant_eligibility_ly = (LinearLayout) findViewById(R.id.co_applicant_eligibility_ly);
 
+
+        is_co_available = Pref.getCoAPPAVAILABLE(context);
         Log.e("property_identified",property_identified);
+
+        if(is_co_available.equals("1"))
+        {
+            co_applicant_eligibility_ly.setVisibility(View.VISIBLE);
+        }else
+        {
+            co_applicant_eligibility_ly.setVisibility(View.GONE);
+
+        }
 
         if(salary_type.equals("2"))
         {
@@ -1626,7 +1638,7 @@ public class Eligibility_HL extends SimpleActivity {
                         Log.d("Self_Other_Income_ID", Self_Other_Income_ID);
                         Log.d("Self_Other_Income_Value", Self_Other_Income_Value);
 
-                        if(Other_Income_ID.equals("4"))
+                        if(Self_Other_Income_ID.equals("4"))
                         {
                             self_other_income_YN.setVisibility(View.GONE);
                         }else
