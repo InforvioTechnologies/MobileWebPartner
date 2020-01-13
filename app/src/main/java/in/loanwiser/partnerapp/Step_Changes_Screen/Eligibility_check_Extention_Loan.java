@@ -46,7 +46,7 @@ import in.loanwiser.partnerapp.R;
 import in.loanwiser.partnerapp.SimpleActivity;
 
 
-public class Eligibility_check_LAP extends SimpleActivity {
+public class Eligibility_check_Extention_Loan extends SimpleActivity {
 
     LinearLayout self,former,salaried,identified_yes_or_no,property_field;
     String salary_type,loan_type;
@@ -137,7 +137,7 @@ public class Eligibility_check_LAP extends SimpleActivity {
        // setContentView(R.layout.activity_eligibility_check__lap);
 
         setContentView(R.layout.activity_simple);
-        Objs.a.setStubId(this,R.layout.activity_eligibility_check__lap);
+        Objs.a.setStubId(this,R.layout.activity_eligibility_check__extention_loan);
         initTools(R.string.eligi_check);
 
 
@@ -189,8 +189,8 @@ public class Eligibility_check_LAP extends SimpleActivity {
         property_Size = (AppCompatTextView) findViewById(R.id.property_Size);
         property_Size1 = (AppCompatTextView) findViewById(R.id.property_Size1);
 
-        age_of_propert_txt = (AppCompatTextView) findViewById(R.id.age_of_propert_txt);
-        age_of_propert_txt1 = (AppCompatTextView) findViewById(R.id.age_of_propert_txt1);
+      //  age_of_propert_txt = (AppCompatTextView) findViewById(R.id.age_of_propert_txt);
+      //  age_of_propert_txt1 = (AppCompatTextView) findViewById(R.id.age_of_propert_txt1);
         required_loan_txt = (AppCompatTextView) findViewById(R.id.required_loan_txt);
         required_loan_txt1 = (AppCompatTextView) findViewById(R.id.required_loan_txt1);
 
@@ -333,8 +333,8 @@ public class Eligibility_check_LAP extends SimpleActivity {
         build_up_area_txt.setTypeface(font);
         build_up_area_txt1.setTypeface(font);
         carpet_area_txt1.setTypeface(font);
-        age_of_propert_txt.setTypeface(font);
-        age_of_propert_txt1.setTypeface(font);
+      //  age_of_propert_txt.setTypeface(font);
+       // age_of_propert_txt1.setTypeface(font);
         carpet_area_txt.setTypeface(font);
         property_price_txt.setTypeface(font);
         property_price_txt1.setTypeface(font);
@@ -372,7 +372,7 @@ public class Eligibility_check_LAP extends SimpleActivity {
         //  prop_purpose.setTypeface(font);
         // property_ownership_edt_txt.setTypeface(font);
         plot_area_edit_txt.setTypeface(font);
-        build_up_area_edit_txt.setTypeface(font);
+      //  build_up_area_edit_txt.setTypeface(font);
       //  proposed_comp_list_date.setTypeface(font);
         carpet_area_edit_txt.setTypeface(font);
         property_price_edt_txt.setTypeface(font);

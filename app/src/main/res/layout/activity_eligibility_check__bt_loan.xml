@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".Step_Changes_Screen.Eligibility_check_LAP">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <LinearLayout
+                android:padding="15dp"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <com.kofigyan.stateprogressbar.StateProgressBar
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:spb_currentStateNumber="three"
+                    app:spb_currentStateDescriptionColor="@color/bc_green"
+                    app:spb_stateDescriptionColor="@color/white"
+                    app:spb_stateNumberBackgroundColor="@color/white"
+                    app:spb_stateForegroundColor="@color/colorAccent"
+                    app:spb_stateNumberForegroundColor="@color/white"
+                    app:spb_stateBackgroundColor="@color/colorPrimary"
+                    app:spb_maxStateNumber="four"/>
+
+                <LinearLayout
+
+                    android:id="@+id/property_field"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <include layout="@layout/bt_loan_ly"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:visibility="gone"
+                    android:id="@+id/salaried"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <include layout="@layout/ly_hl_eligibility_salaried"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/former"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <include layout="@layout/ly_hl_eligibility_self_employed"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/self"
+                    android:visibility="gone"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <include layout="@layout/ly_hl_eligibility_self_employed_buiness_setup"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_marginTop="10dp"
+                    android:elevation="4sp"
+                    android:gravity="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="?android:attr/actionBarSize"
+                    android:orientation="vertical">
+                    <LinearLayout
+                        android:gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <androidx.appcompat.widget.AppCompatButton
+                            android:id="@+id/lead_Eligibility_button"
+                            android:text="@string/next"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="start"
+                            android:background="@drawable/capsul_button3"
+                            android:theme="@style/BtnStyleApp" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

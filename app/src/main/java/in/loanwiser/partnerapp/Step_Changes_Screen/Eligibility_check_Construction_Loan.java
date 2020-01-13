@@ -46,7 +46,7 @@ import in.loanwiser.partnerapp.R;
 import in.loanwiser.partnerapp.SimpleActivity;
 
 
-public class Eligibility_check_LAP extends SimpleActivity {
+public class Eligibility_check_Construction_Loan extends SimpleActivity {
 
     LinearLayout self,former,salaried,identified_yes_or_no,property_field;
     String salary_type,loan_type;
@@ -137,7 +137,7 @@ public class Eligibility_check_LAP extends SimpleActivity {
        // setContentView(R.layout.activity_eligibility_check__lap);
 
         setContentView(R.layout.activity_simple);
-        Objs.a.setStubId(this,R.layout.activity_eligibility_check__lap);
+        Objs.a.setStubId(this,R.layout.activity_eligibility_check__construction_loan);
         initTools(R.string.eligi_check);
 
 
@@ -1291,9 +1291,6 @@ public class Eligibility_check_LAP extends SimpleActivity {
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
                     try {
-
-
-
                         EPF_Deducted_ID = employee_type_ar.getJSONObject(position).getString("id");
                         EPF_Deducted_Value = employee_type_ar.getJSONObject(position).getString("value");
                         //CAT_ID = ja.getJSONObject(position).getString("category_id");

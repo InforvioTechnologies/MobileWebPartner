@@ -82,15 +82,25 @@
             </intent-filter>
         </receiver>
 
-
-        <activity android:name=".Multi_select_checkbox.Multi_Select_checkbox"
+        <activity
+            android:name=".Multi_select_checkbox.Multi_Select_checkbox"
             android:theme="@style/NoAction2"
-            android:windowSoftInputMode="stateHidden"/>
+            android:windowSoftInputMode="stateHidden" />
 
-        <activity android:name=".Step_Changes_Screen.Viability_Report_Activity"
+        <activity
+            android:name=".Step_Changes_Screen.Loan_Viyability_Check_Activity"
             android:theme="@style/NoAction2"
-            android:windowSoftInputMode="stateHidden"/>
+            android:windowSoftInputMode="stateHidden" />
 
+        <activity
+            android:name=".Step_Changes_Screen.Send_Payment_Link_Activity"
+            android:theme="@style/NoAction2"
+            android:windowSoftInputMode="stateHidden" />
+
+        <activity
+            android:name=".Step_Changes_Screen.Viability_Report_Activity"
+            android:theme="@style/NoAction2"
+            android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".Step_Changes_Screen.Lead_Crration_Activity"
             android:theme="@style/NoAction2"
@@ -129,6 +139,35 @@
             android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".Step_Changes_Screen.Eligibility_HL"
+            android:theme="@style/NoAction2"
+            android:windowSoftInputMode="stateHidden" />
+
+        <activity
+            android:name=".Step_Changes_Screen.Eligibility_check_BT_Loan"
+            android:theme="@style/NoAction2"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".Step_Changes_Screen.Eligibility_check_BT_TopUp_Loan"
+            android:theme="@style/NoAction2"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".Step_Changes_Screen.Eligibility_check_Construction_Loan"
+            android:theme="@style/NoAction2"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".Step_Changes_Screen.Eligibility_check_Extention_Loan"
+            android:theme="@style/NoAction2"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".Step_Changes_Screen.Eligibility_check_Improment_Loan"
+            android:theme="@style/NoAction2"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".Step_Changes_Screen.Eligibility_check_Plot_Construction"
+            android:theme="@style/NoAction2"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".Step_Changes_Screen.Eligibility_check_PlotLoan"
             android:theme="@style/NoAction2"
             android:windowSoftInputMode="stateHidden" />
         <activity

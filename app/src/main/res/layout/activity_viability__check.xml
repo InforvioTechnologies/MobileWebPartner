@@ -15,10 +15,10 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
              <LinearLayout
-            android:padding="15dp"
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+                android:padding="15dp"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
             <com.kofigyan.stateprogressbar.StateProgressBar
                 android:layout_width="wrap_content"
@@ -832,6 +832,7 @@
                     android:orientation="vertical"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
+
                     <LinearLayout
                         android:orientation="vertical"
                         android:layout_width="match_parent"

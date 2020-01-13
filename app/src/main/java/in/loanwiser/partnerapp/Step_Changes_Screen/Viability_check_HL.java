@@ -22,6 +22,7 @@ import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -250,7 +251,7 @@ public class Viability_check_HL extends SimpleActivity {
         Objs.a.setStubId(this,R.layout.activity_viability_check__hl);
         initTools(R.string.viy_check);
 
-        progressDialog = new SpotsDialog(context, R.style.Custom);
+        progressDialog = new SpotsDialog(Viability_check_HL.this, R.style.Custom);
         lead_viy_step2 = (AppCompatButton) findViewById(R.id.lead_viy_step2);
 
         salary_mul_select = (LinearLayout) findViewById(R.id.salary_mul_select);
@@ -301,43 +302,19 @@ public class Viability_check_HL extends SimpleActivity {
         business_proof_self_list = (ArrayList<String>) getIntent().getSerializableExtra("select_lid_id");
         vehicle_proof_self_list = (ArrayList<String>) getIntent().getSerializableExtra("select_lid_id");
 
-        Log.e("loan_type",loan_type_id);
-        Log.e("salary_type",salary_type);
-        Log.e("myList_values", String.valueOf(myList_values));
-      //  Log.e("salary_type",salary_type);
-
-        if(loan_type_id.equals("1"))
-        {
-            lead_viy_step2.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Intent intent = new Intent(Viability_check_HL.this, Eligibility_HL.class);
-                    startActivity(intent);
-                   // intent.putExtraData(Property_Identified_ID);
-                    intent.putExtra("property_identified",Property_Identified_ID);
-                    finish();
-                }
-            });
-
-        }else if(loan_type_id.equals("2"))
-        {
-            lead_viy_step2.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-
-                    Intent intent = new Intent(Viability_check_HL.this, Eligibility_check_LAP.class);
-                    startActivity(intent);
-                    finish();
-                }
-            });
-
-        }
-
 
         UISCREEN();
         fonts();
-      //  Click();
+     //  Click();
         makeJsonObjReq1();
+
+        lead_viy_step2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent2 = new Intent(Viability_check_HL.this, Eligibility_HL.class);
+                startActivity(intent2);
+            }
+        });
 
         //multiselect functionality
 
@@ -425,9 +402,9 @@ public class Viability_check_HL extends SimpleActivity {
             propert_identified_ly.setVisibility(View.VISIBLE);
         }else
         {
-            pro_details.setVisibility(View.GONE);
+            pro_details.setVisibility(View.VISIBLE);
             propert_identified_ly.setVisibility(View.GONE);
-            property_identified_Ly1.setVisibility(View.GONE);
+            property_identified_Ly1.setVisibility(View.VISIBLE);
         }
 
         if(salary_type.equals("0"))
@@ -855,6 +832,9 @@ public class Viability_check_HL extends SimpleActivity {
 
                     @Override
                     public void onResponse(JSONObject object) {
+
+                        progressDialog.dismiss();
+
                       //  Log.e("respose Dreopdown", object.toString());
                         /// msgResponse.setText(response.toString());
                         //  Objs.a.showToast(getContext(), String.valueOf(object));
@@ -945,7 +925,7 @@ public class Viability_check_HL extends SimpleActivity {
                             e.printStackTrace();
                         }
                         // Toast.makeText(mCon, response.toString(),Toast.LENGTH_SHORT).show();
-                        progressDialog.dismiss();
+
                     }
                 }, new Response.ErrorListener() {
 
@@ -1230,6 +1210,8 @@ public class Viability_check_HL extends SimpleActivity {
 
                 salary_proof_list = new StringBuffer();
 
+                if(loan_type_id.equals("1") || loan_type_id.equals("3") || loan_type_id.equals("4"))
+                {
                     if(Property_Identified_ID.equals("0"))
                     {
                         Toast.makeText(context,"Please Select Property Identified",Toast.LENGTH_SHORT).show();
@@ -1243,16 +1225,36 @@ public class Viability_check_HL extends SimpleActivity {
                         }else
                         {
                             if(salary_type.equals("1"))
-                           {
-                               Salaried_Validation();
-                           }else if(salary_type.equals("2"))
-                           {
-                               Self_Emp_Validation();
-                           }
+                            {
+                                Salaried_Validation();
+                            }else if(salary_type.equals("2"))
+                            {
+                                Self_Emp_Validation();
+                            }
 
                         }
 
                     }
+
+                }else
+                {
+                    if(Property_Title_ID.equals("0"))
+                    {
+                        Toast.makeText(context,"Please Select Property Title",Toast.LENGTH_SHORT).show();
+
+                    }else
+                    {
+                        if(salary_type.equals("1"))
+                        {
+                            Salaried_Validation();
+                        }else if(salary_type.equals("2"))
+                        {
+                            Self_Emp_Validation();
+                        }
+
+                    }
+                }
+
 
             }
         });
@@ -1324,7 +1326,9 @@ public class Viability_check_HL extends SimpleActivity {
                                 return;
                             }
 
-                            lead_viability();
+                           // lead_viability();
+                            nexteligibility();
+
 
                         }else if(residence_id.equals("2"))
                         {
@@ -1337,7 +1341,8 @@ public class Viability_check_HL extends SimpleActivity {
                                 return;
                             }
 
-                            lead_viability();
+                            //lead_viability();
+                            nexteligibility();
                         }
 
                     }
@@ -1407,6 +1412,59 @@ public class Viability_check_HL extends SimpleActivity {
 
         }
 
+
+    }
+
+    private void nexteligibility()
+    {
+
+        int i = Integer.parseInt(loan_type_id);
+        switch (i) {
+            case 1:
+                Intent intent = new Intent(Viability_check_HL.this, Eligibility_HL.class);
+                startActivity(intent);
+                intent.putExtra("property_identified",Property_Identified_ID);
+                finish();
+                break;
+            case 2:
+                Intent intent1 = new Intent(Viability_check_HL.this, Eligibility_check_LAP.class);
+                startActivity(intent1);
+                finish();
+                break;
+            case 3:
+
+                Intent intent2 = new Intent(Viability_check_HL.this, Eligibility_check_Plot_Construction.class);
+                startActivity(intent2);
+                finish();
+                break;
+            case 4:
+                Intent intent3 = new Intent(Viability_check_HL.this, Eligibility_check_PlotLoan.class);
+                startActivity(intent3);
+                finish();
+
+                break;
+            case 5:
+                Intent intent4 = new Intent(Viability_check_HL.this, Eligibility_check_BT_TopUp_Loan.class);
+                startActivity(intent4);
+                finish();
+                break;
+            case 6:
+
+                Intent intent5 = new Intent(Viability_check_HL.this, Eligibility_check_Improment_Loan.class);
+                startActivity(intent5);
+                finish();
+                break;
+            case 8:
+                Intent intent6 = new Intent(Viability_check_HL.this, Eligibility_check_Extention_Loan.class);
+                startActivity(intent6);
+                finish();
+                break;
+            case 9:
+                Intent intent7 = new Intent(Viability_check_HL.this, Eligibility_check_Extention_Loan.class);
+                startActivity(intent7);
+                finish();
+                break;
+        }
 
     }
 
@@ -2193,6 +2251,8 @@ public class Viability_check_HL extends SimpleActivity {
                 if (!Avg_monthly_Income_D()) {
                     return;
                 }
+
+                nexteligibility();
             }
 
 
@@ -2229,6 +2289,8 @@ public class Viability_check_HL extends SimpleActivity {
             if (!Avg_monthly_income_p()) {
                 return;
             }
+
+            nexteligibility();
 
         }
     }
@@ -2326,6 +2388,7 @@ public class Viability_check_HL extends SimpleActivity {
         if (!Avg_monthly_income_own_Bus()) {
             return;
         }
+        nexteligibility();
 
     }
 
@@ -2370,7 +2433,7 @@ public class Viability_check_HL extends SimpleActivity {
             Toast.makeText(context,"please Select residence type",Toast.LENGTH_SHORT).show();
         }else
         {
-
+            nexteligibility();
         }
     }
 

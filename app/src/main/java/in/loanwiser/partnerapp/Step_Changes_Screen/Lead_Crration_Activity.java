@@ -108,7 +108,16 @@ public class Lead_Crration_Activity extends SimpleActivity {
         UI_FIELDS();
         fonts();
         makeJsonObjReq1();
-        Click();
+      //  Click();
+
+        lead_cr_step1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Lead_Crration_Activity.this, CRIF_Report_Activity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
 
      if(Lontypename.contains("Personal Loan [Unsecured]") || Lontypename.contains("Business Loan [Unsecured]"))
      {
@@ -241,7 +250,7 @@ public class Lead_Crration_Activity extends SimpleActivity {
         {
             Toast.makeText(context, "Please Select Co-Applicant Option", Toast.LENGTH_SHORT).show();
 
-        }else
+        }else  if(IS_CO_Applicant_Id.equals("1"))
         {
             if(CO_Type_of_employement_ID.equals("0"))
             {
@@ -249,28 +258,36 @@ public class Lead_Crration_Activity extends SimpleActivity {
 
             }else
             {
-                if (!validate_wt_Mobile()) {
-                    return;
-                }
-                if(check_complete.isChecked())
-                {
-                    int m = 1;
-                    C_loan_amount_ext = loan_amount_ext.getText().toString();
-                    C_mobile_no_txt = mobile_no_txt.getText().toString();
-                    C_name_txt = name_txt.getText().toString();
-                    C_whats_app_no = whats_app_no.getText().toString();
-                    // lead_cr(C_loan_amount_ext,C_mobile_no_txt,C_name_txt,C_whats_app_no,m);
-
-                    Log.e("App",App);
-                    click_action();
-
-                }else
-                {
-                    Toast.makeText(context, "Please accept the Terms and condition", Toast.LENGTH_SHORT).show();
-                }
+                validate_wats_App();
             }
+        }else
+        {
+            validate_wats_App();
         }
 
+    }
+
+    private void validate_wats_App()
+    {
+        if (!validate_wt_Mobile()) {
+            return;
+        }
+        if(check_complete.isChecked())
+        {
+            int m = 1;
+            C_loan_amount_ext = loan_amount_ext.getText().toString();
+            C_mobile_no_txt = mobile_no_txt.getText().toString();
+            C_name_txt = name_txt.getText().toString();
+            C_whats_app_no = whats_app_no.getText().toString();
+            // lead_cr(C_loan_amount_ext,C_mobile_no_txt,C_name_txt,C_whats_app_no,m);
+
+            Log.e("App",App);
+            click_action();
+
+        }else
+        {
+            Toast.makeText(context, "Please accept the Terms and condition", Toast.LENGTH_SHORT).show();
+        }
     }
 
     private void click_action()
@@ -293,6 +310,11 @@ public class Lead_Crration_Activity extends SimpleActivity {
                     Intent intent = new Intent(Lead_Crration_Activity.this, Viability_Check_PL.class);
                     startActivity(intent);
                     finish();
+        }else
+        {
+            Intent intent = new Intent(Lead_Crration_Activity.this, Viability_check_HL.class);
+            startActivity(intent);
+            finish();
         }
     }
 
@@ -514,6 +536,18 @@ public class Lead_Crration_Activity extends SimpleActivity {
 
                         Pref.putCoAPPAVAILABLE(context,IS_CO_Applicant_Id);
 
+                        if(IS_CO_Applicant_Id.equals("1"))
+                        {
+                            co_applicant_emp_type.setVisibility(View.VISIBLE);
+
+                        }else if(IS_CO_Applicant_Id.equals("2"))
+                        {
+                            co_applicant_emp_type.setVisibility(View.GONE);
+                        }else
+                        {
+                            co_applicant_emp_type.setVisibility(View.GONE);
+                        }
+
                         Log.e("The salary Type",IS_CO_Applicant_Id);
                         //CAT_ID = ja.getJSONObject(position).getString("category_id");
 
@@ -593,7 +627,11 @@ public class Lead_Crration_Activity extends SimpleActivity {
                         Log.e("Loan catgory", object.toString());
                         try {
                             ja1 = object.getJSONArray("loancatlist_arr");
-                            setMainSpinner_loancat(ja1);
+                            if (ja1.length()>0)
+                            {
+                                setMainSpinner_loancat(ja1);
+                            }
+
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }

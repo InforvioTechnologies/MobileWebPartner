@@ -92,6 +92,7 @@ public class Applicant_Details_Activity extends SimpleActivity {
         loanaganstpropert.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                /* String Loantype = "1";
                 String sub_categoryid = "2";
                 String Loantype_name = "Loan Against Property";

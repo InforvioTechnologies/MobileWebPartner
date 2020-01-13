@@ -46,7 +46,7 @@ import in.loanwiser.partnerapp.R;
 import in.loanwiser.partnerapp.SimpleActivity;
 
 
-public class Eligibility_check_LAP extends SimpleActivity {
+public class Eligibility_check_Plot_Construction extends SimpleActivity {
 
     LinearLayout self,former,salaried,identified_yes_or_no,property_field;
     String salary_type,loan_type;
@@ -137,7 +137,7 @@ public class Eligibility_check_LAP extends SimpleActivity {
        // setContentView(R.layout.activity_eligibility_check__lap);
 
         setContentView(R.layout.activity_simple);
-        Objs.a.setStubId(this,R.layout.activity_eligibility_check__lap);
+        Objs.a.setStubId(this,R.layout.activity_eligibility_check__plot_construction_loan);
         initTools(R.string.eligi_check);
 
 
@@ -186,13 +186,13 @@ public class Eligibility_check_LAP extends SimpleActivity {
 
         lead_Eligibility_button = (AppCompatButton) findViewById(R.id.lead_Eligibility_button);
 
-        property_Size = (AppCompatTextView) findViewById(R.id.property_Size);
-        property_Size1 = (AppCompatTextView) findViewById(R.id.property_Size1);
+       // property_Size = (AppCompatTextView) findViewById(R.id.property_Size);
+       // property_Size1 = (AppCompatTextView) findViewById(R.id.property_Size1);
 
-        age_of_propert_txt = (AppCompatTextView) findViewById(R.id.age_of_propert_txt);
-        age_of_propert_txt1 = (AppCompatTextView) findViewById(R.id.age_of_propert_txt1);
-        required_loan_txt = (AppCompatTextView) findViewById(R.id.required_loan_txt);
-        required_loan_txt1 = (AppCompatTextView) findViewById(R.id.required_loan_txt1);
+      //  age_of_propert_txt = (AppCompatTextView) findViewById(R.id.age_of_propert_txt);
+      //  age_of_propert_txt1 = (AppCompatTextView) findViewById(R.id.age_of_propert_txt1);
+      //  required_loan_txt = (AppCompatTextView) findViewById(R.id.required_loan_txt);
+       // required_loan_txt1 = (AppCompatTextView) findViewById(R.id.required_loan_txt1);
 
         plot_area_txt = (AppCompatTextView) findViewById(R.id.plot_area_txt);
         plot_area_txt1 = (AppCompatTextView) findViewById(R.id.plot_area_txt1);
@@ -250,7 +250,7 @@ public class Eligibility_check_LAP extends SimpleActivity {
 
 
         plot_area_edit_txt = (AppCompatEditText) findViewById(R.id.plot_area_edit_txt);
-        build_up_area_edit_txt = (AppCompatEditText) findViewById(R.id.build_up_area_edit_txt);
+      //  build_up_area_edit_txt = (AppCompatEditText) findViewById(R.id.build_up_area_edit_txt);
        // proposed_comp_list_date = (AppCompatEditText) findViewById(R.id.proposed_comp_list_date);
         carpet_area_edit_txt = (AppCompatEditText) findViewById(R.id.carpet_area_edit_txt);
         property_price_edt_txt = (AppCompatEditText) findViewById(R.id.property_price_edt_txt);
@@ -326,15 +326,15 @@ public class Eligibility_check_LAP extends SimpleActivity {
     private void fonts() {
 
         font = Typeface.createFromAsset(context.getAssets(), "Lato-Regular.ttf");
-        property_Size.setTypeface(font);
-        property_Size1.setTypeface(font);
+      //  property_Size.setTypeface(font);
+      //  property_Size1.setTypeface(font);
         plot_area_txt.setTypeface(font);
         plot_area_txt1.setTypeface(font);
         build_up_area_txt.setTypeface(font);
         build_up_area_txt1.setTypeface(font);
         carpet_area_txt1.setTypeface(font);
-        age_of_propert_txt.setTypeface(font);
-        age_of_propert_txt1.setTypeface(font);
+     //   age_of_propert_txt.setTypeface(font);
+      //  age_of_propert_txt1.setTypeface(font);
         carpet_area_txt.setTypeface(font);
         property_price_txt.setTypeface(font);
         property_price_txt1.setTypeface(font);
@@ -372,7 +372,7 @@ public class Eligibility_check_LAP extends SimpleActivity {
         //  prop_purpose.setTypeface(font);
         // property_ownership_edt_txt.setTypeface(font);
         plot_area_edit_txt.setTypeface(font);
-        build_up_area_edit_txt.setTypeface(font);
+      //  build_up_area_edit_txt.setTypeface(font);
       //  proposed_comp_list_date.setTypeface(font);
         carpet_area_edit_txt.setTypeface(font);
         property_price_edt_txt.setTypeface(font);
@@ -439,10 +439,7 @@ public class Eligibility_check_LAP extends SimpleActivity {
 
     private void Property_Validation()
     {
-        if(Property_Size_ID.equals("0"))
-        {
-            Toast.makeText(context,"Please Select the Property Size", Toast.LENGTH_SHORT).show();
-        }else {
+
 
             if (!Ploat_area_()) {
                 return;
@@ -470,8 +467,8 @@ public class Eligibility_check_LAP extends SimpleActivity {
 
             }
 
-        }
     }
+
 
     private void Salaried_Validation()
     {
@@ -952,7 +949,7 @@ public class Eligibility_check_LAP extends SimpleActivity {
 
                             Log.e("employee_type_A",String.valueOf(employee_type_A));
 
-                            Property_Size(property_size_A);
+                          //  Property_Size(property_size_A);
 
                             Select_Purchased_From(purchased_from_A);
                             Select_Company_Type(company_type_A);

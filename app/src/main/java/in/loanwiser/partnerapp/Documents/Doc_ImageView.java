@@ -50,6 +50,7 @@ public class Doc_ImageView extends SimpleActivity {
         Log.e("pfd",document);
         hash =  Objs.a.getBundle(this, Params.transaction_id);
         if(type.equals("pdf")){
+
             Rl_pdf_reader.setVisibility(View.VISIBLE);
             Ly_image_reader.setVisibility(View.GONE);
             webview.getSettings().setJavaScriptEnabled(true);
@@ -59,8 +60,10 @@ public class Doc_ImageView extends SimpleActivity {
 
                 public void onPageFinished(WebView view, String url) {
                     progressbar.setVisibility(View.GONE);
+
                 }
             });
+
         }else{
             Rl_pdf_reader.setVisibility(View.GONE);
             Ly_image_reader.setVisibility(View.VISIBLE);

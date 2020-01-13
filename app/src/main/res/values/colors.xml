@@ -24,4 +24,10 @@
     <color name="iconcolor">#fff568</color>
     <color name="blue">#2196f3</color>
 
+    //color viability report ffe783
+    <color name="yellow_vi">#ffe783</color>
+    <color name="type_A">#40eaca</color>
+    <color name="type_B">#ffcc95</color>
+    <color name="type_C">#ffafaf</color>
+
 </resources>

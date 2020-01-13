@@ -32,6 +32,7 @@ import adhoc.app.applibrary.Config.AppUtils.Params;
 import adhoc.app.applibrary.Config.AppUtils.Urls;
 import adhoc.app.applibrary.Config.AppUtils.VolleySignleton.AppController;
 import dmax.dialog.SpotsDialog;
+import in.loanwiser.partnerapp.PartnerActivitys.Home;
 import in.loanwiser.partnerapp.R;
 import in.loanwiser.partnerapp.SimpleActivity;
 
@@ -53,10 +54,11 @@ public class Payment_Details_Activity extends SimpleActivity {
             paymenttotal,r3,totalamount,
             paymentstatus,r4,payment_status;
 
-    AppCompatButton btn1,btn2;
+    AppCompatButton btn1,btn2,done,get_link;
     private String tag_json_obj = "jobj_req", tag_json_arry = "jarray_req";
 
     private AlertDialog progressDialog;
+
 
     String order_id,order_amt;
 
@@ -97,8 +99,9 @@ public class Payment_Details_Activity extends SimpleActivity {
         payment_status=(AppCompatTextView)findViewById(R.id.status);
 
 
-        btn1=(AppCompatButton)findViewById(R.id.back_side);
+        btn1=(AppCompatButton)findViewById(R.id.get_link);
         btn2=(AppCompatButton)findViewById(R.id.next_side);
+        done=(AppCompatButton)findViewById(R.id.done);
 
         btn2.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -107,7 +110,23 @@ public class Payment_Details_Activity extends SimpleActivity {
             }
         });
 
+        done.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+              /*  Intent intent = new Intent(Payment_Details_Activity.this, Home.class);
+                startActivity(intent);
+                finish();*/
+            }
+        });
 
+        btn1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Payment_Details_Activity.this, Send_Payment_Link_Activity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
 
     }
 
@@ -192,6 +211,7 @@ public class Payment_Details_Activity extends SimpleActivity {
 
        // cfPaymentService.doPayment(this, params, cftoken, stage, "#000000", "#FFFFFF");
         cfPaymentService.doPayment(this, params, cftoken, stage);
+
     }
 
     @Override

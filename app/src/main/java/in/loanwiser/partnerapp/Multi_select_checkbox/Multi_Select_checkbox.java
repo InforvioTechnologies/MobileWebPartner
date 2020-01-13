@@ -124,7 +124,6 @@ public class Multi_Select_checkbox extends SimpleActivity {
 
     private void set_selected_item()
     {
-
         if(myList_values != null)
         {
             for (int i = 0; i < myList_values.size(); ++i) {

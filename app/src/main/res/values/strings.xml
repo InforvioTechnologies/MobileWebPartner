@@ -10,6 +10,7 @@
     <string name="list_lead">List of Leads</string>
     <string name="wt_termss">I accept whatsapp terms and conditions</string>
     <string name="next">Next</string>
+    <string name="Download">Download</string>
 
     <string name="lead_creation">Lead Creation</string>
     <string name="payment">Payment</string>
@@ -441,6 +442,7 @@
 
     //Step changes
     <string name="eligi_check">Eligibility Check</string>
+    <string name="CRIF_REPORT">CRIF REPORT ACTIVITY</string>
     <string name="emp_type1">Type of Employee</string>
     <string name="residence_pin">Residence Pincode</string>
     <string name="property_pin">Property Pincode</string>

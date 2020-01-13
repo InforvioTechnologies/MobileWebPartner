@@ -46,7 +46,7 @@ import in.loanwiser.partnerapp.R;
 import in.loanwiser.partnerapp.SimpleActivity;
 
 
-public class Eligibility_check_LAP extends SimpleActivity {
+public class Eligibility_check_Improment_Loan extends SimpleActivity {
 
     LinearLayout self,former,salaried,identified_yes_or_no,property_field;
     String salary_type,loan_type;

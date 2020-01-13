@@ -46,7 +46,7 @@ import in.loanwiser.partnerapp.R;
 import in.loanwiser.partnerapp.SimpleActivity;
 
 
-public class Eligibility_check_LAP extends SimpleActivity {
+public class Eligibility_check_PlotLoan extends SimpleActivity {
 
     LinearLayout self,former,salaried,identified_yes_or_no,property_field;
     String salary_type,loan_type;
@@ -137,7 +137,7 @@ public class Eligibility_check_LAP extends SimpleActivity {
        // setContentView(R.layout.activity_eligibility_check__lap);
 
         setContentView(R.layout.activity_simple);
-        Objs.a.setStubId(this,R.layout.activity_eligibility_check__lap);
+        Objs.a.setStubId(this,R.layout.activity_eligibility_check__plot_loan);
         initTools(R.string.eligi_check);
 
 
