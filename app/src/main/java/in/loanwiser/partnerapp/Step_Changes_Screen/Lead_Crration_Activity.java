@@ -113,7 +113,7 @@ public class Lead_Crration_Activity extends SimpleActivity {
         lead_cr_step1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Lead_Crration_Activity.this, CRIF_Report_Activity.class);
+                Intent intent = new Intent(Lead_Crration_Activity.this, Viability_Check_PL.class);
                 startActivity(intent);
                 finish();
             }

@@ -495,8 +495,6 @@ public class Eligibility_Check_PL extends SimpleActivity {
                    occupation.remove(i);
                }*/
         for (int i=0;i<ja.length();i++) {
-
-
             JSONObject J = ja.getJSONObject(i);
             Pincode_SA[i] = J.getString("pincode");
             final List<String> Pincode_list = new ArrayList<>(Arrays.asList(Pincode_SA));
@@ -524,10 +522,6 @@ public class Eligibility_Check_PL extends SimpleActivity {
 
             permanent_res_pincode_edtxt.setThreshold(2);
             permanent_res_pincode_edtxt.setAdapter(Pincode_Adapter);
-
-
-
-
 
         }
 
@@ -561,25 +555,17 @@ public class Eligibility_Check_PL extends SimpleActivity {
                             Company_type =object.getJSONArray("Company_type");
                             Type_employee =object.getJSONArray("Type_employee");
                             Current_Residence =object.getJSONArray("Current_Residence");
-
-
-
                             epf_deduct =object.getJSONArray("epf_deduct");
-
                             permanent_adddress =object.getJSONArray("permanent_adddress");
                             relation_own =object.getJSONArray("relation_own");
                             Other_income =object.getJSONArray("Other_income");
                             gst_reflect =object.getJSONArray("gst_reflect");
-
                            // epf_jarray =object.getJSONArray("epf_jarray");
                             Log.e("gst_reflect",String.valueOf(gst_reflect));
-
-
                             Salry_method_Spinner(Company_type);
                             Type_of_Employee(Type_employee);
                             Current_res_Type(Current_Residence);
                             Epf_detedcted(epf_deduct);
-
                             Permanent_res_type(permanent_adddress);
                             Own_hous_relative(relation_own);
                             Other_income_f(Other_income);
@@ -606,6 +592,7 @@ public class Eligibility_Check_PL extends SimpleActivity {
             /**
              * Passing some request headers
              * */
+
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
                 HashMap<String, String> headers = new HashMap<String, String>();
@@ -649,8 +636,6 @@ public class Eligibility_Check_PL extends SimpleActivity {
 
                     try {
                         //  City_loc_uniqueID = ja.getJSONObject(position).getString("city_id");
-
-
                         Company_id = Company_type_ar.getJSONObject(position).getString("id");
                         Company_Value = Company_type_ar.getJSONObject(position).getString("value");
                         //CAT_ID = ja.getJSONObject(position).getString("category_id");
@@ -679,6 +664,7 @@ public class Eligibility_Check_PL extends SimpleActivity {
     }
     private void Type_of_Employee(final JSONArray Type_employee_ar) throws JSONException {
         //   SPINNERLIST = new String[ja.length()];
+
         Employee_type_SA = new String[Type_employee_ar.length()];
         for (int i=0;i<Type_employee_ar.length();i++){
             JSONObject J =  Type_employee_ar.getJSONObject(i);
@@ -707,8 +693,6 @@ public class Eligibility_Check_PL extends SimpleActivity {
 
                     try {
                         //  City_loc_uniqueID = ja.getJSONObject(position).getString("city_id");
-
-
 
                         Emp_type_id = Type_employee_ar.getJSONObject(position).getString("id");
                         Emp_type_Value = Type_employee_ar.getJSONObject(position).getString("value");
@@ -825,7 +809,6 @@ public class Eligibility_Check_PL extends SimpleActivity {
 
                     try {
                         //  City_loc_uniqueID = ja.getJSONObject(position).getString("city_id");
-
                         epf_id = epf_jarray.getJSONObject(position).getString("id");
                         epf_Value = epf_jarray.getJSONObject(position).getString("value");
                         //CAT_ID = ja.getJSONObject(position).getString("category_id");

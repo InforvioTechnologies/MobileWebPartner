@@ -153,13 +153,11 @@ public class Viability_Check_PL extends SimpleActivity {
                 intent.putExtra("select_lid_id", (Serializable) myList_values);
                 startActivity(intent);
 
-
             }
         });
 
-
         UISCREEN();
-    //   Click();
+      //  Click();
         fonts();
         makeJsonObjReq1();
     }
@@ -234,7 +232,6 @@ public class Viability_Check_PL extends SimpleActivity {
         monthly_afr_emi_amt_edit_txt = (AppCompatEditText) findViewById(R.id.monthly_afr_emi_amt_edit_txt);
         monthly_afr_emi_amt_edit_txt.addTextChangedListener(new NumberTextWatcher(monthly_net_sal_edit_txt));
         cv_salary_income_proof = (ChipsView) findViewById(R.id.cv_salary_income_proof);
-
 
     }
 
@@ -328,7 +325,6 @@ public class Viability_Check_PL extends SimpleActivity {
             if(workpincode.length()==2){
                 GET_Pincode1(workpincode);
             }
-
         }
 
         @Override
@@ -352,23 +348,23 @@ public class Viability_Check_PL extends SimpleActivity {
                     return;
                 }
 
-                if(PAN_id.equals("0"))
+              /*  if(PAN_id.equals("0"))
                 {
                     Toast.makeText(context,"Please Select Having PAN Card",Toast.LENGTH_SHORT).show();
 
                 }else
-                {
-                    if (!Validate_Occupation()) {
+                {*/
+                   /* if (!Validate_Occupation()) {
                         return;
-                    }
+                    }*/
                     if (!Validate_net_income()) {
                         return;
                     }
-                    if(Employee_id.equals("0"))
+                   /* if(Employee_id.equals("0"))
                     {
                         Toast.makeText(context,"Please Select Employee id",Toast.LENGTH_SHORT).show();
                     }else
-                    {
+                    {*/
                         if(Salary_id.equals("0"))
                         {
                             Toast.makeText(context,"Please Select Salary Credit Method",Toast.LENGTH_SHORT).show();
@@ -406,9 +402,9 @@ public class Viability_Check_PL extends SimpleActivity {
 
                                 if(residence_id.equals("1"))
                                 {
-                                    if (!Validate_Monthly_Emi()) {
+                                   /* if (!Validate_Monthly_Emi()) {
                                         return;
-                                    }
+                                    }*/
 
                                     lead_viability();
 
@@ -419,17 +415,18 @@ public class Viability_Check_PL extends SimpleActivity {
                                         return;
                                     }
 
-                                    if (!Validate_Monthly_Emi()) {
+                                   /* if (!Validate_Monthly_Emi()) {
                                         return;
-                                    }
+                                    }*/
 
                                     lead_viability();
                                 }
 
                             }
                         }
-                    }
-                }
+                  /*  }*/
+                    ////
+               /* }*/
 
             }
         });

@@ -99,7 +99,6 @@ public class Login extends SimpleActivity {
                 if(new_otp.length()==10){
 
                     imm.hideSoftInputFromWindow(edittext_mobile.getWindowToken(), 0);
-
                 }
             }
             @Override

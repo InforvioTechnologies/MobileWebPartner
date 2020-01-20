@@ -6,9 +6,11 @@ import androidx.core.content.FileProvider;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -21,6 +23,7 @@ import android.webkit.WebViewClient;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -38,6 +41,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
@@ -63,6 +67,12 @@ public class CRIF_Report_Activity extends SimpleActivity {
     ProgressBar progressbar;
 
     RelativeLayout Rl_pdf_reader;
+
+
+    String dest_file_path = "test.pdf";
+    int downloadedSize = 0, totalsize;
+    String download_file_url = "http://ilabs.uw.edu/sites/default/files/sample_0.pdf";
+    float per = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,7 +103,7 @@ public class CRIF_Report_Activity extends SimpleActivity {
           @Override
           public void onClick(View view) {
 
-              Download_Rental_Agreement();
+             Download_Rental_Agreement();
 
           }
       });
