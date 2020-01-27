@@ -966,7 +966,7 @@ public class Eligibility_check_BT_Loan extends SimpleActivity {
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
-                        // Toast.makeText(context, response.toString(),Toast.LENGTH_SHORT).show();
+
                         progressDialog.dismiss();
                     }
                 }, new Response.ErrorListener() {
@@ -1117,9 +1117,7 @@ public class Eligibility_check_BT_Loan extends SimpleActivity {
 
                         Self_Select_Purchased_from_Id = select_purcased_from.getJSONObject(position).getString("id");
                         Self_Select_Purchased_from_Value = select_purcased_from.getJSONObject(position).getString("value");
-                        //CAT_ID = ja.getJSONObject(position).getString("category_id");
-                        Log.d("Property_Size_ID", Self_Select_Purchased_from_Id);
-                        Log.d("Property_Size_Value", Self_Select_Purchased_from_Value);
+
 
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -1179,9 +1177,7 @@ public class Eligibility_check_BT_Loan extends SimpleActivity {
 
                         Company_Type_Id = select_company_ar.getJSONObject(position).getString("id");
                         Company_Type_Value = select_company_ar.getJSONObject(position).getString("value");
-                        //CAT_ID = ja.getJSONObject(position).getString("category_id");
-                        Log.d("Company_Type_Id", Company_Type_Id);
-                        Log.d("Company_Type_Value", Company_Type_Value);
+
 
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -1355,9 +1351,7 @@ public class Eligibility_check_BT_Loan extends SimpleActivity {
 
                         Other_Income_ID = other_income_ar.getJSONObject(position).getString("id");
                         Other_Income_Value = other_income_ar.getJSONObject(position).getString("value");
-                        //CAT_ID = ja.getJSONObject(position).getString("category_id");
-                        Log.d("EPF_Deducted_ID", Other_Income_ID);
-                        Log.d("EPF_Deducted_Value", Other_Income_Value);
+
 
                         if(Other_Income_ID.equals("4"))
                         {
@@ -1396,9 +1390,7 @@ public class Eligibility_check_BT_Loan extends SimpleActivity {
 
                         Self_Other_Income_ID = other_income_ar.getJSONObject(position).getString("id");
                         Self_Other_Income_Value = other_income_ar.getJSONObject(position).getString("value");
-                        //CAT_ID = ja.getJSONObject(position).getString("category_id");
-                        Log.d("Self_Other_Income_ID", Self_Other_Income_ID);
-                        Log.d("Self_Other_Income_Value", Self_Other_Income_Value);
+
 
                         if(Self_Other_Income_ID.equals("4"))
                         {
@@ -1431,7 +1423,7 @@ public class Eligibility_check_BT_Loan extends SimpleActivity {
     }
 
     private void GST_Reflacted(final JSONArray gst_reflected) throws JSONException {
-        //   SPINNERLIST = new String[ja.length()];
+
         IS_GST_Reflected = new String[gst_reflected.length()];
         for (int i=0;i<gst_reflected.length();i++){
             JSONObject J =  gst_reflected.getJSONObject(i);
@@ -1495,9 +1487,7 @@ public class Eligibility_check_BT_Loan extends SimpleActivity {
 
                         Self_GST_Reflact_ID = gst_reflected.getJSONObject(position).getString("id");
                         Self_GST_Reflact__Value = gst_reflected.getJSONObject(position).getString("value");
-                        //CAT_ID = ja.getJSONObject(position).getString("category_id");
-                        Log.d("GST_Reflact_ID", Self_GST_Reflact_ID);
-                        Log.d("GST_Reflact__Value", Self_GST_Reflact__Value);
+
 
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -1520,7 +1510,7 @@ public class Eligibility_check_BT_Loan extends SimpleActivity {
 
     }
     private void Current_residence_Proof(final JSONArray current_residence_proof) throws JSONException {
-        //   SPINNERLIST = new String[ja.length()];
+
         Current_residence_SA = new String[current_residence_proof.length()];
         for (int i=0;i<current_residence_proof.length();i++){
             JSONObject J =  current_residence_proof.getJSONObject(i);

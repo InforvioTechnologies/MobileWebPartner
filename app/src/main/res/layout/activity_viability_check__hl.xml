@@ -24,6 +24,7 @@
             app:spb_stateBackgroundColor="@color/colorAccent"
             app:spb_maxStateNumber="four"/>
     </LinearLayout>
+
     <ScrollView
         android:layout_weight="1"
         android:layout_width="match_parent"

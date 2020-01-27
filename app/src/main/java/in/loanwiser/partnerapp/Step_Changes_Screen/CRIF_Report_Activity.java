@@ -65,10 +65,7 @@ public class CRIF_Report_Activity extends SimpleActivity {
 
     WebView webview;
     ProgressBar progressbar;
-
     RelativeLayout Rl_pdf_reader;
-
-
     String dest_file_path = "test.pdf";
     int downloadedSize = 0, totalsize;
     String download_file_url = "http://ilabs.uw.edu/sites/default/files/sample_0.pdf";
@@ -77,6 +74,7 @@ public class CRIF_Report_Activity extends SimpleActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
       //  setContentView(R.layout.activity_crif__report_);
 
         setContentView(R.layout.activity_simple);
@@ -110,11 +108,13 @@ public class CRIF_Report_Activity extends SimpleActivity {
 
     }
 
-    private void  Download_Rental_Agreement() {
+    private void Download_Rental_Agreement() {
 
         String url = "http://maven.apache.org/archives/maven-1.x/maven.pdf";
+
         // declare the dialog as a member field of your activity
         // instantiate it within the onCreate method
+
         mProgressDialog = new ProgressDialog(CRIF_Report_Activity.this);
         mProgressDialog.setMessage("File Is Dowloading");
         mProgressDialog.setIndeterminate(true);
@@ -127,9 +127,9 @@ public class CRIF_Report_Activity extends SimpleActivity {
         downloadTask.execute(url);
 
         mProgressDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
-
             @Override
             public void onCancel(DialogInterface dialog) {
+
                 downloadTask.cancel(true); //cancel the task
             }
         });
@@ -175,7 +175,6 @@ public class CRIF_Report_Activity extends SimpleActivity {
                     } else {
 
                         // Toast.makeText(context,"Directory is not created: ", Toast.LENGTH_LONG).show();
-
                     }
                 }catch(Exception e){
                     e.printStackTrace();

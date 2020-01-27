@@ -123,8 +123,6 @@ public class Eligibility_BL extends SimpleActivity {
         spinn_gst_other = (Spinner) findViewById(R.id.spinn_gst_other);
         spinn_other_income = (Spinner) findViewById(R.id.spinn_other_income);
         business_registration_spinner = (Spinner) findViewById(R.id.business_registration_spinner);
-
-
         business_registration_txt = (AppCompatTextView) findViewById(R.id.business_registration_txt);
         business_registration_txt1 = (AppCompatTextView) findViewById(R.id.business_registration_txt1);
         avg_bank_balence_txt = (AppCompatTextView) findViewById(R.id.avg_bank_balence_txt);
@@ -245,16 +243,16 @@ public class Eligibility_BL extends SimpleActivity {
     {
 
 
-        lead_Elegibility_Bank.setOnClickListener(new View.OnClickListener() {
+       /* lead_Elegibility_Bank.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(Eligibility_BL.this, Credite_report_details.class);
                 startActivity(intent);
                 finish();
             }
-        });
+        });*/
 
-       /* lead_Elegibility_Bank.setOnClickListener(new View.OnClickListener() {
+        lead_Elegibility_Bank.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
@@ -289,7 +287,7 @@ public class Eligibility_BL extends SimpleActivity {
 
                 }
             }
-        });*/
+        });
 
     }
 
@@ -304,20 +302,20 @@ public class Eligibility_BL extends SimpleActivity {
             Toast.makeText(context,"Please Select Current Residence Addres Proof",Toast.LENGTH_SHORT).show();
         }else
         {
-            if(Guarenter_Id.equals("0"))
+          /*  if(Guarenter_Id.equals("0"))
             {
                 Toast.makeText(context,"Please Select can you provide Guarenter",Toast.LENGTH_SHORT).show();
 
             }else
-            {
+            {*/
 
-                if (!residence_Business_reference_name()) {
+             /*   if (!residence_Business_reference_name()) {
                     return;
                 }
 
                 if (!residence_Business_reference_phone()) {
                     return;
-                }
+                }*/
 
                 if(Other_income_Id.equals("0"))
                 {
@@ -345,7 +343,7 @@ public class Eligibility_BL extends SimpleActivity {
 
                 }
 
-            }
+           /* }*/
         }
 
     }
@@ -470,8 +468,7 @@ public class Eligibility_BL extends SimpleActivity {
 
                     @Override
                     public void onResponse(JSONObject object) {
-                        Log.e("respose Dreopdown", object.toString());
-                        /// msgResponse.setText(response.toString());
+
                         //  Objs.a.showToast(getContext(), String.valueOf(object));
 
                         try {
@@ -483,17 +480,17 @@ public class Eligibility_BL extends SimpleActivity {
                             Business_registration =object.getJSONArray("Business_registration");
                             // Business_Proof =object.getJSONArray("Business_Proof");
                             Log.e("Type_of_employement",String.valueOf(Provide_Guarantor));
-
                             Current_res_proof(Current_address_proof);
                             Provie_Guarenter(Provide_Guarantor);
                             Other_income(other_income);
                             GST_reflected(GST_reflected);
                             Business_registration_fun(Business_registration);
 
+
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
-                        // Toast.makeText(mCon, response.toString(),Toast.LENGTH_SHORT).show();
+
                         progressDialog.dismiss();
                     }
                 }, new Response.ErrorListener() {
@@ -505,9 +502,7 @@ public class Eligibility_BL extends SimpleActivity {
             }
         }) {
 
-            /**
-             * Passing some request headers
-             * */
+
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
                 HashMap<String, String> headers = new HashMap<String, String>();
@@ -550,13 +545,10 @@ public class Eligibility_BL extends SimpleActivity {
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
                     try {
-                        //  City_loc_uniqueID = ja.getJSONObject(position).getString("city_id");
+
 
                         Spinner_res_proof_Id = Current_res_proof_ar.getJSONObject(position).getString("id");
                         Spinner_res_proof_Value = Current_res_proof_ar.getJSONObject(position).getString("value");
-                        //CAT_ID = ja.getJSONObject(position).getString("category_id");
-                        Log.d("Salary_id", Spinner_res_proof_Id);
-                        Log.d("Salary_Value", Spinner_res_proof_Value);
 
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -608,13 +600,9 @@ public class Eligibility_BL extends SimpleActivity {
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
                     try {
-                        //  City_loc_uniqueID = ja.getJSONObject(position).getString("city_id");
 
                         Guarenter_Id = Provide_Guarantor.getJSONObject(position).getString("id");
                         Guarenter_Value = Provide_Guarantor.getJSONObject(position).getString("value");
-                        //CAT_ID = ja.getJSONObject(position).getString("category_id");
-                        Log.d("Salary_id", Spinner_res_proof_Id);
-                        Log.d("Salary_Value", Spinner_res_proof_Value);
 
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -638,7 +626,7 @@ public class Eligibility_BL extends SimpleActivity {
     }
 
     private void Other_income(final JSONArray Other_income_ar) throws JSONException {
-        //   SPINNERLIST = new String[ja.length()];
+
         Other_income_SA = new String[Other_income_ar.length()];
         for (int i=0;i<Other_income_ar.length();i++){
             JSONObject J =  Other_income_ar.getJSONObject(i);
@@ -666,7 +654,6 @@ public class Eligibility_BL extends SimpleActivity {
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
                     try {
-                        //  City_loc_uniqueID = ja.getJSONObject(position).getString("city_id");
 
                         Other_income_Id = Other_income_ar.getJSONObject(position).getString("id");
                         Other_income_Value = Other_income_ar.getJSONObject(position).getString("value");
@@ -709,7 +696,7 @@ public class Eligibility_BL extends SimpleActivity {
     }
 
     private void GST_reflected(final JSONArray GST_reflected_ar) throws JSONException {
-        //   SPINNERLIST = new String[ja.length()];
+
         Gst_refelect_SA = new String[GST_reflected_ar.length()];
         for (int i=0;i<GST_reflected_ar.length();i++){
             JSONObject J =  GST_reflected_ar.getJSONObject(i);
@@ -737,13 +724,10 @@ public class Eligibility_BL extends SimpleActivity {
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
                     try {
-                        //  City_loc_uniqueID = ja.getJSONObject(position).getString("city_id");
 
                         Gstreflect_Id = GST_reflected_ar.getJSONObject(position).getString("id");
                         Gstreflect_Value = GST_reflected_ar.getJSONObject(position).getString("value");
-                        //CAT_ID = ja.getJSONObject(position).getString("category_id");
-                        Log.d("Salary_id", Spinner_res_proof_Id);
-                        Log.d("Salary_Value", Spinner_res_proof_Value);
+
 
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -795,13 +779,9 @@ public class Eligibility_BL extends SimpleActivity {
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
                     try {
-                        //  City_loc_uniqueID = ja.getJSONObject(position).getString("city_id");
 
                         Business_registration_Id = Business_registration_ar.getJSONObject(position).getString("id");
                         Business_registration_Value = Business_registration_ar.getJSONObject(position).getString("value");
-                        //CAT_ID = ja.getJSONObject(position).getString("category_id");
-                        Log.d("Salary_id", Business_registration_Id);
-                        Log.d("Salary_Value", Business_registration_Value);
 
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -843,7 +823,7 @@ public class Eligibility_BL extends SimpleActivity {
         JSONObject J= null;
         try {
             J =new JSONObject();
-            //  J.put(Params.email_id,email);
+
 
             J.put("Business_registration_Id",Business_registration_Id);
 
@@ -895,7 +875,7 @@ public class Eligibility_BL extends SimpleActivity {
             }
         };
 
-        // AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
+
         int socketTimeout = 0;
         RetryPolicy policy = new DefaultRetryPolicy(socketTimeout,
                 DefaultRetryPolicy.DEFAULT_MAX_RETRIES,

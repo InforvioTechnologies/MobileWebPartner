@@ -76,7 +76,7 @@ public class Lead_Crration_Activity extends SimpleActivity {
 
     InputMethodManager imm;
     JSONArray Employement,is_coapplicant;
-    AppCompatEditText loan_amount_ext,name_txt,mobile_no_txt,whats_app_no;
+    AppCompatEditText loan_amount_ext,name_txt,mobile_no_txt,whats_app_no,age_edite_txt;
     AppCompatTextView txt_loan_category,txt_loan_category1,loan_type,loan_type1,
                         Loan_amount,Loan_amount1,name,name1,mobile,mobile1,wt_mobile,wt_mobile11,terms_and_condition,
             type_of_empmnt_txt,type_of_empmnt_txt1,do_you_have_coApp_txt,do_you_have_coApp_txt1,coApp_txt_emp_type1
@@ -113,9 +113,11 @@ public class Lead_Crration_Activity extends SimpleActivity {
         lead_cr_step1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Lead_Crration_Activity.this, Viability_Check_PL.class);
+
+                Intent intent = new Intent(Lead_Crration_Activity.this, Viability_Check_BL.class);
                 startActivity(intent);
                 finish();
+
             }
         });
 
@@ -170,6 +172,7 @@ public class Lead_Crration_Activity extends SimpleActivity {
         mobile1 = (AppCompatTextView) findViewById(R.id.mobile1);
         wt_mobile = (AppCompatTextView) findViewById(R.id.wt_mobile);
         wt_mobile11 = (AppCompatTextView) findViewById(R.id.wt_mobile1);
+        age_edite_txt = (AppCompatEditText) findViewById(R.id.age_edite_txt);
         terms_and_condition = (AppCompatTextView) findViewById(R.id.terms_and_condition);
         check_complete = (CheckBox) findViewById(R.id.check_complete);
 
@@ -181,6 +184,7 @@ public class Lead_Crration_Activity extends SimpleActivity {
         name_txt.setTypeface(font);
         mobile_no_txt.setTypeface(font);
         whats_app_no.setTypeface(font);
+        age_edite_txt.setTypeface(font);
 
         txt_loan_category.setTypeface(font);
         txt_loan_category1.setTypeface(font);
@@ -240,6 +244,9 @@ public class Lead_Crration_Activity extends SimpleActivity {
             return;
         }
         if (!validateName()) {
+            return;
+        }
+        if (!validate_age()) {
             return;
         }
         if (!validateMobile()) {
@@ -530,7 +537,6 @@ public class Lead_Crration_Activity extends SimpleActivity {
 
                     try {
 
-
                         IS_CO_Applicant_Id = do_u_have_co_.getJSONObject(position).getString("id");
                         IS_CO_Applicant_Value = do_u_have_co_.getJSONObject(position).getString("value");
 
@@ -594,6 +600,20 @@ public class Lead_Crration_Activity extends SimpleActivity {
 
         return true;
     }
+
+    private boolean validate_age(){
+        if (age_edite_txt.getText().toString().trim().isEmpty() || age_edite_txt.length() < 3) {
+            age_edite_txt.setError(getText(R.string.err_curent));
+            age_edite_txt.requestFocus();
+            return false;
+        } else {
+
+        }
+
+        return true;
+    }
+
+
     private boolean validateMobile() {
         if (mobile_no_txt.length() < 10 || mobile_no_txt.length() > 10) {
             mobile_no_txt.setError(getText(R.string.error_empty_mobile));

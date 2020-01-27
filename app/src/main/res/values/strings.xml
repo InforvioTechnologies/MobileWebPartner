@@ -227,7 +227,7 @@
 
     <string name="des">Designation in Company</string>
     <string name="cmp_type">Company Type</string>
-    <string name="emp_type">Type of Employee</string>
+    <string name="emp_type">Type of Business</string>
     <string name="emp_count">No of Employee in company</string>
     <string name="salary_credit">Salary Credit Method</string>
     <string name="cur_res_proof">Current residence address Proof</string>
@@ -241,9 +241,15 @@
     <string name="no">No</string>
     <string name="rem_tnr">Remaining Tenor</string>
     <string name="occupation_">Occupation</string>
+    <string name="rent_paid">Rent Paid for House</string>
+    <string name="affordable_emi">Affordable EMI</string>
+    <string name="designation_rank">Designation and Rank</string>
+    <string name="education_qualification">Education Qualification</string>
+    <string name="marital_statues">Marital Status</string>
+    <string name="nodf">No Of Dependents in Family</string>
     <string name="montly">Monthly Net Salary</string>
     <string name="other_income_">Other Income</string>
-    <string name="other_income">Amount</string>
+    <string name="other_income">Monthly income</string>
     <string name="home_purpose2"> Purchase house</string>
     <string name="home_purpose3"> Construct house in your land</string>
     <string name="home_purpose4"> Improvement loan</string>
@@ -455,10 +461,10 @@
     <string name="business_proof">Business Income Proof</string>
     <string name="vehicle_type">Vehicle Type(MultiSelect)</string>
     <string name="nov">Number of vehicle</string>
-    <string name="nyw">Number of years in work</string>
+    <string name="nyw">Number of years in Business</string>
     <string name="actual_business">Actual Business</string>
     <string name="avg">Average monthly income</string>
-    <string name="bus_proof">Business Proof(MultiSelect)</string>
+    <string name="bus_proof">Business Vintage Proof(MultiSelect)</string>
     <string name="wt_crop">What kind of crops(MultiSelect)</string>
     <string name="ai">Annual Income</string>
     <string name="di">Daily Income</string>
@@ -525,12 +531,12 @@
     <string name="ploat_area_sqft">Plot Area(Sq.ft)</string>
     <string name="builtup_area">Builtup Area(Sq.ft)</string>
     <string name="age_of_property_">Age Of Property</string>
-    <string name="plot_value">Plot Value</string>
+    <string name="plot_value">Cost of Plot</string>
 
 
     <string name="carpet_area">Carpet Area(Sq.ft)</string>
     <string name="required_loan_amt">Required Loan Amount</string>
-    <string name="property_price">Property Price</string>
+    <string name="property_price">Property Value</string>
 
     <string name="estimated_cmp_date">Estimated Completion date</string>
     <string name="cost_estimate">Cost Estimated</string>
@@ -568,6 +574,9 @@
     <string name="persentage_of_income_bank_credited">% of Purchases of Income is Bank credited</string>
     <string name="have_emp_id">Have Employee ID?</string>
     <string name="noa">Number of acres</string>
+
+    <string name="ER_EG">Employment Rank and Employment Grade </string>
+    <string name="Own_house">Own House Condition </string>
 
     <string name="app_pan_no">Applicant PAN No</string>
     <string name="co_app_pan_no"> Co Applicant PAN No</string>

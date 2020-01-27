@@ -10,6 +10,7 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -58,9 +59,11 @@
                         android:textColor="@color/white"
                         android:text="Employment Details"
                         android:layout_height="wrap_content" />
+
                 </LinearLayout>
 
                 <LinearLayout
+                    android:visibility="gone"
                     android:layout_marginTop="10dp"
                     android:orientation="vertical"
                     android:layout_width="match_parent"
@@ -262,7 +265,7 @@
                             style="@style/LorgeText2"
                             android:textColor="@color/colorPrimaryDark"
                             android:textColorHint="@color/colorPrimaryDark"
-                            android:hint="4"
+                            android:hint="1"
                             android:layout_height="wrap_content" />
                         <androidx.appcompat.widget.AppCompatTextView
                             android:gravity="left"
@@ -283,6 +286,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:textSize="16sp"
+                            android:inputType="number"
+                            android:imeOptions="actionDone"
                             android:id="@+id/monthly_net_sal_edit_txt"
                             android:textColor="@color/colorPrimaryDark"/>
                     </LinearLayout>
@@ -361,7 +366,7 @@
                         style="@style/LorgeText2"
                         android:textColor="@color/colorPrimaryDark"
                         android:textColorHint="@color/colorPrimaryDark"
-                        android:hint="6"
+                        android:hint="2"
                         android:layout_height="wrap_content" />
                     <androidx.appcompat.widget.AppCompatTextView
                         android:gravity="left"
@@ -374,6 +379,7 @@
                         android:text="@string/salary_credit"
                         android:layout_height="wrap_content" />
                 </LinearLayout>
+
                 <LinearLayout
                     android:gravity="center"
                     android:orientation="horizontal"
@@ -415,7 +421,7 @@
                         style="@style/LorgeText2"
                         android:textColor="@color/colorPrimaryDark"
                         android:textColorHint="@color/colorPrimaryDark"
-                        android:hint="7"
+                        android:hint="3"
                         android:layout_height="wrap_content" />
                     <androidx.appcompat.widget.AppCompatTextView
                         android:gravity="left"
@@ -505,7 +511,7 @@
                         style="@style/LorgeText2"
                         android:textColor="@color/colorPrimaryDark"
                         android:textColorHint="@color/colorPrimaryDark"
-                        android:hint="8"
+                        android:hint="3"
                         android:layout_height="wrap_content" />
                     <androidx.appcompat.widget.AppCompatTextView
                         android:gravity="left"
@@ -548,7 +554,7 @@
                         style="@style/LorgeText2"
                         android:textColor="@color/colorPrimaryDark"
                         android:textColorHint="@color/colorPrimaryDark"
-                        android:hint="9"
+                        android:hint="4"
                         android:layout_height="wrap_content" />
                     <androidx.appcompat.widget.AppCompatTextView
                         android:gravity="left"
@@ -591,7 +597,7 @@
                         style="@style/LorgeText2"
                         android:textColor="@color/colorPrimaryDark"
                         android:textColorHint="@color/colorPrimaryDark"
-                        android:hint="10"
+                        android:hint="5"
                         android:layout_height="wrap_content" />
                     <androidx.appcompat.widget.AppCompatTextView
                         android:gravity="left"
@@ -653,7 +659,7 @@
                         style="@style/LorgeText2"
                         android:textColor="@color/colorPrimaryDark"
                         android:textColorHint="@color/colorPrimaryDark"
-                        android:hint="11"
+                        android:hint="6"
                         android:layout_height="wrap_content" />
                     <androidx.appcompat.widget.AppCompatTextView
                         android:gravity="left"
@@ -697,7 +703,7 @@
                         style="@style/LorgeText2"
                         android:textColor="@color/colorPrimaryDark"
                         android:textColorHint="@color/colorPrimaryDark"
-                        android:hint="12"
+                        android:hint="7"
                         android:layout_height="wrap_content" />
                     <androidx.appcompat.widget.AppCompatTextView
                         android:gravity="left"
@@ -750,7 +756,7 @@
                         style="@style/LorgeText2"
                         android:textColor="@color/colorPrimaryDark"
                         android:textColorHint="@color/colorPrimaryDark"
-                        android:hint="13"
+                        android:hint="8"
                         android:layout_height="wrap_content" />
                     <androidx.appcompat.widget.AppCompatTextView
                         android:gravity="left"
@@ -792,7 +798,7 @@
                             style="@style/LorgeText2"
                             android:textColor="@color/colorPrimaryDark"
                             android:textColorHint="@color/colorPrimaryDark"
-                            android:hint="13"
+                            android:hint="9"
                             android:layout_height="wrap_content" />
                         <androidx.appcompat.widget.AppCompatTextView
                             android:gravity="left"
@@ -851,7 +857,7 @@
                                 style="@style/LorgeText2"
                                 android:textColor="@color/colorPrimaryDark"
                                 android:textColorHint="@color/colorPrimaryDark"
-                                android:hint="14"
+                                android:hint="10"
                                 android:layout_height="wrap_content" />
                             <androidx.appcompat.widget.AppCompatTextView
                                 android:gravity="left"
@@ -893,7 +899,7 @@
                                 style="@style/LorgeText2"
                                 android:textColor="@color/colorPrimaryDark"
                                 android:textColorHint="@color/colorPrimaryDark"
-                                android:hint="15"
+                                android:hint="11"
                                 android:layout_height="wrap_content" />
                             <androidx.appcompat.widget.AppCompatTextView
                                 android:gravity="left"
@@ -918,97 +924,7 @@
                                 android:textColor="@color/colorPrimaryDark"/>
                         </LinearLayout>
                     </LinearLayout>
-                    <LinearLayout
-                        android:padding="5dp"
-                        android:orientation="vertical"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-                        <LinearLayout
-                            android:id="@+id/assets_owned"
-                            android:orientation="horizontal"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
-                            <androidx.appcompat.widget.AppCompatTextView
-                                android:gravity="left"
-                                android:layout_marginLeft="2dp"
-                                android:id="@+id/assets_owned_txt"
-                                android:layout_width="wrap_content"
-                                style="@style/LorgeText2"
-                                android:textColor="@color/colorPrimaryDark"
-                                android:textColorHint="@color/colorPrimaryDark"
-                                android:hint="4"
-                                android:layout_height="wrap_content" />
-                            <androidx.appcompat.widget.AppCompatTextView
-                                android:gravity="left"
-                                android:layout_marginLeft="2dp"
-                                android:id="@+id/assets_owned_txt1"
-                                android:layout_width="match_parent"
-                                style="@style/LorgeText2"
-                                android:textColor="@color/colorPrimaryDark"
-                                android:textColorHint="@color/colorPrimaryDark"
-                                android:text="@string/assets_own"
-                                android:layout_height="wrap_content" />
-                        </LinearLayout>
-                        <LinearLayout
-                            android:gravity="center"
-                            android:orientation="horizontal"
-                            android:layout_width="match_parent"
-                            android:layout_height="60dp">
 
-                            <LinearLayout
-                                android:id="@+id/assets_owned_ly"
-                                android:layout_marginLeft="30dp"
-                                android:orientation="vertical"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content">
-                                <androidx.appcompat.widget.AppCompatTextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="40dp"
-                                    android:textSize="16sp"
-                                    android:background="@drawable/capsul_button_drop_down"
-                                    android:inputType="number"
-                                    android:id="@+id/assets_owned_BL"
-                                    android:textColor="@color/colorPrimaryDark"/>
-                            </LinearLayout>
-                            <LinearLayout
-                                android:visibility="gone"
-                                android:layout_marginLeft="30dp"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent">
-                                <Spinner
-
-                                    style="@style/Base.Widget.AppCompat.Spinner.Underlined"
-                                    android:backgroundTint="#ff000000"
-                                    android:backgroundTintMode="src_in"
-                                    android:spinnerMode="dropdown"
-                                    android:id="@+id/spinner_assets_owned"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent" />
-                            </LinearLayout>
-
-                        </LinearLayout>
-                        <LinearLayout
-                            android:visibility="gone"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:paddingLeft="16dp"
-                            android:elevation="6dp"
-                            android:layout_margin="10dp"
-                            android:orientation="horizontal"
-                            android:background="@color/paper">
-
-                            <com.doodle.android.chips.ChipsView
-                                android:id="@+id/cv_Assets_Owns"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:overScrollMode="never"
-                                android:textAppearance="@style/ChipTextStyle_Selected"
-                                app:cv_max_height="100dp"
-                                app:cv_vertical_spacing="2dp"
-                                />
-
-                        </LinearLayout>
-                    </LinearLayout>
                 </LinearLayout>
 
             <LinearLayout
@@ -1029,7 +945,7 @@
                         style="@style/LorgeText2"
                         android:textColor="@color/colorPrimaryDark"
                         android:textColorHint="@color/colorPrimaryDark"
-                        android:hint="13"
+                        android:hint="12"
                         android:layout_height="wrap_content" />
                     <androidx.appcompat.widget.AppCompatTextView
                         android:gravity="left"
@@ -1054,6 +970,97 @@
                         android:textColor="@color/colorPrimaryDark"/>
                 </LinearLayout>
             </LinearLayout>
+            <LinearLayout
+                    android:padding="5dp"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <LinearLayout
+                        android:id="@+id/assets_owned"
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:gravity="left"
+                            android:layout_marginLeft="2dp"
+                            android:id="@+id/assets_owned_txt"
+                            android:layout_width="wrap_content"
+                            style="@style/LorgeText2"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:textColorHint="@color/colorPrimaryDark"
+                            android:hint="12"
+                            android:layout_height="wrap_content" />
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:gravity="left"
+                            android:layout_marginLeft="2dp"
+                            android:id="@+id/assets_owned_txt1"
+                            android:layout_width="match_parent"
+                            style="@style/LorgeText2"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:textColorHint="@color/colorPrimaryDark"
+                            android:text="@string/assets_own"
+                            android:layout_height="wrap_content" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp">
+
+                        <LinearLayout
+                            android:id="@+id/assets_owned_ly"
+                            android:layout_marginLeft="30dp"
+                            android:orientation="vertical"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:layout_width="match_parent"
+                                android:layout_height="40dp"
+                                android:textSize="16sp"
+                                android:background="@drawable/capsul_button_drop_down"
+                                android:inputType="number"
+                                android:id="@+id/assets_owned_BL"
+                                android:textColor="@color/colorPrimaryDark"/>
+                        </LinearLayout>
+                        <LinearLayout
+                            android:visibility="gone"
+                            android:layout_marginLeft="30dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+                            <Spinner
+
+                                style="@style/Base.Widget.AppCompat.Spinner.Underlined"
+                                android:backgroundTint="#ff000000"
+                                android:backgroundTintMode="src_in"
+                                android:spinnerMode="dropdown"
+                                android:id="@+id/spinner_assets_owned"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:visibility="gone"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:paddingLeft="16dp"
+                        android:elevation="6dp"
+                        android:layout_margin="10dp"
+                        android:orientation="horizontal"
+                        android:background="@color/paper">
+
+                        <com.doodle.android.chips.ChipsView
+                            android:id="@+id/cv_Assets_Owns"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:overScrollMode="never"
+                            android:textAppearance="@style/ChipTextStyle_Selected"
+                            app:cv_max_height="100dp"
+                            app:cv_vertical_spacing="2dp"
+                            />
+
+                    </LinearLayout>
+                </LinearLayout>
             </LinearLayout>
                  <LinearLayout
                      android:layout_marginTop="10dp"

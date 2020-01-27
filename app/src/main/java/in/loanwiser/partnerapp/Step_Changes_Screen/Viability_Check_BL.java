@@ -70,7 +70,7 @@ public class Viability_Check_BL extends SimpleActivity {
             spinner_office_shop_setup,business_proof_own_business_spinner,spp_vehicle_type,
             what_crop_spinne,business_incom_proof_D,spinner_business_proof_txt_D,
             spinner_how_do_sell_milk,business_incom_proof_p,spinner_business_proof_txt_P,
-            spinner_frenc_deler_sub;
+            spinner_frenc_deler_sub,spinner_office_shop_setup_ind,spinner_office_shop_setup_far;
 
     private LinearLayout individual,self_business,formin_dairy,Driver_C_owner,
              res_rented,forming,dairy,poultry,
@@ -99,7 +99,8 @@ public class Viability_Check_BL extends SimpleActivity {
             txt_residence_type1,current_recidence_txt,current_recidence_txt1,assets_owned_txt,assets_owned_txt1,
             vocation_indiviual_txt,vocation_indiviual_txt1,busines_inco_proof_individua_txt,busines_inco_proof_individua_txt1,
     vehicle_individual_txt,vehicle_individual_txt1,number_of_vehicle_ind_txt,number_of_vehicle_ind_txt1,no_of_year_ind_txt,
-    no_of_year_ind_txt1,monthly_incom_txt,monthly_incom_txt1,busproof_ind_txt,busproof_ind_txt1,assets_owned_BL,vehicle_type_text;
+    no_of_year_ind_txt1,monthly_incom_txt,monthly_incom_txt1,busproof_ind_txt,busproof_ind_txt1,assets_owned_BL,
+            office_setup_txt_ind,office_setup_txt_ind1,vehicle_type_text,office_setup_txt_far,office_setup_txt_far1;
 
     AppCompatEditText age_edit_txt,residence_edite_txt,live_curentres_edite_txt,no_of_vehicle_edit_txt,
             no_of_years_ind_edit_txt,avg_monthly_incom_edit_txt,
@@ -115,8 +116,7 @@ public class Viability_Check_BL extends SimpleActivity {
 
 
 
-    AutoCompleteTextView residence_pincode_edite_txt,office_residence_pincode_edite_txt
-                           ;
+    AutoCompleteTextView residence_pincode_edite_txt,office_residence_pincode_edite_txt;
 
     private String tag_json_obj = "jobj_req", tag_json_arry = "jarray_req";
 
@@ -214,6 +214,7 @@ public class Viability_Check_BL extends SimpleActivity {
 
             }
         });
+
         self_frm_business_proof_txt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -278,6 +279,8 @@ public class Viability_Check_BL extends SimpleActivity {
 
         spi_busproof_own_business =(Spinner) findViewById(R.id.spi_busproof_own_business);
         business_incom_proof_D =(Spinner) findViewById(R.id.business_incom_proof_D);
+        spinner_office_shop_setup_ind =(Spinner) findViewById(R.id.spinner_office_shop_setup_ind);
+        spinner_office_shop_setup_far =(Spinner) findViewById(R.id.spinner_office_shop_setup_far);
 
         individual = (LinearLayout) findViewById(R.id.individual);
         formin_dairy = (LinearLayout) findViewById(R.id.formin_dairy);
@@ -304,6 +307,9 @@ public class Viability_Check_BL extends SimpleActivity {
         ofiice_res_details = (LinearLayout) findViewById(R.id.ofiice_res_details);
 
         business_details_txt = (AppCompatTextView) findViewById(R.id.business_details_txt);
+        office_setup_txt_ind = (AppCompatTextView) findViewById(R.id.office_setup_txt_ind);
+        office_setup_txt_ind1 = (AppCompatTextView) findViewById(R.id.office_setup_txt_ind1);
+
         emp_type1 = (AppCompatTextView) findViewById(R.id.emp_type1);
         emp_type2 = (AppCompatTextView) findViewById(R.id.emp_type2);
         age_txt = (AppCompatTextView) findViewById(R.id.age_txt);
@@ -334,6 +340,8 @@ public class Viability_Check_BL extends SimpleActivity {
 
         busproof_ind_txt = (AppCompatTextView) findViewById(R.id.busproof_ind_txt);
         busproof_ind_txt1 = (AppCompatTextView) findViewById(R.id.busproof_ind_txt1);
+        office_setup_txt_far = (AppCompatTextView) findViewById(R.id.office_setup_txt_far);
+        office_setup_txt_far1 = (AppCompatTextView) findViewById(R.id.office_setup_txt_far1);
 
 
         age_edit_txt = (AppCompatEditText) findViewById(R.id.age_edit_txt);
@@ -387,11 +395,14 @@ public class Viability_Check_BL extends SimpleActivity {
     private void Font()
     {
 
-
        font = Typeface.createFromAsset(context.getAssets(), "Lato-Regular.ttf");
 
         business_details_txt.setTypeface(font);
+        office_setup_txt_far.setTypeface(font);
+        office_setup_txt_far1.setTypeface(font);
         emp_type1.setTypeface(font);
+        office_setup_txt_ind.setTypeface(font);
+        office_setup_txt_ind1.setTypeface(font);
         emp_type2.setTypeface(font);
         age_txt.setTypeface(font);
         age_txt1.setTypeface(font);
@@ -471,7 +482,7 @@ public class Viability_Check_BL extends SimpleActivity {
         residence_pincode_edite_txt.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                Log.e("hi", "hi11");
+
                 String workpincode = residence_pincode_edite_txt.getText().toString();
 
                 if (workpincode.length() == 2) {
@@ -494,7 +505,7 @@ public class Viability_Check_BL extends SimpleActivity {
         office_residence_pincode_edite_txt.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                Log.e("hi", "hi11");
+
                 String workpincode = office_residence_pincode_edite_txt.getText().toString();
 
                 if (workpincode.length() == 2) {
@@ -537,12 +548,12 @@ public class Viability_Check_BL extends SimpleActivity {
                         return;
                     }
 
-                    if(PAN_id.equals("0"))
+                  *//*  if(PAN_id.equals("0"))
                     {
                         Toast.makeText(context,"please Select the Pan Card",Toast.LENGTH_SHORT).show();
 
                     }else
-                    {
+                    {*//*
 
                         if(Employee_type_Id.equals("1"))
                         {
@@ -556,23 +567,23 @@ public class Viability_Check_BL extends SimpleActivity {
                                     Toast.makeText(context,"please Select the vocation Type",Toast.LENGTH_SHORT).show();
                                 }else  if(vocation_type_forming_id.equals("1"))
                                 {
-                                    if (!Actual_business_forming()) {
+                                   *//* if (!Actual_business_forming()) {
                                         return;
-                                    }
+                                    }*//*
                                     validation_forming();
 
                                 }else if(vocation_type_forming_id.equals("2"))
                                 {
-                                    if (!Actual_business_forming()) {
+                                   *//* if (!Actual_business_forming()) {
                                         return;
-                                    }
+                                    }*//*
                                     validate_dairy();
 
                                 }else if(vocation_type_forming_id.equals("3"))
                                 {
-                                    if (!Actual_business_forming()) {
+                                   *//* if (!Actual_business_forming()) {
                                         return;
-                                    }
+                                    }*//*
                                     validation_poultry();
                                 }
 
@@ -582,10 +593,11 @@ public class Viability_Check_BL extends SimpleActivity {
 
                         }
 
-
-                    }
+                   *//* }*//*
+                    //
 
                 }
+            ////////////////////////
 
             }
         });*/
@@ -601,9 +613,9 @@ public class Viability_Check_BL extends SimpleActivity {
         }else
         {
 
-            if (!Actual_business()) {
+           /* if (!Actual_business()) {
                 return;
-            }
+            }*/
 
             if(Business_income_proof_id.equals("0"))
             {
@@ -640,9 +652,6 @@ public class Viability_Check_BL extends SimpleActivity {
 
             }
 
-
-
-
         }
     }
 
@@ -667,7 +676,6 @@ public class Viability_Check_BL extends SimpleActivity {
             if (!No_of_Years_in_work()) {
                 return;
             }
-
             if (!average_monthly_income()) {
                 return;
             }
@@ -706,8 +714,6 @@ public class Viability_Check_BL extends SimpleActivity {
                     return;
                 }
             }
-
-
 
         }
     }
@@ -1421,8 +1427,6 @@ public class Viability_Check_BL extends SimpleActivity {
 
 
         Pincode_SA = new String[ja.length()];
-
-
         /*for (int i =occupation.length() - 1;i >= 0; i--) {
                    occupation.remove(i);
                }*/
@@ -1498,7 +1502,7 @@ public class Viability_Check_BL extends SimpleActivity {
                     @Override
                     public void onResponse(JSONObject object) {
                         Log.e("respose Dreopdown", object.toString());
-                        /// msgResponse.setText(response.toString());
+
                         //  Objs.a.showToast(getContext(), String.valueOf(object));
 
                         try {
@@ -1524,8 +1528,6 @@ public class Viability_Check_BL extends SimpleActivity {
 
                            // Business_Proof =object.getJSONArray("Business_Proof");
 
-
-                            Log.e("Type_of_employement",String.valueOf(Type_of_employement));
 
                             Type_of_Employeement(Type_of_employement);
                             HAVE_PAN_Card(have_pan_ar);
@@ -1832,14 +1834,9 @@ public class Viability_Check_BL extends SimpleActivity {
                     try {
 
 
-                        //  City_loc_uniqueID = ja.getJSONObject(position).getString("city_id");
+
                         Business_income_proof_id = Business_income_proof_ar.getJSONObject(position).getString("id");
                         Business_income_proof_value = Business_income_proof_ar.getJSONObject(position).getString("value");
-                        //CAT_ID = ja.getJSONObject(position).getString("category_id");
-                        Log.d("vocaton_id", Business_income_proof_id);
-                        Log.d("vocaton_value", Business_income_proof_value);
-
-
 
 
                     } catch (JSONException e) {
@@ -1903,13 +1900,11 @@ public class Viability_Check_BL extends SimpleActivity {
 
                     try {
 
-
                         //  City_loc_uniqueID = ja.getJSONObject(position).getString("city_id");
                         business_incom_proof_Dairy_id = Business_income_proof_ar.getJSONObject(position).getString("id");
                         business_incom_proof_Dairy_value = Business_income_proof_ar.getJSONObject(position).getString("value");
                         //CAT_ID = ja.getJSONObject(position).getString("category_id");
-                        Log.d("vocaton_id", business_incom_proof_Dairy_id);
-                        Log.d("vocaton_value", business_incom_proof_Dairy_value);
+
 
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -1937,13 +1932,10 @@ public class Viability_Check_BL extends SimpleActivity {
 
                     try {
 
-
-                        //  City_loc_uniqueID = ja.getJSONObject(position).getString("city_id");
                         business_incom_proof_own_business_id = Business_income_proof_ar.getJSONObject(position).getString("id");
                         business_incom_proof_own_business_value  = Business_income_proof_ar.getJSONObject(position).getString("value");
-                        //CAT_ID = ja.getJSONObject(position).getString("category_id");
-                        Log.d("vocaton_id", business_incom_proof_own_business_id);
-                        Log.d("vocaton_value", business_incom_proof_own_business_value);
+
+
 
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -2038,7 +2030,7 @@ public class Viability_Check_BL extends SimpleActivity {
                     try {
 
 
-                        //  City_loc_uniqueID = ja.getJSONObject(position).getString("city_id");
+
                         vocation_type_forming_id = vocation_type_forming_ar.getJSONObject(position).getString("id");
                         vocation_type_forming_value = vocation_type_forming_ar.getJSONObject(position).getString("value");
                         //CAT_ID = ja.getJSONObject(position).getString("category_id");
@@ -2062,9 +2054,6 @@ public class Viability_Check_BL extends SimpleActivity {
                             dairy.setVisibility(View.GONE);
                             poultry.setVisibility(View.VISIBLE);
                         }
-
-
-
 
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -2118,14 +2107,8 @@ public class Viability_Check_BL extends SimpleActivity {
 
                     try {
 
-
-                        //  City_loc_uniqueID = ja.getJSONObject(position).getString("city_id");
                         selling_milk_id = selling_milk_ar.getJSONObject(position).getString("id");
                         selling_milk_value = selling_milk_ar.getJSONObject(position).getString("value");
-                        //CAT_ID = ja.getJSONObject(position).getString("category_id");
-                        Log.d("vocaton_id", selling_milk_id);
-                        Log.d("vocaton_value", selling_milk_value);
-
 
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -2141,6 +2124,7 @@ public class Viability_Check_BL extends SimpleActivity {
                 @Override
                 public boolean onTouch(View view, MotionEvent motionEvent) {
                     // imm.hideSoftInputFromWindow(edt_buyer_address.getWindowToken(), 0);
+                   // InputMethodManager in = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                     return false;
                 }
             });
@@ -2149,7 +2133,6 @@ public class Viability_Check_BL extends SimpleActivity {
     }
 
     private void Office_Shop_(final JSONArray office_shop_ar) throws JSONException {
-        //   SPINNERLIST = new String[ja.length()];
 
         Office_Shop_SA = new String[office_shop_ar.length()];
         for (int i=0;i<office_shop_ar.length();i++){
@@ -2173,19 +2156,54 @@ public class Viability_Check_BL extends SimpleActivity {
 
             Office_Shop__Adapter.setDropDownViewResource(R.layout.view_spinner_item);
             spinner_office_shop_setup.setAdapter(Office_Shop__Adapter);
+            spinner_office_shop_setup_ind.setAdapter(Office_Shop__Adapter);
+            spinner_office_shop_setup_far.setAdapter(Office_Shop__Adapter);
             spinner_office_shop_setup.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
                     try {
 
-
-                        //  City_loc_uniqueID = ja.getJSONObject(position).getString("city_id");
                         Office_Shop__id = office_shop_ar.getJSONObject(position).getString("id");
                         Office_Shop__value = office_shop_ar.getJSONObject(position).getString("value");
-                        //CAT_ID = ja.getJSONObject(position).getString("category_id");
-                        Log.d("vocaton_id", Office_Shop__id);
-                        Log.d("vocaton_value", Office_Shop__value);
+
+                        if(Office_Shop__id.equals("2"))
+                        {
+                            ofiice_res_details.setVisibility(View.VISIBLE);
+                        }else
+                        {
+                            ofiice_res_details.setVisibility(View.GONE);
+
+                        }
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+
+                }
+            });
+            spinner_office_shop_setup.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View view, MotionEvent motionEvent) {
+                    // imm.hideSoftInputFromWindow(edt_buyer_address.getWindowToken(), 0);
+                    return false;
+                }
+            });
+
+            spinner_office_shop_setup_ind.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                    try {
+
+
+                        Office_Shop__id = office_shop_ar.getJSONObject(position).getString("id");
+                        Office_Shop__value = office_shop_ar.getJSONObject(position).getString("value");
+
 
                         if(Office_Shop__id.equals("2"))
                         {
@@ -2209,7 +2227,44 @@ public class Viability_Check_BL extends SimpleActivity {
 
                 }
             });
-            spinner_office_shop_setup.setOnTouchListener(new View.OnTouchListener() {
+            spinner_office_shop_setup_ind.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View view, MotionEvent motionEvent) {
+                    // imm.hideSoftInputFromWindow(edt_buyer_address.getWindowToken(), 0);
+                    return false;
+                }
+            });
+
+
+            spinner_office_shop_setup_far.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                    try {
+
+                        Office_Shop__id = office_shop_ar.getJSONObject(position).getString("id");
+                        Office_Shop__value = office_shop_ar.getJSONObject(position).getString("value");
+
+                        if(Office_Shop__id.equals("2"))
+                        {
+                            ofiice_res_details.setVisibility(View.VISIBLE);
+                        }else
+                        {
+                            ofiice_res_details.setVisibility(View.GONE);
+
+                        }
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+
+                }
+            });
+            spinner_office_shop_setup_far.setOnTouchListener(new View.OnTouchListener() {
                 @Override
                 public boolean onTouch(View view, MotionEvent motionEvent) {
                     // imm.hideSoftInputFromWindow(edt_buyer_address.getWindowToken(), 0);
@@ -2221,7 +2276,6 @@ public class Viability_Check_BL extends SimpleActivity {
     }
 
     private void Runs_own_business_franchise(final JSONArray franchise_ar) throws JSONException {
-        //   SPINNERLIST = new String[ja.length()];
 
         franchise_SA = new String[franchise_ar.length()];
         for (int i=0;i<franchise_ar.length();i++){
@@ -2251,18 +2305,8 @@ public class Viability_Check_BL extends SimpleActivity {
 
                     try {
 
-
-                        //  City_loc_uniqueID = ja.getJSONObject(position).getString("city_id");
                         franchise__id = franchise.getJSONObject(position).getString("id");
                         franchise__value = franchise.getJSONObject(position).getString("value");
-                        //CAT_ID = ja.getJSONObject(position).getString("category_id");
-                        Log.d("vocaton_id", franchise__id);
-                        Log.d("vocaton_value", franchise__value);
-
-
-
-
-
 
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -2299,7 +2343,6 @@ public class Viability_Check_BL extends SimpleActivity {
                     v.setTypeface(font);
                     return v;
                 }
-
                 public View getDropDownView(int position, View convertView, ViewGroup parent) {
                     TextView v = (TextView) super.getView(position, convertView, parent);
                     v.setTypeface(font);
@@ -2317,13 +2360,9 @@ public class Viability_Check_BL extends SimpleActivity {
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
                     try {
-                        //  City_loc_uniqueID = ja.getJSONObject(position).getString("city_id");
 
                         residence_id = Residence_ownership_ar.getJSONObject(position).getString("id");
                         residence_Value = Residence_ownership_ar.getJSONObject(position).getString("value");
-                        //CAT_ID = ja.getJSONObject(position).getString("category_id");
-                        Log.d("Salary_id", residence_id);
-                        Log.d("Salary_Value", residence_Value);
 
                         if(residence_id.equals("2"))
                         {
@@ -2359,13 +2398,9 @@ public class Viability_Check_BL extends SimpleActivity {
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
                     try {
-                        //  City_loc_uniqueID = ja.getJSONObject(position).getString("city_id");
 
                        off_residence_id = Residence_ownership_ar.getJSONObject(position).getString("id");
                         off_residence_Value = Residence_ownership_ar.getJSONObject(position).getString("value");
-                        //CAT_ID = ja.getJSONObject(position).getString("category_id");
-                        Log.d("off_residence_id", off_residence_id);
-                        Log.d("off_residence_Value", off_residence_Value);
 
                         if(off_residence_id.equals("2"))
                         {
@@ -2428,14 +2463,9 @@ public class Viability_Check_BL extends SimpleActivity {
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
                     try {
-                        //  City_loc_uniqueID = ja.getJSONObject(position).getString("city_id");
 
                         business_own_type_id = Business_type_own_business_ar.getJSONObject(position).getString("id");
                         business_own_type_Value = Business_type_own_business_ar.getJSONObject(position).getString("value");
-                        //CAT_ID = ja.getJSONObject(position).getString("category_id");
-                        Log.d("Salary_id", business_own_type_id);
-                        Log.d("Salary_Value", business_own_type_Value);
-
 
                         if(business_own_type_id.equals("1"))
                         {
@@ -2630,8 +2660,6 @@ public class Viability_Check_BL extends SimpleActivity {
     }
 
     //Dairy
-
-
     //////ADApter Multi Select
 
     private class MyCustomAdapter_Business_proof_Individual extends ArrayAdapter<IncomeProofPOJO> {
@@ -3333,10 +3361,6 @@ public class Viability_Check_BL extends SimpleActivity {
     }
 
     private void lead_viability() {
-
-
-       // ST_monthly_afr_emi_amt_edit_txt = monthly_afr_emi_amt_edit_txt.getText().toString();
-
 
       /*  String stringNumber = St_monthly_net_sal_edit_txt;
         result = stringNumber.replace(",","");*/

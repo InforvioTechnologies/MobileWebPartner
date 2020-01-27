@@ -436,16 +436,15 @@ public class LoginNew extends AppCompatActivity implements GoogleApiClient.Conne
                     public void onResponse(JSONObject response) {
                         progressDialog.dismiss();
                         String JO_data  = String.valueOf(response);
-                        //   Objs.a.showToast(mCon,"BUSINESS_login_POST  "+"\n"+  JO_data );
-                        Log.d("Response :", JO_data);
+
                         try {
                             if (response.getString(Params.status).equals(Params.ok)){
                                 String otp_new =  response.getString(Params.otp);
-                                //    Objs.a.showToast(mCon, otp_new);
+
                                 Objs.a.showToast(mCon,"OTP will be sent to the mobile number");
                                 Objs.ac.StartActivityPutExtra(mCon, SmsActivity2.class, Params.otp,otp_new,
                                         Params.mobile_no,Moblie);
-                               // Objs.ac.StartActivity(mCon, VerifedOTP.class);
+
                                 finish();
                             }
                             if (response.getString(Params.status).equals(Params.error)){
