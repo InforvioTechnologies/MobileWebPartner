@@ -16,7 +16,7 @@
             <androidx.appcompat.widget.AppCompatImageView
                 android:layout_width="match_parent"
                 android:layout_height="150dp"
-                android:background="@drawable/home_loan"
+                android:background="@drawable/hl_baner"
                 android:scaleType="fitXY"/>
         </LinearLayout>
         <LinearLayout
@@ -75,46 +75,103 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
 
-                        <androidx.appcompat.widget.AppCompatTextView
-                            android:id="@+id/sub_id3"  style="@style/SmallText"
-                            android:gravity="left"
+                        <LinearLayout
+                            android:orientation="horizontal"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:textColor="@color/black"
+                            android:layout_height="wrap_content">
 
-                            android:text="@string/home_purpose2"/>
+                            <ImageView
+                                android:layout_gravity="center"
+                                android:background="@drawable/hl_circle"
+                                android:layout_width="10dp"
+                                android:layout_height="10dp" />
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:id="@+id/sub_id3"
+                                style="@style/SmallText"
+                                android:gravity="left"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/black"
+                                android:text="@string/home_purpose2"/>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <ImageView
+                                android:layout_gravity="center"
+                                android:background="@drawable/hl_circle"
+                                android:layout_width="10dp"
+                                android:layout_height="10dp" />
                         <androidx.appcompat.widget.AppCompatTextView
                             android:id="@+id/sub_id4"  style="@style/SmallText"
                             android:gravity="left"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:textColor="@color/black"
-
                             android:text="@string/home_purpose3"/>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <ImageView
+                                android:layout_gravity="center"
+                                android:background="@drawable/hl_circle"
+                                android:layout_width="10dp"
+                                android:layout_height="10dp" />
                         <androidx.appcompat.widget.AppCompatTextView
                             android:id="@+id/sub_id5"
                             android:gravity="left"  style="@style/SmallText"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:textColor="@color/black"
-
                             android:text="@string/home_purpose4"/>
+                        </LinearLayout>
+
+
+                        <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <ImageView
+                                android:layout_gravity="center"
+                                android:background="@drawable/hl_circle"
+                                android:layout_width="10dp"
+                                android:layout_height="10dp" />
                         <androidx.appcompat.widget.AppCompatTextView
                             android:id="@+id/sub_id6"
                             android:gravity="left"   style="@style/SmallText"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:textColor="@color/black"
-
                             android:text="@string/home_purpose5"/>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <ImageView
+                                android:layout_gravity="center"
+                                android:background="@drawable/hl_circle"
+                                android:layout_width="10dp"
+                                android:layout_height="10dp" />
                         <androidx.appcompat.widget.AppCompatTextView
                             android:id="@+id/sub_id7"
                             android:gravity="left"   style="@style/SmallText"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:textColor="@color/black"
-
                             android:text="@string/home_purpose6"/>
+                        </LinearLayout>
                         <androidx.appcompat.widget.AppCompatTextView
                             android:id="@+id/sub_id8"
                             android:gravity="left"   style="@style/SmallText"

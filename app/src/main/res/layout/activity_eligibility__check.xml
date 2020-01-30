@@ -6,13 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".Step_Changes_Screen.Eligibility_Check_PL">
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+
             <LinearLayout
                 android:padding="15dp"
                 android:orientation="vertical"
@@ -31,7 +25,16 @@
                     app:spb_stateBackgroundColor="@color/colorPrimary"
                     app:spb_maxStateNumber="four"/>
 
-            <LinearLayout
+                <ScrollView
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+                  <LinearLayout
                  android:padding="5dp"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -1367,6 +1370,8 @@
                     </LinearLayout>
                 </LinearLayout>
 
+                </LinearLayout>
+                </ScrollView>
 
                 <LinearLayout
                     android:layout_marginTop="10dp"
@@ -1394,6 +1399,5 @@
 
                 </LinearLayout>
             </LinearLayout>
-        </LinearLayout>
-    </ScrollView>
+
 </LinearLayout>

@@ -5,13 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Step_Changes_Screen.Eligibility_BL">
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+
             <LinearLayout
                 android:padding="15dp"
                 android:orientation="vertical"
@@ -30,7 +24,16 @@
                     app:spb_stateBackgroundColor="@color/colorPrimary"
                     app:spb_maxStateNumber="four"/>
 
+                <ScrollView
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp">
+
                 <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+                    <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical">
@@ -538,123 +541,22 @@
 
                 </LinearLayout>
 
-                <LinearLayout
-                    android:background="@color/colorPrimary"
-                    android:gravity="center"
-                    android:orientation="vertical"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:gravity="center"
-                        android:layout_width="match_parent"
-                        style="@style/LorgeText"
-                        android:textSize="16sp"
-                        android:id="@+id/other_income"
-                        android:textColor="@color/white"
-                        android:text="Other Income Details"
-                        android:layout_height="wrap_content" />
-
-                </LinearLayout>
-                <LinearLayout
-                    android:padding="5dp"
-                    android:orientation="vertical"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
                     <LinearLayout
-                        android:id="@+id/other_income_ly"
-                        android:orientation="horizontal"
+                        android:background="@color/colorPrimary"
+                        android:gravity="center"
+                        android:orientation="vertical"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
                         <androidx.appcompat.widget.AppCompatTextView
-                            android:gravity="left"
-                            android:layout_marginLeft="2dp"
-                            android:id="@+id/other_income_txt"
-                            android:layout_width="wrap_content"
-                            style="@style/LorgeText2"
-                            android:textColor="@color/colorPrimaryDark"
-                            android:textColorHint="@color/colorPrimaryDark"
-                            android:hint="7"
+                            android:gravity="center"
+                            android:layout_width="match_parent"
+                            style="@style/LorgeText"
+                            android:textSize="16sp"
+                            android:id="@+id/other_income"
+                            android:textColor="@color/white"
+                            android:text="Other Income Details"
                             android:layout_height="wrap_content" />
-                        <androidx.appcompat.widget.AppCompatTextView
-                            android:gravity="left"
-                            android:layout_marginLeft="2dp"
-                            android:id="@+id/other_income_txt1"
-                            android:layout_width="match_parent"
-                            style="@style/LorgeText2"
-                            android:textColor="@color/colorPrimaryDark"
-                            android:textColorHint="@color/colorPrimaryDark"
-                            android:text="@string/other_income_"
-                            android:layout_height="wrap_content" />
-                    </LinearLayout>
-                    <LinearLayout
-                        android:gravity="center"
-                        android:orientation="horizontal"
-                        android:layout_width="match_parent"
-                        android:layout_height="60dp">
 
-                        <LinearLayout
-                            android:layout_marginLeft="30dp"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent">
-                            <Spinner
-
-                                style="@style/Base.Widget.AppCompat.Spinner.Underlined"
-                                android:backgroundTint="#ff000000"
-                                android:backgroundTintMode="src_in"
-                                android:spinnerMode="dropdown"
-                                android:id="@+id/spinn_other_income"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent" />
-                        </LinearLayout>
-
-                    </LinearLayout>
-                </LinearLayout>
-                <LinearLayout
-                    android:id="@+id/other_income_ifany"
-                    android:orientation="vertical"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                    <LinearLayout
-                        android:orientation="vertical"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
-                        <LinearLayout
-                            android:id="@+id/other_income_amount"
-                            android:orientation="horizontal"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
-                            <androidx.appcompat.widget.AppCompatTextView
-                                android:gravity="left"
-                                android:layout_marginLeft="2dp"
-                                android:id="@+id/other_incom_amt_txt"
-                                android:layout_width="wrap_content"
-                                style="@style/LorgeText2"
-                                android:textColor="@color/colorPrimaryDark"
-                                android:textColorHint="@color/colorPrimaryDark"
-                                android:hint="8"
-                                android:layout_height="wrap_content" />
-                            <androidx.appcompat.widget.AppCompatTextView
-                                android:gravity="left"
-                                android:layout_marginLeft="2dp"
-                                android:layout_width="match_parent"
-                                style="@style/LorgeText2"
-                                android:id="@+id/other_incom_amt_txt1"
-                                android:textColor="@color/colorPrimaryDark"
-                                android:textColorHint="@color/colorPrimaryDark"
-                                android:text="@string/other_income"
-                                android:layout_height="wrap_content" />
-                        </LinearLayout>
-                        <LinearLayout
-                            android:layout_marginLeft="30dp"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent">
-                            <androidx.appcompat.widget.AppCompatEditText
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:textSize="16sp"
-                                android:id="@+id/other_income_edite_txt"
-                                android:textColor="@color/colorPrimaryDark"/>
-                        </LinearLayout>
                     </LinearLayout>
                     <LinearLayout
                         android:padding="5dp"
@@ -662,29 +564,29 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
                         <LinearLayout
-                            android:id="@+id/is_gst"
+                            android:id="@+id/other_income_ly"
                             android:orientation="horizontal"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content">
                             <androidx.appcompat.widget.AppCompatTextView
                                 android:gravity="left"
                                 android:layout_marginLeft="2dp"
-                                android:id="@+id/is_gst_reflect_txt"
+                                android:id="@+id/other_income_txt"
                                 android:layout_width="wrap_content"
                                 style="@style/LorgeText2"
                                 android:textColor="@color/colorPrimaryDark"
                                 android:textColorHint="@color/colorPrimaryDark"
-                                android:hint="9"
+                                android:hint="7"
                                 android:layout_height="wrap_content" />
                             <androidx.appcompat.widget.AppCompatTextView
                                 android:gravity="left"
                                 android:layout_marginLeft="2dp"
-                                android:id="@+id/is_gst_reflect_txt1"
+                                android:id="@+id/other_income_txt1"
                                 android:layout_width="match_parent"
                                 style="@style/LorgeText2"
                                 android:textColor="@color/colorPrimaryDark"
                                 android:textColorHint="@color/colorPrimaryDark"
-                                android:text="@string/gst_reflect"
+                                android:text="@string/other_income_"
                                 android:layout_height="wrap_content" />
                         </LinearLayout>
                         <LinearLayout
@@ -698,19 +600,122 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent">
                                 <Spinner
+
                                     style="@style/Base.Widget.AppCompat.Spinner.Underlined"
                                     android:backgroundTint="#ff000000"
                                     android:backgroundTintMode="src_in"
                                     android:spinnerMode="dropdown"
-                                    android:id="@+id/spinn_gst_other"
+                                    android:id="@+id/spinn_other_income"
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent" />
                             </LinearLayout>
 
                         </LinearLayout>
                     </LinearLayout>
-                </LinearLayout>
+                    <LinearLayout
+                        android:id="@+id/other_income_ifany"
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <LinearLayout
+                            android:orientation="vertical"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+                            <LinearLayout
+                                android:id="@+id/other_income_amount"
+                                android:orientation="horizontal"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:gravity="left"
+                                    android:layout_marginLeft="2dp"
+                                    android:id="@+id/other_incom_amt_txt"
+                                    android:layout_width="wrap_content"
+                                    style="@style/LorgeText2"
+                                    android:textColor="@color/colorPrimaryDark"
+                                    android:textColorHint="@color/colorPrimaryDark"
+                                    android:hint="8"
+                                    android:layout_height="wrap_content" />
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:gravity="left"
+                                    android:layout_marginLeft="2dp"
+                                    android:layout_width="match_parent"
+                                    style="@style/LorgeText2"
+                                    android:id="@+id/other_incom_amt_txt1"
+                                    android:textColor="@color/colorPrimaryDark"
+                                    android:textColorHint="@color/colorPrimaryDark"
+                                    android:text="@string/other_income"
+                                    android:layout_height="wrap_content" />
+                            </LinearLayout>
+                            <LinearLayout
+                                android:layout_marginLeft="30dp"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent">
+                                <androidx.appcompat.widget.AppCompatEditText
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:textSize="16sp"
+                                    android:id="@+id/other_income_edite_txt"
+                                    android:textColor="@color/colorPrimaryDark"/>
+                            </LinearLayout>
+                        </LinearLayout>
+                        <LinearLayout
+                            android:padding="5dp"
+                            android:orientation="vertical"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+                            <LinearLayout
+                                android:id="@+id/is_gst"
+                                android:orientation="horizontal"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:gravity="left"
+                                    android:layout_marginLeft="2dp"
+                                    android:id="@+id/is_gst_reflect_txt"
+                                    android:layout_width="wrap_content"
+                                    style="@style/LorgeText2"
+                                    android:textColor="@color/colorPrimaryDark"
+                                    android:textColorHint="@color/colorPrimaryDark"
+                                    android:hint="9"
+                                    android:layout_height="wrap_content" />
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:gravity="left"
+                                    android:layout_marginLeft="2dp"
+                                    android:id="@+id/is_gst_reflect_txt1"
+                                    android:layout_width="match_parent"
+                                    style="@style/LorgeText2"
+                                    android:textColor="@color/colorPrimaryDark"
+                                    android:textColorHint="@color/colorPrimaryDark"
+                                    android:text="@string/gst_reflect"
+                                    android:layout_height="wrap_content" />
+                            </LinearLayout>
+                            <LinearLayout
+                                android:gravity="center"
+                                android:orientation="horizontal"
+                                android:layout_width="match_parent"
+                                android:layout_height="60dp">
 
+                                <LinearLayout
+                                    android:layout_marginLeft="30dp"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent">
+                                    <Spinner
+                                        style="@style/Base.Widget.AppCompat.Spinner.Underlined"
+                                        android:backgroundTint="#ff000000"
+                                        android:backgroundTintMode="src_in"
+                                        android:spinnerMode="dropdown"
+                                        android:id="@+id/spinn_gst_other"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent" />
+                                </LinearLayout>
+
+                            </LinearLayout>
+                        </LinearLayout>
+                    </LinearLayout>
+
+                </LinearLayout>
+                </ScrollView>
 
 
                 <LinearLayout
@@ -739,6 +744,5 @@
 
                 </LinearLayout>
             </LinearLayout>
-        </LinearLayout>
-    </ScrollView>
+
 </LinearLayout>

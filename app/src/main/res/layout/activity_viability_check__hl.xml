@@ -60,7 +60,6 @@
                             android:textColor="@color/white"
                             android:text="Property Details"
                             android:layout_height="wrap_content" />
-
                     </LinearLayout>
 
                     <LinearLayout

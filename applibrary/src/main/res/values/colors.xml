@@ -60,6 +60,7 @@
     <color name="white">#ffffffff</color>
     <color name="black">#ff000000</color>
     <color name="gray">#bcbaba</color>
+    <color name="gray12">#f5f7fa</color>
     <color name="gray1">#d5d7eb</color>
 
     <color name="white_50">#88ffffff</color>

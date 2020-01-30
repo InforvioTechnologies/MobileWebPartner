@@ -223,11 +223,11 @@ public class Applicant_Details_Single extends SimpleActivity {
                 J = getItem(position);
 
                 if(J.getString(Params.applicant_name).equals("Property")){
-                    holder.image_property.setImageDrawable(getResources().getDrawable(R.drawable.home11));
+                    holder.image_property.setImageDrawable(getResources().getDrawable(R.drawable.ic_house));
                 }else if(J.getString(Params.applicant_name).equals("Vehicle")){
                     holder.image_property.setImageDrawable(getResources().getDrawable(R.drawable.car1));
                 } else{
-                    holder.image_property.setImageDrawable(getResources().getDrawable(R.drawable.applicant12));
+                    holder.image_property.setImageDrawable(getResources().getDrawable(R.drawable.ic_applicant));
                 }
 
                 holder.class_name.setText(J.getString(Params.applicant_name));

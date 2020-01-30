@@ -103,7 +103,7 @@
                                         style="@style/ButtonStyle"
                                         android:text="Go"
                                         android:textSize="10sp"
-                                        android:background="@color/colorPrimary"
+                                        android:background="@drawable/capsul_button31"
                                         android:layout_width="80dp"
                                         android:layout_marginRight="10dp"
                                         android:layout_height="30dp" />
@@ -119,482 +119,521 @@
                                 android:layout_height="wrap_content">
 
                                 <LinearLayout
+                                    android:background="@color/white"
                                     android:orientation="vertical"
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent">
-                                    <androidx.cardview.widget.CardView
-                                        xmlns:card_view="http://schemas.android.com/apk/res-auto"
-                                        android:id="@+id/CD_document"
-                                        android:layout_marginTop="3dp"
-                                        android:layout_marginLeft="3dp"
-                                        android:layout_marginRight="3dp"
+                                    <LinearLayout
+                                        android:background="@color/gray12"
+                                        android:orientation="vertical"
                                         android:layout_width="match_parent"
-                                        android:layout_height="70dp"
-                                        app:cardCornerRadius="6dp"
-                                        app:cardUseCompatPadding="true">
-                                        <LinearLayout
-                                            android:background="@color/white"
-                                            android:orientation="vertical"
+                                        android:layout_height="wrap_content">
+                                        <androidx.cardview.widget.CardView
+                                            xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                                            android:id="@+id/CD_document"
+                                            android:layout_marginTop="3dp"
+                                            android:layout_marginLeft="3dp"
+                                            android:layout_marginRight="3dp"
                                             android:layout_width="match_parent"
-                                            android:layout_height="match_parent">
-
+                                            android:background="@color/white"
+                                            android:layout_height="70dp"
+                                           >
                                             <LinearLayout
-                                                android:orientation="horizontal"
+                                                android:background="@color/gray12"
+                                                android:orientation="vertical"
                                                 android:layout_width="match_parent"
                                                 android:layout_height="match_parent">
 
                                                 <LinearLayout
-                                                    android:gravity="center"
                                                     android:orientation="horizontal"
-                                                    android:layout_width="80dp"
+                                                    android:layout_width="match_parent"
                                                     android:layout_height="match_parent">
-                                                    <ImageView
+
+                                                    <LinearLayout
                                                         android:gravity="center"
-                                                        android:background="@drawable/app_pro"
-                                                        android:layout_width="25dp"
-                                                        android:layout_height="25dp" />
-                                                </LinearLayout>
+                                                        android:orientation="horizontal"
+                                                        android:layout_width="80dp"
+                                                        android:layout_height="match_parent">
+                                                        <ImageView
+                                                            android:gravity="center"
+                                                            android:background="@drawable/app_pro"
+                                                            android:layout_width="25dp"
+                                                            android:layout_height="25dp" />
+                                                    </LinearLayout>
 
-                                                <LinearLayout
-                                                    android:layout_width="wrap_content"
-                                                    android:layout_height="wrap_content"
-                                                    android:layout_gravity="center"
-                                                    android:orientation="vertical">
-
-                                                   <!-- <androidx.appcompat.widget.AppCompatTextView
+                                                    <LinearLayout
+                                                        android:layout_width="wrap_content"
+                                                        android:layout_height="wrap_content"
                                                         android:layout_gravity="center"
-                                                        style="@style/SmallText"
-                                                        android:id="@+id/Doc_status"
-                                                        android:textColor="@color/black"
-                                                        android:text="Documents Pending "
-                                                        android:layout_width="200dp"
-                                                        android:layout_height="wrap_content" />-->
+                                                        android:orientation="vertical">
 
-                                                    <androidx.appcompat.widget.AppCompatTextView
-                                                        android:layout_gravity="center"
-                                                        style="@style/SmallText"
-                                                        android:id="@+id/Doc_status"
-                                                        android:textColor="@color/black"
-                                                        android:text="Total Leads"
-                                                        android:layout_width="200dp"
-                                                        android:layout_height="wrap_content" />
-                                                </LinearLayout>
+                                                        <!-- <androidx.appcompat.widget.AppCompatTextView
+                                                             android:layout_gravity="center"
+                                                             style="@style/SmallText"
+                                                             android:id="@+id/Doc_status"
+                                                             android:textColor="@color/black"
+                                                             android:text="Documents Pending "
+                                                             android:layout_width="200dp"
+                                                             android:layout_height="wrap_content" />-->
 
-                                                <LinearLayout
-                                                    android:gravity="center"
-                                                    android:orientation="horizontal"
-                                                    android:layout_width="wrap_content"
-                                                    android:layout_height="match_parent">
-                                                    <androidx.appcompat.widget.AppCompatTextView
-                                                        android:id="@+id/document_statues"
+                                                        <androidx.appcompat.widget.AppCompatTextView
+                                                            android:layout_gravity="center"
+                                                            style="@style/SmallText"
+                                                            android:id="@+id/Doc_status"
+                                                            android:textColor="@color/black"
+                                                            android:text="Total Leads"
+                                                            android:layout_width="200dp"
+                                                            android:layout_height="wrap_content" />
+                                                    </LinearLayout>
+
+                                                    <LinearLayout
                                                         android:gravity="center"
-                                                        android:text="0"
-                                                        style="@style/SmallText"
+                                                        android:orientation="horizontal"
+                                                        android:layout_width="wrap_content"
+                                                        android:layout_height="match_parent">
+                                                        <androidx.appcompat.widget.AppCompatTextView
+                                                            android:id="@+id/document_statues"
+                                                            android:gravity="center"
+                                                            android:text="0"
+                                                            style="@style/SmallText"
 
-                                                        android:textColor="@color/black"
-                                                        android:layout_width="45dp"
-                                                        android:layout_height="45dp" />
+                                                            android:textColor="@color/black"
+                                                            android:layout_width="45dp"
+                                                            android:layout_height="45dp" />
+                                                    </LinearLayout>
                                                 </LinearLayout>
+
+
                                             </LinearLayout>
-
-
-                                        </LinearLayout>
-                                    </androidx.cardview.widget.CardView>
-
-                                    <androidx.cardview.widget.CardView
-                                        xmlns:card_view="http://schemas.android.com/apk/res-auto"
-                                        android:id="@+id/CD_in_progress"
-
-                                        android:layout_marginLeft="3dp"
-                                        android:layout_marginRight="3dp"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="70dp"
-                                        app:cardCornerRadius="6dp"
-                                        app:cardUseCompatPadding="true">
+                                        </androidx.cardview.widget.CardView>
                                         <LinearLayout
-                                            android:background="@color/white"
                                             android:orientation="vertical"
                                             android:layout_width="match_parent"
-                                            android:layout_height="match_parent">
-
+                                            android:layout_height="wrap_content">
+                                            <View
+                                                android:layout_width="match_parent"
+                                                android:layout_height="0.9dp"
+                                                android:background="@color/white"/>
+                                        </LinearLayout>
+                                        <androidx.cardview.widget.CardView
+                                            xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                                            android:id="@+id/CD_in_progress"
+                                            android:layout_marginLeft="3dp"
+                                            android:layout_marginRight="3dp"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="70dp"
+                                           >
                                             <LinearLayout
-                                                android:orientation="horizontal"
+                                                android:background="@color/gray12"
+                                                android:orientation="vertical"
                                                 android:layout_width="match_parent"
                                                 android:layout_height="match_parent">
 
                                                 <LinearLayout
-                                                    android:gravity="center"
                                                     android:orientation="horizontal"
-                                                    android:layout_width="80dp"
+                                                    android:layout_width="match_parent"
                                                     android:layout_height="match_parent">
-                                                    <ImageView
+
+                                                    <LinearLayout
                                                         android:gravity="center"
-                                                        android:background="@drawable/app_pro"
-                                                        android:layout_width="25dp"
-                                                        android:layout_height="25dp" />
-                                                </LinearLayout>
+                                                        android:orientation="horizontal"
+                                                        android:layout_width="80dp"
+                                                        android:layout_height="match_parent">
+                                                        <ImageView
+                                                            android:gravity="center"
+                                                            android:background="@drawable/app_pro"
+                                                            android:layout_width="25dp"
+                                                            android:layout_height="25dp" />
+                                                    </LinearLayout>
 
-                                                <LinearLayout
-                                                    android:layout_width="wrap_content"
-                                                    android:layout_height="wrap_content"
-                                                    android:layout_gravity="center"
-                                                    android:orientation="vertical">
-
-                                                  <!--  <androidx.appcompat.widget.AppCompatTextView
+                                                    <LinearLayout
+                                                        android:layout_width="wrap_content"
+                                                        android:layout_height="wrap_content"
                                                         android:layout_gravity="center"
-                                                        android:id="@+id/In_Progress"
-                                                        style="@style/SmallText"
-                                                        android:textColor="@color/black"
-                                                        android:text="In Progress"
-                                                        android:layout_width="200dp"
-                                                        android:layout_height="wrap_content" />-->
+                                                        android:orientation="vertical">
 
-                                                    <androidx.appcompat.widget.AppCompatTextView
-                                                        android:layout_gravity="center"
-                                                        android:id="@+id/In_Progress"
-                                                        style="@style/SmallText"
-                                                        android:textColor="@color/black"
-                                                        android:text="Pending with you"
-                                                        android:layout_width="200dp"
-                                                        android:layout_height="wrap_content" />
-                                                </LinearLayout>
+                                                        <!--  <androidx.appcompat.widget.AppCompatTextView
+                                                              android:layout_gravity="center"
+                                                              android:id="@+id/In_Progress"
+                                                              style="@style/SmallText"
+                                                              android:textColor="@color/black"
+                                                              android:text="In Progress"
+                                                              android:layout_width="200dp"
+                                                              android:layout_height="wrap_content" />-->
 
-                                                <LinearLayout
-                                                    android:gravity="center"
-                                                    android:orientation="horizontal"
-                                                    android:layout_width="wrap_content"
-                                                    android:layout_height="match_parent">
-                                                    <androidx.appcompat.widget.AppCompatTextView
-                                                        android:id="@+id/In_Progress_count"
+                                                        <androidx.appcompat.widget.AppCompatTextView
+                                                            android:layout_gravity="center"
+                                                            android:id="@+id/In_Progress"
+                                                            style="@style/SmallText"
+                                                            android:textColor="@color/black"
+                                                            android:text="Pending with you"
+                                                            android:layout_width="200dp"
+                                                            android:layout_height="wrap_content" />
+                                                    </LinearLayout>
+
+                                                    <LinearLayout
                                                         android:gravity="center"
-                                                        android:text="0"
-                                                        style="@style/SmallText"
-                                                        android:textColor="@color/black"
-                                                        android:layout_width="45dp"
-                                                        android:layout_height="45dp" />
+                                                        android:orientation="horizontal"
+                                                        android:layout_width="wrap_content"
+                                                        android:layout_height="match_parent">
+                                                        <androidx.appcompat.widget.AppCompatTextView
+                                                            android:id="@+id/In_Progress_count"
+                                                            android:gravity="center"
+                                                            android:text="0"
+                                                            style="@style/SmallText"
+                                                            android:textColor="@color/black"
+                                                            android:layout_width="45dp"
+                                                            android:layout_height="45dp" />
+                                                    </LinearLayout>
                                                 </LinearLayout>
+
+
                                             </LinearLayout>
-
-
-                                        </LinearLayout>
-                                    </androidx.cardview.widget.CardView>
-
-                                    <androidx.cardview.widget.CardView
-                                        xmlns:card_view="http://schemas.android.com/apk/res-auto"
-                                        android:id="@+id/CD_approved"
-
-                                        android:layout_marginLeft="3dp"
-                                        android:layout_marginRight="3dp"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="70dp"
-                                        app:cardCornerRadius="6dp"
-                                        app:cardUseCompatPadding="true">
+                                        </androidx.cardview.widget.CardView>
                                         <LinearLayout
-                                            android:background="@color/white"
                                             android:orientation="vertical"
                                             android:layout_width="match_parent"
-                                            android:layout_height="match_parent">
-
+                                            android:layout_height="wrap_content">
+                                            <View
+                                                android:layout_width="match_parent"
+                                                android:layout_height="0.9dp"
+                                                android:background="@color/white"/>
+                                        </LinearLayout>
+                                        <androidx.cardview.widget.CardView
+                                            xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                                            android:id="@+id/CD_approved"
+                                            android:layout_marginLeft="3dp"
+                                            android:layout_marginRight="3dp"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="70dp"
+                                           >
                                             <LinearLayout
-                                                android:orientation="horizontal"
+                                                android:background="@color/gray12"
+                                                android:orientation="vertical"
                                                 android:layout_width="match_parent"
                                                 android:layout_height="match_parent">
 
                                                 <LinearLayout
-                                                    android:gravity="center"
                                                     android:orientation="horizontal"
-                                                    android:layout_width="80dp"
+                                                    android:layout_width="match_parent"
                                                     android:layout_height="match_parent">
-                                                    <ImageView
+
+                                                    <LinearLayout
                                                         android:gravity="center"
-                                                        android:background="@drawable/app_pro"
-                                                        android:layout_width="25dp"
-                                                        android:layout_height="25dp" />
-                                                </LinearLayout>
+                                                        android:orientation="horizontal"
+                                                        android:layout_width="80dp"
+                                                        android:layout_height="match_parent">
+                                                        <ImageView
+                                                            android:gravity="center"
+                                                            android:background="@drawable/app_pro"
+                                                            android:layout_width="25dp"
+                                                            android:layout_height="25dp" />
+                                                    </LinearLayout>
 
-                                                <LinearLayout
-                                                    android:layout_width="wrap_content"
-                                                    android:layout_height="wrap_content"
-                                                    android:layout_gravity="center"
-                                                    android:orientation="vertical">
-
-                                                   <!-- <androidx.appcompat.widget.AppCompatTextView
+                                                    <LinearLayout
+                                                        android:layout_width="wrap_content"
+                                                        android:layout_height="wrap_content"
                                                         android:layout_gravity="center"
-                                                        style="@style/SmallText"
-                                                        android:id="@+id/Approved"
-                                                        android:textColor="@color/black"
-                                                        android:text="Approved"
-                                                        android:layout_width="200dp"
-                                                        android:layout_height="wrap_content" />-->
+                                                        android:orientation="vertical">
 
-                                                    <androidx.appcompat.widget.AppCompatTextView
-                                                        android:layout_gravity="center"
-                                                        android:id="@+id/Approved"
-                                                        style="@style/SmallText"
-                                                        android:textColor="@color/black"
-                                                        android:text="In Progress"
-                                                        android:layout_width="200dp"
-                                                        android:layout_height="wrap_content" />
-                                                </LinearLayout>
+                                                        <!-- <androidx.appcompat.widget.AppCompatTextView
+                                                             android:layout_gravity="center"
+                                                             style="@style/SmallText"
+                                                             android:id="@+id/Approved"
+                                                             android:textColor="@color/black"
+                                                             android:text="Approved"
+                                                             android:layout_width="200dp"
+                                                             android:layout_height="wrap_content" />-->
 
-                                                <LinearLayout
-                                                    android:gravity="center"
-                                                    android:orientation="horizontal"
-                                                    android:layout_width="wrap_content"
-                                                    android:layout_height="match_parent">
-                                                    <androidx.appcompat.widget.AppCompatTextView
-                                                        android:id="@+id/Approved_count"
+                                                        <androidx.appcompat.widget.AppCompatTextView
+                                                            android:layout_gravity="center"
+                                                            android:id="@+id/Approved"
+                                                            style="@style/SmallText"
+                                                            android:textColor="@color/black"
+                                                            android:text="In Progress"
+                                                            android:layout_width="200dp"
+                                                            android:layout_height="wrap_content" />
+                                                    </LinearLayout>
+
+                                                    <LinearLayout
                                                         android:gravity="center"
-                                                        android:text="0"
-                                                        style="@style/SmallText"
-                                                        android:textColor="@color/black"
-                                                        android:layout_width="45dp"
-                                                        android:layout_height="45dp" />
+                                                        android:orientation="horizontal"
+                                                        android:layout_width="wrap_content"
+                                                        android:layout_height="match_parent">
+                                                        <androidx.appcompat.widget.AppCompatTextView
+                                                            android:id="@+id/Approved_count"
+                                                            android:gravity="center"
+                                                            android:text="0"
+                                                            style="@style/SmallText"
+                                                            android:textColor="@color/black"
+                                                            android:layout_width="45dp"
+                                                            android:layout_height="45dp" />
+                                                    </LinearLayout>
                                                 </LinearLayout>
+
+
                                             </LinearLayout>
-
-
-                                        </LinearLayout>
-                                    </androidx.cardview.widget.CardView>
-                                    <androidx.cardview.widget.CardView
-                                        xmlns:card_view="http://schemas.android.com/apk/res-auto"
-                                        android:id="@+id/CD_disbursed"
-
-                                        android:layout_marginLeft="3dp"
-                                        android:layout_marginRight="3dp"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="70dp"
-                                        app:cardCornerRadius="6dp"
-                                        app:cardUseCompatPadding="true">
+                                        </androidx.cardview.widget.CardView>
                                         <LinearLayout
-                                            android:background="@color/white"
                                             android:orientation="vertical"
                                             android:layout_width="match_parent"
-                                            android:layout_height="match_parent">
-
+                                            android:layout_height="wrap_content">
+                                            <View
+                                                android:layout_width="match_parent"
+                                                android:layout_height="0.9dp"
+                                                android:background="@color/white"/>
+                                        </LinearLayout>
+                                        <androidx.cardview.widget.CardView
+                                            xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                                            android:id="@+id/CD_disbursed"
+                                            android:layout_marginLeft="3dp"
+                                            android:layout_marginRight="3dp"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="70dp">
                                             <LinearLayout
-                                                android:orientation="horizontal"
+                                                android:background="@color/gray12"
+                                                android:orientation="vertical"
                                                 android:layout_width="match_parent"
                                                 android:layout_height="match_parent">
 
                                                 <LinearLayout
-                                                    android:gravity="center"
                                                     android:orientation="horizontal"
-                                                    android:layout_width="80dp"
+                                                    android:layout_width="match_parent"
                                                     android:layout_height="match_parent">
-                                                    <ImageView
+
+                                                    <LinearLayout
                                                         android:gravity="center"
-                                                        android:background="@drawable/app_pro"
-                                                        android:layout_width="25dp"
-                                                        android:layout_height="25dp" />
-                                                </LinearLayout>
+                                                        android:orientation="horizontal"
+                                                        android:layout_width="80dp"
+                                                        android:layout_height="match_parent">
+                                                        <ImageView
+                                                            android:gravity="center"
+                                                            android:background="@drawable/app_pro"
+                                                            android:layout_width="25dp"
+                                                            android:layout_height="25dp" />
+                                                    </LinearLayout>
 
-                                                <LinearLayout
-                                                    android:layout_width="wrap_content"
-                                                    android:layout_height="wrap_content"
-                                                    android:layout_gravity="center"
-                                                    android:orientation="vertical">
-
-                                                  <!--  <androidx.appcompat.widget.AppCompatTextView
+                                                    <LinearLayout
+                                                        android:layout_width="wrap_content"
+                                                        android:layout_height="wrap_content"
                                                         android:layout_gravity="center"
-                                                        style="@style/SmallText"
-                                                        android:id="@+id/Disbursed"
-                                                        android:textColor="@color/black"
-                                                        android:text="Disbursed"
-                                                        android:layout_width="200dp"
-                                                        android:layout_height="wrap_content" />-->
+                                                        android:orientation="vertical">
 
-                                                    <androidx.appcompat.widget.AppCompatTextView
-                                                        android:layout_gravity="center"
-                                                        android:id="@+id/Disbursed"
-                                                        style="@style/SmallText"
-                                                        android:textColor="@color/black"
-                                                        android:text="Rejected"
-                                                        android:layout_width="200dp"
-                                                        android:layout_height="wrap_content" />
+                                                        <!--  <androidx.appcompat.widget.AppCompatTextView
+                                                              android:layout_gravity="center"
+                                                              style="@style/SmallText"
+                                                              android:id="@+id/Disbursed"
+                                                              android:textColor="@color/black"
+                                                              android:text="Disbursed"
+                                                              android:layout_width="200dp"
+                                                              android:layout_height="wrap_content" />-->
 
-                                                </LinearLayout>
+                                                        <androidx.appcompat.widget.AppCompatTextView
+                                                            android:layout_gravity="center"
+                                                            android:id="@+id/Disbursed"
+                                                            style="@style/SmallText"
+                                                            android:textColor="@color/black"
+                                                            android:text="Rejected"
+                                                            android:layout_width="200dp"
+                                                            android:layout_height="wrap_content" />
 
-                                                <LinearLayout
-                                                    android:gravity="center"
-                                                    android:orientation="horizontal"
-                                                    android:layout_width="wrap_content"
-                                                    android:layout_height="match_parent">
-                                                    <androidx.appcompat.widget.AppCompatTextView
-                                                        android:id="@+id/Disbursed_count"
+                                                    </LinearLayout>
+
+                                                    <LinearLayout
                                                         android:gravity="center"
-                                                        android:text="0"
-                                                        style="@style/SmallText"
-                                                        android:textColor="@color/black"
-                                                        android:layout_width="45dp"
-                                                        android:layout_height="45dp" />
+                                                        android:orientation="horizontal"
+                                                        android:layout_width="wrap_content"
+                                                        android:layout_height="match_parent">
+                                                        <androidx.appcompat.widget.AppCompatTextView
+                                                            android:id="@+id/Disbursed_count"
+                                                            android:gravity="center"
+                                                            android:text="0"
+                                                            style="@style/SmallText"
+                                                            android:textColor="@color/black"
+                                                            android:layout_width="45dp"
+                                                            android:layout_height="45dp" />
+                                                    </LinearLayout>
                                                 </LinearLayout>
+
+
                                             </LinearLayout>
-
-
-                                        </LinearLayout>
-                                    </androidx.cardview.widget.CardView>
-                                    <androidx.cardview.widget.CardView
-                                        xmlns:card_view="http://schemas.android.com/apk/res-auto"
-                                        android:id="@+id/CD_declined"
-                                        android:layout_marginLeft="3dp"
-                                        android:layout_marginRight="3dp"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="70dp"
-                                        app:cardCornerRadius="6dp"
-                                        app:cardUseCompatPadding="true">
+                                        </androidx.cardview.widget.CardView>
                                         <LinearLayout
-                                            android:background="@color/white"
                                             android:orientation="vertical"
                                             android:layout_width="match_parent"
-                                            android:layout_height="match_parent">
-
+                                            android:layout_height="wrap_content">
+                                            <View
+                                                android:layout_width="match_parent"
+                                                android:layout_height="0.9dp"
+                                                android:background="@color/white"/>
+                                        </LinearLayout>
+                                        <androidx.cardview.widget.CardView
+                                            xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                                            android:id="@+id/CD_declined"
+                                            android:layout_marginLeft="3dp"
+                                            android:layout_marginRight="3dp"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="70dp">
                                             <LinearLayout
-                                                android:orientation="horizontal"
+                                                android:background="@color/gray12"
+                                                android:orientation="vertical"
                                                 android:layout_width="match_parent"
                                                 android:layout_height="match_parent">
 
                                                 <LinearLayout
-                                                    android:gravity="center"
                                                     android:orientation="horizontal"
-                                                    android:layout_width="80dp"
+                                                    android:layout_width="match_parent"
                                                     android:layout_height="match_parent">
-                                                    <ImageView
+
+                                                    <LinearLayout
                                                         android:gravity="center"
-                                                        android:background="@drawable/app_pro"
-                                                        android:layout_width="25dp"
-                                                        android:layout_height="25dp" />
-                                                </LinearLayout>
+                                                        android:orientation="horizontal"
+                                                        android:layout_width="80dp"
+                                                        android:layout_height="match_parent">
+                                                        <ImageView
+                                                            android:gravity="center"
+                                                            android:background="@drawable/app_pro"
+                                                            android:layout_width="25dp"
+                                                            android:layout_height="25dp" />
+                                                    </LinearLayout>
 
-                                                <LinearLayout
-                                                    android:layout_width="wrap_content"
-                                                    android:layout_height="wrap_content"
-                                                    android:layout_gravity="center"
-                                                    android:orientation="vertical">
-
-                                                  <!--  <androidx.appcompat.widget.AppCompatTextView
+                                                    <LinearLayout
+                                                        android:layout_width="wrap_content"
+                                                        android:layout_height="wrap_content"
                                                         android:layout_gravity="center"
-                                                        android:id="@+id/Declined"
-                                                        style="@style/SmallText"
-                                                        android:textColor="@color/black"
-                                                        android:text="Declined"
-                                                        android:layout_width="200dp"
-                                                        android:layout_height="wrap_content" />-->
+                                                        android:orientation="vertical">
 
-                                                    <androidx.appcompat.widget.AppCompatTextView
-                                                        android:layout_gravity="center"
-                                                        android:id="@+id/Declined"
-                                                        style="@style/SmallText"
-                                                        android:textColor="@color/black"
-                                                        android:text="Sanctioned"
-                                                        android:layout_width="200dp"
-                                                        android:layout_height="wrap_content" />
+                                                        <!--  <androidx.appcompat.widget.AppCompatTextView
+                                                              android:layout_gravity="center"
+                                                              android:id="@+id/Declined"
+                                                              style="@style/SmallText"
+                                                              android:textColor="@color/black"
+                                                              android:text="Declined"
+                                                              android:layout_width="200dp"
+                                                              android:layout_height="wrap_content" />-->
 
-                                                </LinearLayout>
+                                                        <androidx.appcompat.widget.AppCompatTextView
+                                                            android:layout_gravity="center"
+                                                            android:id="@+id/Declined"
+                                                            style="@style/SmallText"
+                                                            android:textColor="@color/black"
+                                                            android:text="Sanctioned"
+                                                            android:layout_width="200dp"
+                                                            android:layout_height="wrap_content" />
 
-                                                <LinearLayout
-                                                    android:gravity="center"
-                                                    android:orientation="horizontal"
-                                                    android:layout_width="wrap_content"
-                                                    android:layout_height="match_parent">
-                                                    <androidx.appcompat.widget.AppCompatTextView
-                                                        android:id="@+id/Declined_count"
+                                                    </LinearLayout>
+
+                                                    <LinearLayout
                                                         android:gravity="center"
-                                                        android:text="0"
-                                                        style="@style/SmallText"
-                                                        android:textColor="@color/black"
-                                                        android:layout_width="45dp"
-                                                        android:layout_height="45dp" />
+                                                        android:orientation="horizontal"
+                                                        android:layout_width="wrap_content"
+                                                        android:layout_height="match_parent">
+                                                        <androidx.appcompat.widget.AppCompatTextView
+                                                            android:id="@+id/Declined_count"
+                                                            android:gravity="center"
+                                                            android:text="0"
+                                                            style="@style/SmallText"
+                                                            android:textColor="@color/black"
+                                                            android:layout_width="45dp"
+                                                            android:layout_height="45dp" />
+                                                    </LinearLayout>
                                                 </LinearLayout>
+
+
                                             </LinearLayout>
-
-
-                                        </LinearLayout>
-                                    </androidx.cardview.widget.CardView>
-                                    <androidx.cardview.widget.CardView
-                                        xmlns:card_view="http://schemas.android.com/apk/res-auto"
-                                        android:id="@+id/CD_closed"
-
-                                        android:layout_marginLeft="3dp"
-                                        android:layout_marginRight="3dp"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="70dp"
-                                        app:cardCornerRadius="6dp"
-                                        app:cardUseCompatPadding="true">
+                                        </androidx.cardview.widget.CardView>
                                         <LinearLayout
-                                            android:background="@color/white"
                                             android:orientation="vertical"
                                             android:layout_width="match_parent"
-                                            android:layout_height="match_parent">
-
+                                            android:layout_height="wrap_content">
+                                            <View
+                                                android:layout_width="match_parent"
+                                                android:layout_height="0.9dp"
+                                                android:background="@color/white"/>
+                                        </LinearLayout>
+                                        <androidx.cardview.widget.CardView
+                                            xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                                            android:id="@+id/CD_closed"
+                                            android:layout_marginLeft="3dp"
+                                            android:layout_marginRight="3dp"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="70dp">
                                             <LinearLayout
-                                                android:orientation="horizontal"
+                                                android:background="@color/gray12"
+                                                android:orientation="vertical"
                                                 android:layout_width="match_parent"
                                                 android:layout_height="match_parent">
 
                                                 <LinearLayout
-                                                    android:gravity="center"
                                                     android:orientation="horizontal"
-                                                    android:layout_width="80dp"
+                                                    android:layout_width="match_parent"
                                                     android:layout_height="match_parent">
-                                                    <ImageView
+
+                                                    <LinearLayout
                                                         android:gravity="center"
-                                                        android:background="@drawable/app_pro"
-                                                        android:layout_width="25dp"
-                                                        android:layout_height="25dp" />
-                                                </LinearLayout>
+                                                        android:orientation="horizontal"
+                                                        android:layout_width="80dp"
+                                                        android:layout_height="match_parent">
+                                                        <ImageView
+                                                            android:gravity="center"
+                                                            android:background="@drawable/app_pro"
+                                                            android:layout_width="25dp"
+                                                            android:layout_height="25dp" />
+                                                    </LinearLayout>
 
-                                                <LinearLayout
-                                                    android:layout_width="wrap_content"
-                                                    android:layout_height="wrap_content"
-                                                    android:layout_gravity="center"
-                                                    android:orientation="vertical">
-
-                                                  <!--  <androidx.appcompat.widget.AppCompatTextView
+                                                    <LinearLayout
+                                                        android:layout_width="wrap_content"
+                                                        android:layout_height="wrap_content"
                                                         android:layout_gravity="center"
-                                                        style="@style/SmallText1"
-                                                        android:id="@+id/Closed"
-                                                        android:textSize="15sp"
-                                                        android:textColor="@color/black"
-                                                        android:text="Closed"
-                                                        android:layout_width="200dp"
-                                                        android:layout_height="wrap_content" />-->
+                                                        android:orientation="vertical">
 
-                                                    <androidx.appcompat.widget.AppCompatTextView
-                                                        android:layout_gravity="center"
-                                                        style="@style/SmallText1"
-                                                        android:id="@+id/Closed"
-                                                        android:textSize="15sp"
-                                                        android:textColor="@color/black"
-                                                        android:text="Disbursed"
-                                                        android:layout_width="200dp"
-                                                        android:layout_height="wrap_content" />
+                                                        <!--  <androidx.appcompat.widget.AppCompatTextView
+                                                              android:layout_gravity="center"
+                                                              style="@style/SmallText1"
+                                                              android:id="@+id/Closed"
+                                                              android:textSize="15sp"
+                                                              android:textColor="@color/black"
+                                                              android:text="Closed"
+                                                              android:layout_width="200dp"
+                                                              android:layout_height="wrap_content" />-->
 
-                                                </LinearLayout>
+                                                        <androidx.appcompat.widget.AppCompatTextView
+                                                            android:layout_gravity="center"
+                                                            style="@style/SmallText1"
+                                                            android:id="@+id/Closed"
+                                                            android:textSize="15sp"
+                                                            android:textColor="@color/black"
+                                                            android:text="Disbursed"
+                                                            android:layout_width="200dp"
+                                                            android:layout_height="wrap_content" />
 
-                                                <LinearLayout
-                                                    android:gravity="center"
-                                                    android:orientation="horizontal"
-                                                    android:layout_width="wrap_content"
-                                                    android:layout_height="match_parent">
-                                                    <androidx.appcompat.widget.AppCompatTextView
-                                                        android:id="@+id/Closed_count"
+                                                    </LinearLayout>
+
+                                                    <LinearLayout
                                                         android:gravity="center"
-                                                        android:text="0"
-                                                        android:textSize="18sp"
-                                                        android:textColor="@color/black"
-                                                        android:layout_width="45dp"
-                                                        android:layout_height="45dp" />
+                                                        android:orientation="horizontal"
+                                                        android:layout_width="wrap_content"
+                                                        android:layout_height="match_parent">
+                                                        <androidx.appcompat.widget.AppCompatTextView
+                                                            android:id="@+id/Closed_count"
+                                                            android:gravity="center"
+                                                            android:text="0"
+                                                            android:textSize="18sp"
+                                                            android:textColor="@color/black"
+                                                            android:layout_width="45dp"
+                                                            android:layout_height="45dp" />
+                                                    </LinearLayout>
                                                 </LinearLayout>
+
+
                                             </LinearLayout>
+                                        </androidx.cardview.widget.CardView>
 
+                                        <androidx.appcompat.widget.AppCompatTextView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="70dp" />
+                                    </LinearLayout>
 
-                                        </LinearLayout>
-                                    </androidx.cardview.widget.CardView>
-
-                                    <androidx.appcompat.widget.AppCompatTextView
-                                        android:layout_width="match_parent"
-                                        android:layout_height="70dp" />
                                 </LinearLayout>
 
 

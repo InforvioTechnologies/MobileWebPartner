@@ -243,16 +243,16 @@ public class Eligibility_BL extends SimpleActivity {
     {
 
 
-       /* lead_Elegibility_Bank.setOnClickListener(new View.OnClickListener() {
+        lead_Elegibility_Bank.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(Eligibility_BL.this, Credite_report_details.class);
                 startActivity(intent);
                 finish();
             }
-        });*/
+        });
 
-        lead_Elegibility_Bank.setOnClickListener(new View.OnClickListener() {
+        /*lead_Elegibility_Bank.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
@@ -287,7 +287,7 @@ public class Eligibility_BL extends SimpleActivity {
 
                 }
             }
-        });
+        });*/
 
     }
 

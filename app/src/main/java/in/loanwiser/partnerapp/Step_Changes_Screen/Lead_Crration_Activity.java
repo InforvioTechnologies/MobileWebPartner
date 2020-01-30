@@ -108,13 +108,13 @@ public class Lead_Crration_Activity extends SimpleActivity {
         UI_FIELDS();
         fonts();
         makeJsonObjReq1();
-      //  Click();
+      // Click();
 
         lead_cr_step1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                Intent intent = new Intent(Lead_Crration_Activity.this, Viability_Check_BL.class);
+                Intent intent = new Intent(Lead_Crration_Activity.this, Viability_check_HL.class);
                 startActivity(intent);
                 finish();
 
@@ -127,6 +127,7 @@ public class Lead_Crration_Activity extends SimpleActivity {
          type_of_empmnt.setVisibility(View.GONE);
          co_applicant_ly.setVisibility(View.GONE);
          co_applicant_emp_type.setVisibility(View.GONE);
+
      }else
      {
 

@@ -16,6 +16,8 @@
     <string name="payment">Payment</string>
 
     <string name="name">Name</string>
+    <string name="DFD">Disbursed From Date</string>
+    <string name="DTD">Disbursed To Date</string>
     <string name="name_cs">Customer Name</string>
     <string name="mob">Customer Mobile No</string>
     <string name="signin">SIGN IN</string>
@@ -89,6 +91,7 @@
     <string name="bank_name">Name of the Bank</string>
     <string name="branch">Bank Branch</string>
     <string name="pay_mode">Mode of Payment through</string>
+    <string name="proceed">proceed</string>
 
     <string name="pay_out_details">Payout Details</string>
     <string name="ifsc">IFSC Code</string>
@@ -96,6 +99,7 @@
     <string name="mbank">Mobile</string>
     <string name="d_leads">Disbursed Leads List</string>
     <string name="d_amount">Disbursed Amount</string>
+    <string name="last_updated">Last Updated</string>
     <string name="c_amount">Commission Amount</string>
     <string name="d_leads_details">Disbursed Leads Details</string>
     <string name="lead_creation1">Lead Creation</string>

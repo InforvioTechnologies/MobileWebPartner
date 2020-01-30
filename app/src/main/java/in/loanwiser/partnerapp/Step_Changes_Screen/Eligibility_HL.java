@@ -520,12 +520,12 @@ public class Eligibility_HL extends SimpleActivity {
                     Toast.makeText(context,"Please Select the Transaction Type", Toast.LENGTH_SHORT).show();
                 }else
                 {
-                    if(Property_ownership_Id.equals("0"))
+                  /*  if(Property_ownership_Id.equals("0"))
                     {
                         Toast.makeText(context,"Please Select the Propertry Ownership", Toast.LENGTH_SHORT).show();
 
                     }else
-                    {
+                    {*/
                         if (!Proposed_Completion_Date()) {
                             return;
                         }
@@ -551,7 +551,7 @@ public class Eligibility_HL extends SimpleActivity {
                         }
 
 
-                    }
+                   /* }*/
                 }
 
             }
@@ -1018,7 +1018,7 @@ public class Eligibility_HL extends SimpleActivity {
                             Property_Size(property_size_A);
                             Property_Purpose(property_purpose_A);
                             Property_Trasanction_type(transaction_type_A);
-                            Property_Ownership(property_ownership_A);
+                         //   Property_Ownership(property_ownership_A);
                             Select_Purchased_From(purchased_from_A);
                             Select_Company_Type(company_type_A);
                             Select_Employement_type(employee_type_A);

@@ -115,7 +115,7 @@ public class Registration extends SimpleActivity implements GoogleApiClient.Conn
     Typeface font;
     private AppCompatButton submit;
     private String Moblie;
-    MaterialEditText name,mob,pincode1;
+    AppCompatEditText name,mob,pincode1;
     private FocusControl phoneFocus;
     String State_Loc_uniqueID,City_loc_uniqueID,Bussiness_uniqueID;
 
@@ -407,8 +407,8 @@ public class Registration extends SimpleActivity implements GoogleApiClient.Conn
 
         city_you = (AppCompatTextView) findViewById(R.id.city_you);
 
-        name = (MaterialEditText) findViewById(R.id.name);
-        mob = (MaterialEditText) findViewById(R.id.mob);
+        name = (AppCompatEditText) findViewById(R.id.name);
+        mob = (AppCompatEditText) findViewById(R.id.mob);
         pincode1 = (MaterialEditText) findViewById(R.id.pincode);
 
         editTextName = (AppCompatEditText) findViewById(R.id.name);

@@ -7,14 +7,7 @@
     android:orientation="vertical"
     tools:context=".Step_Changes_Screen.Eligibility_HL">
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
             <LinearLayout
                 android:padding="15dp"
                 android:orientation="vertical"
@@ -33,6 +26,15 @@
                     app:spb_stateBackgroundColor="@color/colorPrimary"
                     app:spb_maxStateNumber="four"/>
 
+                <ScrollView
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
                 <LinearLayout
                     android:visibility="gone"
                     android:id="@+id/property_field"
@@ -49,9 +51,6 @@
                     android:layout_height="wrap_content">
                     <include layout="@layout/ly_hl_eligibility_salaried"/>
                 </LinearLayout>
-
-
-
                 <LinearLayout
                     android:visibility="gone"
                     android:id="@+id/former"
@@ -76,6 +75,8 @@
                     android:layout_height="wrap_content">
                     <include layout="@layout/ly_co_applicant_eligibility_salried"/>
                 </LinearLayout>
+                </LinearLayout>
+                </ScrollView>
                 <LinearLayout
                     android:layout_marginTop="10dp"
                     android:elevation="4sp"
@@ -101,9 +102,8 @@
                     </LinearLayout>
 
                 </LinearLayout>
-
             </LinearLayout>
-        </LinearLayout>
-    </ScrollView>
+
+
 
 </LinearLayout>

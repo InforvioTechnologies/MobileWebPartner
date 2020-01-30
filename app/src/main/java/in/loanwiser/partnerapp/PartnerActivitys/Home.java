@@ -165,24 +165,24 @@ public class Home extends AppCompatActivity {
                                     app_doc_message.setText("Thankyou for Uploading the Documents");
                                     Pref.putDOC_Status(mCon,"1");
                                     app_doc_message.setTextColor(ContextCompat.getColor(mCon, R.color.colorAccent));
-                                    app_doc_img.setImageDrawable(getResources().getDrawable(R.drawable.don));
+                                    app_doc_img.setImageDrawable(getResources().getDrawable(R.drawable.ic_tick_icon));
                                 }else{
                                   //  doc.setEnabled(true);
                                     Pref.putDOC_Status(mCon,"0");
                                     app_doc_message.setTextColor(ContextCompat.getColor(mCon, R.color.gray));
-                                    app_doc_img.setImageDrawable(getResources().getDrawable(R.drawable.notdon));
+                                    app_doc_img.setImageDrawable(getResources().getDrawable(R.drawable.ic_not_tick));
                                 }
 
                                 if(S4.equals("1")){
                                     inter.setEnabled(true);
                                     customerinterview.setTextColor(ContextCompat.getColor(mCon, R.color.colorAccent));
                                     customerinterview.setText("Thank you for sharing more info about you with Customer care");
-                                    app_interview_img.setImageDrawable(getResources().getDrawable(R.drawable.don));
+                                    app_interview_img.setImageDrawable(getResources().getDrawable(R.drawable.ic_tick_icon));
                                 }else{
                                     inter.setEnabled(false);
                                     customerinterview.setVisibility(View.VISIBLE);
                                     customerinterview.setTextColor(ContextCompat.getColor(mCon, R.color.gray));
-                                    app_interview_img.setImageDrawable(getResources().getDrawable(R.drawable.notdon));
+                                    app_interview_img.setImageDrawable(getResources().getDrawable(R.drawable.ic_not_tick));
                                 }
 
 
@@ -191,12 +191,12 @@ public class Home extends AppCompatActivity {
                                //    offerdetails.setVisibility(View.GONE);
                                    offerdetails.setText(step_status);
                                    offerdetails.setTextColor(ContextCompat.getColor(mCon, R.color.colorAccent));
-                                   app_offer_img.setImageDrawable(getResources().getDrawable(R.drawable.don));
+                                   app_offer_img.setImageDrawable(getResources().getDrawable(R.drawable.ic_tick_icon));
                                }else{
                                    offer.setEnabled(false);
                                    offerdetails.setVisibility(View.VISIBLE);
                                    offerdetails.setTextColor(ContextCompat.getColor(mCon, R.color.gray));
-                                   app_offer_img.setImageDrawable(getResources().getDrawable(R.drawable.notdon));
+                                   app_offer_img.setImageDrawable(getResources().getDrawable(R.drawable.ic_not_tick));
                                }
 
                             }else {

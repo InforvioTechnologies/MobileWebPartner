@@ -153,10 +153,10 @@ public class Payment_Details_Activity extends SimpleActivity {
 
                                 String msg = object.getString("message");
                                 String cftoken = object.getString("cftoken");
-
                                 Log.e("message",msg);
                                 Log.e("cftoken",cftoken);
                                 Do_Cashfree_Payment(cftoken);
+
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();

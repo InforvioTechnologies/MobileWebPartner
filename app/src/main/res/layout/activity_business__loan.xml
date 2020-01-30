@@ -16,7 +16,7 @@
             <androidx.appcompat.widget.AppCompatImageView
                 android:layout_width="match_parent"
                 android:layout_height="150dp"
-                android:background="@drawable/business_loan"
+                android:background="@drawable/bl_baner"
                 android:scaleType="fitXY"/>
         </LinearLayout>
         <LinearLayout
@@ -67,6 +67,7 @@
                         android:layout_height="wrap_content"
                         android:textColor="@color/black"
                         style="@style/SmallText"
+                        android:textStyle="bold"
                         android:text="@string/loan_purpose1"/>
 
                     <LinearLayout
@@ -77,6 +78,16 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
 
+                        <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <ImageView
+                                android:layout_gravity="center"
+                                android:background="@drawable/bl_circle"
+                                android:layout_width="10dp"
+                                android:layout_height="10dp" />
                         <androidx.appcompat.widget.AppCompatTextView
                             android:id="@+id/sub_id3"
                             android:gravity="left"
@@ -85,6 +96,9 @@
                             android:textColor="@color/black"
                             style="@style/SmallText"
                             android:text="@string/business_purpose2"/>
+                        </LinearLayout>
+
+
                         <androidx.appcompat.widget.AppCompatTextView
                             android:id="@+id/sub_id4"
                             android:gravity="left"
@@ -94,6 +108,17 @@
                             android:textColor="@color/black"
                             style="@style/SmallText"
                             android:text="@string/personal_purpose3"/>
+
+                        <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <ImageView
+                                android:layout_gravity="center"
+                                android:background="@drawable/bl_circle"
+                                android:layout_width="10dp"
+                                android:layout_height="10dp" />
                         <androidx.appcompat.widget.AppCompatTextView
                             android:id="@+id/sub_id5"
                             android:gravity="left"
@@ -102,6 +127,18 @@
                             android:textColor="@color/black"
                             style="@style/SmallText"
                             android:text="@string/business_purpose3"/>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <ImageView
+                                android:layout_gravity="center"
+                                android:background="@drawable/bl_circle"
+                                android:layout_width="10dp"
+                                android:layout_height="10dp" />
                         <androidx.appcompat.widget.AppCompatTextView
                             android:id="@+id/sub_id6"
                             android:gravity="left"
@@ -111,7 +148,7 @@
                             style="@style/SmallText"
                             android:text="@string/business_purpose4"/>
 
-
+                        </LinearLayout>
 
                         <androidx.appcompat.widget.AppCompatTextView
                             android:visibility="gone"
