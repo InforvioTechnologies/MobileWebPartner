@@ -54,7 +54,7 @@
                             style="@style/LorgeText"
                             android:id="@+id/step1"
                             android:textSize="18sp"
-                            android:textColor="@color/colorPrimary"
+                            android:textColor="@color/colorAccent"
                             android:text="Step 1"
                             android:layout_width="200dp"
                             android:layout_height="wrap_content" />
@@ -454,7 +454,7 @@
                             style="@style/LorgeText"
                             android:id="@+id/step2"
                             android:textSize="18sp"
-                            android:textColor="@color/colorPrimary"
+                            android:textColor="@color/colorAccent"
                             android:text="Step 2"
                             android:layout_width="200dp"
                             android:layout_height="wrap_content" />
@@ -522,7 +522,7 @@
                         android:layout_height="match_parent">
                         <ImageView
                             android:gravity="center"
-                            android:background="@drawable/ic_document_verification"
+                            android:background="@drawable/document_verification_icon"
                             android:layout_width="45dp"
                             android:layout_height="45dp" />
                     </LinearLayout>
@@ -541,7 +541,7 @@
                                 style="@style/LorgeText"
                                 android:id="@+id/step3"
                                 android:textSize="18sp"
-                                android:textColor="@color/colorPrimary"
+                                android:textColor="@color/colorAccent"
                                 android:text="Step 3"
                                 android:layout_width="200dp"
                                 android:layout_height="wrap_content" />
@@ -614,7 +614,7 @@
                         android:layout_height="match_parent">
                         <ImageView
                             android:gravity="center"
-                            android:background="@drawable/ic_offer_icon"
+                            android:background="@drawable/offer_details"
                             android:layout_width="45dp"
                             android:layout_height="45dp" />
                     </LinearLayout>
@@ -634,7 +634,7 @@
                                 style="@style/LorgeText"
                                 android:id="@+id/step4"
                                 android:textSize="18sp"
-                                android:textColor="@color/colorPrimary"
+                                android:textColor="@color/colorAccent"
                                 android:text="Step 4"
                                 android:layout_width="200dp"
                                 android:layout_height="wrap_content" />

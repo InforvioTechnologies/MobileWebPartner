@@ -79,7 +79,7 @@
                                 android:gravity="center"
                                 android:orientation="horizontal"
                                 android:layout_width="match_parent"
-                                android:layout_height="60dp">
+                                android:layout_height="50dp">
 
                                 <LinearLayout
                                     android:layout_marginLeft="30dp"
@@ -175,7 +175,7 @@
                                 android:gravity="center"
                                 android:orientation="horizontal"
                                 android:layout_width="match_parent"
-                                android:layout_height="60dp">
+                                android:layout_height="50dp">
 
                                 <LinearLayout
                                     android:layout_marginLeft="30dp"
@@ -493,7 +493,7 @@
                                 android:gravity="center"
                                 android:orientation="horizontal"
                                 android:layout_width="match_parent"
-                                android:layout_height="60dp">
+                                android:layout_height="50dp">
 
                                 <LinearLayout
                                     android:layout_marginLeft="30dp"
@@ -546,7 +546,7 @@
                                 android:gravity="center"
                                 android:orientation="horizontal"
                                 android:layout_width="match_parent"
-                                android:layout_height="60dp">
+                                android:layout_height="50dp">
 
                                 <LinearLayout
                                     android:layout_marginLeft="30dp"
@@ -685,7 +685,7 @@
                                 android:gravity="center"
                                 android:orientation="horizontal"
                                 android:layout_width="match_parent"
-                                android:layout_height="60dp">
+                                android:layout_height="50dp">
 
                                 <LinearLayout
                                     android:layout_marginLeft="30dp"
@@ -721,7 +721,7 @@
                                     style="@style/LorgeText2"
                                     android:textColor="@color/colorPrimaryDark"
                                     android:textColorHint="@color/colorPrimaryDark"
-                                    android:hint="2"
+                                    android:hint="14"
                                     android:layout_height="wrap_content" />
                                 <androidx.appcompat.widget.AppCompatTextView
                                     android:gravity="left"
@@ -764,7 +764,7 @@
                                     style="@style/LorgeText2"
                                     android:textColor="@color/colorPrimaryDark"
                                     android:textColorHint="@color/colorPrimaryDark"
-                                    android:hint="14"
+                                    android:hint="15"
                                     android:layout_height="wrap_content" />
                                 <androidx.appcompat.widget.AppCompatTextView
                                     android:gravity="left"
@@ -807,7 +807,7 @@
                                     style="@style/LorgeText2"
                                     android:textColor="@color/colorPrimaryDark"
                                     android:textColorHint="@color/colorPrimaryDark"
-                                    android:hint="15"
+                                    android:hint="16"
                                     android:layout_height="wrap_content" />
                                 <androidx.appcompat.widget.AppCompatTextView
                                     android:gravity="left"
@@ -824,7 +824,7 @@
                                 android:gravity="center"
                                 android:orientation="horizontal"
                                 android:layout_width="match_parent"
-                                android:layout_height="60dp">
+                                android:layout_height="50dp">
 
                                 <LinearLayout
                                     android:layout_marginLeft="30dp"
@@ -859,7 +859,7 @@
                                     style="@style/LorgeText2"
                                     android:textColor="@color/colorPrimaryDark"
                                     android:textColorHint="@color/colorPrimaryDark"
-                                    android:hint="16"
+                                    android:hint="17"
                                     android:layout_height="wrap_content" />
                                 <androidx.appcompat.widget.AppCompatTextView
                                     android:gravity="left"
@@ -905,7 +905,7 @@
                                 style="@style/LorgeText2"
                                 android:textColor="@color/colorPrimaryDark"
                                 android:textColorHint="@color/colorPrimaryDark"
-                                android:hint="17"
+                                android:hint="18"
                                 android:layout_height="wrap_content" />
                             <androidx.appcompat.widget.AppCompatTextView
                                 android:gravity="left"
@@ -922,7 +922,7 @@
                             android:gravity="center"
                             android:orientation="horizontal"
                             android:layout_width="match_parent"
-                            android:layout_height="60dp">
+                            android:layout_height="50dp">
 
                             <LinearLayout
                                 android:layout_marginLeft="30dp"
@@ -958,7 +958,7 @@
                                 style="@style/LorgeText2"
                                 android:textColor="@color/colorPrimaryDark"
                                 android:textColorHint="@color/colorPrimaryDark"
-                                android:hint="18"
+                                android:hint="19"
                                 android:layout_height="wrap_content" />
                             <androidx.appcompat.widget.AppCompatTextView
                                 android:gravity="left"
@@ -975,7 +975,7 @@
                             android:gravity="center"
                             android:orientation="horizontal"
                             android:layout_width="match_parent"
-                            android:layout_height="60dp">
+                            android:layout_height="50dp">
 
                             <LinearLayout
                                 android:layout_marginLeft="30dp"
@@ -1011,7 +1011,7 @@
                                 style="@style/LorgeText2"
                                 android:textColor="@color/colorPrimaryDark"
                                 android:textColorHint="@color/colorPrimaryDark"
-                                android:hint="19"
+                                android:hint="20"
                                 android:layout_height="wrap_content" />
                             <androidx.appcompat.widget.AppCompatTextView
                                 android:gravity="left"
@@ -1073,7 +1073,7 @@
                         android:gravity="center"
                         android:orientation="horizontal"
                         android:layout_width="match_parent"
-                        android:layout_height="60dp">
+                        android:layout_height="50dp">
 
                         <LinearLayout
                             android:layout_marginLeft="30dp"
@@ -1133,7 +1133,7 @@
                             android:gravity="center"
                             android:orientation="horizontal"
                             android:layout_width="match_parent"
-                            android:layout_height="60dp">
+                            android:layout_height="50dp">
 
                             <LinearLayout
                                 android:layout_marginLeft="30dp"
@@ -1251,7 +1251,7 @@
                         android:gravity="center"
                         android:orientation="horizontal"
                         android:layout_width="match_parent"
-                        android:layout_height="60dp">
+                        android:layout_height="50dp">
 
                         <LinearLayout
                             android:layout_marginLeft="30dp"
@@ -1349,7 +1349,7 @@
                         android:gravity="center"
                         android:orientation="horizontal"
                         android:layout_width="match_parent"
-                        android:layout_height="60dp">
+                        android:layout_height="50dp">
 
                         <LinearLayout
                             android:layout_marginLeft="30dp"

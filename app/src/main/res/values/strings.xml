@@ -234,6 +234,7 @@
     <string name="emp_type">Type of Business</string>
     <string name="emp_count">No of Employee in company</string>
     <string name="salary_credit">Salary Credit Method</string>
+    <string name="area">area</string>
     <string name="cur_res_proof">Current residence address Proof</string>
     <string name="business_regi">Business Registration</string>
     <string name="perment_res_pincod">Permanent Residence Pincode</string>
@@ -580,7 +581,7 @@
     <string name="noa">Number of acres</string>
 
     <string name="ER_EG">Employment Rank and Employment Grade </string>
-    <string name="Own_house">Own House Condition </string>
+    <string name="Own_house">Own House Condition</string>
 
     <string name="app_pan_no">Applicant PAN No</string>
     <string name="co_app_pan_no"> Co Applicant PAN No</string>

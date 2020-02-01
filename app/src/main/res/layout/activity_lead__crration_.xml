@@ -7,13 +7,18 @@
     android:orientation="vertical"
     tools:context=".Step_Changes_Screen.Lead_Crration_Activity">
 
-
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
-
+            <ScrollView
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="0dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
             <LinearLayout
                 android:padding="15dp"
                 android:orientation="vertical"
@@ -32,14 +37,7 @@
                     app:spb_stateBackgroundColor="@color/colorAccent"
                     app:spb_maxStateNumber="four"/>
 
-                <ScrollView
-                    android:layout_weight="1"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp">
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical">
+
                     <LinearLayout
                         android:layout_marginTop="10dp"
                         android:padding="5dp"
@@ -305,14 +303,14 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent">
                             <LinearLayout
-                                android:id="@+id/Ly_age"
+                                android:id="@+id/Ly_email"
                                 android:orientation="horizontal"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content">
                                 <androidx.appcompat.widget.AppCompatTextView
                                     android:gravity="left"
                                     android:layout_marginLeft="2dp"
-                                    android:id="@+id/age"
+                                    android:id="@+id/email"
                                     android:layout_width="wrap_content"
                                     style="@style/LorgeText2"
                                     android:textColor="@color/colorPrimaryDark"
@@ -320,14 +318,14 @@
                                     android:hint="6"
                                     android:layout_height="wrap_content" />
                                 <androidx.appcompat.widget.AppCompatTextView
-                                    android:id="@+id/age1"
+                                    android:id="@+id/email1"
                                     android:gravity="left"
                                     android:layout_marginLeft="2dp"
                                     android:layout_width="match_parent"
                                     style="@style/LorgeText2"
                                     android:textColor="@color/colorPrimaryDark"
                                     android:textColorHint="@color/colorPrimaryDark"
-                                    android:hint="Age"
+                                    android:hint="Email"
                                     android:layout_height="wrap_content" />
                             </LinearLayout>
                             <LinearLayout
@@ -335,9 +333,9 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent">
                                 <androidx.appcompat.widget.AppCompatEditText
-                                    android:id="@+id/age_edite_txt"
+                                    android:id="@+id/email_edite_txt"
                                     android:textSize="16sp"
-                                    android:inputType="number"
+                                    android:inputType="textEmailAddress"
                                     android:textColor="@color/colorPrimaryDark"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"/>
@@ -565,8 +563,7 @@
 
 
                     </LinearLayout>
-                </LinearLayout>
-                </ScrollView>
+
 
                 <LinearLayout
                     android:layout_marginTop="10dp"
@@ -594,6 +591,8 @@
                 </LinearLayout>
 
             </LinearLayout>
+            </LinearLayout>
+            </ScrollView>
         </LinearLayout>
 
 

@@ -46,7 +46,7 @@
             android:gravity="center"
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="60dp">
+            android:layout_height="50dp">
 
             <LinearLayout
                 android:layout_marginLeft="30dp"
@@ -99,7 +99,7 @@
                 android:gravity="center"
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="60dp">
+                android:layout_height="50dp">
 
                 <LinearLayout
                     android:layout_marginLeft="30dp"
@@ -201,7 +201,7 @@
                 android:gravity="center"
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="60dp">
+                android:layout_height="50dp">
 
                 <LinearLayout
                     android:layout_marginLeft="30dp"
@@ -296,7 +296,7 @@
                 android:gravity="center"
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="60dp">
+                android:layout_height="50dp">
 
                 <LinearLayout
                     android:id="@+id/self_frm_what_crop_ly"
@@ -787,7 +787,7 @@
                 android:gravity="center"
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="60dp">
+                android:layout_height="50dp">
 
                 <LinearLayout
                     android:layout_marginLeft="30dp"
@@ -881,7 +881,7 @@
                     android:gravity="center"
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
-                    android:layout_height="60dp">
+                    android:layout_height="50dp">
 
                     <LinearLayout
                         android:layout_marginLeft="30dp"
@@ -1002,7 +1002,7 @@
                     android:gravity="center"
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
-                    android:layout_height="60dp">
+                    android:layout_height="50dp">
 
                     <LinearLayout
                         android:layout_marginLeft="30dp"
@@ -1265,7 +1265,7 @@
                     android:gravity="center"
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
-                    android:layout_height="60dp">
+                    android:layout_height="50dp">
 
                     <LinearLayout
                         android:layout_marginLeft="30dp"

@@ -60,6 +60,7 @@ import dmax.dialog.SpotsDialog;
 import in.loanwiser.partnerapp.Multi_select_checkbox.Multi_Select_checkbox;
 import in.loanwiser.partnerapp.NumberTextWatcher;
 import in.loanwiser.partnerapp.PartnerActivitys.Add_Applicant;
+import in.loanwiser.partnerapp.PartnerActivitys.Applicant_Details_Activity;
 import in.loanwiser.partnerapp.PartnerActivitys.IncomeProofPOJO;
 import in.loanwiser.partnerapp.R;
 import in.loanwiser.partnerapp.SimpleActivity;
@@ -70,8 +71,8 @@ public class Viability_Check_PL extends SimpleActivity {
     AppCompatButton lead_viy_step2;
 
     private Spinner spinner_residence_type,spinner_employe_id,spinn_salary_crt_mtd,
-            spinner_salary_proof,has_pan_card_spnr,Other_family_income_spnr;
-    LinearLayout residence_type,residence_live,pan_card_available,other_earning_avbl;
+            spinner_salary_proof,has_pan_card_spnr,Other_family_income_spnr,spinn_area,res_spinn_area;
+    LinearLayout residence_type,residence_live,pan_card_available,other_earning_avbl,other_family_mem,asstes_own;
     RadioGroup has_pan_card,applicant_family_OEM;
     RadioButton yes_pan,no_pan,other__OEM_family_yes,other_OEM_family_no;
     AppCompatTextView age,age1,pan_number_txt,pan_number_txt1,Pan_number_txt,Pan_number1_txt,
@@ -81,7 +82,8 @@ public class Viability_Check_PL extends SimpleActivity {
                      cmp_pincode_txt,cmp_pincode_txt1,txt_residence_pincode,txt_residence_pincode1,txt_residence_type,
                     txt_residence_type1,Lives_in_current_txt,Lives_in_current_txt1,any_other_family_member_txt,
                       any_other_family_member_txt1,family_member_name_txt,family_member_name_txt1,family_member_income_txt,
-            family_member_income_txt1,monthly_afr_emi_txt,monthly_afr_emi_txt1,salary_proof_edit_txt_pl,assets_owned_BL;
+            family_member_income_txt1,monthly_afr_emi_txt,monthly_afr_emi_txt1,salary_proof_edit_txt_pl,assets_owned_BL,
+            assets_owned_txt,area_txt,area_txt1,res_area_txt,res_area_txt1;
 
     AppCompatEditText age_edite_txt,pan_number_edit_txt,occupation_edit_txt,monthly_net_sal_edit_txt,
                          experience_in_current_cmpy,total_experience_edit_txt
@@ -96,15 +98,18 @@ public class Viability_Check_PL extends SimpleActivity {
     JSONArray Residence_ownership_ar,Salary_method_ar,Salary_proof_ar,employee_id_ar,have_pan_ar,
                     other_earning_ar,Property_Type,Assets_own;
     String[] SPINNERLIST;
-    String[] SALARY_Method,Salary_Proof,Residence_Type_SA,Employe_ID_SA,PAN_ID_SA,Other_Earning_SA,Pincode_SA;
+    String[] SALARY_Method,Salary_Proof,Residence_Type_SA,Employe_ID_SA,PAN_ID_SA,
+            Other_Earning_SA,Pincode_SA,Area;
 
     ArrayAdapter<String> Salary_Adapter,Salary_proof_Adapter,Residence_Adapter,Employee_ID_Adapter,
-            PAN_ID_Adapter,Other_Earning_Adapter,Pincode_Adapter;
+            PAN_ID_Adapter,Other_Earning_Adapter,Pincode_Adapter,A_Area;
 
     String String_value_Age,ST_occupation_edit_txt,St_monthly_net_sal_edit_txt,
             ST_experience_in_current_cmpy,ST_total_experience_edit_txt,
             ST_company_pincode_txt,ST_residence_pincode1_edit_txt,
-            ST_current_residence_edit_txt,ST_monthly_afr_emi_amt_edit_txt,result;
+            ST_current_residence_edit_txt,ST_monthly_afr_emi_amt_edit_txt,result,
+            company_area,company_area_district_id,company_area_state_id,
+            res_company_area,res_company_area_district_id,res_company_area_state_id;
 
     private String tag_json_obj = "jobj_req", tag_json_arry = "jarray_req";
 
@@ -138,14 +143,19 @@ public class Viability_Check_PL extends SimpleActivity {
 
         Assets_myList_values = (ArrayList<String>) getIntent().getSerializableExtra("select_lid_id");
 
-       /* lead_viy_step2.setOnClickListener(new View.OnClickListener() {
+        lead_viy_step2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(Viability_Check_PL.this, Eligibility_Check_PL.class);
                 startActivity(intent);
                 finish();
             }
-        });*/
+        });
+
+        Log.e("viability check Pl ","Personal Loan");
+      /* monthly_sal_txt,salery_credite_method_txt,Exp_in_current_txt,total_workexperiecnce_txt,cmp_pincode_txt,
+        txt_residence_pincode,txt_residence_type,Lives_in_current_txt,any_other_family_member_txt,family_member_name_txt
+        assets_owned_txt*/
 
         myList_values = (ArrayList<String>) getIntent().getSerializableExtra("select_lid_id");
 
@@ -186,16 +196,26 @@ public class Viability_Check_PL extends SimpleActivity {
         spinner_salary_proof = (Spinner) findViewById(R.id.spinner_salary_proof);
         has_pan_card_spnr = (Spinner) findViewById(R.id.has_pan_card_spnr);
         Other_family_income_spnr = (Spinner) findViewById(R.id.Other_family_income_spnr);
+        spinn_area = (Spinner) findViewById(R.id.spinn_area);
+        res_spinn_area = (Spinner) findViewById(R.id.res_spinn_area);
 
         residence_type = (LinearLayout) findViewById(R.id.residence_type);
         residence_live = (LinearLayout) findViewById(R.id.residence_live);
         pan_card_available = (LinearLayout) findViewById(R.id.pan_card_available);
         other_earning_avbl = (LinearLayout) findViewById(R.id.other_earning_avbl);
+        other_family_mem = (LinearLayout) findViewById(R.id.other_family_mem);
+        asstes_own = (LinearLayout) findViewById(R.id.asstes_own);
         residence_type.setVisibility(View.VISIBLE);
 
 
         age = (AppCompatTextView) findViewById(R.id.age);
         age1 = (AppCompatTextView) findViewById(R.id.age1);
+
+        area_txt = (AppCompatTextView) findViewById(R.id.area_txt);
+        area_txt1 = (AppCompatTextView) findViewById(R.id.area_txt1);
+        res_area_txt = (AppCompatTextView) findViewById(R.id.res_area_txt);
+        res_area_txt1 = (AppCompatTextView) findViewById(R.id.res_area_txt1);
+
         pan_number_txt = (AppCompatTextView) findViewById(R.id.pan_number_txt);
         pan_number_txt1 = (AppCompatTextView) findViewById(R.id.pan_number_txt1);
         occupation_txt = (AppCompatTextView) findViewById(R.id.occupation_txt);
@@ -224,6 +244,7 @@ public class Viability_Check_PL extends SimpleActivity {
         any_other_family_member_txt1 = (AppCompatTextView) findViewById(R.id.any_other_family_member_txt1);
         family_member_name_txt = (AppCompatTextView) findViewById(R.id.family_member_name_txt);
         family_member_name_txt1 = (AppCompatTextView) findViewById(R.id.family_member_name_txt1);
+        assets_owned_txt = (AppCompatTextView) findViewById(R.id.assets_owned_txt);
         family_member_income_txt = (AppCompatTextView) findViewById(R.id.family_member_income_txt);
         family_member_income_txt1 = (AppCompatTextView) findViewById(R.id.family_member_income_txt1);
         monthly_afr_emi_txt = (AppCompatTextView) findViewById(R.id.monthly_afr_emi_txt);
@@ -284,6 +305,7 @@ public class Viability_Check_PL extends SimpleActivity {
         any_other_family_member_txt1.setTypeface(font);
         family_member_name_txt.setTypeface(font);
         family_member_name_txt1.setTypeface(font);
+        assets_owned_txt.setTypeface(font);
         family_member_income_txt.setTypeface(font);
         family_member_income_txt1.setTypeface(font);
         monthly_afr_emi_txt.setTypeface(font);
@@ -302,6 +324,8 @@ public class Viability_Check_PL extends SimpleActivity {
         family_member_name_edit_txt.setTypeface(font);
         family_member_income_edit_txt.setTypeface(font);
         monthly_afr_emi_amt_edit_txt.setTypeface(font);
+        res_area_txt.setTypeface(font);
+        res_area_txt1.setTypeface(font);
 
     }
 
@@ -359,9 +383,9 @@ public class Viability_Check_PL extends SimpleActivity {
 
                 salary_proof_list = new StringBuffer();
 
-             /*   if (!Validate_age()) {
+                if (!Validate_age()) {
                     return;
-                }*/
+                }
 
               /*  if(PAN_id.equals("0"))
                 {
@@ -417,11 +441,15 @@ public class Viability_Check_PL extends SimpleActivity {
 
                                 if(residence_id.equals("1"))
                                 {
+
+                                    Intent intent = new Intent(Viability_Check_PL.this, Eligibility_Check_PL.class);
+                                    startActivity(intent);
+                                    finish();
                                    /* if (!Validate_Monthly_Emi()) {
                                         return;
                                     }*/
 
-                                   if(other_earning_id.equals("2"))
+                                 /*  if(other_earning_id.equals("2"))
                                    {
                                        Toast.makeText(context,"Please Select other earning member",Toast.LENGTH_SHORT).show();
 
@@ -446,7 +474,7 @@ public class Viability_Check_PL extends SimpleActivity {
                                        startActivity(intent);
                                        finish();
                                    }
-
+                                    */
                                 }else if(residence_id.equals("2"))
                                 {
 
@@ -454,7 +482,11 @@ public class Viability_Check_PL extends SimpleActivity {
                                         return;
                                     }
 
-                                    if(other_earning_id.equals("2"))
+                                    Intent intent = new Intent(Viability_Check_PL.this, Eligibility_Check_PL.class);
+                                    startActivity(intent);
+                                    finish();
+
+                                    /*if(other_earning_id.equals("2"))
                                     {
                                         Toast.makeText(context,"Please Select other earning member",Toast.LENGTH_SHORT).show();
 
@@ -470,20 +502,21 @@ public class Viability_Check_PL extends SimpleActivity {
                                         Intent intent = new Intent(Viability_Check_PL.this, Eligibility_Check_PL.class);
                                         startActivity(intent);
                                         finish();
-                                   /* if (!Validate_Monthly_Emi()) {
+                                   *//* if (!Validate_Monthly_Emi()) {
                                         return;
-                                    }*/
+                                    }*//*
                                       //  lead_viability();
                                     }else
                                     {
                                         Intent intent = new Intent(Viability_Check_PL.this, Eligibility_Check_PL.class);
                                         startActivity(intent);
                                         finish();
-                                    }
+                                    }*/
                                 }
 
                             }
                         }
+
                   /*  }*/
                     ////
                /* }*/
@@ -496,7 +529,7 @@ public class Viability_Check_PL extends SimpleActivity {
     private boolean Validate_age() {
 
         if (age_edite_txt.length() < 1 || age_edite_txt.length() > 3) {
-            age_edite_txt.setError(getText(R.string.age_vali));
+            age_edite_txt.setError(getText(R.string.err_curent));
             age_edite_txt.requestFocus();
             return false;
 
@@ -521,7 +554,7 @@ public class Viability_Check_PL extends SimpleActivity {
     private boolean Validate_net_income() {
 
         if (monthly_net_sal_edit_txt.length() < 5) {
-            monthly_net_sal_edit_txt.setError(getText(R.string.net_salary));
+            monthly_net_sal_edit_txt.setError(getText(R.string.err_curent));
             monthly_net_sal_edit_txt.requestFocus();
             return false;
         } else {
@@ -532,7 +565,7 @@ public class Viability_Check_PL extends SimpleActivity {
 
     private boolean Validate_experience(){
         if (experience_in_current_cmpy.getText().toString().trim().isEmpty()) {
-            experience_in_current_cmpy.setError(getText(R.string.error_experience));
+            experience_in_current_cmpy.setError(getText(R.string.err_curent));
             experience_in_current_cmpy.requestFocus();
             return false;
         } else {
@@ -559,7 +592,7 @@ public class Viability_Check_PL extends SimpleActivity {
 
     private boolean Validate_total_experience(){
         if (total_experience_edit_txt.getText().toString().trim().isEmpty()) {
-            total_experience_edit_txt.setError(getText(R.string.error_total_experience));
+            total_experience_edit_txt.setError(getText(R.string.err_curent));
             total_experience_edit_txt.requestFocus();
             return false;
         } else {
@@ -571,7 +604,7 @@ public class Viability_Check_PL extends SimpleActivity {
 
     private boolean Company_locationpincode1(){
         if (company_pincode_txt.getText().toString().isEmpty()) {
-            company_pincode_txt.setError(getText(R.string.error_pincode));
+            company_pincode_txt.setError(getText(R.string.err_curent));
             company_pincode_txt.requestFocus();
             return false;
         } else {
@@ -664,7 +697,7 @@ public class Viability_Check_PL extends SimpleActivity {
                             Residence_Array(Residence_ownership_ar);
                             Employee_ID_Array(employee_id_ar);
                             HAVE_PAN_Card(have_pan_ar);
-                            Other_Earning(other_earning_ar);
+                           // Other_Earning(other_earning_ar);
 
 
                             Log.e("Property_Type",String.valueOf(other_earning_ar));
@@ -799,12 +832,52 @@ public class Viability_Check_PL extends SimpleActivity {
                         if(residence_id.equals("2") )
                         {
                             monthly_afr_emi_txt.setText("14");
+
                             residence_live.setVisibility(View.VISIBLE);
+
+                            other_family_mem.setVisibility(View.GONE);
+                            asstes_own.setVisibility(View.GONE);
+
+                            other_earning_avbl.setVisibility(View.GONE);
+
+                            age.setText("1");
+                            monthly_sal_txt.setText("2");
+                            salery_credite_method_txt.setText("3");
+                            Exp_in_current_txt.setText("4");
+                            total_workexperiecnce_txt.setText("5");
+                            cmp_pincode_txt.setText("6");
+                            area_txt.setText("7");
+                            txt_residence_pincode.setText("8");
+                            res_area_txt.setText("9");
+                            txt_residence_type.setText("10");
+                            Lives_in_current_txt.setText("11");
+                            any_other_family_member_txt.setText("9");
+
+                            assets_owned_txt.setText("10");
+
 
                         }else
                         {
-                            monthly_afr_emi_txt.setText("13");
+
                             residence_live.setVisibility(View.GONE);
+
+                            other_family_mem.setVisibility(View.GONE);
+                            asstes_own.setVisibility(View.GONE);
+
+                            other_earning_avbl.setVisibility(View.GONE);
+
+                            age.setText("1");
+                            monthly_sal_txt.setText("2");
+                            salery_credite_method_txt.setText("3");
+                            Exp_in_current_txt.setText("4");
+                            total_workexperiecnce_txt.setText("5");
+                            cmp_pincode_txt.setText("6");
+                            area_txt.setText("7");
+                            txt_residence_pincode.setText("8");
+                            res_area_txt.setText("9");
+                            txt_residence_type.setText("10");
+
+
                         }
 
                     } catch (JSONException e) {
@@ -987,12 +1060,61 @@ public class Viability_Check_PL extends SimpleActivity {
                         Log.d("Salary_id", other_earning_id);
                         Log.d("Salary_Value", other_earning_value);
 
+                        monthly_sal_txt.setText("1");
+                        salery_credite_method_txt.setText("2");
+                        Exp_in_current_txt.setText("3");
+                        total_workexperiecnce_txt.setText("4");
+                        cmp_pincode_txt.setText("5");
+                        txt_residence_pincode.setText("6");
+                        txt_residence_type.setText("7");
+                        Lives_in_current_txt.setText("8");
+                        any_other_family_member_txt.setText("9");
+                        family_member_name_txt.setText("10");
+                        family_member_income_txt.setText("11");
+                        assets_owned_txt.setText("12");
+
                         if(other_earning_id.equals("1"))
                         {
-                            other_earning_avbl.setVisibility(View.VISIBLE);
+                            other_family_mem.setVisibility(View.GONE);
+                            asstes_own.setVisibility(View.GONE);
+
+                            other_earning_avbl.setVisibility(View.GONE);
+
+                            monthly_sal_txt.setText("1");
+                            salery_credite_method_txt.setText("2");
+                            Exp_in_current_txt.setText("3");
+                            total_workexperiecnce_txt.setText("4");
+                            cmp_pincode_txt.setText("5");
+                            txt_residence_pincode.setText("6");
+                            txt_residence_type.setText("7");
+                            Lives_in_current_txt.setText("8");
+                            any_other_family_member_txt.setText("9");
+                            family_member_name_txt.setText("10");
+                            family_member_income_txt.setText("11");
+                            assets_owned_txt.setText("12");
                         }else
                         {
+                            other_family_mem.setVisibility(View.GONE);
                             other_earning_avbl.setVisibility(View.GONE);
+                            asstes_own.setVisibility(View.GONE);
+                            monthly_sal_txt.setText("1");
+                            salery_credite_method_txt.setText("2");
+                            Exp_in_current_txt.setText("3");
+                            total_workexperiecnce_txt.setText("4");
+                            cmp_pincode_txt.setText("5");
+                            txt_residence_pincode.setText("6");
+                            txt_residence_type.setText("7");
+                            Lives_in_current_txt.setText("8");
+
+                            if(residence_id.equals("0"))
+                            {
+                                any_other_family_member_txt.setText("8");
+                                assets_owned_txt.setText("9");
+                            }else
+                            {
+                                any_other_family_member_txt.setText("9");
+                                assets_owned_txt.setText("10");
+                            }
                         }
 
 
@@ -1216,7 +1338,7 @@ public class Viability_Check_PL extends SimpleActivity {
            // company_pincode_txt.setThreshold(2);
           //  company_pincode_txt.setAdapter(Pincode_Adapter);
 
-            String workpincode = residence_pincode1_edit_txt.getText().toString();
+            String workpincode = company_pincode_txt.getText().toString();
             String workpincode1 = residence_pincode1_edit_txt.getText().toString();
 
             if(workpincode.length()> 2){
@@ -1238,6 +1360,14 @@ public class Viability_Check_PL extends SimpleActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
                 String code = (String)adapterView.getItemAtPosition(i);
+
+                if(code.length()==6){
+                    GET_AERA_POST(code);
+                }else {
+                    Objs.a.showToast(context,"Please Select Pin code");
+                }
+
+                imm.hideSoftInputFromWindow(company_pincode_txt.getWindowToken(), 0);
             }
         });
 
@@ -1247,11 +1377,169 @@ public class Viability_Check_PL extends SimpleActivity {
 
                 String code = (String)adapterView.getItemAtPosition(i);
 
+                if(code.length()==6){
+                    GET_AERA_POST(code);
+                }else {
+                    Objs.a.showToast(context,"Please Select Pin code");
+                }
+
+                imm.hideSoftInputFromWindow(company_pincode_txt.getWindowToken(), 0);
+
             }
         });
 
 
     }
+
+    private void GET_AERA_POST(String code) {
+        progressDialog.show();
+        JSONObject J =new JSONObject();
+        try {
+            J.put("pincode", code);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, Urls.GET_AERA_POST, J,
+                new Response.Listener<JSONObject>() {
+
+                    @Override
+                    public void onResponse(JSONObject object) {
+                        try {
+
+                            if (object.getString(Params.status).equals("success")) {
+                                JSONArray response = object.getJSONArray("response");
+                                //    Log.e("Pincode", String.valueOf(response));
+                                setArea(response);
+                            }
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        progressDialog.dismiss();
+                    }
+                }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                VolleyLog.d("TAG", "Error: " + error.getMessage());
+                progressDialog.dismiss();
+            }
+        }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("Content-Type", "application/json");
+                return headers;
+            }
+        };
+        AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
+
+    }
+
+
+    private void setArea(final JSONArray ja) throws JSONException {
+
+        Area = new String[ja.length()];
+        for (int i=0;i<ja.length();i++){
+            JSONObject J =  ja.getJSONObject(i);
+            Area[i] = J.getString("area");
+            final List<String> area_list = new ArrayList<>(Arrays.asList(Area));
+            A_Area = new ArrayAdapter<String>(getApplicationContext(), R.layout.view_spinner_item, area_list){
+                public View getView(int position, View convertView, ViewGroup parent) {
+                    font = Typeface.createFromAsset(getApplicationContext().getAssets(),"Lato-Regular.ttf");
+                    TextView v = (TextView) super.getView(position, convertView, parent);
+                    v.setTypeface(font);
+                    return v;
+                }
+
+                public View getDropDownView(int position, View convertView, ViewGroup parent) {
+                    TextView v = (TextView) super.getView(position, convertView, parent);
+                    v.setTypeface(font);
+                    return v;
+                }
+            };
+
+            String workpincode = company_pincode_txt.getText().toString();
+            String workpincode1 = residence_pincode1_edit_txt.getText().toString();
+
+            if(workpincode.length()> 2){
+                A_Area.setDropDownViewResource(R.layout.view_spinner_item);
+                spinn_area.setAdapter(A_Area);
+                spinn_area.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                    @Override
+                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                        try {
+                            //   work_pincode_area = ja.getJSONObject(position).getString("id");
+                            company_area = ja.getJSONObject(position).getString("id");
+                            company_area_district_id = ja.getJSONObject(position).getString("district_id");
+                            company_area_state_id = ja.getJSONObject(position).getString("state_id");
+                            // Objs.a.showToast(getContext(),work_pincode_area);
+                            ///  String a = work_pincode_area +"   "+work_pincode_district_id +"   "+work_pincode_state_id;
+
+                            //   Log.e("Drop Down",a);
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onNothingSelected(AdapterView<?> parent) {
+
+                    }
+                });
+                spinn_area.setOnTouchListener(new View.OnTouchListener() {
+                    @Override
+                    public boolean onTouch(View view, MotionEvent motionEvent) {
+                        // imm.hideSoftInputFromWindow(edt_buyer_address.getWindowToken(), 0);
+                        return false;
+                    }
+                });
+            }
+            if(workpincode1.length()> 2){
+
+            } A_Area.setDropDownViewResource(R.layout.view_spinner_item);
+            res_spinn_area.setAdapter(A_Area);
+            res_spinn_area.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                    try {
+
+
+                        res_company_area = ja.getJSONObject(position).getString("id");
+                        res_company_area_district_id = ja.getJSONObject(position).getString("district_id");
+                        res_company_area_state_id = ja.getJSONObject(position).getString("state_id");
+                        // Objs.a.showToast(getContext(),work_pincode_area);
+                        ///  String a = work_pincode_area +"   "+work_pincode_district_id +"   "+work_pincode_state_id;
+
+                        //   Log.e("Drop Down",a);
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+
+                }
+            });
+            res_spinn_area.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View view, MotionEvent motionEvent) {
+                    // imm.hideSoftInputFromWindow(edt_buyer_address.getWindowToken(), 0);
+                    return false;
+                }
+            });
+
+
+        }
+
+    }
+
 
     private void lead_viability() {
 
@@ -1369,7 +1657,7 @@ public class Viability_Check_PL extends SimpleActivity {
     @Override
     public void onBackPressed() {
 
-        Objs.ac.StartActivity(mCon, Lead_Crration_Activity.class);
+        Objs.ac.StartActivity(mCon, Applicant_Details_Activity.class);
         finish();
         super.onBackPressed();
 

@@ -256,7 +256,7 @@ public class Viability_check_HL extends SimpleActivity {
 
         salary_mul_select = (LinearLayout) findViewById(R.id.salary_mul_select);
         salary_proof_edit_txt1 = (AppCompatTextView) findViewById(R.id.salary_proof_edit_txt);
-
+        Log.e("viability check Hl ","Secure Loan");
 
         business_proof_type_text = (AppCompatTextView) findViewById(R.id.business_proof_type_text);
 
