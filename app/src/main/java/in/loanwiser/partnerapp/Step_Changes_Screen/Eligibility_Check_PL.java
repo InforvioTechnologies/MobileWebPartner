@@ -79,11 +79,12 @@ public class Eligibility_Check_PL extends SimpleActivity {
             permanent_res_pincode_txt1,permenant_res_txt,permenant_res_txt1,
             own_hose_relative_txt,own_hose_relative_txt1,rel_full_address_txt,
             rel_full_address_txt1,other_income_details_txt,other_income_txt,other_income_txt1,
-            is_gst_reflect_txt,is_gst_reflect_txt1,other_incom_amt_txt,other_incom_amt_txt1;
+            is_gst_reflect_txt,is_gst_reflect_txt1,other_incom_amt_txt,other_incom_amt_txt1,no_of_dependent,no_of_dependent1;
 
 
     AppCompatEditText company_name_edtxt,designation_in_company,no_of_emp_edtxt,
-                     rel_full_address_edtxt,other_incom_amt_edtxt;
+                     rel_full_address_edtxt,other_incom_amt_edtxt,no_of_dependent_edt_txt,
+            emi_amount_edit_txt,education_qualification_edit_txt;
     AutoCompleteTextView permanent_res_pincode_edtxt;
 
     Spinner spinner_cmp_type,employee_type_spnr,epf_spinner,current_res_spinner,perment_restype_spnr,
@@ -138,14 +139,14 @@ public class Eligibility_Check_PL extends SimpleActivity {
         epf_spinner = (Spinner) findViewById(R.id.epf_spinner);
         current_res_spinner = (Spinner) findViewById(R.id.current_res_spinner);
 
-        perment_restype_spnr = (Spinner) findViewById(R.id.perment_restype_spnr);
-        own_hose_relative_spinner = (Spinner) findViewById(R.id.own_hose_relative_spinner);
+      //  perment_restype_spnr = (Spinner) findViewById(R.id.perment_restype_spnr);
+      //  own_hose_relative_spinner = (Spinner) findViewById(R.id.own_hose_relative_spinner);
         spinn_other_income = (Spinner) findViewById(R.id.spinn_other_income);
         spinn_is_gst_reflect = (Spinner) findViewById(R.id.spinn_is_gst_reflect);
         has_pan_card_spnr = (Spinner) findViewById(R.id.has_pan_card_spnr);
         spinner_employe_id = (Spinner) findViewById(R.id.spinner_employe_id);
 
-        relative_if_rented_ly = (LinearLayout) findViewById(R.id.relative_if_rented_ly);
+       // relative_if_rented_ly = (LinearLayout) findViewById(R.id.relative_if_rented_ly);
        /* perment_restype_spnr,
                 permanent_res_type_spinner,spinn_other_income,spinn_is_gst_reflect;*/
         /* AppCompatTextView cmp_typ_txt,cmp_typ_txt1,Company_name,Company_name1,desg_nation_txt,
@@ -160,7 +161,9 @@ public class Eligibility_Check_PL extends SimpleActivity {
         AppCompatEditText company_name_edtxt,designation_in_company,no_of_emp_edtxt,
                      permanent_res_pincode_edtxt,rel_full_address_edtxt,other_incom_amt_edtxt;*/
 
-        cmp_typ_txt = (AppCompatTextView) findViewById(R.id.cmp_typ_txt);
+        no_of_dependent = (AppCompatTextView) findViewById(R.id.no_of_dependent);
+        no_of_dependent1 = (AppCompatTextView) findViewById(R.id.no_of_dependent1);
+            cmp_typ_txt = (AppCompatTextView) findViewById(R.id.cmp_typ_txt);
         cmp_typ_txt1 = (AppCompatTextView) findViewById(R.id.cmp_typ_txt1);
         Company_name = (AppCompatTextView) findViewById(R.id.Company_name);
         Company_name1 = (AppCompatTextView) findViewById(R.id.Company_name1);
@@ -175,14 +178,15 @@ public class Eligibility_Check_PL extends SimpleActivity {
         epf_txt1 = (AppCompatTextView) findViewById(R.id.epf_txt1);
         current_res_proof = (AppCompatTextView) findViewById(R.id.current_res_proof);
         current_res_proof1 = (AppCompatTextView) findViewById(R.id.current_res_proof1);
-        permanent_res_pincode_txt = (AppCompatTextView) findViewById(R.id.permanent_res_pincode_txt);
-        permanent_res_pincode_txt1 = (AppCompatTextView) findViewById(R.id.permanent_res_pincode_txt1);
-        permenant_res_txt = (AppCompatTextView) findViewById(R.id.permenant_res_txt);
+      //  permanent_res_pincode_txt = (AppCompatTextView) findViewById(R.id.permanent_res_pincode_txt);
+       // permanent_res_pincode_txt1 = (AppCompatTextView) findViewById(R.id.permanent_res_pincode_txt1);
+
+       /* permenant_res_txt = (AppCompatTextView) findViewById(R.id.permenant_res_txt);
         permenant_res_txt1 = (AppCompatTextView) findViewById(R.id.permenant_res_txt1);
         own_hose_relative_txt = (AppCompatTextView) findViewById(R.id.own_hose_relative_txt);
         own_hose_relative_txt1 = (AppCompatTextView) findViewById(R.id.own_hose_relative_txt1);
         rel_full_address_txt = (AppCompatTextView) findViewById(R.id.rel_full_address_txt);
-        rel_full_address_txt1 = (AppCompatTextView) findViewById(R.id.rel_full_address_txt1);
+        rel_full_address_txt1 = (AppCompatTextView) findViewById(R.id.rel_full_address_txt1);*/
         other_income_details_txt = (AppCompatTextView) findViewById(R.id.other_income_details_txt);
         other_income_txt = (AppCompatTextView) findViewById(R.id.other_income_txt);
         other_income_txt1 = (AppCompatTextView) findViewById(R.id.other_income_txt1);
@@ -191,11 +195,14 @@ public class Eligibility_Check_PL extends SimpleActivity {
         is_gst_reflect_txt = (AppCompatTextView) findViewById(R.id.is_gst_reflect_txt);
         is_gst_reflect_txt1 = (AppCompatTextView) findViewById(R.id.is_gst_reflect_txt1);
 
-        company_name_edtxt = (AppCompatEditText) findViewById(R.id.company_name_edtxt);
+        no_of_dependent_edt_txt = (AppCompatEditText) findViewById(R.id.no_of_dependent_edt_txt);
+        education_qualification_edit_txt = (AppCompatEditText) findViewById(R.id.education_qualification_edit_txt);
+
+            company_name_edtxt = (AppCompatEditText) findViewById(R.id.company_name_edtxt);
         designation_in_company = (AppCompatEditText) findViewById(R.id.designation_in_company);
         no_of_emp_edtxt = (AppCompatEditText) findViewById(R.id.no_of_emp_edtxt);
-        permanent_res_pincode_edtxt = (AutoCompleteTextView) findViewById(R.id.permanent_res_pincode_edtxt);
-        rel_full_address_edtxt = (AppCompatEditText) findViewById(R.id.rel_full_address_edtxt);
+      //  permanent_res_pincode_edtxt = (AutoCompleteTextView) findViewById(R.id.permanent_res_pincode_edtxt);
+        emi_amount_edit_txt = (AppCompatEditText) findViewById(R.id.emi_amount_edit_txt);
         other_incom_amt_edtxt = (AppCompatEditText) findViewById(R.id.other_incom_amt_edtxt);
 
     }
@@ -219,15 +226,16 @@ public class Eligibility_Check_PL extends SimpleActivity {
         epf_txt1.setTypeface(font);
         current_res_proof.setTypeface(font);
         current_res_proof1.setTypeface(font);
-        permanent_res_pincode_txt.setTypeface(font);
-        permanent_res_pincode_txt1.setTypeface(font);
-        permenant_res_txt.setTypeface(font);
-        permenant_res_txt1.setTypeface(font);
-        own_hose_relative_txt.setTypeface(font);
+
+      /*  permanent_res_pincode_txt.setTypeface(font);
+        permanent_res_pincode_txt1.setTypeface(font);*/
+       // permenant_res_txt.setTypeface(font);
+        no_of_dependent_edt_txt.setTypeface(font);
+      /*  own_hose_relative_txt.setTypeface(font);
 
         own_hose_relative_txt1.setTypeface(font);
         rel_full_address_txt.setTypeface(font);
-        rel_full_address_txt1.setTypeface(font);
+        rel_full_address_txt1.setTypeface(font);*/
         other_income_details_txt.setTypeface(font);
         other_income_txt.setTypeface(font);
         other_income_txt1.setTypeface(font);
@@ -238,8 +246,8 @@ public class Eligibility_Check_PL extends SimpleActivity {
         company_name_edtxt.setTypeface(font);
         designation_in_company.setTypeface(font);
         no_of_emp_edtxt.setTypeface(font);
-        permanent_res_pincode_edtxt.setTypeface(font);
-        rel_full_address_edtxt.setTypeface(font);
+      //  permanent_res_pincode_edtxt.setTypeface(font);
+        education_qualification_edit_txt.setTypeface(font);
         other_incom_amt_edtxt.setTypeface(font);
 
     }
@@ -248,7 +256,7 @@ public class Eligibility_Check_PL extends SimpleActivity {
      {
 
 
-         permanent_res_pincode_edtxt.addTextChangedListener(new TextWatcher() {
+       /*  permanent_res_pincode_edtxt.addTextChangedListener(new TextWatcher() {
              @Override
              public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                  Log.e("hi","hi11");
@@ -269,72 +277,76 @@ public class Eligibility_Check_PL extends SimpleActivity {
              public void afterTextChanged(Editable editable) {
 
              }
-         });
+         });*/
 
          lead_viy_step2.setOnClickListener(new View.OnClickListener() {
              @Override
              public void onClick(View view) {
 
-                 if(Company_id.equals("0"))
+                 if(PAN_id.equals("0"))
                  {
-                      Toast.makeText(mCon, "Please Select Company Type", Toast.LENGTH_SHORT).show();
+                      Toast.makeText(mCon, "Please Select Has PAN ?", Toast.LENGTH_SHORT).show();
                  }else
                  {
-                     if (!Validate_Company_Name()) {
-                         return;
-                     }
 
-                     if (!Validate_Designation_in_company()) {
-                         return;
-                     }
-
-                     if(Emp_type_id.equals("0"))
+                     if(Employee_id.equals("0"))
                      {
-                         Toast.makeText(mCon, "Please Select Type of Employee", Toast.LENGTH_SHORT).show();
-                     }else {
+                         Toast.makeText(mCon, "Please Select Have Employee id ?", Toast.LENGTH_SHORT).show();
+
+                     }else
+                     {
+                         if(Company_id.equals("0"))
+                         {
+                             Toast.makeText(mCon, "Please Select Company Type", Toast.LENGTH_SHORT).show();
+
+                         }else
+                         {
+                             if (!Validate_Company_Name()) {
+                                 return;
+                             }
+
+                             if (!Validate_Designation_in_company()) {
+                                 return;
+                             }
+
+                             if(Emp_type_id.equals("0"))
+                             {
+                                 Toast.makeText(mCon, "Please Select Type of Employee", Toast.LENGTH_SHORT).show();
+                             }else {
 
 
-                         if (!Validate_No_of_Employee()) {
-                             return;
-                         }
-
-                         if (epf_id.equals("0")) {
-                             Toast.makeText(mCon, "Please Select Epf detected", Toast.LENGTH_SHORT).show();
-
-                         } else {
-                             if (current_ress_id.equals("0")) {
-                                 Toast.makeText(mCon, "Select Current residence Proof", Toast.LENGTH_SHORT).show();
-                             } else {
-                                 if (!Validate_Permanent_residence_pincode()) {
+                                 if (!Validate_No_of_Employee()) {
                                      return;
                                  }
-                                 if (permanent_res_id.equals("0")) {
-                                     Toast.makeText(mCon, "Please Select Permanent residence Type", Toast.LENGTH_SHORT).show();
 
-                                 }else if(permanent_res_id.equals("2")) {
+                                 if (epf_id.equals("0")) {
+                                     Toast.makeText(mCon, "Please Select Epf detected", Toast.LENGTH_SHORT).show();
 
-                                     if (Own_house_rela_id.equals("0")) {
-                                         Toast.makeText(mCon, "Please Select own house of blood relative", Toast.LENGTH_SHORT).show();
-
+                                 } else {
+                                     if (current_ress_id.equals("0")) {
+                                         Toast.makeText(mCon, "Select Current residence Proof", Toast.LENGTH_SHORT).show();
                                      } else {
 
-                                         if (!Validate_full_addres_relative()) {
+                                         if (!valiat_no_of_dependent()) {
+                                             return;
+                                         }
+
+                                         if (!valiat_education_qualification()) {
+                                             return;
+                                         }
+                                         if (!Validate_emi_amount()) {
                                              return;
                                          }
 
                                          other_varidation();
 
                                      }
-
-                                 }else if(permanent_res_id.equals("1"))
-                                 {
-
-                                     other_varidation();
                                  }
-
                              }
                          }
+
                      }
+
                  }
 
              }
@@ -361,7 +373,9 @@ public class Eligibility_Check_PL extends SimpleActivity {
 
              }else
              {
-                 lead_viability();
+                 Intent intent = new Intent(Eligibility_Check_PL.this, Credite_report_details.class);
+                 startActivity(intent);
+                 finish();
              }
 
          }
@@ -391,10 +405,10 @@ public class Eligibility_Check_PL extends SimpleActivity {
         return true;
     }
 
-    private boolean Validate_Permanent_residence_pincode(){
-        if (permanent_res_pincode_edtxt.getText().toString().trim().isEmpty()) {
-            permanent_res_pincode_edtxt.setError(getText(R.string.error_no_emp));
-            permanent_res_pincode_edtxt.requestFocus();
+    private boolean valiat_no_of_dependent(){
+        if (no_of_dependent_edt_txt.getText().toString().trim().isEmpty()) {
+            no_of_dependent_edt_txt.setError(getText(R.string.err_curent));
+            no_of_dependent_edt_txt.requestFocus();
             return false;
         } else {
 
@@ -403,10 +417,10 @@ public class Eligibility_Check_PL extends SimpleActivity {
         return true;
     }
 
-    private boolean Validate_full_addres_relative(){
-        if (rel_full_address_txt1.getText().toString().trim().isEmpty()) {
-            rel_full_address_txt1.setError(getText(R.string.error_full_address));
-            rel_full_address_txt1.requestFocus();
+    private boolean valiat_education_qualification(){
+        if (education_qualification_edit_txt.getText().toString().trim().isEmpty()) {
+            education_qualification_edit_txt.setError(getText(R.string.err_curent));
+            education_qualification_edit_txt.requestFocus();
             return false;
         } else {
 
@@ -439,6 +453,19 @@ public class Eligibility_Check_PL extends SimpleActivity {
 
         return true;
     }
+
+    private boolean Validate_emi_amount(){
+        if (emi_amount_edit_txt.getText().toString().trim().isEmpty()) {
+            emi_amount_edit_txt.setError(getText(R.string.err_curent));
+            emi_amount_edit_txt.requestFocus();
+            return false;
+        } else {
+
+        }
+
+        return true;
+    }
+
 
     private void GET_Pincode1(String code) {
         // progressDialog.show();
@@ -570,8 +597,8 @@ public class Eligibility_Check_PL extends SimpleActivity {
                             Type_of_Employee(Type_employee);
                             Current_res_Type(Current_Residence);
                             Epf_detedcted(epf_deduct);
-                            Permanent_res_type(permanent_adddress);
-                            Own_hous_relative(relation_own);
+                          //  Permanent_res_type(permanent_adddress);
+                          //  Own_hous_relative(relation_own);
                             Other_income_f(Other_income);
                             gst_reflect_f(gst_reflect);
 
@@ -821,8 +848,8 @@ public class Eligibility_Check_PL extends SimpleActivity {
                         Emp_type_id = Type_employee_ar.getJSONObject(position).getString("id");
                         Emp_type_Value = Type_employee_ar.getJSONObject(position).getString("value");
                         //CAT_ID = ja.getJSONObject(position).getString("category_id");
-                        Log.d("Company_id", Company_id);
-                        Log.d("Company_Value", Company_Value);
+                        Log.d("Company_id", Emp_type_id);
+                        Log.d("Company_Value", Emp_type_Value);
 
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -1218,10 +1245,10 @@ public class Eligibility_Check_PL extends SimpleActivity {
 
         S_company_name_edtxt = company_name_edtxt.getText().toString();
         S_no_of_emp_edtxt = no_of_emp_edtxt.getText().toString();
-        S_permanent_res_pincode_edtxt = permanent_res_pincode_edtxt.getText().toString();
+      //  S_permanent_res_pincode_edtxt = permanent_res_pincode_edtxt.getText().toString();
 
         S_experience_in_current_cmpy = designation_in_company.getText().toString();
-        S_rel_full_address_txt1 = rel_full_address_txt1.getText().toString();
+       // S_rel_full_address_txt1 = rel_full_address_txt1.getText().toString();
 
         S_other_incom_amt_edtxt = other_incom_amt_edtxt.getText().toString();
 

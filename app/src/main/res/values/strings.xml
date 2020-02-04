@@ -231,7 +231,7 @@
 
     <string name="des">Designation in Company</string>
     <string name="cmp_type">Company Type</string>
-    <string name="emp_type">Type of Business</string>
+    <string name="emp_type">Type of Employee</string>
     <string name="emp_count">No of Employee in company</string>
     <string name="salary_credit">Salary Credit Method</string>
     <string name="area">area</string>
@@ -650,6 +650,7 @@
 
 
     <string name="net_salary">Please Enter the valid amount</string>
+
     <string name="err_curent">This field is required</string>
     <string name="permanent_res_type">Permanent Residence Type</string>
     <string name="own_hous">Own house of any Blood Relative</string>

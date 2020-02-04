@@ -165,7 +165,7 @@ public class Viability_Check_BL extends SimpleActivity {
 
        // assets_owned_BL = (AppCompatTextView) findViewById(R.id.assets_owned_BL);
 
-
+        Log.e("viability check BL ","Businss Loan");
         UISCREEN();
         makeJsonObjReq1();
         Font();

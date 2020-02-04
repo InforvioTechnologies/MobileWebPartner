@@ -28,6 +28,7 @@ android {
                 storePassword "123123"
                 keyAlias "key0"
                 keyPassword "123123"
+
             }
         }
         buildTypes {

@@ -54,6 +54,7 @@ import java.util.Map;
 
 import adhoc.app.applibrary.Config.AppUtils.Objs;
 import adhoc.app.applibrary.Config.AppUtils.Params;
+import adhoc.app.applibrary.Config.AppUtils.Pref.Pref;
 import adhoc.app.applibrary.Config.AppUtils.Urls;
 import adhoc.app.applibrary.Config.AppUtils.VolleySignleton.AppController;
 import dmax.dialog.SpotsDialog;
@@ -71,8 +72,13 @@ public class Viability_Check_PL extends SimpleActivity {
     AppCompatButton lead_viy_step2;
 
     private Spinner spinner_residence_type,spinner_employe_id,spinn_salary_crt_mtd,
-            spinner_salary_proof,has_pan_card_spnr,Other_family_income_spnr,spinn_area,res_spinn_area;
-    LinearLayout residence_type,residence_live,pan_card_available,other_earning_avbl,other_family_mem,asstes_own;
+            spinner_salary_proof,has_pan_card_spnr,Other_family_income_spnr,spinn_area,res_spinn_area,
+            co_applicant_spinner,co_applicant_emp_spinner;
+
+
+
+    LinearLayout residence_type,residence_live,pan_card_available,other_earning_avbl,other_family_mem,asstes_own,
+            co_applicant_ly,co_applicant_emp_type,co_applicant_salaried_employed,co_applicant_self_employed;
     RadioGroup has_pan_card,applicant_family_OEM;
     RadioButton yes_pan,no_pan,other__OEM_family_yes,other_OEM_family_no;
     AppCompatTextView age,age1,pan_number_txt,pan_number_txt1,Pan_number_txt,Pan_number1_txt,
@@ -83,14 +89,28 @@ public class Viability_Check_PL extends SimpleActivity {
                     txt_residence_type1,Lives_in_current_txt,Lives_in_current_txt1,any_other_family_member_txt,
                       any_other_family_member_txt1,family_member_name_txt,family_member_name_txt1,family_member_income_txt,
             family_member_income_txt1,monthly_afr_emi_txt,monthly_afr_emi_txt1,salary_proof_edit_txt_pl,assets_owned_BL,
-            assets_owned_txt,area_txt,area_txt1,res_area_txt,res_area_txt1;
+            assets_owned_txt,area_txt,area_txt1,res_area_txt,res_area_txt1,do_you_have_coApp_txt,coApp_txt_emp_type1,
+            do_you_have_coApp_txt1,coApp_txt_emp_type2;
 
     AppCompatEditText age_edite_txt,pan_number_edit_txt,occupation_edit_txt,monthly_net_sal_edit_txt,
                          experience_in_current_cmpy,total_experience_edit_txt
                          ,current_residence_edit_txt,family_member_name_edit_txt,
-            family_member_income_edit_txt,monthly_afr_emi_amt_edit_txt;
+            family_member_income_edit_txt,monthly_afr_emi_amt_edit_txt,
+            pl_co_app_slrd_name_edite_txt,pl_co_app_slrd_age_edite_txt,pl_co_app_slrd_month_net_slrd_edite_txt,pl_co_app_slrd_experience_in_current_cmpy,
+            pl_co_app_slrd_total_experience_edit_txt;
 
-    AppCompatAutoCompleteTextView company_pincode_txt,residence_pincode1_edit_txt;
+    //Co Applicant
+    private Spinner pl_co_app_slrd_spinn_salary_crt_mtd,pl_co_app_slrd_res_spinn_area;
+
+    AppCompatAutoCompleteTextView company_pincode_txt,residence_pincode1_edit_txt,pl_co_app_slrd_company_pincode_txt;
+    String pl_co_app_slrd_Salary_id,pl_co_app_slrd_Salary_Value,pl_co_app_slrd_res_spinn_area_id,pl_co_app_slrd_res_spinn_area_district_id,
+            pl_co_app_slrd_res_spinn_area_state_id;
+
+    AppCompatTextView pl_co_app_slrd_salary_proof_edit_txt,pl_co_app_slrd_assets_owned_BL;
+
+    ////////
+
+    JSONArray Employement,is_coapplicant;
     Typeface font;
     private Context context = this;
     InputMethodManager imm;
@@ -99,10 +119,11 @@ public class Viability_Check_PL extends SimpleActivity {
                     other_earning_ar,Property_Type,Assets_own;
     String[] SPINNERLIST;
     String[] SALARY_Method,Salary_Proof,Residence_Type_SA,Employe_ID_SA,PAN_ID_SA,
-            Other_Earning_SA,Pincode_SA,Area;
+            Other_Earning_SA,Pincode_SA,Area,CO_Type_Of_Emp_SA,Have_Co_Applicant;
 
     ArrayAdapter<String> Salary_Adapter,Salary_proof_Adapter,Residence_Adapter,Employee_ID_Adapter,
-            PAN_ID_Adapter,Other_Earning_Adapter,Pincode_Adapter,A_Area;
+            PAN_ID_Adapter,Other_Earning_Adapter,Pincode_Adapter,A_Area,CO_Type_Of_Emp_Adapter,
+            Have_Co_Adapter;
 
     String String_value_Age,ST_occupation_edit_txt,St_monthly_net_sal_edit_txt,
             ST_experience_in_current_cmpy,ST_total_experience_edit_txt,
@@ -116,7 +137,8 @@ public class Viability_Check_PL extends SimpleActivity {
     private AlertDialog progressDialog;
 
     String Salary_id,Salary_Value,Salary_proof_id,Salary_proof_Value,residence_id,residence_Value,
-                 Employee_id,Employee_Value,PAN_id,PAN_Value, other_earning_id,other_earning_value;
+                 Employee_id,Employee_Value,PAN_id,PAN_Value, other_earning_id,other_earning_value,
+            CO_Type_of_employement_ID,CO_Type_of_employement_Value, IS_CO_Applicant_Id,IS_CO_Applicant_Value;
 
     ArrayList<IncomeProofPOJO> IncomeProof_Salaried,Salary_income_Proof;
     MyCustomAdapter_Salary_Proof dataAdapter_Salaried_proof = null;
@@ -140,17 +162,19 @@ public class Viability_Check_PL extends SimpleActivity {
         imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
 
         salary_proof_edit_txt_pl = (AppCompatTextView) findViewById(R.id.salary_proof_edit_txt_pl);
+        pl_co_app_slrd_salary_proof_edit_txt = (AppCompatTextView) findViewById(R.id.pl_co_app_slrd_salary_proof_edit_txt);
+        pl_co_app_slrd_assets_owned_BL = (AppCompatTextView) findViewById(R.id.pl_co_app_slrd_assets_owned_BL);
 
         Assets_myList_values = (ArrayList<String>) getIntent().getSerializableExtra("select_lid_id");
 
-        lead_viy_step2.setOnClickListener(new View.OnClickListener() {
+      /*  lead_viy_step2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(Viability_Check_PL.this, Eligibility_Check_PL.class);
                 startActivity(intent);
                 finish();
             }
-        });
+        });*/
 
         Log.e("viability check Pl ","Personal Loan");
       /* monthly_sal_txt,salery_credite_method_txt,Exp_in_current_txt,total_workexperiecnce_txt,cmp_pincode_txt,
@@ -160,6 +184,18 @@ public class Viability_Check_PL extends SimpleActivity {
         myList_values = (ArrayList<String>) getIntent().getSerializableExtra("select_lid_id");
 
         salary_proof_edit_txt_pl.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Viability_Check_PL.this, Multi_Select_checkbox.class);
+                intent.putExtra("jsonArray", Salary_proof_ar.toString());
+                intent.putExtra("select_lid_id", (Serializable) myList_values);
+                startActivity(intent);
+
+            }
+        });
+
+
+        pl_co_app_slrd_salary_proof_edit_txt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(Viability_Check_PL.this, Multi_Select_checkbox.class);
@@ -180,6 +216,18 @@ public class Viability_Check_PL extends SimpleActivity {
 
             }
         });
+
+        pl_co_app_slrd_assets_owned_BL.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Viability_Check_PL.this, Multi_Select_checkbox.class);
+                intent.putExtra("jsonArray", Assets_own.toString());
+                intent.putExtra("select_lid_id", (Serializable) Assets_myList_values);
+                startActivity(intent);
+
+            }
+        });
+
 
         UISCREEN();
         Click();
@@ -208,6 +256,12 @@ public class Viability_Check_PL extends SimpleActivity {
         residence_type.setVisibility(View.VISIBLE);
 
 
+        co_applicant_salaried_employed = (LinearLayout) findViewById(R.id.co_applicant_salaried_employed);
+        co_applicant_self_employed = (LinearLayout) findViewById(R.id.co_applicant_self_employed);
+
+        co_applicant_ly = (LinearLayout) findViewById(R.id.co_applicant_ly);
+        co_applicant_emp_type = (LinearLayout) findViewById(R.id.co_applicant_emp_type);
+
         age = (AppCompatTextView) findViewById(R.id.age);
         age1 = (AppCompatTextView) findViewById(R.id.age1);
 
@@ -215,6 +269,10 @@ public class Viability_Check_PL extends SimpleActivity {
         area_txt1 = (AppCompatTextView) findViewById(R.id.area_txt1);
         res_area_txt = (AppCompatTextView) findViewById(R.id.res_area_txt);
         res_area_txt1 = (AppCompatTextView) findViewById(R.id.res_area_txt1);
+        do_you_have_coApp_txt = (AppCompatTextView) findViewById(R.id.do_you_have_coApp_txt);
+        do_you_have_coApp_txt1 = (AppCompatTextView) findViewById(R.id.do_you_have_coApp_txt1);
+        coApp_txt_emp_type1 = (AppCompatTextView) findViewById(R.id.coApp_txt_emp_type1);
+        coApp_txt_emp_type2 = (AppCompatTextView) findViewById(R.id.coApp_txt_emp_type2);
 
         pan_number_txt = (AppCompatTextView) findViewById(R.id.pan_number_txt);
         pan_number_txt1 = (AppCompatTextView) findViewById(R.id.pan_number_txt1);
@@ -251,6 +309,9 @@ public class Viability_Check_PL extends SimpleActivity {
         monthly_afr_emi_txt1 = (AppCompatTextView) findViewById(R.id.monthly_afr_emi_txt1);
 
 
+        co_applicant_spinner = (Spinner) findViewById(R.id.co_applicant_spinner);
+        co_applicant_emp_spinner = (Spinner) findViewById(R.id.co_applicant_emp_spinner);
+
         age_edite_txt = (AppCompatEditText) findViewById(R.id.age_edite_txt);
         pan_number_edit_txt = (AppCompatEditText) findViewById(R.id.pan_number_edit_txt);
         occupation_edit_txt = (AppCompatEditText) findViewById(R.id.occupation_edit_txt);
@@ -261,13 +322,28 @@ public class Viability_Check_PL extends SimpleActivity {
         company_pincode_txt = (AppCompatAutoCompleteTextView) findViewById(R.id.company_pincode_txt);
 
         residence_pincode1_edit_txt = (AppCompatAutoCompleteTextView) findViewById(R.id.residence_pincode1_edit_txt);
+        pl_co_app_slrd_company_pincode_txt = (AppCompatAutoCompleteTextView) findViewById(R.id.pl_co_app_slrd_company_pincode_txt);
 
         current_residence_edit_txt = (AppCompatEditText) findViewById(R.id.current_residence_edit_txt);
+
         family_member_name_edit_txt = (AppCompatEditText) findViewById(R.id.family_member_name_edit_txt);
         family_member_income_edit_txt = (AppCompatEditText) findViewById(R.id.family_member_income_edit_txt);
         monthly_afr_emi_amt_edit_txt = (AppCompatEditText) findViewById(R.id.monthly_afr_emi_amt_edit_txt);
         monthly_afr_emi_amt_edit_txt.addTextChangedListener(new NumberTextWatcher(monthly_net_sal_edit_txt));
         cv_salary_income_proof = (ChipsView) findViewById(R.id.cv_salary_income_proof);
+
+        //pl_co_app_slrd_age_edite_txt,pl_co_app_slrd_month_net_slrd_edite_txt,pl_co_app_slrd_experience_in_current_cmpy,
+        //            pl_co_app_slrd_total_experience_edit_txt
+
+        pl_co_app_slrd_name_edite_txt = (AppCompatEditText) findViewById(R.id.pl_co_app_slrd_name_edite_txt);
+        pl_co_app_slrd_age_edite_txt = (AppCompatEditText) findViewById(R.id.pl_co_app_slrd_age_edite_txt);
+        pl_co_app_slrd_month_net_slrd_edite_txt = (AppCompatEditText) findViewById(R.id.pl_co_app_slrd_month_net_slrd_edite_txt);
+        pl_co_app_slrd_experience_in_current_cmpy = (AppCompatEditText) findViewById(R.id.pl_co_app_slrd_experience_in_current_cmpy);
+        pl_co_app_slrd_total_experience_edit_txt = (AppCompatEditText) findViewById(R.id.pl_co_app_slrd_total_experience_edit_txt);
+        pl_co_app_slrd_company_pincode_txt = (AppCompatAutoCompleteTextView) findViewById(R.id.pl_co_app_slrd_company_pincode_txt);
+
+        pl_co_app_slrd_spinn_salary_crt_mtd = (Spinner) findViewById(R.id.pl_co_app_slrd_spinn_salary_crt_mtd);
+        pl_co_app_slrd_res_spinn_area = (Spinner) findViewById(R.id.pl_co_app_slrd_res_spinn_area);
 
     }
 
@@ -326,6 +402,10 @@ public class Viability_Check_PL extends SimpleActivity {
         monthly_afr_emi_amt_edit_txt.setTypeface(font);
         res_area_txt.setTypeface(font);
         res_area_txt1.setTypeface(font);
+        do_you_have_coApp_txt.setTypeface(font);
+        do_you_have_coApp_txt1.setTypeface(font);
+        coApp_txt_emp_type1.setTypeface(font);
+        coApp_txt_emp_type2.setTypeface(font);
 
     }
 
@@ -376,6 +456,29 @@ public class Viability_Check_PL extends SimpleActivity {
 
         }
     });
+
+
+        pl_co_app_slrd_company_pincode_txt.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                Log.e("hi","hi11");
+                String workpincode = pl_co_app_slrd_company_pincode_txt.getText().toString();
+
+                if(workpincode.length()==2){
+                    GET_Pincode1(workpincode);
+                }
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
 
         lead_viy_step2.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -442,39 +545,12 @@ public class Viability_Check_PL extends SimpleActivity {
                                 if(residence_id.equals("1"))
                                 {
 
-                                    Intent intent = new Intent(Viability_Check_PL.this, Eligibility_Check_PL.class);
+
+                                    co_applicant_validation();
+                                   /* Intent intent = new Intent(Viability_Check_PL.this, Eligibility_Check_PL.class);
                                     startActivity(intent);
                                     finish();
-                                   /* if (!Validate_Monthly_Emi()) {
-                                        return;
-                                    }*/
-
-                                 /*  if(other_earning_id.equals("2"))
-                                   {
-                                       Toast.makeText(context,"Please Select other earning member",Toast.LENGTH_SHORT).show();
-
-                                   }else if(other_earning_id.equals("1"))
-                                   {
-                                        if (!family_member()) {
-                                        return;
-                                            }
-
-                                       if (!family_member_income()) {
-                                           return;
-                                       }
-
-                                       //  lead_viability();
-
-                                       Intent intent = new Intent(Viability_Check_PL.this, Eligibility_Check_PL.class);
-                                       startActivity(intent);
-                                       finish();
-                                   }else
-                                   {
-                                       Intent intent = new Intent(Viability_Check_PL.this, Eligibility_Check_PL.class);
-                                       startActivity(intent);
-                                       finish();
-                                   }
-                                    */
+                                   */
                                 }else if(residence_id.equals("2"))
                                 {
 
@@ -482,36 +558,12 @@ public class Viability_Check_PL extends SimpleActivity {
                                         return;
                                     }
 
-                                    Intent intent = new Intent(Viability_Check_PL.this, Eligibility_Check_PL.class);
+                                    co_applicant_validation();
+                                 /*   Intent intent = new Intent(Viability_Check_PL.this, Eligibility_Check_PL.class);
                                     startActivity(intent);
-                                    finish();
+                                    finish();*/
 
-                                    /*if(other_earning_id.equals("2"))
-                                    {
-                                        Toast.makeText(context,"Please Select other earning member",Toast.LENGTH_SHORT).show();
 
-                                    }else  if(other_earning_id.equals("1")) {
-
-                                        if (!family_member()) {
-                                            return;
-                                        }
-
-                                        if (!family_member_income()) {
-                                            return;
-                                        }
-                                        Intent intent = new Intent(Viability_Check_PL.this, Eligibility_Check_PL.class);
-                                        startActivity(intent);
-                                        finish();
-                                   *//* if (!Validate_Monthly_Emi()) {
-                                        return;
-                                    }*//*
-                                      //  lead_viability();
-                                    }else
-                                    {
-                                        Intent intent = new Intent(Viability_Check_PL.this, Eligibility_Check_PL.class);
-                                        startActivity(intent);
-                                        finish();
-                                    }*/
                                 }
 
                             }
@@ -524,6 +576,65 @@ public class Viability_Check_PL extends SimpleActivity {
             }
         });
 
+    }
+
+
+    private void co_applicant_validation()
+    {
+        if(IS_CO_Applicant_Id.equals("0"))
+        {
+            Toast.makeText(context,"Select Do you haveing Co Applicant",Toast.LENGTH_SHORT).show();
+
+        }else if(IS_CO_Applicant_Id.equals("1"))
+        {
+            if(CO_Type_of_employement_ID.equals("0"))
+            {
+                Toast.makeText(context,"Select Co Applicant Employement type",Toast.LENGTH_SHORT).show();
+
+            }else  if(CO_Type_of_employement_ID.equals("1"))
+            {
+
+                if (!Validate_pl_co_app_slrd_name_edite_txt()) {
+                    return;
+                }
+
+                if (!Validate_pl_co_app_slrd_age_edite_txt()) {
+                    return;
+                }
+
+                if (!Validate_pl_co_app_slrd_month_net_slrd_edite_txt()) {
+                    return;
+                }
+                if(pl_co_app_slrd_Salary_id.equals("0"))
+                {
+                    Toast.makeText(context,"Select salary credit method",Toast.LENGTH_SHORT).show();
+
+                }else
+                {
+                    if (!Validate_pl_co_app_slrd_experience_in_current_cmpy()) {
+                        return;
+                    }
+                    if (!Validate_pl_co_app_slrd_total_experience_edit_txt()) {
+                        return;
+                    }
+
+                    if (!Validate_pl_co_app_slrd_company_pincode_txt()) {
+                        return;
+                    }
+
+                }
+
+            }else
+            {
+
+            }
+
+        } else if(IS_CO_Applicant_Id.equals("2")) {
+
+            Intent intent = new Intent(Viability_Check_PL.this, Eligibility_Check_PL.class);
+            startActivity(intent);
+            finish();
+        }
     }
 
     private boolean Validate_age() {
@@ -567,6 +678,76 @@ public class Viability_Check_PL extends SimpleActivity {
         if (experience_in_current_cmpy.getText().toString().trim().isEmpty()) {
             experience_in_current_cmpy.setError(getText(R.string.err_curent));
             experience_in_current_cmpy.requestFocus();
+            return false;
+        } else {
+
+        }
+
+        return true;
+    }
+
+    private boolean Validate_pl_co_app_slrd_name_edite_txt(){
+        if (pl_co_app_slrd_name_edite_txt.getText().toString().trim().isEmpty()) {
+            pl_co_app_slrd_name_edite_txt.setError(getText(R.string.err_curent));
+            pl_co_app_slrd_name_edite_txt.requestFocus();
+            return false;
+        } else {
+
+        }
+
+        return true;
+    }
+    private boolean Validate_pl_co_app_slrd_age_edite_txt(){
+        if (pl_co_app_slrd_age_edite_txt.getText().toString().trim().isEmpty()) {
+            pl_co_app_slrd_age_edite_txt.setError(getText(R.string.err_curent));
+            pl_co_app_slrd_age_edite_txt.requestFocus();
+            return false;
+        } else {
+
+        }
+
+        return true;
+    }
+    private boolean Validate_pl_co_app_slrd_month_net_slrd_edite_txt(){
+        if (pl_co_app_slrd_month_net_slrd_edite_txt.getText().toString().trim().isEmpty()) {
+            pl_co_app_slrd_month_net_slrd_edite_txt.setError(getText(R.string.err_curent));
+            pl_co_app_slrd_month_net_slrd_edite_txt.requestFocus();
+            return false;
+        } else {
+
+        }
+
+        return true;
+    }
+
+    private boolean Validate_pl_co_app_slrd_experience_in_current_cmpy(){
+        if (pl_co_app_slrd_experience_in_current_cmpy.getText().toString().trim().isEmpty()) {
+            pl_co_app_slrd_experience_in_current_cmpy.setError(getText(R.string.err_curent));
+            pl_co_app_slrd_experience_in_current_cmpy.requestFocus();
+            return false;
+        } else {
+
+        }
+
+        return true;
+    }
+
+    private boolean Validate_pl_co_app_slrd_total_experience_edit_txt(){
+        if (pl_co_app_slrd_total_experience_edit_txt.getText().toString().trim().isEmpty()) {
+            pl_co_app_slrd_total_experience_edit_txt.setError(getText(R.string.err_curent));
+            pl_co_app_slrd_total_experience_edit_txt.requestFocus();
+            return false;
+        } else {
+
+        }
+
+        return true;
+    }
+
+    private boolean Validate_pl_co_app_slrd_company_pincode_txt(){
+        if (pl_co_app_slrd_company_pincode_txt.getText().toString().trim().isEmpty()) {
+            pl_co_app_slrd_company_pincode_txt.setError(getText(R.string.err_curent));
+            pl_co_app_slrd_company_pincode_txt.requestFocus();
             return false;
         } else {
 
@@ -697,6 +878,10 @@ public class Viability_Check_PL extends SimpleActivity {
                             Residence_Array(Residence_ownership_ar);
                             Employee_ID_Array(employee_id_ar);
                             HAVE_PAN_Card(have_pan_ar);
+                            Employement =object.getJSONArray("Employement");
+                            is_coapplicant =object.getJSONArray("is_coapplicant");
+                            Co_Type_Of_Employement_Spinner(Employement);
+                            DO_Have_Co_Applicant(is_coapplicant);
                            // Other_Earning(other_earning_ar);
 
 
@@ -757,6 +942,7 @@ public class Viability_Check_PL extends SimpleActivity {
 
             Salary_Adapter.setDropDownViewResource(R.layout.view_spinner_item);
             spinn_salary_crt_mtd.setAdapter(Salary_Adapter);
+
             spinn_salary_crt_mtd.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -782,6 +968,40 @@ public class Viability_Check_PL extends SimpleActivity {
                 }
             });
             spinn_salary_crt_mtd.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View view, MotionEvent motionEvent) {
+                    // imm.hideSoftInputFromWindow(edt_buyer_address.getWindowToken(), 0);
+                    return false;
+                }
+            });
+
+            //Co Applicant Salary cr method
+            pl_co_app_slrd_spinn_salary_crt_mtd.setAdapter(Salary_Adapter);
+            pl_co_app_slrd_spinn_salary_crt_mtd.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                    try {
+                        //  City_loc_uniqueID = ja.getJSONObject(position).getString("city_id");
+
+
+                        pl_co_app_slrd_Salary_id = Salary_method_ar.getJSONObject(position).getString("id");
+                        pl_co_app_slrd_Salary_Value = Salary_method_ar.getJSONObject(position).getString("value");
+                        //CAT_ID = ja.getJSONObject(position).getString("category_id");
+                        Log.d("Salary_id", pl_co_app_slrd_Salary_id);
+                        Log.d("Salary_Value", pl_co_app_slrd_Salary_Value);
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+
+                }
+            });
+            pl_co_app_slrd_spinn_salary_crt_mtd.setOnTouchListener(new View.OnTouchListener() {
                 @Override
                 public boolean onTouch(View view, MotionEvent motionEvent) {
                     // imm.hideSoftInputFromWindow(edt_buyer_address.getWindowToken(), 0);
@@ -850,10 +1070,11 @@ public class Viability_Check_PL extends SimpleActivity {
                             txt_residence_pincode.setText("8");
                             res_area_txt.setText("9");
                             txt_residence_type.setText("10");
-                            Lives_in_current_txt.setText("11");
-                            any_other_family_member_txt.setText("9");
 
-                            assets_owned_txt.setText("10");
+
+                            Lives_in_current_txt.setText("11");
+                            do_you_have_coApp_txt.setText("12");
+                            coApp_txt_emp_type1.setText("13");
 
 
                         }else
@@ -876,7 +1097,8 @@ public class Viability_Check_PL extends SimpleActivity {
                             txt_residence_pincode.setText("8");
                             res_area_txt.setText("9");
                             txt_residence_type.setText("10");
-
+                            do_you_have_coApp_txt.setText("11");
+                            coApp_txt_emp_type1.setText("12");
 
                         }
 
@@ -1249,7 +1471,163 @@ public class Viability_Check_PL extends SimpleActivity {
 
     }
 
+    private void Co_Type_Of_Employement_Spinner(final JSONArray Type_Of_emp_ar) throws JSONException {
+        //   SPINNERLIST = new String[ja.length()];
+        CO_Type_Of_Emp_SA = new String[Type_Of_emp_ar.length()];
+        for (int i=0;i<Type_Of_emp_ar.length();i++){
+            JSONObject J =  Type_Of_emp_ar.getJSONObject(i);
+            CO_Type_Of_Emp_SA[i] = J.getString("value");
+            final List<String> loan_type_list = new ArrayList<>(Arrays.asList(CO_Type_Of_Emp_SA));
+            CO_Type_Of_Emp_Adapter = new ArrayAdapter<String>(context, R.layout.view_spinner_item, loan_type_list){
+                public View getView(int position, View convertView, ViewGroup parent) {
+                    font = Typeface.createFromAsset(context.getAssets(),"Lato-Regular.ttf");
+                    TextView v = (TextView) super.getView(position, convertView, parent);
+                    v.setTypeface(font);
+                    return v;
+                }
 
+                public View getDropDownView(int position, View convertView, ViewGroup parent) {
+                    TextView v = (TextView) super.getView(position, convertView, parent);
+                    v.setTypeface(font);
+                    return v;
+                }
+            };
+
+            CO_Type_Of_Emp_Adapter.setDropDownViewResource(R.layout.view_spinner_item);
+            co_applicant_emp_spinner.setAdapter(CO_Type_Of_Emp_Adapter);
+            co_applicant_emp_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                    try {
+
+
+                        CO_Type_of_employement_ID = Type_Of_emp_ar.getJSONObject(position).getString("id");
+                        CO_Type_of_employement_Value = Type_Of_emp_ar.getJSONObject(position).getString("value");
+
+                        if(IS_CO_Applicant_Id.equals("1"))
+                        {
+
+                            if(CO_Type_of_employement_ID.equals("1"))
+                            {
+                                co_applicant_salaried_employed.setVisibility(View.VISIBLE);
+                                co_applicant_self_employed.setVisibility(View.GONE);
+
+                            }else if(CO_Type_of_employement_ID.equals("2"))
+                            {
+                                co_applicant_salaried_employed.setVisibility(View.GONE);
+                                co_applicant_self_employed.setVisibility(View.VISIBLE);
+                            }
+
+                        }else
+                        {
+                            co_applicant_salaried_employed.setVisibility(View.GONE);
+                            co_applicant_self_employed.setVisibility(View.GONE);
+                        }
+
+                        Pref.putCOSALARYTYPE(context,CO_Type_of_employement_ID);
+
+                        Log.e("The salary Type",CO_Type_of_employement_Value);
+                        //CAT_ID = ja.getJSONObject(position).getString("category_id");
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+
+                }
+            });
+            co_applicant_emp_spinner.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View view, MotionEvent motionEvent) {
+                    // imm.hideSoftInputFromWindow(edt_buyer_address.getWindowToken(), 0);
+                    return false;
+                }
+            });
+        }
+
+    }
+
+    private void DO_Have_Co_Applicant(final JSONArray do_u_have_co_) throws JSONException {
+        //   SPINNERLIST = new String[ja.length()];
+        Have_Co_Applicant = new String[do_u_have_co_.length()];
+        for (int i=0;i<do_u_have_co_.length();i++){
+            JSONObject J =  do_u_have_co_.getJSONObject(i);
+            Have_Co_Applicant[i] = J.getString("value");
+            final List<String> loan_type_list = new ArrayList<>(Arrays.asList(Have_Co_Applicant));
+            Have_Co_Adapter = new ArrayAdapter<String>(context, R.layout.view_spinner_item, loan_type_list){
+                public View getView(int position, View convertView, ViewGroup parent) {
+                    font = Typeface.createFromAsset(context.getAssets(),"Lato-Regular.ttf");
+                    TextView v = (TextView) super.getView(position, convertView, parent);
+                    v.setTypeface(font);
+                    return v;
+                }
+
+                public View getDropDownView(int position, View convertView, ViewGroup parent) {
+                    TextView v = (TextView) super.getView(position, convertView, parent);
+                    v.setTypeface(font);
+                    return v;
+                }
+            };
+
+            Have_Co_Adapter.setDropDownViewResource(R.layout.view_spinner_item);
+            co_applicant_spinner.setAdapter(Have_Co_Adapter);
+            co_applicant_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                    try {
+
+
+                        IS_CO_Applicant_Id = do_u_have_co_.getJSONObject(position).getString("id");
+                        IS_CO_Applicant_Value = do_u_have_co_.getJSONObject(position).getString("value");
+
+                        Pref.putCoAPPAVAILABLE(context,IS_CO_Applicant_Id);
+
+                        if(IS_CO_Applicant_Id.equals("1"))
+                        {
+                            co_applicant_emp_type.setVisibility(View.VISIBLE);
+/*
+                            do_you_have_coApp_txt.setText("8");
+                            coApp_txt_emp_type1.setText("9");*/
+
+
+                        }else if(IS_CO_Applicant_Id.equals("2"))
+                        {
+                           co_applicant_emp_type.setVisibility(View.GONE);
+                           // do_you_have_coApp_txt.setText("8");
+
+                        }else
+                        {
+                            co_applicant_emp_type.setVisibility(View.GONE);
+                        }
+
+                        Log.e("The salary Type",IS_CO_Applicant_Id);
+                        //CAT_ID = ja.getJSONObject(position).getString("category_id");
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+
+                }
+            });
+            co_applicant_spinner.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View view, MotionEvent motionEvent) {
+                    // imm.hideSoftInputFromWindow(edt_buyer_address.getWindowToken(), 0);
+                    return false;
+                }
+            });
+        }
+
+    }
 
     ///Auto Completer Pin Code
 
@@ -1340,6 +1718,7 @@ public class Viability_Check_PL extends SimpleActivity {
 
             String workpincode = company_pincode_txt.getText().toString();
             String workpincode1 = residence_pincode1_edit_txt.getText().toString();
+            String workpincode3 = pl_co_app_slrd_company_pincode_txt.getText().toString();
 
             if(workpincode.length()> 2){
                 company_pincode_txt.setThreshold(2);
@@ -1351,7 +1730,10 @@ public class Viability_Check_PL extends SimpleActivity {
                 residence_pincode1_edit_txt.setAdapter(Pincode_Adapter);
             }
 
-
+            if(workpincode3.length()> 2){
+                pl_co_app_slrd_company_pincode_txt.setThreshold(2);
+                pl_co_app_slrd_company_pincode_txt.setAdapter(Pincode_Adapter);
+            }
 
         }
 
@@ -1378,7 +1760,24 @@ public class Viability_Check_PL extends SimpleActivity {
                 String code = (String)adapterView.getItemAtPosition(i);
 
                 if(code.length()==6){
-                    GET_AERA_POST(code);
+                    GET_AERA_POST1(code);
+                }else {
+                    Objs.a.showToast(context,"Please Select Pin code");
+                }
+
+                imm.hideSoftInputFromWindow(company_pincode_txt.getWindowToken(), 0);
+
+            }
+        });
+
+        pl_co_app_slrd_company_pincode_txt.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+                String code = (String)adapterView.getItemAtPosition(i);
+
+                if(code.length()==6){
+                    GET_AERA_POST2(code);
                 }else {
                     Objs.a.showToast(context,"Please Select Pin code");
                 }
@@ -1436,7 +1835,6 @@ public class Viability_Check_PL extends SimpleActivity {
         AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
 
     }
-
 
     private void setArea(final JSONArray ja) throws JSONException {
 
@@ -1528,6 +1926,225 @@ public class Viability_Check_PL extends SimpleActivity {
                 }
             });
             res_spinn_area.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View view, MotionEvent motionEvent) {
+                    // imm.hideSoftInputFromWindow(edt_buyer_address.getWindowToken(), 0);
+                    return false;
+                }
+            });
+
+
+        }
+
+    }
+
+    private void GET_AERA_POST1(String code) {
+        progressDialog.show();
+        JSONObject J =new JSONObject();
+        try {
+            J.put("pincode", code);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, Urls.GET_AERA_POST, J,
+                new Response.Listener<JSONObject>() {
+
+                    @Override
+                    public void onResponse(JSONObject object) {
+                        try {
+
+                            if (object.getString(Params.status).equals("success")) {
+                                JSONArray response = object.getJSONArray("response");
+                                //    Log.e("Pincode", String.valueOf(response));
+                                setArea1(response);
+                            }
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        progressDialog.dismiss();
+                    }
+                }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                VolleyLog.d("TAG", "Error: " + error.getMessage());
+                progressDialog.dismiss();
+            }
+        }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("Content-Type", "application/json");
+                return headers;
+            }
+        };
+        AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
+
+    }
+
+    private void setArea1(final JSONArray ja) throws JSONException {
+
+        Area = new String[ja.length()];
+        for (int i=0;i<ja.length();i++){
+            JSONObject J =  ja.getJSONObject(i);
+            Area[i] = J.getString("area");
+            final List<String> area_list = new ArrayList<>(Arrays.asList(Area));
+            A_Area = new ArrayAdapter<String>(getApplicationContext(), R.layout.view_spinner_item, area_list){
+                public View getView(int position, View convertView, ViewGroup parent) {
+                    font = Typeface.createFromAsset(getApplicationContext().getAssets(),"Lato-Regular.ttf");
+                    TextView v = (TextView) super.getView(position, convertView, parent);
+                    v.setTypeface(font);
+                    return v;
+                }
+
+                public View getDropDownView(int position, View convertView, ViewGroup parent) {
+                    TextView v = (TextView) super.getView(position, convertView, parent);
+                    v.setTypeface(font);
+                    return v;
+                }
+            };
+
+
+            String workpincode1 = residence_pincode1_edit_txt.getText().toString();
+
+            A_Area.setDropDownViewResource(R.layout.view_spinner_item);
+            res_spinn_area.setAdapter(A_Area);
+            res_spinn_area.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                    try {
+
+
+                        res_company_area = ja.getJSONObject(position).getString("id");
+                        res_company_area_district_id = ja.getJSONObject(position).getString("district_id");
+                        res_company_area_state_id = ja.getJSONObject(position).getString("state_id");
+                        // Objs.a.showToast(getContext(),work_pincode_area);
+                        ///  String a = work_pincode_area +"   "+work_pincode_district_id +"   "+work_pincode_state_id;
+
+                        //   Log.e("Drop Down",a);
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+
+                }
+            });
+            res_spinn_area.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View view, MotionEvent motionEvent) {
+                    // imm.hideSoftInputFromWindow(edt_buyer_address.getWindowToken(), 0);
+                    return false;
+                }
+            });
+
+
+        }
+
+    }
+
+    private void GET_AERA_POST2(String code) {
+        progressDialog.show();
+        JSONObject J =new JSONObject();
+        try {
+            J.put("pincode", code);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, Urls.GET_AERA_POST, J,
+                new Response.Listener<JSONObject>() {
+
+                    @Override
+                    public void onResponse(JSONObject object) {
+                        try {
+
+                            if (object.getString(Params.status).equals("success")) {
+                                JSONArray response = object.getJSONArray("response");
+                                //    Log.e("Pincode", String.valueOf(response));
+                                setArea2(response);
+                            }
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        progressDialog.dismiss();
+                    }
+                }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                VolleyLog.d("TAG", "Error: " + error.getMessage());
+                progressDialog.dismiss();
+            }
+        }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("Content-Type", "application/json");
+                return headers;
+            }
+        };
+        AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
+
+    }
+
+    private void setArea2(final JSONArray ja) throws JSONException {
+
+        Area = new String[ja.length()];
+        for (int i=0;i<ja.length();i++){
+            JSONObject J =  ja.getJSONObject(i);
+            Area[i] = J.getString("area");
+            final List<String> area_list = new ArrayList<>(Arrays.asList(Area));
+            A_Area = new ArrayAdapter<String>(getApplicationContext(), R.layout.view_spinner_item, area_list){
+                public View getView(int position, View convertView, ViewGroup parent) {
+                    font = Typeface.createFromAsset(getApplicationContext().getAssets(),"Lato-Regular.ttf");
+                    TextView v = (TextView) super.getView(position, convertView, parent);
+                    v.setTypeface(font);
+                    return v;
+                }
+
+                public View getDropDownView(int position, View convertView, ViewGroup parent) {
+                    TextView v = (TextView) super.getView(position, convertView, parent);
+                    v.setTypeface(font);
+                    return v;
+                }
+            };
+
+
+            String workpincode2 = pl_co_app_slrd_company_pincode_txt.getText().toString();
+
+            A_Area.setDropDownViewResource(R.layout.view_spinner_item);
+            pl_co_app_slrd_res_spinn_area.setAdapter(A_Area);
+            pl_co_app_slrd_res_spinn_area.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                    try {
+
+                        pl_co_app_slrd_res_spinn_area_id = ja.getJSONObject(position).getString("id");
+                        pl_co_app_slrd_res_spinn_area_district_id = ja.getJSONObject(position).getString("district_id");
+                        pl_co_app_slrd_res_spinn_area_state_id = ja.getJSONObject(position).getString("state_id");
+
+                        //   Log.e("Drop Down",a);
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+
+                }
+            });
+            pl_co_app_slrd_res_spinn_area.setOnTouchListener(new View.OnTouchListener() {
                 @Override
                 public boolean onTouch(View view, MotionEvent motionEvent) {
                     // imm.hideSoftInputFromWindow(edt_buyer_address.getWindowToken(), 0);

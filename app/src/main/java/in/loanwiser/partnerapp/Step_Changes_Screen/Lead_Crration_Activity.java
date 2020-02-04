@@ -72,7 +72,7 @@ public class Lead_Crration_Activity extends SimpleActivity {
     String Lontypename,Lontype,Loan_Cat_id,result,C_loan_amount_ext,
             C_mobile_no_txt,C_name_txt,C_whats_app_no,LoanCat_Name,
             Type_of_employement_ID,Type_of_employement_Value, CO_Type_of_employement_ID,CO_Type_of_employement_Value,
-            IS_CO_Applicant_Id,IS_CO_Applicant_Value;
+            IS_CO_Applicant_Id,IS_CO_Applicant_Value,Mobile,Name,C_email_edite_txt;
 
     InputMethodManager imm;
     JSONArray Employement,is_coapplicant;
@@ -111,23 +111,28 @@ public class Lead_Crration_Activity extends SimpleActivity {
         UI_FIELDS();
         fonts();
         makeJsonObjReq1();
-        Click();
+      // Click();
 
-       /* lead_cr_step1.setOnClickListener(new View.OnClickListener() {
+        lead_cr_step1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                Intent intent = new Intent(Lead_Crration_Activity.this, Viability_check_HL.class);
+                Intent intent = new Intent(Lead_Crration_Activity.this, Viability_Check_PL.class);
                 startActivity(intent);
                 finish();
 
             }
         });
-*/
+
+
+
+
+
      if(Lontypename.contains("Personal Loan [Unsecured]") || Lontypename.contains("Business Loan [Unsecured]"))
      {
 
          type_of_empmnt.setVisibility(View.GONE);
+         Type_of_employement_ID = "0";
          co_applicant_ly.setVisibility(View.GONE);
          co_applicant_emp_type.setVisibility(View.GONE);
          //txt_loan_category,loan_type,type_of_empmnt_txt,Loan_amount,name,age,mobile,do_you_have_coApp_txt,coApp_txt_emp_type1
@@ -143,6 +148,7 @@ public class Lead_Crration_Activity extends SimpleActivity {
          wt_mobile.setText("7");
      }else
      {
+
          txt_loan_category.setText("1");
          loan_type.setText("2");
          type_of_empmnt_txt.setText("3");
@@ -202,6 +208,12 @@ public class Lead_Crration_Activity extends SimpleActivity {
         email_edite_txt = (AppCompatEditText) findViewById(R.id.email_edite_txt);
         terms_and_condition = (AppCompatTextView) findViewById(R.id.terms_and_condition);
         check_complete = (CheckBox) findViewById(R.id.check_complete);
+
+        Mobile = Pref.getMobileLead(getApplicationContext());
+        Name = Pref.getName(getApplicationContext());
+
+        name_txt.setText(Name);
+        mobile_no_txt.setText(Mobile);
 
     }
     private void fonts() {
@@ -296,15 +308,11 @@ public class Lead_Crration_Activity extends SimpleActivity {
         }
         if(check_complete.isChecked())
         {
-            int m = 1;
-            C_loan_amount_ext = loan_amount_ext.getText().toString();
-            C_mobile_no_txt = mobile_no_txt.getText().toString();
-            C_name_txt = name_txt.getText().toString();
-            C_whats_app_no = whats_app_no.getText().toString();
-            // lead_cr(C_loan_amount_ext,C_mobile_no_txt,C_name_txt,C_whats_app_no,m);
+
+            lead_cr();
 
             Log.e("App",App);
-            click_action();
+           // click_action();
 
         }else
         {
@@ -915,21 +923,32 @@ public class Lead_Crration_Activity extends SimpleActivity {
         /// loadSubLocations(ja.getJSONObject(0).getString("countryid"));
     }
 
-    private void lead_cr(String C_loan_amount_ext , String C_mobile_no_txt,String C_name_txt, String C_whats_app_no,int m) {
-
+    private void lead_cr( ) {
+        C_loan_amount_ext = loan_amount_ext.getText().toString();
         String stringNumber = C_loan_amount_ext;
         result = stringNumber.replace(",","");
         JSONObject jsonObject =new JSONObject();
         JSONObject J= null;
+
+        int m = 1;
+
+        C_mobile_no_txt = mobile_no_txt.getText().toString();
+        C_whats_app_no = whats_app_no.getText().toString();
+        C_name_txt = name_txt.getText().toString();
+        C_email_edite_txt = email_edite_txt.getText().toString();
+
+
         try {
             J =new JSONObject();
-            //  J.put(Params.email_id,email);
-            J.put(Params.user_name,C_name_txt);
-            J.put(Params.mobile_no,C_mobile_no_txt);
-            J.put(Params.loan_amount,result);
-            J.put("C_whats_app_no",C_whats_app_no);
-            J.put("Loan_Cat_id",Loan_Cat_id);
-            J.put("App",App);
+             J.put("b2b_userid",Pref.getID(getApplicationContext()));
+            J.put("user_name",C_name_txt);
+            J.put("email_id",C_email_edite_txt);
+            J.put("mobileno",C_mobile_no_txt);
+            J.put("loan_amount",result);
+            J.put("whatsapp",C_whats_app_no);
+            J.put("employment_type",Type_of_employement_ID);
+            J.put("loan_type",App);
+            J.put("loan_cat",Loan_Cat_id);
             J.put("terms_cond",m);
 
         } catch (JSONException e) {
@@ -937,17 +956,20 @@ public class Lead_Crration_Activity extends SimpleActivity {
         }
 
         Log.e("Add Home Laoan", String.valueOf(J));
-       /* progressDialog.show();
-        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, Urls.ADD_LEAD_POST, J,
+        progressDialog.show();
+
+        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, Urls.Lead_Creation, J,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
 
                         String data = String.valueOf(response);
-                        Log.e("Add_Home_loan Partner", String.valueOf(response));
+                        Log.e("Lead creation", String.valueOf(response));
                         try {
 
-                            if(response.getString(Params.status).equals("Ok")) {
+                            JSONObject jsonObject1 = response.getJSONObject("reponse");
+
+                            if(jsonObject1.getString("status").equals("success")) {
 
                                 if(App.equals("1"))
                                 {
@@ -962,18 +984,18 @@ public class Lead_Crration_Activity extends SimpleActivity {
 
                                 } else if(App.equals("20"))
                                 {
-                                    Intent intent = new Intent(Lead_Crration_Activity.this, Viability_Check_PL.class);
+                                    Intent intent = new Intent(Lead_Crration_Activity.this, Viability_Check_BL.class);
                                     startActivity(intent);
                                     finish();
 
                                 } else if(App.equals("21"))
                                 {
-                                    Intent intent = new Intent(Lead_Crration_Activity.this, Viability_Check_BL.class);
+                                    Intent intent = new Intent(Lead_Crration_Activity.this, Viability_Check_PL.class);
                                     startActivity(intent);
                                     finish();
                                 }
                             }
-                            if(response.getString(Params.status).equals("error")) {
+                            if(jsonObject1.getString(Params.status).equals("error")) {
                                 Objs.a.showToast(context, "Already Registered with Propwiser");
                             }
                         } catch (JSONException e) {
@@ -1007,7 +1029,9 @@ public class Lead_Crration_Activity extends SimpleActivity {
 
         jsonObjReq.setRetryPolicy(policy);
 
-        AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);*/
+        AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
+
+
     }
 
     @Override

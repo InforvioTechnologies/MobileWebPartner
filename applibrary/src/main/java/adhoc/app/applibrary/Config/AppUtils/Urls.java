@@ -13,6 +13,7 @@ public class Urls {
 
  /*UAT*/
    public static String Urls = "http://cscapitest.propwiser.com/mobile/mortgage_updated.php?call=";
+   public static String Urls_step = "http://cscapitest.propwiser.com/mobile/partner_loanapi.php?call=";
    public static String Urls_phamplet = "http://cscapitest.propwiser.com/mobile/pamphlet_distributor.php?call=";
 
 
@@ -77,6 +78,10 @@ public class Urls {
     public static String APPLICANT_INFO_POST = Urls + "getapplicationdetails";
     public static String APPLICANT_STATUS_POST = Urls + "get_applicantstatus";
     public static String BANK_GET = "http://cscapi.propwiser.com/mobile/rental.php?call=bank_list";
+
+    //Step changes
+    public static String Lead_Creation = Urls_step + "Lead_Creation";
+
 
     /* public static  String = "" ;
     public static  String = "" ;

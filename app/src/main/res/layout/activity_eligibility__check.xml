@@ -6,7 +6,15 @@
     android:layout_height="match_parent"
     tools:context=".Step_Changes_Screen.Eligibility_Check_PL">
 
+    <ScrollView
 
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
             <LinearLayout
                 android:padding="15dp"
                 android:orientation="vertical"
@@ -25,23 +33,14 @@
                     app:spb_stateBackgroundColor="@color/colorPrimary"
                     app:spb_maxStateNumber="four"/>
 
-                <ScrollView
-                    android:layout_weight="1"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical">
                   <LinearLayout
-                 android:padding="5dp"
+                      android:padding="5dp"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical">
                     <LinearLayout
                         android:layout_marginTop="10dp"
-                        android:padding="5dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
@@ -85,19 +84,21 @@
                                     android:layout_marginLeft="30dp"
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent">
+
                                     <Spinner
+                                        android:id="@+id/has_pan_card_spnr"
                                         style="@style/Base.Widget.AppCompat.Spinner.Underlined"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
                                         android:backgroundTint="#ff000000"
                                         android:backgroundTintMode="src_in"
-                                        android:spinnerMode="dropdown"
-                                        android:id="@+id/has_pan_card_spnr"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="match_parent" />
+                                        android:spinnerMode="dropdown" />
                                 </LinearLayout>
 
                             </LinearLayout>
                         </LinearLayout>
                         <LinearLayout
+                            android:visibility="gone"
                             android:orientation="vertical"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent">
@@ -141,7 +142,7 @@
                             </LinearLayout>
                         </LinearLayout>
                         <LinearLayout
-                            android:padding="5dp"
+
                             android:orientation="vertical"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content">
@@ -158,7 +159,7 @@
                                     style="@style/LorgeText2"
                                     android:textColor="@color/colorPrimaryDark"
                                     android:textColorHint="@color/colorPrimaryDark"
-                                    android:hint="3"
+                                    android:hint="2"
                                     android:layout_height="wrap_content" />
                                 <androidx.appcompat.widget.AppCompatTextView
                                     android:gravity="left"
@@ -193,8 +194,202 @@
 
                             </LinearLayout>
                         </LinearLayout>
+
+
+
                         <LinearLayout
-                            android:padding="5dp"
+                            android:orientation="vertical"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+                            <LinearLayout
+                                android:id="@+id/cmp_typ_ly"
+                                android:orientation="horizontal"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:gravity="left"
+                                    android:layout_marginLeft="2dp"
+                                    android:id="@+id/cmp_typ_txt"
+                                    android:layout_width="wrap_content"
+                                    style="@style/LorgeText2"
+                                    android:textColor="@color/colorPrimaryDark"
+                                    android:textColorHint="@color/colorPrimaryDark"
+                                    android:hint="3"
+                                    android:layout_height="wrap_content" />
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:gravity="left"
+                                    android:layout_marginLeft="2dp"
+                                    android:id="@+id/cmp_typ_txt1"
+                                    android:layout_width="match_parent"
+                                    style="@style/LorgeText2"
+                                    android:textColor="@color/colorPrimaryDark"
+                                    android:textColorHint="@color/colorPrimaryDark"
+                                    android:text="@string/cmp_type"
+                                    android:layout_height="wrap_content" />
+                            </LinearLayout>
+                            <LinearLayout
+                                android:gravity="center"
+                                android:orientation="horizontal"
+                                android:layout_width="match_parent"
+                                android:layout_height="50dp">
+
+                                <LinearLayout
+                                    android:layout_marginLeft="30dp"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent">
+                                    <Spinner
+                                        style="@style/Base.Widget.AppCompat.Spinner.Underlined"
+                                        android:backgroundTint="#ff000000"
+                                        android:backgroundTintMode="src_in"
+                                        android:spinnerMode="dropdown"
+                                        android:id="@+id/spinner_cmp_type"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent" />
+                                </LinearLayout>
+
+                            </LinearLayout>
+                        </LinearLayout>
+                        <LinearLayout
+
+                            android:orientation="vertical"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+                            <LinearLayout
+                                android:id="@+id/Ly_name"
+                                android:orientation="horizontal"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:gravity="left"
+                                    android:layout_marginLeft="2dp"
+                                    android:id="@+id/Company_name"
+                                    android:layout_width="wrap_content"
+                                    style="@style/LorgeText2"
+                                    android:textColor="@color/colorPrimaryDark"
+                                    android:textColorHint="@color/colorPrimaryDark"
+                                    android:hint="4"
+                                    android:layout_height="wrap_content" />
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:gravity="left"
+                                    android:layout_marginLeft="2dp"
+                                    android:id="@+id/Company_name1"
+                                    android:layout_width="match_parent"
+                                    style="@style/LorgeText2"
+                                    android:textColor="@color/colorPrimaryDark"
+                                    android:textColorHint="@color/colorPrimaryDark"
+                                    android:hint="Company Name"
+                                    android:layout_height="wrap_content" />
+                            </LinearLayout>
+                            <LinearLayout
+                                android:layout_marginLeft="30dp"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent">
+                                <androidx.appcompat.widget.AppCompatEditText
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:id="@+id/company_name_edtxt"
+                                    android:textSize="16sp"
+                                    android:inputType="text"
+                                    android:textColor="@color/colorPrimaryDark"/>
+                            </LinearLayout>
+                        </LinearLayout>
+                        <LinearLayout
+                            android:orientation="vertical"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+                            <LinearLayout
+                                android:id="@+id/Ly_desig"
+                                android:orientation="horizontal"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:gravity="left"
+                                    android:layout_marginLeft="2dp"
+                                    android:id="@+id/desg_nation_txt"
+                                    android:layout_width="wrap_content"
+                                    style="@style/LorgeText2"
+                                    android:textColor="@color/colorPrimaryDark"
+                                    android:textColorHint="@color/colorPrimaryDark"
+                                    android:hint="5"
+                                    android:layout_height="wrap_content" />
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:gravity="left"
+                                    android:layout_marginLeft="2dp"
+                                    android:layout_width="match_parent"
+                                    style="@style/LorgeText2"
+                                    android:id="@+id/desg_nation_txt1"
+                                    android:textColor="@color/colorPrimaryDark"
+                                    android:textColorHint="@color/colorPrimaryDark"
+                                    android:text="@string/des"
+                                    android:layout_height="wrap_content" />
+                            </LinearLayout>
+                            <LinearLayout
+                                android:layout_marginLeft="30dp"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent">
+                                <androidx.appcompat.widget.AppCompatEditText
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:id="@+id/designation_in_company"
+                                    android:textColor="@color/colorPrimaryDark"
+                                    android:textSize="16sp"
+                                    android:inputType="text"/>
+                            </LinearLayout>
+                        </LinearLayout>
+                        <LinearLayout
+                            android:orientation="vertical"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+                            <LinearLayout
+                                android:id="@+id/type_emp_ly"
+                                android:orientation="horizontal"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:gravity="left"
+                                    android:layout_marginLeft="2dp"
+                                    android:id="@+id/type_emp_txt"
+                                    android:layout_width="wrap_content"
+                                    style="@style/LorgeText2"
+                                    android:textColor="@color/colorPrimaryDark"
+                                    android:textColorHint="@color/colorPrimaryDark"
+                                    android:hint="6"
+                                    android:layout_height="wrap_content" />
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:gravity="left"
+                                    android:layout_marginLeft="2dp"
+                                    android:id="@+id/type_emp_txt1"
+                                    android:layout_width="match_parent"
+                                    style="@style/LorgeText2"
+                                    android:textColor="@color/colorPrimaryDark"
+                                    android:textColorHint="@color/colorPrimaryDark"
+                                    android:text="@string/emp_type"
+                                    android:layout_height="wrap_content" />
+                            </LinearLayout>
+                            <LinearLayout
+                                android:gravity="center"
+                                android:orientation="horizontal"
+                                android:layout_width="match_parent"
+                                android:layout_height="50dp">
+
+                                <LinearLayout
+                                    android:layout_marginLeft="30dp"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent">
+                                    <Spinner
+                                        style="@style/Base.Widget.AppCompat.Spinner.Underlined"
+                                        android:backgroundTint="#ff000000"
+                                        android:backgroundTintMode="src_in"
+                                        android:spinnerMode="dropdown"
+                                        android:id="@+id/employee_type_spnr"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent" />
+                                </LinearLayout>
+
+                            </LinearLayout>
+                        </LinearLayout>
+
+                        <LinearLayout
                             android:orientation="vertical"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content">
@@ -211,7 +406,7 @@
                                     style="@style/LorgeText2"
                                     android:textColor="@color/colorPrimaryDark"
                                     android:textColorHint="@color/colorPrimaryDark"
-                                    android:hint="4"
+                                    android:hint="7"
                                     android:layout_height="wrap_content" />
                                 <androidx.appcompat.widget.AppCompatTextView
                                     android:gravity="left"
@@ -285,563 +480,8 @@
                             </LinearLayout>
                         </LinearLayout>
 
-                        <LinearLayout
-                            android:orientation="vertical"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent">
-                            <LinearLayout
-                                android:id="@+id/Ly_maried"
-                                android:orientation="horizontal"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content">
-                                <androidx.appcompat.widget.AppCompatTextView
-                                    android:gravity="left"
-                                    android:layout_marginLeft="2dp"
-                                    android:id="@+id/maried_statues_txt"
-                                    android:layout_width="wrap_content"
-                                    style="@style/LorgeText2"
-                                    android:textColor="@color/colorPrimaryDark"
-                                    android:textColorHint="@color/colorPrimaryDark"
-                                    android:hint="5"
-                                    android:layout_height="wrap_content" />
-                                <androidx.appcompat.widget.AppCompatTextView
-                                    android:gravity="left"
-                                    android:layout_marginLeft="2dp"
-                                    android:layout_width="match_parent"
-                                    android:id="@+id/maried_statues_txt1"
-                                    style="@style/LorgeText2"
-                                    android:textColor="@color/colorPrimaryDark"
-                                    android:textColorHint="@color/colorPrimaryDark"
-                                    android:text="@string/marital_statues"
-                                    android:layout_height="wrap_content" />
-                            </LinearLayout>
 
-                            <LinearLayout
-                                android:layout_marginLeft="30dp"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent">
-                                <androidx.appcompat.widget.AppCompatEditText
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:textSize="16sp"
-                                    android:id="@+id/maried_statues_edt_txt"
-                                    android:textColor="@color/colorPrimaryDark"/>
-                            </LinearLayout>
-                        </LinearLayout>
-                        <LinearLayout
-                            android:orientation="vertical"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent">
-                            <LinearLayout
-                                android:id="@+id/no_of_dependent_ly"
-                                android:orientation="horizontal"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content">
-                                <androidx.appcompat.widget.AppCompatTextView
-                                    android:gravity="left"
-                                    android:layout_marginLeft="2dp"
-                                    android:id="@+id/no_of_dependent"
-                                    android:layout_width="wrap_content"
-                                    style="@style/LorgeText2"
-                                    android:textColor="@color/colorPrimaryDark"
-                                    android:textColorHint="@color/colorPrimaryDark"
-                                    android:hint="6"
-                                    android:layout_height="wrap_content" />
-                                <androidx.appcompat.widget.AppCompatTextView
-                                    android:gravity="left"
-                                    android:layout_marginLeft="2dp"
-                                    android:layout_width="match_parent"
-                                    android:id="@+id/no_of_dependent1"
-                                    style="@style/LorgeText2"
-                                    android:textColor="@color/colorPrimaryDark"
-                                    android:textColorHint="@color/colorPrimaryDark"
-                                    android:text="@string/nodf"
-                                    android:layout_height="wrap_content" />
-                            </LinearLayout>
 
-                            <LinearLayout
-                                android:layout_marginLeft="30dp"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent">
-                                <androidx.appcompat.widget.AppCompatEditText
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:textSize="16sp"
-                                    android:id="@+id/no_of_dependent_edt_txt"
-                                    android:textColor="@color/colorPrimaryDark"/>
-                            </LinearLayout>
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:orientation="vertical"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent">
-                            <LinearLayout
-                                android:id="@+id/rent_paid_ly"
-                                android:orientation="horizontal"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content">
-                                <androidx.appcompat.widget.AppCompatTextView
-                                    android:gravity="left"
-                                    android:layout_marginLeft="2dp"
-                                    android:id="@+id/rent_paid_txt"
-                                    android:layout_width="wrap_content"
-                                    style="@style/LorgeText2"
-                                    android:textColor="@color/colorPrimaryDark"
-                                    android:textColorHint="@color/colorPrimaryDark"
-                                    android:hint="7"
-                                    android:layout_height="wrap_content" />
-                                <androidx.appcompat.widget.AppCompatTextView
-                                    android:gravity="left"
-                                    android:layout_marginLeft="2dp"
-                                    android:layout_width="match_parent"
-                                    android:id="@+id/rent_paid_txt1"
-                                    style="@style/LorgeText2"
-                                    android:textColor="@color/colorPrimaryDark"
-                                    android:textColorHint="@color/colorPrimaryDark"
-                                    android:text="@string/rent_paid"
-                                    android:layout_height="wrap_content" />
-                            </LinearLayout>
-
-                            <LinearLayout
-                                android:layout_marginLeft="30dp"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent">
-                                <androidx.appcompat.widget.AppCompatEditText
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:textSize="16sp"
-                                    android:id="@+id/rent_paid_edit_txt"
-                                    android:textColor="@color/colorPrimaryDark"/>
-                            </LinearLayout>
-                        </LinearLayout>
-                        <LinearLayout
-                            android:orientation="vertical"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent">
-                            <LinearLayout
-                                android:id="@+id/education_qualification_ly"
-                                android:orientation="horizontal"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content">
-                                <androidx.appcompat.widget.AppCompatTextView
-                                    android:gravity="left"
-                                    android:layout_marginLeft="2dp"
-                                    android:id="@+id/education_qualification_txt"
-                                    android:layout_width="wrap_content"
-                                    style="@style/LorgeText2"
-                                    android:textColor="@color/colorPrimaryDark"
-                                    android:textColorHint="@color/colorPrimaryDark"
-                                    android:hint="8"
-                                    android:layout_height="wrap_content" />
-                                <androidx.appcompat.widget.AppCompatTextView
-                                    android:gravity="left"
-                                    android:layout_marginLeft="2dp"
-                                    android:layout_width="match_parent"
-                                    android:id="@+id/education_qualification_txt1"
-                                    style="@style/LorgeText2"
-                                    android:textColor="@color/colorPrimaryDark"
-                                    android:textColorHint="@color/colorPrimaryDark"
-                                    android:text="@string/education_qualification"
-                                    android:layout_height="wrap_content" />
-                            </LinearLayout>
-
-                            <LinearLayout
-                                android:layout_marginLeft="30dp"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent">
-                                <androidx.appcompat.widget.AppCompatEditText
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:textSize="16sp"
-                                    android:id="@+id/education_qualification_edit_txt"
-                                    android:textColor="@color/colorPrimaryDark"/>
-                            </LinearLayout>
-                        </LinearLayout>
-                        <LinearLayout
-                            android:padding="5dp"
-                            android:orientation="vertical"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
-                            <LinearLayout
-                                android:id="@+id/employee_rank_ly"
-                                android:orientation="horizontal"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content">
-                                <androidx.appcompat.widget.AppCompatTextView
-                                    android:gravity="left"
-                                    android:layout_marginLeft="2dp"
-                                    android:id="@+id/employee_txt"
-                                    android:layout_width="wrap_content"
-                                    style="@style/LorgeText2"
-                                    android:textColor="@color/colorPrimaryDark"
-                                    android:textColorHint="@color/colorPrimaryDark"
-                                    android:hint="9"
-                                    android:layout_height="wrap_content" />
-                                <androidx.appcompat.widget.AppCompatTextView
-                                    android:gravity="left"
-                                    android:layout_marginLeft="2dp"
-                                    android:id="@+id/employee_txt1"
-                                    android:layout_width="match_parent"
-                                    style="@style/LorgeText2"
-                                    android:textColor="@color/colorPrimaryDark"
-                                    android:textColorHint="@color/colorPrimaryDark"
-                                    android:text="@string/ER_EG"
-                                    android:layout_height="wrap_content" />
-                            </LinearLayout>
-                            <LinearLayout
-                                android:gravity="center"
-                                android:orientation="horizontal"
-                                android:layout_width="match_parent"
-                                android:layout_height="50dp">
-
-                                <LinearLayout
-                                    android:layout_marginLeft="30dp"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent">
-                                    <Spinner
-                                        style="@style/Base.Widget.AppCompat.Spinner.Underlined"
-                                        android:backgroundTint="#ff000000"
-                                        android:backgroundTintMode="src_in"
-                                        android:spinnerMode="dropdown"
-                                        android:id="@+id/employee_spinner"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="match_parent" />
-                                </LinearLayout>
-
-                            </LinearLayout>
-                        </LinearLayout>
-                        <LinearLayout
-                            android:padding="5dp"
-                            android:orientation="vertical"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
-                            <LinearLayout
-                                android:id="@+id/own_house_cond_ly"
-                                android:orientation="horizontal"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content">
-                                <androidx.appcompat.widget.AppCompatTextView
-                                    android:gravity="left"
-                                    android:layout_marginLeft="2dp"
-                                    android:id="@+id/own_house_cond_txt"
-                                    android:layout_width="wrap_content"
-                                    style="@style/LorgeText2"
-                                    android:textColor="@color/colorPrimaryDark"
-                                    android:textColorHint="@color/colorPrimaryDark"
-                                    android:hint="10"
-                                    android:layout_height="wrap_content" />
-                                <androidx.appcompat.widget.AppCompatTextView
-                                    android:gravity="left"
-                                    android:layout_marginLeft="2dp"
-                                    android:id="@+id/own_house_cond_txt1"
-                                    android:layout_width="match_parent"
-                                    style="@style/LorgeText2"
-                                    android:textColor="@color/colorPrimaryDark"
-                                    android:textColorHint="@color/colorPrimaryDark"
-                                    android:text="@string/Own_house"
-                                    android:layout_height="wrap_content" />
-                            </LinearLayout>
-                            <LinearLayout
-                                android:gravity="center"
-                                android:orientation="horizontal"
-                                android:layout_width="match_parent"
-                                android:layout_height="50dp">
-
-                                <LinearLayout
-                                    android:layout_marginLeft="30dp"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent">
-                                    <Spinner
-                                        style="@style/Base.Widget.AppCompat.Spinner.Underlined"
-                                        android:backgroundTint="#ff000000"
-                                        android:backgroundTintMode="src_in"
-                                        android:spinnerMode="dropdown"
-                                        android:id="@+id/own_house_spinner"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="match_parent" />
-                                </LinearLayout>
-
-                            </LinearLayout>
-                        </LinearLayout>
-                        <LinearLayout
-                            android:orientation="vertical"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent">
-                            <LinearLayout
-                                android:id="@+id/affordable_emi_ly"
-                                android:orientation="horizontal"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content">
-                                <androidx.appcompat.widget.AppCompatTextView
-                                    android:gravity="left"
-                                    android:layout_marginLeft="2dp"
-                                    android:id="@+id/affordable_emi_txt"
-                                    android:layout_width="wrap_content"
-                                    style="@style/LorgeText2"
-                                    android:textColor="@color/colorPrimaryDark"
-                                    android:textColorHint="@color/colorPrimaryDark"
-                                    android:hint="11"
-                                    android:layout_height="wrap_content" />
-                                <androidx.appcompat.widget.AppCompatTextView
-                                    android:gravity="left"
-                                    android:layout_marginLeft="2dp"
-                                    android:layout_width="match_parent"
-                                    android:id="@+id/affordable_emi_txt1"
-                                    style="@style/LorgeText2"
-                                    android:textColor="@color/colorPrimaryDark"
-                                    android:textColorHint="@color/colorPrimaryDark"
-                                    android:text="@string/affordable_emi"
-                                    android:layout_height="wrap_content" />
-                            </LinearLayout>
-
-                            <LinearLayout
-                                android:layout_marginLeft="30dp"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent">
-                                <androidx.appcompat.widget.AppCompatEditText
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:textSize="16sp"
-                                    android:id="@+id/affordable_emi_edt_txt"
-                                    android:textColor="@color/colorPrimaryDark"/>
-                            </LinearLayout>
-                        </LinearLayout>
-                        <LinearLayout
-                            android:orientation="vertical"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent">
-                            <LinearLayout
-                                android:id="@+id/designation_rank_ly"
-                                android:orientation="horizontal"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content">
-                                <androidx.appcompat.widget.AppCompatTextView
-                                    android:gravity="left"
-                                    android:layout_marginLeft="2dp"
-                                    android:id="@+id/designation_rank_txt"
-                                    android:layout_width="wrap_content"
-                                    style="@style/LorgeText2"
-                                    android:textColor="@color/colorPrimaryDark"
-                                    android:textColorHint="@color/colorPrimaryDark"
-                                    android:hint="12"
-                                    android:layout_height="wrap_content" />
-                                <androidx.appcompat.widget.AppCompatTextView
-                                    android:gravity="left"
-                                    android:layout_marginLeft="2dp"
-                                    android:layout_width="match_parent"
-                                    android:id="@+id/designation_rank_txt1"
-                                    style="@style/LorgeText2"
-                                    android:textColor="@color/colorPrimaryDark"
-                                    android:textColorHint="@color/colorPrimaryDark"
-                                    android:text="@string/designation_rank"
-                                    android:layout_height="wrap_content" />
-                            </LinearLayout>
-
-                            <LinearLayout
-                                android:layout_marginLeft="30dp"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent">
-                                <androidx.appcompat.widget.AppCompatEditText
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:textSize="16sp"
-                                    android:id="@+id/designation_rank_edt_txt"
-                                    android:textColor="@color/colorPrimaryDark"/>
-                            </LinearLayout>
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:orientation="vertical"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
-                            <LinearLayout
-                                android:id="@+id/cmp_typ_ly"
-                                android:orientation="horizontal"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content">
-                                <androidx.appcompat.widget.AppCompatTextView
-                                    android:gravity="left"
-                                    android:layout_marginLeft="2dp"
-                                    android:id="@+id/cmp_typ_txt"
-                                    android:layout_width="wrap_content"
-                                    style="@style/LorgeText2"
-                                    android:textColor="@color/colorPrimaryDark"
-                                    android:textColorHint="@color/colorPrimaryDark"
-                                    android:hint="13"
-                                    android:layout_height="wrap_content" />
-                                <androidx.appcompat.widget.AppCompatTextView
-                                    android:gravity="left"
-                                    android:layout_marginLeft="2dp"
-                                    android:id="@+id/cmp_typ_txt1"
-                                    android:layout_width="match_parent"
-                                    style="@style/LorgeText2"
-                                    android:textColor="@color/colorPrimaryDark"
-                                    android:textColorHint="@color/colorPrimaryDark"
-                                    android:text="@string/cmp_type"
-                                    android:layout_height="wrap_content" />
-                            </LinearLayout>
-                            <LinearLayout
-                                android:gravity="center"
-                                android:orientation="horizontal"
-                                android:layout_width="match_parent"
-                                android:layout_height="50dp">
-
-                                <LinearLayout
-                                    android:layout_marginLeft="30dp"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent">
-                                    <Spinner
-                                        style="@style/Base.Widget.AppCompat.Spinner.Underlined"
-                                        android:backgroundTint="#ff000000"
-                                        android:backgroundTintMode="src_in"
-                                        android:spinnerMode="dropdown"
-                                        android:id="@+id/spinner_cmp_type"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="match_parent" />
-                                </LinearLayout>
-
-                            </LinearLayout>
-                        </LinearLayout>
-                        <LinearLayout
-
-                            android:orientation="vertical"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent">
-                            <LinearLayout
-                                android:id="@+id/Ly_name"
-                                android:orientation="horizontal"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content">
-                                <androidx.appcompat.widget.AppCompatTextView
-                                    android:gravity="left"
-                                    android:layout_marginLeft="2dp"
-                                    android:id="@+id/Company_name"
-                                    android:layout_width="wrap_content"
-                                    style="@style/LorgeText2"
-                                    android:textColor="@color/colorPrimaryDark"
-                                    android:textColorHint="@color/colorPrimaryDark"
-                                    android:hint="14"
-                                    android:layout_height="wrap_content" />
-                                <androidx.appcompat.widget.AppCompatTextView
-                                    android:gravity="left"
-                                    android:layout_marginLeft="2dp"
-                                    android:id="@+id/Company_name1"
-                                    android:layout_width="match_parent"
-                                    style="@style/LorgeText2"
-                                    android:textColor="@color/colorPrimaryDark"
-                                    android:textColorHint="@color/colorPrimaryDark"
-                                    android:hint="Company Name"
-                                    android:layout_height="wrap_content" />
-                            </LinearLayout>
-                            <LinearLayout
-                                android:layout_marginLeft="30dp"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent">
-                                <androidx.appcompat.widget.AppCompatEditText
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:id="@+id/company_name_edtxt"
-                                    android:textSize="16sp"
-                                    android:inputType="text"
-                                    android:textColor="@color/colorPrimaryDark"/>
-                            </LinearLayout>
-                        </LinearLayout>
-                        <LinearLayout
-                            android:orientation="vertical"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent">
-                            <LinearLayout
-                                android:id="@+id/Ly_desig"
-                                android:orientation="horizontal"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content">
-                                <androidx.appcompat.widget.AppCompatTextView
-                                    android:gravity="left"
-                                    android:layout_marginLeft="2dp"
-                                    android:id="@+id/desg_nation_txt"
-                                    android:layout_width="wrap_content"
-                                    style="@style/LorgeText2"
-                                    android:textColor="@color/colorPrimaryDark"
-                                    android:textColorHint="@color/colorPrimaryDark"
-                                    android:hint="15"
-                                    android:layout_height="wrap_content" />
-                                <androidx.appcompat.widget.AppCompatTextView
-                                    android:gravity="left"
-                                    android:layout_marginLeft="2dp"
-                                    android:layout_width="match_parent"
-                                    style="@style/LorgeText2"
-                                    android:id="@+id/desg_nation_txt1"
-                                    android:textColor="@color/colorPrimaryDark"
-                                    android:textColorHint="@color/colorPrimaryDark"
-                                    android:text="@string/des"
-                                    android:layout_height="wrap_content" />
-                            </LinearLayout>
-                            <LinearLayout
-                                android:layout_marginLeft="30dp"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent">
-                                <androidx.appcompat.widget.AppCompatEditText
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:id="@+id/designation_in_company"
-                                    android:textColor="@color/colorPrimaryDark"
-                                    android:textSize="16sp"
-                                    android:inputType="text"/>
-                            </LinearLayout>
-                        </LinearLayout>
-                        <LinearLayout
-                            android:orientation="vertical"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
-                            <LinearLayout
-                                android:id="@+id/type_emp_ly"
-                                android:orientation="horizontal"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content">
-                                <androidx.appcompat.widget.AppCompatTextView
-                                    android:gravity="left"
-                                    android:layout_marginLeft="2dp"
-                                    android:id="@+id/type_emp_txt"
-                                    android:layout_width="wrap_content"
-                                    style="@style/LorgeText2"
-                                    android:textColor="@color/colorPrimaryDark"
-                                    android:textColorHint="@color/colorPrimaryDark"
-                                    android:hint="16"
-                                    android:layout_height="wrap_content" />
-                                <androidx.appcompat.widget.AppCompatTextView
-                                    android:gravity="left"
-                                    android:layout_marginLeft="2dp"
-                                    android:id="@+id/type_emp_txt1"
-                                    android:layout_width="match_parent"
-                                    style="@style/LorgeText2"
-                                    android:textColor="@color/colorPrimaryDark"
-                                    android:textColorHint="@color/colorPrimaryDark"
-                                    android:text="@string/emp_type"
-                                    android:layout_height="wrap_content" />
-                            </LinearLayout>
-                            <LinearLayout
-                                android:gravity="center"
-                                android:orientation="horizontal"
-                                android:layout_width="match_parent"
-                                android:layout_height="50dp">
-
-                                <LinearLayout
-                                    android:layout_marginLeft="30dp"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent">
-                                    <Spinner
-                                        style="@style/Base.Widget.AppCompat.Spinner.Underlined"
-                                        android:backgroundTint="#ff000000"
-                                        android:backgroundTintMode="src_in"
-                                        android:spinnerMode="dropdown"
-                                        android:id="@+id/employee_type_spnr"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="match_parent" />
-                                </LinearLayout>
-
-                            </LinearLayout>
-                        </LinearLayout>
                         <LinearLayout
                             android:orientation="vertical"
                             android:layout_width="match_parent"
@@ -859,7 +499,7 @@
                                     style="@style/LorgeText2"
                                     android:textColor="@color/colorPrimaryDark"
                                     android:textColorHint="@color/colorPrimaryDark"
-                                    android:hint="17"
+                                    android:hint="8"
                                     android:layout_height="wrap_content" />
                                 <androidx.appcompat.widget.AppCompatTextView
                                     android:gravity="left"
@@ -882,13 +522,14 @@
                                     android:id="@+id/no_of_emp_edtxt"
                                     android:textColor="@color/colorPrimaryDark"
                                     android:textSize="16sp"
-                                    android:inputType="text"/>
+                                    android:imeOptions="actionDone"
+                                    android:inputType="number"/>
                             </LinearLayout>
                         </LinearLayout>
 
                     </LinearLayout>
                     <LinearLayout
-                        android:padding="5dp"
+
                         android:orientation="vertical"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
@@ -905,7 +546,7 @@
                                 style="@style/LorgeText2"
                                 android:textColor="@color/colorPrimaryDark"
                                 android:textColorHint="@color/colorPrimaryDark"
-                                android:hint="18"
+                                android:hint="9"
                                 android:layout_height="wrap_content" />
                             <androidx.appcompat.widget.AppCompatTextView
                                 android:gravity="left"
@@ -941,7 +582,7 @@
                         </LinearLayout>
                     </LinearLayout>
                     <LinearLayout
-                        android:padding="5dp"
+
                         android:orientation="vertical"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
@@ -958,7 +599,7 @@
                                 style="@style/LorgeText2"
                                 android:textColor="@color/colorPrimaryDark"
                                 android:textColorHint="@color/colorPrimaryDark"
-                                android:hint="19"
+                                android:hint="10"
                                 android:layout_height="wrap_content" />
                             <androidx.appcompat.widget.AppCompatTextView
                                 android:gravity="left"
@@ -994,207 +635,142 @@
 
                         </LinearLayout>
                     </LinearLayout>
-                    <LinearLayout
-                        android:orientation="vertical"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
-                        <LinearLayout
-                            android:id="@+id/permanent_res_pincode_ly"
-                            android:orientation="horizontal"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
-                            <androidx.appcompat.widget.AppCompatTextView
-                                android:gravity="left"
-                                android:layout_marginLeft="2dp"
-                                android:id="@+id/permanent_res_pincode_txt"
-                                android:layout_width="wrap_content"
-                                style="@style/LorgeText2"
-                                android:textColor="@color/colorPrimaryDark"
-                                android:textColorHint="@color/colorPrimaryDark"
-                                android:hint="20"
-                                android:layout_height="wrap_content" />
-                            <androidx.appcompat.widget.AppCompatTextView
-                                android:gravity="left"
-                                android:layout_marginLeft="2dp"
-                                android:layout_width="match_parent"
-                                android:id="@+id/permanent_res_pincode_txt1"
-                                style="@style/LorgeText2"
-                                android:textColor="@color/colorPrimaryDark"
-                                android:textColorHint="@color/colorPrimaryDark"
-                                android:text="@string/perment_res_pincod"
-                                android:layout_height="wrap_content" />
-                        </LinearLayout>
-                        <LinearLayout
-                            android:layout_marginLeft="30dp"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent">
-                            <androidx.appcompat.widget.AppCompatAutoCompleteTextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:id="@+id/permanent_res_pincode_edtxt"
-                                android:textColor="@color/colorPrimaryDark"
-                                android:textSize="16sp"
-                                android:inputType="number"/>
 
-                        </LinearLayout>
-                    </LinearLayout>
-                    <LinearLayout
-                    android:padding="5dp"
-                    android:orientation="vertical"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                    <LinearLayout
-                        android:id="@+id/permanent_residence_type"
-                        android:orientation="horizontal"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-                        <androidx.appcompat.widget.AppCompatTextView
-                            android:gravity="left"
-                            android:layout_marginLeft="2dp"
-                            android:id="@+id/permenant_res_txt"
-                            android:layout_width="wrap_content"
-                            style="@style/LorgeText2"
-                            android:textColor="@color/colorPrimaryDark"
-                            android:textColorHint="@color/colorPrimaryDark"
-                            android:hint="20"
-                            android:layout_height="wrap_content" />
-                        <androidx.appcompat.widget.AppCompatTextView
-                            android:gravity="left"
-                            android:layout_marginLeft="2dp"
-                            android:id="@+id/permenant_res_txt1"
-                            android:layout_width="match_parent"
-                            style="@style/LorgeText2"
-                            android:textColor="@color/colorPrimaryDark"
-                            android:textColorHint="@color/colorPrimaryDark"
-                            android:text="@string/permanent_res_type"
-                            android:layout_height="wrap_content" />
-                    </LinearLayout>
-                    <LinearLayout
-                        android:gravity="center"
-                        android:orientation="horizontal"
-                        android:layout_width="match_parent"
-                        android:layout_height="50dp">
+                      <LinearLayout
+                          android:orientation="vertical"
+                          android:layout_width="match_parent"
+                          android:layout_height="match_parent">
+                          <LinearLayout
+                              android:id="@+id/no_of_dependent_ly"
+                              android:orientation="horizontal"
+                              android:layout_width="match_parent"
+                              android:layout_height="wrap_content">
+                              <androidx.appcompat.widget.AppCompatTextView
+                                  android:gravity="left"
+                                  android:layout_marginLeft="2dp"
+                                  android:id="@+id/no_of_dependent"
+                                  android:layout_width="wrap_content"
+                                  style="@style/LorgeText2"
+                                  android:textColor="@color/colorPrimaryDark"
+                                  android:textColorHint="@color/colorPrimaryDark"
+                                  android:hint="11"
+                                  android:layout_height="wrap_content" />
+                              <androidx.appcompat.widget.AppCompatTextView
+                                  android:gravity="left"
+                                  android:layout_marginLeft="2dp"
+                                  android:layout_width="match_parent"
+                                  android:id="@+id/no_of_dependent1"
+                                  style="@style/LorgeText2"
+                                  android:textColor="@color/colorPrimaryDark"
+                                  android:textColorHint="@color/colorPrimaryDark"
+                                  android:text="@string/nodf"
+                                  android:layout_height="wrap_content" />
+                          </LinearLayout>
 
-                        <LinearLayout
-                            android:layout_marginLeft="30dp"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent">
-                            <Spinner
+                          <LinearLayout
+                              android:layout_marginLeft="30dp"
+                              android:layout_width="match_parent"
+                              android:layout_height="match_parent">
+                              <androidx.appcompat.widget.AppCompatEditText
+                                  android:layout_width="match_parent"
+                                  android:layout_height="wrap_content"
+                                  android:textSize="16sp"
+                                  android:inputType="number"
+                                  android:imeOptions="actionNext"
+                                  android:id="@+id/no_of_dependent_edt_txt"
+                                  android:textColor="@color/colorPrimaryDark"/>
+                          </LinearLayout>
+                      </LinearLayout>
+                      <LinearLayout
+                          android:orientation="vertical"
+                          android:layout_width="match_parent"
+                          android:layout_height="match_parent">
+                          <LinearLayout
+                              android:id="@+id/education_qualification_ly"
+                              android:orientation="horizontal"
+                              android:layout_width="match_parent"
+                              android:layout_height="wrap_content">
+                              <androidx.appcompat.widget.AppCompatTextView
+                                  android:gravity="left"
+                                  android:layout_marginLeft="2dp"
+                                  android:id="@+id/education_qualification_txt"
+                                  android:layout_width="wrap_content"
+                                  style="@style/LorgeText2"
+                                  android:textColor="@color/colorPrimaryDark"
+                                  android:textColorHint="@color/colorPrimaryDark"
+                                  android:hint="12"
+                                  android:layout_height="wrap_content" />
+                              <androidx.appcompat.widget.AppCompatTextView
+                                  android:gravity="left"
+                                  android:layout_marginLeft="2dp"
+                                  android:layout_width="match_parent"
+                                  android:id="@+id/education_qualification_txt1"
+                                  style="@style/LorgeText2"
+                                  android:textColor="@color/colorPrimaryDark"
+                                  android:textColorHint="@color/colorPrimaryDark"
+                                  android:text="@string/education_qualification"
+                                  android:layout_height="wrap_content" />
+                          </LinearLayout>
 
-                                style="@style/Base.Widget.AppCompat.Spinner.Underlined"
-                                android:backgroundTint="#ff000000"
-                                android:backgroundTintMode="src_in"
-                                android:spinnerMode="dropdown"
-                                android:id="@+id/perment_restype_spnr"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent" />
-                        </LinearLayout>
+                          <LinearLayout
+                              android:layout_marginLeft="30dp"
+                              android:layout_width="match_parent"
+                              android:layout_height="match_parent">
+                              <androidx.appcompat.widget.AppCompatEditText
+                                  android:layout_width="match_parent"
+                                  android:layout_height="wrap_content"
+                                  android:textSize="16sp"
+                                  android:imeOptions="actionNext"
+                                  android:inputType="text"
+                                  android:id="@+id/education_qualification_edit_txt"
+                                  android:textColor="@color/colorPrimaryDark"/>
+                          </LinearLayout>
+                      </LinearLayout>
+                      <LinearLayout
+                          android:orientation="vertical"
+                          android:layout_width="match_parent"
+                          android:layout_height="match_parent">
+                          <LinearLayout
+                              android:id="@+id/monthly_afforabl_mi_ly"
+                              android:orientation="horizontal"
+                              android:layout_width="match_parent"
+                              android:layout_height="wrap_content">
+                              <androidx.appcompat.widget.AppCompatTextView
+                                  android:gravity="left"
+                                  android:layout_marginLeft="2dp"
+                                  android:id="@+id/monthly_pay_mi_amt"
+                                  android:layout_width="wrap_content"
+                                  style="@style/LorgeText2"
+                                  android:textColor="@color/colorPrimaryDark"
+                                  android:textColorHint="@color/colorPrimaryDark"
+                                  android:hint="13"
+                                  android:layout_height="wrap_content" />
+                              <androidx.appcompat.widget.AppCompatTextView
+                                  android:gravity="left"
+                                  android:layout_marginLeft="2dp"
+                                  android:layout_width="match_parent"
+                                  android:id="@+id/monthly_pay_mi_amt1"
+                                  style="@style/LorgeText2"
+                                  android:textColor="@color/colorPrimaryDark"
+                                  android:textColorHint="@color/colorPrimaryDark"
+                                  android:text="@string/mly_aft_emi"
+                                  android:layout_height="wrap_content" />
+                          </LinearLayout>
 
-                    </LinearLayout>
-                </LinearLayout>
-                <LinearLayout
-                    android:id="@+id/relative_if_rented_ly"
-                    android:orientation="vertical"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                    <LinearLayout
-
-                        android:padding="5dp"
-                        android:orientation="vertical"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-                        <LinearLayout
-                            android:id="@+id/permanent_res_type_ly"
-                            android:orientation="horizontal"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
-                            <androidx.appcompat.widget.AppCompatTextView
-                                android:gravity="left"
-                                android:layout_marginLeft="2dp"
-                                android:id="@+id/own_hose_relative_txt"
-                                android:layout_width="wrap_content"
-                                style="@style/LorgeText2"
-                                android:textColor="@color/colorPrimaryDark"
-                                android:textColorHint="@color/colorPrimaryDark"
-                                android:hint="21"
-                                android:layout_height="wrap_content" />
-                            <androidx.appcompat.widget.AppCompatTextView
-                                android:gravity="left"
-                                android:layout_marginLeft="2dp"
-                                android:id="@+id/own_hose_relative_txt1"
-                                android:layout_width="match_parent"
-                                style="@style/LorgeText2"
-                                android:textColor="@color/colorPrimaryDark"
-                                android:textColorHint="@color/colorPrimaryDark"
-                                android:text="@string/own_hous"
-                                android:layout_height="wrap_content" />
-                        </LinearLayout>
-                        <LinearLayout
-                            android:gravity="center"
-                            android:orientation="horizontal"
-                            android:layout_width="match_parent"
-                            android:layout_height="50dp">
-
-                            <LinearLayout
-                                android:layout_marginLeft="30dp"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent">
-                                <Spinner
-                                    style="@style/Base.Widget.AppCompat.Spinner.Underlined"
-                                    android:backgroundTint="#ff000000"
-                                    android:backgroundTintMode="src_in"
-                                    android:spinnerMode="dropdown"
-                                    android:id="@+id/own_hose_relative_spinner"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent" />
-                            </LinearLayout>
-                        </LinearLayout>
-                    </LinearLayout>
-                    <LinearLayout
-                        android:orientation="vertical"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
-                        <LinearLayout
-                            android:id="@+id/rel_full_address_ly"
-                            android:orientation="horizontal"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
-                            <androidx.appcompat.widget.AppCompatTextView
-                                android:gravity="left"
-                                android:layout_marginLeft="2dp"
-                                android:id="@+id/rel_full_address_txt"
-                                android:layout_width="wrap_content"
-                                style="@style/LorgeText2"
-                                android:textColor="@color/colorPrimaryDark"
-                                android:textColorHint="@color/colorPrimaryDark"
-                                android:hint="22"
-                                android:layout_height="wrap_content" />
-                            <androidx.appcompat.widget.AppCompatTextView
-                                android:gravity="left"
-                                android:layout_marginLeft="2dp"
-                                android:layout_width="match_parent"
-                                android:id="@+id/rel_full_address_txt1"
-                                style="@style/LorgeText2"
-                                android:textColor="@color/colorPrimaryDark"
-                                android:textColorHint="@color/colorPrimaryDark"
-                                android:text="@string/full_addres"
-                                android:layout_height="wrap_content" />
-                        </LinearLayout>
-                        <LinearLayout
-                            android:layout_marginLeft="30dp"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent">
-                            <androidx.appcompat.widget.AppCompatEditText
-                                android:layout_width="match_parent"
-                                android:id="@+id/rel_full_address_edtxt"
-                                android:textColor="@color/colorPrimaryDark"
-                                android:textSize="16sp"
-                                android:inputType="text"
-                                android:layout_height="wrap_content"/>
-                        </LinearLayout>
-                    </LinearLayout>
-                </LinearLayout>
-
+                          <LinearLayout
+                              android:layout_marginLeft="30dp"
+                              android:layout_width="match_parent"
+                              android:layout_height="match_parent">
+                              <androidx.appcompat.widget.AppCompatEditText
+                                  android:layout_width="match_parent"
+                                  android:layout_height="wrap_content"
+                                  android:textSize="16sp"
+                                  android:inputType="number"
+                                  android:imeOptions="actionDone"
+                                  android:id="@+id/emi_amount_edit_txt"
+                                  android:textColor="@color/colorPrimaryDark"/>
+                          </LinearLayout>
+                      </LinearLayout>
 
             </LinearLayout>
 
@@ -1216,7 +792,6 @@
 
                 </LinearLayout>
                 <LinearLayout
-                    android:padding="5dp"
                     android:orientation="vertical"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
@@ -1233,7 +808,7 @@
                             android:layout_height="match_parent"
                             android:layout_marginLeft="2dp"
                             android:gravity="left"
-                            android:hint="23"
+                            android:hint="14"
                             android:textColor="@color/colorPrimaryDark"
                             android:textColorHint="@color/colorPrimaryDark" />
                         <androidx.appcompat.widget.AppCompatTextView
@@ -1288,7 +863,7 @@
                             style="@style/LorgeText2"
                             android:textColor="@color/colorPrimaryDark"
                             android:textColorHint="@color/colorPrimaryDark"
-                            android:hint="24"
+                            android:hint="15"
                             android:layout_height="wrap_content" />
                         <androidx.appcompat.widget.AppCompatTextView
                             android:gravity="left"
@@ -1298,7 +873,7 @@
                             style="@style/LorgeText2"
                             android:textColor="@color/colorPrimaryDark"
                             android:textColorHint="@color/colorPrimaryDark"
-                            android:text="@string/other_income"
+                            android:text="Amount"
                             android:layout_height="wrap_content" />
                     </LinearLayout>
                     <LinearLayout
@@ -1315,7 +890,6 @@
                     </LinearLayout>
                 </LinearLayout>
                 <LinearLayout
-                    android:padding="5dp"
                     android:orientation="vertical"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
@@ -1332,7 +906,7 @@
                             style="@style/LorgeText2"
                             android:textColor="@color/colorPrimaryDark"
                             android:textColorHint="@color/colorPrimaryDark"
-                            android:hint="23"
+                            android:hint="16"
                             android:layout_height="wrap_content" />
                         <androidx.appcompat.widget.AppCompatTextView
                             android:gravity="left"
@@ -1342,7 +916,7 @@
                             style="@style/LorgeText2"
                             android:textColor="@color/colorPrimaryDark"
                             android:textColorHint="@color/colorPrimaryDark"
-                            android:text="@string/gst_reflect"
+                            android:text="Is Refleted in ITR "
                             android:layout_height="wrap_content" />
                     </LinearLayout>
                     <LinearLayout
@@ -1370,8 +944,7 @@
                     </LinearLayout>
                 </LinearLayout>
 
-                </LinearLayout>
-                </ScrollView>
+
 
                 <LinearLayout
                     android:layout_marginTop="10dp"
@@ -1399,5 +972,6 @@
 
                 </LinearLayout>
             </LinearLayout>
-
+            </LinearLayout>
+</ScrollView>
 </LinearLayout>
