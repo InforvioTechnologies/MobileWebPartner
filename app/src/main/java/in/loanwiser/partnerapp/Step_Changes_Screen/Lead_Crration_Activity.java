@@ -117,7 +117,7 @@ public class Lead_Crration_Activity extends SimpleActivity {
             @Override
             public void onClick(View view) {
 
-                Intent intent = new Intent(Lead_Crration_Activity.this, Viability_Check_PL.class);
+                Intent intent = new Intent(Lead_Crration_Activity.this, Eligibility_Check_PL.class);
                 startActivity(intent);
                 finish();
 
@@ -971,6 +971,9 @@ public class Lead_Crration_Activity extends SimpleActivity {
 
                             if(jsonObject1.getString("status").equals("success")) {
 
+                                String user_id = jsonObject1.getString("user_id");
+                                String transaction_id = jsonObject1.getString("transaction_id");
+
                                 if(App.equals("1"))
                                 {
                                     Intent intent = new Intent(Lead_Crration_Activity.this, Viability_check_HL.class);
@@ -991,6 +994,8 @@ public class Lead_Crration_Activity extends SimpleActivity {
                                 } else if(App.equals("21"))
                                 {
                                     Intent intent = new Intent(Lead_Crration_Activity.this, Viability_Check_PL.class);
+                                    intent.putExtra("user_id", user_id);
+                                    intent.putExtra("transaction_id", transaction_id);
                                     startActivity(intent);
                                     finish();
                                 }

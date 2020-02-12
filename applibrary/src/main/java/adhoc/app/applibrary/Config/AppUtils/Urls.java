@@ -81,6 +81,7 @@ public class Urls {
 
     //Step changes
     public static String Lead_Creation = Urls_step + "Lead_Creation";
+    public static String VIABILITY_CHECK = Urls_step + "viability_check";
 
 
     /* public static  String = "" ;

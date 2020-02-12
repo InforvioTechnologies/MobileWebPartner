@@ -17,19 +17,20 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <LinearLayout
-                android:background="@color/colorPrimary"
-                android:gravity="center"
+
+                android:gravity="left"
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <androidx.appcompat.widget.AppCompatTextView
-                    android:gravity="center"
+                    android:gravity="left"
                     android:layout_width="match_parent"
                     android:id="@+id/business_details_txt"
                     style="@style/LorgeText"
-                    android:textSize="16sp"
-                    android:textColor="@color/white"
-                    android:text="Co-Applicant Details"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/colorPrimary"
+                    android:text="Co Applicant Personal/Work Details"
                     android:layout_height="wrap_content" />
             </LinearLayout>
         </LinearLayout>
@@ -72,8 +73,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="16sp"
-                    android:inputType="number"
-                    android:id="@+id/pl_Ly_co_app_edit_txt_name"
+                    android:inputType="text"
+                    android:id="@+id/pl_Ly_co_app_self_edit_txt_name"
                     android:textColor="@color/colorPrimaryDark"/>
             </LinearLayout>
         </LinearLayout>
@@ -122,14 +123,13 @@
                         android:backgroundTint="#ff000000"
                         android:backgroundTintMode="src_in"
                         android:spinnerMode="dropdown"
-                        android:id="@+id/emp_type"
+                        android:id="@+id/pl_Ly_co_app_self_emp_type"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent" />
                 </LinearLayout>
 
             </LinearLayout>
         </LinearLayout>
-
 
             <LinearLayout
                 android:orientation="vertical"
@@ -170,7 +170,7 @@
                         android:layout_height="wrap_content"
                         android:textSize="16sp"
                         android:inputType="number"
-                        android:id="@+id/age_edit_txt"
+                        android:id="@+id/pl_Ly_co_app_self_age_edit_txt"
                         android:textColor="@color/colorPrimaryDark"/>
                 </LinearLayout>
             </LinearLayout>
@@ -178,28 +178,475 @@
 
 
         <LinearLayout
+            android:orientation="vertical"
+            android:id="@+id/pl_self_individual"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <include layout="@layout/pl_co_app_viability_bl_individual"/>
+        </LinearLayout>
+        <LinearLayout
+            android:visibility="gone"
+            android:orientation="vertical"
+            android:id="@+id/pl_formin_dairy"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <include layout="@layout/pl_co_app_viability_farming_dairy_poultry"/>
+        </LinearLayout>
+        <LinearLayout
+            android:visibility="gone"
+            android:orientation="vertical"
+            android:id="@+id/pl_self_business"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <include layout="@layout/pl_co_app_viability_bl_ownbusiness"/>
+        </LinearLayout>
 
+        <LinearLayout
             android:orientation="vertical"
-            android:id="@+id/individual"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-            <include layout="@layout/viability_bl_individual"/>
+            <LinearLayout
+                android:id="@+id/business_proof_ly_P"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:gravity="left"
+                    android:layout_marginLeft="2dp"
+                    android:id="@+id/business_proof_txt_P"
+                    android:layout_width="wrap_content"
+                    style="@style/LorgeText2"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textColorHint="@color/colorPrimaryDark"
+                    android:hint="12"
+                    android:layout_height="wrap_content" />
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:gravity="left"
+                    android:layout_marginLeft="2dp"
+                    android:id="@+id/business_proof_txt1_P"
+                    android:layout_width="match_parent"
+                    style="@style/LorgeText2"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textColorHint="@color/colorPrimaryDark"
+                    android:text="@string/bus_proof"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+            <LinearLayout
+                android:visibility="gone"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="50dp">
+
+                <LinearLayout
+                    android:layout_marginLeft="30dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                    <Spinner
+                        style="@style/Base.Widget.AppCompat.Spinner.Underlined"
+                        android:backgroundTint="#ff000000"
+                        android:backgroundTintMode="src_in"
+                        android:spinnerMode="dropdown"
+                        android:id="@+id/spinner_business_proof_txt_P"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="50dp">
+
+                <LinearLayout
+                    android:layout_marginLeft="30dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                    <Spinner
+                        style="@style/Base.Widget.AppCompat.Spinner.Underlined"
+                        android:backgroundTint="#ff000000"
+                        android:backgroundTintMode="src_in"
+                        android:spinnerMode="dropdown"
+                        android:id="@+id/co_self_bus_vintage_proof"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+                </LinearLayout>
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingLeft="16dp"
+                android:elevation="6dp"
+                android:layout_margin="10dp"
+                android:orientation="horizontal"
+                android:background="@color/paper">
+
+                <com.doodle.android.chips.ChipsView
+                    android:id="@+id/self_cv_bus_vintage_proof"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:overScrollMode="never"
+                    android:textAppearance="@style/ChipTextStyle_Selected"
+                    app:cv_max_height="100dp"
+                    app:cv_vertical_spacing="2dp"
+                    />
+
+            </LinearLayout>
+
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:id="@+id/business_proof"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:gravity="left"
+                    android:layout_marginLeft="2dp"
+
+                    android:layout_width="wrap_content"
+                    android:id="@+id/busines_inco_proof_individua_txt"
+                    style="@style/LorgeText2"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textColorHint="@color/colorPrimaryDark"
+                    android:hint="10"
+                    android:layout_height="wrap_content" />
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:gravity="left"
+                    android:layout_marginLeft="2dp"
+                    android:id="@+id/busines_inco_proof_individua_txt1"
+                    android:layout_width="match_parent"
+                    style="@style/LorgeText2"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textColorHint="@color/colorPrimaryDark"
+                    android:text="@string/business_proof"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+            <LinearLayout
+                android:visibility="gone"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="50dp">
+
+                <LinearLayout
+                    android:layout_marginLeft="30dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                    <Spinner
+                        style="@style/Base.Widget.AppCompat.Spinner.Underlined"
+                        android:backgroundTint="#ff000000"
+                        android:backgroundTintMode="src_in"
+                        android:spinnerMode="dropdown"
+                        android:id="@+id/pl_co_app_ind_business_incom_proof"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="50dp">
+
+                <LinearLayout
+                    android:layout_marginLeft="30dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                    <Spinner
+                        style="@style/Base.Widget.AppCompat.Spinner.Underlined"
+                        android:backgroundTint="#ff000000"
+                        android:backgroundTintMode="src_in"
+                        android:spinnerMode="dropdown"
+                        android:id="@+id/co_self_bussiness_proof"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+                </LinearLayout>
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingLeft="16dp"
+                android:elevation="6dp"
+                android:layout_margin="10dp"
+                android:orientation="horizontal"
+                android:background="@color/paper">
+
+                <com.doodle.android.chips.ChipsView
+                    android:id="@+id/self_cv_business_proof"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:overScrollMode="never"
+                    android:textAppearance="@style/ChipTextStyle_Selected"
+                    app:cv_max_height="100dp"
+                    app:cv_vertical_spacing="2dp"
+                    />
+
+            </LinearLayout>
+
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:id="@+id/office_setup_indi"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:gravity="left"
+                    android:layout_marginLeft="2dp"
+                    android:id="@+id/office_setup_txt_ind"
+                    android:layout_width="wrap_content"
+                    style="@style/LorgeText2"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textColorHint="@color/colorPrimaryDark"
+                    android:hint="11"
+                    android:layout_height="wrap_content" />
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:gravity="left"
+                    android:layout_marginLeft="2dp"
+                    android:id="@+id/pl_co_app_ind_office_setup_txt_ind1"
+                    android:layout_width="match_parent"
+                    style="@style/LorgeText2"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textColorHint="@color/colorPrimaryDark"
+                    android:text="@string/office_shop_setup"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+            <LinearLayout
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="60dp">
+
+                <LinearLayout
+                    android:layout_marginLeft="30dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                    <Spinner
+                        style="@style/Base.Widget.AppCompat.Spinner.Underlined"
+                        android:backgroundTint="#ff000000"
+                        android:backgroundTintMode="src_in"
+                        android:spinnerMode="dropdown"
+                        android:id="@+id/pl_co_app_ind_spinner_office_shop_setup_ind"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+                </LinearLayout>
+
+            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:id="@+id/pl_ly_co_app_assets_own"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:gravity="left"
+                    android:layout_marginLeft="2dp"
+                    android:id="@+id/pl_co_app_assets_own_txt1"
+                    android:layout_width="wrap_content"
+                    style="@style/LorgeText2"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textColorHint="@color/colorPrimaryDark"
+                    android:hint="12"
+                    android:layout_height="wrap_content" />
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:gravity="left"
+                    android:layout_marginLeft="2dp"
+                    android:id="@+id/pl_co_app_assets_own_txt2"
+                    android:layout_width="match_parent"
+                    style="@style/LorgeText2"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textColorHint="@color/colorPrimaryDark"
+                    android:text="@string/assets_own"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+            <LinearLayout
+                android:visibility="gone"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="50dp">
+
+                <LinearLayout
+
+                    android:layout_marginLeft="30dp"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:textSize="16sp"
+                        android:background="@drawable/capsul_button_drop_down"
+                        android:inputType="number"
+                        android:id="@+id/pl_co_app_assets_own_txt_multiselect"
+                        android:textColor="@color/colorPrimaryDark"/>
+                </LinearLayout>
+
+
+            </LinearLayout>
+            <LinearLayout
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="50dp">
+
+                <LinearLayout
+                    android:layout_marginLeft="30dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                    <Spinner
+                        style="@style/Base.Widget.AppCompat.Spinner.Underlined"
+                        android:backgroundTint="#ff000000"
+                        android:backgroundTintMode="src_in"
+                        android:spinnerMode="dropdown"
+                        android:id="@+id/co_self_asstes_owned"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+                </LinearLayout>
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingLeft="16dp"
+                android:elevation="6dp"
+                android:layout_margin="10dp"
+                android:orientation="horizontal"
+                android:background="@color/paper">
+
+                <com.doodle.android.chips.ChipsView
+                    android:id="@+id/co_self_asstes_owned_CV"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:overScrollMode="never"
+                    android:textAppearance="@style/ChipTextStyle_Selected"
+                    app:cv_max_height="100dp"
+                    app:cv_vertical_spacing="2dp"
+                    />
+
+            </LinearLayout>
+
         </LinearLayout>
         <LinearLayout
             android:visibility="gone"
+            android:id="@+id/pl_co_self_ofiice_res_details"
             android:orientation="vertical"
-            android:id="@+id/formin_dairy"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-            <include layout="@layout/viability_farming_dairy_poultry"/>
-        </LinearLayout>
-        <LinearLayout
-            android:visibility="gone"
-            android:orientation="vertical"
-            android:id="@+id/self_business"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <include layout="@layout/viability_bl_ownbusiness"/>
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <LinearLayout
+                    android:id="@+id/resi_pincode"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:gravity="left"
+                        android:layout_marginLeft="2dp"
+                        android:id="@+id/txt_residence_pincode"
+                        android:layout_width="wrap_content"
+                        style="@style/LorgeText2"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textColorHint="@color/colorPrimaryDark"
+                        android:hint="13"
+                        android:layout_height="wrap_content" />
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:gravity="left"
+                        android:layout_marginLeft="2dp"
+                        android:layout_width="match_parent"
+                        style="@style/LorgeText2"
+                        android:id="@+id/txt_residence_pincode1"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textColorHint="@color/colorPrimaryDark"
+                        android:text="@string/off_shop"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_marginLeft="30dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <androidx.appcompat.widget.AppCompatAutoCompleteTextView
+                        android:id="@+id/pl_co_app_office_residence_pincode_edite_txt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="number"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="16sp" />
+                </LinearLayout>
+            </LinearLayout>
+            <LinearLayout
+                android:padding="5dp"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:id="@+id/office_residence_type"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:gravity="left"
+                        android:layout_marginLeft="2dp"
+                        android:id="@+id/office_txt_residence_type"
+                        android:layout_width="wrap_content"
+                        style="@style/LorgeText2"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textColorHint="@color/colorPrimaryDark"
+                        android:hint="14"
+                        android:layout_height="wrap_content" />
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:gravity="left"
+                        android:layout_marginLeft="2dp"
+                        android:id="@+id/office_txt_residence_type1"
+                        android:layout_width="match_parent"
+                        style="@style/LorgeText2"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textColorHint="@color/colorPrimaryDark"
+                        android:text="@string/off_residence"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+                <LinearLayout
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp">
+
+                    <LinearLayout
+                        android:layout_marginLeft="30dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+                        <Spinner
+                            style="@style/Base.Widget.AppCompat.Spinner.Underlined"
+                            android:backgroundTint="#ff000000"
+                            android:backgroundTintMode="src_in"
+                            android:spinnerMode="dropdown"
+                            android:id="@+id/pl_co_self_office_spinner_residence_type"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent" />
+                    </LinearLayout>
+
+                </LinearLayout>
+            </LinearLayout>
         </LinearLayout>
 
     </LinearLayout>

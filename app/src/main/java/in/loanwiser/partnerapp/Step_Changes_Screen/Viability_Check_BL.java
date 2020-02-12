@@ -535,7 +535,7 @@ public class Viability_Check_BL extends SimpleActivity {
             }
         });
 
-       /* lead_viy_step2.setOnClickListener(new View.OnClickListener() {
+        lead_viy_step2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
@@ -548,12 +548,12 @@ public class Viability_Check_BL extends SimpleActivity {
                         return;
                     }
 
-                  *//*  if(PAN_id.equals("0"))
+                    if(PAN_id.equals("0"))
                     {
                         Toast.makeText(context,"please Select the Pan Card",Toast.LENGTH_SHORT).show();
 
                     }else
-                    {*//*
+                    {
 
                         if(Employee_type_Id.equals("1"))
                         {
@@ -567,23 +567,23 @@ public class Viability_Check_BL extends SimpleActivity {
                                     Toast.makeText(context,"please Select the vocation Type",Toast.LENGTH_SHORT).show();
                                 }else  if(vocation_type_forming_id.equals("1"))
                                 {
-                                   *//* if (!Actual_business_forming()) {
+                                    if (!Actual_business_forming()) {
                                         return;
-                                    }*//*
+                                    }
                                     validation_forming();
 
                                 }else if(vocation_type_forming_id.equals("2"))
                                 {
-                                   *//* if (!Actual_business_forming()) {
+                                    if (!Actual_business_forming()) {
                                         return;
-                                    }*//*
+                                    }
                                     validate_dairy();
 
                                 }else if(vocation_type_forming_id.equals("3"))
                                 {
-                                   *//* if (!Actual_business_forming()) {
+                                    if (!Actual_business_forming()) {
                                         return;
-                                    }*//*
+                                    }
                                     validation_poultry();
                                 }
 
@@ -593,14 +593,14 @@ public class Viability_Check_BL extends SimpleActivity {
 
                         }
 
-                   *//* }*//*
+                    }
                     //
 
                 }
             ////////////////////////
 
             }
-        });*/
+        });
 
     }
 
@@ -1547,7 +1547,7 @@ public class Viability_Check_BL extends SimpleActivity {
                             Office_Shop_(office_shop);
                             Vehicle_Type_(vehicle_Type);
                             Crop_type_function(crop_type);
-                            Selling_milk(sell_milk);
+                           // Selling_milk(sell_milk);
 
                             Selling_milk(sell_milk);
 
@@ -2279,7 +2279,7 @@ public class Viability_Check_BL extends SimpleActivity {
 
         franchise_SA = new String[franchise_ar.length()];
         for (int i=0;i<franchise_ar.length();i++){
-            JSONObject J =  franchise.getJSONObject(i);
+            JSONObject J =  franchise_ar.getJSONObject(i);
             franchise_SA[i] = J.getString("value");
             final List<String> loan_type_list = new ArrayList<>(Arrays.asList(franchise_SA));
             franchise__Adapter = new ArrayAdapter<String>(context, R.layout.view_spinner_item, loan_type_list){
@@ -2305,8 +2305,8 @@ public class Viability_Check_BL extends SimpleActivity {
 
                     try {
 
-                        franchise__id = franchise.getJSONObject(position).getString("id");
-                        franchise__value = franchise.getJSONObject(position).getString("value");
+                        franchise__id = franchise_ar.getJSONObject(position).getString("id");
+                        franchise__value = franchise_ar.getJSONObject(position).getString("value");
 
                     } catch (JSONException e) {
                         e.printStackTrace();

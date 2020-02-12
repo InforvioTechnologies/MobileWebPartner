@@ -2570,6 +2570,7 @@ public class Add_Applicant extends Fragment {
                         aVSB_co_self_business_proof = VSB_co_self_business_proof.split(",");
                         businessproo1 = new JSONArray(Arrays.asList(aVSB_co_self_business_proof));
                     }
+
                     SB_self = new StringBuffer();
                     ArrayList<IncomeProofPOJO> SB_selfList = dataAdapter_Self.self;
                     for(int i=0;i<SB_selfList.size();i++){
@@ -2579,6 +2580,7 @@ public class Add_Applicant extends Fragment {
                             String responseID1 = String.valueOf(SB_self);
                         }
                     }
+
                     if (SB_self.length()> 0) {
 
                         String responseID1 = String.valueOf(SB_self);
@@ -3447,6 +3449,7 @@ public class Add_Applicant extends Fragment {
                                   JSONArray occ, JSONArray month_in,JSONArray resd,JSONArray b_reg,
                                   JSONArray b_proof,JSONArray ic_sal,JSONArray ic_self){
         JSONObject jsonObject =new JSONObject();
+
         JSONObject J= null;
         try {
 

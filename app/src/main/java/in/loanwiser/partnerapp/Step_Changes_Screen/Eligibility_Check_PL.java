@@ -20,6 +20,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.widget.AppCompatAutoCompleteTextView;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.AppCompatEditText;
 import androidx.appcompat.widget.AppCompatTextView;
@@ -61,17 +62,22 @@ public class Eligibility_Check_PL extends SimpleActivity {
     InputMethodManager imm;
     private AlertDialog progressDialog;
     JSONArray Company_type,Type_employee,Current_Residence,epf_deduct,
-            Residence_ownership,permanent_adddress,relation_own,Other_income,gst_reflect,employee_id_ar,have_pan_ar;
+            Residence_ownership,permanent_adddress,relation_own,Other_income,gst_reflect,employee_id_ar,have_pan_ar,
+            Marital_Status,Reflected_ITR;
 
     String[] Company_type_SA,Employee_type_SA,Current_res_SA,Epf_detected_SA,Permanent_SA,
-            Own_house_relativ_SA,Pincode_SA,Other_income_SA,gst_reflect_SA,Employe_ID_SA,PAN_ID_SA;
+            Own_house_relativ_SA,Pincode_SA,Other_income_SA,gst_reflect_SA,Employe_ID_SA,PAN_ID_SA,
+            Marital_Statues_SA,Area,Permanent_Resi_SA;
 
     ArrayAdapter<String> Company_type_Adapter,Type_employee_Adapter,Current_residence_Adapter,
             Epf_detected_Adapter,permanent_Adapter,Own_house_Relative_Adapter,Pincode_Adapter,
-            Other_income_Adapter,gst_reflect_Adapter,Employee_ID_Adapter,PAN_ID_Adapter;
+            Other_income_Adapter,gst_reflect_Adapter,Employee_ID_Adapter,PAN_ID_Adapter,Marital_Statues_Adapter,
+            A_Area_Adapter,Permanent_Resi_Adapter;
 
     String Company_id,Company_Value,Emp_type_id,Emp_type_Value,current_ress_id,current_ress_Value,
-            epf_id,epf_Value,permanent_res_id,permanent_res_Value,Own_house_rela_id,Own_house_rela_Value;
+            epf_id,epf_Value,permanent_res_id,permanent_res_Value,Own_house_rela_id,Own_house_rela_Value,
+            maried_res_spinner_id,maried_res_spinner_Value, permanent_residence__area_id,cpermanent_residence_spinn_district_id,
+            permanent_residence_spinn_state_id, Permanent_Resi_id,Permanent_Resi_Value;
 
     AppCompatTextView cmp_typ_txt,cmp_typ_txt1,Company_name,Company_name1,desg_nation_txt,
             desg_nation_txt1,type_emp_txt,type_emp_txt1,no_of_Employee_txt,no_of_Employee_txt1,
@@ -88,13 +94,33 @@ public class Eligibility_Check_PL extends SimpleActivity {
     AutoCompleteTextView permanent_res_pincode_edtxt;
 
     Spinner spinner_cmp_type,employee_type_spnr,epf_spinner,current_res_spinner,perment_restype_spnr,
-            own_hose_relative_spinner,spinn_other_income,spinn_is_gst_reflect,has_pan_card_spnr,spinner_employe_id;
+            own_hose_relative_spinner,spinn_other_income,spinn_is_gst_reflect,has_pan_card_spnr,spinner_employe_id,
+            maried_res_spinner,permanent_res_type_res_spinner;
 
     String S_company_name_edtxt,S_no_of_emp_edtxt,S_permanent_res_pincode_edtxt,S_experience_in_current_cmpy,
-            Other_income_id,Other_income_Value,gst_reflect_id,gst_reflect_Value,S_rel_full_address_txt1,
-            S_other_incom_amt_edtxt,Employee_id,PAN_id,PAN_Value,Employee_Value;
+            S_Designation_in_current_companny,Other_income_id,Other_income_Value,gst_reflect_id,gst_reflect_Value,S_rel_full_address_txt1,
+            S_other_incom_amt_edtxt,Employee_id,PAN_id,PAN_Value,Employee_Value,
+            S_no_of_dependent_edt_txt,S_education_qualification_edit_txt,S_emi_amount_edit_txt,S_permanent_residence_spinner,
+            S_own_house_blood_address_edt_txt,S_rent_paid_for_house_edit_txt;
 
-    LinearLayout relative_if_rented_ly;
+    LinearLayout relative_if_rented_ly,is_other_income,rented,co_app_is_other_income;
+
+    AutoCompleteTextView permanent_residence_spinner;
+
+    //Co Applicant
+
+        Spinner pl_co_self_has_pan_card_spnr,pl_co_app_spinner_employe_id,pl_co_app_spinner_cmp_type,pl_co_app_employee_type_spnr,
+                pl_co_app_epf_spinner,pl_co_app_current_res_spinner,pl_co_app_maried_res_spinner,pl_co_app_spinn_other_income,
+                pl_co_App_spinn_is_gst_reflect,permanent_residence_spinn_area;
+
+        AppCompatEditText pl_co_app_designation_in_company,pl_co_App_education_qualification_edit_txt,pl_co_app_emi_amount_edit_txt,
+                pl_co_app_no_of_dependent_edt_txt,pl_co_App_other_incom_amt_edtxt,own_house_blood_address_edt_txt,
+                rent_paid_for_house_edit_txt;
+
+        String Pl_Co_App_PAN_id,Pl_Co_App_PAN_Value,pl_co_app_Employee_id,pl_co_app_Employee_Value,
+                pl_co_app_Company_id,pl_co_app_Company_Value, pl_co_app_Emp_type_id,pl_co_app_Emp_type_Value,
+                pl_co_app_epf_id,pl_co_app_epf_Value, pl_co_app_maried_res_spinner_id,pl_co_app_maried_res_spinner_Value,
+                pl_co_app_Other_income_id,pl_co_app_Other_income_Value,pl_co_App_gst_reflect_id,pl_co_App_gst_reflect_Value;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -140,26 +166,38 @@ public class Eligibility_Check_PL extends SimpleActivity {
         current_res_spinner = (Spinner) findViewById(R.id.current_res_spinner);
 
       //  perment_restype_spnr = (Spinner) findViewById(R.id.perment_restype_spnr);
-      //  own_hose_relative_spinner = (Spinner) findViewById(R.id.own_hose_relative_spinner);
+       own_hose_relative_spinner = (Spinner) findViewById(R.id.own_hose_relative_spinner);
         spinn_other_income = (Spinner) findViewById(R.id.spinn_other_income);
         spinn_is_gst_reflect = (Spinner) findViewById(R.id.spinn_is_gst_reflect);
         has_pan_card_spnr = (Spinner) findViewById(R.id.has_pan_card_spnr);
         spinner_employe_id = (Spinner) findViewById(R.id.spinner_employe_id);
+        maried_res_spinner = (Spinner) findViewById(R.id.maried_res_spinner);
+        permanent_residence_spinn_area = (Spinner) findViewById(R.id.permanent_residence_spinn_area);
+        permanent_res_type_res_spinner = (Spinner) findViewById(R.id.permanent_res_type_res_spinner);
 
-       // relative_if_rented_ly = (LinearLayout) findViewById(R.id.relative_if_rented_ly);
-       /* perment_restype_spnr,
-                permanent_res_type_spinner,spinn_other_income,spinn_is_gst_reflect;*/
-        /* AppCompatTextView cmp_typ_txt,cmp_typ_txt1,Company_name,Company_name1,desg_nation_txt,
-            desg_nation_txt1,type_emp_txt,type_emp_txt1,no_of_Employee_txt,no_of_Employee_txt1,
-            epf_txt,epf_txt1,current_res_proof,current_res_proof1,permanent_res_pincode_txt,
-            permanent_res_pincode_txt1,permenant_res_txt,permenant_res_txt1,
-            permanent_res_type_txt,permanent_res_type_txt1,rel_full_address_txt,
-            rel_full_address_txt1,other_income_details_txt,other_income_txt,other_income_txt1,
-            is_gst_reflect_txt,is_gst_reflect_txt1;
+        is_other_income = (LinearLayout) findViewById(R.id.is_other_income);
+        co_app_is_other_income = (LinearLayout) findViewById(R.id.co_app_is_other_income);
+        rented = (LinearLayout) findViewById(R.id.rented);
 
+        permanent_residence_spinner = (AppCompatAutoCompleteTextView) findViewById(R.id.permanent_residence_spinner);
 
-        AppCompatEditText company_name_edtxt,designation_in_company,no_of_emp_edtxt,
-                     permanent_res_pincode_edtxt,rel_full_address_edtxt,other_incom_amt_edtxt;*/
+        //Co apllicant
+
+        pl_co_self_has_pan_card_spnr = (Spinner) findViewById(R.id.pl_co_self_has_pan_card_spnr);
+        pl_co_app_spinner_employe_id = (Spinner) findViewById(R.id.pl_co_app_spinner_employe_id);
+        pl_co_app_spinner_cmp_type = (Spinner) findViewById(R.id.pl_co_app_spinner_cmp_type);
+        company_name_edtxt = (AppCompatEditText) findViewById(R.id.company_name_edtxt);
+        pl_co_app_designation_in_company = (AppCompatEditText) findViewById(R.id.pl_co_app_designation_in_company);
+        pl_co_app_employee_type_spnr = (Spinner) findViewById(R.id.pl_co_app_employee_type_spnr);
+        no_of_emp_edtxt = (AppCompatEditText) findViewById(R.id.no_of_emp_edtxt);
+        pl_co_app_epf_spinner = (Spinner) findViewById(R.id.pl_co_app_epf_spinner);
+        pl_co_app_maried_res_spinner = (Spinner) findViewById(R.id.pl_co_app_maried_res_spinner);
+        pl_co_app_spinn_other_income = (Spinner) findViewById(R.id.pl_co_app_spinn_other_income);
+        pl_co_App_spinn_is_gst_reflect = (Spinner) findViewById(R.id.pl_co_App_spinn_is_gst_reflect);
+        pl_co_app_no_of_dependent_edt_txt = (AppCompatEditText) findViewById(R.id.pl_co_app_no_of_dependent_edt_txt);
+        pl_co_App_education_qualification_edit_txt = (AppCompatEditText) findViewById(R.id.pl_co_App_education_qualification_edit_txt);
+        pl_co_app_emi_amount_edit_txt = (AppCompatEditText) findViewById(R.id.pl_co_app_emi_amount_edit_txt);
+
 
         no_of_dependent = (AppCompatTextView) findViewById(R.id.no_of_dependent);
         no_of_dependent1 = (AppCompatTextView) findViewById(R.id.no_of_dependent1);
@@ -196,7 +234,9 @@ public class Eligibility_Check_PL extends SimpleActivity {
         is_gst_reflect_txt1 = (AppCompatTextView) findViewById(R.id.is_gst_reflect_txt1);
 
         no_of_dependent_edt_txt = (AppCompatEditText) findViewById(R.id.no_of_dependent_edt_txt);
+        own_house_blood_address_edt_txt = (AppCompatEditText) findViewById(R.id.own_house_blood_address_edt_txt);
         education_qualification_edit_txt = (AppCompatEditText) findViewById(R.id.education_qualification_edit_txt);
+        rent_paid_for_house_edit_txt = (AppCompatEditText) findViewById(R.id.rent_paid_for_house_edit_txt);
 
             company_name_edtxt = (AppCompatEditText) findViewById(R.id.company_name_edtxt);
         designation_in_company = (AppCompatEditText) findViewById(R.id.designation_in_company);
@@ -256,11 +296,11 @@ public class Eligibility_Check_PL extends SimpleActivity {
      {
 
 
-       /*  permanent_res_pincode_edtxt.addTextChangedListener(new TextWatcher() {
+         permanent_residence_spinner.addTextChangedListener(new TextWatcher() {
              @Override
              public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                  Log.e("hi","hi11");
-                 String permanent_pincode = permanent_res_pincode_edtxt.getText().toString();
+                 String permanent_pincode = permanent_residence_spinner.getText().toString();
 
                  if(permanent_pincode.length()==2){
                      GET_Pincode1(permanent_pincode);
@@ -277,7 +317,7 @@ public class Eligibility_Check_PL extends SimpleActivity {
              public void afterTextChanged(Editable editable) {
 
              }
-         });*/
+         });
 
          lead_viy_step2.setOnClickListener(new View.OnClickListener() {
              @Override
@@ -314,7 +354,6 @@ public class Eligibility_Check_PL extends SimpleActivity {
                                  Toast.makeText(mCon, "Please Select Type of Employee", Toast.LENGTH_SHORT).show();
                              }else {
 
-
                                  if (!Validate_No_of_Employee()) {
                                      return;
                                  }
@@ -327,6 +366,175 @@ public class Eligibility_Check_PL extends SimpleActivity {
                                          Toast.makeText(mCon, "Select Current residence Proof", Toast.LENGTH_SHORT).show();
                                      } else {
 
+
+                                         if (!Validate_permanent_residence_()) {
+                                             return;
+                                         }
+
+                                         if(Permanent_Resi_id.equals("0"))
+                                         {
+                                             Toast.makeText(mCon, "Select Permanent Type", Toast.LENGTH_SHORT).show();
+
+                                         }else if(Permanent_Resi_id.equals("2"))
+                                         {
+                                             if(maried_res_spinner_id.equals("0"))
+                                             {
+                                                 Toast.makeText(mCon, "Select Marital Status", Toast.LENGTH_SHORT).show();
+
+                                             }else
+                                             {
+                                                 if (!valiat_no_of_dependent()) {
+                                                     return;
+                                                 }
+
+                                                 if (!valiat_rent_paid_for_house_edit_txt()) {
+                                                     return;
+                                                 }
+
+
+                                                 if (!valiat_education_qualification()) {
+                                                     return;
+                                                 }
+                                                 if (!Validate_emi_amount()) {
+                                                     return;
+                                                 }
+
+                                                 other_varidation();
+                                             }
+                                         }else
+                                         {
+
+                                             if(Own_house_rela_id.equals("0"))
+                                             {
+                                                 Toast.makeText(mCon, "select own house of blood relative", Toast.LENGTH_SHORT).show();
+
+                                             }else
+                                             {
+                                                 if (!valiat_own_house_blood_address_edt_txt()) {
+                                                     return;
+                                                 }
+                                                 if(maried_res_spinner_id.equals("0"))
+                                                 {
+                                                     Toast.makeText(mCon, "Select Marital Status", Toast.LENGTH_SHORT).show();
+
+                                                 }else
+                                                 {
+                                                     if (!valiat_no_of_dependent()) {
+                                                         return;
+                                                     }
+                                                     if (!valiat_rent_paid_for_house_edit_txt()) {
+                                                         return;
+                                                     }
+                                                     if (!valiat_education_qualification()) {
+                                                         return;
+                                                     }
+                                                     if (!Validate_emi_amount()) {
+                                                         return;
+                                                     }
+
+                                                     other_varidation();
+                                                 }
+                                             }
+
+                                         }
+
+                                     }
+                                 }
+                             }
+                         }
+
+                     }
+
+                 }
+
+             }
+             //
+         });
+
+     }
+
+
+     private void other_varidation()
+     {
+         if(Other_income_id.equals("0"))
+         {
+             Toast.makeText(mCon, "Please Select other income", Toast.LENGTH_SHORT).show();
+
+         }else if(!Other_income_id.equals("4"))
+         {
+                 lead_Eligibility();
+
+         }else
+         {
+             if (!Validate_other_income()) {
+                 return;
+             }
+             if(gst_reflect_id.equals("0"))
+             {
+                 Toast.makeText(mCon, "Please Select ITR Reflected", Toast.LENGTH_SHORT).show();
+
+             }else
+             {
+                 lead_Eligibility();
+             }
+         }
+     }
+
+     private void Co_Applicant()
+     {
+
+         if(PAN_id.equals("0"))
+         {
+             Toast.makeText(mCon, "Please Select Has PAN ?", Toast.LENGTH_SHORT).show();
+         }else
+         {
+
+             if(Employee_id.equals("0"))
+             {
+                 Toast.makeText(mCon, "Please Select Have Employee id ?", Toast.LENGTH_SHORT).show();
+
+             }else
+             {
+                 if(Company_id.equals("0"))
+                 {
+                     Toast.makeText(mCon, "Please Select Company Type", Toast.LENGTH_SHORT).show();
+
+                 }else
+                 {
+                     if (!Validate_Company_Name()) {
+                         return;
+                     }
+
+                     if (!Validate_Designation_in_company()) {
+                         return;
+                     }
+
+                     if(Emp_type_id.equals("0"))
+                     {
+                         Toast.makeText(mCon, "Please Select Type of Employee", Toast.LENGTH_SHORT).show();
+                     }else {
+
+                         if (!Validate_No_of_Employee()) {
+                             return;
+                         }
+
+                         if (epf_id.equals("0")) {
+                             Toast.makeText(mCon, "Please Select Epf detected", Toast.LENGTH_SHORT).show();
+
+                         } else {
+
+                                 if(Permanent_Resi_id.equals("0"))
+                                 {
+                                     Toast.makeText(mCon, "Select Permanent Type", Toast.LENGTH_SHORT).show();
+
+                                 }else
+                                 {
+                                     if(maried_res_spinner_id.equals("0"))
+                                     {
+                                         Toast.makeText(mCon, "Select Marital Status", Toast.LENGTH_SHORT).show();
+
+                                     }else
+                                     {
                                          if (!valiat_no_of_dependent()) {
                                              return;
                                          }
@@ -339,47 +547,19 @@ public class Eligibility_Check_PL extends SimpleActivity {
                                          }
 
                                          other_varidation();
-
                                      }
                                  }
-                             }
+
                          }
-
                      }
-
                  }
 
              }
-         });
-
-     }
-
-
-     private void other_varidation()
-     {
-         if(Other_income_id.equals("0"))
-         {
-             Toast.makeText(mCon, "Please Select other income", Toast.LENGTH_SHORT).show();
-
-         }else
-         {
-             if (!Validate_other_income()) {
-                 return;
-             }
-
-             if(gst_reflect_id.equals("0"))
-             {
-                 Toast.makeText(mCon, "Please Select gst Reflected", Toast.LENGTH_SHORT).show();
-
-             }else
-             {
-                 Intent intent = new Intent(Eligibility_Check_PL.this, Credite_report_details.class);
-                 startActivity(intent);
-                 finish();
-             }
 
          }
+
      }
+
 
     private boolean Validate_Company_Name(){
         if (company_name_edtxt.getText().toString().trim().isEmpty()) {
@@ -417,6 +597,18 @@ public class Eligibility_Check_PL extends SimpleActivity {
         return true;
     }
 
+    private boolean valiat_own_house_blood_address_edt_txt(){
+        if (own_house_blood_address_edt_txt.getText().toString().trim().isEmpty()) {
+            own_house_blood_address_edt_txt.setError(getText(R.string.err_curent));
+            own_house_blood_address_edt_txt.requestFocus();
+            return false;
+        } else {
+
+        }
+
+        return true;
+    }
+
     private boolean valiat_education_qualification(){
         if (education_qualification_edit_txt.getText().toString().trim().isEmpty()) {
             education_qualification_edit_txt.setError(getText(R.string.err_curent));
@@ -428,6 +620,20 @@ public class Eligibility_Check_PL extends SimpleActivity {
 
         return true;
     }
+
+    private boolean valiat_rent_paid_for_house_edit_txt(){
+        if (rent_paid_for_house_edit_txt.getText().toString().trim().isEmpty()) {
+            rent_paid_for_house_edit_txt.setError(getText(R.string.err_curent));
+            rent_paid_for_house_edit_txt.requestFocus();
+            return false;
+        } else {
+
+        }
+
+        return true;
+    }
+
+
 
     private boolean Validate_other_income(){
         if (other_incom_amt_edtxt.getText().toString().trim().isEmpty()) {
@@ -465,6 +671,19 @@ public class Eligibility_Check_PL extends SimpleActivity {
 
         return true;
     }
+
+    private boolean Validate_permanent_residence_(){
+        if (permanent_residence_spinner.getText().toString().trim().isEmpty()) {
+            permanent_residence_spinner.setError(getText(R.string.err_curent));
+            permanent_residence_spinner.requestFocus();
+            return false;
+        } else {
+
+        }
+
+        return true;
+    }
+
 
 
     private void GET_Pincode1(String code) {
@@ -547,8 +766,8 @@ public class Eligibility_Check_PL extends SimpleActivity {
                 }
             };
 
-            permanent_res_pincode_edtxt.setThreshold(2);
-            permanent_res_pincode_edtxt.setAdapter(Pincode_Adapter);
+            permanent_residence_spinner.setThreshold(2);
+            permanent_residence_spinner.setAdapter(Pincode_Adapter);
 
         }
 
@@ -560,8 +779,136 @@ public class Eligibility_Check_PL extends SimpleActivity {
             }
         });
 
+        permanent_res_pincode_edtxt.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+                String code = (String)adapterView.getItemAtPosition(i);
+
+                if(code.length()==6){
+                    GET_AERA_POST(code);
+                }else {
+                    Objs.a.showToast(context,"Please Select Pin code");
+                }
+
+                imm.hideSoftInputFromWindow(permanent_res_pincode_edtxt.getWindowToken(), 0);
+            }
+        });
 
 
+
+    }
+
+    private void GET_AERA_POST(String code) {
+        progressDialog.show();
+        JSONObject J =new JSONObject();
+        try {
+            J.put("pincode", code);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, Urls.GET_AERA_POST, J,
+                new Response.Listener<JSONObject>() {
+
+                    @Override
+                    public void onResponse(JSONObject object) {
+                        try {
+
+                            if (object.getString(Params.status).equals("success")) {
+                                JSONArray response = object.getJSONArray("response");
+                                //    Log.e("Pincode", String.valueOf(response));
+                                setArea(response);
+                            }
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        progressDialog.dismiss();
+                    }
+                }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                VolleyLog.d("TAG", "Error: " + error.getMessage());
+                progressDialog.dismiss();
+            }
+        }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("Content-Type", "application/json");
+                return headers;
+            }
+        };
+        AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
+
+    }
+
+    private void setArea(final JSONArray ja) throws JSONException {
+
+        Area = new String[ja.length()];
+        for (int i=0;i<ja.length();i++){
+            JSONObject J =  ja.getJSONObject(i);
+            Area[i] = J.getString("area");
+            final List<String> area_list = new ArrayList<>(Arrays.asList(Area));
+            A_Area_Adapter = new ArrayAdapter<String>(getApplicationContext(), R.layout.view_spinner_item, area_list){
+                public View getView(int position, View convertView, ViewGroup parent) {
+                    font = Typeface.createFromAsset(getApplicationContext().getAssets(),"Lato-Regular.ttf");
+                    TextView v = (TextView) super.getView(position, convertView, parent);
+                    v.setTypeface(font);
+                    return v;
+                }
+
+                public View getDropDownView(int position, View convertView, ViewGroup parent) {
+                    TextView v = (TextView) super.getView(position, convertView, parent);
+                    v.setTypeface(font);
+                    return v;
+                }
+            };
+
+            String workpincode = permanent_res_pincode_edtxt.getText().toString();
+            //  String workpincode1 = residence_pincode1_edit_txt.getText().toString();
+
+            if(workpincode.length()> 2){
+                A_Area_Adapter.setDropDownViewResource(R.layout.view_spinner_item);
+                permanent_residence_spinn_area.setAdapter(A_Area_Adapter);
+                permanent_residence_spinn_area.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                    @Override
+                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                        try {
+
+
+                            //   work_pincode_area = ja.getJSONObject(position).getString("id");
+                            permanent_residence__area_id = ja.getJSONObject(position).getString("id");
+                            cpermanent_residence_spinn_district_id = ja.getJSONObject(position).getString("district_id");
+                            permanent_residence_spinn_state_id = ja.getJSONObject(position).getString("state_id");
+                            // Objs.a.showToast(getContext(),work_pincode_area);
+                            ///  String a = work_pincode_area +"   "+work_pincode_district_id +"   "+work_pincode_state_id;
+
+                            //   Log.e("Drop Down",a);
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onNothingSelected(AdapterView<?> parent) {
+
+                    }
+                });
+                permanent_residence_spinn_area.setOnTouchListener(new View.OnTouchListener() {
+                    @Override
+                    public boolean onTouch(View view, MotionEvent motionEvent) {
+                        // imm.hideSoftInputFromWindow(edt_buyer_address.getWindowToken(), 0);
+                        return false;
+                    }
+                });
+            }
+
+        }
 
     }
 
@@ -574,9 +921,6 @@ public class Eligibility_Check_PL extends SimpleActivity {
                     @Override
                     public void onResponse(JSONObject object) {
                         Log.e("respose Dreopdown", object.toString());
-                        /// msgResponse.setText(response.toString());
-                        //  Objs.a.showToast(getContext(), String.valueOf(object));
-
                         try {
 
                             Company_type =object.getJSONArray("Company_type");
@@ -585,11 +929,14 @@ public class Eligibility_Check_PL extends SimpleActivity {
                             epf_deduct =object.getJSONArray("epf_deduct");
                             permanent_adddress =object.getJSONArray("permanent_adddress");
                             relation_own =object.getJSONArray("relation_own");
+
                             Other_income =object.getJSONArray("Other_income");
                             gst_reflect =object.getJSONArray("gst_reflect");
                             employee_id_ar =object.getJSONArray("employee_id");
                             have_pan_ar =object.getJSONArray("have_pan");
-                           // epf_jarray =object.getJSONArray("epf_jarray");
+                            Marital_Status =object.getJSONArray("Marital_Status");
+                            Reflected_ITR =object.getJSONArray("Reflected_ITR");
+
                             Log.e("gst_reflect",String.valueOf(gst_reflect));
                             Employee_ID_Array(employee_id_ar);
                             HAVE_PAN_Card(have_pan_ar);
@@ -597,12 +944,13 @@ public class Eligibility_Check_PL extends SimpleActivity {
                             Type_of_Employee(Type_employee);
                             Current_res_Type(Current_Residence);
                             Epf_detedcted(epf_deduct);
-                          //  Permanent_res_type(permanent_adddress);
-                          //  Own_hous_relative(relation_own);
-                            Other_income_f(Other_income);
-                            gst_reflect_f(gst_reflect);
 
-                          //  Epf_detedcted(epf_jarray);
+                            Other_income_f(Other_income);
+                            itr_reflect_f(Reflected_ITR);
+                            Marital_Statues(Marital_Status);
+                            Permanent_res_Type(permanent_adddress);
+                            Own_hous_relative(relation_own);
+
 
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -689,6 +1037,40 @@ public class Eligibility_Check_PL extends SimpleActivity {
                     return false;
                 }
             });
+
+            pl_co_app_spinner_cmp_type.setAdapter(Company_type_Adapter);
+            pl_co_app_spinner_cmp_type.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                    try {
+
+                        //  City_loc_uniqueID = ja.getJSONObject(position).getString("city_id");
+                        pl_co_app_Company_id = Company_type_ar.getJSONObject(position).getString("id");
+                        pl_co_app_Company_Value = Company_type_ar.getJSONObject(position).getString("value");
+                        //CAT_ID = ja.getJSONObject(position).getString("category_id");
+                        Log.d("Company_id", Company_id);
+                        Log.d("Company_Value", Company_Value);
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+
+                }
+            });
+            pl_co_app_spinner_cmp_type.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View view, MotionEvent motionEvent) {
+                    // imm.hideSoftInputFromWindow(edt_buyer_address.getWindowToken(), 0);
+                    return false;
+                }
+            });
+
+
         }
 
     }
@@ -748,11 +1130,46 @@ public class Eligibility_Check_PL extends SimpleActivity {
                     return false;
                 }
             });
+
+
+
+            pl_co_app_spinner_employe_id.setAdapter(Employee_ID_Adapter);
+            pl_co_app_spinner_employe_id.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                    try {
+
+
+                        //  City_loc_uniqueID = ja.getJSONObject(position).getString("city_id");
+                        pl_co_app_Employee_id = employee_id_ar.getJSONObject(position).getString("id");
+                        pl_co_app_Employee_Value = employee_id_ar.getJSONObject(position).getString("value");
+                        //CAT_ID = ja.getJSONObject(position).getString("category_id");
+                        Log.d("Salary_id", Employee_id);
+                        Log.d("Salary_Value", Employee_Value);
+
+
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+
+                }
+            });
+            pl_co_app_spinner_employe_id.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View view, MotionEvent motionEvent) {
+                    // imm.hideSoftInputFromWindow(edt_buyer_address.getWindowToken(), 0);
+                    return false;
+                }
+            });
         }
 
     }
-
-
 
     private void HAVE_PAN_Card(final JSONArray has_pancard_ar) throws JSONException {
         //   SPINNERLIST = new String[ja.length()];
@@ -777,6 +1194,7 @@ public class Eligibility_Check_PL extends SimpleActivity {
             };
 
             PAN_ID_Adapter.setDropDownViewResource(R.layout.view_spinner_item);
+
             has_pan_card_spnr.setAdapter(PAN_ID_Adapter);
             has_pan_card_spnr.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
@@ -804,6 +1222,39 @@ public class Eligibility_Check_PL extends SimpleActivity {
                 }
             });
             has_pan_card_spnr.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View view, MotionEvent motionEvent) {
+                    // imm.hideSoftInputFromWindow(edt_buyer_address.getWindowToken(), 0);
+                    return false;
+                }
+            });
+            pl_co_self_has_pan_card_spnr.setAdapter(PAN_ID_Adapter);
+            pl_co_self_has_pan_card_spnr.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                    try {
+
+                        //  City_loc_uniqueID = ja.getJSONObject(position).getString("city_id");
+                        Pl_Co_App_PAN_id = has_pancard_ar.getJSONObject(position).getString("id");
+                        Pl_Co_App_PAN_Value = has_pancard_ar.getJSONObject(position).getString("value");
+                        //CAT_ID = ja.getJSONObject(position).getString("category_id");
+                        Log.d("Salary_id", Pl_Co_App_PAN_id);
+                        Log.d("Salary_Value", Pl_Co_App_PAN_id);
+
+
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+
+                }
+            });
+            pl_co_self_has_pan_card_spnr.setOnTouchListener(new View.OnTouchListener() {
                 @Override
                 public boolean onTouch(View view, MotionEvent motionEvent) {
                     // imm.hideSoftInputFromWindow(edt_buyer_address.getWindowToken(), 0);
@@ -868,6 +1319,40 @@ public class Eligibility_Check_PL extends SimpleActivity {
                     return false;
                 }
             });
+
+
+            pl_co_app_employee_type_spnr.setAdapter(Type_employee_Adapter);
+            pl_co_app_employee_type_spnr.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                    try {
+                        //  City_loc_uniqueID = ja.getJSONObject(position).getString("city_id");
+
+                        pl_co_app_Emp_type_id = Type_employee_ar.getJSONObject(position).getString("id");
+                        pl_co_app_Emp_type_Value = Type_employee_ar.getJSONObject(position).getString("value");
+                        //CAT_ID = ja.getJSONObject(position).getString("category_id");
+                        Log.d("Company_id", Emp_type_id);
+                        Log.d("Company_Value", Emp_type_Value);
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+
+                }
+            });
+            pl_co_app_employee_type_spnr.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View view, MotionEvent motionEvent) {
+                    // imm.hideSoftInputFromWindow(edt_buyer_address.getWindowToken(), 0);
+                    return false;
+                }
+            });
+
         }
 
     }
@@ -920,6 +1405,162 @@ public class Eligibility_Check_PL extends SimpleActivity {
                 }
             });
             current_res_spinner.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View view, MotionEvent motionEvent) {
+                    // imm.hideSoftInputFromWindow(edt_buyer_address.getWindowToken(), 0);
+                    return false;
+                }
+            });
+        }
+
+    }
+
+    private void Marital_Statues(final JSONArray Marital_Statues_ar) throws JSONException {
+        //   SPINNERLIST = new String[ja.length()];
+        Marital_Statues_SA = new String[Marital_Statues_ar.length()];
+        for (int i=0;i<Marital_Statues_ar.length();i++){
+            JSONObject J =  Marital_Statues_ar.getJSONObject(i);
+            Marital_Statues_SA[i] = J.getString("value");
+            final List<String> loan_type_list = new ArrayList<>(Arrays.asList( Marital_Statues_SA));
+            Marital_Statues_Adapter = new ArrayAdapter<String>(context, R.layout.view_spinner_item, loan_type_list){
+                public View getView(int position, View convertView, ViewGroup parent) {
+                    font = Typeface.createFromAsset(context.getAssets(),"Lato-Regular.ttf");
+                    TextView v = (TextView) super.getView(position, convertView, parent);
+                    v.setTypeface(font);
+                    return v;
+                }
+
+                public View getDropDownView(int position, View convertView, ViewGroup parent) {
+                    TextView v = (TextView) super.getView(position, convertView, parent);
+                    v.setTypeface(font);
+                    return v;
+                }
+            };
+
+            Marital_Statues_Adapter.setDropDownViewResource(R.layout.view_spinner_item);
+            maried_res_spinner.setAdapter(Marital_Statues_Adapter);
+            maried_res_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                    try {
+                        //  City_loc_uniqueID = ja.getJSONObject(position).getString("city_id");
+
+                        maried_res_spinner_id = Marital_Statues_ar.getJSONObject(position).getString("id");
+                        maried_res_spinner_Value = Marital_Statues_ar.getJSONObject(position).getString("value");
+                        //CAT_ID = ja.getJSONObject(position).getString("category_id");
+                        Log.d("Company_id", maried_res_spinner_id);
+                        Log.d("Company_Value", maried_res_spinner_Value);
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+
+                }
+            });
+            maried_res_spinner.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View view, MotionEvent motionEvent) {
+                    // imm.hideSoftInputFromWindow(edt_buyer_address.getWindowToken(), 0);
+                    return false;
+                }
+            });
+
+
+            pl_co_app_maried_res_spinner.setAdapter(Marital_Statues_Adapter);
+            pl_co_app_maried_res_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                    try {
+                        //  City_loc_uniqueID = ja.getJSONObject(position).getString("city_id");
+
+                        pl_co_app_maried_res_spinner_id = Marital_Statues_ar.getJSONObject(position).getString("id");
+                        pl_co_app_maried_res_spinner_Value = Marital_Statues_ar.getJSONObject(position).getString("value");
+                        //CAT_ID = ja.getJSONObject(position).getString("category_id");
+                        Log.d("Company_id", maried_res_spinner_id);
+                        Log.d("Company_Value", maried_res_spinner_Value);
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+
+                }
+            });
+            pl_co_app_maried_res_spinner.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View view, MotionEvent motionEvent) {
+                    // imm.hideSoftInputFromWindow(edt_buyer_address.getWindowToken(), 0);
+                    return false;
+                }
+            });
+        }
+
+    }
+
+    private void Permanent_res_Type(final JSONArray Permanent_Resi_ar) throws JSONException {
+        //   SPINNERLIST = new String[ja.length()];
+        Permanent_Resi_SA = new String[Permanent_Resi_ar.length()];
+        for (int i=0;i<Permanent_Resi_ar.length();i++){
+            JSONObject J =  Permanent_Resi_ar.getJSONObject(i);
+            Permanent_Resi_SA[i] = J.getString("value");
+            final List<String> loan_type_list = new ArrayList<>(Arrays.asList(Permanent_Resi_SA));
+            Permanent_Resi_Adapter = new ArrayAdapter<String>(context, R.layout.view_spinner_item, loan_type_list){
+                public View getView(int position, View convertView, ViewGroup parent) {
+                    font = Typeface.createFromAsset(context.getAssets(),"Lato-Regular.ttf");
+                    TextView v = (TextView) super.getView(position, convertView, parent);
+                    v.setTypeface(font);
+                    return v;
+                }
+
+                public View getDropDownView(int position, View convertView, ViewGroup parent) {
+                    TextView v = (TextView) super.getView(position, convertView, parent);
+                    v.setTypeface(font);
+                    return v;
+                }
+            };
+
+            Permanent_Resi_Adapter.setDropDownViewResource(R.layout.view_spinner_item);
+            permanent_res_type_res_spinner.setAdapter(Permanent_Resi_Adapter);
+            permanent_res_type_res_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                    try {
+                        //  City_loc_uniqueID = ja.getJSONObject(position).getString("city_id");
+
+
+                        Permanent_Resi_id = Permanent_Resi_ar.getJSONObject(position).getString("id");
+                        Permanent_Resi_Value = Permanent_Resi_ar.getJSONObject(position).getString("value");
+
+                        if(Permanent_Resi_id.equals("1"))
+                        {
+                            rented.setVisibility(View.VISIBLE);
+                        }else if(Permanent_Resi_id.equals("2"))
+                        {
+                            rented.setVisibility(View.GONE);
+                        }
+
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+
+                }
+            });
+            permanent_res_type_res_spinner.setOnTouchListener(new View.OnTouchListener() {
                 @Override
                 public boolean onTouch(View view, MotionEvent motionEvent) {
                     // imm.hideSoftInputFromWindow(edt_buyer_address.getWindowToken(), 0);
@@ -983,61 +1624,21 @@ public class Eligibility_Check_PL extends SimpleActivity {
                     return false;
                 }
             });
-        }
 
-    }
 
-    private void Permanent_res_type(final JSONArray Permanent_Ar) throws JSONException {
-        //   SPINNERLIST = new String[ja.length()];
-
-       Permanent_SA = new String[Permanent_Ar.length()];
-        for (int i=0;i<Permanent_Ar.length();i++){
-            JSONObject J =  Permanent_Ar.getJSONObject(i);
-            Permanent_SA[i] = J.getString("value");
-            final List<String> loan_type_list = new ArrayList<>(Arrays.asList( Permanent_SA));
-            permanent_Adapter = new ArrayAdapter<String>(context, R.layout.view_spinner_item, loan_type_list){
-                public View getView(int position, View convertView, ViewGroup parent) {
-                    font = Typeface.createFromAsset(context.getAssets(),"Lato-Regular.ttf");
-                    TextView v = (TextView) super.getView(position, convertView, parent);
-                    v.setTypeface(font);
-                    return v;
-                }
-
-                public View getDropDownView(int position, View convertView, ViewGroup parent) {
-                    TextView v = (TextView) super.getView(position, convertView, parent);
-                    v.setTypeface(font);
-                    return v;
-                }
-            };
-
-            permanent_Adapter.setDropDownViewResource(R.layout.view_spinner_item);
-            perment_restype_spnr.setAdapter(permanent_Adapter);
-            perment_restype_spnr.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            pl_co_app_epf_spinner.setAdapter(Epf_detected_Adapter);
+            pl_co_app_epf_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
                     try {
+
                         //  City_loc_uniqueID = ja.getJSONObject(position).getString("city_id");
-
-                        permanent_res_id = Permanent_Ar.getJSONObject(position).getString("id");
-                        permanent_res_Value = Permanent_Ar.getJSONObject(position).getString("value");
+                        pl_co_app_epf_id = epf_jarray.getJSONObject(position).getString("id");
+                        pl_co_app_epf_Value = epf_jarray.getJSONObject(position).getString("value");
                         //CAT_ID = ja.getJSONObject(position).getString("category_id");
-
-                        if(permanent_res_id.equals("2"))
-                        {
-                            relative_if_rented_ly.setVisibility(View.VISIBLE);
-                            other_income_txt.setText("10");
-                            other_incom_amt_txt.setText("11");
-                            is_gst_reflect_txt.setText("12");
-                        }else
-                        {
-                            relative_if_rented_ly.setVisibility(View.GONE);
-                            other_income_txt.setText("8");
-                            other_incom_amt_txt.setText("9");
-                            is_gst_reflect_txt.setText("10");
-                        }
-                        Log.d("Company_id", current_ress_id);
-                        Log.d("Company_Value", current_ress_Value);
+                        Log.d("epf_id", epf_id);
+                        Log.d("epf_Value", epf_Value);
 
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -1049,7 +1650,7 @@ public class Eligibility_Check_PL extends SimpleActivity {
 
                 }
             });
-            perment_restype_spnr.setOnTouchListener(new View.OnTouchListener() {
+            pl_co_app_epf_spinner.setOnTouchListener(new View.OnTouchListener() {
                 @Override
                 public boolean onTouch(View view, MotionEvent motionEvent) {
                     // imm.hideSoftInputFromWindow(edt_buyer_address.getWindowToken(), 0);
@@ -1059,6 +1660,8 @@ public class Eligibility_Check_PL extends SimpleActivity {
         }
 
     }
+
+
     private void Own_hous_relative(final JSONArray Own_house_rela_Ar) throws JSONException {
         //   SPINNERLIST = new String[ja.length()];
         Own_house_relativ_SA = new String[Own_house_rela_Ar.length()];
@@ -1150,13 +1753,21 @@ public class Eligibility_Check_PL extends SimpleActivity {
 
                     try {
                         //  City_loc_uniqueID = ja.getJSONObject(position).getString("city_id");
-
-
                         Other_income_id = Other_income_Ar.getJSONObject(position).getString("id");
                         Other_income_Value = Other_income_Ar.getJSONObject(position).getString("value");
                         //CAT_ID = ja.getJSONObject(position).getString("category_id");
                         Log.d("Company_id", current_ress_id);
                         Log.d("Company_Value", current_ress_Value);
+
+                         if(Other_income_id.equals("4"))
+                        {
+                            is_other_income.setVisibility(View.GONE);
+                        }else
+                        {
+                            is_other_income.setVisibility(View.VISIBLE);
+                        }
+
+
 
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -1175,13 +1786,57 @@ public class Eligibility_Check_PL extends SimpleActivity {
                     return false;
                 }
             });
+
+            pl_co_app_spinn_other_income.setAdapter( Other_income_Adapter);
+            pl_co_app_spinn_other_income.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                    try {
+
+                        //  City_loc_uniqueID = ja.getJSONObject(position).getString("city_id");
+                        pl_co_app_Other_income_id = Other_income_Ar.getJSONObject(position).getString("id");
+                        pl_co_app_Other_income_Value = Other_income_Ar.getJSONObject(position).getString("value");
+                        //CAT_ID = ja.getJSONObject(position).getString("category_id");
+                        Log.d("Company_id", current_ress_id);
+                        Log.d("Company_Value", current_ress_Value);
+
+                        if(pl_co_app_Other_income_id.equals("4"))
+                        {
+                            co_app_is_other_income.setVisibility(View.GONE);
+                        }else
+                        {
+                            co_app_is_other_income.setVisibility(View.VISIBLE);
+                        }
+
+
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+
+                }
+            });
+            pl_co_app_spinn_other_income.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View view, MotionEvent motionEvent) {
+                    // imm.hideSoftInputFromWindow(edt_buyer_address.getWindowToken(), 0);
+                    return false;
+                }
+            });
+
+
         }
 
     }
 
 
 
-    private void gst_reflect_f(final JSONArray gst_reflect_Ar) throws JSONException {
+    private void itr_reflect_f(final JSONArray gst_reflect_Ar) throws JSONException {
         //   SPINNERLIST = new String[ja.length()];
         gst_reflect_SA = new String[gst_reflect_Ar.length()];
         for (int i=0;i<gst_reflect_Ar.length();i++){
@@ -1236,44 +1891,88 @@ public class Eligibility_Check_PL extends SimpleActivity {
                     return false;
                 }
             });
+
+            pl_co_App_spinn_is_gst_reflect.setAdapter(gst_reflect_Adapter);
+            pl_co_App_spinn_is_gst_reflect.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                    try {
+                        //  City_loc_uniqueID = ja.getJSONObject(position).getString("city_id");
+
+
+                        pl_co_App_gst_reflect_id = gst_reflect_Ar.getJSONObject(position).getString("id");
+                        pl_co_App_gst_reflect_Value = gst_reflect_Ar.getJSONObject(position).getString("value");
+                        //CAT_ID = ja.getJSONObject(position).getString("category_id");
+
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+
+                }
+            });
+            pl_co_App_spinn_is_gst_reflect.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View view, MotionEvent motionEvent) {
+                    // imm.hideSoftInputFromWindow(edt_buyer_address.getWindowToken(), 0);
+                    return false;
+                }
+            });
+
+
         }
 
     }
 
-    private void lead_viability() {
+    private void lead_Eligibility() {
 
 
         S_company_name_edtxt = company_name_edtxt.getText().toString();
-        S_no_of_emp_edtxt = no_of_emp_edtxt.getText().toString();
-      //  S_permanent_res_pincode_edtxt = permanent_res_pincode_edtxt.getText().toString();
 
-        S_experience_in_current_cmpy = designation_in_company.getText().toString();
+      //  S_permanent_res_pincode_edtxt = permanent_res_pincode_edtxt.getText().toString();
        // S_rel_full_address_txt1 = rel_full_address_txt1.getText().toString();
 
+        S_Designation_in_current_companny = designation_in_company.getText().toString();
+        S_no_of_dependent_edt_txt = no_of_dependent_edt_txt.getText().toString();
+        S_education_qualification_edit_txt = education_qualification_edit_txt.getText().toString();
+        S_emi_amount_edit_txt = emi_amount_edit_txt.getText().toString();
         S_other_incom_amt_edtxt = other_incom_amt_edtxt.getText().toString();
-
-
-
+        S_no_of_emp_edtxt = no_of_emp_edtxt.getText().toString();
+        S_permanent_residence_spinner = permanent_residence_spinner.getText().toString();
+        S_own_house_blood_address_edt_txt = own_house_blood_address_edt_txt.getText().toString();
+        S_rent_paid_for_house_edit_txt = rent_paid_for_house_edit_txt.getText().toString();
 
         JSONObject jsonObject =new JSONObject();
         JSONObject J= null;
         try {
 
             J =new JSONObject();
-            //  J.put(Params.email_id,email);
+
+            J.put("has_pancardHave ",PAN_id);
+            J.put("has_pancardHave ",Employee_id);
+            J.put("Company_id",Company_id);
+            J.put("S_Designation_in_current_companny",S_Designation_in_current_companny);
             J.put("S_company_name_edtxt",S_company_name_edtxt);
             J.put("S_no_of_emp_edtxt",S_no_of_emp_edtxt);
-            J.put("S_permanent_res_pincode_edtxt",S_permanent_res_pincode_edtxt);
-            J.put("S_experience_in_current_cmpy",S_experience_in_current_cmpy);
-            J.put("Company_id",Company_id);
-            J.put("Emp_type_id",Emp_type_id);
-            J.put("current_ress_id",current_ress_id);
             J.put("epf_id",epf_id);
-            J.put("permanent_res_id",permanent_res_id);
-            J.put("Own_house_rela_id",Own_house_rela_id);
-            J.put("S_rel_full_address_txt1",S_rel_full_address_txt1);
+            J.put("current_ress_id",current_ress_id);
+            J.put("maried_res_spinner_id",maried_res_spinner_id);
+            J.put("S_no_of_dependent_edt_txt",S_no_of_dependent_edt_txt);
+            J.put("S_emi_amount_edit_txt",S_emi_amount_edit_txt);
             J.put("Other_income_id",Other_income_id);
             J.put("S_other_incom_amt_edtxt",S_other_incom_amt_edtxt);
+            J.put("gst_reflect_id",gst_reflect_id);
+            J.put("S_permanent_residence_spinner",S_permanent_residence_spinner);
+            J.put("permanent_residence__area_id",permanent_residence__area_id);
+            J.put("Permanent_Resi_id",Permanent_Resi_id);
+            J.put("Own_house_rela_id",Own_house_rela_id);
+            J.put("S_own_house_blood_address_edt_txt",S_own_house_blood_address_edt_txt);
+            J.put("S_rent_paid_for_house_edit_txt",S_rent_paid_for_house_edit_txt);
 
 
         } catch (JSONException e) {

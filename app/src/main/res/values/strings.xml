@@ -236,8 +236,11 @@
     <string name="salary_credit">Salary Credit Method</string>
     <string name="area">area</string>
     <string name="cur_res_proof">Current residence address Proof</string>
+
     <string name="business_regi">Business Registration</string>
     <string name="perment_res_pincod">Permanent Residence Pincode</string>
+    <string name="perment_res_area">Permanent Residence area</string>
+    <string name="perment_res_type">Permanent Residence Type</string>
     <string name="existing_loan">Do you have any Existing Loan ?</string>
     <string name="emi_amt">EMI Amount</string>
     <string name="bnk_name">Bank Name</string>
@@ -252,6 +255,7 @@
     <string name="education_qualification">Education Qualification</string>
     <string name="marital_statues">Marital Status</string>
     <string name="nodf">No Of Dependents in Family</string>
+    <string name="rent_paid_">Rent paid for House</string>
     <string name="montly">Monthly Net Salary</string>
     <string name="other_income_">Other Income</string>
     <string name="other_income">Monthly income</string>
@@ -466,7 +470,7 @@
     <string name="business_proof">Business Income Proof</string>
     <string name="vehicle_type">Vehicle Type(MultiSelect)</string>
     <string name="nov">Number of vehicle</string>
-    <string name="nyw">Number of years in Business</string>
+    <string name="nyw">Number of Months in Business</string>
     <string name="actual_business">Actual Business</string>
     <string name="avg">Average monthly income</string>
     <string name="bus_proof">Business Vintage Proof(MultiSelect)</string>
@@ -485,8 +489,8 @@
     <string name="office_shop_setup">Office/Shop Setup</string>
     <string name="deler_type">If you are Franchise/dealer/sub dealer</string>
     <string name="delership_cmp">Name of dealership company</string>
-    <string name="monthly_profit">Monthly Profit</string>
-    <string name="noyiw">Number of years in work</string>
+    <string name="monthly_profit">Average Monthly Profit</string>
+    <string name="noyiw">Number of months in Business</string>
     <string name="monthly_income">Monthly Income</string>
     <string name="no_of_employees">No-of Employees</string>
     <string name="business_setup_investment">Business setup Investment</string>

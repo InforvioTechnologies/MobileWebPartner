@@ -8,5 +8,5 @@
     android:textColor="@color/black"
     android:textSize="14dp"
     style="@style/SmallText"
-
+    android:text="hi"
     android:textIsSelectable="false"/>

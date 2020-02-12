@@ -67,7 +67,7 @@
                 <androidx.appcompat.widget.AppCompatEditText
                     android:id="@+id/pl_co_app_slrd_name_edite_txt"
                     android:textSize="16sp"
-                    android:inputType="number"
+                    android:inputType="text"
                     android:textColor="@color/colorPrimaryDark"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
@@ -155,6 +155,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="16sp"
+                    android:inputType="number"
+                    android:imeOptions="actionDone"
                     android:id="@+id/pl_co_app_slrd_month_net_slrd_edite_txt"
                     android:textColor="@color/colorPrimaryDark"/>
             </LinearLayout>
@@ -245,6 +247,7 @@
                 android:layout_height="wrap_content" />
         </LinearLayout>
         <LinearLayout
+            android:visibility="gone"
             android:gravity="center"
             android:orientation="horizontal"
             android:layout_width="match_parent"
@@ -267,6 +270,48 @@
             </LinearLayout>
 
         </LinearLayout>
+        <LinearLayout
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="50dp">
+
+            <LinearLayout
+                android:layout_marginLeft="30dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <Spinner
+                    style="@style/Base.Widget.AppCompat.Spinner.Underlined"
+                    android:backgroundTint="#ff000000"
+                    android:backgroundTintMode="src_in"
+                    android:spinnerMode="dropdown"
+                    android:id="@+id/salaried_salary_proof_sppiner"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+            </LinearLayout>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingLeft="16dp"
+            android:elevation="6dp"
+            android:layout_margin="10dp"
+            android:orientation="horizontal"
+            android:background="@color/paper">
+
+            <com.doodle.android.chips.ChipsView
+                android:id="@+id/salaried_cv_salary_proof"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:overScrollMode="never"
+                android:textAppearance="@style/ChipTextStyle_Selected"
+                app:cv_max_height="100dp"
+                app:cv_vertical_spacing="2dp"
+                />
+
+        </LinearLayout>
+
 
     </LinearLayout>
     <LinearLayout
@@ -484,6 +529,7 @@
                 android:layout_height="wrap_content" />
         </LinearLayout>
         <LinearLayout
+            android:visibility="gone"
             android:gravity="center"
             android:orientation="horizontal"
             android:layout_width="match_parent"
@@ -504,6 +550,47 @@
                     android:id="@+id/pl_co_app_slrd_assets_owned_BL"
                     android:textColor="@color/colorPrimaryDark"/>
             </LinearLayout>
+
+        </LinearLayout>
+        <LinearLayout
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="50dp">
+
+            <LinearLayout
+                android:layout_marginLeft="30dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <Spinner
+                    style="@style/Base.Widget.AppCompat.Spinner.Underlined"
+                    android:backgroundTint="#ff000000"
+                    android:backgroundTintMode="src_in"
+                    android:spinnerMode="dropdown"
+                    android:id="@+id/salaried_assets_owned_sppiner"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+            </LinearLayout>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingLeft="16dp"
+            android:elevation="6dp"
+            android:layout_margin="10dp"
+            android:orientation="horizontal"
+            android:background="@color/paper">
+
+            <com.doodle.android.chips.ChipsView
+                android:id="@+id/salaried_cv_assets_ownned"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:overScrollMode="never"
+                android:textAppearance="@style/ChipTextStyle_Selected"
+                app:cv_max_height="100dp"
+                app:cv_vertical_spacing="2dp"
+                />
 
         </LinearLayout>
 

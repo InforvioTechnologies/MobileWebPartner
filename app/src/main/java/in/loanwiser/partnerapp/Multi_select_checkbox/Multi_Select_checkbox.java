@@ -23,6 +23,7 @@ import java.util.List;
 
 import in.loanwiser.partnerapp.R;
 import in.loanwiser.partnerapp.SimpleActivity;
+import in.loanwiser.partnerapp.Step_Changes_Screen.Viability_Check_PL;
 import in.loanwiser.partnerapp.Step_Changes_Screen.Viability_check_HL;
 
 public class Multi_Select_checkbox extends SimpleActivity {
@@ -85,7 +86,7 @@ public class Multi_Select_checkbox extends SimpleActivity {
 
                 if(selected.size()>0)
                 {
-                    Intent intent = new Intent(Multi_Select_checkbox.this, Viability_check_HL.class);
+                    Intent intent = new Intent(Multi_Select_checkbox.this, Viability_Check_PL.class);
                     intent.putExtra("select_lid_id", (Serializable) select_lid_id);
                     startActivity(intent);
                     finish();
