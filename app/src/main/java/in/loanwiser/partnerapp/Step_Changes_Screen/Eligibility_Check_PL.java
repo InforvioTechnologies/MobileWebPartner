@@ -26,8 +26,10 @@ import androidx.appcompat.widget.AppCompatEditText;
 import androidx.appcompat.widget.AppCompatTextView;
 
 import com.android.volley.AuthFailureError;
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.Response;
+import com.android.volley.RetryPolicy;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonObjectRequest;
@@ -45,6 +47,7 @@ import java.util.Map;
 
 import adhoc.app.applibrary.Config.AppUtils.Objs;
 import adhoc.app.applibrary.Config.AppUtils.Params;
+import adhoc.app.applibrary.Config.AppUtils.Pref.Pref;
 import adhoc.app.applibrary.Config.AppUtils.Urls;
 import adhoc.app.applibrary.Config.AppUtils.VolleySignleton.AppController;
 import dmax.dialog.SpotsDialog;
@@ -90,8 +93,9 @@ public class Eligibility_Check_PL extends SimpleActivity {
 
     AppCompatEditText company_name_edtxt,designation_in_company,no_of_emp_edtxt,
                      rel_full_address_edtxt,other_incom_amt_edtxt,no_of_dependent_edt_txt,
-            emi_amount_edit_txt,education_qualification_edit_txt;
-    AutoCompleteTextView permanent_res_pincode_edtxt;
+            emi_amount_edit_txt,education_qualification_edit_txt,pl_co_app_company_name_edtxt;
+
+    AutoCompleteTextView permanent_residence_auto;
 
     Spinner spinner_cmp_type,employee_type_spnr,epf_spinner,current_res_spinner,perment_restype_spnr,
             own_hose_relative_spinner,spinn_other_income,spinn_is_gst_reflect,has_pan_card_spnr,spinner_employe_id,
@@ -105,8 +109,6 @@ public class Eligibility_Check_PL extends SimpleActivity {
 
     LinearLayout relative_if_rented_ly,is_other_income,rented,co_app_is_other_income;
 
-    AutoCompleteTextView permanent_residence_spinner;
-
     //Co Applicant
 
         Spinner pl_co_self_has_pan_card_spnr,pl_co_app_spinner_employe_id,pl_co_app_spinner_cmp_type,pl_co_app_employee_type_spnr,
@@ -115,12 +117,16 @@ public class Eligibility_Check_PL extends SimpleActivity {
 
         AppCompatEditText pl_co_app_designation_in_company,pl_co_App_education_qualification_edit_txt,pl_co_app_emi_amount_edit_txt,
                 pl_co_app_no_of_dependent_edt_txt,pl_co_App_other_incom_amt_edtxt,own_house_blood_address_edt_txt,
-                rent_paid_for_house_edit_txt;
+                rent_paid_for_house_edit_txt,pl_co_App_no_of_emp_edtxt;
 
         String Pl_Co_App_PAN_id,Pl_Co_App_PAN_Value,pl_co_app_Employee_id,pl_co_app_Employee_Value,
                 pl_co_app_Company_id,pl_co_app_Company_Value, pl_co_app_Emp_type_id,pl_co_app_Emp_type_Value,
                 pl_co_app_epf_id,pl_co_app_epf_Value, pl_co_app_maried_res_spinner_id,pl_co_app_maried_res_spinner_Value,
                 pl_co_app_Other_income_id,pl_co_app_Other_income_Value,pl_co_App_gst_reflect_id,pl_co_App_gst_reflect_Value;
+
+        String residence_id;
+        LinearLayout full_addres_of_relative,rented1,permanent_res_type_ly,permanent_residence_pincode_ly,permanent_res_area,
+                rent_paid_for_house_ly,pl_co_app_cmp_name,pl_co_cmp_des_;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -136,11 +142,31 @@ public class Eligibility_Check_PL extends SimpleActivity {
       //  Company_type,Type_employee,Current_Residence,
 
 
-
+        residence_id = Pref.get_Residence_ID(getApplicationContext());
         UISCREEN();
         Click();
         fonts();
         makeJsonObjReq1();
+
+        if(residence_id.equals("1"))
+        {
+            full_addres_of_relative.setVisibility(View.GONE);
+            permanent_res_type_ly.setVisibility(View.GONE);
+            permanent_residence_pincode_ly.setVisibility(View.GONE);
+            permanent_res_area.setVisibility(View.GONE);
+            rented.setVisibility(View.GONE);
+            rent_paid_for_house_ly.setVisibility(View.GONE);
+        }else
+        {
+            full_addres_of_relative.setVisibility(View.VISIBLE);
+            permanent_res_type_ly.setVisibility(View.VISIBLE);
+            permanent_residence_pincode_ly.setVisibility(View.VISIBLE);
+            permanent_res_area.setVisibility(View.VISIBLE);
+            rented.setVisibility(View.VISIBLE);
+            rent_paid_for_house_ly.setVisibility(View.VISIBLE);
+        }
+
+
     /*
 
         lead_viy_step2.setOnClickListener(new View.OnClickListener() {
@@ -179,7 +205,7 @@ public class Eligibility_Check_PL extends SimpleActivity {
         co_app_is_other_income = (LinearLayout) findViewById(R.id.co_app_is_other_income);
         rented = (LinearLayout) findViewById(R.id.rented);
 
-        permanent_residence_spinner = (AppCompatAutoCompleteTextView) findViewById(R.id.permanent_residence_spinner);
+        permanent_residence_auto = (AppCompatAutoCompleteTextView) findViewById(R.id.permanent_residence_auto);
 
         //Co apllicant
 
@@ -239,11 +265,23 @@ public class Eligibility_Check_PL extends SimpleActivity {
         rent_paid_for_house_edit_txt = (AppCompatEditText) findViewById(R.id.rent_paid_for_house_edit_txt);
 
             company_name_edtxt = (AppCompatEditText) findViewById(R.id.company_name_edtxt);
+        pl_co_app_company_name_edtxt = (AppCompatEditText) findViewById(R.id.pl_co_app_company_name_edtxt);
+
         designation_in_company = (AppCompatEditText) findViewById(R.id.designation_in_company);
         no_of_emp_edtxt = (AppCompatEditText) findViewById(R.id.no_of_emp_edtxt);
-      //  permanent_res_pincode_edtxt = (AutoCompleteTextView) findViewById(R.id.permanent_res_pincode_edtxt);
+        pl_co_App_no_of_emp_edtxt = (AppCompatEditText) findViewById(R.id.pl_co_App_no_of_emp_edtxt);
+        permanent_residence_auto = (AutoCompleteTextView) findViewById(R.id.permanent_residence_auto);
         emi_amount_edit_txt = (AppCompatEditText) findViewById(R.id.emi_amount_edit_txt);
         other_incom_amt_edtxt = (AppCompatEditText) findViewById(R.id.other_incom_amt_edtxt);
+
+
+        full_addres_of_relative = (LinearLayout) findViewById(R.id.full_addres_of_relative);
+        permanent_res_type_ly = (LinearLayout) findViewById(R.id.permanent_res_type_ly);
+        rent_paid_for_house_ly = (LinearLayout) findViewById(R.id.rent_paid_for_house_ly);
+        pl_co_app_cmp_name = (LinearLayout) findViewById(R.id.pl_co_app_cmp_name);
+        pl_co_cmp_des_ = (LinearLayout) findViewById(R.id.pl_co_cmp_des_);
+        permanent_residence_pincode_ly = (LinearLayout) findViewById(R.id.permanent_residence_pincode_ly);
+        permanent_res_area = (LinearLayout) findViewById(R.id.permanent_res_area);
 
     }
 
@@ -286,7 +324,7 @@ public class Eligibility_Check_PL extends SimpleActivity {
         company_name_edtxt.setTypeface(font);
         designation_in_company.setTypeface(font);
         no_of_emp_edtxt.setTypeface(font);
-      //  permanent_res_pincode_edtxt.setTypeface(font);
+        permanent_residence_auto.setTypeface(font);
         education_qualification_edit_txt.setTypeface(font);
         other_incom_amt_edtxt.setTypeface(font);
 
@@ -296,11 +334,11 @@ public class Eligibility_Check_PL extends SimpleActivity {
      {
 
 
-         permanent_residence_spinner.addTextChangedListener(new TextWatcher() {
+         permanent_residence_auto.addTextChangedListener(new TextWatcher() {
              @Override
              public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                  Log.e("hi","hi11");
-                 String permanent_pincode = permanent_residence_spinner.getText().toString();
+                 String permanent_pincode = permanent_residence_auto.getText().toString();
 
                  if(permanent_pincode.length()==2){
                      GET_Pincode1(permanent_pincode);
@@ -341,108 +379,23 @@ public class Eligibility_Check_PL extends SimpleActivity {
 
                          }else
                          {
-                             if (!Validate_Company_Name()) {
-                                 return;
-                             }
 
-                             if (!Validate_Designation_in_company()) {
-                                 return;
-                             }
-
-                             if(Emp_type_id.equals("0"))
+                             if(Company_id.equals("1") || Company_id.equals("2"))
                              {
-                                 Toast.makeText(mCon, "Please Select Type of Employee", Toast.LENGTH_SHORT).show();
+                                 validate1();
                              }else {
 
-                                 if (!Validate_No_of_Employee()) {
+                                 if (!Validate_Company_Name()) {
                                      return;
                                  }
 
-                                 if (epf_id.equals("0")) {
-                                     Toast.makeText(mCon, "Please Select Epf detected", Toast.LENGTH_SHORT).show();
-
-                                 } else {
-                                     if (current_ress_id.equals("0")) {
-                                         Toast.makeText(mCon, "Select Current residence Proof", Toast.LENGTH_SHORT).show();
-                                     } else {
-
-
-                                         if (!Validate_permanent_residence_()) {
-                                             return;
-                                         }
-
-                                         if(Permanent_Resi_id.equals("0"))
-                                         {
-                                             Toast.makeText(mCon, "Select Permanent Type", Toast.LENGTH_SHORT).show();
-
-                                         }else if(Permanent_Resi_id.equals("2"))
-                                         {
-                                             if(maried_res_spinner_id.equals("0"))
-                                             {
-                                                 Toast.makeText(mCon, "Select Marital Status", Toast.LENGTH_SHORT).show();
-
-                                             }else
-                                             {
-                                                 if (!valiat_no_of_dependent()) {
-                                                     return;
-                                                 }
-
-                                                 if (!valiat_rent_paid_for_house_edit_txt()) {
-                                                     return;
-                                                 }
-
-
-                                                 if (!valiat_education_qualification()) {
-                                                     return;
-                                                 }
-                                                 if (!Validate_emi_amount()) {
-                                                     return;
-                                                 }
-
-                                                 other_varidation();
-                                             }
-                                         }else
-                                         {
-
-                                             if(Own_house_rela_id.equals("0"))
-                                             {
-                                                 Toast.makeText(mCon, "select own house of blood relative", Toast.LENGTH_SHORT).show();
-
-                                             }else
-                                             {
-                                                 if (!valiat_own_house_blood_address_edt_txt()) {
-                                                     return;
-                                                 }
-                                                 if(maried_res_spinner_id.equals("0"))
-                                                 {
-                                                     Toast.makeText(mCon, "Select Marital Status", Toast.LENGTH_SHORT).show();
-
-                                                 }else
-                                                 {
-                                                     if (!valiat_no_of_dependent()) {
-                                                         return;
-                                                     }
-                                                     if (!valiat_rent_paid_for_house_edit_txt()) {
-                                                         return;
-                                                     }
-                                                     if (!valiat_education_qualification()) {
-                                                         return;
-                                                     }
-                                                     if (!Validate_emi_amount()) {
-                                                         return;
-                                                     }
-
-                                                     other_varidation();
-                                                 }
-                                             }
-
-                                         }
-
-                                     }
+                                 if (!Validate_Designation_in_company()) {
+                                     return;
                                  }
-                             }
-                         }
+                                 validate1();
 
+                         }//
+                         }
                      }
 
                  }
@@ -454,14 +407,125 @@ public class Eligibility_Check_PL extends SimpleActivity {
      }
 
 
+     private void validate1()
+     {
+         if(Emp_type_id.equals("0"))
+         {
+             Toast.makeText(mCon, "Please Select Type of Employee", Toast.LENGTH_SHORT).show();
+         }else {
+
+             if (!Validate_No_of_Employee()) {
+                 return;
+             }
+
+             if (epf_id.equals("0")) {
+                 Toast.makeText(mCon, "Please Select Epf detected", Toast.LENGTH_SHORT).show();
+
+             } else {
+                 if (current_ress_id.equals("0")) {
+                     Toast.makeText(mCon, "Select Current residence Proof", Toast.LENGTH_SHORT).show();
+                 } else {
+
+
+                     if(residence_id.equals("1"))
+                     {
+                         owned_house_Validation();
+                     }else
+                     {
+                         rented_house_validation();
+                     }
+
+                 }
+             }
+         }
+     }
+
+     private void owned_house_Validation()
+     {
+         if(maried_res_spinner_id.equals("0"))
+         {
+             Toast.makeText(mCon, "Select Marital Status", Toast.LENGTH_SHORT).show();
+
+         }else {
+             if (!valiat_no_of_dependent()) {
+                 return;
+             }
+
+             if (!valiat_education_qualification()) {
+                 return;
+             }
+             if (!Validate_emi_amount()) {
+                 return;
+             }
+
+             other_varidation();
+         }
+     }
+     private void rented_house_validation()
+     {
+         if (!Validate_permanent_residence_()) {
+             return;
+         }
+
+         if(Permanent_Resi_id.equals("0"))
+         {
+             Toast.makeText(mCon, "Select Permanent Type", Toast.LENGTH_SHORT).show();
+
+         }else if(Permanent_Resi_id.equals("1"))
+         {
+             validation2();
+         }else
+         {
+             if(Own_house_rela_id.equals("0"))
+             {
+                 Toast.makeText(mCon, "select own house of blood relative", Toast.LENGTH_SHORT).show();
+
+             }else
+             {
+                 if (!valiat_own_house_blood_address_edt_txt()) {
+                     return;
+                 }
+                 validation2();
+             }//
+
+         }
+     }
+
+     private void validation2()
+     {
+         if(maried_res_spinner_id.equals("0"))
+         {
+             Toast.makeText(mCon, "Select Marital Status", Toast.LENGTH_SHORT).show();
+
+         }else
+         {
+             if (!valiat_no_of_dependent()) {
+                 return;
+             }
+
+             if (!valiat_rent_paid_for_house_edit_txt()) {
+                 return;
+             }
+
+             if (!valiat_education_qualification()) {
+                 return;
+             }
+             if (!Validate_emi_amount()) {
+                 return;
+             }
+
+             other_varidation();
+         }
+     }
      private void other_varidation()
      {
          if(Other_income_id.equals("0"))
          {
              Toast.makeText(mCon, "Please Select other income", Toast.LENGTH_SHORT).show();
 
-         }else if(!Other_income_id.equals("4"))
+         }else if(Other_income_id.equals("4"))
          {
+
                  lead_Eligibility();
 
          }else
@@ -483,72 +547,67 @@ public class Eligibility_Check_PL extends SimpleActivity {
      private void Co_Applicant()
      {
 
-         if(PAN_id.equals("0"))
+         if(Pl_Co_App_PAN_id.equals("0"))
          {
-             Toast.makeText(mCon, "Please Select Has PAN ?", Toast.LENGTH_SHORT).show();
+             Toast.makeText(mCon, "Please Select Co applicant Has PAN ?", Toast.LENGTH_SHORT).show();
          }else
          {
 
-             if(Employee_id.equals("0"))
+             if(pl_co_app_Employee_id.equals("0"))
              {
-                 Toast.makeText(mCon, "Please Select Have Employee id ?", Toast.LENGTH_SHORT).show();
+                 Toast.makeText(mCon, "Please Select Co applicant Have Employee id ?", Toast.LENGTH_SHORT).show();
 
              }else
              {
-                 if(Company_id.equals("0"))
+                 if(pl_co_app_Company_id.equals("0"))
                  {
-                     Toast.makeText(mCon, "Please Select Company Type", Toast.LENGTH_SHORT).show();
+                     Toast.makeText(mCon, "Please Select Co applicant Company Type", Toast.LENGTH_SHORT).show();
 
                  }else
                  {
-                     if (!Validate_Company_Name()) {
+                     if (!Co_App_Validate_Company_Name()) {
                          return;
                      }
 
-                     if (!Validate_Designation_in_company()) {
+                     if (!Co_App_Validate_Designation_in_company()) {
                          return;
                      }
 
-                     if(Emp_type_id.equals("0"))
+                     if(pl_co_app_Emp_type_id.equals("0"))
                      {
-                         Toast.makeText(mCon, "Please Select Type of Employee", Toast.LENGTH_SHORT).show();
+                         Toast.makeText(mCon, "Please Select Co applicant Type of Employee", Toast.LENGTH_SHORT).show();
                      }else {
 
-                         if (!Validate_No_of_Employee()) {
+                         if (!Pl_Co_Validate_No_of_Employee()) {
                              return;
                          }
 
-                         if (epf_id.equals("0")) {
-                             Toast.makeText(mCon, "Please Select Epf detected", Toast.LENGTH_SHORT).show();
+                         if (pl_co_app_epf_id.equals("0")) {
+                             Toast.makeText(mCon, "Please Select Co applicant Epf detected", Toast.LENGTH_SHORT).show();
 
                          } else {
 
-                                 if(Permanent_Resi_id.equals("0"))
-                                 {
-                                     Toast.makeText(mCon, "Select Permanent Type", Toast.LENGTH_SHORT).show();
 
-                                 }else
-                                 {
-                                     if(maried_res_spinner_id.equals("0"))
+                                     if(pl_co_app_maried_res_spinner_id.equals("0"))
                                      {
-                                         Toast.makeText(mCon, "Select Marital Status", Toast.LENGTH_SHORT).show();
+                                         Toast.makeText(mCon, "Select Co applicant Marital Status", Toast.LENGTH_SHORT).show();
 
                                      }else
                                      {
-                                         if (!valiat_no_of_dependent()) {
+                                         if (!Pl_Co_valiat_no_of_dependent()) {
                                              return;
                                          }
 
-                                         if (!valiat_education_qualification()) {
+                                         if (!Validate_pl_Co_education_qualification_edit_txt()) {
                                              return;
                                          }
-                                         if (!Validate_emi_amount()) {
+                                         if (!pl_co_App_Validate_emi_amount()) {
                                              return;
                                          }
 
                                          other_varidation();
                                      }
-                                 }
+
 
                          }
                      }
@@ -560,6 +619,31 @@ public class Eligibility_Check_PL extends SimpleActivity {
 
      }
 
+    private void Co_App_other_varidation()
+    {
+        if(pl_co_app_Other_income_id.equals("0"))
+        {
+            Toast.makeText(mCon, "Please Select other income", Toast.LENGTH_SHORT).show();
+
+        }else if(!pl_co_app_Other_income_id.equals("4"))
+        {
+            lead_Eligibility();
+
+        }else
+        {
+            if (!pl_Co_App_Validate_other_income()) {
+                return;
+            }
+            if(pl_co_App_gst_reflect_id.equals("0"))
+            {
+                Toast.makeText(mCon, "Please Select ITR Reflected", Toast.LENGTH_SHORT).show();
+
+            }else
+            {
+                lead_Eligibility();
+            }
+        }
+    }
 
     private boolean Validate_Company_Name(){
         if (company_name_edtxt.getText().toString().trim().isEmpty()) {
@@ -573,6 +657,21 @@ public class Eligibility_Check_PL extends SimpleActivity {
         return true;
     }
 
+    private boolean Co_App_Validate_Company_Name(){
+        if (pl_co_app_company_name_edtxt.getText().toString().trim().isEmpty()) {
+            pl_co_app_company_name_edtxt.setError(getText(R.string.error_company_name));
+            pl_co_app_company_name_edtxt.requestFocus();
+            return false;
+        } else {
+
+        }
+
+        return true;
+    }
+
+
+
+
     private boolean Validate_No_of_Employee(){
         if (no_of_emp_edtxt.getText().toString().trim().isEmpty()) {
             no_of_emp_edtxt.setError(getText(R.string.error_no_emp));
@@ -585,6 +684,20 @@ public class Eligibility_Check_PL extends SimpleActivity {
         return true;
     }
 
+    private boolean Pl_Co_Validate_No_of_Employee(){
+        if (pl_co_App_no_of_emp_edtxt.getText().toString().trim().isEmpty()) {
+            pl_co_App_no_of_emp_edtxt.setError(getText(R.string.error_no_emp));
+            pl_co_App_no_of_emp_edtxt.requestFocus();
+            return false;
+        } else {
+
+        }
+
+        return true;
+    }
+
+
+
     private boolean valiat_no_of_dependent(){
         if (no_of_dependent_edt_txt.getText().toString().trim().isEmpty()) {
             no_of_dependent_edt_txt.setError(getText(R.string.err_curent));
@@ -596,6 +709,20 @@ public class Eligibility_Check_PL extends SimpleActivity {
 
         return true;
     }
+
+    private boolean Pl_Co_valiat_no_of_dependent(){
+        if (pl_co_app_no_of_dependent_edt_txt.getText().toString().trim().isEmpty()) {
+            pl_co_app_no_of_dependent_edt_txt.setError(getText(R.string.err_curent));
+            pl_co_app_no_of_dependent_edt_txt.requestFocus();
+            return false;
+        } else {
+
+        }
+
+        return true;
+    }
+
+
 
     private boolean valiat_own_house_blood_address_edt_txt(){
         if (own_house_blood_address_edt_txt.getText().toString().trim().isEmpty()) {
@@ -621,10 +748,26 @@ public class Eligibility_Check_PL extends SimpleActivity {
         return true;
     }
 
+
+
+
+
     private boolean valiat_rent_paid_for_house_edit_txt(){
         if (rent_paid_for_house_edit_txt.getText().toString().trim().isEmpty()) {
             rent_paid_for_house_edit_txt.setError(getText(R.string.err_curent));
             rent_paid_for_house_edit_txt.requestFocus();
+            return false;
+        } else {
+
+        }
+
+        return true;
+    }
+
+    private boolean Validate_pl_Co_education_qualification_edit_txt(){
+        if (pl_co_App_education_qualification_edit_txt.getText().toString().trim().isEmpty()) {
+            pl_co_App_education_qualification_edit_txt.setError(getText(R.string.err_curent));
+            pl_co_App_education_qualification_edit_txt.requestFocus();
             return false;
         } else {
 
@@ -647,6 +790,18 @@ public class Eligibility_Check_PL extends SimpleActivity {
         return true;
     }
 
+    private boolean pl_Co_App_Validate_other_income(){
+        if (pl_co_App_other_incom_amt_edtxt.getText().toString().trim().isEmpty()) {
+            pl_co_App_other_incom_amt_edtxt.setError(getText(R.string.oth_income));
+            pl_co_App_other_incom_amt_edtxt.requestFocus();
+            return false;
+        } else {
+
+        }
+
+        return true;
+    }
+
 
     private boolean Validate_Designation_in_company(){
         if (designation_in_company.getText().toString().trim().isEmpty()) {
@@ -660,6 +815,20 @@ public class Eligibility_Check_PL extends SimpleActivity {
         return true;
     }
 
+    private boolean Co_App_Validate_Designation_in_company(){
+        if (pl_co_app_designation_in_company.getText().toString().trim().isEmpty()) {
+            pl_co_app_designation_in_company.setError(getText(R.string.error_company_name));
+            pl_co_app_designation_in_company.requestFocus();
+            return false;
+        } else {
+
+        }
+
+        return true;
+    }
+
+
+
     private boolean Validate_emi_amount(){
         if (emi_amount_edit_txt.getText().toString().trim().isEmpty()) {
             emi_amount_edit_txt.setError(getText(R.string.err_curent));
@@ -672,10 +841,23 @@ public class Eligibility_Check_PL extends SimpleActivity {
         return true;
     }
 
+
+    private boolean pl_co_App_Validate_emi_amount(){
+        if (pl_co_app_emi_amount_edit_txt.getText().toString().trim().isEmpty()) {
+            pl_co_app_emi_amount_edit_txt.setError(getText(R.string.err_curent));
+            pl_co_app_emi_amount_edit_txt.requestFocus();
+            return false;
+        } else {
+
+        }
+
+        return true;
+    }
+
     private boolean Validate_permanent_residence_(){
-        if (permanent_residence_spinner.getText().toString().trim().isEmpty()) {
-            permanent_residence_spinner.setError(getText(R.string.err_curent));
-            permanent_residence_spinner.requestFocus();
+        if (permanent_residence_auto.getText().toString().trim().isEmpty()) {
+            permanent_residence_auto.setError(getText(R.string.err_curent));
+            permanent_residence_auto.requestFocus();
             return false;
         } else {
 
@@ -766,12 +948,12 @@ public class Eligibility_Check_PL extends SimpleActivity {
                 }
             };
 
-            permanent_residence_spinner.setThreshold(2);
-            permanent_residence_spinner.setAdapter(Pincode_Adapter);
+            permanent_residence_auto.setThreshold(2);
+            permanent_residence_auto.setAdapter(Pincode_Adapter);
 
         }
 
-        permanent_res_pincode_edtxt.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        permanent_residence_auto.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
@@ -779,7 +961,7 @@ public class Eligibility_Check_PL extends SimpleActivity {
             }
         });
 
-        permanent_res_pincode_edtxt.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        permanent_residence_auto.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
@@ -791,7 +973,7 @@ public class Eligibility_Check_PL extends SimpleActivity {
                     Objs.a.showToast(context,"Please Select Pin code");
                 }
 
-                imm.hideSoftInputFromWindow(permanent_res_pincode_edtxt.getWindowToken(), 0);
+                imm.hideSoftInputFromWindow(permanent_residence_auto.getWindowToken(), 0);
             }
         });
 
@@ -867,7 +1049,7 @@ public class Eligibility_Check_PL extends SimpleActivity {
                 }
             };
 
-            String workpincode = permanent_res_pincode_edtxt.getText().toString();
+            String workpincode = permanent_residence_auto.getText().toString();
             //  String workpincode1 = residence_pincode1_edit_txt.getText().toString();
 
             if(workpincode.length()> 2){
@@ -940,7 +1122,7 @@ public class Eligibility_Check_PL extends SimpleActivity {
                             Log.e("gst_reflect",String.valueOf(gst_reflect));
                             Employee_ID_Array(employee_id_ar);
                             HAVE_PAN_Card(have_pan_ar);
-                            Salry_method_Spinner(Company_type);
+                            Comapany_type(Company_type);
                             Type_of_Employee(Type_employee);
                             Current_res_Type(Current_Residence);
                             Epf_detedcted(epf_deduct);
@@ -984,7 +1166,7 @@ public class Eligibility_Check_PL extends SimpleActivity {
 
     }
 
-    private void Salry_method_Spinner(final JSONArray Company_type_ar) throws JSONException {
+    private void Comapany_type(final JSONArray Company_type_ar) throws JSONException {
         //   SPINNERLIST = new String[ja.length()];
         Company_type_SA = new String[Company_type_ar.length()];
         for (int i=0;i<Company_type_ar.length();i++){
@@ -1016,6 +1198,17 @@ public class Eligibility_Check_PL extends SimpleActivity {
                         //  City_loc_uniqueID = ja.getJSONObject(position).getString("city_id");
                         Company_id = Company_type_ar.getJSONObject(position).getString("id");
                         Company_Value = Company_type_ar.getJSONObject(position).getString("value");
+
+                        if(Company_id.equals("1") || Company_id. equals("2"))
+                        {
+                            pl_co_app_cmp_name.setVisibility(View.GONE);
+                            pl_co_cmp_des_.setVisibility(View.GONE);
+                        }else
+                        {
+                            pl_co_app_cmp_name.setVisibility(View.VISIBLE);
+                            pl_co_cmp_des_.setVisibility(View.VISIBLE);
+                        }
+
                         //CAT_ID = ja.getJSONObject(position).getString("category_id");
                         Log.d("Company_id", Company_id);
                         Log.d("Company_Value", Company_Value);
@@ -1049,8 +1242,7 @@ public class Eligibility_Check_PL extends SimpleActivity {
                         pl_co_app_Company_id = Company_type_ar.getJSONObject(position).getString("id");
                         pl_co_app_Company_Value = Company_type_ar.getJSONObject(position).getString("value");
                         //CAT_ID = ja.getJSONObject(position).getString("category_id");
-                        Log.d("Company_id", Company_id);
-                        Log.d("Company_Value", Company_Value);
+
 
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -1141,12 +1333,11 @@ public class Eligibility_Check_PL extends SimpleActivity {
                     try {
 
 
-                        //  City_loc_uniqueID = ja.getJSONObject(position).getString("city_id");
+
                         pl_co_app_Employee_id = employee_id_ar.getJSONObject(position).getString("id");
                         pl_co_app_Employee_Value = employee_id_ar.getJSONObject(position).getString("value");
-                        //CAT_ID = ja.getJSONObject(position).getString("category_id");
-                        Log.d("Salary_id", Employee_id);
-                        Log.d("Salary_Value", Employee_Value);
+
+
 
 
 
@@ -1235,12 +1426,10 @@ public class Eligibility_Check_PL extends SimpleActivity {
 
                     try {
 
-                        //  City_loc_uniqueID = ja.getJSONObject(position).getString("city_id");
+
                         Pl_Co_App_PAN_id = has_pancard_ar.getJSONObject(position).getString("id");
                         Pl_Co_App_PAN_Value = has_pancard_ar.getJSONObject(position).getString("value");
-                        //CAT_ID = ja.getJSONObject(position).getString("category_id");
-                        Log.d("Salary_id", Pl_Co_App_PAN_id);
-                        Log.d("Salary_Value", Pl_Co_App_PAN_id);
+
 
 
 
@@ -1332,8 +1521,6 @@ public class Eligibility_Check_PL extends SimpleActivity {
                         pl_co_app_Emp_type_id = Type_employee_ar.getJSONObject(position).getString("id");
                         pl_co_app_Emp_type_Value = Type_employee_ar.getJSONObject(position).getString("value");
                         //CAT_ID = ja.getJSONObject(position).getString("category_id");
-                        Log.d("Company_id", Emp_type_id);
-                        Log.d("Company_Value", Emp_type_Value);
 
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -1391,8 +1578,7 @@ public class Eligibility_Check_PL extends SimpleActivity {
                         current_ress_id = Current_Residence_ar.getJSONObject(position).getString("id");
                         current_ress_Value = Current_Residence_ar.getJSONObject(position).getString("value");
                         //CAT_ID = ja.getJSONObject(position).getString("category_id");
-                        Log.d("Company_id", current_ress_id);
-                        Log.d("Company_Value", current_ress_Value);
+
 
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -1449,8 +1635,7 @@ public class Eligibility_Check_PL extends SimpleActivity {
                         maried_res_spinner_id = Marital_Statues_ar.getJSONObject(position).getString("id");
                         maried_res_spinner_Value = Marital_Statues_ar.getJSONObject(position).getString("value");
                         //CAT_ID = ja.getJSONObject(position).getString("category_id");
-                        Log.d("Company_id", maried_res_spinner_id);
-                        Log.d("Company_Value", maried_res_spinner_Value);
+
 
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -1482,8 +1667,7 @@ public class Eligibility_Check_PL extends SimpleActivity {
                         pl_co_app_maried_res_spinner_id = Marital_Statues_ar.getJSONObject(position).getString("id");
                         pl_co_app_maried_res_spinner_Value = Marital_Statues_ar.getJSONObject(position).getString("value");
                         //CAT_ID = ja.getJSONObject(position).getString("category_id");
-                        Log.d("Company_id", maried_res_spinner_id);
-                        Log.d("Company_Value", maried_res_spinner_Value);
+
 
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -1543,8 +1727,11 @@ public class Eligibility_Check_PL extends SimpleActivity {
 
                         if(Permanent_Resi_id.equals("1"))
                         {
-                            rented.setVisibility(View.VISIBLE);
+                            rented.setVisibility(View.GONE);
                         }else if(Permanent_Resi_id.equals("2"))
+                        {
+                            rented.setVisibility(View.VISIBLE);
+                        }else
                         {
                             rented.setVisibility(View.GONE);
                         }
@@ -1697,8 +1884,6 @@ public class Eligibility_Check_PL extends SimpleActivity {
                         Own_house_rela_id = Own_house_rela_Ar.getJSONObject(position).getString("id");
                         Own_house_rela_Value = Own_house_rela_Ar.getJSONObject(position).getString("value");
                         //CAT_ID = ja.getJSONObject(position).getString("category_id");
-                        Log.d("Company_id", current_ress_id);
-                        Log.d("Company_Value", current_ress_Value);
 
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -1756,8 +1941,7 @@ public class Eligibility_Check_PL extends SimpleActivity {
                         Other_income_id = Other_income_Ar.getJSONObject(position).getString("id");
                         Other_income_Value = Other_income_Ar.getJSONObject(position).getString("value");
                         //CAT_ID = ja.getJSONObject(position).getString("category_id");
-                        Log.d("Company_id", current_ress_id);
-                        Log.d("Company_Value", current_ress_Value);
+
 
                          if(Other_income_id.equals("4"))
                         {
@@ -1797,9 +1981,7 @@ public class Eligibility_Check_PL extends SimpleActivity {
                         //  City_loc_uniqueID = ja.getJSONObject(position).getString("city_id");
                         pl_co_app_Other_income_id = Other_income_Ar.getJSONObject(position).getString("id");
                         pl_co_app_Other_income_Value = Other_income_Ar.getJSONObject(position).getString("value");
-                        //CAT_ID = ja.getJSONObject(position).getString("category_id");
-                        Log.d("Company_id", current_ress_id);
-                        Log.d("Company_Value", current_ress_Value);
+
 
                         if(pl_co_app_Other_income_id.equals("4"))
                         {
@@ -1870,9 +2052,7 @@ public class Eligibility_Check_PL extends SimpleActivity {
 
                         gst_reflect_id = gst_reflect_Ar.getJSONObject(position).getString("id");
                         gst_reflect_Value = gst_reflect_Ar.getJSONObject(position).getString("value");
-                        //CAT_ID = ja.getJSONObject(position).getString("category_id");
-                        Log.d("Company_id", current_ress_id);
-                        Log.d("Company_Value", current_ress_Value);
+
 
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -1933,47 +2113,81 @@ public class Eligibility_Check_PL extends SimpleActivity {
 
 
         S_company_name_edtxt = company_name_edtxt.getText().toString();
-
-      //  S_permanent_res_pincode_edtxt = permanent_res_pincode_edtxt.getText().toString();
-       // S_rel_full_address_txt1 = rel_full_address_txt1.getText().toString();
-
         S_Designation_in_current_companny = designation_in_company.getText().toString();
         S_no_of_dependent_edt_txt = no_of_dependent_edt_txt.getText().toString();
         S_education_qualification_edit_txt = education_qualification_edit_txt.getText().toString();
         S_emi_amount_edit_txt = emi_amount_edit_txt.getText().toString();
         S_other_incom_amt_edtxt = other_incom_amt_edtxt.getText().toString();
         S_no_of_emp_edtxt = no_of_emp_edtxt.getText().toString();
-        S_permanent_residence_spinner = permanent_residence_spinner.getText().toString();
+        S_permanent_residence_spinner = permanent_residence_auto.getText().toString();
         S_own_house_blood_address_edt_txt = own_house_blood_address_edt_txt.getText().toString();
         S_rent_paid_for_house_edit_txt = rent_paid_for_house_edit_txt.getText().toString();
 
         JSONObject jsonObject =new JSONObject();
+        JSONObject Applicant =new JSONObject();
+        JSONObject Co_Applicant =new JSONObject();
+
+        try {
+            Co_Applicant.put("has_pancardHave ",Pl_Co_App_PAN_id);
+            Co_Applicant.put("has_emp_id ",pl_co_app_Employee_id);
+            Co_Applicant.put("company_type ",pl_co_app_Company_id);
+            Co_Applicant.put("pl_co_app_Emp_type_id ",pl_co_app_Emp_type_id);
+            Co_Applicant.put("is_epf_deduct ",pl_co_app_epf_id);
+            Co_Applicant.put("marital_status ",pl_co_app_maried_res_spinner_id);
+            Co_Applicant.put("company_name ",pl_co_app_company_name_edtxt);
+            Co_Applicant.put("employees_count ",pl_co_App_no_of_emp_edtxt);
+            Co_Applicant.put("designation ",pl_co_app_designation_in_company);
+            Co_Applicant.put("no_of_dependency ",pl_co_app_no_of_dependent_edt_txt);
+            Co_Applicant.put("affordable_pay ",pl_co_app_emi_amount_edit_txt);
+            Co_Applicant.put("qualification ",pl_co_App_education_qualification_edit_txt);
+
+
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
         JSONObject J= null;
         try {
 
             J =new JSONObject();
 
-            J.put("has_pancardHave ",PAN_id);
-            J.put("has_pancardHave ",Employee_id);
-            J.put("Company_id",Company_id);
-            J.put("S_Designation_in_current_companny",S_Designation_in_current_companny);
-            J.put("S_company_name_edtxt",S_company_name_edtxt);
-            J.put("S_no_of_emp_edtxt",S_no_of_emp_edtxt);
-            J.put("epf_id",epf_id);
-            J.put("current_ress_id",current_ress_id);
-            J.put("maried_res_spinner_id",maried_res_spinner_id);
-            J.put("S_no_of_dependent_edt_txt",S_no_of_dependent_edt_txt);
-            J.put("S_emi_amount_edit_txt",S_emi_amount_edit_txt);
-            J.put("Other_income_id",Other_income_id);
-            J.put("S_other_incom_amt_edtxt",S_other_incom_amt_edtxt);
-            J.put("gst_reflect_id",gst_reflect_id);
-            J.put("S_permanent_residence_spinner",S_permanent_residence_spinner);
-            J.put("permanent_residence__area_id",permanent_residence__area_id);
-            J.put("Permanent_Resi_id",Permanent_Resi_id);
-            J.put("Own_house_rela_id",Own_house_rela_id);
-            J.put("S_own_house_blood_address_edt_txt",S_own_house_blood_address_edt_txt);
-            J.put("S_rent_paid_for_house_edit_txt",S_rent_paid_for_house_edit_txt);
+            Applicant.put("has_pancardHave ",PAN_id);
+            Applicant.put("has_emp_id ",Employee_id);
+            Applicant.put("company_type",Company_id);
+            Applicant.put("designation",S_Designation_in_current_companny);
+            Applicant.put("company_name",S_company_name_edtxt);
+            Applicant.put("employees_count",S_no_of_emp_edtxt);
+            Applicant.put("is_epf_deduct",epf_id);
+            Applicant.put("addr_proof_rentCurrent",current_ress_id);
+            Applicant.put("marital_status",maried_res_spinner_id);
+            Applicant.put("no_of_dependency",S_no_of_dependent_edt_txt);
+            Applicant.put("affordable_pay",S_emi_amount_edit_txt);
+            Applicant.put("other_from",Other_income_id);
+            Applicant.put("other_amount",S_other_incom_amt_edtxt);
+            Applicant.put("other_reflected",gst_reflect_id);
+            Applicant.put("perm_res_pincode",S_permanent_residence_spinner);
+            Applicant.put("perm_res_area ",permanent_residence__area_id);
+            Applicant.put("perm_residence",Permanent_Resi_id);
+            Applicant.put("own_house_relative",Own_house_rela_id);
+            Applicant.put("rel_address",S_own_house_blood_address_edt_txt);
+            Applicant.put("rent_beingpaid",S_rent_paid_for_house_edit_txt);
+            Applicant.put("qualification",S_education_qualification_edit_txt);
 
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+
+        try {
+            J =new JSONObject();
+            //  J.put(Params.email_id,email);
+            J.put("applicant_count",1);
+            J.put("transaction_id",11225);
+            J.put("user_id",9766);
+            J.put("applicant",Applicant);
+            J.put("co_applicant",Co_Applicant);
 
         } catch (JSONException e) {
             e.printStackTrace();
@@ -1981,7 +2195,7 @@ public class Eligibility_Check_PL extends SimpleActivity {
 
         Log.e("Add Home Laoan", String.valueOf(J));
         progressDialog.show();
-      /*  JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, Urls.ADD_LEAD_POST, J,
+        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, Urls.Eligibility_Check, J,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
@@ -1992,29 +2206,7 @@ public class Eligibility_Check_PL extends SimpleActivity {
 
                             if(response.getString(Params.status).equals("Ok")) {
 
-                                if(App.equals("1"))
-                                {
-                                    Intent intent = new Intent(Lead_Crration_Activity.this, Viability_check_HL.class);
-                                    startActivity(intent);
-                                    finish();
-                                }else if(App.equals("2"))
-                                {
-                                    Intent intent = new Intent(Lead_Crration_Activity.this, Viability_check_HL.class);
-                                    startActivity(intent);
-                                    finish();
 
-                                } else if(App.equals("20"))
-                                {
-                                    Intent intent = new Intent(Lead_Crration_Activity.this, Viability_Check_PL.class);
-                                    startActivity(intent);
-                                    finish();
-
-                                } else if(App.equals("21"))
-                                {
-                                    Intent intent = new Intent(Lead_Crration_Activity.this, Viability_Check_BL.class);
-                                    startActivity(intent);
-                                    finish();
-                                }
                             }
                             if(response.getString(Params.status).equals("error")) {
                                 Objs.a.showToast(context, "Already Registered with Propwiser");
@@ -2050,7 +2242,7 @@ public class Eligibility_Check_PL extends SimpleActivity {
 
         jsonObjReq.setRetryPolicy(policy);
 
-        AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);*/
+        AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
     }
 
     @Override

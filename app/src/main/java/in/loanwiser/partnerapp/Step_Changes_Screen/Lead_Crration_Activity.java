@@ -111,19 +111,18 @@ public class Lead_Crration_Activity extends SimpleActivity {
         UI_FIELDS();
         fonts();
         makeJsonObjReq1();
-      // Click();
+     // Click();
 
         lead_cr_step1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                Intent intent = new Intent(Lead_Crration_Activity.this, Eligibility_Check_PL.class);
+                Intent intent = new Intent(Lead_Crration_Activity.this, Viability_Check_PL.class);
                 startActivity(intent);
                 finish();
 
             }
         });
-
 
 
 
@@ -317,34 +316,6 @@ public class Lead_Crration_Activity extends SimpleActivity {
         }else
         {
             Toast.makeText(context, "Please accept the Terms and condition", Toast.LENGTH_SHORT).show();
-        }
-    }
-
-    private void click_action()
-    {
-
-        if(App.equals("1")|| App.equals("2"))
-        {
-                    Intent intent = new Intent(Lead_Crration_Activity.this, Viability_check_HL.class);
-                    startActivity(intent);
-                    finish();
-
-        }else if(App.equals("20"))
-        {
-                    Intent intent = new Intent(Lead_Crration_Activity.this, Viability_Check_BL.class);
-                    startActivity(intent);
-                    finish();
-
-        } else if(App.equals("21"))
-        {
-                    Intent intent = new Intent(Lead_Crration_Activity.this, Viability_Check_PL.class);
-                    startActivity(intent);
-                    finish();
-        }else
-        {
-            Intent intent = new Intent(Lead_Crration_Activity.this, Viability_check_HL.class);
-            startActivity(intent);
-            finish();
         }
     }
 

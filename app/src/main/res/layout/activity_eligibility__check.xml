@@ -247,7 +247,7 @@
                             </LinearLayout>
                         </LinearLayout>
                         <LinearLayout
-
+                            android:id="@+id/pl_co_app_cmp_name"
                             android:orientation="vertical"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent">
@@ -291,6 +291,7 @@
                             </LinearLayout>
                         </LinearLayout>
                         <LinearLayout
+                            android:id="@+id/pl_co_cmp_des_"
                             android:orientation="vertical"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent">
@@ -617,7 +618,6 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent">
                                 <Spinner
-
                                     style="@style/Base.Widget.AppCompat.Spinner.Underlined"
                                     android:backgroundTint="#ff000000"
                                     android:backgroundTintMode="src_in"
@@ -630,6 +630,7 @@
                         </LinearLayout>
                     </LinearLayout>
                     <LinearLayout
+                        android:id="@+id/permanent_residence_pincode_ly"
                           android:orientation="vertical"
                           android:layout_width="match_parent"
                           android:layout_height="match_parent">
@@ -668,11 +669,12 @@
                                   android:layout_height="wrap_content"
                                   android:textSize="16sp"
                                   android:inputType="number"
-                                  android:id="@+id/permanent_residence_spinner"
+                                  android:id="@+id/permanent_residence_auto"
                                   android:textColor="@color/colorPrimaryDark"/>
                           </LinearLayout>
                       </LinearLayout>
                       <LinearLayout
+                          android:id="@+id/permanent_res_area"
                           android:orientation="vertical"
                           android:layout_width="match_parent"
                           android:layout_height="wrap_content">
@@ -726,11 +728,11 @@
                           </LinearLayout>
                       </LinearLayout>
                       <LinearLayout
+                          android:id="@+id/permanent_res_type_ly"
                           android:orientation="vertical"
                           android:layout_width="match_parent"
                           android:layout_height="wrap_content">
                           <LinearLayout
-                              android:id="@+id/permanent_res_type_ly"
                               android:orientation="horizontal"
                               android:layout_width="match_parent"
                               android:layout_height="wrap_content">
@@ -755,7 +757,6 @@
                                   android:text="@string/perment_res_type"
                                   android:layout_height="wrap_content" />
                           </LinearLayout>
-
                           <LinearLayout
                               android:gravity="center"
                               android:orientation="horizontal"
@@ -837,6 +838,7 @@
                               </LinearLayout>
                           </LinearLayout>
                           <LinearLayout
+                              android:id="@+id/full_addres_of_relative"
                               android:orientation="vertical"
                               android:layout_width="match_parent"
                               android:layout_height="match_parent">
@@ -980,11 +982,12 @@
                           </LinearLayout>
                       </LinearLayout>
                       <LinearLayout
+                          android:id="@+id/rent_paid_for_house_ly"
                           android:orientation="vertical"
                           android:layout_width="match_parent"
                           android:layout_height="match_parent">
                           <LinearLayout
-                              android:id="@+id/rent_paid_for_house_ly"
+
                               android:orientation="horizontal"
                               android:layout_width="match_parent"
                               android:layout_height="wrap_content">

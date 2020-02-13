@@ -122,7 +122,7 @@ public class Viability_Check_PL extends SimpleActivity {
     Spinner pl_co_self_spi_vocation_forming,co_self_D_spinner_how_do_sell_milk,pl_co_app_spinner_office_shop_setup_ind,
             spinner_busines_type_own_business,co_self_fran_spinner_frenc_deler_sub,pl_co_own_spinner_office_shop_setup,
             assets_owned_sppiner,salaried_assets_owned_sppiner,salaried_salary_proof_sppiner,co_self_ind_vehicle_type,
-            pl_co_app_what_crop_spinne;
+            pl_co_app_what_crop_spinne,pl_co_app_ind_spinner_office_ownership_Type;
 
     String pl_co_app_slrd_Salary_id,pl_co_app_slrd_Salary_Value,pl_co_app_slrd_res_spinn_area_id,pl_co_app_slrd_res_spinn_area_district_id,
             pl_co_app_slrd_res_spinn_area_state_id,pl_co_s_forming_vocation_type_forming_id,pl_co_s_forming_vocation_type_forming_value;
@@ -153,17 +153,18 @@ public class Viability_Check_PL extends SimpleActivity {
     JSONArray Residence_ownership_ar,Salary_method_ar,Salary_proof_ar,employee_id_ar,have_pan_ar,
                     other_earning_ar,Property_Type,Assets_own,vocaton_ar,Pl_self_ind_Type_of_employement,
             Business_Proof,office_shop,vehicle_Type,vocation_type_forming_ar,sell_milk,franchise,Business_type_own_business,
+            Office_residence,
             crop_type,Business_income_proof;
     String[] SPINNERLIST;
     String[] SALARY_Method,Salary_Proof,Residence_Type_SA,Employe_ID_SA,PAN_ID_SA,
             Other_Earning_SA,Pincode_SA,Area,CO_Type_Of_Emp_SA,Have_Co_Applicant,Vocation_SA,EMPLOYEE_TYPE_SA,
             vocation_type_forming__SA,Office_Shop_SA,Selling_Milk_SA,Own_business_type_SA,
-            franchise_SA;
+            franchise_SA,Office_Shop_own_SA;
 
     ArrayAdapter<String> Salary_Adapter,Salary_proof_Adapter,Residence_Adapter,Employee_ID_Adapter,
             PAN_ID_Adapter,Other_Earning_Adapter,Pincode_Adapter,A_Area,CO_Type_Of_Emp_Adapter,
             Have_Co_Adapter,Vocation_Adapter,Employee_Type_adapter,Office_Shop__Adapter,vocation_type_forming_Adapter,
-            Selling_Milk_Adapter,Own_business_type_Adapter,franchise__Adapter;
+            Selling_Milk_Adapter,Own_business_type_Adapter,franchise__Adapter,Office_Shop_own_SA_Adapter;
 
     String String_value_Age,ST_occupation_edit_txt,St_monthly_net_sal_edit_txt,
             ST_experience_in_current_cmpy,ST_total_experience_edit_txt,
@@ -229,7 +230,7 @@ public class Viability_Check_PL extends SimpleActivity {
     JSONArray business_proof_self = new JSONArray();
     JSONArray self_co_assets_ = new JSONArray();
 
-    String user_id,transaction_id;
+    String user_id,transaction_id,pl_co_app_ind_Office_Shop_Own_id,pl_co_app_ind_Office_Shop_Own_value;
     int applicant_count;
 
     @Override
@@ -257,14 +258,15 @@ public class Viability_Check_PL extends SimpleActivity {
 
         Assets_myList_values = (ArrayList<String>) getIntent().getSerializableExtra("select_lid_id");
         removeClass = new RemoveCommas();
-      /*  lead_viy_step2.setOnClickListener(new View.OnClickListener() {
+
+        lead_viy_step2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(Viability_Check_PL.this, Eligibility_Check_PL.class);
                 startActivity(intent);
                 finish();
             }
-        });*/
+        });
 
         Log.e("viability check Pl ","Personal Loan");
       /* monthly_sal_txt,salery_credite_method_txt,Exp_in_current_txt,total_workexperiecnce_txt,cmp_pincode_txt,
@@ -330,7 +332,7 @@ public class Viability_Check_PL extends SimpleActivity {
 
 
         UISCREEN();
-        Click();
+       // Click();
         fonts();
         makeJsonObjReq1();
     }
@@ -428,6 +430,7 @@ public class Viability_Check_PL extends SimpleActivity {
         salaried_salary_proof_sppiner = (Spinner) findViewById(R.id.salaried_salary_proof_sppiner);
         co_self_ind_vehicle_type = (Spinner) findViewById(R.id.co_self_ind_vehicle_type);
         pl_co_app_what_crop_spinne = (Spinner) findViewById(R.id.pl_co_app_what_crop_spinne);
+        pl_co_app_ind_spinner_office_ownership_Type = (Spinner) findViewById(R.id.pl_co_app_ind_spinner_office_ownership_Type);
 
 
         age_edite_txt = (AppCompatEditText) findViewById(R.id.age_edite_txt);
@@ -1149,8 +1152,6 @@ public class Viability_Check_PL extends SimpleActivity {
 
     private void validate_dairy()
     {
-
-
             if (!Validate_pl_co_D_no_of_animals()) {
                 return;
             }
@@ -1956,6 +1957,7 @@ public class Viability_Check_PL extends SimpleActivity {
                             Business_Proof =object.getJSONArray("Business_Proof");
                             Business_income_proof =object.getJSONArray("Business_income_proof");
                             office_shop =object.getJSONArray("office_shop");
+                            Office_residence =object.getJSONArray("Office_residence");
                             vehicle_Type =object.getJSONArray("vehicle_Type");
                             sell_milk =object.getJSONArray("sell_milk");
                             Business_type_own_business =object.getJSONArray("Business_type");
@@ -1980,6 +1982,7 @@ public class Viability_Check_PL extends SimpleActivity {
                             pl_self_ind_Vocation(vocaton_ar);
                             Pl_self_ind_Type_of_employement_(Pl_self_ind_Type_of_employement);
                             pl_co_self_Office_Shop_(office_shop);
+                            pl_co_self_Office_own_Rent(Office_residence);
                             pl_vocation_type_forming(vocation_type_forming_ar);
 
                             Selling_milk(sell_milk);
@@ -2149,8 +2152,8 @@ public class Viability_Check_PL extends SimpleActivity {
                         residence_id = Residence_ownership_ar.getJSONObject(position).getString("id");
                         residence_Value = Residence_ownership_ar.getJSONObject(position).getString("value");
                         //CAT_ID = ja.getJSONObject(position).getString("category_id");
-                        Log.d("Salary_id", residence_id);
-                        Log.d("Salary_Value", residence_Value);
+
+                        Pref.put_Residence_ID(mCon,residence_id);
 
                         if(residence_id.equals("2") )
                         {
@@ -2376,7 +2379,6 @@ public class Viability_Check_PL extends SimpleActivity {
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
                     try {
-
 
                         //  City_loc_uniqueID = ja.getJSONObject(position).getString("city_id");
                         other_earning_id = other_earning_ar.getJSONObject(position).getString("id");
@@ -4324,6 +4326,66 @@ public class Viability_Check_PL extends SimpleActivity {
 
     }
 
+    private void pl_co_self_Office_own_Rent(final JSONArray office_shop_ar) throws JSONException {
+
+
+
+        Office_Shop_own_SA = new String[office_shop_ar.length()];
+        for (int i=0;i<office_shop_ar.length();i++){
+            JSONObject J =  office_shop_ar.getJSONObject(i);
+            Office_Shop_own_SA[i] = J.getString("value");
+            final List<String> loan_type_list = new ArrayList<>(Arrays.asList(Office_Shop_own_SA));
+            Office_Shop_own_SA_Adapter = new ArrayAdapter<String>(context, R.layout.view_spinner_item, loan_type_list){
+                public View getView(int position, View convertView, ViewGroup parent) {
+                    font = Typeface.createFromAsset(context.getAssets(),"Lato-Regular.ttf");
+                    TextView v = (TextView) super.getView(position, convertView, parent);
+                    v.setTypeface(font);
+                    return v;
+                }
+
+                public View getDropDownView(int position, View convertView, ViewGroup parent) {
+                    TextView v = (TextView) super.getView(position, convertView, parent);
+                    v.setTypeface(font);
+                    return v;
+                }
+            };
+
+            Office_Shop_own_SA_Adapter.setDropDownViewResource(R.layout.view_spinner_item);
+            pl_co_app_ind_spinner_office_ownership_Type.setAdapter(Office_Shop_own_SA_Adapter);
+           /*
+            spinner_office_shop_setup_far.setAdapter(Office_Shop__Adapter);*/
+
+            pl_co_app_ind_spinner_office_ownership_Type.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                    try {
+
+                        pl_co_app_ind_Office_Shop_Own_id = office_shop_ar.getJSONObject(position).getString("id");
+                        pl_co_app_ind_Office_Shop_Own_value = office_shop_ar.getJSONObject(position).getString("value");
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+
+                }
+            });
+            pl_co_app_ind_spinner_office_ownership_Type.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View view, MotionEvent motionEvent) {
+                    // imm.hideSoftInputFromWindow(edt_buyer_address.getWindowToken(), 0);
+                    return false;
+                }
+            });
+
+        }
+
+    }
+
     private void pl_co_self_Office_Shop_(final JSONArray office_shop_ar) throws JSONException {
 
         Office_Shop_SA = new String[office_shop_ar.length()];
@@ -4812,6 +4874,9 @@ public class Viability_Check_PL extends SimpleActivity {
 
                             if(response.getString(Params.status).equals("Ok")) {
 
+                                Intent intent = new Intent(Viability_Check_PL.this, Eligibility_Check_PL.class);
+                                startActivity(intent);
+                                finish();
 
                             }
                             if(response.getString(Params.status).equals("error")) {

@@ -41,6 +41,8 @@ public final class Pref {
     public static String LOANTYPE = "LOANTYPE";
     public static String LOANTYPE1 = "LOANTYPE1";
     public static String NAME = "NAME";
+    public static String Residence_ID = "Residence_ID";
+
     public static String MOBILE = "MOBILE";
     public static String LEADMOBILE = "LEADMOBILE";
     public static String LOANTYPENAME = "LOANTYPENAME";
@@ -532,6 +534,21 @@ public static void putName(final Context context, String aUserId) {
         SharedPreferences prefs = Pref.get(context);
         SharedPreferences.Editor editor = prefs.edit();
         editor.remove(ID);
+        editor.commit();
+    }
+
+    public static void put_Residence_ID(final Context context, String aUserId) {
+        Pref.putPref(context, Residence_ID, aUserId);
+    }
+
+    public static String get_Residence_ID(final Context context) {
+        return Pref.getPref(context, Residence_ID, null);
+    }
+
+    public static void remove_Residence_ID(final Context context) {
+        SharedPreferences prefs = Pref.get(context);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.remove(Residence_ID);
         editor.commit();
     }
 

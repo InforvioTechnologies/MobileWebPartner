@@ -237,7 +237,7 @@
                             <androidx.appcompat.widget.AppCompatEditText
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:id="@+id/company_name_edtxt"
+                                android:id="@+id/pl_co_app_company_name_edtxt"
                                 android:textSize="16sp"
                                 android:inputType="text"
                                 android:textColor="@color/colorPrimaryDark"/>
@@ -376,7 +376,7 @@
                             <androidx.appcompat.widget.AppCompatEditText
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:id="@+id/no_of_emp_edtxt"
+                                android:id="@+id/pl_co_App_no_of_emp_edtxt"
                                 android:textColor="@color/colorPrimaryDark"
                                 android:textSize="16sp"
                                 android:imeOptions="actionDone"
@@ -788,7 +788,6 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent">
                             <Spinner
-
                                 style="@style/Base.Widget.AppCompat.Spinner.Underlined"
                                 android:backgroundTint="#ff000000"
                                 android:backgroundTintMode="src_in"
