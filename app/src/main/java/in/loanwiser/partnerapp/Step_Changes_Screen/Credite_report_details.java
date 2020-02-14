@@ -84,12 +84,6 @@ public class Credite_report_details extends SimpleActivity {
         initTools(R.string.credit_report1);
 
         progressDialog = new SpotsDialog(context, R.style.Custom);
-
-
-
-
-
-
         makeJsonObjReq1();
         SCREEN_UI();
         Font();

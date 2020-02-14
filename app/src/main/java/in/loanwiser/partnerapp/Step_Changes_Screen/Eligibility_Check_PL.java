@@ -124,7 +124,8 @@ public class Eligibility_Check_PL extends SimpleActivity {
                 pl_co_app_epf_id,pl_co_app_epf_Value, pl_co_app_maried_res_spinner_id,pl_co_app_maried_res_spinner_Value,
                 pl_co_app_Other_income_id,pl_co_app_Other_income_Value,pl_co_App_gst_reflect_id,pl_co_App_gst_reflect_Value;
 
-        String residence_id;
+        String residence_id,Co_Applicant,S_pl_co_app_company_name_edtxt,S_pl_co_App_no_of_emp_edtxt,S_pl_co_app_designation_in_company,
+                S_pl_co_app_no_of_dependent_edt_txt,S_pl_co_app_emi_amount_edit_txt,S_pl_co_App_education_qualification_edit_txt;
         LinearLayout full_addres_of_relative,rented1,permanent_res_type_ly,permanent_residence_pincode_ly,permanent_res_area,
                 rent_paid_for_house_ly,pl_co_app_cmp_name,pl_co_cmp_des_;
 
@@ -143,6 +144,7 @@ public class Eligibility_Check_PL extends SimpleActivity {
 
 
         residence_id = Pref.get_Residence_ID(getApplicationContext());
+        Co_Applicant = Pref.getCoAPPAVAILABLE(getApplicationContext());
         UISCREEN();
         Click();
         fonts();
@@ -167,9 +169,8 @@ public class Eligibility_Check_PL extends SimpleActivity {
         }
 
 
-    /*
 
-        lead_viy_step2.setOnClickListener(new View.OnClickListener() {
+     /*   lead_viy_step2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
@@ -177,8 +178,7 @@ public class Eligibility_Check_PL extends SimpleActivity {
                 startActivity(intent);
                 finish();
             }
-        });
-    */
+        });*/
 
     }
 
@@ -526,7 +526,15 @@ public class Eligibility_Check_PL extends SimpleActivity {
          }else if(Other_income_id.equals("4"))
          {
 
-                 lead_Eligibility();
+
+                if(Co_Applicant.equals("1"))
+                {
+                    Co_Applicant();
+                }else
+                {
+                    lead_Eligibility();
+                }
+
 
          }else
          {
@@ -539,7 +547,14 @@ public class Eligibility_Check_PL extends SimpleActivity {
 
              }else
              {
-                 lead_Eligibility();
+                 if(Co_Applicant.equals("1"))
+                 {
+                     Co_Applicant();
+                 }else
+                 {
+                     lead_Eligibility();
+                 }
+
              }
          }
      }
@@ -605,7 +620,7 @@ public class Eligibility_Check_PL extends SimpleActivity {
                                              return;
                                          }
 
-                                         other_varidation();
+                                         Co_App_other_varidation();
                                      }
 
 
@@ -2080,11 +2095,9 @@ public class Eligibility_Check_PL extends SimpleActivity {
                     try {
                         //  City_loc_uniqueID = ja.getJSONObject(position).getString("city_id");
 
-
                         pl_co_App_gst_reflect_id = gst_reflect_Ar.getJSONObject(position).getString("id");
                         pl_co_App_gst_reflect_Value = gst_reflect_Ar.getJSONObject(position).getString("value");
                         //CAT_ID = ja.getJSONObject(position).getString("category_id");
-
 
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -2123,29 +2136,27 @@ public class Eligibility_Check_PL extends SimpleActivity {
         S_own_house_blood_address_edt_txt = own_house_blood_address_edt_txt.getText().toString();
         S_rent_paid_for_house_edit_txt = rent_paid_for_house_edit_txt.getText().toString();
 
+
+
+
+        S_pl_co_app_company_name_edtxt = pl_co_app_company_name_edtxt.getText().toString();
+        S_pl_co_App_no_of_emp_edtxt = pl_co_App_no_of_emp_edtxt.getText().toString();
+        S_pl_co_app_designation_in_company = pl_co_app_designation_in_company.getText().toString();
+        S_pl_co_app_no_of_dependent_edt_txt = pl_co_app_no_of_dependent_edt_txt.getText().toString();
+        S_pl_co_app_emi_amount_edit_txt = pl_co_app_emi_amount_edit_txt.getText().toString();
+        S_pl_co_App_education_qualification_edit_txt = pl_co_App_education_qualification_edit_txt.getText().toString();
+
         JSONObject jsonObject =new JSONObject();
         JSONObject Applicant =new JSONObject();
         JSONObject Co_Applicant =new JSONObject();
 
-        try {
-            Co_Applicant.put("has_pancardHave ",Pl_Co_App_PAN_id);
-            Co_Applicant.put("has_emp_id ",pl_co_app_Employee_id);
-            Co_Applicant.put("company_type ",pl_co_app_Company_id);
-            Co_Applicant.put("pl_co_app_Emp_type_id ",pl_co_app_Emp_type_id);
-            Co_Applicant.put("is_epf_deduct ",pl_co_app_epf_id);
-            Co_Applicant.put("marital_status ",pl_co_app_maried_res_spinner_id);
-            Co_Applicant.put("company_name ",pl_co_app_company_name_edtxt);
-            Co_Applicant.put("employees_count ",pl_co_App_no_of_emp_edtxt);
-            Co_Applicant.put("designation ",pl_co_app_designation_in_company);
-            Co_Applicant.put("no_of_dependency ",pl_co_app_no_of_dependent_edt_txt);
-            Co_Applicant.put("affordable_pay ",pl_co_app_emi_amount_edit_txt);
-            Co_Applicant.put("qualification ",pl_co_App_education_qualification_edit_txt);
+        JSONArray other_income = new JSONArray();
+        JSONArray other_amount = new JSONArray();
+        JSONArray itr_reflected = new JSONArray();
 
-
-
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+        other_income = new JSONArray(Arrays.asList(Other_income_id));
+        other_amount = new JSONArray(Arrays.asList(S_other_incom_amt_edtxt));
+        itr_reflected = new JSONArray(Arrays.asList(gst_reflect_id));
 
         JSONObject J= null;
         try {
@@ -2163,9 +2174,11 @@ public class Eligibility_Check_PL extends SimpleActivity {
             Applicant.put("marital_status",maried_res_spinner_id);
             Applicant.put("no_of_dependency",S_no_of_dependent_edt_txt);
             Applicant.put("affordable_pay",S_emi_amount_edit_txt);
-            Applicant.put("other_from",Other_income_id);
-            Applicant.put("other_amount",S_other_incom_amt_edtxt);
-            Applicant.put("other_reflected",gst_reflect_id);
+
+            Applicant.put("other_from",other_income);
+            Applicant.put("other_amount",other_amount);
+            Applicant.put("other_reflected",itr_reflected);
+
             Applicant.put("perm_res_pincode",S_permanent_residence_spinner);
             Applicant.put("perm_res_area ",permanent_residence__area_id);
             Applicant.put("perm_residence",Permanent_Resi_id);
@@ -2173,6 +2186,27 @@ public class Eligibility_Check_PL extends SimpleActivity {
             Applicant.put("rel_address",S_own_house_blood_address_edt_txt);
             Applicant.put("rent_beingpaid",S_rent_paid_for_house_edit_txt);
             Applicant.put("qualification",S_education_qualification_edit_txt);
+
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+
+        try {
+            Co_Applicant.put("has_pancardHave",Pl_Co_App_PAN_id);
+            Co_Applicant.put("has_emp_id",pl_co_app_Employee_id);
+            Co_Applicant.put("company_type",pl_co_app_Company_id);
+            Co_Applicant.put("pl_co_app_Emp_type_id",pl_co_app_Emp_type_id);
+            Co_Applicant.put("is_epf_deduct",pl_co_app_epf_id);
+            Co_Applicant.put("marital_status",pl_co_app_maried_res_spinner_id);
+            Co_Applicant.put("company_name",S_pl_co_app_company_name_edtxt);
+            Co_Applicant.put("employees_count",S_pl_co_App_no_of_emp_edtxt);
+            Co_Applicant.put("designation",S_pl_co_app_designation_in_company);
+            Co_Applicant.put("no_of_dependency",S_pl_co_app_no_of_dependent_edt_txt);
+            Co_Applicant.put("affordable_pay",S_pl_co_app_emi_amount_edit_txt);
+            Co_Applicant.put("qualification",S_pl_co_App_education_qualification_edit_txt);
+
 
 
         } catch (JSONException e) {
@@ -2204,8 +2238,7 @@ public class Eligibility_Check_PL extends SimpleActivity {
                         Log.e("Add_Home_loan Partner", String.valueOf(response));
                         try {
 
-                            if(response.getString(Params.status).equals("Ok")) {
-
+                            if(response.getString("applicant_status").equals("success")) {
 
                             }
                             if(response.getString(Params.status).equals("error")) {

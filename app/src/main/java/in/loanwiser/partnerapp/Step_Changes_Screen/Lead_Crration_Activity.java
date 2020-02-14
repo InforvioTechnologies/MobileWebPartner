@@ -117,7 +117,7 @@ public class Lead_Crration_Activity extends SimpleActivity {
             @Override
             public void onClick(View view) {
 
-                Intent intent = new Intent(Lead_Crration_Activity.this, Viability_Check_PL.class);
+                Intent intent = new Intent(Lead_Crration_Activity.this, Creadite_Report_Activity.class);
                 startActivity(intent);
                 finish();
 

@@ -587,9 +587,14 @@
     <string name="ER_EG">Employment Rank and Employment Grade </string>
     <string name="Own_house">Own House Condition</string>
 
-    <string name="app_pan_no">Applicant PAN No</string>
+    <string name="app_pan_no">PAN Number</string>
+    <string name="first_name">First name</string>
+    <string name="last_name">Last name</string>
+    <string name="father_name">Father name</string>
+    <string name="dob">Date of Birth</string>
     <string name="co_app_pan_no"> Co Applicant PAN No</string>
     <string name="mobile">Mobile No</string>
+    <string name="Pincode">Pincode</string>
     <string name="crt_termss">I accepts the terms and conditions</string>
     <string name="age_vali">Please Enter the valid age</string>
     <string name="need_cr_report">Do you Need a Credite Report ?</string>
