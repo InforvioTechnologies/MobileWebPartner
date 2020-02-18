@@ -233,6 +233,7 @@ public class Viability_Check_PL extends SimpleActivity {
     String user_id,transaction_id,pl_co_app_ind_Office_Shop_Own_id,pl_co_app_ind_Office_Shop_Own_value;
     int applicant_count;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -259,14 +260,14 @@ public class Viability_Check_PL extends SimpleActivity {
         Assets_myList_values = (ArrayList<String>) getIntent().getSerializableExtra("select_lid_id");
         removeClass = new RemoveCommas();
 
-        lead_viy_step2.setOnClickListener(new View.OnClickListener() {
+     /*   lead_viy_step2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(Viability_Check_PL.this, Eligibility_Check_PL.class);
                 startActivity(intent);
                 finish();
             }
-        });
+        });*/
 
         Log.e("viability check Pl ","Personal Loan");
       /* monthly_sal_txt,salery_credite_method_txt,Exp_in_current_txt,total_workexperiecnce_txt,cmp_pincode_txt,
@@ -332,7 +333,7 @@ public class Viability_Check_PL extends SimpleActivity {
 
 
         UISCREEN();
-       // Click();
+       Click();
         fonts();
         makeJsonObjReq1();
     }
@@ -4740,7 +4741,6 @@ public class Viability_Check_PL extends SimpleActivity {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
         try {
 
             if(IS_CO_Applicant_Id.equals("1"))
@@ -4853,7 +4853,9 @@ public class Viability_Check_PL extends SimpleActivity {
             //  J.put(Params.email_id,email);
             J.put("applicant_count",applicant_count);
             J.put("transaction_id",transaction_id);
+          //  J.put("transaction_id","11381");
             J.put("user_id",user_id);
+           // J.put("user_id","9919");
             J.put("applicant",applicant);
             J.put("co_applicant",applicant1);
 
@@ -4869,19 +4871,34 @@ public class Viability_Check_PL extends SimpleActivity {
                     public void onResponse(JSONObject response) {
 
                         String data = String.valueOf(response);
+
                         Log.e("Add_Home_loan Partner", String.valueOf(response));
                         try {
+                            JSONObject jsonObject1 = response.getJSONObject("response");
+                            if(jsonObject1.getString("applicant_status").equals("success")) {
 
-                            if(response.getString(Params.status).equals("Ok")) {
+                                 if(jsonObject1.getString("viablity_status").equals("success"))
+                                 {
+                                     Toast.makeText(context,"Viability Created Successfully",Toast.LENGTH_SHORT).show();
 
-                                Intent intent = new Intent(Viability_Check_PL.this, Eligibility_Check_PL.class);
-                                startActivity(intent);
-                                finish();
+                                     Intent intent = new Intent(Viability_Check_PL.this, Eligibility_Check_PL.class);
+                                     intent.putExtra("user_id", user_id);
+                                     intent.putExtra("transaction_id", transaction_id);
+                                     startActivity(intent);
+                                     finish();
+                                 }else if(jsonObject1.getString("viablity_status").equals("error"))
+                                 {
+                                     Toast.makeText(context,"Viability Failed",Toast.LENGTH_SHORT).show();
+
+                                     String viability_array =jsonObject1.getString("viability_arr");
+                                     Intent intent = new Intent(Viability_Check_PL.this, Loan_Viyability_Check_Activity.class);
+                                     intent.putExtra("viability_jsonArray", viability_array.toString());
+                                     startActivity(intent);
+                                     finish();
+                                 }
 
                             }
-                            if(response.getString(Params.status).equals("error")) {
-                                Objs.a.showToast(context, "Already Registered with Propwiser");
-                            }
+
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }

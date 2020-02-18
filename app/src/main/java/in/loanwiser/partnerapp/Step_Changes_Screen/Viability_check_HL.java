@@ -258,7 +258,7 @@ public class Viability_check_HL extends SimpleActivity {
         salary_proof_edit_txt1 = (AppCompatTextView) findViewById(R.id.salary_proof_edit_txt);
         Log.e("viability check Hl ","Secure Loan");
 
-        business_proof_type_text = (AppCompatTextView) findViewById(R.id.business_proof_type_text);
+
 
         vehicle_type_text = (AppCompatTextView) findViewById(R.id.vehicle_type_text);
         self_proof_edit_txt = (AppCompatTextView) findViewById(R.id.self_proof_edit_txt);
@@ -539,19 +539,14 @@ public class Viability_check_HL extends SimpleActivity {
         spinner_how_do_sell_milk =(Spinner) findViewById(R.id.spinner_how_do_sell_milk);
         //  spinner_busines_type =(Spinner) findViewById(R.id.spinner_busines_type);
         spinner_busines_type_own_business =(Spinner) findViewById(R.id.spinner_busines_type_own_business);
-        business_incom_proof =(Spinner) findViewById(R.id.business_incom_proof);
-        business_incom_proof_forming =(Spinner) findViewById(R.id.business_incom_proof_forming);
-        business_proof_own_business_spinner =(Spinner) findViewById(R.id.business_proof_own_business_spinner);
-        what_crop_spinne =(Spinner) findViewById(R.id.what_crop_spinne);
-        business_incom_proof_p =(Spinner) findViewById(R.id.business_incom_proof_p);
 
-        spi_busproof_individual =(Spinner) findViewById(R.id.spi_busproof_individual);
+        what_crop_spinne =(Spinner) findViewById(R.id.what_crop_spinne);
         spinner_business_proof_txt_F =(Spinner) findViewById(R.id.spinner_business_proof_txt_F);
         spinner_business_proof_txt_D =(Spinner) findViewById(R.id.spinner_business_proof_txt_D);
         spinner_business_proof_txt_P =(Spinner) findViewById(R.id.spinner_business_proof_txt_P);
         spinner_assets_owned =(Spinner) findViewById(R.id.spinner_assets_owned);
         spp_vehicle_type =(Spinner) findViewById(R.id.spp_vehicle_type);
-        spinner_office_shop_setup =(Spinner) findViewById(R.id.spinner_office_shop_setup);
+
         spinner_frenc_deler_sub =(Spinner) findViewById(R.id.spinner_frenc_deler_sub);
 
         spnr_property_category = (Spinner) findViewById(R.id.spnr_property_category);
@@ -561,7 +556,7 @@ public class Viability_check_HL extends SimpleActivity {
         spnr_da_bulding_approval = (Spinner) findViewById(R.id.spnr_da_bulding_approval);
 
         spi_busproof_own_business =(Spinner) findViewById(R.id.spi_busproof_own_business);
-        business_incom_proof_D =(Spinner) findViewById(R.id.business_incom_proof_D);
+
 
         individual = (LinearLayout) findViewById(R.id.individual);
         formin_dairy = (LinearLayout) findViewById(R.id.formin_dairy);
@@ -571,11 +566,11 @@ public class Viability_check_HL extends SimpleActivity {
         forming = (LinearLayout) findViewById(R.id.forming);
         dairy = (LinearLayout) findViewById(R.id.dairy);
         poultry = (LinearLayout) findViewById(R.id.poultry);
-        cv_vusiness_proof_individual =(ChipsView) findViewById(R.id.cv_vusiness_proof_individual);
-        cv_Business_proof_poultry =(ChipsView) findViewById(R.id.cv_Business_proof_poultry);
+
+
         cv_Assets_Owns =(ChipsView) findViewById(R.id.cv_Assets_Owns);
         cv_business_proof_multiselect_forming =(ChipsView) findViewById(R.id.cv_business_proof_multiselect_forming);
-        cv_Business_proof_dairy =(ChipsView) findViewById(R.id.cv_Business_proof_dairy);
+
         cv_business_proof_own =(ChipsView) findViewById(R.id.cv_business_proof_own);
         cv_vehicle_type =(ChipsView) findViewById(R.id.cv_vehicle_type);
         cv_what_kindof_crop =(ChipsView) findViewById(R.id.cv_what_kindof_crop);
@@ -617,10 +612,6 @@ public class Viability_check_HL extends SimpleActivity {
         monthly_incom_txt = (AppCompatTextView) findViewById(R.id.monthly_incom_txt);
         monthly_incom_txt1 = (AppCompatTextView) findViewById(R.id.monthly_incom_txt1);
 
-        busproof_ind_txt = (AppCompatTextView) findViewById(R.id.busproof_ind_txt);
-        busproof_ind_txt1 = (AppCompatTextView) findViewById(R.id.busproof_ind_txt1);
-
-
         age_edit_txt = (AppCompatEditText) findViewById(R.id.age_edit_txt);
         // residence_edite_txt = (AppCompatEditText) findViewById(R.id.residence_edite_txt);
         live_curentres_edite_txt = (AppCompatEditText) findViewById(R.id.live_curentres_edite_txt);
@@ -650,7 +641,7 @@ public class Viability_check_HL extends SimpleActivity {
         no_of_years_in_work_P = (AppCompatEditText) findViewById(R.id.no_of_years_in_work_P);
         avg_monthly_income_Poultry = (AppCompatEditText) findViewById(R.id.avg_monthly_income_Poultry);
 
-        actual_business_edit_own_edt_txt = (AppCompatEditText) findViewById(R.id.actual_business_edit_own_edt_txt);
+
         delership_company_edit_txt = (AppCompatEditText) findViewById(R.id.delership_company_edit_txt);
         monthly_profit_edit_txt = (AppCompatEditText) findViewById(R.id.monthly_profit_edit_txt);
 
@@ -3573,180 +3564,7 @@ public class Viability_check_HL extends SimpleActivity {
 
             Business_income_proof_Adapter.setDropDownViewResource(R.layout.view_spinner_item);
 
-            business_incom_proof.setAdapter(Business_income_proof_Adapter);
-            business_incom_proof.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                @Override
-                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
-                    try {
-
-
-                        //  City_loc_uniqueID = ja.getJSONObject(position).getString("city_id");
-                        Business_income_proof_id = Business_income_proof_ar.getJSONObject(position).getString("id");
-                        Business_income_proof_value = Business_income_proof_ar.getJSONObject(position).getString("value");
-                        //CAT_ID = ja.getJSONObject(position).getString("category_id");
-                        Log.d("vocaton_id", Business_income_proof_id);
-                        Log.d("vocaton_value", Business_income_proof_value);
-
-
-
-
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                }
-
-                @Override
-                public void onNothingSelected(AdapterView<?> parent) {
-
-                }
-            });
-            business_incom_proof.setOnTouchListener(new View.OnTouchListener() {
-                @Override
-                public boolean onTouch(View view, MotionEvent motionEvent) {
-                    // imm.hideSoftInputFromWindow(edt_buyer_address.getWindowToken(), 0);
-                    return false;
-                }
-            });
-
-            //business_income_proof_forming
-            business_incom_proof_forming.setAdapter(Business_income_proof_Adapter);
-            business_incom_proof_forming.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                @Override
-                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
-                    try {
-
-
-                        //  City_loc_uniqueID = ja.getJSONObject(position).getString("city_id");
-                        business_incom_proof_forming_id = Business_income_proof_ar.getJSONObject(position).getString("id");
-                        business_incom_proof_forming_value = Business_income_proof_ar.getJSONObject(position).getString("value");
-                        //CAT_ID = ja.getJSONObject(position).getString("category_id");
-                        Log.d("vocaton_id", business_incom_proof_forming_id);
-                        Log.d("vocaton_value", business_incom_proof_forming_value);
-
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                }
-
-                @Override
-                public void onNothingSelected(AdapterView<?> parent) {
-
-                }
-            });
-            business_incom_proof_forming.setOnTouchListener(new View.OnTouchListener() {
-                @Override
-                public boolean onTouch(View view, MotionEvent motionEvent) {
-                    // imm.hideSoftInputFromWindow(edt_buyer_address.getWindowToken(), 0);
-                    return false;
-                }
-            });
-
             ///Buiness Income proof Dairy
-
-            business_incom_proof_D.setAdapter(Business_income_proof_Adapter);
-            business_incom_proof_D.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                @Override
-                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
-                    try {
-
-
-                        //  City_loc_uniqueID = ja.getJSONObject(position).getString("city_id");
-                        business_incom_proof_Dairy_id = Business_income_proof_ar.getJSONObject(position).getString("id");
-                        business_incom_proof_Dairy_value = Business_income_proof_ar.getJSONObject(position).getString("value");
-                        //CAT_ID = ja.getJSONObject(position).getString("category_id");
-                        Log.d("vocaton_id", business_incom_proof_Dairy_id);
-                        Log.d("vocaton_value", business_incom_proof_Dairy_value);
-
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                }
-
-                @Override
-                public void onNothingSelected(AdapterView<?> parent) {
-
-                }
-            });
-            business_incom_proof_forming.setOnTouchListener(new View.OnTouchListener() {
-                @Override
-                public boolean onTouch(View view, MotionEvent motionEvent) {
-                    // imm.hideSoftInputFromWindow(edt_buyer_address.getWindowToken(), 0);
-                    return false;
-                }
-            });
-            ///Own Business income Proof
-
-            business_proof_own_business_spinner.setAdapter(Business_income_proof_Adapter);
-            business_proof_own_business_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                @Override
-                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
-                    try {
-
-
-                        //  City_loc_uniqueID = ja.getJSONObject(position).getString("city_id");
-                        business_incom_proof_own_business_id = Business_income_proof_ar.getJSONObject(position).getString("id");
-                        business_incom_proof_own_business_value  = Business_income_proof_ar.getJSONObject(position).getString("value");
-                        //CAT_ID = ja.getJSONObject(position).getString("category_id");
-                        Log.d("vocaton_id", business_incom_proof_own_business_id);
-                        Log.d("vocaton_value", business_incom_proof_own_business_value);
-
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                }
-
-                @Override
-                public void onNothingSelected(AdapterView<?> parent) {
-
-                }
-            });
-            business_proof_own_business_spinner.setOnTouchListener(new View.OnTouchListener() {
-                @Override
-                public boolean onTouch(View view, MotionEvent motionEvent) {
-                    // imm.hideSoftInputFromWindow(edt_buyer_address.getWindowToken(), 0);
-                    return false;
-                }
-            });
-
-
-
-            business_incom_proof_p.setAdapter(Business_income_proof_Adapter);
-            business_incom_proof_p.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                @Override
-                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
-                    try {
-
-
-
-                        //  City_loc_uniqueID = ja.getJSONObject(position).getString("city_id");
-                        business_incom_proof_Poultry_id = Business_income_proof_ar.getJSONObject(position).getString("id");
-                        business_incom_proof_Poultry_value  = Business_income_proof_ar.getJSONObject(position).getString("value");
-                        //CAT_ID = ja.getJSONObject(position).getString("category_id");
-                        Log.e("vocaton_id", business_incom_proof_Poultry_id);
-                        Log.e("vocaton_value", business_incom_proof_Poultry_value);
-
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                }
-
-                @Override
-                public void onNothingSelected(AdapterView<?> parent) {
-
-                }
-            });
-            business_incom_proof_p.setOnTouchListener(new View.OnTouchListener() {
-                @Override
-                public boolean onTouch(View view, MotionEvent motionEvent) {
-                    // imm.hideSoftInputFromWindow(edt_buyer_address.getWindowToken(), 0);
-                    return false;
-                }
-            });
 
         }
 

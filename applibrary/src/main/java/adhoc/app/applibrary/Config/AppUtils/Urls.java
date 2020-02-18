@@ -83,7 +83,7 @@ public class Urls {
     public static String Lead_Creation = Urls_step + "Lead_Creation";
     public static String VIABILITY_CHECK = Urls_step + "viability_check";
     public static String Eligibility_Check = Urls_step + "eligibility_check";
-    public static String CRIF_REPORT = Urls_step + "insert_familycrif";
+    public static String CRIF_REPORT = Urls_step + "crfi_check";
 
 
     /* public static  String = "" ;

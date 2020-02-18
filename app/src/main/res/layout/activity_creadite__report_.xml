@@ -76,6 +76,8 @@
                                 android:id="@+id/first_name_Edite_text"
                                 android:textColor="@color/colorPrimaryDark"
                                 android:textSize="16sp"
+                                android:inputType="text"
+                                android:imeOptions="actionNext"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"/>
                         </LinearLayout>
@@ -118,6 +120,8 @@
                                 android:id="@+id/Last_name_Edite_text"
                                 android:textColor="@color/colorPrimaryDark"
                                 android:textSize="16sp"
+                                android:inputType="text"
+                                android:imeOptions="actionNext"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"/>
                         </LinearLayout>
@@ -160,6 +164,8 @@
                                 android:id="@+id/Pan_No_Edite_text"
                                 android:textColor="@color/colorPrimaryDark"
                                 android:textSize="16sp"
+                                android:inputType="text"
+                                android:imeOptions="actionNext"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"/>
                         </LinearLayout>
@@ -202,6 +208,8 @@
                                 android:id="@+id/father_name_edt_txt"
                                 android:textColor="@color/colorPrimaryDark"
                                 android:textSize="16sp"
+                                android:inputType="text"
+                                android:imeOptions="actionNext"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"/>
                         </LinearLayout>
@@ -244,6 +252,8 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:id="@+id/Email_Id_Edite_text"
+                                android:inputType="textEmailAddress"
+                                android:imeOptions="actionNext"
                                 android:textColor="@color/colorPrimaryDark"
                                 android:textSize="16sp"/>
                         </LinearLayout>
@@ -286,6 +296,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:id="@+id/dob_Edite_text"
+                                android:inputType="date"
                                 android:textColor="@color/colorPrimaryDark"
                                 android:textSize="16sp"/>
                         </LinearLayout>
@@ -329,6 +340,8 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:id="@+id/Mobile_No_Edite_text"
+                                android:inputType="number"
+                                android:imeOptions="actionNext"
                                 android:textColor="@color/colorPrimaryDark"
                                 android:textSize="16sp"/>
                         </LinearLayout>
@@ -372,6 +385,8 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:id="@+id/pincode_edt_txt"
+                                android:inputType="number"
+                                android:imeOptions="actionDone"
                                 android:textColor="@color/colorPrimaryDark"
                                 android:textSize="16sp"/>
                         </LinearLayout>
@@ -388,10 +403,11 @@
                             android:id="@+id/other_income_details_txt"
                             android:textSize="18sp"
                             android:textStyle="bold"
+                            android:inputType="number"
+                            android:imeOptions="actionNext"
                             android:textColor="@color/colorPrimary1"
                             android:text="Co Applicant"
                             android:layout_height="wrap_content" />
-
                     </LinearLayout>
 
                     <LinearLayout
@@ -432,6 +448,8 @@
                                 android:id="@+id/pl_co_app_first_name_Edite_text"
                                 android:textColor="@color/colorPrimaryDark"
                                 android:textSize="16sp"
+                                android:inputType="text"
+                                android:imeOptions="actionNext"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"/>
                         </LinearLayout>
@@ -474,6 +492,8 @@
                                 android:id="@+id/pl_co_app_Last_name_Edite_text"
                                 android:textColor="@color/colorPrimaryDark"
                                 android:textSize="16sp"
+                                android:inputType="text"
+                                android:imeOptions="actionNext"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"/>
                         </LinearLayout>
@@ -516,6 +536,8 @@
                                 android:id="@+id/pl_co_app_Pan_No_Edite_text"
                                 android:textColor="@color/colorPrimaryDark"
                                 android:textSize="16sp"
+                                android:inputType="text"
+                                android:imeOptions="actionNext"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"/>
                         </LinearLayout>
@@ -558,6 +580,8 @@
                                 android:id="@+id/pl_co_app_father_name_edt_txt"
                                 android:textColor="@color/colorPrimaryDark"
                                 android:textSize="16sp"
+                                android:inputType="text"
+                                android:imeOptions="actionNext"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"/>
                         </LinearLayout>
@@ -599,6 +623,8 @@
                             <androidx.appcompat.widget.AppCompatEditText
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:inputType="textEmailAddress"
+                                android:imeOptions="actionNext"
                                 android:id="@+id/pl_co_app_Email_Id_Edite_text"
                                 android:textColor="@color/colorPrimaryDark"
                                 android:textSize="16sp"/>
@@ -641,6 +667,8 @@
                             <androidx.appcompat.widget.AppCompatEditText
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:inputType="date"
+                                android:imeOptions="actionNext"
                                 android:id="@+id/pl_co_app_dob_Edite_text"
                                 android:textColor="@color/colorPrimaryDark"
                                 android:textSize="16sp"/>
@@ -684,6 +712,8 @@
                             <androidx.appcompat.widget.AppCompatEditText
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:inputType="number"
+                                android:imeOptions="actionNext"
                                 android:id="@+id/pl_co_app_Mobile_No_Edite_text"
                                 android:textColor="@color/colorPrimaryDark"
                                 android:textSize="16sp"/>
@@ -727,6 +757,8 @@
                             <androidx.appcompat.widget.AppCompatEditText
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:inputType="number"
+                                android:imeOptions="actionDone"
                                 android:id="@+id/pl_co_app_pincode_edt_txt"
                                 android:textColor="@color/colorPrimaryDark"
                                 android:textSize="16sp"/>

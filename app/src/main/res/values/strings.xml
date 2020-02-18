@@ -266,6 +266,7 @@
     <string name="home_purpose6"> Renovate/Extend your exisiting House</string>
     <string name="home_purpose7"> Balance Transfer </string>
     <string name="viy_check">Viability Check</string>
+    <string name="viy_report">Viability Report</string>
 
     <string name="viy_check1">multi Check</string>
 
@@ -487,6 +488,7 @@
     <string name="profit_selling">Profit after selling</string>
     <string name="business_type">Business Type</string>
     <string name="office_shop_setup">Office/Shop Setup</string>
+    <string name="office_shop_area">Office/Shop Area</string>
     <string name="deler_type">If you are Franchise/dealer/sub dealer</string>
     <string name="delership_cmp">Name of dealership company</string>
     <string name="monthly_profit">Average Monthly Profit</string>

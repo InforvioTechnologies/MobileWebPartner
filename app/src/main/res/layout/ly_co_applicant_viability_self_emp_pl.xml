@@ -473,7 +473,7 @@
                     style="@style/LorgeText2"
                     android:textColor="@color/colorPrimaryDark"
                     android:textColorHint="@color/colorPrimaryDark"
-                    android:text="@string/office_shop_setup"
+                    android:text="@string/office_shop_area"
                     android:layout_height="wrap_content" />
             </LinearLayout>
             <LinearLayout

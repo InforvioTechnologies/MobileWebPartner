@@ -102,6 +102,7 @@ public class Lead_Crration_Activity extends SimpleActivity {
        // LoanCat_Name = Pref.getLoanCat_Name(context);
 
         Log.e("Loantype_Name",Lontypename);
+        Log.e("Get ID",Pref.getID(getApplicationContext()));
 
         font = Typeface.createFromAsset(context.getAssets(), "Lato-Regular.ttf");
         progressDialog = new SpotsDialog(context, R.style.Custom);
@@ -111,21 +112,18 @@ public class Lead_Crration_Activity extends SimpleActivity {
         UI_FIELDS();
         fonts();
         makeJsonObjReq1();
-     // Click();
+       // Click();
 
         lead_cr_step1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                Intent intent = new Intent(Lead_Crration_Activity.this, Creadite_Report_Activity.class);
+                Intent intent = new Intent(Lead_Crration_Activity.this, Viability_Check_BL.class);
                 startActivity(intent);
                 finish();
 
             }
         });
-
-
-
 
      if(Lontypename.contains("Personal Loan [Unsecured]") || Lontypename.contains("Business Loan [Unsecured]"))
      {
@@ -964,6 +962,7 @@ public class Lead_Crration_Activity extends SimpleActivity {
 
                                 } else if(App.equals("21"))
                                 {
+                                    Toast.makeText(context,"Lead Created Successfully",Toast.LENGTH_SHORT).show();
                                     Intent intent = new Intent(Lead_Crration_Activity.this, Viability_Check_PL.class);
                                     intent.putExtra("user_id", user_id);
                                     intent.putExtra("transaction_id", transaction_id);

@@ -127,7 +127,9 @@ public class Eligibility_Check_PL extends SimpleActivity {
         String residence_id,Co_Applicant,S_pl_co_app_company_name_edtxt,S_pl_co_App_no_of_emp_edtxt,S_pl_co_app_designation_in_company,
                 S_pl_co_app_no_of_dependent_edt_txt,S_pl_co_app_emi_amount_edit_txt,S_pl_co_App_education_qualification_edit_txt;
         LinearLayout full_addres_of_relative,rented1,permanent_res_type_ly,permanent_residence_pincode_ly,permanent_res_area,
-                rent_paid_for_house_ly,pl_co_app_cmp_name,pl_co_cmp_des_;
+                rent_paid_for_house_ly,pl_co_app_cmp_name,pl_co_cmp_des_,co_applicant_pl_co_applicant;
+        String user_id,transaction_id;
+        int app_count;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -145,6 +147,11 @@ public class Eligibility_Check_PL extends SimpleActivity {
 
         residence_id = Pref.get_Residence_ID(getApplicationContext());
         Co_Applicant = Pref.getCoAPPAVAILABLE(getApplicationContext());
+
+        Intent intent = getIntent();
+        user_id = intent.getStringExtra("user_id");
+        transaction_id = intent.getStringExtra("transaction_id");
+
         UISCREEN();
         Click();
         fonts();
@@ -168,7 +175,15 @@ public class Eligibility_Check_PL extends SimpleActivity {
             rent_paid_for_house_ly.setVisibility(View.VISIBLE);
         }
 
+        if(Co_Applicant.equals("1"))
+        {
+            app_count=2;
+            co_applicant_pl_co_applicant.setVisibility(View.VISIBLE);
+        }else {
+            app_count=1;
+            co_applicant_pl_co_applicant.setVisibility(View.GONE);
 
+        }
 
      /*   lead_viy_step2.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -280,6 +295,7 @@ public class Eligibility_Check_PL extends SimpleActivity {
         rent_paid_for_house_ly = (LinearLayout) findViewById(R.id.rent_paid_for_house_ly);
         pl_co_app_cmp_name = (LinearLayout) findViewById(R.id.pl_co_app_cmp_name);
         pl_co_cmp_des_ = (LinearLayout) findViewById(R.id.pl_co_cmp_des_);
+        co_applicant_pl_co_applicant = (LinearLayout) findViewById(R.id.co_applicant_pl_co_applicant);
         permanent_residence_pincode_ly = (LinearLayout) findViewById(R.id.permanent_residence_pincode_ly);
         permanent_res_area = (LinearLayout) findViewById(R.id.permanent_res_area);
 
@@ -2174,11 +2190,9 @@ public class Eligibility_Check_PL extends SimpleActivity {
             Applicant.put("marital_status",maried_res_spinner_id);
             Applicant.put("no_of_dependency",S_no_of_dependent_edt_txt);
             Applicant.put("affordable_pay",S_emi_amount_edit_txt);
-
             Applicant.put("other_from",other_income);
             Applicant.put("other_amount",other_amount);
             Applicant.put("other_reflected",itr_reflected);
-
             Applicant.put("perm_res_pincode",S_permanent_residence_spinner);
             Applicant.put("perm_res_area ",permanent_residence__area_id);
             Applicant.put("perm_residence",Permanent_Resi_id);
@@ -2191,7 +2205,6 @@ public class Eligibility_Check_PL extends SimpleActivity {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
 
         try {
             Co_Applicant.put("has_pancardHave",Pl_Co_App_PAN_id);
@@ -2207,8 +2220,6 @@ public class Eligibility_Check_PL extends SimpleActivity {
             Co_Applicant.put("affordable_pay",S_pl_co_app_emi_amount_edit_txt);
             Co_Applicant.put("qualification",S_pl_co_App_education_qualification_edit_txt);
 
-
-
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -2217,9 +2228,11 @@ public class Eligibility_Check_PL extends SimpleActivity {
         try {
             J =new JSONObject();
             //  J.put(Params.email_id,email);
-            J.put("applicant_count",1);
-            J.put("transaction_id",11225);
-            J.put("user_id",9766);
+            J.put("applicant_count",app_count);
+           // J.put("transaction_id",11381);
+            J.put("transaction_id",transaction_id);
+          //  J.put("user_id",9919);
+            J.put("user_id",user_id);
             J.put("applicant",Applicant);
             J.put("co_applicant",Co_Applicant);
 
@@ -2237,13 +2250,29 @@ public class Eligibility_Check_PL extends SimpleActivity {
                         String data = String.valueOf(response);
                         Log.e("Add_Home_loan Partner", String.valueOf(response));
                         try {
+                            JSONObject jsonObject1 = response.getJSONObject("response");
+                            if(jsonObject1.getString("applicant_status").equals("success")) {
+                                if(jsonObject1.getString("eligibility_status").equals("success"))
+                                {
+                                    Toast.makeText(context,"Eligibility Created Successfully",Toast.LENGTH_SHORT).show();
 
-                            if(response.getString("applicant_status").equals("success")) {
+                                    Intent intent = new Intent(Eligibility_Check_PL.this, Creadite_Report_Activity.class);
+                                    intent.putExtra("user_id", user_id);
+                                    intent.putExtra("transaction_id", transaction_id);
+                                    startActivity(intent);
+                                    finish();
+                                }else if(jsonObject1.getString("eligibility_status").equals("error"))
+                                {
+                                    Toast.makeText(context,"Eligibility Failed",Toast.LENGTH_SHORT).show();
 
+                                    String viability_array =jsonObject1.getString("eligibility_arr");
+                                    Intent intent = new Intent(Eligibility_Check_PL.this, Loan_Viyability_Check_Activity.class);
+                                    intent.putExtra("viability_jsonArray", viability_array.toString());
+                                    startActivity(intent);
+                                    finish();
+                                }
                             }
-                            if(response.getString(Params.status).equals("error")) {
-                                Objs.a.showToast(context, "Already Registered with Propwiser");
-                            }
+
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
