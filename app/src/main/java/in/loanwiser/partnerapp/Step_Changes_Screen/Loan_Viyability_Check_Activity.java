@@ -26,7 +26,7 @@ public class Loan_Viyability_Check_Activity extends SimpleActivity {
        // setContentView(R.layout.activity_loan__viyability__check_);
 
         setContentView(R.layout.activity_simple);
-        Objs.a.setStubId(this,R.layout.activity_viability__check);
+        Objs.a.setStubId(this,R.layout.activity_loan__viyability__check_);
         initTools(R.string.viy_report);
 
         Intent intent = getIntent();

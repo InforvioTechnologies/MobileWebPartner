@@ -957,6 +957,8 @@ public class Lead_Crration_Activity extends SimpleActivity {
                                 } else if(App.equals("20"))
                                 {
                                     Intent intent = new Intent(Lead_Crration_Activity.this, Viability_Check_BL.class);
+                                    intent.putExtra("user_id", user_id);
+                                    intent.putExtra("transaction_id", transaction_id);
                                     startActivity(intent);
                                     finish();
 

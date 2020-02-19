@@ -868,7 +868,9 @@ public class Viability_Check_PL extends SimpleActivity {
                                 if(residence_id.equals("1"))
                                 {
 
+
                                     co_applicant_validation();
+
                                    /* Intent intent = new Intent(Viability_Check_PL.this, Eligibility_Check_PL.class);
                                     startActivity(intent);
                                     finish();
@@ -1312,7 +1314,7 @@ public class Viability_Check_PL extends SimpleActivity {
             self_own_vintage_bus_SA = self_own_vintage_bus_str.split(",");
 
             business_vintage_self = new JSONArray();
-            business_vintage_self = new JSONArray(Arrays.asList(assets_owned_array));
+            business_vintage_self = new JSONArray(Arrays.asList(self_own_vintage_bus_SA));
         }
 
         co_own_bus_proof = new StringBuffer();
@@ -1332,7 +1334,7 @@ public class Viability_Check_PL extends SimpleActivity {
             self_own_bus_SA = self_own_bus_str.split(",");
 
             business_proof_self = new JSONArray();
-            business_proof_self = new JSONArray(Arrays.asList(assets_owned_array));
+            business_proof_self = new JSONArray(Arrays.asList(self_own_bus_SA));
         }
 
 
@@ -1359,7 +1361,7 @@ public class Viability_Check_PL extends SimpleActivity {
                 self_co_assets_owned_SA = self_co_assets_owned_str.split(",");
 
                 self_co_assets_ = new JSONArray();
-                self_co_assets_ = new JSONArray(Arrays.asList(assets_owned_array));
+                self_co_assets_ = new JSONArray(Arrays.asList(self_co_assets_owned_SA));
             }
 
         }
