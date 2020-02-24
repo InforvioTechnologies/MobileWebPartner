@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -45,13 +46,15 @@ import adhoc.app.applibrary.Config.AppUtils.Pref.Pref;
 import adhoc.app.applibrary.Config.AppUtils.Urls;
 import adhoc.app.applibrary.Config.AppUtils.VolleySignleton.AppController;
 import dmax.dialog.SpotsDialog;
+import in.loanwiser.partnerapp.PartnerActivitys.Applicant_Details_Activity;
 import in.loanwiser.partnerapp.R;
 import in.loanwiser.partnerapp.SimpleActivity;
 
 
 public class Eligibility_BL extends SimpleActivity {
 
-    private LinearLayout self_business;
+    private LinearLayout self_business,individual,co_individual,
+            co_self_business;
     private String Lontype ;
 
     private String tag_json_obj = "jobj_req", tag_json_arry = "jarray_req";
@@ -62,9 +65,11 @@ public class Eligibility_BL extends SimpleActivity {
     private Context context = this;
     InputMethodManager imm;
     JSONArray Provide_Guarantor,Current_address_proof,GST_reflected,other_income,
-            Business_registration;
+            Business_registration,Bank_account,permanent_adddress,Reflected_ITR,Education_Qualification;
+
     Spinner spinner_res_proof,spinner_guaranter,spinner_existing_loan,spinn_other_income,
-            spinn_gst_other,business_registration_spinner;
+            spinn_gst_other,business_registration_spinner,having_bank_account,permanent_res_type_spinner,
+            Educatio_qualification_Sppinner;
 
     String[] Current_address_Proof_SA,Provide_guarente_SA,Other_income_SA,
             Gst_refelect_SA,Business_registration_SA;
@@ -73,7 +78,8 @@ public class Eligibility_BL extends SimpleActivity {
             Business_registration_adapter;
     String Spinner_res_proof_Id,Spinner_res_proof_Value,Guarenter_Id,Guarenter_Value,
             Gstreflect_Id,Gstreflect_Value,Business_registration_Id,Business_registration_Value,
-            Other_income_Id,Other_income_Value;
+            Other_income_Id,Other_income_Value,having_bank_Id,having_bank_Value,permanent_res_Id,
+            permanent_res_Value;
 
     AppCompatTextView business_registration_txt,business_registration_txt1,
             avg_bank_balence_txt,avg_bank_balence_txt1,res_proof,res_proof1,guaranter_txt,guaranter_txt1,
@@ -84,10 +90,58 @@ public class Eligibility_BL extends SimpleActivity {
 
     AppCompatEditText Avg_monthly_income,Business_reference_mobile,Business_refernce_name,
             other_income_edite_txt,purchased_by_bank_edit_txt,purchased_by_GStbill_edit_txt
-           ,sales_by_GStbill_edit_txt,bank_cridit_by_edtxt;
+           ,sales_by_GStbill_edit_txt,bank_cridit_by_edtxt,business_ref_name_edt_txt;
     AppCompatButton lead_Elegibility_Bank;
 
-    LinearLayout other_income_ifany;
+    LinearLayout other_income_ifany,co_applicant_pl_co_applicant,residence_rented,co_other_income_ifany;
+    String user_id,transaction_id,IS_CO_Applicant_Id,CO_Type_of_employement_ID,Educational_Id,Educational_Value,
+            Employement_Type,Rsidence_Type,purchased_by_bank_edit_txt1,purchased_by_GStbill_edit_txt1,sales_by_GStbill_edit_txt1,bank_cridit_by_edtxt1,
+            Avg_monthly_income1,Business_refernce_name1,Business_reference_mobile1,other_income_edite_txt1,
+            S_business_ref_name_edt_txt;
+
+    AppCompatEditText permanent_res_pincode_edt_txt;
+
+    int app_count;
+
+    // Co Applicant Self
+
+    JSONArray Other_income,epf_deduct,Marital_Status,Type_employee,Company_type,
+            employee_id_ar,have_pan_ar;
+
+    String [] PAN_ID_SA,Employe_ID_SA,Company_type_SA,Employee_type_SA,Marital_Statues_SA,Epf_detected_SA,
+            gst_reflect_SA;
+
+    ArrayAdapter<String> PAN_ID_Adapter,Employee_ID_Adapter,Company_type_Adapter,Type_employee_Adapter,Marital_Statues_Adapter,
+            Epf_detected_Adapter,Other_income_Adapter,gst_reflect_Adapter;
+        String  co_having_bank_Id,co_having_bank_Value, co_Educational_Id,co_Educational_Value,
+                co_Business_registration_Id,co_Business_registration_Value, co_Spinner_res_proof_Id,co_Spinner_res_proof_Value,
+                co_Other_income_Id,co_Other_income_Value, co_Gstreflect_Id,co_Gstreflect_Value,CO_Employement_Type,
+                IS_CO_Salried_Self;
+
+        Spinner co_having_bank_account,co_Educatio_qualification_Sppinner,co_business_registration_spinner,
+            co_spinner_res_proof,co_spinn_other_income,co_spinn_gst_other;
+
+        AppCompatEditText co_business_ref_name_edt_txt,co_purchased_by_bank_edit_txt,co_purchased_by_GStbill_edit_txt,
+                co_sales_by_GStbill_edit_txt,co_bank_cridit_by_edtxt,co_Avg_monthly_income,co_other_income_edite_txt;
+
+        Spinner  pl_co_self_has_pan_card_spnr,pl_co_app_spinner_employe_id,pl_co_app_spinner_cmp_type,
+                pl_co_app_employee_type_spnr,pl_co_app_epf_spinner,
+                pl_co_app_spinn_other_income,pl_co_App_spinn_is_gst_reflect,pl_co_app_maried_res_spinner;
+
+        String   Pl_Co_App_PAN_id,Pl_Co_App_PAN_Value,pl_co_app_Employee_id,pl_co_app_Employee_Value,
+                pl_co_app_Company_id,pl_co_app_Company_Value,pl_co_app_Emp_type_id,pl_co_app_Other_income_Value,
+                pl_co_App_gst_reflect_id,pl_co_App_gst_reflect_Value, pl_co_app_epf_id,pl_co_app_epf_Value,
+                pl_co_app_maried_res_spinner_id,pl_co_app_maried_res_spinner_Value,pl_co_app_Other_income_id,
+                pl_co_app_Emp_type_Value;
+
+        String S_pl_co_app_company_name_edtxt,S_pl_co_App_no_of_emp_edtxt,S_pl_co_app_designation_in_company,
+                S_pl_co_app_no_of_dependent_edt_txt,S_pl_co_app_emi_amount_edit_txt,S_pl_co_App_education_qualification_edit_txt;
+
+        LinearLayout co_app_is_other_income,bl_co_eligibility_salaried,bl_co_eligibility_self;
+
+        AppCompatEditText  pl_co_app_company_name_edtxt,pl_co_app_designation_in_company,pl_co_App_no_of_emp_edtxt,pl_co_app_no_of_dependent_edt_txt,
+                pl_co_App_education_qualification_edit_txt, pl_co_app_emi_amount_edit_txt,pl_co_App_other_incom_amt_edtxt;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -105,13 +159,67 @@ public class Eligibility_BL extends SimpleActivity {
         progressDialog = new SpotsDialog(context, R.style.Custom);
         imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
 
+     /*   Intent intent = getIntent();
+        user_id = intent.getStringExtra("user_id");
+        transaction_id = intent.getStringExtra("transaction_id");
+        CO_Type_of_employement_ID = intent.getStringExtra("CO_Type_of_employement_ID");*/
+        IS_CO_Applicant_Id = Pref.getCoAPPAVAILABLE(getApplicationContext());
+        IS_CO_Salried_Self = Pref.getCOAPPSALARYTYPE(getApplicationContext());
 
+
+        Employement_Type = Pref.getCOSALARYTYPE(getApplicationContext());
+        CO_Employement_Type = Pref.getCOEMPTYPE(getApplicationContext());
+        Rsidence_Type = Pref.getResidenceType(getApplicationContext());
 
         makeJsonObjReq1();
         UISCREENS();
         Font();
         Click();
 
+        if(Employement_Type.equals("1"))
+        {
+            individual.setVisibility(View.VISIBLE);
+            self_business.setVisibility(View.GONE);
+
+        }else if(Employement_Type.equals("2"))
+        {
+            individual.setVisibility(View.GONE);
+            self_business.setVisibility(View.GONE);
+
+        }else if(Employement_Type.equals("3"))
+        {
+            individual.setVisibility(View.GONE);
+            self_business.setVisibility(View.VISIBLE);
+        }
+
+        if(IS_CO_Applicant_Id.equals("1"))
+        {
+            co_applicant_pl_co_applicant.setVisibility(View.VISIBLE);
+            app_count = 2;
+
+            if(CO_Employement_Type.equals("1"))
+            {
+                bl_co_eligibility_salaried.setVisibility(View.VISIBLE);
+                bl_co_eligibility_self.setVisibility(View.GONE);
+            }else
+            {
+                bl_co_eligibility_salaried.setVisibility(View.GONE);
+                bl_co_eligibility_self.setVisibility(View.VISIBLE);
+            }
+        }else
+        {
+            app_count = 1;
+            co_applicant_pl_co_applicant.setVisibility(View.GONE);
+        }
+
+
+        if(Rsidence_Type.equals("2"))
+        {
+            residence_rented.setVisibility(View.VISIBLE);
+        }else
+        {
+            residence_rented.setVisibility(View.GONE);
+        }
 
     }
 
@@ -119,22 +227,23 @@ public class Eligibility_BL extends SimpleActivity {
     {
 
         spinner_res_proof = (Spinner) findViewById(R.id.spinner_res_proof);
-        spinner_guaranter = (Spinner) findViewById(R.id.spinner_guaranter);
+
         spinn_gst_other = (Spinner) findViewById(R.id.spinn_gst_other);
         spinn_other_income = (Spinner) findViewById(R.id.spinn_other_income);
         business_registration_spinner = (Spinner) findViewById(R.id.business_registration_spinner);
+        Educatio_qualification_Sppinner = (Spinner) findViewById(R.id.Educatio_qualification_Sppinner);
+
+        having_bank_account = (Spinner) findViewById(R.id.having_bank_account);
+        permanent_res_type_spinner = (Spinner) findViewById(R.id.permanent_res_type_spinner);
+
+
         business_registration_txt = (AppCompatTextView) findViewById(R.id.business_registration_txt);
         business_registration_txt1 = (AppCompatTextView) findViewById(R.id.business_registration_txt1);
         avg_bank_balence_txt = (AppCompatTextView) findViewById(R.id.avg_bank_balence_txt);
         avg_bank_balence_txt1 = (AppCompatTextView) findViewById(R.id.avg_bank_balence_txt1);
         res_proof = (AppCompatTextView) findViewById(R.id.res_proof);
         res_proof1 = (AppCompatTextView) findViewById(R.id.res_proof1);
-        guaranter_txt = (AppCompatTextView) findViewById(R.id.guaranter_txt);
-        guaranter_txt1 = (AppCompatTextView) findViewById(R.id.guaranter_txt1);
-        business_r_name_txt = (AppCompatTextView) findViewById(R.id.business_r_name_txt);
-        business_r_name_txt1 = (AppCompatTextView) findViewById(R.id.business_r_name_txt1);
-        business_refernce_txt = (AppCompatTextView) findViewById(R.id.business_refernce_txt);
-        business_refernce_txt1 = (AppCompatTextView) findViewById(R.id.business_refernce_txt1);
+
         other_income_txt = (AppCompatTextView) findViewById(R.id.other_income_txt);
         other_income_txt1 = (AppCompatTextView) findViewById(R.id.other_income_txt1);
         other_incom_amt_txt = (AppCompatTextView) findViewById(R.id.other_incom_amt_txt);
@@ -154,50 +263,77 @@ public class Eligibility_BL extends SimpleActivity {
         bank_credit1_txt = (AppCompatTextView) findViewById(R.id.bank_credit1_txt);
         bank_credit1_txt1 = (AppCompatTextView) findViewById(R.id.bank_credit1_txt1);
 
-        Avg_monthly_income = (AppCompatEditText) findViewById(R.id.Avg_monthly_income);
-        Business_reference_mobile = (AppCompatEditText) findViewById(R.id.Business_reference_mobile);
-        Business_refernce_name = (AppCompatEditText) findViewById(R.id.Business_refernce_name);
+
         other_income_edite_txt = (AppCompatEditText) findViewById(R.id.other_income_edite_txt);
 
         purchased_by_bank_edit_txt = (AppCompatEditText) findViewById(R.id.purchased_by_bank_edit_txt);
         purchased_by_GStbill_edit_txt = (AppCompatEditText) findViewById(R.id.purchased_by_GStbill_edit_txt);
         sales_by_GStbill_edit_txt = (AppCompatEditText) findViewById(R.id.sales_by_GStbill_edit_txt);
         bank_cridit_by_edtxt = (AppCompatEditText) findViewById(R.id.bank_cridit_by_edtxt);
+        business_ref_name_edt_txt = (AppCompatEditText) findViewById(R.id.business_ref_name_edt_txt);
+
+        co_business_ref_name_edt_txt = (AppCompatEditText) findViewById(R.id.co_business_ref_name_edt_txt);
+        co_purchased_by_bank_edit_txt = (AppCompatEditText) findViewById(R.id.co_purchased_by_bank_edit_txt);
+        co_purchased_by_GStbill_edit_txt = (AppCompatEditText) findViewById(R.id.co_purchased_by_GStbill_edit_txt);
+        co_sales_by_GStbill_edit_txt = (AppCompatEditText) findViewById(R.id.co_sales_by_GStbill_edit_txt);
+        co_bank_cridit_by_edtxt = (AppCompatEditText) findViewById(R.id.co_bank_cridit_by_edtxt);
+        co_Avg_monthly_income = (AppCompatEditText) findViewById(R.id.co_Avg_monthly_income);
+        co_other_income_edite_txt = (AppCompatEditText) findViewById(R.id.co_other_income_edite_txt);
+
+        permanent_res_pincode_edt_txt = (AppCompatEditText) findViewById(R.id.permanent_res_pincode_edt_txt);
 
         lead_Elegibility_Bank = (AppCompatButton) findViewById(R.id.lead_Elegibility_Bank);
 
         other_income_ifany = (LinearLayout) findViewById(R.id.other_income_ifany);
-        if(Lontype.equals("3"))
-        {
-            self_business.setVisibility(View.VISIBLE);
-            business_registration_txt.setText("1");
-            purchased_by_bank1.setText("2");
-            purchased_by_gst.setText("3");
-            gst_sales1_txt.setText("4");
-            bank_credit1_txt.setText("5");
+        co_other_income_ifany = (LinearLayout) findViewById(R.id.co_other_income_ifany);
 
-            avg_bank_balence_txt.setText("5");
-            res_proof.setText("6");
-            guaranter_txt.setText("7");
-            business_r_name_txt.setText("8");
-            business_refernce_txt.setText("9");
-            other_income_txt.setText("10");
-            other_incom_amt_txt.setText("11");
-            is_gst_reflect_txt.setText("12");
+        co_applicant_pl_co_applicant = (LinearLayout) findViewById(R.id.co_applicant_pl_co_applicant);
 
-        }else
-        {
-            self_business.setVisibility(View.GONE);
-            business_registration_txt.setText("1");
-            avg_bank_balence_txt.setText("2");
-            res_proof.setText("3");
-            guaranter_txt.setText("4");
-            business_r_name_txt.setText("5");
-            business_refernce_txt.setText("6");
-            other_income_txt.setText("7");
-            other_incom_amt_txt.setText("8");
-            is_gst_reflect_txt.setText("9");
-        }
+        bl_co_eligibility_salaried = (LinearLayout) findViewById(R.id.bl_co_eligibility_salaried);
+        bl_co_eligibility_self = (LinearLayout) findViewById(R.id.bl_co_eligibility_self);
+
+        individual = (LinearLayout) findViewById(R.id.individual);
+        co_individual = (LinearLayout) findViewById(R.id.co_individual);
+        self_business = (LinearLayout) findViewById(R.id.self_business);
+        co_self_business = (LinearLayout) findViewById(R.id.co_self_business);
+        residence_rented = (LinearLayout) findViewById(R.id.residence_rented);
+
+
+
+        ///co Applicnt
+        pl_co_self_has_pan_card_spnr = (Spinner) findViewById(R.id.pl_co_self_has_pan_card_spnr);
+        pl_co_app_spinner_employe_id = (Spinner) findViewById(R.id.pl_co_app_spinner_employe_id);
+        pl_co_app_spinner_cmp_type = (Spinner) findViewById(R.id.pl_co_app_spinner_cmp_type);
+
+        pl_co_app_designation_in_company = (AppCompatEditText) findViewById(R.id.pl_co_app_designation_in_company);
+        pl_co_app_employee_type_spnr = (Spinner) findViewById(R.id.pl_co_app_employee_type_spnr);
+             pl_co_app_epf_spinner = (Spinner) findViewById(R.id.pl_co_app_epf_spinner);
+        pl_co_app_maried_res_spinner = (Spinner) findViewById(R.id.pl_co_app_maried_res_spinner);
+        pl_co_app_spinn_other_income = (Spinner) findViewById(R.id.pl_co_app_spinn_other_income);
+        pl_co_App_spinn_is_gst_reflect = (Spinner) findViewById(R.id.pl_co_App_spinn_is_gst_reflect);
+        pl_co_app_no_of_dependent_edt_txt = (AppCompatEditText) findViewById(R.id.pl_co_app_no_of_dependent_edt_txt);
+        pl_co_App_education_qualification_edit_txt = (AppCompatEditText) findViewById(R.id.pl_co_App_education_qualification_edit_txt);
+        pl_co_app_emi_amount_edit_txt = (AppCompatEditText) findViewById(R.id.pl_co_app_emi_amount_edit_txt);
+        co_app_is_other_income = (LinearLayout) findViewById(R.id.co_app_is_other_income);
+
+
+        //self
+        co_having_bank_account = (Spinner) findViewById(R.id.co_having_bank_account);
+        co_Educatio_qualification_Sppinner = (Spinner) findViewById(R.id.co_Educatio_qualification_Sppinner);
+        co_business_registration_spinner = (Spinner) findViewById(R.id.co_business_registration_spinner);
+        co_spinner_res_proof = (Spinner) findViewById(R.id.co_spinner_res_proof);
+        co_spinn_other_income = (Spinner) findViewById(R.id.co_spinn_other_income);
+        co_spinn_gst_other = (Spinner) findViewById(R.id.co_spinn_gst_other);
+
+
+
+        pl_co_app_company_name_edtxt = (AppCompatEditText) findViewById(R.id.pl_co_app_company_name_edtxt);
+        pl_co_app_designation_in_company = (AppCompatEditText) findViewById(R.id.pl_co_app_designation_in_company);
+        pl_co_App_no_of_emp_edtxt = (AppCompatEditText) findViewById(R.id.pl_co_App_no_of_emp_edtxt);
+        pl_co_app_no_of_dependent_edt_txt = (AppCompatEditText) findViewById(R.id.pl_co_app_no_of_dependent_edt_txt);
+        pl_co_App_education_qualification_edit_txt = (AppCompatEditText) findViewById(R.id.pl_co_App_education_qualification_edit_txt);
+        pl_co_app_emi_amount_edit_txt = (AppCompatEditText) findViewById(R.id.pl_co_app_emi_amount_edit_txt);
+        pl_co_App_other_incom_amt_edtxt = (AppCompatEditText) findViewById(R.id.pl_co_App_other_incom_amt_edtxt);
 
     }
 
@@ -206,38 +342,7 @@ public class Eligibility_BL extends SimpleActivity {
         font = Typeface.createFromAsset(context.getAssets(), "Lato-Regular.ttf");
 
         is_gst_reflect_txt.setTypeface(font);
-        is_gst_reflect_txt1.setTypeface(font);
-        purchased_by_bank1.setTypeface(font);
-        purchased_by_bank2.setTypeface(font);
-        purchased_by_gst.setTypeface(font);
-        purchased_by_gst1.setTypeface(font);
-        bank_credit1_txt.setTypeface(font);
-        bank_credit1_txt1.setTypeface(font);
-        gst_sales1_txt.setTypeface(font);
-        gst_sales1_txt1.setTypeface(font);
 
-        business_registration_txt.setTypeface(font);
-        business_registration_txt1.setTypeface(font);
-        avg_bank_balence_txt.setTypeface(font);
-        avg_bank_balence_txt1.setTypeface(font);
-        res_proof.setTypeface(font);
-        res_proof1.setTypeface(font);
-        guaranter_txt.setTypeface(font);
-        guaranter_txt1.setTypeface(font);
-        business_r_name_txt.setTypeface(font);
-        business_r_name_txt1.setTypeface(font);
-        business_refernce_txt.setTypeface(font);
-        business_refernce_txt1.setTypeface(font);
-        other_income_txt.setTypeface(font);
-        other_income_txt1.setTypeface(font);
-        other_incom_amt_txt.setTypeface(font);
-        other_incom_amt_txt1.setTypeface(font);
-        is_gst_reflect_txt.setTypeface(font);
-        is_gst_reflect_txt1.setTypeface(font);
-        Avg_monthly_income.setTypeface(font);
-        Business_reference_mobile.setTypeface(font);
-        Business_refernce_name.setTypeface(font);
-        other_income_edite_txt.setTypeface(font);
     }
     private void Click ()
     {
@@ -252,78 +357,130 @@ public class Eligibility_BL extends SimpleActivity {
             }
         });
 
-        /*lead_Elegibility_Bank.setOnClickListener(new View.OnClickListener() {
+        lead_Elegibility_Bank.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                if(Business_registration_Id.equals("0"))
+
+                if(Employement_Type.equals("1"))
                 {
-                    Toast.makeText(context,"Please Select Business Registration",Toast.LENGTH_SHORT).show();
-                }else
-                {
-                    if(Lontype.equals("3"))
+                    if(having_bank_Id.equals("0"))
                     {
-
-                        if (!Purchased_by_Bank()) {
-                            return;
-                        }
-                        if (!Purchased_by_Gst_bill()) {
-                            return;
-                        }
-                        if (!sales_by_Gst_bill()) {
-                            return;
-                        }
-
-                        if (!Sales_bank_cridit_()) {
-                            return;
-                        }
-
-                        validation();
-
+                        Toast.makeText(context,"Please Select Bank A/C Type",Toast.LENGTH_SHORT).show();
                     }else
                     {
-                        validation();
+                      if(Educatio_qualification_Sppinner.equals("0"))
+                      {
+                          Toast.makeText(context,"Please Select Educational Qualification",Toast.LENGTH_SHORT).show();
+
+                      }else
+                      {
+                          if (!Sales_Bank_ref_Name()) {
+                              return;
+                          }
+
+                          if(Rsidence_Type.equals("2"))
+                          {
+                              rented();
+                          }else
+                          {
+                              validation();
+                          }
+
+
+                      }
+
                     }
 
+                }else if(Employement_Type.equals("2"))
+                {
+                    if(Spinner_res_proof_Id.equals("0"))
+                    {
+                        Toast.makeText(context,"Please Select Current Residence Addres Proof",Toast.LENGTH_SHORT).show();
+                    }else
+                    {
+                        if(Rsidence_Type.equals("2"))
+                        {
+                            rented();
+                        }else
+                        {
+                            validation();
+                        }
+                    }
+                }else if(Employement_Type.equals("3"))
+                {
+                    if(Business_registration_Id.equals("0"))
+                    {
+                        Toast.makeText(context,"Please Select Business Registration",Toast.LENGTH_SHORT).show();
+                    }else
+                    {
+
+                            if (!Purchased_by_Bank()) {
+                                return;
+                            }
+                            if (!Purchased_by_Gst_bill()) {
+                                return;
+                            }
+                            if (!sales_by_Gst_bill()) {
+                                return;
+                            }
+
+                            if (!Sales_bank_cridit_()) {
+                                return;
+                            }
+
+                        if (!Average_monthly_income()) {
+                            return;
+                        }
+                        if(Rsidence_Type.equals("2"))
+                        {
+                            rented();
+                        }else
+                        {
+                            validation();
+                        }
+
+                    }
                 }
+//////
             }
-        });*/
+        });
 
     }
 
-    private void validation()
-    {
-
-        if (!Average_monthly_income()) {
-            return;
-        }
+    private void rented(){
         if(Spinner_res_proof_Id.equals("0"))
         {
             Toast.makeText(context,"Please Select Current Residence Addres Proof",Toast.LENGTH_SHORT).show();
         }else
         {
-          /*  if(Guarenter_Id.equals("0"))
+            if (!Validation_Permanent_Resi()) {
+                return;
+            }
+            if(permanent_res_Id.equals("0"))
             {
-                Toast.makeText(context,"Please Select can you provide Guarenter",Toast.LENGTH_SHORT).show();
-
+                Toast.makeText(context,"Please Select  Residence Type",Toast.LENGTH_SHORT).show();
             }else
-            {*/
+            {
+                validation();
+            }
 
-             /*   if (!residence_Business_reference_name()) {
-                    return;
-                }
 
-                if (!residence_Business_reference_phone()) {
-                    return;
-                }*/
-
+        }
+    }
+    private void validation()
+    {
+        if(Spinner_res_proof_Id.equals("0"))
+        {
+            Toast.makeText(context,"Please Select Current Residence Addres Proof",Toast.LENGTH_SHORT).show();
+        }else
+        {
                 if(Other_income_Id.equals("0"))
                 {
                     Toast.makeText(context,"Please Select Other Income",Toast.LENGTH_SHORT).show();
 
                 }else if(Other_income_Id.equals("4"))
                 {
-
 
                 }else
                 {
@@ -334,19 +491,249 @@ public class Eligibility_BL extends SimpleActivity {
 
                     if(Gstreflect_Id.equals("0"))
                     {
-                        Toast.makeText(context,"Please Select Gst Reflected",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context,"Please Select ITR Reflected",Toast.LENGTH_SHORT).show();
                     }
                     else
                     {
+
+
+                       CO_APPLICANT_VALIDATION();
+                        //
+                    }
+                }
+        }
+
+    }
+
+
+
+        private void CO_APPLICANT_VALIDATION()
+        {
+            if(IS_CO_Applicant_Id.equals("1")) {
+
+                if(IS_CO_Salried_Self.equals("1"))
+                {
+                    salaried();
+                }else
+                {
+                    co_self();
+                }
+
+            }else
+            {
+              lead_Eligibility();
+            }
+        }
+
+
+        private void salaried()
+        {
+
+
+                if(Pl_Co_App_PAN_id.equals("0"))
+                {
+                    Toast.makeText(mCon, "Please Select Co applicant Has PAN ?", Toast.LENGTH_SHORT).show();
+                }else
+                {
+
+                    if(pl_co_app_Employee_id.equals("0"))
+                    {
+                        Toast.makeText(mCon, "Please Select Co applicant Have Employee id ?", Toast.LENGTH_SHORT).show();
+
+                    }else
+                    {
+                        if(pl_co_app_Company_id.equals("0"))
+                        {
+                            Toast.makeText(mCon, "Please Select Co applicant Company Type", Toast.LENGTH_SHORT).show();
+
+                        }else
+                        {
+                            if (!Co_App_Validate_Company_Name()) {
+                                return;
+                            }
+
+                            if (!Co_App_Validate_Designation_in_company()) {
+                                return;
+                            }
+
+                            if(pl_co_app_Emp_type_id.equals("0"))
+                            {
+                                Toast.makeText(mCon, "Please Select Co applicant Type of Employee", Toast.LENGTH_SHORT).show();
+                            }else {
+
+                                if (!Pl_Co_Validate_No_of_Employee()) {
+                                    return;
+                                }
+
+                                if (pl_co_app_epf_id.equals("0")) {
+                                    Toast.makeText(mCon, "Please Select Co applicant Epf detected", Toast.LENGTH_SHORT).show();
+
+                                } else {
+
+
+                                    if(pl_co_app_maried_res_spinner_id.equals("0"))
+                                    {
+                                        Toast.makeText(mCon, "Select Co applicant Marital Status", Toast.LENGTH_SHORT).show();
+
+                                    }else
+                                    {
+                                        if (!Pl_Co_valiat_no_of_dependent()) {
+                                            return;
+                                        }
+
+                                        if (!Validate_pl_Co_education_qualification_edit_txt()) {
+                                            return;
+                                        }
+                                        if (!pl_co_App_Validate_emi_amount()) {
+                                            return;
+                                        }
+
+                                        Co_App_other_varidation();
+                                    }
+
+
+                                }
+                            }
+                        }
+                    }
+                }
+
+        }
+
+    private void Co_App_other_varidation()
+    {
+        if(pl_co_app_Other_income_id.equals("0"))
+        {
+            Toast.makeText(mCon, "Please Select other income", Toast.LENGTH_SHORT).show();
+
+        }else if(!pl_co_app_Other_income_id.equals("4"))
+        {
+            lead_Eligibility();
+
+        }else
+        {
+            if (!pl_Co_App_Validate_other_income()) {
+                return;
+            }
+            if(pl_co_App_gst_reflect_id.equals("0"))
+            {
+                Toast.makeText(mCon, "Please Select ITR Reflected", Toast.LENGTH_SHORT).show();
+
+            }else
+            {
+                lead_Eligibility();
+            }
+        }
+    }
+
+    ///end salarird eligibility
+        private void co_self()
+        {
+            if(CO_Employement_Type.equals("1"))
+            {
+                co_individual.setVisibility(View.VISIBLE);
+                co_self_business.setVisibility(View.GONE);
+                if(co_having_bank_Id.equals("0"))
+                {
+                    Toast.makeText(context,"Please Select Bank A/C Type",Toast.LENGTH_SHORT).show();
+                }else
+                {
+                    if(co_Educatio_qualification_Sppinner.equals("0"))
+                    {
+                        Toast.makeText(context,"Please Select Educational Qualification",Toast.LENGTH_SHORT).show();
+
+                    }else
+                    {
+                        if (!Validate_co_business_ref_name_edt_txt()) {
+                            return;
+                        }
+
+                        co_validation();
 
                     }
 
                 }
 
-           /* }*/
+            }else if(CO_Employement_Type.equals("2"))
+            {
+
+                co_individual.setVisibility(View.GONE);
+                co_self_business.setVisibility(View.GONE);
+                if(co_Spinner_res_proof_Id.equals("0"))
+                {
+                    Toast.makeText(context,"Please Select Current Residence Addres Proof",Toast.LENGTH_SHORT).show();
+                }else
+                {
+                    co_validation();
+                }
+            }else if(CO_Employement_Type.equals("3"))
+            {
+                if(co_Business_registration_Id.equals("0"))
+                {
+                    Toast.makeText(context,"Please Select Business Registration",Toast.LENGTH_SHORT).show();
+                }else
+                {
+
+                    if (!Validate_co_purchased_by_bank_edit_txt()) {
+                        return;
+                    }
+                    if (!Validate_co_purchased_by_GStbill_edit_txt()) {
+                        return;
+                    }
+                    if (!Validate_co_sales_by_GStbill_edit_txt()) {
+                        return;
+                    }
+
+                    if (!Validate_co_bank_cridit_by_edtxt()) {
+                        return;
+                    }
+
+                    if (!Validate_co_Avg_monthly_income()) {
+                        return;
+                    }
+                    co_validation();
+
+                }
+            }
+
+        }
+
+    private void co_validation()
+    {
+        if(co_Spinner_res_proof_Id.equals("0"))
+        {
+            Toast.makeText(context,"Please Select Co Applicant Current Residence Addres Proof",Toast.LENGTH_SHORT).show();
+        }else
+        {
+            if(co_Other_income_Id.equals("0"))
+            {
+                Toast.makeText(context,"Please Select Co Applicant Other Income",Toast.LENGTH_SHORT).show();
+
+            }else if(co_Other_income_Id.equals("4"))
+            {
+
+            }else
+            {
+
+                if (!Validate_co_other_income_edite_txt()) {
+                    return;
+                }
+
+                if(co_Gstreflect_Id.equals("0"))
+                {
+                    Toast.makeText(context,"Please Select Co Applicant ITR Reflected",Toast.LENGTH_SHORT).show();
+                }
+                else
+                {
+                   lead_Eligibility();
+                    //
+                }
+            }
         }
 
     }
+
+    //end self eligibility
 
     private boolean Purchased_by_Bank(){
 
@@ -366,6 +753,19 @@ public class Eligibility_BL extends SimpleActivity {
         if (purchased_by_GStbill_edit_txt.getText().toString().isEmpty()) {
             purchased_by_GStbill_edit_txt.setError(getText(R.string.error_purchased_by_gst));
             purchased_by_GStbill_edit_txt.requestFocus();
+            return false;
+        } else {
+
+            //inputLayoutLname.setErrorEnabled(false);
+        }
+
+        return true;
+    }
+
+    private boolean Validation_Permanent_Resi(){
+        if (permanent_res_pincode_edt_txt.getText().toString().isEmpty()) {
+            permanent_res_pincode_edt_txt.setError(getText(R.string.err_curent));
+            permanent_res_pincode_edt_txt.requestFocus();
             return false;
         } else {
 
@@ -404,6 +804,118 @@ public class Eligibility_BL extends SimpleActivity {
 
         return true;
     }
+
+    private boolean Sales_Bank_ref_Name(){
+        if (business_ref_name_edt_txt.getText().toString().isEmpty()) {
+            business_ref_name_edt_txt.setError(getText(R.string.error_sales_by_bank_crdt));
+            business_ref_name_edt_txt.requestFocus();
+            return false;
+        } else {
+
+            //inputLayoutLname.setErrorEnabled(false);
+
+        }
+
+        return true;
+    }
+
+    private boolean Validate_co_business_ref_name_edt_txt(){
+        if (co_business_ref_name_edt_txt.getText().toString().isEmpty()) {
+            co_business_ref_name_edt_txt.setError(getText(R.string.error_sales_by_bank_crdt));
+            co_business_ref_name_edt_txt.requestFocus();
+            return false;
+        } else {
+
+            //inputLayoutLname.setErrorEnabled(false);
+
+        }
+
+        return true;
+    }
+    private boolean Validate_co_purchased_by_bank_edit_txt(){
+        if (co_purchased_by_bank_edit_txt.getText().toString().isEmpty()) {
+            co_purchased_by_bank_edit_txt.setError(getText(R.string.error_sales_by_bank_crdt));
+            co_purchased_by_bank_edit_txt.requestFocus();
+            return false;
+        } else {
+
+            //inputLayoutLname.setErrorEnabled(false);
+
+        }
+
+        return true;
+    }
+
+    private boolean Validate_co_purchased_by_GStbill_edit_txt(){
+        if (co_purchased_by_GStbill_edit_txt.getText().toString().isEmpty()) {
+            co_purchased_by_GStbill_edit_txt.setError(getText(R.string.error_sales_by_bank_crdt));
+            co_purchased_by_GStbill_edit_txt.requestFocus();
+            return false;
+        } else {
+
+            //inputLayoutLname.setErrorEnabled(false);
+
+        }
+
+        return true;
+    }
+
+    private boolean Validate_co_sales_by_GStbill_edit_txt(){
+        if (co_sales_by_GStbill_edit_txt.getText().toString().isEmpty()) {
+            co_sales_by_GStbill_edit_txt.setError(getText(R.string.error_sales_by_bank_crdt));
+            co_sales_by_GStbill_edit_txt.requestFocus();
+            return false;
+        } else {
+
+            //inputLayoutLname.setErrorEnabled(false);
+
+        }
+
+        return true;
+    }
+
+    private boolean Validate_co_bank_cridit_by_edtxt(){
+        if (co_bank_cridit_by_edtxt.getText().toString().isEmpty()) {
+            co_bank_cridit_by_edtxt.setError(getText(R.string.error_sales_by_bank_crdt));
+            co_bank_cridit_by_edtxt.requestFocus();
+            return false;
+        } else {
+
+            //inputLayoutLname.setErrorEnabled(false);
+
+        }
+
+        return true;
+    }
+
+    private boolean Validate_co_Avg_monthly_income(){
+        if (co_Avg_monthly_income.getText().toString().isEmpty()) {
+            co_Avg_monthly_income.setError(getText(R.string.error_sales_by_bank_crdt));
+            co_Avg_monthly_income.requestFocus();
+            return false;
+        } else {
+
+            //inputLayoutLname.setErrorEnabled(false);
+
+        }
+
+        return true;
+    }
+    private boolean Validate_co_other_income_edite_txt(){
+        if (co_other_income_edite_txt.getText().toString().isEmpty()) {
+            co_other_income_edite_txt.setError(getText(R.string.error_sales_by_bank_crdt));
+            co_other_income_edite_txt.requestFocus();
+            return false;
+        } else {
+
+            //inputLayoutLname.setErrorEnabled(false);
+
+        }
+
+        return true;
+    }
+
+
 
     private boolean Average_monthly_income(){
         if (Avg_monthly_income.getText().toString().isEmpty()) {
@@ -459,6 +971,93 @@ public class Eligibility_BL extends SimpleActivity {
         return true;
     }
 
+    ///co Salaried
+
+
+
+    private boolean Co_App_Validate_Company_Name(){
+        if (pl_co_app_company_name_edtxt.getText().toString().trim().isEmpty()) {
+            pl_co_app_company_name_edtxt.setError(getText(R.string.error_company_name));
+            pl_co_app_company_name_edtxt.requestFocus();
+            return false;
+        } else {
+
+        }
+
+        return true;
+    }
+
+    private boolean Co_App_Validate_Designation_in_company(){
+        if (pl_co_app_designation_in_company.getText().toString().trim().isEmpty()) {
+            pl_co_app_designation_in_company.setError(getText(R.string.error_company_name));
+            pl_co_app_designation_in_company.requestFocus();
+            return false;
+        } else {
+
+        }
+
+        return true;
+    }
+
+    private boolean Pl_Co_Validate_No_of_Employee(){
+        if (pl_co_App_no_of_emp_edtxt.getText().toString().trim().isEmpty()) {
+            pl_co_App_no_of_emp_edtxt.setError(getText(R.string.error_no_emp));
+            pl_co_App_no_of_emp_edtxt.requestFocus();
+            return false;
+        } else {
+
+        }
+
+        return true;
+    }
+
+    private boolean Pl_Co_valiat_no_of_dependent(){
+        if (pl_co_app_no_of_dependent_edt_txt.getText().toString().trim().isEmpty()) {
+            pl_co_app_no_of_dependent_edt_txt.setError(getText(R.string.err_curent));
+            pl_co_app_no_of_dependent_edt_txt.requestFocus();
+            return false;
+        } else {
+
+        }
+
+        return true;
+    }
+
+    private boolean Validate_pl_Co_education_qualification_edit_txt(){
+        if (pl_co_App_education_qualification_edit_txt.getText().toString().trim().isEmpty()) {
+            pl_co_App_education_qualification_edit_txt.setError(getText(R.string.err_curent));
+            pl_co_App_education_qualification_edit_txt.requestFocus();
+            return false;
+        } else {
+
+        }
+
+        return true;
+    }
+
+    private boolean pl_co_App_Validate_emi_amount(){
+        if (pl_co_app_emi_amount_edit_txt.getText().toString().trim().isEmpty()) {
+            pl_co_app_emi_amount_edit_txt.setError(getText(R.string.err_curent));
+            pl_co_app_emi_amount_edit_txt.requestFocus();
+            return false;
+        } else {
+
+        }
+
+        return true;
+    }
+
+    private boolean pl_Co_App_Validate_other_income(){
+        if (pl_co_App_other_incom_amt_edtxt.getText().toString().trim().isEmpty()) {
+            pl_co_App_other_incom_amt_edtxt.setError(getText(R.string.oth_income));
+            pl_co_App_other_incom_amt_edtxt.requestFocus();
+            return false;
+        } else {
+
+        }
+
+        return true;
+    }
 
     private void makeJsonObjReq1() {
         progressDialog.show();
@@ -473,19 +1072,48 @@ public class Eligibility_BL extends SimpleActivity {
 
                         try {
 
-                            Provide_Guarantor =object.getJSONArray("Provide_Guarantor");
-                            Current_address_proof =object.getJSONArray("Current_address");
+
+                            Current_address_proof =object.getJSONArray("addr_proof_rent");
                             GST_reflected =object.getJSONArray("GST_reflected");
                             other_income =object.getJSONArray("other_income");
                             Business_registration =object.getJSONArray("Business_registration");
-                            // Business_Proof =object.getJSONArray("Business_Proof");
-                            Log.e("Type_of_employement",String.valueOf(Provide_Guarantor));
-                            Current_res_proof(Current_address_proof);
-                            Provie_Guarenter(Provide_Guarantor);
-                            Other_income(other_income);
-                            GST_reflected(GST_reflected);
-                            Business_registration_fun(Business_registration);
+                            permanent_adddress =object.getJSONArray("permanent_adddress");
+                            Bank_account =object.getJSONArray("Bank_account");
+                            Reflected_ITR =object.getJSONArray("Reflected_ITR");
+                           // Business_registration =object.getJSONArray("Business_registration");
 
+                            Education_Qualification =object.getJSONArray("Education Qualification");
+                            // Business_Proof =object.getJSONArray("Business_Proof");
+
+
+
+                            Other_income =object.getJSONArray("Other_income");
+                            epf_deduct =object.getJSONArray("epf_deduct");
+                            Marital_Status =object.getJSONArray("Marital_Status");
+                            Type_employee =object.getJSONArray("Type_employee");
+                            Company_type =object.getJSONArray("Company_type");
+                            employee_id_ar =object.getJSONArray("employee_id");
+                            have_pan_ar =object.getJSONArray("have_pan");
+
+                            Current_res_proof(Current_address_proof);
+                            Bank_account(Bank_account);
+                            Other_income(other_income);
+                            GST_reflected(Reflected_ITR);
+                            Business_registration_fun(Business_registration);
+                            Permanent_Adddress_(permanent_adddress);
+                            Education_Qualification_(Education_Qualification);
+
+
+                            //co salried
+                            HAVE_PAN_Card(have_pan_ar);
+                            Employee_ID_Array(employee_id_ar);
+                            Comapany_type(Company_type);
+                            Type_of_Employee(Type_employee);
+                            Marital_Statues(Marital_Status);
+                            Epf_detedcted(epf_deduct);
+
+                            Other_income_f(Other_income);
+                            itr_reflect_f(Reflected_ITR);
 
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -567,11 +1195,95 @@ public class Eligibility_BL extends SimpleActivity {
                     return false;
                 }
             });
+
+            co_spinner_res_proof.setAdapter(CureentAddress_proof_adapter);
+            co_spinner_res_proof.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                    try {
+
+
+                        co_Spinner_res_proof_Id = Current_res_proof_ar.getJSONObject(position).getString("id");
+                        co_Spinner_res_proof_Value = Current_res_proof_ar.getJSONObject(position).getString("value");
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+
+                }
+            });
+            co_spinner_res_proof.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View view, MotionEvent motionEvent) {
+                    // imm.hideSoftInputFromWindow(edt_buyer_address.getWindowToken(), 0);
+                    return false;
+                }
+            });
         }
 
     }
 
-    private void Provie_Guarenter(final JSONArray Provide_Guarantor) throws JSONException {
+    private void Permanent_Adddress_(final JSONArray Current_res_proof_ar) throws JSONException {
+        //   SPINNERLIST = new String[ja.length()];
+        Current_address_Proof_SA = new String[Current_res_proof_ar.length()];
+        for (int i=0;i<Current_res_proof_ar.length();i++){
+            JSONObject J =  Current_res_proof_ar.getJSONObject(i);
+            Current_address_Proof_SA[i] = J.getString("value");
+            final List<String> loan_type_list = new ArrayList<>(Arrays.asList(Current_address_Proof_SA));
+            CureentAddress_proof_adapter = new ArrayAdapter<String>(context, R.layout.view_spinner_item, loan_type_list){
+                public View getView(int position, View convertView, ViewGroup parent) {
+                    font = Typeface.createFromAsset(context.getAssets(),"Lato-Regular.ttf");
+                    TextView v = (TextView) super.getView(position, convertView, parent);
+                    v.setTypeface(font);
+                    return v;
+                }
+
+                public View getDropDownView(int position, View convertView, ViewGroup parent) {
+                    TextView v = (TextView) super.getView(position, convertView, parent);
+                    v.setTypeface(font);
+                    return v;
+                }
+            };
+
+            CureentAddress_proof_adapter.setDropDownViewResource(R.layout.view_spinner_item);
+            permanent_res_type_spinner.setAdapter(CureentAddress_proof_adapter);
+            permanent_res_type_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                    try {
+
+
+                        permanent_res_Id = Current_res_proof_ar.getJSONObject(position).getString("id");
+                        permanent_res_Value = Current_res_proof_ar.getJSONObject(position).getString("value");
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+
+                }
+            });
+            permanent_res_type_spinner.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View view, MotionEvent motionEvent) {
+                    // imm.hideSoftInputFromWindow(edt_buyer_address.getWindowToken(), 0);
+                    return false;
+                }
+            });
+        }
+
+    }
+
+    private void Bank_account(final JSONArray Provide_Guarantor) throws JSONException {
         //   SPINNERLIST = new String[ja.length()];
         Provide_guarente_SA = new String[Provide_Guarantor.length()];
         for (int i=0;i<Provide_Guarantor.length();i++){
@@ -594,15 +1306,15 @@ public class Eligibility_BL extends SimpleActivity {
             };
 
             Provide_gurenter_adapter.setDropDownViewResource(R.layout.view_spinner_item);
-            spinner_guaranter.setAdapter(Provide_gurenter_adapter);
-            spinner_guaranter.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            having_bank_account.setAdapter(Provide_gurenter_adapter);
+            having_bank_account.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
                     try {
 
-                        Guarenter_Id = Provide_Guarantor.getJSONObject(position).getString("id");
-                        Guarenter_Value = Provide_Guarantor.getJSONObject(position).getString("value");
+                        having_bank_Id = Provide_Guarantor.getJSONObject(position).getString("id");
+                        having_bank_Value = Provide_Guarantor.getJSONObject(position).getString("value");
 
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -614,7 +1326,36 @@ public class Eligibility_BL extends SimpleActivity {
 
                 }
             });
-            spinner_guaranter.setOnTouchListener(new View.OnTouchListener() {
+            having_bank_account.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View view, MotionEvent motionEvent) {
+                    // imm.hideSoftInputFromWindow(edt_buyer_address.getWindowToken(), 0);
+                    return false;
+                }
+            });
+
+
+            co_having_bank_account.setAdapter(Provide_gurenter_adapter);
+            co_having_bank_account.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                    try {
+
+                        co_having_bank_Id = Provide_Guarantor.getJSONObject(position).getString("id");
+                        co_having_bank_Value = Provide_Guarantor.getJSONObject(position).getString("value");
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+
+                }
+            });
+            co_having_bank_account.setOnTouchListener(new View.OnTouchListener() {
                 @Override
                 public boolean onTouch(View view, MotionEvent motionEvent) {
                     // imm.hideSoftInputFromWindow(edt_buyer_address.getWindowToken(), 0);
@@ -658,8 +1399,7 @@ public class Eligibility_BL extends SimpleActivity {
                         Other_income_Id = Other_income_ar.getJSONObject(position).getString("id");
                         Other_income_Value = Other_income_ar.getJSONObject(position).getString("value");
                         //CAT_ID = ja.getJSONObject(position).getString("category_id");
-                        Log.d("Salary_id", Spinner_res_proof_Id);
-                        Log.d("Salary_Value", Spinner_res_proof_Value);
+
 
 
                         if(Other_income_Id.equals("0"))
@@ -691,6 +1431,52 @@ public class Eligibility_BL extends SimpleActivity {
                     return false;
                 }
             });
+
+
+            co_spinn_other_income.setAdapter(Other_income_adapter);
+            co_spinn_other_income.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                    try {
+
+
+                        co_Other_income_Id = Other_income_ar.getJSONObject(position).getString("id");
+                        co_Other_income_Value = Other_income_ar.getJSONObject(position).getString("value");
+                        //CAT_ID = ja.getJSONObject(position).getString("category_id");
+
+
+
+                        if(co_Other_income_Id.equals("0"))
+                        {
+                            co_other_income_ifany.setVisibility(View.VISIBLE);
+
+                        }else if(co_Other_income_Id.equals("4"))
+                        {
+                            co_other_income_ifany.setVisibility(View.GONE);
+                        }else
+                        {
+                            co_other_income_ifany.setVisibility(View.VISIBLE);
+                        }
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+
+                }
+            });
+            co_spinn_other_income.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View view, MotionEvent motionEvent) {
+                    // imm.hideSoftInputFromWindow(edt_buyer_address.getWindowToken(), 0);
+                    return false;
+                }
+            });
+
         }
 
     }
@@ -740,6 +1526,123 @@ public class Eligibility_BL extends SimpleActivity {
                 }
             });
             spinn_gst_other.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View view, MotionEvent motionEvent) {
+                    // imm.hideSoftInputFromWindow(edt_buyer_address.getWindowToken(), 0);
+                    return false;
+                }
+            });
+
+            co_spinn_gst_other.setAdapter(Gst_reflect_adapter);
+            co_spinn_gst_other.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                    try {
+
+                        co_Gstreflect_Id = GST_reflected_ar.getJSONObject(position).getString("id");
+                        co_Gstreflect_Value = GST_reflected_ar.getJSONObject(position).getString("value");
+
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+
+                }
+            });
+            co_spinn_gst_other.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View view, MotionEvent motionEvent) {
+                    // imm.hideSoftInputFromWindow(edt_buyer_address.getWindowToken(), 0);
+                    return false;
+                }
+            });
+
+
+        }
+
+    }
+
+    private void Education_Qualification_(final JSONArray GST_reflected_ar) throws JSONException {
+
+        Gst_refelect_SA = new String[GST_reflected_ar.length()];
+        for (int i=0;i<GST_reflected_ar.length();i++){
+            JSONObject J =  GST_reflected_ar.getJSONObject(i);
+            Gst_refelect_SA[i] = J.getString("value");
+            final List<String> loan_type_list = new ArrayList<>(Arrays.asList(Gst_refelect_SA));
+            Gst_reflect_adapter = new ArrayAdapter<String>(context, R.layout.view_spinner_item, loan_type_list){
+                public View getView(int position, View convertView, ViewGroup parent) {
+                    font = Typeface.createFromAsset(context.getAssets(),"Lato-Regular.ttf");
+                    TextView v = (TextView) super.getView(position, convertView, parent);
+                    v.setTypeface(font);
+                    return v;
+                }
+
+                public View getDropDownView(int position, View convertView, ViewGroup parent) {
+                    TextView v = (TextView) super.getView(position, convertView, parent);
+                    v.setTypeface(font);
+                    return v;
+                }
+            };
+
+            Gst_reflect_adapter.setDropDownViewResource(R.layout.view_spinner_item);
+            Educatio_qualification_Sppinner.setAdapter(Gst_reflect_adapter);
+            Educatio_qualification_Sppinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                    try {
+
+                        Educational_Id = GST_reflected_ar.getJSONObject(position).getString("id");
+                        Educational_Value = GST_reflected_ar.getJSONObject(position).getString("value");
+
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+
+                }
+            });
+            Educatio_qualification_Sppinner.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View view, MotionEvent motionEvent) {
+                    // imm.hideSoftInputFromWindow(edt_buyer_address.getWindowToken(), 0);
+                    return false;
+                }
+            });
+
+
+
+            co_Educatio_qualification_Sppinner.setAdapter(Gst_reflect_adapter);
+            co_Educatio_qualification_Sppinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                    try {
+
+                        co_Educational_Id = GST_reflected_ar.getJSONObject(position).getString("id");
+                        co_Educational_Value = GST_reflected_ar.getJSONObject(position).getString("value");
+
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+
+                }
+            });
+            co_Educatio_qualification_Sppinner.setOnTouchListener(new View.OnTouchListener() {
                 @Override
                 public boolean onTouch(View view, MotionEvent motionEvent) {
                     // imm.hideSoftInputFromWindow(edt_buyer_address.getWindowToken(), 0);
@@ -800,49 +1703,631 @@ public class Eligibility_BL extends SimpleActivity {
                     return false;
                 }
             });
+
+
+            co_business_registration_spinner.setAdapter(Business_registration_adapter);
+            co_business_registration_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                    try {
+
+
+
+                        co_Business_registration_Id = Business_registration_ar.getJSONObject(position).getString("id");
+                        co_Business_registration_Value = Business_registration_ar.getJSONObject(position).getString("value");
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+
+                }
+            });
+            co_business_registration_spinner.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View view, MotionEvent motionEvent) {
+                    // imm.hideSoftInputFromWindow(edt_buyer_address.getWindowToken(), 0);
+                    return false;
+                }
+            });
         }
 
     }
+
+
+
+
+
+
+
+    //CO Applicant sppiner values
+    private void HAVE_PAN_Card(final JSONArray has_pancard_ar) throws JSONException {
+        //   SPINNERLIST = new String[ja.length()];
+        PAN_ID_SA = new String[has_pancard_ar.length()];
+        for (int i=0;i<has_pancard_ar.length();i++){
+            JSONObject J =  has_pancard_ar.getJSONObject(i);
+            PAN_ID_SA[i] = J.getString("value");
+            final List<String> loan_type_list = new ArrayList<>(Arrays.asList(PAN_ID_SA));
+            PAN_ID_Adapter = new ArrayAdapter<String>(context, R.layout.view_spinner_item, loan_type_list){
+                public View getView(int position, View convertView, ViewGroup parent) {
+                    font = Typeface.createFromAsset(context.getAssets(),"Lato-Regular.ttf");
+                    TextView v = (TextView) super.getView(position, convertView, parent);
+                    v.setTypeface(font);
+                    return v;
+                }
+
+                public View getDropDownView(int position, View convertView, ViewGroup parent) {
+                    TextView v = (TextView) super.getView(position, convertView, parent);
+                    v.setTypeface(font);
+                    return v;
+                }
+            };
+
+            PAN_ID_Adapter.setDropDownViewResource(R.layout.view_spinner_item);
+
+
+            pl_co_self_has_pan_card_spnr.setAdapter(PAN_ID_Adapter);
+            pl_co_self_has_pan_card_spnr.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                    try {
+                        Pl_Co_App_PAN_id = has_pancard_ar.getJSONObject(position).getString("id");
+                        Pl_Co_App_PAN_Value = has_pancard_ar.getJSONObject(position).getString("value");
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+
+                }
+            });
+            pl_co_self_has_pan_card_spnr.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View view, MotionEvent motionEvent) {
+                    // imm.hideSoftInputFromWindow(edt_buyer_address.getWindowToken(), 0);
+                    return false;
+                }
+            });
+        }
+
+    }
+    private void Employee_ID_Array(final JSONArray employee_id_ar) throws JSONException {
+        //   SPINNERLIST = new String[ja.length()];
+        Employe_ID_SA = new String[employee_id_ar.length()];
+        for (int i=0;i<employee_id_ar.length();i++){
+            JSONObject J =  employee_id_ar.getJSONObject(i);
+            Employe_ID_SA[i] = J.getString("value");
+            final List<String> loan_type_list = new ArrayList<>(Arrays.asList(Employe_ID_SA));
+            Employee_ID_Adapter = new ArrayAdapter<String>(context, R.layout.view_spinner_item, loan_type_list){
+                public View getView(int position, View convertView, ViewGroup parent) {
+                    font = Typeface.createFromAsset(context.getAssets(),"Lato-Regular.ttf");
+                    TextView v = (TextView) super.getView(position, convertView, parent);
+                    v.setTypeface(font);
+                    return v;
+                }
+
+                public View getDropDownView(int position, View convertView, ViewGroup parent) {
+                    TextView v = (TextView) super.getView(position, convertView, parent);
+                    v.setTypeface(font);
+                    return v;
+                }
+            };
+
+            Employee_ID_Adapter.setDropDownViewResource(R.layout.view_spinner_item);
+            pl_co_app_spinner_employe_id.setAdapter(Employee_ID_Adapter);
+            pl_co_app_spinner_employe_id.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                    try {
+                        pl_co_app_Employee_id = employee_id_ar.getJSONObject(position).getString("id");
+                        pl_co_app_Employee_Value = employee_id_ar.getJSONObject(position).getString("value");
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+
+                }
+            });
+            pl_co_app_spinner_employe_id.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View view, MotionEvent motionEvent) {
+                    // imm.hideSoftInputFromWindow(edt_buyer_address.getWindowToken(), 0);
+                    return false;
+                }
+            });
+        }
+
+    }
+
+    private void Comapany_type(final JSONArray Company_type_ar) throws JSONException {
+        //   SPINNERLIST = new String[ja.length()];
+        Company_type_SA = new String[Company_type_ar.length()];
+        for (int i=0;i<Company_type_ar.length();i++){
+            JSONObject J =  Company_type_ar.getJSONObject(i);
+            Company_type_SA[i] = J.getString("value");
+            final List<String> loan_type_list = new ArrayList<>(Arrays.asList(Company_type_SA));
+            Company_type_Adapter = new ArrayAdapter<String>(context, R.layout.view_spinner_item, loan_type_list){
+                public View getView(int position, View convertView, ViewGroup parent) {
+                    font = Typeface.createFromAsset(context.getAssets(),"Lato-Regular.ttf");
+                    TextView v = (TextView) super.getView(position, convertView, parent);
+                    v.setTypeface(font);
+                    return v;
+                }
+
+                public View getDropDownView(int position, View convertView, ViewGroup parent) {
+                    TextView v = (TextView) super.getView(position, convertView, parent);
+                    v.setTypeface(font);
+                    return v;
+                }
+            };
+
+            Company_type_Adapter.setDropDownViewResource(R.layout.view_spinner_item);
+
+
+            pl_co_app_spinner_cmp_type.setAdapter(Company_type_Adapter);
+            pl_co_app_spinner_cmp_type.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                    try {
+
+                        //  City_loc_uniqueID = ja.getJSONObject(position).getString("city_id");
+                        pl_co_app_Company_id = Company_type_ar.getJSONObject(position).getString("id");
+                        pl_co_app_Company_Value = Company_type_ar.getJSONObject(position).getString("value");
+                        //CAT_ID = ja.getJSONObject(position).getString("category_id");
+
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+
+                }
+            });
+            pl_co_app_spinner_cmp_type.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View view, MotionEvent motionEvent) {
+                    // imm.hideSoftInputFromWindow(edt_buyer_address.getWindowToken(), 0);
+                    return false;
+                }
+            });
+
+
+        }
+
+    }
+
+    private void Type_of_Employee(final JSONArray Type_employee_ar) throws JSONException {
+        //   SPINNERLIST = new String[ja.length()];
+
+        Employee_type_SA = new String[Type_employee_ar.length()];
+        for (int i=0;i<Type_employee_ar.length();i++){
+            JSONObject J =  Type_employee_ar.getJSONObject(i);
+            Employee_type_SA[i] = J.getString("value");
+            final List<String> loan_type_list = new ArrayList<>(Arrays.asList( Employee_type_SA));
+            Type_employee_Adapter = new ArrayAdapter<String>(context, R.layout.view_spinner_item, loan_type_list){
+                public View getView(int position, View convertView, ViewGroup parent) {
+                    font = Typeface.createFromAsset(context.getAssets(),"Lato-Regular.ttf");
+                    TextView v = (TextView) super.getView(position, convertView, parent);
+                    v.setTypeface(font);
+                    return v;
+                }
+
+                public View getDropDownView(int position, View convertView, ViewGroup parent) {
+                    TextView v = (TextView) super.getView(position, convertView, parent);
+                    v.setTypeface(font);
+                    return v;
+                }
+            };
+
+            Type_employee_Adapter.setDropDownViewResource(R.layout.view_spinner_item);
+
+            pl_co_app_employee_type_spnr.setAdapter(Type_employee_Adapter);
+            pl_co_app_employee_type_spnr.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                    try {
+                        //  City_loc_uniqueID = ja.getJSONObject(position).getString("city_id");
+
+                        pl_co_app_Emp_type_id = Type_employee_ar.getJSONObject(position).getString("id");
+                        pl_co_app_Emp_type_Value = Type_employee_ar.getJSONObject(position).getString("value");
+                        //CAT_ID = ja.getJSONObject(position).getString("category_id");
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+
+                }
+            });
+            pl_co_app_employee_type_spnr.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View view, MotionEvent motionEvent) {
+                    // imm.hideSoftInputFromWindow(edt_buyer_address.getWindowToken(), 0);
+                    return false;
+                }
+            });
+
+        }
+
+    }
+    private void Marital_Statues(final JSONArray Marital_Statues_ar) throws JSONException {
+        //   SPINNERLIST = new String[ja.length()];
+        Marital_Statues_SA = new String[Marital_Statues_ar.length()];
+        for (int i=0;i<Marital_Statues_ar.length();i++){
+            JSONObject J =  Marital_Statues_ar.getJSONObject(i);
+            Marital_Statues_SA[i] = J.getString("value");
+            final List<String> loan_type_list = new ArrayList<>(Arrays.asList( Marital_Statues_SA));
+            Marital_Statues_Adapter = new ArrayAdapter<String>(context, R.layout.view_spinner_item, loan_type_list){
+                public View getView(int position, View convertView, ViewGroup parent) {
+                    font = Typeface.createFromAsset(context.getAssets(),"Lato-Regular.ttf");
+                    TextView v = (TextView) super.getView(position, convertView, parent);
+                    v.setTypeface(font);
+                    return v;
+                }
+
+                public View getDropDownView(int position, View convertView, ViewGroup parent) {
+                    TextView v = (TextView) super.getView(position, convertView, parent);
+                    v.setTypeface(font);
+                    return v;
+                }
+            };
+
+            Marital_Statues_Adapter.setDropDownViewResource(R.layout.view_spinner_item);
+
+            pl_co_app_maried_res_spinner.setAdapter(Marital_Statues_Adapter);
+            pl_co_app_maried_res_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                    try {
+                        //  City_loc_uniqueID = ja.getJSONObject(position).getString("city_id");
+
+                        pl_co_app_maried_res_spinner_id = Marital_Statues_ar.getJSONObject(position).getString("id");
+                        pl_co_app_maried_res_spinner_Value = Marital_Statues_ar.getJSONObject(position).getString("value");
+                        //CAT_ID = ja.getJSONObject(position).getString("category_id");
+
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+
+                }
+            });
+            pl_co_app_maried_res_spinner.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View view, MotionEvent motionEvent) {
+                    // imm.hideSoftInputFromWindow(edt_buyer_address.getWindowToken(), 0);
+                    return false;
+                }
+            });
+        }
+
+    }
+    private void Epf_detedcted(final JSONArray epf_jarray) throws JSONException {
+        //   SPINNERLIST = new String[ja.length()];
+        Epf_detected_SA = new String[epf_jarray.length()];
+        for (int i=0;i<epf_jarray.length();i++){
+            JSONObject J =  epf_jarray.getJSONObject(i);
+            Epf_detected_SA[i] = J.getString("value");
+            final List<String> loan_type_list = new ArrayList<>(Arrays.asList( Epf_detected_SA));
+            Epf_detected_Adapter = new ArrayAdapter<String>(context, R.layout.view_spinner_item, loan_type_list){
+                public View getView(int position, View convertView, ViewGroup parent) {
+                    font = Typeface.createFromAsset(context.getAssets(),"Lato-Regular.ttf");
+                    TextView v = (TextView) super.getView(position, convertView, parent);
+                    v.setTypeface(font);
+                    return v;
+                }
+
+                public View getDropDownView(int position, View convertView, ViewGroup parent) {
+                    TextView v = (TextView) super.getView(position, convertView, parent);
+                    v.setTypeface(font);
+                    return v;
+                }
+            };
+
+            Epf_detected_Adapter.setDropDownViewResource(R.layout.view_spinner_item);
+            pl_co_app_epf_spinner.setAdapter(Epf_detected_Adapter);
+            pl_co_app_epf_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                    try {
+
+                        //  City_loc_uniqueID = ja.getJSONObject(position).getString("city_id");
+                        pl_co_app_epf_id = epf_jarray.getJSONObject(position).getString("id");
+                        pl_co_app_epf_Value = epf_jarray.getJSONObject(position).getString("value");
+                        //CAT_ID = ja.getJSONObject(position).getString("category_id");
+
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+
+                }
+            });
+            pl_co_app_epf_spinner.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View view, MotionEvent motionEvent) {
+                    // imm.hideSoftInputFromWindow(edt_buyer_address.getWindowToken(), 0);
+                    return false;
+                }
+            });
+        }
+
+    }
+    private void Other_income_f(final JSONArray Other_income_Ar) throws JSONException {
+        //   SPINNERLIST = new String[ja.length()];
+        Other_income_SA = new String[Other_income_Ar.length()];
+        for (int i=0;i<Other_income_Ar.length();i++){
+            JSONObject J =  Other_income_Ar.getJSONObject(i);
+            Other_income_SA[i] = J.getString("value");
+            final List<String> loan_type_list = new ArrayList<>(Arrays.asList( Other_income_SA));
+            Other_income_Adapter = new ArrayAdapter<String>(context, R.layout.view_spinner_item, loan_type_list){
+                public View getView(int position, View convertView, ViewGroup parent) {
+                    font = Typeface.createFromAsset(context.getAssets(),"Lato-Regular.ttf");
+                    TextView v = (TextView) super.getView(position, convertView, parent);
+                    v.setTypeface(font);
+                    return v;
+                }
+
+                public View getDropDownView(int position, View convertView, ViewGroup parent) {
+                    TextView v = (TextView) super.getView(position, convertView, parent);
+                    v.setTypeface(font);
+                    return v;
+                }
+            };
+
+            Other_income_Adapter.setDropDownViewResource(R.layout.view_spinner_item);
+
+            pl_co_app_spinn_other_income.setAdapter( Other_income_Adapter);
+            pl_co_app_spinn_other_income.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                    try {
+
+                        //  City_loc_uniqueID = ja.getJSONObject(position).getString("city_id");
+                        pl_co_app_Other_income_id = Other_income_Ar.getJSONObject(position).getString("id");
+                        pl_co_app_Other_income_Value = Other_income_Ar.getJSONObject(position).getString("value");
+
+
+                        if(pl_co_app_Other_income_id.equals("4"))
+                        {
+                            co_app_is_other_income.setVisibility(View.GONE);
+                        }else
+                        {
+                            co_app_is_other_income.setVisibility(View.VISIBLE);
+                        }
+
+
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+
+                }
+            });
+            pl_co_app_spinn_other_income.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View view, MotionEvent motionEvent) {
+                    // imm.hideSoftInputFromWindow(edt_buyer_address.getWindowToken(), 0);
+                    return false;
+                }
+            });
+
+
+        }
+
+    }
+    private void itr_reflect_f(final JSONArray gst_reflect_Ar) throws JSONException {
+        //   SPINNERLIST = new String[ja.length()];
+        gst_reflect_SA = new String[gst_reflect_Ar.length()];
+        for (int i=0;i<gst_reflect_Ar.length();i++){
+            JSONObject J =  gst_reflect_Ar.getJSONObject(i);
+            gst_reflect_SA[i] = J.getString("value");
+            final List<String> loan_type_list = new ArrayList<>(Arrays.asList(gst_reflect_SA));
+            gst_reflect_Adapter = new ArrayAdapter<String>(context, R.layout.view_spinner_item, loan_type_list){
+                public View getView(int position, View convertView, ViewGroup parent) {
+                    font = Typeface.createFromAsset(context.getAssets(),"Lato-Regular.ttf");
+                    TextView v = (TextView) super.getView(position, convertView, parent);
+                    v.setTypeface(font);
+                    return v;
+                }
+
+                public View getDropDownView(int position, View convertView, ViewGroup parent) {
+                    TextView v = (TextView) super.getView(position, convertView, parent);
+                    v.setTypeface(font);
+                    return v;
+                }
+            };
+
+            gst_reflect_Adapter.setDropDownViewResource(R.layout.view_spinner_item);
+            pl_co_App_spinn_is_gst_reflect.setAdapter(gst_reflect_Adapter);
+            pl_co_App_spinn_is_gst_reflect.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                    try {
+                        //  City_loc_uniqueID = ja.getJSONObject(position).getString("city_id");
+
+                        pl_co_App_gst_reflect_id = gst_reflect_Ar.getJSONObject(position).getString("id");
+                        pl_co_App_gst_reflect_Value = gst_reflect_Ar.getJSONObject(position).getString("value");
+                        //CAT_ID = ja.getJSONObject(position).getString("category_id");
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+
+                }
+            });
+            pl_co_App_spinn_is_gst_reflect.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View view, MotionEvent motionEvent) {
+                    // imm.hideSoftInputFromWindow(edt_buyer_address.getWindowToken(), 0);
+                    return false;
+                }
+            });
+
+
+        }
+
+    }
+
 
 
     private void lead_Eligibility() {
 
 
 
-        String purchased_by_bank_edit_txt1 = purchased_by_bank_edit_txt.getText().toString();
-        String purchased_by_GStbill_edit_txt1 = purchased_by_GStbill_edit_txt.getText().toString();
-        String sales_by_GStbill_edit_txt1 = sales_by_GStbill_edit_txt.getText().toString();
-        String bank_cridit_by_edtxt1 = bank_cridit_by_edtxt.getText().toString();
 
-        String Avg_monthly_income1 = Avg_monthly_income.getText().toString();
-        String Business_refernce_name1 = Business_refernce_name.getText().toString();
-        String Business_reference_mobile1 = Business_reference_mobile.getText().toString();
-        String other_income_edite_txt1 = other_income_edite_txt.getText().toString();
+
+
+         purchased_by_bank_edit_txt1 = purchased_by_bank_edit_txt.getText().toString();
+         purchased_by_GStbill_edit_txt1 = purchased_by_GStbill_edit_txt.getText().toString();
+         sales_by_GStbill_edit_txt1 = sales_by_GStbill_edit_txt.getText().toString();
+         bank_cridit_by_edtxt1 = bank_cridit_by_edtxt.getText().toString();
+
+         Avg_monthly_income1 = Avg_monthly_income.getText().toString();
+         Business_refernce_name1 = Business_refernce_name.getText().toString();
+         Business_reference_mobile1 = Business_reference_mobile.getText().toString();
+         other_income_edite_txt1 = other_income_edite_txt.getText().toString();
+         S_business_ref_name_edt_txt = business_ref_name_edt_txt.getText().toString();
+
+
+
+//salried
+
+
+        S_pl_co_app_company_name_edtxt = pl_co_app_company_name_edtxt.getText().toString();
+        S_pl_co_App_no_of_emp_edtxt = pl_co_App_no_of_emp_edtxt.getText().toString();
+        S_pl_co_app_designation_in_company = pl_co_app_designation_in_company.getText().toString();
+        S_pl_co_app_no_of_dependent_edt_txt = pl_co_app_no_of_dependent_edt_txt.getText().toString();
+        S_pl_co_app_emi_amount_edit_txt = pl_co_app_emi_amount_edit_txt.getText().toString();
+        S_pl_co_App_education_qualification_edit_txt = pl_co_App_education_qualification_edit_txt.getText().toString();
+
+
+        S_pl_co_App_education_qualification_edit_txt = co_business_ref_name_edt_txt.getText().toString();
+        S_pl_co_App_education_qualification_edit_txt = co_purchased_by_bank_edit_txt.getText().toString();
+        S_pl_co_App_education_qualification_edit_txt = co_purchased_by_GStbill_edit_txt.getText().toString();
+        S_pl_co_App_education_qualification_edit_txt = co_sales_by_GStbill_edit_txt.getText().toString();
+        S_pl_co_App_education_qualification_edit_txt = co_bank_cridit_by_edtxt.getText().toString();
+        S_pl_co_App_education_qualification_edit_txt = co_Avg_monthly_income.getText().toString();
+        S_pl_co_App_education_qualification_edit_txt = co_other_income_edite_txt.getText().toString();
 
         JSONObject jsonObject =new JSONObject();
+        JSONObject Applicant =new JSONObject();
+        JSONObject Co_Applicant =new JSONObject();
+
+     //   Applicant.put("")
+
         JSONObject J= null;
         try {
             J =new JSONObject();
 
 
-            J.put("Business_registration_Id",Business_registration_Id);
-
-            J.put("purchased_by_bank_edit_txt1",purchased_by_bank_edit_txt1);
-            J.put("purchased_by_GStbill_edit_txt1",purchased_by_GStbill_edit_txt1);
-            J.put("sales_by_GStbill_edit_txt1",sales_by_GStbill_edit_txt1);
-            J.put("bank_cridit_by_edtxt1",bank_cridit_by_edtxt1);
-            J.put("Avg_monthly_income1",Avg_monthly_income1);
-            J.put("Business_refernce_name1",Business_refernce_name1);
-            J.put("Business_reference_mobile1",Business_reference_mobile1);
-            J.put("other_income_edite_txt1",other_income_edite_txt1);
-
-            J.put("Spinner_res_proof_Id",Spinner_res_proof_Id);
-            J.put("Guarenter_Id",Guarenter_Id);
-            J.put("Other_income_Id",Other_income_Id);
+            Applicant.put("having_bank_Id",having_bank_Id);
+            Applicant.put("Educatio_qualification_Sppinner",Educatio_qualification_Sppinner);
+            Applicant.put("S_business_ref_name_edt_txt",S_business_ref_name_edt_txt);
+            Applicant.put("S_business_ref_name_edt_txt",Spinner_res_proof_Id);
+            Applicant.put("Other_income_Id",Other_income_Id);
+            Applicant.put("other_income_edite_txt",other_income_edite_txt);
+            Applicant.put("Gstreflect_Id",Gstreflect_Id);
+            Applicant.put("Business_registration_Id",Business_registration_Id);
+            Applicant.put("purchased_by_bank_edit_txt1",purchased_by_bank_edit_txt1);
+            Applicant.put("purchased_by_GStbill_edit_txt1",purchased_by_GStbill_edit_txt1);
+            Applicant.put("sales_by_GStbill_edit_txt1",sales_by_GStbill_edit_txt1);
+            Applicant.put("bank_cridit_by_edtxt1",bank_cridit_by_edtxt1);
+            Applicant.put("Avg_monthly_income1",Avg_monthly_income1);
 
         } catch (JSONException e) {
             e.printStackTrace();
         }
+
+
+        try {
+            Co_Applicant.put("has_pancardHave",Pl_Co_App_PAN_id);
+            Co_Applicant.put("has_emp_id",pl_co_app_Employee_id);
+            Co_Applicant.put("company_type",pl_co_app_Company_id);
+            Co_Applicant.put("pl_co_app_Emp_type_id",pl_co_app_Emp_type_id);
+            Co_Applicant.put("is_epf_deduct",pl_co_app_epf_id);
+            Co_Applicant.put("marital_status",pl_co_app_maried_res_spinner_id);
+            Co_Applicant.put("company_name",S_pl_co_app_company_name_edtxt);
+            Co_Applicant.put("employees_count",S_pl_co_App_no_of_emp_edtxt);
+            Co_Applicant.put("designation",S_pl_co_app_designation_in_company);
+            Co_Applicant.put("no_of_dependency",S_pl_co_app_no_of_dependent_edt_txt);
+            Co_Applicant.put("affordable_pay",S_pl_co_app_emi_amount_edit_txt);
+            Co_Applicant.put("qualification",S_pl_co_App_education_qualification_edit_txt);
+
+
+            Applicant.put("having_bank_Id",co_having_bank_Id);
+            Applicant.put("Educatio_qualification_Sppinner",co_Educatio_qualification_Sppinner);
+            Applicant.put("S_business_ref_name_edt_txt",co_business_ref_name_edt_txt);
+            Applicant.put("S_business_ref_name_edt_txt",Spinner_res_proof_Id);
+            Applicant.put("Other_income_Id",Other_income_Id);
+            Applicant.put("other_income_edite_txt",other_income_edite_txt);
+            Applicant.put("Gstreflect_Id",Gstreflect_Id);
+            Applicant.put("Business_registration_Id",Business_registration_Id);
+            Applicant.put("purchased_by_bank_edit_txt1",purchased_by_bank_edit_txt1);
+            Applicant.put("purchased_by_GStbill_edit_txt1",purchased_by_GStbill_edit_txt1);
+            Applicant.put("sales_by_GStbill_edit_txt1",sales_by_GStbill_edit_txt1);
+            Applicant.put("bank_cridit_by_edtxt1",bank_cridit_by_edtxt1);
+            Applicant.put("Avg_monthly_income1",Avg_monthly_income1);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            J =new JSONObject();
+            //  J.put(Params.email_id,email);
+            J.put("applicant_count",app_count);
+            // J.put("transaction_id",11381);
+            J.put("transaction_id",transaction_id);
+            //  J.put("user_id",9919);
+            J.put("user_id",user_id);
+            J.put("applicant",Applicant);
+            J.put("co_applicant",Co_Applicant);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
 
         Log.e("Add Home Laoan", String.valueOf(J));
         progressDialog.show();
@@ -889,7 +2374,7 @@ public class Eligibility_BL extends SimpleActivity {
     @Override
     public void onBackPressed() {
 
-        Objs.ac.StartActivity(mCon, Viability_Check_BL.class);
+        Objs.ac.StartActivity(mCon, Applicant_Details_Activity.class);
         finish();
         super.onBackPressed();
 

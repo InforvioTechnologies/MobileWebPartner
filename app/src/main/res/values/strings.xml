@@ -238,6 +238,9 @@
     <string name="cur_res_proof">Current residence address Proof</string>
 
     <string name="business_regi">Business Registration</string>
+    <string name="edu_q">Educational Qualification</string>
+    <string name="having_bank">Having saving Bank Account</string>
+
     <string name="perment_res_pincod">Permanent Residence Pincode</string>
     <string name="perment_res_area">Permanent Residence area</string>
     <string name="perment_res_type">Permanent Residence Type</string>
@@ -257,7 +260,7 @@
     <string name="nodf">No Of Dependents in Family</string>
     <string name="rent_paid_">Rent paid for House</string>
     <string name="montly">Monthly Net Salary</string>
-    <string name="other_income_">Other Income</string>
+    <string name="other_income_">Other Income (if any)</string>
     <string name="other_income">Monthly income</string>
     <string name="home_purpose2"> Purchase house</string>
     <string name="home_purpose3"> Construct house in your land</string>
@@ -284,7 +287,7 @@
     <string name="personal_purpose5"> For Business </string>
 
     <string name="personal_purpose6">For financial requirements </string>
-    <string name="gst_reflect">Is GST Reflected</string>
+    <string name="gst_reflect">Is ITR Reflected</string>
 
     <string name="add_leads">Add Leads</string>
     <string name="leads">List of Leads</string>

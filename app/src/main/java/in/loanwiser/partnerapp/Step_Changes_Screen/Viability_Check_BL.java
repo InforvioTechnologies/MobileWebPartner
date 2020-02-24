@@ -346,7 +346,7 @@ public class Viability_Check_BL extends SimpleActivity {
         UISCREEN();
         makeJsonObjReq1();
         Font();
-        Click();
+       // Click();
 
         vehicle_type_text = (AppCompatTextView) findViewById(R.id.vehicle_type_text);
 
@@ -360,6 +360,15 @@ public class Viability_Check_BL extends SimpleActivity {
         vehicle_proof_self_list = (ArrayList<String>) getIntent().getSerializableExtra("select_lid_id");
 
         removeClass = new RemoveCommas();
+
+        lead_viy_step2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Viability_Check_BL.this, Eligibility_BL.class);
+                startActivity(intent);
+                finish();
+            }
+        });
 
         vehicle_type_text.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -752,15 +761,55 @@ public class Viability_Check_BL extends SimpleActivity {
         });
 
 
-
-      /*  lead_viy_step2.setOnClickListener(new View.OnClickListener() {
+        pl_co_app_office_residence_pincode_edite_txt.addTextChangedListener(new TextWatcher() {
             @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(Viability_Check_BL.this, Eligibility_BL.class);
-                startActivity(intent);
-                finish();
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+                String workpincode = pl_co_app_office_residence_pincode_edite_txt.getText().toString();
+
+                if (workpincode.length() == 2) {
+                    co_GET_Pincode1(workpincode);
+                }
+
             }
-        });*/
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+
+
+        pl_co_app_slrd_company_pincode_txt.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                Log.e("hi","hi11");
+                String workpincode = pl_co_app_slrd_company_pincode_txt.getText().toString();
+
+                if(workpincode.length()==2){
+                    co_GET_Pincode1(workpincode);
+
+                }
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+
+
+      /*  */
 
         lead_viy_step2.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -2378,6 +2427,67 @@ public class Viability_Check_BL extends SimpleActivity {
         return true;
     }
 
+    private void Salry_method_Spinner(final JSONArray Salary_method_ar) throws JSONException {
+        //   SPINNERLIST = new String[ja.length()];
+        SALARY_Method = new String[Salary_method_ar.length()];
+        for (int i=0;i<Salary_method_ar.length();i++){
+            JSONObject J =  Salary_method_ar.getJSONObject(i);
+            SALARY_Method[i] = J.getString("value");
+            final List<String> loan_type_list = new ArrayList<>(Arrays.asList(SALARY_Method));
+            Salary_Adapter = new ArrayAdapter<String>(context, R.layout.view_spinner_item, loan_type_list){
+                public View getView(int position, View convertView, ViewGroup parent) {
+                    font = Typeface.createFromAsset(context.getAssets(),"Lato-Regular.ttf");
+                    TextView v = (TextView) super.getView(position, convertView, parent);
+                    v.setTypeface(font);
+                    return v;
+                }
+
+                public View getDropDownView(int position, View convertView, ViewGroup parent) {
+                    TextView v = (TextView) super.getView(position, convertView, parent);
+                    v.setTypeface(font);
+                    return v;
+                }
+            };
+
+            Salary_Adapter.setDropDownViewResource(R.layout.view_spinner_item);
+
+            //Co Applicant Salary cr method
+            pl_co_app_slrd_spinn_salary_crt_mtd.setAdapter(Salary_Adapter);
+            pl_co_app_slrd_spinn_salary_crt_mtd.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                    try {
+                        //  City_loc_uniqueID = ja.getJSONObject(position).getString("city_id");
+
+
+                        pl_co_app_slrd_Salary_id = Salary_method_ar.getJSONObject(position).getString("id");
+                        pl_co_app_slrd_Salary_Value = Salary_method_ar.getJSONObject(position).getString("value");
+                        //CAT_ID = ja.getJSONObject(position).getString("category_id");
+                        Log.d("Salary_id", pl_co_app_slrd_Salary_id);
+                        Log.d("Salary_Value", pl_co_app_slrd_Salary_Value);
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+
+                }
+            });
+            pl_co_app_slrd_spinn_salary_crt_mtd.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View view, MotionEvent motionEvent) {
+                    // imm.hideSoftInputFromWindow(edt_buyer_address.getWindowToken(), 0);
+                    return false;
+                }
+            });
+        }
+
+    }
+
     private void pl_vocation_type_forming(final JSONArray vocation_type_forming_ar) throws JSONException {
         //   SPINNERLIST = new String[ja.length()];
 
@@ -2749,7 +2859,7 @@ public class Viability_Check_BL extends SimpleActivity {
                             vehicle_Type =object.getJSONArray("vehicle_Type");
                             crop_type =object.getJSONArray("crop_type");
                             sell_milk =object.getJSONArray("sell_milk");
-
+                            Salary_method_ar =object.getJSONArray("Salary_method");
                             Office_residence =object.getJSONArray("Office_residence");
                             franchise =object.getJSONArray("franchise");
                             is_coapplicant =object.getJSONArray("is_coapplicant");
@@ -2786,7 +2896,7 @@ public class Viability_Check_BL extends SimpleActivity {
                             pl_co_self_Office_Shop_(office_shop);
                             pl_co_self_Office_own_Rent(Office_residence);
                             pl_vocation_type_forming(vocation_type_forming_ar);
-
+                            Salry_method_Spinner(Salary_method_ar);
                             co_Selling_milk(sell_milk);
                             co_Runs_own_business_franchise(franchise);
                             co_Business_type_own_business_Array(Business_type_own_business);
@@ -3162,6 +3272,8 @@ public class Viability_Check_BL extends SimpleActivity {
 
                         Employee_type_Id = Type_of_employement_ar.getJSONObject(position).getString("id");
                         Employee_type_Value = Type_of_employement_ar.getJSONObject(position).getString("value");
+
+                        Pref.putCOSALARYTYPE(context,Employee_type_Id);
                         //CAT_ID = ja.getJSONObject(position).getString("category_id");
                         Log.d("Salary_id", Employee_type_Id);
                         Log.d("Salary_Value", Employee_type_Value);
@@ -3223,6 +3335,10 @@ public class Viability_Check_BL extends SimpleActivity {
                         pl_self_ind_Employee_type_Id = Type_of_employement_ar.getJSONObject(position).getString("id");
                         pl_self_ind_Employee_type_Value = Type_of_employement_ar.getJSONObject(position).getString("value");
                         //CAT_ID = ja.getJSONObject(position).getString("category_id");
+
+                        Pref.putCOEMPTYPE(context,pl_self_ind_Employee_type_Id);
+
+
 
                         int b = Integer.parseInt(pl_self_ind_Employee_type_Id);
                         // pl_self_individual,pl_formin_dairy,pl_self_business
@@ -3305,6 +3421,7 @@ public class Viability_Check_BL extends SimpleActivity {
                         CO_Type_of_employement_ID = Type_Of_emp_ar.getJSONObject(position).getString("id");
                         CO_Type_of_employement_Value = Type_Of_emp_ar.getJSONObject(position).getString("value");
 
+                        Pref.putCOAPPSALARYTYPE(context,CO_Type_of_employement_ID);
                         if(IS_CO_Applicant_Id.equals("1"))
                         {
 
@@ -3325,7 +3442,7 @@ public class Viability_Check_BL extends SimpleActivity {
                             co_applicant_self_employed.setVisibility(View.GONE);
                         }
 
-                        Pref.putCOSALARYTYPE(context,CO_Type_of_employement_ID);
+
 
                         Log.e("The salary Type",CO_Type_of_employement_Value);
                         //CAT_ID = ja.getJSONObject(position).getString("category_id");
@@ -3742,6 +3859,8 @@ public class Viability_Check_BL extends SimpleActivity {
 
                         residence_id = Residence_ownership_ar.getJSONObject(position).getString("id");
                         residence_Value = Residence_ownership_ar.getJSONObject(position).getString("value");
+
+                        Pref.putResidenceType(context,residence_id);
                         if(residence_id.equals("2"))
                         {
                             res_rented.setVisibility(View.VISIBLE);
@@ -5376,7 +5495,7 @@ public class Viability_Check_BL extends SimpleActivity {
                     Objs.a.showToast(context,"Please Select Pin code");
                 }
 
-                imm.hideSoftInputFromWindow(company_pincode_txt.getWindowToken(), 0);
+                imm.hideSoftInputFromWindow(pl_co_app_slrd_company_pincode_txt.getWindowToken(), 0);
 
             }
         });
@@ -5393,7 +5512,7 @@ public class Viability_Check_BL extends SimpleActivity {
                     Objs.a.showToast(context,"Please Select Pin code");
                 }
 
-                imm.hideSoftInputFromWindow(company_pincode_txt.getWindowToken(), 0);
+                imm.hideSoftInputFromWindow(pl_co_app_office_residence_pincode_edite_txt.getWindowToken(), 0);
 
             }
         });
@@ -6413,13 +6532,34 @@ public class Viability_Check_BL extends SimpleActivity {
                         Log.e("Add_Home_loan Partner", String.valueOf(response));
                         try {
 
-                            if(response.getString(Params.status).equals("Ok")) {
+                            JSONObject jsonObject1 = response.getJSONObject("response");
+                            if(jsonObject1.getString("applicant_status").equals("success")) {
 
+                                if(jsonObject1.getString("viablity_status").equals("success"))
+                                {
+                                    Toast.makeText(context,"Viability Created Successfully",Toast.LENGTH_SHORT).show();
+
+                                    Intent intent = new Intent(Viability_Check_BL.this, Eligibility_BL.class);
+                                    intent.putExtra("user_id", user_id);
+                                    intent.putExtra("transaction_id", transaction_id);
+                                    intent.putExtra("IS_CO_Applicant_Id", IS_CO_Applicant_Id);
+                                    intent.putExtra("CO_Type_of_employement_ID", CO_Type_of_employement_ID);
+                                    startActivity(intent);
+                                    finish();
+                                }else if(jsonObject1.getString("viablity_status").equals("error"))
+                                {
+                                    Toast.makeText(context,"Viability Failed",Toast.LENGTH_SHORT).show();
+
+                                    String viability_array =jsonObject1.getString("viability_arr");
+                                    Intent intent = new Intent(Viability_Check_BL.this, Loan_Viyability_Check_Activity.class);
+                                    intent.putExtra("viability_jsonArray", viability_array.toString());
+                                    startActivity(intent);
+                                    finish();
+                                }
 
                             }
-                            if(response.getString(Params.status).equals("error")) {
-                                Objs.a.showToast(context, "Already Registered with Propwiser");
-                            }
+
+
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }

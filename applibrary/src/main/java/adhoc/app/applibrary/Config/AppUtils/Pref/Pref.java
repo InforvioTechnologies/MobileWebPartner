@@ -52,6 +52,9 @@ public final class Pref {
     public static String DOC_Status = "DOC_Status";
     public static String IDENTIFIED = "IDENTIFIED";
     public static String CoAPPAVAILABLE = "CoAPPAVAILABLE";
+    public static String ResidenceType = "ResidenceType";
+    public static String COEMPTYPE = "COEMPTYPE";
+    public static String COAPPSALARYTYPE = "COAPPSALARYTYPE";
 
     public static SharedPreferences get(final Context context) {
         return context.getSharedPreferences(context.getResources().getString(R.string.app_name),Context.MODE_PRIVATE);
@@ -171,6 +174,22 @@ public static void putapplicant_name(final Context context, String aUserId) {
         editor.commit();
     }
 
+    //Residence Type
+    public static void putResidenceType(final Context context, String aUserId) {
+        Pref.putPref(context, ResidenceType, aUserId);
+    }
+
+    public static String getResidenceType(final Context context) {
+        return Pref.getPref(context, ResidenceType, null);
+    }
+
+    public static void removeResidenceType(final Context context) {
+        SharedPreferences prefs = Pref.get(context);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.remove(ResidenceType);
+        editor.commit();
+    }
+
     //Salary type
 
     public static void putSALARYTYPE(final Context context, String aUserId) {
@@ -188,9 +207,39 @@ public static void putapplicant_name(final Context context, String aUserId) {
         editor.commit();
     }
 
+    public static void putCOAPPSALARYTYPE(final Context context, String aUserId) {
+        Pref.putPref(context, COAPPSALARYTYPE, aUserId);
+    }
+
+    public static String getCOAPPSALARYTYPE(final Context context) {
+        return Pref.getPref(context, COAPPSALARYTYPE, null);
+    }
+
+    public static void removeCOAPPSALARYTYPE(final Context context) {
+        SharedPreferences prefs = Pref.get(context);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.remove(COAPPSALARYTYPE);
+        editor.commit();
+    }
 
 
-    //Co Salary Type
+    // Salary Type
+    public static void putCOEMPTYPE(final Context context, String aUserId) {
+        Pref.putPref(context, COEMPTYPE, aUserId);
+    }
+
+    public static String getCOEMPTYPE(final Context context) {
+        return Pref.getPref(context, COEMPTYPE, null);
+    }
+
+    public static void removeCOEMPTYPE(final Context context) {
+        SharedPreferences prefs = Pref.get(context);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.remove(SALARYTYPE);
+        editor.commit();
+    }
+
+    // Salary Type
     public static void putCOSALARYTYPE(final Context context, String aUserId) {
         Pref.putPref(context, COSALARYTYPE, aUserId);
     }

@@ -4738,6 +4738,7 @@ public class Viability_Check_PL extends SimpleActivity {
             applicant.put("per_area",res_company_area);
             applicant.put("res_type",residence_id);
             applicant.put("live_in_res",ST_current_residence_edit_txt);
+            applicant1.put("emp_statues",CO_Type_of_employement_ID);
 
 
         } catch (JSONException e) {
@@ -4760,12 +4761,13 @@ public class Viability_Check_PL extends SimpleActivity {
                     applicant1.put("income_proof",salary_proof_salary_array);
                     applicant1.put("ofc_area",pl_co_app_slrd_res_spinn_area_id);
                     applicant1.put("assets",assets_owned_salary_array);
+                    applicant1.put("emp_statues",CO_Type_of_employement_ID);
 
                 }else if(CO_Type_of_employement_ID.equals("2"))
                 {
                     co_applicant_salaried_employed.setVisibility(View.GONE);
                     co_applicant_self_employed.setVisibility(View.VISIBLE);
-
+                    applicant1.put("emp_statues",CO_Type_of_employement_ID);
                     applicant1.put("bus_employment_type",pl_self_ind_Employee_type_Id);
                     applicant1.put("member_name",ST_pl_Ly_co_app_self_edit_txt_name);
                     applicant1.put("age",ST_pl_Ly_co_app_self_age_edit_txt);
@@ -4828,7 +4830,7 @@ public class Viability_Check_PL extends SimpleActivity {
                             applicant1.put("selling_price",ST_pl_co_P_Selling_Price);
                             applicant1.put("profit",ST_pl_co_p_Profit_affter_selling);
                             //own
-                            applicant1.put("ST_pl_co_own_self_delership_company_edit_txt",ST_pl_co_own_self_delership_company_edit_txt);
+                            applicant1.put("dealership_name",ST_pl_co_own_self_delership_company_edit_txt);
                             applicant1.put("is_franchise",pl_co_self_franchise__id);
                             applicant1.put("bus_employee_count",ST_pl_co_no_of_employee_own_ser_bus_edit_txt);
                             applicant1.put("setup_investment",ST_pl_co_business_investment_own_ser_bus_edit_txt);
@@ -4854,10 +4856,10 @@ public class Viability_Check_PL extends SimpleActivity {
             J =new JSONObject();
             //  J.put(Params.email_id,email);
             J.put("applicant_count",applicant_count);
-            J.put("transaction_id",transaction_id);
-          //  J.put("transaction_id","11381");
-            J.put("user_id",user_id);
-           // J.put("user_id","9919");
+           // J.put("transaction_id",transaction_id);
+           J.put("transaction_id","11381");
+           // J.put("user_id",user_id);
+            J.put("user_id","9919");
             J.put("applicant",applicant);
             J.put("co_applicant",applicant1);
 

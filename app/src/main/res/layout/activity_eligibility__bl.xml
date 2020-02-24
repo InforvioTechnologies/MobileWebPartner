@@ -6,6 +6,15 @@
     android:layout_height="match_parent"
     tools:context=".Step_Changes_Screen.Eligibility_BL">
 
+    <ScrollView
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
             <LinearLayout
                 android:padding="15dp"
                 android:orientation="vertical"
@@ -24,15 +33,7 @@
                     app:spb_stateBackgroundColor="@color/colorPrimary"
                     app:spb_maxStateNumber="four"/>
 
-                <ScrollView
-                    android:layout_weight="1"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical">
                     <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -45,61 +46,214 @@
                         android:orientation="vertical">
 
                         <LinearLayout
+                            android:visibility="gone"
+                            android:id="@+id/individual"
                             android:orientation="vertical"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content">
                             <LinearLayout
-                                android:id="@+id/business_registration_ly"
-                                android:orientation="horizontal"
+                                android:orientation="vertical"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content">
-                                <androidx.appcompat.widget.AppCompatTextView
-                                    android:gravity="left"
-                                    android:layout_marginLeft="2dp"
-                                    android:id="@+id/business_registration_txt"
-                                    android:layout_width="wrap_content"
-                                    style="@style/LorgeText2"
-                                    android:textColor="@color/colorPrimaryDark"
-                                    android:textColorHint="@color/colorPrimaryDark"
-                                    android:hint="1"
-                                    android:layout_height="wrap_content" />
-                                <androidx.appcompat.widget.AppCompatTextView
-                                    android:gravity="left"
-                                    android:layout_marginLeft="2dp"
-                                    android:id="@+id/business_registration_txt1"
+                                <LinearLayout
+                                    android:id="@+id/havinf_bank_account"
+                                    android:orientation="horizontal"
                                     android:layout_width="match_parent"
-                                    style="@style/LorgeText2"
-                                    android:textColor="@color/colorPrimaryDark"
-                                    android:textColorHint="@color/colorPrimaryDark"
-                                    android:text="@string/business_regi"
-                                    android:layout_height="wrap_content" />
+                                    android:layout_height="wrap_content">
+                                    <androidx.appcompat.widget.AppCompatTextView
+                                        android:gravity="left"
+                                        android:layout_marginLeft="2dp"
+                                        android:id="@+id/havinf_bank_account_txt"
+                                        android:layout_width="wrap_content"
+                                        style="@style/LorgeText2"
+                                        android:textColor="@color/colorPrimaryDark"
+                                        android:textColorHint="@color/colorPrimaryDark"
+                                        android:hint="1"
+                                        android:layout_height="wrap_content" />
+                                    <androidx.appcompat.widget.AppCompatTextView
+                                        android:gravity="left"
+                                        android:layout_marginLeft="2dp"
+                                        android:id="@+id/havinf_bank_account_txt1"
+                                        android:layout_width="match_parent"
+                                        style="@style/LorgeText2"
+                                        android:textColor="@color/colorPrimaryDark"
+                                        android:textColorHint="@color/colorPrimaryDark"
+                                        android:text="@string/having_bank"
+                                        android:layout_height="wrap_content" />
+                                </LinearLayout>
+                                <LinearLayout
+                                    android:gravity="center"
+                                    android:orientation="horizontal"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="50dp">
+
+                                    <LinearLayout
+                                        android:layout_marginLeft="30dp"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent">
+                                        <Spinner
+                                            style="@style/Base.Widget.AppCompat.Spinner.Underlined"
+                                            android:backgroundTint="#ff000000"
+                                            android:backgroundTintMode="src_in"
+                                            android:spinnerMode="dropdown"
+                                            android:id="@+id/having_bank_account"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent" />
+                                    </LinearLayout>
+                                </LinearLayout>
                             </LinearLayout>
                             <LinearLayout
-                                android:gravity="center"
-                                android:orientation="horizontal"
+                                android:orientation="vertical"
                                 android:layout_width="match_parent"
-                                android:layout_height="50dp">
+                                android:layout_height="wrap_content">
+                                <LinearLayout
+                                    android:id="@+id/education_qualification"
+                                    android:orientation="horizontal"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content">
+                                    <androidx.appcompat.widget.AppCompatTextView
+                                        android:gravity="left"
+                                        android:layout_marginLeft="2dp"
+                                        android:id="@+id/education_qualification_txt"
+                                        android:layout_width="wrap_content"
+                                        style="@style/LorgeText2"
+                                        android:textColor="@color/colorPrimaryDark"
+                                        android:textColorHint="@color/colorPrimaryDark"
+                                        android:hint="2"
+                                        android:layout_height="wrap_content" />
+                                    <androidx.appcompat.widget.AppCompatTextView
+                                        android:gravity="left"
+                                        android:layout_marginLeft="2dp"
+                                        android:id="@+id/education_qualification_txt1"
+                                        android:layout_width="match_parent"
+                                        style="@style/LorgeText2"
+                                        android:textColor="@color/colorPrimaryDark"
+                                        android:textColorHint="@color/colorPrimaryDark"
+                                        android:text="@string/edu_q"
+                                        android:layout_height="wrap_content" />
+                                </LinearLayout>
+                                <LinearLayout
+                                    android:gravity="center"
+                                    android:orientation="horizontal"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="50dp">
 
+                                    <LinearLayout
+                                        android:layout_marginLeft="30dp"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent">
+                                        <Spinner
+                                            style="@style/Base.Widget.AppCompat.Spinner.Underlined"
+                                            android:backgroundTint="#ff000000"
+                                            android:backgroundTintMode="src_in"
+                                            android:spinnerMode="dropdown"
+                                            android:id="@+id/Educatio_qualification_Sppinner"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent" />
+                                    </LinearLayout>
+                                </LinearLayout>
+                            </LinearLayout>
+                            <LinearLayout
+                                android:layout_marginTop="10dp"
+                                android:orientation="vertical"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent">
+                                <LinearLayout
+                                    android:id="@+id/business_ref_name"
+                                    android:orientation="horizontal"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content">
+                                    <androidx.appcompat.widget.AppCompatTextView
+                                        android:gravity="left"
+                                        android:layout_marginLeft="2dp"
+                                        android:id="@+id/business_ref_name_txt"
+                                        android:layout_width="wrap_content"
+                                        style="@style/LorgeText2"
+                                        android:textColor="@color/colorPrimaryDark"
+                                        android:textColorHint="@color/colorPrimaryDark"
+                                        android:hint="2"
+                                        android:layout_height="wrap_content" />
+                                    <androidx.appcompat.widget.AppCompatTextView
+                                        android:gravity="left"
+                                        android:layout_marginLeft="2dp"
+                                        android:layout_width="match_parent"
+                                        style="@style/LorgeText2"
+                                        android:id="@+id/business_ref_name_txt1"
+                                        android:textColor="@color/colorPrimaryDark"
+                                        android:textColorHint="@color/colorPrimaryDark"
+                                        android:text="Business Reference Name"
+                                        android:layout_height="wrap_content" />
+                                </LinearLayout>
                                 <LinearLayout
                                     android:layout_marginLeft="30dp"
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent">
-                                    <Spinner
-                                        style="@style/Base.Widget.AppCompat.Spinner.Underlined"
-                                        android:backgroundTint="#ff000000"
-                                        android:backgroundTintMode="src_in"
-                                        android:spinnerMode="dropdown"
-                                        android:id="@+id/business_registration_spinner"
+                                    <androidx.appcompat.widget.AppCompatEditText
                                         android:layout_width="match_parent"
-                                        android:layout_height="match_parent" />
+                                        android:layout_height="wrap_content"
+                                        android:textSize="16sp"
+                                        android:id="@+id/business_ref_name_edt_txt"
+                                        android:textColor="@color/colorPrimaryDark"/>
                                 </LinearLayout>
                             </LinearLayout>
                         </LinearLayout>
                         <LinearLayout
+                            android:visibility="gone"
                             android:id="@+id/self_business"
                             android:orientation="vertical"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content">
+                            <LinearLayout
+                                android:orientation="vertical"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+                                <LinearLayout
+                                    android:id="@+id/business_registration_ly"
+                                    android:orientation="horizontal"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content">
+                                    <androidx.appcompat.widget.AppCompatTextView
+                                        android:gravity="left"
+                                        android:layout_marginLeft="2dp"
+                                        android:id="@+id/business_registration_txt"
+                                        android:layout_width="wrap_content"
+                                        style="@style/LorgeText2"
+                                        android:textColor="@color/colorPrimaryDark"
+                                        android:textColorHint="@color/colorPrimaryDark"
+                                        android:hint="1"
+                                        android:layout_height="wrap_content" />
+                                    <androidx.appcompat.widget.AppCompatTextView
+                                        android:gravity="left"
+                                        android:layout_marginLeft="2dp"
+                                        android:id="@+id/business_registration_txt1"
+                                        android:layout_width="match_parent"
+                                        style="@style/LorgeText2"
+                                        android:textColor="@color/colorPrimaryDark"
+                                        android:textColorHint="@color/colorPrimaryDark"
+                                        android:text="@string/business_regi"
+                                        android:layout_height="wrap_content" />
+                                </LinearLayout>
+                                <LinearLayout
+                                    android:gravity="center"
+                                    android:orientation="horizontal"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="50dp">
+
+                                    <LinearLayout
+                                        android:layout_marginLeft="30dp"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent">
+                                        <Spinner
+                                            style="@style/Base.Widget.AppCompat.Spinner.Underlined"
+                                            android:backgroundTint="#ff000000"
+                                            android:backgroundTintMode="src_in"
+                                            android:spinnerMode="dropdown"
+                                            android:id="@+id/business_registration_spinner"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent" />
+                                    </LinearLayout>
+                                </LinearLayout>
+                            </LinearLayout>
                             <LinearLayout
                                 android:orientation="vertical"
                                 android:layout_width="match_parent"
@@ -300,50 +454,52 @@
                                 </LinearLayout>
 
                             </LinearLayout>
-                        </LinearLayout>
-                        <LinearLayout
-                            android:layout_marginTop="10dp"
-                            android:orientation="vertical"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent">
                             <LinearLayout
-                                android:id="@+id/avg_bank_balence_ly"
-                                android:orientation="horizontal"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content">
-                                <androidx.appcompat.widget.AppCompatTextView
-                                    android:gravity="left"
-                                    android:layout_marginLeft="2dp"
-                                    android:id="@+id/avg_bank_balence_txt"
-                                    android:layout_width="wrap_content"
-                                    style="@style/LorgeText2"
-                                    android:textColor="@color/colorPrimaryDark"
-                                    android:textColorHint="@color/colorPrimaryDark"
-                                    android:hint="2"
-                                    android:layout_height="wrap_content" />
-                                <androidx.appcompat.widget.AppCompatTextView
-                                    android:gravity="left"
-                                    android:layout_marginLeft="2dp"
-                                    android:layout_width="match_parent"
-                                    style="@style/LorgeText2"
-                                    android:id="@+id/avg_bank_balence_txt1"
-                                    android:textColor="@color/colorPrimaryDark"
-                                    android:textColorHint="@color/colorPrimaryDark"
-                                    android:text="@string/avg_bank_balence"
-                                    android:layout_height="wrap_content" />
-                            </LinearLayout>
-                            <LinearLayout
-                                android:layout_marginLeft="30dp"
+                                android:layout_marginTop="10dp"
+                                android:orientation="vertical"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent">
-                                <androidx.appcompat.widget.AppCompatEditText
+                                <LinearLayout
+                                    android:id="@+id/avg_bank_balence_ly"
+                                    android:orientation="horizontal"
                                     android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:textSize="16sp"
-                                    android:id="@+id/Avg_monthly_income"
-                                    android:textColor="@color/colorPrimaryDark"/>
+                                    android:layout_height="wrap_content">
+                                    <androidx.appcompat.widget.AppCompatTextView
+                                        android:gravity="left"
+                                        android:layout_marginLeft="2dp"
+                                        android:id="@+id/avg_bank_balence_txt"
+                                        android:layout_width="wrap_content"
+                                        style="@style/LorgeText2"
+                                        android:textColor="@color/colorPrimaryDark"
+                                        android:textColorHint="@color/colorPrimaryDark"
+                                        android:hint="2"
+                                        android:layout_height="wrap_content" />
+                                    <androidx.appcompat.widget.AppCompatTextView
+                                        android:gravity="left"
+                                        android:layout_marginLeft="2dp"
+                                        android:layout_width="match_parent"
+                                        style="@style/LorgeText2"
+                                        android:id="@+id/avg_bank_balence_txt1"
+                                        android:textColor="@color/colorPrimaryDark"
+                                        android:textColorHint="@color/colorPrimaryDark"
+                                        android:text="Average Bank Balence"
+                                        android:layout_height="wrap_content" />
+                                </LinearLayout>
+                                <LinearLayout
+                                    android:layout_marginLeft="30dp"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent">
+                                    <androidx.appcompat.widget.AppCompatEditText
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:textSize="16sp"
+                                        android:id="@+id/Avg_monthly_income"
+                                        android:textColor="@color/colorPrimaryDark"/>
+                                </LinearLayout>
                             </LinearLayout>
                         </LinearLayout>
+
+
                         <LinearLayout
                             android:orientation="vertical"
                             android:layout_width="match_parent"
@@ -361,7 +517,7 @@
                                     style="@style/LorgeText2"
                                     android:textColor="@color/colorPrimaryDark"
                                     android:textColorHint="@color/colorPrimaryDark"
-                                    android:hint="3"
+                                    android:hint="1"
                                     android:layout_height="wrap_content" />
                                 <androidx.appcompat.widget.AppCompatTextView
                                     android:gravity="left"
@@ -396,168 +552,131 @@
 
                             </LinearLayout>
                         </LinearLayout>
-
                         <LinearLayout
-                            android:visibility="gone"
+                            android:id="@+id/residence_rented"
                             android:orientation="vertical"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content">
                             <LinearLayout
-                                android:id="@+id/guaranter"
-                                android:orientation="horizontal"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content">
-                                <androidx.appcompat.widget.AppCompatTextView
-                                    android:gravity="left"
-                                    android:layout_marginLeft="2dp"
-                                    android:id="@+id/guaranter_txt"
-                                    android:layout_width="wrap_content"
-                                    style="@style/LorgeText2"
-                                    android:textColor="@color/colorPrimaryDark"
-                                    android:textColorHint="@color/colorPrimaryDark"
-                                    android:hint="4"
-                                    android:layout_height="wrap_content" />
-                                <androidx.appcompat.widget.AppCompatTextView
-                                    android:gravity="left"
-                                    android:layout_marginLeft="2dp"
-                                    android:id="@+id/guaranter_txt1"
-                                    android:layout_width="match_parent"
-                                    style="@style/LorgeText2"
-                                    android:textColor="@color/colorPrimaryDark"
-                                    android:textColorHint="@color/colorPrimaryDark"
-                                    android:text="@string/guaranter"
-                                    android:layout_height="wrap_content" />
-                            </LinearLayout>
-                            <LinearLayout
-                                android:gravity="center"
-                                android:orientation="horizontal"
-                                android:layout_width="match_parent"
-                                android:layout_height="60dp">
 
+                                android:layout_marginTop="10dp"
+                                android:orientation="vertical"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent">
+                                <LinearLayout
+                                    android:id="@+id/permanent_res_pincode"
+                                    android:orientation="horizontal"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content">
+                                    <androidx.appcompat.widget.AppCompatTextView
+                                        android:gravity="left"
+                                        android:layout_marginLeft="2dp"
+                                        android:id="@+id/permanent_res_txt"
+                                        android:layout_width="wrap_content"
+                                        style="@style/LorgeText2"
+                                        android:textColor="@color/colorPrimaryDark"
+                                        android:textColorHint="@color/colorPrimaryDark"
+                                        android:hint="2"
+                                        android:layout_height="wrap_content" />
+                                    <androidx.appcompat.widget.AppCompatTextView
+                                        android:gravity="left"
+                                        android:layout_marginLeft="2dp"
+                                        android:layout_width="match_parent"
+                                        style="@style/LorgeText2"
+                                        android:id="@+id/permanent_res_txt1"
+                                        android:textColor="@color/colorPrimaryDark"
+                                        android:textColorHint="@color/colorPrimaryDark"
+                                        android:text="Permanent Residence Pincode"
+                                        android:layout_height="wrap_content" />
+                                </LinearLayout>
                                 <LinearLayout
                                     android:layout_marginLeft="30dp"
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent">
-                                    <Spinner
-
-                                        style="@style/Base.Widget.AppCompat.Spinner.Underlined"
-                                        android:backgroundTint="#ff000000"
-                                        android:backgroundTintMode="src_in"
-                                        android:spinnerMode="dropdown"
-                                        android:id="@+id/spinner_guaranter"
+                                    <androidx.appcompat.widget.AppCompatEditText
                                         android:layout_width="match_parent"
-                                        android:layout_height="match_parent" />
+                                        android:layout_height="wrap_content"
+                                        android:textSize="16sp"
+                                        android:id="@+id/permanent_res_pincode_edt_txt"
+                                        android:textColor="@color/colorPrimaryDark"/>
                                 </LinearLayout>
+                            </LinearLayout>
+                            <LinearLayout
+                                android:orientation="vertical"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+                                <LinearLayout
+                                    android:id="@+id/permanent_res_type"
+                                    android:orientation="horizontal"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content">
+                                    <androidx.appcompat.widget.AppCompatTextView
+                                        android:gravity="left"
+                                        android:layout_marginLeft="2dp"
+                                        android:id="@+id/permanent_res_type_txt"
+                                        android:layout_width="wrap_content"
+                                        style="@style/LorgeText2"
+                                        android:textColor="@color/colorPrimaryDark"
+                                        android:textColorHint="@color/colorPrimaryDark"
+                                        android:hint="3"
+                                        android:layout_height="wrap_content" />
+                                    <androidx.appcompat.widget.AppCompatTextView
+                                        android:gravity="left"
+                                        android:layout_marginLeft="2dp"
+                                        android:id="@+id/permanent_res_type_txt1"
+                                        android:layout_width="match_parent"
+                                        style="@style/LorgeText2"
+                                        android:textColor="@color/colorPrimaryDark"
+                                        android:textColorHint="@color/colorPrimaryDark"
+                                        android:text="@string/perment_res_type"
+                                        android:layout_height="wrap_content" />
+                                </LinearLayout>
+                                <LinearLayout
+                                    android:gravity="center"
+                                    android:orientation="horizontal"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="50dp">
 
+                                    <LinearLayout
+                                        android:layout_marginLeft="30dp"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent">
+                                        <Spinner
+                                            style="@style/Base.Widget.AppCompat.Spinner.Underlined"
+                                            android:backgroundTint="#ff000000"
+                                            android:backgroundTintMode="src_in"
+                                            android:spinnerMode="dropdown"
+                                            android:id="@+id/permanent_res_type_spinner"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent" />
+                                    </LinearLayout>
+
+                                </LinearLayout>
                             </LinearLayout>
                         </LinearLayout>
-                        <LinearLayout
-                            android:visibility="gone"
-                            android:orientation="vertical"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent">
-                            <LinearLayout
-                                android:id="@+id/business_reference_name"
-                                android:orientation="horizontal"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content">
-                                <androidx.appcompat.widget.AppCompatTextView
-                                    android:gravity="left"
-                                    android:layout_marginLeft="2dp"
-                                    android:id="@+id/business_r_name_txt"
-                                    android:layout_width="wrap_content"
-                                    style="@style/LorgeText2"
-                                    android:textColor="@color/colorPrimaryDark"
-                                    android:textColorHint="@color/colorPrimaryDark"
-                                    android:hint="5"
-                                    android:layout_height="wrap_content" />
-                                <androidx.appcompat.widget.AppCompatTextView
-                                    android:gravity="left"
-                                    android:layout_marginLeft="2dp"
-                                    android:layout_width="match_parent"
-                                    style="@style/LorgeText2"
-                                    android:id="@+id/business_r_name_txt1"
-                                    android:textColor="@color/colorPrimaryDark"
-                                    android:textColorHint="@color/colorPrimaryDark"
-                                    android:text="@string/business_refernce_name"
-                                    android:layout_height="wrap_content" />
-                            </LinearLayout>
-                            <LinearLayout
-                                android:layout_marginLeft="30dp"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent">
-                                <androidx.appcompat.widget.AppCompatEditText
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:textSize="16sp"
-                                    android:id="@+id/Business_refernce_name"
-                                    android:textColor="@color/colorPrimaryDark"/>
-                            </LinearLayout>
-                        </LinearLayout>
-                        <LinearLayout
-                            android:visibility="gone"
-                            android:orientation="vertical"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent">
-                            <LinearLayout
-                                android:id="@+id/business_refernce_mobile"
-                                android:orientation="horizontal"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content">
-                                <androidx.appcompat.widget.AppCompatTextView
-                                    android:gravity="left"
-                                    android:layout_marginLeft="2dp"
-                                    android:id="@+id/business_refernce_txt"
-                                    android:layout_width="wrap_content"
-                                    style="@style/LorgeText2"
-                                    android:textColor="@color/colorPrimaryDark"
-                                    android:textColorHint="@color/colorPrimaryDark"
-                                    android:hint="6"
-                                    android:layout_height="wrap_content" />
-                                <androidx.appcompat.widget.AppCompatTextView
-                                    android:gravity="left"
-                                    android:layout_marginLeft="2dp"
-                                    android:layout_width="match_parent"
-                                    android:id="@+id/business_refernce_txt1"
-                                    style="@style/LorgeText2"
-                                    android:textColor="@color/colorPrimaryDark"
-                                    android:textColorHint="@color/colorPrimaryDark"
-                                    android:text="@string/business_refernce_mobile"
-                                    android:layout_height="wrap_content" />
-                            </LinearLayout>
-                            <LinearLayout
-                                android:layout_marginLeft="30dp"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent">
-                                <androidx.appcompat.widget.AppCompatEditText
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:textSize="16sp"
-                                    android:id="@+id/Business_reference_mobile"
-                                    android:textColor="@color/colorPrimaryDark"/>
-                            </LinearLayout>
-                        </LinearLayout>
+
+
                     </LinearLayout>
 
                 </LinearLayout>
 
                     <LinearLayout
-                        android:background="@color/colorPrimary"
-                        android:gravity="center"
+                        android:gravity="left"
                         android:orientation="vertical"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
                         <androidx.appcompat.widget.AppCompatTextView
-                            android:gravity="center"
+                            android:gravity="left"
                             android:layout_width="match_parent"
                             style="@style/LorgeText"
-                            android:textSize="16sp"
+                            android:textSize="18sp"
+                            android:textStyle="bold"
                             android:id="@+id/other_income"
-                            android:textColor="@color/white"
+                            android:textColor="@color/colorPrimary"
                             android:text="Other Income Details"
                             android:layout_height="wrap_content" />
-
                     </LinearLayout>
+
                     <LinearLayout
                         android:padding="5dp"
                         android:orientation="vertical"
@@ -713,10 +832,14 @@
                             </LinearLayout>
                         </LinearLayout>
                     </LinearLayout>
-
+                <LinearLayout
+                    android:visibility="gone"
+                    android:id="@+id/co_applicant_pl_co_applicant"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <include layout="@layout/co_eligibility_pl_check"/>
                 </LinearLayout>
-                </ScrollView>
-
 
                 <LinearLayout
                     android:layout_marginTop="10dp"
@@ -744,5 +867,7 @@
 
                 </LinearLayout>
             </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
 
 </LinearLayout>
