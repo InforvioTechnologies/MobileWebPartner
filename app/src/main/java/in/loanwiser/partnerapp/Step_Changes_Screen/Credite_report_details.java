@@ -23,8 +23,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.Response;
+import com.android.volley.RetryPolicy;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonObjectRequest;
@@ -40,6 +42,7 @@ import java.util.List;
 import java.util.Map;
 
 import adhoc.app.applibrary.Config.AppUtils.Objs;
+import adhoc.app.applibrary.Config.AppUtils.Pref.Pref;
 import adhoc.app.applibrary.Config.AppUtils.Urls;
 import adhoc.app.applibrary.Config.AppUtils.VolleySignleton.AppController;
 import dmax.dialog.SpotsDialog;
@@ -73,7 +76,9 @@ public class Credite_report_details extends SimpleActivity {
     private AlertDialog progressDialog;
 
     String[] Do_you_have_Existing_Loan;
-    String  Existing_Loan_ID,Existing_Value;
+    String  Existing_Loan_ID,Existing_Value,S_EMI_Amount,S_bank_name_Edite_txt,S_loan_type_Edite_txt,
+            S_remaning_tenor_Edite_txt,IS_CO_Applicant_Id;
+    int app_count;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -198,10 +203,11 @@ public class Credite_report_details extends SimpleActivity {
                          return;
                      }
 
-                     Payment_Option();
+                     no_credite_report();
+
                  }else if(Existing_Loan_ID.equals("2"))
                  {
-                     Payment_Option();
+                     no_credite_report();
                  }
              }
          });
@@ -265,12 +271,7 @@ public class Credite_report_details extends SimpleActivity {
         return true;
     }
 
-        private void Payment_Option()
-        {
-            Intent intent = new Intent(Credite_report_details.this, Payment_Details_Activity.class);
-            startActivity(intent);
-            finish();
-        }
+
 
     private void makeJsonObjReq1() {
         progressDialog.show();
@@ -387,6 +388,93 @@ public class Credite_report_details extends SimpleActivity {
             });
         }
 
+    }
+
+    private void no_credite_report()
+    {
+
+        IS_CO_Applicant_Id = Pref.getCoAPPAVAILABLE(getApplicationContext());
+
+        if(IS_CO_Applicant_Id.equals("1"))
+        {
+            app_count = 2;
+        }else
+        {
+            app_count = 1;
+        }
+
+        S_EMI_Amount = EMI_Amount.getText().toString();
+        S_bank_name_Edite_txt = bank_name_Edite_txt.getText().toString();
+        S_loan_type_Edite_txt = loan_type_Edite_txt.getText().toString();
+        S_remaning_tenor_Edite_txt = remaning_tenor_Edite_txt.getText().toString();
+
+        JSONArray EMI_Amount1 = new JSONArray();
+        JSONArray bank_name_Edite_txt1 = new JSONArray();
+        JSONArray loan_type_Edite_txt = new JSONArray();
+        JSONArray remaning_tenor_Edite_txt = new JSONArray();
+
+        EMI_Amount1 = new JSONArray(Arrays.asList(S_EMI_Amount));
+        bank_name_Edite_txt1 = new JSONArray(Arrays.asList(S_bank_name_Edite_txt));
+        loan_type_Edite_txt = new JSONArray(Arrays.asList(S_loan_type_Edite_txt));
+        remaning_tenor_Edite_txt = new JSONArray(Arrays.asList(S_remaning_tenor_Edite_txt));
+
+        JSONObject J= null;
+        try {
+            J =new JSONObject();
+            //  J.put(Params.email_id,email);
+            J.put("applicant_count",app_count);
+            J.put("transaction_id",Pref.getTRANSACTIONID(getApplicationContext()));
+            J.put("user_id",Pref.getUSERID(getApplicationContext()));
+            J.put("is_existloan",Existing_Loan_ID);
+            J.put("emi_amount",EMI_Amount1);
+            J.put("bank_name",bank_name_Edite_txt1);
+            J.put("loan_type",loan_type_Edite_txt);
+            J.put("remaining_tenor",remaning_tenor_Edite_txt );
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+
+        Log.e("Add Home Laoan", String.valueOf(J));
+        progressDialog.show();
+        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, Urls.Eligibility_Check, J,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+
+                        String data = String.valueOf(response);
+                        Log.e("Add_Home_loan Partner", String.valueOf(response));
+
+                        progressDialog.dismiss();
+                    }
+                }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                //Log.d(TAG, error.getMessage());
+                VolleyLog.d("TAG", "Error: " + error.getMessage());
+                progressDialog.dismiss();
+
+            }
+        }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("content-type", "application/json");
+                return headers;
+            }
+        };
+
+
+        int socketTimeout = 0;
+        RetryPolicy policy = new DefaultRetryPolicy(socketTimeout,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
+
+        jsonObjReq.setRetryPolicy(policy);
+
+        AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
     }
 
     @Override

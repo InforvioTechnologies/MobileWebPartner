@@ -135,7 +135,11 @@ public class Eligibility_BL extends SimpleActivity {
                 pl_co_app_Emp_type_Value;
 
         String S_pl_co_app_company_name_edtxt,S_pl_co_App_no_of_emp_edtxt,S_pl_co_app_designation_in_company,
-                S_pl_co_app_no_of_dependent_edt_txt,S_pl_co_app_emi_amount_edit_txt,S_pl_co_App_education_qualification_edit_txt;
+                S_pl_co_app_no_of_dependent_edt_txt,S_pl_co_app_emi_amount_edit_txt,S_pl_co_App_education_qualification_edit_txt,
+                S_co_business_ref_name_edt_txt,S_co_purchased_by_bank_edit_txt,S_co_purchased_by_GStbill_edit_txt,
+                S_co_sales_by_GStbill_edit_txt,S_co_bank_cridit_by_edtxt,S_co_Avg_monthly_income,S_co_other_income_edite_txt,
+                S_purchased_by_bank_edit_txt1,S_purchased_by_GStbill_edit_txt1,S_sales_by_GStbill_edit_txt1,S_bank_cridit_by_edtxt1,
+                S_Avg_monthly_income1,S_other_income_edite_txt1,S_pl_co_App_other_incom_amt_edtxt;
 
         LinearLayout co_app_is_other_income,bl_co_eligibility_salaried,bl_co_eligibility_self;
 
@@ -159,10 +163,11 @@ public class Eligibility_BL extends SimpleActivity {
         progressDialog = new SpotsDialog(context, R.style.Custom);
         imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
 
-     /*   Intent intent = getIntent();
+        Intent intent = getIntent();
         user_id = intent.getStringExtra("user_id");
         transaction_id = intent.getStringExtra("transaction_id");
-        CO_Type_of_employement_ID = intent.getStringExtra("CO_Type_of_employement_ID");*/
+
+
         IS_CO_Applicant_Id = Pref.getCoAPPAVAILABLE(getApplicationContext());
         IS_CO_Salried_Self = Pref.getCOAPPSALARYTYPE(getApplicationContext());
 
@@ -197,7 +202,7 @@ public class Eligibility_BL extends SimpleActivity {
             co_applicant_pl_co_applicant.setVisibility(View.VISIBLE);
             app_count = 2;
 
-            if(CO_Employement_Type.equals("1"))
+            if(IS_CO_Salried_Self.equals("1"))
             {
                 bl_co_eligibility_salaried.setVisibility(View.VISIBLE);
                 bl_co_eligibility_self.setVisibility(View.GONE);
@@ -278,6 +283,7 @@ public class Eligibility_BL extends SimpleActivity {
         co_sales_by_GStbill_edit_txt = (AppCompatEditText) findViewById(R.id.co_sales_by_GStbill_edit_txt);
         co_bank_cridit_by_edtxt = (AppCompatEditText) findViewById(R.id.co_bank_cridit_by_edtxt);
         co_Avg_monthly_income = (AppCompatEditText) findViewById(R.id.co_Avg_monthly_income);
+        Avg_monthly_income = (AppCompatEditText) findViewById(R.id.Avg_monthly_income);
         co_other_income_edite_txt = (AppCompatEditText) findViewById(R.id.co_other_income_edite_txt);
 
         permanent_res_pincode_edt_txt = (AppCompatEditText) findViewById(R.id.permanent_res_pincode_edt_txt);
@@ -369,7 +375,7 @@ public class Eligibility_BL extends SimpleActivity {
                         Toast.makeText(context,"Please Select Bank A/C Type",Toast.LENGTH_SHORT).show();
                     }else
                     {
-                      if(Educatio_qualification_Sppinner.equals("0"))
+                      if(Educational_Id.equals("0"))
                       {
                           Toast.makeText(context,"Please Select Educational Qualification",Toast.LENGTH_SHORT).show();
 
@@ -606,7 +612,7 @@ public class Eligibility_BL extends SimpleActivity {
         {
             Toast.makeText(mCon, "Please Select other income", Toast.LENGTH_SHORT).show();
 
-        }else if(!pl_co_app_Other_income_id.equals("4"))
+        }else if(pl_co_app_Other_income_id.equals("4"))
         {
             lead_Eligibility();
 
@@ -638,7 +644,7 @@ public class Eligibility_BL extends SimpleActivity {
                     Toast.makeText(context,"Please Select Bank A/C Type",Toast.LENGTH_SHORT).show();
                 }else
                 {
-                    if(co_Educatio_qualification_Sppinner.equals("0"))
+                    if(co_Educational_Id.equals("0"))
                     {
                         Toast.makeText(context,"Please Select Educational Qualification",Toast.LENGTH_SHORT).show();
 
@@ -668,6 +674,8 @@ public class Eligibility_BL extends SimpleActivity {
                 }
             }else if(CO_Employement_Type.equals("3"))
             {
+                co_individual.setVisibility(View.GONE);
+                co_self_business.setVisibility(View.VISIBLE);
                 if(co_Business_registration_Id.equals("0"))
                 {
                     Toast.makeText(context,"Please Select Business Registration",Toast.LENGTH_SHORT).show();
@@ -738,7 +746,7 @@ public class Eligibility_BL extends SimpleActivity {
     private boolean Purchased_by_Bank(){
 
         if (purchased_by_bank_edit_txt.getText().toString().isEmpty()) {
-            purchased_by_bank_edit_txt.setError(getText(R.string.error_purchased_by_Bank));
+            purchased_by_bank_edit_txt.setError(getText(R.string.err_curent));
             purchased_by_bank_edit_txt.requestFocus();
             return false;
         } else {
@@ -751,7 +759,7 @@ public class Eligibility_BL extends SimpleActivity {
 
     private boolean Purchased_by_Gst_bill(){
         if (purchased_by_GStbill_edit_txt.getText().toString().isEmpty()) {
-            purchased_by_GStbill_edit_txt.setError(getText(R.string.error_purchased_by_gst));
+            purchased_by_GStbill_edit_txt.setError(getText(R.string.err_curent));
             purchased_by_GStbill_edit_txt.requestFocus();
             return false;
         } else {
@@ -778,7 +786,7 @@ public class Eligibility_BL extends SimpleActivity {
 
     private boolean sales_by_Gst_bill(){
         if (sales_by_GStbill_edit_txt.getText().toString().isEmpty()) {
-            sales_by_GStbill_edit_txt.setError(getText(R.string.error_sales_by_gst_crdt));
+            sales_by_GStbill_edit_txt.setError(getText(R.string.err_curent));
             sales_by_GStbill_edit_txt.requestFocus();
             return false;
         } else {
@@ -793,7 +801,7 @@ public class Eligibility_BL extends SimpleActivity {
 
     private boolean Sales_bank_cridit_(){
         if (bank_cridit_by_edtxt.getText().toString().isEmpty()) {
-            bank_cridit_by_edtxt.setError(getText(R.string.error_sales_by_bank_crdt));
+            bank_cridit_by_edtxt.setError(getText(R.string.err_curent));
             bank_cridit_by_edtxt.requestFocus();
             return false;
         } else {
@@ -807,7 +815,7 @@ public class Eligibility_BL extends SimpleActivity {
 
     private boolean Sales_Bank_ref_Name(){
         if (business_ref_name_edt_txt.getText().toString().isEmpty()) {
-            business_ref_name_edt_txt.setError(getText(R.string.error_sales_by_bank_crdt));
+            business_ref_name_edt_txt.setError(getText(R.string.err_curent));
             business_ref_name_edt_txt.requestFocus();
             return false;
         } else {
@@ -821,7 +829,7 @@ public class Eligibility_BL extends SimpleActivity {
 
     private boolean Validate_co_business_ref_name_edt_txt(){
         if (co_business_ref_name_edt_txt.getText().toString().isEmpty()) {
-            co_business_ref_name_edt_txt.setError(getText(R.string.error_sales_by_bank_crdt));
+            co_business_ref_name_edt_txt.setError(getText(R.string.err_curent));
             co_business_ref_name_edt_txt.requestFocus();
             return false;
         } else {
@@ -832,9 +840,10 @@ public class Eligibility_BL extends SimpleActivity {
 
         return true;
     }
+
     private boolean Validate_co_purchased_by_bank_edit_txt(){
         if (co_purchased_by_bank_edit_txt.getText().toString().isEmpty()) {
-            co_purchased_by_bank_edit_txt.setError(getText(R.string.error_sales_by_bank_crdt));
+            co_purchased_by_bank_edit_txt.setError(getText(R.string.err_curent));
             co_purchased_by_bank_edit_txt.requestFocus();
             return false;
         } else {
@@ -848,7 +857,7 @@ public class Eligibility_BL extends SimpleActivity {
 
     private boolean Validate_co_purchased_by_GStbill_edit_txt(){
         if (co_purchased_by_GStbill_edit_txt.getText().toString().isEmpty()) {
-            co_purchased_by_GStbill_edit_txt.setError(getText(R.string.error_sales_by_bank_crdt));
+            co_purchased_by_GStbill_edit_txt.setError(getText(R.string.err_curent));
             co_purchased_by_GStbill_edit_txt.requestFocus();
             return false;
         } else {
@@ -862,7 +871,7 @@ public class Eligibility_BL extends SimpleActivity {
 
     private boolean Validate_co_sales_by_GStbill_edit_txt(){
         if (co_sales_by_GStbill_edit_txt.getText().toString().isEmpty()) {
-            co_sales_by_GStbill_edit_txt.setError(getText(R.string.error_sales_by_bank_crdt));
+            co_sales_by_GStbill_edit_txt.setError(getText(R.string.err_curent));
             co_sales_by_GStbill_edit_txt.requestFocus();
             return false;
         } else {
@@ -876,7 +885,7 @@ public class Eligibility_BL extends SimpleActivity {
 
     private boolean Validate_co_bank_cridit_by_edtxt(){
         if (co_bank_cridit_by_edtxt.getText().toString().isEmpty()) {
-            co_bank_cridit_by_edtxt.setError(getText(R.string.error_sales_by_bank_crdt));
+            co_bank_cridit_by_edtxt.setError(getText(R.string.err_curent));
             co_bank_cridit_by_edtxt.requestFocus();
             return false;
         } else {
@@ -890,7 +899,7 @@ public class Eligibility_BL extends SimpleActivity {
 
     private boolean Validate_co_Avg_monthly_income(){
         if (co_Avg_monthly_income.getText().toString().isEmpty()) {
-            co_Avg_monthly_income.setError(getText(R.string.error_sales_by_bank_crdt));
+            co_Avg_monthly_income.setError(getText(R.string.err_curent));
             co_Avg_monthly_income.requestFocus();
             return false;
         } else {
@@ -901,9 +910,10 @@ public class Eligibility_BL extends SimpleActivity {
 
         return true;
     }
+
     private boolean Validate_co_other_income_edite_txt(){
         if (co_other_income_edite_txt.getText().toString().isEmpty()) {
-            co_other_income_edite_txt.setError(getText(R.string.error_sales_by_bank_crdt));
+            co_other_income_edite_txt.setError(getText(R.string.err_curent));
             co_other_income_edite_txt.requestFocus();
             return false;
         } else {
@@ -919,7 +929,7 @@ public class Eligibility_BL extends SimpleActivity {
 
     private boolean Average_monthly_income(){
         if (Avg_monthly_income.getText().toString().isEmpty()) {
-            Avg_monthly_income.setError(getText(R.string.error_avg));
+            Avg_monthly_income.setError(getText(R.string.err_curent));
             Avg_monthly_income.requestFocus();
             return false;
         } else {
@@ -960,7 +970,7 @@ public class Eligibility_BL extends SimpleActivity {
 
     private boolean other_income_amount(){
         if (other_income_edite_txt.getText().toString().isEmpty()) {
-            other_income_edite_txt.setError(getText(R.string.error_other_income_amt));
+            other_income_edite_txt.setError(getText(R.string.err_curent));
             other_income_edite_txt.requestFocus();
             return false;
         } else {
@@ -977,7 +987,7 @@ public class Eligibility_BL extends SimpleActivity {
 
     private boolean Co_App_Validate_Company_Name(){
         if (pl_co_app_company_name_edtxt.getText().toString().trim().isEmpty()) {
-            pl_co_app_company_name_edtxt.setError(getText(R.string.error_company_name));
+            pl_co_app_company_name_edtxt.setError(getText(R.string.err_curent));
             pl_co_app_company_name_edtxt.requestFocus();
             return false;
         } else {
@@ -989,7 +999,7 @@ public class Eligibility_BL extends SimpleActivity {
 
     private boolean Co_App_Validate_Designation_in_company(){
         if (pl_co_app_designation_in_company.getText().toString().trim().isEmpty()) {
-            pl_co_app_designation_in_company.setError(getText(R.string.error_company_name));
+            pl_co_app_designation_in_company.setError(getText(R.string.err_curent));
             pl_co_app_designation_in_company.requestFocus();
             return false;
         } else {
@@ -1001,7 +1011,7 @@ public class Eligibility_BL extends SimpleActivity {
 
     private boolean Pl_Co_Validate_No_of_Employee(){
         if (pl_co_App_no_of_emp_edtxt.getText().toString().trim().isEmpty()) {
-            pl_co_App_no_of_emp_edtxt.setError(getText(R.string.error_no_emp));
+            pl_co_App_no_of_emp_edtxt.setError(getText(R.string.err_curent));
             pl_co_App_no_of_emp_edtxt.requestFocus();
             return false;
         } else {
@@ -1049,7 +1059,7 @@ public class Eligibility_BL extends SimpleActivity {
 
     private boolean pl_Co_App_Validate_other_income(){
         if (pl_co_App_other_incom_amt_edtxt.getText().toString().trim().isEmpty()) {
-            pl_co_App_other_incom_amt_edtxt.setError(getText(R.string.oth_income));
+            pl_co_App_other_incom_amt_edtxt.setError(getText(R.string.err_curent));
             pl_co_App_other_incom_amt_edtxt.requestFocus();
             return false;
         } else {
@@ -2212,47 +2222,58 @@ public class Eligibility_BL extends SimpleActivity {
 
 
     private void lead_Eligibility() {
-
-
-
-
-
-
-         purchased_by_bank_edit_txt1 = purchased_by_bank_edit_txt.getText().toString();
-         purchased_by_GStbill_edit_txt1 = purchased_by_GStbill_edit_txt.getText().toString();
-         sales_by_GStbill_edit_txt1 = sales_by_GStbill_edit_txt.getText().toString();
-         bank_cridit_by_edtxt1 = bank_cridit_by_edtxt.getText().toString();
-
-         Avg_monthly_income1 = Avg_monthly_income.getText().toString();
-         Business_refernce_name1 = Business_refernce_name.getText().toString();
-         Business_reference_mobile1 = Business_reference_mobile.getText().toString();
-         other_income_edite_txt1 = other_income_edite_txt.getText().toString();
+         S_purchased_by_bank_edit_txt1 = purchased_by_bank_edit_txt.getText().toString();
+         S_purchased_by_GStbill_edit_txt1 = purchased_by_GStbill_edit_txt.getText().toString();
+         S_sales_by_GStbill_edit_txt1 = sales_by_GStbill_edit_txt.getText().toString();
+         S_bank_cridit_by_edtxt1 = bank_cridit_by_edtxt.getText().toString();
+         S_Avg_monthly_income1 = Avg_monthly_income.getText().toString();
+         S_other_income_edite_txt1 = other_income_edite_txt.getText().toString();
          S_business_ref_name_edt_txt = business_ref_name_edt_txt.getText().toString();
-
-
-
+         S_business_ref_name_edt_txt = business_ref_name_edt_txt.getText().toString();
 //salried
-
-
         S_pl_co_app_company_name_edtxt = pl_co_app_company_name_edtxt.getText().toString();
         S_pl_co_App_no_of_emp_edtxt = pl_co_App_no_of_emp_edtxt.getText().toString();
         S_pl_co_app_designation_in_company = pl_co_app_designation_in_company.getText().toString();
         S_pl_co_app_no_of_dependent_edt_txt = pl_co_app_no_of_dependent_edt_txt.getText().toString();
         S_pl_co_app_emi_amount_edit_txt = pl_co_app_emi_amount_edit_txt.getText().toString();
         S_pl_co_App_education_qualification_edit_txt = pl_co_App_education_qualification_edit_txt.getText().toString();
+        S_pl_co_App_other_incom_amt_edtxt = pl_co_App_other_incom_amt_edtxt.getText().toString();
 
-
-        S_pl_co_App_education_qualification_edit_txt = co_business_ref_name_edt_txt.getText().toString();
-        S_pl_co_App_education_qualification_edit_txt = co_purchased_by_bank_edit_txt.getText().toString();
-        S_pl_co_App_education_qualification_edit_txt = co_purchased_by_GStbill_edit_txt.getText().toString();
-        S_pl_co_App_education_qualification_edit_txt = co_sales_by_GStbill_edit_txt.getText().toString();
-        S_pl_co_App_education_qualification_edit_txt = co_bank_cridit_by_edtxt.getText().toString();
-        S_pl_co_App_education_qualification_edit_txt = co_Avg_monthly_income.getText().toString();
-        S_pl_co_App_education_qualification_edit_txt = co_other_income_edite_txt.getText().toString();
+        S_co_business_ref_name_edt_txt = co_business_ref_name_edt_txt.getText().toString();
+        S_co_purchased_by_bank_edit_txt = co_purchased_by_bank_edit_txt.getText().toString();
+        S_co_purchased_by_GStbill_edit_txt = co_purchased_by_GStbill_edit_txt.getText().toString();
+        S_co_sales_by_GStbill_edit_txt = co_sales_by_GStbill_edit_txt.getText().toString();
+        S_co_bank_cridit_by_edtxt = co_bank_cridit_by_edtxt.getText().toString();
+        S_co_Avg_monthly_income = co_Avg_monthly_income.getText().toString();
+        S_co_other_income_edite_txt = co_other_income_edite_txt.getText().toString();
 
         JSONObject jsonObject =new JSONObject();
         JSONObject Applicant =new JSONObject();
         JSONObject Co_Applicant =new JSONObject();
+
+        JSONArray other_income = new JSONArray();
+        JSONArray other_amount = new JSONArray();
+        JSONArray itr_reflected = new JSONArray();
+
+        JSONArray other_income1 = new JSONArray();
+        JSONArray other_amount1 = new JSONArray();
+        JSONArray itr_reflected1 = new JSONArray();
+
+        JSONArray other_income2 = new JSONArray();
+        JSONArray other_amount2 = new JSONArray();
+        JSONArray itr_reflected2 = new JSONArray();
+
+        other_income = new JSONArray(Arrays.asList(Other_income_Id));
+        other_amount = new JSONArray(Arrays.asList(S_other_income_edite_txt1));
+        itr_reflected = new JSONArray(Arrays.asList(Gstreflect_Id));
+
+        other_income1 = new JSONArray(Arrays.asList(pl_co_app_Other_income_id));
+        other_amount1 = new JSONArray(Arrays.asList(S_pl_co_App_other_incom_amt_edtxt));
+        itr_reflected1 = new JSONArray(Arrays.asList(pl_co_App_gst_reflect_id));
+
+        other_income2 = new JSONArray(Arrays.asList(co_Other_income_Id));
+        other_amount2 = new JSONArray(Arrays.asList(S_co_other_income_edite_txt));
+        itr_reflected2 = new JSONArray(Arrays.asList(co_Gstreflect_Id));
 
      //   Applicant.put("")
 
@@ -2261,66 +2282,86 @@ public class Eligibility_BL extends SimpleActivity {
             J =new JSONObject();
 
 
-            Applicant.put("having_bank_Id",having_bank_Id);
-            Applicant.put("Educatio_qualification_Sppinner",Educatio_qualification_Sppinner);
-            Applicant.put("S_business_ref_name_edt_txt",S_business_ref_name_edt_txt);
-            Applicant.put("S_business_ref_name_edt_txt",Spinner_res_proof_Id);
-            Applicant.put("Other_income_Id",Other_income_Id);
-            Applicant.put("other_income_edite_txt",other_income_edite_txt);
-            Applicant.put("Gstreflect_Id",Gstreflect_Id);
-            Applicant.put("Business_registration_Id",Business_registration_Id);
-            Applicant.put("purchased_by_bank_edit_txt1",purchased_by_bank_edit_txt1);
-            Applicant.put("purchased_by_GStbill_edit_txt1",purchased_by_GStbill_edit_txt1);
-            Applicant.put("sales_by_GStbill_edit_txt1",sales_by_GStbill_edit_txt1);
-            Applicant.put("bank_cridit_by_edtxt1",bank_cridit_by_edtxt1);
-            Applicant.put("Avg_monthly_income1",Avg_monthly_income1);
+            Applicant.put("has_sb_account",having_bank_Id);
+            Applicant.put("qualification",Educational_Id);
+            Applicant.put("reference_name",S_business_ref_name_edt_txt);
+            Applicant.put("addr_proof_own",Spinner_res_proof_Id);
+
+            Applicant.put("other_from",other_income);
+            Applicant.put("other_amount",other_amount);
+            Applicant.put("other_reflected",other_amount);
+
+            Applicant.put("bussiness_registeration",Business_registration_Id);
+            Applicant.put("purchased_by_bank_edit_txt1",S_purchased_by_bank_edit_txt1);
+            Applicant.put("purchased_by_GStbill_edit_txt1",S_purchased_by_GStbill_edit_txt1);
+            Applicant.put("sales_by_GStbill_edit_txt1",S_sales_by_GStbill_edit_txt1);
+            Applicant.put("bank_cridit_by_edtxt1",S_bank_cridit_by_edtxt1);
+            Applicant.put("Avg_monthly_income1",S_Avg_monthly_income1);
 
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
 
-        try {
-            Co_Applicant.put("has_pancardHave",Pl_Co_App_PAN_id);
-            Co_Applicant.put("has_emp_id",pl_co_app_Employee_id);
-            Co_Applicant.put("company_type",pl_co_app_Company_id);
-            Co_Applicant.put("pl_co_app_Emp_type_id",pl_co_app_Emp_type_id);
-            Co_Applicant.put("is_epf_deduct",pl_co_app_epf_id);
-            Co_Applicant.put("marital_status",pl_co_app_maried_res_spinner_id);
-            Co_Applicant.put("company_name",S_pl_co_app_company_name_edtxt);
-            Co_Applicant.put("employees_count",S_pl_co_App_no_of_emp_edtxt);
-            Co_Applicant.put("designation",S_pl_co_app_designation_in_company);
-            Co_Applicant.put("no_of_dependency",S_pl_co_app_no_of_dependent_edt_txt);
-            Co_Applicant.put("affordable_pay",S_pl_co_app_emi_amount_edit_txt);
-            Co_Applicant.put("qualification",S_pl_co_App_education_qualification_edit_txt);
+        if(IS_CO_Applicant_Id.equals("1"))
+        {
+            try {
 
 
-            Applicant.put("having_bank_Id",co_having_bank_Id);
-            Applicant.put("Educatio_qualification_Sppinner",co_Educatio_qualification_Sppinner);
-            Applicant.put("S_business_ref_name_edt_txt",co_business_ref_name_edt_txt);
-            Applicant.put("S_business_ref_name_edt_txt",Spinner_res_proof_Id);
-            Applicant.put("Other_income_Id",Other_income_Id);
-            Applicant.put("other_income_edite_txt",other_income_edite_txt);
-            Applicant.put("Gstreflect_Id",Gstreflect_Id);
-            Applicant.put("Business_registration_Id",Business_registration_Id);
-            Applicant.put("purchased_by_bank_edit_txt1",purchased_by_bank_edit_txt1);
-            Applicant.put("purchased_by_GStbill_edit_txt1",purchased_by_GStbill_edit_txt1);
-            Applicant.put("sales_by_GStbill_edit_txt1",sales_by_GStbill_edit_txt1);
-            Applicant.put("bank_cridit_by_edtxt1",bank_cridit_by_edtxt1);
-            Applicant.put("Avg_monthly_income1",Avg_monthly_income1);
+                if(IS_CO_Salried_Self.equals("1"))
+                {
+                    Co_Applicant.put("has_pancard",Pl_Co_App_PAN_id);
+                    Co_Applicant.put("has_emp_id",pl_co_app_Employee_id);
+                    Co_Applicant.put("company_type",pl_co_app_Company_id);
+                    Co_Applicant.put("employee_type",pl_co_app_Emp_type_id);
+                    Co_Applicant.put("is_epf_deduct",pl_co_app_epf_id);
+                    Co_Applicant.put("marital_status",pl_co_app_maried_res_spinner_id);
+                    Co_Applicant.put("company_name",S_pl_co_app_company_name_edtxt);
+                    Co_Applicant.put("employees_count",S_pl_co_App_no_of_emp_edtxt);
+                    Co_Applicant.put("designation",S_pl_co_app_designation_in_company);
+                    Co_Applicant.put("no_of_dependency",S_pl_co_app_no_of_dependent_edt_txt);
+                    Co_Applicant.put("affordable_pay",S_pl_co_app_emi_amount_edit_txt);
+                    Co_Applicant.put("qualification",S_pl_co_App_education_qualification_edit_txt);
 
-        } catch (JSONException e) {
-            e.printStackTrace();
+
+                    Co_Applicant.put("other_from",other_income1);
+                    Co_Applicant.put("other_amount",other_amount1);
+                    Co_Applicant.put("other_reflected",itr_reflected1);
+
+                }else
+                {
+                    Co_Applicant.put("has_sb_account",co_having_bank_Id);
+                    Co_Applicant.put("qualification",co_Educational_Id);
+                    Co_Applicant.put("reference_name",co_business_ref_name_edt_txt);
+                    Co_Applicant.put("addr_proof_own",co_Spinner_res_proof_Id);
+
+                    Co_Applicant.put("other_from",other_income2);
+                    Co_Applicant.put("other_amount",other_amount2);
+                    Co_Applicant.put("other_reflected",itr_reflected2);
+
+                    Co_Applicant.put("bussiness_registeration",co_Business_registration_Id);
+                    Co_Applicant.put("purpercent_bankacc",S_co_purchased_by_bank_edit_txt);
+                    Co_Applicant.put("purpercent_gstbill",S_co_purchased_by_GStbill_edit_txt);
+                    Co_Applicant.put("salepercent_gstbill",S_co_sales_by_GStbill_edit_txt);
+                    Co_Applicant.put("incomepercent_bank",S_co_bank_cridit_by_edtxt);
+                    Co_Applicant.put("avg_bankbalance",S_co_Avg_monthly_income);
+                }
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }else {
+
         }
+
+
 
         try {
             J =new JSONObject();
             //  J.put(Params.email_id,email);
             J.put("applicant_count",app_count);
-            // J.put("transaction_id",11381);
-            J.put("transaction_id",transaction_id);
-            //  J.put("user_id",9919);
-            J.put("user_id",user_id);
+            J.put("transaction_id",Pref.getTRANSACTIONID(getApplicationContext()));
+            J.put("user_id",Pref.getUSERID(getApplicationContext()));
             J.put("applicant",Applicant);
             J.put("co_applicant",Co_Applicant);
 
@@ -2331,14 +2372,41 @@ public class Eligibility_BL extends SimpleActivity {
 
         Log.e("Add Home Laoan", String.valueOf(J));
         progressDialog.show();
-        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, Urls.ADD_LEAD_POST, J,
+        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, Urls.Eligibility_Check, J,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
 
                         String data = String.valueOf(response);
                         Log.e("Add_Home_loan Partner", String.valueOf(response));
+                        try {
+                            JSONObject jsonObject1 = response.getJSONObject("response");
+                            if(jsonObject1.getString("applicant_status").equals("success")) {
+                                if(jsonObject1.getString("eligibility_status").equals("success"))
+                                {
+                                    Toast.makeText(context,"Eligibility Created Successfully",Toast.LENGTH_SHORT).show();
 
+                                    Intent intent = new Intent(Eligibility_BL.this, Creadite_Report_Activity.class);
+                                    intent.putExtra("user_id", user_id);
+                                    intent.putExtra("transaction_id", transaction_id);
+                                    startActivity(intent);
+                                    finish();
+                                }else if(jsonObject1.getString("eligibility_status").equals("error"))
+                                {
+                                    Toast.makeText(context,"Eligibility Failed",Toast.LENGTH_SHORT).show();
+
+                                    String viability_array =jsonObject1.getString("eligibility_arr");
+                                    Intent intent = new Intent(Eligibility_BL.this, Loan_Viyability_Check_Activity.class);
+                                    intent.putExtra("viability_jsonArray", viability_array.toString());
+                                    startActivity(intent);
+                                    finish();
+                                }
+                            }
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        progressDialog.dismiss();
 
                         progressDialog.dismiss();
                     }

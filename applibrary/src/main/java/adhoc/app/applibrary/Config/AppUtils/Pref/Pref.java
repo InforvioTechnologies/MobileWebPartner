@@ -32,6 +32,7 @@ public final class Pref {
     public static String CLASSID = "CLASSID";
     public static String USERTYPE = "USERTYPE";
     public static String TRANSACTIONID = "TRANSACTIONID";
+    public static String USERID = "USERID";
 
     public static String APPLICANTNAME = "APPLICANTNAME";
 
@@ -173,6 +174,39 @@ public static void putapplicant_name(final Context context, String aUserId) {
         editor.remove(CoAPPAVAILABLE);
         editor.commit();
     }
+
+    //transaction id
+    public static void putTRANSACTIONID(final Context context, String aUserId) {
+        Pref.putPref(context, TRANSACTIONID, aUserId);
+    }
+
+    public static String getTRANSACTIONID(final Context context) {
+        return Pref.getPref(context, TRANSACTIONID, null);
+    }
+
+    public static void removeTRANSACTIONID(final Context context) {
+        SharedPreferences prefs = Pref.get(context);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.remove(TRANSACTIONID);
+        editor.commit();
+    }
+
+    //
+    public static void putUSERID(final Context context, String aUserId) {
+        Pref.putPref(context, USERID, aUserId);
+    }
+
+    public static String getUSERID(final Context context) {
+        return Pref.getPref(context, USERID, null);
+    }
+
+    public static void removeUSERID(final Context context) {
+        SharedPreferences prefs = Pref.get(context);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.remove(USERID);
+        editor.commit();
+    }
+
 
     //Residence Type
     public static void putResidenceType(final Context context, String aUserId) {

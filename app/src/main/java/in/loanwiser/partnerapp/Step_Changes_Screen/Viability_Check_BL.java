@@ -346,7 +346,7 @@ public class Viability_Check_BL extends SimpleActivity {
         UISCREEN();
         makeJsonObjReq1();
         Font();
-       // Click();
+        Click();
 
         vehicle_type_text = (AppCompatTextView) findViewById(R.id.vehicle_type_text);
 
@@ -361,6 +361,7 @@ public class Viability_Check_BL extends SimpleActivity {
 
         removeClass = new RemoveCommas();
 
+/*
         lead_viy_step2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -369,6 +370,7 @@ public class Viability_Check_BL extends SimpleActivity {
                 finish();
             }
         });
+*/
 
         vehicle_type_text.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -713,6 +715,7 @@ public class Viability_Check_BL extends SimpleActivity {
 
       //  business_details_txt.setTypeface(font);
     }
+
     private void Click() {
 
         residence_pincode_edite_txt.addTextChangedListener(new TextWatcher() {
@@ -6289,9 +6292,6 @@ public class Viability_Check_BL extends SimpleActivity {
         ST_pl_co_p_Profit_affter_selling = pl_co_p_Profit_affter_selling.getText().toString();
         ST_pl_co_P_no_of_years_in_work_P = pl_co_P_no_of_years_in_work_P.getText().toString();
 
-
-
-
         //own business fran
         ST_pl_co_own_self_delership_company_edit_txt = pl_co_own_self_delership_company_edit_txt.getText().toString();
         ST_pl_co_own_self_monthly_profit_edit_txt = pl_co_own_self_monthly_profit_edit_txt.getText().toString();
@@ -6509,11 +6509,9 @@ public class Viability_Check_BL extends SimpleActivity {
         try {
             J =new JSONObject();
 
-            J.put("applicant_count","1");
-           // J.put("transaction_id",transaction_id);
-            J.put("transaction_id","11381");
-           // J.put("user_id",user_id);
-            J.put("user_id","9919");
+            J.put("applicant_count",applicant_count);
+            J.put("transaction_id",Pref.getTRANSACTIONID(getApplicationContext()));
+            J.put("user_id",Pref.getUSERID(getApplicationContext()));
             J.put("applicant",applicant1);
             J.put("co_applicant",Co_applicant1);
 
@@ -6542,8 +6540,7 @@ public class Viability_Check_BL extends SimpleActivity {
                                     Intent intent = new Intent(Viability_Check_BL.this, Eligibility_BL.class);
                                     intent.putExtra("user_id", user_id);
                                     intent.putExtra("transaction_id", transaction_id);
-                                    intent.putExtra("IS_CO_Applicant_Id", IS_CO_Applicant_Id);
-                                    intent.putExtra("CO_Type_of_employement_ID", CO_Type_of_employement_ID);
+
                                     startActivity(intent);
                                     finish();
                                 }else if(jsonObject1.getString("viablity_status").equals("error"))

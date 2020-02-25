@@ -832,6 +832,8 @@
                             </LinearLayout>
                         </LinearLayout>
                     </LinearLayout>
+
+
                 <LinearLayout
                     android:visibility="gone"
                     android:id="@+id/co_applicant_pl_co_applicant"

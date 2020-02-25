@@ -532,6 +532,8 @@ public class Lead_Crration_Activity extends SimpleActivity {
 
                         Pref.putCoAPPAVAILABLE(context,IS_CO_Applicant_Id);
 
+
+
                         if(IS_CO_Applicant_Id.equals("1"))
                         {
                             co_applicant_emp_type.setVisibility(View.VISIBLE);
@@ -940,6 +942,9 @@ public class Lead_Crration_Activity extends SimpleActivity {
 
                                 String user_id = jsonObject1.getString("user_id");
                                 String transaction_id = jsonObject1.getString("transaction_id");
+
+                                Pref.putTRANSACTIONID(context,transaction_id);
+                                Pref.putUSERID(context,user_id);
 
                                 if(App.equals("1"))
                                 {

@@ -3429,7 +3429,7 @@ public class Viability_Check_PL extends SimpleActivity {
 
                         CO_Type_of_employement_ID = Type_Of_emp_ar.getJSONObject(position).getString("id");
                         CO_Type_of_employement_Value = Type_Of_emp_ar.getJSONObject(position).getString("value");
-
+                        Pref.putCOAPPSALARYTYPE(context,CO_Type_of_employement_ID);
                         if(IS_CO_Applicant_Id.equals("1"))
                         {
 
@@ -4282,6 +4282,8 @@ public class Viability_Check_PL extends SimpleActivity {
                         Log.d("pl_Employee_type_Id", pl_self_ind_Employee_type_Id);
                         Log.d("pl_self_ind", pl_self_ind_Employee_type_Value);
 
+                        Pref.putCOEMPTYPE(context,pl_self_ind_Employee_type_Id);
+
                         int b = Integer.parseInt(pl_self_ind_Employee_type_Id);
                         // pl_self_individual,pl_formin_dairy,pl_self_business
                         switch(b) {
@@ -4856,10 +4858,8 @@ public class Viability_Check_PL extends SimpleActivity {
             J =new JSONObject();
             //  J.put(Params.email_id,email);
             J.put("applicant_count",applicant_count);
-           // J.put("transaction_id",transaction_id);
-           J.put("transaction_id","11381");
-           // J.put("user_id",user_id);
-            J.put("user_id","9919");
+            J.put("transaction_id",Pref.getTRANSACTIONID(getApplicationContext()));
+            J.put("user_id",Pref.getUSERID(getApplicationContext()));
             J.put("applicant",applicant);
             J.put("co_applicant",applicant1);
 
