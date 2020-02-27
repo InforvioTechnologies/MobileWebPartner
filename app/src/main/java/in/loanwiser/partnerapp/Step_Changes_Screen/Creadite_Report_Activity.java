@@ -14,6 +14,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -72,6 +73,9 @@ public class Creadite_Report_Activity extends SimpleActivity {
             S_pl_co_app_dob_Edite_text,S_pl_co_app_Mobile_No_Edite_text,S_pl_co_app_pincode_edt_txt;
 
     Calendar myCalendar;
+    LinearLayout co_applicant_crif;
+
+    int applicant_count;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,6 +94,15 @@ public class Creadite_Report_Activity extends SimpleActivity {
         Font();
         Click();
 
+
+        if(Co_Applicant.equals("1"))
+        {
+            co_applicant_crif.setVisibility(View.VISIBLE);
+        }else
+        {
+            co_applicant_crif.setVisibility(View.GONE);
+
+        }
     }
 
     private void UISCREEN()
@@ -126,6 +139,8 @@ public class Creadite_Report_Activity extends SimpleActivity {
         pl_co_app_Mobile_No_Edite_text = (AppCompatEditText) findViewById(R.id.pl_co_app_Mobile_No_Edite_text);
         pl_co_app_pincode_edt_txt = (AppCompatEditText) findViewById(R.id.pl_co_app_pincode_edt_txt);
         credit_det_cap_button = (AppCompatButton) findViewById(R.id.credit_det_cap_button);
+
+        co_applicant_crif = (LinearLayout) findViewById(R.id.co_applicant_crif);
 
     }
 
@@ -470,9 +485,6 @@ public class Creadite_Report_Activity extends SimpleActivity {
     private void CRIF_Report()
     {
 
-
-
-
         S_first_name_edtxt = first_name_Edite_text.getText().toString();
         S_last_name_edtxt = Last_name_Edite_text.getText().toString();
         S_father_name_edtxt = father_name_edt_txt.getText().toString();
@@ -512,6 +524,17 @@ public class Creadite_Report_Activity extends SimpleActivity {
             e.printStackTrace();
         }
 
+
+        if(Co_Applicant.equals("1"))
+        {
+            applicant_count = 2;
+            co_applicant_crif.setVisibility(View.VISIBLE);
+        }else
+        {
+            applicant_count = 1;
+            co_applicant_crif.setVisibility(View.GONE);
+
+        }
         try {
             Co_Applicant.put("first_name",S_pl_co_app_first_name_Edite_text);
             Co_Applicant.put("last_name",S_pl_co_app_Last_name_Edite_text);
@@ -529,7 +552,7 @@ public class Creadite_Report_Activity extends SimpleActivity {
         try {
             J =new JSONObject();
             //  J.put(Params.email_id,email);
-            J.put("applicant_count",1);
+            J.put("applicant_count",applicant_count);
             J.put("transaction_id",11225);
             J.put("user_id",9766);
             J.put("applicant",Applicant);

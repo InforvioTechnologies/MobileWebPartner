@@ -2957,9 +2957,7 @@ public class Eligibility_Check_PL extends SimpleActivity {
                                 {
                                     Toast.makeText(context,"Eligibility Created Successfully",Toast.LENGTH_SHORT).show();
 
-                                    Intent intent = new Intent(Eligibility_Check_PL.this, Creadite_Report_Activity.class);
-                                    intent.putExtra("user_id", user_id);
-                                    intent.putExtra("transaction_id", transaction_id);
+                                    Intent intent = new Intent(Eligibility_Check_PL.this, Credite_report_details.class);
                                     startActivity(intent);
                                     finish();
                                 }else if(jsonObject1.getString("eligibility_status").equals("error"))

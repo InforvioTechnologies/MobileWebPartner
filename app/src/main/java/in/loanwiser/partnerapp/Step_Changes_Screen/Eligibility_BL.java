@@ -1184,7 +1184,6 @@ public class Eligibility_BL extends SimpleActivity {
 
                     try {
 
-
                         Spinner_res_proof_Id = Current_res_proof_ar.getJSONObject(position).getString("id");
                         Spinner_res_proof_Value = Current_res_proof_ar.getJSONObject(position).getString("value");
 
@@ -2386,7 +2385,7 @@ public class Eligibility_BL extends SimpleActivity {
                                 {
                                     Toast.makeText(context,"Eligibility Created Successfully",Toast.LENGTH_SHORT).show();
 
-                                    Intent intent = new Intent(Eligibility_BL.this, Creadite_Report_Activity.class);
+                                    Intent intent = new Intent(Eligibility_BL.this, Credite_report_details.class);
                                     intent.putExtra("user_id", user_id);
                                     intent.putExtra("transaction_id", transaction_id);
                                     startActivity(intent);
@@ -2408,7 +2407,6 @@ public class Eligibility_BL extends SimpleActivity {
                         }
                         progressDialog.dismiss();
 
-                        progressDialog.dismiss();
                     }
                 }, new Response.ErrorListener() {
 

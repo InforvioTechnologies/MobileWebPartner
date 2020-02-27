@@ -1579,6 +1579,8 @@ public class Viability_Check_PL extends SimpleActivity {
 
         return true;
     }
+
+
     private boolean Validate_pl_Ly_co_app_self_edit_txt_name(){
         if (pl_Ly_co_app_self_edit_txt_name.getText().toString().isEmpty()) {
             pl_Ly_co_app_self_edit_txt_name.setError(getText(R.string.err_curent));
@@ -4740,12 +4742,13 @@ public class Viability_Check_PL extends SimpleActivity {
             applicant.put("per_area",res_company_area);
             applicant.put("res_type",residence_id);
             applicant.put("live_in_res",ST_current_residence_edit_txt);
-            applicant1.put("emp_statues",CO_Type_of_employement_ID);
+            applicant.put("emp_statues",CO_Type_of_employement_ID);
 
 
         } catch (JSONException e) {
             e.printStackTrace();
         }
+
         try {
 
             if(IS_CO_Applicant_Id.equals("1"))

@@ -52,17 +52,17 @@ import in.loanwiser.partnerapp.SimpleActivity;
 public class Credite_report_details extends SimpleActivity {
 
     AppCompatButton cr_yes,cr_no;
-    LinearLayout credite_report_yes_No,having_existing_loan;
+    LinearLayout credite_report_yes_No,having_existing_loan,co_having_existing_loan;
 
     AppCompatTextView dcomplete,Credit_report_des,need_cr_report,existing_loan,
                      do_you_need_credit_rep_txt,existing_Loan_txt,emi_amt_txt,emi_amt_txt1,
             bank_name_txt,bank_name_txt1,loan_type_txt,loan_type_txt1;
 
     AppCompatEditText EMI_Amount,bank_name_Edite_txt,loan_type_Edite_txt,
-                      remaning_tenor_Edite_txt;
+                      remaning_tenor_Edite_txt,co_EMI_Amount,co_bank_name_Edite_txt,co_loan_type_Edite_txt,co_remaning_tenor_Edite_txt;
 
     AppCompatButton next_step4;
-    Spinner have_existing_Loan;
+    Spinner have_existing_Loan,co_have_existing_Loan;
     JSONArray having_Loan_array;
 
     Typeface font;
@@ -77,8 +77,11 @@ public class Credite_report_details extends SimpleActivity {
 
     String[] Do_you_have_Existing_Loan;
     String  Existing_Loan_ID,Existing_Value,S_EMI_Amount,S_bank_name_Edite_txt,S_loan_type_Edite_txt,
-            S_remaning_tenor_Edite_txt,IS_CO_Applicant_Id;
+            S_remaning_tenor_Edite_txt,IS_CO_Applicant_Id,co_Existing_Loan_ID,co_Existing_Value,
+            S_co_EMI_Amount,S_co_bank_name_Edite_txt,S_co_loan_type_Edite_txt,S_co_remaning_tenor_Edite_txt;
     int app_count;
+    String Co_Applicant;
+    LinearLayout co_applicant_have;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,10 +92,22 @@ public class Credite_report_details extends SimpleActivity {
         initTools(R.string.credit_report1);
 
         progressDialog = new SpotsDialog(context, R.style.Custom);
+       // Co_Applicant = Pref.getCoAPPAVAILABLE(getApplicationContext());
+        Co_Applicant = "1";
+
         makeJsonObjReq1();
         SCREEN_UI();
         Font();
         Click();
+
+        if(Co_Applicant.equals("1"))
+        {
+            co_applicant_have.setVisibility(View.VISIBLE);
+        }else
+        {
+            co_applicant_have.setVisibility(View.GONE);
+
+        }
 
     }
 
@@ -111,6 +126,7 @@ public class Credite_report_details extends SimpleActivity {
 
         credite_report_yes_No = (LinearLayout) findViewById(R.id.credite_report_yes_No);
         having_existing_loan = (LinearLayout) findViewById(R.id.having_existing_loan);
+        co_having_existing_loan = (LinearLayout) findViewById(R.id.co_having_existing_loan);
 
         dcomplete = (AppCompatTextView) findViewById(R.id.dcomplete);
         Credit_report_des = (AppCompatTextView) findViewById(R.id.Credit_report_des);
@@ -127,9 +143,19 @@ public class Credite_report_details extends SimpleActivity {
         bank_name_Edite_txt = (AppCompatEditText) findViewById(R.id.bank_name_Edite_txt);
         loan_type_Edite_txt = (AppCompatEditText) findViewById(R.id.loan_type_Edite_txt);
         remaning_tenor_Edite_txt = (AppCompatEditText) findViewById(R.id.remaning_tenor_Edite_txt);
+
+
+
+        co_EMI_Amount = (AppCompatEditText) findViewById(R.id.co_EMI_Amount);
+        co_bank_name_Edite_txt = (AppCompatEditText) findViewById(R.id.co_bank_name_Edite_txt);
+        co_loan_type_Edite_txt = (AppCompatEditText) findViewById(R.id.co_loan_type_Edite_txt);
+        co_remaning_tenor_Edite_txt = (AppCompatEditText) findViewById(R.id.co_remaning_tenor_Edite_txt);
+
         have_existing_Loan = (Spinner) findViewById(R.id.have_existing_Loan);
+        co_have_existing_Loan = (Spinner) findViewById(R.id.co_have_existing_Loan);
 
         next_step4 = (AppCompatButton) findViewById(R.id.next_step4);
+        co_applicant_have = (LinearLayout) findViewById(R.id.co_applicant_have);
 
 
     }
@@ -187,31 +213,98 @@ public class Credite_report_details extends SimpleActivity {
                      Toast.makeText(context, "plese Select Existing Loan",Toast.LENGTH_SHORT).show();
                  }else if(Existing_Loan_ID.equals("1"))
                  {
-                     if (!EMI_Amount()) {
-                         return;
-                     }
 
-                     if (!Bank_Name_edite_Txt()) {
-                         return;
-                     }
+                     validate_applicant();
 
-                     if (!Loan_Type_Fun()) {
-                         return;
-                     }
-
-                     if (!Remaning_Tenor()) {
-                         return;
-                     }
-
-                     no_credite_report();
 
                  }else if(Existing_Loan_ID.equals("2"))
                  {
-                     no_credite_report();
+                     if(Co_Applicant.equals("1"))
+                     {
+                         if(co_Existing_Loan_ID.equals("0"))
+                         {
+                             Toast.makeText(context, "plese Select Existing Loan",Toast.LENGTH_SHORT).show();
+                         }else if(co_Existing_Loan_ID.equals("1"))
+                         {
+
+                             validate_co_applicant();
+
+
+                         }else if(co_Existing_Loan_ID.equals("2"))
+                         {
+                             no_credite_report();
+                         }
+
+                     }else
+                     {
+                         no_credite_report();
+
+                     }
+
                  }
              }
          });
+      }
 
+     private void validate_applicant()
+      {
+          if (!EMI_Amount()) {
+              return;
+          }
+
+          if (!Bank_Name_edite_Txt()) {
+              return;
+          }
+
+          if (!Loan_Type_Fun()) {
+              return;
+          }
+
+          if (!Remaning_Tenor()) {
+              return;
+          }
+
+          if(Co_Applicant.equals("1"))
+          {
+              if(co_Existing_Loan_ID.equals("0"))
+              {
+                  Toast.makeText(context, "plese Select Existing Loan",Toast.LENGTH_SHORT).show();
+              }else if(co_Existing_Loan_ID.equals("1"))
+              {
+
+                  validate_co_applicant();
+
+
+              }else if(co_Existing_Loan_ID.equals("2"))
+              {
+                  no_credite_report();
+              }
+          }else
+          {
+              no_credite_report();
+
+          }
+
+      }
+
+      private  void validate_co_applicant()
+      {
+          if (!co_EMI_Amount()) {
+              return;
+          }
+
+          if (!co_Bank_Name_edite_Txt()) {
+              return;
+          }
+
+          if (!co_Loan_Type_Fun()) {
+              return;
+          }
+
+          if (!co_Remaning_Tenor()) {
+              return;
+          }
+          no_credite_report();
 
       }
 
@@ -220,6 +313,21 @@ public class Credite_report_details extends SimpleActivity {
         if (EMI_Amount.getText().toString().isEmpty()) {
             EMI_Amount.setError(getText(R.string.error_emi));
             EMI_Amount.requestFocus();
+            return false;
+        } else {
+
+            //inputLayoutLname.setErrorEnabled(false);
+        }
+
+        return true;
+    }
+
+
+    private boolean co_EMI_Amount(){
+
+        if (co_EMI_Amount.getText().toString().isEmpty()) {
+            co_EMI_Amount.setError(getText(R.string.error_emi));
+            co_EMI_Amount.requestFocus();
             return false;
         } else {
 
@@ -243,6 +351,20 @@ public class Credite_report_details extends SimpleActivity {
         return true;
     }
 
+    private boolean co_Bank_Name_edite_Txt(){
+
+        if (co_bank_name_Edite_txt.getText().toString().isEmpty()) {
+            co_bank_name_Edite_txt.setError(getText(R.string.error_bank_name));
+            co_bank_name_Edite_txt.requestFocus();
+            return false;
+        } else {
+
+            //inputLayoutLname.setErrorEnabled(false);
+        }
+
+        return true;
+    }
+
     private boolean Loan_Type_Fun(){
 
         if (loan_type_Edite_txt.getText().toString().isEmpty()) {
@@ -257,11 +379,39 @@ public class Credite_report_details extends SimpleActivity {
         return true;
     }
 
+    private boolean co_Loan_Type_Fun(){
+
+        if (co_loan_type_Edite_txt.getText().toString().isEmpty()) {
+            co_loan_type_Edite_txt.setError(getText(R.string.error_Loan_Type));
+            co_loan_type_Edite_txt.requestFocus();
+            return false;
+        } else {
+
+            //inputLayoutLname.setErrorEnabled(false);
+        }
+
+        return true;
+    }
+
     private boolean Remaning_Tenor(){
 
         if (remaning_tenor_Edite_txt.getText().toString().isEmpty()) {
             remaning_tenor_Edite_txt.setError(getText(R.string.error_Loan_Type));
             remaning_tenor_Edite_txt.requestFocus();
+            return false;
+        } else {
+
+            //inputLayoutLname.setErrorEnabled(false);
+        }
+
+        return true;
+    }
+
+    private boolean co_Remaning_Tenor(){
+
+        if (co_remaning_tenor_Edite_txt.getText().toString().isEmpty()) {
+            co_remaning_tenor_Edite_txt.setError(getText(R.string.error_Loan_Type));
+            co_remaning_tenor_Edite_txt.requestFocus();
             return false;
         } else {
 
@@ -386,6 +536,49 @@ public class Credite_report_details extends SimpleActivity {
                     return false;
                 }
             });
+
+            co_have_existing_Loan.setAdapter(Existing_loan_adapter);
+            co_have_existing_Loan.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                    try {
+                        //  City_loc_uniqueID = ja.getJSONObject(position).getString("city_id");
+
+                        co_Existing_Loan_ID = Current_res_proof_ar.getJSONObject(position).getString("id");
+                        co_Existing_Value = Current_res_proof_ar.getJSONObject(position).getString("value");
+                        //CAT_ID = ja.getJSONObject(position).getString("category_id");
+                        Log.d("Existing_Loan_ID", Existing_Loan_ID);
+                        Log.d("Existing_Value", Existing_Value);
+
+                        if(co_Existing_Loan_ID.equals("1"))
+                        {
+                            co_having_existing_loan.setVisibility(View.VISIBLE);
+                        }else
+                        {
+                            co_having_existing_loan.setVisibility(View.GONE);
+
+                        }
+
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+
+                }
+            });
+            co_have_existing_Loan.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View view, MotionEvent motionEvent) {
+                    // imm.hideSoftInputFromWindow(edt_buyer_address.getWindowToken(), 0);
+                    return false;
+                }
+            });
+
         }
 
     }
@@ -408,28 +601,73 @@ public class Credite_report_details extends SimpleActivity {
         S_loan_type_Edite_txt = loan_type_Edite_txt.getText().toString();
         S_remaning_tenor_Edite_txt = remaning_tenor_Edite_txt.getText().toString();
 
+
+
+        S_co_EMI_Amount = co_EMI_Amount.getText().toString();
+        S_co_bank_name_Edite_txt = co_bank_name_Edite_txt.getText().toString();
+        S_co_loan_type_Edite_txt = co_loan_type_Edite_txt.getText().toString();
+        S_co_remaning_tenor_Edite_txt = co_remaning_tenor_Edite_txt.getText().toString();
+
         JSONArray EMI_Amount1 = new JSONArray();
         JSONArray bank_name_Edite_txt1 = new JSONArray();
         JSONArray loan_type_Edite_txt = new JSONArray();
         JSONArray remaning_tenor_Edite_txt = new JSONArray();
+
+        JSONArray EMI_Amount2 = new JSONArray();
+        JSONArray bank_name_Edite_txt2 = new JSONArray();
+        JSONArray loan_type_Edite_txt2 = new JSONArray();
+        JSONArray remaning_tenor_Edite_txt2 = new JSONArray();
+
 
         EMI_Amount1 = new JSONArray(Arrays.asList(S_EMI_Amount));
         bank_name_Edite_txt1 = new JSONArray(Arrays.asList(S_bank_name_Edite_txt));
         loan_type_Edite_txt = new JSONArray(Arrays.asList(S_loan_type_Edite_txt));
         remaning_tenor_Edite_txt = new JSONArray(Arrays.asList(S_remaning_tenor_Edite_txt));
 
+        EMI_Amount2 = new JSONArray(Arrays.asList(S_co_EMI_Amount));
+        bank_name_Edite_txt2 = new JSONArray(Arrays.asList(S_co_bank_name_Edite_txt));
+        loan_type_Edite_txt2 = new JSONArray(Arrays.asList(S_co_loan_type_Edite_txt));
+        remaning_tenor_Edite_txt2 = new JSONArray(Arrays.asList(S_co_remaning_tenor_Edite_txt));
+
+        JSONObject Applicant =new JSONObject();
+        JSONObject Co_Applicant =new JSONObject();
+
+        try {
+            Applicant.put("is_existloan",Existing_Loan_ID);
+            Applicant.put("emi_amount",EMI_Amount1);
+            Applicant.put("bank_name",bank_name_Edite_txt1);
+            Applicant.put("loan_type",loan_type_Edite_txt);
+            Applicant.put("remaining_tenor",remaning_tenor_Edite_txt);
+
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            Co_Applicant.put("is_existloan",co_Existing_Loan_ID);
+            Co_Applicant.put("emi_amount",EMI_Amount2);
+            Co_Applicant.put("bank_name",bank_name_Edite_txt2);
+            Co_Applicant.put("loan_type",loan_type_Edite_txt2);
+            Co_Applicant.put("remaining_tenor",remaning_tenor_Edite_txt2);
+
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
         JSONObject J= null;
         try {
             J =new JSONObject();
             //  J.put(Params.email_id,email);
             J.put("applicant_count",app_count);
-            J.put("transaction_id",Pref.getTRANSACTIONID(getApplicationContext()));
-            J.put("user_id",Pref.getUSERID(getApplicationContext()));
-            J.put("is_existloan",Existing_Loan_ID);
-            J.put("emi_amount",EMI_Amount1);
-            J.put("bank_name",bank_name_Edite_txt1);
-            J.put("loan_type",loan_type_Edite_txt);
-            J.put("remaining_tenor",remaning_tenor_Edite_txt );
+          //  J.put("transaction_id",Pref.getTRANSACTIONID(getApplicationContext()));
+            // J.put("user_id",Pref.getUSERID(getApplicationContext()));
+            J.put("transaction_id","11502");
+            J.put("user_id","10043");
+            J.put("applicant",Applicant);
+            J.put("co_applicant",Co_Applicant);
+
 
         } catch (JSONException e) {
             e.printStackTrace();
@@ -438,15 +676,41 @@ public class Credite_report_details extends SimpleActivity {
 
         Log.e("Add Home Laoan", String.valueOf(J));
         progressDialog.show();
-        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, Urls.Eligibility_Check, J,
+        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, Urls.NOCRIFREPORT, J,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
 
                         String data = String.valueOf(response);
-                        Log.e("Add_Home_loan Partner", String.valueOf(response));
 
+                        Log.e("Add Home Laoan", String.valueOf(data));
+                        try {
+                            JSONObject jsonObject1 = response.getJSONObject("response");
+                            if(jsonObject1.getString("applicant_status").equals("success")) {
+                                if(jsonObject1.getString("pay_status").equals("success"))
+                                {
+                                    Toast.makeText(context,"Eligibility Created Successfully",Toast.LENGTH_SHORT).show();
+                                    Intent intent = new Intent(Credite_report_details.this, Payment_Details_Activity.class);
+
+                                    startActivity(intent);
+                                    finish();
+                                }else if(jsonObject1.getString("pay_status").equals("error"))
+                                {
+                                    Toast.makeText(context,"Eligibility Failed",Toast.LENGTH_SHORT).show();
+
+                                    String viability_array =jsonObject1.getString("eligibility_arr");
+                                    Intent intent = new Intent(Credite_report_details.this, Loan_Viyability_Check_Activity.class);
+                                    intent.putExtra("viability_jsonArray", viability_array.toString());
+                                    startActivity(intent);
+                                    finish();
+                                }
+                            }
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
                         progressDialog.dismiss();
+
                     }
                 }, new Response.ErrorListener() {
 
@@ -466,7 +730,6 @@ public class Credite_report_details extends SimpleActivity {
             }
         };
 
-
         int socketTimeout = 0;
         RetryPolicy policy = new DefaultRetryPolicy(socketTimeout,
                 DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
@@ -475,6 +738,7 @@ public class Credite_report_details extends SimpleActivity {
         jsonObjReq.setRetryPolicy(policy);
 
         AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
+
     }
 
     @Override

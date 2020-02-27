@@ -4,44 +4,35 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".Step_Changes_Screen.Viability_check_HL">
+    tools:context=".Step_Changes_Screen.Viability_Check_BL">
 
     <ScrollView
-        android:layout_weight="1"
         android:layout_width="match_parent"
-        android:layout_height="0dp">
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-          <LinearLayout
-        android:padding="15dp"
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <com.kofigyan.stateprogressbar.StateProgressBar
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:spb_currentStateNumber="two"
-            app:spb_currentStateDescriptionColor="@color/bc_green"
-            app:spb_stateDescriptionColor="@color/white"
-            app:spb_stateNumberBackgroundColor="@color/white"
-            app:spb_stateForegroundColor="@color/colorPrimary"
-            app:spb_stateNumberForegroundColor="@color/white"
-            app:spb_stateBackgroundColor="@color/colorAccent"
-            app:spb_maxStateNumber="four"/>
-    </LinearLayout>
-          <LinearLayout
+        android:layout_height="match_parent">
+
+
+              <LinearLayout
                 android:padding="15dp"
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-                <LinearLayout
-                    android:layout_marginTop="10dp"
-                    android:layout_width="match_parent"
+                <com.kofigyan.stateprogressbar.StateProgressBar
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    app:spb_currentStateNumber="two"
+                    app:spb_currentStateDescriptionColor="@color/bc_green"
+                    app:spb_stateDescriptionColor="@color/white"
+                    app:spb_stateNumberBackgroundColor="@color/white"
+                    app:spb_stateForegroundColor="@color/colorAccent"
+                    app:spb_stateNumberForegroundColor="@color/white"
+                    app:spb_stateBackgroundColor="@color/colorPrimary"
+                    app:spb_maxStateNumber="four"/>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:orientation="vertical">
 
                     <LinearLayout
@@ -60,7 +51,6 @@
                             android:text="Property Details"
                             android:layout_height="wrap_content" />
                     </LinearLayout>
-
                     <LinearLayout
                         android:id="@+id/propert_identified_ly"
                         android:padding="5dp"
@@ -491,24 +481,129 @@
 
                     </LinearLayout>
 
-
                     <LinearLayout
                         android:id="@+id/salaried"
                         android:orientation="vertical"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
-
-                        <include layout="@layout/viability_ly_salaried" />
+                        <include layout="@layout/ly_hl_viability_salaried_new"/>
                     </LinearLayout>
-
                     <LinearLayout
-                        android:visibility="gone"
                         android:id="@+id/self_employed"
                         android:orientation="vertical"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
-                        <include layout="@layout/ly_selfemployed"/>
+                        <include layout="@layout/ly_hl_viability_self"/>
                     </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/co_applicant_ly"
+                        android:padding="5dp"
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:gravity="left"
+                                android:layout_marginLeft="2dp"
+                                android:id="@+id/do_you_have_coApp_txt"
+                                android:layout_width="wrap_content"
+                                style="@style/LorgeText2"
+                                android:textColor="@color/colorPrimaryDark"
+                                android:textColorHint="@color/colorPrimaryDark"
+                                android:hint="8"
+                                android:layout_height="wrap_content" />
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:gravity="left"
+                                android:layout_marginLeft="2dp"
+                                android:id="@+id/do_you_have_coApp_txt1"
+                                android:layout_width="match_parent"
+                                style="@style/LorgeText2"
+                                android:textColor="@color/colorPrimaryDark"
+                                android:textColorHint="@color/colorPrimaryDark"
+                                android:text="@string/co_applicant"
+                                android:layout_height="wrap_content" />
+                        </LinearLayout>
+                        <LinearLayout
+                            android:gravity="center"
+                            android:orientation="horizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp">
+
+                            <LinearLayout
+                                android:layout_marginLeft="30dp"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent">
+                                <Spinner
+                                    style="@style/Base.Widget.AppCompat.Spinner.Underlined"
+                                    android:backgroundTint="#ff000000"
+                                    android:backgroundTintMode="src_in"
+                                    android:spinnerMode="dropdown"
+                                    android:id="@+id/co_applicant_spinner"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent" />
+                            </LinearLayout>
+
+                        </LinearLayout>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:id="@+id/co_applicant_emp_type"
+                        android:padding="5dp"
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <LinearLayout
+
+                            android:orientation="horizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:gravity="left"
+                                android:layout_marginLeft="2dp"
+                                android:id="@+id/coApp_txt_emp_type1"
+                                android:layout_width="wrap_content"
+                                style="@style/LorgeText2"
+                                android:textColor="@color/colorPrimaryDark"
+                                android:textColorHint="@color/colorPrimaryDark"
+                                android:hint="9"
+                                android:layout_height="wrap_content" />
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:gravity="left"
+                                android:layout_marginLeft="2dp"
+                                android:id="@+id/coApp_txt_emp_type2"
+                                android:layout_width="match_parent"
+                                style="@style/LorgeText2"
+                                android:textColor="@color/colorPrimaryDark"
+                                android:textColorHint="@color/colorPrimaryDark"
+                                android:text="@string/type_of_emp"
+                                android:layout_height="wrap_content" />
+                        </LinearLayout>
+                        <LinearLayout
+                            android:gravity="center"
+                            android:orientation="horizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp">
+
+                            <LinearLayout
+                                android:layout_marginLeft="30dp"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent">
+                                <Spinner
+                                    style="@style/Base.Widget.AppCompat.Spinner.Underlined"
+                                    android:backgroundTint="#ff000000"
+                                    android:backgroundTintMode="src_in"
+                                    android:spinnerMode="dropdown"
+                                    android:id="@+id/co_applicant_emp_spinner"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent" />
+                            </LinearLayout>
+
+                        </LinearLayout>
+                    </LinearLayout>
+
                     <LinearLayout
                         android:visibility="gone"
                         android:id="@+id/co_applicant_salaried_employed"
@@ -517,44 +612,44 @@
                         android:layout_height="wrap_content">
                         <include layout="@layout/ly_co_applicant_viability"/>
                     </LinearLayout>
-
                     <LinearLayout
                         android:visibility="gone"
                         android:id="@+id/co_applicant_self_employed"
                         android:orientation="vertical"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
-                        <include layout="@layout/ly_co_applicant_viability_self_emp"/>
+                        <include layout="@layout/ly_co_applicant_viability_self_emp_pl"/>
                     </LinearLayout>
 
                 </LinearLayout>
 
+                <LinearLayout
+                    android:layout_marginTop="10dp"
+                    android:elevation="4sp"
+                    android:gravity="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="?android:attr/actionBarSize"
+                    android:orientation="vertical">
+                    <LinearLayout
+                        android:gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <androidx.appcompat.widget.AppCompatButton
+                            android:id="@+id/lead_viy_step2"
+                            android:text="@string/next"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="start"
+                            android:background="@drawable/capsul_button3"
+                            android:theme="@style/BtnStyleApp" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
             </LinearLayout>
-          <LinearLayout
-        android:layout_marginTop="10dp"
-        android:elevation="4sp"
-        android:gravity="center"
-        android:layout_width="match_parent"
-        android:layout_height="?android:attr/listPreferredItemHeight"
-        android:orientation="vertical">
-        <LinearLayout
-            android:gravity="center"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
 
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/lead_viy_step2"
-                android:text="@string/next"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="start"
-                android:background="@drawable/capsul_button3"
-                android:theme="@style/BtnStyleApp" />
-
-        </LinearLayout>
-
-    </LinearLayout>
-        </LinearLayout>
     </ScrollView>
-   </LinearLayout>
+
+</LinearLayout>

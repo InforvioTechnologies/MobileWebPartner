@@ -87,16 +87,22 @@
             android:theme="@style/NoAction2"
             android:windowSoftInputMode="stateHidden" />
 
+        <activity android:name=".Step_Changes_Screen.Document_CheckList_Generation"
+            android:theme="@style/NoAction2"
+            android:windowSoftInputMode="stateHidden"/>
+
+        <activity android:name=".Step_Changes_Screen.Viability_Check_HL_new"
+            android:theme="@style/NoAction2"
+            android:windowSoftInputMode="stateHidden"/>
+
         <activity
             android:name=".Step_Changes_Screen.Loan_Viyability_Check_Activity"
             android:theme="@style/NoAction2"
             android:windowSoftInputMode="stateHidden" />
-
         <activity
             android:name=".Step_Changes_Screen.Send_Payment_Link_Activity"
             android:theme="@style/NoAction2"
             android:windowSoftInputMode="stateHidden" />
-
         <activity
             android:name=".Step_Changes_Screen.Viability_Report_Activity"
             android:theme="@style/NoAction2"
@@ -141,7 +147,6 @@
             android:name=".Step_Changes_Screen.Eligibility_HL"
             android:theme="@style/NoAction2"
             android:windowSoftInputMode="stateHidden" />
-
         <activity
             android:name=".Step_Changes_Screen.Eligibility_check_BT_Loan"
             android:theme="@style/NoAction2"

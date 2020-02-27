@@ -319,7 +319,7 @@ public class Viability_check_HL extends SimpleActivity {
         //multiselect functionality
 
 
-        vehicle_type_text.setOnClickListener(new View.OnClickListener() {
+      /*  vehicle_type_text.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(Viability_check_HL.this, Multi_Select_checkbox.class);
@@ -393,7 +393,7 @@ public class Viability_check_HL extends SimpleActivity {
                 startActivity(intent);
 
             }
-        });
+        });*/
 
         //
         if(loan_type_id.equals("1") || loan_type_id.equals("3") || loan_type_id.equals("4"))
@@ -431,6 +431,10 @@ public class Viability_check_HL extends SimpleActivity {
         salaried = (LinearLayout) findViewById(R.id.salaried);
         self_employed = (LinearLayout) findViewById(R.id.self_employed);
         pro_details = (LinearLayout) findViewById(R.id.pro_details);
+
+        propert_identified_ly = (LinearLayout) findViewById(R.id.propert_identified_ly);
+        property_identified_Ly1 = (LinearLayout) findViewById(R.id.property_identified_Ly1);
+
         spnr_type_of_empmnt = (Spinner) findViewById(R.id.spnr_type_of_empmnt);
 
         property_identified_typ_txt = (AppCompatTextView) findViewById(R.id.property_identified_typ_txt);
@@ -465,8 +469,7 @@ public class Viability_check_HL extends SimpleActivity {
         pan_card_available = (LinearLayout) findViewById(R.id.pan_card_available);
         other_earning_avbl = (LinearLayout) findViewById(R.id.other_earning_avbl);
 
-        propert_identified_ly = (LinearLayout) findViewById(R.id.propert_identified_ly);
-        property_identified_Ly1 = (LinearLayout) findViewById(R.id.property_identified_Ly1);
+
 
         residence_type.setVisibility(View.VISIBLE);
 
@@ -747,8 +750,8 @@ public class Viability_check_HL extends SimpleActivity {
         assets_owned_txt1.setTypeface(font);
         vocation_indiviual_txt.setTypeface(font);
         vocation_indiviual_txt1.setTypeface(font);
-        busines_inco_proof_individua_txt.setTypeface(font);
-        busines_inco_proof_individua_txt1.setTypeface(font);
+      //  busines_inco_proof_individua_txt.setTypeface(font);
+      //  busines_inco_proof_individua_txt1.setTypeface(font);
         vehicle_individual_txt.setTypeface(font);
         vehicle_individual_txt1.setTypeface(font);
         number_of_vehicle_ind_txt.setTypeface(font);
@@ -764,8 +767,8 @@ public class Viability_check_HL extends SimpleActivity {
         live_curentres_edite_txt.setTypeface(font);
         no_of_vehicle_edit_txt.setTypeface(font);
         //  no_of_years_ind_edit_txt.setTypeface(font);
-        busproof_ind_txt.setTypeface(font);
-        busproof_ind_txt1.setTypeface(font);
+      //  busproof_ind_txt.setTypeface(font);
+      //  busproof_ind_txt1.setTypeface(font);
         avg_monthly_incom_edit_txt.setTypeface(font);
         actual_business_ind_edit_txt.setTypeface(font);
         actual_business_edit_forming_txt.setTypeface(font);
@@ -783,7 +786,7 @@ public class Viability_check_HL extends SimpleActivity {
         no_of_years_in_work_P.setTypeface(font);
         avg_monthly_income_Poultry.setTypeface(font);
 
-        actual_business_edit_own_edt_txt.setTypeface(font);
+     //   actual_business_edit_own_edt_txt.setTypeface(font);
         delership_company_edit_txt.setTypeface(font);
         monthly_profit_edit_txt.setTypeface(font);
 
@@ -836,10 +839,11 @@ public class Viability_check_HL extends SimpleActivity {
                             employee_id_ar =object.getJSONArray("employee_id");
                             other_earning_ar =object.getJSONArray("other_earning");
                             have_pan_ar =object.getJSONArray("have_pan");
-                            Property_Type =object.getJSONArray("Property_Type");
-                            Property_title =object.getJSONArray("Property_title");
+
                             Employement =object.getJSONArray("Employement");
 
+                            Property_Type =object.getJSONArray("Property_Type");
+                            Property_title =object.getJSONArray("Property_title");
                             property_identified =object.getJSONArray("property_identified");
                             property_category =object.getJSONArray("property_category");
                             land_approval =object.getJSONArray("land_approval");
@@ -860,6 +864,7 @@ public class Viability_check_HL extends SimpleActivity {
                             Log.e("Employement",String.valueOf(Employement));
                             Log.e("Property_title",String.valueOf(Property_title));
                           //  Salry_method_Spinner(Residence_ownership_ar);
+
                             Property_Identified_Spinner(property_identified);
                             Property_Title_Spinner(Property_title);
 
@@ -898,12 +903,12 @@ public class Viability_check_HL extends SimpleActivity {
 
                             vocation_type_forming(vocation_type_forming_ar);
                             Residence_Array_Self(Residence_ownership_ar_self);
-                            Business_type_own_business_Array(Business_type_own_business);
-                            Business_Proof_individual(Business_Proof);
-                            Business_Proof_individual_forming(Business_Proof);
-                            Business_Proof_Own_Business(Business_Proof);
-                            Business_Proof_forming_Dairy(Business_Proof);
-                            Business_Proof_forming_Poultry(Business_Proof);
+                          //  Business_type_own_business_Array(Business_type_own_business);
+                          //  Business_Proof_individual(Business_Proof);
+                          //  Business_Proof_individual_forming(Business_Proof);
+                          //  Business_Proof_Own_Business(Business_Proof);
+                          //  Business_Proof_forming_Dairy(Business_Proof);
+                          //  Business_Proof_forming_Poultry(Business_Proof);
                            // Assets_own_fun(Assets_own);
                             Office_Shop_(office_shop);
                             Vehicle_Type_(vehicle_Type);
@@ -3712,7 +3717,6 @@ public class Viability_check_HL extends SimpleActivity {
                 }
             });
         }
-
     }
 
     private void Office_Shop_(final JSONArray office_shop_ar) throws JSONException {

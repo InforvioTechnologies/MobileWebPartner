@@ -83,8 +83,10 @@ public class Urls {
     public static String Lead_Creation = Urls_step + "Lead_Creation";
     public static String VIABILITY_CHECK = Urls_step + "viability_check";
     public static String Eligibility_Check = Urls_step + "eligibility_check";
-    public static String CRIF_REPORT = Urls_step + "crfi_check";
-    public static String NOCRIFREPORT = Urls_step + "insert_familycrif";
+    public static String NOCRIFREPORT = Urls_step + "crfi_check";
+    public static String PAYMENT_CONFIRMATION = Urls_step + "payarr";
+    public static String PAYMENT_SCHEDULE = Urls_step + "get_payschedule";
+
 
 
     /* public static  String = "" ;
