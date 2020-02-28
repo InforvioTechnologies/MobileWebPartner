@@ -217,7 +217,7 @@ public class Viability_Check_HL_new extends SimpleActivity {
             co_self_bus_vintage_proof,co_self_bussiness_proof,co_self_asstes_owned;
 
     AppCompatEditText pl_Ly_co_app_self_edit_txt_name,pl_Ly_co_app_self_age_edit_txt,pl_co_app_ind_no_of_vehicle_edit_txt,
-            pl_co_app_ind_no_of_years_work_ind_edit_txt,pl_co_app_ind_avg_monthly_incom_edit_txt;
+            pl_co_app_ind_no_of_years_work_ind_edit_txt,pl_co_app_ind_avg_monthly_incom_edit_txt,property_pincode1_edit_txt;
 
     AppCompatAutoCompleteTextView company_pincode_txt,residence_pincode1_edit_txt,pl_co_app_slrd_company_pincode_txt,
             pl_co_app_office_residence_pincode_edite_txt;
@@ -274,7 +274,7 @@ public class Viability_Check_HL_new extends SimpleActivity {
             ST_pl_co_app_slrd_experience_in_current_cmpy,ST_pl_co_app_slrd_total_experience_edit_txt,
             ST_pl_co_app_slrd_company_pincode_txt,ST_pl_Ly_co_app_self_edit_txt_name,ST_pl_Ly_co_app_self_age_edit_txt,
             ST_pl_co_app_ind_no_of_vehicle_edit_txt,ST_pl_co_app_ind_no_of_years_work_ind_edit_txt,
-            ST_pl_co_app_ind_avg_monthly_incom_edit_txt;
+            ST_pl_co_app_ind_avg_monthly_incom_edit_txt,S_property_pincode1_edit_txt;
 
     String ST_pl_co_app_f_no_of_acres_edit_txt,ST_pl_co_app_F_anual_income_edit_txt,
             ST_pl_co_app_f_daily_income_f,ST_pl_co_app_F_number_of_years_in_work,ST_pl_co_app_F_average_monthly_income,
@@ -407,6 +407,7 @@ public class Viability_Check_HL_new extends SimpleActivity {
                 startActivity(intent);
             }
         });
+
 */
 
 
@@ -634,6 +635,7 @@ public class Viability_Check_HL_new extends SimpleActivity {
         pl_co_app_ind_spinner_office_ownership_Type = (Spinner) findViewById(R.id.pl_co_app_ind_spinner_office_ownership_Type);
 
 
+        property_pincode1_edit_txt = (AppCompatEditText) findViewById(R.id.property_pincode1_edit_txt);
         age_edite_txt = (AppCompatEditText) findViewById(R.id.age_edite_txt);
         pan_number_edit_txt = (AppCompatEditText) findViewById(R.id.pan_number_edit_txt);
         occupation_edit_txt = (AppCompatEditText) findViewById(R.id.occupation_edit_txt);
@@ -901,13 +903,131 @@ public class Viability_Check_HL_new extends SimpleActivity {
             @Override
             public void onClick(View view) {
 
-                if(salary_type.equals("1"))
+
+
+                if(loan_type_id.equals("1") || loan_type_id.equals("3") || loan_type_id.equals("4"))
                 {
-                    Applicant_salaried();
-                }else if(salary_type.equals("2"))
+                    if(Property_Identified_ID.equals("0"))
+                    {
+                        Toast.makeText(context,"Please Select Property Identified",Toast.LENGTH_SHORT).show();
+
+                    }else
+                    {
+                        if(Property_Title_ID.equals("0"))
+                        {
+                            Toast.makeText(context,"Please Select Property Title",Toast.LENGTH_SHORT).show();
+
+                        }else
+                        {
+                            if(Propery_Category_ID.equals("0"))
+                            {
+                                Toast.makeText(context,"Please Select Property Category",Toast.LENGTH_SHORT).show();
+
+                            }else {
+                                if(Propery_Type_ID.equals("0"))
+                                {
+                                    Toast.makeText(context,"Please Select Property Type",Toast.LENGTH_SHORT).show();
+
+                                }else {
+
+                                    if(Approval_of_Land_ID.equals("0"))
+                                    {
+                                        Toast.makeText(context,"Please Select Approval of Land",Toast.LENGTH_SHORT).show();
+
+                                    }else {
+
+                                        if(Bulding_Approval_Id.equals("0"))
+                                        {
+                                            Toast.makeText(context,"Please Select Bulding Approval",Toast.LENGTH_SHORT).show();
+
+                                        }else {
+                                            if(DA_Bulding_ID.equals("0"))
+                                            {
+                                                Toast.makeText(context,"Please Select DA Approval",Toast.LENGTH_SHORT).show();
+
+                                            }else {
+                                                if (!Validate_Property_pincode()) {
+                                                    return;
+                                                }
+
+
+                                                if(salary_type.equals("1"))
+                                                {
+                                                    Applicant_salaried();
+                                                }else if(salary_type.equals("2"))
+                                                {
+                                                    Applicant_self();
+                                                }
+                                            }
+                                        }
+
+                                    }
+                                }
+                            }
+
+
+
+                        }
+
+                    }
+
+                }else
                 {
-                    Applicant_self();
+                    if(Property_Title_ID.equals("0"))
+                    {
+                        Toast.makeText(context,"Please Select Property Title",Toast.LENGTH_SHORT).show();
+
+                    }else
+                    {
+                        if(Propery_Category_ID.equals("0"))
+                        {
+                            Toast.makeText(context,"Please Select Property Category",Toast.LENGTH_SHORT).show();
+
+                        }else {
+                            if(Propery_Type_ID.equals("0"))
+                            {
+                                Toast.makeText(context,"Please Select Property Type",Toast.LENGTH_SHORT).show();
+
+                            }else {
+
+                                if(Approval_of_Land_ID.equals("0"))
+                                {
+                                    Toast.makeText(context,"Please Select Approval of Land",Toast.LENGTH_SHORT).show();
+
+                                }else {
+
+                                    if(Bulding_Approval_Id.equals("0"))
+                                    {
+                                        Toast.makeText(context,"Please Select Bulding Approval",Toast.LENGTH_SHORT).show();
+
+                                    }else {
+                                        if(DA_Bulding_ID.equals("0"))
+                                        {
+                                            Toast.makeText(context,"Please Select DA Approval",Toast.LENGTH_SHORT).show();
+
+                                        }else {
+
+                                            if (!Validate_Property_pincode()) {
+                                                return;
+                                            }
+
+                                            if(salary_type.equals("1"))
+                                            {
+                                                Applicant_salaried();
+                                            }else if(salary_type.equals("2"))
+                                            {
+                                                Applicant_self();
+                                            }
+                                        }
+                                    }
+
+                                }
+                            }
+                        }
+
+                    }
                 }
+
             ////////////////////////
 
             }
@@ -922,35 +1042,15 @@ public class Viability_Check_HL_new extends SimpleActivity {
             return;
         }
 
-              /*  if(PAN_id.equals("0"))
-                {
-                    Toast.makeText(context,"Please Select Having PAN Card",Toast.LENGTH_SHORT).show();
 
-                }else
-                {*/
-                   /* if (!Validate_Occupation()) {
-                        return;
-                    }*/
         if (!Validate_net_income()) {
             return;
         }
-                   /* if(Employee_id.equals("0"))
-                    {
-                        Toast.makeText(context,"Please Select Employee id",Toast.LENGTH_SHORT).show();
-                    }else
-                    {*/
         if(Salary_id.equals("0"))
         {
             Toast.makeText(context,"Please Select applicant Salary Credit Method",Toast.LENGTH_SHORT).show();
         }else
         {
-                            /*if(salary_proof_list.length() < 0 )
-                            {
-
-                            } else
-                            {
-                                Toast.makeText(context,"Please Select Salary Proof",Toast.LENGTH_SHORT).show();
-                            }*/
 
             if (!Validate_experience()) {
                 return;
@@ -1896,6 +1996,19 @@ public class Viability_Check_HL_new extends SimpleActivity {
         }
         return true;
     }
+
+    private boolean Validate_Property_pincode() {
+
+        if (property_pincode1_edit_txt.length() < 5) {
+            property_pincode1_edit_txt.setError(getText(R.string.err_curent));
+            property_pincode1_edit_txt.requestFocus();
+            return false;
+        } else {
+            //     inputLayoutNumber.setErrorEnabled(false);
+        }
+        return true;
+    }
+
 
     private boolean Validate_experience(){
         if (experience_in_current_cmpy.getText().toString().trim().isEmpty()) {
@@ -4976,6 +5089,8 @@ public class Viability_Check_HL_new extends SimpleActivity {
                         hl_salried_residence_id = Residence_ownership_ar.getJSONObject(position).getString("id");
                         hl_salried_residence_Value = Residence_ownership_ar.getJSONObject(position).getString("value");
 
+                        Pref.put_Residence_ID(mCon,hl_salried_residence_id);
+
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
@@ -7397,6 +7512,7 @@ public class Viability_Check_HL_new extends SimpleActivity {
 
         String_value_Age = age_edite_txt.getText().toString();
         St_monthly_net_sal_edit_txt = monthly_net_sal_edit_txt.getText().toString();
+        S_property_pincode1_edit_txt = property_pincode1_edit_txt.getText().toString();
 
         ST_experience_in_current_cmpy = experience_in_current_cmpy.getText().toString();
         ST_total_experience_edit_txt = total_experience_edit_txt.getText().toString();
@@ -7515,6 +7631,15 @@ public class Viability_Check_HL_new extends SimpleActivity {
 
             if(salary_type.equals("1"))
             {
+                applicant1.put("property_identify",Property_Identified_ID);
+                applicant1.put("property_title",Property_Title_ID);
+                applicant1.put("property_category",Propery_Category_ID);
+                applicant1.put("Property Type",Propery_Type_ID);
+                applicant1.put("land_approval",Approval_of_Land_ID);
+                applicant1.put("building_approval",Bulding_Approval_Id);
+                applicant1.put("DA_Bulding_ID",DA_Bulding_ID);
+                applicant1.put("prop_pincode",S_property_pincode1_edit_txt);
+
                 applicant1.put("age",String_value_Age);
                 applicant1.put("net_salary",St_monthly_net_sal_edit_txt);
                 applicant1.put("salary_mode",Salary_id);
@@ -7756,12 +7881,12 @@ public class Viability_Check_HL_new extends SimpleActivity {
                                 {
                                     Toast.makeText(context,"Viability Created Successfully",Toast.LENGTH_SHORT).show();
 
-                                    Intent intent = new Intent(Viability_Check_HL_new.this, Eligibility_BL.class);
+                                    Intent intent = new Intent(Viability_Check_HL_new.this, Eligibility_HL.class);
                                     intent.putExtra("user_id", user_id);
                                     intent.putExtra("transaction_id", transaction_id);
-
                                     startActivity(intent);
                                     finish();
+
                                 }else if(jsonObject1.getString("viablity_status").equals("error"))
                                 {
                                     Toast.makeText(context,"Viability Failed",Toast.LENGTH_SHORT).show();
