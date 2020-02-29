@@ -7,7 +7,6 @@
     tools:context=".Step_Changes_Screen.Eligibility_BL">
 
     <ScrollView
-        android:layout_weight="1"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -33,6 +32,15 @@
                     app:spb_stateBackgroundColor="@color/colorPrimary"
                     app:spb_maxStateNumber="four"/>
 
+
+                <LinearLayout
+                    android:visibility="gone"
+                    android:id="@+id/property_field"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <include layout="@layout/hl_property_field_ly"/>
+                </LinearLayout>
 
                 <LinearLayout
                     android:id="@+id/app_eligibility_salaried_hl"

@@ -269,7 +269,7 @@ public static void putapplicant_name(final Context context, String aUserId) {
     public static void removeCOEMPTYPE(final Context context) {
         SharedPreferences prefs = Pref.get(context);
         SharedPreferences.Editor editor = prefs.edit();
-        editor.remove(SALARYTYPE);
+        editor.remove(COEMPTYPE);
         editor.commit();
     }
 

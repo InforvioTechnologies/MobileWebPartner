@@ -151,11 +151,6 @@ public class Eligibility_Check_PL extends SimpleActivity {
               co_Business_registration_Id,co_Business_registration_Value;
      LinearLayout co_other_income_ifany;
 
-
-
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -491,6 +486,7 @@ public class Eligibility_Check_PL extends SimpleActivity {
 
                  }
 
+                 //
              }
              //
          });
@@ -891,22 +887,6 @@ public class Eligibility_Check_PL extends SimpleActivity {
 
         return true;
     }
-
-    private boolean Co_App_Validate_Company_Name(){
-        if (pl_co_app_company_name_edtxt.getText().toString().trim().isEmpty()) {
-            pl_co_app_company_name_edtxt.setError(getText(R.string.error_company_name));
-            pl_co_app_company_name_edtxt.requestFocus();
-            return false;
-        } else {
-
-        }
-
-        return true;
-    }
-
-
-
-
     private boolean Validate_No_of_Employee(){
         if (no_of_emp_edtxt.getText().toString().trim().isEmpty()) {
             no_of_emp_edtxt.setError(getText(R.string.error_no_emp));
@@ -918,21 +898,6 @@ public class Eligibility_Check_PL extends SimpleActivity {
 
         return true;
     }
-
-    private boolean Pl_Co_Validate_No_of_Employee(){
-        if (pl_co_App_no_of_emp_edtxt.getText().toString().trim().isEmpty()) {
-            pl_co_App_no_of_emp_edtxt.setError(getText(R.string.error_no_emp));
-            pl_co_App_no_of_emp_edtxt.requestFocus();
-            return false;
-        } else {
-
-        }
-
-        return true;
-    }
-
-
-
     private boolean valiat_no_of_dependent(){
         if (no_of_dependent_edt_txt.getText().toString().trim().isEmpty()) {
             no_of_dependent_edt_txt.setError(getText(R.string.err_curent));
@@ -944,20 +909,6 @@ public class Eligibility_Check_PL extends SimpleActivity {
 
         return true;
     }
-
-    private boolean Pl_Co_valiat_no_of_dependent(){
-        if (pl_co_app_no_of_dependent_edt_txt.getText().toString().trim().isEmpty()) {
-            pl_co_app_no_of_dependent_edt_txt.setError(getText(R.string.err_curent));
-            pl_co_app_no_of_dependent_edt_txt.requestFocus();
-            return false;
-        } else {
-
-        }
-
-        return true;
-    }
-
-
 
     private boolean valiat_own_house_blood_address_edt_txt(){
         if (own_house_blood_address_edt_txt.getText().toString().trim().isEmpty()) {
@@ -983,10 +934,6 @@ public class Eligibility_Check_PL extends SimpleActivity {
         return true;
     }
 
-
-
-
-
     private boolean valiat_rent_paid_for_house_edit_txt(){
         if (rent_paid_for_house_edit_txt.getText().toString().trim().isEmpty()) {
             rent_paid_for_house_edit_txt.setError(getText(R.string.err_curent));
@@ -998,6 +945,96 @@ public class Eligibility_Check_PL extends SimpleActivity {
 
         return true;
     }
+
+    private boolean Validate_other_income(){
+        if (other_incom_amt_edtxt.getText().toString().trim().isEmpty()) {
+            other_incom_amt_edtxt.setError(getText(R.string.oth_income));
+            other_incom_amt_edtxt.requestFocus();
+            return false;
+        } else {
+
+        }
+
+        return true;
+    }
+    private boolean Validate_Designation_in_company(){
+        if (designation_in_company.getText().toString().trim().isEmpty()) {
+            designation_in_company.setError(getText(R.string.error_company_name));
+            designation_in_company.requestFocus();
+            return false;
+        } else {
+
+        }
+
+        return true;
+    }
+    private boolean Validate_emi_amount(){
+        if (emi_amount_edit_txt.getText().toString().trim().isEmpty()) {
+            emi_amount_edit_txt.setError(getText(R.string.err_curent));
+            emi_amount_edit_txt.requestFocus();
+            return false;
+        } else {
+
+        }
+
+        return true;
+    }
+    private boolean Validate_permanent_residence_(){
+        if (permanent_residence_auto.getText().toString().trim().isEmpty()) {
+            permanent_residence_auto.setError(getText(R.string.err_curent));
+            permanent_residence_auto.requestFocus();
+            return false;
+        } else {
+
+        }
+
+        return true;
+    }
+
+    private boolean Co_App_Validate_Company_Name(){
+        if (pl_co_app_company_name_edtxt.getText().toString().trim().isEmpty()) {
+            pl_co_app_company_name_edtxt.setError(getText(R.string.error_company_name));
+            pl_co_app_company_name_edtxt.requestFocus();
+            return false;
+        } else {
+
+        }
+
+        return true;
+    }
+
+
+
+
+
+
+    private boolean Pl_Co_Validate_No_of_Employee(){
+        if (pl_co_App_no_of_emp_edtxt.getText().toString().trim().isEmpty()) {
+            pl_co_App_no_of_emp_edtxt.setError(getText(R.string.error_no_emp));
+            pl_co_App_no_of_emp_edtxt.requestFocus();
+            return false;
+        } else {
+
+        }
+
+        return true;
+    }
+
+    private boolean Pl_Co_valiat_no_of_dependent(){
+        if (pl_co_app_no_of_dependent_edt_txt.getText().toString().trim().isEmpty()) {
+            pl_co_app_no_of_dependent_edt_txt.setError(getText(R.string.err_curent));
+            pl_co_app_no_of_dependent_edt_txt.requestFocus();
+            return false;
+        } else {
+
+        }
+
+        return true;
+    }
+
+
+
+
 
     private boolean Validate_pl_Co_education_qualification_edit_txt(){
         if (pl_co_App_education_qualification_edit_txt.getText().toString().trim().isEmpty()) {
@@ -1013,17 +1050,7 @@ public class Eligibility_Check_PL extends SimpleActivity {
 
 
 
-    private boolean Validate_other_income(){
-        if (other_incom_amt_edtxt.getText().toString().trim().isEmpty()) {
-            other_incom_amt_edtxt.setError(getText(R.string.oth_income));
-            other_incom_amt_edtxt.requestFocus();
-            return false;
-        } else {
 
-        }
-
-        return true;
-    }
 
     private boolean pl_Co_App_Validate_other_income(){
         if (pl_co_App_other_incom_amt_edtxt.getText().toString().trim().isEmpty()) {
@@ -1038,17 +1065,7 @@ public class Eligibility_Check_PL extends SimpleActivity {
     }
 
 
-    private boolean Validate_Designation_in_company(){
-        if (designation_in_company.getText().toString().trim().isEmpty()) {
-            designation_in_company.setError(getText(R.string.error_company_name));
-            designation_in_company.requestFocus();
-            return false;
-        } else {
 
-        }
-
-        return true;
-    }
 
     private boolean Co_App_Validate_Designation_in_company(){
         if (pl_co_app_designation_in_company.getText().toString().trim().isEmpty()) {
@@ -1064,17 +1081,7 @@ public class Eligibility_Check_PL extends SimpleActivity {
 
 
 
-    private boolean Validate_emi_amount(){
-        if (emi_amount_edit_txt.getText().toString().trim().isEmpty()) {
-            emi_amount_edit_txt.setError(getText(R.string.err_curent));
-            emi_amount_edit_txt.requestFocus();
-            return false;
-        } else {
 
-        }
-
-        return true;
-    }
 
 
     private boolean pl_co_App_Validate_emi_amount(){
@@ -1089,17 +1096,7 @@ public class Eligibility_Check_PL extends SimpleActivity {
         return true;
     }
 
-    private boolean Validate_permanent_residence_(){
-        if (permanent_residence_auto.getText().toString().trim().isEmpty()) {
-            permanent_residence_auto.setError(getText(R.string.err_curent));
-            permanent_residence_auto.requestFocus();
-            return false;
-        } else {
 
-        }
-
-        return true;
-    }
 
 
     private boolean Validate_co_business_ref_name_edt_txt(){
@@ -2022,73 +2019,7 @@ public class Eligibility_Check_PL extends SimpleActivity {
 
     }
 
-    private void Permanent_res_Type(final JSONArray Permanent_Resi_ar) throws JSONException {
-        //   SPINNERLIST = new String[ja.length()];
-        Permanent_Resi_SA = new String[Permanent_Resi_ar.length()];
-        for (int i=0;i<Permanent_Resi_ar.length();i++){
-            JSONObject J =  Permanent_Resi_ar.getJSONObject(i);
-            Permanent_Resi_SA[i] = J.getString("value");
-            final List<String> loan_type_list = new ArrayList<>(Arrays.asList(Permanent_Resi_SA));
-            Permanent_Resi_Adapter = new ArrayAdapter<String>(context, R.layout.view_spinner_item, loan_type_list){
-                public View getView(int position, View convertView, ViewGroup parent) {
-                    font = Typeface.createFromAsset(context.getAssets(),"Lato-Regular.ttf");
-                    TextView v = (TextView) super.getView(position, convertView, parent);
-                    v.setTypeface(font);
-                    return v;
-                }
 
-                public View getDropDownView(int position, View convertView, ViewGroup parent) {
-                    TextView v = (TextView) super.getView(position, convertView, parent);
-                    v.setTypeface(font);
-                    return v;
-                }
-            };
-
-            Permanent_Resi_Adapter.setDropDownViewResource(R.layout.view_spinner_item);
-            permanent_res_type_res_spinner.setAdapter(Permanent_Resi_Adapter);
-            permanent_res_type_res_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                @Override
-                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
-                    try {
-                        //  City_loc_uniqueID = ja.getJSONObject(position).getString("city_id");
-
-
-                        Permanent_Resi_id = Permanent_Resi_ar.getJSONObject(position).getString("id");
-                        Permanent_Resi_Value = Permanent_Resi_ar.getJSONObject(position).getString("value");
-
-                        if(Permanent_Resi_id.equals("1"))
-                        {
-                            rented.setVisibility(View.GONE);
-                        }else if(Permanent_Resi_id.equals("2"))
-                        {
-                            rented.setVisibility(View.VISIBLE);
-                        }else
-                        {
-                            rented.setVisibility(View.GONE);
-                        }
-
-
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                }
-
-                @Override
-                public void onNothingSelected(AdapterView<?> parent) {
-
-                }
-            });
-            permanent_res_type_res_spinner.setOnTouchListener(new View.OnTouchListener() {
-                @Override
-                public boolean onTouch(View view, MotionEvent motionEvent) {
-                    // imm.hideSoftInputFromWindow(edt_buyer_address.getWindowToken(), 0);
-                    return false;
-                }
-            });
-        }
-
-    }
 
     private void Epf_detedcted(final JSONArray epf_jarray) throws JSONException {
         //   SPINNERLIST = new String[ja.length()];
@@ -2237,7 +2168,73 @@ public class Eligibility_Check_PL extends SimpleActivity {
         }
 
     }
+    private void Permanent_res_Type(final JSONArray Permanent_Resi_ar) throws JSONException {
+        //   SPINNERLIST = new String[ja.length()];
+        Permanent_Resi_SA = new String[Permanent_Resi_ar.length()];
+        for (int i=0;i<Permanent_Resi_ar.length();i++){
+            JSONObject J =  Permanent_Resi_ar.getJSONObject(i);
+            Permanent_Resi_SA[i] = J.getString("value");
+            final List<String> loan_type_list = new ArrayList<>(Arrays.asList(Permanent_Resi_SA));
+            Permanent_Resi_Adapter = new ArrayAdapter<String>(context, R.layout.view_spinner_item, loan_type_list){
+                public View getView(int position, View convertView, ViewGroup parent) {
+                    font = Typeface.createFromAsset(context.getAssets(),"Lato-Regular.ttf");
+                    TextView v = (TextView) super.getView(position, convertView, parent);
+                    v.setTypeface(font);
+                    return v;
+                }
 
+                public View getDropDownView(int position, View convertView, ViewGroup parent) {
+                    TextView v = (TextView) super.getView(position, convertView, parent);
+                    v.setTypeface(font);
+                    return v;
+                }
+            };
+
+            Permanent_Resi_Adapter.setDropDownViewResource(R.layout.view_spinner_item);
+            permanent_res_type_res_spinner.setAdapter(Permanent_Resi_Adapter);
+            permanent_res_type_res_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                    try {
+                        //  City_loc_uniqueID = ja.getJSONObject(position).getString("city_id");
+
+
+                        Permanent_Resi_id = Permanent_Resi_ar.getJSONObject(position).getString("id");
+                        Permanent_Resi_Value = Permanent_Resi_ar.getJSONObject(position).getString("value");
+
+                        if(Permanent_Resi_id.equals("1"))
+                        {
+                            rented.setVisibility(View.GONE);
+                        }else if(Permanent_Resi_id.equals("2"))
+                        {
+                            rented.setVisibility(View.VISIBLE);
+                        }else
+                        {
+                            rented.setVisibility(View.GONE);
+                        }
+
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+
+                }
+            });
+            permanent_res_type_res_spinner.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View view, MotionEvent motionEvent) {
+                    // imm.hideSoftInputFromWindow(edt_buyer_address.getWindowToken(), 0);
+                    return false;
+                }
+            });
+        }
+
+    }
 
 
     private void Other_income_f(final JSONArray Other_income_Ar) throws JSONException {

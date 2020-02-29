@@ -95,6 +95,10 @@
             android:theme="@style/NoAction2"
             android:windowSoftInputMode="stateHidden"/>
 
+        <activity android:name=".Step_Changes_Screen.Eligibility_HL_New"
+            android:theme="@style/NoAction2"
+            android:windowSoftInputMode="stateHidden"/>
+
         <activity
             android:name=".Step_Changes_Screen.Loan_Viyability_Check_Activity"
             android:theme="@style/NoAction2"

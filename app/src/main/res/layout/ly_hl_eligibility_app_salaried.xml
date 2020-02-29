@@ -219,7 +219,7 @@
                 </LinearLayout>
             </LinearLayout>
             <LinearLayout
-                android:id="@+id/pl_co_app_cmp_name"
+                android:id="@+id/hl_eligi_app_cmp_name"
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
@@ -263,7 +263,7 @@
                 </LinearLayout>
             </LinearLayout>
             <LinearLayout
-                android:id="@+id/pl_co_cmp_des_"
+                android:id="@+id/hl_eligibility_cmp_des_"
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
@@ -752,7 +752,7 @@
             </LinearLayout>
         </LinearLayout>
         <LinearLayout
-            android:id="@+id/rented"
+            android:id="@+id/rented_applicant_salaried_hl"
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -1156,7 +1156,7 @@
                     android:backgroundTint="#ff000000"
                     android:backgroundTintMode="src_in"
                     android:spinnerMode="dropdown"
-                    android:id="@+id/spinn_other_income"
+                    android:id="@+id/applicant_salaried_spinn_other_income"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent" />
             </LinearLayout>

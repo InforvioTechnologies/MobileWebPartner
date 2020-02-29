@@ -217,10 +217,10 @@ public class Viability_Check_HL_new extends SimpleActivity {
             co_self_bus_vintage_proof,co_self_bussiness_proof,co_self_asstes_owned;
 
     AppCompatEditText pl_Ly_co_app_self_edit_txt_name,pl_Ly_co_app_self_age_edit_txt,pl_co_app_ind_no_of_vehicle_edit_txt,
-            pl_co_app_ind_no_of_years_work_ind_edit_txt,pl_co_app_ind_avg_monthly_incom_edit_txt,property_pincode1_edit_txt;
+            pl_co_app_ind_no_of_years_work_ind_edit_txt,pl_co_app_ind_avg_monthly_incom_edit_txt;
 
     AppCompatAutoCompleteTextView company_pincode_txt,residence_pincode1_edit_txt,pl_co_app_slrd_company_pincode_txt,
-            pl_co_app_office_residence_pincode_edite_txt;
+            pl_co_app_office_residence_pincode_edite_txt,property_pincode1_edit_txt;
 
     Spinner pl_co_self_spi_vocation_forming,co_self_D_spinner_how_do_sell_milk,pl_co_app_spinner_office_shop_setup_ind,
             spinner_busines_type_own_business,co_self_fran_spinner_frenc_deler_sub,pl_co_own_spinner_office_shop_setup,
@@ -371,7 +371,7 @@ public class Viability_Check_HL_new extends SimpleActivity {
         UISCREEN();
         makeJsonObjReq1();
         Font();
-        Click();
+       // Click();
 
         vehicle_type_text = (AppCompatTextView) findViewById(R.id.vehicle_type_text);
 
@@ -386,16 +386,15 @@ public class Viability_Check_HL_new extends SimpleActivity {
 
         removeClass = new RemoveCommas();
 
-/*
         lead_viy_step2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Viability_Check_BL.this, Eligibility_BL.class);
+                Intent intent = new Intent(Viability_Check_HL_new.this, Eligibility_HL_New.class);
                 startActivity(intent);
                 finish();
             }
         });
-*/
+
 /*
 
         vehicle_type_text.setOnClickListener(new View.OnClickListener() {
@@ -635,7 +634,7 @@ public class Viability_Check_HL_new extends SimpleActivity {
         pl_co_app_ind_spinner_office_ownership_Type = (Spinner) findViewById(R.id.pl_co_app_ind_spinner_office_ownership_Type);
 
 
-        property_pincode1_edit_txt = (AppCompatEditText) findViewById(R.id.property_pincode1_edit_txt);
+        property_pincode1_edit_txt = (AppCompatAutoCompleteTextView) findViewById(R.id.property_pincode1_edit_txt);
         age_edite_txt = (AppCompatEditText) findViewById(R.id.age_edite_txt);
         pan_number_edit_txt = (AppCompatEditText) findViewById(R.id.pan_number_edit_txt);
         occupation_edit_txt = (AppCompatEditText) findViewById(R.id.occupation_edit_txt);
