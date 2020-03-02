@@ -112,9 +112,9 @@ public class Lead_Crration_Activity extends SimpleActivity {
         UI_FIELDS();
         fonts();
         makeJsonObjReq1();
-       // Click();
+        Click();
 
-        lead_cr_step1.setOnClickListener(new View.OnClickListener() {
+       /* lead_cr_step1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
@@ -124,7 +124,7 @@ public class Lead_Crration_Activity extends SimpleActivity {
 
             }
         });
-
+*/
      if(Lontypename.contains("Personal Loan [Unsecured]") || Lontypename.contains("Business Loan [Unsecured]"))
      {
 
@@ -153,6 +153,8 @@ public class Lead_Crration_Activity extends SimpleActivity {
          mobile.setText("7");
          do_you_have_coApp_txt.setText("8");
          wt_mobile.setText("9");
+         co_applicant_ly.setVisibility(View.GONE);
+         co_applicant_emp_type.setVisibility(View.GONE);
      }
 
     }

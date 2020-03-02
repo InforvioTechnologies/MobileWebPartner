@@ -111,7 +111,7 @@ public class Eligibility_HL_New extends SimpleActivity {
     // Co Applicant Self
 
     JSONArray Other_income,epf_deduct,Marital_Status,Type_employee,Company_type,
-            employee_id_ar,have_pan_ar,Current_Residence,relation_own;
+            employee_id_ar,have_pan_ar,Current_Residence,relation_own,Property_Status,transaction_type;;
 
     String [] PAN_ID_SA,Employe_ID_SA,Company_type_SA,Employee_type_SA,Marital_Statues_SA,Epf_detected_SA,
             gst_reflect_SA,Current_res_SA,Own_house_relativ_SA,Permanent_Resi_SA,Pincode_SA,Area;
@@ -151,7 +151,7 @@ public class Eligibility_HL_New extends SimpleActivity {
         String salary_type,residence_id;
 
         LinearLayout co_app_is_other_income,bl_co_eligibility_salaried,bl_co_eligibility_self,
-                app_eligibility_salaried_hl,app_eligibility_self_hl;
+                app_eligibility_salaried_hl,app_eligibility_self_hl,age_of_Property_lap;
         LinearLayout full_addres_of_relative,permanent_res_type_ly,rent_paid_for_house_ly,pl_co_app_cmp_name,pl_co_cmp_des_,
                 permanent_residence_pincode_ly,permanent_res_area;
 
@@ -186,7 +186,13 @@ public class Eligibility_HL_New extends SimpleActivity {
 
 
 
+    Spinner propert_statues_spinner,transaction_type_spi;
 
+    String transaction_type_spi_id,transaction_type_spi_value,propert_statues_spinner_id,
+            propert_statues_spinner_value,S_plot_area_edit_txt,S_build_up_area_edit_txt,S_property_price_edt_txt,
+            loan_type_id,S_age_Of_Property_Edit_Text;
+
+    AppCompatEditText plot_area_edit_txt,build_up_area_edit_txt,property_price_edt_txt,age_Of_Property_Edit_Text;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -213,6 +219,8 @@ public class Eligibility_HL_New extends SimpleActivity {
         IS_CO_Salried_Self = Pref.getCOAPPSALARYTYPE(getApplicationContext());
         salary_type = Pref.getSALARYTYPE(context);
 
+        loan_type_id = Pref.getLoanType(context);
+
         Employement_Type = Pref.getCOSALARYTYPE(getApplicationContext());
         CO_Employement_Type = Pref.getCOEMPTYPE(getApplicationContext());
         Rsidence_Type = Pref.getResidenceType(getApplicationContext());
@@ -225,6 +233,7 @@ public class Eligibility_HL_New extends SimpleActivity {
         Click();
 
         Log.e("the salried type",salary_type);
+        Log.e("the CO_Employ",CO_Employement_Type);
 
         if(salary_type.equals("1"))
         {
@@ -241,7 +250,7 @@ public class Eligibility_HL_New extends SimpleActivity {
             property_field.setVisibility(View.VISIBLE);
         }else
         {
-            property_field.setVisibility(View.GONE);
+            property_field.setVisibility(View.VISIBLE);
         }
 
         if(Employement_Type.equals("1"))
@@ -305,6 +314,16 @@ public class Eligibility_HL_New extends SimpleActivity {
         {
             residence_rented.setVisibility(View.GONE);
         }
+
+
+                if(loan_type_id.equals("2"))
+                {
+                    age_of_Property_lap.setVisibility(View.GONE);
+                }else
+                {
+                    age_of_Property_lap.setVisibility(View.VISIBLE);
+
+                }
 
     }
 
@@ -386,6 +405,7 @@ public class Eligibility_HL_New extends SimpleActivity {
 
         app_eligibility_salaried_hl = (LinearLayout) findViewById(R.id.app_eligibility_salaried_hl);
         app_eligibility_self_hl = (LinearLayout) findViewById(R.id.app_eligibility_self_hl);
+        age_of_Property_lap = (LinearLayout) findViewById(R.id.age_of_Property_lap);
 
 
 
@@ -436,6 +456,19 @@ public class Eligibility_HL_New extends SimpleActivity {
         pl_co_App_other_incom_amt_edtxt = (AppCompatEditText) findViewById(R.id.pl_co_App_other_incom_amt_edtxt);
 
 
+
+
+
+
+        ///
+        propert_statues_spinner = (Spinner) findViewById(R.id.propert_statues_spinner);
+        transaction_type_spi = (Spinner) findViewById(R.id.transaction_type_spi);
+        //plot_area_edit_txt,build_up_area_edit_txt,carpet_area_edit_txt;
+
+        plot_area_edit_txt = (AppCompatEditText) findViewById(R.id.plot_area_edit_txt);
+        build_up_area_edit_txt = (AppCompatEditText) findViewById(R.id.build_up_area_edit_txt);
+        property_price_edt_txt = (AppCompatEditText) findViewById(R.id.property_price_edt_txt);
+        age_Of_Property_Edit_Text = (AppCompatEditText) findViewById(R.id.age_Of_Property_Edit_Text);
 
         //applicant Salaried
         spinner_cmp_type = (Spinner) findViewById(R.id.spinner_cmp_type);
@@ -513,7 +546,7 @@ public class Eligibility_HL_New extends SimpleActivity {
             }
         });
 
-
+/*
         lead_Elegibility_Bank.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -521,21 +554,75 @@ public class Eligibility_HL_New extends SimpleActivity {
                 startActivity(intent);
                 finish();
             }
-        });
+        });*/
 
         lead_Elegibility_Bank.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                if(salary_type.equals("1"))
+
+                if(transaction_type_spi_id.equals("0"))
                 {
-                    applicant_elig_salaried();
-                }else if(salary_type.equals("2"))
-                {
-                    applicant_elig_Self();
+                    Toast.makeText(mCon, "Please Select Transaction Type", Toast.LENGTH_SHORT).show();
+
+                }else {
+                    if(propert_statues_spinner_id.equals("0"))
+                    {
+                        Toast.makeText(mCon, "Please Select Property Status", Toast.LENGTH_SHORT).show();
+
+                    }else {
+
+
+                        if(loan_type_id.equals("2"))
+                        {
+
+                            if (!Validate_age_Of_Property_Edit_Text()) {
+                                return;
+                            }
+                            if (!Validate_plot_area_edit_txt()) {
+                                return;
+                            }
+                            if (!Validate_build_up_area_edit_txt()) {
+                                return;
+                            }
+                            if (!Validate_carpet_area_edit_txt()) {
+                                return;
+                            }
+
+                            if(salary_type.equals("1"))
+                            {
+                                applicant_elig_salaried();
+                            }else if(salary_type.equals("2"))
+                            {
+                                applicant_elig_Self();
+                            }
+
+                        }else
+                        {
+                            if (!Validate_plot_area_edit_txt()) {
+                                return;
+                            }
+                            if (!Validate_build_up_area_edit_txt()) {
+                                return;
+                            }
+                            if (!Validate_carpet_area_edit_txt()) {
+                                return;
+                            }
+
+                            if(salary_type.equals("1"))
+                            {
+                                applicant_elig_salaried();
+                            }else if(salary_type.equals("2"))
+                            {
+                                applicant_elig_Self();
+                            }
+
+                        }
+
+
+
+                    }
                 }
-
-
 //////
             }
         });
@@ -1001,6 +1088,8 @@ public class Eligibility_HL_New extends SimpleActivity {
     ///end salarird eligibility
         private void co_self()
         {
+
+            Log.e("the self","self_co_is called");
             if(CO_Employement_Type.equals("1"))
             {
                 co_individual.setVisibility(View.VISIBLE);
@@ -1554,6 +1643,55 @@ public class Eligibility_HL_New extends SimpleActivity {
         return true;
     }
 
+    private boolean Validate_plot_area_edit_txt(){
+        if (plot_area_edit_txt.getText().toString().trim().isEmpty()) {
+            plot_area_edit_txt.setError(getText(R.string.err_curent));
+            plot_area_edit_txt.requestFocus();
+            return false;
+        } else {
+
+        }
+
+        return true;
+    }
+
+    private boolean Validate_build_up_area_edit_txt(){
+        if (build_up_area_edit_txt.getText().toString().trim().isEmpty()) {
+            build_up_area_edit_txt.setError(getText(R.string.err_curent));
+            build_up_area_edit_txt.requestFocus();
+            return false;
+        } else {
+
+        }
+
+        return true;
+    }
+
+    private boolean Validate_carpet_area_edit_txt(){
+        if (property_price_edt_txt.getText().toString().trim().isEmpty()) {
+            property_price_edt_txt.setError(getText(R.string.err_curent));
+            property_price_edt_txt.requestFocus();
+            return false;
+        } else {
+
+        }
+
+        return true;
+    }
+
+    private boolean Validate_age_Of_Property_Edit_Text(){
+        if (age_Of_Property_Edit_Text.getText().toString().trim().isEmpty()) {
+            age_Of_Property_Edit_Text.setError(getText(R.string.err_curent));
+            age_Of_Property_Edit_Text.requestFocus();
+            return false;
+        } else {
+
+        }
+
+        return true;
+    }
+
+
 
     private void makeJsonObjReq1() {
         progressDialog.show();
@@ -1581,7 +1719,8 @@ public class Eligibility_HL_New extends SimpleActivity {
                             Education_Qualification =object.getJSONArray("Education Qualification");
                             // Business_Proof =object.getJSONArray("Business_Proof");
 
-
+                            Property_Status =object.getJSONArray("Property Status");
+                            transaction_type =object.getJSONArray("transaction_type");
 
                             Other_income =object.getJSONArray("Other_income");
                             epf_deduct =object.getJSONArray("epf_deduct");
@@ -1615,6 +1754,11 @@ public class Eligibility_HL_New extends SimpleActivity {
                             Other_income_f(Other_income);
                             itr_reflect_f(Reflected_ITR);
 
+                            //property
+                            hl_Property_Status(Property_Status);
+                            hl_transaction_type(transaction_type);
+
+
                             ///applicant salaried APP_Salaried_HAVE_PAN_Card
                             APP_Salaried_Employee_ID_Array(employee_id_ar);
                             APP_Salaried_HAVE_PAN_Card(have_pan_ar);
@@ -1628,6 +1772,7 @@ public class Eligibility_HL_New extends SimpleActivity {
                             APP_Salaried_Marital_Statues(Marital_Status);
                             APP_Salaried_Permanent_res_Type(permanent_adddress);
                             APP_Salaried_Own_hous_relative(relation_own);
+
 
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -3445,6 +3590,122 @@ public class Eligibility_HL_New extends SimpleActivity {
 
     }
 
+    private void hl_Property_Status(final JSONArray vocaton_ar) throws JSONException {
+        //   SPINNERLIST = new String[ja.length()];
+
+        Permanent_Resi_SA = new String[vocaton_ar.length()];
+        for (int i=0;i<vocaton_ar.length();i++){
+            JSONObject J =  vocaton_ar.getJSONObject(i);
+            Permanent_Resi_SA[i] = J.getString("value");
+            final List<String> loan_type_list = new ArrayList<>(Arrays.asList(Permanent_Resi_SA));
+            Permanent_Resi_Adapter = new ArrayAdapter<String>(context, R.layout.view_spinner_item, loan_type_list){
+                public View getView(int position, View convertView, ViewGroup parent) {
+                    font = Typeface.createFromAsset(context.getAssets(),"Lato-Regular.ttf");
+                    TextView v = (TextView) super.getView(position, convertView, parent);
+                    v.setTypeface(font);
+                    return v;
+                }
+
+                public View getDropDownView(int position, View convertView, ViewGroup parent) {
+                    TextView v = (TextView) super.getView(position, convertView, parent);
+                    v.setTypeface(font);
+                    return v;
+                }
+            };
+
+            Permanent_Resi_Adapter.setDropDownViewResource(R.layout.view_spinner_item);
+            propert_statues_spinner.setAdapter(Permanent_Resi_Adapter);
+            propert_statues_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                    try {
+
+
+                        //  City_loc_uniqueID = ja.getJSONObject(position).getString("city_id");
+                        propert_statues_spinner_id = vocaton_ar.getJSONObject(position).getString("id");
+                        propert_statues_spinner_value = vocaton_ar.getJSONObject(position).getString("value");
+
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+
+                }
+            });
+            propert_statues_spinner.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View view, MotionEvent motionEvent) {
+                    // imm.hideSoftInputFromWindow(edt_buyer_address.getWindowToken(), 0);
+                    return false;
+                }
+            });
+        }
+
+    }
+
+    private void hl_transaction_type(final JSONArray vocaton_ar) throws JSONException {
+        //   SPINNERLIST = new String[ja.length()];
+
+        Permanent_Resi_SA = new String[vocaton_ar.length()];
+        for (int i=0;i<vocaton_ar.length();i++){
+            JSONObject J =  vocaton_ar.getJSONObject(i);
+            Permanent_Resi_SA[i] = J.getString("value");
+            final List<String> loan_type_list = new ArrayList<>(Arrays.asList(Permanent_Resi_SA));
+            Permanent_Resi_Adapter = new ArrayAdapter<String>(context, R.layout.view_spinner_item, loan_type_list){
+                public View getView(int position, View convertView, ViewGroup parent) {
+                    font = Typeface.createFromAsset(context.getAssets(),"Lato-Regular.ttf");
+                    TextView v = (TextView) super.getView(position, convertView, parent);
+                    v.setTypeface(font);
+                    return v;
+                }
+
+                public View getDropDownView(int position, View convertView, ViewGroup parent) {
+                    TextView v = (TextView) super.getView(position, convertView, parent);
+                    v.setTypeface(font);
+                    return v;
+                }
+            };
+
+            Permanent_Resi_Adapter.setDropDownViewResource(R.layout.view_spinner_item);
+            transaction_type_spi.setAdapter(Permanent_Resi_Adapter);
+            transaction_type_spi.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                    try {
+
+
+                        //  City_loc_uniqueID = ja.getJSONObject(position).getString("city_id");
+                        transaction_type_spi_id = vocaton_ar.getJSONObject(position).getString("id");
+                        transaction_type_spi_value = vocaton_ar.getJSONObject(position).getString("value");
+
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+
+                }
+            });
+            transaction_type_spi.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View view, MotionEvent motionEvent) {
+                    // imm.hideSoftInputFromWindow(edt_buyer_address.getWindowToken(), 0);
+                    return false;
+                }
+            });
+        }
+
+    }
+
 
     private void GET_Pincode1(String code) {
         // progressDialog.show();
@@ -3639,9 +3900,6 @@ public class Eligibility_HL_New extends SimpleActivity {
 
                         try {
 
-
-
-
                             //   work_pincode_area = ja.getJSONObject(position).getString("id");
                             permanent_residence__area_id = ja.getJSONObject(position).getString("id");
                             cpermanent_residence_spinn_district_id = ja.getJSONObject(position).getString("district_id");
@@ -3677,9 +3935,16 @@ public class Eligibility_HL_New extends SimpleActivity {
     private void lead_Eligibility() {
 
 
+        //Property Values
+        S_plot_area_edit_txt = plot_area_edit_txt.getText().toString();
+        S_build_up_area_edit_txt = build_up_area_edit_txt.getText().toString();
+        S_property_price_edt_txt = property_price_edt_txt.getText().toString();
+        S_age_Of_Property_Edit_Text = age_Of_Property_Edit_Text.getText().toString();
+
 
         ///applicant salaried
         S_company_name_edtxt = company_name_edtxt.getText().toString();
+
         S_Designation_in_current_companny = designation_in_company.getText().toString();
         S_no_of_dependent_edt_txt = no_of_dependent_edt_txt.getText().toString();
         S_education_qualification_edit_txt = education_qualification_edit_txt.getText().toString();
@@ -3786,6 +4051,7 @@ public class Eligibility_HL_New extends SimpleActivity {
                 Applicant.put("rel_address",S_own_house_blood_address_edt_txt);
                 Applicant.put("rent_beingpaid",S_rent_paid_for_house_edit_txt);
                 Applicant.put("qualification",S_education_qualification_edit_txt);
+
             }else if(salary_type.equals("2"))
             {
                 Applicant.put("has_sb_account",having_bank_Id);
@@ -3869,6 +4135,13 @@ public class Eligibility_HL_New extends SimpleActivity {
             J =new JSONObject();
             //  J.put(Params.email_id,email);
             J.put("applicant_count",app_count);
+            J.put("transaction_type",transaction_type_spi_id);
+            J.put("property_status",propert_statues_spinner_id);
+            J.put("age_of_property",S_age_Of_Property_Edit_Text);
+            J.put("plot_area",S_plot_area_edit_txt);
+            J.put("builtup_area",S_build_up_area_edit_txt);
+            J.put("property_price",S_property_price_edt_txt);
+
             J.put("transaction_id",Pref.getTRANSACTIONID(getApplicationContext()));
             J.put("user_id",Pref.getUSERID(getApplicationContext()));
             J.put("applicant",Applicant);

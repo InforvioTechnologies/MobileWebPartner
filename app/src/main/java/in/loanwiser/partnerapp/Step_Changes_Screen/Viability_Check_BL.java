@@ -6419,7 +6419,7 @@ public class Viability_Check_BL extends SimpleActivity {
                 {
                     co_applicant_salaried_employed.setVisibility(View.GONE);
                     co_applicant_self_employed.setVisibility(View.VISIBLE);
-
+                    applicant1.put("emp_statues",CO_Type_of_employement_ID);
                     Co_applicant1.put("bus_employment_type",pl_self_ind_Employee_type_Id);
                     Co_applicant1.put("member_name",ST_pl_Ly_co_app_self_edit_txt_name);
                     Co_applicant1.put("age",ST_pl_Ly_co_app_self_age_edit_txt);

@@ -535,6 +535,7 @@
     <string name="prop_market_value">Property Market Value</string>
     <string name="select_purchased_from">Select Purchased from</string>
     <string name="property_size">Property Size</string>
+    <string name="property_statues">Property Status</string>
     <string name="land_value">Land Value</string>
     <string name="prop_puropose">Purpose</string>
 

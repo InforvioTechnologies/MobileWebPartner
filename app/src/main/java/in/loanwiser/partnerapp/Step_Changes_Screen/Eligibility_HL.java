@@ -132,6 +132,8 @@ public class Eligibility_HL extends SimpleActivity {
     AppCompatAutoCompleteTextView self_permanent_res_edit_txt;
     String property_identified,is_co_available;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -241,8 +243,7 @@ public class Eligibility_HL extends SimpleActivity {
         construction_statues_txt1 = (AppCompatTextView) findViewById(R.id.construction_statues_txt1);
         property_ownership_txt = (AppCompatTextView) findViewById(R.id.property_ownership_txt);
         property_ownership_txt1 = (AppCompatTextView) findViewById(R.id.property_ownership_txt1);
-        proposed_comp_list_txt = (AppCompatTextView) findViewById(R.id.proposed_comp_list_txt);
-        proposed_comp_list_txt1 = (AppCompatTextView) findViewById(R.id.proposed_comp_list_txt1);
+
         plot_area_txt = (AppCompatTextView) findViewById(R.id.plot_area_txt);
         plot_area_txt1 = (AppCompatTextView) findViewById(R.id.plot_area_txt1);
         build_up_area_txt = (AppCompatTextView) findViewById(R.id.build_up_area_txt);
@@ -286,7 +287,7 @@ public class Eligibility_HL extends SimpleActivity {
 
 
         propert_Size = (Spinner) findViewById(R.id.propert_Size);
-        Purpose_spinner_ = (Spinner) findViewById(R.id.Purpose_spinner_);
+
         transaction_type_spi = (Spinner) findViewById(R.id.transaction_type_spi);
        // property_ownerShip = (Spinner) findViewById(R.id.property_ownerShip);
         spinner_cmp_type = (Spinner) findViewById(R.id.spinner_cmp_type);
@@ -300,7 +301,7 @@ public class Eligibility_HL extends SimpleActivity {
 
         plot_area_edit_txt = (AppCompatEditText) findViewById(R.id.plot_area_edit_txt);
         build_up_area_edit_txt = (AppCompatEditText) findViewById(R.id.build_up_area_edit_txt);
-        proposed_comp_list_date = (AppCompatEditText) findViewById(R.id.proposed_comp_list_date);
+
         carpet_area_edit_txt = (AppCompatEditText) findViewById(R.id.carpet_area_edit_txt);
         property_price_edt_txt = (AppCompatEditText) findViewById(R.id.property_price_edt_txt);
         company_name_edt_txt = (AppCompatEditText) findViewById(R.id.company_name_edt_txt);
@@ -1377,12 +1378,9 @@ public class Eligibility_HL extends SimpleActivity {
                 }
             });
 
-
         }
 
     }
-
-
 
     private void Select_Company_Type(final JSONArray select_company_ar) throws JSONException {
         //   SPINNERLIST = new String[ja.length()];
@@ -1630,8 +1628,6 @@ public class Eligibility_HL extends SimpleActivity {
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
                     try {
-
-
                         Self_Other_Income_ID = other_income_ar.getJSONObject(position).getString("id");
                         Self_Other_Income_Value = other_income_ar.getJSONObject(position).getString("value");
                         //CAT_ID = ja.getJSONObject(position).getString("category_id");
@@ -1645,7 +1641,6 @@ public class Eligibility_HL extends SimpleActivity {
                         {
                             self_other_income_YN.setVisibility(View.VISIBLE);
                         }
-
 
                     } catch (JSONException e) {
                         e.printStackTrace();

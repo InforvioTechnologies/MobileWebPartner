@@ -156,7 +156,6 @@ public class Eligibility_check_LAP extends SimpleActivity {
         self_other_income_YN = (LinearLayout) findViewById(R.id.self_other_income_YN);
 
 
-
         if(salary_type.equals("2"))
         {
             self.setVisibility(View.GONE);
@@ -237,9 +236,9 @@ public class Eligibility_check_LAP extends SimpleActivity {
 
 
         propert_Size = (Spinner) findViewById(R.id.propert_Size);
-        Purpose_spinner_ = (Spinner) findViewById(R.id.Purpose_spinner_);
+
         transaction_type_spi = (Spinner) findViewById(R.id.transaction_type_spi);
-        property_ownerShip = (Spinner) findViewById(R.id.property_ownerShip);
+
         spinner_cmp_type = (Spinner) findViewById(R.id.spinner_cmp_type);
         select_purchased_spinner_ = (Spinner) findViewById(R.id.select_purchased_spinner_);
         epf_deducted_spinner = (Spinner) findViewById(R.id.epf_deducted_spinner);

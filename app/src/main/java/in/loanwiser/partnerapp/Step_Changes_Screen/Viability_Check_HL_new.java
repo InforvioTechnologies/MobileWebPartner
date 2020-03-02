@@ -253,7 +253,7 @@ public class Viability_Check_HL_new extends SimpleActivity {
     JSONArray Salary_method_ar,Salary_proof_ar,employee_id_ar,
             other_earning_ar,Property_Type,Pl_self_ind_Type_of_employement,Office_residence,
             Property_title,property_identified,property_category,land_approval,building_approval,
-            DA_approval;
+            DA_approval,Property_Status,transaction_type;
 
     String[] SPINNERLIST;
     String[] SALARY_Method,Salary_Proof,Employe_ID_SA,
@@ -347,6 +347,8 @@ public class Viability_Check_HL_new extends SimpleActivity {
             DA_Bulding_ID,DA_Bulding_Value,Property_Identified_ID,Property_Identified_Value,Property_Title_ID,Property_Title_Value;
 
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -371,7 +373,7 @@ public class Viability_Check_HL_new extends SimpleActivity {
         UISCREEN();
         makeJsonObjReq1();
         Font();
-       // Click();
+        Click();
 
         vehicle_type_text = (AppCompatTextView) findViewById(R.id.vehicle_type_text);
 
@@ -386,7 +388,7 @@ public class Viability_Check_HL_new extends SimpleActivity {
 
         removeClass = new RemoveCommas();
 
-        lead_viy_step2.setOnClickListener(new View.OnClickListener() {
+     /*   lead_viy_step2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(Viability_Check_HL_new.this, Eligibility_HL_New.class);
@@ -394,7 +396,7 @@ public class Viability_Check_HL_new extends SimpleActivity {
                 finish();
             }
         });
-
+*/
 /*
 
         vehicle_type_text.setOnClickListener(new View.OnClickListener() {
@@ -717,6 +719,11 @@ public class Viability_Check_HL_new extends SimpleActivity {
         pl_co_self_spi_vocation_forming = (Spinner) findViewById(R.id.pl_co_self_spi_vocation_forming);
 
         pl_co_app_ind_spinner_office_shop_setup_ind = (Spinner) findViewById(R.id.pl_co_app_ind_spinner_office_shop_setup_ind);
+
+
+
+
+
 
         pl_co_self_ofiice_res_details =( LinearLayout) findViewById(R.id.pl_co_self_ofiice_res_details);
 
@@ -3367,6 +3374,8 @@ public class Viability_Check_HL_new extends SimpleActivity {
                             land_approval =object.getJSONArray("land_approval");
                             building_approval =object.getJSONArray("building_approval");
                             DA_approval =object.getJSONArray("DA_approval");
+                            Property_Status =object.getJSONArray("Property Status");
+                            transaction_type =object.getJSONArray("transaction_type");
 
                             Property_Identified_Spinner(property_identified);
                             Property_Title_Spinner(Property_title);
@@ -3403,6 +3412,7 @@ public class Viability_Check_HL_new extends SimpleActivity {
 
                             //co
                             pl_self_ind_Vocation(vocaton_ar);
+
                             Pl_self_ind_Type_of_employement_(Type_of_employement);
                             pl_co_self_Office_Shop_(office_shop);
                             pl_co_self_Office_own_Rent(Office_residence);
@@ -4485,7 +4495,7 @@ public class Viability_Check_HL_new extends SimpleActivity {
                 }
             });
 
-            pl_Ly_co_app_self_emp_type.setAdapter(Employee_Type_adapter);
+         /*   pl_Ly_co_app_self_emp_type.setAdapter(Employee_Type_adapter);
             pl_Ly_co_app_self_emp_type.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -4499,9 +4509,12 @@ public class Viability_Check_HL_new extends SimpleActivity {
 
                         Pref.putCOEMPTYPE(context,pl_self_ind_Employee_type_Id);
 
+                        Log.e("The self Type",Pref.getCOEMPTYPE(getApplicationContext()));
 
 
                         int b = Integer.parseInt(pl_self_ind_Employee_type_Id);
+
+                        Pref.putCOEMPTYPE(context,pl_self_ind_Employee_type_Id);
                         // pl_self_individual,pl_formin_dairy,pl_self_business
                         switch(b) {
                             case 1:
@@ -4544,7 +4557,7 @@ public class Viability_Check_HL_new extends SimpleActivity {
                     // imm.hideSoftInputFromWindow(edt_buyer_address.getWindowToken(), 0);
                     return false;
                 }
-            });
+            });*/
         }
 
     }
@@ -7037,6 +7050,9 @@ public class Viability_Check_HL_new extends SimpleActivity {
 
     }
 
+
+
+
     private void pl_self_ind_Vocation(final JSONArray vocaton_ar) throws JSONException {
         //   SPINNERLIST = new String[ja.length()];
 
@@ -7142,6 +7158,8 @@ public class Viability_Check_HL_new extends SimpleActivity {
                         //CAT_ID = ja.getJSONObject(position).getString("category_id");
                         Log.d("pl_Employee_type_Id", pl_self_ind_Employee_type_Id);
                         Log.d("pl_self_ind", pl_self_ind_Employee_type_Value);
+
+                        Pref.putCOEMPTYPE(context,pl_self_ind_Employee_type_Id);
 
                         int b = Integer.parseInt(pl_self_ind_Employee_type_Id);
                         // pl_self_individual,pl_formin_dairy,pl_self_business
