@@ -59,6 +59,7 @@ import adhoc.app.applibrary.Config.AppUtils.VolleySignleton.AppController;
 import dmax.dialog.SpotsDialog;
 import in.loanwiser.partnerapp.Multi_select_checkbox.Multi_Select_checkbox;
 import in.loanwiser.partnerapp.NumberTextWatcher;
+import in.loanwiser.partnerapp.PartnerActivitys.Applicant_Details_Activity;
 import in.loanwiser.partnerapp.PartnerActivitys.IncomeProofPOJO;
 import in.loanwiser.partnerapp.PartnerActivitys.RemoveCommas;
 import in.loanwiser.partnerapp.R;
@@ -365,15 +366,15 @@ public class Viability_Check_HL_new extends SimpleActivity {
 
         loan_type_id = Pref.getLoanType(context);
         salary_type = Pref.getSALARYTYPE(context);
-        Intent intent = getIntent();
+       /* Intent intent = getIntent();
         user_id = intent.getStringExtra("user_id");
-        transaction_id = intent.getStringExtra("transaction_id");
+        transaction_id = intent.getStringExtra("transaction_id");*/
 
-        Log.e("viability check BL ","Businss Loan");
+        Log.e("salary_type",salary_type);
         UISCREEN();
-        makeJsonObjReq1();
+        Account_Listings_Details();
         Font();
-        Click();
+       Click();
 
         vehicle_type_text = (AppCompatTextView) findViewById(R.id.vehicle_type_text);
 
@@ -388,7 +389,7 @@ public class Viability_Check_HL_new extends SimpleActivity {
 
         removeClass = new RemoveCommas();
 
-     /*   lead_viy_step2.setOnClickListener(new View.OnClickListener() {
+      /*  lead_viy_step2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(Viability_Check_HL_new.this, Eligibility_HL_New.class);
@@ -398,7 +399,6 @@ public class Viability_Check_HL_new extends SimpleActivity {
         });
 */
 /*
-
         vehicle_type_text.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -406,6 +406,7 @@ public class Viability_Check_HL_new extends SimpleActivity {
                 intent.putExtra("jsonArray", vehicle_Type.toString());
                 intent.putExtra("select_lid_id", (Serializable) vehicle_proof_self_list);
                 startActivity(intent);
+
             }
         });
 
@@ -434,6 +435,7 @@ public class Viability_Check_HL_new extends SimpleActivity {
             self_employed.setVisibility(View.GONE);
         }else if(salary_type.equals("2"))
         {
+            Log.e("salary_type",salary_type);
             salaried.setVisibility(View.GONE);
             self_employed.setVisibility(View.VISIBLE);
         }
@@ -917,7 +919,7 @@ public class Viability_Check_HL_new extends SimpleActivity {
                     {
                         Toast.makeText(context,"Please Select Property Identified",Toast.LENGTH_SHORT).show();
 
-                    }else
+                    }else if(Property_Identified_ID.equals("1"))
                     {
                         if(Property_Title_ID.equals("0"))
                         {
@@ -975,6 +977,15 @@ public class Viability_Check_HL_new extends SimpleActivity {
 
                         }
 
+                    }else
+                    {
+                        if(salary_type.equals("1"))
+                        {
+                            Applicant_salaried();
+                        }else if(salary_type.equals("2"))
+                        {
+                            Applicant_self();
+                        }
                     }
 
                 }else
@@ -3327,10 +3338,70 @@ public class Viability_Check_HL_new extends SimpleActivity {
 
     }
 
-    private void makeJsonObjReq1() {
+    private void Account_Listings_Details() {
+        JSONObject jsonObject =new JSONObject();
+        JSONObject J= null;
+        try {
+            J =new JSONObject();
+            J.put(Params.b2b_userid, Pref.getID(mCon));
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+    //    progressDialog.show();
+
+        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, Urls.PROFILE_DETAILS_POST, J,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            if(response.getString(Params.status).equals(Params.success)) {
+
+                                JSONObject jobj = response.getJSONObject(Params.response);
+
+                              String  R_state = jobj.getString(Params.state_id);
+                                makeJsonObjReq1(R_state);
+
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                   //     progressDialog.dismiss();
+                    }
+                }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+             //   progressDialog.dismiss();
+                Toast.makeText(getApplicationContext(),error.getMessage(),Toast.LENGTH_SHORT).show();
+            }
+        }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("content-type", "application/json");
+                return headers;
+            }
+        };
+        AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
+    }
+
+    private void makeJsonObjReq1(String state_id) {
         progressDialog.show();
-        Log.e("Request Dreopdown", "called");
-        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.GET, Urls.GET_DROPDOWN_LIST, null,
+
+
+        JSONObject J= null;
+        try {
+            J =new JSONObject();
+            J.put("state_id", state_id);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        Log.e("Request State", J.toString());
+        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, Urls.GET_DROPDOWN_LIST, J,
                 new Response.Listener<JSONObject>() {
 
                     @Override
@@ -5100,6 +5171,7 @@ public class Viability_Check_HL_new extends SimpleActivity {
 
                         hl_salried_residence_id = Residence_ownership_ar.getJSONObject(position).getString("id");
                         hl_salried_residence_Value = Residence_ownership_ar.getJSONObject(position).getString("value");
+                       // Pref.putResidenceType(context,residence_id);
 
                         Pref.put_Residence_ID(mCon,hl_salried_residence_id);
 
@@ -7669,7 +7741,7 @@ public class Viability_Check_HL_new extends SimpleActivity {
                 applicant1.put("per_area",res_area_id);
                 applicant1.put("res_type",hl_salried_residence_id);
                 applicant1.put("live_in_res",ST_current_residence_edit_txt);
-                applicant1.put("emp_statues",salary_type);
+                applicant1.put("emp_statues",1);
 
             }else if(salary_type.equals("2"))
             {
@@ -7751,7 +7823,7 @@ public class Viability_Check_HL_new extends SimpleActivity {
                  applicant1.put("res_pincode",V_residence_pincode_edite_txt);
                  applicant1.put("per_area",residence_area);
                  applicant1.put("ofc_area",office_residence_area);
-
+                applicant1.put("emp_statues",3);
 
             }
         } catch (JSONException e) {
@@ -7775,6 +7847,7 @@ public class Viability_Check_HL_new extends SimpleActivity {
                     Co_applicant1.put("income_proof",salary_proof_salary_array);
                     Co_applicant1.put("ofc_area",pl_co_app_slrd_res_spinn_area_id);
                     Co_applicant1.put("assets",assets_owned_salary_array);
+                    Co_applicant1.put("emp_statues",1);
 
                 }else if(CO_Type_of_employement_ID.equals("2"))
                 {
@@ -7784,6 +7857,7 @@ public class Viability_Check_HL_new extends SimpleActivity {
                     Co_applicant1.put("bus_employment_type",pl_self_ind_Employee_type_Id);
                     Co_applicant1.put("member_name",ST_pl_Ly_co_app_self_edit_txt_name);
                     Co_applicant1.put("age",ST_pl_Ly_co_app_self_age_edit_txt);
+                    Co_applicant1.put("emp_statues",3);
 
                     int b = Integer.parseInt(pl_self_ind_Employee_type_Id);
                     // pl_self_individual,pl_formin_dairy,pl_self_business
@@ -7898,7 +7972,7 @@ public class Viability_Check_HL_new extends SimpleActivity {
                                 {
                                     Toast.makeText(context,"Viability Created Successfully",Toast.LENGTH_SHORT).show();
 
-                                    Intent intent = new Intent(Viability_Check_HL_new.this, Eligibility_HL.class);
+                                    Intent intent = new Intent(Viability_Check_HL_new.this, Eligibility_HL_New.class);
                                     intent.putExtra("user_id", user_id);
                                     intent.putExtra("transaction_id", transaction_id);
                                     startActivity(intent);
@@ -7913,6 +7987,7 @@ public class Viability_Check_HL_new extends SimpleActivity {
                                     intent.putExtra("viability_jsonArray", viability_array.toString());
                                     startActivity(intent);
                                     finish();
+
                                 }
 
                             }
@@ -7955,9 +8030,10 @@ public class Viability_Check_HL_new extends SimpleActivity {
     @Override
     public void onBackPressed() {
 
-        Objs.ac.StartActivity(mCon, Lead_Crration_Activity.class);
+        Objs.ac.StartActivity(mCon, Applicant_Details_Activity.class);
         finish();
         super.onBackPressed();
 
     }
+
 }

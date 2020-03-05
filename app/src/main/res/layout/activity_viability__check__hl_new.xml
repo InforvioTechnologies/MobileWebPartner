@@ -37,17 +37,16 @@
 
                     <LinearLayout
                         android:id="@+id/pro_details"
-                        android:background="@color/colorPrimary"
-                        android:gravity="center"
+                        android:gravity="left"
                         android:orientation="vertical"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
                         <androidx.appcompat.widget.AppCompatTextView
-                            android:gravity="center"
+                            android:gravity="left"
                             android:layout_width="match_parent"
                             style="@style/LorgeText"
                             android:textSize="16sp"
-                            android:textColor="@color/white"
+                            android:textColor="@color/colorPrimary"
                             android:text="Property Details"
                             android:layout_height="wrap_content" />
                     </LinearLayout>
@@ -482,6 +481,7 @@
                     </LinearLayout>
 
                     <LinearLayout
+                        android:visibility="gone"
                         android:id="@+id/salaried"
                         android:orientation="vertical"
                         android:layout_width="match_parent"
@@ -489,6 +489,7 @@
                         <include layout="@layout/ly_hl_viability_salaried_new"/>
                     </LinearLayout>
                     <LinearLayout
+                        android:visibility="gone"
                         android:id="@+id/self_employed"
                         android:orientation="vertical"
                         android:layout_width="match_parent"

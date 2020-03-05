@@ -156,27 +156,31 @@ public class Payment_Details_Activity extends SimpleActivity {
     private void get_pay_shedule() {
         // progressDialog.show();
 
+        String Order_Id = Pref.getUSERID(getApplicationContext()) + "-0";
+      //  String Order_Id = "10043" + "-0";
         JSONObject J =new JSONObject();
         try {
-            J.put("user_id", Pref.getUSERID(getApplicationContext()));
-
-
+            J.put("order_id", Order_Id);
         } catch (JSONException e) {
             e.printStackTrace();
         }
+        Log.e("Payment schedule", String.valueOf(J));
         JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, Urls.PAYMENT_SCHEDULE, J,
                 new Response.Listener<JSONObject>() {
 
                     @Override
                     public void onResponse(JSONObject object) {
+
+                        Log.e("Payment schedule", String.valueOf(object));
                         try {
                             if (object.getString("Payment schedule").equals("Success")) {
 
-                                 Payment_Amount = object.getString("payment_amount");
+
                                 JSONObject payment_reponse= object.getJSONObject("Response");
+                                Payment_Amount = payment_reponse.getString("payment_amount");
                                 JSONArray payment_arr = payment_reponse.getJSONArray("payment_arr");
 
-                                totalamount.setText("Payment_Amount");
+                                totalamount.setText(Payment_Amount);
 
                                 araycount=payment_arr.length();
 
@@ -186,8 +190,8 @@ public class Payment_Details_Activity extends SimpleActivity {
                                     crif_charge .setVisibility(View.VISIBLE);
                                 }else
                                 {
-                                    lead_charge .setVisibility(View.GONE);
-                                    crif_charge .setVisibility(View.VISIBLE);
+                                    lead_charge .setVisibility(View.VISIBLE);
+                                    crif_charge .setVisibility(View.GONE);
                                 }
 
                                 for (int i = 0; i < araycount; i++) {
@@ -200,9 +204,13 @@ public class Payment_Details_Activity extends SimpleActivity {
                                       pay_id = rec.getString("pay_id");
                                       amount = rec.getString("amount");
 
+                                        Log.e("Payment schedule", order_id);
+                                        Log.e("amount ", amount);
+
                                       if(i>1)
                                       {
                                           CRIE_charge.setText(amount);
+                                          Lead_charge.setText(amount);
                                       }else
                                       {
                                           Lead_charge.setText(amount);
@@ -248,28 +256,31 @@ public class Payment_Details_Activity extends SimpleActivity {
 
     private void Do_payment_method() {
         // progressDialog.show();
-        order_id = "95911-0";
-        order_amt = "1";
+      //  order_id = "95914-0";
+      ///  order_amt = "1";
         JSONObject J =new JSONObject();
         try {
             J.put("order_id", order_id);
-            J.put("order_amount",order_amt);
+            J.put("order_amount",Payment_Amount);
 
         } catch (JSONException e) {
             e.printStackTrace();
         }
+        Log.e("Payment tocken", String.valueOf(J));
+
         JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, Urls.GET_TOCKEN, J,
                 new Response.Listener<JSONObject>() {
 
                     @Override
                     public void onResponse(JSONObject object) {
+                        Log.e("Payment tocken", String.valueOf(object));
                         try {
                             if (object.getString(Params.status).equals("OK")) {
 
                                 String msg = object.getString("message");
                                 String cftoken = object.getString("cftoken");
-                                Log.e("message",msg);
-                                Log.e("cftoken",cftoken);
+                              //  Log.e("message",msg);
+                              //  Log.e("cftoken",cftoken);
                                 Do_Cashfree_Payment(cftoken);
 
                             }
@@ -315,7 +326,7 @@ public class Payment_Details_Activity extends SimpleActivity {
 
         params.put(PARAM_APP_ID, appId);
         params.put(PARAM_ORDER_ID, order_id);
-        params.put(PARAM_ORDER_AMOUNT, order_amt);
+        params.put(PARAM_ORDER_AMOUNT, Payment_Amount);
         params.put(PARAM_ORDER_NOTE, orderNote);
         params.put(PARAM_CUSTOMER_NAME, customerName);
         params.put(PARAM_CUSTOMER_PHONE, customerPhone);
@@ -343,7 +354,6 @@ public class Payment_Details_Activity extends SimpleActivity {
                     if (bundle.getString(key) != null) {
                         Log.e("Response", key + " : " + bundle.getString(key));
                         result1.add(key + " : " + bundle.getString(key));
-
 
                        /* if( key.contains("txStatus"))
                         {
@@ -376,7 +386,8 @@ public class Payment_Details_Activity extends SimpleActivity {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        progressDialog.show();
+        Log.e("jsonArray", String.valueOf(J));
+      //  progressDialog.show();
         JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, Urls.PAYMENT_CONFIRMATION, J,
                 new Response.Listener<JSONObject>() {
 
@@ -385,7 +396,7 @@ public class Payment_Details_Activity extends SimpleActivity {
                         try {
                             if (object.getString("status").equals("success")) {
 
-                                Intent intent = new Intent(Payment_Details_Activity.this, Document_CheckList_Generation.class);
+                                Intent intent = new Intent(Payment_Details_Activity.this, Home.class);
                                 startActivity(intent);
                                 finish();
                             }

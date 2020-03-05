@@ -46,6 +46,7 @@ import adhoc.app.applibrary.Config.AppUtils.Pref.Pref;
 import adhoc.app.applibrary.Config.AppUtils.Urls;
 import adhoc.app.applibrary.Config.AppUtils.VolleySignleton.AppController;
 import dmax.dialog.SpotsDialog;
+import in.loanwiser.partnerapp.PartnerActivitys.Home;
 import in.loanwiser.partnerapp.R;
 import in.loanwiser.partnerapp.SimpleActivity;
 
@@ -93,14 +94,14 @@ public class Credite_report_details extends SimpleActivity {
 
         progressDialog = new SpotsDialog(context, R.style.Custom);
        // Co_Applicant = Pref.getCoAPPAVAILABLE(getApplicationContext());
-        Co_Applicant = "1";
+
 
         makeJsonObjReq1();
         SCREEN_UI();
         Font();
         Click();
-
-        if(Co_Applicant.equals("1"))
+        IS_CO_Applicant_Id = Pref.getCoAPPAVAILABLE(getApplicationContext());
+        if(IS_CO_Applicant_Id.equals("1"))
         {
             co_applicant_have.setVisibility(View.VISIBLE);
         }else
@@ -219,7 +220,7 @@ public class Credite_report_details extends SimpleActivity {
 
                  }else if(Existing_Loan_ID.equals("2"))
                  {
-                     if(Co_Applicant.equals("1"))
+                     if(IS_CO_Applicant_Id.equals("1"))
                      {
                          if(co_Existing_Loan_ID.equals("0"))
                          {
@@ -264,7 +265,7 @@ public class Credite_report_details extends SimpleActivity {
               return;
           }
 
-          if(Co_Applicant.equals("1"))
+          if(IS_CO_Applicant_Id.equals("1"))
           {
               if(co_Existing_Loan_ID.equals("0"))
               {
@@ -586,7 +587,7 @@ public class Credite_report_details extends SimpleActivity {
     private void no_credite_report()
     {
 
-        IS_CO_Applicant_Id = Pref.getCoAPPAVAILABLE(getApplicationContext());
+
 
         if(IS_CO_Applicant_Id.equals("1"))
         {
@@ -644,16 +645,22 @@ public class Credite_report_details extends SimpleActivity {
             e.printStackTrace();
         }
 
-        try {
-            Co_Applicant.put("is_existloan",co_Existing_Loan_ID);
-            Co_Applicant.put("emi_amount",EMI_Amount2);
-            Co_Applicant.put("bank_name",bank_name_Edite_txt2);
-            Co_Applicant.put("loan_type",loan_type_Edite_txt2);
-            Co_Applicant.put("remaining_tenor",remaning_tenor_Edite_txt2);
+        if(IS_CO_Applicant_Id.equals("1"))
+        {
+            try {
+                Co_Applicant.put("is_existloan",co_Existing_Loan_ID);
+                Co_Applicant.put("emi_amount",EMI_Amount2);
+                Co_Applicant.put("bank_name",bank_name_Edite_txt2);
+                Co_Applicant.put("loan_type",loan_type_Edite_txt2);
+                Co_Applicant.put("remaining_tenor",remaning_tenor_Edite_txt2);
 
 
-        } catch (JSONException e) {
-            e.printStackTrace();
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }else
+        {
+
         }
 
         JSONObject J= null;
@@ -661,10 +668,10 @@ public class Credite_report_details extends SimpleActivity {
             J =new JSONObject();
             //  J.put(Params.email_id,email);
             J.put("applicant_count",app_count);
-          //  J.put("transaction_id",Pref.getTRANSACTIONID(getApplicationContext()));
-            // J.put("user_id",Pref.getUSERID(getApplicationContext()));
-            J.put("transaction_id","11502");
-            J.put("user_id","10043");
+            J.put("transaction_id",Pref.getTRANSACTIONID(getApplicationContext()));
+             J.put("user_id",Pref.getUSERID(getApplicationContext()));
+            /*J.put("transaction_id","11502");
+            J.put("user_id","10043");*/
             J.put("applicant",Applicant);
             J.put("co_applicant",Co_Applicant);
 
@@ -691,15 +698,14 @@ public class Credite_report_details extends SimpleActivity {
                                 {
                                     Toast.makeText(context,"Eligibility Created Successfully",Toast.LENGTH_SHORT).show();
                                     Intent intent = new Intent(Credite_report_details.this, Payment_Details_Activity.class);
-
                                     startActivity(intent);
                                     finish();
                                 }else if(jsonObject1.getString("pay_status").equals("error"))
                                 {
                                     Toast.makeText(context,"Eligibility Failed",Toast.LENGTH_SHORT).show();
 
-                                    String viability_array =jsonObject1.getString("eligibility_arr");
-                                    Intent intent = new Intent(Credite_report_details.this, Loan_Viyability_Check_Activity.class);
+                                    String viability_array =jsonObject1.getString("pay_status");
+                                    Intent intent = new Intent(Credite_report_details.this, Home.class);
                                     intent.putExtra("viability_jsonArray", viability_array.toString());
                                     startActivity(intent);
                                     finish();

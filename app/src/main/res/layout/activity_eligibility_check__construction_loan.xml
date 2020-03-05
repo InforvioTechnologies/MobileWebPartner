@@ -39,7 +39,7 @@
                     android:orientation="vertical"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
-                    <include layout="@layout/construction_loan"/>
+                    <include layout="@layout/improment_loan_new"/>
                 </LinearLayout>
                 <LinearLayout
                     android:visibility="gone"

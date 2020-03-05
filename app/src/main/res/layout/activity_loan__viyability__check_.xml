@@ -110,15 +110,12 @@
                             android:layout_height="match_parent"
                             android:layout_weight="1">
                             <androidx.appcompat.widget.AppCompatTextView
-                                android:id="@+id/payment_amount"
+                                android:id="@+id/loan_viability"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="yes"
+                                android:text="Faild"
                                 android:textSize="12sp"
                                 android:textColor="@color/colorPrimary1"/>
-
-
-
                         </LinearLayout>
                     </LinearLayout>
                     <View
@@ -168,7 +165,7 @@
                                 android:layout_height="wrap_content">
 
                                 <androidx.appcompat.widget.AppCompatTextView
-                                    android:id="@+id/lcc"
+                                    android:id="@+id/ove_all"
                                     android:text="Type B"
                                     android:textSize="12sp"
 
@@ -201,7 +198,7 @@
                                 android:layout_height="wrap_content"
                                 android:textColor="@color/colorPrimary1"
                                 android:textSize="12sp"
-                                android:text="Loan offer"/>
+                                android:text="Reason"/>
 
                             <androidx.appcompat.widget.AppCompatTextView
                                 android:id="@+id/r3"
@@ -223,7 +220,7 @@
                                 android:layout_height="wrap_content">
 
                                 <androidx.appcompat.widget.AppCompatTextView
-                                    android:id="@+id/crc"
+                                    android:id="@+id/viability_reson"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:textColor="@color/colorPrimary1"

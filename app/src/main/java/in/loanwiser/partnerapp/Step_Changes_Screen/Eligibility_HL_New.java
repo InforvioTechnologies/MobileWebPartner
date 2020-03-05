@@ -111,7 +111,7 @@ public class Eligibility_HL_New extends SimpleActivity {
     // Co Applicant Self
 
     JSONArray Other_income,epf_deduct,Marital_Status,Type_employee,Company_type,
-            employee_id_ar,have_pan_ar,Current_Residence,relation_own,Property_Status,transaction_type;;
+            employee_id_ar,have_pan_ar,Current_Residence,relation_own,Property_Status,transaction_type,Construction_Status;;
 
     String [] PAN_ID_SA,Employe_ID_SA,Company_type_SA,Employee_type_SA,Marital_Statues_SA,Epf_detected_SA,
             gst_reflect_SA,Current_res_SA,Own_house_relativ_SA,Permanent_Resi_SA,Pincode_SA,Area;
@@ -170,7 +170,7 @@ public class Eligibility_HL_New extends SimpleActivity {
     gst_reflect_Value,Own_house_rela_id,Own_house_rela_Value,Permanent_Resi_id,Permanent_Resi_Value,App_salaried_Other_income_id;
 
       LinearLayout hl_eligi_app_cmp_name,hl_eligibility_cmp_des_,is_other_income,rented_applicant_salaried_hl,
-              property_field;
+              property_field,property_field_bt_TOP_up;
 
       AppCompatEditText  company_name_edtxt,no_of_emp_edtxt,no_of_dependent_edt_txt,own_house_blood_address_edt_txt,
               education_qualification_edit_txt,rent_paid_for_house_edit_txt,other_incom_amt_edtxt,
@@ -186,13 +186,32 @@ public class Eligibility_HL_New extends SimpleActivity {
 
 
 
-    Spinner propert_statues_spinner,transaction_type_spi;
+    Spinner propert_statues_spinner,transaction_type_spi,construction_statues_spinner;
 
     String transaction_type_spi_id,transaction_type_spi_value,propert_statues_spinner_id,
             propert_statues_spinner_value,S_plot_area_edit_txt,S_build_up_area_edit_txt,S_property_price_edt_txt,
-            loan_type_id,S_age_Of_Property_Edit_Text;
+            loan_type_id,S_age_Of_Property_Edit_Text,construction_statues_spinner_id,construction_statues_spinner_value,
+            S_cost_of_plot_edite_text,S_plot_area_edit_txt_plot_construction,S_build_up_area_edit_txt_plot_construction,
+            S_plot_property_price_edt_txt,S_plot_area_edit_txt_plot_;
 
-    AppCompatEditText plot_area_edit_txt,build_up_area_edit_txt,property_price_edt_txt,age_Of_Property_Edit_Text;
+    AppCompatEditText plot_area_edit_txt,build_up_area_edit_txt,property_price_edt_txt,age_Of_Property_Edit_Text,
+            cost_of_plot_edite_text,plot_area_edit_txt_plot_construction,build_up_area_edit_txt_plot_construction,
+            plot_property_price_edt_txt,plot_area_edit_txt_plot_;
+
+
+    AppCompatEditText plot_area_edit_txt_bt,build_up_area_edit_txt_bt,property_price_edt_txt_bt,Existing_bank_edit_txt,
+            Loan_varient_edit_txt,loan_amount_edit_txt,original_tenure_edit_txt,remaining_tenure_edit_txt,
+            interest_rate_edit_txt,plot_area_edit_txt_improment,ploat_area_edit_txt_improment,cost_estimation_edit_txt_improment,
+            property_ownership_edt_txt_improment;
+
+    String  S_plot_area_edit_txt_bt,S_build_up_area_edit_txt_bt,S_property_price_edt_txt_bt,S_Existing_bank_edit_txt,S_Loan_varient_edit_txt,
+            S_loan_amount_edit_txt,S_original_tenure_edit_txt,S_remaining_tenure_edit_txt,
+            S_interest_rate_edit_txt;
+
+    String S_plot_area_edit_txt_improment,S_ploat_area_edit_txt_improment,S_cost_estimation_edit_txt_improment,
+            S_property_ownership_edt_txt_improment,R_state;
+
+    LinearLayout plot_construction_loan,identified_yes_or_no,plot_loan,improvment_extention;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -232,17 +251,44 @@ public class Eligibility_HL_New extends SimpleActivity {
         Font();
         Click();
 
-        Log.e("the salried type",salary_type);
-        Log.e("the CO_Employ",CO_Employement_Type);
+       // Log.e("the salried type",salary_type);
+       // Log.e("the CO_Employ",CO_Employement_Type);
 
         if(salary_type.equals("1"))
         {
             app_eligibility_salaried_hl.setVisibility(View.VISIBLE);
             app_eligibility_self_hl.setVisibility(View.GONE);
+            if(residence_id.equals("1"))
+            {
+                full_addres_of_relative.setVisibility(View.GONE);
+                permanent_res_type_ly.setVisibility(View.GONE);
+                permanent_residence_pincode_ly.setVisibility(View.GONE);
+                permanent_res_area.setVisibility(View.GONE);
+                rented_applicant_salaried_hl.setVisibility(View.GONE);
+                rent_paid_for_house_ly.setVisibility(View.GONE);
+            }else
+            {
+                full_addres_of_relative.setVisibility(View.VISIBLE);
+                permanent_res_type_ly.setVisibility(View.VISIBLE);
+                permanent_residence_pincode_ly.setVisibility(View.VISIBLE);
+                permanent_res_area.setVisibility(View.VISIBLE);
+                rented_applicant_salaried_hl.setVisibility(View.VISIBLE);
+                rent_paid_for_house_ly.setVisibility(View.VISIBLE);
+            }
+
         }else if(salary_type.equals("2"))
         {
             app_eligibility_salaried_hl.setVisibility(View.GONE);
             app_eligibility_self_hl.setVisibility(View.VISIBLE);
+
+            if(Rsidence_Type.equals("2"))
+            {
+                residence_rented.setVisibility(View.VISIBLE);
+            }else
+            {
+                residence_rented.setVisibility(View.GONE);
+            }
+
         }
 
         if(property_identified.equals("1"))
@@ -289,41 +335,50 @@ public class Eligibility_HL_New extends SimpleActivity {
             co_applicant_pl_co_applicant.setVisibility(View.GONE);
         }
 
-        if(residence_id.equals("1"))
+
+        if(loan_type_id.equals("1"))
         {
-            full_addres_of_relative.setVisibility(View.GONE);
-            permanent_res_type_ly.setVisibility(View.GONE);
-            permanent_residence_pincode_ly.setVisibility(View.GONE);
-            permanent_res_area.setVisibility(View.GONE);
-            rented_applicant_salaried_hl.setVisibility(View.GONE);
-            rent_paid_for_house_ly.setVisibility(View.GONE);
-        }else
+            identified_yes_or_no.setVisibility(View.VISIBLE);
+             age_of_Property_lap.setVisibility(View.VISIBLE);
+            plot_construction_loan.setVisibility(View.GONE);
+
+            plot_loan.setVisibility(View.GONE);
+        }else if(loan_type_id.equals("2"))
         {
-            full_addres_of_relative.setVisibility(View.VISIBLE);
-            permanent_res_type_ly.setVisibility(View.VISIBLE);
-            permanent_residence_pincode_ly.setVisibility(View.VISIBLE);
-            permanent_res_area.setVisibility(View.VISIBLE);
-            rented_applicant_salaried_hl.setVisibility(View.VISIBLE);
-            rent_paid_for_house_ly.setVisibility(View.VISIBLE);
+            identified_yes_or_no.setVisibility(View.VISIBLE);
+            age_of_Property_lap.setVisibility(View.GONE);
+            plot_construction_loan.setVisibility(View.GONE);
+            plot_loan.setVisibility(View.GONE);
+
+         }else if(loan_type_id.equals("3") || loan_type_id.equals("8"))
+             {
+                 identified_yes_or_no.setVisibility(View.GONE);
+                 plot_construction_loan.setVisibility(View.VISIBLE);
+                 plot_loan.setVisibility(View.GONE);
+
+        }else if(loan_type_id.equals("4"))
+        {
+            identified_yes_or_no.setVisibility(View.GONE);
+            plot_construction_loan.setVisibility(View.GONE);
+            plot_loan.setVisibility(View.VISIBLE);
         }
+        else if(loan_type_id.equals("5") || loan_type_id.equals("10"))
+        {
+            identified_yes_or_no.setVisibility(View.GONE);
+            plot_construction_loan.setVisibility(View.GONE);
+            plot_loan.setVisibility(View.GONE);
+            property_field_bt_TOP_up.setVisibility(View.VISIBLE);
 
-        if(Rsidence_Type.equals("2"))
-        {
-            residence_rented.setVisibility(View.VISIBLE);
-        }else
-        {
-            residence_rented.setVisibility(View.GONE);
+            improvment_extention.setVisibility(View.GONE);
         }
-
-
-                if(loan_type_id.equals("2"))
-                {
-                    age_of_Property_lap.setVisibility(View.GONE);
-                }else
-                {
-                    age_of_Property_lap.setVisibility(View.VISIBLE);
-
-                }
+        if(loan_type_id.equals("6") || loan_type_id.equals("9") )
+        {
+            identified_yes_or_no.setVisibility(View.GONE);
+            plot_construction_loan.setVisibility(View.GONE);
+            plot_loan.setVisibility(View.GONE);
+            property_field_bt_TOP_up.setVisibility(View.GONE);
+            improvment_extention.setVisibility(View.VISIBLE);
+        }
 
     }
 
@@ -407,6 +462,9 @@ public class Eligibility_HL_New extends SimpleActivity {
         app_eligibility_self_hl = (LinearLayout) findViewById(R.id.app_eligibility_self_hl);
         age_of_Property_lap = (LinearLayout) findViewById(R.id.age_of_Property_lap);
 
+        plot_construction_loan = (LinearLayout) findViewById(R.id.plot_construction_loan);
+        identified_yes_or_no = (LinearLayout) findViewById(R.id.identified_yes_or_no);
+
 
 
 
@@ -419,6 +477,8 @@ public class Eligibility_HL_New extends SimpleActivity {
         co_applicant_pl_co_applicant = (LinearLayout) findViewById(R.id.co_applicant_pl_co_applicant);
         permanent_residence_pincode_ly = (LinearLayout) findViewById(R.id.permanent_residence_pincode_ly);
         permanent_res_area = (LinearLayout) findViewById(R.id.permanent_res_area);
+        plot_loan = (LinearLayout) findViewById(R.id.plot_loan);
+        improvment_extention = (LinearLayout) findViewById(R.id.improvment_extention);
 
         ///co Applicnt
         pl_co_self_has_pan_card_spnr = (Spinner) findViewById(R.id.pl_co_self_has_pan_card_spnr);
@@ -465,12 +525,54 @@ public class Eligibility_HL_New extends SimpleActivity {
         transaction_type_spi = (Spinner) findViewById(R.id.transaction_type_spi);
         //plot_area_edit_txt,build_up_area_edit_txt,carpet_area_edit_txt;
 
+
+        //property
         plot_area_edit_txt = (AppCompatEditText) findViewById(R.id.plot_area_edit_txt);
         build_up_area_edit_txt = (AppCompatEditText) findViewById(R.id.build_up_area_edit_txt);
         property_price_edt_txt = (AppCompatEditText) findViewById(R.id.property_price_edt_txt);
         age_Of_Property_Edit_Text = (AppCompatEditText) findViewById(R.id.age_Of_Property_Edit_Text);
 
+
+
+        plot_area_edit_txt_improment = (AppCompatEditText) findViewById(R.id.plot_area_edit_txt_improment);
+        ploat_area_edit_txt_improment = (AppCompatEditText) findViewById(R.id.ploat_area_edit_txt_improment);
+        cost_estimation_edit_txt_improment = (AppCompatEditText) findViewById(R.id.cost_estimation_edit_txt_improment);
+        property_ownership_edt_txt_improment = (AppCompatEditText) findViewById(R.id.property_ownership_edt_txt_improment);
+
+
+        cost_of_plot_edite_text = (AppCompatEditText) findViewById(R.id.cost_of_plot_edite_text);
+        plot_area_edit_txt_plot_construction = (AppCompatEditText) findViewById(R.id.plot_area_edit_txt_plot_construction);
+        build_up_area_edit_txt_plot_construction = (AppCompatEditText) findViewById(R.id.build_up_area_edit_txt_plot_construction);
+        plot_property_price_edt_txt = (AppCompatEditText) findViewById(R.id.plot_property_price_edt_txt);
+        plot_area_edit_txt_plot_ = (AppCompatEditText) findViewById(R.id.plot_area_edit_txt_plot_);
+
+
+//bt
+      /*  plot_area_edit_txt_bt,ploat_area_edit_txt,property_price_edt_txt_bt,Existing_bank_edit_txt,
+                Loan_varient_edit_txt,loan_amount_edit_txt,original_tenure_edit_txt,remaining_tenure_edit_txt,
+                interest_rate_edit_txt;*/
+        plot_area_edit_txt_bt = (AppCompatEditText) findViewById(R.id.plot_area_edit_txt_bt);
+        Existing_bank_edit_txt = (AppCompatEditText) findViewById(R.id.Existing_bank_edit_txt);
+        build_up_area_edit_txt_bt = (AppCompatEditText) findViewById(R.id.build_up_area_edit_txt_bt);
+        property_price_edt_txt_bt = (AppCompatEditText) findViewById(R.id.property_price_edt_txt_bt);
+        Loan_varient_edit_txt = (AppCompatEditText) findViewById(R.id.Loan_varient_edit_txt);
+        loan_amount_edit_txt = (AppCompatEditText) findViewById(R.id.loan_amount_edit_txt);
+        original_tenure_edit_txt = (AppCompatEditText) findViewById(R.id.original_tenure_edit_txt);
+        remaining_tenure_edit_txt = (AppCompatEditText) findViewById(R.id.remaining_tenure_edit_txt);
+        interest_rate_edit_txt = (AppCompatEditText) findViewById(R.id.interest_rate_edit_txt);
+
+        property_field_bt_TOP_up = (LinearLayout) findViewById(R.id.property_field_bt_TOP_up);
+
+
+
+        cost_of_plot_edite_text = (AppCompatEditText) findViewById(R.id.cost_of_plot_edite_text);
+        plot_area_edit_txt_plot_construction = (AppCompatEditText) findViewById(R.id.plot_area_edit_txt_plot_construction);
+        build_up_area_edit_txt_plot_construction = (AppCompatEditText) findViewById(R.id.build_up_area_edit_txt_plot_construction);
+
+        construction_statues_spinner = (Spinner) findViewById(R.id.construction_statues_spinner);
+
         //applicant Salaried
+
         spinner_cmp_type = (Spinner) findViewById(R.id.spinner_cmp_type);
         has_pan_card_spnr = (Spinner) findViewById(R.id.has_pan_card_spnr);
         spinner_employe_id = (Spinner) findViewById(R.id.spinner_employe_id);
@@ -561,33 +663,86 @@ public class Eligibility_HL_New extends SimpleActivity {
             public void onClick(View view) {
 
 
-                if(transaction_type_spi_id.equals("0"))
+                if(loan_type_id.equals("1") || loan_type_id.equals("2"))
                 {
-                    Toast.makeText(mCon, "Please Select Transaction Type", Toast.LENGTH_SHORT).show();
-
-                }else {
-                    if(propert_statues_spinner_id.equals("0"))
+                    if(transaction_type_spi_id.equals("0"))
                     {
-                        Toast.makeText(mCon, "Please Select Property Status", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(mCon, "Please Select Transaction Type", Toast.LENGTH_SHORT).show();
 
                     }else {
-
-
-                        if(loan_type_id.equals("2"))
+                        if(propert_statues_spinner_id.equals("0"))
                         {
+                            Toast.makeText(mCon, "Please Select Property Status", Toast.LENGTH_SHORT).show();
 
-                            if (!Validate_age_Of_Property_Edit_Text()) {
-                                return;
+                        }else {
+
+
+                            if(loan_type_id.equals("2"))
+                            {
+
+                                if (!Validate_age_Of_Property_Edit_Text()) {
+                                    return;
+                                }
+                                if (!Validate_plot_area_edit_txt()) {
+                                    return;
+                                }
+                                if (!Validate_build_up_area_edit_txt()) {
+                                    return;
+                                }
+                                if (!Validate_carpet_area_edit_txt()) {
+                                    return;
+                                }
+
+                                if(salary_type.equals("1"))
+                                {
+                                    applicant_elig_salaried();
+                                }else if(salary_type.equals("2"))
+                                {
+                                    applicant_elig_Self();
+                                }
+
+                            }else  if(loan_type_id.equals("1"))
+                            {
+                                if (!Validate_plot_area_edit_txt()) {
+                                    return;
+                                }
+                                if (!Validate_build_up_area_edit_txt()) {
+                                    return;
+                                }
+                                if (!Validate_carpet_area_edit_txt()) {
+                                    return;
+                                }
+
+                                if(salary_type.equals("1"))
+                                {
+                                    applicant_elig_salaried();
+                                }else if(salary_type.equals("2"))
+                                {
+                                    applicant_elig_Self();
+                                }
                             }
-                            if (!Validate_plot_area_edit_txt()) {
-                                return;
-                            }
-                            if (!Validate_build_up_area_edit_txt()) {
-                                return;
-                            }
-                            if (!Validate_carpet_area_edit_txt()) {
-                                return;
-                            }
+                        }
+                    }
+
+                }else {
+                    if(loan_type_id.equals("3")|| loan_type_id.equals("8"))
+                    {
+
+                        if (!Validate_cost_of_plot_edite_text()) {
+                            return;
+                        }
+                        if (!Validate_plot_area_edit_txt_plot_construction()) {
+                            return;
+                        }
+                        if (!Validate_build_up_area_edit_txt_plot_construction()) {
+                            return;
+                        }
+
+                        if(construction_statues_spinner_id.equals("0"))
+                        {
+                            Toast.makeText(mCon, "Please Construction Statues ?", Toast.LENGTH_SHORT).show();
+
+                        }else {
 
                             if(salary_type.equals("1"))
                             {
@@ -596,32 +751,76 @@ public class Eligibility_HL_New extends SimpleActivity {
                             {
                                 applicant_elig_Self();
                             }
-
-                        }else
-                        {
-                            if (!Validate_plot_area_edit_txt()) {
-                                return;
-                            }
-                            if (!Validate_build_up_area_edit_txt()) {
-                                return;
-                            }
-                            if (!Validate_carpet_area_edit_txt()) {
-                                return;
-                            }
-
-                            if(salary_type.equals("1"))
-                            {
-                                applicant_elig_salaried();
-                            }else if(salary_type.equals("2"))
-                            {
-                                applicant_elig_Self();
-                            }
-
                         }
 
 
+                    } else if(loan_type_id.equals("4"))
+                    {
+
+                        if (!Validate_plot_property_price_edt_txt()) {
+                            return;
+                        }
+                        if (!Validate_plot_area_edit_txt_plot_()) {
+                            return;
+                        }
+                        if(salary_type.equals("1"))
+                        {
+                            applicant_elig_salaried();
+                        }else if(salary_type.equals("2"))
+                        {
+                            applicant_elig_Self();
+                        }
+
+                    }else if(loan_type_id.equals("5"))
+                    {
+                        if (!Validate_plot_area_edit_txt_bt()) {
+                            return;
+                        }
+                        if (!Validate_build_up_area_edit_txt_bt()) {
+                            return;
+                        }
+                        if (!Validate_property_price_edt_txt_bt()) {
+                            return;
+                        }
+
+                        if (!Validate_Existing_bank_edit_txt()) {
+                            return;
+                        }
+                        if (!Validate_Loan_varient_edit_txt()) {
+                            return;
+                        }
+                        if (!Validate_loan_amount_edit_txt()) {
+                            return;
+                        }
+                        if (!Validate_original_tenure_edit_txt()) {
+                            return;
+                        }
+                        if (!Validate_remaining_tenure_edit_txt()) {
+                            return;
+                        }
+                        if (!Validate_interest_rate_edit_txt()) {
+                            return;
+                        }
+
+                    }else if(loan_type_id.equals("6") || loan_type_id.equals("9") )
+                    {
+                        if (!Validate_plot_area_edit_txt_improment()) {
+                            return;
+                        }
+
+                        if (!Validate_ploat_area_edit_txt_improment()) {
+                            return;
+                        }
+                        if (!Validate_ploat_area_edit_txt_improment()) {
+                            return;
+                        }
+                        if (!Validate_cost_estimation_edit_txt_improment()) {
+                            return;
+                        }
 
                     }
+
+
                 }
 //////
             }
@@ -690,7 +889,6 @@ public class Eligibility_HL_New extends SimpleActivity {
                     Toast.makeText(mCon, "Select Current residence Proof", Toast.LENGTH_SHORT).show();
                 } else {
 
-
                     if(residence_id.equals("1"))
                     {
                         owned_house_Validation();
@@ -698,7 +896,6 @@ public class Eligibility_HL_New extends SimpleActivity {
                     {
                         rented_house_validation();
                     }
-
                 }
             }
         }
@@ -1691,6 +1888,222 @@ public class Eligibility_HL_New extends SimpleActivity {
         return true;
     }
 
+ /*
+       cost_of_plot_edite_text,plot_area_edit_txt_plot_construction,build_up_area_edit_txt_plot_construction,
+            plot_construction_property_price_edt_txt,plot_area_edit_txt_plot_;*/
+
+    private boolean Validate_cost_of_plot_edite_text(){
+        if (cost_of_plot_edite_text.getText().toString().trim().isEmpty()) {
+            cost_of_plot_edite_text.setError(getText(R.string.err_curent));
+            cost_of_plot_edite_text.requestFocus();
+            return false;
+        } else {
+
+        }
+
+        return true;
+    }
+    private boolean Validate_plot_area_edit_txt_plot_construction(){
+        if (plot_area_edit_txt_plot_construction.getText().toString().trim().isEmpty()) {
+            plot_area_edit_txt_plot_construction.setError(getText(R.string.err_curent));
+            plot_area_edit_txt_plot_construction.requestFocus();
+            return false;
+        } else {
+
+        }
+
+        return true;
+    }
+    private boolean Validate_build_up_area_edit_txt_plot_construction(){
+        if (build_up_area_edit_txt_plot_construction.getText().toString().trim().isEmpty()) {
+            build_up_area_edit_txt_plot_construction.setError(getText(R.string.err_curent));
+            build_up_area_edit_txt_plot_construction.requestFocus();
+            return false;
+        } else {
+
+        }
+
+        return true;
+    }
+    private boolean Validate_plot_property_price_edt_txt(){
+        if (plot_property_price_edt_txt.getText().toString().trim().isEmpty()) {
+            plot_property_price_edt_txt.setError(getText(R.string.err_curent));
+            plot_property_price_edt_txt.requestFocus();
+            return false;
+        } else {
+
+        }
+
+        return true;
+    }
+    private boolean Validate_plot_area_edit_txt_plot_(){
+        if (plot_area_edit_txt_plot_.getText().toString().trim().isEmpty()) {
+            plot_area_edit_txt_plot_.setError(getText(R.string.err_curent));
+            plot_area_edit_txt_plot_.requestFocus();
+            return false;
+        } else {
+
+        }
+
+        return true;
+    }
+
+
+
+    private boolean Validate_plot_area_edit_txt_bt(){
+        if (plot_area_edit_txt_bt.getText().toString().trim().isEmpty()) {
+            plot_area_edit_txt_bt.setError(getText(R.string.err_curent));
+            plot_area_edit_txt_bt.requestFocus();
+            return false;
+        } else {
+
+        }
+
+        return true;
+    }
+
+    private boolean Validate_build_up_area_edit_txt_bt(){
+        if (build_up_area_edit_txt_bt.getText().toString().trim().isEmpty()) {
+            build_up_area_edit_txt_bt.setError(getText(R.string.err_curent));
+            build_up_area_edit_txt_bt.requestFocus();
+            return false;
+        } else {
+
+        }
+
+        return true;
+    }
+
+    private boolean Validate_property_price_edt_txt_bt(){
+        if (property_price_edt_txt_bt.getText().toString().trim().isEmpty()) {
+            property_price_edt_txt_bt.setError(getText(R.string.err_curent));
+            property_price_edt_txt_bt.requestFocus();
+            return false;
+        } else {
+
+        }
+
+        return true;
+    }
+
+    private boolean Validate_Existing_bank_edit_txt(){
+        if (Existing_bank_edit_txt.getText().toString().trim().isEmpty()) {
+            Existing_bank_edit_txt.setError(getText(R.string.err_curent));
+            Existing_bank_edit_txt.requestFocus();
+            return false;
+        } else {
+
+        }
+
+        return true;
+    }
+    private boolean Validate_Loan_varient_edit_txt(){
+        if (Loan_varient_edit_txt.getText().toString().trim().isEmpty()) {
+            Loan_varient_edit_txt.setError(getText(R.string.err_curent));
+            Loan_varient_edit_txt.requestFocus();
+            return false;
+        } else {
+
+        }
+
+        return true;
+    }
+
+    private boolean Validate_loan_amount_edit_txt(){
+        if (loan_amount_edit_txt.getText().toString().trim().isEmpty()) {
+            loan_amount_edit_txt.setError(getText(R.string.err_curent));
+            loan_amount_edit_txt.requestFocus();
+            return false;
+        } else {
+
+        }
+
+        return true;
+    }
+
+    private boolean Validate_original_tenure_edit_txt(){
+        if (original_tenure_edit_txt.getText().toString().trim().isEmpty()) {
+            original_tenure_edit_txt.setError(getText(R.string.err_curent));
+            original_tenure_edit_txt.requestFocus();
+            return false;
+        } else {
+
+        }
+
+        return true;
+    }
+
+    private boolean Validate_remaining_tenure_edit_txt(){
+        if (remaining_tenure_edit_txt.getText().toString().trim().isEmpty()) {
+            remaining_tenure_edit_txt.setError(getText(R.string.err_curent));
+            remaining_tenure_edit_txt.requestFocus();
+            return false;
+        } else {
+
+        }
+
+        return true;
+    }
+
+    private boolean Validate_interest_rate_edit_txt(){
+        if (interest_rate_edit_txt.getText().toString().trim().isEmpty()) {
+            interest_rate_edit_txt.setError(getText(R.string.err_curent));
+            interest_rate_edit_txt.requestFocus();
+            return false;
+        } else {
+
+        }
+
+        return true;
+    }
+
+
+
+    private boolean Validate_plot_area_edit_txt_improment(){
+        if (plot_area_edit_txt_improment.getText().toString().trim().isEmpty()) {
+            plot_area_edit_txt_improment.setError(getText(R.string.err_curent));
+            plot_area_edit_txt_improment.requestFocus();
+            return false;
+        } else {
+
+        }
+
+        return true;
+    }
+    private boolean Validate_ploat_area_edit_txt_improment(){
+        if (ploat_area_edit_txt_improment.getText().toString().trim().isEmpty()) {
+            ploat_area_edit_txt_improment.setError(getText(R.string.err_curent));
+            ploat_area_edit_txt_improment.requestFocus();
+            return false;
+        } else {
+
+        }
+
+        return true;
+    }
+    private boolean Validate_cost_estimation_edit_txt_improment(){
+        if (cost_estimation_edit_txt_improment.getText().toString().trim().isEmpty()) {
+            cost_estimation_edit_txt_improment.setError(getText(R.string.err_curent));
+            cost_estimation_edit_txt_improment.requestFocus();
+            return false;
+        } else {
+
+        }
+
+        return true;
+    }
+    private boolean Validate_property_ownership_edt_txt_improment(){
+        if (property_ownership_edt_txt_improment.getText().toString().trim().isEmpty()) {
+            property_ownership_edt_txt_improment.setError(getText(R.string.err_curent));
+            property_ownership_edt_txt_improment.requestFocus();
+            return false;
+        } else {
+
+        }
+
+        return true;
+    }
+
 
 
     private void makeJsonObjReq1() {
@@ -1721,6 +2134,7 @@ public class Eligibility_HL_New extends SimpleActivity {
 
                             Property_Status =object.getJSONArray("Property Status");
                             transaction_type =object.getJSONArray("transaction_type");
+                            Construction_Status =object.getJSONArray("Construction Status");
 
                             Other_income =object.getJSONArray("Other_income");
                             epf_deduct =object.getJSONArray("epf_deduct");
@@ -1757,6 +2171,7 @@ public class Eligibility_HL_New extends SimpleActivity {
                             //property
                             hl_Property_Status(Property_Status);
                             hl_transaction_type(transaction_type);
+                            plot_construction_transaction_type(Construction_Status);
 
 
                             ///applicant salaried APP_Salaried_HAVE_PAN_Card
@@ -3706,6 +4121,64 @@ public class Eligibility_HL_New extends SimpleActivity {
 
     }
 
+    private void plot_construction_transaction_type(final JSONArray vocaton_ar) throws JSONException {
+        //   SPINNERLIST = new String[ja.length()];
+
+        Permanent_Resi_SA = new String[vocaton_ar.length()];
+        for (int i=0;i<vocaton_ar.length();i++){
+            JSONObject J =  vocaton_ar.getJSONObject(i);
+            Permanent_Resi_SA[i] = J.getString("value");
+            final List<String> loan_type_list = new ArrayList<>(Arrays.asList(Permanent_Resi_SA));
+            Permanent_Resi_Adapter = new ArrayAdapter<String>(context, R.layout.view_spinner_item, loan_type_list){
+                public View getView(int position, View convertView, ViewGroup parent) {
+                    font = Typeface.createFromAsset(context.getAssets(),"Lato-Regular.ttf");
+                    TextView v = (TextView) super.getView(position, convertView, parent);
+                    v.setTypeface(font);
+                    return v;
+                }
+
+                public View getDropDownView(int position, View convertView, ViewGroup parent) {
+                    TextView v = (TextView) super.getView(position, convertView, parent);
+                    v.setTypeface(font);
+                    return v;
+                }
+            };
+
+            Permanent_Resi_Adapter.setDropDownViewResource(R.layout.view_spinner_item);
+            construction_statues_spinner.setAdapter(Permanent_Resi_Adapter);
+            construction_statues_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                    try {
+
+
+                        //  City_loc_uniqueID = ja.getJSONObject(position).getString("city_id");
+                        construction_statues_spinner_id = vocaton_ar.getJSONObject(position).getString("id");
+                        construction_statues_spinner_value = vocaton_ar.getJSONObject(position).getString("value");
+
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+
+                }
+            });
+            construction_statues_spinner.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View view, MotionEvent motionEvent) {
+                    // imm.hideSoftInputFromWindow(edt_buyer_address.getWindowToken(), 0);
+                    return false;
+                }
+            });
+        }
+
+    }
+
 
     private void GET_Pincode1(String code) {
         // progressDialog.show();
@@ -3941,7 +4414,31 @@ public class Eligibility_HL_New extends SimpleActivity {
         S_property_price_edt_txt = property_price_edt_txt.getText().toString();
         S_age_Of_Property_Edit_Text = age_Of_Property_Edit_Text.getText().toString();
 
+        S_cost_of_plot_edite_text = cost_of_plot_edite_text.getText().toString();
+        S_plot_area_edit_txt_plot_construction = plot_area_edit_txt_plot_construction.getText().toString();
+        S_build_up_area_edit_txt_plot_construction = build_up_area_edit_txt_plot_construction.getText().toString();
 
+        S_plot_property_price_edt_txt = plot_property_price_edt_txt.getText().toString();
+        S_plot_area_edit_txt_plot_ = plot_area_edit_txt_plot_.getText().toString();
+
+
+
+
+        S_plot_area_edit_txt_bt = plot_area_edit_txt_bt.getText().toString();
+        S_build_up_area_edit_txt_bt = build_up_area_edit_txt_bt.getText().toString();
+        S_property_price_edt_txt_bt = property_price_edt_txt_bt.getText().toString();
+        S_Existing_bank_edit_txt = Existing_bank_edit_txt.getText().toString();
+        S_Loan_varient_edit_txt = Loan_varient_edit_txt.getText().toString();
+        S_loan_amount_edit_txt = loan_amount_edit_txt.getText().toString();
+        S_original_tenure_edit_txt = original_tenure_edit_txt.getText().toString();
+        S_remaining_tenure_edit_txt = remaining_tenure_edit_txt.getText().toString();
+        S_interest_rate_edit_txt = interest_rate_edit_txt.getText().toString();
+
+
+        S_plot_area_edit_txt_improment = plot_area_edit_txt_improment.getText().toString();
+        S_ploat_area_edit_txt_improment = ploat_area_edit_txt_improment.getText().toString();
+        S_cost_estimation_edit_txt_improment = cost_estimation_edit_txt_improment.getText().toString();
+        S_property_ownership_edt_txt_improment = property_ownership_edt_txt_improment.getText().toString();
         ///applicant salaried
         S_company_name_edtxt = company_name_edtxt.getText().toString();
 
@@ -4027,6 +4524,48 @@ public class Eligibility_HL_New extends SimpleActivity {
         JSONObject J= null;
         try {
             J =new JSONObject();
+
+
+            if(loan_type_id.equals("1") ||loan_type_id.equals("2") )
+            {
+                Applicant.put("transaction_type",transaction_type_spi_id);
+                Applicant.put("property_status",propert_statues_spinner_id);
+                Applicant.put("age_of_property",S_age_Of_Property_Edit_Text);
+                Applicant.put("plot_area",S_plot_area_edit_txt);
+                Applicant.put("builtup_area",S_build_up_area_edit_txt);
+                Applicant.put("property_price",S_property_price_edt_txt);
+
+            }else if(loan_type_id.equals("3") ||loan_type_id.equals("8") )
+            {
+                Applicant.put("cost_of_land",S_cost_of_plot_edite_text);
+                Applicant.put("plot_area",S_plot_area_edit_txt_plot_construction);
+                Applicant.put("builtup_area",S_build_up_area_edit_txt_plot_construction);
+                Applicant.put("construction_status",construction_statues_spinner_id);
+
+            }else if(loan_type_id.equals("4"))
+            {
+                Applicant.put("plot_area",S_plot_property_price_edt_txt);
+                Applicant.put("property_price",S_plot_area_edit_txt_plot_);
+            }
+            else if(loan_type_id.equals("5") || loan_type_id.equals("10"))
+            {
+                Applicant.put("plot_area",S_plot_area_edit_txt_bt);
+                Applicant.put("built_up_area",build_up_area_edit_txt_bt);
+                Applicant.put("property_value",S_property_price_edt_txt_bt);
+                Applicant.put("exit_bank_name",S_Existing_bank_edit_txt);
+                Applicant.put("exist_loan_varient",S_Loan_varient_edit_txt);
+                Applicant.put("original_loan_amount",S_loan_amount_edit_txt);
+                Applicant.put("original_tenure",S_original_tenure_edit_txt);
+                Applicant.put("remaining_tenure",S_remaining_tenure_edit_txt);
+                Applicant.put("interest_rate",S_interest_rate_edit_txt);
+
+            } else if(loan_type_id.equals("6") || loan_type_id.equals("9") ) {
+
+                Applicant.put("plot_area", S_plot_area_edit_txt_improment);
+                Applicant.put("plot_area", S_ploat_area_edit_txt_improment);
+                Applicant.put("plot_area", S_cost_estimation_edit_txt_improment);
+                Applicant.put("plot_area", S_property_ownership_edt_txt_improment);
+            }
 
             if(salary_type.equals("1"))
             {
@@ -4135,12 +4674,7 @@ public class Eligibility_HL_New extends SimpleActivity {
             J =new JSONObject();
             //  J.put(Params.email_id,email);
             J.put("applicant_count",app_count);
-            J.put("transaction_type",transaction_type_spi_id);
-            J.put("property_status",propert_statues_spinner_id);
-            J.put("age_of_property",S_age_Of_Property_Edit_Text);
-            J.put("plot_area",S_plot_area_edit_txt);
-            J.put("builtup_area",S_build_up_area_edit_txt);
-            J.put("property_price",S_property_price_edt_txt);
+
 
             J.put("transaction_id",Pref.getTRANSACTIONID(getApplicationContext()));
             J.put("user_id",Pref.getUSERID(getApplicationContext()));

@@ -4742,7 +4742,7 @@ public class Viability_Check_PL extends SimpleActivity {
             applicant.put("per_area",res_company_area);
             applicant.put("res_type",residence_id);
             applicant.put("live_in_res",ST_current_residence_edit_txt);
-            applicant.put("emp_statues",CO_Type_of_employement_ID);
+            applicant.put("emp_statues",1);
 
 
         } catch (JSONException e) {
@@ -4766,13 +4766,13 @@ public class Viability_Check_PL extends SimpleActivity {
                     applicant1.put("income_proof",salary_proof_salary_array);
                     applicant1.put("ofc_area",pl_co_app_slrd_res_spinn_area_id);
                     applicant1.put("assets",assets_owned_salary_array);
-                    applicant1.put("emp_statues",CO_Type_of_employement_ID);
+                    applicant1.put("emp_statues",1);
 
                 }else if(CO_Type_of_employement_ID.equals("2"))
                 {
                     co_applicant_salaried_employed.setVisibility(View.GONE);
                     co_applicant_self_employed.setVisibility(View.VISIBLE);
-                    applicant1.put("emp_statues",CO_Type_of_employement_ID);
+                    applicant1.put("emp_statues",3);
                     applicant1.put("bus_employment_type",pl_self_ind_Employee_type_Id);
                     applicant1.put("member_name",ST_pl_Ly_co_app_self_edit_txt_name);
                     applicant1.put("age",ST_pl_Ly_co_app_self_age_edit_txt);
@@ -4846,6 +4846,7 @@ public class Viability_Check_PL extends SimpleActivity {
                             applicant1.put("income_proof",business_proof_self);
                             applicant1.put("office_setup",pl_co_app_ind_Office_Shop__id);
                             applicant1.put("assets",self_co_assets_);
+                            applicant1.put("emp_statues",IS_CO_Applicant_Id);
                 }
 
             }else {

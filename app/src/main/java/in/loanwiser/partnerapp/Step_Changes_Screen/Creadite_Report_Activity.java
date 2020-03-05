@@ -7,6 +7,7 @@ import androidx.appcompat.widget.AppCompatEditText;
 import androidx.appcompat.widget.AppCompatTextView;
 
 import android.app.AlertDialog;
+import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
@@ -14,6 +15,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.DatePicker;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
@@ -41,6 +43,7 @@ import adhoc.app.applibrary.Config.AppUtils.Pref.Pref;
 import adhoc.app.applibrary.Config.AppUtils.Urls;
 import adhoc.app.applibrary.Config.AppUtils.VolleySignleton.AppController;
 import dmax.dialog.SpotsDialog;
+import in.loanwiser.partnerapp.PartnerActivitys.Home;
 import in.loanwiser.partnerapp.R;
 import in.loanwiser.partnerapp.SimpleActivity;
 
@@ -158,6 +161,13 @@ public class Creadite_Report_Activity extends SimpleActivity {
 
     }
 
+    private void updateLabel()
+    {
+        String myFormat = "dd-MM-yyyy"; //In which you need put here
+        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
+        dob_Edite_text.setText(sdf.format(myCalendar.getTime()));
+        pl_co_app_dob_Edite_text.setText(sdf.format(myCalendar.getTime()));
+    }
     private void Click() {
 
         credit_det_cap_button.setOnClickListener(new View.OnClickListener() {
@@ -168,7 +178,42 @@ public class Creadite_Report_Activity extends SimpleActivity {
                 finish();
             }
         });
+        final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
 
+            @Override
+            public void onDateSet(DatePicker view, int year, int monthOfYear,
+                                  int dayOfMonth) {
+                // TODO Auto-generated method stub
+                myCalendar.set(Calendar.YEAR, year);
+                myCalendar.set(Calendar.MONTH, monthOfYear);
+                myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                updateLabel();
+            }
+
+        };
+
+         dob_Edite_text.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                new DatePickerDialog(Creadite_Report_Activity.this, date, myCalendar
+                        .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
+                        myCalendar.get(Calendar.DAY_OF_MONTH)).show();
+            }
+
+
+        });
+         pl_co_app_dob_Edite_text.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                new DatePickerDialog(Creadite_Report_Activity.this, date, myCalendar
+                        .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
+                        myCalendar.get(Calendar.DAY_OF_MONTH)).show();
+            }
+
+
+        });
 
         credit_det_cap_button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -510,6 +555,7 @@ public class Creadite_Report_Activity extends SimpleActivity {
         JSONObject Co_Applicant =new JSONObject();
         JSONObject J= null;
 
+
         try {
             Applicant.put("first_name",S_first_name_edtxt);
             Applicant.put("last_name",S_last_name_edtxt);
@@ -529,32 +575,34 @@ public class Creadite_Report_Activity extends SimpleActivity {
         {
             applicant_count = 2;
             co_applicant_crif.setVisibility(View.VISIBLE);
+            try {
+                Co_Applicant.put("first_name",S_pl_co_app_first_name_Edite_text);
+                Co_Applicant.put("last_name",S_pl_co_app_Last_name_Edite_text);
+                Co_Applicant.put("father_name",S_pl_co_app_father_name_edt_txt);
+                Co_Applicant.put("member_dob",S_pl_co_app_dob_Edite_text);
+                Co_Applicant.put("crif_pincode",S_pl_co_app_pincode_edt_txt);
+                Co_Applicant.put("pan_no",S_pl_co_app_Pan_No_Edite_text);
+                Co_Applicant.put("member_email",S_pl_co_app_Email_Id_Edite_text);
+                Co_Applicant.put("member_mobile",S_pl_co_app_Mobile_No_Edite_text);
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
         }else
         {
             applicant_count = 1;
             co_applicant_crif.setVisibility(View.GONE);
 
         }
-        try {
-            Co_Applicant.put("first_name",S_pl_co_app_first_name_Edite_text);
-            Co_Applicant.put("last_name",S_pl_co_app_Last_name_Edite_text);
-            Co_Applicant.put("father_name",S_pl_co_app_father_name_edt_txt);
-            Co_Applicant.put("member_dob",S_pl_co_app_dob_Edite_text);
-            Co_Applicant.put("crif_pincode",S_pl_co_app_pincode_edt_txt);
-            Co_Applicant.put("pan_no",S_pl_co_app_Pan_No_Edite_text);
-            Co_Applicant.put("member_email",S_pl_co_app_Email_Id_Edite_text);
-            Co_Applicant.put("member_mobile",S_pl_co_app_Mobile_No_Edite_text);
 
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
 
         try {
             J =new JSONObject();
             //  J.put(Params.email_id,email);
             J.put("applicant_count",applicant_count);
-            J.put("transaction_id",11225);
-            J.put("user_id",9766);
+            J.put("transaction_id",Pref.getTRANSACTIONID(getApplicationContext()));
+            J.put("user_id",Pref.getUSERID(getApplicationContext()));
             J.put("applicant",Applicant);
             J.put("co_applicant",Co_Applicant);
 
@@ -572,12 +620,25 @@ public class Creadite_Report_Activity extends SimpleActivity {
                         String data = String.valueOf(response);
                         Log.e("Add_Home_loan Partner", String.valueOf(response));
                         try {
+                            JSONObject jsonObject1 = response.getJSONObject("response");
+                            if(jsonObject1.getString("applicant_status").equals("success")) {
+                                if(jsonObject1.getString("pay_status").equals("success"))
+                                {
+                                    Toast.makeText(context,"Eligibility Created Successfully",Toast.LENGTH_SHORT).show();
+                                    Intent intent = new Intent(Creadite_Report_Activity.this, Payment_Details_Activity.class);
+                                    startActivity(intent);
+                                    finish();
 
-                            if(response.getString("applicant_status").equals("success")) {
+                                }else if(jsonObject1.getString("pay_status").equals("error"))
+                                {
+                                    Toast.makeText(context,"Eligibility Failed",Toast.LENGTH_SHORT).show();
+                                    String viability_array =jsonObject1.getString("pay_status");
+                                    Intent intent = new Intent(Creadite_Report_Activity.this, Home.class);
+                                    intent.putExtra("viability_jsonArray", viability_array.toString());
+                                    startActivity(intent);
+                                    finish();
 
-                            }
-                            if(response.getString(Params.status).equals("error")) {
-                                Objs.a.showToast(context, "Already Registered with Propwiser");
+                                }
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();

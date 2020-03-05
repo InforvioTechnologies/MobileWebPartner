@@ -86,6 +86,7 @@ public class Urls {
     public static String NOCRIFREPORT = Urls_step + "crfi_check";
     public static String PAYMENT_CONFIRMATION = Urls_step + "payarr";
     public static String PAYMENT_SCHEDULE = Urls_step + "get_payschedule";
+    public static String DOCUMENT_CHECK_LIST = Urls_step + "get_documentcklist";
 
 
 

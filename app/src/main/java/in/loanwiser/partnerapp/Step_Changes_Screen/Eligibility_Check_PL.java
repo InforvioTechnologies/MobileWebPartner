@@ -51,6 +51,7 @@ import adhoc.app.applibrary.Config.AppUtils.Pref.Pref;
 import adhoc.app.applibrary.Config.AppUtils.Urls;
 import adhoc.app.applibrary.Config.AppUtils.VolleySignleton.AppController;
 import dmax.dialog.SpotsDialog;
+import in.loanwiser.partnerapp.PartnerActivitys.Applicant_Details_Activity;
 import in.loanwiser.partnerapp.R;
 import in.loanwiser.partnerapp.SimpleActivity;
 
@@ -58,7 +59,6 @@ import in.loanwiser.partnerapp.SimpleActivity;
 public class Eligibility_Check_PL extends SimpleActivity {
 
     AppCompatButton lead_viy_step2;
-
     private String tag_json_obj = "jobj_req", tag_json_arry = "jarray_req";
     Typeface font;
     private Context context = this;
@@ -324,6 +324,7 @@ public class Eligibility_Check_PL extends SimpleActivity {
 
             company_name_edtxt = (AppCompatEditText) findViewById(R.id.company_name_edtxt);
         pl_co_app_company_name_edtxt = (AppCompatEditText) findViewById(R.id.pl_co_app_company_name_edtxt);
+        pl_co_App_other_incom_amt_edtxt = (AppCompatEditText) findViewById(R.id.pl_co_App_other_incom_amt_edtxt);
 
         designation_in_company = (AppCompatEditText) findViewById(R.id.designation_in_company);
         no_of_emp_edtxt = (AppCompatEditText) findViewById(R.id.no_of_emp_edtxt);
@@ -418,7 +419,6 @@ public class Eligibility_Check_PL extends SimpleActivity {
 
     private void Click ()
      {
-
 
          permanent_residence_auto.addTextChangedListener(new TextWatcher() {
              @Override
@@ -2804,9 +2804,6 @@ public class Eligibility_Check_PL extends SimpleActivity {
         S_own_house_blood_address_edt_txt = own_house_blood_address_edt_txt.getText().toString();
         S_rent_paid_for_house_edit_txt = rent_paid_for_house_edit_txt.getText().toString();
 
-
-
-
         S_pl_co_app_company_name_edtxt = pl_co_app_company_name_edtxt.getText().toString();
         S_pl_co_App_no_of_emp_edtxt = pl_co_App_no_of_emp_edtxt.getText().toString();
         S_pl_co_app_designation_in_company = pl_co_app_designation_in_company.getText().toString();
@@ -2895,7 +2892,7 @@ public class Eligibility_Check_PL extends SimpleActivity {
                     Co_Applicant.put("other_amount",S_co_other_income_edite_txt_ar);
                     Co_Applicant.put("other_reflected",S_co_Gstreflect_Id_ar);
 
-                }else
+                }else if(IS_CO_Salried_Self.equals("2"))
                 {
                     Co_Applicant.put("has_sb_account",co_having_bank_Id);
                     Co_Applicant.put("qualification",co_Educational_Id);
@@ -2960,7 +2957,6 @@ public class Eligibility_Check_PL extends SimpleActivity {
                                 }else if(jsonObject1.getString("eligibility_status").equals("error"))
                                 {
                                     Toast.makeText(context,"Eligibility Failed",Toast.LENGTH_SHORT).show();
-
                                     String viability_array =jsonObject1.getString("eligibility_arr");
                                     Intent intent = new Intent(Eligibility_Check_PL.this, Loan_Viyability_Check_Activity.class);
                                     intent.putExtra("viability_jsonArray", viability_array.toString());
@@ -3006,7 +3002,7 @@ public class Eligibility_Check_PL extends SimpleActivity {
     @Override
     public void onBackPressed() {
 
-        Objs.ac.StartActivity(mCon, Viability_Check_PL.class);
+        Objs.ac.StartActivity(mCon, Applicant_Details_Activity.class);
         finish();
         super.onBackPressed();
     }

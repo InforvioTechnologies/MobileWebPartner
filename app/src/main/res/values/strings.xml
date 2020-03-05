@@ -552,6 +552,7 @@
     <string name="carpet_area">Carpet Area(Sq.ft)</string>
     <string name="required_loan_amt">Required Loan Amount</string>
     <string name="property_price">Property Value</string>
+    <string name="Plot_price">Plot Value</string>
 
     <string name="estimated_cmp_date">Estimated Completion date</string>
     <string name="cost_estimate">Cost Estimated</string>

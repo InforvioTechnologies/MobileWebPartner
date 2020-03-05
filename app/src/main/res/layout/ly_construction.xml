@@ -13,18 +13,35 @@
             android:layout_height="match_parent">
 
             <LinearLayout
+                android:id="@+id/pro_details"
+                android:gravity="left"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:gravity="left"
+                    android:layout_width="match_parent"
+                    style="@style/LorgeText"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/colorPrimary"
+                    android:text="Property Details"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+            <LinearLayout
+                android:visibility="gone"
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <LinearLayout
-                    android:id="@+id/select_purchase_from"
+                    android:id="@+id/construction_type"
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
                     <androidx.appcompat.widget.AppCompatTextView
                         android:gravity="left"
                         android:layout_marginLeft="2dp"
-                        android:id="@+id/property_Size"
+                        android:id="@+id/trans_type_txt"
                         android:layout_width="wrap_content"
                         style="@style/LorgeText2"
                         android:textColor="@color/colorPrimaryDark"
@@ -34,20 +51,19 @@
                     <androidx.appcompat.widget.AppCompatTextView
                         android:gravity="left"
                         android:layout_marginLeft="2dp"
-                        android:id="@+id/property_Size1"
                         android:layout_width="match_parent"
                         style="@style/LorgeText2"
+                        android:id="@+id/trans_type_txt1"
                         android:textColor="@color/colorPrimaryDark"
                         android:textColorHint="@color/colorPrimaryDark"
-                        android:text="@string/property_size"
+                        android:text="@string/property_ownership"
                         android:layout_height="wrap_content" />
                 </LinearLayout>
                 <LinearLayout
                     android:gravity="center"
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
-                    android:layout_height="60dp">
-
+                    android:layout_height="50dp">
                     <LinearLayout
                         android:layout_marginLeft="30dp"
                         android:layout_width="match_parent"
@@ -57,13 +73,13 @@
                             android:backgroundTint="#ff000000"
                             android:backgroundTintMode="src_in"
                             android:spinnerMode="dropdown"
-                            android:id="@+id/propert_Size"
+                            android:id="@+id/property_ownership"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent" />
                     </LinearLayout>
-
                 </LinearLayout>
             </LinearLayout>
+
             <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="match_parent"
@@ -81,7 +97,7 @@
                         style="@style/LorgeText2"
                         android:textColor="@color/colorPrimaryDark"
                         android:textColorHint="@color/colorPrimaryDark"
-                        android:hint="2"
+                        android:hint="1"
                         android:layout_height="wrap_content" />
                     <androidx.appcompat.widget.AppCompatTextView
                         android:gravity="left"
@@ -103,7 +119,7 @@
                         android:layout_height="wrap_content"
                         android:textColor="@color/colorPrimaryDark"
                         android:textColorHint="@color/colorPrimaryDark"
-                        android:id="@+id/plot_area_edit_txt"/>
+                        android:id="@+id/plot_area_edit_txt_improment"/>
                 </LinearLayout>
             </LinearLayout>
             <LinearLayout
@@ -123,7 +139,7 @@
                         style="@style/LorgeText2"
                         android:textColor="@color/colorPrimaryDark"
                         android:textColorHint="@color/colorPrimaryDark"
-                        android:hint="3"
+                        android:hint="2"
                         android:layout_height="wrap_content" />
                     <androidx.appcompat.widget.AppCompatTextView
                         android:gravity="left"
@@ -145,138 +161,9 @@
                         android:layout_height="wrap_content"
                         android:textColor="@color/colorPrimaryDark"
                         android:textColorHint="@color/colorPrimaryDark"
-                        android:id="@+id/ploat_area_edit_txt"/>
+                        android:id="@+id/ploat_area_edit_txt_improment"/>
                 </LinearLayout>
             </LinearLayout>
-            <LinearLayout
-                android:visibility="gone"
-                android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <LinearLayout
-                    android:id="@+id/carpet_area_ly"
-                    android:orientation="horizontal"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:gravity="left"
-                        android:layout_marginLeft="2dp"
-                        android:id="@+id/carpet_area_txt"
-                        android:layout_width="wrap_content"
-                        style="@style/LorgeText2"
-                        android:textColor="@color/colorPrimaryDark"
-                        android:textColorHint="@color/colorPrimaryDark"
-                        android:hint="5"
-                        android:layout_height="wrap_content" />
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:gravity="left"
-                        android:layout_marginLeft="2dp"
-                        android:layout_width="match_parent"
-                        style="@style/LorgeText2"
-                        android:id="@+id/carpet_area_txt1"
-                        android:textColor="@color/colorPrimaryDark"
-                        android:textColorHint="@color/colorPrimaryDark"
-                        android:text="@string/carpet_area"
-                        android:layout_height="wrap_content" />
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_marginLeft="30dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-                    <androidx.appcompat.widget.AppCompatEditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/colorPrimaryDark"
-                        android:textColorHint="@color/colorPrimaryDark"
-                        android:id="@+id/carpet_area_edit_txt"/>
-                </LinearLayout>
-            </LinearLayout>
-            <LinearLayout
-                android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <LinearLayout
-                    android:id="@+id/property_ownership_ly"
-                    android:orientation="horizontal"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:gravity="left"
-                        android:layout_marginLeft="2dp"
-                        android:id="@+id/property_ownership_txt"
-                        android:layout_width="wrap_content"
-                        style="@style/LorgeText2"
-                        android:textColor="@color/colorPrimaryDark"
-                        android:textColorHint="@color/colorPrimaryDark"
-                        android:hint="5"
-                        android:layout_height="wrap_content" />
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:gravity="left"
-                        android:layout_marginLeft="2dp"
-                        android:layout_width="match_parent"
-                        style="@style/LorgeText2"
-                        android:id="@+id/property_ownership_txt1"
-                        android:textColor="@color/colorPrimaryDark"
-                        android:textColorHint="@color/colorPrimaryDark"
-                        android:text="@string/property_ownership"
-                        android:layout_height="wrap_content" />
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_marginLeft="30dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-                    <androidx.appcompat.widget.AppCompatEditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/colorPrimaryDark"
-                        android:textColorHint="@color/colorPrimaryDark"
-                        android:id="@+id/property_ownership_edt_txt"/>
-                </LinearLayout>
-            </LinearLayout>
-
-            <LinearLayout
-                android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <LinearLayout
-                    android:id="@+id/estimated_completion_date_ly"
-                    android:orientation="horizontal"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:gravity="left"
-                        android:layout_marginLeft="2dp"
-                        android:id="@+id/estimated_completion_date_txt"
-                        android:layout_width="wrap_content"
-                        style="@style/LorgeText2"
-                        android:textColor="@color/colorPrimaryDark"
-                        android:textColorHint="@color/colorPrimaryDark"
-                        android:hint="7"
-                        android:layout_height="wrap_content" />
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:gravity="left"
-                        android:layout_marginLeft="2dp"
-                        android:layout_width="match_parent"
-                        style="@style/LorgeText2"
-                        android:id="@+id/estimated_completion_date_txt1"
-                        android:textColor="@color/colorPrimaryDark"
-                        android:textColorHint="@color/colorPrimaryDark"
-                        android:text="@string/estimated_cmp_date"
-                        android:layout_height="wrap_content" />
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_marginLeft="30dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-                    <androidx.appcompat.widget.AppCompatEditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/colorPrimaryDark"
-                        android:textColorHint="@color/colorPrimaryDark"
-                        android:id="@+id/estimated_completion_date_edit_txt"/>
-                </LinearLayout>
-            </LinearLayout>
-
             <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="match_parent"
@@ -294,7 +181,7 @@
                         style="@style/LorgeText2"
                         android:textColor="@color/colorPrimaryDark"
                         android:textColorHint="@color/colorPrimaryDark"
-                        android:hint="6"
+                        android:hint="3"
                         android:layout_height="wrap_content" />
                     <androidx.appcompat.widget.AppCompatTextView
                         android:gravity="left"
@@ -316,7 +203,7 @@
                         android:layout_height="wrap_content"
                         android:textColor="@color/colorPrimaryDark"
                         android:textColorHint="@color/colorPrimaryDark"
-                        android:id="@+id/cost_estimation_edit_txt"/>
+                        android:id="@+id/cost_estimation_edit_txt_improment"/>
                 </LinearLayout>
             </LinearLayout>
             <LinearLayout
@@ -325,26 +212,26 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <LinearLayout
-                    android:id="@+id/property_price"
+                    android:id="@+id/property_ownership_ly"
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
                     <androidx.appcompat.widget.AppCompatTextView
                         android:gravity="left"
                         android:layout_marginLeft="2dp"
-                        android:id="@+id/property_price_txt"
+                        android:id="@+id/property_ownership_txt"
                         android:layout_width="wrap_content"
                         style="@style/LorgeText2"
                         android:textColor="@color/colorPrimaryDark"
                         android:textColorHint="@color/colorPrimaryDark"
-                        android:hint="7"
+                        android:hint="4"
                         android:layout_height="wrap_content" />
                     <androidx.appcompat.widget.AppCompatTextView
                         android:gravity="left"
                         android:layout_marginLeft="2dp"
                         android:layout_width="match_parent"
                         style="@style/LorgeText2"
-                        android:id="@+id/property_price_txt1"
+                        android:id="@+id/property_ownership_txt1"
                         android:textColor="@color/colorPrimaryDark"
                         android:textColorHint="@color/colorPrimaryDark"
                         android:text="@string/property_price"
@@ -359,7 +246,7 @@
                         android:layout_height="wrap_content"
                         android:textColor="@color/colorPrimaryDark"
                         android:textColorHint="@color/colorPrimaryDark"
-                        android:id="@+id/property_price_edt_txt"/>
+                        android:id="@+id/property_ownership_edt_txt_improment"/>
                 </LinearLayout>
             </LinearLayout>
 

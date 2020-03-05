@@ -72,7 +72,7 @@ public class Lead_Crration_Activity extends SimpleActivity {
     String Lontypename,Lontype,Loan_Cat_id,result,C_loan_amount_ext,
             C_mobile_no_txt,C_name_txt,C_whats_app_no,LoanCat_Name,
             Type_of_employement_ID,Type_of_employement_Value, CO_Type_of_employement_ID,CO_Type_of_employement_Value,
-            IS_CO_Applicant_Id,IS_CO_Applicant_Value,Mobile,Name,C_email_edite_txt;
+            IS_CO_Applicant_Id,IS_CO_Applicant_Value,Mobile,Name,C_email_edite_txt,EMP_Statues;
 
     InputMethodManager imm;
     JSONArray Employement,is_coapplicant;
@@ -112,19 +112,18 @@ public class Lead_Crration_Activity extends SimpleActivity {
         UI_FIELDS();
         fonts();
         makeJsonObjReq1();
-        Click();
+     Click();
 
-       /* lead_cr_step1.setOnClickListener(new View.OnClickListener() {
+      /*  lead_cr_step1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
                 Intent intent = new Intent(Lead_Crration_Activity.this, Viability_Check_HL_new.class);
                 startActivity(intent);
                 finish();
-
             }
-        });
-*/
+        });*/
+
      if(Lontypename.contains("Personal Loan [Unsecured]") || Lontypename.contains("Business Loan [Unsecured]"))
      {
 
@@ -294,7 +293,6 @@ public class Lead_Crration_Activity extends SimpleActivity {
         }
 
             validate_wats_App();
-
 
     }
 
@@ -908,6 +906,17 @@ public class Lead_Crration_Activity extends SimpleActivity {
         C_name_txt = name_txt.getText().toString();
         C_email_edite_txt = email_edite_txt.getText().toString();
 
+        if(App.equals("21"))
+        {
+            EMP_Statues = "1";
+        }else if(App.equals("20"))
+        {
+            EMP_Statues = "2";
+        }else
+        {
+            EMP_Statues = Type_of_employement_ID;
+        }
+
 
         try {
             J =new JSONObject();
@@ -917,7 +926,7 @@ public class Lead_Crration_Activity extends SimpleActivity {
             J.put("mobileno",C_mobile_no_txt);
             J.put("loan_amount",result);
             J.put("whatsapp",C_whats_app_no);
-            J.put("employment_type",Type_of_employement_ID);
+            J.put("employment_type",EMP_Statues);
             J.put("loan_type",App);
             J.put("loan_cat",Loan_Cat_id);
             J.put("terms_cond",m);
@@ -948,18 +957,7 @@ public class Lead_Crration_Activity extends SimpleActivity {
                                 Pref.putTRANSACTIONID(context,transaction_id);
                                 Pref.putUSERID(context,user_id);
 
-                                if(App.equals("1"))
-                                {
-                                    Intent intent = new Intent(Lead_Crration_Activity.this, Viability_check_HL.class);
-                                    startActivity(intent);
-                                    finish();
-                                }else if(App.equals("2"))
-                                {
-                                    Intent intent = new Intent(Lead_Crration_Activity.this, Viability_check_HL.class);
-                                    startActivity(intent);
-                                    finish();
-
-                                } else if(App.equals("20"))
+                              if(App.equals("20"))
                                 {
                                     Intent intent = new Intent(Lead_Crration_Activity.this, Viability_Check_BL.class);
                                     intent.putExtra("user_id", user_id);
@@ -975,6 +973,11 @@ public class Lead_Crration_Activity extends SimpleActivity {
                                     intent.putExtra("transaction_id", transaction_id);
                                     startActivity(intent);
                                     finish();
+                                } else {
+
+                                        Intent intent = new Intent(Lead_Crration_Activity.this, Viability_Check_HL_new.class);
+                                        startActivity(intent);
+                                        finish();
                                 }
                             }
                             if(jsonObject1.getString(Params.status).equals("error")) {

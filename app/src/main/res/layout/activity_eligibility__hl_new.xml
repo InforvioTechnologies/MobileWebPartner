@@ -32,7 +32,6 @@
                     app:spb_stateBackgroundColor="@color/colorPrimary"
                     app:spb_maxStateNumber="four"/>
 
-
                 <LinearLayout
                     android:visibility="gone"
                     android:id="@+id/property_field"
@@ -41,7 +40,40 @@
                     android:layout_height="wrap_content">
                     <include layout="@layout/hl_property_field_ly"/>
                 </LinearLayout>
+                <LinearLayout
+                    android:visibility="gone"
+                    android:id="@+id/property_field_bt_TOP_up"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <include layout="@layout/bt_topup_loan_ly"/>
+                </LinearLayout>
 
+                <LinearLayout
+                    android:visibility="gone"
+                    android:id="@+id/improvment_extention"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <include layout="@layout/improment_loan_new"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/pro_details"
+                    android:gravity="left"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:gravity="left"
+                        android:layout_width="match_parent"
+                        style="@style/LorgeText"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/colorPrimary"
+                        android:text="Applicant Personal/Work Details"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
                 <LinearLayout
                     android:id="@+id/app_eligibility_salaried_hl"
                     android:orientation="vertical"

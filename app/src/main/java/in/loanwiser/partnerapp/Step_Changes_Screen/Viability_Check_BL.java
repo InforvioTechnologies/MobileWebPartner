@@ -59,6 +59,7 @@ import adhoc.app.applibrary.Config.AppUtils.VolleySignleton.AppController;
 import dmax.dialog.SpotsDialog;
 import in.loanwiser.partnerapp.Multi_select_checkbox.Multi_Select_checkbox;
 import in.loanwiser.partnerapp.NumberTextWatcher;
+import in.loanwiser.partnerapp.PartnerActivitys.Applicant_Details_Activity;
 import in.loanwiser.partnerapp.PartnerActivitys.IncomeProofPOJO;
 import in.loanwiser.partnerapp.PartnerActivitys.RemoveCommas;
 import in.loanwiser.partnerapp.R;
@@ -6392,6 +6393,7 @@ public class Viability_Check_BL extends SimpleActivity {
                  applicant1.put("res_pincode",V_residence_pincode_edite_txt);
                  applicant1.put("per_area",residence_area);
                  applicant1.put("ofc_area",office_residence_area);
+                 applicant1.put("emp_statues",3);
 
         } catch (JSONException e) {
             e.printStackTrace();
@@ -6414,12 +6416,13 @@ public class Viability_Check_BL extends SimpleActivity {
                     Co_applicant1.put("income_proof",salary_proof_salary_array);
                     Co_applicant1.put("ofc_area",pl_co_app_slrd_res_spinn_area_id);
                     Co_applicant1.put("assets",assets_owned_salary_array);
+                    Co_applicant1.put("emp_statues",1);
 
                 }else if(CO_Type_of_employement_ID.equals("2"))
                 {
                     co_applicant_salaried_employed.setVisibility(View.GONE);
                     co_applicant_self_employed.setVisibility(View.VISIBLE);
-                    applicant1.put("emp_statues",CO_Type_of_employement_ID);
+                    applicant1.put("emp_statues",3);
                     Co_applicant1.put("bus_employment_type",pl_self_ind_Employee_type_Id);
                     Co_applicant1.put("member_name",ST_pl_Ly_co_app_self_edit_txt_name);
                     Co_applicant1.put("age",ST_pl_Ly_co_app_self_age_edit_txt);
@@ -6594,7 +6597,7 @@ public class Viability_Check_BL extends SimpleActivity {
     @Override
     public void onBackPressed() {
 
-        Objs.ac.StartActivity(mCon, Lead_Crration_Activity.class);
+        Objs.ac.StartActivity(mCon, Applicant_Details_Activity.class);
         finish();
         super.onBackPressed();
 

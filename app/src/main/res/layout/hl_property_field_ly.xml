@@ -13,6 +13,23 @@
             android:layout_height="match_parent">
 
             <LinearLayout
+                android:id="@+id/pro_details"
+                android:gravity="left"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:gravity="left"
+                    android:layout_width="match_parent"
+                    style="@style/LorgeText"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/colorPrimary"
+                    android:text="Property Details"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
+            <LinearLayout
                 android:id="@+id/identified_yes_or_no"
                 android:orientation="vertical"
                 android:layout_width="match_parent"
@@ -120,6 +137,7 @@
 
                     </LinearLayout>
                 </LinearLayout>
+
                 <LinearLayout
                     android:id="@+id/age_of_Property_lap"
                     android:orientation="vertical"
@@ -255,6 +273,7 @@
                             android:id="@+id/build_up_area_edit_txt"/>
                     </LinearLayout>
                 </LinearLayout>
+
                 <LinearLayout
                     android:visibility="gone"
                     android:orientation="vertical"
@@ -346,7 +365,286 @@
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
+            <LinearLayout
+                android:visibility="gone"
+                android:id="@+id/plot_construction_loan"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
+                <LinearLayout
+                    android:id="@+id/cost_of_plot"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <LinearLayout
+
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:gravity="left"
+                            android:layout_marginLeft="2dp"
+                            android:layout_width="wrap_content"
+                            style="@style/LorgeText2"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:textColorHint="@color/colorPrimaryDark"
+                            android:hint="1"
+                            android:layout_height="wrap_content" />
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:gravity="left"
+                            android:layout_marginLeft="2dp"
+                            android:layout_width="match_parent"
+                            style="@style/LorgeText2"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:textColorHint="@color/colorPrimaryDark"
+                            android:text="@string/plot_value"
+                            android:layout_height="wrap_content" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_marginLeft="30dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+                        <androidx.appcompat.widget.AppCompatEditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:textColorHint="@color/colorPrimaryDark"
+                            android:inputType="text"
+                            android:imeOptions="actionNext"
+                            android:id="@+id/cost_of_plot_edite_text"/>
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <LinearLayout
+                        android:id="@+id/plot_area_ly_plot_construction"
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:gravity="left"
+                            android:layout_marginLeft="2dp"
+                            android:layout_width="wrap_content"
+                            style="@style/LorgeText2"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:textColorHint="@color/colorPrimaryDark"
+                            android:hint="2"
+                            android:layout_height="wrap_content" />
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:gravity="left"
+                            android:layout_marginLeft="2dp"
+                            android:layout_width="match_parent"
+                            style="@style/LorgeText2"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:textColorHint="@color/colorPrimaryDark"
+                            android:text="@string/ploat_area_sqft"
+                            android:layout_height="wrap_content" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_marginLeft="30dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+                        <androidx.appcompat.widget.AppCompatEditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:textColorHint="@color/colorPrimaryDark"
+                            android:inputType="text"
+                            android:imeOptions="actionNext"
+                            android:id="@+id/plot_area_edit_txt_plot_construction"/>
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <LinearLayout
+
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:gravity="left"
+                            android:layout_marginLeft="2dp"
+                            android:layout_width="wrap_content"
+                            style="@style/LorgeText2"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:textColorHint="@color/colorPrimaryDark"
+                            android:hint="3"
+                            android:layout_height="wrap_content" />
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:gravity="left"
+                            android:layout_marginLeft="2dp"
+                            android:layout_width="match_parent"
+                            style="@style/LorgeText2"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:textColorHint="@color/colorPrimaryDark"
+                            android:text="@string/builtup_area"
+                            android:layout_height="wrap_content" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_marginLeft="30dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+                        <androidx.appcompat.widget.AppCompatEditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:textColorHint="@color/colorPrimaryDark"
+                            android:inputType="text"
+                            android:imeOptions="actionNext"
+                            android:id="@+id/build_up_area_edit_txt_plot_construction"/>
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:gravity="left"
+                            android:layout_marginLeft="2dp"
+                            android:layout_width="wrap_content"
+                            style="@style/LorgeText2"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:textColorHint="@color/colorPrimaryDark"
+                            android:hint="4"
+                            android:layout_height="wrap_content" />
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:gravity="left"
+                            android:layout_marginLeft="2dp"
+                            android:layout_width="match_parent"
+                            style="@style/LorgeText2"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:textColorHint="@color/colorPrimaryDark"
+                            android:text="@string/construction_statues"
+                            android:layout_height="wrap_content" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp">
+                        <LinearLayout
+                            android:layout_marginLeft="30dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+                            <Spinner
+                                style="@style/Base.Widget.AppCompat.Spinner.Underlined"
+                                android:backgroundTint="#ff000000"
+                                android:backgroundTintMode="src_in"
+                                android:spinnerMode="dropdown"
+                                android:id="@+id/construction_statues_spinner"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent" />
+                        </LinearLayout>
+                    </LinearLayout>
+                </LinearLayout>
+
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="vertical"
+                android:id="@+id/plot_loan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:id="@+id/plot_value"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:gravity="left"
+                            android:layout_marginLeft="2dp"
+                            android:layout_width="wrap_content"
+                            style="@style/LorgeText2"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:textColorHint="@color/colorPrimaryDark"
+                            android:hint="1"
+                            android:layout_height="wrap_content" />
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:gravity="left"
+                            android:layout_marginLeft="2dp"
+                            android:layout_width="match_parent"
+                            style="@style/LorgeText2"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:textColorHint="@color/colorPrimaryDark"
+                            android:text="@string/Plot_price"
+                            android:layout_height="wrap_content" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_marginLeft="30dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+                        <androidx.appcompat.widget.AppCompatEditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:textSize="16dp"
+                            android:inputType="number"
+                            android:imeOptions="actionNext"
+                            android:textColorHint="@color/colorPrimaryDark"
+                            android:id="@+id/plot_property_price_edt_txt"/>
+                    </LinearLayout>
+                </LinearLayout>
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <LinearLayout
+                        android:id="@+id/plot_area_ly_plot_"
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:gravity="left"
+                            android:layout_marginLeft="2dp"
+                            android:layout_width="wrap_content"
+                            style="@style/LorgeText2"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:textColorHint="@color/colorPrimaryDark"
+                            android:hint="2"
+                            android:layout_height="wrap_content" />
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:gravity="left"
+                            android:layout_marginLeft="2dp"
+                            android:layout_width="match_parent"
+                            style="@style/LorgeText2"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:textColorHint="@color/colorPrimaryDark"
+                            android:text="@string/ploat_area_sqft"
+                            android:layout_height="wrap_content" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_marginLeft="30dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+                        <androidx.appcompat.widget.AppCompatEditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:textColorHint="@color/colorPrimaryDark"
+                            android:inputType="text"
+                            android:imeOptions="actionNext"
+                            android:id="@+id/plot_area_edit_txt_plot_"/>
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
         </LinearLayout>
+
+
     </ScrollView>
 </LinearLayout>
