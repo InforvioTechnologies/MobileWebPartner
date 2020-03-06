@@ -87,18 +87,23 @@
             android:theme="@style/NoAction2"
             android:windowSoftInputMode="stateHidden" />
 
-        <activity android:name=".Step_Changes_Screen.Document_CheckList_Generation"
+
+        <activity android:name=".Step_Changes_Screen.Document_Check_List"
             android:theme="@style/NoAction2"
             android:windowSoftInputMode="stateHidden"/>
 
-        <activity android:name=".Step_Changes_Screen.Viability_Check_HL_new"
+        <activity
+            android:name=".Step_Changes_Screen.Document_CheckList_Generation"
             android:theme="@style/NoAction2"
-            android:windowSoftInputMode="stateHidden"/>
-
-        <activity android:name=".Step_Changes_Screen.Eligibility_HL_New"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".Step_Changes_Screen.Viability_Check_HL_new"
             android:theme="@style/NoAction2"
-            android:windowSoftInputMode="stateHidden"/>
-
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".Step_Changes_Screen.Eligibility_HL_New"
+            android:theme="@style/NoAction2"
+            android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".Step_Changes_Screen.Loan_Viyability_Check_Activity"
             android:theme="@style/NoAction2"
@@ -189,6 +194,10 @@
             android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".Step_Changes_Screen.Viability_check_HL"
+            android:theme="@style/NoAction2"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".PartnerActivitys.Applicant_Info_new"
             android:theme="@style/NoAction2"
             android:windowSoftInputMode="stateHidden" />
         <activity

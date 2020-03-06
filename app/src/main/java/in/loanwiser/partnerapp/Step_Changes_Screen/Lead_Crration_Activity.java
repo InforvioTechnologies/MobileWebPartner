@@ -316,22 +316,11 @@ public class Lead_Crration_Activity extends SimpleActivity {
     }
 
     private void makeJsonObjReq1() {
-        JSONObject J= null;
-        try {
 
-            J = new JSONObject();
-            J.put("state_id","28");
-
-        }catch (JSONException e)
-        {
-            e.printStackTrace();
-        }
-
-        Log.e("state_id", String.valueOf(J));
-
+        //Log.e("state_id", String.valueOf(J));
         progressDialog.show();
         Log.e("Request Dreopdown", "called");
-        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, Urls.GET_DROPDOWN_LIST, J,
+        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.GET, Urls.GET_DROPDOWN_LIST, null,
                 new Response.Listener<JSONObject>() {
 
                     @Override

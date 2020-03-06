@@ -87,8 +87,9 @@ public class Urls {
     public static String PAYMENT_CONFIRMATION = Urls_step + "payarr";
     public static String PAYMENT_SCHEDULE = Urls_step + "get_payschedule";
     public static String DOCUMENT_CHECK_LIST = Urls_step + "get_documentcklist";
-
-
+    public static String APPLICANT_INFO = Urls_step + "applicant_info";
+    public static String UPDATED_ENABLE = Urls_step + "update_enable";
+   // public static String DOCUMENT_CHECK_LIST = Urls_document_check_list + "get_documentcklist";
 
     /* public static  String = "" ;
     public static  String = "" ;

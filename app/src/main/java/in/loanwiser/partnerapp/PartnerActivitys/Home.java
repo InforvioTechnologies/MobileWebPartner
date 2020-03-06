@@ -2,6 +2,7 @@ package in.loanwiser.partnerapp.PartnerActivitys;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import androidx.core.content.ContextCompat;
 import androidx.appcompat.app.AppCompatActivity;
@@ -35,6 +36,7 @@ import adhoc.app.applibrary.Config.AppUtils.VolleySignleton.AppController;
 import dmax.dialog.SpotsDialog;
 import in.loanwiser.partnerapp.Documents.Applicant_Details_Single;
 import in.loanwiser.partnerapp.R;
+import in.loanwiser.partnerapp.Step_Changes_Screen.Document_Check_List;
 
 public class Home extends AppCompatActivity {
 
@@ -43,12 +45,12 @@ public class Home extends AppCompatActivity {
     private String S1,S2,S3,S4,S5;
     Toolbar toolbar;
     private AlertDialog progressDialog;
-    private CardView app,doc,inter,offer;
+    private CardView app,doc,offer;
     private String tag_json_obj = "jobj_req", tag_json_arry = "jarray_req";
     private ImageView app_doc_img,app_info_img,app_info_img11,app_interview_img,app_offer_img,app_track_img;
     private TextView customerinterview,offerdetails,app_doc_message,app_info_message;
     private LinearLayout lead_cr_statues;
-
+    CardView Applicant_info_ly,Document_check_list,Document_Upload;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,18 +68,40 @@ public class Home extends AppCompatActivity {
         progressDialog = new SpotsDialog(this, R.style.Custom);
 
 
-
         user_id =  Objs.a.getBundle(this, Params.user_id);
         transaction_id =  Objs.a.getBundle(this, Params.transaction_id);
         applicant_id =  Objs.a.getBundle(this, Params.applicant_id);
         sub_taskid =  Objs.a.getBundle(this, Params.sub_taskid);
         step_status =  Objs.a.getBundle(this, Params.step_status);
+
+
         Log.e("step_status",step_status);
 
-        app = (CardView) findViewById(R.id.hl);
-        doc = (CardView) findViewById(R.id.lap);
-        //   CD_app_track = (CardView) findViewById(R.id.CD_app_track);
-        inter = (CardView) findViewById(R.id.PL);
+        initCode();
+
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
+    }
+
+    private void initCode() {
+         initUI();
+         fonts();
+        clicks();
+      //  Work_flow_status(transaction_id);
+    }
+
+    private void initUI()
+    {
+        Applicant_info_ly = (CardView) findViewById(R.id.Applicant_info_ly);
+
+
+
+        Document_check_list = (CardView) findViewById(R.id.Document_check_list);
+        Document_Upload = (CardView) findViewById(R.id.Document_Upload);
         offer = (CardView) findViewById(R.id.Blo);
         lead_cr_statues = (LinearLayout) findViewById(R.id.lead_cr_statues);
 
@@ -91,23 +115,7 @@ public class Home extends AppCompatActivity {
         app_info_message = (TextView) findViewById(R.id.app_info_message) ;
         app_doc_message = (TextView) findViewById(R.id.app_doc_message) ;
         offerdetails = (TextView) findViewById(R.id.callcenter_offer) ;
-        initCode();
-
     }
-
-    @Override
-    public boolean onSupportNavigateUp() {
-        onBackPressed();
-        return true;
-    }
-
-    private void initCode() {
-        // initUI();
-         fonts();
-        clicks();
-        Work_flow_status(transaction_id);
-    }
-
     private void fonts() {
         Objs.a.OutfitNormalFontStyle(mCon, R.id.step1);
         Objs.a.OutfitNormalFontStyle(mCon, R.id.app_info);
@@ -121,6 +129,7 @@ public class Home extends AppCompatActivity {
         Objs.a.OutfitNormalFontStyle(mCon, R.id.app_doc_message);
         Objs.a.OutfitNormalFontStyle(mCon, R.id.app_info_message);
     }
+
     private void Work_flow_status(String transaction_id) {
         JSONObject jsonObject =new JSONObject();
         JSONObject J= null;
@@ -151,11 +160,11 @@ public class Home extends AppCompatActivity {
                                 //CD_app_info,CD_app_doc,CD_app_interview,CD_app_offer,CD_app_offer,CD_app_track
                                 //app_doc_img,app_info_img,app_interview_img,app_offer_img,app_track_img;
                                 if(S2.equals("1")){
-                                    app.setEnabled(true);
+                                 //   app.setEnabled(true);
                                     app_info_message.setTextColor(ContextCompat.getColor(mCon, R.color.colorAccent));
                                   //  app_info_img.setImageDrawable(getResources().getDrawable(R.drawable.don));
                                 }else{
-                                    app.setEnabled(false);
+                                   // app.setEnabled(true);
                                     app_info_message.setTextColor(ContextCompat.getColor(mCon, R.color.gray));
                                   //  app_info_img.setImageDrawable(getResources().getDrawable(R.drawable.notdon));
                                 }
@@ -174,12 +183,12 @@ public class Home extends AppCompatActivity {
                                 }
 
                                 if(S4.equals("1")){
-                                    inter.setEnabled(true);
+                                    Document_Upload.setEnabled(true);
                                     customerinterview.setTextColor(ContextCompat.getColor(mCon, R.color.colorAccent));
                                     customerinterview.setText("Thank you for sharing more info about you with Customer care");
                                     app_interview_img.setImageDrawable(getResources().getDrawable(R.drawable.ic_tick_icon));
                                 }else{
-                                    inter.setEnabled(false);
+                                    Document_Upload.setEnabled(false);
                                     customerinterview.setVisibility(View.VISIBLE);
                                     customerinterview.setTextColor(ContextCompat.getColor(mCon, R.color.gray));
                                     app_interview_img.setImageDrawable(getResources().getDrawable(R.drawable.ic_not_tick));
@@ -227,20 +236,23 @@ public class Home extends AppCompatActivity {
         };
         AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
     }
+
     private void clicks() {
 
-        findViewById(R.id.hl).setOnClickListener(new View.OnClickListener() {
+       /* findViewById(R.id.hl).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
               //  lead_cr_statues.setVisibility(View.VISIBLE);
 
-               /* Objs.ac.StartActivityPutExtra(mCon,
-                        Applicant_Info.class,
-                        Params.id,user_id, Params.transaction_id,transaction_id,
-                        Params.applicant_id,applicant_id, Params.sub_taskid,sub_taskid);*/
-
-
+            }
+        });
+*/
+        Applicant_info_ly.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Home.this,Applicant_Info_new.class);
+                startActivity(intent);
             }
         });
 
@@ -262,15 +274,17 @@ public class Home extends AppCompatActivity {
             }
         });
 
-        findViewById(R.id.lap).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.Document_check_list).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //      Toast.makeText(mCon, "CD_app_info", Toast.LENGTH_LONG).show();
-                Account_Listings_Details(user_id);
+              //  Account_Listings_Details(user_id);
+                Intent intent = new Intent(Home.this, Document_Check_List.class);
+                startActivity(intent);
             }
         });
 
-        findViewById(R.id.PL).setOnClickListener(new View.OnClickListener() {
+      /*  findViewById(R.id.PL).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -282,7 +296,7 @@ public class Home extends AppCompatActivity {
                 //Objs.ac.StartActivity(mCon, Customer_Info.class);
                 //        Toast.makeText(mCon, "CD_app_interview", Toast.LENGTH_LONG).show();
             }
-        });
+        });*/
 
         findViewById(R.id.Blo).setOnClickListener(new View.OnClickListener() {
             @Override
