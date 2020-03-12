@@ -49,7 +49,6 @@ import in.loanwiser.partnerapp.SimpleActivity;
 
 public class Creadite_Report_Activity extends SimpleActivity {
 
-
     AppCompatTextView name_txt,name_txt1,email_id_Txt,email_id_Txt1,mobiles_txt,mobiles_txt1,
             co_applicant_name_txt,co_applicant_name_txt1,Co_applicant_email_id,Co_applicant_email_id1,
             co_applicant_mobile,accept_terms_condition;
@@ -609,7 +608,6 @@ public class Creadite_Report_Activity extends SimpleActivity {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
         Log.e("Add Home Laoan", String.valueOf(J));
         progressDialog.show();
         JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, Urls.NOCRIFREPORT, J,

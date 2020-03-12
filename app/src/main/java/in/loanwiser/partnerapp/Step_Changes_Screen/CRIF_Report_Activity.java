@@ -86,6 +86,7 @@ public class CRIF_Report_Activity extends SimpleActivity {
         webview = (WebView)findViewById(R.id.webview);
         progressbar = (ProgressBar) findViewById(R.id.progressbar);
         webview.getSettings().setJavaScriptEnabled(true);
+
         String filename =  "https://callcenter.propwiser.com/crif_mail_download.php?user_id=MUxURkNBKzFHSXJHMDZMMkZDaFByQT09&trans_id=MUxURkNBKzFHSXJHMDZMMkZDaFByQT09";
         String filename1 =  "http://www.tutorialspoint.com";
      //   webview.loadUrl("http://docs.google.com/gview?embedded=true&url=" + filename);

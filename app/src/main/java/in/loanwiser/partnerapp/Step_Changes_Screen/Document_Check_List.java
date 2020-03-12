@@ -6,6 +6,7 @@ import androidx.appcompat.widget.AppCompatTextView;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
@@ -36,6 +37,7 @@ import java.util.List;
 import java.util.Map;
 
 import adhoc.app.applibrary.Config.AppUtils.Objs;
+import adhoc.app.applibrary.Config.AppUtils.Params;
 import adhoc.app.applibrary.Config.AppUtils.Urls;
 import adhoc.app.applibrary.Config.AppUtils.VolleySignleton.AppController;
 import dmax.dialog.SpotsDialog;
@@ -94,7 +96,9 @@ public class Document_Check_List extends SimpleActivity implements CompoundButto
 
     AppCompatTextView  Identity_Proof_txt,Current_Proof_txt,Permanent_Proof_txt,Income_Proof_txt,
             Work_Proof_txt_id,Photo_Proof_txt;
-    private CheckBox checkBox;
+
+
+    String applicant_name,transaction_id,user_type,emp_state;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -105,12 +109,16 @@ public class Document_Check_List extends SimpleActivity implements CompoundButto
         initTools(R.string.doc_check_list);
 
         progressDialog = new SpotsDialog(context, R.style.Custom);
-
         UIBINDING();
+
+        applicant_name =  Objs.a.getBundle(this, Params.applicant_name);
+        transaction_id =  Objs.a.getBundle(this, Params.transaction_id);
+        user_type =  Objs.a.getBundle(this, Params.user_type);
+        emp_state =  Objs.a.getBundle(this, Params.emp_state);
 
         Document_check_lsit();
 
-        Click();
+      //  Click();
 
     }
 
@@ -136,7 +144,7 @@ public class Document_Check_List extends SimpleActivity implements CompoundButto
                             J = response_iD_proof_comon.getJSONObject(i);
 
                             doc_ype_com = J.getJSONArray("doc_type_names");
-                            checklist_name_validate(doc_ype_com,key);
+                          //  checklist_name_validate(doc_ype_com,key);
 
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -190,7 +198,7 @@ public class Document_Check_List extends SimpleActivity implements CompoundButto
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        Log.e("Request cHECKBOX", "called");
+        Log.e("Request cHECKBOX", String.valueOf(J));
 
         JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, Urls.UPDATED_ENABLE, J,
                 new Response.Listener<JSONObject>() {
@@ -221,8 +229,6 @@ public class Document_Check_List extends SimpleActivity implements CompoundButto
         // Adding request to request queue
         AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
 
-
-
     }
 
 
@@ -230,11 +236,14 @@ public class Document_Check_List extends SimpleActivity implements CompoundButto
         JSONObject J = null;
         try {
             J = new JSONObject();
-            J.put("transaction_id", "11368");
-            J.put("employement_type", "1");
-            J.put("applicant_type", "1");
-            J.put("type_req", "0");
-            J.put("status_flag", "0");
+            J.put("transaction_id", transaction_id);
+          //  J.put("transaction_id", "11465");
+         //   J.put("applicant_type", "1");
+         //   J.put("employement_type", "1");
+           J.put("employement_type", emp_state);
+           J.put("applicant_type", user_type);
+            J.put("type_req", 0);
+            J.put("status_flag", 1);
 
         } catch (JSONException e) {
             e.printStackTrace();
@@ -265,8 +274,8 @@ public class Document_Check_List extends SimpleActivity implements CompoundButto
                                 for (int i=0;i<response_iD_proof_comon.length();i++) {
                                     JSONObject J = null;
                                     try {
-                                        J = response_iD_proof_comon.getJSONObject(i);
 
+                                        J = response_iD_proof_comon.getJSONObject(i);
                                         doc_ype_com = J.getJSONArray("doc_type_names");
                                         checklist_name(doc_ype_com,key);
 
@@ -341,7 +350,7 @@ public class Document_Check_List extends SimpleActivity implements CompoundButto
             TableRow row =new TableRow(this);
             row.setId(i);
             row.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.FILL_PARENT, TableRow.LayoutParams.WRAP_CONTENT));
-            checkBox = new CheckBox(this);
+            final CheckBox checkBox = new CheckBox(this);
             TextView textView = new TextView(this);
             checkBox.setOnCheckedChangeListener(this);
             checkBox.setId(i);
@@ -367,8 +376,7 @@ public class Document_Check_List extends SimpleActivity implements CompoundButto
                                 if (string5.equals(doc_typename6)) {
                                     target_id6 = jsonObjectUid5.getString("legal_docid");
                                     mList5.add(target_id6);
-                                    // Log.e("the check id-1", String.valueOf(mList5));
-
+                                     Log.e("target_id6", String.valueOf(target_id6));
                                     String status = "1";
                                     document_format(target_id6,status);
                                 }
@@ -397,16 +405,16 @@ public class Document_Check_List extends SimpleActivity implements CompoundButto
 
 
     }
-    private void checklist_name_validate(final JSONArray doc_ype_com, String key) {
+ /*   private void checklist_name_validate(final JSONArray doc_ype_com, String key) {
 
-     /*   LinearLayout.LayoutParams lparams = new LinearLayout.LayoutParams(
+     *//*   LinearLayout.LayoutParams lparams = new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
         TextView tv = new TextView(this);
         tv.setLayoutParams(lparams);
         tv.setText(key);
         tv.setTextSize(18);
         tv.setTextColor(Color.BLACK);
-        check_list_name.addView(tv);*/
+        check_list_name.addView(tv);*//*
 
         checklistname_count = doc_ype_com.length();
         for (int i = 0; i < checklistname_count; i++) {
@@ -424,7 +432,7 @@ public class Document_Check_List extends SimpleActivity implements CompoundButto
                 e.printStackTrace();
             }
 
-        /*    TableRow row =new TableRow(this);
+        *//*    TableRow row =new TableRow(this);
             row.setId(i);
             row.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.FILL_PARENT, TableRow.LayoutParams.WRAP_CONTENT));
             checkBox = new CheckBox(this);
@@ -434,7 +442,7 @@ public class Document_Check_List extends SimpleActivity implements CompoundButto
             checkBox.setText(checklist_name1);
             //  row.addView(checkBox);
             check_list_name.addView(checkBox);
-            // my_layout.addView(row);*/
+            // my_layout.addView(row);*//*
 
 
 
@@ -448,7 +456,7 @@ public class Document_Check_List extends SimpleActivity implements CompoundButto
             Log.e("sellect","select all from one");
         }
 
-    }
+    }*/
 
     @Override
     public void onCheckedChanged(CompoundButton compoundButton, boolean b) {

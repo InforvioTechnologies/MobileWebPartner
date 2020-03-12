@@ -78,7 +78,6 @@ public class Applicant_Details_Activity extends SimpleActivity {
                 String sub_categoryid = "1";
                 Pref.putLoanType(mCon,Loantype);
                 Pref.putLoanTypeSub(mCon,sub_categoryid);
-
                 String Loantype_name = "Home Loan";
                 Pref.putLoanTypename(mCon,Loantype_name);
 

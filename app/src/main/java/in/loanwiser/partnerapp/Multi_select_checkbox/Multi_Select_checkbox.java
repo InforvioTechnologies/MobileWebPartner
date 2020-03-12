@@ -84,7 +84,7 @@ public class Multi_Select_checkbox extends SimpleActivity {
                     }
                 }
 
-                if(selected.size()>0)
+              /*  if(selected.size()>0)
                 {
                     Intent intent = new Intent(Multi_Select_checkbox.this, Viability_Check_PL.class);
                     intent.putExtra("select_lid_id", (Serializable) select_lid_id);
@@ -93,7 +93,7 @@ public class Multi_Select_checkbox extends SimpleActivity {
                 }else
                 {
                     Toast.makeText(Multi_Select_checkbox.this, "Please select at least one", Toast.LENGTH_SHORT).show();
-                }
+                }*/
 
                // Toast.makeText(this, logString, Toast.LENGTH_SHORT).show();
             }

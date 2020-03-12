@@ -3,6 +3,7 @@ package in.loanwiser.partnerapp.Documents;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import androidx.appcompat.widget.AppCompatTextView;
 import androidx.cardview.widget.CardView;
@@ -35,8 +36,10 @@ import adhoc.app.applibrary.Config.AppUtils.Pref.Pref;
 import adhoc.app.applibrary.Config.AppUtils.Urls;
 import adhoc.app.applibrary.Config.AppUtils.VolleySignleton.AppController;
 import dmax.dialog.SpotsDialog;
+import in.loanwiser.partnerapp.PartnerActivitys.Home;
 import in.loanwiser.partnerapp.PartnerActivitys.SimpleActivity;
 import in.loanwiser.partnerapp.R;
+import in.loanwiser.partnerapp.Step_Changes_Screen.Document_Checklist_Details_type;
 
 public class Applicant_Doc_Details extends SimpleActivity {
 
@@ -49,14 +52,14 @@ public class Applicant_Doc_Details extends SimpleActivity {
     private String TAG = Applicant_Doc_Details.class.getSimpleName();
     private AlertDialog progressDialog;
     private String usertype;
-    private String new_user_type;
+    private String new_user_type,transaction_id,Applicant_type;
     MenuItem chat;
+    JSONObject jsonobject_2;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_simple);
-
         Objs.a.setStubId(this, R.layout.activity_applicant__doc__details);
         applicant_name =  Objs.a.getBundle(this, Params.applicant_name);
         String document= applicant_name+" Document";
@@ -67,25 +70,36 @@ public class Applicant_Doc_Details extends SimpleActivity {
 
         doc_id =  Objs.a.getBundle(this, Params.id);
         emp_state =  Objs.a.getBundle(this, Params.emp_state);
-        type =  Objs.a.getBundle(this, Params.user_type);
+        Applicant_type =  Objs.a.getBundle(this, Params.user_type);
+        transaction_id =  Objs.a.getBundle(this, Params.transaction_id);
 
-        Pref.putAEID(mCon,type);
-        Document_Details(doc_id,emp_state,type);
+        Pref.putAEID(mCon,Applicant_type);
+
+        Pref.putDOC(mCon,doc_id);
+        Pref.putTID(mCon,transaction_id);
+        Pref.putEID(mCon,emp_state);
+
+        Document_Details();
 
 
 
     }
 
-    private void Document_Details(String id, String emp_state,String type) {
+    private void Document_Details() {
         JSONObject jsonObject =new JSONObject();
         JSONObject J= null;
         try {
             J =new JSONObject();
-            J.put(Params.checklist_code, Params.EMITRA);
-            J.put(Params.transaction_id, id);
-            J.put(Params.usertype, type);
-            J.put(Params.applicant_empstatus, emp_state);
+          //  J.put(Params.checklist_code, Params.EMITRA);
+         //   J.put("transaction_id", "11465");
+           // J.put("applicant_type", "1");
+         //   J.put("employement_type", "1");
 
+            J.put("transaction_id", transaction_id);
+            J.put("applicant_type", Applicant_type);
+            J.put("employement_type", emp_state);
+            J.put("type_req", 0);
+            J.put("status_flag", 1);
 
         } catch (JSONException e) {
             e.printStackTrace();
@@ -94,16 +108,34 @@ public class Applicant_Doc_Details extends SimpleActivity {
         Log.e("Applicant_Doc", String.valueOf(J));
 
         progressDialog.show();
-        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, Urls.GET_DOCUMENT_POST, J,
+        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, Urls.DOCUMENT_CHECK_LIST, J,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
 
+                        Log.e("Applicant_Doc",response.toString());
                         String data = String.valueOf(response);
                         //   Objs.a.showToast(mCon, data);
 
+                        try {
+                            JSONObject jsonObject1 = response.getJSONObject("response");
+                            JSONArray jsonArray = jsonObject1.getJSONArray("key_arr");
+                            jsonobject_2 = jsonObject1.getJSONObject("document_arr");
 
-                        Log.e("response", data);
+                            if (jsonArray.length()>0){
+                                // Objs.a.showToast(mCon, String.valueOf(object.getJSONArray(Params.products)));
+
+                                setAdapter(jsonArray);
+
+                            }else {
+                                Objs.a.ShowHideNoItems(mCon,true);
+                            }
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                      /*  Log.e("response", data);
                         try {
                             JSONArray ja = response.getJSONArray(Params.displayname);
                             new_user_type = response.getString(Params.user_type);
@@ -118,7 +150,7 @@ public class Applicant_Doc_Details extends SimpleActivity {
 
                         } catch (JSONException e) {
                             e.printStackTrace();
-                        }
+                        }*/
                         progressDialog.dismiss();
                     }
                 }, new Response.ErrorListener() {
@@ -188,35 +220,58 @@ public class Applicant_Doc_Details extends SimpleActivity {
                 String rupee = getResources().getString(R.string.Rs);
                 J = getItem(position);
 
-                holder.class_name.setText(Objs.a.capitalize(J.getString(Params.class_name)));
+                holder.class_name.setText(Objs.a.capitalize(J.getString("key")));
                 Objs.a.NewNormalFontStyle(mCon,holder.class_name);
 
-                if(J.getString(Params.class_name).contains("Signature Verification Document")){
-                    holder.image_doc.setImageDrawable(getResources().getDrawable(R.drawable.file));
-                }else if(J.getString(Params.class_name).contains("Address Proof")){
-                    holder.image_doc.setImageDrawable(getResources().getDrawable(R.drawable.file));
-                }else if(J.getString(Params.class_name).contains("Identify Proof")){
-                    holder.image_doc.setImageDrawable(getResources().getDrawable(R.drawable.file));
-                }else if(J.getString(Params.class_name).contains("Income Proof")){
-                    holder.image_doc.setImageDrawable(getResources().getDrawable(R.drawable.file));
-                }else if(J.getString(Params.class_name).contains("Existing Loan Documents")){
-                    holder.image_doc.setImageDrawable(getResources().getDrawable(R.drawable.file));
-                }else if(J.getString(Params.class_name).contains("Account Statement")){
-                    holder.image_doc.setImageDrawable(getResources().getDrawable(R.drawable.file));
-                }else if(J.getString(Params.class_name).contains("ITR Document")){
-                    holder.image_doc.setImageDrawable(getResources().getDrawable(R.drawable.file));
-                }else{
-                    holder.image_doc.setImageDrawable(getResources().getDrawable(R.drawable.file));
+
+                String key = J.getString("key");
+                holder.class_name.setText(key);
+
+                JSONArray Proof_Array12 = jsonobject_2.getJSONArray(key);
+
+                for (int i=0;i<Proof_Array12.length();i++) {
+                    JSONObject J = null;
+                    try {
+
+                        J = Proof_Array12.getJSONObject(i);
+                        JSONArray  doc_ype_com = J.getJSONArray("doc_type_names");
+
+                        Log.e("doc_ype_com",doc_ype_com.toString());
+                        if (doc_ype_com.length() > 0) {
+
+                            for (int i1=0;i<Proof_Array12.length();i++) {
+                                JSONObject J1 = null;
+                                try {
+
+                                    J1 = Proof_Array12.getJSONObject(i);
+
+                                  /*    if(J1.getString(Params.uploadstatus).equals("1")){
+
+                                      holder.uploaded_yes.setImageDrawable(getResources().getDrawable(R.drawable.don));
+
+                                      }else {
+                                      holder.uploaded_yes.setImageDrawable(getResources().getDrawable(R.drawable.notdon));
+                                      }*/
+
+                                }
+                             catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                            }
+
+                        } else {
+                            Objs.a.ShowHideNoItems(mCon, true);
+                        }
+                        // checklist_name(doc_ype_com,key);
+                        // setAdapter(doc_ype_com);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
                 }
 
-                if(J.getString(Params.uploadstatus).equals("1")){
-
-                    holder.uploaded_yes.setImageDrawable(getResources().getDrawable(R.drawable.don));
+                holder.image_doc.setImageDrawable(getResources().getDrawable(R.drawable.file));
 
 
-                }/*else {
-                    holder.uploaded_yes.setImageDrawable(getResources().getDrawable(R.drawable.notdone));
-                }*/
 
                 holder.card_view_class_name.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -225,28 +280,19 @@ public class Applicant_Doc_Details extends SimpleActivity {
 
                         try {
 
-                            String id = J.getString(Params.id);
-                            String class_name1 = J.getString(Params.class_name);
-                            String transaction_id = doc_id;
-                            String applicant_empstatus = emp_state;
+                            String key = J.getString("key");
+
+                            Pref.putDOCKEY(mCon,key);
+
+                            JSONArray Proof_Array = jsonobject_2.getJSONArray(key);
+                            String proof_String_JSonarray  = String.valueOf(Proof_Array);
+                            Log.e("the proof_",Proof_Array.toString());
+
+                            Intent intent = new Intent(Applicant_Doc_Details.this, Document_Details.class);
+                            intent.putExtra("jsonArray", proof_String_JSonarray.toString());
+                            startActivity(intent);
 
 
-                            Pref.putDOC(mCon,id);
-                            Pref.putTID(mCon,transaction_id);
-                            Pref.putEID(mCon,applicant_empstatus);
-
-                            String all = id + "," + class_name1 + "," + transaction_id + "," + applicant_empstatus
-                                    + "," + new_user_type;
-
-
-                            Log.e("card_view_class_name", all);
-
-                            //    Objs.a.showToast(mCon, String.valueOf(J));
-
-                            Objs.ac.StartActivityPutExtra(mCon,Document_Details.class,
-                                    Params.user_type,new_user_type,
-                                    Params.class_name,class_name1);
-                            //Objs.ac.StartActivity(mCon,DemoActivity.class);
 
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -254,7 +300,6 @@ public class Applicant_Doc_Details extends SimpleActivity {
 
                     }
                 });
-
             } catch (NullPointerException e) {
                 Objs.a.showToast(mCon, e.toString());
             } catch (Exception e) {

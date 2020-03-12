@@ -47,6 +47,7 @@ public class Params {
     public static String otp_status = "otp_status";
 
     public static String city_name = "city_name";
+    public static String docid1 = "docid1";
     public static String loantypelist_arr = "loantypelist_arr";
     public static String otp_entered = "otp_entered";
     public static String message = "message";
@@ -105,6 +106,7 @@ public class Params {
     public static String email = "email";
     public static String applicant_id = "applicant_id";
     public static String step_status = "step_status";
+    public static String Applicant_status = "Applicant_status";
     public static String username = "username";
     public static String mobileno = "mobileno";
     public static String subtask_id = "subtask_id";
@@ -145,6 +147,8 @@ public class Params {
     public static String doc_typename = "doc_typename";
     public static String upload_count = "upload_count";
     public static String class_name = "class_name";
+    public static String loan_type_id = "loan_type_id";
+
     public static String docid= "docid";
     public static String counts= "counts";
     public static String class_id = "class_id";

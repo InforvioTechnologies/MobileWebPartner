@@ -110,6 +110,8 @@ public class Viability_Check_HL_new extends SimpleActivity {
     no_of_year_ind_txt1,monthly_incom_txt,monthly_incom_txt1,busproof_ind_txt,busproof_ind_txt1,assets_owned_BL,
             office_setup_txt_ind,office_setup_txt_ind1,vehicle_type_text,office_setup_txt_far,office_setup_txt_far1;
 
+    AppCompatTextView business_proof_txt_P;
+
     AppCompatEditText age_edit_txt,residence_edite_txt,live_curentres_edite_txt,no_of_vehicle_edit_txt,
             no_of_years_ind_edit_txt,avg_monthly_incom_edit_txt,
             actual_business_ind_edit_txt,no_of_years_work_ind_edit_txt,actual_business_edit_forming_txt,
@@ -226,7 +228,7 @@ public class Viability_Check_HL_new extends SimpleActivity {
     Spinner pl_co_self_spi_vocation_forming,co_self_D_spinner_how_do_sell_milk,pl_co_app_spinner_office_shop_setup_ind,
             spinner_busines_type_own_business,co_self_fran_spinner_frenc_deler_sub,pl_co_own_spinner_office_shop_setup,
             assets_owned_sppiner,salaried_assets_owned_sppiner,salaried_salary_proof_sppiner,co_self_ind_vehicle_type,
-            pl_co_app_what_crop_spinne,pl_co_app_ind_spinner_office_ownership_Type;
+            pl_co_app_what_crop_spinne,pl_co_app_ind_spinner_office_ownership_Type,hl_app_spinner_salary_proof;
 
     String pl_co_app_slrd_Salary_id,pl_co_app_slrd_Salary_Value,pl_co_app_slrd_res_spinn_area_id,pl_co_app_slrd_res_spinn_area_district_id,
             pl_co_app_slrd_res_spinn_area_state_id,pl_co_s_forming_vocation_type_forming_id,pl_co_s_forming_vocation_type_forming_value;
@@ -243,9 +245,9 @@ public class Viability_Check_HL_new extends SimpleActivity {
     AppCompatTextView pl_co_app_ind_vehicle_type_text;
     ////////
 
-    String assets_owned_str,assets_owned_salaried_str,salary_proof_salaried_str,co_vehilce_str,
+    String assets_owned_str,assets_owned_salaried_str,salary_proof_salaried_str,salary_proof_salaried_str_App,co_vehilce_str,
             co_what_kind_crop_str,co_self_own_bus_str,co_self_own_vintage_bus_str,co_self_co_assets_owned_str;
-    String [] assets_owned_SA,assets_owned_salaried_SA,salary_proof_salaried_SA,co_vehilce_SA,
+    String [] assets_owned_SA,assets_owned_salaried_SA,salary_proof_salaried_SA,salary_proof_salaried_app_SA,co_vehilce_SA,
             co_what_kind_crop_SA,co_self_own_bus_SA,co_self_own_vintage_bus_SA,co_self_co_assets_owned_SA;
 
 
@@ -288,7 +290,7 @@ public class Viability_Check_HL_new extends SimpleActivity {
 
 
 
-    StringBuffer assets_buff,assets_salaried_buff,salaried_salaried_buff,co_self_ind_vehilce_type,
+    StringBuffer assets_buff,assets_salaried_buff,salaried_salaried_buff,salaried_salaried_buff_app,co_self_ind_vehilce_type,
             co_self_F_what_crop,co_Vintage_business_proof,co_own_bus_proof,co_self_assets_owned_buff;
 
     String Salary_id,Salary_Value,Salary_proof_id,Salary_proof_Value,
@@ -296,7 +298,7 @@ public class Viability_Check_HL_new extends SimpleActivity {
             CO_Type_of_employement_ID,CO_Type_of_employement_Value, IS_CO_Applicant_Id,IS_CO_Applicant_Value;
 
     ArrayList<IncomeProofPOJO> IncomeProof_Salaried,Salary_income_Proof,assets_owned_proof,
-            assets_owned_salaried,salary_proof_arr_list,vehicle_Type_arr_list,what_kind_of_crope_list,
+            assets_owned_salaried,salary_proof_arr_list,salary_proof_arr_list_app,vehicle_Type_arr_list,what_kind_of_crope_list,
             co_self_bus_vintage_proof_list,co_self_assets_owned,co_self_Assets_owned_list,co_self_bus_own_proof_list,
             assets_owner_salaried_applicant_list;
     //  MyCustomAdapter_Salary_Proof dataAdapter_Salaried_proof = null;
@@ -305,6 +307,7 @@ public class Viability_Check_HL_new extends SimpleActivity {
     MyCustomAdapter_assets_owned_Salaried_Applicant assets_owned_salaried_applicant_Adapter = null;
 
     MyCustomAdapter_salary_proof_Salaried salary_proof_salaried_Adapter = null;
+    MyCustomAdapter_salary_proof_Salaried_App salary_proof_salaried_Adapter_APP = null;
     MyCustomAdapter_vehicle_type_self self_vehicle_adapter = null;
     MyCustomAdapter_what_crope_self what_crop_adapter = null;
     CO_MyCustomAdapter_Business_Vintage_proof co_business_vintage_Adapter = null;
@@ -322,6 +325,7 @@ public class Viability_Check_HL_new extends SimpleActivity {
     JSONArray assets_owned_array = new JSONArray();
     JSONArray assets_owned_salary_array = new JSONArray();
     JSONArray salary_proof_salary_array = new JSONArray();
+    JSONArray salary_proof_salary_array_App = new JSONArray();
     JSONArray co_vehicle_type_array = new JSONArray();
     JSONArray co_what_crop_array = new JSONArray();
     JSONArray co_business_vintage_self = new JSONArray();
@@ -347,7 +351,21 @@ public class Viability_Check_HL_new extends SimpleActivity {
             Approval_of_Land_ID,Approval_of_Land_Value,Bulding_Approval_Id,Bulding_Approval_Value,
             DA_Bulding_ID,DA_Bulding_Value,Property_Identified_ID,Property_Identified_Value,Property_Title_ID,Property_Title_Value;
 
+//text no
+    AppCompatTextView property_identified_typ_txt,property_title_txt,property_category_txt,property_type_txt,
+        approval_of_land_txt,bulding_approval_txt,da_bulding_approval_txt,txt_property_pincode,
+        age,monthly_sal_txt,salery_credite_method_txt,Exp_in_current_txt,total_workexperiecnce_txt,cmp_pincode_txt,
+        area_txt,pl_co_app_slrd_assets_owned_txt,txt_residence_pincode_hs,res_area_txt,txt_residence_type_hs,
+        Lives_in_current_txt,do_you_have_coApp_txt,coApp_txt_emp_type1;
 
+    AppCompatTextView  vocation_txt,number_of_acres_txt,what_crop_ly_txt,annual_income_ly_txt,daily_income_txt,
+    No_of_years_inwork_txt_F,ami_txt__F,number_of_animals_txt,no_of_litter_procured_txt,how_do_u_sell_txt_1,
+            No_of_years_inwork_txt_D,ami_txt__D,number_of_birds_txt,supplided_by_txt,selling_price,profit_txt,
+            No_of_years_inwork_txt_P,ami_txt_P,vocation_txt_own_HL,
+            deler_type_txt,name_of_deler_ship_cmp_txt,monthly_profit_txt,business_setup_investment_txt,
+            value_of_rawmeterial_txt,monthly_sales_txt,value_of_machin_txt,
+            no_of_year_in_w_txt_M,avg_txt_M,office_txt_residence_type,Bl_self_office_ownership_type_txt,
+            pl_co_app_assets_own_txt1,blt_residence_pincode;
 
 
     @Override
@@ -417,8 +435,26 @@ public class Viability_Check_HL_new extends SimpleActivity {
         {
             pro_details.setVisibility(View.VISIBLE);
             propert_identified_ly.setVisibility(View.VISIBLE);
+
+                   property_identified_typ_txt.setText("1");
+                    property_title_txt.setText("2");
+                     property_category_txt.setText("3");
+                   property_type_txt.setText("4");
+                  approval_of_land_txt.setText("5");
+                   bulding_approval_txt.setText("6");
+                   da_bulding_approval_txt.setText("7");
+                  txt_property_pincode.setText("8");
+
         }else
         {
+            property_title_txt.setText("1");
+            property_category_txt.setText("2");
+            property_type_txt.setText("3");
+            approval_of_land_txt.setText("4");
+            bulding_approval_txt.setText("5");
+            da_bulding_approval_txt.setText("6");
+            txt_property_pincode.setText("7");
+
             pro_details.setVisibility(View.VISIBLE);
             propert_identified_ly.setVisibility(View.GONE);
             property_identified_Ly1.setVisibility(View.VISIBLE);
@@ -532,6 +568,80 @@ public class Viability_Check_HL_new extends SimpleActivity {
         business_details_txt = (AppCompatTextView) findViewById(R.id.business_details_txt);
         office_setup_txt_ind = (AppCompatTextView) findViewById(R.id.office_setup_txt_ind);
 
+        property_identified_typ_txt = (AppCompatTextView) findViewById(R.id.property_identified_typ_txt);
+        property_title_txt = (AppCompatTextView) findViewById(R.id.property_title_txt);
+        property_category_txt = (AppCompatTextView) findViewById(R.id.property_category_txt);
+        property_type_txt = (AppCompatTextView) findViewById(R.id.property_type_txt);
+        approval_of_land_txt = (AppCompatTextView) findViewById(R.id.approval_of_land_txt);
+        bulding_approval_txt = (AppCompatTextView) findViewById(R.id.bulding_approval_txt);
+        da_bulding_approval_txt = (AppCompatTextView) findViewById(R.id.da_bulding_approval_txt);
+        txt_property_pincode = (AppCompatTextView) findViewById(R.id.txt_property_pincode);
+
+        //salaried
+
+        age = (AppCompatTextView) findViewById(R.id.age);
+        monthly_sal_txt = (AppCompatTextView) findViewById(R.id.monthly_sal_txt);
+        salery_credite_method_txt = (AppCompatTextView) findViewById(R.id.salery_credite_method_txt);
+        Exp_in_current_txt = (AppCompatTextView) findViewById(R.id.Exp_in_current_txt);
+        total_workexperiecnce_txt = (AppCompatTextView) findViewById(R.id.total_workexperiecnce_txt);
+        cmp_pincode_txt = (AppCompatTextView) findViewById(R.id.cmp_pincode_txt);
+        area_txt = (AppCompatTextView) findViewById(R.id.area_txt);
+        pl_co_app_slrd_assets_owned_txt = (AppCompatTextView) findViewById(R.id.pl_co_app_slrd_assets_owned_txt);
+        txt_residence_pincode_hs = (AppCompatTextView) findViewById(R.id.txt_residence_pincode_hs);
+        res_area_txt = (AppCompatTextView) findViewById(R.id.res_area_txt);
+        txt_residence_type_hs = (AppCompatTextView) findViewById(R.id.txt_residence_type_hs);
+        Lives_in_current_txt = (AppCompatTextView) findViewById(R.id.Lives_in_current_txt);
+
+        //self
+
+
+
+        deler_type_txt = (AppCompatTextView) findViewById(R.id.deler_type_txt);
+        name_of_deler_ship_cmp_txt = (AppCompatTextView) findViewById(R.id.name_of_deler_ship_cmp_txt);
+        monthly_profit_txt = (AppCompatTextView) findViewById(R.id.monthly_profit_txt);
+        business_setup_investment_txt = (AppCompatTextView) findViewById(R.id.business_setup_investment_txt);
+        value_of_rawmeterial_txt = (AppCompatTextView) findViewById(R.id.value_of_rawmeterial_txt);
+        monthly_sales_txt = (AppCompatTextView) findViewById(R.id.monthly_sales_txt);
+        value_of_machin_txt = (AppCompatTextView) findViewById(R.id.value_of_machin_txt);
+        no_of_year_in_w_txt_M = (AppCompatTextView) findViewById(R.id.no_of_year_in_w_txt_M);
+        avg_txt_M = (AppCompatTextView) findViewById(R.id.avg_txt_M);
+
+        vocation_txt = (AppCompatTextView) findViewById(R.id.vocation_txt);
+        vocation_txt_own_HL = (AppCompatTextView) findViewById(R.id.vocation_txt_own_HL);
+        number_of_acres_txt = (AppCompatTextView) findViewById(R.id.number_of_acres_txt);
+        what_crop_ly_txt = (AppCompatTextView) findViewById(R.id.what_crop_ly_txt);
+        annual_income_ly_txt = (AppCompatTextView) findViewById(R.id.annual_income_ly_txt);
+        daily_income_txt = (AppCompatTextView) findViewById(R.id.daily_income_txt);
+        No_of_years_inwork_txt_F = (AppCompatTextView) findViewById(R.id.No_of_years_inwork_txt_F);
+        ami_txt__F = (AppCompatTextView) findViewById(R.id.ami_txt__F);
+
+        number_of_animals_txt = (AppCompatTextView) findViewById(R.id.number_of_animals_txt);
+        no_of_litter_procured_txt = (AppCompatTextView) findViewById(R.id.no_of_litter_procured_txt);
+        how_do_u_sell_txt_1 = (AppCompatTextView) findViewById(R.id.how_do_u_sell_txt_1);
+        No_of_years_inwork_txt_D = (AppCompatTextView) findViewById(R.id.No_of_years_inwork_txt_D);
+        ami_txt__D = (AppCompatTextView) findViewById(R.id.ami_txt__D);
+
+
+
+        number_of_birds_txt = (AppCompatTextView) findViewById(R.id.number_of_birds_txt);
+        supplided_by_txt = (AppCompatTextView) findViewById(R.id.supplided_by_txt);
+        selling_price = (AppCompatTextView) findViewById(R.id.selling_price);
+        profit_txt = (AppCompatTextView) findViewById(R.id.profit_txt);
+        No_of_years_inwork_txt_P = (AppCompatTextView) findViewById(R.id.No_of_years_inwork_txt_P);
+        ami_txt_P = (AppCompatTextView) findViewById(R.id.ami_txt_P);
+
+
+
+        office_txt_residence_type = (AppCompatTextView) findViewById(R.id.office_txt_residence_type);
+        Bl_self_office_ownership_type_txt = (AppCompatTextView) findViewById(R.id.Bl_self_office_ownership_type_txt);
+        pl_co_app_assets_own_txt1 = (AppCompatTextView) findViewById(R.id.pl_co_app_assets_own_txt1);
+        blt_residence_pincode = (AppCompatTextView) findViewById(R.id.blt_residence_pincode);
+
+
+
+            do_you_have_coApp_txt = (AppCompatTextView) findViewById(R.id.do_you_have_coApp_txt);
+        coApp_txt_emp_type1 = (AppCompatTextView) findViewById(R.id.coApp_txt_emp_type1);
+
 
         emp_type1 = (AppCompatTextView) findViewById(R.id.emp_type1);
         emp_type2 = (AppCompatTextView) findViewById(R.id.emp_type2);
@@ -550,6 +660,7 @@ public class Viability_Check_HL_new extends SimpleActivity {
         assets_owned_txt1 = (AppCompatTextView) findViewById(R.id.assets_owned_txt1);
         vocation_indiviual_txt = (AppCompatTextView) findViewById(R.id.vocation_indiviual_txt);
         vocation_indiviual_txt1 = (AppCompatTextView) findViewById(R.id.vocation_indiviual_txt1);
+        business_proof_txt_P = (AppCompatTextView) findViewById(R.id.business_proof_txt_P);
         busines_inco_proof_individua_txt = (AppCompatTextView) findViewById(R.id.busines_inco_proof_individua_txt);
         busines_inco_proof_individua_txt1 = (AppCompatTextView) findViewById(R.id.busines_inco_proof_individua_txt1);
         vehicle_individual_txt = (AppCompatTextView) findViewById(R.id.vehicle_individual_txt);
@@ -633,6 +744,8 @@ public class Viability_Check_HL_new extends SimpleActivity {
         assets_owned_sppiner = (Spinner) findViewById(R.id.assets_owned_sppiner);
         salaried_assets_owned_sppiner = (Spinner) findViewById(R.id.salaried_assets_owned_sppiner);
         salaried_salary_proof_sppiner = (Spinner) findViewById(R.id.salaried_salary_proof_sppiner);
+        hl_app_spinner_salary_proof = (Spinner) findViewById(R.id.hl_app_spinner_salary_proof);
+
         co_self_ind_vehicle_type = (Spinner) findViewById(R.id.co_self_ind_vehicle_type);
         pl_co_app_what_crop_spinne = (Spinner) findViewById(R.id.pl_co_app_what_crop_spinne);
         pl_co_app_ind_spinner_office_ownership_Type = (Spinner) findViewById(R.id.pl_co_app_ind_spinner_office_ownership_Type);
@@ -1068,6 +1181,24 @@ public class Viability_Check_HL_new extends SimpleActivity {
             Toast.makeText(context,"Please Select applicant Salary Credit Method",Toast.LENGTH_SHORT).show();
         }else
         {
+            salaried_salaried_buff_app = new StringBuffer();
+            ArrayList<IncomeProofPOJO> assests_list_v1 = salary_proof_salaried_Adapter_APP.SALARIED_PROOF_SALARIED_App;
+            for(int i=0;i<assests_list_v1.size();i++){
+                IncomeProofPOJO country = assests_list_v1.get(i);
+                if(country.isIP_selected()){
+                    salaried_salaried_buff_app.append(country.getIP_id()+ ",");
+                    String responseID1 = String.valueOf(salaried_salaried_buff_app);
+                }
+            }
+            if (salaried_salaried_buff_app.length()> 0) {
+
+                String responseID1 = String.valueOf(salaried_salaried_buff_app);
+                salary_proof_salaried_str_App = removeClass.cleanUpCommas(responseID1);
+                salary_proof_salaried_app_SA = salary_proof_salaried_str_App.split(",");
+
+                salary_proof_salary_array_App = new JSONArray();
+                salary_proof_salary_array_App = new JSONArray(Arrays.asList(salary_proof_salaried_app_SA));
+            }
 
             if (!Validate_experience()) {
                 return;
@@ -1615,6 +1746,7 @@ public class Viability_Check_HL_new extends SimpleActivity {
 
                 if(pl_self_ind_Employee_type_Id.equals("0"))
                 {
+                    Toast.makeText(context,"please Select the Co Employment Type",Toast.LENGTH_SHORT).show();
 
                 }else if(pl_self_ind_Employee_type_Id.equals("1"))
                 {
@@ -3497,6 +3629,7 @@ public class Viability_Check_HL_new extends SimpleActivity {
                             assets_owner_salaried_applicant(Assets_own);
 
                             salary_proof_salaried(Salary_proof_ar);
+                            salary_proof_salaried_app(Salary_proof_ar);
                             self_ind_vehicle_type(vehicle_Type);
                             pl_wt_kind_of_crope(crop_type);
                             co_Runs_own_business_Vintage_Proof(Business_Proof);
@@ -4310,11 +4443,83 @@ public class Viability_Check_HL_new extends SimpleActivity {
                         if(Property_Identified_ID.equals("0") ||Property_Identified_ID.equals("2") )
                         {
                             property_identified_Ly1.setVisibility(View.GONE);
+
+                            if(salary_type.equals("1"))
+                            {
+                                age.setText("2");
+                                monthly_sal_txt.setText("3");
+                                salery_credite_method_txt.setText("4");
+                                Exp_in_current_txt.setText("5");
+                                total_workexperiecnce_txt.setText("6");
+                                cmp_pincode_txt.setText("7");
+                                area_txt.setText("8");
+                                pl_co_app_slrd_assets_owned_txt.setText("9");
+                                txt_residence_pincode_hs.setText("10");
+                                res_area_txt.setText("11");
+                                txt_residence_type_hs.setText("12");
+                                Lives_in_current_txt.setText("13");
+                                do_you_have_coApp_txt.setText("14");
+                                coApp_txt_emp_type1.setText("15");
+                            }else
+                            {
+                                emp_type1.setText("2");
+                                age_txt.setText("3");
+                            }
+
                         }else
                         {
                             property_identified_Ly1.setVisibility(View.VISIBLE);
-                        }
+                            if(salary_type.equals("1"))
+                            {
+                                if(loan_type_id.equals("1") || loan_type_id.equals("3") || loan_type_id.equals("4")) {
+                                    age.setText("9");
+                                    monthly_sal_txt.setText("10");
+                                    salery_credite_method_txt.setText("11");
+                                    Exp_in_current_txt.setText("12");
+                                    total_workexperiecnce_txt.setText("13");
+                                    cmp_pincode_txt.setText("14");
+                                    area_txt.setText("15");
+                                    pl_co_app_slrd_assets_owned_txt.setText("16");
+                                    txt_residence_pincode_hs.setText("17");
+                                    res_area_txt.setText("18");
+                                    txt_residence_type_hs.setText("19");
+                                    Lives_in_current_txt.setText("20");
+                                    do_you_have_coApp_txt.setText("21");
+                                    coApp_txt_emp_type1.setText("22");
+                                    property_identified_Ly1.setVisibility(View.VISIBLE);
+                                }else
+                                {
+                                    age.setText("8");
+                                    monthly_sal_txt.setText("9");
+                                    salery_credite_method_txt.setText("10");
+                                    Exp_in_current_txt.setText("11");
+                                    total_workexperiecnce_txt.setText("12");
+                                    cmp_pincode_txt.setText("13");
+                                    area_txt.setText("14");
+                                    pl_co_app_slrd_assets_owned_txt.setText("15");
+                                    txt_residence_pincode_hs.setText("16");
+                                    res_area_txt.setText("17");
+                                    txt_residence_type_hs.setText("18");
+                                    Lives_in_current_txt.setText("19");
+                                    do_you_have_coApp_txt.setText("20");
+                                    coApp_txt_emp_type1.setText("21");
 
+                                }
+                            }else if(salary_type.equals("2"))
+                            {
+                                if(loan_type_id.equals("1") || loan_type_id.equals("3") || loan_type_id.equals("4")) {
+                                    emp_type1.setText("9");
+                                    age_txt.setText("10");
+                                }else
+                                {
+
+                                    emp_type1.setText("8");
+                                    age_txt.setText("9");
+
+                                }
+                            }
+
+                        }
 
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -4527,13 +4732,33 @@ public class Viability_Check_HL_new extends SimpleActivity {
                                 individual.setVisibility(View.VISIBLE);
                                 formin_dairy.setVisibility(View.GONE);
                                 self_business.setVisibility(View.GONE);
-                              //  ofiice_res_details.setVisibility(View.GONE);
+
+                                if(Property_Identified_ID.equals("1")) {
+
+                                    vocation_indiviual_txt.setText("10");
+
+                                }else
+                                {
+                                    vocation_indiviual_txt.setText("4");
+
+                                }
                                 break;
                             case 2:
                                 individual.setVisibility(View.GONE);
                                 formin_dairy.setVisibility(View.VISIBLE);
                                 self_business.setVisibility(View.GONE);
                                // ofiice_res_details.setVisibility(View.GONE);
+
+                                if(Property_Identified_ID.equals("1")) {
+
+                                    vocation_txt.setText("10");
+
+                                }else
+                                {
+                                    vocation_txt.setText("4");
+
+
+                                }
                                 break;
                             case 3:
 
@@ -4543,6 +4768,18 @@ public class Viability_Check_HL_new extends SimpleActivity {
                                 individual.setVisibility(View.GONE);
                                 formin_dairy.setVisibility(View.GONE);
                                 self_business.setVisibility(View.VISIBLE);
+
+                                if(Property_Identified_ID.equals("1")) {
+
+                                    vocation_txt_own_HL.setText("10");
+
+
+                                }else
+                                {
+                                    vocation_txt_own_HL.setText("4");
+
+
+                                }
                                 break;
                         }
 
@@ -4755,10 +4992,94 @@ public class Viability_Check_HL_new extends SimpleActivity {
                         if(BL_ind_vocaton_id.equals("7"))
                         {
                             Driver_C_owner.setVisibility(View.VISIBLE);
+                            if(Property_Identified_ID.equals("1")) {
 
+                                vocation_indiviual_txt.setText("10");
+                                vehicle_individual_txt.setText("11");
+                                number_of_vehicle_ind_txt.setText("12");
+                                no_of_year_ind_txt.setText("13");
+                                monthly_incom_txt.setText("14");
+
+                                business_proof_txt_P.setText("15");
+                                busines_inco_proof_individua_txt.setText("16");
+                                office_setup_txt_ind.setText("17");
+                                office_txt_residence_type.setText("18");
+                                txt_residence_pincode.setText("19");
+                                Bl_self_office_ownership_type_txt.setText("20");
+                                pl_co_app_assets_own_txt1.setText("21");
+                                blt_residence_pincode.setText("22");
+                                res_area_txt.setText("23");
+                                txt_residence_type.setText("24");
+
+                                do_you_have_coApp_txt.setText("25");
+                                coApp_txt_emp_type1.setText("26");
+
+                            }else
+                            {
+                                vocation_indiviual_txt.setText("4");
+                                vehicle_individual_txt.setText("5");
+                                number_of_vehicle_ind_txt.setText("6");
+                                no_of_year_ind_txt.setText("7");
+                                monthly_incom_txt.setText("8");
+
+                                business_proof_txt_P.setText("9");
+                                busines_inco_proof_individua_txt.setText("10");
+                                office_setup_txt_ind.setText("11");
+                                office_txt_residence_type.setText("12");
+                                txt_residence_pincode.setText("13");
+                                Bl_self_office_ownership_type_txt.setText("14");
+                                pl_co_app_assets_own_txt1.setText("15");
+                                blt_residence_pincode.setText("16");
+                                res_area_txt.setText("17");
+                                txt_residence_type.setText("18");
+
+                                do_you_have_coApp_txt.setText("19");
+                                coApp_txt_emp_type1.setText("20");
+                            }
                         }else
                         {
                             Driver_C_owner.setVisibility(View.GONE);
+                            if(Property_Identified_ID.equals("1")) {
+
+                                vocation_indiviual_txt.setText("10");
+                                no_of_year_ind_txt.setText("11");
+                                monthly_incom_txt.setText("12");
+
+                                business_proof_txt_P.setText("13");
+                                busines_inco_proof_individua_txt.setText("14");
+                                office_setup_txt_ind.setText("15");
+                                office_txt_residence_type.setText("16");
+                                txt_residence_pincode.setText("17");
+                                Bl_self_office_ownership_type_txt.setText("18");
+                                pl_co_app_assets_own_txt1.setText("19");
+                                blt_residence_pincode.setText("20");
+                                res_area_txt.setText("21");
+                                txt_residence_type.setText("22");
+
+                                do_you_have_coApp_txt.setText("23");
+                                coApp_txt_emp_type1.setText("24");
+
+                            }else
+                            {
+                                vocation_indiviual_txt.setText("4");
+                                no_of_year_ind_txt.setText("5");
+                                monthly_incom_txt.setText("6");
+
+                                business_proof_txt_P.setText("7");
+                                busines_inco_proof_individua_txt.setText("8");
+                                office_setup_txt_ind.setText("9");
+                                office_txt_residence_type.setText("10");
+                                txt_residence_pincode.setText("11");
+                                Bl_self_office_ownership_type_txt.setText("12");
+                                pl_co_app_assets_own_txt1.setText("13");
+                                blt_residence_pincode.setText("14");
+                                res_area_txt.setText("15");
+                                txt_residence_type.setText("17");
+                                do_you_have_coApp_txt.setText("18");
+                                coApp_txt_emp_type1.setText("19");
+
+                            }
+
                         }
 
                     } catch (JSONException e) {
@@ -4857,16 +5178,81 @@ public class Viability_Check_HL_new extends SimpleActivity {
                             dairy.setVisibility(View.GONE);
                             poultry.setVisibility(View.GONE);
 
+                            /*  if(Property_Identified_ID.equals("1")) {
+
+                                    vocation_txt.setText("10");
+
+                                }else
+                                {
+                                    vocation_txt.setText("4");
+
+                                }*/
+
+                            if(Property_Identified_ID.equals("11")) {
+                                number_of_acres_txt.setText("12");
+                                what_crop_ly_txt.setText("13");
+                                annual_income_ly_txt.setText("14");
+                                daily_income_txt.setText("15");
+                                No_of_years_inwork_txt_F.setText("16");
+                                ami_txt__F.setText("17");
+                            }else
+                            {
+                                number_of_acres_txt.setText("5");
+                                what_crop_ly_txt.setText("6");
+                                annual_income_ly_txt.setText("7");
+                                daily_income_txt.setText("8");
+                                No_of_years_inwork_txt_F.setText("9");
+                                ami_txt__F.setText("10");
+                            }
+
+
                         }else if(vocation_type_forming_id.equals("2"))
                         {
                             forming.setVisibility(View.GONE);
                             dairy.setVisibility(View.VISIBLE);
                             poultry.setVisibility(View.GONE);
+
+                            if(Property_Identified_ID.equals("11")) {
+                                number_of_acres_txt.setText("12");
+                                no_of_litter_procured_txt.setText("13");
+                                how_do_u_sell_txt_1.setText("14");
+                                No_of_years_inwork_txt_D.setText("15");
+                                ami_txt__D.setText("16");
+                            }else
+                            {
+                                number_of_acres_txt.setText("5");
+                                no_of_litter_procured_txt.setText("6");
+                                how_do_u_sell_txt_1.setText("7");
+                                No_of_years_inwork_txt_D.setText("8");
+                                ami_txt__D.setText("9");
+                            }
+
+
                         }else if(vocation_type_forming_id.equals("3"))
                         {
                             forming.setVisibility(View.GONE);
                             dairy.setVisibility(View.GONE);
                             poultry.setVisibility(View.VISIBLE);
+
+                            if(Property_Identified_ID.equals("11")) {
+                                number_of_birds_txt.setText("12");
+                                supplided_by_txt.setText("13");
+                                selling_price.setText("14");
+                                profit_txt.setText("15");
+                                No_of_years_inwork_txt_P.setText("16");
+                                ami_txt_P.setText("17");
+                            }else
+                            {
+                                number_of_birds_txt.setText("5");
+                                supplided_by_txt.setText("6");
+                                selling_price.setText("7");
+                                profit_txt.setText("8");
+                                No_of_years_inwork_txt_P.setText("9");
+                                ami_txt_P.setText("10");
+                            }
+
+
+
                         }
 
                     } catch (JSONException e) {
@@ -5235,22 +5621,83 @@ public class Viability_Check_HL_new extends SimpleActivity {
                         business_own_type_id = Business_type_own_business_ar.getJSONObject(position).getString("id");
                         business_own_type_Value = Business_type_own_business_ar.getJSONObject(position).getString("value");
 
+
+                        /*
+                                if(Property_Identified_ID.equals("1")) {
+
+                                    vocation_txt_own_HL.setText("10");
+
+                                }else
+                                {
+                                    vocation_txt_own_HL.setText("4");
+
+                                }*/
+
                         if(business_own_type_id.equals("1"))
                         {
                             Retail_wholesale_business.setVisibility(View.VISIBLE);
                             service_business.setVisibility(View.GONE);
                             manufacturing.setVisibility(View.GONE);
 
+                            if(Property_Identified_ID.equals("1")) {
+
+                                deler_type_txt.setText("11");
+                                name_of_deler_ship_cmp_txt.setText("12");
+                                monthly_profit_txt.setText("13");
+                                no_of_year_in_w_txt_M.setText("14");
+                                avg_txt_M.setText("15");
+
+                            }else
+                            {
+                                deler_type_txt.setText("5");
+                                name_of_deler_ship_cmp_txt.setText("6");
+                                monthly_profit_txt.setText("7");
+                                no_of_year_in_w_txt_M.setText("8");
+                                avg_txt_M.setText("9");
+
+                            }
+
                         }else if(business_own_type_id.equals("2"))
                         {
                             Retail_wholesale_business.setVisibility(View.GONE);
                             service_business.setVisibility(View.VISIBLE);
                             manufacturing.setVisibility(View.GONE);
+                            if(Property_Identified_ID.equals("1")) {
+                                business_setup_investment_txt.setText("11");
+                                no_of_year_in_w_txt_M.setText("12");
+                                avg_txt_M.setText("13");
+                            }else
+                            {
+                                business_setup_investment_txt.setText("5");
+                                no_of_year_in_w_txt_M.setText("6");
+                                avg_txt_M.setText("7");
+                            }
+
+
                         }else if(business_own_type_id.equals("3"))
                         {
                             Retail_wholesale_business.setVisibility(View.GONE);
                             service_business.setVisibility(View.GONE);
                             manufacturing.setVisibility(View.VISIBLE);
+
+                            if(Property_Identified_ID.equals("1")) {
+
+                                value_of_rawmeterial_txt.setText("11");
+                                monthly_sales_txt.setText("12");
+                                value_of_machin_txt.setText("13");
+                                no_of_year_in_w_txt_M.setText("14");
+                                avg_txt_M.setText("15");
+
+                            }else
+                            {
+                                value_of_rawmeterial_txt.setText("5");
+                                monthly_sales_txt.setText("6");
+                                value_of_machin_txt.setText("7");
+                                no_of_year_in_w_txt_M.setText("8");
+                                avg_txt_M.setText("9");
+
+                            }
+
                         }
 
 
@@ -5864,6 +6311,24 @@ public class Viability_Check_HL_new extends SimpleActivity {
         assets_owned_salaried_applicant_Adapter.notifyDataSetChanged();
     }
 
+    private void salary_proof_salaried_app(final JSONArray ja) throws JSONException {
+
+        salary_proof_arr_list_app = new ArrayList<IncomeProofPOJO>();
+
+        for (int i=0;i<ja.length();i++){
+            JSONObject J =  ja.getJSONObject(i);
+
+            String id = J.getString("id");
+            String locality = J.getString("value");
+
+            IncomeProofPOJO salary_proof = new IncomeProofPOJO(id,locality,false);
+            salary_proof_arr_list_app.add(salary_proof);
+        }
+        salary_proof_salaried_Adapter_APP = new MyCustomAdapter_salary_proof_Salaried_App(context, 0,salary_proof_arr_list);
+        hl_app_spinner_salary_proof.setAdapter(salary_proof_salaried_Adapter_APP);
+        salary_proof_salaried_Adapter_APP.notifyDataSetChanged();
+    }
+
     private void salary_proof_salaried(final JSONArray ja) throws JSONException {
 
         salary_proof_arr_list = new ArrayList<IncomeProofPOJO>();
@@ -6323,6 +6788,95 @@ public class Viability_Check_HL_new extends SimpleActivity {
         }
 
     }
+
+    private class MyCustomAdapter_salary_proof_Salaried_App extends ArrayAdapter<IncomeProofPOJO> {
+
+        private ArrayList<IncomeProofPOJO> SALARIED_PROOF_SALARIED_App;
+        IncomeProofPOJO salary_proof_salaried_App;
+        public MyCustomAdapter_salary_proof_Salaried_App(Context context, int textViewResourceId,
+                                                     ArrayList<IncomeProofPOJO> SALARIED_PROOF_SALARIED_App) {
+            super(context, textViewResourceId, SALARIED_PROOF_SALARIED_App);
+            this.SALARIED_PROOF_SALARIED_App = new ArrayList<IncomeProofPOJO>();
+            this.SALARIED_PROOF_SALARIED_App.addAll(SALARIED_PROOF_SALARIED_App);
+        }
+
+        private class ViewHolder {
+            TextView code;
+            CheckBox name;
+        }
+
+        @Override
+        public View getDropDownView(int position, View convertView,
+                                    ViewGroup parent) {
+            return getCustomView(position, convertView, parent);
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            return getCustomView(position, convertView, parent);
+        }
+
+        public View getCustomView(int position, View convertView, ViewGroup parent) {
+
+            MyCustomAdapter_salary_proof_Salaried_App.ViewHolder holder = null;
+
+            if (convertView == null) {
+                LayoutInflater vi = (LayoutInflater)getContext().getSystemService(
+                        Context.LAYOUT_INFLATER_SERVICE);
+                convertView = vi.inflate(R.layout.income_proof_info, null);
+                holder = new MyCustomAdapter_salary_proof_Salaried_App.ViewHolder();
+                holder.code = (TextView) convertView.findViewById(R.id.code);
+                holder.name = (CheckBox) convertView.findViewById(R.id.checkBox1);
+
+
+                holder.name.setTypeface(font);
+                holder.name.setTextSize(13);
+                holder.code.setTypeface(font);
+                holder.code.setTextSize(13);
+                convertView.setTag(holder);
+
+                holder.name.setOnClickListener( new View.OnClickListener() {
+                    public void onClick(View v) {
+                        CheckBox cb = (CheckBox) v ;
+                        IncomeProofPOJO salary_proof = (IncomeProofPOJO) cb.getTag();
+                        salary_proof.setIP_selected(cb.isChecked());
+
+                        String email = salary_proof.getIP_name();
+                        Uri imgUrl = Uri.parse("https://image.shutterstock.com/image-vector/green-proof-icon-check-concept-260nw-596401601.jpg");
+                        Contact contact = new Contact(null, null, null, email, imgUrl);
+                        if (cb.isChecked()) {
+                            cv_salary_income_proof.addChip(email, imgUrl, contact);
+                        } else {
+                            cv_salary_income_proof.removeChipBy(contact);
+                        }
+                    }
+
+                });
+            }
+            else {
+                holder = (MyCustomAdapter_salary_proof_Salaried_App.ViewHolder) convertView.getTag();
+            }
+
+            salary_proof_salaried_App = SALARIED_PROOF_SALARIED_App.get(position);
+            holder.name.setText(salary_proof_salaried_App.getIP_name());
+            holder.name.setChecked(salary_proof_salaried_App.isIP_selected());
+            holder.name.setTag(salary_proof_salaried_App);
+
+            if(salary_proof_salaried_App.getIP_name().contains("Salary Proof")){
+                holder.name.setVisibility(View.GONE);
+                holder.code.setVisibility(View.VISIBLE);
+                holder.code.setText("Select Salary Proof");
+
+            }else {
+                holder.code.setVisibility(View.GONE);
+                holder.name.setVisibility(View.VISIBLE);
+            }
+            return convertView;
+        }
+
+    }
+
+
 
     private class MyCustomAdapter_vehicle_type_self extends ArrayAdapter<IncomeProofPOJO> {
 
@@ -7732,6 +8286,7 @@ public class Viability_Check_HL_new extends SimpleActivity {
                 applicant1.put("age",String_value_Age);
                 applicant1.put("net_salary",St_monthly_net_sal_edit_txt);
                 applicant1.put("salary_mode",Salary_id);
+                applicant1.put("income_proof",salary_proof_salary_array_App);
                 applicant1.put("work_experiance",ST_experience_in_current_cmpy);
                 applicant1.put("tot_work_experiance",ST_total_experience_edit_txt);
                 applicant1.put("work_pincode",ST_company_pincode_txt);
@@ -7745,6 +8300,15 @@ public class Viability_Check_HL_new extends SimpleActivity {
 
             }else if(salary_type.equals("2"))
             {
+
+                applicant1.put("property_identify",Property_Identified_ID);
+                applicant1.put("property_title",Property_Title_ID);
+                applicant1.put("property_category",Propery_Category_ID);
+                applicant1.put("Property Type",Propery_Type_ID);
+                applicant1.put("land_approval",Approval_of_Land_ID);
+                applicant1.put("building_approval",Bulding_Approval_Id);
+                applicant1.put("DA_Bulding_ID",DA_Bulding_ID);
+                applicant1.put("prop_pincode",S_property_pincode1_edit_txt);
 
                 applicant1.put("bus_employment_type",Employee_type_Id);
                 applicant1.put("age",V_age);

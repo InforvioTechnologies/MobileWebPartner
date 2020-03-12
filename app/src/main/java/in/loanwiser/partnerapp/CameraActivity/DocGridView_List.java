@@ -53,9 +53,10 @@ public class DocGridView_List extends SimpleActivity {
     private String TAG = DocGridView_List.class.getSimpleName();
     private AlertDialog progressDialog;
     String id,doc_name,docid,class_id,user_type,transaction_id,doc_id,doc_typename;
-    String _class_id,_transaction_id,_user_type,_doc_id,type;
+    String _class_id,_transaction_id,_user_type,_doc_id,type,docid1;
     private RecyclerView recyclerView;
     private FloatingActionButton fab_add_more;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,20 +66,22 @@ public class DocGridView_List extends SimpleActivity {
 
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
 
+    //    id =  Objs.a.getBundle(this, Params.id);
+      //  doc_name =  Objs.a.getBundle(this, Params.doc_typename);
 
-        id =  Objs.a.getBundle(this, Params.id);
-        doc_name =  Objs.a.getBundle(this, Params.doc_typename);
         doc_typename =  Objs.a.getBundle(this, Params.doc_typename);
         initTools1(doc_typename);
         class_id =  Objs.a.getBundle(this, Params.class_id);
         user_type =  Objs.a.getBundle(this, Params.user_type);
         transaction_id =  Objs.a.getBundle(this, Params.transaction_id);
         doc_id =  Objs.a.getBundle(this, Params.doc_id);
+        docid1 =  Objs.a.getBundle(this, Params.docid1);
         //   type =  Objs.a.getBundle(this, Params.type);
 
         String all = "DocGridView_List"+"\n"+ doc_id +"\n"+ transaction_id +"\n"+user_type
                 + "\n" + class_id;
 
+        Log.e("docid1",docid1);
         // Objs.a.showToast(mCon, all);
 
         fab_add_more = (FloatingActionButton) findViewById(R.id.fab_add_more);
@@ -90,11 +93,8 @@ public class DocGridView_List extends SimpleActivity {
             @Override
             public void onClick(View view) {
                 Objs.ac.StartActivityPutExtra(DocGridView_List.this, ManiActivity_Image2.class,
-                        Params.id,id
-                        , Params.doc_typename,doc_name,
-                        Params.docid,doc_id
-                        , Params.class_id,class_id,
-                        Params.user_type,user_type,
+                         Params.doc_typename,doc_typename,
+                        Params.docid,doc_id,
                         Params.transaction_id,transaction_id);
                 finish();
             }
@@ -109,22 +109,26 @@ public class DocGridView_List extends SimpleActivity {
             J.put(Params.user_type, user_type1);
             J.put(Params.class_id, class_id1);
             J.put(Params.transaction_id, transaction_id1);
-            J.put(Params.doc_id, doc_id1);
+            J.put(Params.doc_id, docid1);
         } catch (JSONException e) {
             e.printStackTrace();
         }
+        Log.e("Request ", String.valueOf(J));
         progressDialog.show();
-        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, Urls.DOC_IMG_POST, J,
+        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, Urls.DOC_IMAGE_VIEW, J,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
                         try {
                             Log.e("Image Response", String.valueOf(response));
-                            _class_id =  response.getString(Params.class_id);
-                            _transaction_id =  response.getString(Params.transaction_id);
-                            _user_type =  response.getString(Params.user_type);
-                            _doc_id =  response.getString(Params.doc_id);
-                            JSONArray ja = response.getJSONArray(Params.doc_url);
+
+                            JSONObject jsonObject1 = response.getJSONObject("response");
+
+                            _class_id =  jsonObject1.getString(Params.class_id);
+                            _transaction_id =  jsonObject1.getString(Params.transaction_id);
+                            _user_type =  jsonObject1.getString(Params.user_type);
+                            _doc_id =  jsonObject1.getString(Params.doc_id);
+                            JSONArray ja = jsonObject1.getJSONArray(Params.doc_url);
                             if (ja.length()>0){
                                 setAdapter(ja);
                             }else {

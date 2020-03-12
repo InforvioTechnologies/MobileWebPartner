@@ -388,6 +388,59 @@
                         </LinearLayout>
 
                         <LinearLayout
+                            android:id="@+id/Is_Mobile_no"
+                            android:padding="5dp"
+                            android:orientation="vertical"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+                            <LinearLayout
+                                android:orientation="horizontal"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:gravity="left"
+                                    android:layout_marginLeft="2dp"
+                                    android:id="@+id/is_mobile_no"
+                                    android:layout_width="wrap_content"
+                                    style="@style/LorgeText2"
+                                    android:textColor="@color/colorPrimaryDark"
+                                    android:textColorHint="@color/colorPrimaryDark"
+                                    android:hint="8"
+                                    android:layout_height="wrap_content" />
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:gravity="left"
+                                    android:layout_marginLeft="2dp"
+                                    android:id="@+id/is_mobile_no1"
+                                    android:layout_width="match_parent"
+                                    style="@style/LorgeText2"
+                                    android:textColor="@color/colorPrimaryDark"
+                                    android:textColorHint="@color/colorPrimaryDark"
+                                    android:text="@string/is_mobile_"
+                                    android:layout_height="wrap_content" />
+                            </LinearLayout>
+                            <LinearLayout
+                                android:gravity="center"
+                                android:orientation="horizontal"
+                                android:layout_width="match_parent"
+                                android:layout_height="50dp">
+
+                                <LinearLayout
+                                    android:layout_marginLeft="30dp"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent">
+                                    <Spinner
+                                        style="@style/Base.Widget.AppCompat.Spinner.Underlined"
+                                        android:backgroundTint="#ff000000"
+                                        android:backgroundTintMode="src_in"
+                                        android:spinnerMode="dropdown"
+                                        android:id="@+id/is_whats_app_spinner"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent" />
+                                </LinearLayout>
+
+                            </LinearLayout>
+                        </LinearLayout>
+                        <LinearLayout
                             android:id="@+id/co_applicant_ly"
                             android:padding="5dp"
                             android:orientation="vertical"
@@ -497,11 +550,12 @@
                         </LinearLayout>
 
                         <LinearLayout
+                            android:id="@+id/Ly_wt_mob"
                             android:orientation="vertical"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent">
                             <LinearLayout
-                                android:id="@+id/Ly_wt_mob"
+
                                 android:orientation="horizontal"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content">
@@ -523,7 +577,7 @@
                                     android:id="@+id/wt_mobile1"
                                     android:textColor="@color/colorPrimaryDark"
                                     android:textColorHint="@color/colorPrimaryDark"
-                                    android:hint="What's App Number"
+                                    android:hint="WhatsApp Number"
                                     android:layout_height="wrap_content" />
 
                             </LinearLayout>

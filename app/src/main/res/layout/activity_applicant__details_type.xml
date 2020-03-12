@@ -104,7 +104,7 @@
 
                 </LinearLayout>
                 <LinearLayout
-
+                    android:visibility="gone"
                     android:id="@+id/Ly_DOC_Status"
                     android:padding="10dp"
                     android:elevation="4sp"

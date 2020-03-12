@@ -37,6 +37,7 @@ import adhoc.app.applibrary.Config.AppUtils.Pref.Pref;
 import adhoc.app.applibrary.Config.AppUtils.Urls;
 import adhoc.app.applibrary.Config.AppUtils.VolleySignleton.AppController;
 import dmax.dialog.SpotsDialog;
+import in.loanwiser.partnerapp.PartnerActivitys.Applicant_Details_Activity;
 import in.loanwiser.partnerapp.PartnerActivitys.Home;
 import in.loanwiser.partnerapp.R;
 import in.loanwiser.partnerapp.SimpleActivity;
@@ -108,14 +109,14 @@ public class Payment_Details_Activity extends SimpleActivity {
             }
         });
 
-        btn1.setOnClickListener(new View.OnClickListener() {
+      /*  btn1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(Payment_Details_Activity.this, Send_Payment_Link_Activity.class);
                 startActivity(intent);
                 finish();
             }
-        });
+        });*/
     }
 
     private void UISCREEN()
@@ -188,10 +189,13 @@ public class Payment_Details_Activity extends SimpleActivity {
                                 {
                                     lead_charge .setVisibility(View.VISIBLE);
                                     crif_charge .setVisibility(View.VISIBLE);
+
                                 }else
                                 {
+
                                     lead_charge .setVisibility(View.VISIBLE);
                                     crif_charge .setVisibility(View.GONE);
+
                                 }
 
                                 for (int i = 0; i < araycount; i++) {
@@ -396,9 +400,11 @@ public class Payment_Details_Activity extends SimpleActivity {
                         try {
                             if (object.getString("status").equals("success")) {
 
-                                Intent intent = new Intent(Payment_Details_Activity.this, Home.class);
+                             /*   Intent intent = new Intent(Payment_Details_Activity.this, Home.class);
                                 startActivity(intent);
-                                finish();
+                                finish();*/
+
+                                 Toast.makeText(mCon, "Sucessfully Completed",Toast.LENGTH_SHORT).show();
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -428,7 +434,7 @@ public class Payment_Details_Activity extends SimpleActivity {
     @Override
     public void onBackPressed() {
 
-        Objs.ac.StartActivity(mCon, Eligibility_BL.class);
+        Objs.ac.StartActivity(mCon, Applicant_Details_Activity.class);
         finish();
         super.onBackPressed();
     }

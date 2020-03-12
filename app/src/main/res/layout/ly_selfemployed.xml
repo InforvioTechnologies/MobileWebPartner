@@ -22,18 +22,18 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
                     <LinearLayout
-                        android:background="@color/colorPrimary"
-                        android:gravity="center"
+                        android:gravity="left"
                         android:orientation="vertical"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
                         <androidx.appcompat.widget.AppCompatTextView
-                            android:gravity="center"
+                            android:gravity="left"
                             android:layout_width="match_parent"
                             android:id="@+id/business_details_txt"
                             style="@style/LorgeText"
-                            android:textSize="16sp"
-                            android:textColor="@color/white"
+                            android:textSize="18sp"
+                            android:textStyle="bold"
+                            android:textColor="@color/colorPrimary"
                             android:text="Business Details"
                             android:layout_height="wrap_content" />
                     </LinearLayout>
@@ -196,7 +196,7 @@
 
                 </LinearLayout>
                 <LinearLayout
-                    android:visibility="gone"
+
                     android:orientation="vertical"
                     android:id="@+id/individual"
                     android:layout_width="match_parent"
@@ -232,18 +232,18 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
                     <LinearLayout
-                        android:background="@color/colorPrimary"
-                        android:gravity="center"
+                        android:gravity="left"
                         android:orientation="vertical"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
                         <androidx.appcompat.widget.AppCompatTextView
-                            android:gravity="center"
+                            android:gravity="left"
                             android:layout_width="match_parent"
                             style="@style/LorgeText"
-                            android:textSize="16sp"
+                            android:textSize="18sp"
+                            android:textStyle="bold"
                             android:id="@+id/residence_details"
-                            android:textColor="@color/white"
+                            android:textColor="@color/colorPrimary"
                             android:text="Residence Details"
                             android:layout_height="wrap_content" />
                     </LinearLayout>
@@ -271,7 +271,7 @@
                                     style="@style/LorgeText2"
                                     android:textColor="@color/colorPrimaryDark"
                                     android:textColorHint="@color/colorPrimaryDark"
-                                    android:hint="1"
+                                    android:hint="11"
                                     android:layout_height="wrap_content" />
                                 <androidx.appcompat.widget.AppCompatTextView
                                     android:gravity="left"
@@ -316,7 +316,7 @@
                                     style="@style/LorgeText2"
                                     android:textColor="@color/colorPrimaryDark"
                                     android:textColorHint="@color/colorPrimaryDark"
-                                    android:hint="2"
+                                    android:hint="12"
                                     android:layout_height="wrap_content" />
                                 <androidx.appcompat.widget.AppCompatTextView
                                     android:gravity="left"
@@ -370,7 +370,7 @@
                                 style="@style/LorgeText2"
                                 android:textColor="@color/colorPrimaryDark"
                                 android:textColorHint="@color/colorPrimaryDark"
-                                android:hint="1"
+                                android:hint="13"
                                 android:layout_height="wrap_content" />
                             <androidx.appcompat.widget.AppCompatTextView
                                 android:gravity="left"
@@ -415,7 +415,7 @@
                                 style="@style/LorgeText2"
                                 android:textColor="@color/colorPrimaryDark"
                                 android:textColorHint="@color/colorPrimaryDark"
-                                android:hint="2"
+                                android:hint="14"
                                 android:layout_height="wrap_content" />
                             <androidx.appcompat.widget.AppCompatTextView
                                 android:gravity="left"
@@ -471,7 +471,7 @@
                                 style="@style/LorgeText2"
                                 android:textColor="@color/colorPrimaryDark"
                                 android:textColorHint="@color/colorPrimaryDark"
-                                android:hint="3"
+                                android:hint="15"
                                 android:layout_height="wrap_content" />
                             <androidx.appcompat.widget.AppCompatTextView
                                 android:gravity="left"
@@ -515,7 +515,7 @@
                                 style="@style/LorgeText2"
                                 android:textColor="@color/colorPrimaryDark"
                                 android:textColorHint="@color/colorPrimaryDark"
-                                android:hint="4"
+                                android:hint="16"
                                 android:layout_height="wrap_content" />
                             <androidx.appcompat.widget.AppCompatTextView
                                 android:gravity="left"

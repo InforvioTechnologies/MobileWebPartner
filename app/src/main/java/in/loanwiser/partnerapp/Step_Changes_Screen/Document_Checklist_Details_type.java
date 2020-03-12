@@ -1,16 +1,12 @@
-package in.loanwiser.partnerapp.Documents;
+package in.loanwiser.partnerapp.Step_Changes_Screen;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import androidx.appcompat.widget.AppCompatButton;
-import androidx.appcompat.widget.AppCompatTextView;
-import androidx.cardview.widget.CardView;
-import androidx.recyclerview.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,11 +17,17 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import androidx.appcompat.widget.AppCompatButton;
+import androidx.appcompat.widget.AppCompatTextView;
+import androidx.cardview.widget.CardView;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -40,17 +42,19 @@ import adhoc.app.applibrary.Config.AppUtils.Pref.Pref;
 import adhoc.app.applibrary.Config.AppUtils.Urls;
 import adhoc.app.applibrary.Config.AppUtils.VolleySignleton.AppController;
 import dmax.dialog.SpotsDialog;
+import in.loanwiser.partnerapp.Documents.Applicant_Doc_Details;
+import in.loanwiser.partnerapp.Documents.Applicant_Doc_Details_Property;
 import in.loanwiser.partnerapp.PartnerActivitys.Dashboard_Activity;
 import in.loanwiser.partnerapp.PartnerActivitys.SimpleActivity;
 import in.loanwiser.partnerapp.R;
 
-public class Applicant_Details_Single extends SimpleActivity {
+public class Document_Checklist_Details_type extends SimpleActivity {
 
     private Context mCon = this;
     String JSON, number, Jobject;
     private ProgressDialog pDialog;
     private String tag_json_obj = "jobj_req", tag_json_arry = "jarray_req";
-    private String TAG = Applicant_Details_Single.class.getSimpleName();
+    private String TAG = Document_Checklist_Details_type.class.getSimpleName();
     RelativeLayout lay_logout;
     AppCompatTextView applicant_from,dcomplete,notes;
     AppCompatButton logout, contact;
@@ -65,6 +69,7 @@ public class Applicant_Details_Single extends SimpleActivity {
     private AppCompatButton Completed;
     private CheckBox check_complete;
     String jsonStringObj;
+    String jsonArray;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,8 +77,8 @@ public class Applicant_Details_Single extends SimpleActivity {
       //  setContentView(R.layout.activity_applicant__details__single);
         setContentView(R.layout.activity_simple);
 
-        Objs.a.setStubId(this, R.layout.activity_applicant__details__single);
-        initTools(R.string.doc_upload);
+        Objs.a.setStubId(this, R.layout.activity_applicant__details_type);
+        initTools(R.string.doc_check_list1);
         progressDialog = new SpotsDialog(this, R.style.Custom);
 
         applicant_from = (AppCompatTextView) findViewById(R.id.applicant_from);
@@ -88,37 +93,11 @@ public class Applicant_Details_Single extends SimpleActivity {
 
         status_upload.setVisibility(View.GONE);
 
-        JSON = Objs.a.getBundle(this, Params.JSON);
-        Jobject = Objs.a.getBundle(this, Params.JSONObj);
-        APP_id = Objs.a.getBundle(this, Params.id);
-        S_transaction_id = Objs.a.getBundle(this, Params.transaction_id);
-
-        Log.e("JSON",JSON.toString());
-        Log.e("Jobject",Jobject.toString());
-        Log.e("APP_id",APP_id.toString());
-        Log.e("S_transaction_id",S_transaction_id.toString());
-
-      /*  try {
-            JSONObject jsonObject = new JSONObject(Jobject);
-
-            application_form_ = jsonObject.getString(Params.application_form);
-
-            applicant_from.setText(application_form_);
-            Objs.a.NewNormalFontStyle(mCon, applicant_from);
-            Objs.a.NewNormalFontStyle(mCon, dcomplete);
-            Objs.a.NewNormalFontStyle(mCon, notes);
-
-            if (jsonObject.getString(Params.status).equals("1")) {
-                status_upload.setVisibility(View.VISIBLE);
-                status_upload.setImageDrawable(getResources().getDrawable(R.drawable.don));
-            }
-
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }*/
+        Intent intent = getIntent();
+         jsonArray = intent.getStringExtra("jsonArray");
 
         try {
-            JSONArray ja = new JSONArray(JSON);
+            JSONArray ja = new JSONArray(jsonArray);
             if (ja.length() > 0) {
                 setAdapter(ja);
             } else {
@@ -129,11 +108,6 @@ public class Applicant_Details_Single extends SimpleActivity {
         }
 
 
-    /* if(Pref.getDOC_Status(mCon).equals("1")){
-                Ly_DOC_Status.setVisibility(View.GONE);
-            }else {
-                Ly_DOC_Status.setVisibility(View.VISIBLE);
-            }*/
 
         Completed.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -251,41 +225,18 @@ public class Applicant_Details_Single extends SimpleActivity {
                             A_type = J.getString(Params.user_type);
                             String applicant_name = J.getString(Params.applicant_name);
 
-                            if(J.getString(Params.applicant_name).equals("Property")||
-                                    J.getString(Params.applicant_name).equals("Vehicle")){
-                                A_Pr_type = "1";
-                                //    Objs.a.showToast(mCon, A_id+"\n" + A_empstatue+"\n" +A_Pr_type + "\n" +A_type);
-                                // Objs.a.showToast(mCon, A_Pr_type + "\n" +"Its Property you idiot...!!");
-                                String all = A_transaction_id + "," + A_type + "," + A_Pr_type + "," + A_empstatue;
-                                Pref.putPRO(mCon, all);
-                                Objs.ac.StartActivityPutExtra(mCon, Applicant_Doc_Details_Property.class,
-                                        Params.applicant_name,applicant_name);
-                                /*Objs.ac.StartActivityPutExtra(mCon,
-                                        Applicant_Doc_Details_Property.class,
-                                        Params.id,A_id,
-                                        Params.user_type,A_type,
-                                        Params.type,A_Pr_type,
-                                        Params.emp_state,A_empstatue);*/
-                            }else{
-
-                                    A_Pr_type = "0";
-
-                                    //  Objs.a.showToast(mCon, A_Pr_type + "\n" +"Its not...!!");
-                                    // Objs.a.showToast(mCon, A_id+"\n" + A_empstatue+"\n" +A_type);
                                     String all = A_transaction_id + "," + A_type + "," + A_Pr_type + "," + A_empstatue;
                                     Log.e("Applicant_DetailsSingle", all);
-                                    Objs.ac.StartActivityPutExtra(mCon, Applicant_Doc_Details.class,
+                                    Objs.ac.StartActivityPutExtra(mCon, Document_Check_List.class,
                                             Params.applicant_name,applicant_name,
                                             Params.transaction_id,A_transaction_id,
-                                            Params.id,A_transaction_id,
                                             Params.user_type,A_type,
-                                            Params.type,A_Pr_type,
                                             Params.emp_state,A_empstatue);
                                     //  Pref.putATID(mCon,A_id);
                                     // Pref.putAEID(mCon,A_empstatue);Params.user_type,A_type,
                                     //  Objs.ac.StartActivity(mCon, Applicant_Doc_Details.class);
 
-                            }
+
 
 
                         } catch (JSONException e) {
@@ -368,6 +319,8 @@ public class Applicant_Details_Single extends SimpleActivity {
                                   Objs.a.showToast(mCon,"You have not yet Uploaded any Document for Loan Process "+ "\n" + "Please Upload the Document");
 
                               }
+
+
 
                             /*  Objs.ac.StartActivity(mCon, Dashboard_Activity.class);
                               finish();*/

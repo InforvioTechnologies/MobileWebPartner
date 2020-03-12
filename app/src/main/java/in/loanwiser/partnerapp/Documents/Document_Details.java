@@ -2,6 +2,7 @@ package in.loanwiser.partnerapp.Documents;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import androidx.appcompat.widget.AppCompatTextView;
 import androidx.cardview.widget.CardView;
@@ -49,6 +50,7 @@ public class Document_Details extends SimpleActivity {
     private AlertDialog progressDialog;
     private String TAG = Document_Details.class.getSimpleName();
     MenuItem chat;
+    String jsonArray,Proof_DOC_KEY_;
 
 
     @Override
@@ -59,58 +61,140 @@ public class Document_Details extends SimpleActivity {
 
         progressDialog = new SpotsDialog(this, R.style.Custom);
         Objs.a.setStubId(this, R.layout.activity_document__details);
-
         classname1 =  Objs.a.getBundle(Document_Details.this, Params.class_name);
         Pref.putapplicant_name(mCon,classname1);
 
-        initTools1(classname1);
         choose_one =(AppCompatTextView)findViewById(R.id.choose_one);
         Objs.a.NormalFontStyle(mCon,choose_one);
 
         doc_id =  Pref.getDOC(mCon);
         transaction_id = Pref.getTID(mCon);
         applicant_empstatus =  Pref.getEID(mCon);
+        Proof_DOC_KEY_ =  Pref.getDOCKEY(mCon);
+        initTools1(Proof_DOC_KEY_);
+        Intent intent = getIntent();
+        jsonArray = intent.getStringExtra("jsonArray");
+
         type =  Pref.getAEID(mCon);
 
-        Document_Details(transaction_id,applicant_empstatus,doc_id);
+       /* try {
+            JSONArray ja = new JSONArray(jsonArray);
+            for (int i=0;i<ja.length();i++) {
+                JSONObject J = null;
+                try {
 
-    }
+                    J = ja.getJSONObject(i);
+                    JSONArray  doc_ype_com = J.getJSONArray("doc_type_names");
 
-    private void Document_Details(String transaction_id, String applicant_empstatus, String spec_id) {
-        final JSONObject jsonObject =new JSONObject();
-        JSONObject J= null;
-        try {
-            J =new JSONObject();
-            J.put(Params.transaction_id, transaction_id);
-            J.put(Params.applicant_empstatus, applicant_empstatus);
-            J.put(Params.spec_id, spec_id);
-            J.put(Params.user_type, type);
+                    Log.e("doc_ype_com",doc_ype_com.toString());
+                    if (doc_ype_com.length() > 0) {
+                        setAdapter(doc_ype_com);
+                    } else {
+                        Objs.a.ShowHideNoItems(mCon, true);
+                    }
+                   // checklist_name(doc_ype_com,key);
+                   // setAdapter(doc_ype_com);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        Log.e("Document_Details", String.valueOf(J));
+*/
+
+        Document_Details();
+      //  Document_Details(transaction_id,applicant_empstatus,doc_id);
+
+    }
+
+    private void Document_Details() {
+        JSONObject jsonObject =new JSONObject();
+        JSONObject J= null;
+        try {
+            J =new JSONObject();
+            //  J.put(Params.checklist_code, Params.EMITRA);
+          /*  J.put("transaction_id", "11465");
+            J.put("applicant_type", "1");
+            J.put("employement_type", "1");*/
+
+              J.put("transaction_id", transaction_id);
+            J.put("applicant_type", type);
+             J.put("employement_type", applicant_empstatus);
+            J.put("type_req", 0);
+            J.put("status_flag", 1);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        Log.e("Applicant_Doc_1", String.valueOf(J));
+
         progressDialog.show();
-        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, Urls.SINGLE_DOCUMENT_POST, J,
+        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, Urls.DOCUMENT_CHECK_LIST, J,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
+
+                        Log.e("response",response.toString());
                         String data = String.valueOf(response);
+                        //   Objs.a.showToast(mCon, data);
+
                         try {
-                            JSONObject object = response.getJSONObject(Params.displayname);
-                            JSONArray ja = object.getJSONArray(Params.singlelist);
-                            if (ja.length()>0){
-                                setAdapter(ja);
-                            }else {
-                                Objs.a.ShowHideNoItems(mCon,true);
+                            JSONObject jsonObject1 = response.getJSONObject("response");
+                            JSONArray jsonArray = jsonObject1.getJSONArray("key_arr");
+                            JSONObject jsonobject_2 = jsonObject1.getJSONObject("document_arr");
+
+                            JSONArray Proof_Array = jsonobject_2.getJSONArray(Proof_DOC_KEY_);
+
+                            for (int i=0;i<Proof_Array.length();i++) {
+                                JSONObject J = null;
+                                try {
+
+                                    J = Proof_Array.getJSONObject(i);
+                                    JSONArray  doc_ype_com = J.getJSONArray("doc_type_names");
+
+                                    Log.e("doc_ype_com",doc_ype_com.toString());
+                                    if (doc_ype_com.length() > 0) {
+                                        setAdapter(doc_ype_com);
+                                    } else {
+                                        Objs.a.ShowHideNoItems(mCon, true);
+                                    }
+                                    // checklist_name(doc_ype_com,key);
+                                    // setAdapter(doc_ype_com);
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
                             }
+
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
+
+                      /*  Log.e("response", data);
+                        try {
+                            JSONArray ja = response.getJSONArray(Params.displayname);
+                            new_user_type = response.getString(Params.user_type);
+                            if (ja.length()>0){
+                                // Objs.a.showToast(mCon, String.valueOf(object.getJSONArray(Params.products)));
+
+                                setAdapter(ja);
+
+                            }else {
+                                Objs.a.ShowHideNoItems(mCon,true);
+                            }
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }*/
                         progressDialog.dismiss();
                     }
                 }, new Response.ErrorListener() {
+
             @Override
             public void onErrorResponse(VolleyError error) {
+                //Log.d(TAG, error.getMessage());
                 VolleyLog.d(TAG, "Error: " + error.getMessage());
                 Toast.makeText(getApplicationContext(),error.getMessage(), Toast.LENGTH_SHORT).show();
                 progressDialog.dismiss();
@@ -123,7 +207,10 @@ public class Document_Details extends SimpleActivity {
                 return headers;
             }
         };
+        // Adding request to request queue
         AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
+        // Cancelling request
+        // ApplicationController.getInstance().getRequestQueue().cancelAll(tag_json_obj);
     }
 
     private void setAdapter(JSONArray ja) {
@@ -161,13 +248,15 @@ public class Document_Details extends SimpleActivity {
             try {
                 J = getItem(position);
                 holder.Over_all.setVisibility(View.GONE);
-                holder.doc_typename.setText((J.getString(Params.doc_typename)));
-                Objs.a.NewNormalFontStyle(mCon,holder.doc_typename);
-                holder.doc_typename_all.setText((J.getString(Params.doc_typename)));
-                Objs.a.NewNormalFontStyle(mCon,holder.doc_typename_all);
-                holder.count__all.setText(J.getString(Params.upload_count));
 
-                if(J.getString(Params.upload_status).equals("1")){
+                holder.doc_typename.setText((J.getString("doc_typename")));
+                Objs.a.NewNormalFontStyle(mCon,holder.doc_typename);
+                holder.doc_typename_all.setText((J.getString("doc_typename")));
+                Objs.a.NewNormalFontStyle(mCon,holder.doc_typename_all);
+
+              holder.count__all.setText(J.getString("doc_count"));
+
+                if(J.getString("upload_status").equals("1")){
                     holder.Over_all.setVisibility(View.VISIBLE);
                     holder.Ly_first.setVisibility(View.GONE);
                 }else{
@@ -175,31 +264,34 @@ public class Document_Details extends SimpleActivity {
                     holder.Ly_first.setVisibility(View.VISIBLE);
 
                 }
+
                 holder.Over_all.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         J = getItem(position);
                         try {
 
-                            String id =   J.getString(Params.id);
+                         //  String id =   J.getString(Params.id);
                             String doc_name =   J.getString(Params.doc_typename);
-                            String doc_typename =   J.getString(Params.doc_typename);
-                            String docid =   J.getString(Params.doc_id);
+                            String doc_typename =   J.getString("doc_typename");
+                            String docid =   J.getString("legal_docid");
+                            String docid1 =   J.getString("docid");
                             String class_id =   J.getString(Params.class_id);
                             String user_type =    Pref.getAEID(mCon);
-                            String transaction_id =   J.getString(Params.transaction_id);
+                            String transaction_id =   J.getString("transaction_id");
 
                             // Objs.a.showToast(mCon, id +"\n"+ transaction_id +"\n"+ doc_name
                             //         +"\n"+  docid +"\n"+class_id +"\n"+
                             //         user_type );
-
+                            Log.e("doc_typename",doc_typename);
+                            Log.e("legalid",docid);
+                            Log.e("transaction_id",transaction_id);
 
                             Objs.ac.StartActivityPutExtra(mCon, DocGridView_List.class,
                                     Params.class_id,class_id,
                                     Params.user_type,user_type,
                                     Params.transaction_id,transaction_id,
-                                    Params.doc_id,docid,
-                                    Params.id,id,
+                                    Params.doc_id,docid,Params.docid1,docid1,
                                     Params.doc_typename,doc_typename);
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -211,27 +303,19 @@ public class Document_Details extends SimpleActivity {
                     public void onClick(View view) {
                         J = getItem(position);
                         try {
-                            String id =   J.getString(Params.id);
-                            String doc_typename =   J.getString(Params.doc_typename);
-                            String docid =   J.getString(Params.doc_id);
-                            String class_id =   J.getString(Params.class_id);
-                            String user_type =  Pref.getAEID(mCon);
-                            String transaction_id =   J.getString(Params.transaction_id);
+                          //  String id =   J.getString(Params.id);
+                            String doc_typename =   J.getString("doc_typename");
+                            String docid =   J.getString("legal_docid");
+                          //  String class_id =   J.getString(Params.class_id);
+                          //  String user_type =  Pref.getAEID(mCon);
+                            String transaction_id =   J.getString("transaction_id");
 
+                            Log.e("doc_typename",doc_typename);
+                            Log.e("legalid",docid);
+                            Log.e("transaction_id",transaction_id);
 
-                           /* Objs.a.showToast(mCon, id +"\n"+ transaction_id +"\n"+ doc_typename
-                                    +"\n"+  docid +"\n"+class_id +"\n"+
-                                   user_type );*/
-                           String all =  id +"\n"+ transaction_id +"\n"+ doc_typename
-                                    +"\n"+  docid +"\n"+class_id +"\n"+
-                                    user_type;
-
-                            Log.e("Document_Details", all);
-
-                            Objs.ac.StartActivityPutExtra(mCon, ManiActivity_Image2.class, Params.id,id
-                                    , Params.doc_typename,doc_typename, Params.docid,docid
-                                    , Params.class_id,class_id, Params.user_type,user_type,
-                                    Params.transaction_id,transaction_id);
+                            Objs.ac.StartActivityPutExtra(mCon, ManiActivity_Image2.class, Params.doc_typename,doc_typename,
+                                    Params.docid,docid,Params.transaction_id,transaction_id);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }

@@ -36,11 +36,21 @@ import adhoc.app.applibrary.Config.AppUtils.VolleySignleton.AppController;
 import dmax.dialog.SpotsDialog;
 import in.loanwiser.partnerapp.Documents.Applicant_Details_Single;
 import in.loanwiser.partnerapp.R;
+import in.loanwiser.partnerapp.Step_Changes_Screen.CRIF_Report_Activity;
 import in.loanwiser.partnerapp.Step_Changes_Screen.Document_Check_List;
+import in.loanwiser.partnerapp.Step_Changes_Screen.Document_Checklist_Details_type;
+import in.loanwiser.partnerapp.Step_Changes_Screen.Eligibility_BL;
+import in.loanwiser.partnerapp.Step_Changes_Screen.Eligibility_Check_PL;
+import in.loanwiser.partnerapp.Step_Changes_Screen.Eligibility_HL_New;
+import in.loanwiser.partnerapp.Step_Changes_Screen.Lead_Crration_Activity;
+import in.loanwiser.partnerapp.Step_Changes_Screen.Viability_Check_BL;
+import in.loanwiser.partnerapp.Step_Changes_Screen.Viability_Check_HL_new;
+import in.loanwiser.partnerapp.Step_Changes_Screen.Viability_Check_PL;
 
 public class Home extends AppCompatActivity {
 
-    String  email,username,user_id,mobileno,transaction_id, subtask_id,applicant_id,b2b_userid,sub_taskid,step_status;
+    String  email,username,user_id,mobileno,transaction_id, subtask_id,applicant_id,b2b_userid,sub_taskid,step_status,
+            Applicant_Statues;
     private Context mCon = this;
     private String S1,S2,S3,S4,S5;
     Toolbar toolbar;
@@ -50,7 +60,13 @@ public class Home extends AppCompatActivity {
     private ImageView app_doc_img,app_info_img,app_info_img11,app_interview_img,app_offer_img,app_track_img;
     private TextView customerinterview,offerdetails,app_doc_message,app_info_message;
     private LinearLayout lead_cr_statues;
-    CardView Applicant_info_ly,Document_check_list,Document_Upload;
+    CardView Applicant_info_ly,Document_check_list,Document_Upload,
+            Viability_Check,eligibility_check,viability_Report,Credit_REport_Generation;
+    ImageView viability_check_img2,eligibility_check_img,viability_report_image,Credite_report_image;
+
+    String viability,eligibility,credit_request,payment,viability_report,
+    document_checklist,document_upload,loan_type_id,loan_type;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,15 +83,20 @@ public class Home extends AppCompatActivity {
         //  toolbar.setNavigationIcon(R.drawable.ic_hamburger);
         progressDialog = new SpotsDialog(this, R.style.Custom);
 
-
         user_id =  Objs.a.getBundle(this, Params.user_id);
         transaction_id =  Objs.a.getBundle(this, Params.transaction_id);
         applicant_id =  Objs.a.getBundle(this, Params.applicant_id);
         sub_taskid =  Objs.a.getBundle(this, Params.sub_taskid);
-        step_status =  Objs.a.getBundle(this, Params.step_status);
+        Applicant_Statues =  Objs.a.getBundle(this, Params.Applicant_status);
+
+        loan_type_id =  Objs.a.getBundle(this, Params.loan_type_id);
+        loan_type =  Objs.a.getBundle(this, Params.loan_type);
 
 
-        Log.e("step_status",step_status);
+      //  step_status =  Objs.a.getBundle(this, Params.step_status);
+
+
+      //  Log.e("step_status",step_status);
 
         initCode();
 
@@ -91,30 +112,149 @@ public class Home extends AppCompatActivity {
          initUI();
          fonts();
         clicks();
-      //  Work_flow_status(transaction_id);
+        Work_flow_status(transaction_id);
     }
 
     private void initUI()
     {
+
         Applicant_info_ly = (CardView) findViewById(R.id.Applicant_info_ly);
-
-
-
         Document_check_list = (CardView) findViewById(R.id.Document_check_list);
         Document_Upload = (CardView) findViewById(R.id.Document_Upload);
         offer = (CardView) findViewById(R.id.Blo);
+
+
+
+        Viability_Check = (CardView) findViewById(R.id.Viability_Check);
+        eligibility_check = (CardView) findViewById(R.id.eligibility_check);
+        viability_Report = (CardView) findViewById(R.id.viability_Report);
+        Credit_REport_Generation = (CardView) findViewById(R.id.Credit_REport_Generation);
+
         lead_cr_statues = (LinearLayout) findViewById(R.id.lead_cr_statues);
 
         app_doc_img = (ImageView) findViewById(R.id.app_doc_img);
         app_info_img = (ImageView) findViewById(R.id.app_info_img);
         app_info_img11 = (ImageView) findViewById(R.id.app_info_img11);
         app_interview_img = (ImageView) findViewById(R.id.app_interview_img);
+
+
         app_offer_img = (ImageView) findViewById(R.id.app_offer_img);
+
+        //viability_check_img2,eligibility_check_img,viability_report_image,Credite_report_image;
+
+        viability_check_img2 = (ImageView) findViewById(R.id.viability_check_img2);
+        eligibility_check_img = (ImageView) findViewById(R.id.eligibility_check_img);
+        viability_report_image = (ImageView) findViewById(R.id.viability_report_image);
+        Credite_report_image = (ImageView) findViewById(R.id.Credite_report_image);
 
         customerinterview = (TextView) findViewById(R.id.customerinterview_offer) ;
         app_info_message = (TextView) findViewById(R.id.app_info_message) ;
         app_doc_message = (TextView) findViewById(R.id.app_doc_message) ;
         offerdetails = (TextView) findViewById(R.id.callcenter_offer) ;
+
+        Viability_Check.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                if(viability.contains("completed"))
+                {
+
+                }else
+                {
+
+                    if(loan_type_id.equals("21"))
+                    {
+
+                        Intent intent = new Intent(Home.this, Viability_Check_PL.class);
+                        intent.putExtra("user_id", user_id);
+                        intent.putExtra("transaction_id", transaction_id);
+                        startActivity(intent);
+                        finish();
+
+                    }else if(loan_type_id.equals("20"))
+                    {
+                        Intent intent = new Intent(Home.this, Viability_Check_BL.class);
+                        intent.putExtra("user_id", user_id);
+                        intent.putExtra("transaction_id", transaction_id);
+                        startActivity(intent);
+                        finish();
+
+                    }else
+                    {
+                        Intent intent = new Intent(Home.this, Viability_Check_HL_new.class);
+                        startActivity(intent);
+                        finish();
+                    }
+
+
+                }
+
+            }
+        });
+
+        eligibility_check.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                if(viability.contains("completed"))
+                {
+                    if(eligibility.contains("completed"))
+                    {
+
+                    }else
+                    {
+                        if(loan_type_id.equals("21"))
+                        {
+
+                            Intent intent = new Intent(Home.this, Eligibility_Check_PL.class);
+                            intent.putExtra("user_id", user_id);
+                            intent.putExtra("transaction_id", transaction_id);
+                            startActivity(intent);
+                            finish();
+
+                        }else if(loan_type_id.equals("20"))
+                        {
+                            Intent intent = new Intent(Home.this, Eligibility_BL.class);
+                            intent.putExtra("user_id", user_id);
+                            intent.putExtra("transaction_id", transaction_id);
+                            startActivity(intent);
+                            finish();
+
+                        }else
+                        {
+                            Intent intent = new Intent(Home.this, Eligibility_HL_New.class);
+                            startActivity(intent);
+                            finish();
+                        }
+                    }
+                }else
+                {
+                    Toast.makeText(getApplicationContext(),"Please Complete the Viavility Check", Toast.LENGTH_SHORT).show();
+
+                }
+
+
+            }
+        });
+        viability_Report.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intent = new Intent(Home.this, CRIF_Report_Activity.class);
+                startActivity(intent);
+            }
+        });
+        Credit_REport_Generation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intent = new Intent(Home.this, CRIF_Report_Activity.class);
+                startActivity(intent);
+
+            }
+        });
+
+
     }
     private void fonts() {
         Objs.a.OutfitNormalFontStyle(mCon, R.id.step1);
@@ -135,21 +275,102 @@ public class Home extends AppCompatActivity {
         JSONObject J= null;
         try {
             J =new JSONObject();
-            J.put(Params.transaction_id, transaction_id);
+            J.put("trans_id", transaction_id);
         } catch (JSONException e) {
             e.printStackTrace();
         }
         //  Objs.a.showToast(mCon,"Empty " + id);
         progressDialog.show();
-        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, Urls.WORKFLOW_POST, J,
+        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, Urls.PARTNER_STATUES, J,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
                         try {
 
                              Log.e("Home List",String.valueOf(response));
+
+                             JSONObject jsonObject1 = response.getJSONObject("response");
+                             JSONObject jsonObject2 = jsonObject1.getJSONObject("step2");
+                             JSONObject jsonObject3 = jsonObject1.getJSONObject("step3");
+
+
+                             String step2_statues = jsonObject2.getString("status");
+                             JSONObject step2_sub_statues = jsonObject2.getJSONObject("sub_status");
+
+                             JSONObject step3_sub_statues = jsonObject3.getJSONObject("sub_status");
+
+
+
+                             viability = step2_sub_statues.getString("viability");
+                             eligibility = step2_sub_statues.getString("eligibility");
+                             credit_request = step2_sub_statues.getString("credit_request");
+                             payment = step2_sub_statues.getString("payment");
+                             viability_report = step2_sub_statues.getString("viability_report");
+
+                             document_checklist = step3_sub_statues.getString("document_checklist");
+                             document_upload = step3_sub_statues.getString("document_upload");
+
+
+                            if(document_checklist.contains("pending"))
+                            {
+                                app_doc_img.setImageDrawable(getResources().getDrawable(R.drawable.ic_not_tick));
+
+                            }else
+                            {
+                                app_doc_img.setImageDrawable(getResources().getDrawable(R.drawable.ic_tick_icon));
+
+                            }
+                            if(document_upload.contains("pending"))
+                            {
+
+                                app_interview_img.setImageDrawable(getResources().getDrawable(R.drawable.ic_not_tick));
+
+                            }else
+                            {
+                                app_interview_img.setImageDrawable(getResources().getDrawable(R.drawable.ic_tick_icon));
+
+                            }
+
+
+                            if(viability.contains("completed"))
+                            {
+
+                                viability_check_img2.setImageDrawable(getResources().getDrawable(R.drawable.ic_tick_icon));
+                            }else
+                            {
+                                viability_check_img2.setImageDrawable(getResources().getDrawable(R.drawable.ic_not_tick));
+                            }
+
+                            if(eligibility.contains("completed"))
+                            {
+
+                                eligibility_check_img.setImageDrawable(getResources().getDrawable(R.drawable.ic_tick_icon));
+                            }else
+                            {
+                                eligibility_check_img.setImageDrawable(getResources().getDrawable(R.drawable.ic_not_tick));
+                            }
+
+                            if(credit_request.contains("completed"))
+                            {
+
+                                Credite_report_image.setImageDrawable(getResources().getDrawable(R.drawable.ic_tick_icon));
+                            }else
+                            {
+                                Credite_report_image.setImageDrawable(getResources().getDrawable(R.drawable.ic_not_tick));
+                            }
+
+                            if(viability_report.contains("completed"))
+                            {
+
+                                viability_report_image.setImageDrawable(getResources().getDrawable(R.drawable.ic_tick_icon));
+                            }else
+                            {
+                                viability_report_image.setImageDrawable(getResources().getDrawable(R.drawable.ic_not_tick));
+                            }
+
+
                             //    Objs.a.showToast(mCon, String.valueOf(response));
-                            if(response.getBoolean(Params.status)){
+                           /* if(response.getBoolean(Params.status)){
 
                                 S1 = response.getString(Params.s1);
                                 S2 = response.getString(Params.s2);
@@ -211,7 +432,7 @@ public class Home extends AppCompatActivity {
                             }else {
 
                             }
-
+*/
 
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -279,8 +500,18 @@ public class Home extends AppCompatActivity {
             public void onClick(View v) {
                 //      Toast.makeText(mCon, "CD_app_info", Toast.LENGTH_LONG).show();
               //  Account_Listings_Details(user_id);
-                Intent intent = new Intent(Home.this, Document_Check_List.class);
+                Intent intent = new Intent(Home.this, Document_Checklist_Details_type.class);
+                intent.putExtra("jsonArray", Applicant_Statues.toString());
                 startActivity(intent);
+            }
+        });
+
+        findViewById(R.id.Document_Upload).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //      Toast.makeText(mCon, "CD_app_info", Toast.LENGTH_LONG).show();
+                 Account_Listings_Details(user_id);
+
             }
         });
 
@@ -319,16 +550,20 @@ public class Home extends AppCompatActivity {
             e.printStackTrace();
         }
         progressDialog.show();
-        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, Urls.APP_ID_OTP_POST, J,
+        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, Urls.PARTNER_STATUES_IDs, J,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
+
+                        Log.e("the reponse",response.toString());
                         try {
 
-                            JSONObject jsonObject1 = response.getJSONObject(Params.application_form);
-                            String user_id  = response.getString(Params.user_id);
+                            JSONObject Response = response.getJSONObject("reponse");
+
+                            JSONObject jsonObject1 = Response.getJSONObject(Params.application_form);
+                            String user_id  = Response.getString(Params.user_id);
                             String jsonStringObj  = String.valueOf(jsonObject1);
-                            JSONArray jsonArray = response.getJSONArray(Params.emp_states);
+                            JSONArray jsonArray = Response.getJSONArray(Params.emp_states);
 
                             if (jsonArray.length()>0){
                                 String jsonString  = String.valueOf(jsonArray);
@@ -345,7 +580,7 @@ public class Home extends AppCompatActivity {
                                 Objs.a.ShowHideNoItems(mCon,true);
                             }
 
-                            JSONArray ja = response.getJSONArray(Params.emp_states);
+                         //   JSONArray ja = response.getJSONArray(Params.emp_states);
 
                         } catch (JSONException e) {
                             e.printStackTrace();

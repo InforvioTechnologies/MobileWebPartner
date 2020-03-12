@@ -153,13 +153,10 @@ public class ManiActivity_Image2 extends SimpleActivity implements SingleUploadB
         pDialog = new ProgressDialog(this);
         pDialog.setMessage("Loading...");
 
-      //  user_type =  Objs.a.getBundle(this, Params.user_type);
-        id =  Objs.a.getBundle(this, Params.id);
         doc_typename =  Objs.a.getBundle(this, Params.doc_typename);
         initTools1(doc_typename);
         docid =  Objs.a.getBundle(this, Params.docid);
-        class_id =  Objs.a.getBundle(this, Params.class_id);
-        user_type =  Objs.a.getBundle(this, Params.user_type);
+
         transaction_id =  Objs.a.getBundle(this, Params.transaction_id);
 
        /* Log.d("ID_values",id);
@@ -420,6 +417,7 @@ public class ManiActivity_Image2 extends SimpleActivity implements SingleUploadB
     }
 
     public Uri getOutputMediaFileUri(int type) {
+
         return Uri.fromFile(getOutputMediaFile(type));
     }
 
@@ -476,10 +474,12 @@ public class ManiActivity_Image2 extends SimpleActivity implements SingleUploadB
     }
 
     private void launchUploadActivity(boolean isImage){
+
         Intent i = new Intent(ManiActivity_Image2.this, UploadActivity.class);
         i.putExtra("filePath", fileUri.getPath());
         i.putExtra("isImage", isImage);
         startActivity(i);
+
     }
 
 
@@ -613,15 +613,12 @@ public class ManiActivity_Image2 extends SimpleActivity implements SingleUploadB
                 //  Log.d("Camara image1", String.valueOf(singleimage));
 
                   progressDialog.show();
-                StringRequest stringRequest = new StringRequest(Request.Method.POST, Urls.IMG_UPLOAD_DOCUMENT_POST,
+                StringRequest stringRequest = new StringRequest(Request.Method.POST, Urls.CAMERA_IMAGE_Upload,
                         new Response.Listener<String>() {
                             @Override
                             public void onResponse(String response) {
                                 progressDialog.dismiss();
                                 Log.d("Camara image", String.valueOf(response));
-                              //  Objs.a.showToast(mCon, String.valueOf(response));
-                                   // progressDialog.dismiss();
-
                                 try {
                                     JSONObject j = new JSONObject(response);
                                     String a = j.getString(Params.status);
@@ -643,12 +640,11 @@ public class ManiActivity_Image2 extends SimpleActivity implements SingleUploadB
                     @Override
                     protected Map<String, String> getParams() throws AuthFailureError {
                         Map<String, String> params = new HashMap<>();
-                        params.put(Params.doc_id, id);
+                        params.put("legal_id", docid);
                         params.put(Params.doc_name, doc_typename);
-                        params.put(Params.class_id, class_id);
-                        params.put(Params.user_type, user_type);
                         params.put(Params.transaction_id, transaction_id);
                         params.put(Params.img_url, singleimage);
+                        params.put(Params.is_mobileupload,"4");
                         Log.d("Camara image", String.valueOf(params));
                         return params;
 
@@ -677,14 +673,12 @@ public class ManiActivity_Image2 extends SimpleActivity implements SingleUploadB
         }
         else
         {
+
             if(filePath != null){
-
-
 
                 String path= String.valueOf(filePath);
                 String filename = path.substring(path.lastIndexOf("/")+1);
                 String pdf1 = filename.substring(filename.lastIndexOf(".")+1);
-
 
                 String a= "pdf";
 
@@ -699,6 +693,7 @@ public class ManiActivity_Image2 extends SimpleActivity implements SingleUploadB
                 }
 
             }
+
             else
             {
 
@@ -713,7 +708,7 @@ public class ManiActivity_Image2 extends SimpleActivity implements SingleUploadB
                         bitmap = PhotoLoader.init().from(imagePath).requestSize(512, 512).getBitmap();
                         final String encodedString = ImageBase64.encode(bitmap);
                         progressDialog.show();
-                        StringRequest stringRequest = new StringRequest(Request.Method.POST, Urls.IMG_UPLOAD_DOCUMENT_POST, new Response.Listener<String>() {
+                        StringRequest stringRequest = new StringRequest(Request.Method.POST, Urls.CAMERA_IMAGE_Upload, new Response.Listener<String>() {
                             @Override
                             public void onResponse(String response) {
                                 progressDialog.dismiss();
@@ -730,7 +725,9 @@ public class ManiActivity_Image2 extends SimpleActivity implements SingleUploadB
                                         Objs.ac.StartActivityPutExtra(mCon,Document_Details.class, Params.user_type,user_type);
                                     }
                                 } catch (JSONException e) {
+
                                     e.printStackTrace();
+
                                 }
                             }
                         }, new Response.ErrorListener() {
@@ -743,15 +740,18 @@ public class ManiActivity_Image2 extends SimpleActivity implements SingleUploadB
                             @Override
                             protected Map<String, String> getParams() throws AuthFailureError {
                                 Map<String, String> params = new HashMap<>();
-                                params.put(Params.doc_id, id);
+                               // params.put(Params.is_mobileupload, "4");
+                                params.put("legal_id", docid);
                                 params.put(Params.doc_name, doc_typename);
-                                params.put(Params.class_id, class_id);
-                                params.put(Params.user_type, user_type);
                                 params.put(Params.transaction_id, transaction_id);
                                 params.put(Params.img_url, encodedString);
-                                params.put(Params.is_mobileupload, "4");
-                                Log.d("Camara image", String.valueOf(params));
+                                params.put(Params.is_mobileupload,"4");
+                               // Log.d("Camara image", String.valueOf(params));
+                                Log.e("legal_id ", docid);
+                                Log.e("doc_typename ", doc_typename);
+                                Log.e("transaction_id ", transaction_id);
                                 return params;
+
                             }
                         };
 
@@ -795,14 +795,12 @@ public class ManiActivity_Image2 extends SimpleActivity implements SingleUploadB
                 uploadReceiver.setUploadID(uploadId);
                 //Creating a multi part request
                 progressDialog.show();
-                new MultipartUploadRequest(this, uploadId, Urls.PDF_UPLOAD_DOCUMENT_POST)
+                new MultipartUploadRequest(this, uploadId, Urls.PDF_Document_Upload)
                         .addFileToUpload(path, Params.img_url) //Adding file
-                        .addParameter(Params.doc_id, id) //Adding text parameter to the request
+                        .addParameter("legal_id", docid) //Adding text parameter to the request
                         .addParameter(Params.doc_name, doc_typename)
-                        .addParameter(Params.class_id, class_id)
-                        .addParameter(Params.is_mobileupload, "4")
-                        .addParameter(Params.user_type, user_type)
                         .addParameter(Params.transaction_id, transaction_id)
+                        .addParameter(Params.is_mobileupload, "4")
                        // .setNotificationConfig(new UploadNotificationConfig())
                         .setMaxRetries(2)
                         .startUpload(); //Starting the upload
@@ -871,75 +869,6 @@ public class ManiActivity_Image2 extends SimpleActivity implements SingleUploadB
     public void onCancelled() {
 
     }
-  /*  private void Send_Reload(final String no) {
-        JSONObject jsonObject =new JSONObject();
-        JSONObject J= null;
-        try {
-            J =new JSONObject();
-            J.put(Params.user_id, no);
 
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        progressDialog.show();
-        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, Urls.APP_ID_OTP_POST, J,
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-
-
-                        String data = String.valueOf(response);
-
-                        try {
-
-                            JSONObject jsonObject1 = response.getJSONObject(Params.application_form);
-                            String user_id  = response.getString(Params.user_id);
-                            String jsonStringObj  = String.valueOf(jsonObject1);
-                            JSONArray jsonArray = response.getJSONArray(Params.emp_states);
-
-                            if (jsonArray.length()>0){
-                                String jsonString  = String.valueOf(jsonArray);
-
-                                Objs.ac.StartActivityPutExtra(mCon,
-                                        Applicant_Details_Single.class,
-                                        Params.JSON, jsonString,
-                                        Params.id,user_id,
-                                        Params.JSONObj,jsonStringObj);
-                                finish();
-                            }else {
-                                Objs.a.ShowHideNoItems(mCon,true);
-                            }
-
-                            JSONArray ja = response.getJSONArray(Params.emp_states);
-
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                        // progressDialog.dismiss();
-                    }
-                }, new Response.ErrorListener() {
-
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                //Log.d(TAG, error.getMessage());
-                //   VolleyLog.d(TAG, "Error: " + error.getMessage());
-                Objs.a.showToast(mCon, error.getMessage());
-                //  Toast.makeText(context,error.getMessage(),Toast.LENGTH_SHORT).show();
-                progressDialog.dismiss();
-            }
-        }) {
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                HashMap<String, String> headers = new HashMap<String, String>();
-                headers.put("content-type", "application/json");
-                return headers;
-            }
-        };
-        // Adding request to request queue
-        AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
-
-        // Cancelling request
-        // ApplicationController.getInstance().getRequestQueue().cancelAll(tag_json_obj);
-    }*/
 }
 

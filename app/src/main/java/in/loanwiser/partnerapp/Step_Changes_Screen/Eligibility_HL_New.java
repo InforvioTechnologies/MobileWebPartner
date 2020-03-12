@@ -677,7 +677,7 @@ public class Eligibility_HL_New extends SimpleActivity {
                         }else {
 
 
-                            if(loan_type_id.equals("2"))
+                            if(loan_type_id.equals("1"))
                             {
 
                                 if (!Validate_age_Of_Property_Edit_Text()) {
@@ -701,7 +701,7 @@ public class Eligibility_HL_New extends SimpleActivity {
                                     applicant_elig_Self();
                                 }
 
-                            }else  if(loan_type_id.equals("1"))
+                            }else  if(loan_type_id.equals("2"))
                             {
                                 if (!Validate_plot_area_edit_txt()) {
                                     return;

@@ -235,7 +235,7 @@
     <string name="emp_type">Type of Employee</string>
     <string name="emp_count">No of Employee in company</string>
     <string name="salary_credit">Salary Credit Method</string>
-    <string name="area">area</string>
+    <string name="area">Area</string>
     <string name="cur_res_proof">Current residence address Proof</string>
 
     <string name="business_regi">Business Registration</string>
@@ -363,6 +363,7 @@
     <string name="app_details">Applicant Details</string>
     <string name="app_offer_updated">Loanwiser Customer Care will call you to complete the Step</string>
     <string name="doc_upload">Document Upload</string>
+    <string name="doc_check_list1">Document Check List</string>
     <string name="app_track">Track Status</string>
     <string name="loan_type_new">Loan Type </string>
     <string name="no_applicant">Number of Applicant </string>
@@ -523,6 +524,7 @@
     <string name="property_category">Property Category</string>
     <string name="type_of_emp">Type of employment</string>
     <string name="co_applicant">Do you Have Co Applicant</string>
+    <string name="is_mobile_">Is mobile Number Same as WhatsApp Number</string>
     <string name="saving_bank_acc">Have saving Bank Account</string>
     <string name="salary_proof">Salary Proof</string>
     <string name="exp_current_cmp">Experiance in Current Company(months)</string>

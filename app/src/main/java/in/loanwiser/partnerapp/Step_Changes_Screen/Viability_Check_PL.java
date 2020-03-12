@@ -155,7 +155,7 @@ public class Viability_Check_PL extends SimpleActivity {
             Business_Proof,office_shop,vehicle_Type,vocation_type_forming_ar,sell_milk,franchise,Business_type_own_business,
             Office_residence,
             crop_type,Business_income_proof;
-    String[] SPINNERLIST;
+    String[] SPINNERLIST,salary_proof_salaried_app_SA;
     String[] SALARY_Method,Salary_Proof,Residence_Type_SA,Employe_ID_SA,PAN_ID_SA,
             Other_Earning_SA,Pincode_SA,Area,CO_Type_Of_Emp_SA,Have_Co_Applicant,Vocation_SA,EMPLOYEE_TYPE_SA,
             vocation_type_forming__SA,Office_Shop_SA,Selling_Milk_SA,Own_business_type_SA,
@@ -193,20 +193,21 @@ public class Viability_Check_PL extends SimpleActivity {
 
     private AlertDialog progressDialog;
 
-    StringBuffer assets_buff,assets_salaried_buff,salaried_salaried_buff,self_ind_vehilce_type,
+    StringBuffer assets_buff,assets_salaried_buff,salaried_salaried_buff,salaried_salaried_buff_app,self_ind_vehilce_type,
             self_F_what_crop,Vintage_business_proof,co_own_bus_proof,co_self_assets_owned_buff;
 
     String Salary_id,Salary_Value,Salary_proof_id,Salary_proof_Value,residence_id,residence_Value,
-                 Employee_id,Employee_Value,PAN_id,PAN_Value, other_earning_id,other_earning_value,
+                 Employee_id,Employee_Value,PAN_id,PAN_Value, other_earning_id,other_earning_value,salary_proof_salaried_str_App,
             CO_Type_of_employement_ID,CO_Type_of_employement_Value, IS_CO_Applicant_Id,IS_CO_Applicant_Value;
 
     ArrayList<IncomeProofPOJO> IncomeProof_Salaried,Salary_income_Proof,assets_owned_proof,
-                                assets_owned_salaried,salary_proof_arr_list,vehicle_Type_arr_list,what_kind_of_crope_list,
+                                assets_owned_salaried,salary_proof_arr_list,salary_proof_arr_list_app,vehicle_Type_arr_list,what_kind_of_crope_list,
             co_self_bus_vintage_proof_list,co_self_assets_owned,co_self_Assets_owned_list,co_self_bus_own_proof_list;
   //  MyCustomAdapter_Salary_Proof dataAdapter_Salaried_proof = null;
     MyCustomAdapter_Assets_owned dataAdapter_assets_owned = null;
     MyCustomAdapter_assets_owned_Salaried assets_owned_salaried_Adapter = null;
     MyCustomAdapter_salary_proof_Salaried salary_proof_salaried_Adapter = null;
+    MyCustomAdapter_salary_proof_Salaried_App salary_proof_salaried_Adapter_APP = null;
     MyCustomAdapter_vehicle_type_self self_vehicle_adapter = null;
     MyCustomAdapter_what_crope_self what_crop_adapter = null;
     MyCustomAdapter_Business_Vintage_proof business_vintage_Adapter = null;
@@ -229,6 +230,7 @@ public class Viability_Check_PL extends SimpleActivity {
     JSONArray business_vintage_self = new JSONArray();
     JSONArray business_proof_self = new JSONArray();
     JSONArray self_co_assets_ = new JSONArray();
+    JSONArray salary_proof_salary_array_App = new JSONArray();
 
     String user_id,transaction_id,pl_co_app_ind_Office_Shop_Own_id,pl_co_app_ind_Office_Shop_Own_value;
     int applicant_count;
@@ -816,13 +818,24 @@ public class Viability_Check_PL extends SimpleActivity {
                             Toast.makeText(context,"Please Select Co applicant Salary Credit Method",Toast.LENGTH_SHORT).show();
                         }else
                         {
-                            /*if(salary_proof_list.length() < 0 )
-                            {
+                            salaried_salaried_buff_app = new StringBuffer();
+                            ArrayList<IncomeProofPOJO> assests_list_v1 = salary_proof_salaried_Adapter_APP.SALARIED_PROOF_SALARIED_App;
+                            for(int i=0;i<assests_list_v1.size();i++){
+                                IncomeProofPOJO country = assests_list_v1.get(i);
+                                if(country.isIP_selected()){
+                                    salaried_salaried_buff_app.append(country.getIP_id()+ ",");
+                                    String responseID1 = String.valueOf(salaried_salaried_buff_app);
+                                }
+                            }
+                            if (salaried_salaried_buff_app.length()> 0) {
 
-                            } else
-                            {
-                                Toast.makeText(context,"Please Select Salary Proof",Toast.LENGTH_SHORT).show();
-                            }*/
+                                String responseID1 = String.valueOf(salaried_salaried_buff_app);
+                                salary_proof_salaried_str_App = removeClass.cleanUpCommas(responseID1);
+                                salary_proof_salaried_app_SA = salary_proof_salaried_str_App.split(",");
+
+                                salary_proof_salary_array_App = new JSONArray();
+                                salary_proof_salary_array_App = new JSONArray(Arrays.asList(salary_proof_salaried_app_SA));
+                            }
 
                             if (!Validate_experience()) {
                                 return;
@@ -2178,14 +2191,14 @@ public class Viability_Check_PL extends SimpleActivity {
                             total_workexperiecnce_txt.setText("5");
                             cmp_pincode_txt.setText("6");
                             area_txt.setText("7");
-                            txt_residence_pincode.setText("8");
-                            res_area_txt.setText("9");
-                            txt_residence_type.setText("10");
+                            txt_residence_pincode.setText("9");
+                            res_area_txt.setText("10");
+                            txt_residence_type.setText("11");
 
 
-                            Lives_in_current_txt.setText("11");
-                            do_you_have_coApp_txt.setText("12");
-                            coApp_txt_emp_type1.setText("13");
+                            Lives_in_current_txt.setText("12");
+                            do_you_have_coApp_txt.setText("13");
+                            coApp_txt_emp_type1.setText("14");
 
 
                         }else
@@ -2205,11 +2218,11 @@ public class Viability_Check_PL extends SimpleActivity {
                             total_workexperiecnce_txt.setText("5");
                             cmp_pincode_txt.setText("6");
                             area_txt.setText("7");
-                            txt_residence_pincode.setText("8");
-                            res_area_txt.setText("9");
-                            txt_residence_type.setText("10");
-                            do_you_have_coApp_txt.setText("11");
-                            coApp_txt_emp_type1.setText("12");
+                            txt_residence_pincode.setText("9");
+                            res_area_txt.setText("10");
+                            txt_residence_type.setText("11");
+                            do_you_have_coApp_txt.setText("12");
+                            coApp_txt_emp_type1.setText("13");
 
                         }
 
@@ -2586,6 +2599,24 @@ public class Viability_Check_PL extends SimpleActivity {
         assets_owned_salaried_Adapter.notifyDataSetChanged();
     }
 
+    private void salary_proof_salaried_app(final JSONArray ja) throws JSONException {
+
+        salary_proof_arr_list_app = new ArrayList<IncomeProofPOJO>();
+
+        for (int i=0;i<ja.length();i++){
+            JSONObject J =  ja.getJSONObject(i);
+
+            String id = J.getString("id");
+            String locality = J.getString("value");
+
+            IncomeProofPOJO salary_proof = new IncomeProofPOJO(id,locality,false);
+            salary_proof_arr_list_app.add(salary_proof);
+        }
+        salary_proof_salaried_Adapter_APP = new MyCustomAdapter_salary_proof_Salaried_App(context, 0,salary_proof_arr_list);
+        spinner_salary_proof.setAdapter(salary_proof_salaried_Adapter_APP);
+        salary_proof_salaried_Adapter_APP.notifyDataSetChanged();
+    }
+
     private void salary_proof_salaried(final JSONArray ja) throws JSONException {
 
         salary_proof_arr_list = new ArrayList<IncomeProofPOJO>();
@@ -2861,6 +2892,93 @@ public class Viability_Check_PL extends SimpleActivity {
                 holder.name.setVisibility(View.GONE);
                 holder.code.setVisibility(View.VISIBLE);
                 holder.code.setText("Select Assets Own");
+
+            }else {
+                holder.code.setVisibility(View.GONE);
+                holder.name.setVisibility(View.VISIBLE);
+            }
+            return convertView;
+        }
+
+    }
+
+    private class MyCustomAdapter_salary_proof_Salaried_App extends ArrayAdapter<IncomeProofPOJO> {
+
+        private ArrayList<IncomeProofPOJO> SALARIED_PROOF_SALARIED_App;
+        IncomeProofPOJO salary_proof_salaried_App;
+        public MyCustomAdapter_salary_proof_Salaried_App(Context context, int textViewResourceId,
+                                                         ArrayList<IncomeProofPOJO> SALARIED_PROOF_SALARIED_App) {
+            super(context, textViewResourceId, SALARIED_PROOF_SALARIED_App);
+            this.SALARIED_PROOF_SALARIED_App = new ArrayList<IncomeProofPOJO>();
+            this.SALARIED_PROOF_SALARIED_App.addAll(SALARIED_PROOF_SALARIED_App);
+        }
+
+        private class ViewHolder {
+            TextView code;
+            CheckBox name;
+        }
+
+        @Override
+        public View getDropDownView(int position, View convertView,
+                                    ViewGroup parent) {
+            return getCustomView(position, convertView, parent);
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            return getCustomView(position, convertView, parent);
+        }
+
+        public View getCustomView(int position, View convertView, ViewGroup parent) {
+
+            MyCustomAdapter_salary_proof_Salaried_App.ViewHolder holder = null;
+
+            if (convertView == null) {
+                LayoutInflater vi = (LayoutInflater)getContext().getSystemService(
+                        Context.LAYOUT_INFLATER_SERVICE);
+                convertView = vi.inflate(R.layout.income_proof_info, null);
+                holder = new MyCustomAdapter_salary_proof_Salaried_App.ViewHolder();
+                holder.code = (TextView) convertView.findViewById(R.id.code);
+                holder.name = (CheckBox) convertView.findViewById(R.id.checkBox1);
+
+
+                holder.name.setTypeface(font);
+                holder.name.setTextSize(13);
+                holder.code.setTypeface(font);
+                holder.code.setTextSize(13);
+                convertView.setTag(holder);
+
+                holder.name.setOnClickListener( new View.OnClickListener() {
+                    public void onClick(View v) {
+                        CheckBox cb = (CheckBox) v ;
+                        IncomeProofPOJO salary_proof = (IncomeProofPOJO) cb.getTag();
+                        salary_proof.setIP_selected(cb.isChecked());
+
+                        String email = salary_proof.getIP_name();
+                        Uri imgUrl = Uri.parse("https://image.shutterstock.com/image-vector/green-proof-icon-check-concept-260nw-596401601.jpg");
+                        Contact contact = new Contact(null, null, null, email, imgUrl);
+                        if (cb.isChecked()) {
+                            cv_salary_income_proof.addChip(email, imgUrl, contact);
+                        } else {
+                            cv_salary_income_proof.removeChipBy(contact);
+                        }
+                    }
+
+                });
+            }
+            else {
+                holder = (MyCustomAdapter_salary_proof_Salaried_App.ViewHolder) convertView.getTag();
+            }
+
+            salary_proof_salaried_App = SALARIED_PROOF_SALARIED_App.get(position);
+            holder.name.setText(salary_proof_salaried_App.getIP_name());
+            holder.name.setChecked(salary_proof_salaried_App.isIP_selected());
+            holder.name.setTag(salary_proof_salaried_App);
+
+            if(salary_proof_salaried_App.getIP_name().contains("Salary Proof")){
+                holder.name.setVisibility(View.GONE);
+                holder.code.setVisibility(View.VISIBLE);
+                holder.code.setText("Select Salary Proof");
 
             }else {
                 holder.code.setVisibility(View.GONE);
@@ -4733,6 +4851,7 @@ public class Viability_Check_PL extends SimpleActivity {
             applicant.put("age",String_value_Age);
             applicant.put("net_salary",St_monthly_net_sal_edit_txt);
             applicant.put("salary_mode",Salary_id);
+            applicant1.put("income_proof",salary_proof_salary_array_App);
             applicant.put("work_experiance",ST_experience_in_current_cmpy);
             applicant.put("tot_work_experiance",ST_total_experience_edit_txt);
             applicant.put("work_pincode",ST_company_pincode_txt);

@@ -72,10 +72,11 @@ public class Lead_Crration_Activity extends SimpleActivity {
     String Lontypename,Lontype,Loan_Cat_id,result,C_loan_amount_ext,
             C_mobile_no_txt,C_name_txt,C_whats_app_no,LoanCat_Name,
             Type_of_employement_ID,Type_of_employement_Value, CO_Type_of_employement_ID,CO_Type_of_employement_Value,
-            IS_CO_Applicant_Id,IS_CO_Applicant_Value,Mobile,Name,C_email_edite_txt,EMP_Statues;
+            IS_CO_Applicant_Id,IS_CO_Applicant_Value,Mobile,Name,C_email_edite_txt,EMP_Statues,
+            Is_Whats_app_ID,Is_Whats_app_Value;
 
     InputMethodManager imm;
-    JSONArray Employement,is_coapplicant;
+    JSONArray Employement,is_coapplicant,is_whatsapp;
     AppCompatEditText loan_amount_ext,name_txt,mobile_no_txt,whats_app_no,age_edite_txt,email_edite_txt;
     AppCompatTextView txt_loan_category,txt_loan_category1,loan_type,loan_type1,
                         Loan_amount,Loan_amount1,name,name1,mobile,mobile1,wt_mobile,wt_mobile11,terms_and_condition,
@@ -83,10 +84,12 @@ public class Lead_Crration_Activity extends SimpleActivity {
             ,coApp_txt_emp_type2,age,email,email1;
 
     CheckBox check_complete;
-    Spinner co_applicant_spinner,co_applicant_emp_spinner;
+    Spinner co_applicant_spinner,co_applicant_emp_spinner,is_whats_app_spinner;
     LinearLayout type_of_empmnt,co_applicant_ly,co_applicant_emp_type;
     TextView v;
     String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
+
+    LinearLayout Ly_wt_mob;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -112,9 +115,9 @@ public class Lead_Crration_Activity extends SimpleActivity {
         UI_FIELDS();
         fonts();
         makeJsonObjReq1();
-     Click();
+     // Click();
 
-      /*  lead_cr_step1.setOnClickListener(new View.OnClickListener() {
+        lead_cr_step1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
@@ -122,7 +125,7 @@ public class Lead_Crration_Activity extends SimpleActivity {
                 startActivity(intent);
                 finish();
             }
-        });*/
+        });
 
      if(Lontypename.contains("Personal Loan [Unsecured]") || Lontypename.contains("Business Loan [Unsecured]"))
      {
@@ -186,6 +189,7 @@ public class Lead_Crration_Activity extends SimpleActivity {
 
         co_applicant_spinner = (Spinner) findViewById(R.id.co_applicant_spinner);
         co_applicant_emp_spinner = (Spinner) findViewById(R.id.co_applicant_emp_spinner);
+        is_whats_app_spinner = (Spinner) findViewById(R.id.is_whats_app_spinner);
 
         type_of_empmnt = (LinearLayout) findViewById(R.id.type_of_empmnt);
         co_applicant_ly = (LinearLayout) findViewById(R.id.co_applicant_ly);
@@ -204,6 +208,8 @@ public class Lead_Crration_Activity extends SimpleActivity {
         email_edite_txt = (AppCompatEditText) findViewById(R.id.email_edite_txt);
         terms_and_condition = (AppCompatTextView) findViewById(R.id.terms_and_condition);
         check_complete = (CheckBox) findViewById(R.id.check_complete);
+
+        Ly_wt_mob = (LinearLayout) findViewById(R.id.Ly_wt_mob);
 
         Mobile = Pref.getMobileLead(getApplicationContext());
         Name = Pref.getName(getApplicationContext());
@@ -330,10 +336,13 @@ public class Lead_Crration_Activity extends SimpleActivity {
 
                             Employement =object.getJSONArray("Employement");
                             is_coapplicant =object.getJSONArray("is_coapplicant");
-                            Log.e("Property_title",String.valueOf(Employement));
+
+                            is_whatsapp =object.getJSONArray("is_whatsapp");
+                            Log.e("is_whatsapp",String.valueOf(is_whatsapp));
 
                             Type_Of_Employement_Spinner(Employement);
                             Co_Type_Of_Employement_Spinner(Employement);
+                            is_whatsApp_values(is_whatsapp);
                             DO_Have_Co_Applicant(is_coapplicant);
 
                         } catch (JSONException e) {
@@ -416,6 +425,71 @@ public class Lead_Crration_Activity extends SimpleActivity {
                 }
             });
             spnr_type_of_empmnt.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View view, MotionEvent motionEvent) {
+                    // imm.hideSoftInputFromWindow(edt_buyer_address.getWindowToken(), 0);
+                    return false;
+                }
+            });
+        }
+
+    }
+
+    private void is_whatsApp_values(final JSONArray Type_Of_emp_ar) throws JSONException {
+        //   SPINNERLIST = new String[ja.length()];
+        CO_Type_Of_Emp_SA = new String[Type_Of_emp_ar.length()];
+        for (int i=0;i<Type_Of_emp_ar.length();i++){
+            JSONObject J =  Type_Of_emp_ar.getJSONObject(i);
+            CO_Type_Of_Emp_SA[i] = J.getString("value");
+            final List<String> loan_type_list = new ArrayList<>(Arrays.asList(CO_Type_Of_Emp_SA));
+            CO_Type_Of_Emp_Adapter = new ArrayAdapter<String>(context, R.layout.view_spinner_item, loan_type_list){
+                public View getView(int position, View convertView, ViewGroup parent) {
+                    font = Typeface.createFromAsset(context.getAssets(),"Lato-Regular.ttf");
+                    TextView v = (TextView) super.getView(position, convertView, parent);
+                    v.setTypeface(font);
+                    return v;
+                }
+
+                public View getDropDownView(int position, View convertView, ViewGroup parent) {
+                    TextView v = (TextView) super.getView(position, convertView, parent);
+                    v.setTypeface(font);
+                    return v;
+                }
+            };
+
+            CO_Type_Of_Emp_Adapter.setDropDownViewResource(R.layout.view_spinner_item);
+            is_whats_app_spinner.setAdapter(CO_Type_Of_Emp_Adapter);
+            is_whats_app_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                    try {
+
+
+                        Is_Whats_app_ID = Type_Of_emp_ar.getJSONObject(position).getString("id");
+                        Is_Whats_app_Value = Type_Of_emp_ar.getJSONObject(position).getString("value");
+
+                        if(Is_Whats_app_ID.equals("1"))
+                        {
+                            Ly_wt_mob.setVisibility(View.GONE);
+
+                        }else
+                        {
+                            Ly_wt_mob.setVisibility(View.VISIBLE);
+                        }
+
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+
+                }
+            });
+            is_whats_app_spinner.setOnTouchListener(new View.OnTouchListener() {
                 @Override
                 public boolean onTouch(View view, MotionEvent motionEvent) {
                     // imm.hideSoftInputFromWindow(edt_buyer_address.getWindowToken(), 0);
@@ -891,7 +965,14 @@ public class Lead_Crration_Activity extends SimpleActivity {
         int m = 1;
 
         C_mobile_no_txt = mobile_no_txt.getText().toString();
-        C_whats_app_no = whats_app_no.getText().toString();
+        if(Is_Whats_app_ID.equals("1"))
+        {
+            C_whats_app_no = C_mobile_no_txt;
+        }else
+        {
+            C_whats_app_no = whats_app_no.getText().toString();
+        }
+
         C_name_txt = name_txt.getText().toString();
         C_email_edite_txt = email_edite_txt.getText().toString();
 
@@ -905,7 +986,6 @@ public class Lead_Crration_Activity extends SimpleActivity {
         {
             EMP_Statues = Type_of_employement_ID;
         }
-
 
         try {
             J =new JSONObject();

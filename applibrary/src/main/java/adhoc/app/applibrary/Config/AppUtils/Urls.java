@@ -89,9 +89,16 @@ public class Urls {
     public static String DOCUMENT_CHECK_LIST = Urls_step + "get_documentcklist";
     public static String APPLICANT_INFO = Urls_step + "applicant_info";
     public static String UPDATED_ENABLE = Urls_step + "update_enable";
+    public static String PARTNER_STATUES = Urls_step + "part_status";
+    public static String PARTNER_STATUES_IDs = Urls_step + "appid_view";
+    public static String CAMERA_IMAGE_Upload = Urls_step + "multi_doc";
+    public static String PDF_Document_Upload = Urls_step + "multi_docpdf";
+    public static String DOC_IMAGE_VIEW = Urls_step + "docu_view";
+
    // public static String DOCUMENT_CHECK_LIST = Urls_document_check_list + "get_documentcklist";
 
     /* public static  String = "" ;
+    public static  String = "" ;
     public static  String = "" ;
     public static  String = "" ;
     public static  String = "" ;

@@ -56,6 +56,7 @@ public final class Pref {
     public static String ResidenceType = "ResidenceType";
     public static String COEMPTYPE = "COEMPTYPE";
     public static String COAPPSALARYTYPE = "COAPPSALARYTYPE";
+    public static String DOCKEY = "DOCKEY";
 
     public static SharedPreferences get(final Context context) {
         return context.getSharedPreferences(context.getResources().getString(R.string.app_name),Context.MODE_PRIVATE);
@@ -682,6 +683,22 @@ public static void putName(final Context context, String aUserId) {
         editor.commit();
     }
 
+
+
+    public static void putDOCKEY(final Context context, String aUserId) {
+        Pref.putPref(context, DOCKEY, aUserId);
+    }
+
+    public static String getDOCKEY(final Context context) {
+        return Pref.getPref(context, DOCKEY, null);
+    }
+
+    public static void removeDOCKEY(final Context context) {
+        SharedPreferences prefs = Pref.get(context);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.remove(DOCKEY);
+        editor.commit();
+    }
 
 
     public static void putTID(final Context context, String aUserId) {

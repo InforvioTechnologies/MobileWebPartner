@@ -78,9 +78,10 @@ public class Dashboard_Activity extends AppCompatActivity implements OnLoadMoreL
     private String tag_json_obj = "jobj_req", tag_json_arry = "jarray_req";
     private String TAG = Dashboard_Activity.class.getSimpleName();
     private AlertDialog progressDialog;
-    String email,username,mobileno,id,step_status,status,loan_type,loan_categoryid;
+    String email,username,mobileno,id,step_status,status,loan_type,loan_categoryid,payment;
+
     String applicant_id,sub_taskid,transaction_id,Mobile,Mobile1,loan_typename,sub_categoryid,
-            transaction_id1,subtask_id,applicant_id1;
+            transaction_id1,subtask_id,applicant_id1,loan_type_id;
     AppCompatButton logout1,leads_float_chat;
     AppCompatTextView no_leads_data,txt_bank,txt_profile,txt_get_callback,label_status;
     LinearLayout Ly_no_leads_data;
@@ -334,7 +335,7 @@ public class Dashboard_Activity extends AppCompatActivity implements OnLoadMoreL
                                                 mobileno,transaction_id));
                                         leadListAdapter_dashboard.notifyDataSetChanged();
                                     }
-                                    Log.e("leadListAdapter_dashboard", String.valueOf(leadListAdapter_dashboard));
+                                    Log.e("leadListA", String.valueOf(leadListAdapter_dashboard));
                                     leadListAdapter_dashboard.addPosts(items);
                                    // items.clear();
                                    // items = null;
@@ -610,7 +611,7 @@ public class Dashboard_Activity extends AppCompatActivity implements OnLoadMoreL
 
         progressDialog.show();
 
-        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, Urls.APP_ID_OTP_POST, J,
+        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, Urls.PARTNER_STATUES_IDs, J,
                 new Response.Listener<JSONObject>() {
                     @SuppressLint("LongLogTag")
                     @Override
@@ -621,27 +622,39 @@ public class Dashboard_Activity extends AppCompatActivity implements OnLoadMoreL
 
                         try {
                             String statues = response.getString("status");
-                            String statues2 = response.getString("loan_categoryid");
 
-                            String user_id = response.getString("user_id");
-                            Loan_amount = response.getString("loan_amount");
-                            sub_categoryid =   response.getString("sub_categoryid");
-                            transaction_id1 =  response.getString("transaction_id");
-                            subtask_id =  response.getString("subtask_id");
-                            applicant_id1 =  "APP-"+user_id;
-                            // String statues2 = "3";
-                            Log.d("applicant_id1",applicant_id1);
-                            if (statues == "true")
+                            if(statues.contains("success"))
                             {
-                                Log.d(" applicant Entry true", step_status11);
-                                Objs.ac.StartActivityPutExtra(mCon, Home.class,
-                                        Params.user_id,user_id,
-                                        Params.step_status,step_status11,
-                                        Params.transaction_id,transaction_id1,
-                                        Params.applicant_id,applicant_id1,
-                                        Params.sub_taskid,subtask_id);
+                                JSONObject jsonObject2 = response.getJSONObject("reponse");
+
+                                JSONArray jsonArray = jsonObject2.getJSONArray("emp_states");
+
+                                String user_id = jsonObject2.getString("user_id");
+                                Loan_amount = jsonObject2.getString("loan_amount");
+                                sub_categoryid =   jsonObject2.getString("sub_categoryid");
+                                transaction_id1 =  jsonObject2.getString("transaction_id");
+                                subtask_id =  jsonObject2.getString("subtask_id");
+                                loan_type_id =  jsonObject2.getString("loan_type_id");
+                                loan_type =  jsonObject2.getString("loan_type");
+                                payment =  jsonObject2.getString("payment");
+                                applicant_id1 =  "APP-"+user_id;
+                                // String statues2 = "3";
+                                Pref.putUSERID(mCon,user_id);
+                                String _Emp_staus_jsonArray = jsonArray.toString();
+
+                                Log.d("applicant_id1",loan_type);
+
+                                    Objs.ac.StartActivityPutExtra(mCon, Home.class,
+                                            Params.user_id,user_id,
+                                            Params.transaction_id,transaction_id1,
+                                            Params.applicant_id,applicant_id1,
+                                            Params.sub_taskid,subtask_id, Params.Applicant_status,_Emp_staus_jsonArray,
+                                            Params.loan_type_id,loan_type_id,Params.loan_type,loan_type);
+                                    finish();
                             }
-                            else
+
+
+                            /*else
                             {
                                 int a = Integer.parseInt(statues2);
                                 Log.d("loan_categoryid123", String.valueOf(a));
@@ -683,9 +696,7 @@ public class Dashboard_Activity extends AppCompatActivity implements OnLoadMoreL
                                         Objs.a.showToast(mCon, "Please Contact Call center to Update the Details");
                                         return;
                                 }
-                            }
-
-
+                            }*/
 
                         } catch (JSONException e) {
                             e.printStackTrace();

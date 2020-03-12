@@ -123,8 +123,7 @@
 
             <androidx.cardview.widget.CardView
                 xmlns:card_view="http://schemas.android.com/apk/res-auto"
-                android:id="@+id/CD_in_progress"
-
+                android:id="@+id/Viability_Check"
                 android:layout_marginLeft="3dp"
                 android:layout_marginRight="3dp"
                 android:layout_width="match_parent"
@@ -177,7 +176,7 @@
                             <ImageView
                                 android:background="@drawable/ic_tick_icon"
                                 android:gravity="center"
-                                android:id="@+id/app_info_img2"
+                                android:id="@+id/viability_check_img2"
                                 android:layout_width="25dp"
                                 android:layout_height="25dp"/>
                         </LinearLayout>
@@ -249,7 +248,7 @@
                             <ImageView
                                 android:background="@drawable/ic_tick_icon"
                                 android:gravity="center"
-                                android:id="@+id/app_info_img3"
+                                android:id="@+id/eligibility_check_img"
                                 android:layout_width="25dp"
                                 android:layout_height="25dp"/>
                         </LinearLayout>
@@ -269,7 +268,7 @@
             </LinearLayout>
             <androidx.cardview.widget.CardView
                 xmlns:card_view="http://schemas.android.com/apk/res-auto"
-                android:id="@+id/CD_document"
+                android:id="@+id/viability_Report"
                 android:layout_marginTop="3dp"
                 android:layout_marginLeft="3dp"
                 android:layout_marginRight="3dp"
@@ -322,7 +321,7 @@
                             <ImageView
                                 android:background="@drawable/ic_tick_icon"
                                 android:gravity="center"
-                                android:id="@+id/app_info_img1"
+                                android:id="@+id/viability_report_image"
                                 android:layout_width="25dp"
                                 android:layout_height="25dp"/>
                         </LinearLayout>
@@ -342,7 +341,7 @@
             </LinearLayout>
             <androidx.cardview.widget.CardView
                 xmlns:card_view="http://schemas.android.com/apk/res-auto"
-                android:id="@+id/CD_approved"
+                android:id="@+id/Credit_REport_Generation"
                 android:layout_marginLeft="3dp"
                 android:layout_marginRight="3dp"
                 android:layout_width="match_parent"
@@ -394,7 +393,7 @@
                             <ImageView
                             android:background="@drawable/ic_tick_icon"
                             android:gravity="center"
-                            android:id="@+id/app_info_img4"
+                            android:id="@+id/Credite_report_image"
                             android:layout_width="25dp"
                             android:layout_height="25dp"/>
                         </LinearLayout>

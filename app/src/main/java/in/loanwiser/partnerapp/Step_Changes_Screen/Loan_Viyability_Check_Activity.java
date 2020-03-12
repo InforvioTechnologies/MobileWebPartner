@@ -7,6 +7,7 @@ import androidx.appcompat.widget.AppCompatTextView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.ListView;
 
 import org.json.JSONArray;
@@ -17,6 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import adhoc.app.applibrary.Config.AppUtils.Objs;
+import in.loanwiser.partnerapp.PartnerActivitys.Applicant_Details_Activity;
 import in.loanwiser.partnerapp.R;
 import in.loanwiser.partnerapp.SimpleActivity;
 
@@ -29,6 +31,7 @@ public class Loan_Viyability_Check_Activity extends SimpleActivity {
             ove_all;
     JSONArray array,rule_message_Applicant,rule_message_Co_Applicant;
     List<String> result1;
+    AppCompatButton viability_Done;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -101,6 +104,14 @@ public class Loan_Viyability_Check_Activity extends SimpleActivity {
         {
             e.printStackTrace();
         }
+
+        viability_Done.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent1 = new Intent(Loan_Viyability_Check_Activity.this, Applicant_Details_Activity.class);
+                startActivity(intent1);
+            }
+        });
     }
 
     private void UIScreen()
@@ -114,6 +125,8 @@ public class Loan_Viyability_Check_Activity extends SimpleActivity {
         viability_reson =(AppCompatTextView)findViewById(R.id.viability_reson);
 
         ove_all =(AppCompatTextView)findViewById(R.id.ove_all);
+
+        viability_Done =(AppCompatButton)findViewById(R.id.viability_Done);
     }
 
 }

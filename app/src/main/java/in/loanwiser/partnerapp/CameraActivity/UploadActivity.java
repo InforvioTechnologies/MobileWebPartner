@@ -240,7 +240,7 @@ public class UploadActivity extends Activity implements SingleUploadBroadcastRec
             //  Log.d("Camara image1", String.valueOf(singleimage));
 
             progressDialog.show();
-            StringRequest stringRequest = new StringRequest(Request.Method.POST, Urls.IMG_UPLOAD_DOCUMENT_POST,
+            StringRequest stringRequest = new StringRequest(Request.Method.POST, Urls.CAMERA_IMAGE_Upload,
                     new Response.Listener<String>() {
                         @Override
                         public void onResponse(String response) {
@@ -273,13 +273,16 @@ public class UploadActivity extends Activity implements SingleUploadBroadcastRec
                 @Override
                 protected Map<String, String> getParams() throws AuthFailureError {
                     Map<String, String> params = new HashMap<>();
-                    params.put(Params.doc_id, id);
+                    params.put("legal_id", docid);
                     params.put(Params.doc_name, doc_typename);
-                    params.put(Params.class_id, class_id);
-                    params.put(Params.user_type,user_type);
-                    params.put(Params.is_mobileupload,"4");
                     params.put(Params.transaction_id,  transaction_id);
                     params.put(Params.img_url, singleimage);
+                    params.put(Params.is_mobileupload,"4");
+
+                    Log.e("doc_typename",doc_typename);
+                    Log.e("transaction_id",transaction_id);
+                    Log.e("legal_id",docid);
+
                     return params;
                 }
             };
