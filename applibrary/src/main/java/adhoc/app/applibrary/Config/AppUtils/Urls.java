@@ -48,6 +48,9 @@ public class Urls {
     public static String GET_OCC_POST  = Urls + "getoccupation";
     public static String GET_PINCODE_POST  = Urls + "getpincode";
     public static String GET_TOCKEN  = Urls_phamplet + "get_Token";
+
+
+
     public static String GET_AERA_POST  = Urls + "getarea";
     public static String BUSS_TYPE_POST  = Urls + "get_businesstype";
     public static String GET_CITY_POST  = Urls + "getcity&state_value=";
@@ -95,6 +98,7 @@ public class Urls {
     public static String PDF_Document_Upload = Urls_step + "multi_docpdf";
     public static String DOC_IMAGE_VIEW = Urls_step + "docu_view";
 
+ public static String Payment_Initialize  = Urls_step + "payment_initialize";
    // public static String DOCUMENT_CHECK_LIST = Urls_document_check_list + "get_documentcklist";
 
     /* public static  String = "" ;

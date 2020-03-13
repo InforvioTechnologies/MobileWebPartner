@@ -97,6 +97,7 @@ public class Payment_Details_Activity extends SimpleActivity {
             @Override
             public void onClick(View view) {
                 Do_payment_method();
+
             }
         });
 
@@ -233,6 +234,58 @@ public class Payment_Details_Activity extends SimpleActivity {
 
                             }
 
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        // Toast.makeText(mCon, response.toString(),Toast.LENGTH_SHORT).show();
+                        progressDialog.dismiss();
+                    }
+                }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                VolleyLog.d("TAG", "Error: " + error.getMessage());
+                progressDialog.dismiss();
+            }
+        }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("Content-Type", "application/json");
+                return headers;
+            }
+        };
+        AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
+
+    }
+
+    private void Payment_initialize() {
+        // progressDialog.show();
+        //  order_id = "95914-0";
+        ///  order_amt = "1";
+        JSONObject J =new JSONObject();
+        try {
+            J.put("order_id", order_id);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        Log.e("Payment initialize", String.valueOf(J));
+
+        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, Urls.Payment_Initialize, J,
+                new Response.Listener<JSONObject>() {
+
+                    @Override
+                    public void onResponse(JSONObject object) {
+                        Log.e("Payment", String.valueOf(object));
+                        try {
+
+                            JSONObject jsonObject = object.getJSONObject("status");
+                            if (jsonObject.getString("status").equals("1")) {
+
+
+
+                            }
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -403,7 +456,6 @@ public class Payment_Details_Activity extends SimpleActivity {
                              /*   Intent intent = new Intent(Payment_Details_Activity.this, Home.class);
                                 startActivity(intent);
                                 finish();*/
-
                                  Toast.makeText(mCon, "Sucessfully Completed",Toast.LENGTH_SHORT).show();
                             }
                         } catch (JSONException e) {

@@ -700,6 +700,7 @@ public class Credite_report_details extends SimpleActivity {
                                     Intent intent = new Intent(Credite_report_details.this, Payment_Details_Activity.class);
                                     startActivity(intent);
                                     finish();
+
                                 }else if(jsonObject1.getString("pay_status").equals("error"))
                                 {
                                     Toast.makeText(context,"Eligibility Failed",Toast.LENGTH_SHORT).show();

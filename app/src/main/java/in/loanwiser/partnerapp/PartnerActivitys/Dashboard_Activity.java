@@ -59,6 +59,8 @@ import in.loanwiser.partnerapp.Infinite_Scrollview.OnLoadMoreListener;
 import in.loanwiser.partnerapp.Lead_Website.MainActivity_Add_Lead_Website;
 import in.loanwiser.partnerapp.Partner_Statues.Statues_Dashboard_Nav;
 import in.loanwiser.partnerapp.R;
+import in.loanwiser.partnerapp.Step_Changes_Screen.Credite_report_details;
+import in.loanwiser.partnerapp.Step_Changes_Screen.Payment_Details_Activity;
 import in.loanwiser.partnerapp.User_Account.Welcome_Page;
 
 import static adhoc.app.applibrary.Config.AppUtils.Objs.a;
@@ -82,6 +84,7 @@ public class Dashboard_Activity extends AppCompatActivity implements OnLoadMoreL
 
     String applicant_id,sub_taskid,transaction_id,Mobile,Mobile1,loan_typename,sub_categoryid,
             transaction_id1,subtask_id,applicant_id1,loan_type_id;
+
     AppCompatButton logout1,leads_float_chat;
     AppCompatTextView no_leads_data,txt_bank,txt_profile,txt_get_callback,label_status;
     LinearLayout Ly_no_leads_data;
@@ -610,6 +613,7 @@ public class Dashboard_Activity extends AppCompatActivity implements OnLoadMoreL
         }
 
         progressDialog.show();
+        Log.e("Applicant Entry request", String.valueOf(J));
 
         JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, Urls.PARTNER_STATUES_IDs, J,
                 new Response.Listener<JSONObject>() {
@@ -638,12 +642,21 @@ public class Dashboard_Activity extends AppCompatActivity implements OnLoadMoreL
                                 loan_type =  jsonObject2.getString("loan_type");
                                 payment =  jsonObject2.getString("payment");
                                 applicant_id1 =  "APP-"+user_id;
+
+
                                 // String statues2 = "3";
                                 Pref.putUSERID(mCon,user_id);
                                 String _Emp_staus_jsonArray = jsonArray.toString();
 
-                                Log.d("applicant_id1",loan_type);
 
+                                if(payment.equals("error"))
+                                {
+                                    Intent intent = new Intent(Dashboard_Activity.this, Payment_Details_Activity.class);
+                                    startActivity(intent);
+                                    finish();
+                                }else
+                                {
+                                    Log.d("applicant_id1",loan_type);
                                     Objs.ac.StartActivityPutExtra(mCon, Home.class,
                                             Params.user_id,user_id,
                                             Params.transaction_id,transaction_id1,
@@ -651,6 +664,10 @@ public class Dashboard_Activity extends AppCompatActivity implements OnLoadMoreL
                                             Params.sub_taskid,subtask_id, Params.Applicant_status,_Emp_staus_jsonArray,
                                             Params.loan_type_id,loan_type_id,Params.loan_type,loan_type);
                                     finish();
+
+                                }
+
+
                             }
 
 
@@ -708,6 +725,7 @@ public class Dashboard_Activity extends AppCompatActivity implements OnLoadMoreL
             @Override
             public void onErrorResponse(VolleyError error) {
                 progressDialog.dismiss();
+                Log.e("Applicant Entry request", String.valueOf(error));
                 Toast.makeText(getApplicationContext(),error.getMessage(), Toast.LENGTH_SHORT).show();
             }
         }) {
@@ -797,7 +815,7 @@ public class Dashboard_Activity extends AppCompatActivity implements OnLoadMoreL
         Pref.removeStatus_id(mCon);
         Pref.removeStatus_Count(mCon);
         finish();
-
         super.onBackPressed();
+
     }
 }

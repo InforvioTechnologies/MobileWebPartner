@@ -293,13 +293,10 @@ public class Home extends AppCompatActivity {
                              JSONObject jsonObject2 = jsonObject1.getJSONObject("step2");
                              JSONObject jsonObject3 = jsonObject1.getJSONObject("step3");
 
-
                              String step2_statues = jsonObject2.getString("status");
                              JSONObject step2_sub_statues = jsonObject2.getJSONObject("sub_status");
 
                              JSONObject step3_sub_statues = jsonObject3.getJSONObject("sub_status");
-
-
 
                              viability = step2_sub_statues.getString("viability");
                              eligibility = step2_sub_statues.getString("eligibility");
@@ -309,6 +306,7 @@ public class Home extends AppCompatActivity {
 
                              document_checklist = step3_sub_statues.getString("document_checklist");
                              document_upload = step3_sub_statues.getString("document_upload");
+
 
 
                             if(document_checklist.contains("pending"))

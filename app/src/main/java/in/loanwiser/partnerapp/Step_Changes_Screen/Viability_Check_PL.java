@@ -1987,6 +1987,7 @@ public class Viability_Check_PL extends SimpleActivity {
                             assets_owner_salaried(Assets_own);
                             Self_Assets_Owned(Assets_own);
                             salary_proof_salaried(Salary_proof_ar);
+                            salary_proof_salaried_app1(Salary_proof_ar);
                             self_ind_vehicle_type(vehicle_Type);
 
                             Residence_Array(Residence_ownership_ar);
@@ -2599,7 +2600,7 @@ public class Viability_Check_PL extends SimpleActivity {
         assets_owned_salaried_Adapter.notifyDataSetChanged();
     }
 
-    private void salary_proof_salaried_app(final JSONArray ja) throws JSONException {
+    private void salary_proof_salaried_app1(final JSONArray ja) throws JSONException {
 
         salary_proof_arr_list_app = new ArrayList<IncomeProofPOJO>();
 

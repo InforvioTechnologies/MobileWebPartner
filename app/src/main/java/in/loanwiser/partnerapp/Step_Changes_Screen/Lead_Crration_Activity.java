@@ -115,7 +115,8 @@ public class Lead_Crration_Activity extends SimpleActivity {
         UI_FIELDS();
         fonts();
         makeJsonObjReq1();
-     // Click();
+     Click();
+/*
 
         lead_cr_step1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -126,6 +127,7 @@ public class Lead_Crration_Activity extends SimpleActivity {
                 finish();
             }
         });
+*/
 
      if(Lontypename.contains("Personal Loan [Unsecured]") || Lontypename.contains("Business Loan [Unsecured]"))
      {
@@ -304,21 +306,42 @@ public class Lead_Crration_Activity extends SimpleActivity {
 
     private void validate_wats_App()
     {
-        if (!validate_wt_Mobile()) {
-            return;
-        }
-        if(check_complete.isChecked())
+        if(Is_Whats_app_ID.equals("1"))
         {
+            if(check_complete.isChecked())
+            {
 
-            lead_cr();
+                lead_cr();
 
-            Log.e("App",App);
-           // click_action();
+                Log.e("App",App);
+                // click_action();
+
+            }else
+            {
+                Toast.makeText(context, "Please accept the Terms and condition", Toast.LENGTH_SHORT).show();
+            }
 
         }else
         {
-            Toast.makeText(context, "Please accept the Terms and condition", Toast.LENGTH_SHORT).show();
+            if (!validate_wt_Mobile()) {
+                return;
+            }
+            if(check_complete.isChecked())
+            {
+
+                lead_cr();
+
+                Log.e("App",App);
+                // click_action();
+
+            }else
+            {
+                Toast.makeText(context, "Please accept the Terms and condition", Toast.LENGTH_SHORT).show();
+            }
         }
+
+
+
     }
 
     private void makeJsonObjReq1() {
