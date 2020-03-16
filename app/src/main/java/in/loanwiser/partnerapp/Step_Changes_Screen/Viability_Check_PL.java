@@ -262,7 +262,7 @@ public class Viability_Check_PL extends SimpleActivity {
         Assets_myList_values = (ArrayList<String>) getIntent().getSerializableExtra("select_lid_id");
         removeClass = new RemoveCommas();
 
-     /*   lead_viy_step2.setOnClickListener(new View.OnClickListener() {
+       /* lead_viy_step2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(Viability_Check_PL.this, Eligibility_Check_PL.class);
@@ -335,7 +335,7 @@ public class Viability_Check_PL extends SimpleActivity {
 
 
         UISCREEN();
-       Click();
+        Click();
         fonts();
         makeJsonObjReq1();
     }
@@ -2185,23 +2185,6 @@ public class Viability_Check_PL extends SimpleActivity {
 
                             other_earning_avbl.setVisibility(View.GONE);
 
-                            age.setText("1");
-                            monthly_sal_txt.setText("2");
-                            salery_credite_method_txt.setText("3");
-                            Exp_in_current_txt.setText("4");
-                            total_workexperiecnce_txt.setText("5");
-                            cmp_pincode_txt.setText("6");
-                            area_txt.setText("7");
-                            txt_residence_pincode.setText("9");
-                            res_area_txt.setText("10");
-                            txt_residence_type.setText("11");
-
-
-                            Lives_in_current_txt.setText("12");
-                            do_you_have_coApp_txt.setText("13");
-                            coApp_txt_emp_type1.setText("14");
-
-
                         }else
                         {
 
@@ -2211,20 +2194,6 @@ public class Viability_Check_PL extends SimpleActivity {
                           //  asstes_own.setVisibility(View.GONE);
 
                             other_earning_avbl.setVisibility(View.GONE);
-
-                            age.setText("1");
-                            monthly_sal_txt.setText("2");
-                            salery_credite_method_txt.setText("3");
-                            Exp_in_current_txt.setText("4");
-                            total_workexperiecnce_txt.setText("5");
-                            cmp_pincode_txt.setText("6");
-                            area_txt.setText("7");
-                            txt_residence_pincode.setText("9");
-                            res_area_txt.setText("10");
-                            txt_residence_type.setText("11");
-                            do_you_have_coApp_txt.setText("12");
-                            coApp_txt_emp_type1.setText("13");
-
                         }
 
                     } catch (JSONException e) {

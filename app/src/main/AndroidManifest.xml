@@ -101,6 +101,11 @@
             android:theme="@style/NoAction2"
             android:windowSoftInputMode="stateHidden" />
 
+        <activity
+            android:name=".Step_Changes_Screen.Viability_Report_Activity_New"
+            android:theme="@style/NoAction2"
+            android:windowSoftInputMode="stateHidden" />
+
 
         <activity
             android:name=".Step_Changes_Screen.Document_Checklist_Details_type"

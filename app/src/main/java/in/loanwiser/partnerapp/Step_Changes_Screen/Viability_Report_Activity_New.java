@@ -1,16 +1,10 @@
 package in.loanwiser.partnerapp.Step_Changes_Screen;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.AppCompatButton;
-import androidx.core.content.FileProvider;
-
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
-import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Color;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -20,11 +14,12 @@ import android.util.Log;
 import android.view.View;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.widget.AppCompatButton;
+import androidx.core.content.FileProvider;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -42,13 +37,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 
 import adhoc.app.applibrary.Config.AppUtils.Objs;
-import adhoc.app.applibrary.Config.AppUtils.Params;
 import adhoc.app.applibrary.Config.AppUtils.Pref.Pref;
 import adhoc.app.applibrary.Config.AppUtils.Urls;
 import adhoc.app.applibrary.Config.AppUtils.VolleySignleton.AppController;
@@ -56,7 +49,7 @@ import dmax.dialog.SpotsDialog;
 import in.loanwiser.partnerapp.R;
 import in.loanwiser.partnerapp.SimpleActivity;
 
-public class CRIF_Report_Activity extends SimpleActivity {
+public class Viability_Report_Activity_New extends SimpleActivity {
 
     AppCompatButton pdf_download;
     private ProgressDialog mProgressDialog;
@@ -78,10 +71,9 @@ public class CRIF_Report_Activity extends SimpleActivity {
         super.onCreate(savedInstanceState);
 
       //  setContentView(R.layout.activity_crif__report_);
-
         setContentView(R.layout.activity_simple);
         Objs.a.setStubId(this,R.layout.activity_crif__report_);
-        initTools(R.string.CRIF_REPORT);
+        initTools(R.string.VIABILITY);
 
         Intent intent = getIntent();
         applicant_id = intent.getStringExtra("applicant_id");
@@ -92,21 +84,21 @@ public class CRIF_Report_Activity extends SimpleActivity {
         progressbar = (ProgressBar) findViewById(R.id.progressbar);
         webview.getSettings().setJavaScriptEnabled(true);
 
-        // filename =  "https://callcenter.propwiser.com/crif_mail_download.php?user_id=MUxURkNBKzFHSXJHMDZMMkZDaFByQT09&trans_id=MUxURkNBKzFHSXJHMDZMMkZDaFByQT09";
+      //  filename =  "https://callcenter.propwiser.com/crif_mail_download.php?user_id=MUxURkNBKzFHSXJHMDZMMkZDaFByQT09&trans_id=MUxURkNBKzFHSXJHMDZMMkZDaFByQT09";
         String filename1 =  "http://www.tutorialspoint.com";
      //   webview.loadUrl("http://docs.google.com/gview?embedded=true&url=" + filename);
 
-     /*   webview.getSettings().setLoadsImagesAutomatically(true);
+        webview.getSettings().setLoadsImagesAutomatically(true);
         webview.getSettings().setJavaScriptEnabled(true);
         webview.setScrollBarStyle(View.SCROLLBARS_INSIDE_OVERLAY);
-        webview.loadUrl(filename);
+        webview.loadUrl(filename1);
         webview.setWebViewClient(new WebViewClient() {
 
             public void onPageFinished(WebView view, String url) {
                 progressbar.setVisibility(View.GONE);
 
             }
-        });*/
+        });
 
       pdf_download = (AppCompatButton) findViewById(R.id.pdf_download);
       pdf_download.setOnClickListener(new View.OnClickListener() {
@@ -116,7 +108,7 @@ public class CRIF_Report_Activity extends SimpleActivity {
           }
       });
 
-        Crif_Generation();
+     //   Crif_Generation();
 
     }
 
@@ -127,7 +119,7 @@ public class CRIF_Report_Activity extends SimpleActivity {
         // declare the dialog as a member field of your activity
         // instantiate it within the onCreate method
 
-        mProgressDialog = new ProgressDialog(CRIF_Report_Activity.this);
+        mProgressDialog = new ProgressDialog(Viability_Report_Activity_New.this);
         mProgressDialog.setMessage("File Is Dowloading");
         mProgressDialog.setIndeterminate(true);
         mProgressDialog.setMax(100);
@@ -135,7 +127,7 @@ public class CRIF_Report_Activity extends SimpleActivity {
         mProgressDialog.setCancelable(true);
 
         // execute this when the downloader must be fired
-        final DownloadTask downloadTask = new DownloadTask(CRIF_Report_Activity.this);
+        final DownloadTask downloadTask = new DownloadTask(Viability_Report_Activity_New.this);
         downloadTask.execute(url);
 
         mProgressDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {

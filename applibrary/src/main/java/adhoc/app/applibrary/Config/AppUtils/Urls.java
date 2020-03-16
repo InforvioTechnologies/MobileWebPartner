@@ -99,6 +99,9 @@ public class Urls {
     public static String DOC_IMAGE_VIEW = Urls_step + "docu_view";
 
  public static String Payment_Initialize  = Urls_step + "payment_initialize";
+
+ public static String CRIF_Generation  = Urls_step + "crif_generation";
+
    // public static String DOCUMENT_CHECK_LIST = Urls_document_check_list + "get_documentcklist";
 
     /* public static  String = "" ;

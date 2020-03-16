@@ -362,16 +362,14 @@ public class Viability_Check_BL extends SimpleActivity {
 
         removeClass = new RemoveCommas();
 
-/*
-        lead_viy_step2.setOnClickListener(new View.OnClickListener() {
+      /*  lead_viy_step2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(Viability_Check_BL.this, Eligibility_BL.class);
                 startActivity(intent);
                 finish();
             }
-        });
-*/
+        });*/
 
         vehicle_type_text.setOnClickListener(new View.OnClickListener() {
             @Override

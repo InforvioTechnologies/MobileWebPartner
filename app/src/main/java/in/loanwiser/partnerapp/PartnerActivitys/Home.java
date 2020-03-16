@@ -46,6 +46,8 @@ import in.loanwiser.partnerapp.Step_Changes_Screen.Lead_Crration_Activity;
 import in.loanwiser.partnerapp.Step_Changes_Screen.Viability_Check_BL;
 import in.loanwiser.partnerapp.Step_Changes_Screen.Viability_Check_HL_new;
 import in.loanwiser.partnerapp.Step_Changes_Screen.Viability_Check_PL;
+import in.loanwiser.partnerapp.Step_Changes_Screen.Viability_Report_Activity;
+import in.loanwiser.partnerapp.Step_Changes_Screen.Viability_Report_Activity_New;
 
 public class Home extends AppCompatActivity {
 
@@ -93,10 +95,31 @@ public class Home extends AppCompatActivity {
         loan_type =  Objs.a.getBundle(this, Params.loan_type);
 
 
+        try {
+            JSONArray array = new JSONArray(Applicant_Statues);
+            for (int i=0;i<array.length();i++) {
+                JSONObject J = null;
+                try {
+                    J = array.getJSONObject(i);
+
+                    applicant_id = J.getString("user_type");
+
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        Pref.putTRANSACTIONID(mCon,transaction_id);
+        Pref.putUSERID(mCon,user_id);
       //  step_status =  Objs.a.getBundle(this, Params.step_status);
 
 
-      //  Log.e("step_status",step_status);
+        Log.e("applicant_id",applicant_id);
 
         initCode();
 
@@ -240,7 +263,7 @@ public class Home extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                Intent intent = new Intent(Home.this, CRIF_Report_Activity.class);
+                Intent intent = new Intent(Home.this, Viability_Report_Activity_New.class);
                 startActivity(intent);
             }
         });
@@ -249,7 +272,9 @@ public class Home extends AppCompatActivity {
             public void onClick(View view) {
 
                 Intent intent = new Intent(Home.this, CRIF_Report_Activity.class);
+                intent.putExtra("applicant_id", applicant_id);
                 startActivity(intent);
+                finish();
 
             }
         });
@@ -573,6 +598,7 @@ public class Home extends AppCompatActivity {
                                         Params.id,user_id,
                                         Params.transaction_id,transaction_id,
                                         Params.JSONObj,jsonStringObj);
+
                                  //finish();
                             }else {
                                 Objs.a.ShowHideNoItems(mCon,true);

@@ -70,7 +70,6 @@
                                 style="@style/LorgeText2"
                                 android:textColor="@color/colorPrimaryDark"
                                 android:textColorHint="@color/colorPrimaryDark"
-                                android:hint="1"
                                 android:layout_height="wrap_content" />
                             <androidx.appcompat.widget.AppCompatTextView
                                 android:gravity="left"
@@ -131,7 +130,6 @@
                                     style="@style/LorgeText2"
                                     android:textColor="@color/colorPrimaryDark"
                                     android:textColorHint="@color/colorPrimaryDark"
-                                    android:hint="2"
                                     android:layout_height="wrap_content" />
                                 <androidx.appcompat.widget.AppCompatTextView
                                     android:gravity="left"
@@ -184,7 +182,6 @@
                                     style="@style/LorgeText2"
                                     android:textColor="@color/colorPrimaryDark"
                                     android:textColorHint="@color/colorPrimaryDark"
-                                    android:hint="3"
                                     android:layout_height="wrap_content" />
                                 <androidx.appcompat.widget.AppCompatTextView
                                     android:gravity="left"
@@ -238,7 +235,6 @@
                                     style="@style/LorgeText2"
                                     android:textColor="@color/colorPrimaryDark"
                                     android:textColorHint="@color/colorPrimaryDark"
-                                    android:hint="4"
                                     android:layout_height="wrap_content" />
 
                                 <androidx.appcompat.widget.AppCompatTextView
@@ -292,7 +288,6 @@
                                     style="@style/LorgeText2"
                                     android:textColor="@color/colorPrimaryDark"
                                     android:textColorHint="@color/colorPrimaryDark"
-                                    android:hint="5"
                                     android:layout_height="wrap_content" />
 
                                 <androidx.appcompat.widget.AppCompatTextView
@@ -346,7 +341,6 @@
                                     style="@style/LorgeText2"
                                     android:textColor="@color/colorPrimaryDark"
                                     android:textColorHint="@color/colorPrimaryDark"
-                                    android:hint="6"
                                     android:layout_height="wrap_content" />
 
                                 <androidx.appcompat.widget.AppCompatTextView
@@ -400,7 +394,6 @@
                                     style="@style/LorgeText2"
                                     android:textColor="@color/colorPrimaryDark"
                                     android:textColorHint="@color/colorPrimaryDark"
-                                    android:hint="6"
                                     android:layout_height="wrap_content" />
 
                                 <androidx.appcompat.widget.AppCompatTextView
@@ -452,7 +445,6 @@
                                     style="@style/LorgeText2"
                                     android:textColor="@color/colorPrimaryDark"
                                     android:textColorHint="@color/colorPrimaryDark"
-                                    android:hint="7"
                                     android:layout_height="wrap_content" />
                                 <androidx.appcompat.widget.AppCompatTextView
                                     android:gravity="left"
@@ -516,7 +508,6 @@
                                 style="@style/LorgeText2"
                                 android:textColor="@color/colorPrimaryDark"
                                 android:textColorHint="@color/colorPrimaryDark"
-                                android:hint="22"
                                 android:layout_height="wrap_content" />
                             <androidx.appcompat.widget.AppCompatTextView
                                 android:gravity="left"
@@ -570,7 +561,7 @@
                                 style="@style/LorgeText2"
                                 android:textColor="@color/colorPrimaryDark"
                                 android:textColorHint="@color/colorPrimaryDark"
-                                android:hint="23"
+
                                 android:layout_height="wrap_content" />
                             <androidx.appcompat.widget.AppCompatTextView
                                 android:gravity="left"

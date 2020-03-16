@@ -104,6 +104,7 @@ public class Multi_Select_checkbox extends SimpleActivity {
     private void multi_spin( final  JSONArray salary_mulit)
     {
         Salary_proof = new String[salary_mulit.length()];
+
         for (int i=0;i<salary_mulit.length();i++) {
             JSONObject J = null;
             try {
