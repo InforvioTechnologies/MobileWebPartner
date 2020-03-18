@@ -1195,7 +1195,8 @@
                     android:id="@+id/other_incom_amt_edtxt"
                     android:textColor="@color/colorPrimaryDark"
                     android:textSize="16sp"
-                    android:inputType="text"/>
+                    android:imeOptions="actionDone"
+                    android:inputType="number"/>
             </LinearLayout>
         </LinearLayout>
         <LinearLayout

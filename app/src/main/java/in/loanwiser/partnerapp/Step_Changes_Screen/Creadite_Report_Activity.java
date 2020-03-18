@@ -28,6 +28,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonObjectRequest;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -95,7 +96,7 @@ public class Creadite_Report_Activity extends SimpleActivity {
         UISCREEN();
         Font();
         Click();
-
+        GET_Credite_Data();
 
         if(Co_Applicant.equals("1"))
         {
@@ -524,7 +525,49 @@ public class Creadite_Report_Activity extends SimpleActivity {
         return true;
     }
 
+    private void GET_Credite_Data( ) {
+        // progressDialog.show();
+        JSONObject J =new JSONObject();
+        try {
+            J.put("transaction_id",Pref.getTRANSACTIONID(getApplicationContext()));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, Urls.CRIF_DATA_Populate, J,
+                new Response.Listener<JSONObject>() {
 
+                    @Override
+                    public void onResponse(JSONObject object) {
+                        try {
+                            if (object.getString(Params.status).equals("success")) {
+                                JSONArray response = object.getJSONArray("response");
+                                // Log.e("Pincode", String.valueOf(response));
+
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        // Toast.makeText(mCon, response.toString(),Toast.LENGTH_SHORT).show();
+                        progressDialog.dismiss();
+                    }
+                }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                VolleyLog.d("TAG", "Error: " + error.getMessage());
+                progressDialog.dismiss();
+            }
+        }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("Content-Type", "application/json");
+                return headers;
+            }
+        };
+        AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
+
+    }
 
     private void CRIF_Report()
     {
@@ -594,7 +637,6 @@ public class Creadite_Report_Activity extends SimpleActivity {
             co_applicant_crif.setVisibility(View.GONE);
 
         }
-
 
         try {
             J =new JSONObject();

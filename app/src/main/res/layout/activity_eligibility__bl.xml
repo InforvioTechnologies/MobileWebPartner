@@ -750,7 +750,7 @@
                                     android:id="@+id/other_incom_amt_txt1"
                                     android:textColor="@color/colorPrimaryDark"
                                     android:textColorHint="@color/colorPrimaryDark"
-                                    android:text="@string/other_income"
+                                    android:text="Amount"
                                     android:layout_height="wrap_content" />
                             </LinearLayout>
                             <LinearLayout

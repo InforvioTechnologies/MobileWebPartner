@@ -869,7 +869,9 @@ public class Registration extends SimpleActivity implements GoogleApiClient.Conn
                                 //  Objs.a.showToast(mCon,"Registered");
                                 String otp_new = response.getString(Params.otp);
 
-                                Objs.a.showToast(mCon,"OTP will be sent to the mobile number");
+                             //   Objs.a.showToast(mCon,"OTP will be sent to the mobile number");
+                                Toast.makeText(mCon,"OTP will be sent to the mobile number",Toast.LENGTH_SHORT).show();
+
                                 JSONObject jsonObject1 = response.getJSONObject(Params.inputs);
                                 String JSON = String.valueOf(jsonObject1);
                                 Objs.ac.StartActivityPutExtra(mCon, SmsActivity.class, Params.otp,otp_new
@@ -878,7 +880,7 @@ public class Registration extends SimpleActivity implements GoogleApiClient.Conn
                             }
 
                             if(response.getString(Params.status).equals(Params.error)){
-                                Objs.a.showToast(mCon,"Mobile number is already registered. Please login");
+                                Toast.makeText(mCon,"Mobile number is already registered. Please login",Toast.LENGTH_SHORT).show();
                             }
 
                         } catch (JSONException e) {

@@ -28,7 +28,6 @@
                     app:spb_stateBackgroundColor="@color/colorPrimary"
                     app:spb_maxStateNumber="four"/>
 
-
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -833,6 +832,23 @@
                     </LinearLayout>
 
                     <LinearLayout
+                        android:background="@color/white"
+                        android:gravity="left"
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:gravity="left"
+                            android:layout_width="match_parent"
+                            style="@style/LorgeText"
+                            android:textSize="18sp"
+                            android:textStyle="bold"
+                            android:id="@+id/Co_applicant_details"
+                            android:textColor="@color/colorPrimary"
+                            android:text="Co Applicant Details"
+                            android:layout_height="wrap_content" />
+                    </LinearLayout>
+                    <LinearLayout
                         android:id="@+id/co_applicant_ly"
                         android:padding="5dp"
                         android:orientation="vertical"
@@ -912,7 +928,7 @@
                                 style="@style/LorgeText2"
                                 android:textColor="@color/colorPrimaryDark"
                                 android:textColorHint="@color/colorPrimaryDark"
-                                android:text="@string/type_of_emp"
+                                android:text="@string/type_of_co_emp"
                                 android:layout_height="wrap_content" />
                         </LinearLayout>
                         <LinearLayout

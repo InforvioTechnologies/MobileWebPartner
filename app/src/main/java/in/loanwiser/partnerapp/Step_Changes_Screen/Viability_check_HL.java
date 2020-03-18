@@ -305,16 +305,17 @@ public class Viability_check_HL extends SimpleActivity {
 
         UISCREEN();
         fonts();
-     //  Click();
+      Click();
         makeJsonObjReq1();
 
+/*
         lead_viy_step2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent2 = new Intent(Viability_check_HL.this, Eligibility_HL.class);
                 startActivity(intent2);
             }
-        });
+        });*/
 
         //multiselect functionality
 

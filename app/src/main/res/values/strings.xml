@@ -272,6 +272,7 @@
     <string name="viy_check">Viability Check</string>
     <string name="viy_report">Viability Report</string>
     <string name="doc_check_list">Document CheckList</string>
+    <string name="Viability_Data">Viability Data</string>
 
     <string name="viy_check1">multi Check</string>
 
@@ -524,6 +525,8 @@
     <string name="da_approval">DA Approval</string>
     <string name="property_category">Property Category</string>
     <string name="type_of_emp">Type of employment</string>
+    <string name="type_of_co_emp">Type of Co Applicant employment</string>
+
     <string name="co_applicant">Do you Have Co Applicant</string>
     <string name="is_mobile_">Is mobile Number Same as WhatsApp Number</string>
     <string name="saving_bank_acc">Have saving Bank Account</string>
@@ -556,8 +559,8 @@
 
     <string name="carpet_area">Carpet Area(Sq.ft)</string>
     <string name="required_loan_amt">Required Loan Amount</string>
-    <string name="property_price">Property Value</string>
-    <string name="Plot_price">Plot Value</string>
+    <string name="property_price">Property Value(RS)</string>
+    <string name="Plot_price">Plot Value(RS)</string>
 
     <string name="estimated_cmp_date">Estimated Completion date</string>
     <string name="cost_estimate">Cost Estimated</string>
@@ -680,32 +683,13 @@
     <string name="oth_income">please Select other income</string>
     <string name="error_full_address">please Enter full Address</string>
 
-    <string-array name="fruit_array">
-        <item>Apple</item>
-        <item>Orange</item>
-        <item>Banana</item>
-        <item>Lime</item>
-        <item>Pear</item>
-        <item>Coconut</item>
-        <item>Coconut1</item>
-        <item>Coconut2</item>
-        <item>Coconut3</item>
-        <item>Coconut</item>
-        <item>Coconut</item>
-        <item>Coconut</item>
-        <item>Coconut</item>
-        <item>Coconut</item>
-        <item>Coconut</item>
-        <item>Coconut</item>
-        <item>Coconut</item>
-        <item>Coconut</item>
-        <item>Coconut</item>
-        <item>Coconut</item>
-        <item>Coconut</item>
-        <item>Coconut</item>
-        <item>Coconut</item>
-    </string-array>
+    <string name="permission_request_message">Storage permission allows us to save pdf.</string>
 
+    <string name="age">Age</string>
+    <string name="Area">Area</string>
+    <string name="assets_own1">Assets own</string>
+    <string name="residence_type1">Residence Type</string>
+    <string name="perpanent_area">Residence Area</string>
 
     <string name="need_cr_report_des"> credit report should be at the top of the
         list of your personal financial habits.

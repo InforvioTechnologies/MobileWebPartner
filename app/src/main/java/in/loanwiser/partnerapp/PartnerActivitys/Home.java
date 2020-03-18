@@ -3,6 +3,7 @@ package in.loanwiser.partnerapp.PartnerActivitys;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import androidx.core.content.ContextCompat;
 import androidx.appcompat.app.AppCompatActivity;
@@ -35,14 +36,17 @@ import adhoc.app.applibrary.Config.AppUtils.Urls;
 import adhoc.app.applibrary.Config.AppUtils.VolleySignleton.AppController;
 import dmax.dialog.SpotsDialog;
 import in.loanwiser.partnerapp.Documents.Applicant_Details_Single;
+import in.loanwiser.partnerapp.PDF_Dounloader.PermissionUtils;
 import in.loanwiser.partnerapp.R;
 import in.loanwiser.partnerapp.Step_Changes_Screen.CRIF_Report_Activity;
+import in.loanwiser.partnerapp.Step_Changes_Screen.CRIF_Report_Activity_PDF_View;
 import in.loanwiser.partnerapp.Step_Changes_Screen.Document_Check_List;
 import in.loanwiser.partnerapp.Step_Changes_Screen.Document_Checklist_Details_type;
 import in.loanwiser.partnerapp.Step_Changes_Screen.Eligibility_BL;
 import in.loanwiser.partnerapp.Step_Changes_Screen.Eligibility_Check_PL;
 import in.loanwiser.partnerapp.Step_Changes_Screen.Eligibility_HL_New;
 import in.loanwiser.partnerapp.Step_Changes_Screen.Lead_Crration_Activity;
+import in.loanwiser.partnerapp.Step_Changes_Screen.Viability_Activity_Data_View;
 import in.loanwiser.partnerapp.Step_Changes_Screen.Viability_Check_BL;
 import in.loanwiser.partnerapp.Step_Changes_Screen.Viability_Check_HL_new;
 import in.loanwiser.partnerapp.Step_Changes_Screen.Viability_Check_PL;
@@ -66,8 +70,13 @@ public class Home extends AppCompatActivity {
             Viability_Check,eligibility_check,viability_Report,Credit_REport_Generation;
     ImageView viability_check_img2,eligibility_check_img,viability_report_image,Credite_report_image;
 
-    String viability,eligibility,credit_request,payment,viability_report,
+    String viability,eligibility,credit_request,payment,viability_report,viability_report_URL,
     document_checklist,document_upload,loan_type_id,loan_type;
+
+
+    private static final int STORAGE_PERMISSION_REQUEST_CODE = 1;
+
+    PermissionUtils permissionUtils;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -118,10 +127,11 @@ public class Home extends AppCompatActivity {
         Pref.putUSERID(mCon,user_id);
       //  step_status =  Objs.a.getBundle(this, Params.step_status);
 
-
+        permissionUtils = new PermissionUtils();
         Log.e("applicant_id",applicant_id);
-
+        Report_View_Fu();
         initCode();
+
 
     }
 
@@ -145,8 +155,6 @@ public class Home extends AppCompatActivity {
         Document_check_list = (CardView) findViewById(R.id.Document_check_list);
         Document_Upload = (CardView) findViewById(R.id.Document_Upload);
         offer = (CardView) findViewById(R.id.Blo);
-
-
 
         Viability_Check = (CardView) findViewById(R.id.Viability_Check);
         eligibility_check = (CardView) findViewById(R.id.eligibility_check);
@@ -181,7 +189,11 @@ public class Home extends AppCompatActivity {
 
                 if(viability.contains("completed"))
                 {
-
+                    Intent intent = new Intent(Home.this, Viability_Activity_Data_View.class);
+                    intent.putExtra("user_id", user_id);
+                    intent.putExtra("transaction_id", transaction_id);
+                    startActivity(intent);
+                    finish();
                 }else
                 {
 
@@ -259,20 +271,28 @@ public class Home extends AppCompatActivity {
 
             }
         });
+
         viability_Report.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                Intent intent = new Intent(Home.this, Viability_Report_Activity_New.class);
-                startActivity(intent);
+                if (permissionUtils.checkPermission(Home.this, STORAGE_PERMISSION_REQUEST_CODE, view)) {
+                    if (viability_report_URL.length() > 0) {
+                        try {
+                            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(viability_report_URL)));
+                        } catch (Exception e) {
+                            e.getStackTrace();
+                        }
+                    }
+
+                }
             }
         });
         Credit_REport_Generation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                Intent intent = new Intent(Home.this, CRIF_Report_Activity.class);
-                intent.putExtra("applicant_id", applicant_id);
+                Intent intent = new Intent(Home.this, CRIF_Report_Activity_PDF_View.class);
                 startActivity(intent);
                 finish();
 
@@ -481,6 +501,57 @@ public class Home extends AppCompatActivity {
         AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
     }
 
+    private void Report_View_Fu() {
+        JSONObject jsonObject =new JSONObject();
+        JSONObject J= null;
+        try {
+            J =new JSONObject();
+            J.put("trans_id", transaction_id);
+            J.put("user_id", user_id);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        Log.e("Report Request ",String.valueOf(J));
+        progressDialog.show();
+        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, Urls.Report_Activity, J,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+
+                            Log.e("Report response",String.valueOf(response));
+                            String report_statues = response.getString("status");
+                            if(report_statues.equals("success"))
+                            {
+                                JSONObject jsonObject1 = response.getJSONObject("crif_report");
+
+                                viability_report_URL = response.getString("viability_report");
+                            }
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                        progressDialog.dismiss();
+                    }
+                }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                progressDialog.dismiss();
+                Toast.makeText(getApplicationContext(),error.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("content-type", "application/json");
+                return headers;
+            }
+        };
+        AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
+    }
+
     private void clicks() {
 
        /* findViewById(R.id.hl).setOnClickListener(new View.OnClickListener() {
@@ -634,7 +705,7 @@ public class Home extends AppCompatActivity {
     public void onBackPressed() {
         Objs.ac.StartActivity(mCon, Dashboard_Activity.class);
         finish();
-        Pref.removeDOC_Status(mCon);
+
         super.onBackPressed();
     }
 }

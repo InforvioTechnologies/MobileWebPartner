@@ -51,6 +51,7 @@ import adhoc.app.applibrary.Config.AppUtils.Pref.Pref;
 import adhoc.app.applibrary.Config.AppUtils.Urls;
 import adhoc.app.applibrary.Config.AppUtils.VolleySignleton.AppController;
 import dmax.dialog.SpotsDialog;
+import in.loanwiser.partnerapp.NumberTextWatcher;
 import in.loanwiser.partnerapp.PartnerActivitys.Applicant_Details_Activity;
 import in.loanwiser.partnerapp.R;
 import in.loanwiser.partnerapp.SimpleActivity;
@@ -325,6 +326,7 @@ public class Eligibility_Check_PL extends SimpleActivity {
             company_name_edtxt = (AppCompatEditText) findViewById(R.id.company_name_edtxt);
         pl_co_app_company_name_edtxt = (AppCompatEditText) findViewById(R.id.pl_co_app_company_name_edtxt);
         pl_co_App_other_incom_amt_edtxt = (AppCompatEditText) findViewById(R.id.pl_co_App_other_incom_amt_edtxt);
+        pl_co_App_other_incom_amt_edtxt.addTextChangedListener(new NumberTextWatcher(pl_co_App_other_incom_amt_edtxt));
 
         designation_in_company = (AppCompatEditText) findViewById(R.id.designation_in_company);
         no_of_emp_edtxt = (AppCompatEditText) findViewById(R.id.no_of_emp_edtxt);
@@ -332,7 +334,7 @@ public class Eligibility_Check_PL extends SimpleActivity {
         permanent_residence_auto = (AutoCompleteTextView) findViewById(R.id.permanent_residence_auto);
         emi_amount_edit_txt = (AppCompatEditText) findViewById(R.id.emi_amount_edit_txt);
         other_incom_amt_edtxt = (AppCompatEditText) findViewById(R.id.other_incom_amt_edtxt);
-
+        other_incom_amt_edtxt.addTextChangedListener(new NumberTextWatcher(other_incom_amt_edtxt));
 
         full_addres_of_relative = (LinearLayout) findViewById(R.id.full_addres_of_relative);
         permanent_res_type_ly = (LinearLayout) findViewById(R.id.permanent_res_type_ly);
@@ -369,6 +371,7 @@ public class Eligibility_Check_PL extends SimpleActivity {
         co_bank_cridit_by_edtxt = (AppCompatEditText) findViewById(R.id.co_bank_cridit_by_edtxt);
         co_Avg_monthly_income = (AppCompatEditText) findViewById(R.id.co_Avg_monthly_income);
         co_other_income_edite_txt = (AppCompatEditText) findViewById(R.id.co_other_income_edite_txt);
+        co_other_income_edite_txt.addTextChangedListener(new NumberTextWatcher(co_other_income_edite_txt));
 
     }
 
@@ -401,7 +404,7 @@ public class Eligibility_Check_PL extends SimpleActivity {
         own_hose_relative_txt1.setTypeface(font);
         rel_full_address_txt.setTypeface(font);
         rel_full_address_txt1.setTypeface(font);*/
-        other_income_details_txt.setTypeface(font);
+
         other_income_txt.setTypeface(font);
         other_income_txt1.setTypeface(font);
         other_incom_amt_txt.setTypeface(font);

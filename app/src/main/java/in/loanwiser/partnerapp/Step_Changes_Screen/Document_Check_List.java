@@ -42,6 +42,7 @@ import adhoc.app.applibrary.Config.AppUtils.Urls;
 import adhoc.app.applibrary.Config.AppUtils.VolleySignleton.AppController;
 import dmax.dialog.SpotsDialog;
 import in.loanwiser.partnerapp.Multi_select_checkbox.CustomAdapter;
+import in.loanwiser.partnerapp.PartnerActivitys.Home;
 import in.loanwiser.partnerapp.R;
 import in.loanwiser.partnerapp.SimpleActivity;
 
@@ -119,6 +120,14 @@ public class Document_Check_List extends SimpleActivity implements CompoundButto
         Document_check_lsit();
 
       //  Click();
+
+      /*  Docum_ch_step1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Document_Check_List.this, Home.class);
+                startActivity(intent);
+            }
+        });*/
 
     }
 
@@ -249,7 +258,7 @@ public class Document_Check_List extends SimpleActivity implements CompoundButto
             e.printStackTrace();
         }
            progressDialog.show();
-        Log.e(" Document check ", String.valueOf(J));
+        Log.e("Request ", String.valueOf(J));
 
         JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, Urls.DOCUMENT_CHECK_LIST, J,
                 new Response.Listener<JSONObject>() {
@@ -462,4 +471,13 @@ public class Document_Check_List extends SimpleActivity implements CompoundButto
     public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
 
     }
+
+   /* @Override
+    public void onBackPressed() {
+
+        Intent intent = new Intent(Document_Check_List.this, Home.class);
+        startActivity(intent);
+        finish();
+        super.onBackPressed();
+    }*/
 }

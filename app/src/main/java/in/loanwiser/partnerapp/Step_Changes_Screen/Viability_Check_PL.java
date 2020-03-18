@@ -70,8 +70,8 @@ import in.loanwiser.partnerapp.SimpleActivity;
 
 public class Viability_Check_PL extends SimpleActivity {
 
-    AppCompatButton lead_viy_step2;
 
+    AppCompatButton lead_viy_step2;
     private Spinner spinner_residence_type,spinner_employe_id,spinn_salary_crt_mtd,
             spinner_salary_proof,has_pan_card_spnr,Other_family_income_spnr,spinn_area,res_spinn_area,
             co_applicant_spinner,co_applicant_emp_spinner;
@@ -269,8 +269,8 @@ public class Viability_Check_PL extends SimpleActivity {
                 startActivity(intent);
                 finish();
             }
-        });*/
-
+        });
+       */
         Log.e("viability check Pl ","Personal Loan");
       /* monthly_sal_txt,salery_credite_method_txt,Exp_in_current_txt,total_workexperiecnce_txt,cmp_pincode_txt,
         txt_residence_pincode,txt_residence_type,Lives_in_current_txt,any_other_family_member_txt,family_member_name_txt
@@ -311,6 +311,7 @@ public class Viability_Check_PL extends SimpleActivity {
 
             }
         });*/
+
         app_assets_owned.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -325,6 +326,7 @@ public class Viability_Check_PL extends SimpleActivity {
         pl_co_app_slrd_assets_owned_BL.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 Intent intent = new Intent(Viability_Check_PL.this, Multi_Select_checkbox.class);
                 intent.putExtra("jsonArray", Assets_own.toString());
                 intent.putExtra("select_lid_id", (Serializable) Assets_myList_values);
@@ -335,7 +337,7 @@ public class Viability_Check_PL extends SimpleActivity {
 
 
         UISCREEN();
-        Click();
+       Click();
         fonts();
         makeJsonObjReq1();
     }
@@ -442,6 +444,7 @@ public class Viability_Check_PL extends SimpleActivity {
         pl_co_own_self_delership_company_edit_txt = (AppCompatEditText) findViewById(R.id.pl_co_own_self_delership_company_edit_txt);
         monthly_net_sal_edit_txt = (AppCompatEditText) findViewById(R.id.monthly_net_sal_edit_txt);
         monthly_net_sal_edit_txt.addTextChangedListener(new NumberTextWatcher(monthly_net_sal_edit_txt));
+
         experience_in_current_cmpy = (AppCompatEditText) findViewById(R.id.experience_in_current_cmpy);
         total_experience_edit_txt = (AppCompatEditText) findViewById(R.id.total_experience_edit_txt);
         company_pincode_txt = (AppCompatAutoCompleteTextView) findViewById(R.id.company_pincode_txt);
@@ -479,6 +482,7 @@ public class Viability_Check_PL extends SimpleActivity {
         pl_co_app_slrd_name_edite_txt = (AppCompatEditText) findViewById(R.id.pl_co_app_slrd_name_edite_txt);
         pl_co_app_slrd_age_edite_txt = (AppCompatEditText) findViewById(R.id.pl_co_app_slrd_age_edite_txt);
         pl_co_app_slrd_month_net_slrd_edite_txt = (AppCompatEditText) findViewById(R.id.pl_co_app_slrd_month_net_slrd_edite_txt);
+        pl_co_app_slrd_month_net_slrd_edite_txt.addTextChangedListener(new NumberTextWatcher(pl_co_app_slrd_month_net_slrd_edite_txt));
         pl_co_app_slrd_experience_in_current_cmpy = (AppCompatEditText) findViewById(R.id.pl_co_app_slrd_experience_in_current_cmpy);
         pl_co_app_slrd_total_experience_edit_txt = (AppCompatEditText) findViewById(R.id.pl_co_app_slrd_total_experience_edit_txt);
         pl_co_app_f_no_of_acres_edit_txt = (AppCompatEditText) findViewById(R.id.pl_co_app_f_no_of_acres_edit_txt);
@@ -572,7 +576,6 @@ public class Viability_Check_PL extends SimpleActivity {
         family_member_income_txt1.setTypeface(font);
         monthly_afr_emi_txt.setTypeface(font);
         monthly_afr_emi_txt1.setTypeface(font);
-
 
         age_edite_txt.setTypeface(font);
         pan_number_edit_txt.setTypeface(font);
@@ -732,7 +735,6 @@ public class Viability_Check_PL extends SimpleActivity {
         public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
         }
-
         @Override
         public void afterTextChanged(Editable editable) {
 
@@ -745,7 +747,6 @@ public class Viability_Check_PL extends SimpleActivity {
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
                 String workpincode = pl_co_app_office_residence_pincode_edite_txt.getText().toString();
-
                 if (workpincode.length() == 2) {
                     GET_Pincode1(workpincode);
                 }
@@ -761,6 +762,7 @@ public class Viability_Check_PL extends SimpleActivity {
             public void afterTextChanged(Editable editable) {
 
             }
+
         });
 
 

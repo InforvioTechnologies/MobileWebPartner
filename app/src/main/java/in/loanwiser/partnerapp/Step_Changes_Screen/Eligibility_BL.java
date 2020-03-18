@@ -46,6 +46,7 @@ import adhoc.app.applibrary.Config.AppUtils.Pref.Pref;
 import adhoc.app.applibrary.Config.AppUtils.Urls;
 import adhoc.app.applibrary.Config.AppUtils.VolleySignleton.AppController;
 import dmax.dialog.SpotsDialog;
+import in.loanwiser.partnerapp.NumberTextWatcher;
 import in.loanwiser.partnerapp.PartnerActivitys.Applicant_Details_Activity;
 import in.loanwiser.partnerapp.R;
 import in.loanwiser.partnerapp.SimpleActivity;
@@ -253,6 +254,8 @@ public class Eligibility_BL extends SimpleActivity {
         other_income_txt1 = (AppCompatTextView) findViewById(R.id.other_income_txt1);
         other_incom_amt_txt = (AppCompatTextView) findViewById(R.id.other_incom_amt_txt);
         other_incom_amt_txt1 = (AppCompatTextView) findViewById(R.id.other_incom_amt_txt1);
+
+
         is_gst_reflect_txt = (AppCompatTextView) findViewById(R.id.is_gst_reflect_txt);
         is_gst_reflect_txt1 = (AppCompatTextView) findViewById(R.id.is_gst_reflect_txt1);
 
@@ -270,7 +273,7 @@ public class Eligibility_BL extends SimpleActivity {
 
 
         other_income_edite_txt = (AppCompatEditText) findViewById(R.id.other_income_edite_txt);
-
+        other_income_edite_txt.addTextChangedListener(new NumberTextWatcher(other_income_edite_txt));
         purchased_by_bank_edit_txt = (AppCompatEditText) findViewById(R.id.purchased_by_bank_edit_txt);
         purchased_by_GStbill_edit_txt = (AppCompatEditText) findViewById(R.id.purchased_by_GStbill_edit_txt);
         sales_by_GStbill_edit_txt = (AppCompatEditText) findViewById(R.id.sales_by_GStbill_edit_txt);
@@ -285,6 +288,7 @@ public class Eligibility_BL extends SimpleActivity {
         co_Avg_monthly_income = (AppCompatEditText) findViewById(R.id.co_Avg_monthly_income);
         Avg_monthly_income = (AppCompatEditText) findViewById(R.id.Avg_monthly_income);
         co_other_income_edite_txt = (AppCompatEditText) findViewById(R.id.co_other_income_edite_txt);
+        co_other_income_edite_txt.addTextChangedListener(new NumberTextWatcher(co_other_income_edite_txt));
 
         permanent_res_pincode_edt_txt = (AppCompatEditText) findViewById(R.id.permanent_res_pincode_edt_txt);
 
@@ -1408,8 +1412,6 @@ public class Eligibility_BL extends SimpleActivity {
                         Other_income_Id = Other_income_ar.getJSONObject(position).getString("id");
                         Other_income_Value = Other_income_ar.getJSONObject(position).getString("value");
                         //CAT_ID = ja.getJSONObject(position).getString("category_id");
-
-
 
                         if(Other_income_Id.equals("0"))
                         {

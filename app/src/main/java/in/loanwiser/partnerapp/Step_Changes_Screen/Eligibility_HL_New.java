@@ -51,6 +51,7 @@ import adhoc.app.applibrary.Config.AppUtils.Pref.Pref;
 import adhoc.app.applibrary.Config.AppUtils.Urls;
 import adhoc.app.applibrary.Config.AppUtils.VolleySignleton.AppController;
 import dmax.dialog.SpotsDialog;
+import in.loanwiser.partnerapp.NumberTextWatcher;
 import in.loanwiser.partnerapp.PartnerActivitys.Applicant_Details_Activity;
 import in.loanwiser.partnerapp.R;
 import in.loanwiser.partnerapp.SimpleActivity;
@@ -514,7 +515,7 @@ public class Eligibility_HL_New extends SimpleActivity {
         pl_co_App_education_qualification_edit_txt = (AppCompatEditText) findViewById(R.id.pl_co_App_education_qualification_edit_txt);
         pl_co_app_emi_amount_edit_txt = (AppCompatEditText) findViewById(R.id.pl_co_app_emi_amount_edit_txt);
         pl_co_App_other_incom_amt_edtxt = (AppCompatEditText) findViewById(R.id.pl_co_App_other_incom_amt_edtxt);
-
+        pl_co_App_other_incom_amt_edtxt.addTextChangedListener(new NumberTextWatcher(pl_co_App_other_incom_amt_edtxt));
 
 
 
@@ -532,6 +533,8 @@ public class Eligibility_HL_New extends SimpleActivity {
         property_price_edt_txt = (AppCompatEditText) findViewById(R.id.property_price_edt_txt);
         age_Of_Property_Edit_Text = (AppCompatEditText) findViewById(R.id.age_Of_Property_Edit_Text);
 
+        property_price_edt_txt.addTextChangedListener(new NumberTextWatcher(property_price_edt_txt));
+
 
 
         plot_area_edit_txt_improment = (AppCompatEditText) findViewById(R.id.plot_area_edit_txt_improment);
@@ -544,6 +547,9 @@ public class Eligibility_HL_New extends SimpleActivity {
         plot_area_edit_txt_plot_construction = (AppCompatEditText) findViewById(R.id.plot_area_edit_txt_plot_construction);
         build_up_area_edit_txt_plot_construction = (AppCompatEditText) findViewById(R.id.build_up_area_edit_txt_plot_construction);
         plot_property_price_edt_txt = (AppCompatEditText) findViewById(R.id.plot_property_price_edt_txt);
+
+        plot_property_price_edt_txt.addTextChangedListener(new NumberTextWatcher(plot_property_price_edt_txt));
+
         plot_area_edit_txt_plot_ = (AppCompatEditText) findViewById(R.id.plot_area_edit_txt_plot_);
 
 
@@ -554,7 +560,10 @@ public class Eligibility_HL_New extends SimpleActivity {
         plot_area_edit_txt_bt = (AppCompatEditText) findViewById(R.id.plot_area_edit_txt_bt);
         Existing_bank_edit_txt = (AppCompatEditText) findViewById(R.id.Existing_bank_edit_txt);
         build_up_area_edit_txt_bt = (AppCompatEditText) findViewById(R.id.build_up_area_edit_txt_bt);
+
         property_price_edt_txt_bt = (AppCompatEditText) findViewById(R.id.property_price_edt_txt_bt);
+        property_price_edt_txt_bt.addTextChangedListener(new NumberTextWatcher(property_price_edt_txt_bt));
+
         Loan_varient_edit_txt = (AppCompatEditText) findViewById(R.id.Loan_varient_edit_txt);
         loan_amount_edit_txt = (AppCompatEditText) findViewById(R.id.loan_amount_edit_txt);
         original_tenure_edit_txt = (AppCompatEditText) findViewById(R.id.original_tenure_edit_txt);
@@ -572,7 +581,6 @@ public class Eligibility_HL_New extends SimpleActivity {
         construction_statues_spinner = (Spinner) findViewById(R.id.construction_statues_spinner);
 
         //applicant Salaried
-
         spinner_cmp_type = (Spinner) findViewById(R.id.spinner_cmp_type);
         has_pan_card_spnr = (Spinner) findViewById(R.id.has_pan_card_spnr);
         spinner_employe_id = (Spinner) findViewById(R.id.spinner_employe_id);
@@ -587,17 +595,11 @@ public class Eligibility_HL_New extends SimpleActivity {
         permanent_res_type_res_spinner = (Spinner) findViewById(R.id.permanent_res_type_res_spinner);
         permanent_residence_spinn_area = (Spinner) findViewById(R.id.permanent_residence_spinn_area);
 
-
         hl_eligi_app_cmp_name = (LinearLayout) findViewById(R.id.hl_eligi_app_cmp_name);
         hl_eligibility_cmp_des_ = (LinearLayout) findViewById(R.id.hl_eligibility_cmp_des_);
         is_other_income = (LinearLayout) findViewById(R.id.is_other_income);
         rented_applicant_salaried_hl = (LinearLayout) findViewById(R.id.rented_applicant_salaried_hl);
         property_field = (LinearLayout) findViewById(R.id.property_field);
-
-
-
-
-
 
         company_name_edtxt = (AppCompatEditText) findViewById(R.id.company_name_edtxt);
         no_of_emp_edtxt = (AppCompatEditText) findViewById(R.id.no_of_emp_edtxt);
@@ -606,12 +608,11 @@ public class Eligibility_HL_New extends SimpleActivity {
         education_qualification_edit_txt = (AppCompatEditText) findViewById(R.id.education_qualification_edit_txt);
         rent_paid_for_house_edit_txt = (AppCompatEditText) findViewById(R.id.rent_paid_for_house_edit_txt);
         other_incom_amt_edtxt = (AppCompatEditText) findViewById(R.id.other_incom_amt_edtxt);
+        other_incom_amt_edtxt.addTextChangedListener(new NumberTextWatcher(other_incom_amt_edtxt));
+
         designation_in_company = (AppCompatEditText) findViewById(R.id.designation_in_company);
         emi_amount_edit_txt = (AppCompatEditText) findViewById(R.id.emi_amount_edit_txt);
         permanent_residence_auto = (AppCompatAutoCompleteTextView) findViewById(R.id.permanent_residence_auto);
-
-
-
 
     }
 

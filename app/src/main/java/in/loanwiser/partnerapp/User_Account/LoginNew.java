@@ -441,14 +441,16 @@ public class LoginNew extends AppCompatActivity implements GoogleApiClient.Conne
                             if (response.getString(Params.status).equals(Params.ok)){
                                 String otp_new =  response.getString(Params.otp);
 
-                                Objs.a.showToast(mCon,"OTP will be sent to the mobile number");
+                                Toast.makeText(mCon,"OTP will be sent to the mobile number",Toast.LENGTH_SHORT).show();
+                               // Objs.a.showToast(mCon,"OTP will be sent to the mobile number");
                                 Objs.ac.StartActivityPutExtra(mCon, SmsActivity2.class, Params.otp,otp_new,
                                         Params.mobile_no,Moblie);
-
                                 finish();
+
                             }
                             if (response.getString(Params.status).equals(Params.error)){
-                                Objs.a.showToast(mCon,"Mobile number is not registered. Please register it");
+                              //  Objs.a.showToast(mCon,"Mobile number is not registered. Please register it");
+                                Toast.makeText(mCon,"Mobile number is already registered. Please login",Toast.LENGTH_SHORT).show();
                             }
 
                         } catch (JSONException e) {

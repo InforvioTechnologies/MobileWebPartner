@@ -614,18 +614,19 @@
 
         </LinearLayout>
         <LinearLayout
-            android:background="@color/colorPrimary"
-            android:gravity="center"
+
+            android:gravity="left"
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <androidx.appcompat.widget.AppCompatTextView
-                android:gravity="center"
+                android:gravity="left"
                 android:layout_width="match_parent"
                 style="@style/LorgeText"
                 android:id="@+id/other_income_details_txt"
-                android:textSize="16sp"
-                android:textColor="@color/white"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textColor="@color/colorPrimary"
                 android:text="Other Income Details"
                 android:layout_height="wrap_content" />
 
@@ -647,7 +648,6 @@
                     android:layout_height="match_parent"
                     android:layout_marginLeft="2dp"
                     android:gravity="left"
-
                     android:textColor="@color/colorPrimaryDark"
                     android:textColorHint="@color/colorPrimaryDark" />
                 <androidx.appcompat.widget.AppCompatTextView
@@ -728,7 +728,9 @@
                         android:id="@+id/pl_co_App_other_incom_amt_edtxt"
                         android:textColor="@color/colorPrimaryDark"
                         android:textSize="16sp"
-                        android:inputType="text"/>
+                        android:inputType="number"
+                        android:imeOptions="actionDone"
+                      />
                 </LinearLayout>
             </LinearLayout>
             <LinearLayout

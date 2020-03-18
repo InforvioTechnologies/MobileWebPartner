@@ -296,7 +296,10 @@ public class SmsActivity extends AppCompatActivity {
                                      user_array = response.getString(Params.b2b_userid);
                                      partner_code = response.getString(Params.partner_code);
                                     Pref.putPART(mCon, partner_code);
-                                    Objs.a.showToast(mCon, "Welcome to Loanwiser, you have successfully logged in");
+                                  //  Objs.a.showToast(mCon, "Welcome to Loanwiser, you have successfully logged in");
+
+                                    Toast.makeText(mCon,"Welcome to Loanwiser, you have successfully logged in",Toast.LENGTH_SHORT).show();
+
                                     Pref.putUID(mCon, no_bundle);
                                     Pref.putMobile(mCon, S_moblie);
                                     Pref.putName(mCon, S_name);
@@ -307,9 +310,11 @@ public class SmsActivity extends AppCompatActivity {
                             }
 
                             if(response.getString(Params.status).equals(Params.error)){
-                                Objs.a.showToast(mCon,"Already Verified");
+
+                                Toast.makeText(mCon,"Already Verified",Toast.LENGTH_SHORT).show();
+
                                 if(response.getString(Params.state_status).equals("0")){
-                                    Objs.a.showToast(mCon,"No Operation ");
+                                    Toast.makeText(mCon,"No Operation ",Toast.LENGTH_SHORT).show();
                                 }
                                 if(response.getString(Params.state_status).equals("1")) {
 

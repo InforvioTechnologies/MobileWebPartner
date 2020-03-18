@@ -150,6 +150,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="16sp"
+                    android:inputType="number"
                     android:id="@+id/no_of_acres_edit_txt"
                     android:textColor="@color/colorPrimaryDark"/>
             </LinearLayout>
@@ -279,6 +280,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="16sp"
+                    android:inputType="number"
+                    android:imeOptions="actionNext"
                     android:id="@+id/anual_income_edit_txt"
                     android:textColor="@color/colorPrimaryDark"/>
             </LinearLayout>
@@ -320,6 +323,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="16sp"
+                    android:inputType="number"
+                    android:imeOptions="actionNext"
                     android:id="@+id/daily_income_f"
                     android:textColor="@color/colorPrimaryDark"/>
             </LinearLayout>
@@ -361,6 +366,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textSize="16sp"
+                        android:imeOptions="actionNext"
+                        android:inputType="number"
                         android:id="@+id/number_of_years_in_work"
                         android:textColor="@color/colorPrimaryDark"/>
                 </LinearLayout>
@@ -491,6 +498,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textSize="16sp"
+                        android:inputType="number"
+                        android:imeOptions="actionDone"
                         android:id="@+id/average_monthly_income"
                         android:textColor="@color/colorPrimaryDark"/>
                 </LinearLayout>

@@ -544,14 +544,20 @@ public class Viability_Check_BL extends SimpleActivity {
 
         no_of_acres_edit_txt = (AppCompatEditText) findViewById(R.id.no_of_acres_edit_txt);
         anual_income_edit_txt = (AppCompatEditText) findViewById(R.id.anual_income_edit_txt);
+        anual_income_edit_txt.addTextChangedListener(new NumberTextWatcher(anual_income_edit_txt));
         daily_income_f = (AppCompatEditText) findViewById(R.id.daily_income_f);
+        daily_income_f.addTextChangedListener(new NumberTextWatcher(daily_income_f));
         number_of_years_in_work = (AppCompatEditText) findViewById(R.id.number_of_years_in_work);
+
         average_monthly_income = (AppCompatEditText) findViewById(R.id.average_monthly_income);
+        average_monthly_income.addTextChangedListener(new NumberTextWatcher(average_monthly_income));
 
         no_of_birds_edit_txt = (AppCompatEditText) findViewById(R.id.no_of_birds_edit_txt);
         supply_by_who = (AppCompatEditText) findViewById(R.id.supply_by_who);
 
         avg_monthly_incom_edit_txt = (AppCompatEditText) findViewById(R.id.avg_monthly_incom_edit_txt);
+        avg_monthly_incom_edit_txt.addTextChangedListener(new NumberTextWatcher(avg_monthly_incom_edit_txt));
+
         actual_business_ind_edit_txt = (AppCompatEditText) findViewById(R.id.actual_business_ind_edit_txt);
         actual_business_edit_forming_txt = (AppCompatEditText) findViewById(R.id.actual_business_edit_forming_txt);
         no_of_animals = (AppCompatEditText) findViewById(R.id.no_of_animals);
@@ -559,29 +565,38 @@ public class Viability_Check_BL extends SimpleActivity {
         no_of_liters_edit_txt = (AppCompatEditText) findViewById(R.id.no_of_liters_edit_txt);
         no_of_years_in_works = (AppCompatEditText) findViewById(R.id.no_of_years_in_works);
         avg_monthly_income = (AppCompatEditText) findViewById(R.id.avg_monthly_income);
+        avg_monthly_income.addTextChangedListener(new NumberTextWatcher(avg_monthly_income));
         Selling_Price = (AppCompatEditText) findViewById(R.id.Selling_Price);
+        Selling_Price.addTextChangedListener(new NumberTextWatcher(Selling_Price));
         Profit_affter_selling = (AppCompatEditText) findViewById(R.id.Profit_affter_selling);
+        Profit_affter_selling.addTextChangedListener(new NumberTextWatcher(Profit_affter_selling));
         no_of_years_in_work_P = (AppCompatEditText) findViewById(R.id.no_of_years_in_work_P);
         avg_monthly_income_Poultry = (AppCompatEditText) findViewById(R.id.avg_monthly_income_Poultry);
-
+        avg_monthly_income_Poultry.addTextChangedListener(new NumberTextWatcher(avg_monthly_income_Poultry));
 
         delership_company_edit_txt = (AppCompatEditText) findViewById(R.id.delership_company_edit_txt);
         monthly_profit_edit_txt = (AppCompatEditText) findViewById(R.id.monthly_profit_edit_txt);
 
        monthly_income_own_ser_bus_edit_txt = (AppCompatEditText) findViewById(R.id.monthly_income_own_ser_bus_edit_txt);
-       no_of_employee_own_ser_bus_edit_txt = (AppCompatEditText) findViewById(R.id.no_of_employee_own_ser_bus_edit_txt);
+        monthly_income_own_ser_bus_edit_txt.addTextChangedListener(new NumberTextWatcher(monthly_income_own_ser_bus_edit_txt));
+
+        no_of_employee_own_ser_bus_edit_txt = (AppCompatEditText) findViewById(R.id.no_of_employee_own_ser_bus_edit_txt);
         business_investment_own_ser_bus_edit_txt = (AppCompatEditText) findViewById(R.id.business_investment_own_ser_bus_edit_txt);
-
-
+        business_investment_own_ser_bus_edit_txt.addTextChangedListener(new NumberTextWatcher(business_investment_own_ser_bus_edit_txt));
 
         value_of_stock_raw_material = (AppCompatEditText) findViewById(R.id.value_of_stock_raw_material);
+        value_of_stock_raw_material.addTextChangedListener(new NumberTextWatcher(value_of_stock_raw_material));
+
         monthly_sales_manufa = (AppCompatEditText) findViewById(R.id.monthly_sales_manufa);
+        monthly_sales_manufa.addTextChangedListener(new NumberTextWatcher(monthly_sales_manufa));
         monthly_profit_manufa = (AppCompatEditText) findViewById(R.id.monthly_profit_manufa);
+        monthly_profit_manufa.addTextChangedListener(new NumberTextWatcher(monthly_profit_manufa));
         value_of_machineries = (AppCompatEditText) findViewById(R.id.value_of_machineries);
+        value_of_machineries.addTextChangedListener(new NumberTextWatcher(value_of_machineries));
 
         number_of_years_in_work_retails = (AppCompatEditText) findViewById(R.id.number_of_years_in_work_retails);
         average_monthly_income_own_business = (AppCompatEditText) findViewById(R.id.average_monthly_income_own_business);
-
+        average_monthly_income_own_business.addTextChangedListener(new NumberTextWatcher(average_monthly_income_own_business));
 
         /// co applicant
 
@@ -652,6 +667,8 @@ public class Viability_Check_BL extends SimpleActivity {
         pl_co_app_slrd_name_edite_txt = (AppCompatEditText) findViewById(R.id.pl_co_app_slrd_name_edite_txt);
         pl_co_app_slrd_age_edite_txt = (AppCompatEditText) findViewById(R.id.pl_co_app_slrd_age_edite_txt);
         pl_co_app_slrd_month_net_slrd_edite_txt = (AppCompatEditText) findViewById(R.id.pl_co_app_slrd_month_net_slrd_edite_txt);
+        pl_co_app_slrd_month_net_slrd_edite_txt.addTextChangedListener(new NumberTextWatcher(pl_co_app_slrd_month_net_slrd_edite_txt));
+
         pl_co_app_slrd_experience_in_current_cmpy = (AppCompatEditText) findViewById(R.id.pl_co_app_slrd_experience_in_current_cmpy);
         pl_co_app_slrd_total_experience_edit_txt = (AppCompatEditText) findViewById(R.id.pl_co_app_slrd_total_experience_edit_txt);
         pl_co_app_f_no_of_acres_edit_txt = (AppCompatEditText) findViewById(R.id.pl_co_app_f_no_of_acres_edit_txt);
@@ -659,25 +676,45 @@ public class Viability_Check_BL extends SimpleActivity {
         pl_co_app_f_daily_income_f = (AppCompatEditText) findViewById(R.id.pl_co_app_f_daily_income_f);
         pl_co_app_F_number_of_years_in_work = (AppCompatEditText) findViewById(R.id.pl_co_app_F_number_of_years_in_work);
         pl_co_app_F_average_monthly_income = (AppCompatEditText) findViewById(R.id.pl_co_app_F_average_monthly_income);
+        pl_co_app_F_average_monthly_income.addTextChangedListener(new NumberTextWatcher(pl_co_app_F_average_monthly_income));
+
         pl_co_D_no_of_animals = (AppCompatEditText) findViewById(R.id.pl_co_D_no_of_animals);
         pl_co_D_no_of_liters_edit_txt = (AppCompatEditText) findViewById(R.id.pl_co_D_no_of_liters_edit_txt);
         pl_co_app_self_D_no_of_years_in_works = (AppCompatEditText) findViewById(R.id.pl_co_app_self_D_no_of_years_in_works);
         pl_co_app_D_avg_monthly_income = (AppCompatEditText) findViewById(R.id.pl_co_app_D_avg_monthly_income);
+        pl_co_app_D_avg_monthly_income.addTextChangedListener(new NumberTextWatcher(pl_co_app_D_avg_monthly_income));
+
         pl_co_P_no_of_birds_edit_txt = (AppCompatEditText) findViewById(R.id.pl_co_P_no_of_birds_edit_txt);
         pl_co_P_supply_by_who = (AppCompatEditText) findViewById(R.id.pl_co_P_supply_by_who);
         pl_co_P_Selling_Price = (AppCompatEditText) findViewById(R.id.pl_co_P_Selling_Price);
         pl_co_p_Profit_affter_selling = (AppCompatEditText) findViewById(R.id.pl_co_p_Profit_affter_selling);
         pl_co_P_no_of_years_in_work_P = (AppCompatEditText) findViewById(R.id.pl_co_P_no_of_years_in_work_P);
         pl_co_p_avg_monthly_income_Poultry = (AppCompatEditText) findViewById(R.id.pl_co_p_avg_monthly_income_Poultry);
+        pl_co_p_avg_monthly_income_Poultry.addTextChangedListener(new NumberTextWatcher(pl_co_p_avg_monthly_income_Poultry));
+
         pl_co_own_self_monthly_profit_edit_txt = (AppCompatEditText) findViewById(R.id.pl_co_own_self_monthly_profit_edit_txt);
+        pl_co_own_self_monthly_profit_edit_txt.addTextChangedListener(new NumberTextWatcher(pl_co_own_self_monthly_profit_edit_txt));
+
         pl_co_monthly_income_own_ser_bus_edit_txt = (AppCompatEditText) findViewById(R.id.pl_co_monthly_income_own_ser_bus_edit_txt);
+        pl_co_monthly_income_own_ser_bus_edit_txt.addTextChangedListener(new NumberTextWatcher(pl_co_monthly_income_own_ser_bus_edit_txt));
+
         pl_co_no_of_employee_own_ser_bus_edit_txt = (AppCompatEditText) findViewById(R.id.pl_co_no_of_employee_own_ser_bus_edit_txt);
+
         pl_co_business_investment_own_ser_bus_edit_txt = (AppCompatEditText) findViewById(R.id.pl_co_business_investment_own_ser_bus_edit_txt);
+        pl_co_business_investment_own_ser_bus_edit_txt.addTextChangedListener(new NumberTextWatcher(pl_co_business_investment_own_ser_bus_edit_txt));
+
         pl_co_value_of_stock_raw_material = (AppCompatEditText) findViewById(R.id.pl_co_value_of_stock_raw_material);
+        pl_co_value_of_stock_raw_material.addTextChangedListener(new NumberTextWatcher(pl_co_value_of_stock_raw_material));
+
         pl_co_monthly_sales_manufa = (AppCompatEditText) findViewById(R.id.pl_co_monthly_sales_manufa);
+        pl_co_monthly_sales_manufa.addTextChangedListener(new NumberTextWatcher(pl_co_monthly_sales_manufa));
+
         pl_co_value_of_machineries = (AppCompatEditText) findViewById(R.id.pl_co_value_of_machineries);
+        pl_co_value_of_machineries.addTextChangedListener(new NumberTextWatcher(pl_co_value_of_machineries));
+
         pl_co_Own_number_of_years_in_work_retails = (AppCompatEditText) findViewById(R.id.pl_co_Own_number_of_years_in_work_retails);
         pl_co_own_average_monthly_income_own_business = (AppCompatEditText) findViewById(R.id.pl_co_own_average_monthly_income_own_business);
+        pl_co_own_average_monthly_income_own_business.addTextChangedListener(new NumberTextWatcher(pl_co_own_average_monthly_income_own_business));
 
         pl_co_app_slrd_company_pincode_txt = (AppCompatAutoCompleteTextView) findViewById(R.id.pl_co_app_slrd_company_pincode_txt);
         pl_co_app_office_residence_pincode_edite_txt = (AppCompatAutoCompleteTextView) findViewById(R.id.pl_co_app_office_residence_pincode_edite_txt);

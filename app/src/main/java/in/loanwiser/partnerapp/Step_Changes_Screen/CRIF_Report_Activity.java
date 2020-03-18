@@ -383,10 +383,11 @@ public class CRIF_Report_Activity extends SimpleActivity {
         webview.getSettings().setLoadsImagesAutomatically(true);
         webview.getSettings().setJavaScriptEnabled(true);
         webview.setScrollBarStyle(View.SCROLLBARS_INSIDE_OVERLAY);
-        webview.loadUrl(filename);
+        webview.loadUrl("http://docs.google.com/gview?embedded=true&url=" + filename);
         webview.setWebViewClient(new WebViewClient() {
 
             public void onPageFinished(WebView view, String url) {
+
                 progressbar.setVisibility(View.GONE);
 
             }

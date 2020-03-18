@@ -115,21 +115,20 @@ public class Lead_Crration_Activity extends SimpleActivity {
         UI_FIELDS();
         fonts();
         makeJsonObjReq1();
-    Click();
+      //  Click();
 
 
-     /*   lead_cr_step1.setOnClickListener(new View.OnClickListener() {
+        lead_cr_step1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Lead_Crration_Activity.this, Viability_Check_BL.class);
+                Intent intent = new Intent(Lead_Crration_Activity.this, Viability_Check_HL_new.class);
                 startActivity(intent);
                 finish();
             }
         });
-*/
+
      if(Lontypename.contains("Personal Loan [Unsecured]") || Lontypename.contains("Business Loan [Unsecured]"))
      {
-
          type_of_empmnt.setVisibility(View.GONE);
          Type_of_employement_ID = "0";
          co_applicant_ly.setVisibility(View.GONE);
@@ -216,8 +215,8 @@ public class Lead_Crration_Activity extends SimpleActivity {
 
         name_txt.setText(Name);
         mobile_no_txt.setText(Mobile);
-
     }
+
     private void fonts() {
 
         font = Typeface.createFromAsset(getApplicationContext().getAssets(), "Lato-Regular.ttf");

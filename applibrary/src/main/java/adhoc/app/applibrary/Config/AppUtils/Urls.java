@@ -99,8 +99,11 @@ public class Urls {
     public static String DOC_IMAGE_VIEW = Urls_step + "docu_view";
 
  public static String Payment_Initialize  = Urls_step + "payment_initialize";
+ public static String Report_Activity  = Urls_step + "crif_mail_gen";
 
  public static String CRIF_Generation  = Urls_step + "crif_generation";
+    public static String VIEW_VIABILITYDATA = Urls_step + "view_viabilitydata";
+    public static String CRIF_DATA_Populate = Urls_step + "crifdata_view";
 
    // public static String DOCUMENT_CHECK_LIST = Urls_document_check_list + "get_documentcklist";
 

@@ -198,6 +198,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textSize="16sp"
+                        android:inputType="number"
+                        android:imeOptions="actionNext"
                         android:id="@+id/monthly_profit_edit_txt"
                         android:textColor="@color/colorPrimaryDark"/>
                 </LinearLayout>
@@ -545,6 +547,7 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/number_of_years_in_work_retails"
                     android:textSize="16sp"
+                    android:inputType="number"
                     android:textColor="@color/colorPrimaryDark"/>
             </LinearLayout>
         </LinearLayout>
@@ -674,6 +677,8 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/average_monthly_income_own_business"
                     android:textSize="16sp"
+                    android:inputType="number"
+                    android:imeOptions="actionDone"
                     android:textColor="@color/colorPrimaryDark"/>
             </LinearLayout>
         </LinearLayout>

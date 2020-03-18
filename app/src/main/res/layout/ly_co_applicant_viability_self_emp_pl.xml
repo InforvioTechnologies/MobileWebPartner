@@ -175,7 +175,6 @@
 
 
         <LinearLayout
-            android:visibility="gone"
             android:orientation="vertical"
             android:id="@+id/pl_self_individual"
             android:layout_width="match_parent"
@@ -191,7 +190,7 @@
             <include layout="@layout/pl_co_app_viability_farming_dairy_poultry"/>
         </LinearLayout>
         <LinearLayout
-
+            android:visibility="gone"
             android:orientation="vertical"
             android:id="@+id/pl_self_business"
             android:layout_width="match_parent"
