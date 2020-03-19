@@ -2078,14 +2078,14 @@ public class Viability_Check_HL_new extends SimpleActivity {
 
                 String responseID1 = String.valueOf(co_self_assets_owned_buff);
                 co_self_co_assets_owned_str = removeClass.cleanUpCommas(responseID1);
-                co_self_co_assets_owned_SA = self_co_assets_owned_str.split(",");
+                co_self_co_assets_owned_SA = co_self_co_assets_owned_str.split(",");
 
                 co_self_co_assets_ = new JSONArray();
                 co_self_co_assets_ = new JSONArray(Arrays.asList(co_self_co_assets_owned_SA));
             }
-
+            lead_viability();
         }
-        lead_viability();
+
 
     }
 
@@ -3464,7 +3464,7 @@ public class Viability_Check_HL_new extends SimpleActivity {
             e.printStackTrace();
         }
 
-    //    progressDialog.show();
+       progressDialog.show();
 
         JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, Urls.PROFILE_DETAILS_POST, J,
                 new Response.Listener<JSONObject>() {
@@ -3483,7 +3483,7 @@ public class Viability_Check_HL_new extends SimpleActivity {
                             e.printStackTrace();
                         }
 
-                   //     progressDialog.dismiss();
+                      progressDialog.dismiss();
                     }
                 }, new Response.ErrorListener() {
 
@@ -3610,7 +3610,7 @@ public class Viability_Check_HL_new extends SimpleActivity {
                          //   assets_owner(Assets_own);
                             assets_owner_salaried(Assets_own);
                             assets_owner_salaried_applicant(Assets_own);
-
+                            Self_Assets_Owned(Assets_own);
                             salary_proof_salaried(Salary_proof_ar);
                             salary_proof_salaried_app(Salary_proof_ar);
                             self_ind_vehicle_type(vehicle_Type);
@@ -6000,7 +6000,7 @@ public class Viability_Check_HL_new extends SimpleActivity {
             IncomeProofPOJO salary_proof = new IncomeProofPOJO(id,locality,false);
             salary_proof_arr_list_app.add(salary_proof);
         }
-        salary_proof_salaried_Adapter_APP = new MyCustomAdapter_salary_proof_Salaried_App(context, 0,salary_proof_arr_list);
+        salary_proof_salaried_Adapter_APP = new MyCustomAdapter_salary_proof_Salaried_App(context, 0,salary_proof_arr_list_app);
         hl_app_spinner_salary_proof.setAdapter(salary_proof_salaried_Adapter_APP);
         salary_proof_salaried_Adapter_APP.notifyDataSetChanged();
     }

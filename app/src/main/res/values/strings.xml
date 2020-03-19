@@ -667,6 +667,8 @@
     <string name="error_no_emp_in_work">Enter the no employee in Work</string>
     <string name="error_bus_setup_invest">Enter the business set up investment</string>
     <string name="error_value_of_machinaries">Enter the Value of machinaries</string>
+    <string name="payment1">Payment</string>
+    <string name="crif_request">CRIF Request</string>
 
     <string name="error_monthly_income">Enter the no monthly income</string>
 

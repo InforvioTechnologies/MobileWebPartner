@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.graphics.Typeface;
@@ -261,7 +262,8 @@ public class SmsActivity2 extends AppCompatActivity {
                                 Pref.putMobile(mCon,no_bundle);
                                 Pref.putID(mCon, user_array);
 
-                                Objs.ac.StartActivity(mCon, Statues_Dashboard_Nav.class);
+                                Intent intent = new Intent(SmsActivity2.this,Statues_Dashboard_Nav.class);
+                                startActivity(intent);
                                 finish();
                             }
                             if(response.getString(Params.status).equals(Params.error)){

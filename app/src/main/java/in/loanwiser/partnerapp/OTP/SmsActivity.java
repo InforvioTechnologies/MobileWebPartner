@@ -4,11 +4,15 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.AppCompatEditText;
@@ -33,6 +37,10 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.basgeekball.awesomevalidation.AwesomeValidation;
 import com.basgeekball.awesomevalidation.ValidationStyle;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.InstanceIdResult;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -54,6 +62,7 @@ import in.loanwiser.partnerapp.Partner_Statues.Statues_Dashboard_Nav;
 import in.loanwiser.partnerapp.R;
 import in.loanwiser.partnerapp.SMSRetrieverAPI.MySMSBroadcastReceiver;
 import in.loanwiser.partnerapp.SMSRetrieverAPI.SmsListener;
+import in.loanwiser.partnerapp.app.Config;
 
 public class SmsActivity extends AppCompatActivity {
 
@@ -79,7 +88,7 @@ public class SmsActivity extends AppCompatActivity {
     InputMethodManager imm;
     public static final String OTP_REGEX = "[0-9]{1,5}";
     String  user_array,partner_code;
-
+    String token;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -144,8 +153,40 @@ public class SmsActivity extends AppCompatActivity {
 
         setTimer();
         startTimer();
-
+        displayFirebaseRegId();
        smsReceiver();
+    }
+
+    private void displayFirebaseRegId() {
+
+
+        FirebaseInstanceId.getInstance().getInstanceId()
+                .addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<InstanceIdResult> task) {
+                        if (!task.isSuccessful()) {
+                            Log.w("TAG", "getInstanceId failed", task.getException());
+                            return;
+                        }
+
+                        // Get new Instance ID token
+                        token = task.getResult().getToken();
+                        // Log and toast
+                        //  String msg = getString(R.string.msg_token_fmt, token);
+                        //  Log.d(TAG, msg);
+                        // txtRegId.setText("Firebase Reg Id: " + token);
+                        Log.e("token", "Firebase reg id: " + token);
+
+                        // Toast.makeText(Welcome_Page.this, "Firebase Reg Id: " + token, Toast.LENGTH_SHORT).show();
+                    }
+                });
+        // [END retrieve_current_token]
+
+        SharedPreferences pref = getApplicationContext().getSharedPreferences(Config.SHARED_PREF, 0);
+        String regId = pref.getString("regId", null);
+
+        Log.e("token1", "Firebase reg id: " + regId);
+
     }
 
     private void smsReceiver(){
@@ -299,13 +340,12 @@ public class SmsActivity extends AppCompatActivity {
                                   //  Objs.a.showToast(mCon, "Welcome to Loanwiser, you have successfully logged in");
 
                                     Toast.makeText(mCon,"Welcome to Loanwiser, you have successfully logged in",Toast.LENGTH_SHORT).show();
-
+                                    Firebase_Registration(user_array);
                                     Pref.putUID(mCon, no_bundle);
                                     Pref.putMobile(mCon, S_moblie);
                                     Pref.putName(mCon, S_name);
                                     Pref.putID(mCon, user_array);
-                                    Objs.ac.StartActivity(mCon, Statues_Dashboard_Nav.class);
-                                    finish();
+
                                 }
                             }
 
@@ -351,6 +391,64 @@ public class SmsActivity extends AppCompatActivity {
         jsonObjReq.setRetryPolicy(policy);
 
         AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
+    }
+
+
+    private void Firebase_Registration(String brb_userid) {
+
+        JSONObject jsonObject =new JSONObject();
+        JSONObject J= null;
+        try {
+            J = new JSONObject();
+            J.put("mobile_token", token);
+            J.put("b2b_userid", brb_userid);
+        }catch (JSONException e) {
+            e.printStackTrace();
+        }
+        //Log.e("state_id", String.valueOf(J));
+        progressDialog.show();
+        Log.e("Request Firebase", String.valueOf(J));
+        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, Urls.FIREBASE_TOKEN, J,
+                new Response.Listener<JSONObject>() {
+
+                    @Override
+                    public void onResponse(JSONObject object) {
+                        Log.e("Response Firebase", String.valueOf(object));
+                        try {
+
+                            String Register_Token_statues = object.getString("status");
+                            if(Register_Token_statues.contains("success"))
+                            {
+                                Intent intent = new Intent(SmsActivity.this,Statues_Dashboard_Nav.class);
+                                startActivity(intent);
+                                finish();
+                            }
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        // Toast.makeText(mCon, response.toString(),Toast.LENGTH_SHORT).show();
+                        progressDialog.dismiss();
+                    }
+                }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                VolleyLog.d("TAG", "Error: " + error.getMessage());
+                progressDialog.dismiss();
+            }
+        }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("Content-Type", "application/json");
+                return headers;
+            }
+        };
+
+        // Adding request to request queue
+        AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
+
     }
 
     public void ExitAlert(Context context, final String pd_code,final String u_array ) {

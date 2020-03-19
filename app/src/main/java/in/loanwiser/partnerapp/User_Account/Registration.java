@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentSender;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Typeface;
 import android.os.Build;
@@ -14,6 +15,8 @@ import android.os.Bundle;
 import android.os.Handler;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.material.snackbar.Snackbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -57,6 +60,8 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.InstanceIdResult;
 import com.rengwuxian.materialedittext.MaterialEditText;
 
 import org.json.JSONArray;
@@ -80,6 +85,7 @@ import eu.inmite.android.lib.validations.form.annotations.NotEmpty;
 import in.loanwiser.partnerapp.OTP.SmsActivity;
 import in.loanwiser.partnerapp.PartnerActivitys.SimpleActivity;
 import in.loanwiser.partnerapp.R;
+import in.loanwiser.partnerapp.app.Config;
 
 import static android.Manifest.permission.CAMERA;
 import static android.Manifest.permission.READ_EXTERNAL_STORAGE;
@@ -176,9 +182,7 @@ public class Registration extends SimpleActivity implements GoogleApiClient.Conn
 
 
         smsreciver();
-
-
-
+      //  displayFirebaseRegId();
     }
 
     private void initCode() {
@@ -877,6 +881,7 @@ public class Registration extends SimpleActivity implements GoogleApiClient.Conn
                                 Objs.ac.StartActivityPutExtra(mCon, SmsActivity.class, Params.otp,otp_new
                                         , Params.mobile_no,S_moblie, Params.JSON,JSON);
                                 finish();
+
                             }
 
                             if(response.getString(Params.status).equals(Params.error)){
@@ -907,6 +912,7 @@ public class Registration extends SimpleActivity implements GoogleApiClient.Conn
         AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
 
     }
+
 
 
 

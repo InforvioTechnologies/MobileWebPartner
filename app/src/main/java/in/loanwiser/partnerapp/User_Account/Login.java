@@ -223,7 +223,7 @@ public class Login extends SimpleActivity {
             e.printStackTrace();
         }
         String data  = String.valueOf(J);
-        Log.d("Request :", data);
+        Log.e("Request :", data);
         progressDialog.show();
         JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, Urls.BUSINESS_login_POST, J,
                 new Response.Listener<JSONObject>() {
@@ -232,7 +232,7 @@ public class Login extends SimpleActivity {
                         progressDialog.dismiss();
                         String JO_data  = String.valueOf(response);
                         //   Objs.a.showToast(mCon,"BUSINESS_login_POST  "+"\n"+  JO_data );
-                        Log.d("Response :", JO_data);
+                        Log.e("Response :", response.toString());
                         try {
                             if (response.getString(Params.status).equals(Params.ok)){
                                 String otp_new =  response.getString(Params.otp);
@@ -240,8 +240,6 @@ public class Login extends SimpleActivity {
                                 Objs.a.showToast(mCon,"OTP will be sent to the mobile number");
                                 Objs.ac.StartActivityPutExtra(mCon, SmsActivity2.class,Params.otp,otp_new,
                                         Params.mobile_no,Moblie);
-                               /* Objs.ac.StartActivityPutExtra(mCon, SmsActivity2.class,
-                                        Params.mobile_no,Moblie);*/
                                 finish();
                             }
                             if (response.getString(Params.status).equals(Params.error)){

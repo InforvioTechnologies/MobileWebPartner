@@ -1677,14 +1677,14 @@ public class Viability_Check_BL extends SimpleActivity {
 
                 String responseID1 = String.valueOf(co_self_assets_owned_buff);
                 co_self_co_assets_owned_str = removeClass.cleanUpCommas(responseID1);
-                co_self_co_assets_owned_SA = self_co_assets_owned_str.split(",");
+                co_self_co_assets_owned_SA = co_self_co_assets_owned_str.split(",");
 
                 co_self_co_assets_ = new JSONArray();
                 co_self_co_assets_ = new JSONArray(Arrays.asList(co_self_co_assets_owned_SA));
             }
-
+            lead_viability();
         }
-        lead_viability();
+
 
     }
 
@@ -2942,6 +2942,8 @@ public class Viability_Check_BL extends SimpleActivity {
                          //   assets_owner(Assets_own);
                             assets_owner_salaried(Assets_own);
                             salary_proof_salaried(Salary_proof_ar);
+                            Self_Assets_Owned(Assets_own);
+
                             self_ind_vehicle_type(vehicle_Type);
                             pl_wt_kind_of_crope(crop_type);
                             co_Runs_own_business_Vintage_Proof(Business_Proof);

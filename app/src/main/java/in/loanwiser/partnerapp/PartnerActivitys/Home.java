@@ -40,12 +40,14 @@ import in.loanwiser.partnerapp.PDF_Dounloader.PermissionUtils;
 import in.loanwiser.partnerapp.R;
 import in.loanwiser.partnerapp.Step_Changes_Screen.CRIF_Report_Activity;
 import in.loanwiser.partnerapp.Step_Changes_Screen.CRIF_Report_Activity_PDF_View;
+import in.loanwiser.partnerapp.Step_Changes_Screen.Credite_report_details;
 import in.loanwiser.partnerapp.Step_Changes_Screen.Document_Check_List;
 import in.loanwiser.partnerapp.Step_Changes_Screen.Document_Checklist_Details_type;
 import in.loanwiser.partnerapp.Step_Changes_Screen.Eligibility_BL;
 import in.loanwiser.partnerapp.Step_Changes_Screen.Eligibility_Check_PL;
 import in.loanwiser.partnerapp.Step_Changes_Screen.Eligibility_HL_New;
 import in.loanwiser.partnerapp.Step_Changes_Screen.Lead_Crration_Activity;
+import in.loanwiser.partnerapp.Step_Changes_Screen.Payment_Details_Activity;
 import in.loanwiser.partnerapp.Step_Changes_Screen.Viability_Activity_Data_View;
 import in.loanwiser.partnerapp.Step_Changes_Screen.Viability_Check_BL;
 import in.loanwiser.partnerapp.Step_Changes_Screen.Viability_Check_HL_new;
@@ -67,11 +69,14 @@ public class Home extends AppCompatActivity {
     private TextView customerinterview,offerdetails,app_doc_message,app_info_message;
     private LinearLayout lead_cr_statues;
     CardView Applicant_info_ly,Document_check_list,Document_Upload,
-            Viability_Check,eligibility_check,viability_Report,Credit_REport_Generation;
-    ImageView viability_check_img2,eligibility_check_img,viability_report_image,Credite_report_image;
+            Viability_Check,eligibility_check,viability_Report,Credit_REport_Generation,Paymet,
+            CRIF_Check;
+
+    ImageView viability_check_img2,eligibility_check_img,viability_report_image,Credite_report_image,
+            payment_img,crif_img,credite_report_img;
 
     String viability,eligibility,credit_request,payment,viability_report,viability_report_URL,
-    document_checklist,document_upload,loan_type_id,loan_type;
+    document_checklist,document_upload,loan_type_id,loan_type,crif_status;
 
 
     private static final int STORAGE_PERMISSION_REQUEST_CODE = 1;
@@ -155,11 +160,13 @@ public class Home extends AppCompatActivity {
         Document_check_list = (CardView) findViewById(R.id.Document_check_list);
         Document_Upload = (CardView) findViewById(R.id.Document_Upload);
         offer = (CardView) findViewById(R.id.Blo);
+        Paymet = (CardView) findViewById(R.id.Paymet);
 
         Viability_Check = (CardView) findViewById(R.id.Viability_Check);
         eligibility_check = (CardView) findViewById(R.id.eligibility_check);
         viability_Report = (CardView) findViewById(R.id.viability_Report);
         Credit_REport_Generation = (CardView) findViewById(R.id.Credit_REport_Generation);
+        CRIF_Check = (CardView) findViewById(R.id.CRIF_Check);
 
         lead_cr_statues = (LinearLayout) findViewById(R.id.lead_cr_statues);
 
@@ -175,8 +182,11 @@ public class Home extends AppCompatActivity {
 
         viability_check_img2 = (ImageView) findViewById(R.id.viability_check_img2);
         eligibility_check_img = (ImageView) findViewById(R.id.eligibility_check_img);
+        crif_img = (ImageView) findViewById(R.id.crif_img);
         viability_report_image = (ImageView) findViewById(R.id.viability_report_image);
-        Credite_report_image = (ImageView) findViewById(R.id.Credite_report_image);
+       // Credite_report_image = (ImageView) findViewById(R.id.Credite_report_image);
+        credite_report_img = (ImageView) findViewById(R.id.credite_report_img);
+        payment_img = (ImageView) findViewById(R.id.payment_img);
 
         customerinterview = (TextView) findViewById(R.id.customerinterview_offer) ;
         app_info_message = (TextView) findViewById(R.id.app_info_message) ;
@@ -189,11 +199,11 @@ public class Home extends AppCompatActivity {
 
                 if(viability.contains("completed"))
                 {
-                    Intent intent = new Intent(Home.this, Viability_Activity_Data_View.class);
+                   /* Intent intent = new Intent(Home.this, Viability_Activity_Data_View.class);
                     intent.putExtra("user_id", user_id);
                     intent.putExtra("transaction_id", transaction_id);
                     startActivity(intent);
-                    finish();
+                    finish();*/
                 }else
                 {
 
@@ -269,6 +279,36 @@ public class Home extends AppCompatActivity {
                 }
 
 
+            }
+        });
+
+        CRIF_Check.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(credit_request.contains("completed"))
+                {
+
+                }else
+                {
+                    Intent intent = new Intent(Home.this, Credite_report_details.class);
+                    startActivity(intent);
+                    finish();
+                }
+            }
+        });
+
+        Paymet.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(payment.contains("completed"))
+                {
+
+                }else
+                {
+                    Intent intent = new Intent(Home.this, Payment_Details_Activity.class);
+                    startActivity(intent);
+                    finish();
+                }
             }
         });
 
@@ -348,6 +388,7 @@ public class Home extends AppCompatActivity {
                              credit_request = step2_sub_statues.getString("credit_request");
                              payment = step2_sub_statues.getString("payment");
                              viability_report = step2_sub_statues.getString("viability_report");
+                            crif_status = step2_sub_statues.getString("crif_status");
 
                              document_checklist = step3_sub_statues.getString("document_checklist");
                              document_upload = step3_sub_statues.getString("document_upload");
@@ -395,87 +436,46 @@ public class Home extends AppCompatActivity {
 
                             if(credit_request.contains("completed"))
                             {
-
-                                Credite_report_image.setImageDrawable(getResources().getDrawable(R.drawable.ic_tick_icon));
+                                CRIF_Check.setEnabled(false);
+                                crif_img.setImageDrawable(getResources().getDrawable(R.drawable.ic_tick_icon));
                             }else
                             {
-                                Credite_report_image.setImageDrawable(getResources().getDrawable(R.drawable.ic_not_tick));
+                                CRIF_Check.setEnabled(true);
+                                crif_img.setImageDrawable(getResources().getDrawable(R.drawable.ic_not_tick));
+                            }
+
+                            if(payment.contains("completed"))
+                            {
+                                Paymet.setEnabled(false);
+                                payment_img.setImageDrawable(getResources().getDrawable(R.drawable.ic_tick_icon));
+                            }else
+                            {
+                                Paymet.setEnabled(false);
+                                payment_img.setImageDrawable(getResources().getDrawable(R.drawable.ic_not_tick));
                             }
 
                             if(viability_report.contains("completed"))
                             {
-
+                                viability_Report.setEnabled(true);
                                 viability_report_image.setImageDrawable(getResources().getDrawable(R.drawable.ic_tick_icon));
                             }else
                             {
+                                viability_Report.setEnabled(false);
                                 viability_report_image.setImageDrawable(getResources().getDrawable(R.drawable.ic_not_tick));
                             }
 
-
-                            //    Objs.a.showToast(mCon, String.valueOf(response));
-                           /* if(response.getBoolean(Params.status)){
-
-                                S1 = response.getString(Params.s1);
-                                S2 = response.getString(Params.s2);
-                                S3 = response.getString(Params.s3);
-                                S4 = response.getString(Params.s4);
-                                S5 = response.getString(Params.s5);
-
-                                //CD_app_info,CD_app_doc,CD_app_interview,CD_app_offer,CD_app_offer,CD_app_track
-                                //app_doc_img,app_info_img,app_interview_img,app_offer_img,app_track_img;
-                                if(S2.equals("1")){
-                                 //   app.setEnabled(true);
-                                    app_info_message.setTextColor(ContextCompat.getColor(mCon, R.color.colorAccent));
-                                  //  app_info_img.setImageDrawable(getResources().getDrawable(R.drawable.don));
-                                }else{
-                                   // app.setEnabled(true);
-                                    app_info_message.setTextColor(ContextCompat.getColor(mCon, R.color.gray));
-                                  //  app_info_img.setImageDrawable(getResources().getDrawable(R.drawable.notdon));
-                                }
-
-                                if(S3.equals("1")){
-                                    doc.setEnabled(true);
-                                    app_doc_message.setText("Thankyou for Uploading the Documents");
-                                    Pref.putDOC_Status(mCon,"1");
-                                    app_doc_message.setTextColor(ContextCompat.getColor(mCon, R.color.colorAccent));
-                                    app_doc_img.setImageDrawable(getResources().getDrawable(R.drawable.ic_tick_icon));
-                                }else{
-                                  //  doc.setEnabled(true);
-                                    Pref.putDOC_Status(mCon,"0");
-                                    app_doc_message.setTextColor(ContextCompat.getColor(mCon, R.color.gray));
-                                    app_doc_img.setImageDrawable(getResources().getDrawable(R.drawable.ic_not_tick));
-                                }
-
-                                if(S4.equals("1")){
-                                    Document_Upload.setEnabled(true);
-                                    customerinterview.setTextColor(ContextCompat.getColor(mCon, R.color.colorAccent));
-                                    customerinterview.setText("Thank you for sharing more info about you with Customer care");
-                                    app_interview_img.setImageDrawable(getResources().getDrawable(R.drawable.ic_tick_icon));
-                                }else{
-                                    Document_Upload.setEnabled(false);
-                                    customerinterview.setVisibility(View.VISIBLE);
-                                    customerinterview.setTextColor(ContextCompat.getColor(mCon, R.color.gray));
-                                    app_interview_img.setImageDrawable(getResources().getDrawable(R.drawable.ic_not_tick));
-                                }
-
-
-                               if(S5.equals("1")){
-                                   offer.setEnabled(true);
-                               //    offerdetails.setVisibility(View.GONE);
-                                   offerdetails.setText(step_status);
-                                   offerdetails.setTextColor(ContextCompat.getColor(mCon, R.color.colorAccent));
-                                   app_offer_img.setImageDrawable(getResources().getDrawable(R.drawable.ic_tick_icon));
-                               }else{
-                                   offer.setEnabled(false);
-                                   offerdetails.setVisibility(View.VISIBLE);
-                                   offerdetails.setTextColor(ContextCompat.getColor(mCon, R.color.gray));
-                                   app_offer_img.setImageDrawable(getResources().getDrawable(R.drawable.ic_not_tick));
-                               }
-
-                            }else {
-
+                            if(crif_status.contains("completed"))
+                            {
+                                Credit_REport_Generation.setEnabled(true);
+                                credite_report_img.setImageDrawable(getResources().getDrawable(R.drawable.ic_tick_icon));
+                            }else if(crif_status.contains("pending"))
+                            {
+                                Credit_REport_Generation.setEnabled(false);
+                                credite_report_img.setImageDrawable(getResources().getDrawable(R.drawable.ic_not_tick));
+                            }else if(crif_status.contains("not_wanted"))
+                            {
+                                Credit_REport_Generation.setVisibility(View.GONE);
                             }
-*/
 
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -523,8 +523,6 @@ public class Home extends AppCompatActivity {
                             String report_statues = response.getString("status");
                             if(report_statues.equals("success"))
                             {
-                                JSONObject jsonObject1 = response.getJSONObject("crif_report");
-
                                 viability_report_URL = response.getString("viability_report");
                             }
 
@@ -600,6 +598,10 @@ public class Home extends AppCompatActivity {
             }
         });
 
+
+
+
+
         findViewById(R.id.Document_Upload).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -608,6 +610,7 @@ public class Home extends AppCompatActivity {
 
             }
         });
+
 
       /*  findViewById(R.id.PL).setOnClickListener(new View.OnClickListener() {
             @Override

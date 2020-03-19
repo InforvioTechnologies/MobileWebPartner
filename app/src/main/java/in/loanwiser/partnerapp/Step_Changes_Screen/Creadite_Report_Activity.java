@@ -530,20 +530,48 @@ public class Creadite_Report_Activity extends SimpleActivity {
         JSONObject J =new JSONObject();
         try {
             J.put("transaction_id",Pref.getTRANSACTIONID(getApplicationContext()));
+            J.put("user_id",Pref.getUSERID(getApplicationContext()));
         } catch (JSONException e) {
             e.printStackTrace();
         }
+        Log.e("The Credit request", String.valueOf(J));
         JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, Urls.CRIF_DATA_Populate, J,
                 new Response.Listener<JSONObject>() {
 
                     @Override
                     public void onResponse(JSONObject object) {
+
+                        Log.e("The Credit request", String.valueOf(object));
+
                         try {
-                            if (object.getString(Params.status).equals("success")) {
-                                JSONArray response = object.getJSONArray("response");
-                                // Log.e("Pincode", String.valueOf(response));
+                            String applicant_status= object.getString("applicant_status");
+                            String coapplicant_status= object.getString("coapplicant_status");
+
+                            if(applicant_status.contains("success"))
+                            {
+
+                                JSONObject applicant = object.getJSONObject("applicant");
+                                String name = applicant.getString("username");
+                                first_name_Edite_text.setText(name);
+                                String email = applicant.getString("email");
+                                Email_Id_Edite_text.setText(email);
+                                String mobileno = applicant.getString("mobileno");
+                                Mobile_No_Edite_text.setText(mobileno);
 
                             }
+                            if(coapplicant_status.contains("success"))
+                            {
+                                JSONObject coapplicant = object.getJSONObject("coapplicant");
+
+                                String name = coapplicant.getString("username");
+                                pl_co_app_first_name_Edite_text.setText(name);
+                                String email = coapplicant.getString("email");
+                                pl_co_app_Email_Id_Edite_text.setText(email);
+                                String mobileno = coapplicant.getString("mobileno");
+                                pl_co_app_Mobile_No_Edite_text.setText(mobileno);
+
+                            }
+
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }

@@ -1324,7 +1324,7 @@ public class Viability_check_HL extends SimpleActivity {
                             }
 
                            // lead_viability();
-                            nexteligibility();
+
 
 
                         }else if(residence_id.equals("2"))
@@ -1339,7 +1339,7 @@ public class Viability_check_HL extends SimpleActivity {
                             }
 
                             //lead_viability();
-                            nexteligibility();
+
                         }
 
                     }
@@ -1412,58 +1412,7 @@ public class Viability_check_HL extends SimpleActivity {
 
     }
 
-    private void nexteligibility()
-    {
 
-        int i = Integer.parseInt(loan_type_id);
-        switch (i) {
-            case 1:
-                Intent intent = new Intent(Viability_check_HL.this, Eligibility_HL.class);
-                startActivity(intent);
-                intent.putExtra("property_identified",Property_Identified_ID);
-                finish();
-                break;
-            case 2:
-                Intent intent1 = new Intent(Viability_check_HL.this, Eligibility_check_LAP.class);
-                startActivity(intent1);
-                finish();
-                break;
-            case 3:
-
-                Intent intent2 = new Intent(Viability_check_HL.this, Eligibility_check_Plot_Construction.class);
-                startActivity(intent2);
-                finish();
-                break;
-            case 4:
-                Intent intent3 = new Intent(Viability_check_HL.this, Eligibility_check_PlotLoan.class);
-                startActivity(intent3);
-                finish();
-
-                break;
-            case 5:
-                Intent intent4 = new Intent(Viability_check_HL.this, Eligibility_check_BT_TopUp_Loan.class);
-                startActivity(intent4);
-                finish();
-                break;
-            case 6:
-
-                Intent intent5 = new Intent(Viability_check_HL.this, Eligibility_check_Improment_Loan.class);
-                startActivity(intent5);
-                finish();
-                break;
-            case 8:
-                Intent intent6 = new Intent(Viability_check_HL.this, Eligibility_check_Extention_Loan.class);
-                startActivity(intent6);
-                finish();
-                break;
-            case 9:
-                Intent intent7 = new Intent(Viability_check_HL.this, Eligibility_check_Extention_Loan.class);
-                startActivity(intent7);
-                finish();
-                break;
-        }
-
-    }
 
     private boolean Validate_age() {
 
@@ -2249,7 +2198,7 @@ public class Viability_check_HL extends SimpleActivity {
                     return;
                 }
 
-                nexteligibility();
+
             }
 
 
@@ -2287,7 +2236,7 @@ public class Viability_check_HL extends SimpleActivity {
                 return;
             }
 
-            nexteligibility();
+
 
         }
     }
@@ -2385,7 +2334,6 @@ public class Viability_check_HL extends SimpleActivity {
         if (!Avg_monthly_income_own_Bus()) {
             return;
         }
-        nexteligibility();
 
     }
 
@@ -2430,7 +2378,7 @@ public class Viability_check_HL extends SimpleActivity {
             Toast.makeText(context,"please Select residence type",Toast.LENGTH_SHORT).show();
         }else
         {
-            nexteligibility();
+
         }
     }
 

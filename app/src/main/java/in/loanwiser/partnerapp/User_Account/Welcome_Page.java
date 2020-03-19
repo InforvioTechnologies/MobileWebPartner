@@ -110,6 +110,7 @@ public class Welcome_Page extends AppCompatActivity implements Animation.Animati
         Objs.a.OutfitNormalFontStyle(mCon, R.id.welcome);
         Objs.a.OutfitNormalFontStyle(mCon, R.id.emp2);
         Objs.a.OutfitNormalFontStyle(mCon, R.id.emp3);
+
         //Objs.a.ButtonFontStyle(mCon, R.id.Bt_Register);
       // Objs.a.ButtonFontStyle(mCon, R.id.Bt_Login);
     }
@@ -173,7 +174,7 @@ public class Welcome_Page extends AppCompatActivity implements Animation.Animati
                         //  String msg = getString(R.string.msg_token_fmt, token);
                         //  Log.d(TAG, msg);
                        // txtRegId.setText("Firebase Reg Id: " + token);
-                        Log.e("TAG", "Firebase reg id: " + token);
+                        Log.e("token", "Firebase reg id: " + token);
                        // Toast.makeText(Welcome_Page.this, "Firebase Reg Id: " + token, Toast.LENGTH_SHORT).show();
                     }
                 });
@@ -182,7 +183,7 @@ public class Welcome_Page extends AppCompatActivity implements Animation.Animati
         SharedPreferences pref = getApplicationContext().getSharedPreferences(Config.SHARED_PREF, 0);
         String regId = pref.getString("regId", null);
 
-        Log.e("TAG", "Firebase reg id: " + regId);
+        Log.e("token1", "Firebase reg id: " + regId);
 
     }
 }

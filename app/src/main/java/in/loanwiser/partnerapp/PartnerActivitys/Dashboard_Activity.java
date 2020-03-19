@@ -643,13 +643,18 @@ public class Dashboard_Activity extends AppCompatActivity implements OnLoadMoreL
                                 payment =  jsonObject2.getString("payment");
                                 applicant_id1 =  "APP-"+user_id;
 
-
                                 // String statues2 = "3";
                                 Pref.putUSERID(mCon,user_id);
                                 String _Emp_staus_jsonArray = jsonArray.toString();
 
-
-                                if(payment.equals("error"))
+                                Objs.ac.StartActivityPutExtra(mCon, Home.class,
+                                        Params.user_id,user_id,
+                                        Params.transaction_id,transaction_id1,
+                                        Params.applicant_id,applicant_id1,
+                                        Params.sub_taskid,subtask_id, Params.Applicant_status,_Emp_staus_jsonArray,
+                                        Params.loan_type_id,loan_type_id,Params.loan_type,loan_type);
+                                finish();
+                              /*  if(payment.equals("error"))
                                 {
                                     Intent intent = new Intent(Dashboard_Activity.this, Payment_Details_Activity.class);
                                     startActivity(intent);
@@ -665,55 +670,10 @@ public class Dashboard_Activity extends AppCompatActivity implements OnLoadMoreL
                                             Params.loan_type_id,loan_type_id,Params.loan_type,loan_type);
                                     finish();
 
-                                }
+                                }*/
 
 
                             }
-
-
-                            /*else
-                            {
-                                int a = Integer.parseInt(statues2);
-                                Log.d("loan_categoryid123", String.valueOf(a));
-                                switch(a) {
-                                    case 1:
-                                        Log.d(" applicant Entry 1", statues);
-                                        Objs.ac.StartActivityPutExtra(mCon, Applicant_Entry.class,
-                                                Params.user_id,user_id,
-                                                Params.applicant_id,applicant_id1,
-                                                Params.transaction_id,transaction_id1,
-                                                Params.loan_amount,Loan_amount,
-                                                Params.sub_categoryid,sub_categoryid,
-                                                Params.sub_taskid,subtask_id);
-                                        finish();
-                                        break;
-                                    case 2:
-                                        Log.d(" applicant Entry 2", statues);
-                                        Objs.ac.StartActivityPutExtra(mCon, Applicant_Entry1.class,
-                                                Params.user_id,user_id,
-                                                Params.applicant_id,applicant_id1,
-                                                Params.transaction_id,transaction_id1,
-                                                Params.loan_amount,Loan_amount,
-                                                Params.sub_categoryid,sub_categoryid,
-                                                Params.sub_taskid,subtask_id);
-                                        finish();
-                                        break;
-                                    case 3:
-                                        Log.d(" applicant Entry 3", statues);
-                                        Objs.ac.StartActivityPutExtra(mCon, Applicant_Entry2.class,
-                                                Params.user_id,user_id,
-                                                Params.applicant_id,applicant_id1,
-                                                Params.transaction_id,transaction_id1,
-                                                Params.loan_amount,Loan_amount,
-                                                Params.sub_categoryid,sub_categoryid,
-                                                Params.sub_taskid,subtask_id);
-                                        finish();
-                                        break;
-                                    default:
-                                        Objs.a.showToast(mCon, "Please Contact Call center to Update the Details");
-                                        return;
-                                }
-                            }*/
 
                         } catch (JSONException e) {
                             e.printStackTrace();

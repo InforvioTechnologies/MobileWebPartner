@@ -104,6 +104,7 @@ public class Urls {
  public static String CRIF_Generation  = Urls_step + "crif_generation";
     public static String VIEW_VIABILITYDATA = Urls_step + "view_viabilitydata";
     public static String CRIF_DATA_Populate = Urls_step + "crifdata_view";
+    public static String FIREBASE_TOKEN = Urls_step + "update_b2btoken";
 
    // public static String DOCUMENT_CHECK_LIST = Urls_document_check_list + "get_documentcklist";
 

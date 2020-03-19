@@ -1379,8 +1379,10 @@ public class Viability_Check_PL extends SimpleActivity {
                 self_co_assets_ = new JSONArray(Arrays.asList(self_co_assets_owned_SA));
             }
 
+            lead_viability();
+
         }
-        lead_viability();
+
 
     }
 
@@ -1991,7 +1993,6 @@ public class Viability_Check_PL extends SimpleActivity {
                             salary_proof_salaried(Salary_proof_ar);
                             salary_proof_salaried_app1(Salary_proof_ar);
                             self_ind_vehicle_type(vehicle_Type);
-
                             Residence_Array(Residence_ownership_ar);
                             Employee_ID_Array(employee_id_ar);
                             HAVE_PAN_Card(have_pan_ar);

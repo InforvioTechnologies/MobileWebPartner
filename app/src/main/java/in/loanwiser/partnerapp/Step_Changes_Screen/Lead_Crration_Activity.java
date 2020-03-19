@@ -115,17 +115,16 @@ public class Lead_Crration_Activity extends SimpleActivity {
         UI_FIELDS();
         fonts();
         makeJsonObjReq1();
-      //  Click();
-
-
+       Click();
+/*
         lead_cr_step1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Lead_Crration_Activity.this, Viability_Check_HL_new.class);
+                Intent intent = new Intent(Lead_Crration_Activity.this, Creadite_Report_Activity.class);
                 startActivity(intent);
                 finish();
             }
-        });
+        });*/
 
      if(Lontypename.contains("Personal Loan [Unsecured]") || Lontypename.contains("Business Loan [Unsecured]"))
      {
