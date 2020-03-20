@@ -628,6 +628,7 @@ public class Creadite_Report_Activity extends SimpleActivity {
 
         try {
             Applicant.put("first_name",S_first_name_edtxt);
+            Applicant.put("is_creditreport",1);
             Applicant.put("last_name",S_last_name_edtxt);
             Applicant.put("father_name",S_father_name_edtxt);
             Applicant.put("member_dob",S_dob_edtxt);
@@ -647,6 +648,7 @@ public class Creadite_Report_Activity extends SimpleActivity {
             co_applicant_crif.setVisibility(View.VISIBLE);
             try {
                 Co_Applicant.put("first_name",S_pl_co_app_first_name_Edite_text);
+                Co_Applicant.put("is_creditreport",1);
                 Co_Applicant.put("last_name",S_pl_co_app_Last_name_Edite_text);
                 Co_Applicant.put("father_name",S_pl_co_app_father_name_edt_txt);
                 Co_Applicant.put("member_dob",S_pl_co_app_dob_Edite_text);

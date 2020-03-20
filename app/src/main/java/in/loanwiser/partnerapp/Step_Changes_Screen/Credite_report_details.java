@@ -42,10 +42,12 @@ import java.util.List;
 import java.util.Map;
 
 import adhoc.app.applibrary.Config.AppUtils.Objs;
+import adhoc.app.applibrary.Config.AppUtils.Params;
 import adhoc.app.applibrary.Config.AppUtils.Pref.Pref;
 import adhoc.app.applibrary.Config.AppUtils.Urls;
 import adhoc.app.applibrary.Config.AppUtils.VolleySignleton.AppController;
 import dmax.dialog.SpotsDialog;
+import in.loanwiser.partnerapp.PartnerActivitys.Dashboard_Activity;
 import in.loanwiser.partnerapp.PartnerActivitys.Home;
 import in.loanwiser.partnerapp.R;
 import in.loanwiser.partnerapp.SimpleActivity;
@@ -635,6 +637,7 @@ public class Credite_report_details extends SimpleActivity {
 
         try {
             Applicant.put("is_existloan",Existing_Loan_ID);
+            Applicant.put("is_creditreport",1);
             Applicant.put("emi_amount",EMI_Amount1);
             Applicant.put("bank_name",bank_name_Edite_txt1);
             Applicant.put("loan_type",loan_type_Edite_txt);
@@ -649,6 +652,7 @@ public class Credite_report_details extends SimpleActivity {
         {
             try {
                 Co_Applicant.put("is_existloan",co_Existing_Loan_ID);
+                Co_Applicant.put("is_creditreport",1);
                 Co_Applicant.put("emi_amount",EMI_Amount2);
                 Co_Applicant.put("bank_name",bank_name_Edite_txt2);
                 Co_Applicant.put("loan_type",loan_type_Edite_txt2);
@@ -667,6 +671,7 @@ public class Credite_report_details extends SimpleActivity {
         try {
             J =new JSONObject();
             //  J.put(Params.email_id,email);
+
             J.put("applicant_count",app_count);
             J.put("transaction_id",Pref.getTRANSACTIONID(getApplicationContext()));
              J.put("user_id",Pref.getUSERID(getApplicationContext()));
@@ -680,7 +685,6 @@ public class Credite_report_details extends SimpleActivity {
             e.printStackTrace();
         }
 
-
         Log.e("Add Home Laoan", String.valueOf(J));
         progressDialog.show();
         JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, Urls.NOCRIFREPORT, J,
@@ -690,7 +694,7 @@ public class Credite_report_details extends SimpleActivity {
 
                         String data = String.valueOf(response);
 
-                        Log.e("Add Home Laoan", String.valueOf(data));
+                        Log.e("Add Home Laoan", String.valueOf(response));
                         try {
                             JSONObject jsonObject1 = response.getJSONObject("response");
                             if(jsonObject1.getString("applicant_status").equals("success")) {
@@ -703,13 +707,9 @@ public class Credite_report_details extends SimpleActivity {
 
                                 }else if(jsonObject1.getString("pay_status").equals("error"))
                                 {
-                                    Toast.makeText(context,"Eligibility Failed",Toast.LENGTH_SHORT).show();
 
-                                    String viability_array =jsonObject1.getString("pay_status");
-                                    Intent intent = new Intent(Credite_report_details.this, Home.class);
-                                    intent.putExtra("viability_jsonArray", viability_array.toString());
-                                    startActivity(intent);
-                                    finish();
+                                    Update_Payment_Statues();
+
                                 }
                             }
 
@@ -744,6 +744,56 @@ public class Credite_report_details extends SimpleActivity {
 
         jsonObjReq.setRetryPolicy(policy);
 
+        AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
+
+    }
+
+    private void Update_Payment_Statues() {
+         progressDialog.show();
+        JSONObject J =new JSONObject();
+        try {
+            J.put("transaction_id",Pref.getTRANSACTIONID(getApplicationContext()));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, Urls.UPDATE_PAYMENT_STATUES, J,
+                new Response.Listener<JSONObject>() {
+
+                    @Override
+                    public void onResponse(JSONObject object) {
+                        try {
+                            JSONObject response = object.getJSONObject("response");
+
+                            String Staues_pay = response.getString("status");
+                            if(Staues_pay.contains("success"))
+                            {
+
+                                Intent intent = new Intent(Credite_report_details.this, Dashboard_Activity.class);
+                                startActivity(intent);
+                                finish();
+                            }
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        // Toast.makeText(mCon, response.toString(),Toast.LENGTH_SHORT).show();
+                        progressDialog.dismiss();
+                    }
+                }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                VolleyLog.d("TAG", "Error: " + error.getMessage());
+                progressDialog.dismiss();
+            }
+        }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("Content-Type", "application/json");
+                return headers;
+            }
+        };
         AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
 
     }

@@ -107,7 +107,7 @@ public class Home extends AppCompatActivity {
 
         loan_type_id =  Objs.a.getBundle(this, Params.loan_type_id);
         loan_type =  Objs.a.getBundle(this, Params.loan_type);
-
+        Log.e("Applicant_Statues",Applicant_Statues);
 
         try {
             JSONArray array = new JSONArray(Applicant_Statues);
@@ -333,8 +333,9 @@ public class Home extends AppCompatActivity {
             public void onClick(View view) {
 
                 Intent intent = new Intent(Home.this, CRIF_Report_Activity_PDF_View.class);
+                intent.putExtra("user_id", applicant_id);
                 startActivity(intent);
-                finish();
+
 
             }
         });
@@ -364,7 +365,7 @@ public class Home extends AppCompatActivity {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        //  Objs.a.showToast(mCon,"Empty " + id);
+        Log.e("Request List",String.valueOf(J));
         progressDialog.show();
         JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, Urls.PARTNER_STATUES, J,
                 new Response.Listener<JSONObject>() {
@@ -450,7 +451,7 @@ public class Home extends AppCompatActivity {
                                 payment_img.setImageDrawable(getResources().getDrawable(R.drawable.ic_tick_icon));
                             }else
                             {
-                                Paymet.setEnabled(false);
+                                Paymet.setEnabled(true);
                                 payment_img.setImageDrawable(getResources().getDrawable(R.drawable.ic_not_tick));
                             }
 
@@ -460,7 +461,7 @@ public class Home extends AppCompatActivity {
                                 viability_report_image.setImageDrawable(getResources().getDrawable(R.drawable.ic_tick_icon));
                             }else
                             {
-                                viability_Report.setEnabled(false);
+                                viability_Report.setEnabled(true);
                                 viability_report_image.setImageDrawable(getResources().getDrawable(R.drawable.ic_not_tick));
                             }
 
@@ -470,7 +471,7 @@ public class Home extends AppCompatActivity {
                                 credite_report_img.setImageDrawable(getResources().getDrawable(R.drawable.ic_tick_icon));
                             }else if(crif_status.contains("pending"))
                             {
-                                Credit_REport_Generation.setEnabled(false);
+                                Credit_REport_Generation.setEnabled(true);
                                 credite_report_img.setImageDrawable(getResources().getDrawable(R.drawable.ic_not_tick));
                             }else if(crif_status.contains("not_wanted"))
                             {

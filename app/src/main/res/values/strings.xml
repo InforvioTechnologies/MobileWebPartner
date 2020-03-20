@@ -693,6 +693,8 @@
     <string name="residence_type1">Residence Type</string>
     <string name="perpanent_area">Residence Area</string>
 
+    <string name="crif_report">CRIF Report Activity</string>
+
     <string name="need_cr_report_des"> credit report should be at the top of the
         list of your personal financial habits.
         A credit report can act as a shining light into

@@ -4,17 +4,26 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatTextView;
+import androidx.appcompat.widget.Toolbar;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -29,7 +38,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import adhoc.app.applibrary.Config.AppUtils.Objs;
@@ -56,27 +68,243 @@ public class CRIF_Report_Activity_PDF_View extends SimpleActivity {
     private String TAG = CRIF_Report_Activity_PDF_View.class.getSimpleName();
     private AlertDialog progressDialog;
     private String usertype;
-    private String new_user_type,transaction_id,Applicant_type;
+    private String new_user_type,transaction_id,applicant_id;
     MenuItem chat;
     JSONObject jsonobject_2;
 
     private static final int STORAGE_PERMISSION_REQUEST_CODE = 1;
 
     PermissionUtils permissionUtils;
+    Toolbar toolbar;
+    LinearLayout credit_card_app,co_applicant_;
+    AppCompatTextView cr_app1,cr_app2;
+    Typeface font;
+    String[] SALARY_Method,Salary_Proof,Residence_Type_SA,Employe_ID_SA,PAN_ID_SA,Other_Earning_SA;
+    ArrayAdapter<String> Other_Earning_Adapter;
+    Spinner applicant_credite_card_spinner,co_applicant_Spinner;
+    String  credit_issued_id,credit_issued_value,Report_ID,Order_ID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+       setContentView(R.layout.activity_simple);
 
-        setContentView(R.layout.activity_simple);
+       /*  toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setTitle("CRIF Report Activity");
+        getSupportActionBar().setHomeButtonEnabled(true);
+
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // perform whatever you want on back arrow click
+            }
+        });*/
         Objs.a.setStubId(this, R.layout.activity_applicant__doc__details);
-
-        String document= "CRIF Report Activity";
-        initTools1(document);
-        progressDialog = new SpotsDialog(this, R.style.Custom);
+        initTools(R.string.crif_report);
+        progressDialog = new SpotsDialog(mCon, R.style.Custom);
         permissionUtils = new PermissionUtils();
 
-        Document_Details();
+        credit_card_app = (LinearLayout) findViewById(R.id.credit_card_app);
+        co_applicant_ = (LinearLayout) findViewById(R.id.co_applicant_);
+        cr_app1 = (AppCompatTextView) findViewById(R.id.cr_app1);
+        cr_app2 = (AppCompatTextView) findViewById(R.id.cr_app2);
+
+        applicant_credite_card_spinner = (Spinner) findViewById(R.id.applicant_credite_card_spinner);
+        co_applicant_Spinner = (Spinner) findViewById(R.id.co_applicant_Spinner);
+        Intent intent = getIntent();
+        applicant_id = intent.getStringExtra("user_id");
+        Crif_Generation();
+
+    }
+    private void Crif_Generation() {
+
+        JSONObject J =new JSONObject();
+        try {
+            J.put("transaction_id",Pref.getTRANSACTIONID(getApplicationContext()));
+            J.put("user_id",Pref.getUSERID(getApplicationContext()));
+            J.put("relationship_type",applicant_id);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        progressDialog.show();
+        Log.e("Crif Generation", String.valueOf(J));
+        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, Urls.CRIF_Generation, J,
+                new Response.Listener<JSONObject>() {
+
+                    @Override
+                    public void onResponse(JSONObject object) {
+                        Log.e("Payment", String.valueOf(object));
+                        try {
+
+                            String Statues = object.getString("status");
+
+
+                            if (Statues.equals("success")) {
+                                Document_Details();
+                            }else if (Statues.equals("question"))
+                            {
+                                JSONObject data1 = object.getJSONObject("data");
+                                Report_ID  = data1.getString("reportId");
+                                Order_ID  = data1.getString("orderId");
+                                String question = object.getString("question");
+                                JSONArray qus_dropdown = object.getJSONArray("qus_dropdown");
+                                cr_app1.setText(question);
+                                credit_card_app.setVisibility(View.VISIBLE);
+                                Other_Earning(qus_dropdown);
+
+                               // co_applicant_.setVisibility(View.VISIBLE);
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        // Toast.makeText(mCon, response.toString(),Toast.LENGTH_SHORT).show();
+                        progressDialog.dismiss();
+                    }
+                }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                VolleyLog.d("TAG", "Error: " + error.getMessage());
+                progressDialog.dismiss();
+            }
+        }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("Content-Type", "application/json");
+                return headers;
+            }
+        };
+        AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
+
+    }
+
+    private void Other_Earning(final JSONArray other_earning_ar) throws JSONException {
+        //   SPINNERLIST = new String[ja.length()];
+        Other_Earning_SA = new String[other_earning_ar.length()];
+        for (int i=0;i<other_earning_ar.length();i++){
+            JSONObject J =  other_earning_ar.getJSONObject(i);
+            Other_Earning_SA[i] = J.getString("value");
+            final List<String> loan_type_list = new ArrayList<>(Arrays.asList(Other_Earning_SA));
+            Other_Earning_Adapter = new ArrayAdapter<String>(mCon, R.layout.view_spinner_item, loan_type_list){
+                public View getView(int position, View convertView, ViewGroup parent) {
+                    font = Typeface.createFromAsset(mCon.getAssets(),"Lato-Regular.ttf");
+                    TextView v = (TextView) super.getView(position, convertView, parent);
+                    v.setTypeface(font);
+                    return v;
+                }
+
+                public View getDropDownView(int position, View convertView, ViewGroup parent) {
+                    TextView v = (TextView) super.getView(position, convertView, parent);
+                    v.setTypeface(font);
+                    return v;
+                }
+            };
+
+            Other_Earning_Adapter.setDropDownViewResource(R.layout.view_spinner_item);
+            applicant_credite_card_spinner.setAdapter(Other_Earning_Adapter);
+            applicant_credite_card_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                    try {
+
+                        credit_issued_id = other_earning_ar.getJSONObject(position).getString("id");
+                        credit_issued_value = other_earning_ar.getJSONObject(position).getString("value");
+                        //CAT_ID = ja.getJSONObject(position).getString("category_id");
+                        Log.d("Salary_id", credit_issued_id);
+                        Log.d("Salary_Value", credit_issued_value);
+
+                        CRIF_Question_Testing();
+
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+
+                }
+            });
+            applicant_credite_card_spinner.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View view, MotionEvent motionEvent) {
+                    // imm.hideSoftInputFromWindow(edt_buyer_address.getWindowToken(), 0);
+                    return false;
+                }
+            });
+        }
+
+    }
+
+
+    private void CRIF_Question_Testing() {
+
+        JSONObject J =new JSONObject();
+        try {
+            J.put("report_id",Report_ID);
+            J.put("order_id",Order_ID);
+            J.put("crif_question",credit_issued_id);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        progressDialog.show();
+        Log.e("Crif Generation", String.valueOf(J));
+        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, Urls.CRIF_Generation, J,
+                new Response.Listener<JSONObject>() {
+
+                    @Override
+                    public void onResponse(JSONObject object) {
+                        Log.e("Payment", String.valueOf(object));
+                        try {
+
+                            String Statues = object.getString("status");
+                            JSONObject data1 = object.getJSONObject("data");
+                            Report_ID  = data1.getString("reportId");
+                            Order_ID  = data1.getString("orderId");
+
+
+                            if (Statues.equals("success")) {
+                                Document_Details();
+                            }else if (Statues.equals("question"))
+                            {
+                                String question = object.getString("question");
+                                JSONArray qus_dropdown = object.getJSONArray("qus_dropdown");
+                                cr_app1.setText(question);
+                                credit_card_app.setVisibility(View.VISIBLE);
+                                Other_Earning(qus_dropdown);
+
+                                // co_applicant_.setVisibility(View.VISIBLE);
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        // Toast.makeText(mCon, response.toString(),Toast.LENGTH_SHORT).show();
+                        progressDialog.dismiss();
+                    }
+                }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                VolleyLog.d("TAG", "Error: " + error.getMessage());
+                progressDialog.dismiss();
+            }
+        }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("Content-Type", "application/json");
+                return headers;
+            }
+        };
+        AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
 
     }
 
@@ -258,11 +486,10 @@ public class CRIF_Report_Activity_PDF_View extends SimpleActivity {
         }
     }
 
-   /* @Override
+    @Override
     public void onBackPressed() {
-
-        Objs.ac.StartActivity(mCon, Home.class);
-        finish();
+      /*  Objs.ac.StartActivity(mCon, Home.class);
+        finish();*/
         super.onBackPressed();
-    }*/
+    }
 }

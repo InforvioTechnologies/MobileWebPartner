@@ -71,7 +71,7 @@ public class Payment_Details_Activity extends SimpleActivity {
     int araycount=0;
     LinearLayout lead_charge,crif_charge;
 
-
+    private Context context = this;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -81,7 +81,7 @@ public class Payment_Details_Activity extends SimpleActivity {
         initTools(R.string.payment);
 
         result1 = new ArrayList<>();
-        progressDialog = new SpotsDialog(getApplicationContext(), R.style.Custom);
+        progressDialog = new SpotsDialog(context, R.style.Custom);
 
 
         UISCREEN();
@@ -157,7 +157,7 @@ public class Payment_Details_Activity extends SimpleActivity {
     }
 
     private void get_pay_shedule() {
-        // progressDialog.show();
+         progressDialog.show();
 
         String Order_Id = Pref.getUSERID(getApplicationContext()) + "-0";
       //  String Order_Id = "10043" + "-0";
@@ -445,7 +445,7 @@ public class Payment_Details_Activity extends SimpleActivity {
             e.printStackTrace();
         }
         Log.e("jsonArray", String.valueOf(J));
-      //  progressDialog.show();
+        progressDialog.show();
         JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, Urls.PAYMENT_CONFIRMATION, J,
                 new Response.Listener<JSONObject>() {
 
@@ -454,10 +454,9 @@ public class Payment_Details_Activity extends SimpleActivity {
                         try {
                             if (object.getString("status").equals("success")) {
 
-                             /*   Intent intent = new Intent(Payment_Details_Activity.this, Home.class);
-                                startActivity(intent);
-                                finish();*/
-                                 Toast.makeText(mCon, "Sucessfully Completed",Toast.LENGTH_SHORT).show();
+                                Toast.makeText(mCon, "Sucessfully Completed",Toast.LENGTH_SHORT).show();
+                                Update_Payment_Statues();
+
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -484,6 +483,56 @@ public class Payment_Details_Activity extends SimpleActivity {
 
     }
 
+    private void Update_Payment_Statues() {
+        progressDialog.show();
+        JSONObject J =new JSONObject();
+        try {
+            J.put("transaction_id",Pref.getTRANSACTIONID(getApplicationContext()));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        Log.e("payment_st_request",J.toString());
+        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, Urls.UPDATE_PAYMENT_STATUES, J,
+                new Response.Listener<JSONObject>() {
+
+                    @Override
+                    public void onResponse(JSONObject object) {
+                        Log.e("payment_st_request",object.toString());
+                        try {
+                            JSONObject response = object.getJSONObject("response");
+
+                            String Staues_pay = response.getString("status");
+                            if(Staues_pay.contains("success"))
+                            {
+                                Intent intent = new Intent(Payment_Details_Activity.this, Dashboard_Activity.class);
+                                startActivity(intent);
+                                finish();
+                            }
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        // Toast.makeText(mCon, response.toString(),Toast.LENGTH_SHORT).show();
+                        progressDialog.dismiss();
+                    }
+                }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                VolleyLog.d("TAG", "Error: " + error.getMessage());
+                progressDialog.dismiss();
+            }
+        }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("Content-Type", "application/json");
+                return headers;
+            }
+        };
+        AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
+
+    }
     @Override
     public void onBackPressed() {
 
