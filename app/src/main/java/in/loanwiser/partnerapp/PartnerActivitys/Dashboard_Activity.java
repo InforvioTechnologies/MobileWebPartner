@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -57,6 +58,7 @@ import in.loanwiser.partnerapp.Infinite_Scrollview.LeadListAdapter_Dashboard;
 import in.loanwiser.partnerapp.Infinite_Scrollview.Lead_item;
 import in.loanwiser.partnerapp.Infinite_Scrollview.OnLoadMoreListener;
 import in.loanwiser.partnerapp.Lead_Website.MainActivity_Add_Lead_Website;
+import in.loanwiser.partnerapp.PDF_Dounloader.PermissionUtils;
 import in.loanwiser.partnerapp.Partner_Statues.Statues_Dashboard_Nav;
 import in.loanwiser.partnerapp.R;
 import in.loanwiser.partnerapp.Step_Changes_Screen.Credite_report_details;
@@ -89,7 +91,7 @@ public class Dashboard_Activity extends AppCompatActivity implements OnLoadMoreL
     AppCompatTextView no_leads_data,txt_bank,txt_profile,txt_get_callback,label_status;
     LinearLayout Ly_no_leads_data;
     String loancatagorey_id;
-    String Loan_amount,S_status_id;
+    String Loan_amount,S_status_id,viability_report_URL;
     private ImageView imageView_profile;
     private int count12 = -1;
 
@@ -97,6 +99,9 @@ public class Dashboard_Activity extends AppCompatActivity implements OnLoadMoreL
     LeadListAdapter_Dashboard leadListAdapter_dashboard;
     RecyclerView recyclerView;
     private ProgressBar progressBar;
+    private static final int STORAGE_PERMISSION_REQUEST_CODE = 1;
+
+    PermissionUtils permissionUtils;
 
 
     @Override
@@ -539,6 +544,7 @@ public class Dashboard_Activity extends AppCompatActivity implements OnLoadMoreL
                             // Objs.a.showToast(mCon,all);
                             //  Objs.a.showToast(mCon, id);
 
+
                             if(step_status.contains("Rejected"))
                             {
                                 Objs.a.showToast(mCon, "This Lead is Rejected");
@@ -547,6 +553,7 @@ public class Dashboard_Activity extends AppCompatActivity implements OnLoadMoreL
                             {
                                 Applicant_Status(id,step_status);
                             }
+
 
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -576,7 +583,7 @@ public class Dashboard_Activity extends AppCompatActivity implements OnLoadMoreL
             AppCompatTextView type,doc_steps,doc_status,font1,font2,loantype;
             ImageView v_Image;
             ProgressBar progressBar;
-            AppCompatButton appCompatButtonSelect;
+            AppCompatButton appCompatButtonSelect,go_leads;
             AppCompatImageView loan_type_image;
             CardView cardView;
             LinearLayout Over_all;
@@ -589,6 +596,7 @@ public class Dashboard_Activity extends AppCompatActivity implements OnLoadMoreL
                 doc_steps  = (AppCompatTextView) itemView.findViewById(R.id.doc_steps);
                 loantype  = (AppCompatTextView) itemView.findViewById(R.id.loantype);
                 loan_type_image  = (AppCompatImageView) itemView.findViewById(R.id.loan_type_image);
+                go_leads  = (AppCompatButton) itemView.findViewById(R.id.go_leads);
                 // font1  = (AppCompatTextView) itemView.findViewById(R.id.doc_typename_all);
                 //  font2 = (AppCompatTextView) itemView.findViewById(R.id.image_Product);
                 // progressBar = (ProgressBar) itemView.findViewById(R.id.progressBarMaterial);
@@ -598,6 +606,57 @@ public class Dashboard_Activity extends AppCompatActivity implements OnLoadMoreL
             }
         }
     }
+
+    private void Report_View_Fu(String user_id,String transaction_id) {
+        JSONObject jsonObject =new JSONObject();
+        JSONObject J= null;
+        try {
+            J =new JSONObject();
+            J.put("trans_id", transaction_id);
+            J.put("user_id", user_id);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        Log.e("Report Request ",String.valueOf(J));
+        progressDialog.show();
+        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, Urls.Report_Activity, J,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+
+                            Log.e("Report response",String.valueOf(response));
+                            String report_statues = response.getString("status");
+                            if(report_statues.equals("success"))
+                            {
+                                viability_report_URL = response.getString("viability_report");
+
+                            }
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                        progressDialog.dismiss();
+                    }
+                }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                progressDialog.dismiss();
+                Toast.makeText(getApplicationContext(),error.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("content-type", "application/json");
+                return headers;
+            }
+        };
+        AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
+    }
+
 
     public void Applicant_Status(final String id, final String step_status1) {
 

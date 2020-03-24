@@ -637,7 +637,7 @@ public class Credite_report_details extends SimpleActivity {
 
         try {
             Applicant.put("is_existloan",Existing_Loan_ID);
-            Applicant.put("is_creditreport",1);
+            Applicant.put("is_creditreport",0);
             Applicant.put("emi_amount",EMI_Amount1);
             Applicant.put("bank_name",bank_name_Edite_txt1);
             Applicant.put("loan_type",loan_type_Edite_txt);
@@ -652,7 +652,7 @@ public class Credite_report_details extends SimpleActivity {
         {
             try {
                 Co_Applicant.put("is_existloan",co_Existing_Loan_ID);
-                Co_Applicant.put("is_creditreport",1);
+                Co_Applicant.put("is_creditreport",0);
                 Co_Applicant.put("emi_amount",EMI_Amount2);
                 Co_Applicant.put("bank_name",bank_name_Edite_txt2);
                 Co_Applicant.put("loan_type",loan_type_Edite_txt2);

@@ -336,7 +336,6 @@ public class Home extends AppCompatActivity {
                 intent.putExtra("user_id", applicant_id);
                 startActivity(intent);
 
-
             }
         });
 
@@ -378,6 +377,7 @@ public class Home extends AppCompatActivity {
                              JSONObject jsonObject1 = response.getJSONObject("response");
                              JSONObject jsonObject2 = jsonObject1.getJSONObject("step2");
                              JSONObject jsonObject3 = jsonObject1.getJSONObject("step3");
+                             String reject_status = jsonObject1.getString("reject_status");
 
                              String step2_statues = jsonObject2.getString("status");
                              JSONObject step2_sub_statues = jsonObject2.getJSONObject("sub_status");
@@ -394,7 +394,19 @@ public class Home extends AppCompatActivity {
                              document_checklist = step3_sub_statues.getString("document_checklist");
                              document_upload = step3_sub_statues.getString("document_upload");
 
-
+                            if(reject_status.equals("1"))
+                            {
+                                Viability_Check.setVisibility(View.GONE);
+                                eligibility_check.setVisibility(View.GONE);
+                                CRIF_Check.setVisibility(View.GONE);
+                                Paymet.setVisibility(View.GONE);
+                            }else
+                            {
+                                Viability_Check.setVisibility(View.VISIBLE);
+                                eligibility_check.setVisibility(View.VISIBLE);
+                                CRIF_Check.setVisibility(View.VISIBLE);
+                                Paymet.setVisibility(View.VISIBLE);
+                            }
 
                             if(document_checklist.contains("pending"))
                             {

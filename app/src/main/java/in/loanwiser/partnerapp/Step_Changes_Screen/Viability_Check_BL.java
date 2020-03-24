@@ -6453,7 +6453,7 @@ public class Viability_Check_BL extends SimpleActivity {
                     Co_applicant1.put("income_proof",salary_proof_salary_array);
                     Co_applicant1.put("ofc_area",pl_co_app_slrd_res_spinn_area_id);
                     Co_applicant1.put("assets",assets_owned_salary_array);
-                    Co_applicant1.put("emp_statues",1);
+                    Co_applicant1.put("emp_statues",3);
 
                 }else if(CO_Type_of_employement_ID.equals("2"))
                 {

@@ -137,7 +137,9 @@ public class LeadListAdapter_Dashboard extends RecyclerView.Adapter<LeadListAdap
                         if(step_status.contains("Rejected"))
                         {
                             Objs.a.showToast(context, "This Lead is Rejected");
-
+                            if (context instanceof Dashboard_Activity) {
+                                ((Dashboard_Activity)context).Applicant_Status(id,step_status);
+                            }
                         }
                         else
                         {
