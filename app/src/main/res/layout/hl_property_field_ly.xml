@@ -30,6 +30,7 @@
             </LinearLayout>
 
             <LinearLayout
+
                 android:id="@+id/identified_yes_or_no"
                 android:orientation="vertical"
                 android:layout_width="match_parent"
@@ -85,6 +86,7 @@
                 </LinearLayout>
                 </LinearLayout>
                 <LinearLayout
+                    android:visibility="gone"
                     android:orientation="vertical"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
@@ -137,6 +139,7 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:visibility="gone"
                     android:id="@+id/age_of_Property_lap"
                     android:orientation="vertical"
                     android:layout_width="match_parent"

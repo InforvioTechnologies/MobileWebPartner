@@ -886,6 +886,8 @@ public class Registration extends SimpleActivity implements GoogleApiClient.Conn
 
                             if(response.getString(Params.status).equals(Params.error)){
                                 Toast.makeText(mCon,"Mobile number is already registered. Please login",Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(Registration.this,LoginNew.class);
+                                startActivity(intent);
                             }
 
                         } catch (JSONException e) {

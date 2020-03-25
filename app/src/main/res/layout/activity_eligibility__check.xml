@@ -282,6 +282,7 @@
                                     android:layout_height="wrap_content"
                                     android:id="@+id/company_name_edtxt"
                                     android:textSize="16sp"
+                                    android:imeOptions="actionDone"
                                     android:inputType="text"
                                     android:textColor="@color/colorPrimaryDark"/>
                             </LinearLayout>
@@ -326,7 +327,9 @@
                                     android:id="@+id/designation_in_company"
                                     android:textColor="@color/colorPrimaryDark"
                                     android:textSize="16sp"
-                                    android:inputType="text"/>
+                                    android:imeOptions="actionDone"
+                                    android:inputType="text"
+                                   />
                             </LinearLayout>
                         </LinearLayout>
                         <LinearLayout
@@ -472,11 +475,13 @@
                             </LinearLayout>
                         </LinearLayout>
                         <LinearLayout
+                            android:id="@+id/no_of_Employee"
+                            android:visibility="gone"
                             android:orientation="vertical"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent">
                             <LinearLayout
-                                android:id="@+id/no_of_Employee"
+
                                 android:orientation="horizontal"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content">
@@ -1040,6 +1045,28 @@
                           </LinearLayout>
 
                           <LinearLayout
+                              android:gravity="center"
+                              android:orientation="horizontal"
+                              android:layout_width="match_parent"
+                              android:layout_height="50dp">
+
+                              <LinearLayout
+                                  android:layout_marginLeft="30dp"
+                                  android:layout_width="match_parent"
+                                  android:layout_height="match_parent">
+                                  <Spinner
+                                      style="@style/Base.Widget.AppCompat.Spinner.Underlined"
+                                      android:backgroundTint="#ff000000"
+                                      android:backgroundTintMode="src_in"
+                                      android:spinnerMode="dropdown"
+                                      android:id="@+id/Educational_Spinner_pl"
+                                      android:layout_width="match_parent"
+                                      android:layout_height="match_parent" />
+                              </LinearLayout>
+
+                          </LinearLayout>
+                          <LinearLayout
+                              android:visibility="gone"
                               android:layout_marginLeft="30dp"
                               android:layout_width="match_parent"
                               android:layout_height="match_parent">

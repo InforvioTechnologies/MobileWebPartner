@@ -117,10 +117,10 @@ public class Eligibility_BL extends SimpleActivity {
         String  co_having_bank_Id,co_having_bank_Value, co_Educational_Id,co_Educational_Value,
                 co_Business_registration_Id,co_Business_registration_Value, co_Spinner_res_proof_Id,co_Spinner_res_proof_Value,
                 co_Other_income_Id,co_Other_income_Value, co_Gstreflect_Id,co_Gstreflect_Value,CO_Employement_Type,
-                IS_CO_Salried_Self;
+                IS_CO_Salried_Self,  co_salaried_Educational_Id,co_salaried_Educational_Value;
 
         Spinner co_having_bank_account,co_Educatio_qualification_Sppinner,co_business_registration_spinner,
-            co_spinner_res_proof,co_spinn_other_income,co_spinn_gst_other;
+            co_spinner_res_proof,co_spinn_other_income,co_spinn_gst_other,co_Educational_Spinner_pl;
 
         AppCompatEditText co_business_ref_name_edt_txt,co_purchased_by_bank_edit_txt,co_purchased_by_GStbill_edit_txt,
                 co_sales_by_GStbill_edit_txt,co_bank_cridit_by_edtxt,co_Avg_monthly_income,co_other_income_edite_txt;
@@ -142,7 +142,8 @@ public class Eligibility_BL extends SimpleActivity {
                 S_purchased_by_bank_edit_txt1,S_purchased_by_GStbill_edit_txt1,S_sales_by_GStbill_edit_txt1,S_bank_cridit_by_edtxt1,
                 S_Avg_monthly_income1,S_other_income_edite_txt1,S_pl_co_App_other_incom_amt_edtxt;
 
-        LinearLayout co_app_is_other_income,bl_co_eligibility_salaried,bl_co_eligibility_self;
+        LinearLayout co_app_is_other_income,bl_co_eligibility_salaried,bl_co_eligibility_self,
+                co_no_of_Employee;
 
         AppCompatEditText  pl_co_app_company_name_edtxt,pl_co_app_designation_in_company,pl_co_App_no_of_emp_edtxt,pl_co_app_no_of_dependent_edt_txt,
                 pl_co_App_education_qualification_edit_txt, pl_co_app_emi_amount_edit_txt,pl_co_App_other_incom_amt_edtxt;
@@ -238,6 +239,7 @@ public class Eligibility_BL extends SimpleActivity {
         spinn_other_income = (Spinner) findViewById(R.id.spinn_other_income);
         business_registration_spinner = (Spinner) findViewById(R.id.business_registration_spinner);
         Educatio_qualification_Sppinner = (Spinner) findViewById(R.id.Educatio_qualification_Sppinner);
+        co_Educational_Spinner_pl = (Spinner) findViewById(R.id.co_Educational_Spinner_pl);
 
         having_bank_account = (Spinner) findViewById(R.id.having_bank_account);
         permanent_res_type_spinner = (Spinner) findViewById(R.id.permanent_res_type_spinner);
@@ -301,6 +303,7 @@ public class Eligibility_BL extends SimpleActivity {
 
         bl_co_eligibility_salaried = (LinearLayout) findViewById(R.id.bl_co_eligibility_salaried);
         bl_co_eligibility_self = (LinearLayout) findViewById(R.id.bl_co_eligibility_self);
+        co_no_of_Employee = (LinearLayout) findViewById(R.id.co_no_of_Employee);
 
         individual = (LinearLayout) findViewById(R.id.individual);
         co_individual = (LinearLayout) findViewById(R.id.co_individual);
@@ -571,38 +574,83 @@ public class Eligibility_BL extends SimpleActivity {
                                 Toast.makeText(mCon, "Please Select Co applicant Type of Employee", Toast.LENGTH_SHORT).show();
                             }else {
 
-                                if (!Pl_Co_Validate_No_of_Employee()) {
-                                    return;
-                                }
+                                if(pl_co_app_Company_id.equals("1")||pl_co_app_Company_id.equals("2") || pl_co_app_Company_id.equals("3") )
+                                {
+                                    if (pl_co_app_epf_id.equals("0")) {
+                                        Toast.makeText(mCon, "Please Select Co applicant Epf detected", Toast.LENGTH_SHORT).show();
 
-                                if (pl_co_app_epf_id.equals("0")) {
-                                    Toast.makeText(mCon, "Please Select Co applicant Epf detected", Toast.LENGTH_SHORT).show();
-
-                                } else {
+                                    } else {
 
 
-                                    if(pl_co_app_maried_res_spinner_id.equals("0"))
-                                    {
-                                        Toast.makeText(mCon, "Select Co applicant Marital Status", Toast.LENGTH_SHORT).show();
+                                        if(pl_co_app_maried_res_spinner_id.equals("0"))
+                                        {
+                                            Toast.makeText(mCon, "Select Co applicant Marital Status", Toast.LENGTH_SHORT).show();
 
-                                    }else
-                                    {
-                                        if (!Pl_Co_valiat_no_of_dependent()) {
-                                            return;
+                                        }else
+                                        {
+                                            if (!Pl_Co_valiat_no_of_dependent()) {
+                                                return;
+                                            }
+
+                                            if(co_salaried_Educational_Id.equals("0"))
+                                            {
+                                                Toast.makeText(context,"Please Select Educational Qualification",Toast.LENGTH_SHORT).show();
+
+                                            }else
+                                            {
+                                                if (!pl_co_App_Validate_emi_amount()) {
+                                                    return;
+                                                }
+
+                                                Co_App_other_varidation();
+                                            }
+
+
                                         }
 
-                                        if (!Validate_pl_Co_education_qualification_edit_txt()) {
-                                            return;
-                                        }
-                                        if (!pl_co_App_Validate_emi_amount()) {
-                                            return;
-                                        }
 
-                                        Co_App_other_varidation();
                                     }
+                                }else {
+
+                                    if (!Pl_Co_Validate_No_of_Employee()) {
+                                        return;
+                                    }
+                                    if (pl_co_app_epf_id.equals("0")) {
+                                        Toast.makeText(mCon, "Please Select Co applicant Epf detected", Toast.LENGTH_SHORT).show();
+
+                                    } else {
 
 
+                                        if(pl_co_app_maried_res_spinner_id.equals("0"))
+                                        {
+                                            Toast.makeText(mCon, "Select Co applicant Marital Status", Toast.LENGTH_SHORT).show();
+
+                                        }else
+                                        {
+                                            if (!Pl_Co_valiat_no_of_dependent()) {
+                                                return;
+                                            }
+
+                                            if(co_salaried_Educational_Id.equals("0"))
+                                            {
+                                                Toast.makeText(context,"Please Select Educational Qualification",Toast.LENGTH_SHORT).show();
+
+                                            }else
+                                            {
+                                                if (!pl_co_App_Validate_emi_amount()) {
+                                                    return;
+                                                }
+
+                                                Co_App_other_varidation();
+                                            }
+
+
+                                        }
+
+
+                                    }
                                 }
+
                             }
                         }
                     }
@@ -1631,6 +1679,37 @@ public class Eligibility_BL extends SimpleActivity {
             });
 
 
+          //  pl_co_App_education_qualification_edit_txt
+
+
+            co_Educational_Spinner_pl.setAdapter(Gst_reflect_adapter);
+            co_Educational_Spinner_pl.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                    try {
+
+                        co_salaried_Educational_Id = GST_reflected_ar.getJSONObject(position).getString("id");
+                        co_salaried_Educational_Value = GST_reflected_ar.getJSONObject(position).getString("value");
+
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+
+                }
+            });
+            co_Educational_Spinner_pl.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View view, MotionEvent motionEvent) {
+                    // imm.hideSoftInputFromWindow(edt_buyer_address.getWindowToken(), 0);
+                    return false;
+                }
+            });
 
             co_Educatio_qualification_Sppinner.setAdapter(Gst_reflect_adapter);
             co_Educatio_qualification_Sppinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -1898,7 +1977,13 @@ public class Eligibility_BL extends SimpleActivity {
                         pl_co_app_Company_id = Company_type_ar.getJSONObject(position).getString("id");
                         pl_co_app_Company_Value = Company_type_ar.getJSONObject(position).getString("value");
                         //CAT_ID = ja.getJSONObject(position).getString("category_id");
-
+                        if(pl_co_app_Company_id.equals("1")||pl_co_app_Company_id.equals("2") || pl_co_app_Company_id.equals("3") )
+                        {
+                            co_no_of_Employee.setVisibility(View.GONE);
+                        }else
+                        {
+                            co_no_of_Employee.setVisibility(View.VISIBLE);
+                        }
 
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -2322,7 +2407,7 @@ public class Eligibility_BL extends SimpleActivity {
                     Co_Applicant.put("designation",S_pl_co_app_designation_in_company);
                     Co_Applicant.put("no_of_dependency",S_pl_co_app_no_of_dependent_edt_txt);
                     Co_Applicant.put("affordable_pay",S_pl_co_app_emi_amount_edit_txt);
-                    Co_Applicant.put("qualification",S_pl_co_App_education_qualification_edit_txt);
+                    Co_Applicant.put("qualification",co_salaried_Educational_Id);
 
 
                     Co_Applicant.put("other_from",other_income1);

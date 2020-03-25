@@ -157,6 +157,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textSize="16sp"
+                        android:inputType="number"
                         android:id="@+id/delership_company_edit_txt"
                         android:textColor="@color/colorPrimaryDark"/>
 
@@ -249,7 +250,9 @@
                     <androidx.appcompat.widget.AppCompatEditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                       android:imeOptions="actionDone"
                         android:textSize="16sp"
+                        android:inputType="number"
                         android:id="@+id/monthly_income_own_ser_bus_edit_txt"
                         android:textColor="@color/colorPrimaryDark"/>
                 </LinearLayout>
@@ -331,6 +334,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textSize="16sp"
+                        android:inputType="number"
+                        android:imeOptions="actionDone"
                         android:id="@+id/business_investment_own_ser_bus_edit_txt"
                         android:textColor="@color/colorPrimaryDark"/>
                 </LinearLayout>
@@ -380,6 +385,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textSize="16sp"
+                        android:inputType="number"
+                        android:imeOptions="actionDone"
                         android:id="@+id/value_of_stock_raw_material"
                         android:textColor="@color/colorPrimaryDark"/>
                 </LinearLayout>
@@ -421,6 +428,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textSize="16sp"
+                        android:imeOptions="actionDone"
+                        android:inputType="number"
                         android:id="@+id/monthly_sales_manufa"
                         android:textColor="@color/colorPrimaryDark"/>
                 </LinearLayout>
@@ -503,6 +512,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textSize="16sp"
+                        android:inputType="number"
+                        android:imeOptions="actionDone"
                         android:id="@+id/value_of_machineries"
                         android:textColor="@color/colorPrimaryDark"/>
                 </LinearLayout>
@@ -548,6 +559,7 @@
                     android:id="@+id/number_of_years_in_work_retails"
                     android:textSize="16sp"
                     android:inputType="number"
+                    android:imeOptions="actionNext"
                     android:textColor="@color/colorPrimaryDark"/>
             </LinearLayout>
         </LinearLayout>

@@ -160,7 +160,6 @@
                             </LinearLayout>
                         </LinearLayout>
                         <LinearLayout
-
                             android:orientation="vertical"
                             android:id="@+id/individual"
                             android:layout_width="match_parent"

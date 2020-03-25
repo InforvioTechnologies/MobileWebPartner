@@ -140,11 +140,12 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/cmp_typ_ly"
                     android:orientation="vertical"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
                     <LinearLayout
-                        android:id="@+id/cmp_typ_ly"
+
                         android:orientation="horizontal"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
@@ -191,12 +192,12 @@
                     </LinearLayout>
                 </LinearLayout>
                 <LinearLayout
-
+                    android:id="@+id/Ly_name"
                     android:orientation="vertical"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
                     <LinearLayout
-                        android:id="@+id/Ly_name"
+
                         android:orientation="horizontal"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
@@ -230,15 +231,17 @@
                             android:id="@+id/pl_co_app_company_name_edtxt"
                             android:textSize="16sp"
                             android:inputType="text"
+                            android:imeOptions="actionNext"
                             android:textColor="@color/colorPrimaryDark"/>
                     </LinearLayout>
                 </LinearLayout>
                 <LinearLayout
+                    android:id="@+id/Ly_desig"
                     android:orientation="vertical"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
                     <LinearLayout
-                        android:id="@+id/Ly_desig"
+
                         android:orientation="horizontal"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
@@ -272,7 +275,9 @@
                             android:id="@+id/pl_co_app_designation_in_company"
                             android:textColor="@color/colorPrimaryDark"
                             android:textSize="16sp"
-                            android:inputType="text"/>
+                            android:inputType="text"
+                            android:imeOptions="actionDone"
+                          />
                     </LinearLayout>
                 </LinearLayout>
                 <LinearLayout
@@ -328,11 +333,13 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:visibility="gone"
+                    android:id="@+id/co_no_of_Employee"
                     android:orientation="vertical"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
                     <LinearLayout
-                        android:id="@+id/no_of_Employee"
+
                         android:orientation="horizontal"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
@@ -553,6 +560,7 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:visibility="gone"
                     android:layout_marginLeft="30dp"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
@@ -564,6 +572,27 @@
                         android:inputType="text"
                         android:id="@+id/pl_co_App_education_qualification_edit_txt"
                         android:textColor="@color/colorPrimaryDark"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp">
+
+                    <LinearLayout
+                        android:layout_marginLeft="30dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+                        <Spinner
+                            style="@style/Base.Widget.AppCompat.Spinner.Underlined"
+                            android:backgroundTint="#ff000000"
+                            android:backgroundTintMode="src_in"
+                            android:spinnerMode="dropdown"
+                            android:id="@+id/co_Educational_Spinner_pl"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent" />
+                    </LinearLayout>
+
                 </LinearLayout>
             </LinearLayout>
 

@@ -236,6 +236,7 @@
                         android:layout_height="wrap_content"
                         android:textSize="16sp"
                         android:inputType="number"
+                        android:imeOptions="actionNext"
                         android:id="@+id/no_of_vehicle_edit_txt"
                         android:textColor="@color/colorPrimaryDark"/>
                 </LinearLayout>
@@ -281,6 +282,7 @@
                     android:layout_height="wrap_content"
                     android:textSize="16sp"
                     android:inputType="number"
+                    android:imeOptions="actionNext"
                     android:id="@+id/no_of_years_work_ind_edit_txt"
                     android:textColor="@color/colorPrimaryDark"/>
             </LinearLayout>
@@ -325,6 +327,7 @@
                     android:layout_height="wrap_content"
                     android:textSize="16sp"
                     android:inputType="number"
+                    android:imeOptions="actionDone"
                     android:id="@+id/avg_monthly_incom_edit_txt"
                     android:textColor="@color/colorPrimaryDark"/>
             </LinearLayout>

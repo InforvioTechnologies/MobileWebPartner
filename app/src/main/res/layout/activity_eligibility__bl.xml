@@ -586,6 +586,8 @@
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
                                         android:textSize="16sp"
+                                        android:inputType="number"
+                                        android:imeOptions="actionDone"
                                         android:id="@+id/permanent_res_pincode_edt_txt"
                                         android:textColor="@color/colorPrimaryDark"/>
                                 </LinearLayout>
@@ -761,6 +763,8 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:textSize="16sp"
+                                    android:inputType="number"
+                                    android:imeOptions="actionDone"
                                     android:id="@+id/other_income_edite_txt"
                                     android:textColor="@color/colorPrimaryDark"/>
                             </LinearLayout>

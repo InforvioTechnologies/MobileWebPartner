@@ -159,7 +159,7 @@ public class Home extends AppCompatActivity {
         Applicant_info_ly = (CardView) findViewById(R.id.Applicant_info_ly);
         Document_check_list = (CardView) findViewById(R.id.Document_check_list);
         Document_Upload = (CardView) findViewById(R.id.Document_Upload);
-        offer = (CardView) findViewById(R.id.Blo);
+        offer = (CardView) findViewById(R.id.offer_generation);
         Paymet = (CardView) findViewById(R.id.Paymet);
 
         Viability_Check = (CardView) findViewById(R.id.Viability_Check);
@@ -400,12 +400,19 @@ public class Home extends AppCompatActivity {
                                 eligibility_check.setVisibility(View.GONE);
                                 CRIF_Check.setVisibility(View.GONE);
                                 Paymet.setVisibility(View.GONE);
+                                Document_check_list.setVisibility(View.GONE);
+                                Document_Upload.setVisibility(View.GONE);
+                                offer.setVisibility(View.GONE);
+
                             }else
                             {
                                 Viability_Check.setVisibility(View.VISIBLE);
                                 eligibility_check.setVisibility(View.VISIBLE);
                                 CRIF_Check.setVisibility(View.VISIBLE);
                                 Paymet.setVisibility(View.VISIBLE);
+                                Document_check_list.setVisibility(View.VISIBLE);
+                                Document_Upload.setVisibility(View.VISIBLE);
+                                offer.setVisibility(View.VISIBLE);
                             }
 
                             if(document_checklist.contains("pending"))
@@ -639,7 +646,7 @@ public class Home extends AppCompatActivity {
             }
         });*/
 
-        findViewById(R.id.Blo).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.offer_generation).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 

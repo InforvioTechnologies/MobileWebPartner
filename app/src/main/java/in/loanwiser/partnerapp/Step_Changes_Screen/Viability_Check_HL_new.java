@@ -392,7 +392,7 @@ public class Viability_Check_HL_new extends SimpleActivity {
         UISCREEN();
         Account_Listings_Details();
         Font();
-        Click();
+     //  Click();
 
         vehicle_type_text = (AppCompatTextView) findViewById(R.id.vehicle_type_text);
 
@@ -407,16 +407,15 @@ public class Viability_Check_HL_new extends SimpleActivity {
 
         removeClass = new RemoveCommas();
 
-       /* lead_viy_step2.setOnClickListener(new View.OnClickListener() {
+        lead_viy_step2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(Viability_Check_HL_new.this, Eligibility_HL_New.class);
                 startActivity(intent);
                 finish();
             }
-        });*/
+        });
 
-/*
         vehicle_type_text.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -428,7 +427,6 @@ public class Viability_Check_HL_new extends SimpleActivity {
             }
         });
 
-*/
 
 
         if(loan_type_id.equals("1") || loan_type_id.equals("3") || loan_type_id.equals("4"))
@@ -1716,7 +1714,28 @@ public class Viability_Check_HL_new extends SimpleActivity {
                         assets_owned_salary_array = new JSONArray(Arrays.asList(assets_owned_salaried_SA));
                     }
 
-                    lead_viability();
+
+                    if(residence_area == null)
+                    {
+                        Toast.makeText(getApplicationContext(), "Type pin code slowly and select pin code from Dropdown", Toast.LENGTH_SHORT).show();
+                     //   Objs.a.showToast(getContext(),"Type pin code slowly and select pin code from Dropdown");
+                    }
+                    else
+                    {
+                        if(office_residence_area == null)
+                        {
+                            Toast.makeText(getApplicationContext(), "Type pin code slowly and select pin code from Dropdown", Toast.LENGTH_SHORT).show();
+                            //   Objs.a.showToast(getContext(),"Type pin code slowly and select pin code from Dropdown");
+                        }
+                        else
+                        {
+                            lead_viability();
+                        }
+
+
+                    }
+
+
                 }
 
 
@@ -1770,7 +1789,26 @@ public class Viability_Check_HL_new extends SimpleActivity {
             }
 
         } else if(IS_CO_Applicant_Id.equals("2")) {
-            lead_viability();
+
+            if(residence_area == null)
+            {
+                Toast.makeText(getApplicationContext(), "Type pin code slowly and select pin code from Dropdown", Toast.LENGTH_SHORT).show();
+                //   Objs.a.showToast(getContext(),"Type pin code slowly and select pin code from Dropdown");
+            }
+            else
+            {
+                if(office_residence_area == null)
+                {
+                    Toast.makeText(getApplicationContext(), "Type pin code slowly and select pin code from Dropdown", Toast.LENGTH_SHORT).show();
+                    //   Objs.a.showToast(getContext(),"Type pin code slowly and select pin code from Dropdown");
+                }
+                else
+                {
+                    lead_viability();
+                }
+
+
+            }
 
            /* Intent intent = new Intent(Viability_Check_PL.this, Eligibility_Check_PL.class);
             startActivity(intent);

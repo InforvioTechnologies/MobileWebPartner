@@ -138,7 +138,7 @@ public class Applicant_Details_Activity extends SimpleActivity {
                 Pref.putLoanTypeSub(mCon,sub_categoryid);
                 String Loantype = "2";
                 Pref.putLoanType(mCon,Loantype);
-                Intent intent = new Intent(Applicant_Details_Activity.this, Partner_Lead_OTP_Verification.class);
+                Intent intent = new Intent(Applicant_Details_Activity.this, Lead_Crration_Activity.class);
                 startActivity(intent);
                 finish();
 

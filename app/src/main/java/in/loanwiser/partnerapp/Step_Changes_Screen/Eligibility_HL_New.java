@@ -99,7 +99,8 @@ public class Eligibility_HL_New extends SimpleActivity {
            ,sales_by_GStbill_edit_txt,bank_cridit_by_edtxt,business_ref_name_edt_txt;
     AppCompatButton lead_Elegibility_Bank;
 
-    LinearLayout other_income_ifany,co_applicant_pl_co_applicant,residence_rented,co_other_income_ifany;
+    LinearLayout other_income_ifany,co_applicant_pl_co_applicant,residence_rented,co_other_income_ifany,
+            co_no_of_Employee;
     String user_id,transaction_id,IS_CO_Applicant_Id,CO_Type_of_employement_ID,Educational_Id,Educational_Value,
             Employement_Type,Rsidence_Type,purchased_by_bank_edit_txt1,purchased_by_GStbill_edit_txt1,sales_by_GStbill_edit_txt1,bank_cridit_by_edtxt1,
             Avg_monthly_income1,Business_refernce_name1,Business_reference_mobile1,other_income_edite_txt1,
@@ -124,10 +125,10 @@ public class Eligibility_HL_New extends SimpleActivity {
         String  co_having_bank_Id,co_having_bank_Value, co_Educational_Id,co_Educational_Value,
                 co_Business_registration_Id,co_Business_registration_Value, co_Spinner_res_proof_Id,co_Spinner_res_proof_Value,
                 co_Other_income_Id,co_Other_income_Value, co_Gstreflect_Id,co_Gstreflect_Value,CO_Employement_Type,
-                IS_CO_Salried_Self;
+                IS_CO_Salried_Self,  salaried_Educational_Id,salaried_Educational_Value;
 
         Spinner co_having_bank_account,co_Educatio_qualification_Sppinner,co_business_registration_spinner,
-            co_spinner_res_proof,co_spinn_other_income,co_spinn_gst_other;
+            co_spinner_res_proof,co_spinn_other_income,co_spinn_gst_other,Educational_Spinner_pl,co_Educational_Spinner_pl;
 
         AppCompatEditText co_business_ref_name_edt_txt,co_purchased_by_bank_edit_txt,co_purchased_by_GStbill_edit_txt,
                 co_sales_by_GStbill_edit_txt,co_bank_cridit_by_edtxt,co_Avg_monthly_income,co_other_income_edite_txt;
@@ -156,7 +157,7 @@ public class Eligibility_HL_New extends SimpleActivity {
         LinearLayout full_addres_of_relative,permanent_res_type_ly,rent_paid_for_house_ly,pl_co_app_cmp_name,pl_co_cmp_des_,
                 permanent_residence_pincode_ly,permanent_res_area;
 
-        AppCompatEditText  pl_co_app_company_name_edtxt,pl_co_app_designation_in_company,pl_co_App_no_of_emp_edtxt,pl_co_app_no_of_dependent_edt_txt,
+        AppCompatEditText pl_co_app_company_name_edtxt,pl_co_app_designation_in_company,pl_co_App_no_of_emp_edtxt,pl_co_app_no_of_dependent_edt_txt,
                 pl_co_App_education_qualification_edit_txt, pl_co_app_emi_amount_edit_txt,pl_co_App_other_incom_amt_edtxt;
 
 
@@ -171,7 +172,7 @@ public class Eligibility_HL_New extends SimpleActivity {
     gst_reflect_Value,Own_house_rela_id,Own_house_rela_Value,Permanent_Resi_id,Permanent_Resi_Value,App_salaried_Other_income_id;
 
       LinearLayout hl_eligi_app_cmp_name,hl_eligibility_cmp_des_,is_other_income,rented_applicant_salaried_hl,
-              property_field,property_field_bt_TOP_up;
+              property_field,property_field_bt_TOP_up,no_of_Employee;
 
       AppCompatEditText  company_name_edtxt,no_of_emp_edtxt,no_of_dependent_edt_txt,own_house_blood_address_edt_txt,
               education_qualification_edit_txt,rent_paid_for_house_edit_txt,other_incom_amt_edtxt,
@@ -340,7 +341,7 @@ public class Eligibility_HL_New extends SimpleActivity {
         if(loan_type_id.equals("1"))
         {
             identified_yes_or_no.setVisibility(View.VISIBLE);
-             age_of_Property_lap.setVisibility(View.VISIBLE);
+             age_of_Property_lap.setVisibility(View.GONE);
             plot_construction_loan.setVisibility(View.GONE);
 
             plot_loan.setVisibility(View.GONE);
@@ -392,6 +393,8 @@ public class Eligibility_HL_New extends SimpleActivity {
         spinn_other_income = (Spinner) findViewById(R.id.spinn_other_income);
         business_registration_spinner = (Spinner) findViewById(R.id.business_registration_spinner);
         Educatio_qualification_Sppinner = (Spinner) findViewById(R.id.Educatio_qualification_Sppinner);
+        Educational_Spinner_pl = (Spinner) findViewById(R.id.Educational_Spinner_pl);
+        co_Educational_Spinner_pl = (Spinner) findViewById(R.id.co_Educational_Spinner_pl);
 
         having_bank_account = (Spinner) findViewById(R.id.having_bank_account);
         permanent_res_type_spinner = (Spinner) findViewById(R.id.permanent_res_type_spinner);
@@ -447,6 +450,8 @@ public class Eligibility_HL_New extends SimpleActivity {
 
         other_income_ifany = (LinearLayout) findViewById(R.id.other_income_ifany);
         co_other_income_ifany = (LinearLayout) findViewById(R.id.co_other_income_ifany);
+
+        co_no_of_Employee = (LinearLayout) findViewById(R.id.co_no_of_Employee);
 
         co_applicant_pl_co_applicant = (LinearLayout) findViewById(R.id.co_applicant_pl_co_applicant);
 
@@ -596,6 +601,7 @@ public class Eligibility_HL_New extends SimpleActivity {
         permanent_residence_spinn_area = (Spinner) findViewById(R.id.permanent_residence_spinn_area);
 
         hl_eligi_app_cmp_name = (LinearLayout) findViewById(R.id.hl_eligi_app_cmp_name);
+        no_of_Employee = (LinearLayout) findViewById(R.id.no_of_Employee);
         hl_eligibility_cmp_des_ = (LinearLayout) findViewById(R.id.hl_eligibility_cmp_des_);
         is_other_income = (LinearLayout) findViewById(R.id.is_other_income);
         rented_applicant_salaried_hl = (LinearLayout) findViewById(R.id.rented_applicant_salaried_hl);
@@ -671,19 +677,20 @@ public class Eligibility_HL_New extends SimpleActivity {
                         Toast.makeText(mCon, "Please Select Transaction Type", Toast.LENGTH_SHORT).show();
 
                     }else {
-                        if(propert_statues_spinner_id.equals("0"))
+                      /*  if(propert_statues_spinner_id.equals("0"))
                         {
                             Toast.makeText(mCon, "Please Select Property Status", Toast.LENGTH_SHORT).show();
 
-                        }else {
+                        }else {*/
 
 
                             if(loan_type_id.equals("1"))
                             {
 
-                                if (!Validate_age_Of_Property_Edit_Text()) {
+                             /*   if (!Validate_age_Of_Property_Edit_Text()) {
                                     return;
-                                }
+                                }*/
+
                                 if (!Validate_plot_area_edit_txt()) {
                                     return;
                                 }
@@ -722,7 +729,7 @@ public class Eligibility_HL_New extends SimpleActivity {
                                     applicant_elig_Self();
                                 }
                             }
-                        }
+                       /* }*/
                     }
 
                 }else {
@@ -852,6 +859,13 @@ public class Eligibility_HL_New extends SimpleActivity {
 
                     if(Company_id.equals("1") || Company_id.equals("2"))
                     {
+                        if (!Validate_Company_Name()) {
+                            return;
+                        }
+
+                        if (!Validate_Designation_in_company()) {
+                            return;
+                        }
                         validate1();
                     }else {
 
@@ -878,27 +892,78 @@ public class Eligibility_HL_New extends SimpleActivity {
             Toast.makeText(mCon, "Please Select Type of Employee", Toast.LENGTH_SHORT).show();
         }else {
 
-            if (!Validate_No_of_Employee()) {
-                return;
-            }
+            if(Company_id.equals("1") || Company_id. equals("2")|| Company_id. equals("3") )
+            {
+                if (epf_id.equals("0")) {
+                    Toast.makeText(mCon, "Please Select Epf detected", Toast.LENGTH_SHORT).show();
 
-            if (epf_id.equals("0")) {
-                Toast.makeText(mCon, "Please Select Epf detected", Toast.LENGTH_SHORT).show();
-
-            } else {
-                if (current_ress_id.equals("0")) {
-                    Toast.makeText(mCon, "Select Current residence Proof", Toast.LENGTH_SHORT).show();
                 } else {
+                    if (current_ress_id.equals("0")) {
+                        Toast.makeText(mCon, "Select Current residence Proof", Toast.LENGTH_SHORT).show();
+                    } else {
 
-                    if(residence_id.equals("1"))
-                    {
-                        owned_house_Validation();
-                    }else
-                    {
-                        rented_house_validation();
+                        if(residence_id.equals("1"))
+                        {
+                            owned_house_Validation();
+                        }else
+                        {
+                            rented_house_validation();
+                        }
                     }
                 }
+            }else
+            {
+
+
+                if(pl_co_app_Company_id.equals("1") || pl_co_app_Company_id.equals("2") || pl_co_app_Company_id.equals("3"))
+                {
+
+                    if (epf_id.equals("0")) {
+                        Toast.makeText(mCon, "Please Select Epf detected", Toast.LENGTH_SHORT).show();
+
+                    } else {
+                        if (current_ress_id.equals("0")) {
+                            Toast.makeText(mCon, "Select Current residence Proof", Toast.LENGTH_SHORT).show();
+                        } else {
+
+                            if(residence_id.equals("1"))
+                            {
+                                owned_house_Validation();
+                            }else
+                            {
+                                rented_house_validation();
+                            }
+                        }
+                    }
+
+                }else
+                {
+                    if (!Validate_No_of_Employee()) {
+                        return;
+                    }
+
+                    if (epf_id.equals("0")) {
+                        Toast.makeText(mCon, "Please Select Epf detected", Toast.LENGTH_SHORT).show();
+
+                    } else {
+                        if (current_ress_id.equals("0")) {
+                            Toast.makeText(mCon, "Select Current residence Proof", Toast.LENGTH_SHORT).show();
+                        } else {
+
+                            if(residence_id.equals("1"))
+                            {
+                                owned_house_Validation();
+                            }else
+                            {
+                                rented_house_validation();
+                            }
+                        }
+                    }
+                }
+
+
             }
+
         }
     }
 
@@ -913,14 +978,19 @@ public class Eligibility_HL_New extends SimpleActivity {
                 return;
             }
 
-            if (!valiat_education_qualification()) {
-                return;
-            }
-            if (!Validate_emi_amount()) {
-                return;
+            if(salaried_Educational_Id.equals("0"))
+            {
+                Toast.makeText(context,"Please Select Educational Qualification",Toast.LENGTH_SHORT).show();
+
+            }else
+            {
+                if (!Validate_emi_amount()) {
+                    return;
+                }
+
+                other_varidation();
             }
 
-            other_varidation();
         }
     }
     private void rented_house_validation()
@@ -969,14 +1039,19 @@ public class Eligibility_HL_New extends SimpleActivity {
                 return;
             }
 
-            if (!valiat_education_qualification()) {
-                return;
-            }
-            if (!Validate_emi_amount()) {
-                return;
+            if(salaried_Educational_Id.equals("0"))
+            {
+                Toast.makeText(context,"Please Select Educational Qualification",Toast.LENGTH_SHORT).show();
+
+            }else
+            {
+                if (!Validate_emi_amount()) {
+                    return;
+                }
+
+                other_varidation();
             }
 
-            other_varidation();
         }
     }
     private void other_varidation()
@@ -1030,7 +1105,7 @@ public class Eligibility_HL_New extends SimpleActivity {
                 Toast.makeText(context,"Please Select Bank A/C Type",Toast.LENGTH_SHORT).show();
             }else
             {
-                if(Educational_Id.equals("0"))
+                if(co_Educational_Id.equals("0"))
                 {
                     Toast.makeText(context,"Please Select Educational Qualification",Toast.LENGTH_SHORT).show();
 
@@ -1218,38 +1293,86 @@ public class Eligibility_HL_New extends SimpleActivity {
                                 Toast.makeText(mCon, "Please Select Co applicant Type of Employee", Toast.LENGTH_SHORT).show();
                             }else {
 
-                                if (!Pl_Co_Validate_No_of_Employee()) {
-                                    return;
-                                }
+                                if(pl_co_app_Company_id.equals("1") || pl_co_app_Company_id.equals("2") || pl_co_app_Company_id.equals("3"))
+                                {
 
-                                if (pl_co_app_epf_id.equals("0")) {
-                                    Toast.makeText(mCon, "Please Select Co applicant Epf detected", Toast.LENGTH_SHORT).show();
+                                    if (pl_co_app_epf_id.equals("0")) {
+                                        Toast.makeText(mCon, "Please Select Co applicant Epf detected", Toast.LENGTH_SHORT).show();
 
-                                } else {
+                                    } else {
 
 
-                                    if(pl_co_app_maried_res_spinner_id.equals("0"))
-                                    {
-                                        Toast.makeText(mCon, "Select Co applicant Marital Status", Toast.LENGTH_SHORT).show();
+                                        if(pl_co_app_maried_res_spinner_id.equals("0"))
+                                        {
+                                            Toast.makeText(mCon, "Select Co applicant Marital Status", Toast.LENGTH_SHORT).show();
 
-                                    }else
-                                    {
-                                        if (!Pl_Co_valiat_no_of_dependent()) {
-                                            return;
+                                        }else
+                                        {
+                                            if (!Pl_Co_valiat_no_of_dependent()) {
+                                                return;
+                                            }
+
+                                            if(Educational_Id.equals("0"))
+                                            {
+                                                Toast.makeText(context,"Please Select Educational Qualification",Toast.LENGTH_SHORT).show();
+
+                                            }else
+                                            {
+                                                if (!pl_co_App_Validate_emi_amount()) {
+                                                    return;
+                                                }
+
+                                                Co_App_other_varidation();
+                                            }
+
                                         }
 
-                                        if (!Validate_pl_Co_education_qualification_edit_txt()) {
-                                            return;
-                                        }
-                                        if (!pl_co_App_Validate_emi_amount()) {
-                                            return;
-                                        }
 
-                                        Co_App_other_varidation();
                                     }
 
+                                }else
+                                {
+                                    if (!Pl_Co_Validate_No_of_Employee()) {
+                                        return;
+                                    }
+
+                                    if (pl_co_app_epf_id.equals("0")) {
+                                        Toast.makeText(mCon, "Please Select Co applicant Epf detected", Toast.LENGTH_SHORT).show();
+
+                                    } else {
+
+
+                                        if(pl_co_app_maried_res_spinner_id.equals("0"))
+                                        {
+                                            Toast.makeText(mCon, "Select Co applicant Marital Status", Toast.LENGTH_SHORT).show();
+
+                                        }else
+                                        {
+                                            if (!Pl_Co_valiat_no_of_dependent()) {
+                                                return;
+                                            }
+
+                                            if(Educational_Id.equals("0"))
+                                            {
+                                                Toast.makeText(context,"Please Select Educational Qualification",Toast.LENGTH_SHORT).show();
+
+                                            }else
+                                            {
+                                                if (!pl_co_App_Validate_emi_amount()) {
+                                                    return;
+                                                }
+
+                                                Co_App_other_varidation();
+                                            }
+
+                                        }
+
+
+                                    }
+                                    ///
 
                                 }
+
                             }
                         }
                     }
@@ -2666,8 +2789,8 @@ public class Eligibility_HL_New extends SimpleActivity {
             };
 
             Gst_reflect_adapter.setDropDownViewResource(R.layout.view_spinner_item);
-            Educatio_qualification_Sppinner.setAdapter(Gst_reflect_adapter);
-            Educatio_qualification_Sppinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            co_Educational_Spinner_pl.setAdapter(Gst_reflect_adapter);
+            co_Educational_Spinner_pl.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
@@ -2687,7 +2810,7 @@ public class Eligibility_HL_New extends SimpleActivity {
 
                 }
             });
-            Educatio_qualification_Sppinner.setOnTouchListener(new View.OnTouchListener() {
+            co_Educational_Spinner_pl.setOnTouchListener(new View.OnTouchListener() {
                 @Override
                 public boolean onTouch(View view, MotionEvent motionEvent) {
                     // imm.hideSoftInputFromWindow(edt_buyer_address.getWindowToken(), 0);
@@ -2695,6 +2818,34 @@ public class Eligibility_HL_New extends SimpleActivity {
                 }
             });
 
+            Educational_Spinner_pl.setAdapter(Gst_reflect_adapter);
+            Educational_Spinner_pl.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                    try {
+
+                        salaried_Educational_Id = GST_reflected_ar.getJSONObject(position).getString("id");
+                        salaried_Educational_Value = GST_reflected_ar.getJSONObject(position).getString("value");
+
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+
+                }
+            });
+            Educational_Spinner_pl.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View view, MotionEvent motionEvent) {
+                    // imm.hideSoftInputFromWindow(edt_buyer_address.getWindowToken(), 0);
+                    return false;
+                }
+            });
 
 
             co_Educatio_qualification_Sppinner.setAdapter(Gst_reflect_adapter);
@@ -2963,6 +3114,14 @@ public class Eligibility_HL_New extends SimpleActivity {
                         pl_co_app_Company_id = Company_type_ar.getJSONObject(position).getString("id");
                         pl_co_app_Company_Value = Company_type_ar.getJSONObject(position).getString("value");
                         //CAT_ID = ja.getJSONObject(position).getString("category_id");
+
+                        if(pl_co_app_Company_id.equals("1") || pl_co_app_Company_id.equals("2") || pl_co_app_Company_id.equals("3"))
+                        {
+                            co_no_of_Employee.setVisibility(View.GONE);
+                        }else
+                        {
+                            co_no_of_Employee.setVisibility(View.VISIBLE);
+                        }
 
 
                     } catch (JSONException e) {
@@ -3451,12 +3610,14 @@ public class Eligibility_HL_New extends SimpleActivity {
                         Company_id = Company_type_ar.getJSONObject(position).getString("id");
                         Company_Value = Company_type_ar.getJSONObject(position).getString("value");
 
-                        if(Company_id.equals("1") || Company_id. equals("2"))
+                        if(Company_id.equals("1") || Company_id. equals("2")|| Company_id. equals("3") )
                         {
-                            hl_eligi_app_cmp_name.setVisibility(View.GONE);
-                            hl_eligibility_cmp_des_.setVisibility(View.GONE);
+                            no_of_Employee.setVisibility(View.GONE);
+                            hl_eligi_app_cmp_name.setVisibility(View.VISIBLE);
+                            hl_eligibility_cmp_des_.setVisibility(View.VISIBLE);
                         }else
                         {
+                            no_of_Employee.setVisibility(View.VISIBLE);
                             hl_eligi_app_cmp_name.setVisibility(View.VISIBLE);
                             hl_eligibility_cmp_des_.setVisibility(View.VISIBLE);
                         }
@@ -4423,8 +4584,6 @@ public class Eligibility_HL_New extends SimpleActivity {
         S_plot_area_edit_txt_plot_ = plot_area_edit_txt_plot_.getText().toString();
 
 
-
-
         S_plot_area_edit_txt_bt = plot_area_edit_txt_bt.getText().toString();
         S_build_up_area_edit_txt_bt = build_up_area_edit_txt_bt.getText().toString();
         S_property_price_edt_txt_bt = property_price_edt_txt_bt.getText().toString();
@@ -4445,7 +4604,7 @@ public class Eligibility_HL_New extends SimpleActivity {
 
         S_Designation_in_current_companny = designation_in_company.getText().toString();
         S_no_of_dependent_edt_txt = no_of_dependent_edt_txt.getText().toString();
-        S_education_qualification_edit_txt = education_qualification_edit_txt.getText().toString();
+   //     S_education_qualification_edit_txt = education_qualification_edit_txt.getText().toString();
         S_emi_amount_edit_txt = emi_amount_edit_txt.getText().toString();
         S_other_incom_amt_edtxt = other_incom_amt_edtxt.getText().toString();
         S_no_of_emp_edtxt = no_of_emp_edtxt.getText().toString();
@@ -4469,7 +4628,7 @@ public class Eligibility_HL_New extends SimpleActivity {
         S_pl_co_app_designation_in_company = pl_co_app_designation_in_company.getText().toString();
         S_pl_co_app_no_of_dependent_edt_txt = pl_co_app_no_of_dependent_edt_txt.getText().toString();
         S_pl_co_app_emi_amount_edit_txt = pl_co_app_emi_amount_edit_txt.getText().toString();
-        S_pl_co_App_education_qualification_edit_txt = pl_co_App_education_qualification_edit_txt.getText().toString();
+      //  S_pl_co_App_education_qualification_edit_txt = pl_co_App_education_qualification_edit_txt.getText().toString();
         S_pl_co_App_other_incom_amt_edtxt = pl_co_App_other_incom_amt_edtxt.getText().toString();
 
         S_co_business_ref_name_edt_txt = co_business_ref_name_edt_txt.getText().toString();
@@ -4530,8 +4689,8 @@ public class Eligibility_HL_New extends SimpleActivity {
             if(loan_type_id.equals("1") ||loan_type_id.equals("2") )
             {
                 Applicant.put("transaction_type",transaction_type_spi_id);
-                Applicant.put("property_status",propert_statues_spinner_id);
-                Applicant.put("age_of_property",S_age_Of_Property_Edit_Text);
+              //  Applicant.put("property_status",propert_statues_spinner_id);
+             //   Applicant.put("age_of_property",S_age_Of_Property_Edit_Text);
                 Applicant.put("plot_area",S_plot_area_edit_txt);
                 Applicant.put("builtup_area",S_build_up_area_edit_txt);
                 Applicant.put("property_price",S_property_price_edt_txt);
@@ -4590,7 +4749,7 @@ public class Eligibility_HL_New extends SimpleActivity {
                 Applicant.put("own_house_relative",Own_house_rela_id);
                 Applicant.put("rel_address",S_own_house_blood_address_edt_txt);
                 Applicant.put("rent_beingpaid",S_rent_paid_for_house_edit_txt);
-                Applicant.put("qualification",S_education_qualification_edit_txt);
+                Applicant.put("qualification",salaried_Educational_Id);
 
             }else if(salary_type.equals("2"))
             {
@@ -4636,7 +4795,7 @@ public class Eligibility_HL_New extends SimpleActivity {
                     Co_Applicant.put("designation",S_pl_co_app_designation_in_company);
                     Co_Applicant.put("no_of_dependency",S_pl_co_app_no_of_dependent_edt_txt);
                     Co_Applicant.put("affordable_pay",S_pl_co_app_emi_amount_edit_txt);
-                    Co_Applicant.put("qualification",S_pl_co_App_education_qualification_edit_txt);
+                    Co_Applicant.put("qualification",Educational_Id);
 
 
                     Co_Applicant.put("other_from",other_income1);

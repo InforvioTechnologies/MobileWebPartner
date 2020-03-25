@@ -162,6 +162,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textSize="16sp"
+                        android:inputType="number"
+                        android:imeOptions="actionNext"
                         android:id="@+id/pl_co_own_self_delership_company_edit_txt"
                         android:textColor="@color/colorPrimaryDark"/>
 
@@ -203,6 +205,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textSize="16sp"
+                        android:inputType="number"
+                        android:imeOptions="actionNext"
                         android:id="@+id/pl_co_own_self_monthly_profit_edit_txt"
                         android:textColor="@color/colorPrimaryDark"/>
                 </LinearLayout>
@@ -252,6 +256,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textSize="16sp"
+                        android:inputType="number"
+                        android:imeOptions="actionNext"
                         android:id="@+id/pl_co_monthly_income_own_ser_bus_edit_txt"
                         android:textColor="@color/colorPrimaryDark"/>
                 </LinearLayout>
@@ -292,6 +298,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textSize="16sp"
+                        android:inputType="number"
+                        android:imeOptions="actionNext"
                         android:id="@+id/pl_co_no_of_employee_own_ser_bus_edit_txt"
                         android:textColor="@color/colorPrimaryDark"/>
                 </LinearLayout>
@@ -332,6 +340,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textSize="16sp"
+                        android:inputType="number"
+                        android:imeOptions="actionDone"
                         android:id="@+id/pl_co_business_investment_own_ser_bus_edit_txt"
                         android:textColor="@color/colorPrimaryDark"/>
                 </LinearLayout>
@@ -381,6 +391,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textSize="16sp"
+                        android:inputType="number"
+                        android:imeOptions="actionNext"
                         android:id="@+id/pl_co_value_of_stock_raw_material"
                         android:textColor="@color/colorPrimaryDark"/>
                 </LinearLayout>
@@ -423,6 +435,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textSize="16sp"
+                        android:inputType="number"
+                        android:imeOptions="actionNext"
                         android:id="@+id/pl_co_monthly_sales_manufa"
                         android:textColor="@color/colorPrimaryDark"/>
                 </LinearLayout>
@@ -466,6 +480,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textSize="16sp"
+                        android:inputType="number"
+                        android:imeOptions="actionNext"
                         android:id="@+id/pl_co_value_of_machineries"
                         android:textColor="@color/colorPrimaryDark"/>
                 </LinearLayout>
@@ -511,6 +527,8 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/pl_co_Own_number_of_years_in_work_retails"
                     android:textSize="16sp"
+                    android:inputType="number"
+                    android:imeOptions="actionNext"
                     android:textColor="@color/colorPrimaryDark"/>
             </LinearLayout>
         </LinearLayout>
@@ -539,6 +557,8 @@
                     android:layout_marginLeft="2dp"
                     android:layout_width="match_parent"
                     style="@style/LorgeText2"
+                    android:inputType="number"
+                    android:imeOptions="actionNext"
                     android:textColor="@color/colorPrimaryDark"
                     android:textColorHint="@color/colorPrimaryDark"
                     android:text="@string/avg"
