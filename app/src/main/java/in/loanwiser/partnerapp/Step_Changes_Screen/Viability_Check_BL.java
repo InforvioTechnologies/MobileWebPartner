@@ -179,7 +179,7 @@ public class Viability_Check_BL extends SimpleActivity {
     String self_own_vintage_bus_str,self_own_bus_str,self_co_assets_owned_str,vehilce_str,what_kind_crop_str;
 
     LinearLayout co_applicant_emp_type,co_applicant_salaried_employed,co_applicant_self_employed,
-            BL_self_office_ownership_type_ly,co_applicant_ly;
+            BL_self_office_ownership_type_ly,co_applicant_ly,name_of_deler_ship_cmp;
 
     Spinner BL_self_bus_vintage_proof,BL_self_bussiness_proof,BL_self_asstes_owned_spinner,BL_spinner_office_shop_setup_ind,
             office_spinner_area;
@@ -190,7 +190,8 @@ public class Viability_Check_BL extends SimpleActivity {
             V_Selling_Price,V_Profit_affter_selling,V_no_of_years_in_work_P,V_avg_monthly_income_Poultry,
             V_delership_company_edit_txt,V_monthly_profit_edit_txt,V_business_investment_own_ser_bus_edit_txt,V_value_of_stock_raw_material,
             V_monthly_sales_manufa,V_value_of_machineries,V_number_of_years_in_work_retails,V_average_monthly_income_own_business,
-            V_office_residence_pincode_edite_txt,V_residence_pincode_edite_txt;
+            V_office_residence_pincode_edite_txt,V_residence_pincode_edite_txt,
+            V_monthly_profit_edit_txt_mani,V_monthly_profit_edit_txt_service;
 
     String user_id,transaction_id;
 
@@ -204,7 +205,7 @@ public class Viability_Check_BL extends SimpleActivity {
             pl_co_D_no_of_animals,pl_co_D_no_of_liters_edit_txt,pl_co_app_self_D_no_of_years_in_works,
             pl_co_app_D_avg_monthly_income,pl_co_P_no_of_birds_edit_txt,pl_co_P_supply_by_who,pl_co_P_Selling_Price,
             pl_co_p_Profit_affter_selling,pl_co_P_no_of_years_in_work_P,pl_co_p_avg_monthly_income_Poultry,
-            pl_co_own_self_delership_company_edit_txt,
+            pl_co_own_self_delership_company_edit_txt,monthly_profit_edit_txt_service,monthly_profit_edit_txt_mani,
             pl_co_own_self_monthly_profit_edit_txt,pl_co_monthly_income_own_ser_bus_edit_txt,
             pl_co_no_of_employee_own_ser_bus_edit_txt,pl_co_business_investment_own_ser_bus_edit_txt,
             pl_co_value_of_stock_raw_material,pl_co_monthly_sales_manufa,pl_co_value_of_machineries,
@@ -238,7 +239,8 @@ public class Viability_Check_BL extends SimpleActivity {
             pl_co_own_Office_Shop__id,pl_co_own_Office_Shop__value;
 
     LinearLayout pl_self_ind_Driver_C_owner,pl_self_individual,pl_formin_dairy,pl_self_business,pl_co_self_ofiice_res_details,
-            pl_forming,pl_dairy,pl_poultry,pl_co_Retail_wholesale_business,pl_service_business,pl_manufacturing;
+            pl_forming,pl_dairy,pl_poultry,pl_co_Retail_wholesale_business,pl_service_business,pl_manufacturing,
+            name_of_deler_ship_cmp_co_self;
     AppCompatTextView pl_co_app_ind_vehicle_type_text;
     ////////
 
@@ -362,7 +364,7 @@ public class Viability_Check_BL extends SimpleActivity {
 
         removeClass = new RemoveCommas();
 
-      /*  lead_viy_step2.setOnClickListener(new View.OnClickListener() {
+     /*   lead_viy_step2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(Viability_Check_BL.this, Eligibility_BL.class);
@@ -415,7 +417,7 @@ public class Viability_Check_BL extends SimpleActivity {
             }
         });
 
-     /*   business_proof_type_text.setOnClickListener(new View.OnClickListener() {
+       /* business_proof_type_text.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(Viability_Check_BL.this, Multi_Select_checkbox.class);
@@ -494,6 +496,7 @@ public class Viability_Check_BL extends SimpleActivity {
         manufacturing = (LinearLayout) findViewById(R.id.manufacturing);
         ofiice_res_details = (LinearLayout) findViewById(R.id.ofiice_res_details);
         BL_self_office_ownership_type_ly = (LinearLayout) findViewById(R.id.BL_self_office_ownership_type_ly);
+        name_of_deler_ship_cmp = (LinearLayout) findViewById(R.id.name_of_deler_ship_cmp);
 
         //co_applicant_emp_type,co_applicant_salaried_employed,co_applicant_self_employed;
         co_applicant_emp_type = (LinearLayout) findViewById(R.id.co_applicant_emp_type);
@@ -689,6 +692,10 @@ public class Viability_Check_BL extends SimpleActivity {
         pl_co_P_Selling_Price = (AppCompatEditText) findViewById(R.id.pl_co_P_Selling_Price);
         pl_co_p_Profit_affter_selling = (AppCompatEditText) findViewById(R.id.pl_co_p_Profit_affter_selling);
         pl_co_P_no_of_years_in_work_P = (AppCompatEditText) findViewById(R.id.pl_co_P_no_of_years_in_work_P);
+
+        monthly_profit_edit_txt_service = (AppCompatEditText) findViewById(R.id.monthly_profit_edit_txt_service);
+        monthly_profit_edit_txt_mani = (AppCompatEditText) findViewById(R.id.monthly_profit_edit_txt_mani);
+
         pl_co_p_avg_monthly_income_Poultry = (AppCompatEditText) findViewById(R.id.pl_co_p_avg_monthly_income_Poultry);
         pl_co_p_avg_monthly_income_Poultry.addTextChangedListener(new NumberTextWatcher(pl_co_p_avg_monthly_income_Poultry));
 
@@ -732,6 +739,7 @@ public class Viability_Check_BL extends SimpleActivity {
         pl_co_app_ind_spinner_office_shop_setup_ind = (Spinner) findViewById(R.id.pl_co_app_ind_spinner_office_shop_setup_ind);
 
         pl_co_self_ofiice_res_details =( LinearLayout) findViewById(R.id.pl_co_self_ofiice_res_details);
+        name_of_deler_ship_cmp_co_self =( LinearLayout) findViewById(R.id.name_of_deler_ship_cmp_co_self);
 
 
         pl_forming =( LinearLayout) findViewById(R.id.pl_forming);
@@ -758,11 +766,12 @@ public class Viability_Check_BL extends SimpleActivity {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
-                String workpincode = residence_pincode_edite_txt.getText().toString();
+               /* String workpincode = residence_pincode_edite_txt.getText().toString();
 
-                if (workpincode.length() == 2) {
-                    GET_Pincode1(workpincode);
-                }
+                if (workpincode.length() == 6) {
+                  //  GET_Pincode1(workpincode);
+                    GET_AERA_POST(workpincode);
+                }*/
 
             }
 
@@ -773,7 +782,12 @@ public class Viability_Check_BL extends SimpleActivity {
 
             @Override
             public void afterTextChanged(Editable editable) {
+                String workpincode = residence_pincode_edite_txt.getText().toString();
 
+                if (workpincode.length() == 6) {
+                    //  GET_Pincode1(workpincode);
+                    GET_AERA_POST(workpincode);
+                }
             }
         });
 
@@ -781,11 +795,12 @@ public class Viability_Check_BL extends SimpleActivity {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
-                String workpincode = office_residence_pincode_edite_txt.getText().toString();
+             /*   String workpincode = office_residence_pincode_edite_txt.getText().toString();
 
                 if (workpincode.length() == 2) {
-                    GET_Pincode1(workpincode);
-                }
+                    //GET_Pincode1(workpincode);
+                    GET_AERA_POST1(workpincode);
+                }*/
             }
 
             @Override
@@ -795,7 +810,12 @@ public class Viability_Check_BL extends SimpleActivity {
 
             @Override
             public void afterTextChanged(Editable editable) {
+                String workpincode = office_residence_pincode_edite_txt.getText().toString();
 
+                if (workpincode.length() == 6) {
+                    //GET_Pincode1(workpincode);
+                    GET_AERA_POST1(workpincode);
+                }
             }
         });
 
@@ -804,11 +824,13 @@ public class Viability_Check_BL extends SimpleActivity {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
-                String workpincode = pl_co_app_office_residence_pincode_edite_txt.getText().toString();
+               /* String workpincode = pl_co_app_office_residence_pincode_edite_txt.getText().toString();
 
                 if (workpincode.length() == 2) {
-                    co_GET_Pincode1(workpincode);
-                }
+                 //   co_GET_Pincode1(workpincode);
+                    GET_AERA_POST3(workpincode);
+
+                }*/
 
             }
 
@@ -820,6 +842,13 @@ public class Viability_Check_BL extends SimpleActivity {
             @Override
             public void afterTextChanged(Editable editable) {
 
+                String workpincode = pl_co_app_office_residence_pincode_edite_txt.getText().toString();
+
+                if (workpincode.length() == 6) {
+                    //   co_GET_Pincode1(workpincode);
+                    GET_AERA_POST3(workpincode);
+
+                }
             }
         });
 
@@ -827,13 +856,13 @@ public class Viability_Check_BL extends SimpleActivity {
         pl_co_app_slrd_company_pincode_txt.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                Log.e("hi","hi11");
+              /*  Log.e("hi","hi11");
                 String workpincode = pl_co_app_slrd_company_pincode_txt.getText().toString();
 
                 if(workpincode.length()==2){
                     co_GET_Pincode1(workpincode);
 
-                }
+                }*/
             }
 
             @Override
@@ -843,7 +872,13 @@ public class Viability_Check_BL extends SimpleActivity {
 
             @Override
             public void afterTextChanged(Editable editable) {
+                Log.e("hi","hi11");
+                String workpincode = pl_co_app_slrd_company_pincode_txt.getText().toString();
 
+                if(workpincode.length()==2){
+                    GET_AERA_POST2(workpincode);
+
+                }
             }
         });
 
@@ -1003,7 +1038,7 @@ public class Viability_Check_BL extends SimpleActivity {
             if (!average_monthly_income()) {
                 return;
             }
-
+        commValidation();
     }
 
     private void validate_dairy()
@@ -1031,7 +1066,7 @@ public class Viability_Check_BL extends SimpleActivity {
                     return;
                 }
             }
-
+        commValidation();
     }
 
     private void validation_poultry()
@@ -1059,7 +1094,7 @@ public class Viability_Check_BL extends SimpleActivity {
             if (!Avg_monthly_income_p()) {
                 return;
             }
-
+        commValidation();
 
     }
 
@@ -1078,7 +1113,7 @@ public class Viability_Check_BL extends SimpleActivity {
                         {
                             Toast.makeText(context,"please Select Franchise/dealer/sub dealer type",Toast.LENGTH_SHORT).show();
 
-                        }else
+                        }else  if(franchise__id.equals("1"))
                         {
                             if (!Delership_Company()) {
                                 return;
@@ -1088,10 +1123,20 @@ public class Viability_Check_BL extends SimpleActivity {
                             }
 
                             Own_Bus_No_year_com_validation();
+                        }else
+                        {
+                            if (!Monthly_Profit()) {
+                                return;
+                            }
+
+                            Own_Bus_No_year_com_validation();
                         }
 
                     }else if(business_own_type_id.equals("2"))
                     {
+                        if (!Validate_monthly_profit_edit_txt_service()) {
+                            return;
+                        }
 
                         if (!business_investment_own_ser_bus_Work()) {
                             return;
@@ -1100,6 +1145,10 @@ public class Viability_Check_BL extends SimpleActivity {
 
                     }else if(business_own_type_id.equals("3"))
                     {
+
+                        if (!Validate_monthly_profit_edit_txt_mani()) {
+                            return;
+                        }
 
                         if (!value_of_stock_raw_material_Work()) {
                             return;
@@ -1128,7 +1177,7 @@ public class Viability_Check_BL extends SimpleActivity {
         if (!Avg_monthly_income_own_Bus()) {
             return;
         }
-
+        commValidation();
     }
 
     private void commValidation()
@@ -1179,7 +1228,7 @@ public class Viability_Check_BL extends SimpleActivity {
         {
             Toast.makeText(context,"please Select office Setup",Toast.LENGTH_SHORT).show();
 
-        }else
+        }else if(office_id.equals("2"))
         {
             if(off_residence_id.equals("0"))
             {
@@ -1214,6 +1263,30 @@ public class Viability_Check_BL extends SimpleActivity {
                 resi_val();
 
             }
+        }else
+        {
+            self_assets_owned_buff = new StringBuffer();
+
+            ArrayList<IncomeProofPOJO>  self_assets_ownr = Assets_own_adapter.Assets_own_;
+            for(int i=0;i<self_assets_ownr.size();i++){
+                IncomeProofPOJO country = self_assets_ownr.get(i);
+                if(country.isIP_selected()){
+                    self_assets_owned_buff.append(country.getIP_id()+ ",");
+                    // String responseID1 = String.valueOf(co_self_Assets_owned_list);
+                }
+            }
+            if (self_assets_owned_buff.length()> 0) {
+
+                String responseID1 = String.valueOf(self_assets_owned_buff);
+                self_co_assets_owned_str = removeClass.cleanUpCommas(responseID1);
+                self_co_assets_owned_SA = self_co_assets_owned_str.split(",");
+
+                self_co_assets_ = new JSONArray();
+                self_co_assets_ = new JSONArray(Arrays.asList(self_co_assets_owned_SA));
+            }
+
+            resi_val();
+
         }
 
 
@@ -1228,6 +1301,13 @@ public class Viability_Check_BL extends SimpleActivity {
         if(residence_id.equals("0"))
         {
             Toast.makeText(context,"please Select residence type",Toast.LENGTH_SHORT).show();
+        }else if(residence_id.equals("2"))
+        {
+
+            if (!current_livind_validation()) {
+                return;
+            }
+            co_applicant_validation();
         }else
         {
             co_applicant_validation();
@@ -1369,11 +1449,9 @@ public class Viability_Check_BL extends SimpleActivity {
             }
 
         } else if(IS_CO_Applicant_Id.equals("2")) {
+
             lead_viability();
 
-           /* Intent intent = new Intent(Viability_Check_PL.this, Eligibility_Check_PL.class);
-            startActivity(intent);
-            finish();*/
         }
     }
     private void co_validation_individual()
@@ -2162,6 +2240,21 @@ public class Viability_Check_BL extends SimpleActivity {
         }
         return true;
     }
+
+    private boolean current_livind_validation(){
+
+        if (live_curentres_edite_txt.getText().toString().isEmpty()) {
+            live_curentres_edite_txt.setError(getText(R.string.err_curent));
+            live_curentres_edite_txt.requestFocus();
+            return false;
+        } else {
+
+            //inputLayoutLname.setErrorEnabled(false);
+        }
+        return true;
+    }
+
+
     private boolean office_pincode(){
 
         if (office_residence_pincode_edite_txt.getText().toString().isEmpty()) {
@@ -2640,6 +2733,30 @@ public class Viability_Check_BL extends SimpleActivity {
 
         return true;
     }
+
+    private boolean Validate_monthly_profit_edit_txt_service(){
+        if (monthly_profit_edit_txt_service.getText().toString().isEmpty()) {
+            monthly_profit_edit_txt_service.setError(getText(R.string.err_curent));
+            monthly_profit_edit_txt_service.requestFocus();
+            return false;
+        } else {
+            //inputLayoutLname.setErrorEnabled(false);
+        }
+
+        return true;
+    }
+    private boolean Validate_monthly_profit_edit_txt_mani(){
+        if (monthly_profit_edit_txt_mani.getText().toString().isEmpty()) {
+            monthly_profit_edit_txt_mani.setError(getText(R.string.err_curent));
+            monthly_profit_edit_txt_mani.requestFocus();
+            return false;
+        } else {
+            //inputLayoutLname.setErrorEnabled(false);
+        }
+
+        return true;
+    }
+
 
     private boolean Validate_pl_co_monthly_income_own_ser_bus_edit_txt(){
         if (pl_co_monthly_income_own_ser_bus_edit_txt.getText().toString().isEmpty()) {
@@ -3376,6 +3493,7 @@ public class Viability_Check_BL extends SimpleActivity {
                         pl_self_ind_Employee_type_Id = Type_of_employement_ar.getJSONObject(position).getString("id");
                         pl_self_ind_Employee_type_Value = Type_of_employement_ar.getJSONObject(position).getString("value");
                         //CAT_ID = ja.getJSONObject(position).getString("category_id");
+                        Log.d("empl_co_", pl_self_ind_Employee_type_Id);
 
                         Pref.putCOEMPTYPE(context,pl_self_ind_Employee_type_Id);
 
@@ -3782,8 +3900,8 @@ public class Viability_Check_BL extends SimpleActivity {
                             ofiice_res_details.setVisibility(View.VISIBLE);
                         }else
                         {
-                            BL_self_office_ownership_type_ly.setVisibility(View.VISIBLE);
-                            ofiice_res_details.setVisibility(View.VISIBLE);
+                            BL_self_office_ownership_type_ly.setVisibility(View.GONE);
+                            ofiice_res_details.setVisibility(View.GONE);
                         }
 
 
@@ -3844,6 +3962,17 @@ public class Viability_Check_BL extends SimpleActivity {
 
                         franchise__id = franchise_ar.getJSONObject(position).getString("id");
                         franchise__value = franchise_ar.getJSONObject(position).getString("value");
+
+                        if(franchise__id.equals("1"))
+                        {
+                            name_of_deler_ship_cmp.setVisibility(View.VISIBLE);
+                        }else
+                        {
+                            name_of_deler_ship_cmp.setVisibility(View.GONE);
+
+                        }
+
+
 
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -4205,7 +4334,7 @@ public class Viability_Check_BL extends SimpleActivity {
             holder.name.setChecked(business_proof.isIP_selected());
             holder.name.setTag(business_proof);
 
-            if(business_proof.getIP_name().contains("Business Income Proof")){
+            if(business_proof.getIP_name().contains("--Select Business Income Proof --")){
                 holder.name.setVisibility(View.GONE);
                 holder.code.setVisibility(View.VISIBLE);
                 holder.code.setText("Select Business Income Proof");
@@ -4292,7 +4421,7 @@ public class Viability_Check_BL extends SimpleActivity {
             holder.name.setChecked(assets_own.isIP_selected());
             holder.name.setTag(assets_own);
 
-            if(assets_own.getIP_name().contains("Assets Own")){
+            if(assets_own.getIP_name().contains("--Select Assets Own --")){
                 holder.name.setVisibility(View.GONE);
                 holder.code.setVisibility(View.VISIBLE);
                 holder.code.setText("Select Assets Own");
@@ -4380,7 +4509,7 @@ public class Viability_Check_BL extends SimpleActivity {
             holder.name.setChecked(business_vintage_proof_pojo.isIP_selected());
             holder.name.setTag(business_vintage_proof_pojo);
 
-            if(business_vintage_proof_pojo.getIP_name().contains("Business Proof")){
+            if(business_vintage_proof_pojo.getIP_name().contains("--Select Business Proof --")){
                 holder.name.setVisibility(View.GONE);
                 holder.code.setVisibility(View.VISIBLE);
                 holder.code.setText("Select Business Vintage Proof");
@@ -4467,7 +4596,7 @@ public class Viability_Check_BL extends SimpleActivity {
             holder.name.setChecked(vahicletype.isIP_selected());
             holder.name.setTag(vahicletype);
 
-            if(vahicletype.getIP_name().contains("-Select vehicle Type-")){
+            if(vahicletype.getIP_name().contains(" --Select vehicle Type --")){
                 holder.name.setVisibility(View.GONE);
                 holder.code.setVisibility(View.VISIBLE);
                 holder.code.setText("-Select vehicle Type-");
@@ -4554,7 +4683,7 @@ public class Viability_Check_BL extends SimpleActivity {
             holder.name.setChecked(croptype.isIP_selected());
             holder.name.setTag(croptype);
 
-            if(croptype.getIP_name().contains("-What Kind of Crops (Multiselect)-")){
+            if(croptype.getIP_name().contains("--Select What Kind of Crops (Multiselect) --")){
                 holder.name.setVisibility(View.GONE);
                 holder.code.setVisibility(View.VISIBLE);
                 holder.code.setText("-Select Crops Type-");
@@ -4791,7 +4920,7 @@ public class Viability_Check_BL extends SimpleActivity {
             holder.name.setChecked(assets_owned.isIP_selected());
             holder.name.setTag(assets_owned);
 
-            if(assets_owned.getIP_name().contains("Assets Own")){
+            if(assets_owned.getIP_name().contains("--Select Assets Own --")){
                 holder.name.setVisibility(View.GONE);
                 holder.code.setVisibility(View.VISIBLE);
                 holder.code.setText("Select Assets Own");
@@ -4877,7 +5006,7 @@ public class Viability_Check_BL extends SimpleActivity {
             holder.name.setChecked(assets_owned_salaried.isIP_selected());
             holder.name.setTag(assets_owned_salaried);
 
-            if(assets_owned_salaried.getIP_name().contains("Assets Own")){
+            if(assets_owned_salaried.getIP_name().contains("--Select Assets Own --")){
                 holder.name.setVisibility(View.GONE);
                 holder.code.setVisibility(View.VISIBLE);
                 holder.code.setText("Select Assets Own");
@@ -4964,7 +5093,7 @@ public class Viability_Check_BL extends SimpleActivity {
             holder.name.setChecked(salary_proof_salaried.isIP_selected());
             holder.name.setTag(salary_proof_salaried);
 
-            if(salary_proof_salaried.getIP_name().contains("Salary Proof")){
+            if(salary_proof_salaried.getIP_name().contains("--Select Salary Proof --")){
                 holder.name.setVisibility(View.GONE);
                 holder.code.setVisibility(View.VISIBLE);
                 holder.code.setText("Select Salary Proof");
@@ -5051,7 +5180,7 @@ public class Viability_Check_BL extends SimpleActivity {
             holder.name.setChecked(vehicle_type_self.isIP_selected());
             holder.name.setTag(vehicle_type_self);
 
-            if(vehicle_type_self.getIP_name().contains("-Select vehicle Type-")){
+            if(vehicle_type_self.getIP_name().contains("--Select vehicle Type --")){
                 holder.name.setVisibility(View.GONE);
                 holder.code.setVisibility(View.VISIBLE);
                 holder.code.setText("Select Select vehicle Type");
@@ -5138,7 +5267,7 @@ public class Viability_Check_BL extends SimpleActivity {
             holder.name.setChecked(what_crop_pojo.isIP_selected());
             holder.name.setTag(what_crop_pojo);
 
-            if(what_crop_pojo.getIP_name().contains("What Kind of Crops (Multiselect)")){
+            if(what_crop_pojo.getIP_name().contains("--Select What Kind of Crops (Multiselect) --")){
                 holder.name.setVisibility(View.GONE);
                 holder.code.setVisibility(View.VISIBLE);
                 holder.code.setText("Select What Kind of Crops");
@@ -5226,7 +5355,7 @@ public class Viability_Check_BL extends SimpleActivity {
             holder.name.setChecked(business_vintage_proof_pojo.isIP_selected());
             holder.name.setTag(business_vintage_proof_pojo);
 
-            if(business_vintage_proof_pojo.getIP_name().contains("Business Proof")){
+            if(business_vintage_proof_pojo.getIP_name().contains("--Select Business Proof --")){
                 holder.name.setVisibility(View.GONE);
                 holder.code.setVisibility(View.VISIBLE);
                 holder.code.setText("Select Business Vintage Proof");
@@ -5314,7 +5443,7 @@ public class Viability_Check_BL extends SimpleActivity {
             holder.name.setChecked(Self_business_proof_pojo.isIP_selected());
             holder.name.setTag(Self_business_proof_pojo);
 
-            if(Self_business_proof_pojo.getIP_name().contains("Business Income Proof")){
+            if(Self_business_proof_pojo.getIP_name().contains("--Select Business Income Proof --")){
                 holder.name.setVisibility(View.GONE);
                 holder.code.setVisibility(View.VISIBLE);
                 holder.code.setText("Select Business Income Proof");
@@ -5403,7 +5532,7 @@ public class Viability_Check_BL extends SimpleActivity {
             holder.name.setChecked(Co_Business_Self_Assets_pojo.isIP_selected());
             holder.name.setTag(Co_Business_Self_Assets_pojo);
 
-            if(Co_Business_Self_Assets_pojo.getIP_name().contains("Assets Own")){
+            if(Co_Business_Self_Assets_pojo.getIP_name().contains("--Select Assets Own --")){
                 holder.name.setVisibility(View.GONE);
                 holder.code.setVisibility(View.VISIBLE);
                 holder.code.setText("Select Assets Own");
@@ -5882,6 +6011,8 @@ public class Viability_Check_BL extends SimpleActivity {
                         Log.d("pl_Employee_type_Id", pl_self_ind_Employee_type_Id);
                         Log.d("pl_self_ind", pl_self_ind_Employee_type_Value);
 
+                        Pref.putCOEMPTYPE(context,pl_self_ind_Employee_type_Id);
+
                         int b = Integer.parseInt(pl_self_ind_Employee_type_Id);
                         // pl_self_individual,pl_formin_dairy,pl_self_business
                         switch(b) {
@@ -6148,6 +6279,15 @@ public class Viability_Check_BL extends SimpleActivity {
                         pl_co_self_franchise__id = franchise_ar.getJSONObject(position).getString("id");
                         pl_co_self_franchise__value = franchise_ar.getJSONObject(position).getString("value");
 
+                       if( pl_co_self_franchise__id.equals("1"))
+                       {
+                           name_of_deler_ship_cmp_co_self.setVisibility(View.VISIBLE);
+                       }else
+                       {
+                           name_of_deler_ship_cmp_co_self.setVisibility(View.GONE);
+                       }
+
+
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
@@ -6278,6 +6418,9 @@ public class Viability_Check_BL extends SimpleActivity {
 
         V_delership_company_edit_txt = delership_company_edit_txt.getText().toString();
         V_monthly_profit_edit_txt = monthly_profit_edit_txt.getText().toString();
+        V_monthly_profit_edit_txt_mani = monthly_profit_edit_txt_mani.getText().toString();
+        V_monthly_profit_edit_txt_service = monthly_profit_edit_txt_service.getText().toString();
+
 
         //
         V_business_investment_own_ser_bus_edit_txt = business_investment_own_ser_bus_edit_txt.getText().toString();
@@ -6416,10 +6559,12 @@ public class Viability_Check_BL extends SimpleActivity {
 
                  applicant1.put("bus_setup_investment",V_business_investment_own_ser_bus_edit_txt);
 
+                 applicant1.put("monthly_profit",V_monthly_profit_edit_txt_mani);
                  applicant1.put("value_of_stock",V_value_of_stock_raw_material);
                  applicant1.put("monthly_sales",V_monthly_sales_manufa);
                  applicant1.put("value_of_machineries",V_value_of_machineries);
                  applicant1.put("is_franchise",franchise__id);
+                 applicant1.put("monthly_profit",V_monthly_profit_edit_txt_service);
 
                  applicant1.put("bus_proof",business_vintage_self);
                  applicant1.put("income_proof",business_proof_self);

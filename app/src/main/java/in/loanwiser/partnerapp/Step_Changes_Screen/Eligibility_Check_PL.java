@@ -337,6 +337,7 @@ public class Eligibility_Check_PL extends SimpleActivity {
         pl_co_App_no_of_emp_edtxt = (AppCompatEditText) findViewById(R.id.pl_co_App_no_of_emp_edtxt);
         permanent_residence_auto = (AutoCompleteTextView) findViewById(R.id.permanent_residence_auto);
         emi_amount_edit_txt = (AppCompatEditText) findViewById(R.id.emi_amount_edit_txt);
+        emi_amount_edit_txt.addTextChangedListener(new NumberTextWatcher(emi_amount_edit_txt));
         other_incom_amt_edtxt = (AppCompatEditText) findViewById(R.id.other_incom_amt_edtxt);
         other_incom_amt_edtxt.addTextChangedListener(new NumberTextWatcher(other_incom_amt_edtxt));
 
@@ -432,12 +433,13 @@ public class Eligibility_Check_PL extends SimpleActivity {
          permanent_residence_auto.addTextChangedListener(new TextWatcher() {
              @Override
              public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                 Log.e("hi","hi11");
+                /* Log.e("hi","hi11");
                  String permanent_pincode = permanent_residence_auto.getText().toString();
 
                  if(permanent_pincode.length()==2){
-                     GET_Pincode1(permanent_pincode);
-                 }
+                    // GET_Pincode1(permanent_pincode);
+                     GET_AERA_POST(permanent_pincode);
+                 }*/
 
              }
 
@@ -448,7 +450,13 @@ public class Eligibility_Check_PL extends SimpleActivity {
 
              @Override
              public void afterTextChanged(Editable editable) {
+                Log.e("hi","hi11");
+                 String permanent_pincode = permanent_residence_auto.getText().toString();
 
+                 if(permanent_pincode.length()==6){
+                    // GET_Pincode1(permanent_pincode);
+                     GET_AERA_POST(permanent_pincode);
+                 }
              }
          });
 
@@ -518,7 +526,7 @@ public class Eligibility_Check_PL extends SimpleActivity {
              Toast.makeText(mCon, "Please Select Type of Employee", Toast.LENGTH_SHORT).show();
          }else {
 
-             if(Company_id.equals("1") || Company_id.equals("2") ||  Company_id.equals("2"))
+             if(Company_id.equals("1") || Company_id.equals("2") ||  Company_id.equals("3"))
              {
 
                  if (epf_id.equals("0")) {
@@ -608,7 +616,7 @@ public class Eligibility_Check_PL extends SimpleActivity {
          {
              Toast.makeText(mCon, "Select Permanent Type", Toast.LENGTH_SHORT).show();
 
-         }else if(Permanent_Resi_id.equals("1"))
+         }else if(Permanent_Resi_id.equals("2"))
          {
              validation2();
          }else
@@ -2410,10 +2418,10 @@ public class Eligibility_Check_PL extends SimpleActivity {
 
                         if(Permanent_Resi_id.equals("1"))
                         {
-                            rented.setVisibility(View.GONE);
+                            rented.setVisibility(View.VISIBLE);
                         }else if(Permanent_Resi_id.equals("2"))
                         {
-                            rented.setVisibility(View.VISIBLE);
+                            rented.setVisibility(View.GONE);
                         }else
                         {
                             rented.setVisibility(View.GONE);

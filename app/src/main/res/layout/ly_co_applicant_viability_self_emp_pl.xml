@@ -440,63 +440,64 @@
 
             </LinearLayout>
         </LinearLayout>
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <LinearLayout
-                android:id="@+id/pl_co_self_office_ownership_type_ly"
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:gravity="left"
-                    android:layout_marginLeft="2dp"
-                    android:id="@+id/pl_co_self_office_ownership_type_txt"
-                    android:layout_width="wrap_content"
-                    style="@style/LorgeText2"
-                    android:textColor="@color/colorPrimaryDark"
-                    android:textColorHint="@color/colorPrimaryDark"
-                    android:layout_height="wrap_content" />
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:gravity="left"
-                    android:layout_marginLeft="2dp"
-                    android:id="@+id/pl_co_self_office_ownership_type_txt1"
-                    android:layout_width="match_parent"
-                    style="@style/LorgeText2"
-                    android:textColor="@color/colorPrimaryDark"
-                    android:textColorHint="@color/colorPrimaryDark"
-                    android:text="@string/office_shop_area"
-                    android:layout_height="wrap_content" />
-            </LinearLayout>
-            <LinearLayout
-                android:gravity="center"
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="60dp">
 
-                <LinearLayout
-                    android:layout_marginLeft="30dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-                    <Spinner
-                        style="@style/Base.Widget.AppCompat.Spinner.Underlined"
-                        android:backgroundTint="#ff000000"
-                        android:backgroundTintMode="src_in"
-                        android:spinnerMode="dropdown"
-                        android:id="@+id/pl_co_app_ind_spinner_office_ownership_Type"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent" />
-                </LinearLayout>
-
-            </LinearLayout>
-        </LinearLayout>
         <LinearLayout
             android:visibility="gone"
             android:id="@+id/pl_co_self_ofiice_res_details"
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:id="@+id/pl_co_self_office_ownership_type_ly"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:gravity="left"
+                        android:layout_marginLeft="2dp"
+                        android:id="@+id/pl_co_self_office_ownership_type_txt"
+                        android:layout_width="wrap_content"
+                        style="@style/LorgeText2"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textColorHint="@color/colorPrimaryDark"
+                        android:layout_height="wrap_content" />
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:gravity="left"
+                        android:layout_marginLeft="2dp"
+                        android:id="@+id/pl_co_self_office_ownership_type_txt1"
+                        android:layout_width="match_parent"
+                        style="@style/LorgeText2"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textColorHint="@color/colorPrimaryDark"
+                        android:text="@string/off_residence"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+                <LinearLayout
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp">
+
+                    <LinearLayout
+                        android:layout_marginLeft="30dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+                        <Spinner
+                            style="@style/Base.Widget.AppCompat.Spinner.Underlined"
+                            android:backgroundTint="#ff000000"
+                            android:backgroundTintMode="src_in"
+                            android:spinnerMode="dropdown"
+                            android:id="@+id/pl_co_app_ind_spinner_office_ownership_Type"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent" />
+                    </LinearLayout>
+
+                </LinearLayout>
+            </LinearLayout>
             <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="match_parent"
@@ -567,7 +568,7 @@
                         style="@style/LorgeText2"
                         android:textColor="@color/colorPrimaryDark"
                         android:textColorHint="@color/colorPrimaryDark"
-                        android:text="@string/off_residence"
+                        android:text="@string/office_shop_area"
                         android:layout_height="wrap_content" />
                 </LinearLayout>
                 <LinearLayout

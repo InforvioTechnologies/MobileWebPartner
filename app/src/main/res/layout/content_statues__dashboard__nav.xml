@@ -129,6 +129,7 @@
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content">
                                         <androidx.cardview.widget.CardView
+                                            android:visibility="gone"
                                             xmlns:card_view="http://schemas.android.com/apk/res-auto"
                                             android:id="@+id/CD_document"
                                             android:layout_marginTop="3dp"
@@ -217,7 +218,7 @@
                                         </LinearLayout>
                                         <androidx.cardview.widget.CardView
                                             xmlns:card_view="http://schemas.android.com/apk/res-auto"
-                                            android:id="@+id/CD_in_progress"
+                                            android:id="@+id/Pending_withyoy"
                                             android:layout_marginLeft="3dp"
                                             android:layout_marginRight="3dp"
                                             android:layout_width="match_parent"
@@ -277,7 +278,7 @@
                                                         android:layout_width="wrap_content"
                                                         android:layout_height="match_parent">
                                                         <androidx.appcompat.widget.AppCompatTextView
-                                                            android:id="@+id/In_Progress_count"
+                                                            android:id="@+id/Pending_with_you"
                                                             android:gravity="center"
                                                             android:text="0"
                                                             style="@style/SmallText"
@@ -301,7 +302,7 @@
                                         </LinearLayout>
                                         <androidx.cardview.widget.CardView
                                             xmlns:card_view="http://schemas.android.com/apk/res-auto"
-                                            android:id="@+id/CD_approved"
+                                            android:id="@+id/CD_in_progress"
                                             android:layout_marginLeft="3dp"
                                             android:layout_marginRight="3dp"
                                             android:layout_width="match_parent"
@@ -361,7 +362,7 @@
                                                         android:layout_width="wrap_content"
                                                         android:layout_height="match_parent">
                                                         <androidx.appcompat.widget.AppCompatTextView
-                                                            android:id="@+id/Approved_count"
+                                                            android:id="@+id/in_progress"
                                                             android:gravity="center"
                                                             android:text="0"
                                                             style="@style/SmallText"
@@ -385,7 +386,7 @@
                                         </LinearLayout>
                                         <androidx.cardview.widget.CardView
                                             xmlns:card_view="http://schemas.android.com/apk/res-auto"
-                                            android:id="@+id/CD_disbursed"
+                                            android:id="@+id/CD_Rejected"
                                             android:layout_marginLeft="3dp"
                                             android:layout_marginRight="3dp"
                                             android:layout_width="match_parent"
@@ -445,7 +446,7 @@
                                                         android:layout_width="wrap_content"
                                                         android:layout_height="match_parent">
                                                         <androidx.appcompat.widget.AppCompatTextView
-                                                            android:id="@+id/Disbursed_count"
+                                                            android:id="@+id/rejected"
                                                             android:gravity="center"
                                                             android:text="0"
                                                             style="@style/SmallText"
@@ -469,7 +470,7 @@
                                         </LinearLayout>
                                         <androidx.cardview.widget.CardView
                                             xmlns:card_view="http://schemas.android.com/apk/res-auto"
-                                            android:id="@+id/CD_declined"
+                                            android:id="@+id/CD_Sanctioned"
                                             android:layout_marginLeft="3dp"
                                             android:layout_marginRight="3dp"
                                             android:layout_width="match_parent"
@@ -529,7 +530,7 @@
                                                         android:layout_width="wrap_content"
                                                         android:layout_height="match_parent">
                                                         <androidx.appcompat.widget.AppCompatTextView
-                                                            android:id="@+id/Declined_count"
+                                                            android:id="@+id/sanctioned"
                                                             android:gravity="center"
                                                             android:text="0"
                                                             style="@style/SmallText"
@@ -553,7 +554,7 @@
                                         </LinearLayout>
                                         <androidx.cardview.widget.CardView
                                             xmlns:card_view="http://schemas.android.com/apk/res-auto"
-                                            android:id="@+id/CD_closed"
+                                            android:id="@+id/CD_disbursed"
                                             android:layout_marginLeft="3dp"
                                             android:layout_marginRight="3dp"
                                             android:layout_width="match_parent"
@@ -615,7 +616,7 @@
                                                         android:layout_width="wrap_content"
                                                         android:layout_height="match_parent">
                                                         <androidx.appcompat.widget.AppCompatTextView
-                                                            android:id="@+id/Closed_count"
+                                                            android:id="@+id/disbursed"
                                                             android:gravity="center"
                                                             android:text="0"
                                                             android:textSize="18sp"

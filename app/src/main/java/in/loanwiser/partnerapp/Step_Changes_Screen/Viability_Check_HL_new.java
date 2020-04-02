@@ -79,7 +79,7 @@ public class Viability_Check_HL_new extends SimpleActivity {
             spinner_frenc_deler_sub,spinner_office_shop_setup_ind,spinner_office_shop_setup_far;
 
     private LinearLayout individual,self_business,formin_dairy,Driver_C_owner,
-             res_rented,forming,dairy,poultry,
+             res_rented,forming,dairy,poultry,residence_live,
             Retail_wholesale_business,service_business,manufacturing,ofiice_res_details;
     private AppCompatButton lead_viy_step2;
 
@@ -174,14 +174,14 @@ public class Viability_Check_HL_new extends SimpleActivity {
             self_ind_vehilce_type,self_F_what_crop;
     RemoveCommas removeClass;
 
-    Spinner co_applicant_spinner,co_applicant_emp_spinner,spinner_residence_area;
+    Spinner co_applicant_spinner,co_applicant_emp_spinner,spinner_residence_area,property_area;
     String office_id,office_value,residence_area,residence_area_district_id,residence_state_id,
             office_residence_area,office_residence_area_district_id,office_residence_state_id,BL_ind_vocaton_id,
             BL_ind_vocaton_value;
     String self_own_vintage_bus_str,self_own_bus_str,self_co_assets_owned_str,vehilce_str,what_kind_crop_str;
 
     LinearLayout co_applicant_emp_type,co_applicant_salaried_employed,co_applicant_self_employed,
-            BL_self_office_ownership_type_ly,co_applicant_ly;
+            BL_self_office_ownership_type_ly,co_applicant_ly,name_of_deler_ship_cmp;
 
     Spinner BL_self_bus_vintage_proof,BL_self_bussiness_proof,BL_self_asstes_owned_spinner,BL_spinner_office_shop_setup_ind,
             office_spinner_area;
@@ -193,7 +193,7 @@ public class Viability_Check_HL_new extends SimpleActivity {
             V_Selling_Price,V_Profit_affter_selling,V_no_of_years_in_work_P,V_avg_monthly_income_Poultry,
             V_delership_company_edit_txt,V_monthly_profit_edit_txt,V_business_investment_own_ser_bus_edit_txt,V_value_of_stock_raw_material,
             V_monthly_sales_manufa,V_value_of_machineries,V_number_of_years_in_work_retails,V_average_monthly_income_own_business,
-            V_office_residence_pincode_edite_txt,V_residence_pincode_edite_txt;
+            V_office_residence_pincode_edite_txt,V_residence_pincode_edite_txt,Property_area;
 
     String user_id,transaction_id;
 
@@ -220,7 +220,8 @@ public class Viability_Check_HL_new extends SimpleActivity {
             co_self_bus_vintage_proof,co_self_bussiness_proof,co_self_asstes_owned;
 
     AppCompatEditText pl_Ly_co_app_self_edit_txt_name,pl_Ly_co_app_self_age_edit_txt,pl_co_app_ind_no_of_vehicle_edit_txt,
-            pl_co_app_ind_no_of_years_work_ind_edit_txt,pl_co_app_ind_avg_monthly_incom_edit_txt;
+            pl_co_app_ind_no_of_years_work_ind_edit_txt,pl_co_app_ind_avg_monthly_incom_edit_txt,
+            monthly_profit_edit_txt_service,monthly_profit_edit_txt_mani;
 
     AppCompatAutoCompleteTextView company_pincode_txt,residence_pincode1_edit_txt,pl_co_app_slrd_company_pincode_txt,
             pl_co_app_office_residence_pincode_edite_txt,property_pincode1_edit_txt;
@@ -241,7 +242,8 @@ public class Viability_Check_HL_new extends SimpleActivity {
             pl_co_own_Office_Shop__id,pl_co_own_Office_Shop__value;
 
     LinearLayout pl_self_ind_Driver_C_owner,pl_self_individual,pl_formin_dairy,pl_self_business,pl_co_self_ofiice_res_details,
-            pl_forming,pl_dairy,pl_poultry,pl_co_Retail_wholesale_business,pl_service_business,pl_manufacturing;
+            pl_forming,pl_dairy,pl_poultry,pl_co_Retail_wholesale_business,pl_service_business,pl_manufacturing,
+            name_of_deler_ship_cmp_co_self;
     AppCompatTextView pl_co_app_ind_vehicle_type_text;
     ////////
 
@@ -286,7 +288,7 @@ public class Viability_Check_HL_new extends SimpleActivity {
             ST_pl_co_P_no_of_years_in_work_P,ST_pl_co_p_avg_monthly_income_Poultry, ST_pl_co_own_self_delership_company_edit_txt,ST_pl_co_own_self_monthly_profit_edit_txt,
             ST_pl_co_monthly_income_own_ser_bus_edit_txt,ST_pl_co_no_of_employee_own_ser_bus_edit_txt,ST_pl_co_business_investment_own_ser_bus_edit_txt,
             ST_pl_co_value_of_stock_raw_material,ST_pl_co_monthly_sales_manufa,ST_pl_co_value_of_machineries,ST_pl_co_Own_number_of_years_in_work_retails,
-            ST_pl_co_own_average_monthly_income_own_business;
+            ST_pl_co_own_average_monthly_income_own_business,Property_area_id;
 
 
 
@@ -337,7 +339,8 @@ public class Viability_Check_HL_new extends SimpleActivity {
 
     String salary_type,loan_type_id, hl_salried_residence_id,hl_salried_residence_Value,
             res_area_id,res_area_dt_id,res_area_st_id,compny_area_id,compny_area_dt_id,compny_area_st_id;
-    LinearLayout salaried,self_employed,pro_details,propert_identified_ly,property_identified_Ly1;
+    LinearLayout salaried,self_employed,pro_details,propert_identified_ly,property_identified_Ly1,
+            DA_approval_ly;
 
     //salaried
     Spinner spinner_residence_type_hl_salaried,spinn_salary_crt_mtd,res_spinn_area,
@@ -392,7 +395,7 @@ public class Viability_Check_HL_new extends SimpleActivity {
         UISCREEN();
         Account_Listings_Details();
         Font();
-     //  Click();
+       Click();
 
         vehicle_type_text = (AppCompatTextView) findViewById(R.id.vehicle_type_text);
 
@@ -407,16 +410,16 @@ public class Viability_Check_HL_new extends SimpleActivity {
 
         removeClass = new RemoveCommas();
 
-        lead_viy_step2.setOnClickListener(new View.OnClickListener() {
+      /*  lead_viy_step2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(Viability_Check_HL_new.this, Eligibility_HL_New.class);
                 startActivity(intent);
                 finish();
             }
-        });
+        });*/
 
-        vehicle_type_text.setOnClickListener(new View.OnClickListener() {
+      /*  vehicle_type_text.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(Viability_Check_HL_new.this, Multi_Select_checkbox.class);
@@ -426,7 +429,7 @@ public class Viability_Check_HL_new extends SimpleActivity {
 
             }
         });
-
+*/
 
 
         if(loan_type_id.equals("1") || loan_type_id.equals("3") || loan_type_id.equals("4"))
@@ -440,6 +443,15 @@ public class Viability_Check_HL_new extends SimpleActivity {
             propert_identified_ly.setVisibility(View.GONE);
             property_identified_Ly1.setVisibility(View.VISIBLE);
         }
+        if(loan_type_id.equals("4") || loan_type_id.equals("3"))
+        {
+            DA_approval_ly.setVisibility(View.VISIBLE);
+        }else
+        {
+            DA_approval_ly.setVisibility(View.GONE);
+
+        }
+
 
         if(salary_type.equals("0"))
         {
@@ -474,6 +486,7 @@ public class Viability_Check_HL_new extends SimpleActivity {
 
         propert_identified_ly = (LinearLayout) findViewById(R.id.propert_identified_ly);
         property_identified_Ly1 = (LinearLayout) findViewById(R.id.property_identified_Ly1);
+        DA_approval_ly = (LinearLayout) findViewById(R.id.DA_approval_ly);
 
         spi_vocation_type_ =(Spinner) findViewById(R.id.spi_vocation_type_);
         spinner_residence_type =(Spinner) findViewById(R.id.spinner_residence_type);
@@ -489,6 +502,7 @@ public class Viability_Check_HL_new extends SimpleActivity {
 
         co_applicant_spinner = (Spinner) findViewById(R.id.co_applicant_spinner);
         spinner_residence_area = (Spinner) findViewById(R.id.spinner_residence_area);
+        property_area = (Spinner) findViewById(R.id.property_area);
         co_applicant_emp_spinner = (Spinner) findViewById(R.id.co_applicant_emp_spinner);
        // pl_Ly_co_app_self_emp_type = (Spinner) findViewById(R.id.pl_Ly_co_app_self_emp_type);
 
@@ -515,6 +529,7 @@ public class Viability_Check_HL_new extends SimpleActivity {
         self_business = (LinearLayout) findViewById(R.id.self_business);
         Driver_C_owner = (LinearLayout) findViewById(R.id.Driver_C_owner);
         res_rented = (LinearLayout) findViewById(R.id.res_rented);
+        residence_live = (LinearLayout) findViewById(R.id.residence_live);
         forming = (LinearLayout) findViewById(R.id.forming);
         dairy = (LinearLayout) findViewById(R.id.dairy);
         poultry = (LinearLayout) findViewById(R.id.poultry);
@@ -538,6 +553,7 @@ public class Viability_Check_HL_new extends SimpleActivity {
         manufacturing = (LinearLayout) findViewById(R.id.manufacturing);
         ofiice_res_details = (LinearLayout) findViewById(R.id.ofiice_res_details);
         BL_self_office_ownership_type_ly = (LinearLayout) findViewById(R.id.BL_self_office_ownership_type_ly);
+        name_of_deler_ship_cmp = (LinearLayout) findViewById(R.id.name_of_deler_ship_cmp);
 
         //co_applicant_emp_type,co_applicant_salaried_employed,co_applicant_self_employed;
         co_applicant_emp_type = (LinearLayout) findViewById(R.id.co_applicant_emp_type);
@@ -662,15 +678,23 @@ public class Viability_Check_HL_new extends SimpleActivity {
         no_of_years_work_ind_edit_txt = (AppCompatEditText) findViewById(R.id.no_of_years_work_ind_edit_txt);
 
         no_of_acres_edit_txt = (AppCompatEditText) findViewById(R.id.no_of_acres_edit_txt);
+
         anual_income_edit_txt = (AppCompatEditText) findViewById(R.id.anual_income_edit_txt);
+        anual_income_edit_txt.addTextChangedListener(new NumberTextWatcher(anual_income_edit_txt));
+
         daily_income_f = (AppCompatEditText) findViewById(R.id.daily_income_f);
+        daily_income_f.addTextChangedListener(new NumberTextWatcher(daily_income_f));
+
         number_of_years_in_work = (AppCompatEditText) findViewById(R.id.number_of_years_in_work);
         average_monthly_income = (AppCompatEditText) findViewById(R.id.average_monthly_income);
+        average_monthly_income.addTextChangedListener(new NumberTextWatcher(average_monthly_income));
 
         no_of_birds_edit_txt = (AppCompatEditText) findViewById(R.id.no_of_birds_edit_txt);
         supply_by_who = (AppCompatEditText) findViewById(R.id.supply_by_who);
 
         avg_monthly_incom_edit_txt = (AppCompatEditText) findViewById(R.id.avg_monthly_incom_edit_txt);
+        avg_monthly_incom_edit_txt.addTextChangedListener(new NumberTextWatcher(avg_monthly_incom_edit_txt));
+
         actual_business_ind_edit_txt = (AppCompatEditText) findViewById(R.id.actual_business_ind_edit_txt);
         actual_business_edit_forming_txt = (AppCompatEditText) findViewById(R.id.actual_business_edit_forming_txt);
         no_of_animals = (AppCompatEditText) findViewById(R.id.no_of_animals);
@@ -678,30 +702,46 @@ public class Viability_Check_HL_new extends SimpleActivity {
         no_of_liters_edit_txt = (AppCompatEditText) findViewById(R.id.no_of_liters_edit_txt);
         no_of_years_in_works = (AppCompatEditText) findViewById(R.id.no_of_years_in_works);
         avg_monthly_income = (AppCompatEditText) findViewById(R.id.avg_monthly_income);
+        avg_monthly_income.addTextChangedListener(new NumberTextWatcher(avg_monthly_income));
+
         Selling_Price = (AppCompatEditText) findViewById(R.id.Selling_Price);
+        Selling_Price.addTextChangedListener(new NumberTextWatcher(Selling_Price));
+
         Profit_affter_selling = (AppCompatEditText) findViewById(R.id.Profit_affter_selling);
+        Profit_affter_selling.addTextChangedListener(new NumberTextWatcher(Profit_affter_selling));
+
         no_of_years_in_work_P = (AppCompatEditText) findViewById(R.id.no_of_years_in_work_P);
         avg_monthly_income_Poultry = (AppCompatEditText) findViewById(R.id.avg_monthly_income_Poultry);
-
+        avg_monthly_income_Poultry.addTextChangedListener(new NumberTextWatcher(avg_monthly_income_Poultry));
 
         delership_company_edit_txt = (AppCompatEditText) findViewById(R.id.delership_company_edit_txt);
         monthly_profit_edit_txt = (AppCompatEditText) findViewById(R.id.monthly_profit_edit_txt);
+        monthly_profit_edit_txt.addTextChangedListener(new NumberTextWatcher(monthly_profit_edit_txt));
 
        monthly_income_own_ser_bus_edit_txt = (AppCompatEditText) findViewById(R.id.monthly_income_own_ser_bus_edit_txt);
+        monthly_income_own_ser_bus_edit_txt.addTextChangedListener(new NumberTextWatcher(monthly_income_own_ser_bus_edit_txt));
+
        no_of_employee_own_ser_bus_edit_txt = (AppCompatEditText) findViewById(R.id.no_of_employee_own_ser_bus_edit_txt);
         business_investment_own_ser_bus_edit_txt = (AppCompatEditText) findViewById(R.id.business_investment_own_ser_bus_edit_txt);
-
+        business_investment_own_ser_bus_edit_txt.addTextChangedListener(new NumberTextWatcher(business_investment_own_ser_bus_edit_txt));
 
 
         value_of_stock_raw_material = (AppCompatEditText) findViewById(R.id.value_of_stock_raw_material);
+        value_of_stock_raw_material.addTextChangedListener(new NumberTextWatcher(value_of_stock_raw_material));
+
         monthly_sales_manufa = (AppCompatEditText) findViewById(R.id.monthly_sales_manufa);
+        monthly_sales_manufa.addTextChangedListener(new NumberTextWatcher(monthly_sales_manufa));
+
         monthly_profit_manufa = (AppCompatEditText) findViewById(R.id.monthly_profit_manufa);
+        monthly_profit_manufa.addTextChangedListener(new NumberTextWatcher(monthly_profit_manufa));
+
         value_of_machineries = (AppCompatEditText) findViewById(R.id.value_of_machineries);
+        value_of_machineries.addTextChangedListener(new NumberTextWatcher(value_of_machineries));
 
         number_of_years_in_work_retails = (AppCompatEditText) findViewById(R.id.number_of_years_in_work_retails);
         average_monthly_income_own_business = (AppCompatEditText) findViewById(R.id.average_monthly_income_own_business);
 
-
+        average_monthly_income_own_business.addTextChangedListener(new NumberTextWatcher(average_monthly_income_own_business));
         /// co applicant
 
         co_applicant_salaried_employed = (LinearLayout) findViewById(R.id.co_applicant_salaried_employed);
@@ -767,37 +807,92 @@ public class Viability_Check_HL_new extends SimpleActivity {
         pl_Ly_co_app_self_edit_txt_name = (AppCompatEditText) findViewById(R.id.pl_Ly_co_app_self_edit_txt_name);
         pl_Ly_co_app_self_age_edit_txt = (AppCompatEditText) findViewById(R.id.pl_Ly_co_app_self_age_edit_txt);
         pl_co_app_ind_no_of_vehicle_edit_txt = (AppCompatEditText) findViewById(R.id.pl_co_app_ind_no_of_vehicle_edit_txt);
+
         pl_co_app_ind_avg_monthly_incom_edit_txt = (AppCompatEditText) findViewById(R.id.pl_co_app_ind_avg_monthly_incom_edit_txt);
+        pl_co_app_ind_avg_monthly_incom_edit_txt.addTextChangedListener(new NumberTextWatcher(pl_co_app_ind_avg_monthly_incom_edit_txt));
+
+
         pl_co_app_ind_no_of_years_work_ind_edit_txt = (AppCompatEditText) findViewById(R.id.pl_co_app_ind_no_of_years_work_ind_edit_txt);
         pl_Ly_co_app_self_emp_type = (Spinner) findViewById(R.id.pl_Ly_co_app_self_emp_type);
 
         pl_co_app_slrd_name_edite_txt = (AppCompatEditText) findViewById(R.id.pl_co_app_slrd_name_edite_txt);
         pl_co_app_slrd_age_edite_txt = (AppCompatEditText) findViewById(R.id.pl_co_app_slrd_age_edite_txt);
+
+
         pl_co_app_slrd_month_net_slrd_edite_txt = (AppCompatEditText) findViewById(R.id.pl_co_app_slrd_month_net_slrd_edite_txt);
+        pl_co_app_slrd_month_net_slrd_edite_txt.addTextChangedListener(new NumberTextWatcher(pl_co_app_slrd_month_net_slrd_edite_txt));
+
         pl_co_app_slrd_experience_in_current_cmpy = (AppCompatEditText) findViewById(R.id.pl_co_app_slrd_experience_in_current_cmpy);
         pl_co_app_slrd_total_experience_edit_txt = (AppCompatEditText) findViewById(R.id.pl_co_app_slrd_total_experience_edit_txt);
         pl_co_app_f_no_of_acres_edit_txt = (AppCompatEditText) findViewById(R.id.pl_co_app_f_no_of_acres_edit_txt);
+
         pl_co_app_F_anual_income_edit_txt = (AppCompatEditText) findViewById(R.id.pl_co_app_F_anual_income_edit_txt);
+        pl_co_app_F_anual_income_edit_txt.addTextChangedListener(new NumberTextWatcher(pl_co_app_F_anual_income_edit_txt));
+
         pl_co_app_f_daily_income_f = (AppCompatEditText) findViewById(R.id.pl_co_app_f_daily_income_f);
+        pl_co_app_f_daily_income_f.addTextChangedListener(new NumberTextWatcher(pl_co_app_f_daily_income_f));
+
         pl_co_app_F_number_of_years_in_work = (AppCompatEditText) findViewById(R.id.pl_co_app_F_number_of_years_in_work);
+
         pl_co_app_F_average_monthly_income = (AppCompatEditText) findViewById(R.id.pl_co_app_F_average_monthly_income);
+        pl_co_app_F_average_monthly_income.addTextChangedListener(new NumberTextWatcher(pl_co_app_F_average_monthly_income));
+
         pl_co_D_no_of_animals = (AppCompatEditText) findViewById(R.id.pl_co_D_no_of_animals);
         pl_co_D_no_of_liters_edit_txt = (AppCompatEditText) findViewById(R.id.pl_co_D_no_of_liters_edit_txt);
         pl_co_app_self_D_no_of_years_in_works = (AppCompatEditText) findViewById(R.id.pl_co_app_self_D_no_of_years_in_works);
+
         pl_co_app_D_avg_monthly_income = (AppCompatEditText) findViewById(R.id.pl_co_app_D_avg_monthly_income);
+        pl_co_app_D_avg_monthly_income.addTextChangedListener(new NumberTextWatcher(pl_co_app_D_avg_monthly_income));
+
         pl_co_P_no_of_birds_edit_txt = (AppCompatEditText) findViewById(R.id.pl_co_P_no_of_birds_edit_txt);
         pl_co_P_supply_by_who = (AppCompatEditText) findViewById(R.id.pl_co_P_supply_by_who);
+
+
         pl_co_P_Selling_Price = (AppCompatEditText) findViewById(R.id.pl_co_P_Selling_Price);
+        pl_co_P_Selling_Price.addTextChangedListener(new NumberTextWatcher(pl_co_P_Selling_Price));
+
         pl_co_p_Profit_affter_selling = (AppCompatEditText) findViewById(R.id.pl_co_p_Profit_affter_selling);
+        pl_co_p_Profit_affter_selling.addTextChangedListener(new NumberTextWatcher(pl_co_p_Profit_affter_selling));
+
+
         pl_co_P_no_of_years_in_work_P = (AppCompatEditText) findViewById(R.id.pl_co_P_no_of_years_in_work_P);
+
         pl_co_p_avg_monthly_income_Poultry = (AppCompatEditText) findViewById(R.id.pl_co_p_avg_monthly_income_Poultry);
+        pl_co_p_avg_monthly_income_Poultry.addTextChangedListener(new NumberTextWatcher(pl_co_p_avg_monthly_income_Poultry));
+
+
+
+
+        monthly_profit_edit_txt_service = (AppCompatEditText) findViewById(R.id.monthly_profit_edit_txt_service);
+        monthly_profit_edit_txt_service.addTextChangedListener(new NumberTextWatcher(monthly_profit_edit_txt_service));
+
+        monthly_profit_edit_txt_mani = (AppCompatEditText) findViewById(R.id.monthly_profit_edit_txt_mani);
+        monthly_profit_edit_txt_mani.addTextChangedListener(new NumberTextWatcher(monthly_profit_edit_txt_mani));
+
         pl_co_own_self_monthly_profit_edit_txt = (AppCompatEditText) findViewById(R.id.pl_co_own_self_monthly_profit_edit_txt);
+        pl_co_own_self_monthly_profit_edit_txt.addTextChangedListener(new NumberTextWatcher(pl_co_own_self_monthly_profit_edit_txt));
+
+
         pl_co_monthly_income_own_ser_bus_edit_txt = (AppCompatEditText) findViewById(R.id.pl_co_monthly_income_own_ser_bus_edit_txt);
+        pl_co_monthly_income_own_ser_bus_edit_txt.addTextChangedListener(new NumberTextWatcher(pl_co_monthly_income_own_ser_bus_edit_txt));
+
+
         pl_co_no_of_employee_own_ser_bus_edit_txt = (AppCompatEditText) findViewById(R.id.pl_co_no_of_employee_own_ser_bus_edit_txt);
+
         pl_co_business_investment_own_ser_bus_edit_txt = (AppCompatEditText) findViewById(R.id.pl_co_business_investment_own_ser_bus_edit_txt);
+        pl_co_business_investment_own_ser_bus_edit_txt.addTextChangedListener(new NumberTextWatcher(pl_co_business_investment_own_ser_bus_edit_txt));
+
+
         pl_co_value_of_stock_raw_material = (AppCompatEditText) findViewById(R.id.pl_co_value_of_stock_raw_material);
+        pl_co_value_of_stock_raw_material.addTextChangedListener(new NumberTextWatcher(pl_co_value_of_stock_raw_material));
+
         pl_co_monthly_sales_manufa = (AppCompatEditText) findViewById(R.id.pl_co_monthly_sales_manufa);
+        pl_co_monthly_sales_manufa.addTextChangedListener(new NumberTextWatcher(pl_co_monthly_sales_manufa));
+
         pl_co_value_of_machineries = (AppCompatEditText) findViewById(R.id.pl_co_value_of_machineries);
+        pl_co_value_of_machineries.addTextChangedListener(new NumberTextWatcher(pl_co_value_of_machineries));
+
+
         pl_co_Own_number_of_years_in_work_retails = (AppCompatEditText) findViewById(R.id.pl_co_Own_number_of_years_in_work_retails);
         pl_co_own_average_monthly_income_own_business = (AppCompatEditText) findViewById(R.id.pl_co_own_average_monthly_income_own_business);
 
@@ -822,6 +917,7 @@ public class Viability_Check_HL_new extends SimpleActivity {
 
 
         pl_co_self_ofiice_res_details =( LinearLayout) findViewById(R.id.pl_co_self_ofiice_res_details);
+        name_of_deler_ship_cmp_co_self =( LinearLayout) findViewById(R.id.name_of_deler_ship_cmp_co_self);
 
 
         pl_forming =( LinearLayout) findViewById(R.id.pl_forming);
@@ -864,11 +960,12 @@ public class Viability_Check_HL_new extends SimpleActivity {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
-                String workpincode = residence_pincode_edite_txt.getText().toString();
+              /*  String workpincode = residence_pincode_edite_txt.getText().toString();
 
-                if (workpincode.length() == 2) {
-                    GET_Pincode1(workpincode);
-                }
+                if (workpincode.length() == 6) {
+                  //  GET_Pincode1(workpincode);
+                    GET_AERA_POST(workpincode);
+                }*/
 
             }
 
@@ -879,6 +976,44 @@ public class Viability_Check_HL_new extends SimpleActivity {
 
             @Override
             public void afterTextChanged(Editable editable) {
+                String workpincode = residence_pincode_edite_txt.getText().toString();
+
+                if (workpincode.length() == 6) {
+                    //  GET_Pincode1(workpincode);
+                    GET_AERA_POST(workpincode);
+                }
+            }
+        });
+
+
+
+        property_pincode1_edit_txt.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+                /*String workpincode = property_pincode1_edit_txt.getText().toString();
+
+                if (workpincode.length() == 2) {
+                   // GET_Pincode1(workpincode);
+                    GET_AERA_POST_property(workpincode);
+                }*/
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+                String workpincode = property_pincode1_edit_txt.getText().toString();
+
+                if (workpincode.length() == 6) {
+                    // GET_Pincode1(workpincode);
+                    GET_AERA_POST_property(workpincode);
+                }
 
             }
         });
@@ -886,12 +1021,13 @@ public class Viability_Check_HL_new extends SimpleActivity {
         residence_pincode1_edit_txt.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                Log.e("hi","hi11");
+               /* Log.e("hi","hi11");
                 String workpincode = residence_pincode1_edit_txt.getText().toString();
 
-                if(workpincode.length()==2){
-                    GET_Pincode1(workpincode);
-                }
+                if(workpincode.length()==6){
+                   // GET_Pincode1(workpincode);
+                    GET_AERA_POST_app_salaried(workpincode);
+                }*/
             }
 
             @Override
@@ -901,19 +1037,26 @@ public class Viability_Check_HL_new extends SimpleActivity {
 
             @Override
             public void afterTextChanged(Editable editable) {
+                Log.e("hi","hi11");
+                String workpincode = residence_pincode1_edit_txt.getText().toString();
 
+                if(workpincode.length()==6){
+                    // GET_Pincode1(workpincode);
+                    GET_AERA_POST_app_salaried(workpincode);
+                }
             }
         });
 
         company_pincode_txt.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                Log.e("hi","hi11");
+               /* Log.e("hi","hi11");
                 String workpincode = company_pincode_txt.getText().toString();
 
                 if(workpincode.length()==2){
-                    GET_Pincode1(workpincode);
-                }
+                  //  GET_Pincode1(workpincode);
+                    GET_AERA_POST_app_salaried_company(workpincode);
+                }*/
 
             }
 
@@ -924,7 +1067,13 @@ public class Viability_Check_HL_new extends SimpleActivity {
 
             @Override
             public void afterTextChanged(Editable editable) {
+                Log.e("hi","hi11");
+                String workpincode = company_pincode_txt.getText().toString();
 
+                if(workpincode.length()==6){
+                    //  GET_Pincode1(workpincode);
+                    GET_AERA_POST_app_salaried_company(workpincode);
+                }
             }
         });
 
@@ -932,11 +1081,12 @@ public class Viability_Check_HL_new extends SimpleActivity {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
-                String workpincode = office_residence_pincode_edite_txt.getText().toString();
+              /*  String workpincode = office_residence_pincode_edite_txt.getText().toString();
 
                 if (workpincode.length() == 2) {
-                    GET_Pincode1(workpincode);
-                }
+                   // GET_Pincode1(workpincode);
+                    GET_AERA_POST1(workpincode);
+                }*/
             }
 
             @Override
@@ -946,7 +1096,12 @@ public class Viability_Check_HL_new extends SimpleActivity {
 
             @Override
             public void afterTextChanged(Editable editable) {
+                String workpincode = office_residence_pincode_edite_txt.getText().toString();
 
+                if (workpincode.length() == 6) {
+                    // GET_Pincode1(workpincode);
+                    GET_AERA_POST1(workpincode);
+                }
             }
         });
 
@@ -955,11 +1110,12 @@ public class Viability_Check_HL_new extends SimpleActivity {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
-                String workpincode = pl_co_app_office_residence_pincode_edite_txt.getText().toString();
+               /* String workpincode = pl_co_app_office_residence_pincode_edite_txt.getText().toString();
 
                 if (workpincode.length() == 2) {
-                    co_GET_Pincode1(workpincode);
-                }
+                  //  co_GET_Pincode1(workpincode);
+                    GET_AERA_POST3(workpincode);
+                }*/
 
             }
 
@@ -970,6 +1126,13 @@ public class Viability_Check_HL_new extends SimpleActivity {
 
             @Override
             public void afterTextChanged(Editable editable) {
+
+                String workpincode = pl_co_app_office_residence_pincode_edite_txt.getText().toString();
+
+                if (workpincode.length() == 2) {
+                    //  co_GET_Pincode1(workpincode);
+                    GET_AERA_POST3(workpincode);
+                }
 
             }
         });
@@ -982,8 +1145,8 @@ public class Viability_Check_HL_new extends SimpleActivity {
                 String workpincode = pl_co_app_slrd_company_pincode_txt.getText().toString();
 
                 if(workpincode.length()==2){
-                    co_GET_Pincode1(workpincode);
-
+                   // co_GET_Pincode1(workpincode);
+                    GET_AERA_POST2(workpincode);
                 }
             }
 
@@ -994,7 +1157,13 @@ public class Viability_Check_HL_new extends SimpleActivity {
 
             @Override
             public void afterTextChanged(Editable editable) {
+                Log.e("hi","hi11");
+                String workpincode = pl_co_app_slrd_company_pincode_txt.getText().toString();
 
+                if(workpincode.length()==6){
+                    // co_GET_Pincode1(workpincode);
+                    GET_AERA_POST2(workpincode);
+                }
             }
         });
 
@@ -1043,11 +1212,11 @@ public class Viability_Check_HL_new extends SimpleActivity {
                                             Toast.makeText(context,"Please Select Bulding Approval",Toast.LENGTH_SHORT).show();
 
                                         }else {
-                                            if(DA_Bulding_ID.equals("0"))
+                                           /* if(DA_Bulding_ID.equals("0"))
                                             {
                                                 Toast.makeText(context,"Please Select DA Approval",Toast.LENGTH_SHORT).show();
 
-                                            }else {
+                                            }else {*/
                                                 if (!Validate_Property_pincode()) {
                                                     return;
                                                 }
@@ -1060,7 +1229,7 @@ public class Viability_Check_HL_new extends SimpleActivity {
                                                 {
                                                     Applicant_self();
                                                 }
-                                            }
+                                           /* }*/
                                         }
 
                                     }
@@ -1112,11 +1281,11 @@ public class Viability_Check_HL_new extends SimpleActivity {
                                         Toast.makeText(context,"Please Select Bulding Approval",Toast.LENGTH_SHORT).show();
 
                                     }else {
-                                        if(DA_Bulding_ID.equals("0"))
+                                       /* if(DA_Bulding_ID.equals("0"))
                                         {
                                             Toast.makeText(context,"Please Select DA Approval",Toast.LENGTH_SHORT).show();
 
-                                        }else {
+                                        }else {*/
 
                                             if (!Validate_Property_pincode()) {
                                                 return;
@@ -1129,7 +1298,8 @@ public class Viability_Check_HL_new extends SimpleActivity {
                                             {
                                                 Applicant_self();
                                             }
-                                        }
+
+                                      /*  }*/
                                     }
 
                                 }
@@ -1401,7 +1571,7 @@ public class Viability_Check_HL_new extends SimpleActivity {
             if (!average_monthly_income()) {
                 return;
             }
-
+        commValidation();
     }
 
     private void validate_dairy()
@@ -1429,7 +1599,7 @@ public class Viability_Check_HL_new extends SimpleActivity {
                     return;
                 }
             }
-
+        commValidation();
     }
 
     private void validation_poultry()
@@ -1458,7 +1628,7 @@ public class Viability_Check_HL_new extends SimpleActivity {
                 return;
             }
 
-
+        commValidation();
     }
 
     private void Validate_own_Business()
@@ -1467,20 +1637,24 @@ public class Viability_Check_HL_new extends SimpleActivity {
         {
             Toast.makeText(context,"please Select the business type",Toast.LENGTH_SHORT).show();
 
-        }else
-        {
-
-                    if(business_own_type_id.equals("1"))
+        }else if(business_own_type_id.equals("1"))
                     {
                         if(franchise__id.equals("0"))
                         {
                             Toast.makeText(context,"please Select Franchise/dealer/sub dealer type",Toast.LENGTH_SHORT).show();
 
-                        }else
+                        }else if(franchise__id.equals("1"))
                         {
                             if (!Delership_Company()) {
                                 return;
                             }
+                            if (!Monthly_Profit()) {
+                                return;
+                            }
+
+                            Own_Bus_No_year_com_validation();
+                        } else
+                        {
                             if (!Monthly_Profit()) {
                                 return;
                             }
@@ -1491,6 +1665,9 @@ public class Viability_Check_HL_new extends SimpleActivity {
                     }else if(business_own_type_id.equals("2"))
                     {
 
+                        if (!Validate_monthly_profit_edit_txt_service()) {
+                            return;
+                        }
                         if (!business_investment_own_ser_bus_Work()) {
                             return;
                         }
@@ -1498,6 +1675,9 @@ public class Viability_Check_HL_new extends SimpleActivity {
 
                     }else if(business_own_type_id.equals("3"))
                     {
+                        if (!Validate_monthly_profit_edit_txt_mani()) {
+                            return;
+                        }
 
                         if (!value_of_stock_raw_material_Work()) {
                             return;
@@ -1514,7 +1694,7 @@ public class Viability_Check_HL_new extends SimpleActivity {
 
                     }
 
-        }
+
     }
 
     private void Own_Bus_No_year_com_validation()
@@ -1526,7 +1706,7 @@ public class Viability_Check_HL_new extends SimpleActivity {
         if (!Avg_monthly_income_own_Bus()) {
             return;
         }
-
+        commValidation();
     }
 
     private void commValidation()
@@ -1577,7 +1757,7 @@ public class Viability_Check_HL_new extends SimpleActivity {
         {
             Toast.makeText(context,"please Select office Setup",Toast.LENGTH_SHORT).show();
 
-        }else
+        }else if(office_id.equals("2"))
         {
             if(off_residence_id.equals("0"))
             {
@@ -1612,6 +1792,29 @@ public class Viability_Check_HL_new extends SimpleActivity {
                 resi_val();
 
             }
+        }else
+        {
+            self_assets_owned_buff = new StringBuffer();
+
+            ArrayList<IncomeProofPOJO>  self_assets_ownr = Assets_own_adapter.Assets_own_;
+            for(int i=0;i<self_assets_ownr.size();i++){
+                IncomeProofPOJO country = self_assets_ownr.get(i);
+                if(country.isIP_selected()){
+                    self_assets_owned_buff.append(country.getIP_id()+ ",");
+                    // String responseID1 = String.valueOf(co_self_Assets_owned_list);
+                }
+            }
+            if (self_assets_owned_buff.length()> 0) {
+
+                String responseID1 = String.valueOf(self_assets_owned_buff);
+                self_co_assets_owned_str = removeClass.cleanUpCommas(responseID1);
+                self_co_assets_owned_SA = self_co_assets_owned_str.split(",");
+
+                self_co_assets_ = new JSONArray();
+                self_co_assets_ = new JSONArray(Arrays.asList(self_co_assets_owned_SA));
+            }
+
+            resi_val();
         }
 
 
@@ -1714,27 +1917,7 @@ public class Viability_Check_HL_new extends SimpleActivity {
                         assets_owned_salary_array = new JSONArray(Arrays.asList(assets_owned_salaried_SA));
                     }
 
-
-                    if(residence_area == null)
-                    {
-                        Toast.makeText(getApplicationContext(), "Type pin code slowly and select pin code from Dropdown", Toast.LENGTH_SHORT).show();
-                     //   Objs.a.showToast(getContext(),"Type pin code slowly and select pin code from Dropdown");
-                    }
-                    else
-                    {
-                        if(office_residence_area == null)
-                        {
-                            Toast.makeText(getApplicationContext(), "Type pin code slowly and select pin code from Dropdown", Toast.LENGTH_SHORT).show();
-                            //   Objs.a.showToast(getContext(),"Type pin code slowly and select pin code from Dropdown");
-                        }
-                        else
-                        {
-                            lead_viability();
-                        }
-
-
-                    }
-
+                    lead_viability();
 
                 }
 
@@ -1810,9 +1993,6 @@ public class Viability_Check_HL_new extends SimpleActivity {
 
             }
 
-           /* Intent intent = new Intent(Viability_Check_PL.this, Eligibility_Check_PL.class);
-            startActivity(intent);
-            finish();*/
         }
     }
     private void co_validation_individual()
@@ -2574,6 +2754,32 @@ public class Viability_Check_HL_new extends SimpleActivity {
         if (monthly_profit_edit_txt.getText().toString().isEmpty()) {
             monthly_profit_edit_txt.setError(getText(R.string.error_profit_af_sel));
             monthly_profit_edit_txt.requestFocus();
+            return false;
+        } else {
+
+            //inputLayoutLname.setErrorEnabled(false);
+        }
+        return true;
+    }
+
+    private boolean Validate_monthly_profit_edit_txt_service(){
+
+        if (monthly_profit_edit_txt_service.getText().toString().isEmpty()) {
+            monthly_profit_edit_txt_service.setError(getText(R.string.error_profit_af_sel));
+            monthly_profit_edit_txt_service.requestFocus();
+            return false;
+        } else {
+
+            //inputLayoutLname.setErrorEnabled(false);
+        }
+        return true;
+    }
+
+    private boolean Validate_monthly_profit_edit_txt_mani(){
+
+        if (monthly_profit_edit_txt_mani.getText().toString().isEmpty()) {
+            monthly_profit_edit_txt_mani.setError(getText(R.string.error_profit_af_sel));
+            monthly_profit_edit_txt_mani.requestFocus();
             return false;
         } else {
 
@@ -3399,6 +3605,7 @@ public class Viability_Check_HL_new extends SimpleActivity {
             String workpincode3 = company_pincode_txt.getText().toString();
             String workpincode1 = office_residence_pincode_edite_txt.getText().toString();
             String workpincode2 = residence_pincode1_edit_txt.getText().toString();
+            String workpincode4 = property_pincode1_edit_txt.getText().toString();
 
             if(workpincode.length()> 2){
                 residence_pincode_edite_txt.setThreshold(2);
@@ -3418,8 +3625,29 @@ public class Viability_Check_HL_new extends SimpleActivity {
                 residence_pincode1_edit_txt.setThreshold(2);
                 residence_pincode1_edit_txt.setAdapter(Pincode_Adapter);
             }
+            if(workpincode4.length()> 2){
+                property_pincode1_edit_txt.setThreshold(2);
+                property_pincode1_edit_txt.setAdapter(Pincode_Adapter);
+            }
 
         }
+
+        property_pincode1_edit_txt.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+                String code = (String)adapterView.getItemAtPosition(i);
+
+                if(code.length()==6){
+                    GET_AERA_POST_property(code);
+                }else {
+                    Objs.a.showToast(context,"Please Select Pin code");
+                }
+
+                imm.hideSoftInputFromWindow(property_pincode1_edit_txt.getWindowToken(), 0);
+            }
+        });
+
 
         residence_pincode_edite_txt.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -3687,6 +3915,117 @@ public class Viability_Check_HL_new extends SimpleActivity {
         AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
 
     }
+
+
+    //property
+
+    private void GET_AERA_POST_property(String code) {
+        progressDialog.show();
+        JSONObject J =new JSONObject();
+        try {
+            J.put("pincode", code);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, Urls.GET_AERA_POST, J,
+                new Response.Listener<JSONObject>() {
+
+                    @Override
+                    public void onResponse(JSONObject object) {
+                        try {
+
+                            if (object.getString(Params.status).equals("success")) {
+                                JSONArray response = object.getJSONArray("response");
+                                //    Log.e("Pincode", String.valueOf(response));
+                                setArea_Property(response);
+                            }
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        progressDialog.dismiss();
+                    }
+                }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                VolleyLog.d("TAG", "Error: " + error.getMessage());
+                progressDialog.dismiss();
+            }
+        }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("Content-Type", "application/json");
+                return headers;
+            }
+        };
+        AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
+
+    }
+
+    private void setArea_Property(final JSONArray ja) throws JSONException {
+
+        Area = new String[ja.length()];
+        for (int i=0;i<ja.length();i++){
+            JSONObject J =  ja.getJSONObject(i);
+            Area[i] = J.getString("area");
+            final List<String> area_list = new ArrayList<>(Arrays.asList(Area));
+            A_Area = new ArrayAdapter<String>(getApplicationContext(), R.layout.view_spinner_item, area_list){
+                public View getView(int position, View convertView, ViewGroup parent) {
+                    font = Typeface.createFromAsset(getApplicationContext().getAssets(),"Lato-Regular.ttf");
+                    TextView v = (TextView) super.getView(position, convertView, parent);
+                    v.setTypeface(font);
+                    return v;
+                }
+
+                public View getDropDownView(int position, View convertView, ViewGroup parent) {
+                    TextView v = (TextView) super.getView(position, convertView, parent);
+                    v.setTypeface(font);
+                    return v;
+                }
+            };
+
+            String workpincode = property_pincode1_edit_txt.getText().toString();
+            //  String workpincode1 = residence_pincode1_edit_txt.getText().toString();
+
+            if(workpincode.length()> 2){
+                A_Area.setDropDownViewResource(R.layout.view_spinner_item);
+                property_area.setAdapter(A_Area);
+                property_area.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                    @Override
+                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                        try {
+
+                            //   work_pincode_area = ja.getJSONObject(position).getString("id");
+                            Property_area_id = ja.getJSONObject(position).getString("id");
+
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onNothingSelected(AdapterView<?> parent) {
+
+                    }
+                });
+                property_area.setOnTouchListener(new View.OnTouchListener() {
+                    @Override
+                    public boolean onTouch(View view, MotionEvent motionEvent) {
+                        // imm.hideSoftInputFromWindow(edt_buyer_address.getWindowToken(), 0);
+                        return false;
+                    }
+                });
+            }
+
+        }
+
+    }
+    ///
 
     private void GET_AERA_POST(String code) {
         progressDialog.show();
@@ -5134,7 +5473,6 @@ public class Viability_Check_HL_new extends SimpleActivity {
 
                     try {
 
-
                         office_id = office_shop_ar.getJSONObject(position).getString("id");
                         office_value = office_shop_ar.getJSONObject(position).getString("value");
 
@@ -5144,8 +5482,8 @@ public class Viability_Check_HL_new extends SimpleActivity {
                             ofiice_res_details.setVisibility(View.VISIBLE);
                         }else
                         {
-                            BL_self_office_ownership_type_ly.setVisibility(View.VISIBLE);
-                            ofiice_res_details.setVisibility(View.VISIBLE);
+                            BL_self_office_ownership_type_ly.setVisibility(View.GONE);
+                            ofiice_res_details.setVisibility(View.GONE);
                         }
 
 
@@ -5206,6 +5544,14 @@ public class Viability_Check_HL_new extends SimpleActivity {
 
                         franchise__id = franchise_ar.getJSONObject(position).getString("id");
                         franchise__value = franchise_ar.getJSONObject(position).getString("value");
+
+                        if(franchise__id.equals("1"))
+                        {
+                            name_of_deler_ship_cmp.setVisibility(View.VISIBLE);
+                        }else
+                        {
+                            name_of_deler_ship_cmp.setVisibility(View.GONE);
+                        }
 
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -5330,6 +5676,16 @@ public class Viability_Check_HL_new extends SimpleActivity {
                         hl_salried_residence_id = Residence_ownership_ar.getJSONObject(position).getString("id");
                         hl_salried_residence_Value = Residence_ownership_ar.getJSONObject(position).getString("value");
                        // Pref.putResidenceType(context,residence_id);
+                        if(hl_salried_residence_id.equals("2"))
+                        {
+                            residence_live.setVisibility(View.VISIBLE);
+
+                        }else
+                        {
+                            residence_live.setVisibility(View.GONE);
+                        }
+
+
 
                         Pref.put_Residence_ID(mCon,hl_salried_residence_id);
 
@@ -7767,6 +8123,15 @@ public class Viability_Check_HL_new extends SimpleActivity {
                         pl_co_self_franchise__id = franchise_ar.getJSONObject(position).getString("id");
                         pl_co_self_franchise__value = franchise_ar.getJSONObject(position).getString("value");
 
+                        if(pl_co_self_franchise__id.equals("1"))
+                        {
+                            name_of_deler_ship_cmp_co_self.setVisibility(View.VISIBLE);
+                        }else
+                        {
+                            name_of_deler_ship_cmp_co_self.setVisibility(View.GONE);
+                        }
+
+
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
@@ -7994,7 +8359,7 @@ public class Viability_Check_HL_new extends SimpleActivity {
                 applicant1.put("Property Type",Propery_Type_ID);
                 applicant1.put("land_approval",Approval_of_Land_ID);
                 applicant1.put("building_approval",Bulding_Approval_Id);
-                applicant1.put("DA_Bulding_ID",DA_Bulding_ID);
+               // applicant1.put("DA_Bulding_ID",DA_Bulding_ID);
                 applicant1.put("prop_pincode",S_property_pincode1_edit_txt);
 
                 applicant1.put("age",String_value_Age);
@@ -8011,6 +8376,7 @@ public class Viability_Check_HL_new extends SimpleActivity {
                 applicant1.put("res_type",hl_salried_residence_id);
                 applicant1.put("live_in_res",ST_current_residence_edit_txt);
                 applicant1.put("emp_statues",1);
+                applicant1.put("pincode_area ",Property_area_id);
 
             }else if(salary_type.equals("2"))
             {
@@ -8021,7 +8387,7 @@ public class Viability_Check_HL_new extends SimpleActivity {
                 applicant1.put("Property Type",Propery_Type_ID);
                 applicant1.put("land_approval",Approval_of_Land_ID);
                 applicant1.put("building_approval",Bulding_Approval_Id);
-                applicant1.put("DA_Bulding_ID",DA_Bulding_ID);
+              //  applicant1.put("DA_Bulding_ID",DA_Bulding_ID);
                 applicant1.put("prop_pincode",S_property_pincode1_edit_txt);
 
                 applicant1.put("bus_employment_type",Employee_type_Id);

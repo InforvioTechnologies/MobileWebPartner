@@ -81,13 +81,17 @@ public class Statues_Dashboard_Nav extends AppCompatActivity
     LinearLayout Get_call_back,check_eligibility,quick_apply,chat,contact_person,logout,Ly_profile,Ly_bank;
     private AppCompatTextView  Closed_count,Declined_count,Disbursed_count,In_Progress_count,document_statues,
             total_Lead_details,
-            Doc_status,In_Progress,Disbursed,Declined,Closed,Approved,Approved_count;
-    private String  Closed_count1,Declined_count1,Disbursed_count1,In_Progress_count1,document_statues1,Approved1,total_lead_count;
+            Doc_status,In_Progress,Disbursed,Declined,Closed,Approved,Approved_count,Pending_with_you,
+            in_progress,rejected,sanctioned,disbursed;
+
+    private String  Closed_count1,Declined_count1,Disbursed_count1,In_Progress_count1,
+            document_statues1,Approved1,total_lead_count,Rejected;
     View drawerView;
     AppCompatTextView no_leads_data,txt_bank,txt_profile,txt_get_callback,txt_code,code;
 
     FloatingActionButton float_add;
-    private CardView CD_declined,CD_disbursed,CD_approved,CD_in_progress,CD_document,CD_closed;
+    private CardView CD_declined,CD_disbursed,CD_approved,CD_in_progress,CD_document,CD_Sanctioned,
+            Pending_withyoy,CD_Rejected;
     private ImageView imageView_profile;
     private View navHeader;
 
@@ -209,25 +213,32 @@ public class Statues_Dashboard_Nav extends AppCompatActivity
 
         Lead_details = (AppCompatTextView) findViewById(R.id.Lead_details);
         total_Lead_details = (AppCompatTextView) findViewById(R.id.total_Lead_details);
-        Closed_count = (AppCompatTextView) findViewById(R.id.Closed_count);
-        Declined_count = (AppCompatTextView) findViewById(R.id.Declined_count);
-        Disbursed_count = (AppCompatTextView) findViewById(R.id.Disbursed_count);
-        In_Progress_count = (AppCompatTextView) findViewById(R.id.In_Progress_count);
+       // Closed_count = (AppCompatTextView) findViewById(R.id.Closed_count);
+      //  Declined_count = (AppCompatTextView) findViewById(R.id.Declined_count);
+      //  Disbursed_count = (AppCompatTextView) findViewById(R.id.Disbursed_count);
+    //    In_Progress_count = (AppCompatTextView) findViewById(R.id.In_Progress_count);
         document_statues = (AppCompatTextView) findViewById(R.id.document_statues);
+        Pending_with_you = (AppCompatTextView) findViewById(R.id.Pending_with_you);
+        in_progress = (AppCompatTextView) findViewById(R.id.in_progress);
         Doc_status = (AppCompatTextView) findViewById(R.id.Doc_status);
         In_Progress = (AppCompatTextView) findViewById(R.id.In_Progress);
+        rejected = (AppCompatTextView) findViewById(R.id.rejected);
+        sanctioned = (AppCompatTextView) findViewById(R.id.sanctioned);
+        disbursed = (AppCompatTextView) findViewById(R.id.disbursed);
         Disbursed = (AppCompatTextView) findViewById(R.id.Disbursed);
         Declined = (AppCompatTextView) findViewById(R.id.Declined);
         Closed = (AppCompatTextView) findViewById(R.id.Closed);
         Approved = (AppCompatTextView) findViewById(R.id.Approved);
-        Approved_count = (AppCompatTextView) findViewById(R.id.Approved_count);
+     //   Approved_count = (AppCompatTextView) findViewById(R.id.Approved_count);
         //CD_declined,CD_disbursed,CD_approved,CD_in_progress,CD_document
         CD_document= (CardView) findViewById(R.id.CD_document);
         CD_in_progress= (CardView) findViewById(R.id.CD_in_progress);
-        CD_approved= (CardView) findViewById(R.id.CD_approved);
+        Pending_withyoy= (CardView) findViewById(R.id.Pending_withyoy);
+        CD_Rejected = (CardView) findViewById(R.id.CD_Rejected);
+      //  CD_approved= (CardView) findViewById(R.id.CD_approved);
         CD_disbursed= (CardView) findViewById(R.id.CD_disbursed);
-        CD_declined= (CardView) findViewById(R.id.CD_declined);
-        CD_closed= (CardView) findViewById(R.id.CD_closed);
+        CD_Sanctioned= (CardView) findViewById(R.id.CD_Sanctioned);
+      //  CD_closed= (CardView) findViewById(R.id.CD_closed);
         dash_board = (LinearLayout) findViewById(R.id.dash_board);
         go_leads = (AppCompatButton) findViewById(R.id.go_leads);
     }
@@ -240,7 +251,31 @@ public class Statues_Dashboard_Nav extends AppCompatActivity
                 //Objs.ac.StartActivityPutExtra(mCon, Dashboard_Activity.class,Params.status_id,"1");
                 Objs.ac.StartActivity(mCon, Dashboard_Activity.class);
                 Pref.putStatus_id(mCon,"1");
+                Pref.putStatus_Count(mCon,total_lead_count);
+                finish();
+
+            }
+        });
+
+        findViewById(R.id.Pending_withyoy).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Objs.ac.StartActivityPutExtra(mCon, Dashboard_Activity.class,Params.status_id,"1");
+                Objs.ac.StartActivity(mCon, Dashboard_Activity.class);
+                Pref.putStatus_id(mCon,"1");
                 Pref.putStatus_Count(mCon,document_statues1);
+                finish();
+
+            }
+        });
+
+        findViewById(R.id.CD_Rejected).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Objs.ac.StartActivityPutExtra(mCon, Dashboard_Activity.class,Params.status_id,"1");
+                Objs.ac.StartActivity(mCon, Dashboard_Activity.class);
+                Pref.putStatus_id(mCon,"7");
+                Pref.putStatus_Count(mCon,Rejected);
                 finish();
 
             }
@@ -257,7 +292,7 @@ public class Statues_Dashboard_Nav extends AppCompatActivity
 
             }
         });
-        findViewById(R.id.CD_declined).setOnClickListener(new View.OnClickListener() {
+     /*   findViewById(R.id.CD_Sanctioned).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // Objs.ac.StartActivityPutExtra(mCon, Dashboard_Activity.class,Params.status_id,"3");
@@ -267,8 +302,8 @@ public class Statues_Dashboard_Nav extends AppCompatActivity
                 finish();
 
             }
-        });
-        findViewById(R.id.CD_approved).setOnClickListener(new View.OnClickListener() {
+        });*/
+        findViewById(R.id.CD_Sanctioned).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // Objs.ac.StartActivityPutExtra(mCon, Dashboard_Activity.class,Params.status_id,"4");
@@ -292,7 +327,7 @@ public class Statues_Dashboard_Nav extends AppCompatActivity
             }
         });
 
-        findViewById(R.id.CD_closed).setOnClickListener(new View.OnClickListener() {
+       /* findViewById(R.id.CD_closed).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // Objs.ac.StartActivityPutExtra(mCon, Dashboard_Activity.class,Params.status_id,"5");
@@ -302,7 +337,7 @@ public class Statues_Dashboard_Nav extends AppCompatActivity
                 finish();
 
             }
-        });
+        });*/
 
         findViewById(R.id.go_leads).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -320,26 +355,20 @@ public class Statues_Dashboard_Nav extends AppCompatActivity
     private void fonts(){
 
         Objs.a.OutfitNormalFontStyle(mCon, R.id.Lead_details);
-      //  Objs.a.OutfitNormalFontStyle(mCon, R.id.txt_bank);
-     //   Objs.a.OutfitNormalFontStyle(mCon, R.id.txt_profile);
+
         Objs.a.OutfitNormalFontStyle(mCon, R.id.total_Lead_details);
-        Objs.a.OutfitNormalFontStyle(mCon, R.id.Closed_count);
-        Objs.a.OutfitNormalFontStyle(mCon, R.id.Declined_count);
-        Objs.a.OutfitNormalFontStyle(mCon, R.id.Disbursed_count);
-        Objs.a.OutfitNormalFontStyle(mCon, R.id.In_Progress_count);
+
+      //  Objs.a.OutfitNormalFontStyle(mCon, R.id.In_Progress_count);
         Objs.a.OutfitNormalFontStyle(mCon, R.id.document_statues);
         Objs.a.OutfitNormalFontStyle(mCon, R.id.Doc_status);
         Objs.a.OutfitNormalFontStyle(mCon, R.id.In_Progress);
         Objs.a.OutfitNormalFontStyle(mCon, R.id.Disbursed);
-        Objs.a.OutfitNormalFontStyle(mCon, R.id.Declined);
+       // Objs.a.OutfitNormalFontStyle(mCon, R.id.Declined);
         Objs.a.OutfitNormalFontStyle(mCon, R.id.Approved);
-        Objs.a.OutfitNormalFontStyle(mCon, R.id.Approved_count);
+       // Objs.a.OutfitNormalFontStyle(mCon, R.id.Approved_count);
         Objs.a.OutfitNormalFontStyle(mCon, R.id.txt_code);
         Objs.a.OutfitNormalFontStyle(mCon, R.id.code);
 
-       // Objs.a.OutfitNormalFontStyle(mCon, R.id.txt_get_callback);
-      //  Objs.a.OutfitNormalFontStyle(mCon, R.id.help_and_support);
-      //  Objs.a.OutfitNormalFontStyle(mCon, R.id.logout2);
     }
 
 
@@ -485,7 +514,7 @@ public class Statues_Dashboard_Nav extends AppCompatActivity
             J =new JSONObject();
             J.put(Params.b2b_userid, Pref.getID(mCon));
           //  J.put(Params.b2b_userid, "20407");
-            Log.d("response b2b_userid", String.valueOf(J));
+            Log.d("response b2b_userid ", String.valueOf(J));
 
         } catch (JSONException e) {
             e.printStackTrace();
@@ -509,20 +538,41 @@ public class Statues_Dashboard_Nav extends AppCompatActivity
                             Disbursed_count1 = jsonObject1.getString("disbursed");
                             Declined_count1 = jsonObject1.getString("declined");
                             Closed_count1 = jsonObject1.getString("closed");
+                            Rejected = jsonObject1.getString("rejected");
 
-                            total_Lead_details.setText(total_lead_count);
+                          /*  total_Lead_details.setText(total_lead_count);
                             document_statues.setText(document_statues1);
                             In_Progress_count.setText(In_Progress_count1);
                             Disbursed_count.setText(Disbursed_count1);
                             Declined_count.setText(Declined_count1);
                             Closed_count.setText(Closed_count1);
-                            Approved_count.setText(Approved1);
+                            Approved_count.setText(Approved1);*/
+                            total_Lead_details.setText(total_lead_count);
+                            document_statues.setText(total_lead_count);
+                            Pending_with_you.setText(document_statues1);
+                            in_progress.setText(In_Progress_count1);
+                            rejected.setText(Rejected);
+                            sanctioned.setText(Approved1);
+                            disbursed.setText(Disbursed_count1);
 
-                            if(!document_statues1.equals("0")){
+                            if(!document_statues.equals("0")){
                                 CD_document.setEnabled(true);
                             }else{
                                 CD_document.setEnabled(false);
                             }
+
+                            if(!document_statues1.equals("0")){
+                                Pending_withyoy.setEnabled(true);
+                            }else{
+                                Pending_withyoy.setEnabled(false);
+                            }
+
+                            if(!Rejected.equals("0")){
+                                CD_Rejected.setEnabled(true);
+                            }else{
+                                CD_Rejected.setEnabled(false);
+                            }
+
                             if(!In_Progress_count1.equals("0")){
                                 CD_in_progress.setEnabled(true);
                             }else{
@@ -535,23 +585,14 @@ public class Statues_Dashboard_Nav extends AppCompatActivity
                                 CD_disbursed.setEnabled(false);
                             }
 
-                            if(!Declined_count1.equals("0")){
-                                CD_declined.setEnabled(true);
-                            }else{
-                                CD_declined.setEnabled(false);
-                            }
-
                             if(!Approved1.equals("0")){
-                                CD_approved.setEnabled(true);
+                                CD_Sanctioned.setEnabled(true);
                             }else{
-                                CD_approved.setEnabled(false);
+                                CD_Sanctioned.setEnabled(false);
                             }
 
-                            if(!Closed_count1.equals("0")){
-                                CD_closed.setEnabled(true);
-                            }else{
-                                CD_closed.setEnabled(false);
-                            }
+
+
 
                         } catch (JSONException e) {
                             e.printStackTrace();

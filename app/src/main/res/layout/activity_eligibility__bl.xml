@@ -52,6 +52,46 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content">
                             <LinearLayout
+                                android:layout_marginTop="10dp"
+                                android:orientation="vertical"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent">
+                                <LinearLayout
+                                    android:id="@+id/Business_name_ly_ind"
+                                    android:orientation="horizontal"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content">
+                                    <androidx.appcompat.widget.AppCompatTextView
+                                        android:gravity="left"
+                                        android:layout_marginLeft="2dp"
+                                        android:layout_width="wrap_content"
+                                        style="@style/LorgeText2"
+                                        android:textColor="@color/colorPrimaryDark"
+                                        android:textColorHint="@color/colorPrimaryDark"
+                                        android:layout_height="wrap_content" />
+                                    <androidx.appcompat.widget.AppCompatTextView
+                                        android:gravity="left"
+                                        android:layout_marginLeft="2dp"
+                                        android:layout_width="match_parent"
+                                        style="@style/LorgeText2"
+                                        android:textColor="@color/colorPrimaryDark"
+                                        android:textColorHint="@color/colorPrimaryDark"
+                                        android:text="Business Name"
+                                        android:layout_height="wrap_content" />
+                                </LinearLayout>
+                                <LinearLayout
+                                    android:layout_marginLeft="30dp"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent">
+                                    <androidx.appcompat.widget.AppCompatEditText
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:textSize="16sp"
+                                        android:id="@+id/business_Name_edt_txt_ind"
+                                        android:textColor="@color/colorPrimaryDark"/>
+                                </LinearLayout>
+                            </LinearLayout>
+                            <LinearLayout
                                 android:orientation="vertical"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content">
@@ -193,13 +233,141 @@
                                         android:textColor="@color/colorPrimaryDark"/>
                                 </LinearLayout>
                             </LinearLayout>
+                            <LinearLayout
+                                android:layout_marginTop="10dp"
+                                android:orientation="vertical"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent">
+                                <LinearLayout
+                                    android:id="@+id/business_ref_mobile"
+                                    android:orientation="horizontal"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content">
+                                    <androidx.appcompat.widget.AppCompatTextView
+                                        android:gravity="left"
+                                        android:layout_marginLeft="2dp"
+                                        android:id="@+id/business_ref_name_mobile"
+                                        android:layout_width="wrap_content"
+                                        style="@style/LorgeText2"
+                                        android:textColor="@color/colorPrimaryDark"
+                                        android:textColorHint="@color/colorPrimaryDark"
+                                        android:layout_height="wrap_content" />
+                                    <androidx.appcompat.widget.AppCompatTextView
+                                        android:gravity="left"
+                                        android:layout_marginLeft="2dp"
+                                        android:layout_width="match_parent"
+                                        style="@style/LorgeText2"
+                                        android:id="@+id/business_ref_name_mobile1"
+                                        android:textColor="@color/colorPrimaryDark"
+                                        android:textColorHint="@color/colorPrimaryDark"
+                                        android:text="Reference Mobile Number"
+                                        android:layout_height="wrap_content" />
+                                </LinearLayout>
+                                <LinearLayout
+                                    android:layout_marginLeft="30dp"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent">
+                                    <androidx.appcompat.widget.AppCompatEditText
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:textSize="16sp"
+                                        android:inputType="number"
+                                        android:maxLength="10"
+                                        android:id="@+id/business_ref_mobile_edt_txt"
+                                        android:textColor="@color/colorPrimaryDark"/>
+                                </LinearLayout>
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:id="@+id/about_businesss_ly_ind"
+                                android:layout_marginTop="10dp"
+                                android:orientation="vertical"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent">
+                                <LinearLayout
+                                    android:orientation="horizontal"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content">
+                                    <androidx.appcompat.widget.AppCompatTextView
+                                        android:gravity="left"
+                                        android:layout_marginLeft="2dp"
+                                        android:layout_width="wrap_content"
+                                        style="@style/LorgeText2"
+                                        android:textColor="@color/colorPrimaryDark"
+                                        android:textColorHint="@color/colorPrimaryDark"
+                                        android:layout_height="wrap_content" />
+                                    <androidx.appcompat.widget.AppCompatTextView
+                                        android:gravity="left"
+                                        android:layout_marginLeft="2dp"
+                                        android:layout_width="match_parent"
+                                        style="@style/LorgeText2"
+                                        android:textColor="@color/colorPrimaryDark"
+                                        android:textColorHint="@color/colorPrimaryDark"
+                                        android:text="About the Business"
+                                        android:layout_height="wrap_content" />
+                                </LinearLayout>
+                                <LinearLayout
+                                    android:layout_marginLeft="30dp"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent">
+                                    <androidx.appcompat.widget.AppCompatEditText
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:textSize="16sp"
+                                        android:id="@+id/about_the_business"
+                                        android:textColor="@color/colorPrimaryDark"/>
+                                </LinearLayout>
+                            </LinearLayout>
+
                         </LinearLayout>
+
+
                         <LinearLayout
                             android:visibility="gone"
                             android:id="@+id/self_business"
                             android:orientation="vertical"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content">
+                            <LinearLayout
+                                android:layout_marginTop="10dp"
+                                android:orientation="vertical"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent">
+                                <LinearLayout
+                                    android:id="@+id/Business_name_ly"
+                                    android:orientation="horizontal"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content">
+                                    <androidx.appcompat.widget.AppCompatTextView
+                                        android:gravity="left"
+                                        android:layout_marginLeft="2dp"
+                                        android:layout_width="wrap_content"
+                                        style="@style/LorgeText2"
+                                        android:textColor="@color/colorPrimaryDark"
+                                        android:textColorHint="@color/colorPrimaryDark"
+                                        android:layout_height="wrap_content" />
+                                    <androidx.appcompat.widget.AppCompatTextView
+                                        android:gravity="left"
+                                        android:layout_marginLeft="2dp"
+                                        android:layout_width="match_parent"
+                                        style="@style/LorgeText2"
+                                        android:textColor="@color/colorPrimaryDark"
+                                        android:textColorHint="@color/colorPrimaryDark"
+                                        android:text="Business Name"
+                                        android:layout_height="wrap_content" />
+                                </LinearLayout>
+                                <LinearLayout
+                                    android:layout_marginLeft="30dp"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent">
+                                    <androidx.appcompat.widget.AppCompatEditText
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:textSize="16sp"
+                                        android:id="@+id/business_Name_edt_txt"
+                                        android:textColor="@color/colorPrimaryDark"/>
+                                </LinearLayout>
+                            </LinearLayout>
                             <LinearLayout
                                 android:orientation="vertical"
                                 android:layout_width="match_parent"
@@ -251,6 +419,46 @@
                                 </LinearLayout>
                             </LinearLayout>
                             <LinearLayout
+                                android:layout_marginTop="10dp"
+                                android:orientation="vertical"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent">
+                                <LinearLayout
+                                    android:id="@+id/about_businesss_ly_own"
+                                    android:orientation="horizontal"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content">
+                                    <androidx.appcompat.widget.AppCompatTextView
+                                        android:gravity="left"
+                                        android:layout_marginLeft="2dp"
+                                        android:layout_width="wrap_content"
+                                        style="@style/LorgeText2"
+                                        android:textColor="@color/colorPrimaryDark"
+                                        android:textColorHint="@color/colorPrimaryDark"
+                                        android:layout_height="wrap_content" />
+                                    <androidx.appcompat.widget.AppCompatTextView
+                                        android:gravity="left"
+                                        android:layout_marginLeft="2dp"
+                                        android:layout_width="match_parent"
+                                        style="@style/LorgeText2"
+                                        android:textColor="@color/colorPrimaryDark"
+                                        android:textColorHint="@color/colorPrimaryDark"
+                                        android:text="About the Business"
+                                        android:layout_height="wrap_content" />
+                                </LinearLayout>
+                                <LinearLayout
+                                    android:layout_marginLeft="30dp"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent">
+                                    <androidx.appcompat.widget.AppCompatEditText
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:textSize="16sp"
+                                        android:id="@+id/about_the_business_own"
+                                        android:textColor="@color/colorPrimaryDark"/>
+                                </LinearLayout>
+                            </LinearLayout>
+                            <LinearLayout
                                 android:orientation="vertical"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content">
@@ -293,6 +501,7 @@
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:textSize="16sp"
+                                            android:inputType="number"
                                             android:id="@+id/purchased_by_bank_edit_txt"
                                             android:textColor="@color/colorPrimaryDark"/>
                                     </LinearLayout>
@@ -342,6 +551,7 @@
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:textSize="16sp"
+                                            android:inputType="number"
                                             android:id="@+id/purchased_by_GStbill_edit_txt"
                                             android:textColor="@color/colorPrimaryDark"/>
                                     </LinearLayout>
@@ -391,6 +601,7 @@
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:textSize="16sp"
+                                            android:inputType="number"
                                             android:id="@+id/sales_by_GStbill_edit_txt"
                                             android:textColor="@color/colorPrimaryDark"/>
                                     </LinearLayout>
@@ -440,6 +651,7 @@
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:textSize="16sp"
+                                            android:inputType="number"
                                             android:id="@+id/bank_cridit_by_edtxt"
                                             android:textColor="@color/colorPrimaryDark"/>
                                     </LinearLayout>
@@ -484,13 +696,55 @@
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
                                         android:textSize="16sp"
+                                        android:inputType="number"
+                                        android:imeOptions="actionDone"
                                         android:id="@+id/Avg_monthly_income"
                                         android:textColor="@color/colorPrimaryDark"/>
                                 </LinearLayout>
                             </LinearLayout>
                         </LinearLayout>
 
-
+                        <LinearLayout
+                            android:visibility="gone"
+                            android:id="@+id/about_businesss_ly_forming"
+                            android:layout_marginTop="10dp"
+                            android:orientation="vertical"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+                            <LinearLayout
+                                android:orientation="horizontal"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:gravity="left"
+                                    android:layout_marginLeft="2dp"
+                                    android:layout_width="wrap_content"
+                                    style="@style/LorgeText2"
+                                    android:textColor="@color/colorPrimaryDark"
+                                    android:textColorHint="@color/colorPrimaryDark"
+                                    android:layout_height="wrap_content" />
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:gravity="left"
+                                    android:layout_marginLeft="2dp"
+                                    android:layout_width="match_parent"
+                                    style="@style/LorgeText2"
+                                    android:textColor="@color/colorPrimaryDark"
+                                    android:textColorHint="@color/colorPrimaryDark"
+                                    android:text="About the Business"
+                                    android:layout_height="wrap_content" />
+                            </LinearLayout>
+                            <LinearLayout
+                                android:layout_marginLeft="30dp"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent">
+                                <androidx.appcompat.widget.AppCompatEditText
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:textSize="16sp"
+                                    android:id="@+id/about_the_business_forming"
+                                    android:textColor="@color/colorPrimaryDark"/>
+                            </LinearLayout>
+                        </LinearLayout>
                         <LinearLayout
                             android:orientation="vertical"
                             android:layout_width="match_parent"

@@ -346,6 +346,7 @@
                                         android:layout_height="wrap_content"
                                         android:id="@+id/Mobile_No_Edite_text"
                                         android:inputType="number"
+                                        android:maxLength="10"
                                         android:imeOptions="actionNext"
                                         android:textColor="@color/colorPrimaryDark"
                                         android:textSize="16sp"/>
@@ -727,6 +728,7 @@
                                     android:layout_height="wrap_content"
                                     android:inputType="number"
                                     android:imeOptions="actionNext"
+                                    android:maxLength="10"
                                     android:id="@+id/pl_co_app_Mobile_No_Edite_text"
                                     android:textColor="@color/colorPrimaryDark"
                                     android:textSize="16sp"/>

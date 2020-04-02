@@ -142,7 +142,7 @@ public class Dashboard_Activity extends AppCompatActivity implements OnLoadMoreL
                 getSupportActionBar().setTitle("List of Leads");
             }else if(S_status_id.equals("1")){
               //  initTools1("Document Pending");
-                getSupportActionBar().setTitle("Document Pending");
+                getSupportActionBar().setTitle("Pending with you");
             }else if(S_status_id.equals("2")){
               //  initTools1("In Progress");
                 getSupportActionBar().setTitle("In Progress");
@@ -151,13 +151,16 @@ public class Dashboard_Activity extends AppCompatActivity implements OnLoadMoreL
                 getSupportActionBar().setTitle( "Declined");
             }else if(S_status_id.equals("4")){
              //   initTools1( "Approved");
-                getSupportActionBar().setTitle( "Approved");
+                getSupportActionBar().setTitle( "Sanctioned");
             }else if(S_status_id.equals("5")){
              //   initTools1("Disbursed");
                 getSupportActionBar().setTitle("Disbursed");
             }else if(S_status_id.equals("6")){
                 //   initTools1("Disbursed");
-                getSupportActionBar().setTitle("Closed");
+                getSupportActionBar().setTitle("Pending with you");
+            }else if(S_status_id.equals("7"))
+            {
+                    getSupportActionBar().setTitle("Rejected");
             }
         }
 

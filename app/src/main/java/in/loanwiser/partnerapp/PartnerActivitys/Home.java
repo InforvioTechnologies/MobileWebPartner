@@ -199,11 +199,11 @@ public class Home extends AppCompatActivity {
 
                 if(viability.contains("completed"))
                 {
-                   /* Intent intent = new Intent(Home.this, Viability_Activity_Data_View.class);
+                    Intent intent = new Intent(Home.this, Viability_Activity_Data_View.class);
                     intent.putExtra("user_id", user_id);
                     intent.putExtra("transaction_id", transaction_id);
                     startActivity(intent);
-                    finish();*/
+                   // finish();
                 }else
                 {
 

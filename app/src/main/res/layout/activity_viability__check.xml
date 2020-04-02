@@ -523,6 +523,7 @@
                                 android:layout_height="wrap_content"
                                 android:textSize="16sp"
                                 android:inputType="number"
+                                android:maxLength="3"
                                 android:id="@+id/experience_in_current_cmpy"
                                 android:textColor="@color/colorPrimaryDark"/>
                         </LinearLayout>
@@ -565,6 +566,7 @@
                                 android:layout_height="wrap_content"
                                 android:textSize="16sp"
                                 android:inputType="number"
+                                android:maxLength="3"
                                 android:id="@+id/total_experience_edit_txt"
                                 android:textColor="@color/colorPrimaryDark"/>
                         </LinearLayout>
@@ -607,6 +609,8 @@
                                 android:layout_height="wrap_content"
                                 android:textSize="16sp"
                                 android:inputType="number"
+                                android:maxLength="6"
+                                android:imeOptions="actionDone"
                                 android:id="@+id/company_pincode_txt"
                                 android:textColor="@color/colorPrimaryDark"/>
                         </LinearLayout>
@@ -816,6 +820,8 @@
                                 android:layout_height="wrap_content"
                                 android:textSize="16sp"
                                 android:inputType="number"
+                                android:maxLength="6"
+                                android:imeOptions="actionDone"
                                 android:id="@+id/residence_pincode1_edit_txt"
                                 android:textColor="@color/colorPrimaryDark"/>
                         </LinearLayout>
@@ -962,6 +968,9 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:textSize="16sp"
+                                android:maxLength="2"
+                                android:inputType="number"
+                                android:imeOptions="actionDone"
                                 android:id="@+id/current_residence_edit_txt"
                                 android:textColor="@color/colorPrimaryDark"/>
                         </LinearLayout>

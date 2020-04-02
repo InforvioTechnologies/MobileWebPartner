@@ -92,7 +92,7 @@ public class Viability_Activity_Data_View extends SimpleActivity {
         setContentView(R.layout.activity_simple);
         Objs.a.setStubId(this,R.layout.activity_viability___data__view);
         initTools(R.string.Viability_Data);
-        loan_type_newcat=(AppCompatTextView)findViewById(R.id.loan_type_newcat);
+     //   loan_type_newcat=(AppCompatTextView)findViewById(R.id.loan_type_newcat);
         loan_type_new_val_type=(AppCompatTextView)findViewById(R.id.loan_type_new_val_type);
         type_of_employee_new_val_type=(AppCompatTextView)findViewById(R.id.type_of_employee_new_val_type);
         Loan_amount_new_txt =(AppCompatTextView)findViewById(R.id.Loan_amount_new_txt);
@@ -264,7 +264,7 @@ public class Viability_Activity_Data_View extends SimpleActivity {
 
 
                                     String age = Applicant_object.getString("member_age");
-                                    loan_type_newcat.setText(age);
+                                    app_salaried_age.setText(age);
 
                                     String net_salary = Applicant_object.getString("monthly_income");
                                     loan_type_new_val_type.setText(net_salary);

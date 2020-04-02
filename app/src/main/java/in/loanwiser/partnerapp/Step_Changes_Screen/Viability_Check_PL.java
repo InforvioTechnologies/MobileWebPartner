@@ -62,6 +62,7 @@ import in.loanwiser.partnerapp.Multi_select_checkbox.Multi_Select_checkbox;
 import in.loanwiser.partnerapp.NumberTextWatcher;
 import in.loanwiser.partnerapp.PartnerActivitys.Add_Applicant;
 import in.loanwiser.partnerapp.PartnerActivitys.Applicant_Details_Activity;
+import in.loanwiser.partnerapp.PartnerActivitys.Dashboard_Activity;
 import in.loanwiser.partnerapp.PartnerActivitys.IncomeProofPOJO;
 import in.loanwiser.partnerapp.PartnerActivitys.RemoveCommas;
 import in.loanwiser.partnerapp.R;
@@ -135,7 +136,8 @@ public class Viability_Check_PL extends SimpleActivity {
             pl_co_own_Office_Shop__id,pl_co_own_Office_Shop__value;
 
     LinearLayout pl_self_ind_Driver_C_owner,pl_self_individual,pl_formin_dairy,pl_self_business,pl_co_self_ofiice_res_details,
-            pl_forming,pl_dairy,pl_poultry,pl_co_Retail_wholesale_business,pl_service_business,pl_manufacturing;
+            pl_forming,pl_dairy,pl_poultry,pl_co_Retail_wholesale_business,pl_service_business,pl_manufacturing,
+            name_of_deler_ship_cmp_co_self;
     AppCompatTextView pl_co_app_ind_vehicle_type_text;
     ////////
 
@@ -262,14 +264,14 @@ public class Viability_Check_PL extends SimpleActivity {
         Assets_myList_values = (ArrayList<String>) getIntent().getSerializableExtra("select_lid_id");
         removeClass = new RemoveCommas();
 
-        lead_viy_step2.setOnClickListener(new View.OnClickListener() {
+    /*    lead_viy_step2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(Viability_Check_PL.this, Eligibility_Check_PL.class);
                 startActivity(intent);
                 finish();
             }
-        });
+        });*/
         Log.e("viability check Pl ","Personal Loan");
       /* monthly_sal_txt,salery_credite_method_txt,Exp_in_current_txt,total_workexperiecnce_txt,cmp_pincode_txt,
         txt_residence_pincode,txt_residence_type,Lives_in_current_txt,any_other_family_member_txt,family_member_name_txt
@@ -336,7 +338,7 @@ public class Viability_Check_PL extends SimpleActivity {
 
 
         UISCREEN();
-     //   Click();
+        Click();
         fonts();
         makeJsonObjReq1();
     }
@@ -524,6 +526,7 @@ public class Viability_Check_PL extends SimpleActivity {
         pl_co_app_ind_spinner_office_shop_setup_ind = (Spinner) findViewById(R.id.pl_co_app_ind_spinner_office_shop_setup_ind);
 
         pl_co_self_ofiice_res_details =( LinearLayout) findViewById(R.id.pl_co_self_ofiice_res_details);
+        name_of_deler_ship_cmp_co_self =( LinearLayout) findViewById(R.id.name_of_deler_ship_cmp_co_self);
 
 
         pl_forming =( LinearLayout) findViewById(R.id.pl_forming);
@@ -699,12 +702,14 @@ public class Viability_Check_PL extends SimpleActivity {
         company_pincode_txt.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                Log.e("hi","hi11");
+              /*  Log.e("hi","hi11");
                 String workpincode = company_pincode_txt.getText().toString();
 
                 if(workpincode.length()==2){
-                    GET_Pincode1(workpincode);
-                }
+                   // GET_Pincode1(workpincode);
+
+                    GET_AERA_POST(workpincode);
+                }*/
 
             }
 
@@ -715,19 +720,28 @@ public class Viability_Check_PL extends SimpleActivity {
 
             @Override
             public void afterTextChanged(Editable editable) {
+                Log.e("hi","hi11");
+                String workpincode = company_pincode_txt.getText().toString();
 
+                if(workpincode.length()==6){
+                    // GET_Pincode1(workpincode);
+
+                    GET_AERA_POST(workpincode);
+                }
             }
         });
 
         residence_pincode1_edit_txt.addTextChangedListener(new TextWatcher() {
         @Override
         public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-            Log.e("hi","hi11");
+          /*  Log.e("hi","hi11");
             String workpincode = residence_pincode1_edit_txt.getText().toString();
 
-            if(workpincode.length()==2){
-                GET_Pincode1(workpincode);
-            }
+            if(workpincode.length()==6){
+               // GET_Pincode1(workpincode);
+                Log.e("hi","it is called");
+                GET_AERA_POST1(workpincode);
+            }*/
         }
 
         @Override
@@ -736,7 +750,14 @@ public class Viability_Check_PL extends SimpleActivity {
         }
         @Override
         public void afterTextChanged(Editable editable) {
+            Log.e("hi","hi11");
+            String workpincode = residence_pincode1_edit_txt.getText().toString();
 
+            if(workpincode.length()==6){
+                // GET_Pincode1(workpincode);
+                Log.e("hi","it is called");
+                GET_AERA_POST1(workpincode);
+            }
         }
     });
 
@@ -745,10 +766,11 @@ public class Viability_Check_PL extends SimpleActivity {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
-                String workpincode = pl_co_app_office_residence_pincode_edite_txt.getText().toString();
+               /* String workpincode = pl_co_app_office_residence_pincode_edite_txt.getText().toString();
                 if (workpincode.length() == 2) {
-                    GET_Pincode1(workpincode);
-                }
+                   // GET_Pincode1(workpincode);
+                    GET_AERA_POST3(workpincode);
+                }*/
 
             }
 
@@ -759,7 +781,11 @@ public class Viability_Check_PL extends SimpleActivity {
 
             @Override
             public void afterTextChanged(Editable editable) {
-
+                String workpincode = pl_co_app_office_residence_pincode_edite_txt.getText().toString();
+                if (workpincode.length() == 6) {
+                    // GET_Pincode1(workpincode);
+                    GET_AERA_POST3(workpincode);
+                }
             }
 
         });
@@ -768,13 +794,13 @@ public class Viability_Check_PL extends SimpleActivity {
         pl_co_app_slrd_company_pincode_txt.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                Log.e("hi","hi11");
+               /* Log.e("hi","hi11");
                 String workpincode = pl_co_app_slrd_company_pincode_txt.getText().toString();
 
                 if(workpincode.length()==2){
-                    GET_Pincode1(workpincode);
-
-                }
+                   // GET_Pincode1(workpincode);
+                    GET_AERA_POST2(workpincode);
+                }*/
             }
 
             @Override
@@ -784,7 +810,13 @@ public class Viability_Check_PL extends SimpleActivity {
 
             @Override
             public void afterTextChanged(Editable editable) {
+                Log.e("hi","hi11");
+                String workpincode = pl_co_app_slrd_company_pincode_txt.getText().toString();
 
+                if(workpincode.length()==6){
+                    // GET_Pincode1(workpincode);
+                    GET_AERA_POST2(workpincode);
+                }
             }
         });
 
@@ -1031,6 +1063,7 @@ public class Viability_Check_PL extends SimpleActivity {
 
                 if(pl_self_ind_Employee_type_Id.equals("0"))
                 {
+                    Toast.makeText(context,"Select Employee type",Toast.LENGTH_SHORT).show();
 
                 }else if(pl_self_ind_Employee_type_Id.equals("1"))
                 {
@@ -1392,8 +1425,56 @@ public class Viability_Check_PL extends SimpleActivity {
         {
             Toast.makeText(context,"please Select office/shop setup",Toast.LENGTH_SHORT).show();
 
-        }else
+        }else if(pl_co_app_ind_Office_Shop__id.equals("2"))
         {
+
+            if(pl_co_app_ind_Office_Shop_Own_id.equals("0"))
+            {
+                Toast.makeText(context,"please Select office Residence Type",Toast.LENGTH_SHORT).show();
+
+            }else
+            {
+
+                if (!Validate_pl_co_app_office_residence_pincode_edite_txt()) {
+                    return;
+                }
+
+                if(pl_co_app_self_res_spinn_area_id == null)
+                {
+                    Toast.makeText(getApplicationContext(), "Type pin code slowly and select pin code from Dropdown", Toast.LENGTH_SHORT).show();
+                    //   Objs.a.showToast(getContext(),"Type pin code slowly and select pin code from Dropdown");
+                }
+                else
+                {
+                    co_self_assets_owned_buff = new StringBuffer();
+
+                    ArrayList<IncomeProofPOJO>  self_assets_ownr = Co_my_self_Assets_Owned_adapter.SELF_CO_ASSETS_OWNED_LIST;
+                    for(int i=0;i<self_assets_ownr.size();i++){
+                        IncomeProofPOJO country = self_assets_ownr.get(i);
+                        if(country.isIP_selected()){
+                            co_self_assets_owned_buff.append(country.getIP_id()+ ",");
+                            String responseID1 = String.valueOf(co_self_Assets_owned_list);
+                        }
+                    }
+                    if (co_self_assets_owned_buff.length()> 0) {
+
+                        String responseID1 = String.valueOf(co_self_assets_owned_buff);
+                        self_co_assets_owned_str = removeClass.cleanUpCommas(responseID1);
+                        self_co_assets_owned_SA = self_co_assets_owned_str.split(",");
+
+                        self_co_assets_ = new JSONArray();
+                        self_co_assets_ = new JSONArray(Arrays.asList(self_co_assets_owned_SA));
+                    }
+
+
+                    lead_viability();
+                }
+
+            }
+
+
+         } else {
+
             co_self_assets_owned_buff = new StringBuffer();
 
             ArrayList<IncomeProofPOJO>  self_assets_ownr = Co_my_self_Assets_Owned_adapter.SELF_CO_ASSETS_OWNED_LIST;
@@ -1981,6 +2062,19 @@ public class Viability_Check_PL extends SimpleActivity {
 
         return true;
     }
+
+    private boolean Validate_pl_co_app_office_residence_pincode_edite_txt(){
+        if (pl_co_app_office_residence_pincode_edite_txt.getText().toString().isEmpty()) {
+            pl_co_app_office_residence_pincode_edite_txt.setError(getText(R.string.err_curent));
+            pl_co_app_office_residence_pincode_edite_txt.requestFocus();
+            return false;
+        } else {
+            //inputLayoutLname.setErrorEnabled(false);
+        }
+
+        return true;
+    }
+
 
 
     private void makeJsonObjReq1() {
@@ -4677,7 +4771,13 @@ public class Viability_Check_PL extends SimpleActivity {
 
                         pl_co_self_franchise__id = franchise_ar.getJSONObject(position).getString("id");
                         pl_co_self_franchise__value = franchise_ar.getJSONObject(position).getString("value");
-
+                        if(pl_co_self_franchise__id.equals("1"))
+                        {
+                            name_of_deler_ship_cmp_co_self.setVisibility(View.VISIBLE);
+                        }else
+                        {
+                            name_of_deler_ship_cmp_co_self.setVisibility(View.GONE);
+                        }
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
@@ -5025,9 +5125,15 @@ public class Viability_Check_PL extends SimpleActivity {
                                  {
                                      Toast.makeText(context,"Viability Failed",Toast.LENGTH_SHORT).show();
 
-                                     String viability_array =jsonObject1.getString("viability_arr");
+                                     /*String viability_array =jsonObject1.getString("viability_arr");
                                      Intent intent = new Intent(Viability_Check_PL.this, Loan_Viyability_Check_Activity.class);
                                      intent.putExtra("viability_jsonArray", viability_array.toString());
+                                     startActivity(intent);
+                                     finish();*/
+
+                                  //   String viability_array =jsonObject1.getString("viability_arr");
+                                     Intent intent = new Intent(Viability_Check_PL.this, Dashboard_Activity.class);
+                                   //  intent.putExtra("viability_jsonArray", viability_array.toString());
                                      startActivity(intent);
                                      finish();
                                  }

@@ -19,7 +19,7 @@
     <string name="DFD">Disbursed From Date</string>
     <string name="DTD">Disbursed To Date</string>
     <string name="name_cs">Customer Name</string>
-    <string name="mob">Customer Mobile No</string>
+    <string name="mob">Mobile No</string>
     <string name="signin">SIGN IN</string>
     <string name="leadverif">Customer Verification</string>
     <string name="signup1">SIGN UP</string>
@@ -471,7 +471,7 @@
     <string name="residence_pin">Residence Pincode</string>
     <string name="property_pin">Property Pincode</string>
     <string name="off_shop">Office/Shop Pincode</string>
-    <string name="residence">Residence Type</string>
+    <string name="residence">Residence Ownership Type</string>
     <string name="off_residence">Office Residence Type</string>
     <string name="curr_resi">Live in current residence(months)</string>
     <string name="assets_own">Assets own(Multiselect)</string>
@@ -499,7 +499,7 @@
     <string name="office_shop_area">Office/Shop Area</string>
     <string name="deler_type">If you are Franchise/dealer/sub dealer</string>
     <string name="delership_cmp">Name of dealership company</string>
-    <string name="monthly_profit">Average Monthly Profit</string>
+    <string name="monthly_profit">Annual Turnover</string>
     <string name="noyiw">Number of months in Business</string>
     <string name="monthly_income">Monthly Income</string>
     <string name="no_of_employees">No-of Employees</string>
@@ -507,10 +507,10 @@
     <string name="vrm">Value of Stock and Raw materials</string>
     <string name="value_of_machineries">Value of machineries</string>
     <string name="monthly_sales">Monthly Sales</string>
-    <string name="persentage_gst">Percentage of Purchased by GST Bill based</string>
-    <string name="persentage_sale_gst">Percentage of Sales by GST Bill based</string>
-    <string name="persentage_bank">Percentage of Purchased by Bank Account based</string>
-    <string name="persentage_bank_credit_income">Percentage of Income by Bank credited</string>
+    <string name="persentage_gst">Percentage of Purchased by GST Bill based(0 to 100)</string>
+    <string name="persentage_sale_gst">Percentage of Sales by GST Bill based(0 to 100)</string>
+    <string name="persentage_bank">Percentage of Purchased by Bank Account based(0 to 100)</string>
+    <string name="persentage_bank_credit_income">Percentage of Income by Bank credited(0 to 100)</string>
     <string name="avg_bank_balence">Average monthly income</string>
     <string name="guaranter">Can you provide Guaranter ?</string>
     <string name="business_refernce_name">Business Reference Name</string>
@@ -633,6 +633,8 @@
 
     <string name="error_emi">Enter the EMI Amount</string>
     <string name="error_rise">This Field is Required</string>
+    <string name="pan_err">Enter a Valid PAN No</string>
+    <string name="phone_err">Enter a Valid Phone No</string>
     <string name="error_bank_name">Enter the Bank Name</string>
     <string name="error_Loan_Type">Enter the Loan Type</string>
     <string name="error_reming_Tenur">Enter the remaining tenor</string>

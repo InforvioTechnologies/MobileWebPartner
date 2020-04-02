@@ -126,12 +126,12 @@
 
                             <androidx.appcompat.widget.AppCompatTextView
                                 android:id="@+id/lapi"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
+                                android:layout_width="150dp"
+                                android:layout_height="40dp"
+                                android:gravity="center"
                                 android:layout_marginLeft="6dp"
                                 android:padding="2dp"
-                                android:text="Loan Against property"
+                                android:text="Loan Against                    property "
                                 android:textColor="@color/colorAccent"
                                 android:textSize="12sp"
                                 android:textStyle="bold" />

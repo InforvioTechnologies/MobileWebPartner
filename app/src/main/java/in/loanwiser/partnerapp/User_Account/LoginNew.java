@@ -436,7 +436,7 @@ public class LoginNew extends AppCompatActivity implements GoogleApiClient.Conne
                     public void onResponse(JSONObject response) {
                         progressDialog.dismiss();
                         String JO_data  = String.valueOf(response);
-
+                        Log.d("Request :", JO_data.toString());
                         try {
                             if (response.getString(Params.status).equals(Params.ok)){
                                 String otp_new =  response.getString(Params.otp);
@@ -450,7 +450,7 @@ public class LoginNew extends AppCompatActivity implements GoogleApiClient.Conne
                             }
                             if (response.getString(Params.status).equals(Params.error)){
                               //  Objs.a.showToast(mCon,"Mobile number is not registered. Please register it");
-                                Toast.makeText(mCon,"Mobile number is already registered. Please login",Toast.LENGTH_SHORT).show();
+                                Toast.makeText(mCon,"Mobile number is not registered. Please register it",Toast.LENGTH_SHORT).show();
                             }
 
                         } catch (JSONException e) {

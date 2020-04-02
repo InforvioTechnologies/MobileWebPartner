@@ -125,13 +125,14 @@ public class Eligibility_HL_New extends SimpleActivity {
         String  co_having_bank_Id,co_having_bank_Value, co_Educational_Id,co_Educational_Value,
                 co_Business_registration_Id,co_Business_registration_Value, co_Spinner_res_proof_Id,co_Spinner_res_proof_Value,
                 co_Other_income_Id,co_Other_income_Value, co_Gstreflect_Id,co_Gstreflect_Value,CO_Employement_Type,
-                IS_CO_Salried_Self,  salaried_Educational_Id,salaried_Educational_Value;
+                IS_CO_Salried_Self,  salaried_Educational_Id,salaried_Educational_Value,Educational_Id_self;
 
         Spinner co_having_bank_account,co_Educatio_qualification_Sppinner,co_business_registration_spinner,
             co_spinner_res_proof,co_spinn_other_income,co_spinn_gst_other,Educational_Spinner_pl,co_Educational_Spinner_pl;
 
         AppCompatEditText co_business_ref_name_edt_txt,co_purchased_by_bank_edit_txt,co_purchased_by_GStbill_edit_txt,
-                co_sales_by_GStbill_edit_txt,co_bank_cridit_by_edtxt,co_Avg_monthly_income,co_other_income_edite_txt;
+                co_sales_by_GStbill_edit_txt,co_bank_cridit_by_edtxt,co_Avg_monthly_income,co_other_income_edite_txt,
+                about_the_business,business_ref_mobile_edt_txt,business_Name_edt_txt_ind,business_Name_edt_txt;
 
         Spinner  pl_co_self_has_pan_card_spnr,pl_co_app_spinner_employe_id,pl_co_app_spinner_cmp_type,
                 pl_co_app_employee_type_spnr,pl_co_app_epf_spinner,
@@ -194,7 +195,7 @@ public class Eligibility_HL_New extends SimpleActivity {
             propert_statues_spinner_value,S_plot_area_edit_txt,S_build_up_area_edit_txt,S_property_price_edt_txt,
             loan_type_id,S_age_Of_Property_Edit_Text,construction_statues_spinner_id,construction_statues_spinner_value,
             S_cost_of_plot_edite_text,S_plot_area_edit_txt_plot_construction,S_build_up_area_edit_txt_plot_construction,
-            S_plot_property_price_edt_txt,S_plot_area_edit_txt_plot_;
+            S_plot_property_price_edt_txt,S_plot_area_edit_txt_plot_,S_about_the_business,S_business_ref_mobile_edt_txt,S_business_Name_edt_txt,S_business_Name_edt_txt_ind;
 
     AppCompatEditText plot_area_edit_txt,build_up_area_edit_txt,property_price_edt_txt,age_Of_Property_Edit_Text,
             cost_of_plot_edite_text,plot_area_edit_txt_plot_construction,build_up_area_edit_txt_plot_construction,
@@ -434,6 +435,8 @@ public class Eligibility_HL_New extends SimpleActivity {
         sales_by_GStbill_edit_txt = (AppCompatEditText) findViewById(R.id.sales_by_GStbill_edit_txt);
         bank_cridit_by_edtxt = (AppCompatEditText) findViewById(R.id.bank_cridit_by_edtxt);
         business_ref_name_edt_txt = (AppCompatEditText) findViewById(R.id.business_ref_name_edt_txt);
+        business_Name_edt_txt_ind = (AppCompatEditText) findViewById(R.id.business_Name_edt_txt_ind);
+        business_Name_edt_txt = (AppCompatEditText) findViewById(R.id.business_Name_edt_txt);
 
         co_business_ref_name_edt_txt = (AppCompatEditText) findViewById(R.id.co_business_ref_name_edt_txt);
         co_purchased_by_bank_edit_txt = (AppCompatEditText) findViewById(R.id.co_purchased_by_bank_edit_txt);
@@ -443,6 +446,8 @@ public class Eligibility_HL_New extends SimpleActivity {
         co_Avg_monthly_income = (AppCompatEditText) findViewById(R.id.co_Avg_monthly_income);
         Avg_monthly_income = (AppCompatEditText) findViewById(R.id.Avg_monthly_income);
         co_other_income_edite_txt = (AppCompatEditText) findViewById(R.id.co_other_income_edite_txt);
+        about_the_business = (AppCompatEditText) findViewById(R.id.about_the_business);
+        business_ref_mobile_edt_txt = (AppCompatEditText) findViewById(R.id.business_ref_mobile_edt_txt);
 
         permanent_res_pincode_edt_txt = (AppCompatEditText) findViewById(R.id.permanent_res_pincode_edt_txt);
 
@@ -1100,12 +1105,16 @@ public class Eligibility_HL_New extends SimpleActivity {
     {
         if(Employement_Type.equals("1"))
         {
+
+            if (!validate_business_Name_edt_txt_ind()) {
+                return;
+            }
             if(having_bank_Id.equals("0"))
             {
                 Toast.makeText(context,"Please Select Bank A/C Type",Toast.LENGTH_SHORT).show();
             }else
             {
-                if(co_Educational_Id.equals("0"))
+                if(Educational_Id_self.equals("0"))
                 {
                     Toast.makeText(context,"Please Select Educational Qualification",Toast.LENGTH_SHORT).show();
 
@@ -1114,12 +1123,21 @@ public class Eligibility_HL_New extends SimpleActivity {
                     if (!Sales_Bank_ref_Name()) {
                         return;
                     }
+                    if (!Validationbusiness_ref_mobile_edt_txt()) {
+                        return;
+                    }
 
                     if(Rsidence_Type.equals("2"))
                     {
+                        if (!Validate_about_the_business()) {
+                            return;
+                        }
                         rented();
                     }else
                     {
+                        if (!Validate_about_the_business()) {
+                            return;
+                        }
                         validation();
                     }
 
@@ -1137,14 +1155,24 @@ public class Eligibility_HL_New extends SimpleActivity {
             {
                 if(Rsidence_Type.equals("2"))
                 {
+                    if (!Validate_about_the_business()) {
+                        return;
+                    }
                     rented();
                 }else
                 {
+                    if (!Validate_about_the_business()) {
+                        return;
+                    }
                     validation();
                 }
             }
         }else if(Employement_Type.equals("3"))
         {
+            if (!validate_Sales_business_Name_edt_txt()) {
+                return;
+            }
+
             if(Business_registration_Id.equals("0"))
             {
                 Toast.makeText(context,"Please Select Business Registration",Toast.LENGTH_SHORT).show();
@@ -1170,9 +1198,16 @@ public class Eligibility_HL_New extends SimpleActivity {
                 }
                 if(Rsidence_Type.equals("2"))
                 {
+
+                    if (!Validate_about_the_business()) {
+                        return;
+                    }
                     rented();
                 }else
                 {
+                    if (!Validate_about_the_business()) {
+                        return;
+                    }
                     validation();
                 }
 
@@ -1558,7 +1593,18 @@ public class Eligibility_HL_New extends SimpleActivity {
 
         return true;
     }
+    private boolean Validationbusiness_ref_mobile_edt_txt(){
+        if (business_ref_mobile_edt_txt.getText().toString().isEmpty()) {
+            business_ref_mobile_edt_txt.setError(getText(R.string.err_curent));
+            business_ref_mobile_edt_txt.requestFocus();
+            return false;
+        } else {
 
+            //inputLayoutLname.setErrorEnabled(false);
+        }
+
+        return true;
+    }
 
     private boolean sales_by_Gst_bill(){
         if (sales_by_GStbill_edit_txt.getText().toString().isEmpty()) {
@@ -1602,7 +1648,32 @@ public class Eligibility_HL_New extends SimpleActivity {
 
         return true;
     }
+    private boolean validate_Sales_business_Name_edt_txt(){
+        if (business_Name_edt_txt.getText().toString().isEmpty()) {
+            business_Name_edt_txt.setError(getText(R.string.err_curent));
+            business_Name_edt_txt.requestFocus();
+            return false;
+        } else {
 
+            //inputLayoutLname.setErrorEnabled(false);
+
+        }
+
+        return true;
+    }
+    private boolean validate_business_Name_edt_txt_ind(){
+        if (business_Name_edt_txt_ind.getText().toString().isEmpty()) {
+            business_Name_edt_txt_ind.setError(getText(R.string.err_curent));
+            business_Name_edt_txt_ind.requestFocus();
+            return false;
+        } else {
+
+            //inputLayoutLname.setErrorEnabled(false);
+
+        }
+
+        return true;
+    }
     private boolean Validate_co_business_ref_name_edt_txt(){
         if (co_business_ref_name_edt_txt.getText().toString().isEmpty()) {
             co_business_ref_name_edt_txt.setError(getText(R.string.err_curent));
@@ -2216,6 +2287,20 @@ public class Eligibility_HL_New extends SimpleActivity {
 
         return true;
     }
+
+    private boolean Validate_about_the_business(){
+        if (about_the_business.getText().toString().trim().isEmpty()) {
+            about_the_business.setError(getText(R.string.err_curent));
+            about_the_business.requestFocus();
+            return false;
+        } else {
+
+        }
+
+        return true;
+    }
+
+
     private boolean Validate_property_ownership_edt_txt_improment(){
         if (property_ownership_edt_txt_improment.getText().toString().trim().isEmpty()) {
             property_ownership_edt_txt_improment.setError(getText(R.string.err_curent));
@@ -2847,6 +2932,35 @@ public class Eligibility_HL_New extends SimpleActivity {
                 }
             });
 
+
+            Educatio_qualification_Sppinner.setAdapter(Gst_reflect_adapter);
+            Educatio_qualification_Sppinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                    try {
+
+                        Educational_Id_self = GST_reflected_ar.getJSONObject(position).getString("id");
+                      //  Educational_Value_self = GST_reflected_ar.getJSONObject(position).getString("value");
+
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+
+                }
+            });
+            Educatio_qualification_Sppinner.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View view, MotionEvent motionEvent) {
+                    // imm.hideSoftInputFromWindow(edt_buyer_address.getWindowToken(), 0);
+                    return false;
+                }
+            });
 
             co_Educatio_qualification_Sppinner.setAdapter(Gst_reflect_adapter);
             co_Educatio_qualification_Sppinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -4583,6 +4697,12 @@ public class Eligibility_HL_New extends SimpleActivity {
         S_plot_property_price_edt_txt = plot_property_price_edt_txt.getText().toString();
         S_plot_area_edit_txt_plot_ = plot_area_edit_txt_plot_.getText().toString();
 
+        S_about_the_business = about_the_business.getText().toString();
+        S_business_ref_mobile_edt_txt = business_ref_mobile_edt_txt.getText().toString();
+        S_business_Name_edt_txt = business_Name_edt_txt.getText().toString();
+        S_business_Name_edt_txt_ind = business_Name_edt_txt_ind.getText().toString();
+
+
 
         S_plot_area_edit_txt_bt = plot_area_edit_txt_bt.getText().toString();
         S_build_up_area_edit_txt_bt = build_up_area_edit_txt_bt.getText().toString();
@@ -4754,9 +4874,14 @@ public class Eligibility_HL_New extends SimpleActivity {
             }else if(salary_type.equals("2"))
             {
                 Applicant.put("has_sb_account",having_bank_Id);
-                Applicant.put("qualification",Educational_Id);
+                Applicant.put("qualification",Educational_Id_self);
                 Applicant.put("reference_name",S_business_ref_name_edt_txt);
                 Applicant.put("addr_proof_own",Spinner_res_proof_Id);
+                Applicant.put("reference_num",S_business_ref_mobile_edt_txt);
+
+                Applicant.put("company_name",S_business_Name_edt_txt);
+                Applicant.put("company_name",S_business_Name_edt_txt_ind);
+                Applicant.put("about_company",S_about_the_business);
 
                 Applicant.put("other_from",other_income);
                 Applicant.put("other_amount",other_amount);

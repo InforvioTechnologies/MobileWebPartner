@@ -37,6 +37,8 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import adhoc.app.applibrary.Config.AppUtils.Objs;
 import adhoc.app.applibrary.Config.AppUtils.Params;
@@ -44,6 +46,7 @@ import adhoc.app.applibrary.Config.AppUtils.Pref.Pref;
 import adhoc.app.applibrary.Config.AppUtils.Urls;
 import adhoc.app.applibrary.Config.AppUtils.VolleySignleton.AppController;
 import dmax.dialog.SpotsDialog;
+import in.loanwiser.partnerapp.PartnerActivitys.Dashboard_Activity;
 import in.loanwiser.partnerapp.PartnerActivitys.Home;
 import in.loanwiser.partnerapp.R;
 import in.loanwiser.partnerapp.SimpleActivity;
@@ -77,7 +80,7 @@ public class Creadite_Report_Activity extends SimpleActivity {
 
     Calendar myCalendar;
     LinearLayout co_applicant_crif;
-
+    String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
     int applicant_count;
 
     @Override
@@ -226,37 +229,64 @@ public class Creadite_Report_Activity extends SimpleActivity {
                 if (!validate_Last_name()) {
                     return;
                 }
+              /*
                 if (!CR_PAn_Validation()) {
                     return;
-                }
+                }*/
+                String Pan = Pan_No_Edite_text.getText().toString();
 
-                if (!Email_ID_Validation()) {
-                    return;
-                }
+                Pattern pattern = Pattern.compile("[A-Z]{5}[0-9]{4}[A-Z]{1}");
 
-                if (!validate_father_name()) {
-                    return;
-                }
+                Matcher matcher = pattern .matcher(Pan);
 
-                if (!validate_DOB()) {
-                    return;
-                }
+                if (matcher .matches()) {
 
-                if (!Maobile_validation()) {
-                    return;
-                }
+                    if (!Email_ID_Validation()) {
+                        return;
+                    }
 
-                if (!validate_Applicant_pincode()) {
-                    return;
-                }
+                    if (!validate_father_name()) {
+                        return;
+                    }
 
-                if(Co_Applicant.equals(1))
-                {
-                    Co_Applicant_validation();
+                    if (!validate_DOB()) {
+                        return;
+                    }
+
+                  /*  if (!Maobile_validation()) {
+                        return;
+                    }*/
+                    String Moblie = Mobile_No_Edite_text.getText().toString();
+                    if (isValid(Moblie)) {
+                        //   Objs.a.showToast(mCon,"Vaild Number");
+                        if (!validate_Applicant_pincode()) {
+                            return;
+                        }
+
+                        if(Co_Applicant.equals(1))
+                        {
+                            Co_Applicant_validation();
+                        }else
+                        {
+                            CRIF_Report();
+                        }
+                    } else {
+                        //  System.out.println("Invalid Number");
+                        Objs.a.showToast(mCon, "Invalid Number");
+                    }
+
+
+
                 }else
                 {
-                    CRIF_Report();
+                    Pan_No_Edite_text.setError(getText(R.string.pan_err));
+                    Pan_No_Edite_text.requestFocus();
+                  /*  Toast.makeText(getApplicationContext(), Pan+" is Not Valid",
+                            Toast.LENGTH_LONG).show();
+*/
                 }
+
+
 
 
             }
@@ -274,28 +304,49 @@ public class Creadite_Report_Activity extends SimpleActivity {
             return;
         }
 
-        if (!Co_pl_Pan_validation()) {
+      /*  if (!Co_pl_Pan_validation()) {
             return;
-        }
-        if (!Co_pl_father_name_validation()) {
-            return;
-        }
-        if (!Co_pl_Email_Id_validation()) {
-            return;
-        }
-        if (!Co_pl_DOB_validation()) {
-            return;
-        }
+        }*/
 
-        if (!Co_pl_Mobilr_no_validation()) {
-            return;
+        String Pan = pl_co_app_Pan_No_Edite_text.getText().toString();
+
+        Pattern pattern = Pattern.compile("[A-Z]{5}[0-9]{4}[A-Z]{1}");
+
+        Matcher matcher = pattern .matcher(Pan);
+
+        if (matcher .matches()) {
+            if (!Co_pl_father_name_validation()) {
+                return;
+            }
+            if (!Co_pl_Email_Id_validation()) {
+                return;
+            }
+            if (!Co_pl_DOB_validation()) {
+                return;
+            }
+
+         String Moblie1 = pl_co_app_Mobile_No_Edite_text.getText().toString();
+
+          /*  if (!Co_pl_Mobilr_no_validation()) {
+                return;
+            }*/
+
+            if (isValid(Moblie1)) {
+                //   Objs.a.showToast(mCon,"Vaild Number");
+                if (!Co_pl_Pincode_validation()) {
+                    return;
+                }
+                CRIF_Report();
+            } else {
+                //  System.out.println("Invalid Number");
+                Objs.a.showToast(mCon, "Invalid Number");
+            }
+
+        }else
+        {
+            pl_co_app_Pan_No_Edite_text.setError(getText(R.string.pan_err));
+            pl_co_app_Pan_No_Edite_text.requestFocus();
         }
-
-        if (!Co_pl_Pincode_validation()) {
-            return;
-        }
-
-
     }
 
     private boolean validate_name(){
@@ -372,6 +423,7 @@ public class Creadite_Report_Activity extends SimpleActivity {
             Pan_No_Edite_text.setError(getText(R.string.error_rise));
             Pan_No_Edite_text.requestFocus();
             return false;
+
         } else {
 
             //inputLayoutLname.setErrorEnabled(false);
@@ -388,10 +440,19 @@ public class Creadite_Report_Activity extends SimpleActivity {
             return false;
         } else {
 
-            //inputLayoutLname.setErrorEnabled(false);
+            if (Email_Id_Edite_text.getText().toString().trim().matches(emailPattern)) {
+                //Toast.makeText(getApplicationContext(),"valid email address",Toast.LENGTH_SHORT).show();
+                return true;
+            }else {
+
+                Toast.makeText(getApplicationContext(),"", Toast.LENGTH_SHORT).show();
+                Email_Id_Edite_text.setError("Invalid email address");
+                Email_Id_Edite_text.requestFocus();
+                return false;
+            }
         }
 
-        return true;
+     //   return true;
     }
 
     private boolean Maobile_validation(){
@@ -477,10 +538,19 @@ public class Creadite_Report_Activity extends SimpleActivity {
             return false;
         } else {
 
-            //inputLayoutLname.setErrorEnabled(false);
+            if (pl_co_app_Email_Id_Edite_text.getText().toString().trim().matches(emailPattern)) {
+                //Toast.makeText(getApplicationContext(),"valid email address",Toast.LENGTH_SHORT).show();
+                return true;
+            }else {
+
+                Toast.makeText(getApplicationContext(),"", Toast.LENGTH_SHORT).show();
+                pl_co_app_Email_Id_Edite_text.setError("Invalid email address");
+                pl_co_app_Email_Id_Edite_text.requestFocus();
+                return false;
+            }
         }
 
-        return true;
+      //  return true;
     }
 
     private boolean Co_pl_DOB_validation(){
@@ -500,6 +570,8 @@ public class Creadite_Report_Activity extends SimpleActivity {
     private boolean Co_pl_Mobilr_no_validation(){
 
         if (pl_co_app_Mobile_No_Edite_text.getText().toString().isEmpty()) {
+
+
             pl_co_app_Mobile_No_Edite_text.setError(getText(R.string.error_rise));
             pl_co_app_Mobile_No_Edite_text.requestFocus();
             return false;
@@ -595,6 +667,12 @@ public class Creadite_Report_Activity extends SimpleActivity {
         };
         AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
 
+    }
+
+    public static boolean isValid(String s) {
+        Pattern p = Pattern.compile("^([6-7-8-9]{1})([0-9]{9})");
+        Matcher m = p.matcher(s);
+        return (m.find() && m.group().equals(s));
     }
 
     private void CRIF_Report()
@@ -694,17 +772,17 @@ public class Creadite_Report_Activity extends SimpleActivity {
                             if(jsonObject1.getString("applicant_status").equals("success")) {
                                 if(jsonObject1.getString("pay_status").equals("success"))
                                 {
-                                    Toast.makeText(context,"Eligibility Created Successfully",Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(context,"Credite Report Created Successfully",Toast.LENGTH_SHORT).show();
                                     Intent intent = new Intent(Creadite_Report_Activity.this, Payment_Details_Activity.class);
                                     startActivity(intent);
                                     finish();
 
                                 }else if(jsonObject1.getString("pay_status").equals("error"))
                                 {
-                                    Toast.makeText(context,"Eligibility Failed",Toast.LENGTH_SHORT).show();
-                                    String viability_array =jsonObject1.getString("pay_status");
-                                    Intent intent = new Intent(Creadite_Report_Activity.this, Home.class);
-                                    intent.putExtra("viability_jsonArray", viability_array.toString());
+                                    Toast.makeText(context,"Credite Report Failed",Toast.LENGTH_SHORT).show();
+                                  //  String viability_array =jsonObject1.getString("pay_status");
+                                    Intent intent = new Intent(Creadite_Report_Activity.this, Dashboard_Activity.class);
+                                   // intent.putExtra("viability_jsonArray", Dashboard_Activity.toString());
                                     startActivity(intent);
                                     finish();
 

@@ -151,6 +151,7 @@
                     android:layout_height="wrap_content"
                     android:textSize="16sp"
                     android:inputType="number"
+
                     android:id="@+id/no_of_acres_edit_txt"
                     android:textColor="@color/colorPrimaryDark"/>
             </LinearLayout>
@@ -550,6 +551,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="16sp"
+                    android:imeOptions="actionNext"
+                    android:inputType="number"
                     android:id="@+id/no_of_animals"
                     android:textColor="@color/colorPrimaryDark"/>
             </LinearLayout>
@@ -591,6 +594,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="16sp"
+                    android:imeOptions="actionDone"
+                    android:inputType="number"
                     android:id="@+id/no_of_liters_edit_txt"
                     android:textColor="@color/colorPrimaryDark"/>
             </LinearLayout>
@@ -683,6 +688,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textSize="16sp"
+                        android:imeOptions="actionNext"
+                        android:inputType="number"
                         android:id="@+id/no_of_years_in_works"
                         android:textColor="@color/colorPrimaryDark"/>
                 </LinearLayout>
@@ -725,6 +732,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textSize="16sp"
+                        android:imeOptions="actionDone"
+                        android:inputType="number"
                         android:id="@+id/avg_monthly_income"
                         android:textColor="@color/colorPrimaryDark"/>
                 </LinearLayout>
@@ -774,6 +783,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textSize="16sp"
+                        android:imeOptions="actionNext"
+                        android:inputType="number"
                         android:id="@+id/no_of_birds_edit_txt"
                         android:textColor="@color/colorPrimaryDark"/>
                 </LinearLayout>
@@ -815,6 +826,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textSize="16sp"
+                        android:imeOptions="actionNext"
+                        android:inputType="text"
                         android:id="@+id/supply_by_who"
                         android:textColor="@color/colorPrimaryDark"/>
                 </LinearLayout>
@@ -856,6 +869,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textSize="16sp"
+                        android:imeOptions="actionNext"
+                        android:inputType="number"
                         android:id="@+id/Selling_Price"
                         android:textColor="@color/colorPrimaryDark"/>
                 </LinearLayout>
@@ -897,6 +912,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textSize="16sp"
+                        android:imeOptions="actionNext"
+                        android:inputType="number"
                         android:id="@+id/Profit_affter_selling"
                         android:textColor="@color/colorPrimaryDark"/>
                 </LinearLayout>
@@ -939,6 +956,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textSize="16sp"
+                        android:imeOptions="actionNext"
+                        android:inputType="number"
                         android:id="@+id/no_of_years_in_work_P"
                         android:textColor="@color/colorPrimaryDark"/>
                 </LinearLayout>
@@ -981,6 +1000,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textSize="16sp"
+                        android:imeOptions="actionDone"
+                        android:inputType="number"
                         android:id="@+id/avg_monthly_income_Poultry"
                         android:textColor="@color/colorPrimaryDark"/>
                 </LinearLayout>

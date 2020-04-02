@@ -127,11 +127,12 @@
                 </LinearLayout>
             </LinearLayout>
             <LinearLayout
+                android:id="@+id/name_of_deler_ship_cmp_co_self"
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <LinearLayout
-                    android:id="@+id/name_of_deler_ship_cmp"
+
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">

@@ -105,9 +105,9 @@ public class Payment_Details_Activity extends SimpleActivity {
         done.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-              /*  Intent intent = new Intent(Payment_Details_Activity.this, Home.class);
+                Intent intent = new Intent(Payment_Details_Activity.this, Dashboard_Activity.class);
                 startActivity(intent);
-                finish();*/
+                finish();
             }
         });
 
@@ -153,7 +153,7 @@ public class Payment_Details_Activity extends SimpleActivity {
 
         btn1=(AppCompatButton)findViewById(R.id.get_link);
         btn2=(AppCompatButton)findViewById(R.id.next_side);
-        done=(AppCompatButton)findViewById(R.id.done);
+        done=(AppCompatButton)findViewById(R.id.skip_payment);
     }
 
     private void get_pay_shedule() {
