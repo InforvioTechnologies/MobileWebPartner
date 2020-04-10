@@ -1248,7 +1248,7 @@ public class Eligibility_HL_New extends SimpleActivity {
 
                 }else if(Other_income_Id.equals("4"))
                 {
-
+                    lead_Eligibility();
                 }else
                 {
 
@@ -1262,7 +1262,6 @@ public class Eligibility_HL_New extends SimpleActivity {
                     }
                     else
                     {
-
 
                        CO_APPLICANT_VALIDATION();
                         //
