@@ -119,6 +119,8 @@ public class Statues_Dashboard_Nav extends AppCompatActivity
             }
         });
 
+      //  float_add.setContent("Start Chat");
+
 
         initCode();
 

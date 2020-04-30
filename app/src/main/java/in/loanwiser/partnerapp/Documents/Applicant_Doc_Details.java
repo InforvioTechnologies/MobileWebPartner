@@ -121,7 +121,8 @@ public class Applicant_Doc_Details extends SimpleActivity {
                             JSONObject jsonObject1 = response.getJSONObject("response");
                             JSONArray jsonArray = jsonObject1.getJSONArray("key_arr");
                             jsonobject_2 = jsonObject1.getJSONObject("document_arr");
-
+                            Log.e("KEY_ARRar",jsonArray.toString());
+                            Log.e("jsonobject_2",jsonobject_2.toString());
                             if (jsonArray.length()>0){
                                 // Objs.a.showToast(mCon, String.valueOf(object.getJSONArray(Params.products)));
 
@@ -223,13 +224,22 @@ public class Applicant_Doc_Details extends SimpleActivity {
                 holder.class_name.setText(Objs.a.capitalize(J.getString("key")));
                 Objs.a.NewNormalFontStyle(mCon,holder.class_name);
 
+                String docuemt_upload= J.getString("docuemt_upload");
 
                 String key = J.getString("key");
                 holder.class_name.setText(key);
 
                 JSONArray Proof_Array12 = jsonobject_2.getJSONArray(key);
 
-                for (int i=0;i<Proof_Array12.length();i++) {
+                if(docuemt_upload.equals("1")){
+
+                    holder.uploaded_yes.setImageDrawable(getResources().getDrawable(R.drawable.don));
+
+                }else {
+                    holder.uploaded_yes.setImageDrawable(getResources().getDrawable(R.drawable.notdon));
+                }
+
+              /*  for (int i=0;i<Proof_Array12.length();i++) {
                     JSONObject J = null;
                     try {
 
@@ -245,13 +255,13 @@ public class Applicant_Doc_Details extends SimpleActivity {
 
                                     J1 = Proof_Array12.getJSONObject(i);
 
-                                  /*    if(J1.getString(Params.uploadstatus).equals("1")){
+                                      if(J1.getString(Params.uploadstatus).equals("1")){
 
                                       holder.uploaded_yes.setImageDrawable(getResources().getDrawable(R.drawable.don));
 
                                       }else {
                                       holder.uploaded_yes.setImageDrawable(getResources().getDrawable(R.drawable.notdon));
-                                      }*/
+                                      }
 
                                 }
                              catch (JSONException e) {
@@ -267,7 +277,7 @@ public class Applicant_Doc_Details extends SimpleActivity {
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
-                }
+                }*/
 
                 holder.image_doc.setImageDrawable(getResources().getDrawable(R.drawable.file));
 

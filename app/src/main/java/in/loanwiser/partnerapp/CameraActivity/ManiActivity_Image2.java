@@ -326,6 +326,7 @@ public class ManiActivity_Image2 extends SimpleActivity implements SingleUploadB
         imgSinglePick = (ImageView) findViewById(R.id.imgSinglePick);
         imgSinglePick1 = (ImageView) findViewById(R.id.imgSinglePick1);
         upload = (Button) findViewById(R.id.upload);
+
         upload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -362,6 +363,8 @@ public class ManiActivity_Image2 extends SimpleActivity implements SingleUploadB
             }
         });
 */
+        upload.setEnabled(false);
+        upload.setBackgroundResource(R.drawable.capsul_button_dis);
         gallery.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -509,6 +512,9 @@ public class ManiActivity_Image2 extends SimpleActivity implements SingleUploadB
 
             if(filePath != null)
             {
+                upload.setEnabled(true);
+                upload.setBackgroundResource(R.drawable.capsul_button4);
+
                 viewSwitcher.setVisibility(View.GONE);
                 viewSwitcher1.setVisibility(View.VISIBLE);
                 viewSwitcher1.setDisplayedChild(1);
@@ -528,13 +534,16 @@ public class ManiActivity_Image2 extends SimpleActivity implements SingleUploadB
 
 
             } else if (resultCode == RESULT_CANCELED) {
-
+                upload.setEnabled(false);
+                upload.setBackgroundResource(R.drawable.capsul_button_dis);
                 // user cancelled Image capture
                 Toast.makeText(getApplicationContext(),
                         "User cancelled image capture", Toast.LENGTH_SHORT)
                         .show();
 
             } else {
+                upload.setEnabled(false);
+                upload.setBackgroundResource(R.drawable.capsul_button_dis);
                 // failed to capture image
                 Toast.makeText(getApplicationContext(),
                         "Sorry! Failed to capture image", Toast.LENGTH_SHORT)
@@ -544,6 +553,9 @@ public class ManiActivity_Image2 extends SimpleActivity implements SingleUploadB
         }
         else
         {
+            upload.setEnabled(true);
+            upload.setBackgroundResource(R.drawable.capsul_button4);
+
             viewSwitcher.setVisibility(View.VISIBLE);
             viewSwitcher1.setVisibility(View.GONE);
             // viewSwitcher1.setDisplayedChild(1);
@@ -604,9 +616,11 @@ public class ManiActivity_Image2 extends SimpleActivity implements SingleUploadB
     @SuppressLint("LongLogTag")
     public void upload()
     {
-         //   Log.d("Camara image1", String.valueOf(all_path1));
+
+        //   Log.d("Camara image1", String.valueOf(all_path1));
         if(all_path == null && filePath == null )
         {
+          //  upload.setEnabled(true);
             if(bitmap!=null)
             {
                 final String singleimage = getStringImage(bitmap);

@@ -40,6 +40,7 @@ import in.loanwiser.partnerapp.PDF_Dounloader.PermissionUtils;
 import in.loanwiser.partnerapp.R;
 import in.loanwiser.partnerapp.Step_Changes_Screen.CRIF_Report_Activity;
 import in.loanwiser.partnerapp.Step_Changes_Screen.CRIF_Report_Activity_PDF_View;
+import in.loanwiser.partnerapp.Step_Changes_Screen.Creadite_Report_Activity;
 import in.loanwiser.partnerapp.Step_Changes_Screen.Credite_report_details;
 import in.loanwiser.partnerapp.Step_Changes_Screen.Document_Check_List;
 import in.loanwiser.partnerapp.Step_Changes_Screen.Document_Checklist_Details_type;
@@ -290,7 +291,7 @@ public class Home extends AppCompatActivity {
 
                 }else
                 {
-                    Intent intent = new Intent(Home.this, Credite_report_details.class);
+                    Intent intent = new Intent(Home.this, Creadite_Report_Activity.class);
                     startActivity(intent);
                     finish();
                 }

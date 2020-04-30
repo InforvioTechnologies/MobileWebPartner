@@ -16,6 +16,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonObjectRequest;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -38,7 +39,14 @@ public class Viability_Activity_Data_View extends SimpleActivity {
     AppCompatTextView loan_type_newcat,loan_type_new_val_type,type_of_employee_new_val_type,Loan_amount_new_txt,
             loan_type_newcat_appl,loan_type_newcat_appl_total,loan_type_newcat_appl__pincoe,
             loan_type_newcat_appl__are,loan_type_newcat_appl__asets,loan_type_newcat_appl__res_pin,
-            loan_type_newcat_appl__res_area,loan_type_newcat_appl__res_type,loan_type_newcat_appl__live,app_salaried_age;
+            loan_type_newcat_appl__res_area,loan_type_newcat_appl__res_type,loan_type_newcat_appl__live,app_salaried_age,
+            f_vocation_type,f_what_crop,f_anual_income, f_no_of_acres,f_daily_income,f_avg_monthly_income,
+            d_no_of_animals,D_no_month_in_business,d_no_production_Daily,d_how_to_you_sell,
+            D_avg_monthly_income, p_no_of_birds,p_supplied_by_which_cmp,p_selling_price,p_profit_affter_selling,
+            p_average_monthly_incom,own_business_type_1,own_francies_deler,own_anual_turover,own_service_anual_turover,own_service_bisiness_setup,
+            manufacture_anual_turover,manufacture_value_of_stock,manufacture_monthly_sales,
+            value_of_machineries,manu_avg_monthly_income,manu_no_of_month_business,p_no_of_month_in_business,f_no_month,
+            own_name_of_dealer;
 
     AppCompatTextView aaplicant_self_name_txt,aaplicant_self_toe_txt,aaplicant_self_age_txt,
             aaplicant_self_vtype_txt,aaplicant_self_vechiceletype_txt,aaplicant_self_no_f_vechtxt,
@@ -76,13 +84,19 @@ public class Viability_Activity_Data_View extends SimpleActivity {
             co_aaplicant_self_income_txt,
             co_aaplicant_self_office_shop_txt,co_aaplicant_self_residen_tye_txt,
             co_aaplicant_self_office_shop_pinc_txt,co_aaplicant_self_office_shop_area_txt,
-            co_aaplicant_self_assets_own_txt;
+            co_aaplicant_self_assets_own_txt,self_employement_type,self_age_1,self_business_vintage,
+            self_business_income,self_office_shopsetup, off_residence,off_residence_pincode,off_residence_area,assets_own,
+            self_residence_pincode,self_residence_area,self_residence_type,self_curr_resi,
+            selfvocation_type1,vehicle_type_1,no_vehicle,
+            average_monthly_income,no_of_month_in_business,vehicle_type_1_;
 
-    LinearLayout lay_out_applant_salaried,lay_out_applant_selfeployee,lay_out_co_applant_salaried,lay_out_co_applant_selfeployee;
+    LinearLayout lay_out_applant_salaried,lay_out_applant_selfeployee,lay_out_co_applant_salaried,
+            lay_out_co_applant_selfeployee,Ly_experience_appl_live,individual,formin_dairy,self_business,
+            res_rented,office_ly,Driver_C_owner, forming,dairy,poultry,Retail_wholesale_business ,service_business,manufacturing;
 
-
+    String [] area;
     String Employemnt_Status,Applicant_Status,Co_Applicant_status,CO_APPlicant_Employee_Status,bus_employee_type,
-            own_business_type,applicant_own_business_type;
+            own_business_type,applicant_own_business_type,salary_modestr,work_areaarr;
     JSONObject Viability_object,Applicant_object,Co_applicant_object;
 
     @Override
@@ -108,43 +122,75 @@ public class Viability_Activity_Data_View extends SimpleActivity {
         app_salaried_age =(AppCompatTextView)findViewById(R.id.app_salaried_age);
 
 
+        own_business_type_1 =(AppCompatTextView)findViewById(R.id.own_business_type_1);
+        own_francies_deler =(AppCompatTextView)findViewById(R.id.own_francies_deler);
+        own_name_of_dealer =(AppCompatTextView)findViewById(R.id.own_name_of_dealer);
+        own_anual_turover =(AppCompatTextView)findViewById(R.id.own_anual_turover);
+        own_service_anual_turover =(AppCompatTextView)findViewById(R.id.own_service_anual_turover);
+        own_service_bisiness_setup =(AppCompatTextView)findViewById(R.id.own_service_bisiness_setup);
+        manufacture_anual_turover =(AppCompatTextView)findViewById(R.id.manufacture_anual_turover);
+        manufacture_value_of_stock =(AppCompatTextView)findViewById(R.id.manufacture_value_of_stock);
+        manufacture_monthly_sales =(AppCompatTextView)findViewById(R.id.manufacture_monthly_sales);
+        value_of_machineries =(AppCompatTextView)findViewById(R.id.value_of_machineries);
+        manu_avg_monthly_income =(AppCompatTextView)findViewById(R.id.manu_avg_monthly_income);
+
+      //  manu_no_of_month_business,p_no_of_month_in_business,f_no_month
+        manu_no_of_month_business =(AppCompatTextView)findViewById(R.id.manu_no_of_month_business);
+        p_no_of_month_in_business =(AppCompatTextView)findViewById(R.id.p_no_of_month_in_business);
+        f_no_month =(AppCompatTextView)findViewById(R.id.f_no_month);
+
+        self_employement_type =(AppCompatTextView)findViewById(R.id.self_employement_type);
+        self_age_1 =(AppCompatTextView)findViewById(R.id.self_age_1);
+        self_business_vintage =(AppCompatTextView)findViewById(R.id.self_business_vintage);
+        self_business_income =(AppCompatTextView)findViewById(R.id.self_business_income);
+        self_office_shopsetup =(AppCompatTextView)findViewById(R.id.self_office_shopsetup);
 
 
-        aaplicant_self_name_txt =(AppCompatTextView)findViewById(R.id.aaplicant_self_name_txt);
-        aaplicant_self_toe_txt =(AppCompatTextView)findViewById(R.id.aaplicant_self_toe_txt);
-        aaplicant_self_age_txt =(AppCompatTextView)findViewById(R.id.aaplicant_self_age_txt);
-        aaplicant_self_vtype_txt =(AppCompatTextView)findViewById(R.id.aaplicant_self_vtype_txt);
-        aaplicant_self_vechiceletype_txt =(AppCompatTextView)findViewById(R.id.aaplicant_self_vechiceletype_txt);
-        aaplicant_self_no_f_vechtxt =(AppCompatTextView)findViewById(R.id.aaplicant_self_no_f_vechtxt);
-        aaplicant_self_vocation_txt =(AppCompatTextView)findViewById(R.id.aaplicant_self_vocation_txt);
-        aaplicant_self_acres_txt =(AppCompatTextView)findViewById(R.id.aaplicant_self_acres_txt);
-        aaplicant_self_whatkinds_txt =(AppCompatTextView)findViewById(R.id.aaplicant_self_whatkinds_txt);
-        aaplicant_self_annua_incm_txt =(AppCompatTextView)findViewById(R.id.aaplicant_self_annua_incm_txt);
-        aaplicant_self_dailm_incm_txt =(AppCompatTextView)findViewById(R.id.aaplicant_self_dailm_incm_txt);
-        aaplicant_self_no_animals_txt =(AppCompatTextView)findViewById(R.id.aaplicant_self_no_animals_txt);
-        aplicant_self_no_litrals_txt =(AppCompatTextView)findViewById(R.id.aplicant_self_no_litrals_txt);
-        aplicant_self_sell_milk1_txt =(AppCompatTextView)findViewById(R.id.aplicant_self_sell_milk1_txt);
-        aplicant_self_no_birds_txt =(AppCompatTextView)findViewById(R.id.aplicant_self_no_birds_txt);
-        aplicant_self_supp_company_txt =(AppCompatTextView)findViewById(R.id.aplicant_self_supp_company_txt);
-        aplicant_self__selling_birds_txt =(AppCompatTextView)findViewById(R.id.aplicant_self__selling_birds_txt);
-        aplicant_self__afetr_selling_birds_txt =(AppCompatTextView)findViewById(R.id.aplicant_self__afetr_selling_birds_txt);
-        aplicant_self_business_type_txt  =(AppCompatTextView)findViewById(R.id.aplicant_self_business_type_txt);
-        aplicant_self_business_type_txt_franc  =(AppCompatTextView)findViewById(R.id.aplicant_self_business_type_txt_franc);
-        aplicant_self_business_type_txt_Delaership  =(AppCompatTextView)findViewById(R.id.aplicant_self_business_type_txt_Delaership);
-        aplicant_self_business_type_txt_annual  =(AppCompatTextView)findViewById(R.id.aplicant_self_business_type_txt_annual);
-        aplicant_self_business_type_txt_business_Setup1  =(AppCompatTextView)findViewById(R.id.aplicant_self_business_type_txt_business_Setup1);
-        aplicant_self_business_type_txt_value_f_stock  =(AppCompatTextView)findViewById(R.id.aplicant_self_business_type_txt_value_f_stock);
-        aplicant_self_business_type_txt_monthly_sales  =(AppCompatTextView)findViewById(R.id.aplicant_self_business_type_txt_monthly_sales);
-        aplicant_self_business_type_txt_value_f_machine  =(AppCompatTextView)findViewById(R.id.aplicant_self_business_type_txt_value_f_machine);
-        aplicant_self_nbusiness_txt   =(AppCompatTextView)findViewById(R.id.aplicant_self_nbusiness_txt);
-        aplicant_self_busin_vintage_txt  =(AppCompatTextView)findViewById(R.id.aplicant_self_busin_vintage_txt);
-        aplicant_self_average_profit_txt  =(AppCompatTextView)findViewById(R.id.aplicant_self_average_profit_txt);
-        aplicant_self_income_txt  =(AppCompatTextView)findViewById(R.id.aplicant_self_income_txt);
-        aplicant_self_office_shop_txt  =(AppCompatTextView)findViewById(R.id.aplicant_self_office_shop_txt);
-        aplicant_self_residen_tye_txt  =(AppCompatTextView)findViewById(R.id.aplicant_self_residen_tye_txt);
-        aplicant_self_office_shop_pinc_txt  =(AppCompatTextView)findViewById(R.id.aplicant_self_office_shop_pinc_txt);
-        aplicant_self_office_shop_area_txt  =(AppCompatTextView)findViewById(R.id.aplicant_self_office_shop_area_txt);
-        aplicant_self_assets_own_txt  =(AppCompatTextView)findViewById(R.id.aplicant_self_assets_own_txt);
+        f_vocation_type =(AppCompatTextView)findViewById(R.id.f_vocation_type);
+        f_what_crop =(AppCompatTextView)findViewById(R.id.f_what_crop);
+        f_anual_income =(AppCompatTextView)findViewById(R.id.f_anual_income);
+        f_no_of_acres =(AppCompatTextView)findViewById(R.id.f_no_of_acres);
+        f_daily_income =(AppCompatTextView)findViewById(R.id.f_daily_income);
+        f_avg_monthly_income =(AppCompatTextView)findViewById(R.id.f_avg_monthly_income);
+
+        d_no_of_animals =(AppCompatTextView)findViewById(R.id.d_no_of_animals);
+        d_no_production_Daily =(AppCompatTextView)findViewById(R.id.d_no_production_Daily);
+        d_how_to_you_sell =(AppCompatTextView)findViewById(R.id.d_how_to_you_sell);
+        D_avg_monthly_income =(AppCompatTextView)findViewById(R.id.D_avg_monthly_income);
+        D_no_month_in_business =(AppCompatTextView)findViewById(R.id.D_no_month_in_business);
+
+
+        p_no_of_birds =(AppCompatTextView)findViewById(R.id.p_no_of_birds);
+        p_supplied_by_which_cmp =(AppCompatTextView)findViewById(R.id.p_supplied_by_which_cmp);
+        p_selling_price =(AppCompatTextView)findViewById(R.id.p_selling_price);
+        p_profit_affter_selling =(AppCompatTextView)findViewById(R.id.p_profit_affter_selling);
+        p_average_monthly_incom =(AppCompatTextView)findViewById(R.id.p_average_monthly_incom);
+
+
+
+                selfvocation_type1 =(AppCompatTextView)findViewById(R.id.selfvocation_type1);
+        vehicle_type_1 =(AppCompatTextView)findViewById(R.id.vehicle_type_1);
+        no_vehicle =(AppCompatTextView)findViewById(R.id.no_vehicle);
+        average_monthly_income =(AppCompatTextView)findViewById(R.id.average_monthly_income);
+        no_of_month_in_business =(AppCompatTextView)findViewById(R.id.no_of_month_in_business);
+
+
+        off_residence =(AppCompatTextView)findViewById(R.id.off_residence);
+        off_residence_pincode =(AppCompatTextView)findViewById(R.id.off_residence_pincode);
+        off_residence_area =(AppCompatTextView)findViewById(R.id.off_residence_area);
+        assets_own =(AppCompatTextView)findViewById(R.id.assets_own);
+
+
+
+        self_residence_pincode =(AppCompatTextView)findViewById(R.id.self_residence_pincode);
+        self_residence_area =(AppCompatTextView)findViewById(R.id.self_residence_area);
+        self_residence_type =(AppCompatTextView)findViewById(R.id.self_residence_type);
+        self_curr_resi =(AppCompatTextView)findViewById(R.id.self_curr_resi);
+
+
+
+
+
 
 
 
@@ -200,20 +246,35 @@ public class Viability_Activity_Data_View extends SimpleActivity {
         co_aaplicant_self_office_shop_area_txt =(AppCompatTextView)findViewById(R.id.co_aaplicant_self_office_shop_area_txt);
         co_aaplicant_self_assets_own_txt =(AppCompatTextView)findViewById(R.id.co_aaplicant_self_assets_own_txt);
 
-        lay_out_applant_salaried =(LinearLayout)findViewById(R.id.lay_out_applant_salaried) ;
+        res_rented =(LinearLayout)findViewById(R.id.res_rented);
+        lay_out_applant_salaried =(LinearLayout)findViewById(R.id.lay_out_applant_salaried);
+
+        forming =(LinearLayout)findViewById(R.id.forming);
+        dairy =(LinearLayout)findViewById(R.id.dairy);
+        poultry =(LinearLayout)findViewById(R.id.poultry);
+
+
+
+        office_ly =(LinearLayout)findViewById(R.id.office_ly);
+
         lay_out_applant_selfeployee =(LinearLayout)findViewById(R.id.lay_out_applant_selfeployee) ;
         lay_out_co_applant_salaried =(LinearLayout)findViewById(R.id.lay_out_co_applant_salaried) ;
         lay_out_co_applant_selfeployee =(LinearLayout)findViewById(R.id.lay_out_co_applant_selfeployee) ;
+        Ly_experience_appl_live =(LinearLayout)findViewById(R.id.Ly_experience_appl_live) ;
 
 
 
+        individual =(LinearLayout)findViewById(R.id.individual);
+        Driver_C_owner =(LinearLayout)findViewById(R.id.Driver_C_owner);
+        formin_dairy =(LinearLayout)findViewById(R.id.formin_dairy);
+        self_business =(LinearLayout)findViewById(R.id.self_business);
+
+
+        Retail_wholesale_business =(LinearLayout)findViewById(R.id.Retail_wholesale_business);
+        service_business =(LinearLayout)findViewById(R.id.service_business);
+        manufacturing =(LinearLayout)findViewById(R.id.manufacturing);
 
         View_Viability_data();
-
-
-
-
-
 
     }
 
@@ -231,10 +292,9 @@ public class Viability_Activity_Data_View extends SimpleActivity {
 
 
 
-
         //   progressDialog.show();
 
-        Log.e("Request vIew Viability", "called");
+        Log.e("Request vIew Viability", String.valueOf(J));
         JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, Urls.VIEW_VIABILITYDATA, J,
                 new Response.Listener<JSONObject>() {
 
@@ -249,7 +309,6 @@ public class Viability_Activity_Data_View extends SimpleActivity {
                             Employemnt_Status=Applicant_object.getString("employe_status");
 
                             applicant_own_business_type=Applicant_object.getString("bus_vocation");
-
                             Co_Applicant_status=Viability_object.getString("coapplicant_status");
 
 
@@ -262,6 +321,32 @@ public class Viability_Activity_Data_View extends SimpleActivity {
                                     lay_out_applant_salaried.setVisibility(View.VISIBLE);
                                     lay_out_applant_selfeployee.setVisibility(View.GONE);
 
+                                    salary_modestr=Applicant_object.getString("salary_modestr");
+                                 JSONArray work_areaarr_area =Applicant_object.getJSONArray("work_areaarr");
+                                 JSONArray per_areaarr =Applicant_object.getJSONArray("per_areaarr");
+
+                                        try {
+                                           JSONObject J = work_areaarr_area.getJSONObject(0);
+                                            String area = J.getString("area");
+                                            loan_type_newcat_appl__are.setText(area);
+
+                                        } catch (JSONException e) {
+                                            e.printStackTrace();
+                                        }
+
+
+                                    try {
+                                        JSONObject J = per_areaarr.getJSONObject(0);
+                                        String area = J.getString("area");
+                                        loan_type_newcat_appl__res_area.setText(area);
+
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                    }
+
+                                    JSONArray assetsstr1 =Applicant_object.getJSONArray("assetsstr");
+                                    Log.e("work_areaarr_area",work_areaarr_area.toString());
+                                    loan_type_newcat_appl__asets.setText(assetsstr1.toString());
 
                                     String age = Applicant_object.getString("member_age");
                                     app_salaried_age.setText(age);
@@ -270,9 +355,9 @@ public class Viability_Activity_Data_View extends SimpleActivity {
                                     loan_type_new_val_type.setText(net_salary);
 
                                     String salry_credit_method = Applicant_object.getString("salary_mode");
-                                    Loan_amount_new_txt.setText(salry_credit_method);
+                                    Loan_amount_new_txt.setText(salary_modestr);
 
-                                    String salry_proof = Applicant_object.getString("income_proof_type");
+                                    String salry_proof = Applicant_object.getString("income_proof_typestr");
                                     // type_of_employee_new_val_type.setText(salry_proof);
                                     StringBuffer buff3 = new StringBuffer();
                                     buff3.append(salry_proof);
@@ -292,103 +377,272 @@ public class Viability_Activity_Data_View extends SimpleActivity {
                                     String residence_pincode = Applicant_object.getString("per_pincode");
                                     loan_type_newcat_appl__res_pin.setText(residence_pincode);
 
+
+
                                     String residence_type = Applicant_object.getString("residence_type");
-                                    loan_type_newcat_appl__res_type.setText(residence_type);
+                                    String resident_statusstr1 = Applicant_object.getString("resident_statusstr");
+                                    loan_type_newcat_appl__res_type.setText(resident_statusstr1);
+
+                                    if(residence_type.equals("1"))
+                                    {
+                                        Ly_experience_appl_live.setVisibility(View.GONE);
+                                    }else
+                                    {
+                                        Ly_experience_appl_live.setVisibility(View.VISIBLE);
+                                        String current_home_duration = Applicant_object.getString("current_home_duration");
+                                        loan_type_newcat_appl__live.setText(current_home_duration);
+                                    }
 
                                 } else {
+
+                                    Applicant_object=Viability_object.getJSONObject("applicant_data");
+
                                     lay_out_applant_salaried.setVisibility(View.GONE);
                                     lay_out_applant_selfeployee.setVisibility(View.VISIBLE);
 
+                                    String bus_employment_typestr = Applicant_object.getString("bus_employment_typestr");
+                                    String bus_employment_type = Applicant_object.getString("bus_employment_type");
+                                    String member_age = Applicant_object.getString("member_age");
 
-                                    String Type_of_employement = Applicant_object.getString("bus_employment_type");
-                                    aaplicant_self_toe_txt.setText(Type_of_employement);
-
-
-                                    if (Type_of_employement.contains("1")) {
-
-                                        String vocatrion = Applicant_object.getString("vocation");
-                                        aaplicant_self_vtype_txt.setText(vocatrion);
+                                    String vintagedoc = Applicant_object.getString("vintagedoc");
+                                    String vintage_docstr = Applicant_object.getString("vintage_docstr");
 
 
-                                        String vehicle_type = Applicant_object.getString("vehicle_type");
-                                        aaplicant_self_vechiceletype_txt.setText(vehicle_type);
+                                    String income_proof_typestr = Applicant_object.getString("income_proof_typestr");
 
-                                        String no_f_veh = Applicant_object.getString("no_of_vehicles");
-                                        aaplicant_self_no_f_vechtxt.setText(no_f_veh);
+                                    String office_setup = Applicant_object.getString("office_setup");
+                                    String office_setupstr = Applicant_object.getString("office_setupstr");
+
+                                    String office_res = Applicant_object.getString("office_res");
+                                    String ofc_pincode = Applicant_object.getString("ofc_pincode");
+                                   // String ofc_area = Applicant_object.getString("work_areaarr ");
 
 
+                                   if(office_setup.equals("2"))
+                                   {
+                                       office_ly.setVisibility(View.VISIBLE);
+                                         JSONArray ofc_area1 =Applicant_object.getJSONArray("work_areaarr");
+
+                                    if(ofc_area1.length()>0)
+                                    {
+                                        try {
+                                            JSONObject J = ofc_area1.getJSONObject(0);
+                                            String area = J.getString("area");
+                                            off_residence_area.setText(area);
+
+                                        } catch (JSONException e) {
+                                            e.printStackTrace();
+                                        }
                                     }
-                                    if (Type_of_employement.contains("2"))
+                                   }else
+                                   {
+                                       office_ly.setVisibility(View.GONE);
+                                   }
+
+
+                                    String assetsstr = Applicant_object.getString("assetsstr");
+
+                                    String per_pincode = Applicant_object.getString("per_pincode");
+
+
+
+                                    String acres = Applicant_object.getString("acres");
+
+                                    String crop_types = Applicant_object.getString("crop_types");
+                                    String annual_income = Applicant_object.getString("annual_income");
+                                    String daily_income = Applicant_object.getString("daily_income");
+                                    String monthly_income_F = Applicant_object.getString("monthly_income");
+                                    String monthly_income_D = Applicant_object.getString("monthly_income");
+                                    String monthly_income_ow = Applicant_object.getString("monthly_income");
+
+
+                                    String no_of_animals = Applicant_object.getString("no_of_animals");
+                                    String no_of_litres = Applicant_object.getString("no_of_litres");
+                                    String sell_milk_to = Applicant_object.getString("sell_milk_to");
+
+                                    String is_franchise = Applicant_object.getString("is_franchise");
+                                    String value_of_stock = Applicant_object.getString("value_of_stock");
+                                    String setup_investment = Applicant_object.getString("setup_investment");
+                                    String value_of_machineries1 = Applicant_object.getString("value_of_machineries");
+                                    String monthly_sales = Applicant_object.getString("monthly_sales");
+                                    String annual_income1 = Applicant_object.getString("annual_income");
+
+
+                                    if(bus_employment_type.equals("1"))
                                     {
 
+                                        individual.setVisibility(View.VISIBLE);
+                                        formin_dairy.setVisibility(View.GONE);
+                                        self_business.setVisibility(View.GONE);
+                                        String vocation = Applicant_object.getString("vocation");
+                                        String vehicle_type = Applicant_object.getString("vehicle_type");
+                                        String vocation_str = Applicant_object.getString("vocation_str");
+                                        String vehicle_typestr = Applicant_object.getString("vehicle_typestr");
+                                        String no_of_vehicles = Applicant_object.getString("no_of_vehicles");
+                                        String monthly_income = Applicant_object.getString("monthly_income");
+                                        String working_experience = Applicant_object.getString("working_experience");
 
-                                        String no_f_aceres = Applicant_object.getString("acres");
-                                        aaplicant_self_acres_txt.setText(no_f_aceres);
-                                        String crops = Applicant_object.getString("crop_types");
-                                        aaplicant_self_whatkinds_txt.setText(crops);
-                                        String anuualincome = Applicant_object.getString("annual_income");
-                                        aaplicant_self_annua_incm_txt.setText(anuualincome);
-                                        String dailyincome = Applicant_object.getString("daily_income");
-                                        aaplicant_self_dailm_incm_txt.setText(dailyincome);
+                                        selfvocation_type1.setText(vocation_str);
+                                       // selfvocation_type1.setText(vehicle_type);
+                                        //  no_vehicle.setText(no_of_vehicles);
+                                        average_monthly_income.setText(monthly_income);
+                                        no_of_month_in_business.setText(working_experience);
+                                        if(vocation.equals("7"))
+                                        {
+                                            Driver_C_owner.setVisibility(View.VISIBLE);
+                                            vehicle_type_1.setText(vehicle_typestr);
+                                            no_vehicle.setText(no_of_vehicles);
+
+                                        }else
+                                        {
+                                            Driver_C_owner.setVisibility(View.GONE);
+                                        }
 
 
-                                        String no_f_animals = Applicant_object.getString("no_of_animals");
-                                        aaplicant_self_no_animals_txt.setText(no_f_animals);
-                                        String no_f_liters = Applicant_object.getString("no_of_litres");
-                                        aplicant_self_no_litrals_txt.setText(no_f_liters);
 
 
-                                        String sell_milk = Applicant_object.getString("sell_milk_to");
-                                        aplicant_self_sell_milk1_txt.setText(sell_milk);
+
+                                    }else if(bus_employment_type.equals("2"))
+                                    {
+                                        individual.setVisibility(View.GONE);
+                                        formin_dairy.setVisibility(View.VISIBLE);
+                                        self_business.setVisibility(View.GONE);
+
+                                        String vocation = Applicant_object.getString("work_vocation");
+                                        String working_experience = Applicant_object.getString("working_experience");
+
                                         String no_of_birds = Applicant_object.getString("no_of_birds");
-                                        aplicant_self_no_birds_txt.setText(no_of_birds);
                                         String company_supplied = Applicant_object.getString("company_supplied");
-                                        aplicant_self_supp_company_txt.setText(company_supplied);
                                         String selling_price = Applicant_object.getString("selling_price");
-                                        aplicant_self__selling_birds_txt.setText(selling_price);
                                         String profit = Applicant_object.getString("profit");
-                                        aplicant_self__afetr_selling_birds_txt.setText(profit);
+                                        String monthly_profit = Applicant_object.getString("monthly_profit");
+
+
+                                        if(vocation.equals("1"))
+                                        {
+                                            forming.setVisibility(View.VISIBLE);
+                                            dairy.setVisibility(View.GONE);
+                                            poultry.setVisibility(View.GONE);
+                                            JSONArray jsonArray = Applicant_object.getJSONArray("crop_typesstr");
+                                            f_vocation_type.setText(vocation);
+                                            f_no_of_acres.setText(acres);
+                                            f_what_crop.setText(jsonArray.toString());
+                                            f_anual_income.setText(annual_income);
+                                            f_daily_income.setText(daily_income);
+                                            f_no_month.setText(working_experience);
+                                            f_avg_monthly_income.setText(monthly_income_F);
+
+                                        }else if(vocation.equals("2"))
+                                        {
+                                            forming.setVisibility(View.GONE);
+                                            dairy.setVisibility(View.VISIBLE);
+                                            poultry.setVisibility(View.GONE);
+
+                                            d_no_of_animals.setText(no_of_animals);
+                                            d_no_production_Daily.setText(no_of_litres);
+                                            d_how_to_you_sell.setText(sell_milk_to);
+                                            D_no_month_in_business.setText(monthly_income_F);
+                                            D_avg_monthly_income.setText(monthly_income_D);
+
+                                        } else if(vocation.equals("3"))
+                                        {
+                                            forming.setVisibility(View.GONE);
+                                            dairy.setVisibility(View.GONE);
+                                            poultry.setVisibility(View.VISIBLE);
+
+                                            p_no_of_birds.setText(no_of_birds);
+                                            p_supplied_by_which_cmp.setText(company_supplied);
+                                            p_selling_price.setText(selling_price);
+                                            p_profit_affter_selling.setText(profit);
+                                            p_no_of_month_in_business.setText(working_experience);
+                                            p_average_monthly_incom.setText(monthly_income_D);
+
+                                        }
+
+
+
+
+
+
+                                    }else if(bus_employment_type.equals("3"))
+                                    {
+                                        String vocation = Applicant_object.getString("bus_vocation");
+                                        String working_experience = Applicant_object.getString("working_experience");
+                                        individual.setVisibility(View.GONE);
+                                        formin_dairy.setVisibility(View.GONE);
+                                        self_business.setVisibility(View.VISIBLE);
+
+                                        if(vocation.equals("1"))
+                                        {
+                                            Retail_wholesale_business.setVisibility(View.VISIBLE);
+                                            service_business.setVisibility(View.GONE);
+                                            manufacturing.setVisibility(View.GONE);
+
+                                            own_francies_deler.setText(is_franchise);
+                                            own_name_of_dealer.setText(monthly_income_D);
+                                            own_anual_turover.setText(annual_income1);
+
+                                        }else if(vocation.equals("2"))
+                                        {
+                                            Retail_wholesale_business.setVisibility(View.GONE);
+                                            service_business.setVisibility(View.VISIBLE);
+                                            manufacturing.setVisibility(View.GONE);
+
+                                            own_service_anual_turover.setText(annual_income1);
+                                            own_service_bisiness_setup.setText(setup_investment);
+
+                                        }else if(vocation.equals("3"))
+                                        {
+                                            Retail_wholesale_business.setVisibility(View.GONE);
+                                            service_business.setVisibility(View.GONE);
+                                            manufacturing.setVisibility(View.VISIBLE);
+                                            manufacture_anual_turover.setText(annual_income1);
+                                            manufacture_value_of_stock.setText(value_of_stock);
+                                            manufacture_monthly_sales.setText(monthly_sales);
+                                            value_of_machineries.setText(value_of_machineries1);
+                                        }
+
+                                        manu_no_of_month_business.setText(working_experience);
+                                        manu_avg_monthly_income.setText(monthly_income_ow);
                                     }
 
-                                    if (Type_of_employement.contains("3")) {
-                                        if (applicant_own_business_type.contains("1")) {
-                                            String is_franchise = Applicant_object.getString("is_franchise");
-                                            aplicant_self_business_type_txt_franc.setText(is_franchise);
-                                        }
-                                        if (applicant_own_business_type.contains("2")) {
-                                            String setup_investment = Applicant_object.getString("setup_investment");
-                                            aplicant_self_business_type_txt_business_Setup1.setText(setup_investment);
+                                    own_business_type_1.setText(monthly_income_D);
 
-                                        }
+                                    self_business_vintage.setText(vintage_docstr);
+                                   self_employement_type.setText(bus_employment_typestr);
+                                   self_age_1.setText(member_age);
+                                    self_business_income.setText(income_proof_typestr);
+                                    self_office_shopsetup.setText(office_setupstr);
+                                    off_residence.setText(office_res);
+                                    off_residence_pincode.setText(ofc_pincode);
+                                   // off_residence_area.setText(ofc_area);
+                                    assets_own.setText(assetsstr);
 
-                                        if (applicant_own_business_type.contains("3")) {
-                                            String value_of_stock = Applicant_object.getString("value_of_stock");
-                                            aplicant_self_business_type_txt_value_f_stock.setText(value_of_stock);
+                                    self_residence_pincode.setText(per_pincode);
 
-                                            String monthly_sales = Applicant_object.getString("monthly_sales");
-                                            aplicant_self_business_type_txt_monthly_sales.setText(monthly_sales);
-                                            String value_of_machineries = Applicant_object.getString("value_of_machineries");
-                                            aplicant_self_business_type_txt_value_f_machine.setText(value_of_machineries);
-                                        }
+                                    JSONArray per_areaarr =Applicant_object.getJSONArray("per_areaarr");
 
+                                    try {
+                                        JSONObject J = per_areaarr.getJSONObject(0);
+                                        String area = J.getString("area");
+                                        self_residence_area.setText(area);
+
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
                                     }
 
-                                    String monthly_profit = Applicant_object.getString("monthly_profit");
-                                    aplicant_self_average_profit_txt.setText(monthly_profit);
-                                    String office_res = Applicant_object.getString("office_res");
-                                    aplicant_self_residen_tye_txt.setText(office_res);
-                                    String member_name = Applicant_object.getString("member_name");
-                                    aaplicant_self_name_txt.setText(member_name);
-                                    String assets_own = Applicant_object.getString("assets");
-                                    //   aplicant_self_assets_own_txt.setText(assets_own);
-
-                                    StringBuffer buff = new StringBuffer();
-                                    //  for (int i = 0; i < assets_own.length(); i++) {
-                                    buff.append(assets_own);
-
-
-                                    // }
-                                    aplicant_self_assets_own_txt.setText(buff.toString());
+                                    String resident_status = Applicant_object.getString("resident_status");
+                                    String resident_statusstr = Applicant_object.getString("resident_statusstr");
+                                    String current_home_duration = Applicant_object.getString("current_home_duration");
+                                    self_residence_type.setText(resident_statusstr);
+                                    if(resident_status.equals(1))
+                                    {
+                                        res_rented.setVisibility(View.VISIBLE);
+                                    }else
+                                    {
+                                        res_rented.setVisibility(View.GONE);
+                                    }
+                                   self_curr_resi.setText(current_home_duration);
 
 
                                 }
@@ -445,8 +699,6 @@ public class Viability_Activity_Data_View extends SimpleActivity {
 
                                     lay_out_co_applant_salaried.setVisibility(View.GONE);
                                     lay_out_co_applant_selfeployee.setVisibility(View.VISIBLE);
-
-
 
                                     String name_co_applicant=Co_applicant_object .getString("member_name");
                                     co_aaplicant_self_name_txt.setText(name_co_applicant);
@@ -515,7 +767,6 @@ public class Viability_Activity_Data_View extends SimpleActivity {
                                             co_aaplicant_self_business_type_txt_monthly_sales.setText(monthly_sales);
                                             String value_of_machineries = Co_applicant_object.getString("value_of_machineries");
                                             co_aaplicant_self_business_type_txt_value_f_machine.setText(value_of_machineries);
-
                                         }
                                     }
 
@@ -529,7 +780,6 @@ public class Viability_Activity_Data_View extends SimpleActivity {
 
                                     String office_res=Co_applicant_object .getString("office_res");
                                     co_aaplicant_self_residen_tye_txt.setText(office_res);
-
 
                                 }
 

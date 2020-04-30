@@ -540,7 +540,7 @@
                         android:orientation="vertical"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
-                        <include layout="@layout/ly_hl_viability_self"/>
+                        <include layout="@layout/ly_hl_viability_self_view"/>
                     </LinearLayout>
 
                     <LinearLayout
@@ -669,7 +669,7 @@
 
                 </LinearLayout>
 
-                <LinearLayout
+              <!--  <LinearLayout
                     android:layout_marginTop="10dp"
                     android:elevation="4sp"
                     android:gravity="center"
@@ -693,7 +693,33 @@
 
                     </LinearLayout>
 
-                </LinearLayout>
+                </LinearLayout>-->
+
+                  <LinearLayout
+                      android:padding="5dp"
+                      android:layout_marginTop="10dp"
+                      android:elevation="4sp"
+                      android:gravity="center"
+                      android:layout_width="match_parent"
+                      android:layout_height="?android:attr/listPreferredItemHeight"
+                      android:orientation="horizontal">
+                          <LinearLayout
+                              android:layout_marginRight="10dp"
+                              android:layout_weight="1"
+                              android:gravity="center"
+                              android:layout_width="wrap_content"
+                              android:layout_height="wrap_content">
+                              <androidx.appcompat.widget.AppCompatButton
+                                  android:id="@+id/lead_viy_step2"
+                                  android:text="@string/next"
+                                  android:textColor="@color/white"
+                                  android:layout_width="match_parent"
+                                  android:layout_height="match_parent"
+                                  android:layout_gravity="start"
+                                  android:background="@drawable/capsul_button4"
+                                  />
+                          </LinearLayout>
+                  </LinearLayout>
             </LinearLayout>
 
     </ScrollView>

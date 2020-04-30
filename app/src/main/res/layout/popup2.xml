@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="450dp"
+    android:background="@color/black"
+    android:gravity="center">
+
+
+    <RelativeLayout
+        android:background="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="450dp"
+        android:layout_margin="30dp">
+        <ImageView
+            android:id="@+id/closebtn"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_alignParentEnd="true"
+            android:src="@drawable/ic_close_icon"
+            android:layout_alignParentRight="true"
+            />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/pleaseread"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:textStyle="bold"
+            android:textSize="16dp"
+            android:textColor="@color/colorBlack"
+            android:text="@string/pleaseread"
+            android:layout_below="@+id/closebtn"
+            />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/skip_paylay"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_below="@+id/pleaseread"
+            android:text="@string/chooseskip_pay"
+            android:textColor="@color/mid_blue"
+            android:layout_marginLeft="10dp"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/bullet_one"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_below="@+id/skip_paylay"
+            android:text="@string/bulleted_listone"
+            android:textSize="12sp"
+            android:textColor="@color/mid_blue"
+            android:layout_marginLeft="30dp"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/bullet_two"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:textSize="12sp"
+            android:layout_below="@+id/bullet_one"
+            android:text="@string/bulleted_listone"
+            android:textColor="@color/mid_blue"
+            android:layout_marginLeft="30dp"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/bullet_three"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_below="@+id/bullet_two"
+            android:textSize="12sp"
+            android:text="@string/bulleted_listthree"
+            android:textColor="@color/mid_blue"
+            android:layout_marginLeft="30dp"/>
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/payproces"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_below="@+id/bullet_three"
+            android:textSize="12sp"
+            android:text="@string/pay_process"
+            android:textColor="@color/mid_blue"
+            android:layout_marginLeft="10dp"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/proceedany"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_below="@+id/payproces"
+            android:gravity="center"
+            android:text="@string/proceed_anyway"
+            android:textColor="@color/but_red"
+            android:layout_marginLeft="15dp"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/back"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_below="@+id/proceedany"
+            android:gravity="center"
+            android:text="@string/back"
+            android:textColor="@color/mid_blue"
+            android:layout_marginLeft="15dp"/>
+
+
+
+
+
+
+    </RelativeLayout>
+
+
+
+
+</RelativeLayout>

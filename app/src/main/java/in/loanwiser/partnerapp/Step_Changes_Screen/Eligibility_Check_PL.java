@@ -53,6 +53,8 @@ import adhoc.app.applibrary.Config.AppUtils.VolleySignleton.AppController;
 import dmax.dialog.SpotsDialog;
 import in.loanwiser.partnerapp.NumberTextWatcher;
 import in.loanwiser.partnerapp.PartnerActivitys.Applicant_Details_Activity;
+import in.loanwiser.partnerapp.PartnerActivitys.Dashboard_Activity;
+import in.loanwiser.partnerapp.Payment.PaymentActivity;
 import in.loanwiser.partnerapp.R;
 import in.loanwiser.partnerapp.SimpleActivity;
 
@@ -965,7 +967,7 @@ public class Eligibility_Check_PL extends SimpleActivity {
 
             }else if(co_Other_income_Id.equals("4"))
             {
-
+                lead_Eligibility();
             }else
             {
 
@@ -3164,7 +3166,7 @@ public class Eligibility_Check_PL extends SimpleActivity {
                                 {
                                     Toast.makeText(context,"Eligibility Created Successfully",Toast.LENGTH_SHORT).show();
 
-                                    Intent intent = new Intent(Eligibility_Check_PL.this, Credite_report_details.class);
+                                    Intent intent = new Intent(Eligibility_Check_PL.this, PaymentActivity.class);
                                     startActivity(intent);
                                     finish();
                                 }else if(jsonObject1.getString("eligibility_status").equals("error"))
@@ -3215,7 +3217,7 @@ public class Eligibility_Check_PL extends SimpleActivity {
     @Override
     public void onBackPressed() {
 
-        Objs.ac.StartActivity(mCon, Applicant_Details_Activity.class);
+        Objs.ac.StartActivity(mCon, Dashboard_Activity.class);
         finish();
         super.onBackPressed();
     }

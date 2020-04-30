@@ -773,7 +773,7 @@ public class Creadite_Report_Activity extends SimpleActivity {
                                 if(jsonObject1.getString("pay_status").equals("success"))
                                 {
                                     Toast.makeText(context,"Credite Report Created Successfully",Toast.LENGTH_SHORT).show();
-                                    Intent intent = new Intent(Creadite_Report_Activity.this, Payment_Details_Activity.class);
+                                    Intent intent = new Intent(Creadite_Report_Activity.this, Dashboard_Activity.class);
                                     startActivity(intent);
                                     finish();
 
@@ -832,7 +832,7 @@ public class Creadite_Report_Activity extends SimpleActivity {
     @Override
     public void onBackPressed() {
 
-        Objs.ac.StartActivity(mCon, Credite_report_details.class);
+        Objs.ac.StartActivity(mCon, Dashboard_Activity.class);
         finish();
         super.onBackPressed();
     }

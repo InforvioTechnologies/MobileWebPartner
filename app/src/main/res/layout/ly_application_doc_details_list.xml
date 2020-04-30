@@ -53,17 +53,17 @@
 
                     <LinearLayout
                         android:id="@+id/Ly_first"
-                        android:visibility="gone"
+
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
-                            android:orientation="vertical">
+                            android:orientation="horizontal">
 
                             <LinearLayout
-                                android:layout_width="match_parent"
+                                android:layout_width="250dp"
                                 android:layout_height="match_parent"
                                 android:orientation="horizontal">
                                 <androidx.appcompat.widget.AppCompatTextView
@@ -76,7 +76,19 @@
                                     android:text="Product Name"
                                     android:textColor="@color/colorPrimary" />
                             </LinearLayout>
+                            <LinearLayout
+                                android:gravity="center"
+                                android:orientation="horizontal"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent">
 
+                                <ImageView
+                                    android:src="@drawable/notdon"
+                                    android:id="@+id/uploaded_yes"
+                                    android:gravity="center"
+                                    android:layout_width="25dp"
+                                    android:layout_height="25dp" />
+                            </LinearLayout>
                         </LinearLayout>
 
                     </LinearLayout>
@@ -128,6 +140,7 @@
                                     <androidx.appcompat.widget.AppCompatTextView
                                         android:id="@+id/count__all"
                                         android:text="0"
+                                        android:visibility="gone"
                                         android:layout_gravity="center"
                                         android:textColor="@color/colorPrimaryDark"
                                         android:textSize="20dp"
@@ -139,7 +152,7 @@
                                         android:layout_gravity="center"
                                         android:layout_width="25dp"
                                         android:layout_height="25dp"
-                                        android:src="@drawable/file_view1" />
+                                        android:src="@drawable/don" />
                                 </LinearLayout>
 
                             </RelativeLayout>

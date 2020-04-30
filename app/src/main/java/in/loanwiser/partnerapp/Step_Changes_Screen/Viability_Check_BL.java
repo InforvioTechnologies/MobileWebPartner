@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -17,8 +18,10 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -59,7 +62,9 @@ import adhoc.app.applibrary.Config.AppUtils.VolleySignleton.AppController;
 import dmax.dialog.SpotsDialog;
 import in.loanwiser.partnerapp.Multi_select_checkbox.Multi_Select_checkbox;
 import in.loanwiser.partnerapp.NumberTextWatcher;
+import in.loanwiser.partnerapp.PDF_Dounloader.PermissionUtils;
 import in.loanwiser.partnerapp.PartnerActivitys.Applicant_Details_Activity;
+import in.loanwiser.partnerapp.PartnerActivitys.Dashboard_Activity;
 import in.loanwiser.partnerapp.PartnerActivitys.IncomeProofPOJO;
 import in.loanwiser.partnerapp.PartnerActivitys.RemoveCommas;
 import in.loanwiser.partnerapp.R;
@@ -326,6 +331,15 @@ public class Viability_Check_BL extends SimpleActivity {
 
     String pl_co_app_ind_Office_Shop_Own_id,pl_co_app_ind_Office_Shop_Own_value;
     int applicant_count;
+    private static final int STORAGE_PERMISSION_REQUEST_CODE = 1;
+
+    PermissionUtils permissionUtils;
+
+
+    String viability_report_URL;
+    LinearLayout Ly_wt_mob;
+    PopupWindow popupWindow;
+    Button  closePopupBtn,close,view_report,sub_to_next;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -338,7 +352,7 @@ public class Viability_Check_BL extends SimpleActivity {
 
         progressDialog = new SpotsDialog(context, R.style.Custom);
         imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
-
+        permissionUtils = new PermissionUtils();
        // assets_owned_BL = (AppCompatTextView) findViewById(R.id.assets_owned_BL);
 
         Intent intent = getIntent();
@@ -579,6 +593,7 @@ public class Viability_Check_BL extends SimpleActivity {
 
         delership_company_edit_txt = (AppCompatEditText) findViewById(R.id.delership_company_edit_txt);
         monthly_profit_edit_txt = (AppCompatEditText) findViewById(R.id.monthly_profit_edit_txt);
+        monthly_profit_edit_txt.addTextChangedListener(new NumberTextWatcher(monthly_profit_edit_txt));
 
        monthly_income_own_ser_bus_edit_txt = (AppCompatEditText) findViewById(R.id.monthly_income_own_ser_bus_edit_txt);
         monthly_income_own_ser_bus_edit_txt.addTextChangedListener(new NumberTextWatcher(monthly_income_own_ser_bus_edit_txt));
@@ -694,7 +709,10 @@ public class Viability_Check_BL extends SimpleActivity {
         pl_co_P_no_of_years_in_work_P = (AppCompatEditText) findViewById(R.id.pl_co_P_no_of_years_in_work_P);
 
         monthly_profit_edit_txt_service = (AppCompatEditText) findViewById(R.id.monthly_profit_edit_txt_service);
+        monthly_profit_edit_txt_service.addTextChangedListener(new NumberTextWatcher(monthly_profit_edit_txt_service));
+
         monthly_profit_edit_txt_mani = (AppCompatEditText) findViewById(R.id.monthly_profit_edit_txt_mani);
+        monthly_profit_edit_txt_mani.addTextChangedListener(new NumberTextWatcher(monthly_profit_edit_txt_mani));
 
         pl_co_p_avg_monthly_income_Poultry = (AppCompatEditText) findViewById(R.id.pl_co_p_avg_monthly_income_Poultry);
         pl_co_p_avg_monthly_income_Poultry.addTextChangedListener(new NumberTextWatcher(pl_co_p_avg_monthly_income_Poultry));
@@ -4334,7 +4352,7 @@ public class Viability_Check_BL extends SimpleActivity {
             holder.name.setChecked(business_proof.isIP_selected());
             holder.name.setTag(business_proof);
 
-            if(business_proof.getIP_name().contains("--Select Business Income Proof --")){
+            if(business_proof.getIP_name().contains("--Select Business Income Proof--")){
                 holder.name.setVisibility(View.GONE);
                 holder.code.setVisibility(View.VISIBLE);
                 holder.code.setText("Select Business Income Proof");
@@ -4421,7 +4439,7 @@ public class Viability_Check_BL extends SimpleActivity {
             holder.name.setChecked(assets_own.isIP_selected());
             holder.name.setTag(assets_own);
 
-            if(assets_own.getIP_name().contains("--Select Assets Own --")){
+            if(assets_own.getIP_name().contains("--Select Assets Own--")){
                 holder.name.setVisibility(View.GONE);
                 holder.code.setVisibility(View.VISIBLE);
                 holder.code.setText("Select Assets Own");
@@ -4509,7 +4527,7 @@ public class Viability_Check_BL extends SimpleActivity {
             holder.name.setChecked(business_vintage_proof_pojo.isIP_selected());
             holder.name.setTag(business_vintage_proof_pojo);
 
-            if(business_vintage_proof_pojo.getIP_name().contains("--Select Business Proof --")){
+            if(business_vintage_proof_pojo.getIP_name().contains("--Select Business Proof--")){
                 holder.name.setVisibility(View.GONE);
                 holder.code.setVisibility(View.VISIBLE);
                 holder.code.setText("Select Business Vintage Proof");
@@ -4596,7 +4614,7 @@ public class Viability_Check_BL extends SimpleActivity {
             holder.name.setChecked(vahicletype.isIP_selected());
             holder.name.setTag(vahicletype);
 
-            if(vahicletype.getIP_name().contains(" --Select vehicle Type --")){
+            if(vahicletype.getIP_name().contains("--Select vehicle Type--")){
                 holder.name.setVisibility(View.GONE);
                 holder.code.setVisibility(View.VISIBLE);
                 holder.code.setText("-Select vehicle Type-");
@@ -4683,7 +4701,7 @@ public class Viability_Check_BL extends SimpleActivity {
             holder.name.setChecked(croptype.isIP_selected());
             holder.name.setTag(croptype);
 
-            if(croptype.getIP_name().contains("--Select What Kind of Crops (Multiselect) --")){
+            if(croptype.getIP_name().contains("--Select What Kind of Crops (Multiselect)--")){
                 holder.name.setVisibility(View.GONE);
                 holder.code.setVisibility(View.VISIBLE);
                 holder.code.setText("-Select Crops Type-");
@@ -4920,7 +4938,7 @@ public class Viability_Check_BL extends SimpleActivity {
             holder.name.setChecked(assets_owned.isIP_selected());
             holder.name.setTag(assets_owned);
 
-            if(assets_owned.getIP_name().contains("--Select Assets Own --")){
+            if(assets_owned.getIP_name().contains("--Select Assets Own--")){
                 holder.name.setVisibility(View.GONE);
                 holder.code.setVisibility(View.VISIBLE);
                 holder.code.setText("Select Assets Own");
@@ -5006,7 +5024,7 @@ public class Viability_Check_BL extends SimpleActivity {
             holder.name.setChecked(assets_owned_salaried.isIP_selected());
             holder.name.setTag(assets_owned_salaried);
 
-            if(assets_owned_salaried.getIP_name().contains("--Select Assets Own --")){
+            if(assets_owned_salaried.getIP_name().contains("--Select Assets Own--")){
                 holder.name.setVisibility(View.GONE);
                 holder.code.setVisibility(View.VISIBLE);
                 holder.code.setText("Select Assets Own");
@@ -5093,7 +5111,7 @@ public class Viability_Check_BL extends SimpleActivity {
             holder.name.setChecked(salary_proof_salaried.isIP_selected());
             holder.name.setTag(salary_proof_salaried);
 
-            if(salary_proof_salaried.getIP_name().contains("--Select Salary Proof --")){
+            if(salary_proof_salaried.getIP_name().contains("--Select Salary Proof--")){
                 holder.name.setVisibility(View.GONE);
                 holder.code.setVisibility(View.VISIBLE);
                 holder.code.setText("Select Salary Proof");
@@ -5180,7 +5198,7 @@ public class Viability_Check_BL extends SimpleActivity {
             holder.name.setChecked(vehicle_type_self.isIP_selected());
             holder.name.setTag(vehicle_type_self);
 
-            if(vehicle_type_self.getIP_name().contains("--Select vehicle Type --")){
+            if(vehicle_type_self.getIP_name().contains("--Select vehicle Type--")){
                 holder.name.setVisibility(View.GONE);
                 holder.code.setVisibility(View.VISIBLE);
                 holder.code.setText("Select Select vehicle Type");
@@ -5267,10 +5285,10 @@ public class Viability_Check_BL extends SimpleActivity {
             holder.name.setChecked(what_crop_pojo.isIP_selected());
             holder.name.setTag(what_crop_pojo);
 
-            if(what_crop_pojo.getIP_name().contains("--Select What Kind of Crops (Multiselect) --")){
+            if(what_crop_pojo.getIP_name().contains("--Select What Kind of Crops (Multiselect)--")){
                 holder.name.setVisibility(View.GONE);
                 holder.code.setVisibility(View.VISIBLE);
-                holder.code.setText("Select What Kind of Crops");
+                holder.code.setText("-Select What Kind of Crops-");
 
             }else {
                 holder.code.setVisibility(View.GONE);
@@ -5355,10 +5373,10 @@ public class Viability_Check_BL extends SimpleActivity {
             holder.name.setChecked(business_vintage_proof_pojo.isIP_selected());
             holder.name.setTag(business_vintage_proof_pojo);
 
-            if(business_vintage_proof_pojo.getIP_name().contains("--Select Business Proof --")){
+            if(business_vintage_proof_pojo.getIP_name().contains("--Select Business Proof--")){
                 holder.name.setVisibility(View.GONE);
                 holder.code.setVisibility(View.VISIBLE);
-                holder.code.setText("Select Business Vintage Proof");
+                holder.code.setText("-Select Business Vintage Proof-");
 
             }else {
                 holder.code.setVisibility(View.GONE);
@@ -5446,7 +5464,7 @@ public class Viability_Check_BL extends SimpleActivity {
             if(Self_business_proof_pojo.getIP_name().contains("--Select Business Income Proof --")){
                 holder.name.setVisibility(View.GONE);
                 holder.code.setVisibility(View.VISIBLE);
-                holder.code.setText("Select Business Income Proof");
+                holder.code.setText("-Select Business Income Proof-");
 
             }else {
                 holder.code.setVisibility(View.GONE);
@@ -5532,10 +5550,10 @@ public class Viability_Check_BL extends SimpleActivity {
             holder.name.setChecked(Co_Business_Self_Assets_pojo.isIP_selected());
             holder.name.setTag(Co_Business_Self_Assets_pojo);
 
-            if(Co_Business_Self_Assets_pojo.getIP_name().contains("--Select Assets Own --")){
+            if(Co_Business_Self_Assets_pojo.getIP_name().contains("--Select Assets Own--")){
                 holder.name.setVisibility(View.GONE);
                 holder.code.setVisibility(View.VISIBLE);
-                holder.code.setText("Select Assets Own");
+                holder.code.setText("-Select Assets Own-");
 
             }else {
                 holder.code.setVisibility(View.GONE);
@@ -6507,7 +6525,11 @@ public class Viability_Check_BL extends SimpleActivity {
                         applicant1.put("net_salary",V_avg_monthly_incom_edit_txt);
                         break;
                     case 2:
-                        applicant1.put("ind_vocation",vocation_type_forming_id);
+                       // String vocation_forming_string = vocation_type_forming_id;
+                        JSONArray jsonArray = new JSONArray();
+
+                        jsonArray.put(vocation_type_forming_id);
+                        applicant1.put("work_vocation",jsonArray);
                         if(vocation_type_forming_id.equals("1"))
                         {
                             applicant1.put("work_experiance",V_number_of_years_in_work_F);
@@ -6533,7 +6555,7 @@ public class Viability_Check_BL extends SimpleActivity {
                 //ind
                 applicant1.put("ind_vocation",BL_ind_vocaton_id);
                 applicant1.put("no_of_vehicles",V_no_of_vehicle_edit_txt);
-                applicant1.put("work_vocation",vehicle_type_array);
+                applicant1.put("vehicle_type",vehicle_type_array);
 
                 //f
                 applicant1.put("crop_types",what_crop_array);
@@ -6552,8 +6574,11 @@ public class Viability_Check_BL extends SimpleActivity {
 
                 applicant1.put("sell_milk_to",selling_milk_id);
 
+          //  String own_business = business_own_type_id;
                 //bbusiness_own_type_id
-                 applicant1.put("business_vocation",business_own_type_id);
+            JSONArray jsonArray1 = new JSONArray();
+            jsonArray1.put(business_own_type_id);
+                 applicant1.put("business_vocation",jsonArray1);
                  applicant1.put("dealership_name",V_delership_company_edit_txt);
                  applicant1.put("monthly_profit",V_monthly_profit_edit_txt);
 
@@ -6569,6 +6594,7 @@ public class Viability_Check_BL extends SimpleActivity {
                  applicant1.put("bus_proof",business_vintage_self);
                  applicant1.put("income_proof",business_proof_self);
                  applicant1.put("assets",self_co_assets_);
+                 applicant1.put("office_setup",office_id);
                  applicant1.put("office_res",off_residence_id);
                  applicant1.put("res_type",residence_id);
                  applicant1.put("work_pincode",V_office_residence_pincode_edite_txt);
@@ -6618,9 +6644,15 @@ public class Viability_Check_BL extends SimpleActivity {
                             Co_applicant1.put("net_salary",ST_pl_co_app_ind_avg_monthly_incom_edit_txt);
                             break;
                         case 2:
-                            Co_applicant1.put("business_vocation",pl_co_s_forming_vocation_type_forming_id);
+                          //  Co_applicant1.put("business_vocation",pl_co_s_forming_vocation_type_forming_id);
+
+                            JSONArray jsonArray1 = new JSONArray();
+                            jsonArray1.put(pl_co_s_forming_vocation_type_forming_id);
+                            Co_applicant1.put("work_vocation",jsonArray1);
                             if(pl_co_s_forming_vocation_type_forming_id.equals("1"))
                             {
+
+
                                 Co_applicant1.put("work_experiance",ST_pl_co_app_F_number_of_years_in_work);
                                 Co_applicant1.put("net_salary",ST_pl_co_app_F_average_monthly_income);
 
@@ -6636,7 +6668,11 @@ public class Viability_Check_BL extends SimpleActivity {
                             }
                             break;
                         case 3:
-                            Co_applicant1.put("business_vocation",pl_co_own_business_own_type_id);
+
+                            JSONArray jsonArray = new JSONArray();
+                            jsonArray.put(pl_co_own_business_own_type_id);
+                            Co_applicant1.put("business_vocation",jsonArray);
+
                             if(pl_co_own_business_own_type_id.equals("1"))
                             {
                                 Co_applicant1.put("rel_income",ST_pl_co_own_self_monthly_profit_edit_txt);
@@ -6703,9 +6739,9 @@ public class Viability_Check_BL extends SimpleActivity {
         } catch (JSONException e) {
             e.printStackTrace();
         }
+        Log.e("Viability request", String.valueOf(J));
 
-        Log.e("Add Home Laoan", String.valueOf(J));
-        progressDialog.show();
+      /*  progressDialog.show();
         JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, Urls.VIABILITY_CHECK, J,
                 new Response.Listener<JSONObject>() {
                     @Override
@@ -6720,21 +6756,102 @@ public class Viability_Check_BL extends SimpleActivity {
 
                                 if(jsonObject1.getString("viablity_status").equals("success"))
                                 {
+
                                     Toast.makeText(context,"Viability Created Successfully",Toast.LENGTH_SHORT).show();
+                                    LayoutInflater layoutInflater = (LayoutInflater) Viability_Check_BL.this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                                    View customView = layoutInflater.inflate(R.layout.popup,null);
 
-                                    Intent intent = new Intent(Viability_Check_BL.this, Eligibility_BL.class);
-                                    intent.putExtra("user_id", user_id);
-                                    intent.putExtra("transaction_id", transaction_id);
+                                    closePopupBtn = (Button) customView.findViewById(R.id.closePopupBtn);
 
-                                    startActivity(intent);
-                                    finish();
+                                    sub_to_next = (Button) customView.findViewById(R.id.sub_to_next);
+
+
+                                    sub_to_next.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View view) {
+                                            Submit_TO_Loanwiser();
+                                        }
+                                    });
+
+                                    //instantiate popup window
+                                    popupWindow = new PopupWindow(customView, LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
+
+                                    //display the popup window
+                                    popupWindow.showAtLocation(lead_viy_step2, Gravity.CENTER, 0, 0);
+
+                                    //close the popup window on button click
+                                    closePopupBtn.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View v) {
+
+                                            Log.e("hi","hello");
+                                            popupWindow.dismiss();
+                                            Toast.makeText(context,"Viability Created Successfully",Toast.LENGTH_SHORT).show();
+
+                                            Intent intent = new Intent(Viability_Check_BL.this, Eligibility_BL.class);
+                                            intent.putExtra("user_id", user_id);
+                                            intent.putExtra("transaction_id", transaction_id);
+
+                                            startActivity(intent);
+                                            finish();
+                                        }
+                                    });
+
+
                                 }else if(jsonObject1.getString("viablity_status").equals("error"))
                                 {
+
+                                    Toast.makeText(context,"Viability Failed",Toast.LENGTH_SHORT).show();
+                                    viability_report_URL = jsonObject1.getString("viable_reporturl");
+                                    // Toast.makeText(context,"Viability Created Successfully",Toast.LENGTH_SHORT).show();
+                                    LayoutInflater layoutInflater = (LayoutInflater) Viability_Check_BL.this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                                    View customView = layoutInflater.inflate(R.layout.popup1,null);
+
+
+                                    view_report = (Button) customView.findViewById(R.id.view_report);
+                                    close = (Button) customView.findViewById(R.id.close);
+
+                                    //instantiate popup window
+                                    popupWindow = new PopupWindow(customView, LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
+
+                                    //display the popup window
+                                    popupWindow.showAtLocation(lead_viy_step2, Gravity.CENTER, 0, 0);
+
+                                    //close the popup window on button click
+                                    close.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View v) {
+
+                                            //   String viability_array =jsonObject1.getString("viability_arr");
+                                            Intent intent = new Intent(Viability_Check_BL.this, Dashboard_Activity.class);
+                                            //  intent.putExtra("viability_jsonArray", viability_array.toString());
+                                            startActivity(intent);
+                                            finish();
+                                        }
+                                    });
+
+                                    view_report.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View view) {
+                                            if (permissionUtils.checkPermission(Viability_Check_BL.this, STORAGE_PERMISSION_REQUEST_CODE, view)) {
+                                                if (viability_report_URL.length() > 0) {
+                                                    try {
+                                                        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(viability_report_URL)));
+                                                    } catch (Exception e) {
+                                                        e.getStackTrace();
+                                                    }
+                                                }
+
+                                            }
+                                        }
+                                    });
+
+
                                     Toast.makeText(context,"Viability Failed",Toast.LENGTH_SHORT).show();
 
-                                    String viability_array =jsonObject1.getString("viability_arr");
-                                    Intent intent = new Intent(Viability_Check_BL.this, Loan_Viyability_Check_Activity.class);
-                                    intent.putExtra("viability_jsonArray", viability_array.toString());
+                                  //  String viability_array =jsonObject1.getString("viability_arr");
+                                    Intent intent = new Intent(Viability_Check_BL.this, Dashboard_Activity.class);
+                                  //  intent.putExtra("viability_jsonArray", viability_array.toString());
                                     startActivity(intent);
                                     finish();
                                 }
@@ -6773,13 +6890,82 @@ public class Viability_Check_BL extends SimpleActivity {
 
         jsonObjReq.setRetryPolicy(policy);
 
+        AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);*/
+    }
+
+    private void Submit_TO_Loanwiser( ) {
+
+        JSONObject J= null;
+
+        try {
+            J =new JSONObject();
+            J.put("transaction_id",Pref.getTRANSACTIONID(getApplicationContext()));
+
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        Log.e("Add Home Laoan", String.valueOf(J));
+        progressDialog.show();
+
+        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, Urls.SUBMIT_TO_LOANWIER, J,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+
+                        String data = String.valueOf(response);
+                        try {
+                            String Status = response.getString("status");
+                            if(Status.contains("success")){
+                                Intent intent = new Intent(Viability_Check_BL.this, Dashboard_Activity.class);
+                                //  intent.putExtra("viability_jsonArray", viability_array.toString());
+                                startActivity(intent);
+                                finish();
+                            }
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        Log.e("Lead creation", String.valueOf(response));
+
+                        progressDialog.dismiss();
+                    }
+                }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                //Log.d(TAG, error.getMessage());
+                VolleyLog.d("TAG", "Error: " + error.getMessage());
+                progressDialog.dismiss();
+
+            }
+        }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("content-type", "application/json");
+                return headers;
+            }
+        };
+
+        // AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
+        int socketTimeout = 0;
+        RetryPolicy policy = new DefaultRetryPolicy(socketTimeout,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
+
+        jsonObjReq.setRetryPolicy(policy);
+
         AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
+
+
     }
 
     @Override
     public void onBackPressed() {
 
-        Objs.ac.StartActivity(mCon, Applicant_Details_Activity.class);
+        Objs.ac.StartActivity(mCon, Dashboard_Activity.class);
         finish();
         super.onBackPressed();
 

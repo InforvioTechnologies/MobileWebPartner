@@ -577,6 +577,7 @@
 
 
             <LinearLayout
+                android:visibility="gone"
                 android:layout_marginTop="10dp"
                 android:elevation="4sp"
                 android:gravity="center"

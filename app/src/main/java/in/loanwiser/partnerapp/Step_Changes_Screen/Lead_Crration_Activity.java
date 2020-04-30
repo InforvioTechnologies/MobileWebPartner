@@ -1,19 +1,26 @@
 package in.loanwiser.partnerapp.Step_Changes_Screen;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -50,6 +57,7 @@ import adhoc.app.applibrary.Config.AppUtils.VolleySignleton.AppController;
 import dmax.dialog.SpotsDialog;
 import in.loanwiser.partnerapp.NumberTextWatcher;
 import in.loanwiser.partnerapp.PartnerActivitys.Applicant_Details_Activity;
+import in.loanwiser.partnerapp.Payment.PaymentActivity;
 import in.loanwiser.partnerapp.R;
 import in.loanwiser.partnerapp.SimpleActivity;
 
@@ -57,6 +65,9 @@ import in.loanwiser.partnerapp.SimpleActivity;
 public class Lead_Crration_Activity extends SimpleActivity {
 
     AppCompatButton lead_cr_step1;
+
+    private Button submitloanbtn;
+    LinearLayout  savelaterlay;
     private Spinner spinner_loan_category,spinner_loan_type,spnr_type_of_empmnt;
     private Toolbar toolbar;
     private AlertDialog progressDialog;
@@ -90,7 +101,8 @@ public class Lead_Crration_Activity extends SimpleActivity {
     String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
 
     LinearLayout Ly_wt_mob;
-
+    PopupWindow popupWindow;
+    Button  closePopupBtn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -115,13 +127,42 @@ public class Lead_Crration_Activity extends SimpleActivity {
         UI_FIELDS();
         fonts();
         makeJsonObjReq1();
-       Click();
+     Click();
+
+        lead_cr_step1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Lead_Crration_Activity.this, Viability_Check_BL.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+
        /* lead_cr_step1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Lead_Crration_Activity.this, Viability_Check_HL_new.class);
-                startActivity(intent);
-                finish();
+                //instantiate the popup.xml layout file
+                LayoutInflater layoutInflater = (LayoutInflater) Lead_Crration_Activity.this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                View customView = layoutInflater.inflate(R.layout.popup,null);
+
+                closePopupBtn = (Button) customView.findViewById(R.id.closePopupBtn);
+
+                //instantiate popup window
+                popupWindow = new PopupWindow(customView, LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
+
+                //display the popup window
+                popupWindow.showAtLocation(lead_cr_step1, Gravity.CENTER, 0, 0);
+
+                //close the popup window on button click
+                closePopupBtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                        Log.e("hi","hello");
+                        popupWindow.dismiss();
+                    }
+                });
+
             }
         });*/
 
@@ -133,17 +174,17 @@ public class Lead_Crration_Activity extends SimpleActivity {
          co_applicant_emp_type.setVisibility(View.GONE);
          //txt_loan_category,loan_type,type_of_empmnt_txt,Loan_amount,name,age,mobile,do_you_have_coApp_txt,coApp_txt_emp_type1
          //wt_mobile
-         txt_loan_category.setText("1");
+        /* txt_loan_category.setText("1");
          loan_type.setText("2");
          Loan_amount.setText("3");
          name.setText("4");
          email.setText("5");
          mobile.setText("6");
-         wt_mobile.setText("7");
+         wt_mobile.setText("7");*/
 
      }else
      {
-         txt_loan_category.setText("1");
+        /* txt_loan_category.setText("1");
          loan_type.setText("2");
          type_of_empmnt_txt.setText("3");
          Loan_amount.setText("4");
@@ -151,7 +192,7 @@ public class Lead_Crration_Activity extends SimpleActivity {
          email.setText("6");
          mobile.setText("7");
          do_you_have_coApp_txt.setText("8");
-         wt_mobile.setText("9");
+         wt_mobile.setText("9");*/
          co_applicant_ly.setVisibility(View.GONE);
          co_applicant_emp_type.setVisibility(View.GONE);
      }
@@ -170,6 +211,8 @@ public class Lead_Crration_Activity extends SimpleActivity {
         mobile_no_txt = (AppCompatEditText) findViewById(R.id.mobile_no_txt);
         whats_app_no = (AppCompatEditText) findViewById(R.id.whats_app_no);
 
+        submitloanbtn=(Button)findViewById(R.id.submitloanbtn);
+        savelaterlay=(LinearLayout)findViewById(R.id.savelaterlay);
 
         //TextView
         txt_loan_category = (AppCompatTextView) findViewById(R.id.txt_loan_category);
@@ -243,8 +286,92 @@ public class Lead_Crration_Activity extends SimpleActivity {
 
     }
 
+    private void Submitloandialog(){
+        final Dialog dialog = new Dialog(this);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+        dialog.setContentView(R.layout.submitloan_dialog);
+        //  dialog.getWindow().setLayout(display.getWidth() * 90 / 100, LinearLayout.LayoutParams.WRAP_CONTENT);
+        dialog.setCancelable(true);
+        dialog.setCanceledOnTouchOutside(false);
+        Button cancelbtn = (Button) dialog.findViewById(R.id.cancelbtn);
+        Button submitbtn=(Button)dialog.findViewById(R.id.submitbtn);
+        submitbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+                Documentdialog();
+
+            }
+        });
+        cancelbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+
+
+        if (!dialog.isShowing()) {
+            dialog.show();
+        }
+
+
+
+    }
+
+    public void Documentdialog(){
+        final Dialog dialog = new Dialog(this);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+        dialog.setContentView(R.layout.dialogsubmit);
+        dialog.setCancelable(true);
+        dialog.setCanceledOnTouchOutside(false);
+        AppCompatTextView yes_documents = (AppCompatTextView) dialog.findViewById(R.id.yes_documents);
+        AppCompatTextView nosubmit_document =(AppCompatTextView)dialog.findViewById(R.id.nosubmit_document);
+        AppCompatTextView cancel=(AppCompatTextView)dialog.findViewById(R.id.cancel);
+        yes_documents.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+        nosubmit_document.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+        if(!dialog.isShowing()){
+            dialog.show();
+        }
+
+    }
+
   private void Click()
     {
+        submitloanbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Submitloandialog();
+
+            }
+        });
+
+        savelaterlay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
         lead_cr_step1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

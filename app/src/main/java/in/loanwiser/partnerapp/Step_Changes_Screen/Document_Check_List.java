@@ -208,7 +208,7 @@ public class Document_Check_List extends SimpleActivity implements CompoundButto
             e.printStackTrace();
         }
         Log.e("Request cHECKBOX", String.valueOf(J));
-
+        progressDialog.show();
         JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, Urls.UPDATED_ENABLE, J,
                 new Response.Listener<JSONObject>() {
 
@@ -216,7 +216,7 @@ public class Document_Check_List extends SimpleActivity implements CompoundButto
                     public void onResponse(JSONObject object) {
                         Log.e("RESPONSE cHECKBOXsTATUS", String.valueOf(object));
 
-                        //  progressDialog.dismiss();
+                          progressDialog.dismiss();
                     }
                 }, new Response.ErrorListener() {
 

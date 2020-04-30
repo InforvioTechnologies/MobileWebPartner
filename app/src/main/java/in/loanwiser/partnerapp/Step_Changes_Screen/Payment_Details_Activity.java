@@ -372,6 +372,7 @@ public class Payment_Details_Activity extends SimpleActivity {
         String stage = "TEST";
         String appId = "100221d5f45db701fd6552fc722001";
         String orderNote = "Test Order";
+
         String customerName = "mathayan";
         String customerPhone = "8883072458";
         String customerEmail = "arivindh321@gmail.com";
@@ -504,7 +505,7 @@ public class Payment_Details_Activity extends SimpleActivity {
                             String Staues_pay = response.getString("status");
                             if(Staues_pay.contains("success"))
                             {
-                                Intent intent = new Intent(Payment_Details_Activity.this, Dashboard_Activity.class);
+                                Intent intent = new Intent(Payment_Details_Activity.this, Creadite_Report_Activity.class);
                                 startActivity(intent);
                                 finish();
                             }

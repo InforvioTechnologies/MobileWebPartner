@@ -39,11 +39,11 @@
 
         <ImageView
             android:id="@+id/imgSinglePick"
-            android:layout_width="240dp"
-            android:layout_height="240dp"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
             android:layout_gravity="center"
             android:contentDescription="@string/app_name"
-            android:src="@drawable/galery1" />
+            android:src="@drawable/ic_photo" />
 
     </ViewSwitcher>
     <ViewSwitcher
@@ -56,11 +56,11 @@
         android:layout_weight="1" >
         <ImageView
             android:id="@+id/imgSinglePick1"
-            android:layout_width="250dp"
-            android:layout_height="250dp"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
             android:layout_gravity="center"
             android:contentDescription="@string/app_name"
-            android:src="@drawable/pdfnew" />
+            android:src="@drawable/ic_pdf" />
     </ViewSwitcher>
 
     <LinearLayout
@@ -84,20 +84,23 @@
                         android:background="@drawable/btn_sel"
                         android:text="@string/btn_pick_mul" />
             </LinearLayout>-->
+
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
+                    android:gravity="center"
                     android:orientation="horizontal">
-                        <Button
-                            android:gravity="center"
-                            android:id="@+id/upload"
-                            style="@style/btn"
-                            android:layout_width="150dp"
-                            android:layout_height="50dp"
-                            android:layout_marginTop="5dp"
-                            android:background="@drawable/capsul_button3"
-                            android:text="@string/upload" />
+                   <Button
+                    android:layout_gravity="center"
+                    android:id="@+id/upload"
+                    style="@style/btn"
+                    android:layout_width="250dp"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="5dp"
+                       android:layout_marginBottom="10dp"
+                    android:background="@drawable/capsul_button4"
+                    android:text="@string/upload1" />
+
                 </LinearLayout>
     </LinearLayout>
 </LinearLayout>

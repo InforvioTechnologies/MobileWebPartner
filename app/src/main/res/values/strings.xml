@@ -10,6 +10,7 @@
     <string name="list_lead">List of Leads</string>
     <string name="wt_termss">I accept whatsapp terms and conditions</string>
     <string name="next">Next</string>
+    <string name="via_">Save and </string>
     <string name="Download">Download</string>
 
     <string name="lead_creation">Lead Creation</string>
@@ -44,7 +45,7 @@
     <string name="app_sign">Sign Up</string>
     <string name="ur_number">Your Mobile Number</string>
     <string name="ind">India (+91)</string>
-    <string name="listapp1">Apply For Loans </string>
+    <string name="listapp1">Type Of Loan</string>
     <string name="apply">Apply Now</string>
     <string name="error_empty_mobile1">Please enter the Loan Amount above 10,000</string>
     <string name="error_empty_loan">Please enter the Loan Amount above 50,000 </string>
@@ -60,7 +61,7 @@
     <string name="pls_enter_otp">Please enter your mobile number</string>
     <string name="send_txt">We will send you a "\n" One time SMS message</string>
     <string name="generate">Get OTP</string>
-    <string name="submit">Verify it</string>
+    <string name="submit">Verify OTP</string>
     <string name="upload_doc">Upload Document</string>
     <string name="track_status">Track Status</string>
     <string name="error_postal">Please enter the Pincode</string>
@@ -119,7 +120,9 @@
     <string name="App4">4 </string>
     <string name="gamil_reg">Register with Gmail</string>
     <string name="btnUploadToServer">Upload </string>
-    <string name="upload">Upload </string>
+    <string name="upload">Upload</string>
+    //
+    <string name="upload1">Save and Upload </string>
     <string name="NoApplicant">No Co Applicant</string>
     <string name="Applicant1">Co Applicant 1</string>
     <string name="Applicant2">Co Applicant 2</string>
@@ -270,6 +273,7 @@
     <string name="home_purpose6"> Renovate/Extend your exisiting House</string>
     <string name="home_purpose7"> Balance Transfer </string>
     <string name="viy_check">Viability Check</string>
+    <string name="pay_ment">Payment</string>
     <string name="viy_report">Viability Report</string>
     <string name="doc_check_list">Document CheckList</string>
     <string name="Viability_Data">Viability Data</string>
@@ -687,6 +691,23 @@
     <string name="oth_income">please Select other income</string>
     <string name="error_full_address">please Enter full Address</string>
 
+
+    <string name="chooseplan">Choose Plan</string>
+    <string name="amount">Amount</string>
+    <string name="standard">Standard</string>
+    <string name="customplan">Custom Plan</string>
+    <string name="cus_benefit">Customer Benefit</string>
+    <string name="cusben_desc"><![CDATA[Instant Loan Viability & CRIF Report]]></string>
+    <string name="par_benefit">Partner Benefit</string>
+    <string name="par_desc"><b>40 Credit coins</b> in loanwiser Wallet if the Customer profile is eligible for loan processing</string>
+    <string name="choosepay">Choose Payment Option</string>
+    <string name="pay_desc">(Custom Plan cannot be paid using Loanwiser Coins)</string>
+    <string name="paylink_cus">Send Payment Link to Customer</string>
+    <string name="pay_coin">Pay using LoanWiser Credit Coins</string>
+    <string name="collect_cash">Pay &amp; Collect Cash</string>
+    <string name="skippayment">Skip Payment &amp; Proceed</string>
+    <string name="note_desc"><b>Note :</b> Any amount of payment made do not assure a guaranteed loan. if you skip this payment for credit Analysis,there will be delay in your loan processing</string>
+
     <string name="permission_request_message">Storage permission allows us to save pdf.</string>
 
     <string name="age">Age</string>
@@ -695,13 +716,67 @@
     <string name="residence_type1">Residence Type</string>
     <string name="perpanent_area">Residence Area</string>
 
+    <string name="via_pass">Details provided successfully match our loan viability criteria. You can now proceed to next step </string>
+    <string name="via_fail">Details provided do not match our loan viability criteria. View report for details</string>
+
     <string name="crif_report">CRIF Report Activity</string>
+
+    <string name="instantloan">Instant Loan Viability Report</string>
+    <string name="fasttrack_loan">Fast Track Loan Processing</string>
+    <string name="partner_loan_one">Partner benefit amount <b>\u20B9 200</b> - instantly credited in your linked bank account</string>
+    <string name="partner_loan_second">Remaining \u20B9 200 will be added to your Loanwiser Wallet as 200 Credit Coins </string>
+
+    <string name="plan">Plan</string>
+    <string name="rupee_symbol"> \u20B9</string>
+    <string name="paymethod">Payment Method</string>
+    <string name="loanwiser_credit">LoanWiser Credit Coins</string>
+    <string name="pay_collect_cash">Pay and Collect Cash</string>
+    <string name="current_bal">Current Available Balance - 500 Credit Coins</string>
+    <string name="imp_note">Important Note</string>
+    <string name="loanwiser_wallet">You\'ll be Charged 100 Credit Coins from your Loanwiser Wallet</string>
+    <string name="loanwiserweller_desc"> You\'ll receive 40 Credit Coins in your Loanwiser Wallet as the Partner Benefit if the customer profile is eligible for loan processing</string>
+    <string name="makepayment">Make Payment</string>
+    <string name="back">Back</string>
+    <string name="paymentdet">Payment Details</string>
+
+    <string name="sendpayment_linkcus">Send Payment Link to Customer</string>
+    <string name="sendpayment_link">SEND PAYMENT LINK</string>
+    <string name="customer_num">Enter Customer Mobile Number</string>
+    <string name="enter_mobilenum">Enter 10 digit mobile number</string>
+
+    <string name="pleaseread">Please Read</string>
+    <string name="chooseskip_pay">Since you chose to skip payment</string>
+    <string name="bulleted_listone">
+        <li>Viability of loan based on Credit Report and Bank statement will not be done at this stage.
+        </li> </string>
+    <string name="bulleted_listtwo"><li>Only preliminary viability assessment based on the data entered will be worked out at this stage.</li></string>
+    <string name="bulleted_listthree"><li>In the next step, You\'ll need to submit all the required documents based on which the detailed viability assessment will be done.</li></string>
+    <string name="pay_process">Hence,this will be a slow process compared to instant Viability Report option under our Standard plan, which we highly recommend to fast track your loan processing</string>
+    <string name="proceed_anyway">Proceed Anyway</string>
+
+
+    <string name="proced_next">PROCEED TO NEXT STEP</string>
+    <string name="submit_loanwiser">SUBMIT TO LOANWISER</string>
+    <string name="save_later">SAVE FOR LATER</string>
+    <string name="stepone_submit">Are you sure you want to Submit at Step1</string>
+    <string name="stepone_desc">if you proceed to step2 and step3 you can receive more payout and chance to earn instant cash benefit. if you submit at this stage.you\'ll only get payout percentage for the Step 1 completion,and only when the loan is disbursed.</string>
+    <string name="no_cancel">No, Cancel</string>
+    <string name="yes_submit">Yes, Submit</string>
+    <string name="doctupload_dialog">Do you have any lead Documents to be uploaded?</string>
+    <string name="doctupload_desc">you can choose and upload the documents you have with you,in the next screen,it will help us in faster loan processing and hence,faster payouts</string>
+    <string name="yes_documents">Yes I Have Documents</string>
+    <string name="nosubmit_document">No,Submit without Documents</string>
 
     <string name="need_cr_report_des"> credit report should be at the top of the
         list of your personal financial habits.
         A credit report can act as a shining light into
         your financial background, helping reveal personal
         payment history and lending and credit worthiness</string>
+
+    <string name="cus_note"> You chosen to pay from your account and
+        collect cash from customer. You should collect the exact amount
+        mentioned above. We will call the customer for verification.
+        </string>
 
     <string name="doc_seven">If (Current Company Experience lessthan 6 months) then Provide Appointment Letter
         of Current Company and Relieving Letter of Previous Company

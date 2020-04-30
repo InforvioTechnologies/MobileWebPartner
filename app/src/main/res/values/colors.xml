@@ -30,4 +30,10 @@
     <color name="type_B">#ffcc95</color>
     <color name="type_C">#ffafaf</color>
 
+    <color name="mid_blue">#002B5D</color>
+    <color name="lite_gry">#00000029</color>
+    <color name="greenradio">#26FB81</color>
+    <color name="but_red">#D34D53</color>
+    <color name="sky_blue">#48b4e0</color>
+
 </resources>
