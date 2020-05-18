@@ -107,6 +107,15 @@ public class Urls {
     public static String FIREBASE_TOKEN = Urls_step + "update_b2btoken";
     public static String UPDATE_PAYMENT_STATUES = Urls_step + "update_paymentstatus";
     public static String SUBMIT_TO_LOANWIER = Urls_step + "submit_loanwiser";
+    public static String COIN_Transaction = Urls_step + "coins_transaction";
+
+    public static String Payable_Amount = Urls_step + "payable_amount";
+    public static String customplan_msg = Urls_step + "customplan_msg";
+
+    public static String GET_PAYLINK = Urls_step + "get_paylink";
+    public static String send_paymentlink = Urls_step + "send_paymentlink";
+    public static String Transaction_List = Urls_step + "transaction_list";
+    public static String latest_lead_updates = Urls_step + "latest_lead_updates";
 
    // public static String DOCUMENT_CHECK_LIST = Urls_document_check_list + "get_documentcklist";
 
@@ -150,6 +159,5 @@ public class Urls {
 
         return query;
     }
-
 
 }

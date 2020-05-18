@@ -5164,11 +5164,11 @@ public class Viability_Check_PL extends SimpleActivity {
                                          }
                                      });
 
-                                     Intent intent = new Intent(Viability_Check_PL.this, Eligibility_Check_PL.class);
+                                   /*  Intent intent = new Intent(Viability_Check_PL.this, Eligibility_Check_PL.class);
                                      intent.putExtra("user_id", user_id);
                                      intent.putExtra("transaction_id", transaction_id);
                                      startActivity(intent);
-                                     finish();
+                                     finish();*/
                                  }else if(jsonObject1.getString("viablity_status").equals("error"))
                                  {
                                      Toast.makeText(context,"Viability Failed",Toast.LENGTH_SHORT).show();

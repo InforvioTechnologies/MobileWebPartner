@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -338,12 +339,19 @@ public class Dashboard_Activity extends AppCompatActivity implements OnLoadMoreL
                                         String username = J.getString("username");
                                         String mobileno = J.getString("mobileno");
                                         String transaction_id = J.getString("transaction_id");
+
+                                        String loan_amount = J.getString("loan_amount");
+                                        String comp_step = J.getString("comp_step");
+                                        String status_disp = J.getString("status_disp");
+                                        String color_code = J.getString("color_code");
+                                        applicant_id =   J.getString(Params.applicant_id);
+
                                        // String field_status = J.getString("field_status");
 
                                         Log.e("mobile no",mobileno);
 
-                                        items.add(new Lead_item(id,loan_typename, step_status,username,
-                                                mobileno,transaction_id));
+                                        items.add(new Lead_item(applicant_id,loan_typename, step_status,username,
+                                                mobileno,transaction_id,loan_amount,comp_step,status_disp,color_code));
                                         leadListAdapter_dashboard.notifyDataSetChanged();
                                     }
                                     Log.e("leadListA", String.valueOf(leadListAdapter_dashboard));
@@ -474,7 +482,7 @@ public class Dashboard_Activity extends AppCompatActivity implements OnLoadMoreL
         @Override
         public Dashboard_Activity.ListItemAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             View itemView = LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.ly_track_status, parent, false);
+                    .inflate(R.layout.ly_new_lead_status, parent, false);
             return new Dashboard_Activity.ListItemAdapter.ViewHolder(itemView);
         }
 
@@ -492,39 +500,55 @@ public class Dashboard_Activity extends AppCompatActivity implements OnLoadMoreL
                 loan_type =   J.getString("loan_type");
                 loan_typename =   J.getString("loan_typename");
 
+                loan_typename =   J.getString("loan_typename");
+                String  loan_amount =   J.getString("loan_amount");
+                String  step_com =   J.getString("comp_step");
+                String statues_new =   J.getString("status_disp");
+                String color_code =   J.getString("color_code");
+
                 // Get_Loan_Type(loan_categoryid,loan_type);
 
                 if(J.getString("loan_typename").contains("null")) {
                     holder.loantype.setVisibility(View.GONE);
                 }
 
-                holder.type.setText(  applicant_id +" "+ "( "+username+" "+ mobileno+" )");
+              /*  holder.type.setText(  applicant_id +" "+ "( "+username+" "+ mobileno+" )");
                 //  holder.doc_status.setText(status);
                 holder.doc_steps.setText(step_status);
-                holder.loantype.setText(loan_typename);
+                holder.loantype.setText(loan_typename);*/
 
+                holder.Lead_Name.setText(username);
+                holder.loan_amount.setText(loan_amount);
+                holder.app_id.setText(applicant_id);
+                holder.loan_type.setText(loan_typename);
+                holder.step_com.setText(step_com);
+                holder.statues_new.setText(statues_new);
 
-                if(J.getString("loan_typename").contains("Business Loan [Unsecured]")){
-                    holder.loan_type_image.setImageDrawable(getResources().getDrawable(R.drawable.business));
-                }else if(J.getString("loan_typename").contains("Personal Loan [Unsecured]")) {
-                    holder.loan_type_image.setImageDrawable(getResources().getDrawable(R.drawable.personal));
-                }else if(J.getString("loan_typename").contains("Two Wheeler Loan")) {
-                    holder.loan_type_image.setImageDrawable(getResources().getDrawable(R.drawable.car1));
-                }else if(J.getString("loan_typename").contains("Car Loan")) {
-                    holder.loan_type_image.setImageDrawable(getResources().getDrawable(R.drawable.car1));
-                }else if(J.getString("loan_typename").contains("Commercial Vehicle Loan")) {
-                    holder.loan_type_image.setImageDrawable(getResources().getDrawable(R.drawable.car1));
-                }else if(J.getString("loan_typename").contains("Loan Against Property")) {
-                    holder.loan_type_image.setImageDrawable(getResources().getDrawable(R.drawable.loanaganst_property));
+                if(color_code.equals("1"))
+                {
+                    holder.Statues_update_dot.setTextColor(Color.parseColor("#FF9200"));
+                } else if(color_code.equals("2"))
+                {
+                    holder.Statues_update_dot.setTextColor(Color.parseColor("#F9F338"));
+                }else if(color_code.equals("3"))
+                {
+                    holder.Statues_update_dot.setTextColor(Color.parseColor("#1592E6"));
+                }else if(color_code.equals("4"))
+                {
+                    holder.Statues_update_dot.setTextColor(Color.parseColor("#15CE00"));
+                }else if(color_code.equals("5"))
+                {
+                    holder.Statues_update_dot.setTextColor(Color.parseColor("#012B5D"));
                 }else
                 {
-                    holder.loan_type_image.setImageDrawable(getResources().getDrawable(R.drawable.home21));
+                    holder.Statues_update_dot.setTextColor(Color.parseColor("#E3434A"));
                 }
+
+               // holder.payment_plane.setText(loan_typename);
+
                 // Objs.a.OutfitNormalFontStyle(mCon, R.id.doc_typename_all);
                 // Objs.a.OutfitNormalFontStyle(mCon, R.id.doc_steps);
-                a.NewNormalFontStyle(mCon,holder.type);
-                a.NewNormalFontStyle(mCon,holder.doc_steps);
-                a.NewNormalFontStyle(mCon,holder.loantype);
+
                 //  Objs.a.NormalFontStyle(mCon,holder.doc_steps);
 
                 holder.Over_all.setOnClickListener(new View.OnClickListener() {
@@ -583,7 +607,8 @@ public class Dashboard_Activity extends AppCompatActivity implements OnLoadMoreL
 
         public class ViewHolder extends RecyclerView.ViewHolder {
 
-            AppCompatTextView type,doc_steps,doc_status,font1,font2,loantype;
+            AppCompatTextView type,doc_steps,doc_status,font1,font2,loantype,Statues_update_dot,
+                    Lead_Name,loan_amount,app_id,loan_type,payment_plane,step_com,statues_new;
             ImageView v_Image;
             ProgressBar progressBar;
             AppCompatButton appCompatButtonSelect,go_leads;
@@ -595,11 +620,16 @@ public class Dashboard_Activity extends AppCompatActivity implements OnLoadMoreL
             public ViewHolder(View itemView) {
                 super(itemView);
 
-                type  = (AppCompatTextView) itemView.findViewById(R.id.doc_typename_all);
-                doc_steps  = (AppCompatTextView) itemView.findViewById(R.id.doc_steps);
-                loantype  = (AppCompatTextView) itemView.findViewById(R.id.loantype);
-                loan_type_image  = (AppCompatImageView) itemView.findViewById(R.id.loan_type_image);
-                go_leads  = (AppCompatButton) itemView.findViewById(R.id.go_leads);
+                Lead_Name  = (AppCompatTextView) itemView.findViewById(R.id.Lead_Name);
+                loan_amount  = (AppCompatTextView) itemView.findViewById(R.id.loan_amount);
+                app_id  = (AppCompatTextView) itemView.findViewById(R.id.app_id);
+                loan_type  = (AppCompatTextView) itemView.findViewById(R.id.loan_type);
+                payment_plane  = (AppCompatTextView) itemView.findViewById(R.id.payment_plane);
+                step_com  = (AppCompatTextView) itemView.findViewById(R.id.step_com);
+                Statues_update_dot  = (AppCompatTextView) itemView.findViewById(R.id.Statues_update_dot);
+                statues_new  = (AppCompatTextView) itemView.findViewById(R.id.statues_new);
+
+              //  go_leads  = (AppCompatButton) itemView.findViewById(R.id.go_leads);
                 // font1  = (AppCompatTextView) itemView.findViewById(R.id.doc_typename_all);
                 //  font2 = (AppCompatTextView) itemView.findViewById(R.id.image_Product);
                 // progressBar = (ProgressBar) itemView.findViewById(R.id.progressBarMaterial);

@@ -150,6 +150,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="100"
+                                android:id="@+id/payment_amount_stand"
                                 android:textColor="@color/colorBlack"
                                 />
 
@@ -358,7 +359,7 @@
 
         </LinearLayout>
             <LinearLayout
-                android:visibility="gone"
+               android:visibility="gone"
                android:id="@+id/Custome"
                 android:orientation="vertical"
                 android:layout_width="match_parent"
@@ -481,12 +482,11 @@
                                     android:text="@string/rupee_symbol"
                                     android:textColor="@color/colorBlack"/>
 
-
-
                                 <androidx.appcompat.widget.AppCompatTextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="300"
+                                    android:id="@+id/payment_amout_cust"
                                     android:textColor="@color/colorBlack"
                                     />
 
@@ -786,6 +786,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="100"
+                                    android:id="@+id/payment_amont_link"
                                     android:textColor="@color/colorBlack"
                                     />
 

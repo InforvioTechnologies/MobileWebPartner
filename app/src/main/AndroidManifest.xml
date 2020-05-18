@@ -11,7 +11,6 @@
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
@@ -36,6 +35,17 @@
         tools:node="merge"
         tools:replace="android:icon">
 
+        <activity
+            android:name=".Partner_Statues.DashBoard_new"
+            android:label="@string/title_activity_dash_board_new"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <!--
+ <activity
+            android:name=".Bottom_Navigation.Dashboard_Bottom_Navigation_Activity"
+            android:label="@string/title_activity_dashboard__bottom__navigation_"
+            android:theme="@style/NoAction2"
+            android:windowSoftInputMode="stateHidden"></activity>
+        -->
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -87,10 +97,22 @@
             android:theme="@style/NoAction2"
             android:windowSoftInputMode="stateHidden" />
 
-        <activity android:name=".Payment.PaymentDetails"
+        <activity android:name=".Payment.Payment_Sucess_Screen"
             android:theme="@style/NoAction2"
             android:windowSoftInputMode="stateHidden"/>
 
+        <activity
+            android:name=".My_Earnings.My_Earnings"
+            android:theme="@style/NoAction2"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".Step_Changes_Screen.Step_Completion_Screen"
+            android:theme="@style/NoAction2"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".Payment.PaymentDetails"
+            android:theme="@style/NoAction2"
+            android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".Multi_select_checkbox.Multi_Select_checkbox"
             android:theme="@style/NoAction2"

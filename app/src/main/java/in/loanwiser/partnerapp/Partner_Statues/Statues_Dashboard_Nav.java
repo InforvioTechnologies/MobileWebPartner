@@ -114,8 +114,11 @@ public class Statues_Dashboard_Nav extends AppCompatActivity
                /* Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();*/
 
-                Objs.ac.StartActivity(mCon, Applicant_Details_Activity.class);
+                Objs.ac.StartActivity(mCon, DashBoard_new.class);
                 finish();
+
+               /* Objs.ac.StartActivity(mCon, Applicant_Details_Activity.class);
+                finish();*/
             }
         });
 

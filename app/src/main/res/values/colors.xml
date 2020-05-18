@@ -35,5 +35,19 @@
     <color name="greenradio">#26FB81</color>
     <color name="but_red">#D34D53</color>
     <color name="sky_blue">#48b4e0</color>
+    <color name="pending_color">#FF9200</color>
+
+    //my Earnings
+    <color name="gradiant_start">#012B5D</color>
+    <color name="gradiant_end">#082240</color>
+
+
+    <color name="lite_gray">#F7F7F7</color>
+    <color name="text_midblue">#002B5D</color>
+
+    <color name="tab_background_unselected">#FFFFFF</color>
+    <color name="gray">#B0B0B0</color>
+    <color name="black">#000000</color>
+    <color name="text_blue">#012B5D</color>
 
 </resources>

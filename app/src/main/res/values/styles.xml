@@ -9,7 +9,7 @@
     </style>
 
 
-    <style name="NavigationView" >
+    <style name="NavigationView">
         <item name="android:fontFamily" tools:ignore="NewApi">@font/lato_regular</item>
     </style>
 

@@ -48,6 +48,8 @@ import java.util.List;
 import java.util.Map;
 
 import adhoc.app.applibrary.Config.AppUtils.Objs;
+import adhoc.app.applibrary.Config.AppUtils.Params;
+import adhoc.app.applibrary.Config.AppUtils.Pref.Pref;
 import adhoc.app.applibrary.Config.AppUtils.Urls;
 import adhoc.app.applibrary.Config.AppUtils.VolleySignleton.AppController;
 import dmax.dialog.SpotsDialog;
@@ -74,7 +76,8 @@ public class PaymentActivity extends SimpleActivity implements CompoundButton.On
     private AlertDialog progressDialog;
     Typeface font;
 
-    String  Salary_id,Salary_Value;
+    String  payment_id,Salary_Value,paymentamoubt,Payment_value,payment_key,
+            applicant_count;
     JSONArray payment_values;
 
     String STAND="0",CUST="0",PAY_OPTION="0",Chose_plan="0";
@@ -83,6 +86,7 @@ public class PaymentActivity extends SimpleActivity implements CompoundButton.On
     AppCompatTextView proceedany,back;
     Button  closePopupBtn,close,view_report;
     ImageView closebtn;
+    AppCompatTextView standard_amount;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,7 +99,7 @@ public class PaymentActivity extends SimpleActivity implements CompoundButton.On
         UI_Fields();
         Click();
         makeJsonObjReq1();
-
+       // get_pay_shedule();
     }
 
 
@@ -125,6 +129,7 @@ public class PaymentActivity extends SimpleActivity implements CompoundButton.On
         partner_textviewone=findViewById(R.id.partner_textviewone);
         partner_textviewtwo=findViewById(R.id.partner_textviewtwo);
         loancredit_textview=findViewById(R.id.loancredit_textview);
+        standard_amount=findViewById(R.id.standard_amount);
     }
 
     private void Click()
@@ -217,7 +222,7 @@ public class PaymentActivity extends SimpleActivity implements CompoundButton.On
     {
 
         Log.e("STAND",STAND);
-        Log.e("PAY_OPTION",PAY_OPTION);
+        Log.e("CUST",CUST);
         Log.e("PAY_OPTION",PAY_OPTION);
 
         if(Chose_plan.contains("0"))
@@ -233,13 +238,18 @@ public class PaymentActivity extends SimpleActivity implements CompoundButton.On
                     Toast.makeText(this, "Select the Payment Option to Proceed", Toast.LENGTH_SHORT).show();
                 }else
                 {
+
+                    String pay_plan = "1";
                     Intent intent = new Intent(PaymentActivity.this, PaymentDetails.class);
                     intent.putExtra("payment_option", PAY_OPTION);
+                    intent.putExtra("paymentamoubt", paymentamoubt);
+                    intent.putExtra("payment_id", payment_id);
+                    intent.putExtra("payment_plane", pay_plan);
                     startActivity(intent);
                     // finish();
                 }
 
-            }else if(CUST.contains("1"))
+            }else if(CUST.contains("2"))
             {
                 if(PAY_OPTION.contains("0"))
                 {
@@ -247,8 +257,12 @@ public class PaymentActivity extends SimpleActivity implements CompoundButton.On
 
                 }else
                 {
+                    String pay_plan = "2";
                     Intent intent = new Intent(PaymentActivity.this, PaymentDetails.class);
                     intent.putExtra("payment_option", PAY_OPTION);
+                    intent.putExtra("paymentamoubt", paymentamoubt);
+                    intent.putExtra("payment_id", payment_id);
+                    intent.putExtra("payment_plane", pay_plan);
                     startActivity(intent);
                     // finish();
 
@@ -264,8 +278,27 @@ public class PaymentActivity extends SimpleActivity implements CompoundButton.On
     }
     private void makeJsonObjReq1() {
         progressDialog.show();
-        Log.e("Request Dreopdown", "called");
-        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.GET, Urls.GET_DROPDOWN_LIST, null,
+        JSONObject J= null;
+
+        String co_app = Pref.getCoAPPAVAILABLE(getApplicationContext());
+        if(co_app.equals("2"))
+        {
+            applicant_count = "1";
+        }else {
+             applicant_count = "2";
+        }
+
+        try {
+            J =new JSONObject();
+
+         //   J.put("app_count","1");
+           J.put("app_count",applicant_count);
+            J.put("b2buser_id", Pref.getID(getApplicationContext()));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        Log.e("request Dreopdown", J.toString());
+        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, Urls.Payable_Amount, J,
                 new Response.Listener<JSONObject>() {
 
                     @Override
@@ -276,10 +309,23 @@ public class PaymentActivity extends SimpleActivity implements CompoundButton.On
 
                         try {
 
-                            payment_values =object.getJSONArray("payment_values");
+                            String statues = object.getString("status");
+                            if(statues.contains("success"))
+                            {
+                                paymentamoubt = object.getString("standard_amount");
+                                standard_amount.setText(paymentamoubt);
+                                payment_values =object.getJSONArray("custom_plan");
+                                Log.e("Salary_proof_ar",String.valueOf(payment_values));
 
-                            Salry_method_Spinner(payment_values);
-                            Log.e("Salary_proof_ar",String.valueOf(payment_values));
+                                Salry_method_Spinner(payment_values);
+                                standard_amount.setText(paymentamoubt);
+                            }else
+                            {
+
+                            }
+
+
+
 
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -311,6 +357,10 @@ public class PaymentActivity extends SimpleActivity implements CompoundButton.On
         AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
 
     }
+
+
+
+
 
     private void Salry_method_Spinner(final JSONArray Salary_method_ar) throws JSONException {
         //   SPINNERLIST = new String[ja.length()];
@@ -345,11 +395,14 @@ public class PaymentActivity extends SimpleActivity implements CompoundButton.On
                         //  City_loc_uniqueID = ja.getJSONObject(position).getString("city_id");
 
 
-                        Salary_id = Salary_method_ar.getJSONObject(position).getString("id");
-                        Salary_Value = Salary_method_ar.getJSONObject(position).getString("value");
+                        Payment_value = Salary_method_ar.getJSONObject(position).getString("value");
+                        payment_key = Salary_method_ar.getJSONObject(position).getString("key");
                         //CAT_ID = ja.getJSONObject(position).getString("category_id");
-                        Log.d("Salary_id", Salary_id);
-                        Log.d("Salary_Value", Salary_Value);
+                        payment_id = Payment_value;
+                        Log.d("payment_id", Payment_value);
+                        Log.d("Salary_Value", payment_key);
+
+                        get_credit_coins_points(Payment_value);
 
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -374,6 +427,61 @@ public class PaymentActivity extends SimpleActivity implements CompoundButton.On
 
     }
 
+    private void get_credit_coins_points(String Payment_value ) {
+        progressDialog.show();
+
+        String Order_Id = Pref.getUSERID(getApplicationContext()) + "-0";
+        // String Order_Id = "9556" + "-0";
+        JSONObject J =new JSONObject();
+        try {
+            J.put("order_amount", Payment_value);
+            J.put("basic_amount", paymentamoubt);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+       // Log.e("Payment schedule", String.valueOf(J));
+        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, Urls.customplan_msg, J,
+                new Response.Listener<JSONObject>() {
+
+                    @Override
+                    public void onResponse(JSONObject object) {
+                        Log.e("Payment schedule", String.valueOf(object));
+
+                        try {
+                            String statues = object.getString("status");
+                            JSONObject message = object.getJSONObject("message");
+
+                            String str_msg1 = message.getString("msg1");
+                            String str_msg2 = message.getString("msg2");
+                            partner_textviewone.setText(str_msg1);
+                            partner_textviewtwo.setText(str_msg2);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+
+                        // Toast.makeText(mCon, response.toString(),Toast.LENGTH_SHORT).show();
+                        progressDialog.dismiss();
+                    }
+                }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                VolleyLog.d("TAG", "Error: " + error.getMessage());
+                progressDialog.dismiss();
+            }
+        }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("Content-Type", "application/json");
+                return headers;
+            }
+        };
+        AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
+
+    }
+
     @Override
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 
@@ -388,6 +496,7 @@ public class PaymentActivity extends SimpleActivity implements CompoundButton.On
                 loancredit_textview.setTextColor(Color.parseColor("#002B5D"));
                 STAND= "1";
                 Chose_plan= "1";
+                payment_id = paymentamoubt;
 
             }
             if (buttonView.getId() == R.id.custom_radio) {
@@ -396,12 +505,14 @@ public class PaymentActivity extends SimpleActivity implements CompoundButton.On
                 partnerben_laysecond.setVisibility(View.VISIBLE);
                 cusben_textviewone.setText(getString(R.string.instantloan));
                 cusben_textviewsecond.setText(getString(R.string.fasttrack_loan));
-                partner_textviewone.setText(getString(R.string.partner_loan_one));
-                partner_textviewtwo.setText(getString(R.string.partner_loan_second));
+
+                //partner_textviewone.setText(getString(R.string.partner_loan_one));
+              //  partner_textviewtwo.setText(getString(R.string.partner_loan_second));
+
                 loancredit_radio.setChecked(false);
                 loancredit_radio.setEnabled(false);
                 loancredit_textview.setTextColor(Color.parseColor("#B6B6B6"));
-
+                payment_id = Payment_value;
                 CUST = "2";
                 Chose_plan = "1";
 
@@ -411,6 +522,7 @@ public class PaymentActivity extends SimpleActivity implements CompoundButton.On
                 paycollect_radio.setChecked(false);
                 loancredit_radio.setChecked(false);
                 PAY_OPTION = "1";
+
             }
 
             if (buttonView.getId()==R.id.loancredit_radio){

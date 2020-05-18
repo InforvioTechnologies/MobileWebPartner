@@ -58,7 +58,7 @@
                     <ScrollView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
-                        <LinearLayout
+                       <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:orientation="vertical">
@@ -253,7 +253,7 @@
                                                         android:layout_gravity="center"
                                                         android:orientation="vertical">
 
-                                                        <!--  <androidx.appcompat.widget.AppCompatTextView
+                                                       <!-- <androidx.appcompat.widget.AppCompatTextView
                                                               android:layout_gravity="center"
                                                               android:id="@+id/In_Progress"
                                                               style="@style/SmallText"
@@ -337,14 +337,14 @@
                                                         android:layout_gravity="center"
                                                         android:orientation="vertical">
 
-                                                        <!-- <androidx.appcompat.widget.AppCompatTextView
+                                                       <!-- &lt;!&ndash; <androidx.appcompat.widget.AppCompatTextView
                                                              android:layout_gravity="center"
                                                              style="@style/SmallText"
                                                              android:id="@+id/Approved"
                                                              android:textColor="@color/black"
                                                              android:text="Approved"
                                                              android:layout_width="200dp"
-                                                             android:layout_height="wrap_content" />-->
+                                                             android:layout_height="wrap_content" />&ndash;&gt;-->
 
                                                         <androidx.appcompat.widget.AppCompatTextView
                                                             android:layout_gravity="center"
@@ -420,15 +420,15 @@
                                                         android:layout_gravity="center"
                                                         android:orientation="vertical">
 
-                                                        <!--  <androidx.appcompat.widget.AppCompatTextView
+                                                       <!-- &lt;!&ndash;  <androidx.appcompat.widget.AppCompatTextView
                                                               android:layout_gravity="center"
                                                               style="@style/SmallText"
                                                               android:id="@+id/Disbursed"
                                                               android:textColor="@color/black"
                                                               android:text="Disbursed"
                                                               android:layout_width="200dp"
-                                                              android:layout_height="wrap_content" />-->
-
+                                                              android:layout_height="wrap_content" />&ndash;&gt;
+-->
                                                         <androidx.appcompat.widget.AppCompatTextView
                                                             android:layout_gravity="center"
                                                             android:id="@+id/Disbursed"
@@ -504,15 +504,15 @@
                                                         android:layout_gravity="center"
                                                         android:orientation="vertical">
 
-                                                        <!--  <androidx.appcompat.widget.AppCompatTextView
+                                                      <!--  &lt;!&ndash;  <androidx.appcompat.widget.AppCompatTextView
                                                               android:layout_gravity="center"
                                                               android:id="@+id/Declined"
                                                               style="@style/SmallText"
                                                               android:textColor="@color/black"
                                                               android:text="Declined"
                                                               android:layout_width="200dp"
-                                                              android:layout_height="wrap_content" />-->
-
+                                                              android:layout_height="wrap_content" />&ndash;&gt;
+-->
                                                         <androidx.appcompat.widget.AppCompatTextView
                                                             android:layout_gravity="center"
                                                             android:id="@+id/Declined"
@@ -588,7 +588,7 @@
                                                         android:layout_gravity="center"
                                                         android:orientation="vertical">
 
-                                                        <!--  <androidx.appcompat.widget.AppCompatTextView
+                                                       <!-- &lt;!&ndash;  <androidx.appcompat.widget.AppCompatTextView
                                                               android:layout_gravity="center"
                                                               style="@style/SmallText1"
                                                               android:id="@+id/Closed"
@@ -596,8 +596,8 @@
                                                               android:textColor="@color/black"
                                                               android:text="Closed"
                                                               android:layout_width="200dp"
-                                                              android:layout_height="wrap_content" />-->
-
+                                                              android:layout_height="wrap_content" />&ndash;&gt;
+-->
                                                         <androidx.appcompat.widget.AppCompatTextView
                                                             android:layout_gravity="center"
                                                             style="@style/SmallText1"
