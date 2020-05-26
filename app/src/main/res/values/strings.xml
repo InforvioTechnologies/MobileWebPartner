@@ -843,4 +843,26 @@
     <string name="purpose">Purpose</string>
     <string name="coins">Coins</string>
 
+    ///Stepper
+    <string-array name="steps_names">
+        <item>Step 1</item>
+        <item>Step 2</item>
+        <item>Step 3</item>
+        <!--
+        <item>Week schedule</item>
+-->
+    </string-array>
+    <string name="step_one">Step 1</string>
+    <string name="basic_lead">Basic Lead Details</string>
+    <string name="basic_leaddesc">You will get 50% of your Total Partner Benefit</string>
+    <string name="viabilitycheck">Viability Check</string>
+    <string name="via_descone">You will get 60% of your Total Partner Benefit</string>
+    <string name="instant_credit">Instant Credit Assessment</string>
+    <string name="instant_desc">You will get 80% of your Total Partner Benefit</string>
+    <string name="eligiblity_des">You will get 80% of your Total Partner Benefit</string>
+    <string name="eligiblity_check">Eligibility Check</string>
+    <string name="document_title">Document Upload</string>
+    <string name="document_desc">you will get 100% of your Total Partner Benefit</string>
+    <string name="note"><b>Note:</b> More steps you complete, More you can earn! 🏆</string>
+
 </resources>

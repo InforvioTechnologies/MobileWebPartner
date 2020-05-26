@@ -76,7 +76,7 @@ public class LeadListAdapter_Dashboard extends RecyclerView.Adapter<LeadListAdap
 
         LinearLayout Over_all,ly_question;
         View view;
-        String loantype1,statues12,step_status,transaction_id,id;
+        String loantype1,statues12,step_status,transaction_id,id,id1;
 
         public CustomViewHolder(View view) {
             super(view);
@@ -96,7 +96,7 @@ public class LeadListAdapter_Dashboard extends RecyclerView.Adapter<LeadListAdap
         public void bindPost(Lead_item post) {
 
          /*   type.setText(a.capitalize(post.getid()+" "+ "( "+post.getusername()+" "+ post.getmobileno()+" )"));
-            loantype.setText(post.getloan_typename());*/
+            loantype.setText(post.getloan_typename()); */
 
             //doc_steps.setText(post.getstep_status());
 
@@ -106,7 +106,9 @@ public class LeadListAdapter_Dashboard extends RecyclerView.Adapter<LeadListAdap
             loan_type.setText(post.getloan_typename());
             step_com.setText(post.getcomp_step());
             statues_new.setText(post.getstatus_disp());
-          //  Statues_update_dot.setText(post.getcolor_code());
+            payment_plane.setText(post.getpayment_plan());
+          //
+            //  Statues_update_dot.setText(post.getcolor_code());
           //  payment_plane.setText(post.getloan_typename());
 
             String color_code = post.getcolor_code();
@@ -116,6 +118,7 @@ public class LeadListAdapter_Dashboard extends RecyclerView.Adapter<LeadListAdap
 
             step_status = post.getstep_status();
             id = post.getid();
+            id1 = post.getid1();
             transaction_id = post.gettransaction_id();
 
 /*
@@ -151,13 +154,13 @@ public class LeadListAdapter_Dashboard extends RecyclerView.Adapter<LeadListAdap
                         {
                             Objs.a.showToast(context, "This Lead is Rejected");
                             if (context instanceof Dashboard_Activity) {
-                                ((Dashboard_Activity)context).Applicant_Status(id,step_status);
+                                ((Dashboard_Activity)context).Applicant_Status(id1,step_status);
                             }
                         }
                         else
                         {
                             if (context instanceof Dashboard_Activity) {
-                                ((Dashboard_Activity)context).Applicant_Status(id,step_status);
+                                ((Dashboard_Activity)context).Applicant_Status(id1,step_status);
                             }
                            // Applicant_Status(id);
                         }

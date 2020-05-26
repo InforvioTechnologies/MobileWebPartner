@@ -1,5 +1,7 @@
 package in.loanwiser.partnerapp.Partner_Statues;
 
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -30,10 +32,18 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import adhoc.app.applibrary.Config.AppUtils.Objs;
+import adhoc.app.applibrary.Config.AppUtils.Pref.Pref;
 import in.loanwiser.partnerapp.PartnerActivitys.Applicant_Details_Activity;
+import in.loanwiser.partnerapp.PartnerActivitys.Dashboard_Activity;
 import in.loanwiser.partnerapp.Partner_Statues.ui.gallery.GalleryFragment;
 import in.loanwiser.partnerapp.Partner_Statues.ui.home.HomeFragment;
 import in.loanwiser.partnerapp.R;
+import in.loanwiser.partnerapp.Step_Changes_Screen.Pay_Out_Screen;
+import in.loanwiser.partnerapp.User_Account.BankDetails;
+import in.loanwiser.partnerapp.User_Account.ProfileSettings;
+import in.loanwiser.partnerapp.User_Account.Welcome_Page;
+
+import static adhoc.app.applibrary.Config.AppUtils.Objs.a;
 
 public class DashBoard_new extends AppCompatActivity  implements NavigationView.OnNavigationItemSelectedListener,
         BaseSliderView.OnSliderClickListener, ViewPagerEx.OnPageChangeListener {
@@ -57,7 +67,7 @@ public class DashBoard_new extends AppCompatActivity  implements NavigationView.
 
                 Intent intent = new Intent(DashBoard_new.this,Applicant_Details_Activity.class);
                 startActivity(intent);
-              //  finish();
+                finish();
             }
         });
 
@@ -89,13 +99,13 @@ public class DashBoard_new extends AppCompatActivity  implements NavigationView.
                                 selectedFragment = new ActivityFragment();
                                 break;
                             case R.id.leads:
-                                selectedFragment = new GalleryFragment();
+                                selectedFragment = new LeadeFragment();
                                 break;
                             case R.id.earnings:
-                                selectedFragment = new ActivityFragment();
+                                selectedFragment = new MyearningFragment();
                                 break;
                             case R.id.share:
-                                selectedFragment = new ActivityFragment();
+                                selectedFragment = new ShareFragment();
                                 break;
 
                         }
@@ -145,9 +155,62 @@ public class DashBoard_new extends AppCompatActivity  implements NavigationView.
     }
 
     @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-        return false;
+    public boolean onNavigationItemSelected(MenuItem item) {
+        // Handle navigation view item clicks here.nav_payout
+        int id = item.getItemId();
+
+        if (id == R.id.nav_profile) {
+            Intent intent = new Intent(DashBoard_new.this,ProfileSettings.class);
+            startActivity(intent);
+
+        } else if (id == R.id.nav_bank) {
+            Intent intent = new Intent(DashBoard_new.this,BankDetails.class);
+            startActivity(intent);
+
+        } else if (id == R.id.nav_payout) {
+
+            Intent intent = new Intent(DashBoard_new.this,Pay_Out_Screen.class);
+            startActivity(intent);
+
+        }else if (id == R.id.nav_logout) {
+            ExitAlert(DashBoard_new.this);
+
+        }
+
+        /*
+        else if (id == R.id.nav_call) {
+            Objs.ac.StartActivity(mCon, CustomerCare.class);
+        } */
+
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer.closeDrawer(GravityCompat.START);
+        return true;
     }
+
+    public void ExitAlert(Context context) {
+        androidx.appcompat.app.AlertDialog.Builder builder = new  androidx.appcompat.app.AlertDialog.Builder(context, adhoc.app.applibrary.R.style.MyAlertDialogStyle);
+        builder.setTitle(context.getResources().getString(adhoc.app.applibrary.R.string.attention));
+        builder.setIcon(context.getResources().getDrawable(adhoc.app.applibrary.R.drawable.ic_info_outline_black_24dp));
+        builder.setMessage("Do you want to Logout..?");
+        builder.setNegativeButton("No", null);
+        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Pref.removeLogin(getApplicationContext());
+                Pref.removeID(getApplicationContext());
+                Pref.removeMOB(getApplicationContext());
+                Pref.removeMobile(getApplicationContext());
+                Intent i = new Intent(DashBoard_new.this, Welcome_Page.class);
+                i.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                startActivity(i);
+                finish();
+            }
+        });
+        androidx.appcompat.app.AlertDialog alert = builder.create();
+        alert.show();
+        a.DialogStyle(context, alert);
+    }
+
    /* @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.

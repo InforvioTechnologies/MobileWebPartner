@@ -127,16 +127,16 @@ public class Lead_Crration_Activity extends SimpleActivity {
         UI_FIELDS();
         fonts();
         makeJsonObjReq1();
-  //  Click();
+    Click();
 
-        lead_cr_step1.setOnClickListener(new View.OnClickListener() {
+      /*  lead_cr_step1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(Lead_Crration_Activity.this, PaymentActivity.class);
                 startActivity(intent);
                 finish();
             }
-        });
+        });*/
 
        /* lead_cr_step1.setOnClickListener(new View.OnClickListener() {
             @Override

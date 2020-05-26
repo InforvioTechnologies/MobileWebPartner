@@ -1,9 +1,12 @@
 package in.loanwiser.partnerapp.Partner_Statues;
 
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
@@ -11,6 +14,8 @@ import android.widget.Toast;
 
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.AppCompatTextView;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -26,6 +31,7 @@ import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.BaseSliderView;
 import com.daimajia.slider.library.SliderTypes.DefaultSliderView;
 import com.daimajia.slider.library.Tricks.ViewPagerEx;
+import com.google.android.material.navigation.NavigationView;
 
 
 import org.json.JSONArray;
@@ -45,9 +51,13 @@ import in.loanwiser.partnerapp.PartnerActivitys.Dashboard_Activity;
 import in.loanwiser.partnerapp.Payment.PaymentActivity;
 import in.loanwiser.partnerapp.R;
 import in.loanwiser.partnerapp.Step_Changes_Screen.Lead_Crration_Activity;
+import in.loanwiser.partnerapp.Step_Changes_Screen.Pay_Out_Screen;
+import in.loanwiser.partnerapp.User_Account.BankDetails;
+import in.loanwiser.partnerapp.User_Account.ProfileSettings;
+import in.loanwiser.partnerapp.User_Account.Welcome_Page;
 
 
-public class ActivityFragment extends Fragment implements BaseSliderView.OnSliderClickListener, ViewPagerEx.OnPageChangeListener {
+public class ActivityFragment extends Fragment implements NavigationView.OnNavigationItemSelectedListener, BaseSliderView.OnSliderClickListener, ViewPagerEx.OnPageChangeListener {
 
     public ActivityFragment() {
         // Required empty public constructor
@@ -70,12 +80,15 @@ public class ActivityFragment extends Fragment implements BaseSliderView.OnSlide
     private SliderLayout mDemoSlider;
     private ActivityFragment mcon =this;
     private LinearLayout chat;
-    private RecyclerView recycler_view;
+    private RecyclerView recycler_view,recycler_view_health_ass;
     ArrayList<Suggestion_item_freqent> items;
+    ArrayList<Health_Assesment_item_freqent> items1;
     private String tag_json_obj = "jobj_req", tag_json_arry = "jarray_req";
     Resent_Lead_Statues adapter;
+    Health_Assement_Adapter adapter1;
 
     AppCompatButton my_earnings,my_leads;
+    DrawerLayout drawer;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -85,6 +98,7 @@ public class ActivityFragment extends Fragment implements BaseSliderView.OnSlide
         mDemoSlider = (SliderLayout)view.findViewById(R.id.slider);
 
         items = new ArrayList<>();
+        items1 = new ArrayList<>();
         HashMap<String,String> url_maps = new HashMap<String, String>();
 
      /*   url_maps.put("Home Loan", "http://cscapi.propwiser.com/mobile/images/home_loan.png");
@@ -98,12 +112,16 @@ public class ActivityFragment extends Fragment implements BaseSliderView.OnSlide
 
        // Ly_UI(view);
         recycler_view = (RecyclerView)view.findViewById(R.id.recycler_view);
+        recycler_view_health_ass = (RecyclerView)view.findViewById(R.id.recycler_view_health_ass);
 
         my_earnings = (AppCompatButton) view.findViewById(R.id.my_earnings);
         my_leads = (AppCompatButton) view.findViewById(R.id.my_leads);
+         drawer = (DrawerLayout) view.findViewById(R.id.drawer_layout);
 
         adapter = new Resent_Lead_Statues(getActivity(), items);
+        adapter1 = new Health_Assement_Adapter(getActivity(), items1);
         recycler_view.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
+        recycler_view_health_ass.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
 
 
         my_earnings.setOnClickListener(new View.OnClickListener() {
@@ -124,6 +142,7 @@ public class ActivityFragment extends Fragment implements BaseSliderView.OnSlide
 
 
         Get_Allocation_List(view);
+        Health_Assement_List(view);
         for(final String name : url_maps.keySet()){
             // TextSliderView textSliderView = new TextSliderView(this);
             DefaultSliderView textSliderView = new DefaultSliderView(getActivity());
@@ -227,6 +246,70 @@ public class ActivityFragment extends Fragment implements BaseSliderView.OnSlide
         AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
     }
 
+    private void Health_Assement_List(View view) {
+        JSONObject jsonObject =new JSONObject();
+        JSONObject J= null;
+        try {
+            J =new JSONObject();
+            J.put("b2buser_id", Pref.getID(getActivity()));
+
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, Urls.reference_board , null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+
+                        Log.e("the recent",response.toString());
+
+                        try {
+
+
+
+                                JSONArray ja = response.getJSONArray("finance");
+                                if (ja.length()>0){
+                                    for(int i = 0;i<ja.length();i++){
+
+                                        JSONObject J = ja.getJSONObject(i);
+                                        items1.add(new Health_Assesment_item_freqent( J.getString("heading"), J.getString("content"),J.getString("icon"),J.getString("color_code")));
+                                        adapter1.notifyDataSetChanged();
+
+                                    }
+                                    recycler_view_health_ass.setAdapter(adapter1);
+
+                                }else {
+                                    Objs.a.ShowHideNoItems(getActivity(),true);
+                                }
+
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e("Response",String.valueOf(error));
+                Toast.makeText(getActivity(),String.valueOf(error),Toast.LENGTH_SHORT).show();
+
+            }
+        }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("content-type", "application/json");
+                return headers;
+            }
+        };
+
+        Log.d("Response","Login Activity_Exitalert Login_POST33333333333333333333333333333333333");
+        AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
+    }
+
     private void loadFragment(Fragment fragment) {
         // load fragment
         FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
@@ -254,4 +337,59 @@ public class ActivityFragment extends Fragment implements BaseSliderView.OnSlide
     public void onPageScrollStateChanged(int state) {
 
     }
+
+    @Override
+    public boolean onNavigationItemSelected(MenuItem item) {
+        // Handle navigation view item clicks here.nav_payout
+        int id = item.getItemId();
+
+        if (id == R.id.nav_profile) {
+            Objs.ac.StartActivity(getActivity(), ProfileSettings.class);
+        } else if (id == R.id.nav_bank) {
+            Objs.ac.StartActivity(getActivity(), BankDetails.class);
+        } else if (id == R.id.nav_payout) {
+            Objs.ac.StartActivity(getActivity(), Pay_Out_Screen.class);
+        }else if (id == R.id.nav_logout) {
+          //  ExitAlert(getActivity());
+        }
+
+        /*
+        else if (id == R.id.nav_call) {
+            Objs.ac.StartActivity(mCon, CustomerCare.class);
+        } */
+
+
+        drawer.closeDrawer(GravityCompat.START);
+        return true;
+    }
+
+   /* public void ExitAlert(Context context) {
+
+
+
+        Log.e("it is called ","it is called ");
+        //android.app.AlertDialog;
+        androidx.appcompat.app.AlertDialog.Builder builder = new androidx.appcompat.app.AlertDialog.Builder(context, adhoc.app.applibrary.R.style.MyAlertDialogStyle);
+        builder.setTitle(context.getResources().getString(adhoc.app.applibrary.R.string.attention));
+        builder.setIcon(context.getResources().getDrawable(adhoc.app.applibrary.R.drawable.ic_info_outline_black_24dp));
+        builder.setMessage("Do you want to Logout..?");
+        builder.setNegativeButton("No", null);
+        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Pref.removeLogin(getActivity());
+                Pref.removeID(getActivity());
+                Pref.removeMOB(getActivity());
+                Pref.removeMobile(getActivity());
+                Pref.removePART(getActivity());
+                Intent i = new Intent(getActivity(), Welcome_Page.class);
+                i.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                startActivity(i);
+                getActivity().finish();
+            }
+        });
+        androidx.appcompat.app.AlertDialog alert = builder.create();
+        alert.show();
+        Objs.a.DialogStyle(context, alert);
+    }*/
 }

@@ -32,7 +32,15 @@
         <item name="DialogSpotColor">@color/colorPrimary</item>
         <item name="DialogSpotCount">8</item>
     </style>
+    <style name="MyTabLayout" parent="Base.Widget.Design.TabLayout">
+        <item name="tabTextAppearance">@style/MyTabTextAppearance</item>
+    </style>
 
+    <style name="MyTabTextAppearance" parent="TextAppearance.AppCompat.Button">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="textAllCaps">true</item>
+    </style>
     <style name="blinkText" parent="SmallText">
         <item name="android:paddingLeft">@dimen/activity_pading</item>
         <item name="android:paddingRight">@dimen/activity_pading</item>

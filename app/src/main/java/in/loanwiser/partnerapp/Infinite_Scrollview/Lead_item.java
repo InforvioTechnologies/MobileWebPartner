@@ -15,6 +15,8 @@ public class Lead_item {
     private String comp_step;
     private String status_disp;
     private String color_code;
+    private String payment_plan;
+    private String id1;
 
 
 
@@ -99,6 +101,8 @@ public class Lead_item {
         this.status_disp = status_disp;
     }
 
+
+
     public String getcolor_code() {
         return color_code;
     }
@@ -107,8 +111,23 @@ public class Lead_item {
         this.color_code = color_code;
     }
 
+    public String getpayment_plan() {
+        return payment_plan;
+    }
+
+    public void setpayment_plan(String payment_plan) {
+        this.payment_plan = payment_plan;
+    }
+    public String getid1() {
+        return id1;
+    }
+
+    public void setid1(String id1) {
+        this.id1 = id1;
+    }
+
     public Lead_item(String id, String loan_typename, String step_status, String username, String mobileno,
-                     String transaction_id, String loan_amount,String comp_step,String status_disp,String color_code ) {
+                     String transaction_id, String loan_amount,String comp_step,String status_disp,String color_code,String payment_plan,String id1 ) {
         //
         this.id = id;
         this.loan_typename = loan_typename;
@@ -123,6 +142,8 @@ public class Lead_item {
         this.comp_step = comp_step;
         this.status_disp = status_disp;
         this.color_code = color_code;
+        this.payment_plan = payment_plan;
+        this.id1 = id1;
 
 
     }

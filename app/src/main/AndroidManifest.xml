@@ -34,7 +34,7 @@
         android:usesCleartextTraffic="true"
         tools:node="merge"
         tools:replace="android:icon">
-
+        <activity android:name=".Step_Changes_Screen.Step_Completion_Activity"></activity>
         <activity
             android:name=".Partner_Statues.DashBoard_new"
             android:label="@string/title_activity_dash_board_new"
@@ -92,15 +92,26 @@
             </intent-filter>
         </receiver>
 
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:grantUriPermissions="true"
+            android:exported="false"
+            android:authorities="${applicationId}">
+
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_provider_paths"/>
+
+        </provider>
+
         <activity
             android:name=".Payment.PaymentActivity"
             android:theme="@style/NoAction2"
             android:windowSoftInputMode="stateHidden" />
-
-        <activity android:name=".Payment.Payment_Sucess_Screen"
+        <activity
+            android:name=".Payment.Payment_Sucess_Screen"
             android:theme="@style/NoAction2"
-            android:windowSoftInputMode="stateHidden"/>
-
+            android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".My_Earnings.My_Earnings"
             android:theme="@style/NoAction2"

@@ -37,6 +37,7 @@ import adhoc.app.applibrary.Config.AppUtils.VolleySignleton.AppController;
 import dmax.dialog.SpotsDialog;
 import in.loanwiser.partnerapp.Documents.Applicant_Details_Single;
 import in.loanwiser.partnerapp.PDF_Dounloader.PermissionUtils;
+import in.loanwiser.partnerapp.Payment.PaymentActivity;
 import in.loanwiser.partnerapp.R;
 import in.loanwiser.partnerapp.Step_Changes_Screen.CRIF_Report_Activity;
 import in.loanwiser.partnerapp.Step_Changes_Screen.CRIF_Report_Activity_PDF_View;
@@ -306,7 +307,7 @@ public class Home extends AppCompatActivity {
 
                 }else
                 {
-                    Intent intent = new Intent(Home.this, Payment_Details_Activity.class);
+                    Intent intent = new Intent(Home.this, PaymentActivity.class);
                     startActivity(intent);
                     finish();
                 }

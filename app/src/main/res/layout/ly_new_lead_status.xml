@@ -132,9 +132,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_marginLeft="10dp"
                     android:layout_marginTop="10dp"
-                    android:textColor="@color/colorPrimary1" />
+                    android:textColor="#2699FB" />
 
             </LinearLayout>
             <LinearLayout
@@ -185,11 +184,10 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:layout_marginLeft="10dp"
                         android:layout_marginTop="10dp"
                         android:text="Step"
                         android:id="@+id/step_com"
-                        android:textColor="@color/colorPrimary1" />
+                        android:textColor="#2699FB" />
 
                 </LinearLayout>
             </LinearLayout>
@@ -213,7 +211,6 @@
                     />
                 <androidx.appcompat.widget.AppCompatTextView
                     android:layout_marginTop="10dp"
-                    android:layout_marginLeft="10dp"
                     android:gravity="right"
                     android:id="@+id/statues_new"
                     style="@style/SmallText1"

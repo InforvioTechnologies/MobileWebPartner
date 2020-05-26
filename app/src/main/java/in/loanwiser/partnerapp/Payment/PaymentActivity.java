@@ -54,6 +54,7 @@ import adhoc.app.applibrary.Config.AppUtils.Urls;
 import adhoc.app.applibrary.Config.AppUtils.VolleySignleton.AppController;
 import dmax.dialog.SpotsDialog;
 import in.loanwiser.partnerapp.PartnerActivitys.Dashboard_Activity;
+import in.loanwiser.partnerapp.Partner_Statues.DashBoard_new;
 import in.loanwiser.partnerapp.R;
 import in.loanwiser.partnerapp.SimpleActivity;
 import in.loanwiser.partnerapp.Step_Changes_Screen.Eligibility_Check_PL;
@@ -108,6 +109,8 @@ public class PaymentActivity extends SimpleActivity implements CompoundButton.On
         skip_payment = findViewById(R.id.skip_payment);
         proceed_button=findViewById(R.id.proceed_button);
         customplan_amount=findViewById(R.id.customplan_amount);
+        skip_payment=findViewById(R.id.skip_payment);
+
         custom_radio=(RadioButton) findViewById(R.id.custom_radio);
         standard_radio=(RadioButton) findViewById(R.id.standard_radio);
         paymentcustomer_radio=(RadioButton)findViewById(R.id.paymentcustomer_radio);
@@ -196,8 +199,67 @@ public class PaymentActivity extends SimpleActivity implements CompoundButton.On
             }
         });
 
+
+        skip_payment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Update_Payment_Statues();
+            }
+        });
+
     }
 
+    private void Update_Payment_Statues() {
+        progressDialog.show();
+        JSONObject J =new JSONObject();
+        try {
+            J.put("transaction_id",Pref.getTRANSACTIONID(getApplicationContext()));
+            J.put("pay_skip","1");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        Log.e("payment_st_request",J.toString());
+        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, Urls.UPDATE_PAYMENT_STATUES, J,
+                new Response.Listener<JSONObject>() {
+
+                    @Override
+                    public void onResponse(JSONObject object) {
+                        Log.e("payment_st_request",object.toString());
+                        try {
+                            JSONObject response = object.getJSONObject("response");
+
+                            String Staues_pay = response.getString("status");
+                            if(Staues_pay.contains("success"))
+                            {
+                                Intent intent = new Intent(PaymentActivity.this, Dashboard_Activity.class);
+                                startActivity(intent);
+                                finish();
+                            }
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        // Toast.makeText(mCon, response.toString(),Toast.LENGTH_SHORT).show();
+                        progressDialog.dismiss();
+                    }
+                }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                VolleyLog.d("TAG", "Error: " + error.getMessage());
+                progressDialog.dismiss();
+            }
+        }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("Content-Type", "application/json");
+                return headers;
+            }
+        };
+        AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
+
+    }
 
 /*    public void onRadioButtonClicked(View view) {
         boolean checked = ((RadioButton) view).isChecked();
@@ -436,6 +498,7 @@ public class PaymentActivity extends SimpleActivity implements CompoundButton.On
         try {
             J.put("order_amount", Payment_value);
             J.put("basic_amount", paymentamoubt);
+
         } catch (JSONException e) {
             e.printStackTrace();
         }

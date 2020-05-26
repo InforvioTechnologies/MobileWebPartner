@@ -50,4 +50,11 @@
     <color name="black">#000000</color>
     <color name="text_blue">#012B5D</color>
 
+
+    <color name="colorPrimary12">#2699FB</color>
+    <color name="colorPrimaryDark12">#2699FB</color>
+    <color name="shadow_colour">#F7F7F7</color>
+
+    <color name="green">#25D366</color>
+
 </resources>

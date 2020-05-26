@@ -344,14 +344,15 @@ public class Dashboard_Activity extends AppCompatActivity implements OnLoadMoreL
                                         String comp_step = J.getString("comp_step");
                                         String status_disp = J.getString("status_disp");
                                         String color_code = J.getString("color_code");
+                                        String payment_plan = J.getString("payment_plan");
                                         applicant_id =   J.getString(Params.applicant_id);
-
+                                      //  String id1 =   J.getString("id");
                                        // String field_status = J.getString("field_status");
 
                                         Log.e("mobile no",mobileno);
 
                                         items.add(new Lead_item(applicant_id,loan_typename, step_status,username,
-                                                mobileno,transaction_id,loan_amount,comp_step,status_disp,color_code));
+                                                mobileno,transaction_id,loan_amount,comp_step,status_disp,color_code,payment_plan,id));
                                         leadListAdapter_dashboard.notifyDataSetChanged();
                                     }
                                     Log.e("leadListA", String.valueOf(leadListAdapter_dashboard));
@@ -505,6 +506,7 @@ public class Dashboard_Activity extends AppCompatActivity implements OnLoadMoreL
                 String  step_com =   J.getString("comp_step");
                 String statues_new =   J.getString("status_disp");
                 String color_code =   J.getString("color_code");
+
 
                 // Get_Loan_Type(loan_categoryid,loan_type);
 

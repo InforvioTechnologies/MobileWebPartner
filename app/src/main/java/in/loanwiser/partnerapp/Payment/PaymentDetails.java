@@ -506,7 +506,7 @@ public class PaymentDetails extends SimpleActivity {
             J.put("b2buser_id", Pref.getID(getApplicationContext()));
             J.put("user_id",Pref.getUSERID(getApplicationContext()));
             J.put("coins",paymentamoubt);
-
+            J.put("transaction_id",Pref.getTRANSACTIONID(getApplicationContext()));
 
         } catch (JSONException e) {
             e.printStackTrace();
@@ -588,7 +588,7 @@ public class PaymentDetails extends SimpleActivity {
             J.put("b2buser_id", Pref.getID(getApplicationContext()));
             J.put("plan_choose", payment_plane);
             J.put("basicAmount", paymentamoubt);
-
+            J.put("transaction_id",Pref.getTRANSACTIONID(getApplicationContext()));
         } catch (JSONException e) {
             e.printStackTrace();
         }

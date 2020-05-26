@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/viability"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/viabilitycheck"
+        android:paddingRight="24dp"
+        android:paddingEnd="24dp"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        android:textColor="@color/text_blue"
+        android:clickable="true" />
+
+    <TextView
+        android:id="@+id/viability_desc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/via_descone"
+        android:paddingRight="24dp"
+        android:paddingEnd="22sp"
+        android:textSize="14sp"
+        android:layout_marginTop="10dp"
+        android:textColor="@color/text_blue"
+        android:clickable="true" />
+
+    <TextView
+        android:id="@+id/instantcredit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="@string/instant_credit"
+        android:paddingRight="24dp"
+        android:paddingEnd="22sp"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        android:textColor="@color/text_blue"
+        android:clickable="true" />
+    <TextView
+        android:id="@+id/instantcredit_desc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/instant_desc"
+        android:paddingRight="24dp"
+        android:paddingEnd="22sp"
+        android:textSize="14sp"
+        android:layout_marginTop="10dp"
+        android:textColor="@color/text_blue"
+        android:clickable="true" />
+
+    <TextView
+        android:id="@+id/eligiblitycheck"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/eligiblity_check"
+        android:layout_marginTop="20dp"
+        android:paddingRight="24dp"
+        android:paddingEnd="22sp"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        android:textColor="@color/text_blue"
+        android:clickable="true" />
+
+    <TextView
+        android:id="@+id/basic_leaddesc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/eligiblity_des"
+        android:paddingRight="24dp"
+        android:paddingEnd="22sp"
+        android:textSize="14sp"
+        android:layout_marginTop="10dp"
+        android:textColor="@color/text_blue"
+        android:clickable="true" />
+
+</LinearLayout>

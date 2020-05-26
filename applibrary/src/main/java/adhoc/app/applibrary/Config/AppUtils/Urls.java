@@ -116,6 +116,7 @@ public class Urls {
     public static String send_paymentlink = Urls_step + "send_paymentlink";
     public static String Transaction_List = Urls_step + "transaction_list";
     public static String latest_lead_updates = Urls_step + "latest_lead_updates";
+    public static String reference_board  = Urls_step + "reference_board ";
 
    // public static String DOCUMENT_CHECK_LIST = Urls_document_check_list + "get_documentcklist";
 
