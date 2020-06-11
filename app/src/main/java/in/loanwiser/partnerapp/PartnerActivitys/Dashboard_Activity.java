@@ -60,6 +60,7 @@ import in.loanwiser.partnerapp.Infinite_Scrollview.Lead_item;
 import in.loanwiser.partnerapp.Infinite_Scrollview.OnLoadMoreListener;
 import in.loanwiser.partnerapp.Lead_Website.MainActivity_Add_Lead_Website;
 import in.loanwiser.partnerapp.PDF_Dounloader.PermissionUtils;
+import in.loanwiser.partnerapp.Partner_Statues.DashBoard_new;
 import in.loanwiser.partnerapp.Partner_Statues.Statues_Dashboard_Nav;
 import in.loanwiser.partnerapp.R;
 import in.loanwiser.partnerapp.Step_Changes_Screen.Credite_report_details;
@@ -349,13 +350,13 @@ public class Dashboard_Activity extends AppCompatActivity implements OnLoadMoreL
                                       //  String id1 =   J.getString("id");
                                        // String field_status = J.getString("field_status");
 
-                                        Log.e("mobile no",mobileno);
+                                       // Log.e("mobile no",mobileno);
 
                                         items.add(new Lead_item(applicant_id,loan_typename, step_status,username,
                                                 mobileno,transaction_id,loan_amount,comp_step,status_disp,color_code,payment_plan,id));
                                         leadListAdapter_dashboard.notifyDataSetChanged();
                                     }
-                                    Log.e("leadListA", String.valueOf(leadListAdapter_dashboard));
+                                 //   Log.e("leadListA", String.valueOf(leadListAdapter_dashboard));
                                     leadListAdapter_dashboard.addPosts(items);
                                    // items.clear();
                                    // items = null;
@@ -865,7 +866,7 @@ public class Dashboard_Activity extends AppCompatActivity implements OnLoadMoreL
 
     @Override
     public void onBackPressed() {
-        Objs.ac.StartActivity(mCon, Statues_Dashboard_Nav.class);
+        Objs.ac.StartActivity(mCon, DashBoard_new.class);
         Pref.removeStatus_id(mCon);
         Pref.removeStatus_Count(mCon);
         finish();

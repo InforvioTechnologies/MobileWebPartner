@@ -339,7 +339,7 @@ public class Viability_Check_BL extends SimpleActivity {
     String viability_report_URL;
     LinearLayout Ly_wt_mob;
     PopupWindow popupWindow;
-    Button  closePopupBtn,close,view_report,sub_to_next;
+    Button  closePopupBtn,close,view_report,sub_to_next,save_latter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -6741,7 +6741,7 @@ public class Viability_Check_BL extends SimpleActivity {
         }
         Log.e("Viability request", String.valueOf(J));
 
-      /*  progressDialog.show();
+        progressDialog.show();
         JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, Urls.VIABILITY_CHECK, J,
                 new Response.Listener<JSONObject>() {
                     @Override
@@ -6764,12 +6764,23 @@ public class Viability_Check_BL extends SimpleActivity {
                                     closePopupBtn = (Button) customView.findViewById(R.id.closePopupBtn);
 
                                     sub_to_next = (Button) customView.findViewById(R.id.sub_to_next);
+                                    save_latter = (Button) customView.findViewById(R.id.save_latter);
 
 
                                     sub_to_next.setOnClickListener(new View.OnClickListener() {
                                         @Override
                                         public void onClick(View view) {
                                             Submit_TO_Loanwiser();
+                                        }
+                                    });
+
+                                    save_latter.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View view) {
+                                            Intent intent = new Intent(Viability_Check_BL.this, Dashboard_Activity.class);
+                                            //  intent.putExtra("viability_jsonArray", viability_array.toString());
+                                            startActivity(intent);
+                                            finish();
                                         }
                                     });
 
@@ -6890,7 +6901,7 @@ public class Viability_Check_BL extends SimpleActivity {
 
         jsonObjReq.setRetryPolicy(policy);
 
-        AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);*/
+        AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
     }
 
     private void Submit_TO_Loanwiser( ) {

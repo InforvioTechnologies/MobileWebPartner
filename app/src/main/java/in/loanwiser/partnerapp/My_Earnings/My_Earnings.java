@@ -19,16 +19,22 @@ import com.google.android.material.tabs.TabLayout;
 import java.util.ArrayList;
 import java.util.List;
 
+import adhoc.app.applibrary.Config.AppUtils.Objs;
+import in.loanwiser.partnerapp.PartnerActivitys.SimpleActivity;
 import in.loanwiser.partnerapp.R;
 
-public class My_Earnings extends AppCompatActivity {
+public class My_Earnings extends SimpleActivity {
 
     private ScrollView scrollView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.sample);
+       // setContentView(R.layout.sample);
+
+        setContentView(R.layout.activity_simple);
+        Objs.a.setStubId(this,R.layout.sample);
+        initTools(R.string.my_earning);
 
         TabLayout tabLayout = findViewById(R.id.tabs);
         ViewPager viewPager = findViewById(R.id.viewpager);

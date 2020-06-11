@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:fillViewport="true"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -239,13 +239,15 @@
                 <com.google.android.material.tabs.TabLayout
                     android:id="@+id/tabs"
                     android:layout_width="match_parent"
-                    android:layout_height="56dp"
-                    android:clipToPadding="false"
-                    app:tabBackground="@drawable/tab_selector"
-                    app:tabGravity="center"
-                    app:tabIndicator="@color/white"
-                    app:tabRippleColor="@null"
-                    app:tabSelectedTextColor="@color/white" />
+                    android:layout_height="wrap_content"
+                    tools:ignore="NewApi"
+                    android:background="?android:attr/colorPrimary"
+                    android:minHeight="?android:attr/actionBarSize"
+                    style="@style/MyTabLayout"
+                    app:tabMode="fixed"
+                    app:tabGravity="fill"
+                    app:tabIndicatorColor="@android:color/white"
+                    app:tabIndicatorHeight="4dp"/>
 
             </androidx.viewpager.widget.ViewPager>
 

@@ -3,6 +3,7 @@ package in.loanwiser.partnerapp.Partner_Statues;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -69,6 +70,7 @@ public class ActivityFragment extends Fragment implements NavigationView.OnNavig
         fragment.setArguments(args);
         return fragment;
     }
+    SharedPreferences pref; // 0 - for private mode
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -80,15 +82,20 @@ public class ActivityFragment extends Fragment implements NavigationView.OnNavig
     private SliderLayout mDemoSlider;
     private ActivityFragment mcon =this;
     private LinearLayout chat;
-    private RecyclerView recycler_view,recycler_view_health_ass;
+    private RecyclerView recycler_view,recycler_view_health_ass,
+            recycler_view_document_;
     ArrayList<Suggestion_item_freqent> items;
     ArrayList<Health_Assesment_item_freqent> items1;
+    ArrayList<Document_item_freqent> items2;
     private String tag_json_obj = "jobj_req", tag_json_arry = "jarray_req";
     Resent_Lead_Statues adapter;
     Health_Assement_Adapter adapter1;
+    Document_Adapter adapter2;
 
     AppCompatButton my_earnings,my_leads;
     DrawerLayout drawer;
+    public static final String b2b_user_id1 = "b2b_uer_id";
+    String b2b_user_id;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -99,20 +106,30 @@ public class ActivityFragment extends Fragment implements NavigationView.OnNavig
 
         items = new ArrayList<>();
         items1 = new ArrayList<>();
+        items2 = new ArrayList<>();
         HashMap<String,String> url_maps = new HashMap<String, String>();
+
+        pref = getActivity().getSharedPreferences("MyPref", 0);
 
      /*   url_maps.put("Home Loan", "http://cscapi.propwiser.com/mobile/images/home_loan.png");
         // url_maps.put("Loan Against Property", "http://www.expertsconsultancyservices.com/img/content/services/Loan%20against%20Property.jpg");
         url_maps.put("Personal Loan", "http://cscapi.propwiser.com/mobile/images/Loan_aganst_property.png");
         url_maps.put("Loan Against Property", "http://cscapi.propwiser.com/mobile/images/Busines_loan.png");*/
 
-        url_maps.put("Business Loan", "http://cscapi.propwiser.com/mobile/images/Our_Banking_Partnersl.png");
+      /*  url_maps.put("Business Loan", "http://cscapi.propwiser.com/mobile/images/Our_Banking_Partnersl.png");
         url_maps.put("Vehicle Loan", "http://cscapi.propwiser.com/mobile/images/Our_Banking_Partnersl.png");
-        url_maps.put("Vehicle Loan1", "http://cscapi.propwiser.com/mobile/images/Our_Banking_Partnersl.png");
+        url_maps.put("Vehicle Loan1", "http://cscapi.propwiser.com/mobile/images/Our_Banking_Partnersl.png");*/
 
+        url_maps.put("Home Loan", "http://cscapi.propwiser.com/mobile/images/home_loan.png");
+        url_maps.put("Loan Against Property", "http://cscapi.propwiser.com/mobile/images/Loan_aganst_property.png");
+        url_maps.put("Personal Loan", "http://cscapi.propwiser.com/mobile/images/Personal_loan.png");
+        url_maps.put("Business Loan", "http://cscapi.propwiser.com/mobile/images/Busines_loan.png");
+        url_maps.put("Vehicle Loan", "http://cscapi.propwiser.com/mobile/images/vehicle_Loan.png");
+        url_maps.put("Our Banks", "http://cscapi.propwiser.com/mobile/images/Our_Banking_Partnersl.png");
        // Ly_UI(view);
         recycler_view = (RecyclerView)view.findViewById(R.id.recycler_view);
         recycler_view_health_ass = (RecyclerView)view.findViewById(R.id.recycler_view_health_ass);
+        recycler_view_document_ = (RecyclerView)view.findViewById(R.id.recycler_view_document_);
 
         my_earnings = (AppCompatButton) view.findViewById(R.id.my_earnings);
         my_leads = (AppCompatButton) view.findViewById(R.id.my_leads);
@@ -120,8 +137,10 @@ public class ActivityFragment extends Fragment implements NavigationView.OnNavig
 
         adapter = new Resent_Lead_Statues(getActivity(), items);
         adapter1 = new Health_Assement_Adapter(getActivity(), items1);
+        adapter2 = new Document_Adapter(getActivity(), items2);
         recycler_view.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
         recycler_view_health_ass.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
+        recycler_view_document_.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
 
 
         my_earnings.setOnClickListener(new View.OnClickListener() {
@@ -139,6 +158,8 @@ public class ActivityFragment extends Fragment implements NavigationView.OnNavig
                 startActivity(intent);
             }
         });
+
+         b2b_user_id =  pref.getString(b2b_user_id1, null);
 
 
         Get_Allocation_List(view);
@@ -249,9 +270,11 @@ public class ActivityFragment extends Fragment implements NavigationView.OnNavig
     private void Health_Assement_List(View view) {
         JSONObject jsonObject =new JSONObject();
         JSONObject J= null;
+
         try {
             J =new JSONObject();
-            J.put("b2buser_id", Pref.getID(getActivity()));
+
+            J.put("b2buser_id", b2b_user_id);
 
 
         } catch (JSONException e) {
@@ -270,6 +293,7 @@ public class ActivityFragment extends Fragment implements NavigationView.OnNavig
 
 
                                 JSONArray ja = response.getJSONArray("finance");
+                                JSONArray ja1 = response.getJSONArray("checklist");
                                 if (ja.length()>0){
                                     for(int i = 0;i<ja.length();i++){
 
@@ -283,6 +307,20 @@ public class ActivityFragment extends Fragment implements NavigationView.OnNavig
                                 }else {
                                     Objs.a.ShowHideNoItems(getActivity(),true);
                                 }
+
+                            if (ja1.length()>0){
+                                for(int i = 0;i<ja1.length();i++){
+
+                                    JSONObject J = ja1.getJSONObject(i);
+                                    items2.add(new Document_item_freqent( J.getString("name"), J.getString("icon")));
+                                    adapter2.notifyDataSetChanged();
+
+                                }
+                                recycler_view_document_.setAdapter(adapter2);
+
+                            }else {
+                                Objs.a.ShowHideNoItems(getActivity(),true);
+                            }
 
 
                         } catch (JSONException e) {

@@ -5,12 +5,13 @@
     android:background="@color/white"
     android:layout_height="match_parent">
 
-    <ScrollView
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <LinearLayout
-            android:visibility="gone"
+            android:layout_marginTop="520dp"
+            android:gravity="center"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
@@ -22,16 +23,18 @@
                 android:layout_gravity="center"/>
 
             <Button
+
                 android:id="@+id/test_share"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
+
                 android:textColor="#FFFFFF"
                 android:background="@color/green"
-                android:text="Share Whatsapp!"
+                android:text="Share "
                 />
 
             <Button
+                android:visibility="gone"
                 android:id="@+id/image_share"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -44,6 +47,7 @@
 
 
             <Button
+                android:visibility="gone"
                 android:id="@+id/button_share"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -55,6 +59,6 @@
                 />
 
         </LinearLayout>
-    </ScrollView>
+    </androidx.core.widget.NestedScrollView>
 
 </FrameLayout>

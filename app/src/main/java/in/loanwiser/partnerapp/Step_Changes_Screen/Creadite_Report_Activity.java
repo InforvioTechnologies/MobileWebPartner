@@ -11,12 +11,18 @@ import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.LinearLayout;
+import android.widget.PopupWindow;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -46,8 +52,11 @@ import adhoc.app.applibrary.Config.AppUtils.Pref.Pref;
 import adhoc.app.applibrary.Config.AppUtils.Urls;
 import adhoc.app.applibrary.Config.AppUtils.VolleySignleton.AppController;
 import dmax.dialog.SpotsDialog;
+import in.loanwiser.partnerapp.PDF_Dounloader.PermissionUtils;
 import in.loanwiser.partnerapp.PartnerActivitys.Dashboard_Activity;
 import in.loanwiser.partnerapp.PartnerActivitys.Home;
+import in.loanwiser.partnerapp.Payment.PaymentDetails;
+import in.loanwiser.partnerapp.Payment.Payment_Sucess_Screen;
 import in.loanwiser.partnerapp.R;
 import in.loanwiser.partnerapp.SimpleActivity;
 
@@ -57,7 +66,9 @@ public class Creadite_Report_Activity extends SimpleActivity {
             co_applicant_name_txt,co_applicant_name_txt1,Co_applicant_email_id,Co_applicant_email_id1,
             co_applicant_mobile,accept_terms_condition;
     AppCompatButton credit_det_cap_button;
-
+          Button  Proceed_to_next,view_report,close;
+          TextView crif_Score1,score_failed;
+    PopupWindow popupWindow;
     AppCompatEditText Pan_No_Edite_text,Email_Id_Edite_text,Co_App_Pan_No_Edite_text,Co_Email_Id_No_Edite_text,
             Co_Mobile_No_Edite_text,Mobile_No_Edite_text;
     AppCompatCheckBox check_complete;
@@ -82,7 +93,9 @@ public class Creadite_Report_Activity extends SimpleActivity {
     LinearLayout co_applicant_crif;
     String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
     int applicant_count;
-
+    private static final int STORAGE_PERMISSION_REQUEST_CODE = 1;
+    String viability_report_URL;
+    PermissionUtils permissionUtils;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -95,7 +108,7 @@ public class Creadite_Report_Activity extends SimpleActivity {
         Co_Applicant = Pref.getCoAPPAVAILABLE(getApplicationContext());
         progressDialog = new SpotsDialog(context, R.style.Custom);
         myCalendar = Calendar.getInstance();
-
+        permissionUtils = new PermissionUtils();
         UISCREEN();
         Font();
         Click();
@@ -770,24 +783,15 @@ public class Creadite_Report_Activity extends SimpleActivity {
                         try {
                             JSONObject jsonObject1 = response.getJSONObject("response");
                             if(jsonObject1.getString("applicant_status").equals("success")) {
-                                if(jsonObject1.getString("pay_status").equals("success"))
-                                {
-                                    Toast.makeText(context,"Credite Report Created Successfully",Toast.LENGTH_SHORT).show();
-                                    Intent intent = new Intent(Creadite_Report_Activity.this, Dashboard_Activity.class);
-                                    startActivity(intent);
-                                    finish();
+
+                                CRIF_Generation();
 
                                 }else if(jsonObject1.getString("pay_status").equals("error"))
                                 {
                                     Toast.makeText(context,"Credite Report Failed",Toast.LENGTH_SHORT).show();
-                                  //  String viability_array =jsonObject1.getString("pay_status");
-                                    Intent intent = new Intent(Creadite_Report_Activity.this, Dashboard_Activity.class);
-                                   // intent.putExtra("viability_jsonArray", Dashboard_Activity.toString());
-                                    startActivity(intent);
-                                    finish();
 
                                 }
-                            }
+
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -821,6 +825,245 @@ public class Creadite_Report_Activity extends SimpleActivity {
 
         AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
     }
+
+    private void CRIF_Generation() {
+        progressDialog.show();
+        JSONObject J =new JSONObject();
+        JSONObject J1 =new JSONObject();
+        JSONObject J2 =new JSONObject();
+
+        try {
+            J1.put("transaction_id ",Pref.getTRANSACTIONID(getApplicationContext()));
+            J1.put("user_id",Pref.getUSERID(getApplicationContext()));
+            J1.put("relationship_type",1);
+
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        try {
+            J2.put("transaction_id ",Pref.getTRANSACTIONID(getApplicationContext()));
+            J2.put("user_id",Pref.getUSERID(getApplicationContext()));
+            J2.put("relationship_type",2);
+
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        JSONArray jsonArray =new JSONArray();
+        JSONArray jsonArray1 =new JSONArray();
+        String trans_id= Pref.getTRANSACTIONID(getApplicationContext());
+        String user_id= Pref.getUSERID(getApplicationContext());
+
+        jsonArray.put(J1);
+        jsonArray1.put(J2);
+
+
+        try {
+            J.put("user_id",Pref.getUSERID(getApplicationContext()));
+            J.put("applicant_count",applicant_count);
+            J.put("trans_id",Pref.getTRANSACTIONID(getApplicationContext()));
+
+            J.put("applicant",jsonArray);
+            J.put("co_applicant",jsonArray1);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        Log.e("CRIF_Report__request",J.toString());
+        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, Urls.CRIF_Gerneration, J,
+                new Response.Listener<JSONObject>() {
+
+                    @Override
+                    public void onResponse(JSONObject object) {
+                        Log.e("CRIF_Report_response",object.toString());
+                        try {
+
+                            JSONObject jsonObject = object.getJSONObject("applicant_report");
+                            String Staues_pay = jsonObject.getString("status");
+
+                            if(Staues_pay.contains("success")) {
+
+                                CRIF_Score();
+                            }
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        // Toast.makeText(mCon, response.toString(),Toast.LENGTH_SHORT).show();
+                        progressDialog.dismiss();
+                    }
+                }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                VolleyLog.d("TAG", "Error: " + error.getMessage());
+                progressDialog.dismiss();
+            }
+        }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("Content-Type", "application/json");
+                return headers;
+            }
+        };
+        AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
+
+    }
+
+    private void CRIF_Score() {
+        progressDialog.show();
+        JSONObject J =new JSONObject();
+        try {
+            J.put("user_id",Pref.getUSERID(getApplicationContext()));
+            J.put("relationship_type",applicant_count);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        Log.e("payment_st_request",J.toString());
+        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, Urls.CRIF_SCORE_CHECK, J,
+                new Response.Listener<JSONObject>() {
+
+                    @Override
+                    public void onResponse(JSONObject object) {
+                        Log.e("CRIF_Report_response",object.toString());
+                        try {
+
+
+                            String Staues_pay = object.getString("status");
+
+                            JSONObject response = object.getJSONObject("result");
+
+                            String crif_status = response.getString("crif_status");
+                            String crif_score = response.getString("crif_score");
+
+                            if(Staues_pay.contains("success"))
+                            {
+
+                                if(crif_status.equals("2"))
+                                {
+                                    Toast.makeText(context,"Viability Created Successfully",Toast.LENGTH_SHORT).show();
+                                    LayoutInflater layoutInflater = (LayoutInflater) Creadite_Report_Activity.this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                                    View customView = layoutInflater.inflate(R.layout.popup_crif_pass,null);
+
+                                    Proceed_to_next = (Button) customView.findViewById(R.id.Proceed_to_next);
+                                    crif_Score1 = (TextView) customView.findViewById(R.id.crif_Score);
+
+                                    crif_Score1.setText("Your CRIF Score:"+crif_score);
+
+
+
+                                    //instantiate popup window
+                                    popupWindow = new PopupWindow(customView, LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
+
+                                    //display the popup window
+                                    popupWindow.showAtLocation(credit_det_cap_button, Gravity.CENTER, 0, 0);
+
+                                    //close the popup window on button click
+                                    Proceed_to_next.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View v) {
+
+                                            Log.e("hi","hello");
+                                            popupWindow.dismiss();
+
+                                            Toast.makeText(context,"Credite Report Created Successfully",Toast.LENGTH_SHORT).show();
+                                            Intent intent = new Intent(Creadite_Report_Activity.this, Dashboard_Activity.class);
+                                            startActivity(intent);
+                                            finish();
+
+                                            startActivity(intent);
+                                            finish();
+                                        }
+                                    });
+
+                                }else
+                                {
+
+
+                                    Toast.makeText(context,"Viability Failed",Toast.LENGTH_SHORT).show();
+                                   ///iability_report_URL = jsonObject1.getString("viable_reporturl");
+                                    // Toast.makeText(context,"Viability Created Successfully",Toast.LENGTH_SHORT).show();
+                                    LayoutInflater layoutInflater = (LayoutInflater) Creadite_Report_Activity.this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                                    View customView = layoutInflater.inflate(R.layout.popup_crif,null);
+
+                                    score_failed = (TextView) customView.findViewById(R.id.score_failed);
+                                    view_report = (Button) customView.findViewById(R.id.view_report);
+                                    close = (Button) customView.findViewById(R.id.close);
+
+                                    score_failed.setText("Your CRIF Score:"+crif_score);
+                                    //instantiate popup window
+                                    popupWindow = new PopupWindow(customView, LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
+
+                                    //display the popup window
+                                    popupWindow.showAtLocation(credit_det_cap_button, Gravity.CENTER, 0, 0);
+
+                                    //close the popup window on button click
+                                    close.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View v) {
+
+                                            //   String viability_array =jsonObject1.getString("viability_arr");
+                                            Intent intent = new Intent(Creadite_Report_Activity.this, Dashboard_Activity.class);
+                                            //  intent.putExtra("viability_jsonArray", viability_array.toString());
+                                            startActivity(intent);
+                                            finish();
+                                        }
+                                    });
+
+                                    view_report.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View view) {
+                                            if (permissionUtils.checkPermission(Creadite_Report_Activity.this, STORAGE_PERMISSION_REQUEST_CODE, view)) {
+                                                if (viability_report_URL.length() > 0) {
+                                                    try {
+                                                        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(viability_report_URL)));
+                                                    } catch (Exception e) {
+                                                        e.getStackTrace();
+                                                    }
+                                                }
+
+                                            }
+                                        }
+                                    });
+
+                                    Toast.makeText(context,"Credite Report Failed",Toast.LENGTH_SHORT).show();
+
+                                }
+
+                            }else
+                            {
+
+                            }
+
+
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        // Toast.makeText(mCon, response.toString(),Toast.LENGTH_SHORT).show();
+                        progressDialog.dismiss();
+                    }
+                }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                VolleyLog.d("TAG", "Error: " + error.getMessage());
+                progressDialog.dismiss();
+            }
+        }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("Content-Type", "application/json");
+                return headers;
+            }
+        };
+        AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
+
+    }
+
 
         private void Payment_Option()
     {

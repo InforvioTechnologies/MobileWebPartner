@@ -58,6 +58,7 @@ import adhoc.app.applibrary.Config.AppUtils.Pref.Pref;
 import adhoc.app.applibrary.Config.AppUtils.Urls;
 import adhoc.app.applibrary.Config.AppUtils.VolleySignleton.AppController;
 import dmax.dialog.SpotsDialog;
+import in.loanwiser.partnerapp.Partner_Statues.DashBoard_new;
 import in.loanwiser.partnerapp.Partner_Statues.Statues_Dashboard_Nav;
 import in.loanwiser.partnerapp.R;
 import in.loanwiser.partnerapp.SMSRetrieverAPI.MySMSBroadcastReceiver;
@@ -90,6 +91,9 @@ public class SmsActivity extends AppCompatActivity {
     String  user_array,partner_code;
     String token;
 
+    SharedPreferences pref;
+    SharedPreferences.Editor editor;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -105,6 +109,8 @@ public class SmsActivity extends AppCompatActivity {
         opt_bundle =  Objs.a.getBundle(this, Params.otp);
         no_bundle =  Objs.a.getBundle(this, Params.mobile_no);
 
+        pref = getApplicationContext().getSharedPreferences("MyPref", 0); // 0 - for private mode
+         editor = pref.edit();
         try {
             JSONObject j =  new JSONObject(JSON);
 
@@ -345,6 +351,8 @@ public class SmsActivity extends AppCompatActivity {
                                     Pref.putMobile(mCon, S_moblie);
                                     Pref.putName(mCon, S_name);
                                     Pref.putID(mCon, user_array);
+                                    editor.putString("b2b_uer_id", user_array);
+                                    editor.commit();
 
                                 }
                             }
@@ -419,7 +427,7 @@ public class SmsActivity extends AppCompatActivity {
                             String Register_Token_statues = object.getString("status");
                             if(Register_Token_statues.contains("success"))
                             {
-                                Intent intent = new Intent(SmsActivity.this,Statues_Dashboard_Nav.class);
+                                Intent intent = new Intent(SmsActivity.this, DashBoard_new.class);
                                 startActivity(intent);
                                 finish();
                             }

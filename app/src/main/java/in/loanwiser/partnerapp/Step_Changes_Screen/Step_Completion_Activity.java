@@ -11,11 +11,13 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import adhoc.app.applibrary.Config.AppUtils.Objs;
 import ernestoyaquello.com.verticalstepperform.VerticalStepperFormLayout;
 import ernestoyaquello.com.verticalstepperform.interfaces.VerticalStepperForm;
 import in.loanwiser.partnerapp.R;
+import in.loanwiser.partnerapp.SimpleActivity;
 
-public class Step_Completion_Activity extends AppCompatActivity implements VerticalStepperForm {
+public class Step_Completion_Activity extends SimpleActivity implements VerticalStepperForm {
     private VerticalStepperFormLayout verticalStepperForm;
 
     private static final int TITLE_STEP_NUM = 0;
@@ -27,7 +29,15 @@ public class Step_Completion_Activity extends AppCompatActivity implements Verti
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_step__completion_);
+      //  setContentView(R.layout.activity_step__completion_);
+
+        setContentView(R.layout.activity_simple);
+        //Loantype = getIntent().getStringExtra("EXTRA_SESSION_ID");
+        // Log.d("The extration data",Loantype);
+        Objs.a.setStubId(this, R.layout.activity_step__completion_);
+        initTools(R.string.listapp2);
+
+
         proceed_button=(Button)findViewById(R.id.proceed_button);
         initializeActivity();
 
@@ -36,6 +46,12 @@ public class Step_Completion_Activity extends AppCompatActivity implements Verti
             public void onClick(View view) {
                 Intent intent=new Intent(Step_Completion_Activity.this,Lead_Crration_Activity.class);
                 startActivity(intent);
+            }
+        });
+        proceed_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
             }
         });
     }
@@ -98,8 +114,6 @@ public class Step_Completion_Activity extends AppCompatActivity implements Verti
                 verticalStepperForm.setStepAsCompleted(stepNumber);
                 verticalStepperForm.setActiveStepAsCompleted();
                 verticalStepperForm.setActivated(false);
-
-
                 break;
 
         }
@@ -108,9 +122,8 @@ public class Step_Completion_Activity extends AppCompatActivity implements Verti
 
     @Override
     public void sendData() {
-     /*   Intent intent=new Intent(Step_Completion_Activity.this,Lead_Crration_Activity.class);
+        Intent intent=new Intent(Step_Completion_Activity.this,Lead_Crration_Activity.class);
         startActivity(intent);
-*/
     }
 
 

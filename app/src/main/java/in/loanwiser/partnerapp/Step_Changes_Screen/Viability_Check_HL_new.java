@@ -383,7 +383,7 @@ public class Viability_Check_HL_new extends SimpleActivity {
     String viability_report_URL;
     LinearLayout Ly_wt_mob;
     PopupWindow popupWindow;
-    Button closePopupBtn,close,view_report,sub_to_next;
+    Button closePopupBtn,close,view_report,sub_to_next,save_latter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -3744,6 +3744,8 @@ public class Viability_Check_HL_new extends SimpleActivity {
             e.printStackTrace();
         }
 
+        Log.e("Account_Listings_Details",J.toString());
+
        progressDialog.show();
 
         JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, Urls.PROFILE_DETAILS_POST, J,
@@ -3754,7 +3756,7 @@ public class Viability_Check_HL_new extends SimpleActivity {
                             if(response.getString(Params.status).equals(Params.success)) {
 
                                 JSONObject jobj = response.getJSONObject(Params.response);
-
+                                Log.e("Account_Listings_Details response",jobj.toString());
                               String  R_state = jobj.getString(Params.state_id);
                                 makeJsonObjReq1(R_state);
 
@@ -8653,12 +8655,23 @@ public class Viability_Check_HL_new extends SimpleActivity {
 
                                     closePopupBtn = (Button) customView.findViewById(R.id.closePopupBtn);
                                     sub_to_next = (Button) customView.findViewById(R.id.sub_to_next);
+                                    save_latter = (Button) customView.findViewById(R.id.save_latter);
 
 
                                     sub_to_next.setOnClickListener(new View.OnClickListener() {
                                         @Override
                                         public void onClick(View view) {
                                             Submit_TO_Loanwiser();
+                                        }
+                                    });
+
+                                    save_latter.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View view) {
+                                            Intent intent = new Intent(Viability_Check_HL_new.this, Dashboard_Activity.class);
+                                            //  intent.putExtra("viability_jsonArray", viability_array.toString());
+                                            startActivity(intent);
+                                            finish();
                                         }
                                     });
                                     //instantiate popup window

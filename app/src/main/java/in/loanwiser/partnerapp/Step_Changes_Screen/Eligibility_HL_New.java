@@ -625,6 +625,7 @@ public class Eligibility_HL_New extends SimpleActivity {
 
         designation_in_company = (AppCompatEditText) findViewById(R.id.designation_in_company);
         emi_amount_edit_txt = (AppCompatEditText) findViewById(R.id.emi_amount_edit_txt);
+        emi_amount_edit_txt.addTextChangedListener(new NumberTextWatcher(emi_amount_edit_txt));
         permanent_residence_auto = (AppCompatAutoCompleteTextView) findViewById(R.id.permanent_residence_auto);
 
     }
@@ -922,7 +923,7 @@ public class Eligibility_HL_New extends SimpleActivity {
             {
 
 
-                if(pl_co_app_Company_id.equals("1") || pl_co_app_Company_id.equals("2") || pl_co_app_Company_id.equals("3"))
+                if(Company_id.equals("1") || Company_id.equals("2") || Company_id.equals("3"))
                 {
 
                     if (epf_id.equals("0")) {

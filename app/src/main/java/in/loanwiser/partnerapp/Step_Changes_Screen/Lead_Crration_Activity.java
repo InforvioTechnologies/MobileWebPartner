@@ -57,6 +57,8 @@ import adhoc.app.applibrary.Config.AppUtils.VolleySignleton.AppController;
 import dmax.dialog.SpotsDialog;
 import in.loanwiser.partnerapp.NumberTextWatcher;
 import in.loanwiser.partnerapp.PartnerActivitys.Applicant_Details_Activity;
+import in.loanwiser.partnerapp.PartnerActivitys.Dashboard_Activity;
+import in.loanwiser.partnerapp.Payment.Bank_Statement_Activity;
 import in.loanwiser.partnerapp.Payment.PaymentActivity;
 import in.loanwiser.partnerapp.R;
 import in.loanwiser.partnerapp.SimpleActivity;
@@ -103,6 +105,8 @@ public class Lead_Crration_Activity extends SimpleActivity {
     LinearLayout Ly_wt_mob;
     PopupWindow popupWindow;
     Button  closePopupBtn;
+    String string_lead_or_submit,user_id,transaction_id;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -127,12 +131,11 @@ public class Lead_Crration_Activity extends SimpleActivity {
         UI_FIELDS();
         fonts();
         makeJsonObjReq1();
-    Click();
-
-      /*  lead_cr_step1.setOnClickListener(new View.OnClickListener() {
+        Click();
+     /*   lead_cr_step1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Lead_Crration_Activity.this, PaymentActivity.class);
+                Intent intent = new Intent(Lead_Crration_Activity.this, Creadite_Report_Activity.class);
                 startActivity(intent);
                 finish();
             }
@@ -193,6 +196,7 @@ public class Lead_Crration_Activity extends SimpleActivity {
          mobile.setText("7");
          do_you_have_coApp_txt.setText("8");
          wt_mobile.setText("9");*/
+         type_of_empmnt.setVisibility(View.VISIBLE);
          co_applicant_ly.setVisibility(View.GONE);
          co_applicant_emp_type.setVisibility(View.GONE);
      }
@@ -339,14 +343,37 @@ public class Lead_Crration_Activity extends SimpleActivity {
         nosubmit_document.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Submit_TO_Loanwiser();
             }
         });
 
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 dialog.dismiss();
+                if(App.equals("20"))
+                {
+                    Intent intent = new Intent(Lead_Crration_Activity.this, Viability_Check_BL.class);
+                    intent.putExtra("user_id", user_id);
+                    intent.putExtra("transaction_id", transaction_id);
+                    startActivity(intent);
+                    finish();
+
+                } else if(App.equals("21"))
+                {
+                    Toast.makeText(context,"Lead Created Successfully",Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(Lead_Crration_Activity.this, Viability_Check_PL.class);
+                    intent.putExtra("user_id", user_id);
+                    intent.putExtra("transaction_id", transaction_id);
+                    startActivity(intent);
+                    finish();
+                } else {
+
+                    Intent intent = new Intent(Lead_Crration_Activity.this, Viability_Check_HL_new.class);
+                    startActivity(intent);
+                    finish();
+                }
             }
         });
         if(!dialog.isShowing()){
@@ -360,8 +387,34 @@ public class Lead_Crration_Activity extends SimpleActivity {
         submitloanbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Submitloandialog();
+             //   Submitloandialog();
 
+                string_lead_or_submit = "1";
+                if(Loan_Cat_id.equals("0"))
+                {
+                    Toast.makeText(context, "Please Select Loan Category", Toast.LENGTH_SHORT).show();
+                }else
+                {
+                    if(App.equals("0"))
+                    {
+                        Toast.makeText(context, "Please Select Loan Type", Toast.LENGTH_SHORT).show();
+                    }
+                    else if((App.equals("20")) || (App.equals("21")))
+                    {
+                        validation_lead();
+
+                    }else
+                    {
+                        if(Type_of_employement_ID.equals("0"))
+                        {
+                            Toast.makeText(context, "Please Select Employement Type", Toast.LENGTH_SHORT).show();
+
+                        }else
+                        {
+                            validation_lead();
+                        }
+                    }
+                }
             }
         });
 
@@ -369,13 +422,17 @@ public class Lead_Crration_Activity extends SimpleActivity {
             @Override
             public void onClick(View v) {
 
+                Intent intent = new Intent(Lead_Crration_Activity.this, Dashboard_Activity.class);
+                //  intent.putExtra("viability_jsonArray", viability_array.toString());
+                startActivity(intent);
+                finish();
             }
         });
 
         lead_cr_step1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                string_lead_or_submit = "2";
                 if(Loan_Cat_id.equals("0"))
                 {
                     Toast.makeText(context, "Please Select Loan Category", Toast.LENGTH_SHORT).show();
@@ -432,7 +489,13 @@ public class Lead_Crration_Activity extends SimpleActivity {
         {
             if(check_complete.isChecked())
             {
-
+               /* if(string_lead_or_submit.contains("1"))
+                {
+                    Submitloandialog();
+                }else
+                {
+                    lead_cr();
+                }*/
                 lead_cr();
                 Log.e("App",App);
                 // click_action();
@@ -448,6 +511,14 @@ public class Lead_Crration_Activity extends SimpleActivity {
             }
             if(check_complete.isChecked())
             {
+
+              /*  if(string_lead_or_submit.contains("1"))
+                {
+                    Submitloandialog();
+                }else
+                {
+                    lead_cr();
+                }*/
                 lead_cr();
                 Log.e("App",App);
                 // click_action();
@@ -1159,34 +1230,46 @@ public class Lead_Crration_Activity extends SimpleActivity {
 
                             if(jsonObject1.getString("status").equals("success")) {
 
-                                String user_id = jsonObject1.getString("user_id");
-                                String transaction_id = jsonObject1.getString("transaction_id");
+
+                                 user_id = jsonObject1.getString("user_id");
+                                 transaction_id = jsonObject1.getString("transaction_id");
 
                                 Pref.putTRANSACTIONID(context,transaction_id);
                                 Pref.putUSERID(context,user_id);
 
-                              if(App.equals("20"))
+                                if(string_lead_or_submit.contains("1"))
                                 {
-                                    Intent intent = new Intent(Lead_Crration_Activity.this, Viability_Check_BL.class);
-                                    intent.putExtra("user_id", user_id);
-                                    intent.putExtra("transaction_id", transaction_id);
-                                    startActivity(intent);
-                                    finish();
+                                    Submitloandialog();
+                                }else
+                                {
+                                    if(App.equals("20"))
+                                    {
+                                        Intent intent = new Intent(Lead_Crration_Activity.this, Viability_Check_BL.class);
+                                        intent.putExtra("user_id", user_id);
+                                        intent.putExtra("transaction_id", transaction_id);
+                                        startActivity(intent);
+                                        finish();
 
-                                } else if(App.equals("21"))
-                                {
-                                    Toast.makeText(context,"Lead Created Successfully",Toast.LENGTH_SHORT).show();
-                                    Intent intent = new Intent(Lead_Crration_Activity.this, Viability_Check_PL.class);
-                                    intent.putExtra("user_id", user_id);
-                                    intent.putExtra("transaction_id", transaction_id);
-                                    startActivity(intent);
-                                    finish();
-                                } else {
+                                    } else if(App.equals("21"))
+                                    {
+                                        Toast.makeText(context,"Lead Created Successfully",Toast.LENGTH_SHORT).show();
+                                        Intent intent = new Intent(Lead_Crration_Activity.this, Viability_Check_PL.class);
+                                        intent.putExtra("user_id", user_id);
+                                        intent.putExtra("transaction_id", transaction_id);
+                                        startActivity(intent);
+                                        finish();
+                                    } else {
 
                                         Intent intent = new Intent(Lead_Crration_Activity.this, Viability_Check_HL_new.class);
                                         startActivity(intent);
                                         finish();
+                                    }
                                 }
+
+
+
+
+
                             }
                             if(jsonObject1.getString(Params.status).equals("error")) {
                                 Objs.a.showToast(context, "Already Registered with Propwiser");
@@ -1194,6 +1277,75 @@ public class Lead_Crration_Activity extends SimpleActivity {
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
+                        progressDialog.dismiss();
+                    }
+                }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                //Log.d(TAG, error.getMessage());
+                VolleyLog.d("TAG", "Error: " + error.getMessage());
+                progressDialog.dismiss();
+
+            }
+        }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("content-type", "application/json");
+                return headers;
+            }
+        };
+
+        // AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
+        int socketTimeout = 0;
+        RetryPolicy policy = new DefaultRetryPolicy(socketTimeout,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
+
+        jsonObjReq.setRetryPolicy(policy);
+
+        AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
+
+
+    }
+
+    private void Submit_TO_Loanwiser( ) {
+
+        JSONObject J= null;
+
+        try {
+            J =new JSONObject();
+            J.put("transaction_id",Pref.getTRANSACTIONID(getApplicationContext()));
+
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        Log.e("Add Home Laoan", String.valueOf(J));
+        progressDialog.show();
+
+        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, Urls.SUBMIT_TO_LOANWIER, J,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+
+                        String data = String.valueOf(response);
+                        try {
+                            String Status = response.getString("status");
+                            if(Status.contains("success")){
+                                Intent intent = new Intent(Lead_Crration_Activity.this, Dashboard_Activity.class);
+                                //  intent.putExtra("viability_jsonArray", viability_array.toString());
+                                startActivity(intent);
+                                finish();
+                            }
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        Log.e("Lead creation", String.valueOf(response));
+
                         progressDialog.dismiss();
                     }
                 }, new Response.ErrorListener() {

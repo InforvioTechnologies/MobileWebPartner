@@ -46,6 +46,7 @@
     <string name="ur_number">Your Mobile Number</string>
     <string name="ind">India (+91)</string>
     <string name="listapp1">Type Of Loan</string>
+    <string name="listapp2">Step Completion Details</string>
     <string name="apply">Apply Now</string>
     <string name="error_empty_mobile1">Please enter the Loan Amount above 10,000</string>
     <string name="error_empty_loan">Please enter the Loan Amount above 50,000 </string>
@@ -276,6 +277,8 @@
     <string name="pay_ment">Payment</string>
     <string name="viy_report">Viability Report</string>
     <string name="doc_check_list">Document CheckList</string>
+    <string name="share_material">Share Material</string>
+    <string name="my_earning">My Earnings</string>
     <string name="Viability_Data">Viability Data</string>
 
     <string name="viy_check1">multi Check</string>
@@ -718,6 +721,7 @@
 
     <string name="via_pass">Details provided successfully match our loan viability criteria. You can now proceed to next step </string>
     <string name="via_fail">Details provided do not match our loan viability criteria. View report for details</string>
+    <string name="crif_fail">Details provided do not match our loan viability criteria. You cannot process this lead further. View report for details.</string>
 
     <string name="crif_report">CRIF Report Activity</string>
 
@@ -853,6 +857,8 @@
 -->
     </string-array>
     <string name="step_one">Step 1</string>
+    <string name="step_two">Step 2</string>
+    <string name="step_three">Step 3</string>
     <string name="basic_lead">Basic Lead Details</string>
     <string name="basic_leaddesc">You will get 50% of your Total Partner Benefit</string>
     <string name="viabilitycheck">Viability Check</string>
@@ -864,5 +870,20 @@
     <string name="document_title">Document Upload</string>
     <string name="document_desc">you will get 100% of your Total Partner Benefit</string>
     <string name="note"><b>Note:</b> More steps you complete, More you can earn! 🏆</string>
+
+    <string name="bankstate">Please Upload Your Last 6 Months Bank Statements</string>
+    <string name="pdfformet">(PDF Format)</string>
+    <string name="add_docum">Add Document</string>
+    <string name="multiple">You can select multiple files or upload one by one</string>
+    <string name="save_proceed"><![CDATA[SAVE & PROCEED]]></string>
+    <string name="skipstep">Skip this Step</string>
+
+
+    <string name="report_here">Your Instant Credit Assessment Report is here</string>
+    <string name="download">Download</string>
+    <string name="download_report">Please download and Share the report with the customer before proceeding to the next step.</string>
+    <string name="proceed_nextstep">PROCEED TO NEXT STEP</string>
+
+    <string name="downloadcomplete">Download Complete</string>
 
 </resources>

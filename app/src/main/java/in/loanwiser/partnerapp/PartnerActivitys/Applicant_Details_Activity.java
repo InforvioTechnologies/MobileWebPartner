@@ -21,6 +21,7 @@ import in.loanwiser.partnerapp.Partner_Lead_OTP_Verification.Partner_Lead_OTP_Ve
 import in.loanwiser.partnerapp.R;
 import in.loanwiser.partnerapp.Step_Changes_Screen.Lead_Crration_Activity;
 import in.loanwiser.partnerapp.Step_Changes_Screen.Step_Completion_Activity;
+import in.loanwiser.partnerapp.Step_Changes_Screen.Step_Completion_Screen;
 
 public class Applicant_Details_Activity extends SimpleActivity {
 
@@ -82,9 +83,9 @@ public class Applicant_Details_Activity extends SimpleActivity {
                 String Loantype_name = "Home Loan";
                 Pref.putLoanTypename(mCon,Loantype_name);
 
-                Intent intent = new Intent(Applicant_Details_Activity.this, Step_Completion_Activity.class);
+                Intent intent = new Intent(Applicant_Details_Activity.this, Step_Completion_Screen.class);
                 startActivity(intent);
-                finish();
+                //finish();
 
             }
         });
@@ -112,9 +113,9 @@ public class Applicant_Details_Activity extends SimpleActivity {
                 Pref.putLoanType(mCon,Loantype);
                 String Loantype_name = "Loan Against Property";
                 Pref.putLoanTypename(mCon,Loantype_name);
-                Intent intent = new Intent(Applicant_Details_Activity.this, Step_Completion_Activity.class);
+                Intent intent = new Intent(Applicant_Details_Activity.this, Step_Completion_Screen.class);
                 startActivity(intent);
-                finish();
+               // finish();
 
             }
         });
@@ -139,9 +140,9 @@ public class Applicant_Details_Activity extends SimpleActivity {
                 Pref.putLoanTypeSub(mCon,sub_categoryid);
                 String Loantype = "2";
                 Pref.putLoanType(mCon,Loantype);
-                Intent intent = new Intent(Applicant_Details_Activity.this, Step_Completion_Activity.class);
+                Intent intent = new Intent(Applicant_Details_Activity.this, Step_Completion_Screen.class);
                 startActivity(intent);
-                finish();
+               // finish();
 
 
             }
@@ -165,9 +166,9 @@ public class Applicant_Details_Activity extends SimpleActivity {
                 String Loantype_name = "Business Loan [Unsecured]";
                 Pref.putLoanTypename(mCon,Loantype_name);
 
-                Intent intent = new Intent(Applicant_Details_Activity.this, Step_Completion_Activity.class);
+                Intent intent = new Intent(Applicant_Details_Activity.this, Step_Completion_Screen.class);
                 startActivity(intent);
-                finish();
+               // finish();
             }
         });
 
@@ -185,7 +186,7 @@ public class Applicant_Details_Activity extends SimpleActivity {
                 Pref.putLoanTypeSub(mCon,sub_categoryid);
                 Intent intent = new Intent(Applicant_Details_Activity.this, MainActivity_Vehicle_Add_Lead1.class);
                 startActivity(intent);
-                finish();
+                //finish();
             }
         });
 

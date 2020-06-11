@@ -43,6 +43,7 @@ import adhoc.app.applibrary.Config.AppUtils.Pref.Pref;
 import adhoc.app.applibrary.Config.AppUtils.Urls;
 import adhoc.app.applibrary.Config.AppUtils.VolleySignleton.AppController;
 import in.loanwiser.partnerapp.BuildConfig;
+import in.loanwiser.partnerapp.Partner_Statues.DashBoard_new;
 import in.loanwiser.partnerapp.Partner_Statues.Statues_Dashboard_Nav;
 import in.loanwiser.partnerapp.R;
 
@@ -169,7 +170,9 @@ public class Splash_Screen extends AppCompatActivity {
                     finish();
                 }else {
                     // String mobile = Pref.getUID(mCon);
-                    Objs.ac.StartActivity(mCon, Statues_Dashboard_Nav.class);
+                  //  Objs.ac.StartActivity(mCon, DashBoard_new.class);
+                    Intent intent = new Intent(Splash_Screen.this,DashBoard_new.class);
+                    startActivity(intent);
                     finish();
 
                 }

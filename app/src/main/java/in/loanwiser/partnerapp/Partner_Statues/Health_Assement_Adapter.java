@@ -2,6 +2,7 @@ package in.loanwiser.partnerapp.Partner_Statues;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -25,6 +26,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import in.loanwiser.partnerapp.R;
+import in.loanwiser.partnerapp.Share_Material.Share_Screen;
 
 import static com.androidquery.util.AQUtility.getContext;
 
@@ -78,6 +80,17 @@ public class Health_Assement_Adapter extends RecyclerView.Adapter<Health_Assemen
 
         holder.head_line.setText(head_line);
         holder.su_head.setText(content);
+
+        holder.cardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intent = new Intent(context, Share_Screen.class);
+                context.startActivity(intent);
+
+            }
+        });
+
 
      //  Log.e("The Appointment Date",name);
       //  String dt = parseDateToddMMyyyy(appointment_date);

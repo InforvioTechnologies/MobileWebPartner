@@ -8,6 +8,7 @@ import androidx.appcompat.widget.AppCompatTextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.graphics.Color;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -150,8 +151,11 @@ public class LeadListAdapter_Dashboard extends RecyclerView.Adapter<LeadListAdap
             Over_all.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+
+
                         if(step_status.contains("Rejected"))
                         {
+                            Log.e("the lead List","intiated ");
                             Objs.a.showToast(context, "This Lead is Rejected");
                             if (context instanceof Dashboard_Activity) {
                                 ((Dashboard_Activity)context).Applicant_Status(id1,step_status);

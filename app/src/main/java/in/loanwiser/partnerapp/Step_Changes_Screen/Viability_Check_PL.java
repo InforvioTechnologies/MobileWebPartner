@@ -249,7 +249,7 @@ public class Viability_Check_PL extends SimpleActivity {
 
     LinearLayout Ly_wt_mob;
     PopupWindow popupWindow;
-    Button  closePopupBtn,close,view_report,sub_to_next;
+    Button  closePopupBtn,close,view_report,sub_to_next,save_latter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -5133,6 +5133,7 @@ public class Viability_Check_PL extends SimpleActivity {
 
                                      closePopupBtn = (Button) customView.findViewById(R.id.closePopupBtn);
                                      sub_to_next = (Button) customView.findViewById(R.id.sub_to_next);
+                                     save_latter = (Button) customView.findViewById(R.id.save_latter);
 
 
 
@@ -5161,6 +5162,16 @@ public class Viability_Check_PL extends SimpleActivity {
                                          @Override
                                          public void onClick(View view) {
                                              Submit_TO_Loanwiser();
+                                         }
+                                     });
+
+                                     save_latter.setOnClickListener(new View.OnClickListener() {
+                                         @Override
+                                         public void onClick(View view) {
+                                             Intent intent = new Intent(Viability_Check_PL.this, Dashboard_Activity.class);
+                                             //  intent.putExtra("viability_jsonArray", viability_array.toString());
+                                             startActivity(intent);
+                                             finish();
                                          }
                                      });
 

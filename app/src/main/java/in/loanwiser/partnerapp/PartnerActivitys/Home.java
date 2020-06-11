@@ -654,7 +654,7 @@ public class Home extends AppCompatActivity {
 
                 Objs.ac.StartActivityPutExtra(mCon, Offers_list.class,
                         Params.transaction_id,transaction_id);
-                finish();
+               // finish();
             }
         });
 

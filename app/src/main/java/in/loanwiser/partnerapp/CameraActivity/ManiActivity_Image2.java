@@ -700,7 +700,6 @@ public class ManiActivity_Image2 extends SimpleActivity implements SingleUploadB
                 {
                     uploadMultipart_PDF();
                 }
-
                 else
                 {
                     Toast.makeText(getApplicationContext(), "Please select the PDF file from the File Directory", Toast.LENGTH_SHORT).show();
@@ -796,7 +795,7 @@ public class ManiActivity_Image2 extends SimpleActivity implements SingleUploadB
         //getting the actual path of the pdf
         String path = FilePath.getPath(this, filePath);
         Log.d("PDF File", String.valueOf(path));
-        File sourceFile = new File(path);
+       // File sourceFile = new File(path);
 
         if (path == null) {
 
@@ -809,16 +808,25 @@ public class ManiActivity_Image2 extends SimpleActivity implements SingleUploadB
                 uploadReceiver.setUploadID(uploadId);
                 //Creating a multi part request
                 progressDialog.show();
-                new MultipartUploadRequest(this, uploadId, Urls.PDF_Document_Upload)
-                        .addFileToUpload(path, Params.img_url) //Adding file
+                new MultipartUploadRequest(this, uploadId, Urls.Bank_Statement_Upload)
+                      /*  .addFileToUpload(path, Params.img_url) //Adding file
                         .addParameter("legal_id", docid) //Adding text parameter to the request
                         .addParameter(Params.doc_name, doc_typename)
                         .addParameter(Params.transaction_id, transaction_id)
+                        .addParameter(Params.is_mobileupload, "4")*/
+
+                        .addFileToUpload(path, "img_url") //Adding file
+                        .addParameter("pdf_password", "") //Adding text parameter to the request
+                        .addParameter("relationship_type", "1")
+                        .addParameter("entity_id", "no")
+                        .addParameter("transaction_id   ", "11995")
                         .addParameter(Params.is_mobileupload, "4")
+
                        // .setNotificationConfig(new UploadNotificationConfig())
                         .setMaxRetries(2)
                         .startUpload(); //Starting the upload
                 Log.e("ComeON", "Upload multipart 3");
+
             } catch (Exception exc) {
                 Log.e("AndroidUploadService", exc.getMessage(), exc);
                 Toast.makeText(this, exc.getMessage(), Toast.LENGTH_SHORT).show();
@@ -861,6 +869,8 @@ public class ManiActivity_Image2 extends SimpleActivity implements SingleUploadB
 
         String response = String.valueOf(serverResponseCode);
 
+        Log.e("the server Response", String.valueOf(serverResponseCode));
+        Log.e("the server ", String.valueOf(serverResponseBody));
 
         if(response.equals("200")){
             progressDialog.dismiss();

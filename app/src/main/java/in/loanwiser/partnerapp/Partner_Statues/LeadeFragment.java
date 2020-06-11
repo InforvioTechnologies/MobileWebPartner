@@ -3,6 +3,7 @@ package in.loanwiser.partnerapp.Partner_Statues;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
@@ -63,7 +64,7 @@ import adhoc.app.applibrary.Config.AppUtils.VolleySignleton.AppController;
 import dmax.dialog.SpotsDialog;
 import in.loanwiser.partnerapp.BuildConfig;
 import in.loanwiser.partnerapp.Infinite_Scrollview.InfiniteScrollProvider;
-import in.loanwiser.partnerapp.Infinite_Scrollview.LeadListAdapter_Dashboard;
+import in.loanwiser.partnerapp.Infinite_Scrollview.LeadListAdapter_Dashboard1;
 import in.loanwiser.partnerapp.Infinite_Scrollview.Lead_item;
 import in.loanwiser.partnerapp.Infinite_Scrollview.OnLoadMoreListener;
 import in.loanwiser.partnerapp.R;
@@ -87,9 +88,10 @@ public class LeadeFragment extends Fragment implements OnLoadMoreListener {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
+
     private int count12 = -1;
     List<Lead_item> items;
-    LeadListAdapter_Dashboard leadListAdapter_dashboard;
+    LeadListAdapter_Dashboard1 leadListAdapter_dashboard;
     RecyclerView recyclerView;
 
     private ProgressBar progressBar;
@@ -98,6 +100,10 @@ public class LeadeFragment extends Fragment implements OnLoadMoreListener {
     private String tag_json_obj = "jobj_req", tag_json_arry = "jarray_req";
 
     LinearLayout Ly_no_leads_data;
+
+    public static final String b2b_user_id1 = "b2b_uer_id";
+    String b2b_user_id;
+    SharedPreferences pref; // 0 - for private mode
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -108,6 +114,11 @@ public class LeadeFragment extends Fragment implements OnLoadMoreListener {
          view = binding.getRoot();
         setContentView(view);
 */
+
+        pref = getActivity().getSharedPreferences("MyPref", 0);
+
+        b2b_user_id =  pref.getString(b2b_user_id1, null);
+
         items = new ArrayList<>();
         recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
         progressBar = (ProgressBar) view.findViewById(R.id.progress_bar);
@@ -116,7 +127,7 @@ public class LeadeFragment extends Fragment implements OnLoadMoreListener {
 
         Account_Listings_Details(view);
 
-        leadListAdapter_dashboard = new LeadListAdapter_Dashboard(getContext());
+        leadListAdapter_dashboard = new LeadListAdapter_Dashboard1(getContext());
         recyclerView.setLayoutManager(new StaggeredGridLayoutManager(1,StaggeredGridLayoutManager.VERTICAL));
 
         recyclerView.setAdapter(leadListAdapter_dashboard);
@@ -139,7 +150,7 @@ public class LeadeFragment extends Fragment implements OnLoadMoreListener {
         JSONObject J= null;
         try {
             J =new JSONObject();
-            J.put(Params.b2b_userid, Pref.getID(getActivity()));
+            J.put("b2b_userid", b2b_user_id);
             J.put(Params.status_id, "0");
             J.put("count", count12);
 

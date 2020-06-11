@@ -5,6 +5,7 @@ import androidx.appcompat.widget.AppCompatImageView;
 import androidx.appcompat.widget.AppCompatSpinner;
 import androidx.appcompat.widget.AppCompatTextView;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -83,6 +84,7 @@ public class PaymentActivity extends SimpleActivity implements CompoundButton.On
 
     String STAND="0",CUST="0",PAY_OPTION="0",Chose_plan="0";
 
+    String pay_plan;
     PopupWindow popupWindow;
     AppCompatTextView proceedany,back;
     Button  closePopupBtn,close,view_report;
@@ -301,7 +303,9 @@ public class PaymentActivity extends SimpleActivity implements CompoundButton.On
                 }else
                 {
 
-                    String pay_plan = "1";
+                    Log.e("the value to fine STAND",STAND);
+                     pay_plan = "1";
+                    Log.e("the value to fine pay_plan pay_plan",pay_plan);
                     Intent intent = new Intent(PaymentActivity.this, PaymentDetails.class);
                     intent.putExtra("payment_option", PAY_OPTION);
                     intent.putExtra("paymentamoubt", paymentamoubt);
@@ -313,13 +317,15 @@ public class PaymentActivity extends SimpleActivity implements CompoundButton.On
 
             }else if(CUST.contains("2"))
             {
+                Log.e("the value to fine CUST",CUST);
                 if(PAY_OPTION.contains("0"))
                 {
                     Toast.makeText(this, "Select the Payment Option to Proceed", Toast.LENGTH_SHORT).show();
 
                 }else
                 {
-                    String pay_plan = "2";
+                     pay_plan = "2";
+                    Log.e("the value to fine pay_plan pay_plan",pay_plan);
                     Intent intent = new Intent(PaymentActivity.this, PaymentDetails.class);
                     intent.putExtra("payment_option", PAY_OPTION);
                     intent.putExtra("paymentamoubt", paymentamoubt);
@@ -545,6 +551,7 @@ public class PaymentActivity extends SimpleActivity implements CompoundButton.On
 
     }
 
+    @SuppressLint("LongLogTag")
     @Override
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 
@@ -560,7 +567,8 @@ public class PaymentActivity extends SimpleActivity implements CompoundButton.On
                 STAND= "1";
                 Chose_plan= "1";
                 payment_id = paymentamoubt;
-
+                pay_plan = "1";
+                Log.e("the value to fine pay_plan",pay_plan);
             }
             if (buttonView.getId() == R.id.custom_radio) {
                 standard_radio.setChecked(false);
@@ -578,7 +586,8 @@ public class PaymentActivity extends SimpleActivity implements CompoundButton.On
                 payment_id = Payment_value;
                 CUST = "2";
                 Chose_plan = "1";
-
+                pay_plan = "2";
+                Log.e("the value to fine pay_plan",pay_plan);
             }
 
             if (buttonView.getId()==R.id.paymentcustomer_radio){

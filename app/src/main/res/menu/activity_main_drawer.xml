@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:title="Features">
+    <menu>
+
+        <item
+            android:id="@+id/nav_profile"
+            android:icon="@drawable/ic_profile"
+            android:title="Profile" />
+        <item
+            android:id="@+id/nav_bank"
+            android:icon="@drawable/ic_account"
+            android:title="Bank Details" />
+
+        <item android:id="@+id/my_lead"
+            android:icon="@drawable/ic_team"
+            android:title="My Leads" />
+        <item android:id="@+id/my_earnings"
+            android:icon="@drawable/ic_wallet"
+            android:title="My Earnings" />
+        <item android:id="@+id/nav_item_three"
+            android:icon="@drawable/ic_file"
+            android:title="Payout Structure" />
+        <item android:id="@+id/nav_item_three1"
+            android:icon="@drawable/ic_share"
+            android:title="Refer and Earn" />
+
+    </menu>
+    </item>
+        <group>
+            <item android:id="@+id/nav_item_six"
+                android:icon="@drawable/ic_call_us"
+                android:title="call us" />
+            <item android:id="@+id/nav_item_six1"
+                android:icon="@drawable/ic_negotiating"
+                android:title="Chat with us" />
+            <item android:id="@+id/nav_item_seven"
+                android:icon="@drawable/ic_contract"
+                android:title="Terms and Condition" />
+            <item
+                android:id="@+id/nav_logout"
+                android:icon="@drawable/logout"
+                android:title="Logout" />
+        </group>
+
+</menu>

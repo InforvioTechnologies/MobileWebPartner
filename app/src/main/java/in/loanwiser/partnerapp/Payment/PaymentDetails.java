@@ -63,7 +63,7 @@ public class PaymentDetails extends SimpleActivity {
     private PopupWindow mPopupWindow;
     PopupWindow popupWindow;
     LinearLayout linearLayout1;
-    AppCompatTextView back_button;
+    AppCompatTextView back_button,back_button_b;
     ImageView closebtn;
     AppCompatTextView proceedany,back;
     private String tag_json_obj = "jobj_req", tag_json_arry = "jarray_req";
@@ -92,7 +92,7 @@ public class PaymentDetails extends SimpleActivity {
         payment_id = intent.getStringExtra("payment_id");
         payment_plane = intent.getStringExtra("payment_plane");
 
-        Log.e("payment_id",payment_id);
+        Log.e("payment_plane",payment_plane);
 
         result1 = new ArrayList<>();
         payment_button=findViewById(R.id.payment_button);
@@ -100,6 +100,7 @@ public class PaymentDetails extends SimpleActivity {
         send_payment_link1=findViewById(R.id.send_payment_link1);
         linearLayout1=findViewById(R.id.linearLayout1);
         back_button=findViewById(R.id.back_button);
+        back_button_b=findViewById(R.id.back_button_b);
 
         standard=findViewById(R.id.standard);
         Custome=findViewById(R.id.Custome);
@@ -145,6 +146,100 @@ public class PaymentDetails extends SimpleActivity {
                 Pay_Credit_Coins();
                /* Intent intent = new Intent(PaymentDetails.this, Payment_Details_Activity.class);
                 startActivity(intent);*/
+            }
+               /* linearLayout1.setVisibility(View.GONE);
+                LayoutInflater layoutInflater = (LayoutInflater) PaymentDetails.this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                View customView = layoutInflater.inflate(R.layout.popup2,null);
+                closebtn = (ImageView) customView.findViewById(R.id.closebtn);
+                proceedany=(AppCompatTextView)customView.findViewById(R.id.proceedany);
+                back=(AppCompatTextView)customView.findViewById(R.id.back);
+
+
+
+                popupWindow = new PopupWindow(customView, LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+                //display the popup window
+                popupWindow.showAtLocation(linearLayout1, Gravity.CENTER, 0, 0);
+
+                closebtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        popupWindow.dismiss();
+                        linearLayout1.setVisibility(View.VISIBLE);
+
+                    }
+                });
+
+                proceedany.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(PaymentDetails.this, Payment_Details_Activity.class);
+                        startActivity(intent);
+                    }
+                });
+
+                back.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                    }
+                });
+
+            }*/
+            //
+        });
+        back_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+              //  Pay_Credit_Coins();
+                Intent intent = new Intent(PaymentDetails.this, PaymentActivity.class);
+                startActivity(intent);
+            }
+               /* linearLayout1.setVisibility(View.GONE);
+                LayoutInflater layoutInflater = (LayoutInflater) PaymentDetails.this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                View customView = layoutInflater.inflate(R.layout.popup2,null);
+                closebtn = (ImageView) customView.findViewById(R.id.closebtn);
+                proceedany=(AppCompatTextView)customView.findViewById(R.id.proceedany);
+                back=(AppCompatTextView)customView.findViewById(R.id.back);
+
+
+
+                popupWindow = new PopupWindow(customView, LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+                //display the popup window
+                popupWindow.showAtLocation(linearLayout1, Gravity.CENTER, 0, 0);
+
+                closebtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        popupWindow.dismiss();
+                        linearLayout1.setVisibility(View.VISIBLE);
+
+                    }
+                });
+
+                proceedany.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(PaymentDetails.this, Payment_Details_Activity.class);
+                        startActivity(intent);
+                    }
+                });
+
+                back.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                    }
+                });
+
+            }*/
+            //
+        });
+        back_button_b.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               // Pay_Credit_Coins();
+                Intent intent = new Intent(PaymentDetails.this, PaymentActivity.class);
+                startActivity(intent);
             }
                /* linearLayout1.setVisibility(View.GONE);
                 LayoutInflater layoutInflater = (LayoutInflater) PaymentDetails.this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -537,7 +632,6 @@ public class PaymentDetails extends SimpleActivity {
 
                             }
 
-
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -749,7 +843,7 @@ public class PaymentDetails extends SimpleActivity {
 
     }
 
-   /* @Override
+   /*@Override
     public void onBackPressed() {
 
         Objs.ac.StartActivity(mCon, Dashboard_Activity.class);

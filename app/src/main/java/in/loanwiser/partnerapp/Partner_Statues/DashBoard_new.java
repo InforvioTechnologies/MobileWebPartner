@@ -1,14 +1,25 @@
 package in.loanwiser.partnerapp.Partner_Statues;
 
+import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Menu;
 import android.widget.ImageView;
+import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.daimajia.slider.library.SliderTypes.BaseSliderView;
@@ -31,8 +42,21 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
+
 import adhoc.app.applibrary.Config.AppUtils.Objs;
+import adhoc.app.applibrary.Config.AppUtils.Params;
 import adhoc.app.applibrary.Config.AppUtils.Pref.Pref;
+import adhoc.app.applibrary.Config.AppUtils.Urls;
+import adhoc.app.applibrary.Config.AppUtils.VolleySignleton.AppController;
+import dmax.dialog.SpotsDialog;
+import in.loanwiser.partnerapp.Infinite_Scrollview.Lead_item;
+import in.loanwiser.partnerapp.My_Earnings.My_Earnings;
 import in.loanwiser.partnerapp.PartnerActivitys.Applicant_Details_Activity;
 import in.loanwiser.partnerapp.PartnerActivitys.Dashboard_Activity;
 import in.loanwiser.partnerapp.Partner_Statues.ui.gallery.GalleryFragment;
@@ -50,12 +74,18 @@ public class DashBoard_new extends AppCompatActivity  implements NavigationView.
 
     private AppBarConfiguration mAppBarConfiguration;
     private View navHeader;
-    private ImageView imageView_profile;
+    private ImageView imageView_profile,nav_header_imageView;
     BottomNavigationView navView_bottom;
+    private AlertDialog progressDialog;
+    SharedPreferences pref;
+    SharedPreferences.Editor editor;
+    private String tag_json_obj = "jobj_req", tag_json_arry = "jarray_req";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dash_board_new);
+
+        progressDialog = new SpotsDialog(this, R.style.Custom);
 
         navView_bottom =  findViewById(R.id.nav_view1);
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -71,6 +101,10 @@ public class DashBoard_new extends AppCompatActivity  implements NavigationView.
             }
         });
 
+        pref = getApplicationContext().getSharedPreferences("MyPref", 0); // 0 - for private mode
+        editor = pref.edit();
+
+
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -81,13 +115,22 @@ public class DashBoard_new extends AppCompatActivity  implements NavigationView.
 
         navHeader = navigationView.getHeaderView(0);
         imageView_profile = (ImageView) navHeader.findViewById(R.id.imageProfile);
+        nav_header_imageView = (ImageView) navHeader.findViewById(R.id.nav_header_imageView);
         String url = "http://cscapi.propwiser.com/mobile/images/loanwiser-app-logo.png";
-        Glide.with(this).load(url)
+        String url1 = "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcT2h3JvD2aa9HobUrXyYEWUdQEZG6A-VMVHWvEDL838HyFVN3sE&usqp=CAU";
+     /*   Glide.with(this).load(url)
                 .crossFade()
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .into(imageView_profile);
+                .into(imageView_profile);*/
 
        loadFragment(new ActivityFragment());
+
+        Glide.with(this).load(url1)
+                .crossFade()
+                .thumbnail(0.5f)
+                .bitmapTransform(new CircleTransform(this))
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .into(nav_header_imageView);
 
         navView_bottom.setOnNavigationItemSelectedListener
                 (new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -115,6 +158,8 @@ public class DashBoard_new extends AppCompatActivity  implements NavigationView.
                         return true;
                     }
                 });
+
+        Account_Listings_Details();
     }
     private void loadFragment(Fragment fragment) {
         // load fragment
@@ -175,7 +220,16 @@ public class DashBoard_new extends AppCompatActivity  implements NavigationView.
         }else if (id == R.id.nav_logout) {
             ExitAlert(DashBoard_new.this);
 
+        } else if (id == R.id.my_lead) {
+
+            Intent intent = new Intent(DashBoard_new.this,Dashboard_Activity.class);
+            startActivity(intent);
+        }else if (id == R.id.my_earnings) {
+
+            Intent intent = new Intent(DashBoard_new.this, My_Earnings.class);
+            startActivity(intent);
         }
+
 
         /*
         else if (id == R.id.nav_call) {
@@ -200,6 +254,7 @@ public class DashBoard_new extends AppCompatActivity  implements NavigationView.
                 Pref.removeID(getApplicationContext());
                 Pref.removeMOB(getApplicationContext());
                 Pref.removeMobile(getApplicationContext());
+                editor.remove("b2b_uer_id");
                 Intent i = new Intent(DashBoard_new.this, Welcome_Page.class);
                 i.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 startActivity(i);
@@ -218,5 +273,122 @@ public class DashBoard_new extends AppCompatActivity  implements NavigationView.
         return true;
     }*/
 
+    private void Account_Listings_Details() {
 
+        final JSONObject jsonObject =new JSONObject();
+        JSONObject J= null;
+        try {
+            J =new JSONObject();
+            J.put(Params.b2b_userid, Pref.getID(getApplicationContext()));
+
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        Log.e("coins request flag", String.valueOf(J));
+
+            progressDialog.show();
+        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, Urls.GET_FLAG_WALLET, J,
+                new Response.Listener<JSONObject>() {
+                    @SuppressLint("RestrictedApi")
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        Log.e("coins response flag", String.valueOf(response));
+
+                        try {
+                            String string = response.getString("status");
+
+                            if(string.contains("success"))
+                            {
+                               JSONObject jsonObject1 = response.getJSONObject("data");
+
+                               String initiate_coins_transact = jsonObject1.getString("initiate_coins_transact");
+                               if(initiate_coins_transact.equals("0"))
+                               {
+                                   Intiat_Coin_Transaction();
+                               }else
+                               {
+
+                               }
+
+                            }else
+                            {
+
+                            }
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                    }
+                }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+                Toast.makeText(getApplicationContext(),error.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("content-type", "application/json");
+                return headers;
+            }
+        };
+
+        int x=2;// retry count
+        jsonObjReq.setRetryPolicy(new DefaultRetryPolicy(DefaultRetryPolicy.DEFAULT_TIMEOUT_MS * 48,
+                x, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+
+        AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
+
+    }
+
+    private void Intiat_Coin_Transaction() {
+
+        final JSONObject jsonObject =new JSONObject();
+        JSONObject J= null;
+        try {
+            J =new JSONObject();
+            J.put(Params.b2b_userid, Pref.getID(getApplicationContext()));
+
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        Log.e("coins request", String.valueOf(J));
+
+        progressDialog.show();
+        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, Urls.walletreg, J,
+                new Response.Listener<JSONObject>() {
+                    @SuppressLint("RestrictedApi")
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        Log.e("coin Api Call", String.valueOf(response));
+
+                    }
+                }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+                Toast.makeText(getApplicationContext(),error.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("content-type", "application/json");
+                return headers;
+            }
+        };
+
+        int x=2;// retry count
+        jsonObjReq.setRetryPolicy(new DefaultRetryPolicy(DefaultRetryPolicy.DEFAULT_TIMEOUT_MS * 48,
+                x, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+
+        AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
+
+    }
 }

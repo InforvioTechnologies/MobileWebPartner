@@ -34,7 +34,7 @@
         android:usesCleartextTraffic="true"
         tools:node="merge"
         tools:replace="android:icon">
-        <activity android:name=".Step_Changes_Screen.Step_Completion_Activity"></activity>
+
         <activity
             android:name=".Partner_Statues.DashBoard_new"
             android:label="@string/title_activity_dash_board_new"
@@ -94,16 +94,29 @@
 
         <provider
             android:name="androidx.core.content.FileProvider"
-            android:grantUriPermissions="true"
+            android:authorities="${applicationId}"
             android:exported="false"
-            android:authorities="${applicationId}">
-
+            android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/file_provider_paths"/>
-
+                android:resource="@xml/file_provider_paths" />
         </provider>
 
+        <activity android:name=".Share_Material.Share_Screen"
+            android:theme="@style/NoAction2"
+            android:windowSoftInputMode="stateHidden"/>
+        <activity android:name=".Payment.PDF_Download_Manager"
+            android:theme="@style/NoAction2"
+            android:windowSoftInputMode="stateHidden"/>
+
+        <activity
+            android:name=".Payment.Bank_Statement_Activity"
+            android:theme="@style/NoAction2"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".Step_Changes_Screen.Step_Completion_Activity"
+            android:theme="@style/NoAction2"
+            android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".Payment.PaymentActivity"
             android:theme="@style/NoAction2"

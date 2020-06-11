@@ -17,6 +17,7 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TableRow;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -38,9 +39,11 @@ import java.util.Map;
 
 import adhoc.app.applibrary.Config.AppUtils.Objs;
 import adhoc.app.applibrary.Config.AppUtils.Params;
+import adhoc.app.applibrary.Config.AppUtils.Pref.Pref;
 import adhoc.app.applibrary.Config.AppUtils.Urls;
 import adhoc.app.applibrary.Config.AppUtils.VolleySignleton.AppController;
 import dmax.dialog.SpotsDialog;
+import in.loanwiser.partnerapp.Documents.Applicant_Details_Single;
 import in.loanwiser.partnerapp.Multi_select_checkbox.CustomAdapter;
 import in.loanwiser.partnerapp.PartnerActivitys.Home;
 import in.loanwiser.partnerapp.R;
@@ -121,13 +124,14 @@ public class Document_Check_List extends SimpleActivity implements CompoundButto
 
       //  Click();
 
-      /*  Docum_ch_step1.setOnClickListener(new View.OnClickListener() {
+        Docum_ch_step1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Document_Check_List.this, Home.class);
-                startActivity(intent);
+               /* Intent intent = new Intent(Document_Check_List.this, Home.class);
+                startActivity(intent);*/
+                Account_Listings_Details();
             }
-        });*/
+        });
 
     }
 
@@ -167,6 +171,75 @@ public class Document_Check_List extends SimpleActivity implements CompoundButto
         });
 
     }
+
+
+    private void Account_Listings_Details() {
+        JSONObject jsonObject =new JSONObject();
+        JSONObject J= null;
+        try {
+            J =new JSONObject();
+            J.put(Params.user_id, Pref.getUSERID(getApplicationContext()));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        progressDialog.show();
+        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, Urls.PARTNER_STATUES_IDs, J,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+
+                        Log.e("the reponse",response.toString());
+                        try {
+
+                            JSONObject Response = response.getJSONObject("reponse");
+
+                            JSONObject jsonObject1 = Response.getJSONObject(Params.application_form);
+                            String user_id  = Response.getString(Params.user_id);
+                            String jsonStringObj  = String.valueOf(jsonObject1);
+                            JSONArray jsonArray = Response.getJSONArray(Params.emp_states);
+
+                            if (jsonArray.length()>0){
+                                String jsonString  = String.valueOf(jsonArray);
+                                //   Log.e("ApplicantDetails_Single",jsonString);
+
+                                Objs.ac.StartActivityPutExtra(mCon,
+                                        Applicant_Details_Single.class,
+                                        Params.JSON, jsonString,
+                                        Params.id,user_id,
+                                        Params.transaction_id,transaction_id,
+                                        Params.JSONObj,jsonStringObj);
+
+                                //finish();
+                            }else {
+                                Objs.a.ShowHideNoItems(mCon,true);
+                            }
+
+                            //   JSONArray ja = response.getJSONArray(Params.emp_states);
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                        progressDialog.dismiss();
+                    }
+                }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                progressDialog.dismiss();
+                Toast.makeText(getApplicationContext(),error.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("content-type", "application/json");
+                return headers;
+            }
+        };
+        AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
+    }
+
     private void UIBINDING()
     {
         Docum_ch_step1  = (AppCompatButton) findViewById(R.id.Docum_ch_step1);

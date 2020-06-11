@@ -59,6 +59,10 @@ public class Urls {
     public static String ADD_LEAD_POST  = Urls + "createapplication";
     public static String UPDATE_ADD_LEAD_POST  = Urls + "update_basicdata";
     public static String LEAD_LIST_POST  = Urls + "getapplicationusers";
+
+    public static String GET_FLAG_WALLET  = Urls_step + "getflag_wallet";
+    public static String walletreg  = Urls_step + "walletreg";
+
     public static String LEAD_STATUES_LIST  = Urls + "get_status";
     public static String UPDATE_STATUS_DOC  = Urls + "update_uploadstatus";
     public static String BANK_DETAILS_POST  = Urls + "partner_banksearch";
@@ -98,6 +102,8 @@ public class Urls {
     public static String PDF_Document_Upload = Urls_step + "multi_docpdf";
     public static String DOC_IMAGE_VIEW = Urls_step + "docu_view";
 
+    public static String Bank_Statement_Upload = Urls_step + "bank_statement_upload";
+
  public static String Payment_Initialize  = Urls_step + "payment_initialize";
  public static String Report_Activity  = Urls_step + "crif_mail_gen";
 
@@ -106,6 +112,11 @@ public class Urls {
     public static String CRIF_DATA_Populate = Urls_step + "crifdata_view";
     public static String FIREBASE_TOKEN = Urls_step + "update_b2btoken";
     public static String UPDATE_PAYMENT_STATUES = Urls_step + "update_paymentstatus";
+
+
+    public static String CRIF_SCORE_CHECK = Urls_step + "get_crif_score";
+    public static String CRIF_Gerneration = Urls_step + "crif_reportgen";
+
     public static String SUBMIT_TO_LOANWIER = Urls_step + "submit_loanwiser";
     public static String COIN_Transaction = Urls_step + "coins_transaction";
 
@@ -117,7 +128,7 @@ public class Urls {
     public static String Transaction_List = Urls_step + "transaction_list";
     public static String latest_lead_updates = Urls_step + "latest_lead_updates";
     public static String reference_board  = Urls_step + "reference_board ";
-
+    public static String CREDIT_COINS  = Urls_step + "transaction_list";
    // public static String DOCUMENT_CHECK_LIST = Urls_document_check_list + "get_documentcklist";
 
     /* public static  String = "" ;

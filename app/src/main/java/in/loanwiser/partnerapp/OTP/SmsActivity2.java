@@ -56,6 +56,7 @@ import adhoc.app.applibrary.Config.AppUtils.Pref.Pref;
 import adhoc.app.applibrary.Config.AppUtils.Urls;
 import adhoc.app.applibrary.Config.AppUtils.VolleySignleton.AppController;
 import dmax.dialog.SpotsDialog;
+import in.loanwiser.partnerapp.Partner_Statues.DashBoard_new;
 import in.loanwiser.partnerapp.Partner_Statues.Statues_Dashboard_Nav;
 import in.loanwiser.partnerapp.R;
 import in.loanwiser.partnerapp.SMSRetrieverAPI.MySMSBroadcastReceiver;
@@ -88,6 +89,9 @@ public class SmsActivity2 extends AppCompatActivity {
     public static final String OTP_REGEX = "[0-9]{1,5}";
     String token;
 
+    SharedPreferences pref;
+    SharedPreferences.Editor editor;
+
     @SuppressLint("LongLogTag")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -108,6 +112,9 @@ public class SmsActivity2 extends AppCompatActivity {
         // Mobile = Pref.getmobile(mCon);
         //  Log.d("OTP number11111111111111", Mobile);
         // Log.d("OTP number", no_bundle);
+
+        pref = getApplicationContext().getSharedPreferences("MyPref", 0); // 0 - for private mode
+        editor = pref.edit();
 
         editTextOtp =(AppCompatEditText)findViewById(R.id.Mob);
         awesomeValidation = new AwesomeValidation(ValidationStyle.BASIC);
@@ -303,10 +310,12 @@ public class SmsActivity2 extends AppCompatActivity {
                                 Pref.putUID(mCon,no_bundle);
                                 Pref.putMobile(mCon,no_bundle);
                                 Pref.putID(mCon, user_array);
+                                editor.putString("b2b_uer_id", user_array);
+                                editor.commit();
                                 Firebase_Registration(user_array);
-                                Intent intent = new Intent(SmsActivity2.this,Statues_Dashboard_Nav.class);
+                                /*Intent intent = new Intent(SmsActivity2.this, DashBoard_new.class);
                                 startActivity(intent);
-                                finish();
+                                finish();*/
                             }
                             if(response.getString(Params.status).equals(Params.error)){
 
@@ -370,7 +379,7 @@ public class SmsActivity2 extends AppCompatActivity {
                             String Register_Token_statues = object.getString("status");
                             if(Register_Token_statues.contains("success"))
                             {
-                                Intent intent = new Intent(SmsActivity2.this,Statues_Dashboard_Nav.class);
+                                Intent intent = new Intent(SmsActivity2.this,DashBoard_new.class);
                                 startActivity(intent);
                                 finish();
                             }

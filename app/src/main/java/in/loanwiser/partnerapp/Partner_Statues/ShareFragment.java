@@ -122,7 +122,7 @@ public class ShareFragment extends Fragment{
         imageShare = (Button) view.findViewById(R.id.image_share);
         testShare = (Button) view.findViewById(R.id.test_share);
 
-        Share_images(view);
+       // Share_images(view);
 
         button_share.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -240,9 +240,6 @@ public class ShareFragment extends Fragment{
 
             }
         });
-
-
-
         return view;
 
 
