@@ -67,6 +67,7 @@ public class Urls {
     public static String UPDATE_STATUS_DOC  = Urls + "update_uploadstatus";
     public static String BANK_DETAILS_POST  = Urls + "partner_banksearch";
     public static String PROFILE_DETAILS_POST  = Urls + "partner_profilesearch";
+
     public static String PROFILE_UPDATED_POST  = Urls + "partner_profileupdate";
     public static String BANK_UPDATED_POST  = Urls + "partner_bankupdate";
     public static String APP_ID_OTP_POST = Urls + "appid_view";
@@ -129,6 +130,13 @@ public class Urls {
     public static String latest_lead_updates = Urls_step + "latest_lead_updates";
     public static String reference_board  = Urls_step + "reference_board ";
     public static String CREDIT_COINS  = Urls_step + "transaction_list";
+
+    public static String PAYOUT_DISPLAY  = Urls_step + "payout_display";
+    public static String NOTIFICATION_LIST  = Urls_step + "notification_list_partner";
+
+    public static String Notification_Update  = Urls_step + "notification_update";
+    public static String My_Earnings  = Urls_step + "my_earnings";
+    public static String POST_SHARE  = Urls_step + "post_share";
    // public static String DOCUMENT_CHECK_LIST = Urls_document_check_list + "get_documentcklist";
 
     /* public static  String = "" ;

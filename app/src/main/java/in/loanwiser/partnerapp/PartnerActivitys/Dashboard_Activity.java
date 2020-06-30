@@ -215,6 +215,7 @@ public class Dashboard_Activity extends AppCompatActivity implements OnLoadMoreL
 
         Account_Listings_Details(S_status_id);
 
+
         leadListAdapter_dashboard = new LeadListAdapter_Dashboard(this);
         recyclerView.setLayoutManager(new StaggeredGridLayoutManager(1,StaggeredGridLayoutManager.VERTICAL));
 
@@ -436,6 +437,8 @@ public class Dashboard_Activity extends AppCompatActivity implements OnLoadMoreL
         AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
 
     }
+
+
 
    /* private void setAdapter(JSONArray ja) {
         Dashboard_Activity.ListItemAdapter adapter = new Dashboard_Activity.ListItemAdapter(mCon,ja);

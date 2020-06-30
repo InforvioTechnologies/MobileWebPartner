@@ -160,7 +160,7 @@ public class TwoFragment extends Fragment implements OnLoadMoreListener {
         JSONObject J= null;
         try {
             J =new JSONObject();
-            J.put("b2buser_id", 24303);
+            J.put("b2buser_id", b2b_user_id);
             J.put("count", count12);
 
         } catch (JSONException e) {

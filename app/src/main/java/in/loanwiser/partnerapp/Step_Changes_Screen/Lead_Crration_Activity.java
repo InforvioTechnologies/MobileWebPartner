@@ -55,6 +55,7 @@ import adhoc.app.applibrary.Config.AppUtils.Pref.Pref;
 import adhoc.app.applibrary.Config.AppUtils.Urls;
 import adhoc.app.applibrary.Config.AppUtils.VolleySignleton.AppController;
 import dmax.dialog.SpotsDialog;
+import in.loanwiser.partnerapp.BankStamentUpload.Bank_Statement_Upload;
 import in.loanwiser.partnerapp.NumberTextWatcher;
 import in.loanwiser.partnerapp.PartnerActivitys.Applicant_Details_Activity;
 import in.loanwiser.partnerapp.PartnerActivitys.Dashboard_Activity;
@@ -132,10 +133,10 @@ public class Lead_Crration_Activity extends SimpleActivity {
         fonts();
         makeJsonObjReq1();
         Click();
-     /*   lead_cr_step1.setOnClickListener(new View.OnClickListener() {
+      /*  lead_cr_step1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Lead_Crration_Activity.this, Creadite_Report_Activity.class);
+                Intent intent = new Intent(Lead_Crration_Activity.this, Bank_Statement_Upload.class);
                 startActivity(intent);
                 finish();
             }
@@ -1265,10 +1266,6 @@ public class Lead_Crration_Activity extends SimpleActivity {
                                         finish();
                                     }
                                 }
-
-
-
-
 
                             }
                             if(jsonObject1.getString(Params.status).equals("error")) {

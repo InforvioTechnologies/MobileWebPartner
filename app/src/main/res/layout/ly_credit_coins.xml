@@ -10,7 +10,7 @@
     android:background="@color/white"
     android:padding="10dp"
     android:gravity="center"
-    android:layout_height="220dp"
+    android:layout_height="wrap_content"
     android:layout_marginBottom="1.5dp"
     app:cardCornerRadius="4dp"
     android:clipToPadding="false"
@@ -21,73 +21,6 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:orientation="horizontal">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1">
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:singleLine="true"
-                    android:textSize="11dp"
-                    android:textColor="@color/black"
-                    android:text="@string/transcation_history"
-                    />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="right"
-                android:layout_weight="1">
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/filter"
-                    android:textColor="@color/black"
-                    android:textSize="11dp"/>
-
-                <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:src="@drawable/ic_filter"/>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:layout_weight="1">
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/sort"
-                    android:textColor="@color/black"
-                    android:textSize="11dp"/>
-
-                <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:src="@drawable/ic_filter"/>
-
-            </LinearLayout>
-
-
-
-        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -109,6 +42,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/date"
+                    android:textSize="12dp"
                     android:textColor="@color/text_blue"
                     android:id="@+id/date_txt"
                     />
@@ -126,6 +60,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/lead_detail"
+                    android:textSize="12dp"
                     android:textColor="@color/text_blue"
                     android:id="@+id/lead_detail_txt"
                     />
@@ -144,6 +79,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/loan_details"
+                    android:textSize="12dp"
                     android:textColor="@color/text_blue"
                     android:id="@+id/loan_details_txt"
                     />
@@ -161,6 +97,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/purpose"
+                    android:textSize="12dp"
                     android:textColor="@color/text_blue"
                     android:id="@+id/purpose_txt"
                     />
@@ -179,6 +116,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/coins"
                     android:id="@+id/coins_txt"
+                    android:textSize="12dp"
                     android:textColor="@color/text_blue"/>
 
             </LinearLayout>

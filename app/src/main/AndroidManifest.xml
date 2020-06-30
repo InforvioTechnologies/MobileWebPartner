@@ -102,13 +102,27 @@
                 android:resource="@xml/file_provider_paths" />
         </provider>
 
-        <activity android:name=".Share_Material.Share_Screen"
+        <activity
+            android:name=".BankStamentUpload.Upload_Activity_Bank"
             android:theme="@style/NoAction2"
-            android:windowSoftInputMode="stateHidden"/>
-        <activity android:name=".Payment.PDF_Download_Manager"
+            android:windowSoftInputMode="stateHidden" />
+
+        <activity android:name=".Push_Notification.Push_Notification_List"
             android:theme="@style/NoAction2"
             android:windowSoftInputMode="stateHidden"/>
 
+        <activity
+            android:name=".BankStamentUpload.Bank_Statement_Upload"
+            android:theme="@style/NoAction2"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".Share_Material.Share_Screen"
+            android:theme="@style/NoAction2"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".Payment.PDF_Download_Manager"
+            android:theme="@style/NoAction2"
+            android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".Payment.Bank_Statement_Activity"
             android:theme="@style/NoAction2"

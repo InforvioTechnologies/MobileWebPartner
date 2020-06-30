@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".BankStamentUpload.Bank_Statement_Upload">
+
+    <Button
+        android:id="@+id/add"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/add_docum"
+        android:textStyle="bold"
+        android:textColor="#FFFFFF"
+        android:gravity="center_horizontal" />
+
+    <Button
+        android:id="@+id/proceedbtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/save_proceed"
+        android:textColor="#FFFFFF"
+        />
+
+    <Button
+        android:id="@+id/viewpdf"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/viewpdf"
+        android:textColor="#FFFFFF"
+        />
+
+    <Button
+        android:id="@+id/singlepdf"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/viewpdf"
+        android:textColor="#FFFFFF"
+        />
+
+    <ListView
+        android:id="@+id/listview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="20dp"
+        android:divider="@android:color/transparent"
+        android:dividerHeight="12.0sp"
+        android:layout_margin="20dp"/>
+
+</LinearLayout>

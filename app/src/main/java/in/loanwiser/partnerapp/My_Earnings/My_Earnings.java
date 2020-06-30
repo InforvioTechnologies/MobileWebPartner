@@ -1,32 +1,57 @@
 package in.loanwiser.partnerapp.My_Earnings;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 import android.widget.ScrollView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatTextView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.google.android.material.tabs.TabLayout;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import adhoc.app.applibrary.Config.AppUtils.Objs;
+import adhoc.app.applibrary.Config.AppUtils.Params;
+import adhoc.app.applibrary.Config.AppUtils.Pref.Pref;
+import adhoc.app.applibrary.Config.AppUtils.Urls;
+import adhoc.app.applibrary.Config.AppUtils.VolleySignleton.AppController;
+import dmax.dialog.SpotsDialog;
 import in.loanwiser.partnerapp.PartnerActivitys.SimpleActivity;
 import in.loanwiser.partnerapp.R;
 
 public class My_Earnings extends SimpleActivity {
 
     private ScrollView scrollView;
+    private String tag_json_obj = "jobj_req", tag_json_arry = "jarray_req";
+    private AlertDialog progressDialog;
 
+    AppCompatTextView total_earnings,potential_earnings,disbursal_of_leads;
+
+    private Context context = this;
+    TabLayout tabLayout;
+    ViewPager viewPager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,16 +60,21 @@ public class My_Earnings extends SimpleActivity {
         setContentView(R.layout.activity_simple);
         Objs.a.setStubId(this,R.layout.sample);
         initTools(R.string.my_earning);
+        progressDialog = new SpotsDialog(context, R.style.Custom);
+        Account_Listings_Details1();
 
-        TabLayout tabLayout = findViewById(R.id.tabs);
-        ViewPager viewPager = findViewById(R.id.viewpager);
+         tabLayout = findViewById(R.id.tabs);
+         viewPager = findViewById(R.id.viewpager);
+
+        total_earnings = (AppCompatTextView) findViewById(R.id.total_earnings);
+        potential_earnings = (AppCompatTextView) findViewById(R.id.potential_earnings);
+        disbursal_of_leads = (AppCompatTextView) findViewById(R.id.disbursal_of_leads);
+
+
        // scrollView=findViewById(R.id.scroll);
 
-        ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(new OneFragment(), "CASH EARNINGS");
-        adapter.addFragment(new TwoFragment(), "CREDIT COINS");
-        viewPager.setAdapter(adapter);
-        tabLayout.setupWithViewPager(viewPager);
+
+
      /*   viewPager.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -119,5 +149,64 @@ public class My_Earnings extends SimpleActivity {
     }
 
 
+    private void Account_Listings_Details1() {
+        JSONObject jsonObject =new JSONObject();
+        JSONObject J= null;
+        try {
+            J =new JSONObject();
+            J.put("b2buser_id", Pref.getID(getApplicationContext()));
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        progressDialog.show();
+        Log.e("Earning Page" , String.valueOf(J));
+        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, Urls.My_Earnings, J,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+
+                        Log.e("earning reponse Page" , String.valueOf(response));
+                        try {
+
+                            String commission_earned = response.getString("commission_earned");
+                            String potential_earning = response.getString("potential_earning");
+                            String wallet_coins = response.getString("wallet_coins");
+
+                            total_earnings.setText(commission_earned);
+                                    potential_earnings.setText(potential_earning);
+                            disbursal_of_leads.setText(wallet_coins);
+
+                            ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
+                            adapter.addFragment(new OneFragment(), "CASH EARNINGS");
+                            adapter.addFragment(new TwoFragment(), "CREDIT COINS");
+                            viewPager.setAdapter(adapter);
+                            tabLayout.setupWithViewPager(viewPager);
+
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                        progressDialog.dismiss();
+                    }
+                }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                progressDialog.dismiss();
+                Log.e("Profile Page" , String.valueOf(error));
+                // Toast.makeText(getApplicationContext(),error.getMessage(),Toast.LENGTH_SHORT).show();
+            }
+        }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("content-type", "application/json");
+                return headers;
+            }
+        };
+        AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
+    }
 
 }

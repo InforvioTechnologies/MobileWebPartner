@@ -286,6 +286,7 @@
     <string name="pay_out_details1">Payout Details</string>
     <string name="disbursed_lead_list">Disbursed Lead List</string>
     <string name="credit_report">Credit Report</string>
+    <string name="notification">Notifications</string>
     <string name="credit_report1">Know Your Credit Report</string>
     //personal Loan
     <string name="personal_loan">Looking for Loan to fulfil your Personal financial needs. Then Personal Loan comes in handy to meet your expenses like</string>
@@ -885,5 +886,21 @@
     <string name="proceed_nextstep">PROCEED TO NEXT STEP</string>
 
     <string name="downloadcomplete">Download Complete</string>
+
+
+    //Bank Statement Upload
+
+
+    <string name="account">Account 1</string>
+    <string name="doc_type">Please Select document Type</string>
+    <string name="downloadver">Downloaded PDF Version</string>
+    <string name="scanedpdf_doc">Scannned PDF Document</string>
+    <string name="sixmonth_statement">Upload Your Last 6 Months Bank Statements associated with this bank account here</string>
+    <string name="statemnt_info">(Please  ensure that all yourbank statements are from the same bank account)</string>
+    <string name="upload_files">Upload Files</string>
+    <string name="select_multiple">You can Select multiple files at same time</string>
+    <string name="enter_docpass">Please Enter Your Document Password</string>
+
+    <string name="viewpdf">VIew PDF</string>
 
 </resources>

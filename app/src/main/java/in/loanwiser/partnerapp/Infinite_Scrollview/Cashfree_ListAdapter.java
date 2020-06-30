@@ -147,7 +147,7 @@ public class Cashfree_ListAdapter extends RecyclerView.Adapter<Cashfree_ListAdap
             }
 
 
-            Over_all.setOnClickListener(new View.OnClickListener() {
+           /* Over_all.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
 
@@ -166,7 +166,7 @@ public class Cashfree_ListAdapter extends RecyclerView.Adapter<Cashfree_ListAdap
                         }
 
                 }
-            });
+            });*/
 
         }
 

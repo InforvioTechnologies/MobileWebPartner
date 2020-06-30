@@ -12,6 +12,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.Menu;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -61,6 +63,7 @@ import in.loanwiser.partnerapp.PartnerActivitys.Applicant_Details_Activity;
 import in.loanwiser.partnerapp.PartnerActivitys.Dashboard_Activity;
 import in.loanwiser.partnerapp.Partner_Statues.ui.gallery.GalleryFragment;
 import in.loanwiser.partnerapp.Partner_Statues.ui.home.HomeFragment;
+import in.loanwiser.partnerapp.Push_Notification.Push_Notification_List;
 import in.loanwiser.partnerapp.R;
 import in.loanwiser.partnerapp.Step_Changes_Screen.Pay_Out_Screen;
 import in.loanwiser.partnerapp.User_Account.BankDetails;
@@ -78,6 +81,10 @@ public class DashBoard_new extends AppCompatActivity  implements NavigationView.
     BottomNavigationView navView_bottom;
     private AlertDialog progressDialog;
     SharedPreferences pref;
+    RelativeLayout relative_layout_multiple;
+
+    TextView textview,nav_header_textView,nav_header_mobile_no;
+
     SharedPreferences.Editor editor;
     private String tag_json_obj = "jobj_req", tag_json_arry = "jarray_req";
     @Override
@@ -89,6 +96,14 @@ public class DashBoard_new extends AppCompatActivity  implements NavigationView.
 
         navView_bottom =  findViewById(R.id.nav_view1);
         Toolbar toolbar = findViewById(R.id.toolbar);
+
+         textview = findViewById(R.id.hotlist_hot);
+
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        View headerView = navigationView.getHeaderView(0);
+        nav_header_textView = headerView.findViewById(R.id.nav_header_textView);
+        nav_header_mobile_no = headerView.findViewById(R.id.nav_header_mobile_no);
+
         setSupportActionBar(toolbar);
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -104,19 +119,30 @@ public class DashBoard_new extends AppCompatActivity  implements NavigationView.
         pref = getApplicationContext().getSharedPreferences("MyPref", 0); // 0 - for private mode
         editor = pref.edit();
 
-
+        Account_Listings_Details1();
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+      //  NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
         navHeader = navigationView.getHeaderView(0);
         imageView_profile = (ImageView) navHeader.findViewById(R.id.imageProfile);
+
+        relative_layout_multiple = (RelativeLayout) findViewById(R.id.relative_layout_multiple);
+        relative_layout_multiple.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intent = new Intent(DashBoard_new.this, Push_Notification_List.class);
+                startActivity(intent);
+            }
+        });
+
         nav_header_imageView = (ImageView) navHeader.findViewById(R.id.nav_header_imageView);
-        String url = "http://cscapi.propwiser.com/mobile/images/loanwiser-app-logo.png";
+        String url = "https://cdn5.vectorstock.com/i/1000x1000/77/14/businessman-flat-style-icon-vector-7497714.jpg";
         String url1 = "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcT2h3JvD2aa9HobUrXyYEWUdQEZG6A-VMVHWvEDL838HyFVN3sE&usqp=CAU";
      /*   Glide.with(this).load(url)
                 .crossFade()
@@ -125,12 +151,19 @@ public class DashBoard_new extends AppCompatActivity  implements NavigationView.
 
        loadFragment(new ActivityFragment());
 
-        Glide.with(this).load(url1)
+        Glide.with(this).load(url)
                 .crossFade()
                 .thumbnail(0.5f)
                 .bitmapTransform(new CircleTransform(this))
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(nav_header_imageView);
+
+      /*  Glide.with(this).load(R.drawable.ic_person)
+                .crossFade()
+                .thumbnail(0.5f)
+                .bitmapTransform(new CircleTransform(this))
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .into(nav_header_imageView);*/
 
         navView_bottom.setOnNavigationItemSelectedListener
                 (new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -160,6 +193,8 @@ public class DashBoard_new extends AppCompatActivity  implements NavigationView.
                 });
 
         Account_Listings_Details();
+
+
     }
     private void loadFragment(Fragment fragment) {
         // load fragment
@@ -300,6 +335,7 @@ public class DashBoard_new extends AppCompatActivity  implements NavigationView.
 
                             if(string.contains("success"))
                             {
+                                progressDialog.dismiss();
                                JSONObject jsonObject1 = response.getJSONObject("data");
 
                                String initiate_coins_transact = jsonObject1.getString("initiate_coins_transact");
@@ -313,7 +349,7 @@ public class DashBoard_new extends AppCompatActivity  implements NavigationView.
 
                             }else
                             {
-
+                                progressDialog.dismiss();
                             }
 
                         } catch (JSONException e) {
@@ -343,6 +379,67 @@ public class DashBoard_new extends AppCompatActivity  implements NavigationView.
 
         AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
 
+    }
+
+    private void Account_Listings_Details1() {
+        JSONObject jsonObject =new JSONObject();
+        JSONObject J= null;
+        try {
+            J =new JSONObject();
+            J.put(Params.b2b_userid, Pref.getID(getApplicationContext()));
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        progressDialog.show();
+        Log.e("Profile Page" , String.valueOf(J));
+        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, Urls.PROFILE_DETAILS_POST, J,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+
+                        Log.e("Profile Page" , String.valueOf(response));
+                        try {
+                            if(response.getString("notify_status").equals("success")) {
+
+                                JSONObject jobj = response.getJSONObject(Params.response);
+                                Log.e("Profile Page" , String.valueOf(jobj));
+
+                                String notification_count = jobj.getString("notification_count");
+                                String contact_person = jobj.getString("contact_person");
+                                String mobile_no = jobj.getString("mobile_no");
+
+
+                                 textview.setText(notification_count);
+                                nav_header_textView.setText(contact_person);
+                                nav_header_mobile_no.setText(mobile_no);
+                                // pan.setText(jobj.getString(Params.pan_no));
+                            }else {
+                                textview.setVisibility(View.GONE);
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                        progressDialog.dismiss();
+                    }
+                }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                progressDialog.dismiss();
+                Log.e("Profile Page" , String.valueOf(error));
+                // Toast.makeText(getApplicationContext(),error.getMessage(),Toast.LENGTH_SHORT).show();
+            }
+        }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("content-type", "application/json");
+                return headers;
+            }
+        };
+        AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
     }
 
     private void Intiat_Coin_Transaction() {

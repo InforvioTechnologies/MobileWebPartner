@@ -21,6 +21,7 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.kofigyan.stateprogressbar.StateProgressBar;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -85,6 +86,8 @@ public class Home extends AppCompatActivity {
 
     PermissionUtils permissionUtils;
 
+    String[] descriptionData = {"Send to Bank", "Sanctioned", "Disbursed"};
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -110,6 +113,10 @@ public class Home extends AppCompatActivity {
         loan_type_id =  Objs.a.getBundle(this, Params.loan_type_id);
         loan_type =  Objs.a.getBundle(this, Params.loan_type);
         Log.e("Applicant_Statues",Applicant_Statues);
+
+        StateProgressBar stateProgressBar = (StateProgressBar) findViewById(R.id.state_progressbar);
+        stateProgressBar.setStateDescriptionData(descriptionData);
+
 
         try {
             JSONArray array = new JSONArray(Applicant_Statues);
@@ -412,18 +419,18 @@ public class Home extends AppCompatActivity {
                                 eligibility_check.setVisibility(View.VISIBLE);
                                 CRIF_Check.setVisibility(View.VISIBLE);
                                 Paymet.setVisibility(View.VISIBLE);
-                                Document_check_list.setVisibility(View.VISIBLE);
+                                Document_check_list.setVisibility(View.GONE);
                                 Document_Upload.setVisibility(View.VISIBLE);
                                 offer.setVisibility(View.VISIBLE);
                             }
 
                             if(document_checklist.contains("pending"))
                             {
-                                app_doc_img.setImageDrawable(getResources().getDrawable(R.drawable.ic_not_tick));
+                                app_doc_img.setImageDrawable(getResources().getDrawable(R.drawable.ic_warning));
 
                             }else
                             {
-                                app_doc_img.setImageDrawable(getResources().getDrawable(R.drawable.ic_tick_icon));
+                                app_doc_img.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
 
                             }
                             if(document_upload.contains("pending"))
@@ -433,7 +440,7 @@ public class Home extends AppCompatActivity {
 
                             }else
                             {
-                                app_interview_img.setImageDrawable(getResources().getDrawable(R.drawable.ic_tick_icon));
+                                app_interview_img.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
 
                             }
 
@@ -441,59 +448,59 @@ public class Home extends AppCompatActivity {
                             if(viability.contains("completed"))
                             {
 
-                                viability_check_img2.setImageDrawable(getResources().getDrawable(R.drawable.ic_tick_icon));
+                                viability_check_img2.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
                             }else
                             {
-                                viability_check_img2.setImageDrawable(getResources().getDrawable(R.drawable.ic_not_tick));
+                                viability_check_img2.setImageDrawable(getResources().getDrawable(R.drawable.ic_warning));
                             }
 
                             if(eligibility.contains("completed"))
                             {
 
-                                eligibility_check_img.setImageDrawable(getResources().getDrawable(R.drawable.ic_tick_icon));
+                                eligibility_check_img.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
                             }else
                             {
-                                eligibility_check_img.setImageDrawable(getResources().getDrawable(R.drawable.ic_not_tick));
+                                eligibility_check_img.setImageDrawable(getResources().getDrawable(R.drawable.ic_warning));
                             }
 
                             if(credit_request.contains("completed"))
                             {
                                 CRIF_Check.setEnabled(false);
-                                crif_img.setImageDrawable(getResources().getDrawable(R.drawable.ic_tick_icon));
+                                crif_img.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
                             }else
                             {
                                 CRIF_Check.setEnabled(true);
-                                crif_img.setImageDrawable(getResources().getDrawable(R.drawable.ic_not_tick));
+                                crif_img.setImageDrawable(getResources().getDrawable(R.drawable.ic_warning));
                             }
 
                             if(payment.contains("completed"))
                             {
                                 Paymet.setEnabled(false);
-                                payment_img.setImageDrawable(getResources().getDrawable(R.drawable.ic_tick_icon));
+                                payment_img.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
                             }else
                             {
                                 Paymet.setEnabled(true);
-                                payment_img.setImageDrawable(getResources().getDrawable(R.drawable.ic_not_tick));
+                                payment_img.setImageDrawable(getResources().getDrawable(R.drawable.ic_warning));
                             }
 
                             if(viability_report.contains("completed"))
                             {
                                 viability_Report.setEnabled(true);
-                                viability_report_image.setImageDrawable(getResources().getDrawable(R.drawable.ic_tick_icon));
+                                viability_report_image.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
                             }else
                             {
                                 viability_Report.setEnabled(true);
-                                viability_report_image.setImageDrawable(getResources().getDrawable(R.drawable.ic_not_tick));
+                                viability_report_image.setImageDrawable(getResources().getDrawable(R.drawable.ic_warning));
                             }
 
                             if(crif_status.contains("completed"))
                             {
                                 Credit_REport_Generation.setEnabled(true);
-                                credite_report_img.setImageDrawable(getResources().getDrawable(R.drawable.ic_tick_icon));
+                                credite_report_img.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
                             }else if(crif_status.contains("pending"))
                             {
                                 Credit_REport_Generation.setEnabled(true);
-                                credite_report_img.setImageDrawable(getResources().getDrawable(R.drawable.ic_not_tick));
+                                credite_report_img.setImageDrawable(getResources().getDrawable(R.drawable.ic_warning));
                             }else if(crif_status.contains("not_wanted"))
                             {
                                 Credit_REport_Generation.setVisibility(View.GONE);

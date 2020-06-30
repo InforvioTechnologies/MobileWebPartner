@@ -37,7 +37,7 @@
                 android:text="Mathayan M"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
             <TextView
-                android:id="@+id/nav_header_textView1"
+                android:id="@+id/nav_header_mobile_no"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="9566592196"

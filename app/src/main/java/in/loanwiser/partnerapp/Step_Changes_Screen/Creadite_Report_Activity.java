@@ -52,6 +52,7 @@ import adhoc.app.applibrary.Config.AppUtils.Pref.Pref;
 import adhoc.app.applibrary.Config.AppUtils.Urls;
 import adhoc.app.applibrary.Config.AppUtils.VolleySignleton.AppController;
 import dmax.dialog.SpotsDialog;
+import in.loanwiser.partnerapp.BankStamentUpload.Upload_Activity_Bank;
 import in.loanwiser.partnerapp.PDF_Dounloader.PermissionUtils;
 import in.loanwiser.partnerapp.PartnerActivitys.Dashboard_Activity;
 import in.loanwiser.partnerapp.PartnerActivitys.Home;
@@ -969,7 +970,7 @@ public class Creadite_Report_Activity extends SimpleActivity {
                                             popupWindow.dismiss();
 
                                             Toast.makeText(context,"Credite Report Created Successfully",Toast.LENGTH_SHORT).show();
-                                            Intent intent = new Intent(Creadite_Report_Activity.this, Dashboard_Activity.class);
+                                            Intent intent = new Intent(Creadite_Report_Activity.this, Upload_Activity_Bank.class);
                                             startActivity(intent);
                                             finish();
 

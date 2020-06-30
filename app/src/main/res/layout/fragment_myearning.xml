@@ -50,6 +50,7 @@
                             android:layout_height="wrap_content"
                             android:text="@string/total_earnings"
                             android:textColor="@color/white"
+                            android:textSize="12dp"
                             android:gravity="center_horizontal"
                             android:layout_marginLeft="20dp"
                             />
@@ -68,7 +69,9 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="8500"
+                            android:textSize="20dp"
                             android:textStyle="bold"
+                            android:id="@+id/total_earnings"
                             android:gravity="center_horizontal"
                             android:textColor="@color/white"
                             />
@@ -93,6 +96,7 @@
                             android:layout_height="wrap_content"
                             android:text="@string/potencial_earn"
                             android:textColor="@color/white"
+                            android:textSize="12dp"
                             android:gravity="center_horizontal"
                             android:layout_marginLeft="20dp"
                             />
@@ -114,7 +118,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="@string/disbursal_lead"
-                            android:textSize="12sp"
+                            android:textSize="10dp"
                             android:textColor="@color/gray"
                             android:gravity="center_horizontal"/>
 
@@ -130,6 +134,8 @@
                             android:layout_height="wrap_content"
                             android:text="12000"
                             android:textStyle="bold"
+                            android:textSize="14dp"
+                            android:id="@+id/potential_earnings"
                             android:textColor="@color/white"
                             android:gravity="center_horizontal"/>
 
@@ -153,6 +159,7 @@
                             android:layout_height="wrap_content"
                             android:text="@string/disbursal_lead"
                             android:textColor="@color/white"
+                            android:textSize="12dp"
                             android:gravity="center_horizontal"/>
 
                     </LinearLayout>
@@ -166,6 +173,8 @@
                             android:layout_height="wrap_content"
                             android:text="540"
                             android:textStyle="bold"
+                            android:textSize="14dp"
+                            android:id="@+id/disbursal_of_leads"
                             android:gravity="center_horizontal"
                             android:textColor="@color/white"
                             />
@@ -199,6 +208,7 @@
                     android:layout_marginTop="10dp"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
+                    android:textSize="12dp"
                     android:textColor="@color/text_midblue"
                     android:text="@string/potencial_desc"
                     />
@@ -214,6 +224,7 @@
                         android:layout_marginTop="10dp"
                         android:gravity="center_horizontal"
                         android:textAlignment="center"
+                        android:textSize="12dp"
                         android:textColor="@color/text_midblue"
                         android:textStyle="bold"
                         android:text="@string/clickhere_earn"
