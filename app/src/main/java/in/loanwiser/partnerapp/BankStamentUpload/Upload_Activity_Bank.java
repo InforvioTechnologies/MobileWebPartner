@@ -20,6 +20,7 @@ import android.provider.OpenableColumns;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.Toast;
@@ -31,10 +32,19 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+import adhoc.app.applibrary.Config.AppUtils.Objs;
+import adhoc.app.applibrary.Config.AppUtils.Params;
+import adhoc.app.applibrary.Config.AppUtils.Pref.Pref;
+import dmax.dialog.SpotsDialog;
+import in.loanwiser.partnerapp.Documents.Document_Details;
+import in.loanwiser.partnerapp.Documents.SingleUploadBroadcastReceiver;
 import in.loanwiser.partnerapp.PartnerActivitys.Dashboard_Activity;
+import in.loanwiser.partnerapp.PartnerActivitys.Home;
+import in.loanwiser.partnerapp.PartnerActivitys.SimpleActivity;
 import in.loanwiser.partnerapp.R;
+import in.loanwiser.partnerapp.Step_Changes_Screen.Lead_Crration_Activity;
 
-public class Upload_Activity_Bank extends  AppCompatActivity implements View.OnClickListener {
+public class Upload_Activity_Bank extends SimpleActivity implements View.OnClickListener, SingleUploadBroadcastReceiver.Delegate {
 
 private static final int PICK_PDF_REQUEST =1 ;
         RecyclerView recyclerView;
@@ -58,8 +68,7 @@ private List<String> fileDoneList;
         ArrayList<Uri> uriarrayList = new ArrayList<>();
 
 
-
-
+private android.app.AlertDialog progressDialog;
 
 
 
@@ -75,21 +84,32 @@ public static final String Bankstatement_URl="http://cscapitest.propwiser.com/mo
         MultipartUploadRequest uploadRequest;
         AppCompatTextView skip_payment;
 
+        private final SingleUploadBroadcastReceiver uploadReceiver =
+                new SingleUploadBroadcastReceiver();
+
+        EditText docpass_edt_txt;
 
 @Override
 protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_upload___bank);
+
+       // setContentView(R.layout.activity_upload___bank);
+
+        setContentView(R.layout.activity_simple);
+        Objs.a.setStubId(this,R.layout.activity_upload___bank);
+        initTools(R.string.bank_statment);
         upload=findViewById(R.id.upload);
         listview=findViewById(R.id.listview);
         submit=findViewById(R.id.submit);
         skip_payment=findViewById(R.id.skip_payment);
-
+        progressDialog = new SpotsDialog(this, R.style.Custom);
         fileNameList = new ArrayList<>();
         fileDoneList=new ArrayList<>();
 
         upload.setOnClickListener(this);
         submit.setOnClickListener(this);
+
+        docpass_edt_txt = findViewById(R.id.docpass_edt_txt);
 
 
         skip_payment.setOnClickListener(new View.OnClickListener() {
@@ -281,6 +301,8 @@ public void uploadMultipart() {
         //getting the actual path of the image
         ArrayList<String> templist = new ArrayList<String>();
 
+        String pdf_password = docpass_edt_txt.getText().toString();
+
       /*  for (int n=0;n<uriarrayList.size();n++){
             Log.i("TAG", "uploadMultipart:loop "+uriarrayList.get(n));
             String paths= String.valueOf(uriarrayList.get(n));
@@ -301,6 +323,8 @@ public void uploadMultipart() {
         //Uploading code
         try {
         String uploadId = UUID.randomUUID().toString();
+        uploadReceiver.setDelegate(this);
+        uploadReceiver.setUploadID(uploadId);
         Log.i("Uploadpdf", "uploadMultipart:" + uploadId);
         Log.i("Uploadpdf", "Path: " + pathlist.get(0));
         Log.i("Uploadpdf", "uploadMultipart_filename: " + fileName);
@@ -313,17 +337,17 @@ public void uploadMultipart() {
 
         for (int i=0;i<pathlist.size();i++){
         String finalpath= pathlist.get(i);
+        progressDialog.show();
         new MultipartUploadRequest(this, uploadId, Bankstatement_URl)
         .addFileToUpload(finalpath, "img_url") //Adding file
         .addParameter("doc_name", String.valueOf(fileNameList.get(i))) //Adding text parameter to the request
         //Adding file
         //Adding text parameter to the request
-        .addParameter("legal_id", "126307")
         .addParameter("pdf_password", "")
-        .addParameter("relationship_type", "1")
+        .addParameter("relationship_type", pdf_password)
         .addParameter("is_mobileupload ", "4")
-        .addParameter("transaction_id  ", "11995")
-        .setNotificationConfig(new UploadNotificationConfig())
+        .addParameter("transaction_id  ", Pref.getTRANSACTIONID(getApplicationContext()))
+       // .setNotificationConfig(new UploadNotificationConfig())
         .setMaxRetries(2)
         .startUpload(); //Starting the upload
 
@@ -341,6 +365,64 @@ public void uploadMultipart() {
 
 
 
+
+
+        @Override
+        protected void onPause() {
+                super.onPause();
+
+                uploadReceiver.unregister(this);
+        }
+
+
+        @Override
+        public void onProgress(int progress) {
+                Log.i("TAG", "The progress of the upload with ID " + " is: " + progress);
+        }
+
+        @Override
+        public void onProgress(long uploadedBytes, long totalBytes) {
+                Log.i("TAG", "The progress of the upload with ID "
+                        + uploadedBytes + " is: " + totalBytes);
+        }
+
+        @Override
+        public void onError(Exception exception) {
+                Log.e("TAG", "Error in upload with ID:"
+                        + exception.getLocalizedMessage(), exception);
+        }
+
+        @Override
+        public void onCompleted(int serverResponseCode, byte[] serverResponseBody) {
+
+                String response = String.valueOf(serverResponseCode);
+
+                Log.e("the server Response", String.valueOf(serverResponseCode));
+                Log.e("the server ", String.valueOf(serverResponseBody));
+
+                if(response.equals("200")){
+                        progressDialog.dismiss();
+
+                       Toast.makeText(getApplicationContext(),"Successfully Uploaded",Toast.LENGTH_SHORT).show();
+                      /* Intent intent = new Intent(Upload_Activity_Bank.this, Lead_Crration_Activity.class);
+                       startActivity(intent);
+                        finish();*/
+                        // Send_Reload(app_id);
+
+                        //   getContentResolver().delete(uri, null, null);
+                }else if(response.equals("406")){
+                        progressDialog.dismiss();
+
+                }
+                //Upload with ID [B@19058a20 has been completed with HTTP 406. Response from server:
+                //  Log.i(TAG, "Upload with ID " + serverResponseBody + " has been completed with HTTP " + serverResponseCode + ". Response from server: " );
+
+        }
+
+        @Override
+        public void onCancelled() {
+
+        }
 
 
     /*    String uripath=String.valueOf(uriarrayList);
@@ -379,5 +461,6 @@ public String getFileName(Uri uri) {
 protected void onResume() {
         super.onResume();
         fileAdapter.notifyDataSetChanged();
+        uploadReceiver.register(this);
         }
         }

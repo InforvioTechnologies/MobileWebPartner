@@ -14,6 +14,7 @@
     <string name="Download">Download</string>
 
     <string name="lead_creation">Lead Creation</string>
+    <string name="bank_statment">Bank Statment Upload</string>
     <string name="payment">Payment</string>
 
     <string name="name">Name</string>
@@ -710,6 +711,7 @@
     <string name="pay_coin">Pay using LoanWiser Credit Coins</string>
     <string name="collect_cash">Pay &amp; Collect Cash</string>
     <string name="skippayment">Skip Payment &amp; Proceed</string>
+    <string name="skippayment1">Skip &amp; Proceed</string>
     <string name="note_desc"><b>Note :</b> Any amount of payment made do not assure a guaranteed loan. if you skip this payment for credit Analysis,there will be delay in your loan processing</string>
 
     <string name="permission_request_message">Storage permission allows us to save pdf.</string>

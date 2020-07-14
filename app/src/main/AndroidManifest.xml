@@ -15,6 +15,10 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="com.android.launcher.permission.INSTALL_SHORTCUT" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
     <uses-feature android:name="android.hardware.camera" />
     <uses-feature
@@ -77,6 +81,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity android:name=".User_Account.VerifedOTP" /> <!-- Firebase Notifications -->
         <service android:name=".service.MyFirebaseMessagingService">
             <intent-filter>
@@ -106,11 +111,10 @@
             android:name=".BankStamentUpload.Upload_Activity_Bank"
             android:theme="@style/NoAction2"
             android:windowSoftInputMode="stateHidden" />
-
-        <activity android:name=".Push_Notification.Push_Notification_List"
+        <activity
+            android:name=".Push_Notification.Push_Notification_List"
             android:theme="@style/NoAction2"
-            android:windowSoftInputMode="stateHidden"/>
-
+            android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".BankStamentUpload.Bank_Statement_Upload"
             android:theme="@style/NoAction2"

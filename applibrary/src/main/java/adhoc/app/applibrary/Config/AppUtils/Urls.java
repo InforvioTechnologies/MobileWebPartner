@@ -107,6 +107,7 @@ public class Urls {
 
  public static String Payment_Initialize  = Urls_step + "payment_initialize";
  public static String Report_Activity  = Urls_step + "crif_mail_gen";
+ public static String Lead_Details_statues  = Urls_step + "lead_details";
 
  public static String CRIF_Generation  = Urls_step + "crif_generation";
     public static String VIEW_VIABILITYDATA = Urls_step + "view_viabilitydata";

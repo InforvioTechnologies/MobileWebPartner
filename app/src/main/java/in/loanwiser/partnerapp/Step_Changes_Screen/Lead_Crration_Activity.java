@@ -133,6 +133,7 @@ public class Lead_Crration_Activity extends SimpleActivity {
         fonts();
         makeJsonObjReq1();
         Click();
+
       /*  lead_cr_step1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

@@ -20,7 +20,8 @@
                 app:cardBackgroundColor="@color/shadow_colour"
                 app:cardCornerRadius="10dp">
 
-                <RelativeLayout
+                <LinearLayout
+                    android:orientation="vertical"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content">
 
@@ -34,16 +35,24 @@
                         android:textColor="@color/text_blue"
                         android:text="@string/note"/>
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/noteid"
-                        android:textColor="@color/text_blue"
-                        android:layout_centerHorizontal="true"
-                        android:text="@string/clickhere"/>
+                    <LinearLayout
+                        android:id="@+id/earning_details_id"
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:layout_marginLeft="20dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/noteid"
+                            android:textColor="@color/text_blue"
+                            android:layout_centerHorizontal="true"
+                            android:text="@string/clickhere"/>
+                    </LinearLayout>
 
 
-                </RelativeLayout>
+
+                </LinearLayout>
             </androidx.cardview.widget.CardView>
 
             <LinearLayout

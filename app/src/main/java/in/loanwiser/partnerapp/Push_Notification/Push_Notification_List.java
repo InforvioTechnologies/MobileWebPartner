@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
@@ -63,6 +64,8 @@ public class Push_Notification_List extends SimpleActivity implements OnLoadMore
     private AlertDialog progressDialog;
     private String tag_json_obj = "jobj_req", tag_json_arry = "jarray_req";
 
+    LinearLayout Notification_yes,no_notification;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -78,6 +81,11 @@ public class Push_Notification_List extends SimpleActivity implements OnLoadMore
         progressBar = (ProgressBar) findViewById(R.id.progress_bar);
         progressDialog = new SpotsDialog(this, R.style.Custom);
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+
+        Notification_yes = (LinearLayout) findViewById(R.id.Notification_yes);
+        no_notification = (LinearLayout) findViewById(R.id.no_notification);
+
+
         Account_Listings_Details();
         Notification_Adapter = new Notification_Adapter_Dashboard(this);
         recyclerView.setLayoutManager(new StaggeredGridLayoutManager(1,StaggeredGridLayoutManager.VERTICAL));
@@ -129,6 +137,9 @@ public class Push_Notification_List extends SimpleActivity implements OnLoadMore
 
                                 if (ja.length()>0){
 
+                                    Notification_yes.setVisibility(View.VISIBLE);
+                                    no_notification.setVisibility(View.GONE);
+
                                     for(int i = 0;i<ja.length();i++){
                                         JSONObject J = ja.getJSONObject(i);
 
@@ -151,6 +162,9 @@ public class Push_Notification_List extends SimpleActivity implements OnLoadMore
 
 
                                 }else {
+
+                                    Notification_yes.setVisibility(View.GONE);
+                                    no_notification.setVisibility(View.VISIBLE);
                                     Objs.a.ShowHideNoItems(mCon,true);
                                 }
 

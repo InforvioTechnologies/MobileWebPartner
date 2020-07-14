@@ -29,7 +29,6 @@
                         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
 
-
                         <LinearLayout
                             android:orientation="vertical"
                             android:layout_width="match_parent"
@@ -79,6 +78,7 @@
                                         style="@style/SmallText"/>
 
                                     <androidx.recyclerview.widget.RecyclerView
+                                        android:layout_marginTop="20dp"
                                         xmlns:android="http://schemas.android.com/apk/res/android"
                                         xmlns:app="http://schemas.android.com/apk/res-auto"
                                         android:visibility="visible"

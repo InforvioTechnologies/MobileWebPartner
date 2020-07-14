@@ -2,6 +2,7 @@ package in.loanwiser.partnerapp.My_Earnings;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -40,6 +41,7 @@ import adhoc.app.applibrary.Config.AppUtils.VolleySignleton.AppController;
 import dmax.dialog.SpotsDialog;
 import in.loanwiser.partnerapp.PartnerActivitys.SimpleActivity;
 import in.loanwiser.partnerapp.R;
+import in.loanwiser.partnerapp.Step_Changes_Screen.Pay_Out_Screen;
 
 public class My_Earnings extends SimpleActivity {
 
@@ -47,7 +49,7 @@ public class My_Earnings extends SimpleActivity {
     private String tag_json_obj = "jobj_req", tag_json_arry = "jarray_req";
     private AlertDialog progressDialog;
 
-    AppCompatTextView total_earnings,potential_earnings,disbursal_of_leads;
+    AppCompatTextView total_earnings,potential_earnings,disbursal_of_leads,my_earning1;
 
     private Context context = this;
     TabLayout tabLayout;
@@ -69,11 +71,18 @@ public class My_Earnings extends SimpleActivity {
         total_earnings = (AppCompatTextView) findViewById(R.id.total_earnings);
         potential_earnings = (AppCompatTextView) findViewById(R.id.potential_earnings);
         disbursal_of_leads = (AppCompatTextView) findViewById(R.id.disbursal_of_leads);
+        my_earning1 = (AppCompatTextView) findViewById(R.id.my_earning);
 
 
        // scrollView=findViewById(R.id.scroll);
 
-
+        my_earning1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(My_Earnings.this, Pay_Out_Screen.class);
+                startActivity(intent);
+            }
+        });
 
      /*   viewPager.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -93,9 +102,6 @@ public class My_Earnings extends SimpleActivity {
 
 
     }
-
-
-
 
     static class ViewPagerAdapter extends FragmentPagerAdapter {
         private final List<Fragment> mList = new ArrayList<>();

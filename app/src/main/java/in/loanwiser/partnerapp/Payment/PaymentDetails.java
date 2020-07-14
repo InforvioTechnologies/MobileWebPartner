@@ -488,6 +488,11 @@ public class PaymentDetails extends SimpleActivity {
                             if(statues.contains("success"))
                             {
 
+                                Toast.makeText(mCon, "Payment Link is Sucessfully Send to your Mobile No",Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(PaymentDetails.this,Dashboard_Activity.class);
+                                startActivity(intent);
+
+
                             }else
                             {
                                 Toast.makeText(mCon, "you have already paid the Amount",Toast.LENGTH_SHORT).show();

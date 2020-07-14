@@ -82,7 +82,6 @@ public class Applicant_Doc_Details extends SimpleActivity {
         Document_Details();
 
 
-
     }
 
     private void Document_Details() {
@@ -90,15 +89,11 @@ public class Applicant_Doc_Details extends SimpleActivity {
         JSONObject J= null;
         try {
             J =new JSONObject();
-          //  J.put(Params.checklist_code, Params.EMITRA);
-         //   J.put("transaction_id", "11465");
-           // J.put("applicant_type", "1");
-         //   J.put("employement_type", "1");
 
             J.put("transaction_id", transaction_id);
             J.put("applicant_type", Applicant_type);
             J.put("employement_type", emp_state);
-            J.put("type_req", 0);
+            J.put("type_request", 0);
             J.put("status_flag", 1);
 
         } catch (JSONException e) {

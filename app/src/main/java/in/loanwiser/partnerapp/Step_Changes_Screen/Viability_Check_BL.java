@@ -6976,9 +6976,9 @@ public class Viability_Check_BL extends SimpleActivity {
     @Override
     public void onBackPressed() {
 
-        Objs.ac.StartActivity(mCon, Dashboard_Activity.class);
+      /*  Objs.ac.StartActivity(mCon, Dashboard_Activity.class);
         finish();
-        super.onBackPressed();
+        super.onBackPressed();*/
 
     }
 }

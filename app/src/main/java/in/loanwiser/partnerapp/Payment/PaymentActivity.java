@@ -325,7 +325,7 @@ public class PaymentActivity extends SimpleActivity implements CompoundButton.On
                 }else
                 {
                      pay_plan = "2";
-                    Log.e("the value to fine pay_plan pay_plan",pay_plan);
+                    Log.e("the value to fine ",pay_plan);
                     Intent intent = new Intent(PaymentActivity.this, PaymentDetails.class);
                     intent.putExtra("payment_option", PAY_OPTION);
                     intent.putExtra("paymentamoubt", paymentamoubt);

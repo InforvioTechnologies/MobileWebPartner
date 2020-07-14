@@ -1,6 +1,7 @@
 package in.loanwiser.partnerapp.Partner_Statues;
 
 import android.app.AlertDialog;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.appcompat.widget.AppCompatTextView;
@@ -37,10 +38,12 @@ import in.loanwiser.partnerapp.My_Earnings.My_Earnings;
 import in.loanwiser.partnerapp.My_Earnings.OneFragment;
 import in.loanwiser.partnerapp.My_Earnings.TwoFragment;
 import in.loanwiser.partnerapp.R;
+import in.loanwiser.partnerapp.Step_Changes_Screen.Pay_Out_Screen;
+import in.loanwiser.partnerapp.Step_Changes_Screen.Step_Completion_Screen;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link MyearningFragment#newInstance} factory method to
+ * Use the  factory method to
  * create an instance of this fragment.
  */
 public class MyearningFragment extends  Fragment {
@@ -55,7 +58,7 @@ public class MyearningFragment extends  Fragment {
     private String tag_json_obj = "jobj_req", tag_json_arry = "jarray_req";
     private AlertDialog progressDialog;
 
-    AppCompatTextView total_earnings,potential_earnings,disbursal_of_leads;
+    AppCompatTextView total_earnings,potential_earnings,disbursal_of_leads,my_earning;
     TabLayout tabLayout;
     ViewPager viewPager;
 
@@ -69,12 +72,20 @@ public class MyearningFragment extends  Fragment {
         potential_earnings = (AppCompatTextView) v.findViewById(R.id.potential_earnings);
         disbursal_of_leads = (AppCompatTextView) v.findViewById(R.id.disbursal_of_leads);
 
+        my_earning = (AppCompatTextView) v.findViewById(R.id.my_earning);
+
         Account_Listings_Details1();
 
         tabLayout = v.findViewById(R.id.tabs);
         viewPager = v.findViewById(R.id.viewpager);
 
-
+        my_earning.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext(), Pay_Out_Screen.class);
+                startActivity(intent);
+            }
+        });
 
         return v;
 

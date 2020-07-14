@@ -3214,12 +3214,12 @@ public class Eligibility_Check_PL extends SimpleActivity {
         AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
     }
 
-    @Override
+  /*  @Override
     public void onBackPressed() {
 
         Objs.ac.StartActivity(mCon, Dashboard_Activity.class);
         finish();
         super.onBackPressed();
-    }
+    }*/
 
 }

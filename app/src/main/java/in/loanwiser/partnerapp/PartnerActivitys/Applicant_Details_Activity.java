@@ -18,6 +18,7 @@ import adhoc.app.applibrary.Config.AppUtils.Objs;
 import adhoc.app.applibrary.Config.AppUtils.Pref.Pref;
 import dmax.dialog.SpotsDialog;
 import in.loanwiser.partnerapp.Partner_Lead_OTP_Verification.Partner_Lead_OTP_Verification;
+import in.loanwiser.partnerapp.Partner_Statues.DashBoard_new;
 import in.loanwiser.partnerapp.R;
 import in.loanwiser.partnerapp.Step_Changes_Screen.Lead_Crration_Activity;
 import in.loanwiser.partnerapp.Step_Changes_Screen.Step_Completion_Activity;
@@ -204,7 +205,7 @@ public class Applicant_Details_Activity extends SimpleActivity {
     }
     @Override
     public void onBackPressed() {
-        Objs.ac.StartActivity(mCon, Dashboard_Activity.class);
+        Objs.ac.StartActivity(mCon, DashBoard_new.class);
         finish();
         super.onBackPressed();
     }

@@ -209,6 +209,7 @@
                 android:textColor="@color/text_blue"/>
 
             <EditText
+                android:id="@+id/docpass_edt_txt"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="15dp"
@@ -255,7 +256,16 @@
                 android:gravity="center"
                 android:textColor="@color/mid_blue"
                 android:elevation="5dp"
-                android:text="@string/skippayment"/>
+                android:text="@string/skippayment1"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+               android:layout_marginTop="30dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:textColor="@color/mid_blue"
+                android:elevation="5dp" />
 
         </LinearLayout>
 

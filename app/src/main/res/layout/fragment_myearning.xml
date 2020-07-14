@@ -227,6 +227,7 @@
                         android:textSize="12dp"
                         android:textColor="@color/text_midblue"
                         android:textStyle="bold"
+                        android:id="@+id/my_earning"
                         android:text="@string/clickhere_earn"
                         />
                 </LinearLayout>

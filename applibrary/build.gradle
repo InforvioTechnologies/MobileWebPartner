@@ -36,4 +36,8 @@ dependencies {
 
    // compile project(path: ':crisp-sdk')
     implementation 'im.crisp:crisp-sdk:0.1.6'
+    debugCompile('com.github.ajitsing:sherlock:1.0.4@aar') {
+        transitive = true
+    }
+    releaseCompile('com.github.ajitsing:sherlock-no-op:1.0.4@aar')
 }

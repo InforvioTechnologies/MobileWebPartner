@@ -785,12 +785,15 @@ public class Creadite_Report_Activity extends SimpleActivity {
                             JSONObject jsonObject1 = response.getJSONObject("response");
                             if(jsonObject1.getString("applicant_status").equals("success")) {
 
-                                CRIF_Generation();
+                                Toast.makeText(context,"Credite Generated Successfully ",Toast.LENGTH_SHORT).show();
+
+                                Intent intent = new Intent(Creadite_Report_Activity.this, Upload_Activity_Bank.class);
+                                startActivity(intent);
+                                finish();
 
                                 }else if(jsonObject1.getString("pay_status").equals("error"))
                                 {
                                     Toast.makeText(context,"Credite Report Failed",Toast.LENGTH_SHORT).show();
-
                                 }
 
                         } catch (JSONException e) {
@@ -974,8 +977,6 @@ public class Creadite_Report_Activity extends SimpleActivity {
                                             startActivity(intent);
                                             finish();
 
-                                            startActivity(intent);
-                                            finish();
                                         }
                                     });
 

@@ -8,6 +8,7 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.Volley;
+import com.singhajit.sherlock.core.Sherlock;
 
 import im.crisp.sdk.Crisp;
 
@@ -28,6 +29,9 @@ public class AppController extends android.app.Application {
     @Override
     public void onCreate() {
         super.onCreate();
+
+        Sherlock.init(this);
+
         mInstance = this;
 
         Crisp.initialize(this);

@@ -18,7 +18,7 @@
         <item android:id="@+id/my_earnings"
             android:icon="@drawable/ic_wallet"
             android:title="My Earnings" />
-        <item android:id="@+id/nav_item_three"
+        <item android:id="@+id/pay_structure"
             android:icon="@drawable/ic_file"
             android:title="Payout Structure" />
         <item android:id="@+id/nav_item_three1"

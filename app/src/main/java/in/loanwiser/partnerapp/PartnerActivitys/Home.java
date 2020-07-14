@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 
+import androidx.appcompat.widget.AppCompatImageView;
 import androidx.appcompat.widget.AppCompatTextView;
 import androidx.core.content.ContextCompat;
 import androidx.appcompat.app.AppCompatActivity;
@@ -40,6 +41,7 @@ import adhoc.app.applibrary.Config.AppUtils.VolleySignleton.AppController;
 import dmax.dialog.SpotsDialog;
 import in.loanwiser.partnerapp.Documents.Applicant_Details_Single;
 import in.loanwiser.partnerapp.PDF_Dounloader.PermissionUtils;
+import in.loanwiser.partnerapp.Partner_Statues.DashBoard_new;
 import in.loanwiser.partnerapp.Payment.PaymentActivity;
 import in.loanwiser.partnerapp.R;
 import in.loanwiser.partnerapp.Step_Changes_Screen.CRIF_Report_Activity;
@@ -73,18 +75,20 @@ public class Home extends AppCompatActivity {
     private ImageView app_doc_img,app_info_img,app_info_img11,app_interview_img,app_offer_img,app_track_img;
     private TextView customerinterview,offerdetails,app_doc_message,app_info_message;
     private LinearLayout lead_cr_statues;
-    CardView Applicant_info_ly,Document_check_list,Document_Upload,
+    CardView Applicant_info_ly,Document_check_list,Document_Upload,offer_generation,
             Viability_Check,eligibility_check,viability_Report,Credit_REport_Generation,Paymet,
-            CRIF_Check;
+            CRIF_Check,step2_card;
 
     ImageView viability_check_img2,eligibility_check_img,viability_report_image,Credite_report_image,
             payment_img,crif_img,credite_report_img;
 
     String viability,eligibility,credit_request,payment,viability_report,viability_report_URL,
-    document_checklist,document_upload,loan_type_id,loan_type,crif_status;
+    document_checklist,document_upload,loan_type_id,loan_type,crif_status,submit_loanwiser,
+            part_compstatus,part_subcompstatus;
+    AppCompatImageView call_phone;
 
     AppCompatTextView lead_name,mobile_no,Loan_amount,loan_type_,loan_submit_statues1,viability_statues,
-            eligibility_check_cmp,payment_statues_comp,crif_report_cmp,viability_report_cmp;
+            eligibility_check_cmp,payment_statues_comp,crif_report_cmp,viability_report_cmp,loan_statues;
 
 
     private static final int STORAGE_PERMISSION_REQUEST_CODE = 1;
@@ -127,7 +131,29 @@ public class Home extends AppCompatActivity {
         stateProgressBar1.setStateDescriptionData(descriptionData);
         stateProgressBar2.setStateDescriptionData(descriptionData);
 
+        call_phone = findViewById(R.id.call_phone);
+      /*  call_phone.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
+                Intent intent = new Intent(Intent.ACTION_CALL);
+                intent.setData(Uri.parse("tel:" + mobileno));
+                startActivity(intent);
+            }
+        });*/
+        call_phone.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent callIntent = new Intent(Intent.ACTION_DIAL);
+                Log.i("TAG", "onClick: "+mobileno);
+                callIntent.setData(Uri.parse("tel:" +mobileno));
+                try {
+                    startActivity(callIntent);
+                } catch (android.content.ActivityNotFoundException ex) {
+                    Toast.makeText(Home.this, "Could not find an activity to place the call.", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
 
         try {
             JSONArray array = new JSONArray(Applicant_Statues);
@@ -171,7 +197,7 @@ public class Home extends AppCompatActivity {
         Step_copletions();
          fonts();
         clicks();
-        Work_flow_status(transaction_id);
+
 
     }
 
@@ -181,6 +207,7 @@ public class Home extends AppCompatActivity {
         Applicant_info_ly = (CardView) findViewById(R.id.Applicant_info_ly);
         Document_check_list = (CardView) findViewById(R.id.Document_check_list);
         Document_Upload = (CardView) findViewById(R.id.Document_Upload);
+        offer_generation = (CardView) findViewById(R.id.offer_generation);
         offer = (CardView) findViewById(R.id.offer_generation);
         Paymet = (CardView) findViewById(R.id.Paymet);
 
@@ -189,6 +216,7 @@ public class Home extends AppCompatActivity {
         viability_Report = (CardView) findViewById(R.id.viability_Report);
         Credit_REport_Generation = (CardView) findViewById(R.id.Credit_REport_Generation);
         CRIF_Check = (CardView) findViewById(R.id.CRIF_Check);
+        step2_card = (CardView) findViewById(R.id.step2_card);
 
 
 
@@ -197,6 +225,7 @@ public class Home extends AppCompatActivity {
         Loan_amount = (AppCompatTextView) findViewById(R.id.Loan_amount);
         loan_type_ = (AppCompatTextView) findViewById(R.id.loan_type_);
         loan_submit_statues1 = (AppCompatTextView) findViewById(R.id.loan_submit_statues1);
+        loan_statues = (AppCompatTextView) findViewById(R.id.loan_statues);
 
 
         viability_statues = (AppCompatTextView) findViewById(R.id.viability_statues);
@@ -251,7 +280,7 @@ public class Home extends AppCompatActivity {
                         intent.putExtra("user_id", user_id);
                         intent.putExtra("transaction_id", transaction_id);
                         startActivity(intent);
-                        finish();
+                       // finish();
 
                     }else if(loan_type_id.equals("20"))
                     {
@@ -259,13 +288,13 @@ public class Home extends AppCompatActivity {
                         intent.putExtra("user_id", user_id);
                         intent.putExtra("transaction_id", transaction_id);
                         startActivity(intent);
-                        finish();
+                      //  finish();
 
                     }else
                     {
                         Intent intent = new Intent(Home.this, Viability_Check_HL_new.class);
                         startActivity(intent);
-                        finish();
+                       // finish();
                     }
 
 
@@ -292,7 +321,7 @@ public class Home extends AppCompatActivity {
                             intent.putExtra("user_id", user_id);
                             intent.putExtra("transaction_id", transaction_id);
                             startActivity(intent);
-                            finish();
+                           // finish();
 
                         }else if(loan_type_id.equals("20"))
                         {
@@ -300,13 +329,13 @@ public class Home extends AppCompatActivity {
                             intent.putExtra("user_id", user_id);
                             intent.putExtra("transaction_id", transaction_id);
                             startActivity(intent);
-                            finish();
+                           // finish();
 
                         }else
                         {
                             Intent intent = new Intent(Home.this, Eligibility_HL_New.class);
                             startActivity(intent);
-                            finish();
+                           // finish();
                         }
                     }
                 }else
@@ -344,7 +373,7 @@ public class Home extends AppCompatActivity {
                 {
                     Intent intent = new Intent(Home.this, PaymentActivity.class);
                     startActivity(intent);
-                    finish();
+                   // finish();
                 }
             }
         });
@@ -418,11 +447,14 @@ public class Home extends AppCompatActivity {
                             {
                                 JSONObject jsonObject1 = response.getJSONObject("data");
                                 String user_name = jsonObject1.getString("user_name");
-                                String mobileno = jsonObject1.getString("mobileno");
+                                 mobileno = jsonObject1.getString("mobileno");
                                 String loan_type = jsonObject1.getString("loan_type");
                                 String loan_amount = jsonObject1.getString("loan_amount");
                                 String loan_status = jsonObject1.getString("loan_status");
                                 String curr_status = jsonObject1.getString("curr_status");
+                                 submit_loanwiser = jsonObject1.getString("submit_loanwiser");
+                                part_compstatus = jsonObject1.getString("part_compstatus");
+                                part_subcompstatus = jsonObject1.getString("part_subcompstatus");
 
                                 lead_name.setText(user_name);
                                 mobile_no.setText(mobileno);
@@ -432,22 +464,31 @@ public class Home extends AppCompatActivity {
 
                                 if(curr_status.equals("6"))
                                 {
+                                    loan_statues.setVisibility(View.VISIBLE);
                                     stateProgressBar.setVisibility(View.VISIBLE);
                                     stateProgressBar1.setVisibility(View.GONE);
                                     stateProgressBar2.setVisibility(View.GONE);
                                 }else if(curr_status.equals("7"))
                                 {
+                                    loan_statues.setVisibility(View.VISIBLE);
                                     stateProgressBar.setVisibility(View.GONE);
                                     stateProgressBar1.setVisibility(View.VISIBLE);
                                     stateProgressBar2.setVisibility(View.GONE);
-                                }else
+                                }else if(curr_status.equals("8"))
                                 {
+                                    loan_statues.setVisibility(View.VISIBLE);
                                     stateProgressBar.setVisibility(View.GONE);
                                     stateProgressBar1.setVisibility(View.GONE);
                                     stateProgressBar2.setVisibility(View.VISIBLE);
+                                }else
+                                {
+                                    loan_statues.setVisibility(View.GONE);
+                                    stateProgressBar.setVisibility(View.GONE);
+                                    stateProgressBar1.setVisibility(View.GONE);
+                                    stateProgressBar2.setVisibility(View.GONE);
                                 }
 
-
+                                Work_flow_status(transaction_id);
 
                             }
 
@@ -524,6 +565,8 @@ public class Home extends AppCompatActivity {
                                 Document_Upload.setVisibility(View.GONE);
                                 offer.setVisibility(View.GONE);
 
+
+
                             }else
                             {
                                 Viability_Check.setVisibility(View.VISIBLE);
@@ -533,6 +576,74 @@ public class Home extends AppCompatActivity {
                                 Document_check_list.setVisibility(View.GONE);
                                 Document_Upload.setVisibility(View.VISIBLE);
                                 offer.setVisibility(View.VISIBLE);
+                            }
+
+                            if(submit_loanwiser.equals("1"))
+                            {
+                               if(part_compstatus.equals("1"))
+                               {
+                                   step2_card.setEnabled(false);
+                                   Viability_Check.setEnabled(false);
+                                   eligibility_check.setEnabled(false);
+                                   Paymet.setEnabled(false);
+                                   CRIF_Check.setEnabled(false);
+                                   viability_Report.setEnabled(false);
+                                   Document_Upload.setEnabled(false);
+                                   offer_generation.setEnabled(false);
+
+                               }else if(part_compstatus.equals("2"))
+                               {
+
+                                   if(part_subcompstatus.equals("1"))
+                                   {
+
+                                       Viability_Check.setEnabled(true);
+                                       eligibility_check.setEnabled(false);
+                                       Paymet.setEnabled(false);
+                                       CRIF_Check.setEnabled(false);
+                                       viability_Report.setEnabled(false);
+
+                                   }else if(part_subcompstatus.equals("2"))
+                                   {
+
+                                       Viability_Check.setEnabled(true);
+                                       eligibility_check.setEnabled(true);
+                                       Paymet.setEnabled(false);
+                                       CRIF_Check.setEnabled(false);
+                                       viability_Report.setEnabled(false);
+
+                                   }else if(part_subcompstatus.equals("3"))
+                                   {
+
+                                       Viability_Check.setEnabled(true);
+                                       eligibility_check.setEnabled(true);
+                                       Paymet.setEnabled(true);
+                                       CRIF_Check.setEnabled(false);
+                                       viability_Report.setEnabled(false);
+
+                                   }else if(part_subcompstatus.equals("4"))
+                                   {
+                                       Viability_Check.setEnabled(true);
+                                       eligibility_check.setEnabled(true);
+                                       Paymet.setEnabled(true);
+                                       CRIF_Check.setEnabled(true);
+                                       viability_Report.setEnabled(false);
+
+                                   }else if(part_subcompstatus.equals("5"))
+                                   {
+
+                                           Viability_Check.setEnabled(true);
+                                           eligibility_check.setEnabled(true);
+                                           Paymet.setEnabled(true);
+                                           CRIF_Check.setEnabled(true);
+                                           viability_Report.setEnabled(true);
+                                   }
+
+                               }
+
+                            }else
+                            {
+
                             }
 
 
@@ -866,7 +977,7 @@ public class Home extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        Objs.ac.StartActivity(mCon, Dashboard_Activity.class);
+        Objs.ac.StartActivity(mCon, DashBoard_new.class);
         finish();
 
         super.onBackPressed();

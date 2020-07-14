@@ -263,6 +263,12 @@ public class DashBoard_new extends AppCompatActivity  implements NavigationView.
 
             Intent intent = new Intent(DashBoard_new.this, My_Earnings.class);
             startActivity(intent);
+            //Pay_Out_Screen
+        }else if (id == R.id.pay_structure) {
+
+            Intent intent = new Intent(DashBoard_new.this, Pay_Out_Screen.class);
+            startActivity(intent);
+            //Pay_Out_Screen
         }
 
 
