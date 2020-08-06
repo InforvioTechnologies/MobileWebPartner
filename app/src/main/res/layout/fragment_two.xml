@@ -189,6 +189,7 @@
                     android:singleLine="true"
                     android:textSize="12dp"
                     android:textColor="@color/black"
+                    android:id="@+id/trans_his"
                     android:text="@string/transcation_history"
                     />
 
@@ -257,6 +258,7 @@
                     android:text="@string/date"
                     android:textSize="10dp"
                     android:textStyle="bold"
+                    android:id="@+id/date"
                     android:textColor="@color/text_blue"
                     />
 
@@ -274,6 +276,7 @@
                     android:text="@string/lead_detail"
                     android:textSize="10dp"
                     android:textStyle="bold"
+                    android:id="@+id/lead_detail"
                     android:textColor="@color/text_blue"
                     />
 
@@ -291,6 +294,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/loan_details"
                     android:textSize="10dp"
+                    android:id="@+id/loan_detail"
                     android:textStyle="bold"
                     android:textColor="@color/text_blue"
                     />
@@ -309,6 +313,7 @@
                     android:text="@string/amount"
                     android:textSize="10dp"
                     android:textStyle="bold"
+                    android:id="@+id/amount"
                     android:textColor="@color/text_blue"/>
 
             </LinearLayout>
@@ -327,7 +332,24 @@
             </androidx.recyclerview.widget.RecyclerView>
         </LinearLayout>
 
-
+        <LinearLayout
+            android:id="@+id/no_item"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="50dp"
+            android:padding="25dp"
+            android:visibility="gone"
+            android:gravity="center">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/no_trans"
+                android:textSize="25dp"
+                android:gravity="center"
+                android:textColor="#000000"
+                android:textStyle="bold"/>
+        </LinearLayout>
         <ProgressBar
             android:id="@+id/progress_bar"
             android:layout_width="50dp"

@@ -7,6 +7,8 @@ import android.os.Bundle;
 import androidx.appcompat.widget.AppCompatTextView;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
+
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -70,11 +72,12 @@ public class Offers_list extends SimpleActivity {
 
         progressDialog.show();
 
+        Log.e("offer result", String.valueOf(J));
         JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, Urls.OFFER_POST, J,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
-
+                        Log.e("offer result", String.valueOf(response));
                         try {
                             if(response.getBoolean("status")) {
 
@@ -91,7 +94,7 @@ public class Offers_list extends SimpleActivity {
 
                             }
                             else {
-                                Toast.makeText(getApplicationContext(),"Falls data",Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getApplicationContext(),"No Offer Generated",Toast.LENGTH_SHORT).show();
                             }
 
 

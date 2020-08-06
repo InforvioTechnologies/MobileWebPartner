@@ -1,10 +1,16 @@
 package in.loanwiser.partnerapp.Partner_Statues;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Typeface;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.appcompat.widget.AppCompatTextView;
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
@@ -14,6 +20,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -37,6 +44,8 @@ import dmax.dialog.SpotsDialog;
 import in.loanwiser.partnerapp.My_Earnings.My_Earnings;
 import in.loanwiser.partnerapp.My_Earnings.OneFragment;
 import in.loanwiser.partnerapp.My_Earnings.TwoFragment;
+import in.loanwiser.partnerapp.PDF_Dounloader.PermissionUtils;
+import in.loanwiser.partnerapp.PartnerActivitys.Home;
 import in.loanwiser.partnerapp.R;
 import in.loanwiser.partnerapp.Step_Changes_Screen.Pay_Out_Screen;
 import in.loanwiser.partnerapp.Step_Changes_Screen.Step_Completion_Screen;
@@ -53,7 +62,7 @@ public class MyearningFragment extends  Fragment {
         // Required empty public constructor
     }
 
-
+    private static final int STORAGE_PERMISSION_REQUEST_CODE = 1;
 
     private String tag_json_obj = "jobj_req", tag_json_arry = "jarray_req";
     private AlertDialog progressDialog;
@@ -61,6 +70,11 @@ public class MyearningFragment extends  Fragment {
     AppCompatTextView total_earnings,potential_earnings,disbursal_of_leads,my_earning;
     TabLayout tabLayout;
     ViewPager viewPager;
+    PermissionUtils permissionUtils;
+    AppCompatTextView tot_ear,pot_ear,dis_lead,totl_cred,earn_des;
+
+    CardView linearLayout,linearLayout2;
+    LinearLayout network_stat;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -74,22 +88,74 @@ public class MyearningFragment extends  Fragment {
 
         my_earning = (AppCompatTextView) v.findViewById(R.id.my_earning);
 
+        linearLayout = v.findViewById(R.id.linearLayout);
+        linearLayout2 = v.findViewById(R.id.linearLayout2);
+        network_stat = v.findViewById(R.id.network_stat);
+        permissionUtils = new PermissionUtils();
+
+        Typeface font = Typeface.createFromAsset(getActivity().getAssets(), "segoe_ui.ttf");
+        tot_ear=v.findViewById(R.id.tot_ear);
+        pot_ear=v.findViewById(R.id.pot_ear);
+        dis_lead=v.findViewById(R.id.dis_lead);
+        totl_cred=v.findViewById(R.id.totl_cred);
+        earn_des=v.findViewById(R.id.earn_des);
+        tot_ear.setTypeface(font);
+        pot_ear.setTypeface(font);
+        dis_lead.setTypeface(font);
+        totl_cred.setTypeface(font);
+        earn_des.setTypeface(font);
+
         Account_Listings_Details1();
 
         tabLayout = v.findViewById(R.id.tabs);
         viewPager = v.findViewById(R.id.viewpager);
 
+        if(isConnected()==false){
+            network_stat.setVisibility(View.VISIBLE);
+            tabLayout.setVisibility(View.GONE);
+            linearLayout.setVisibility(View.INVISIBLE);
+            linearLayout2.setVisibility(View.INVISIBLE);
+        }
+
+
         my_earning.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getContext(), Pay_Out_Screen.class);
-                startActivity(intent);
+
+
+                String viability_report_URL1 = "http://callcenter.propwiser.com/includes/DETAILED-PAYOUT-STRUCTURE.pdf";
+
+                if (permissionUtils.checkPermission(getActivity(), STORAGE_PERMISSION_REQUEST_CODE, view)) {
+                    if (viability_report_URL1.length() > 0) {
+                        try {
+                            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(viability_report_URL1)));
+                        } catch (Exception e) {
+                            e.getStackTrace();
+                        }
+                    }
+
+                }
             }
         });
 
         return v;
 
     }
+
+
+    public boolean isConnected() {
+        boolean connected = false;
+        try {
+            ConnectivityManager cm = (ConnectivityManager)getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
+            NetworkInfo nInfo = cm.getActiveNetworkInfo();
+            connected = nInfo != null && nInfo.isAvailable() && nInfo.isConnected();
+            return connected;
+        } catch (Exception e) {
+            Log.e("Connectivity Exception", e.getMessage());
+        }
+        return connected;
+    }
+
 
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getFragmentManager());

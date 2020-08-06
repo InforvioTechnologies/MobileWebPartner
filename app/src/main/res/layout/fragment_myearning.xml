@@ -14,206 +14,215 @@
         android:layout_height="match_parent">
 
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/linearLayout"
-            android:layout_width="0dp"
-            android:layout_height="230dp"
-            android:layout_margin="20dp"
-            android:background="@color/colorPrimary"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:background="@drawable/cardview_gradient">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="30dp"
-                        android:layout_weight="1">
-
-                        <androidx.appcompat.widget.AppCompatTextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/total_earnings"
-                            android:textColor="@color/white"
-                            android:textSize="12dp"
-                            android:gravity="center_horizontal"
-                            android:layout_marginLeft="20dp"
-                            />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="30dp"
-                        android:gravity="center_horizontal"
-                        android:layout_weight="1">
-
-
-                        <androidx.appcompat.widget.AppCompatTextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="8500"
-                            android:textSize="20dp"
-                            android:textStyle="bold"
-                            android:id="@+id/total_earnings"
-                            android:gravity="center_horizontal"
-                            android:textColor="@color/white"
-                            />
-                    </LinearLayout>
-
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:orientation="vertical">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="30dp"
-                        >
-                        <androidx.appcompat.widget.AppCompatTextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/potencial_earn"
-                            android:textColor="@color/white"
-                            android:textSize="12dp"
-                            android:gravity="center_horizontal"
-                            android:layout_marginLeft="20dp"
-                            />
-
-                    </LinearLayout>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:orientation="horizontal">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1">
-                        <androidx.appcompat.widget.AppCompatTextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="@string/disbursal_lead"
-                            android:textSize="10dp"
-                            android:textColor="@color/gray"
-                            android:gravity="center_horizontal"/>
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1">
-
-                        <androidx.appcompat.widget.AppCompatTextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="12000"
-                            android:textStyle="bold"
-                            android:textSize="14dp"
-                            android:id="@+id/potential_earnings"
-                            android:textColor="@color/white"
-                            android:gravity="center_horizontal"/>
-
-                    </LinearLayout>
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="30dp"
-                    android:orientation="horizontal">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1">
-
-                        <androidx.appcompat.widget.AppCompatTextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="@string/disbursal_lead"
-                            android:textColor="@color/white"
-                            android:textSize="12dp"
-                            android:gravity="center_horizontal"/>
-
-                    </LinearLayout>
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1">
-
-                        <androidx.appcompat.widget.AppCompatTextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="540"
-                            android:textStyle="bold"
-                            android:textSize="14dp"
-                            android:id="@+id/disbursal_of_leads"
-                            android:gravity="center_horizontal"
-                            android:textColor="@color/white"
-                            />
-
-                    </LinearLayout>
-
-
-                </LinearLayout>
-            </LinearLayout>
-
-
-        </androidx.cardview.widget.CardView>
-
-        <androidx.cardview.widget.CardView
-            android:orientation="vertical"
-            android:id="@+id/linearLayout2"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_margin="20dp"
-            android:layout_height="100dp"
-            android:background="@color/but_red"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout">
+            android:layout_height="match_parent">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:textSize="12dp"
-                    android:textColor="@color/text_midblue"
-                    android:text="@string/potencial_desc"
-                    />
+            <androidx.cardview.widget.CardView
+                android:id="@+id/linearLayout"
+                android:layout_width="0dp"
+                android:layout_height="230dp"
+                android:layout_margin="20dp"
+                android:background="@color/colorPrimary"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
                 <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:background="@drawable/cardview_gradient">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="30dp"
+                            android:layout_weight="1">
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:id ="@+id/tot_ear"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="20dp"
+                                android:gravity="center_horizontal"
+                                android:text="@string/total_earnings"
+                                android:textColor="@color/white"
+                                android:textSize="12dp" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="30dp"
+                            android:layout_weight="1"
+                            android:gravity="center_horizontal">
+
+
+                            <androidx.appcompat.widget.AppCompatImageView
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:layout_gravity="center"
+                                android:background="@drawable/ic_rupee" />
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:id="@+id/total_earnings"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_horizontal"
+                                android:text=""
+                                android:textColor="@color/white"
+                                android:textSize="20dp"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="30dp"
+                            >
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/potencial_earn"
+                                android:textColor="@color/white"
+                                android:textSize="12dp"
+                                android:id="@+id/pot_ear"
+                                android:gravity="left"
+                                android:layout_marginLeft="20dp"
+                                />
+
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1">
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="@string/disbursal_lead"
+                                android:textSize="10dp"
+                                android:layout_marginLeft="20dp"
+                                android:textColor="@color/gray"
+                                android:id="@+id/dis_lead"
+                                android:gravity="left"/>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_horizontal"
+                            android:layout_weight="1">
+
+                            <androidx.appcompat.widget.AppCompatImageView
+                                android:layout_width="15dp"
+                                android:layout_gravity="center"
+                                android:background="@drawable/ic_rupee"
+                                android:layout_height="15dp"/>
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text=""
+                                android:textStyle="bold"
+                                android:textSize="14dp"
+                                android:id="@+id/potential_earnings"
+                                android:textColor="@color/white"
+                                android:gravity="center_horizontal"/>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="30dp"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1">
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Total Credit Coins"
+                                android:textColor="@color/white"
+                                android:textSize="12dp"
+                                android:id="@+id/totl_cred"
+                                android:layout_marginLeft="20dp"
+                                android:gravity="left"/>
+
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_horizontal"
+                            android:layout_weight="1">
+                            <androidx.appcompat.widget.AppCompatImageView
+                                android:layout_width="15dp"
+                                android:layout_gravity="center"
+                                android:background="@drawable/ic_diamond"
+                                android:layout_marginRight="5dp"
+                                android:layout_height="15dp"/>
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text=""
+                                android:textStyle="bold"
+                                android:textSize="14dp"
+                                android:id="@+id/disbursal_of_leads"
+                                android:gravity="center_horizontal"
+                                android:textColor="@color/white"
+                                />
+
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+                </LinearLayout>
+
+
+            </androidx.cardview.widget.CardView>
+
+
+            <androidx.cardview.widget.CardView
+                android:orientation="vertical"
+                android:id="@+id/linearLayout2"
+                android:layout_width="match_parent"
+                android:layout_margin="20dp"
+                android:layout_height="100dp"
+                android:background="@color/but_red"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout">
+
+                <LinearLayout
+                    android:background="#F7F7F7"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
@@ -222,54 +231,99 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
-                        android:gravity="center_horizontal"
-                        android:textAlignment="center"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
                         android:textSize="12dp"
+                        android:id="@+id/earn_des"
                         android:textColor="@color/text_midblue"
-                        android:textStyle="bold"
-                        android:id="@+id/my_earning"
-                        android:text="@string/clickhere_earn"
+                        android:text="@string/potencial_desc"
                         />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:gravity="center_horizontal"
+                            android:textAlignment="center"
+                            android:textSize="12dp"
+                            android:textColor="@color/text_midblue"
+                            android:textStyle="bold"
+                            android:id="@+id/my_earning"
+                            android:text="@string/clickhere_earn"
+                            />
+                    </LinearLayout>
                 </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="1000dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
+
             </LinearLayout>
 
-        </androidx.cardview.widget.CardView>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="1000dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
-
-        </LinearLayout>
 
 
 
-
-        <androidx.viewpager.widget.ViewPager
-            android:layout_margin="10dp"
-            android:id="@+id/viewpager"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
-            >
-
-
-            <com.google.android.material.tabs.TabLayout
-                android:id="@+id/tabs"
+            <androidx.viewpager.widget.ViewPager
+                android:layout_margin="10dp"
+                android:id="@+id/viewpager"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                tools:ignore="NewApi"
-                android:background="?android:attr/colorPrimary"
-                android:minHeight="?android:attr/actionBarSize"
-                style="@style/MyTabLayout"
-                app:tabMode="fixed"
-                app:tabGravity="fill"
-                app:tabIndicatorColor="@android:color/white"
-                app:tabIndicatorHeight="4dp"/>
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
+                >
 
-        </androidx.viewpager.widget.ViewPager>
-    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <com.google.android.material.tabs.TabLayout
+                    android:id="@+id/tabs"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    tools:ignore="NewApi"
+                    android:background="?android:attr/colorPrimary"
+                    android:minHeight="?android:attr/actionBarSize"
+                    style="@style/MyTabLayout"
+                    app:tabMode="fixed"
+                    app:tabGravity="fill"
+                    app:tabIndicatorColor="@android:color/white"
+                    app:tabIndicatorHeight="4dp"/>
+
+            </androidx.viewpager.widget.ViewPager>
+
+            <LinearLayout
+                android:id="@+id/network_stat"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+               android:gravity="center"
+                android:visibility="gone"
+                android:orientation="vertical"
+                tools:ignore="MissingConstraints">
+                <ImageView
+                    android:layout_marginTop="200dp"
+                    android:id="@+id/image_network"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:src="@drawable/ic_network"
+                    android:gravity="center"/>
+                <TextView
+                    android:id="@+id/network_state_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Check your Connection"
+                    android:gravity="center"
+                    android:textSize="20dp"
+                    android:textStyle="bold"/>
+            </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
 </LinearLayout>

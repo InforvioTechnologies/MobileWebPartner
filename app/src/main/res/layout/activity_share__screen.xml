@@ -1,39 +1,293 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".Share_Material.Share_Screen">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
 
     <LinearLayout
-        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
         <LinearLayout
-            android:layout_marginTop="20dp"
-            android:orientation="vertical"
-            android:gravity="center"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-        <androidx.appcompat.widget.AppCompatImageView
-            android:layout_width="300dp"
-            android:layout_height="400dp"
-            android:id="@+id/image_view"
-            />
-        </LinearLayout>
-        <Button
-            android:layout_marginTop="20dp"
-            android:id="@+id/test_share"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="#FFFFFF"
-            android:background="@color/green"
-            android:text="@string/share_material"
-            />
+            android:layout_margin="10dp"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/what_loan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textColor="@color/text_blue"
+                android:gravity="center"/>
+
+            <TextView
+                android:id="@+id/document_check"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:text="@string/docment_checklist"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textColor="@color/text_blue"
+                android:gravity="center"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/loan_image"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_gravity="center"
+                android:tint="@color/black"
+                android:contentDescription="TODO" />
+
+        </LinearLayout>
+
+
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_margin="10dp">
+            <LinearLayout
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:textSize="14dp"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:layout_width="match_parent"
+                    android:background="@color/white"
+                    android:text="Thanks for your interest in my Loan facilitation service.Please find the documents required for applying Loan with any Bank. "
+                    android:layout_height="wrap_content"/>
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:textSize="14dp"
+                    android:layout_marginTop="10dp"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:layout_width="match_parent"
+                    android:background="@color/white"
+                    android:text="KYC"
+                    android:layout_height="wrap_content"/>
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:textSize="12dp"
+                    android:layout_width="match_parent"
+                    android:background="@color/white"
+                    android:text="-Aadhaar card(colored)"
+                    android:layout_height="wrap_content"/>
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:textSize="12dp"
+                    android:layout_width="match_parent"
+                    android:background="@color/white"
+                    android:text="-PAN card(colored)"
+                    android:layout_height="wrap_content"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_marginTop="10dp"
+
+                    android:textSize="14dp"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:layout_width="match_parent"
+                    android:background="@color/white"
+                    android:text="INCOME PROOF"
+                    android:layout_height="wrap_content"/>
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="match_parent"
+                    android:textSize="12dp"
+                    android:background="@color/white"
+                    android:text="- Last 3 months salary slip / salary certificate"
+                    android:layout_height="wrap_content"/>
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="match_parent"
+                    android:background="@color/white"
+                    android:textSize="12dp"
+                    android:text="- Last 6 months Salary's account bank statement"
+                    android:layout_height="wrap_content"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="match_parent"
+                    android:background="@color/white"
+                    android:textSize="12dp"
+                    android:text="- Current office joining / appointment letter"
+                    android:layout_height="wrap_content"/>
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/white"
+                    android:textSize="14dp"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:text="CURRENT RESIDENCE PROOF"
+                    android:layout_height="wrap_content"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="match_parent"
+                    android:background="@color/white"
+                    android:text="- Aadhaar card"
+                    android:textSize="12dp"
+                    android:layout_height="wrap_content"/>
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="match_parent"
+                    android:background="@color/white"
+                    android:text="- Driving license"
+                    android:textSize="12dp"
+                    android:layout_height="wrap_content"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="match_parent"
+                    android:background="@color/white"
+                    android:text="- Passport"
+                    android:textSize="12dp"
+                    android:layout_height="wrap_content"/>
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="match_parent"
+                    android:background="@color/white"
+                    android:text="- Postpaid phone bill"
+                    android:textSize="12dp"
+                    android:layout_height="wrap_content"/>
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="match_parent"
+                    android:background="@color/white"
+                    android:text="- Credit card bill"
+                    android:textSize="12dp"
+                    android:layout_height="wrap_content"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="match_parent"
+                    android:background="@color/white"
+                    android:text="- Bank statement"
+                    android:textSize="12dp"
+                    android:layout_height="wrap_content"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="match_parent"
+                    android:background="@color/white"
+                    android:text="- Electricity bill"
+                    android:textSize="12dp"
+                    android:layout_height="wrap_content"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="match_parent"
+                    android:background="@color/white"
+                    android:textSize="12dp"
+                    android:text="- Rent agreement along with electricity bill"
+                    android:layout_height="wrap_content"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:background="@color/white"
+                    android:textSize="14dp"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:text="EXISTING LOANS (if any)"
+                    android:layout_height="wrap_content"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="match_parent"
+                    android:background="@color/white"
+                    android:textSize="12dp"
+                    android:text="- Loan repayment schedule"
+                    android:layout_height="wrap_content"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="match_parent"
+                    android:background="@color/white"
+                    android:textSize="12dp"
+                    android:text="- Sanction letter"
+                    android:layout_height="wrap_content"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:background="@color/white"
+                    android:textSize="14dp"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:text="Please arrange these documents and share it with me."
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+
+            <androidx.cardview.widget.CardView
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                app:cardCornerRadius="15dp"
+                app:cardUseCompatPadding="true">
+
+                <ListView
+                    android:id="@+id/listview"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:nestedScrollingEnabled="true"/>
+
+                <TextView
+                    android:id="@+id/content"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="40dp"
+                    android:textSize="14sp"
+                    android:visibility="gone"
+                    android:text="@string/about_phone"/>
+
+
+            </androidx.cardview.widget.CardView>
+        </LinearLayout>
+</ScrollView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/whatsapp_button"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:gravity="center"
+                android:padding="10dp"
+                android:layout_margin="10dp"
+                android:text="@string/share_whatsapp"
+                android:textColor="#FFFFFF"
+                android:textSize="14dp"
+                android:background="#00A478"/>
+            <Button
+                android:id="@+id/other_network"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_margin="10dp"
+                android:gravity="center"
+                android:padding="10dp"
+                android:text="@string/other_network"
+                android:textSize="14dp"
+                android:textColor="#FFFFFF"
+                android:background="#3652EC"/>
+
+        </LinearLayout>
+
     </LinearLayout>
 
-
-</LinearLayout>
+</androidx.core.widget.NestedScrollView>

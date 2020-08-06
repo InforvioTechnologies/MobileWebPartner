@@ -66,10 +66,9 @@
                             android:paddingLeft="4dp"
                             android:paddingRight="4dp"
                             android:paddingBottom="1dp"
-
-                            android:text="3"
+                            android:text="300"
                             android:textColor="#ffffff"
-                            android:textSize="12sp" />
+                            android:textSize="8dp" />
                         <!--  <androidx.appcompat.widget.AppCompatImageView
                               android:id="@+id/notification_button"
                               android:layout_width="45dp"

@@ -3,6 +3,7 @@ package in.loanwiser.partnerapp.My_Earnings;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.SharedPreferences;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -13,6 +14,7 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import androidx.appcompat.widget.AppCompatTextView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -78,7 +80,7 @@ public class TwoFragment extends Fragment implements OnLoadMoreListener {
 
     private String tag_json_obj = "jobj_req", tag_json_arry = "jarray_req";
 
-    LinearLayout Ly_no_leads_data;
+    LinearLayout Ly_no_leads_data,no_item;
 
     public static final String b2b_user_id1 = "b2b_uer_id";
     private ProgressBar progressBar;
@@ -90,7 +92,7 @@ public class TwoFragment extends Fragment implements OnLoadMoreListener {
     List<CashfreeList_item> items;
     Cashfree_ListAdapter credite_coin_adapter;
     RecyclerView recyclerView;
-
+    AppCompatTextView trans_his,date,amount,lead_detail,loan_detail;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -100,6 +102,7 @@ public class TwoFragment extends Fragment implements OnLoadMoreListener {
 
         progressBar = (ProgressBar) v.findViewById(R.id.progress_bar);
         Ly_no_leads_data = (LinearLayout) v.findViewById(R.id.Ly_no_leads_data);
+        no_item = (LinearLayout) v.findViewById(R.id.no_item);
         progressDialog = new SpotsDialog(getActivity(), R.style.Custom);
         pref = getActivity().getSharedPreferences("MyPref", 0);
 
@@ -107,6 +110,18 @@ public class TwoFragment extends Fragment implements OnLoadMoreListener {
 
         recyclerView = (RecyclerView) v.findViewById(R.id.recyclerView);
         items = new ArrayList<>();
+
+        Typeface font = Typeface.createFromAsset(getActivity().getAssets(), "segoe_ui.ttf");
+        trans_his=v.findViewById(R.id.trans_his);
+        date=v.findViewById(R.id.date);
+        amount=v.findViewById(R.id.amount);
+        lead_detail=v.findViewById(R.id.lead_detail);
+        loan_detail=v.findViewById(R.id.loan_detail);
+        trans_his.setTypeface(font);
+        date.setTypeface(font);
+        amount.setTypeface(font);
+        lead_detail.setTypeface(font);
+        loan_detail.setTypeface(font);
 
        // showData();
       //  initRecyclerView();
@@ -190,10 +205,11 @@ public class TwoFragment extends Fragment implements OnLoadMoreListener {
                             Log.e("wallet",wallet);
 
                             if(status.equals("1")){
+
                                 JSONArray ja = response.getJSONArray("data");
                                 Log.e("ja",ja.toString());
                                 if (ja.length()>0){
-
+                                    no_item.setVisibility(View.GONE);
                                     for(int i = 0;i<ja.length();i++){
                                         JSONObject J = ja.getJSONObject(i);
 
@@ -210,6 +226,13 @@ public class TwoFragment extends Fragment implements OnLoadMoreListener {
                                         String current_step = J.getString("current_step");
                                         String payment_plan  = J.getString("payment_plan");
 
+                                        String welcome_bonus= J.getString("welcome_bonus");
+                                        if (welcome_bonus.equals("1")){
+                                            app_id="Not applicable";
+                                            user_name="Not applicable";
+                                            loan_type="Not applicable";
+                                            current_step="Not applicable";
+                                        }
 
                                         Log.e("mobile no",date_disp);
 
@@ -226,9 +249,10 @@ public class TwoFragment extends Fragment implements OnLoadMoreListener {
 
                                 }else {
                                     Objs.a.ShowHideNoItems(getActivity(),true);
+                                    no_item.setVisibility(View.VISIBLE);
                                 }
 
-                            }else {
+                            }else{
 
 
 

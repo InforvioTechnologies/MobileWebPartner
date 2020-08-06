@@ -43,6 +43,7 @@ import adhoc.app.applibrary.Config.AppUtils.Urls;
 import adhoc.app.applibrary.Config.AppUtils.VolleySignleton.AppController;
 import dmax.dialog.SpotsDialog;
 import in.loanwiser.partnerapp.PartnerActivitys.Dashboard_Activity;
+import in.loanwiser.partnerapp.Partner_Statues.DashBoard_new;
 import in.loanwiser.partnerapp.R;
 import in.loanwiser.partnerapp.SimpleActivity;
 import in.loanwiser.partnerapp.Step_Changes_Screen.Creadite_Report_Activity;
@@ -138,7 +139,7 @@ public class PaymentDetails extends SimpleActivity {
 
         }
 
-
+        Step_copletions();
 
         payment_button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -459,6 +460,62 @@ public class PaymentDetails extends SimpleActivity {
 
     }
 
+    private void Step_copletions() {
+        JSONObject jsonObject =new JSONObject();
+        JSONObject J= null;
+        try {
+            J =new JSONObject();
+            J.put("user_id", Pref.getUSERID(getApplicationContext()));
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        Log.e("Statues Request ",String.valueOf(J));
+        progressDialog.show();
+        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, Urls.Lead_Details_statues, J,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+
+                            Log.e("Statues response",String.valueOf(response));
+                            String report_statues = response.getString("status");
+                            if(report_statues.equals("success"))
+                            {
+                                JSONObject jsonObject1 = response.getJSONObject("data");
+                                String user_name = jsonObject1.getString("user_name");
+                                String mobileno = jsonObject1.getString("mobileno");
+                                mobilenumber_edittext.setText(mobileno);
+                            }else
+                            {
+                                Toast.makeText(getApplicationContext(),"error please check!!!", Toast.LENGTH_SHORT).show();
+
+                            }
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                        progressDialog.dismiss();
+                    }
+                }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                progressDialog.dismiss();
+                Toast.makeText(getApplicationContext(),error.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("content-type", "application/json");
+                return headers;
+            }
+        };
+        AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
+    }
+
     private void Send_payment_Link() {
 
         String mob_no = mobilenumber_edittext.getText().toString();
@@ -698,11 +755,19 @@ public class PaymentDetails extends SimpleActivity {
 
                     @Override
                     public void onResponse(JSONObject object) {
+
+                        Log.e("Payment Statues", String.valueOf(object));
                         try {
                             if (object.getString("status").equals("success")) {
 
                                 Toast.makeText(mCon, "Sucessfully Completed",Toast.LENGTH_SHORT).show();
                                 Update_Payment_Statues();
+                            }else if (object.getString("status").equals("cancelled"))
+                            {
+                                Toast.makeText(mCon, "Payment is Canceled",Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(PaymentDetails.this, DashBoard_new.class);
+                                startActivity(intent);
+                            }else {
 
                             }
                         } catch (JSONException e) {

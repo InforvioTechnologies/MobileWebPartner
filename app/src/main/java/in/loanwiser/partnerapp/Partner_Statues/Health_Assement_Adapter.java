@@ -3,7 +3,7 @@ package in.loanwiser.partnerapp.Partner_Statues;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
+import android.graphics.Typeface;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,7 +18,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.squareup.picasso.Picasso;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -26,9 +25,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import in.loanwiser.partnerapp.R;
-import in.loanwiser.partnerapp.Share_Material.Share_Screen;
-
-import static com.androidquery.util.AQUtility.getContext;
+import in.loanwiser.partnerapp.Share_Material.ShareLayoutActivity;
 
 public class Health_Assement_Adapter extends RecyclerView.Adapter<Health_Assement_Adapter.CustomViewHolder> {
 
@@ -85,8 +82,8 @@ public class Health_Assement_Adapter extends RecyclerView.Adapter<Health_Assemen
             @Override
             public void onClick(View view) {
 
-                Intent intent = new Intent(context, Share_Screen.class);
-                context.startActivity(intent);
+              /*  Intent intent = new Intent(context, ShareLayoutActivity.class);
+                context.startActivity(intent);*/
 
             }
         });
@@ -140,6 +137,10 @@ public class Health_Assement_Adapter extends RecyclerView.Adapter<Health_Assemen
             su_head = view.findViewById(R.id.su_head);
             cardView = view.findViewById(R.id.cardView);
             helth_icons = view.findViewById(R.id.helth_icons);
+
+            Typeface font = Typeface.createFromAsset(context.getAssets(), "segoe_ui.ttf");
+            head_line.setTypeface(font);
+            su_head.setTypeface(font);
 
         }
     }

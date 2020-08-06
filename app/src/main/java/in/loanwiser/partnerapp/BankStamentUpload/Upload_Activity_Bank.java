@@ -41,6 +41,7 @@ import in.loanwiser.partnerapp.Documents.SingleUploadBroadcastReceiver;
 import in.loanwiser.partnerapp.PartnerActivitys.Dashboard_Activity;
 import in.loanwiser.partnerapp.PartnerActivitys.Home;
 import in.loanwiser.partnerapp.PartnerActivitys.SimpleActivity;
+import in.loanwiser.partnerapp.Partner_Statues.DashBoard_new;
 import in.loanwiser.partnerapp.R;
 import in.loanwiser.partnerapp.Step_Changes_Screen.Lead_Crration_Activity;
 
@@ -106,7 +107,7 @@ protected void onCreate(Bundle savedInstanceState) {
         fileNameList = new ArrayList<>();
         fileDoneList=new ArrayList<>();
 
-        upload.setOnClickListener(this);
+      //  upload.setOnClickListener(this);
         submit.setOnClickListener(this);
 
         docpass_edt_txt = findViewById(R.id.docpass_edt_txt);
@@ -118,6 +119,13 @@ protected void onCreate(Bundle savedInstanceState) {
 
                         Intent intent = new Intent(Upload_Activity_Bank.this, Dashboard_Activity.class);
                         startActivity(intent);
+                }
+        });
+        upload.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                        showFileChooser();
                 }
         });
 
@@ -248,13 +256,20 @@ public String getRealPathFromURI(Context context, Uri contentUri) {
 @Override
 public void onClick(View v) {
         switch (v.getId()){
-        case R.id.upload:
-        showFileChooser();
-        break;
-        case R.id.submit:
-        uploadMultipart();
-        break;
-
+                case R.id.submit:
+                        if(uriarrayList.isEmpty()){
+                                Toast.makeText(Upload_Activity_Bank.this,"Please Select Bank statement",Toast.LENGTH_SHORT).show();
+                        }
+                        else if(docpass_edt_txt.getText().toString().trim().length()==0){
+                                Toast.makeText(Upload_Activity_Bank.this,"Please fill Password field",Toast.LENGTH_SHORT).show();
+                        }
+                        else if(docpass_edt_txt.getText().toString().trim().length()==0 && uriarrayList.size()==0){
+                                Toast.makeText(Upload_Activity_Bank.this,"Please upload document and fill Password field",Toast.LENGTH_SHORT).show();
+                        }
+                        else{
+                                uploadMultipart();
+                        }
+                        break;
 
         }
         }
@@ -404,9 +419,10 @@ public void uploadMultipart() {
                         progressDialog.dismiss();
 
                        Toast.makeText(getApplicationContext(),"Successfully Uploaded",Toast.LENGTH_SHORT).show();
-                      /* Intent intent = new Intent(Upload_Activity_Bank.this, Lead_Crration_Activity.class);
+                       Intent intent = new Intent(Upload_Activity_Bank.this, Dashboard_Activity.class);
                        startActivity(intent);
-                        finish();*/
+                        finish();
+
                         // Send_Reload(app_id);
 
                         //   getContentResolver().delete(uri, null, null);
@@ -462,5 +478,6 @@ protected void onResume() {
         super.onResume();
         fileAdapter.notifyDataSetChanged();
         uploadReceiver.register(this);
+
         }
         }

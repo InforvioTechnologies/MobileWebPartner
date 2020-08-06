@@ -283,7 +283,6 @@ public class SmsActivity2 extends AppCompatActivity {
             J =new JSONObject();
             J.put(Params.otp_entered, otp);
             J.put(Params.flag, "0");
-
             J.put(Params.mobile_no,no_bundle);
 
             Log.d("OTP number", String.valueOf(J));

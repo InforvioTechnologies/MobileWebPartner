@@ -167,6 +167,7 @@
                         android:layout_height="wrap_content"
                         android:textSize="16sp"
                         android:inputType="number"
+                        android:maxLength="2"
                         android:id="@+id/pl_Ly_co_app_self_age_edit_txt"
                         android:textColor="@color/colorPrimaryDark"/>
                 </LinearLayout>

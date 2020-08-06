@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
@@ -18,6 +19,8 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 import androidx.appcompat.widget.Toolbar;
+
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -743,7 +746,13 @@ public class Dashboard_Activity extends AppCompatActivity implements OnLoadMoreL
 
                                 // String statues2 = "3";
                                 Pref.putUSERID(mCon,user_id);
+
+                                SharedPreferences.Editor prefEditor = PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit();
+                                prefEditor.putString("user_id", user_id);
+                                prefEditor.apply();
                                 String _Emp_staus_jsonArray = jsonArray.toString();
+
+
 
                                 Objs.ac.StartActivityPutExtra(mCon, Home.class,
                                         Params.user_id,user_id,

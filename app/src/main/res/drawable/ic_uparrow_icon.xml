@@ -11,7 +11,7 @@
     <path
         android:pathData="M23,21 L17,27l1.4,1.4L23,23.8l4.6,4.6L29,27Z"
         android:strokeAlpha="0.93"
-        android:fillColor="#c72027"
+        android:fillColor="#B0B0B0"
         android:fillType="evenOdd"
         android:fillAlpha="0.93"/>
   </group>

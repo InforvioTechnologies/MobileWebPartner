@@ -50,6 +50,7 @@ import adhoc.app.applibrary.Config.AppUtils.Pref.Pref;
 import adhoc.app.applibrary.Config.AppUtils.Urls;
 import adhoc.app.applibrary.Config.AppUtils.VolleySignleton.AppController;
 import dmax.dialog.SpotsDialog;
+import in.loanwiser.partnerapp.BankStamentUpload.Upload_Activity_Bank;
 import in.loanwiser.partnerapp.Documents.Document_Details;
 import in.loanwiser.partnerapp.PDF_Dounloader.PermissionUtils;
 import in.loanwiser.partnerapp.PartnerActivitys.Dashboard_Activity;
@@ -144,7 +145,9 @@ public class CRIF_Report_Activity_PDF_View extends SimpleActivity {
 
 
                             if (Statues.equals("success")) {
-                                Document_Details();
+
+                                STEP2_COMPLETE();
+
                             }else if (Statues.equals("question"))
                             {
                                 JSONObject data1 = object.getJSONObject("data");
@@ -243,6 +246,61 @@ public class CRIF_Report_Activity_PDF_View extends SimpleActivity {
 
     }
 
+    private void STEP2_COMPLETE() {
+        progressDialog.show();
+
+        JSONObject J =new JSONObject();
+
+        try {
+
+            J.put("trans_id",Pref.getTRANSACTIONID(getApplicationContext()));
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        Log.e("Step2 Complete request",J.toString());
+        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, Urls.step2_complete, J,
+                new Response.Listener<JSONObject>() {
+
+                    @Override
+                    public void onResponse(JSONObject object) {
+                        Log.e("Step2 complete response",object.toString());
+                        try {
+
+                            String Staues_step2_complete = object.getString("status");
+
+                            if(Staues_step2_complete.contains("success")) {
+
+                                Document_Details();
+                            }else
+                            {
+                                Toast.makeText(mCon, "CRIF Statues Failed",Toast.LENGTH_SHORT).show();
+                            }
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        // Toast.makeText(mCon, response.toString(),Toast.LENGTH_SHORT).show();
+                        progressDialog.dismiss();
+                    }
+                }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                VolleyLog.d("TAG", "Error: " + error.getMessage());
+                progressDialog.dismiss();
+            }
+        }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("Content-Type", "application/json");
+                return headers;
+            }
+        };
+        AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
+
+    }
 
     private void CRIF_Question_Testing() {
 
@@ -314,9 +372,10 @@ public class CRIF_Report_Activity_PDF_View extends SimpleActivity {
         try {
             J =new JSONObject();
 
-            J.put("trans_id",Pref.getTRANSACTIONID(getApplicationContext()));
-            J.put("user_id",Pref.getUSERID(getApplicationContext()));
-
+           // J.put("trans_id",Pref.getTRANSACTIONID(getApplicationContext()));
+            J.put("trans_id","11828");
+          //  J.put("user_id","Pref.getUSERID(getApplicationContext())");
+            J.put("user_id","10367");
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -488,8 +547,8 @@ public class CRIF_Report_Activity_PDF_View extends SimpleActivity {
 
     @Override
     public void onBackPressed() {
-      /*  Objs.ac.StartActivity(mCon, Home.class);
-        finish();*/
+        Objs.ac.StartActivity(mCon, Home.class);
+        finish();
         super.onBackPressed();
     }
 }

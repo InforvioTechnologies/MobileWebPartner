@@ -22,6 +22,7 @@
             android:icon="@drawable/ic_file"
             android:title="Payout Structure" />
         <item android:id="@+id/nav_item_three1"
+            android:visible="false"
             android:icon="@drawable/ic_share"
             android:title="Refer and Earn" />
 
@@ -32,9 +33,11 @@
                 android:icon="@drawable/ic_call_us"
                 android:title="call us" />
             <item android:id="@+id/nav_item_six1"
+                android:visible="false"
                 android:icon="@drawable/ic_negotiating"
                 android:title="Chat with us" />
             <item android:id="@+id/nav_item_seven"
+                android:visible="false"
                 android:icon="@drawable/ic_contract"
                 android:title="Terms and Condition" />
             <item

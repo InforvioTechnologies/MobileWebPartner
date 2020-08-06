@@ -1,11 +1,16 @@
 package in.loanwiser.partnerapp.Step_Changes_Screen;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Typeface;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -14,6 +19,7 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -385,6 +391,10 @@ public class Viability_Check_HL_new extends SimpleActivity {
     PopupWindow popupWindow;
     Button closePopupBtn,close,view_report,sub_to_next,save_latter;
 
+    SharedPreferences pref;
+    SharedPreferences.Editor editor;
+    public static  String Employee_type_Id11 = "Employee_type_Id11";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -401,9 +411,14 @@ public class Viability_Check_HL_new extends SimpleActivity {
 
         loan_type_id = Pref.getLoanType(context);
         salary_type = Pref.getSALARYTYPE(context);
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        salary_type=prefs.getString("emp_type","defaultStringIfNothingFound");
+        Log.i("TAG", "onCreate:salary_type "+salary_type);
        /* Intent intent = getIntent();
         user_id = intent.getStringExtra("user_id");
         transaction_id = intent.getStringExtra("transaction_id");*/
+        pref = getApplicationContext().getSharedPreferences("MyPref", 0); // 0 - for private mode
+        editor = pref.edit();
 
         Log.e("salary_type",salary_type);
         UISCREEN();
@@ -970,6 +985,41 @@ public class Viability_Check_HL_new extends SimpleActivity {
 
     private void Click() {
 
+
+
+      //  cv_assets_ownned.getEditText().setCursorVisible(false);
+        salaried_cv_assets_ownned.getEditText().setCursorVisible(false);
+        salaried_cv_salary_proof.getEditText().setCursorVisible(false);
+        self_cv_vehicle_type.getEditText().setCursorVisible(false);
+        cv_what_kindof_crop.getEditText().setCursorVisible(false);
+        self_cv_bus_vintage_proof.getEditText().setCursorVisible(false);
+        self_cv_business_proof.getEditText().setCursorVisible(false);
+        co_self_asstes_owned_CV.getEditText().setCursorVisible(false);
+
+        BL_self_cv_bus_vintage_proof.getEditText().setCursorVisible(false);
+        BL_self_cv_business_proof.getEditText().setCursorVisible(false);
+        BL_self_asstes_owned_CV.getEditText().setCursorVisible(false);
+
+
+        BL_self_cv_bus_vintage_proof.getEditText().setCursorVisible(false);
+        BL_self_cv_business_proof.getEditText().setCursorVisible(false);
+        BL_self_asstes_owned_CV.getEditText().setCursorVisible(false);
+        cv_assets_ownned_salaried.getEditText().setCursorVisible(false);
+
+
+
+      //  cv_vusiness_proof_individual.getEditText().setCursorVisible(false);
+       // cv_Assets_Owns.getEditText().setCursorVisible(false);
+        cv_business_proof_multiselect_forming.getEditText().setCursorVisible(false);
+        cv_business_proof_own.getEditText().setCursorVisible(false);
+        cv_vehicle_type.getEditText().setCursorVisible(false);
+        cv_what_kindof_crop_BL.getEditText().setCursorVisible(false);
+      //  cv_Business_proof_dairy.getEditText().setCursorVisible(false);
+       // cv_Business_proof_poultry.getEditText().setCursorVisible(false);
+
+
+
+
         residence_pincode_edite_txt.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -1370,6 +1420,9 @@ public class Viability_Check_HL_new extends SimpleActivity {
             }
 
             if (!Validate_total_experience()) {
+                return;
+            }
+            if (!Validate_total_graterthan_current_experience()) {
                 return;
             }
 
@@ -1908,6 +1961,10 @@ public class Viability_Check_HL_new extends SimpleActivity {
                         return;
                     }
 
+                    if (!co_App_Validate_total_graterthan_current_experience()) {
+                        return;
+                    }
+
                     if (!Validate_pl_co_app_slrd_company_pincode_txt()) {
                         return;
                     }
@@ -2395,6 +2452,20 @@ public class Viability_Check_HL_new extends SimpleActivity {
 
         }
 
+        return true;
+    }
+    private boolean Validate_total_graterthan_current_experience(){
+        String cur_exp = experience_in_current_cmpy.getText().toString();
+        String total_exp = total_experience_edit_txt.getText().toString();
+        int a = Integer.parseInt(cur_exp);
+        int b = Integer.parseInt(total_exp);
+        if (a > b ) {
+            Toast.makeText(context,"Applicant Current Experience Less then or Equal to Total Work Experience !!!",Toast.LENGTH_SHORT).show();
+            experience_in_current_cmpy.requestFocus();
+            return false;
+        } else {
+
+        }
         return true;
     }
 
@@ -3006,7 +3077,19 @@ public class Viability_Check_HL_new extends SimpleActivity {
 
         return true;
     }
+    private boolean co_App_Validate_total_graterthan_current_experience(){
+        String cur_exp = pl_co_app_slrd_experience_in_current_cmpy.getText().toString();
+        String total_exp = pl_co_app_slrd_total_experience_edit_txt.getText().toString();
+        int a = Integer.parseInt(cur_exp);
+        int b = Integer.parseInt(total_exp);
+        if (a > b ) {
+            Toast.makeText(context,"Co Applicant Current Experience Less then or Equal to Total Work Experience !!!",Toast.LENGTH_SHORT).show();
+            return false;
+        } else {
 
+        }
+        return true;
+    }
     private boolean Validate_pl_co_app_slrd_company_pincode_txt(){
         if (pl_co_app_slrd_company_pincode_txt.getText().toString().trim().isEmpty()) {
             pl_co_app_slrd_company_pincode_txt.setError(getText(R.string.err_curent));
@@ -3744,19 +3827,20 @@ public class Viability_Check_HL_new extends SimpleActivity {
             e.printStackTrace();
         }
 
-        Log.e("Account_Listings_Details",J.toString());
+        Log.e("Account_Details",J.toString());
 
        progressDialog.show();
 
         JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, Urls.PROFILE_DETAILS_POST, J,
                 new Response.Listener<JSONObject>() {
+                    @SuppressLint("LongLogTag")
                     @Override
                     public void onResponse(JSONObject response) {
                         try {
                             if(response.getString(Params.status).equals(Params.success)) {
 
                                 JSONObject jobj = response.getJSONObject(Params.response);
-                                Log.e("Account_Listings_Details response",jobj.toString());
+                                Log.e("Accountresponse",jobj.toString());
                               String  R_state = jobj.getString(Params.state_id);
                                 makeJsonObjReq1(R_state);
 
@@ -4945,13 +5029,17 @@ public class Viability_Check_HL_new extends SimpleActivity {
 
                         Pref.putCoAPPAVAILABLE(context,IS_CO_Applicant_Id);
 
+
+                        editor.putString("IS_CO_Applicant_Id", IS_CO_Applicant_Id);
+                        editor.commit();
+
+
+                        SharedPreferences.Editor prefEditor = PreferenceManager.getDefaultSharedPreferences(context).edit();
+                        prefEditor.putString("co_applicant", IS_CO_Applicant_Id);
+                        prefEditor.apply();
                         if(IS_CO_Applicant_Id.equals("1"))
                         {
                             co_applicant_emp_type.setVisibility(View.VISIBLE);
-
-/*
-                            do_you_have_coApp_txt.setText("8");
-                            coApp_txt_emp_type1.setText("9");*/
 
                         }else if(IS_CO_Applicant_Id.equals("2"))
                         {
@@ -5027,10 +5115,17 @@ public class Viability_Check_HL_new extends SimpleActivity {
                         Employee_type_Value = Type_of_employement_ar.getJSONObject(position).getString("value");
 
                         Pref.putCOSALARYTYPE(context,Employee_type_Id);
-                        //CAT_ID = ja.getJSONObject(position).getString("category_id");
-                        Log.d("Salary_id", Employee_type_Id);
-                        Log.d("Salary_Value", Employee_type_Value);
+                        Pref.putEmployee_type_Id(context,Employee_type_Id);
 
+                        editor.putString("Employee_type_Id", Employee_type_Id);
+                        editor.commit();
+
+                        //CAT_ID = ja.getJSONObject(position).getString("category_id");
+                        Log.d("Employee_type_Id", Employee_type_Id);
+                        Log.d("Employee_type_IdValue", Employee_type_Value);
+
+                         String Employement_Type =  pref.getString(Employee_type_Id, "default value");
+                        Log.d("Employee_geted_Value", Employee_type_Value);
                         int b = Integer.parseInt(Employee_type_Id);
 
                         switch(b) {
@@ -5177,6 +5272,8 @@ public class Viability_Check_HL_new extends SimpleActivity {
                         CO_Type_of_employement_Value = Type_Of_emp_ar.getJSONObject(position).getString("value");
 
                         Pref.putCOAPPSALARYTYPE(context,CO_Type_of_employement_ID);
+
+
                         if(IS_CO_Applicant_Id.equals("1"))
                         {
 
@@ -8661,7 +8758,7 @@ public class Viability_Check_HL_new extends SimpleActivity {
                                     sub_to_next.setOnClickListener(new View.OnClickListener() {
                                         @Override
                                         public void onClick(View view) {
-                                            Submit_TO_Loanwiser();
+                                            Submitloandialog();
                                         }
                                     });
 
@@ -8787,6 +8884,81 @@ public class Viability_Check_HL_new extends SimpleActivity {
         AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
     }
 
+    private void Submitloandialog(){
+        final Dialog dialog = new Dialog(this);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+        dialog.setContentView(R.layout.submitloan_dialog2);
+        //  dialog.getWindow().setLayout(display.getWidth() * 90 / 100, LinearLayout.LayoutParams.WRAP_CONTENT);
+        dialog.setCancelable(true);
+        dialog.setCanceledOnTouchOutside(false);
+        Button cancelbtn = (Button) dialog.findViewById(R.id.cancelbtn);
+        Button submitbtn=(Button)dialog.findViewById(R.id.submitbtn);
+        submitbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+                Documentdialog();
+
+            }
+        });
+        cancelbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+
+
+        if (!dialog.isShowing()) {
+            dialog.show();
+        }
+
+
+
+    }
+
+    public void Documentdialog(){
+        final Dialog dialog = new Dialog(this);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+        dialog.setContentView(R.layout.dialogsubmit);
+        dialog.setCancelable(true);
+        dialog.setCanceledOnTouchOutside(false);
+        AppCompatTextView yes_documents = (AppCompatTextView) dialog.findViewById(R.id.yes_documents);
+        AppCompatTextView nosubmit_document =(AppCompatTextView)dialog.findViewById(R.id.nosubmit_document);
+        AppCompatTextView cancel=(AppCompatTextView)dialog.findViewById(R.id.cancel);
+        yes_documents.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+        nosubmit_document.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Submit_TO_Loanwiser();
+            }
+        });
+
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                dialog.dismiss();
+                Intent intent = new Intent(Viability_Check_HL_new.this, Eligibility_HL_New.class);
+                startActivity(intent);
+                finish();
+
+
+            }
+        });
+        if(!dialog.isShowing()){
+            dialog.show();
+        }
+
+    }
+
     private void Submit_TO_Loanwiser( ) {
 
         JSONObject J= null;
@@ -8858,7 +9030,7 @@ public class Viability_Check_HL_new extends SimpleActivity {
 
     }
 
-   /* @Override
+    @Override
     public void onBackPressed() {
 
         Objs.ac.StartActivity(mCon, Dashboard_Activity.class);
@@ -8866,5 +9038,4 @@ public class Viability_Check_HL_new extends SimpleActivity {
         super.onBackPressed();
 
     }
-*/
 }

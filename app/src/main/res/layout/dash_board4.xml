@@ -43,7 +43,7 @@
                             android:id="@+id/lead_name"
                             android:textStyle="bold"
                             android:textColor="@color/black"
-                            android:text="Gopal"
+                            android:text="Mathayan"
                             android:textSize="14dp"
                             android:layout_width="200dp"
                             android:layout_height="wrap_content" />
@@ -122,7 +122,7 @@
                             android:layout_marginRight="20dp"
                             android:id="@+id/Loan_amount"
                             android:textColor="@color/black"
-                            android:text="20,00,000"
+                            android:text=""
                             android:layout_width="200dp"
                             android:layout_height="wrap_content" />
                     </LinearLayout>
@@ -163,7 +163,7 @@
                             android:textStyle="bold"
                             android:id="@+id/loan_type_"
                             android:textColor="@color/black"
-                            android:text="Personal Loan"
+                            android:text=""
                             android:layout_marginRight="20dp"
                             android:layout_width="200dp"
                             android:textSize="12dp"
@@ -199,20 +199,31 @@
                     <LinearLayout
                         android:layout_marginRight="20dp"
                         android:layout_weight="1"
-                        android:orientation="vertical"
+                        android:orientation="horizontal"
+                        android:layout_gravity="center_horizontal"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
                         <androidx.appcompat.widget.AppCompatTextView
-                            android:layout_gravity="left"
+                            android:id="@+id/sub_to_loanwiser"
+                            android:gravity="left"
+                            style="@style/SmallText"
+                            android:textSize="12dp"
+                            android:textStyle="bold"
+                            android:text="@string/text_with_bullet"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            />
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:gravity="left"
                             style="@style/SmallText"
                             android:textStyle="bold"
                             android:layout_marginRight="20dp"
                             android:id="@+id/loan_submit_statues1"
                             android:textColor="@color/black"
-                            android:text="Submit to Loanwiser"
+                            android:text=""
                             android:layout_width="200dp"
                             android:textSize="12dp"
-                            android:layout_height="wrap_content" />
+                            android:layout_height="match_parent" />
                     </LinearLayout>
 
                 </LinearLayout>
@@ -499,8 +510,8 @@
 
                                 android:gravity="center"
                                 android:id="@+id/viability_check_img2"
-                                android:layout_width="16dp"
-                                android:layout_height="16dp"/>
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"/>
                         </LinearLayout>
                     </LinearLayout>
 
@@ -582,8 +593,8 @@
                             <ImageView
                                 android:gravity="center"
                                 android:id="@+id/eligibility_check_img"
-                                android:layout_width="16dp"
-                                android:layout_height="16dp"/>
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"/>
                         </LinearLayout>
                     </LinearLayout>
 
@@ -665,8 +676,8 @@
                             <ImageView
                                 android:gravity="center"
                                 android:id="@+id/payment_img"
-                                android:layout_width="16dp"
-                                android:layout_height="16dp"/>
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"/>
                         </LinearLayout>
                     </LinearLayout>
 
@@ -724,7 +735,7 @@
                                 android:id="@+id/crif_check_text"
                                 style="@style/SmallText"
                                 android:textColor="@color/colorPrimary"
-                                android:text="Details for Report"
+                                android:text=" CRIF Details"
                                 android:layout_width="200dp"
                                 android:textSize="14dp"
                                 android:layout_height="wrap_content" />
@@ -748,8 +759,8 @@
                             <ImageView
                                 android:gravity="center"
                                 android:id="@+id/crif_img"
-                                android:layout_width="16dp"
-                                android:layout_height="16dp"/>
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"/>
                         </LinearLayout>
                     </LinearLayout>
 
@@ -831,8 +842,8 @@
                             <ImageView
                                 android:gravity="center"
                                 android:id="@+id/viability_report_image"
-                                android:layout_width="16dp"
-                                android:layout_height="16dp"/>
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"/>
                         </LinearLayout>
                     </LinearLayout>
 
@@ -855,7 +866,7 @@
                 android:layout_marginLeft="3dp"
                 android:layout_marginRight="3dp"
                 android:layout_width="match_parent"
-                android:layout_height="100dp">
+                android:layout_height="wrap_content">
                 <LinearLayout
                     android:background="@color/white"
                     android:orientation="vertical"
@@ -891,9 +902,22 @@
                                 style="@style/SmallText"
                                 android:id="@+id/Approved"
                                 android:textColor="@color/black"
-                                android:text="@string/credit_report_gen"
+                                android:text="Details for Report"
+                                android:layout_width="200dp"
+                                android:textSize="14dp"
+                                android:layout_height="wrap_content" />
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:layout_marginBottom="10dp"
+                                android:layout_gravity="center"
+                                style="@style/LorgeText"
+                                android:textSize="10dp"
+                                android:textColor="@color/black"
+                                android:text=""
+                                android:id="@+id/crif_report_view"
                                 android:layout_width="200dp"
                                 android:layout_height="wrap_content" />
+
                         </LinearLayout>
 
                         <LinearLayout

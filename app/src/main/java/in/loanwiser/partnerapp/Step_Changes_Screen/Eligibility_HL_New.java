@@ -3,8 +3,10 @@ package in.loanwiser.partnerapp.Step_Changes_Screen;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -217,6 +219,8 @@ public class Eligibility_HL_New extends SimpleActivity {
             S_property_ownership_edt_txt_improment,R_state;
 
     LinearLayout plot_construction_loan,identified_yes_or_no,plot_loan,improvment_extention;
+    SharedPreferences pref;
+    public static  String Employee_type_Id = "Employee_type_Id";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -241,15 +245,21 @@ public class Eligibility_HL_New extends SimpleActivity {
 
         IS_CO_Applicant_Id = Pref.getCoAPPAVAILABLE(getApplicationContext());
         IS_CO_Salried_Self = Pref.getCOAPPSALARYTYPE(getApplicationContext());
-        salary_type = Pref.getSALARYTYPE(context);
+      //  salary_type = Pref.getSALARYTYPE(context);
+
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        salary_type=prefs.getString("emp_type","defaultStringIfNothingFound");
+        Log.i("TAG", "onCreate:salary_type "+salary_type);
 
         loan_type_id = Pref.getLoanType(context);
 
-        Employement_Type = Pref.getCOSALARYTYPE(getApplicationContext());
+      //  Employement_Type = Pref.getCOSALARYTYPE(getApplicationContext());
+       //
+
         CO_Employement_Type = Pref.getCOEMPTYPE(getApplicationContext());
         Rsidence_Type = Pref.getResidenceType(getApplicationContext());
         residence_id = Pref.get_Residence_ID(getApplicationContext());
-        property_identified = Pref.getPROPERTYIDENTIFIED(getApplicationContext());
+
 
         makeJsonObjReq1();
         UISCREENS();
@@ -283,6 +293,24 @@ public class Eligibility_HL_New extends SimpleActivity {
 
         }else if(salary_type.equals("2"))
         {
+            Employement_Type = Pref.getCOSALARYTYPE(getApplicationContext());
+
+            if(Employement_Type.equals("1"))
+            {
+                individual.setVisibility(View.VISIBLE);
+                self_business.setVisibility(View.GONE);
+
+            }else if(Employement_Type.equals("2"))
+            {
+                individual.setVisibility(View.GONE);
+                self_business.setVisibility(View.GONE);
+
+            }else if(Employement_Type.equals("3"))
+            {
+                individual.setVisibility(View.GONE);
+                self_business.setVisibility(View.VISIBLE);
+            }
+
             app_eligibility_salaried_hl.setVisibility(View.GONE);
             app_eligibility_self_hl.setVisibility(View.VISIBLE);
 
@@ -296,29 +324,26 @@ public class Eligibility_HL_New extends SimpleActivity {
 
         }
 
-        if(property_identified.equals("1"))
+
+        if(loan_type_id.equals("1") || loan_type_id.equals("3") || loan_type_id.equals("4"))
         {
-            property_field.setVisibility(View.VISIBLE);
+            property_identified = Pref.getPROPERTYIDENTIFIED(getApplicationContext());
+            if(property_identified.equals("1"))
+            {
+                property_field.setVisibility(View.VISIBLE);
+            }else
+            {
+                property_field.setVisibility(View.VISIBLE);
+            }
+
         }else
         {
-            property_field.setVisibility(View.VISIBLE);
+
         }
 
-        if(Employement_Type.equals("1"))
-        {
-            individual.setVisibility(View.VISIBLE);
-            self_business.setVisibility(View.GONE);
 
-        }else if(Employement_Type.equals("2"))
-        {
-            individual.setVisibility(View.GONE);
-            self_business.setVisibility(View.GONE);
 
-        }else if(Employement_Type.equals("3"))
-        {
-            individual.setVisibility(View.GONE);
-            self_business.setVisibility(View.VISIBLE);
-        }
+
 
         if(IS_CO_Applicant_Id.equals("1"))
         {
@@ -5041,7 +5066,7 @@ public class Eligibility_HL_New extends SimpleActivity {
         AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
     }
 
-   /* @Override
+  /*  @Override
     public void onBackPressed() {
 
         Objs.ac.StartActivity(mCon, Dashboard_Activity.class);

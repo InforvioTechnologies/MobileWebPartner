@@ -70,9 +70,6 @@ public class AppBaseActivity extends AppCompatActivity
     public void OnNavItemSelected(AppCompatActivity activity, MenuItem item) {
         Context mCon = activity;
         int id = item.getItemId();
-
-
-
         DrawerLayout drawer = (DrawerLayout) activity.findViewById(adhoc.app.applibrary.R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
     }

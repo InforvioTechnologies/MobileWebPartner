@@ -3,6 +3,7 @@ package in.loanwiser.partnerapp.My_Earnings;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.SharedPreferences;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -13,6 +14,7 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import androidx.appcompat.widget.AppCompatTextView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -63,6 +65,8 @@ public class OneFragment extends Fragment implements OnLoadMoreListener {
     List<PayoutList_item> items;
     Payout_ListAdapter credite_coin_adapter1;
     RecyclerView recyclerView;
+    LinearLayout no_item;
+    AppCompatTextView trans_his,date,amount,lead_detail,loan_detail;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -77,8 +81,18 @@ public class OneFragment extends Fragment implements OnLoadMoreListener {
         pref = getActivity().getSharedPreferences("MyPref", 0);
         progressBar = (ProgressBar) v.findViewById(R.id.progress_bar);
         b2b_user_id =  pref.getString(b2b_user_id1, null);
-
-
+        no_item = (LinearLayout) v.findViewById(R.id.no_item);
+        Typeface font = Typeface.createFromAsset(getActivity().getAssets(), "segoe_ui.ttf");
+        trans_his=v.findViewById(R.id.trans_his);
+        date=v.findViewById(R.id.date);
+        amount=v.findViewById(R.id.amount);
+        lead_detail=v.findViewById(R.id.lead_detail);
+        loan_detail=v.findViewById(R.id.loan_detail);
+        trans_his.setTypeface(font);
+        date.setTypeface(font);
+        amount.setTypeface(font);
+        lead_detail.setTypeface(font);
+        loan_detail.setTypeface(font);
 
       //  showData();
        // initRecyclerView();
@@ -117,8 +131,8 @@ public class OneFragment extends Fragment implements OnLoadMoreListener {
         JSONObject J= null;
         try {
             J =new JSONObject();
-          //  J.put("b2buser_id", b2b_user_id);
-            J.put("b2buser_id", 329);
+            J.put("b2buser_id", b2b_user_id);
+           // J.put("b2buser_id", 329);
             J.put("count", count12);
 
         } catch (JSONException e) {
@@ -145,6 +159,7 @@ public class OneFragment extends Fragment implements OnLoadMoreListener {
                             String status = response.getString("status");
 
                             if(status.contains("success")){
+                                no_item.setVisibility(View.GONE);
                                 JSONArray ja = response.getJSONArray("data");
                                 Log.e("ja",ja.toString());
                                 if (ja.length()>0){
@@ -158,6 +173,7 @@ public class OneFragment extends Fragment implements OnLoadMoreListener {
                                         String loan_amount = J.getString("loan_amount");
                                         String loan_type = J.getString("loan_type");
                                         String commision = J.getString("commision");
+
 
 
                                         Log.e("the values", date1.toString());
@@ -179,6 +195,7 @@ public class OneFragment extends Fragment implements OnLoadMoreListener {
 
                             }else {
 
+                                no_item.setVisibility(View.VISIBLE);
                                 if(count12 == 0)
                                 {
                                     progressDialog.dismiss();

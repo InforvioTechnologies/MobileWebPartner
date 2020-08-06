@@ -8,6 +8,8 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -125,6 +127,8 @@ public class ShareFragment extends Fragment{
     private AlertDialog progressDialog;
     RecyclerView recyclerView;
 
+    LinearLayout network_stat,mainlay;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -139,6 +143,14 @@ public class ShareFragment extends Fragment{
         button_share = (Button) view.findViewById(R.id.button_share);
         imageShare = (Button) view.findViewById(R.id.image_share);
         testShare = (Button) view.findViewById(R.id.test_share);
+        network_stat =  view.findViewById(R.id.network_stat);
+        mainlay =  view.findViewById(R.id.mainlay);
+
+        if(isConnected()==false){
+            network_stat.setVisibility(View.VISIBLE);
+            mainlay.setVisibility(View.GONE);
+        }
+
 
         progressDialog = new SpotsDialog(getContext(), R.style.Custom);
        // Share_images(view);
@@ -227,7 +239,7 @@ public class ShareFragment extends Fragment{
                         .into(new SimpleTarget<Bitmap>() {
                             @Override
                             public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
-
+                                progressDialog.dismiss();
                                 Intent intent = new Intent(Intent.ACTION_SEND);
                                 intent.putExtra(Intent.EXTRA_TEXT, "Hey view/download this image");
                                 String path = MediaStore.Images.Media.insertImage(getActivity().getContentResolver(), resource, "", null);
@@ -247,12 +259,14 @@ public class ShareFragment extends Fragment{
 
                             }
                             @Override public void onLoadFailed(Exception e, Drawable errorDrawable) {
+                                progressDialog.dismiss();
                                 Toast.makeText(getActivity(), "Something went wrong", Toast.LENGTH_SHORT).show();
                                 super.onLoadFailed(e, errorDrawable);
                             }
 
                             @Override public void onLoadStarted(Drawable placeholder) {
-                                Toast.makeText(getActivity(), "Starting", Toast.LENGTH_SHORT).show();
+                                progressDialog.show();
+                                Toast.makeText(getActivity(), "Please wait", Toast.LENGTH_SHORT).show();
                             }
 
 
@@ -265,6 +279,21 @@ public class ShareFragment extends Fragment{
 
 
     }
+
+
+    public boolean isConnected() {
+        boolean connected = false;
+        try {
+            ConnectivityManager cm = (ConnectivityManager)getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
+            NetworkInfo nInfo = cm.getActiveNetworkInfo();
+            connected = nInfo != null && nInfo.isAvailable() && nInfo.isConnected();
+            return connected;
+        } catch (Exception e) {
+            Log.e("Connectivity Exception", e.getMessage());
+        }
+        return connected;
+    }
+
 
     private void Share_images(View view)
     {
@@ -294,11 +323,13 @@ public class ShareFragment extends Fragment{
 
                     }
                     @Override public void onLoadFailed(Exception e, Drawable errorDrawable) {
+                        progressDialog.dismiss();
                         Toast.makeText(getActivity(), "Something went wrong", Toast.LENGTH_SHORT).show();
                         super.onLoadFailed(e, errorDrawable);
                     }
 
                     @Override public void onLoadStarted(Drawable placeholder) {
+
                         Toast.makeText(getActivity(), "Starting", Toast.LENGTH_SHORT).show();
                     }
 
@@ -336,7 +367,7 @@ public class ShareFragment extends Fragment{
             @Override
             public void onErrorResponse(VolleyError error) {
                 VolleyLog.d("TAG", "Error: " + error.getMessage());
-                Toast.makeText(getContext(),error.getMessage(),Toast.LENGTH_SHORT).show();
+               // Toast.makeText(getContext(),error.getMessage(),Toast.LENGTH_SHORT).show();
                 progressDialog.dismiss();
             }
         }) {
@@ -438,7 +469,7 @@ public class ShareFragment extends Fragment{
                                 .into(new SimpleTarget<Bitmap>() {
                                     @Override
                                     public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
-
+                                        progressDialog.dismiss();
                                         Intent intent = new Intent(Intent.ACTION_SEND);
                                         intent.putExtra(Intent.EXTRA_TEXT, content);
                                         String path = MediaStore.Images.Media.insertImage(getActivity().getContentResolver(), resource, "", null);
@@ -459,12 +490,14 @@ public class ShareFragment extends Fragment{
 
                                     }
                                     @Override public void onLoadFailed(Exception e, Drawable errorDrawable) {
+                                        progressDialog.dismiss();
                                         Toast.makeText(getActivity(), "Something went wrong", Toast.LENGTH_SHORT).show();
                                         super.onLoadFailed(e, errorDrawable);
                                     }
 
                                     @Override public void onLoadStarted(Drawable placeholder) {
-                                        Toast.makeText(getActivity(), "Starting", Toast.LENGTH_SHORT).show();
+                                        progressDialog.show();
+                                       // Toast.makeText(getActivity(), "Starting", Toast.LENGTH_SHORT).show();
                                     }
 
 
@@ -482,7 +515,7 @@ public class ShareFragment extends Fragment{
                                 .into(new SimpleTarget<Bitmap>() {
                                     @Override
                                     public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
-
+                                        progressDialog.dismiss();
                                         Intent intent = new Intent(Intent.ACTION_SEND);
                                         intent.putExtra(Intent.EXTRA_TEXT, content);
                                         String path = MediaStore.Images.Media.insertImage(getActivity().getContentResolver(), resource, "", null);
@@ -503,14 +536,15 @@ public class ShareFragment extends Fragment{
 
                                     }
                                     @Override public void onLoadFailed(Exception e, Drawable errorDrawable) {
+                                        progressDialog.dismiss();
                                         Toast.makeText(getActivity(), "Something went wrong", Toast.LENGTH_SHORT).show();
                                         super.onLoadFailed(e, errorDrawable);
                                     }
 
                                     @Override public void onLoadStarted(Drawable placeholder) {
-                                        Toast.makeText(getActivity(), "Starting", Toast.LENGTH_SHORT).show();
+                                        progressDialog.show();
+                                       // Toast.makeText(getActivity(), "Please wait it is loading!!!", Toast.LENGTH_SHORT).show();
                                     }
-
 
                                 });
 

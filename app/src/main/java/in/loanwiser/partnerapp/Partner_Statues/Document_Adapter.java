@@ -3,6 +3,7 @@ package in.loanwiser.partnerapp.Partner_Statues;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,7 +25,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import in.loanwiser.partnerapp.R;
-import in.loanwiser.partnerapp.Share_Material.Share_Screen;
+import in.loanwiser.partnerapp.Share_Material.ShareLayoutActivity;
 
 public class Document_Adapter extends RecyclerView.Adapter<Document_Adapter.CustomViewHolder> {
 
@@ -46,22 +47,12 @@ public class Document_Adapter extends RecyclerView.Adapter<Document_Adapter.Cust
     @SuppressLint("ResourceAsColor")
     @Override
     public void onBindViewHolder(@NonNull CustomViewHolder holder, int position) {
-      //  holder.applicant_id.setText("Testing Allocated Lead");
 
-        /* Suggestion_item_freqent( J.getString(Params.id), J.getString(Params.user_id),J.getString(Params.name),
-                                                J.getString(Params.mobileno),J.getString(Params.appointment_date),J.getString(Params.appointfrom_time)))*/
-
-        String head_line  = items.get(position).gethead_line();
-
-        String icon  = items.get(position).geticon();
-
+        final String head_line  = items.get(position).gethead_line();
+        final String icon  = items.get(position).geticon();
+        final String loantype_id  = items.get(position).getloantype_id();
         String url = "http://cscapi.propwiser.com/mobile/images/loanwiser-app-logo.png";
         Log.e("hello",icon);
-
-
-
-
-      //  Picasso.with(getContext()).load(icon).fit().into(holder.helth_icons);
 
         Glide.with(context).load(icon)
                 .crossFade()
@@ -75,15 +66,18 @@ public class Document_Adapter extends RecyclerView.Adapter<Document_Adapter.Cust
             @Override
             public void onClick(View view) {
 
-                Intent intent = new Intent(context, Share_Screen.class);
+                Intent intent = new Intent(context, ShareLayoutActivity.class);
+                intent.putExtra("key",head_line);
+                intent.putExtra("image",icon);
+                intent.putExtra("loantype_id",loantype_id);
                 context.startActivity(intent);
 
             }
         });
 
-     //  Log.e("The Appointment Date",name);
-      //  String dt = parseDateToddMMyyyy(appointment_date);
-       // holder.applicant_date.setText(dt);
+        //  Log.e("The Appointment Date",name);
+        //  String dt = parseDateToddMMyyyy(appointment_date);
+        // holder.applicant_date.setText(dt);
 
       /* holder.cardView.setOnClickListener(new View.OnClickListener() {
            @Override
@@ -113,7 +107,7 @@ public class Document_Adapter extends RecyclerView.Adapter<Document_Adapter.Cust
     @Override
     public int getItemCount() {
         return items.size();
-       // return 6;
+        // return 6;
     }
 
     public class CustomViewHolder extends RecyclerView.ViewHolder {
@@ -129,6 +123,8 @@ public class Document_Adapter extends RecyclerView.Adapter<Document_Adapter.Cust
             cardView = view.findViewById(R.id.cardView);
             helth_icons = view.findViewById(R.id.helth_icons);
 
+            Typeface font = Typeface.createFromAsset(context.getAssets(), "segoe_ui.ttf");
+            su_head.setTypeface(font);
         }
     }
 

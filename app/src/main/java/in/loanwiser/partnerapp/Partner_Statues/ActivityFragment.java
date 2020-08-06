@@ -4,6 +4,9 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Typeface;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -77,7 +80,7 @@ public class ActivityFragment extends Fragment implements NavigationView.OnNavig
         super.onCreate(savedInstanceState);
     }
 
-    private AppCompatTextView profile;
+
     private AppCompatButton navigate,navigate1;
     private SliderLayout mDemoSlider;
     private ActivityFragment mcon =this;
@@ -96,6 +99,9 @@ public class ActivityFragment extends Fragment implements NavigationView.OnNavig
     DrawerLayout drawer;
     public static final String b2b_user_id1 = "b2b_uer_id";
     String b2b_user_id;
+    private AppCompatTextView profile,recent_leads,Document_cheklist,fhas;
+
+    LinearLayout firstlay,secondlay,thirdlay,Ly_allocate,ly_helth_assement_,ly_document_assement_,network_stat;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -131,6 +137,17 @@ public class ActivityFragment extends Fragment implements NavigationView.OnNavig
         recycler_view_health_ass = (RecyclerView)view.findViewById(R.id.recycler_view_health_ass);
         recycler_view_document_ = (RecyclerView)view.findViewById(R.id.recycler_view_document_);
 
+
+
+        firstlay=view.findViewById(R.id.firstlay);
+        secondlay=view.findViewById(R.id.secondlay);
+        thirdlay=view.findViewById(R.id.thirdlay);
+        firstlay=view.findViewById(R.id.firstlay);
+        Ly_allocate=view.findViewById(R.id.Ly_allocate);
+        ly_helth_assement_=view.findViewById(R.id.ly_helth_assement_);
+        ly_document_assement_=view.findViewById(R.id.ly_document_assement_);
+        network_stat=view.findViewById(R.id.network_stat);
+
         my_earnings = (AppCompatButton) view.findViewById(R.id.my_earnings);
         my_leads = (AppCompatButton) view.findViewById(R.id.my_leads);
          drawer = (DrawerLayout) view.findViewById(R.id.drawer_layout);
@@ -141,6 +158,15 @@ public class ActivityFragment extends Fragment implements NavigationView.OnNavig
         recycler_view.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
         recycler_view_health_ass.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
         recycler_view_document_.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
+
+        Typeface font = Typeface.createFromAsset(getActivity().getAssets(), "segoe_ui.ttf");
+        recent_leads=view.findViewById(R.id.recent_leads);
+        Document_cheklist=view.findViewById(R.id.Document_cheklist);
+        fhas=view.findViewById(R.id.fhas);
+        recent_leads.setTypeface(font);
+        Document_cheklist.setTypeface(font);
+        fhas.setTypeface(font);
+
 
 
         my_earnings.setOnClickListener(new View.OnClickListener() {
@@ -160,6 +186,18 @@ public class ActivityFragment extends Fragment implements NavigationView.OnNavig
         });
 
          b2b_user_id =  pref.getString(b2b_user_id1, null);
+
+
+        if(isConnected()==false){
+            network_stat.setVisibility(View.VISIBLE);
+            firstlay.setVisibility(View.GONE);
+            secondlay.setVisibility(View.GONE);
+            thirdlay.setVisibility(View.GONE);
+            Ly_allocate.setVisibility(View.GONE);
+            ly_helth_assement_.setVisibility(View.GONE);
+            ly_document_assement_.setVisibility(View.GONE);
+        }
+
 
 
         Get_Allocation_List(view);
@@ -201,6 +239,21 @@ public class ActivityFragment extends Fragment implements NavigationView.OnNavig
 
 
     }
+
+
+    public boolean isConnected() {
+        boolean connected = false;
+        try {
+            ConnectivityManager cm = (ConnectivityManager)getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
+            NetworkInfo nInfo = cm.getActiveNetworkInfo();
+            connected = nInfo != null && nInfo.isAvailable() && nInfo.isConnected();
+            return connected;
+        } catch (Exception e) {
+            Log.e("Connectivity Exception", e.getMessage());
+        }
+        return connected;
+    }
+
 
     private void Get_Allocation_List(View view) {
         JSONObject jsonObject =new JSONObject();
@@ -251,7 +304,7 @@ public class ActivityFragment extends Fragment implements NavigationView.OnNavig
             @Override
             public void onErrorResponse(VolleyError error) {
                 Log.e("Response",String.valueOf(error));
-                Toast.makeText(getActivity(),String.valueOf(error),Toast.LENGTH_SHORT).show();
+               // Toast.makeText(getActivity(),String.valueOf(error),Toast.LENGTH_SHORT).show();
 
             }
         }) {
@@ -286,7 +339,7 @@ public class ActivityFragment extends Fragment implements NavigationView.OnNavig
                     @Override
                     public void onResponse(JSONObject response) {
 
-                        Log.e("the recent",response.toString());
+                        Log.e("the helth Assement",response.toString());
 
                         try {
 
@@ -312,7 +365,7 @@ public class ActivityFragment extends Fragment implements NavigationView.OnNavig
                                 for(int i = 0;i<ja1.length();i++){
 
                                     JSONObject J = ja1.getJSONObject(i);
-                                    items2.add(new Document_item_freqent( J.getString("name"), J.getString("icon")));
+                                    items2.add(new Document_item_freqent( J.getString("name"), J.getString("icon"),J.getString("loantype_id")));
                                     adapter2.notifyDataSetChanged();
 
                                 }
@@ -332,7 +385,7 @@ public class ActivityFragment extends Fragment implements NavigationView.OnNavig
             @Override
             public void onErrorResponse(VolleyError error) {
                 Log.e("Response",String.valueOf(error));
-                Toast.makeText(getActivity(),String.valueOf(error),Toast.LENGTH_SHORT).show();
+               // Toast.makeText(getActivity(),String.valueOf(error),Toast.LENGTH_SHORT).show();
 
             }
         }) {

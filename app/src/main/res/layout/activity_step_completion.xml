@@ -31,8 +31,8 @@
                         android:layout_height="wrap_content"
                         android:layout_margin="15dp"
                         android:layout_centerHorizontal="true"
-                        android:textSize="14sp"
-                        android:textColor="@color/text_blue"
+                        android:textSize="12dp"
+                        android:textColor="#002B5D"
                         android:text="@string/note"/>
 
                     <LinearLayout
@@ -45,7 +45,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_below="@+id/noteid"
-                            android:textColor="@color/text_blue"
+                            android:textColor="#002B5D"
+                            android:textSize="12dp"
                             android:layout_centerHorizontal="true"
                             android:text="@string/clickhere"/>
                     </LinearLayout>
@@ -109,9 +110,9 @@
                         android:text="@string/step_one"
                         android:paddingRight="24dp"
                         android:paddingEnd="24dp"
-                        android:textSize="14sp"
+                        android:textSize="20dp"
                         android:textStyle="bold"
-                        android:textColor="@color/text_blue"
+                        android:textColor="#2699FB"
                         android:clickable="true" />
                     <TextView
                         android:layout_marginTop="5dp"
@@ -121,9 +122,9 @@
                         android:text="@string/basic_lead"
                         android:paddingRight="24dp"
                         android:paddingEnd="24dp"
-                        android:textSize="14sp"
+                        android:textSize="14dp"
                         android:textStyle="bold"
-                        android:textColor="@color/text_blue"
+                        android:textColor="#002B5D"
                         android:clickable="true" />
 
                     <TextView
@@ -134,13 +135,13 @@
                         android:layout_marginTop="10dp"
                         android:paddingRight="24dp"
                         android:paddingEnd="22sp"
-                        android:textSize="14sp"
+                        android:textSize="12dp"
                         android:textColor="@color/text_blue"
                         android:clickable="true" />
                     </LinearLayout>
 
                     <LinearLayout
-                        android:layout_marginTop="25dp"
+                        android:layout_marginTop="21dp"
                         android:orientation="vertical"
                         android:layout_width="match_parent"
                         android:layout_height="330dp">
@@ -153,9 +154,9 @@
                             android:text="@string/step_two"
                             android:paddingRight="24dp"
                             android:paddingEnd="24dp"
-                            android:textSize="14sp"
+                            android:textSize="20dp"
                             android:textStyle="bold"
-                            android:textColor="@color/text_blue"
+                            android:textColor="#2699FB"
                             android:clickable="true" />
 
                         <TextView
@@ -166,9 +167,9 @@
                             android:text="@string/viabilitycheck"
                             android:paddingRight="24dp"
                             android:paddingEnd="24dp"
-                            android:textSize="14sp"
+                            android:textSize="14dp"
                             android:textStyle="bold"
-                            android:textColor="@color/text_blue"
+                            android:textColor="#002B5D"
                             android:clickable="true" />
 
                         <TextView
@@ -178,7 +179,7 @@
                             android:text="@string/via_descone"
                             android:paddingRight="24dp"
                             android:paddingEnd="22sp"
-                            android:textSize="14sp"
+                            android:textSize="12dp"
                             android:layout_marginTop="10dp"
                             android:textColor="@color/text_blue"
                             android:clickable="true" />
@@ -191,9 +192,9 @@
                             android:text="@string/instant_credit"
                             android:paddingRight="24dp"
                             android:paddingEnd="22sp"
-                            android:textSize="14sp"
+                            android:textSize="14dp"
                             android:textStyle="bold"
-                            android:textColor="@color/text_blue"
+                            android:textColor="#002B5D"
                             android:clickable="true" />
                         <TextView
                             android:id="@+id/instantcredit_desc"
@@ -202,7 +203,7 @@
                             android:text="@string/instant_desc"
                             android:paddingRight="24dp"
                             android:paddingEnd="22sp"
-                            android:textSize="14sp"
+                            android:textSize="12dp"
                             android:layout_marginTop="10dp"
                             android:textColor="@color/text_blue"
                             android:clickable="true" />
@@ -215,9 +216,9 @@
                             android:layout_marginTop="20dp"
                             android:paddingRight="24dp"
                             android:paddingEnd="22sp"
-                            android:textSize="14sp"
+                            android:textSize="14dp"
                             android:textStyle="bold"
-                            android:textColor="@color/text_blue"
+                            android:textColor="#002B5D"
                             android:clickable="true" />
 
                         <TextView
@@ -227,7 +228,7 @@
                             android:text="@string/eligiblity_des"
                             android:paddingRight="24dp"
                             android:paddingEnd="22sp"
-                            android:textSize="14sp"
+                            android:textSize="12dp"
                             android:layout_marginTop="10dp"
                             android:textColor="@color/text_blue"
                             android:clickable="true" />
@@ -239,16 +240,16 @@
                         android:layout_height="wrap_content">
 
                         <TextView
-                            android:layout_marginTop="25dp"
+                            android:layout_marginTop="20dp"
                             android:id="@+id/steps3"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="@string/step_three"
                             android:paddingRight="24dp"
                             android:paddingEnd="24dp"
-                            android:textSize="14sp"
+                            android:textSize="20dp"
                             android:textStyle="bold"
-                            android:textColor="@color/text_blue"
+                            android:textColor="#2699FB"
                             android:clickable="true" />
 
                         <TextView
@@ -258,7 +259,7 @@
                             android:text="@string/document_title"
                             android:paddingRight="24dp"
                             android:paddingEnd="24dp"
-                            android:textSize="14sp"
+                            android:textSize="14dp"
                             android:textStyle="bold"
                             android:textColor="@color/text_blue"
                             android:clickable="true" />
@@ -271,7 +272,7 @@
                             android:layout_marginTop="10dp"
                             android:paddingRight="24dp"
                             android:paddingEnd="22sp"
-                            android:textSize="14sp"
+                            android:textSize="12dp"
                             android:textColor="@color/text_blue"
                             android:clickable="true" />
                     </LinearLayout>

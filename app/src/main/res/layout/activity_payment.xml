@@ -179,7 +179,7 @@
                                     android:layout_gravity="center"
                                     android:layout_margin="10dp"
                                     android:layout_marginTop="10dp"
-                                    android:layout_weight="1">
+                                    >
 
 
 
@@ -204,9 +204,28 @@
                                         android:textStyle="bold"
 
                                         android:textColor="@color/mid_blue" />
+
+                                    <ImageView
+                                        android:layout_gravity="center"
+                                        android:layout_marginLeft="40dp"
+
+                                        android:layout_width="25dp"
+                                        android:layout_height="20dp"
+                                        android:src="@drawable/rupee1" />
+                                    <androidx.appcompat.widget.AppCompatSpinner
+                                        android:id="@+id/customplan_amount"
+                                        android:layout_marginRight="20dp"
+                                        android:layout_width="100dp"
+                                        android:layout_height="match_parent"
+                                        android:gravity="center"
+                                        style="@style/Base.Widget.AppCompat.Spinner.Underlined"
+                                        android:spinnerMode="dropdown"
+                                        android:textAlignment="center" />
+
                                 </LinearLayout>
 
                                 <LinearLayout
+                                    android:visibility="gone"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center"
@@ -216,19 +235,10 @@
                                     android:layout_weight="1"
                                     android:orientation="horizontal">
 
-                                    <androidx.appcompat.widget.AppCompatSpinner
-                                        android:id="@+id/customplan_amount"
-                                        android:layout_width="100dp"
-                                        android:layout_height="match_parent"
-                                        android:gravity="center"
-                                        style="@style/Base.Widget.AppCompat.Spinner.Underlined"
-                                        android:spinnerMode="dropdown"
-                                        android:textAlignment="center" />
+
                                 </LinearLayout>
 
-
                             </LinearLayout>
-
 
                         </LinearLayout>
 
@@ -236,6 +246,7 @@
                     </LinearLayout>
 
                     <LinearLayout
+                        android:background="#F7F7F7"
                         android:layout_width="match_parent"
                         android:layout_height="250dp"
                         android:orientation="vertical">

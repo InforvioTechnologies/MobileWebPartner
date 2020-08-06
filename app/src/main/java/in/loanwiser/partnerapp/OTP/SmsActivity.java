@@ -345,7 +345,7 @@ public class SmsActivity extends AppCompatActivity {
                                     Pref.putPART(mCon, partner_code);
                                   //  Objs.a.showToast(mCon, "Welcome to Loanwiser, you have successfully logged in");
 
-                                    Toast.makeText(mCon,"Welcome to Loanwiser, you have successfully logged in",Toast.LENGTH_SHORT).show();
+                                   // Toast.makeText(mCon,"Welcome to Loanwiser, you have successfully logged in",Toast.LENGTH_SHORT).show();
                                     Firebase_Registration(user_array);
                                     Pref.putUID(mCon, no_bundle);
                                     Pref.putMobile(mCon, S_moblie);

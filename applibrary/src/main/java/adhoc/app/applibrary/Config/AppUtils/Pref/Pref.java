@@ -57,6 +57,7 @@ public final class Pref {
     public static String COEMPTYPE = "COEMPTYPE";
     public static String COAPPSALARYTYPE = "COAPPSALARYTYPE";
     public static String DOCKEY = "DOCKEY";
+    public static String Employee_type_Id = "Employee_type_Id";
 
     public static SharedPreferences get(final Context context) {
         return context.getSharedPreferences(context.getResources().getString(R.string.app_name),Context.MODE_PRIVATE);
@@ -209,6 +210,7 @@ public static void putapplicant_name(final Context context, String aUserId) {
     }
 
 
+
     //Residence Type
     public static void putResidenceType(final Context context, String aUserId) {
         Pref.putPref(context, ResidenceType, aUserId);
@@ -289,6 +291,23 @@ public static void putapplicant_name(final Context context, String aUserId) {
         editor.remove(COSALARYTYPE);
         editor.commit();
     }
+
+
+    public static void putEmployee_type_Id(final Context context, String aUserId) {
+        Pref.putPref(context, Employee_type_Id, aUserId);
+    }
+
+    public static String getEmployee_type_Id(final Context context) {
+        return Pref.getPref(context, Employee_type_Id, null);
+    }
+
+    public static void removeEmployee_type_Id(final Context context) {
+        SharedPreferences prefs = Pref.get(context);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.remove(Employee_type_Id);
+        editor.commit();
+    }
+
 
     public static void putStatus_id(final Context context, String aUserId) {
         Pref.putPref(context, PID, aUserId);

@@ -6,6 +6,8 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Typeface;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -59,6 +61,7 @@ import adhoc.app.applibrary.Config.AppUtils.VolleySignleton.AppController;
 import dmax.dialog.SpotsDialog;
 import in.loanwiser.partnerapp.Infinite_Scrollview.Lead_item;
 import in.loanwiser.partnerapp.My_Earnings.My_Earnings;
+import in.loanwiser.partnerapp.PDF_Dounloader.PermissionUtils;
 import in.loanwiser.partnerapp.PartnerActivitys.Applicant_Details_Activity;
 import in.loanwiser.partnerapp.PartnerActivitys.Dashboard_Activity;
 import in.loanwiser.partnerapp.Partner_Statues.ui.gallery.GalleryFragment;
@@ -66,6 +69,7 @@ import in.loanwiser.partnerapp.Partner_Statues.ui.home.HomeFragment;
 import in.loanwiser.partnerapp.Push_Notification.Push_Notification_List;
 import in.loanwiser.partnerapp.R;
 import in.loanwiser.partnerapp.Step_Changes_Screen.Pay_Out_Screen;
+import in.loanwiser.partnerapp.Step_Changes_Screen.Step_Completion_Screen;
 import in.loanwiser.partnerapp.User_Account.BankDetails;
 import in.loanwiser.partnerapp.User_Account.ProfileSettings;
 import in.loanwiser.partnerapp.User_Account.Welcome_Page;
@@ -87,6 +91,10 @@ public class DashBoard_new extends AppCompatActivity  implements NavigationView.
 
     SharedPreferences.Editor editor;
     private String tag_json_obj = "jobj_req", tag_json_arry = "jarray_req";
+
+    PermissionUtils permissionUtils;
+    private static final int STORAGE_PERMISSION_REQUEST_CODE = 1;
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -98,7 +106,7 @@ public class DashBoard_new extends AppCompatActivity  implements NavigationView.
         Toolbar toolbar = findViewById(R.id.toolbar);
 
          textview = findViewById(R.id.hotlist_hot);
-
+        permissionUtils = new PermissionUtils();
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         View headerView = navigationView.getHeaderView(0);
         nav_header_textView = headerView.findViewById(R.id.nav_header_textView);
@@ -167,6 +175,8 @@ public class DashBoard_new extends AppCompatActivity  implements NavigationView.
 
         navView_bottom.setOnNavigationItemSelectedListener
                 (new BottomNavigationView.OnNavigationItemSelectedListener() {
+
+
                     @Override
                     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                         Fragment selectedFragment = null;
@@ -248,9 +258,8 @@ public class DashBoard_new extends AppCompatActivity  implements NavigationView.
             startActivity(intent);
 
         } else if (id == R.id.nav_payout) {
+            
 
-            Intent intent = new Intent(DashBoard_new.this,Pay_Out_Screen.class);
-            startActivity(intent);
 
         }else if (id == R.id.nav_logout) {
             ExitAlert(DashBoard_new.this);
@@ -266,12 +275,29 @@ public class DashBoard_new extends AppCompatActivity  implements NavigationView.
             //Pay_Out_Screen
         }else if (id == R.id.pay_structure) {
 
-            Intent intent = new Intent(DashBoard_new.this, Pay_Out_Screen.class);
-            startActivity(intent);
+            String viability_report_URL1 = "http://callcenter.propwiser.com/includes/DETAILED-PAYOUT-STRUCTURE.pdf";
+
+            View view = null;
+            if (permissionUtils.checkPermission(DashBoard_new.this, STORAGE_PERMISSION_REQUEST_CODE,  view)) {
+                if (viability_report_URL1.length() > 0) {
+                    try {
+                        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(viability_report_URL1)));
+                    } catch (Exception e) {
+                        e.getStackTrace();
+                    }
+                }
+            }
             //Pay_Out_Screen
+        } else if(id == R.id.nav_item_six){
+            Intent callIntent = new Intent(Intent.ACTION_DIAL);
+            String mobileno="6369626669";
+            callIntent.setData(Uri.parse("tel:" +mobileno));
+            try {
+                startActivity(callIntent);
+            } catch (android.content.ActivityNotFoundException ex) {
+                Toast.makeText(DashBoard_new.this, "Could not find an activity to place the call.", Toast.LENGTH_SHORT).show();
+            }
         }
-
-
         /*
         else if (id == R.id.nav_call) {
             Objs.ac.StartActivity(mCon, CustomerCare.class);

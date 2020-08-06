@@ -24,7 +24,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import in.loanwiser.partnerapp.R;
-import in.loanwiser.partnerapp.Share_Material.Share_Screen;
+import in.loanwiser.partnerapp.Share_Material.ShareLayoutActivity;
 
 public class Credite_Coin_Adapter extends RecyclerView.Adapter<Credite_Coin_Adapter.CustomViewHolder> {
 
@@ -75,7 +75,7 @@ public class Credite_Coin_Adapter extends RecyclerView.Adapter<Credite_Coin_Adap
             @Override
             public void onClick(View view) {
 
-                Intent intent = new Intent(context, Share_Screen.class);
+                Intent intent = new Intent(context, ShareLayoutActivity.class);
                 context.startActivity(intent);
 
             }

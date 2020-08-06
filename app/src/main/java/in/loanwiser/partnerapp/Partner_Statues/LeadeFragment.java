@@ -2,11 +2,14 @@ package in.loanwiser.partnerapp.Partner_Statues;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -62,7 +65,7 @@ import adhoc.app.applibrary.Config.AppUtils.Pref.Pref;
 import adhoc.app.applibrary.Config.AppUtils.Urls;
 import adhoc.app.applibrary.Config.AppUtils.VolleySignleton.AppController;
 import dmax.dialog.SpotsDialog;
-import in.loanwiser.partnerapp.BuildConfig;
+
 import in.loanwiser.partnerapp.Infinite_Scrollview.InfiniteScrollProvider;
 import in.loanwiser.partnerapp.Infinite_Scrollview.LeadListAdapter_Dashboard1;
 import in.loanwiser.partnerapp.Infinite_Scrollview.Lead_item;
@@ -99,7 +102,7 @@ public class LeadeFragment extends Fragment implements OnLoadMoreListener {
     String applicant_id;
     private String tag_json_obj = "jobj_req", tag_json_arry = "jarray_req";
 
-    LinearLayout Ly_no_leads_data;
+    LinearLayout Ly_no_leads_data,network_stat,mainlay;
 
     public static final String b2b_user_id1 = "b2b_uer_id";
     String b2b_user_id;
@@ -123,7 +126,18 @@ public class LeadeFragment extends Fragment implements OnLoadMoreListener {
         recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
         progressBar = (ProgressBar) view.findViewById(R.id.progress_bar);
         Ly_no_leads_data = (LinearLayout) view.findViewById(R.id.Ly_no_leads_data);
+        network_stat = (LinearLayout) view.findViewById(R.id.network_stat);
+        mainlay = (LinearLayout) view.findViewById(R.id.mainlay);
         progressDialog = new SpotsDialog(getActivity(), R.style.Custom);
+
+        if (isConnected()==false){
+            progressDialog.dismiss();
+            network_stat.setVisibility(View.VISIBLE);
+            mainlay.setVisibility(View.INVISIBLE);
+            progressBar.setVisibility(View.GONE);
+
+        }
+
 
         Account_Listings_Details(view);
 
@@ -140,6 +154,19 @@ public class LeadeFragment extends Fragment implements OnLoadMoreListener {
 
     }
 
+
+    public boolean isConnected() {
+        boolean connected = false;
+        try {
+            ConnectivityManager cm = (ConnectivityManager)getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
+            NetworkInfo nInfo = cm.getActiveNetworkInfo();
+            connected = nInfo != null && nInfo.isAvailable() && nInfo.isConnected();
+            return connected;
+        } catch (Exception e) {
+            Log.e("Connectivity Exception", e.getMessage());
+        }
+        return connected;
+    }
 
 
     private void Account_Listings_Details(View view) {
@@ -259,12 +286,12 @@ public class LeadeFragment extends Fragment implements OnLoadMoreListener {
             public void onErrorResponse(VolleyError error) {
                 if(count12 == 0)
                 {
-                    progressDialog.show();
+                    progressDialog.dismiss();
                 }else
                 {
                     progressBar.setVisibility(View.GONE);
                 }
-                Toast.makeText(getActivity(),error.getMessage(), Toast.LENGTH_SHORT).show();
+              //  Toast.makeText(getActivity(),error.getMessage(), Toast.LENGTH_SHORT).show();
             }
         }) {
             @Override

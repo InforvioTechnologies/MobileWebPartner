@@ -118,6 +118,7 @@ public class Urls {
 
     public static String CRIF_SCORE_CHECK = Urls_step + "get_crif_score";
     public static String CRIF_Gerneration = Urls_step + "crif_reportgen";
+    public static String step2_complete  = Urls_step + "step2_complete ";
 
     public static String SUBMIT_TO_LOANWIER = Urls_step + "submit_loanwiser";
     public static String COIN_Transaction = Urls_step + "coins_transaction";
@@ -138,6 +139,10 @@ public class Urls {
     public static String Notification_Update  = Urls_step + "notification_update";
     public static String My_Earnings  = Urls_step + "my_earnings";
     public static String POST_SHARE  = Urls_step + "post_share";
+    public static String DOC_CHECKLIST  = Urls_step + "Get_allDocumentcklist";
+
+   // public static String DOCUMENT_CHECK  = Urls_step + "Get_allDocumentcklist";
+
    // public static String DOCUMENT_CHECK_LIST = Urls_document_check_list + "get_documentcklist";
 
     /* public static  String = "" ;

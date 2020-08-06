@@ -1,6 +1,7 @@
 package in.loanwiser.partnerapp.Partner_Statues;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.content.Context;
 import android.graphics.Color;
 import android.util.Log;
@@ -9,17 +10,37 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
+import adhoc.app.applibrary.Config.AppUtils.Objs;
+import adhoc.app.applibrary.Config.AppUtils.Params;
+import adhoc.app.applibrary.Config.AppUtils.Pref.Pref;
+import adhoc.app.applibrary.Config.AppUtils.Urls;
+import adhoc.app.applibrary.Config.AppUtils.VolleySignleton.AppController;
+import dmax.dialog.SpotsDialog;
+import in.loanwiser.partnerapp.PartnerActivitys.Home;
 import in.loanwiser.partnerapp.R;
 
 public class Resent_Lead_Statues extends RecyclerView.Adapter<Resent_Lead_Statues.CustomViewHolder> {
@@ -27,6 +48,11 @@ public class Resent_Lead_Statues extends RecyclerView.Adapter<Resent_Lead_Statue
     private Context context;
     private ArrayList<Suggestion_item_freqent> items;
     private String lead_id;
+    private AlertDialog progressDialog;
+
+    String Loan_amount,sub_categoryid,transaction_id1,subtask_id,loan_type_id,loan_type,
+            payment,applicant_id1;
+    private String tag_json_obj = "jobj_req", tag_json_arry = "jarray_req";
 
     public Resent_Lead_Statues(Context context, ArrayList<Suggestion_item_freqent> items) {
         this.context = context;
@@ -41,14 +67,14 @@ public class Resent_Lead_Statues extends RecyclerView.Adapter<Resent_Lead_Statue
 
     @SuppressLint("ResourceAsColor")
     @Override
-    public void onBindViewHolder(@NonNull CustomViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull CustomViewHolder holder, final int position) {
       //  holder.applicant_id.setText("Testing Allocated Lead");
 
         /* Suggestion_item_freqent( J.getString(Params.id), J.getString(Params.user_id),J.getString(Params.name),
                                                 J.getString(Params.mobileno),J.getString(Params.appointment_date),J.getString(Params.appointfrom_time)))*/
 
         String appointment_id  = items.get(position).getAppointment_id();
-        String applicant_id  = items.get(position).getUser_ID();
+        final String applicant_id  = items.get(position).getUser_ID();
         String name  = items.get(position).getName();
         String loan_type  = items.get(position).getloan_type();
         String loan_amount  = items.get(position).getloan_amount();
@@ -56,7 +82,8 @@ public class Resent_Lead_Statues extends RecyclerView.Adapter<Resent_Lead_Statue
 
 
         holder.lead_name.setText(name);
-        holder.loan_amount.setText(loan_amount);
+       // holder.loan_amount.setText(loan_amount);
+        holder.loan_amount.setText("\u20B9"+loan_amount);
         holder.loan_type.setText(loan_type);
         holder.Statues_update.setText(status_disp);
 
@@ -87,20 +114,17 @@ public class Resent_Lead_Statues extends RecyclerView.Adapter<Resent_Lead_Statue
       //  String dt = parseDateToddMMyyyy(appointment_date);
        // holder.applicant_date.setText(dt);
 
-      /* holder.cardView.setOnClickListener(new View.OnClickListener() {
+      holder.cardView.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View view) {
 
-                   String appoint_id  = items.get(position).getAppointment_id();
-                   String applicant_id  = items.get(position).getUser_ID();
-                   String lead_id = "1";
-                   String SOD_EOD_ID = "11";
 
+               Applicant_Status(applicant_id);
 
            }
        });
 
-       holder.Bt_create_appointment.setOnClickListener(new View.OnClickListener() {
+     /*  holder.Bt_create_appointment.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View view) {
                String appoint_id  = items.get(position).getAppointment_id();
@@ -134,6 +158,7 @@ public class Resent_Lead_Statues extends RecyclerView.Adapter<Resent_Lead_Statue
             cardView = view.findViewById(R.id.cardView);
             Bt_create_appointment = view.findViewById(R.id.Bt_create_appointment);
             Statues_update_dot = view.findViewById(R.id.Statues_update_dot);
+            progressDialog = new SpotsDialog(context, R.style.Custom);
         }
     }
 
@@ -157,5 +182,107 @@ public class Resent_Lead_Statues extends RecyclerView.Adapter<Resent_Lead_Statue
             e.printStackTrace();
         }
         return str;
+    }
+
+
+    public void Applicant_Status(final String id) {
+
+       // final String step_status11 = step_status1;
+        JSONObject jsonObject =new JSONObject();
+        JSONObject J= null;
+        try {
+            J =new JSONObject();
+            J.put(Params.user_id, id);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        progressDialog.show();
+        Log.e("Applicant Entry request", String.valueOf(J));
+
+        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, Urls.PARTNER_STATUES_IDs, J,
+                new Response.Listener<JSONObject>() {
+                    @SuppressLint("LongLogTag")
+                    @Override
+                    public void onResponse(JSONObject response) {
+
+                        Log.e("Applicant Entry", String.valueOf(response));
+                        JSONObject jsonObject1 = new JSONObject();
+
+                        try {
+                            String statues = response.getString("status");
+
+                            if(statues.contains("success"))
+                            {
+                                JSONObject jsonObject2 = response.getJSONObject("reponse");
+
+                                JSONArray jsonArray = jsonObject2.getJSONArray("emp_states");
+
+                                String user_id = jsonObject2.getString("user_id");
+                                Loan_amount = jsonObject2.getString("loan_amount");
+                                sub_categoryid =   jsonObject2.getString("sub_categoryid");
+                                transaction_id1 =  jsonObject2.getString("transaction_id");
+                                subtask_id =  jsonObject2.getString("subtask_id");
+                                loan_type_id =  jsonObject2.getString("loan_type_id");
+                                loan_type =  jsonObject2.getString("loan_type");
+                                payment =  jsonObject2.getString("payment");
+                                applicant_id1 =  "APP-"+user_id;
+
+
+                                // String statues2 = "3";
+                                Pref.putUSERID(context,user_id);
+                                String _Emp_staus_jsonArray = jsonArray.toString();
+
+                                Objs.ac.StartActivityPutExtra(context, Home.class,
+                                        Params.user_id,user_id,
+                                        Params.transaction_id,transaction_id1,
+                                        Params.applicant_id,applicant_id1,
+                                        Params.sub_taskid,subtask_id, Params.Applicant_status,_Emp_staus_jsonArray,
+                                        Params.loan_type_id,loan_type_id,Params.loan_type,loan_type);
+
+                              /*  if(payment.equals("error"))
+                                {
+                                    Intent intent = new Intent(Dashboard_Activity.this, Payment_Details_Activity.class);
+                                    startActivity(intent);
+                                    finish();
+                                }else
+                                {
+                                    Log.d("applicant_id1",loan_type);
+                                    Objs.ac.StartActivityPutExtra(mCon, Home.class,
+                                            Params.user_id,user_id,
+                                            Params.transaction_id,transaction_id1,
+                                            Params.applicant_id,applicant_id1,
+                                            Params.sub_taskid,subtask_id, Params.Applicant_status,_Emp_staus_jsonArray,
+                                            Params.loan_type_id,loan_type_id,Params.loan_type,loan_type);
+                                    finish();
+
+                                }*/
+
+
+                            }
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        progressDialog.dismiss();
+                    }
+                }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                progressDialog.dismiss();
+                Log.e("Applicant Entry request", String.valueOf(error));
+                Toast.makeText(context,error.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("content-type", "application/json");
+                return headers;
+            }
+        };
+        AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
     }
 }

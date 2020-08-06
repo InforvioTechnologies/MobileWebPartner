@@ -207,6 +207,7 @@ public class ActivityCloser {
         intent.putExtra(ExtraKey6,ExtraMsg6);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
         activity.startActivity(intent);
+
         Objs.a.anim(activity);
     }
 

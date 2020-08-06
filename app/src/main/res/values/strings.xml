@@ -1,5 +1,5 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <string name="app_name">Loanwiser</string>
+    <string name="app_name">Loanwiser Partner</string>
     <string name="welcome">Welcome to </string>
     <string name="login">Login</string>
     <string name="registr">Register</string>
@@ -77,7 +77,7 @@
     <string name="update_lead">Update your Leads</string>
     <string name="validation_state">Select the Loan Typ</string>
     <string name="app_add_lead">Add Lead</string>
-    <string name="invalid_ifcse">Please enter a IFCS Code</string>
+    <string name="invalid_ifcse">Please enter a IFSC Code</string>
     <string name="saveB">Save</string>
     <string name="loan_type">Loan Type</string>
     <string name="property_type">Property identified</string>
@@ -540,8 +540,8 @@
     <string name="is_mobile_">Is mobile Number Same as WhatsApp Number</string>
     <string name="saving_bank_acc">Have saving Bank Account</string>
     <string name="salary_proof">Salary Proof</string>
-    <string name="exp_current_cmp">Experiance in Current Company(months)</string>
-    <string name="total_exp_in_cmp">Total work experience(months)</string>
+    <string name="exp_current_cmp">Experience  in Current Company(months)</string>
+    <string name="total_exp_in_cmp">Total Work Experience(months)</string>
     <string name="cmp_pin">Company Pincode</string>
     <string name="other_family_member">other Earning Members in family?</string>
     <string name="family_member_name">Family Member Name</string>
@@ -776,7 +776,8 @@
 
     <string name="save_later">SAVE FOR LATER</string>
     <string name="stepone_submit">Are you sure you want to Submit at Step1</string>
-    <string name="stepone_desc">if you proceed to step2 and step3 you can receive more payout and chance to earn instant cash benefit. if you submit at this stage.you\'ll only get payout percentage for the Step 1 completion,and only when the loan is disbursed.</string>
+    <string name="stepone_desc">if you proceed to step2 and step3 you can receive more payout and chance to earn instant cash benefit. If you submit at this stage.you\'ll only get payout percentage for the step 1 completion,and only when the loan is disbursed.</string>
+    <string name="stepone_desc1">if you proceed to step3 you can receive more payout and chance to earn instant cash benefit. If you submit at this stage.you\'ll only get payout percentage for the step 1 and step 2 completion,and only when the loan is disbursed.</string>
     <string name="no_cancel">No, Cancel</string>
     <string name="yes_submit">Yes, Submit</string>
     <string name="doctupload_dialog">Do you have any lead Documents to be uploaded?</string>
@@ -904,5 +905,14 @@
     <string name="enter_docpass">Please Enter Your Document Password</string>
 
     <string name="viewpdf">VIew PDF</string>
+    <string name="no_trans">No Transaction Yet!</string>
+
+    <string name="docment_checklist">Document Checklist</string>
+    <string name="share_whatsapp">SHARE ON WHATSAPP</string>
+    <string name="other_network">SHARE ON OTHER NETWORKS</string>
+
+    <string name="latestlead">Latest Lead Updates</string>
+    <string name="finance_ins">Financial Health Assessment Services</string>
+    <string name="doc_check">Document Checklist</string>
 
 </resources>

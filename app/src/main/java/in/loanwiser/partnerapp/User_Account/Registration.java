@@ -864,9 +864,6 @@ public class Registration extends SimpleActivity implements GoogleApiClient.Conn
                         progressDialog.dismiss();
 
                         Log.e("Response :", String.valueOf(response));
-
-
-
                         try {
                             if(response.getString(Params.status).equals(Params.ok)){
 

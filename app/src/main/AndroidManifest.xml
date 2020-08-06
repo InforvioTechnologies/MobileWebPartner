@@ -120,7 +120,7 @@
             android:theme="@style/NoAction2"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name=".Share_Material.Share_Screen"
+            android:name=".Share_Material.ShareLayoutActivity"
             android:theme="@style/NoAction2"
             android:windowSoftInputMode="stateHidden" />
         <activity

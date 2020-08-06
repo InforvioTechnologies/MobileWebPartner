@@ -341,13 +341,14 @@ public class Applicant_Details_Single extends SimpleActivity {
         } catch (JSONException e) {
             e.printStackTrace();
         }
+        Log.e("Documnet_upload_Status", String.valueOf(J));
         progressDialog.show();
         JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, Urls.UPDATE_STATUS_DOC, J,
                 new Response.Listener<JSONObject>() {
                     @SuppressLint("RestrictedApi")
                     @Override
                     public void onResponse(JSONObject response) {
-                        Log.e("Documnet_upload_Status", String.valueOf(response));
+                        Log.e("Documnet_upload_Status1", String.valueOf(response));
                         //{"request":{"transaction_id":"10194"},"response":true,"status":"success"}
                         try {
 

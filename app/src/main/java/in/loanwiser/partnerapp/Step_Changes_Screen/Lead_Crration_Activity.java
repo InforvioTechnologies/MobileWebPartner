@@ -4,9 +4,11 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -133,16 +135,17 @@ public class Lead_Crration_Activity extends SimpleActivity {
         fonts();
         makeJsonObjReq1();
         Click();
+        Loanwiser_Api();
 
-      /*  lead_cr_step1.setOnClickListener(new View.OnClickListener() {
+
+ /*lead_cr_step1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Lead_Crration_Activity.this, Bank_Statement_Upload.class);
+                Intent intent = new Intent(Lead_Crration_Activity.this, PaymentActivity.class);
                 startActivity(intent);
                 finish();
             }
         });*/
-
        /* lead_cr_step1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -621,8 +624,10 @@ public class Lead_Crration_Activity extends SimpleActivity {
                         Type_of_employement_ID = Type_Of_Employement.getJSONObject(position).getString("id");
                         Type_of_employement_Value = Type_Of_Employement.getJSONObject(position).getString("value");
 
-                        Pref.putSALARYTYPE(context,Type_of_employement_ID);
-
+                       // Pref.putSALARYTYPE(context,Type_of_employement_ID);
+                        SharedPreferences.Editor prefEditor = PreferenceManager.getDefaultSharedPreferences(context).edit();
+                        prefEditor.putString("emp_type", Type_of_employement_ID);
+                        prefEditor.apply();
                         Log.e("The salary Type",Type_of_employement_ID);
                         //CAT_ID = ja.getJSONObject(position).getString("category_id");
 
@@ -746,7 +751,7 @@ public class Lead_Crration_Activity extends SimpleActivity {
                         CO_Type_of_employement_ID = Type_Of_emp_ar.getJSONObject(position).getString("id");
                         CO_Type_of_employement_Value = Type_Of_emp_ar.getJSONObject(position).getString("value");
 
-                        Pref.putCOSALARYTYPE(context,CO_Type_of_employement_ID);
+                       // Pref.putCOSALARYTYPE(context,CO_Type_of_employement_ID);
 
                         Log.e("The salary Type",CO_Type_of_employement_Value);
                         //CAT_ID = ja.getJSONObject(position).getString("category_id");
@@ -805,7 +810,7 @@ public class Lead_Crration_Activity extends SimpleActivity {
                         IS_CO_Applicant_Id = do_u_have_co_.getJSONObject(position).getString("id");
                         IS_CO_Applicant_Value = do_u_have_co_.getJSONObject(position).getString("value");
 
-                        Pref.putCoAPPAVAILABLE(context,IS_CO_Applicant_Id);
+                      //  Pref.putCoAPPAVAILABLE(context,IS_CO_Applicant_Id);
 
 
 
@@ -1343,6 +1348,72 @@ public class Lead_Crration_Activity extends SimpleActivity {
                             e.printStackTrace();
                         }
                         Log.e("Lead creation", String.valueOf(response));
+
+                        progressDialog.dismiss();
+                    }
+                }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                //Log.d(TAG, error.getMessage());
+                VolleyLog.d("TAG", "Error: " + error.getMessage());
+                progressDialog.dismiss();
+
+            }
+        }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("content-type", "application/json");
+                return headers;
+            }
+        };
+
+        // AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
+        int socketTimeout = 0;
+        RetryPolicy policy = new DefaultRetryPolicy(socketTimeout,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
+
+        jsonObjReq.setRetryPolicy(policy);
+
+        AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
+
+
+    }
+
+
+    private void Loanwiser_Api( ) {
+
+        JSONObject J= null;
+
+        try {
+            J =new JSONObject();
+            J.put("loan_type","20");
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        Log.e("Add Home Laoan", String.valueOf(J));
+        progressDialog.show();
+
+        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, Urls.DOC_CHECKLIST, J,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+
+                        String data = String.valueOf(response);
+
+                        Log.e("DOCUMENT Cheklist data", String.valueOf(response));
+
+                        try {
+                            String Status = response.getString("status");
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
 
                         progressDialog.dismiss();
                     }

@@ -9,9 +9,11 @@ import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -79,7 +81,7 @@ public class PaymentActivity extends SimpleActivity implements CompoundButton.On
     Typeface font;
 
     String  payment_id,Salary_Value,paymentamoubt,Payment_value,payment_key,
-            applicant_count;
+            applicant_count,co_app;
     JSONArray payment_values;
 
     String STAND="0",CUST="0",PAY_OPTION="0",Chose_plan="0";
@@ -91,6 +93,9 @@ public class PaymentActivity extends SimpleActivity implements CompoundButton.On
     ImageView closebtn;
     AppCompatTextView standard_amount;
 
+    SharedPreferences pref;
+    public static final String IS_CO_Applicant_Id = "IS_CO_Applicant_Id";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -99,6 +104,8 @@ public class PaymentActivity extends SimpleActivity implements CompoundButton.On
         initTools(R.string.pay_ment);
 
         progressDialog = new SpotsDialog(context, R.style.Custom);
+        pref = getApplication().getSharedPreferences("MyPref", 0);
+
         UI_Fields();
         Click();
         makeJsonObjReq1();
@@ -282,6 +289,7 @@ public class PaymentActivity extends SimpleActivity implements CompoundButton.On
         }
     }*/
 
+    @SuppressLint("LongLogTag")
     private void Validate()
     {
 
@@ -348,7 +356,14 @@ public class PaymentActivity extends SimpleActivity implements CompoundButton.On
         progressDialog.show();
         JSONObject J= null;
 
-        String co_app = Pref.getCoAPPAVAILABLE(getApplicationContext());
+       //  co_app = Pref.getCoAPPAVAILABLE(getApplicationContext());
+
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        co_app=prefs.getString("co_applicant","defaultStringIfNothingFound");
+        Log.i("TAG", "onCreate:CO_Employement_Type "+co_app);
+       // String co_app =  pref.getString(IS_CO_Applicant_Id, null);
+       // b2b_user_id =  pref.getString(b2b_user_id1, null);
+
         if(co_app.equals("2"))
         {
             applicant_count = "1";

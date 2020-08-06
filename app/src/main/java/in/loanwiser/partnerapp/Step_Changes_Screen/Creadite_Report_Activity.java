@@ -786,10 +786,7 @@ public class Creadite_Report_Activity extends SimpleActivity {
                             if(jsonObject1.getString("applicant_status").equals("success")) {
 
                                 Toast.makeText(context,"Credite Generated Successfully ",Toast.LENGTH_SHORT).show();
-
-                                Intent intent = new Intent(Creadite_Report_Activity.this, Upload_Activity_Bank.class);
-                                startActivity(intent);
-                                finish();
+                                STEP2_COMPLETE();
 
                                 }else if(jsonObject1.getString("pay_status").equals("error"))
                                 {
@@ -830,216 +827,38 @@ public class Creadite_Report_Activity extends SimpleActivity {
         AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
     }
 
-    private void CRIF_Generation() {
+    private void STEP2_COMPLETE() {
         progressDialog.show();
+
         JSONObject J =new JSONObject();
-        JSONObject J1 =new JSONObject();
-        JSONObject J2 =new JSONObject();
 
         try {
-            J1.put("transaction_id ",Pref.getTRANSACTIONID(getApplicationContext()));
-            J1.put("user_id",Pref.getUSERID(getApplicationContext()));
-            J1.put("relationship_type",1);
 
-
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        try {
-            J2.put("transaction_id ",Pref.getTRANSACTIONID(getApplicationContext()));
-            J2.put("user_id",Pref.getUSERID(getApplicationContext()));
-            J2.put("relationship_type",2);
-
-
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        JSONArray jsonArray =new JSONArray();
-        JSONArray jsonArray1 =new JSONArray();
-        String trans_id= Pref.getTRANSACTIONID(getApplicationContext());
-        String user_id= Pref.getUSERID(getApplicationContext());
-
-        jsonArray.put(J1);
-        jsonArray1.put(J2);
-
-
-        try {
-            J.put("user_id",Pref.getUSERID(getApplicationContext()));
-            J.put("applicant_count",applicant_count);
             J.put("trans_id",Pref.getTRANSACTIONID(getApplicationContext()));
 
-            J.put("applicant",jsonArray);
-            J.put("co_applicant",jsonArray1);
-
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        Log.e("CRIF_Report__request",J.toString());
-        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, Urls.CRIF_Gerneration, J,
+        Log.e("Step2 Complete request",J.toString());
+        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, Urls.step2_complete, J,
                 new Response.Listener<JSONObject>() {
 
                     @Override
                     public void onResponse(JSONObject object) {
-                        Log.e("CRIF_Report_response",object.toString());
+                        Log.e("Step2 complete response",object.toString());
                         try {
 
-                            JSONObject jsonObject = object.getJSONObject("applicant_report");
-                            String Staues_pay = jsonObject.getString("status");
+                            String Staues_step2_complete = object.getString("status");
 
-                            if(Staues_pay.contains("success")) {
+                            if(Staues_step2_complete.contains("success")) {
 
-                                CRIF_Score();
-                            }
-
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                        // Toast.makeText(mCon, response.toString(),Toast.LENGTH_SHORT).show();
-                        progressDialog.dismiss();
-                    }
-                }, new Response.ErrorListener() {
-
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                VolleyLog.d("TAG", "Error: " + error.getMessage());
-                progressDialog.dismiss();
-            }
-        }) {
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                HashMap<String, String> headers = new HashMap<String, String>();
-                headers.put("Content-Type", "application/json");
-                return headers;
-            }
-        };
-        AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
-
-    }
-
-    private void CRIF_Score() {
-        progressDialog.show();
-        JSONObject J =new JSONObject();
-        try {
-            J.put("user_id",Pref.getUSERID(getApplicationContext()));
-            J.put("relationship_type",applicant_count);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        Log.e("payment_st_request",J.toString());
-        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, Urls.CRIF_SCORE_CHECK, J,
-                new Response.Listener<JSONObject>() {
-
-                    @Override
-                    public void onResponse(JSONObject object) {
-                        Log.e("CRIF_Report_response",object.toString());
-                        try {
-
-
-                            String Staues_pay = object.getString("status");
-
-                            JSONObject response = object.getJSONObject("result");
-
-                            String crif_status = response.getString("crif_status");
-                            String crif_score = response.getString("crif_score");
-
-                            if(Staues_pay.contains("success"))
-                            {
-
-                                if(crif_status.equals("2"))
-                                {
-                                    Toast.makeText(context,"Viability Created Successfully",Toast.LENGTH_SHORT).show();
-                                    LayoutInflater layoutInflater = (LayoutInflater) Creadite_Report_Activity.this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                                    View customView = layoutInflater.inflate(R.layout.popup_crif_pass,null);
-
-                                    Proceed_to_next = (Button) customView.findViewById(R.id.Proceed_to_next);
-                                    crif_Score1 = (TextView) customView.findViewById(R.id.crif_Score);
-
-                                    crif_Score1.setText("Your CRIF Score:"+crif_score);
-
-
-
-                                    //instantiate popup window
-                                    popupWindow = new PopupWindow(customView, LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
-
-                                    //display the popup window
-                                    popupWindow.showAtLocation(credit_det_cap_button, Gravity.CENTER, 0, 0);
-
-                                    //close the popup window on button click
-                                    Proceed_to_next.setOnClickListener(new View.OnClickListener() {
-                                        @Override
-                                        public void onClick(View v) {
-
-                                            Log.e("hi","hello");
-                                            popupWindow.dismiss();
-
-                                            Toast.makeText(context,"Credite Report Created Successfully",Toast.LENGTH_SHORT).show();
-                                            Intent intent = new Intent(Creadite_Report_Activity.this, Upload_Activity_Bank.class);
-                                            startActivity(intent);
-                                            finish();
-
-                                        }
-                                    });
-
-                                }else
-                                {
-
-
-                                    Toast.makeText(context,"Viability Failed",Toast.LENGTH_SHORT).show();
-                                   ///iability_report_URL = jsonObject1.getString("viable_reporturl");
-                                    // Toast.makeText(context,"Viability Created Successfully",Toast.LENGTH_SHORT).show();
-                                    LayoutInflater layoutInflater = (LayoutInflater) Creadite_Report_Activity.this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                                    View customView = layoutInflater.inflate(R.layout.popup_crif,null);
-
-                                    score_failed = (TextView) customView.findViewById(R.id.score_failed);
-                                    view_report = (Button) customView.findViewById(R.id.view_report);
-                                    close = (Button) customView.findViewById(R.id.close);
-
-                                    score_failed.setText("Your CRIF Score:"+crif_score);
-                                    //instantiate popup window
-                                    popupWindow = new PopupWindow(customView, LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
-
-                                    //display the popup window
-                                    popupWindow.showAtLocation(credit_det_cap_button, Gravity.CENTER, 0, 0);
-
-                                    //close the popup window on button click
-                                    close.setOnClickListener(new View.OnClickListener() {
-                                        @Override
-                                        public void onClick(View v) {
-
-                                            //   String viability_array =jsonObject1.getString("viability_arr");
-                                            Intent intent = new Intent(Creadite_Report_Activity.this, Dashboard_Activity.class);
-                                            //  intent.putExtra("viability_jsonArray", viability_array.toString());
-                                            startActivity(intent);
-                                            finish();
-                                        }
-                                    });
-
-                                    view_report.setOnClickListener(new View.OnClickListener() {
-                                        @Override
-                                        public void onClick(View view) {
-                                            if (permissionUtils.checkPermission(Creadite_Report_Activity.this, STORAGE_PERMISSION_REQUEST_CODE, view)) {
-                                                if (viability_report_URL.length() > 0) {
-                                                    try {
-                                                        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(viability_report_URL)));
-                                                    } catch (Exception e) {
-                                                        e.getStackTrace();
-                                                    }
-                                                }
-
-                                            }
-                                        }
-                                    });
-
-                                    Toast.makeText(context,"Credite Report Failed",Toast.LENGTH_SHORT).show();
-
-                                }
-
+                                Intent intent = new Intent(Creadite_Report_Activity.this, Upload_Activity_Bank.class);
+                                startActivity(intent);
+                                finish();
                             }else
                             {
-
+                                Toast.makeText(mCon, "CRIF Statues Failed",Toast.LENGTH_SHORT).show();
                             }
-
-
 
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -1065,6 +884,8 @@ public class Creadite_Report_Activity extends SimpleActivity {
         AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
 
     }
+
+
 
 
         private void Payment_Option()

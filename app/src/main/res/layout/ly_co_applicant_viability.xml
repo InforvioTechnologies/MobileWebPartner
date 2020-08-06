@@ -67,6 +67,7 @@
                     android:id="@+id/pl_co_app_slrd_name_edite_txt"
                     android:textSize="16sp"
                     android:inputType="text"
+                    android:maxLength="2"
                     android:textColor="@color/colorPrimaryDark"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>

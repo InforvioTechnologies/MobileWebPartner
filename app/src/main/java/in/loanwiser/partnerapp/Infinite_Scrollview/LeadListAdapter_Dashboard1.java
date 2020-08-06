@@ -3,7 +3,9 @@ package in.loanwiser.partnerapp.Infinite_Scrollview;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -119,7 +121,7 @@ public class LeadListAdapter_Dashboard1 extends RecyclerView.Adapter<LeadListAda
             //doc_steps.setText(post.getstep_status());
 
             Lead_Name.setText(post.getusername());
-            loan_amount.setText(post.getloan_amount());
+            loan_amount.setText("\u20B9"+post.getloan_amount());
             app_id.setText(post.getid());
             loan_type.setText(post.getloan_typename());
             step_com.setText(post.getcomp_step());
@@ -245,12 +247,17 @@ public class LeadListAdapter_Dashboard1 extends RecyclerView.Adapter<LeadListAda
                                 Pref.putUSERID(context,user_id);
                                 String _Emp_staus_jsonArray = jsonArray.toString();
 
+                                SharedPreferences.Editor prefEditor = PreferenceManager.getDefaultSharedPreferences(context).edit();
+                                prefEditor.putString("user_id", user_id);
+                                prefEditor.apply();
+
                                 Objs.ac.StartActivityPutExtra(context, Home.class,
                                         Params.user_id,user_id,
                                         Params.transaction_id,transaction_id1,
                                         Params.applicant_id,applicant_id1,
                                         Params.sub_taskid,subtask_id, Params.Applicant_status,_Emp_staus_jsonArray,
                                         Params.loan_type_id,loan_type_id,Params.loan_type,loan_type);
+
 
                               /*  if(payment.equals("error"))
                                 {

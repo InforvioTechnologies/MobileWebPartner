@@ -102,7 +102,7 @@ public class LeadListAdapter_Dashboard extends RecyclerView.Adapter<LeadListAdap
             //doc_steps.setText(post.getstep_status());
 
             Lead_Name.setText(post.getusername());
-            loan_amount.setText(post.getloan_amount());
+            loan_amount.setText("\u20B9"+post.getloan_amount());
             app_id.setText(post.getid());
             loan_type.setText(post.getloan_typename());
             step_com.setText(post.getcomp_step());

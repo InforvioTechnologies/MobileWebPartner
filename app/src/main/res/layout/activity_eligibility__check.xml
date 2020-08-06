@@ -14,6 +14,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
+
             <LinearLayout
                 android:padding="15dp"
                 android:orientation="vertical"
@@ -515,6 +516,7 @@
                                     android:id="@+id/no_of_emp_edtxt"
                                     android:textColor="@color/colorPrimaryDark"
                                     android:textSize="16sp"
+                                    android:maxLength="8"
                                     android:imeOptions="actionDone"
                                     android:inputType="number"/>
                             </LinearLayout>
@@ -964,6 +966,7 @@
                                   android:layout_height="wrap_content"
                                   android:textSize="16sp"
                                   android:inputType="number"
+                                  android:maxLength="2"
                                   android:imeOptions="actionNext"
                                   android:id="@+id/no_of_dependent_edt_txt"
                                   android:textColor="@color/colorPrimaryDark"/>
@@ -1009,6 +1012,7 @@
                                   android:layout_height="wrap_content"
                                   android:textSize="16sp"
                                   android:inputType="number"
+                                  android:maxLength="10"
                                   android:imeOptions="actionNext"
                                   android:id="@+id/rent_paid_for_house_edit_txt"
                                   android:textColor="@color/colorPrimaryDark"/>
@@ -1120,6 +1124,7 @@
                                   android:textSize="16sp"
                                   android:inputType="number"
                                   android:imeOptions="actionDone"
+                                  android:maxLength="10"
                                   android:id="@+id/emi_amount_edit_txt"
                                   android:textColor="@color/colorPrimaryDark"/>
                           </LinearLayout>
@@ -1242,6 +1247,7 @@
                                 android:id="@+id/other_incom_amt_edtxt"
                                 android:textColor="@color/colorPrimaryDark"
                                 android:textSize="16sp"
+                                android:maxLength="10"
                                 android:inputType="number"/>
                         </LinearLayout>
                     </LinearLayout>
@@ -1271,7 +1277,7 @@
                                 style="@style/LorgeText2"
                                 android:textColor="@color/colorPrimaryDark"
                                 android:textColorHint="@color/colorPrimaryDark"
-                                android:text="Is Refleted in ITR "
+                                android:text="Is Reflected in ITR "
                                 android:layout_height="wrap_content" />
                         </LinearLayout>
                         <LinearLayout

@@ -106,7 +106,7 @@ public class Payout_ListAdapter extends RecyclerView.Adapter<Payout_ListAdapter.
             commision = post.getcommision();
 
             date.setText(date_disp);
-            lead_detail.setText(date_disp+ "\n"+ app_id);
+            lead_detail.setText(user_name+ "\n"+ app_id);
             loan_details.setText(loan_amount+ "\n"+ loan_type);
             amount_id.setText(commision);
 

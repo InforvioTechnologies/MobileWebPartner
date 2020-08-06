@@ -109,10 +109,10 @@ public class Applicant_Info_new extends SimpleActivity {
 
                         try {
                             applicant_info_object=object.getJSONObject("appinfo");
-                            employement_type=applicant_info_object.getString("employement_type");
-
-                            type_of_employement( employement_type);
-
+                           // employement_type=applicant_info_object.getString("employement_type");
+                            employement_type=applicant_info_object.getString("employment_typestr");
+                           // type_of_employement( employement_type);
+                            type_of_employee_new_val_type.setText(employement_type);
                             String user_name=applicant_info_object.getString("username");
                             app_name1_pan_txt.setText(user_name);
                             String email=applicant_info_object.getString("email");
@@ -167,7 +167,7 @@ public class Applicant_Info_new extends SimpleActivity {
 
         JSONObject J =new JSONObject();
         try {
-            J.put("user_id", "10006");
+            J.put("user_id",Pref.getUSERID(getApplicationContext()));
         } catch (JSONException e) {
             e.printStackTrace();
         }

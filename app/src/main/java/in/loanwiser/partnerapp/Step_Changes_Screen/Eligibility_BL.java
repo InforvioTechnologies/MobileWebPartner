@@ -3,8 +3,10 @@ package in.loanwiser.partnerapp.Step_Changes_Screen;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
@@ -182,9 +184,16 @@ public class Eligibility_BL extends SimpleActivity {
 
 
         Employement_Type = Pref.getCOSALARYTYPE(getApplicationContext());
-        CO_Employement_Type = Pref.getCOEMPTYPE(getApplicationContext());
 
-        Log.e("the co",CO_Employement_Type);
+      //  CO_Employement_Type = Pref.getCOEMPTYPE(getApplicationContext());
+
+
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        CO_Employement_Type=prefs.getString("co_applicant","defaultStringIfNothingFound");
+        Log.i("TAG", "onCreate:CO_Employement_Type "+CO_Employement_Type);
+
+        Log.i("TAG", "onCreate:CO_Employement_Type "+CO_Employement_Type);
+       // Log.e("the co",CO_Employement_Type);
         Rsidence_Type = Pref.getResidenceType(getApplicationContext());
 
         makeJsonObjReq1();
@@ -555,7 +564,7 @@ public class Eligibility_BL extends SimpleActivity {
 
                 }else if(Other_income_Id.equals("4"))
                 {
-
+                    lead_Eligibility();
                 }else
                 {
 
