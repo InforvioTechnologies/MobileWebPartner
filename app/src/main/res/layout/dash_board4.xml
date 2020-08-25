@@ -43,7 +43,7 @@
                             android:id="@+id/lead_name"
                             android:textStyle="bold"
                             android:textColor="@color/black"
-                            android:text="Mathayan"
+                            android:text="-"
                             android:textSize="14dp"
                             android:layout_width="200dp"
                             android:layout_height="wrap_content" />
@@ -53,7 +53,7 @@
                             android:id="@+id/mobile_no"
                             android:textSize="12dp"
                             android:textColor="#B0B0B0"
-                            android:text="9566592196"
+                            android:text="-"
                             android:layout_width="200dp"
                             android:layout_height="wrap_content" />
                     </LinearLayout>
@@ -735,10 +735,11 @@
                                 android:id="@+id/crif_check_text"
                                 style="@style/SmallText"
                                 android:textColor="@color/colorPrimary"
-                                android:text=" CRIF Details"
+                                android:text="Details for Report"
                                 android:layout_width="200dp"
                                 android:textSize="14dp"
                                 android:layout_height="wrap_content" />
+
                             <androidx.appcompat.widget.AppCompatTextView
                                 android:layout_marginBottom="10dp"
                                 android:layout_gravity="center"
@@ -902,7 +903,7 @@
                                 style="@style/SmallText"
                                 android:id="@+id/Approved"
                                 android:textColor="@color/black"
-                                android:text="Details for Report"
+                                android:text="CRIF Report"
                                 android:layout_width="200dp"
                                 android:textSize="14dp"
                                 android:layout_height="wrap_content" />

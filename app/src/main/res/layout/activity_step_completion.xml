@@ -84,7 +84,7 @@
                     android:layout_marginLeft="20dp"
                     android:background="@drawable/ic_group_54"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:orientation="vertical">
 
                 </LinearLayout>
@@ -97,7 +97,7 @@
                     android:orientation="vertical">
 
                     <LinearLayout
-                        android:layout_marginTop="23dp"
+
                         android:orientation="vertical"
                         android:layout_width="match_parent"
                         android:layout_height="150dp">
@@ -141,13 +141,13 @@
                     </LinearLayout>
 
                     <LinearLayout
-                        android:layout_marginTop="21dp"
+
                         android:orientation="vertical"
                         android:layout_width="match_parent"
-                        android:layout_height="330dp">
+                        android:layout_height="230dp">
 
                         <TextView
-                            android:layout_marginTop="15dp"
+                            android:layout_marginTop="10dp"
                             android:id="@+id/steps2"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -234,7 +234,7 @@
                             android:clickable="true" />
                     </LinearLayout>
                     <LinearLayout
-                        android:layout_marginTop="10dp"
+                        android:layout_marginTop="50dp"
                         android:orientation="vertical"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">

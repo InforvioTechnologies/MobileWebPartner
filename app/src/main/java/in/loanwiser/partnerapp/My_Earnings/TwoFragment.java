@@ -92,7 +92,7 @@ public class TwoFragment extends Fragment implements OnLoadMoreListener {
     List<CashfreeList_item> items;
     Cashfree_ListAdapter credite_coin_adapter;
     RecyclerView recyclerView;
-    AppCompatTextView trans_his,date,amount,lead_detail,loan_detail;
+    AppCompatTextView trans_his,date_txt,amount,lead_detail,loan_detail,coins_txt;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -113,15 +113,17 @@ public class TwoFragment extends Fragment implements OnLoadMoreListener {
 
         Typeface font = Typeface.createFromAsset(getActivity().getAssets(), "segoe_ui.ttf");
         trans_his=v.findViewById(R.id.trans_his);
-        date=v.findViewById(R.id.date);
-        amount=v.findViewById(R.id.amount);
-        lead_detail=v.findViewById(R.id.lead_detail);
-        loan_detail=v.findViewById(R.id.loan_detail);
+        coins_txt=v.findViewById(R.id.coins_txt);
+        date_txt=v.findViewById(R.id.date_txt);
+        amount=v.findViewById(R.id.purpose_txt);
+        lead_detail=v.findViewById(R.id.lead_detail_txt);
+        loan_detail=v.findViewById(R.id.loan_details_txt);
         trans_his.setTypeface(font);
-        date.setTypeface(font);
+        date_txt.setTypeface(font);
         amount.setTypeface(font);
         lead_detail.setTypeface(font);
         loan_detail.setTypeface(font);
+        coins_txt.setTypeface(font);
 
        // showData();
       //  initRecyclerView();
@@ -281,6 +283,8 @@ public class TwoFragment extends Fragment implements OnLoadMoreListener {
                     progressBar.setVisibility(View.GONE);
                 }
                 Toast.makeText(getActivity(),error.getMessage(), Toast.LENGTH_SHORT).show();
+                Log.e("the earning issues",error.toString());
+
             }
         }) {
             @Override

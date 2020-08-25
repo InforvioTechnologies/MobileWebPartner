@@ -86,20 +86,22 @@ public class ActivityFragment extends Fragment implements NavigationView.OnNavig
     private ActivityFragment mcon =this;
     private LinearLayout chat;
     private RecyclerView recycler_view,recycler_view_health_ass,
-            recycler_view_document_;
+            recycler_view_document_,recycler_view_share;
     ArrayList<Suggestion_item_freqent> items;
     ArrayList<Health_Assesment_item_freqent> items1;
     ArrayList<Document_item_freqent> items2;
+    ArrayList<post_item_freqent> items3;
     private String tag_json_obj = "jobj_req", tag_json_arry = "jarray_req";
     Resent_Lead_Statues adapter;
     Health_Assement_Adapter adapter1;
     Document_Adapter adapter2;
+    Post_share_Statues adapter3;
 
     AppCompatButton my_earnings,my_leads;
     DrawerLayout drawer;
     public static final String b2b_user_id1 = "b2b_uer_id";
     String b2b_user_id;
-    private AppCompatTextView profile,recent_leads,Document_cheklist,fhas;
+    private AppCompatTextView profile,recent_leads,Document_cheklist,fhas,share_material;
 
     LinearLayout firstlay,secondlay,thirdlay,Ly_allocate,ly_helth_assement_,ly_document_assement_,network_stat;
 
@@ -113,6 +115,7 @@ public class ActivityFragment extends Fragment implements NavigationView.OnNavig
         items = new ArrayList<>();
         items1 = new ArrayList<>();
         items2 = new ArrayList<>();
+        items3 = new ArrayList<>();
         HashMap<String,String> url_maps = new HashMap<String, String>();
 
         pref = getActivity().getSharedPreferences("MyPref", 0);
@@ -136,6 +139,7 @@ public class ActivityFragment extends Fragment implements NavigationView.OnNavig
         recycler_view = (RecyclerView)view.findViewById(R.id.recycler_view);
         recycler_view_health_ass = (RecyclerView)view.findViewById(R.id.recycler_view_health_ass);
         recycler_view_document_ = (RecyclerView)view.findViewById(R.id.recycler_view_document_);
+        recycler_view_share = (RecyclerView)view.findViewById(R.id.recycler_view_share);
 
 
 
@@ -147,6 +151,7 @@ public class ActivityFragment extends Fragment implements NavigationView.OnNavig
         ly_helth_assement_=view.findViewById(R.id.ly_helth_assement_);
         ly_document_assement_=view.findViewById(R.id.ly_document_assement_);
         network_stat=view.findViewById(R.id.network_stat);
+        share_material=view.findViewById(R.id.share_material);
 
         my_earnings = (AppCompatButton) view.findViewById(R.id.my_earnings);
         my_leads = (AppCompatButton) view.findViewById(R.id.my_leads);
@@ -155,9 +160,12 @@ public class ActivityFragment extends Fragment implements NavigationView.OnNavig
         adapter = new Resent_Lead_Statues(getActivity(), items);
         adapter1 = new Health_Assement_Adapter(getActivity(), items1);
         adapter2 = new Document_Adapter(getActivity(), items2);
+        adapter3 = new Post_share_Statues(getActivity(), items3);
+
         recycler_view.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
         recycler_view_health_ass.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
         recycler_view_document_.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
+        recycler_view_share.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
 
         Typeface font = Typeface.createFromAsset(getActivity().getAssets(), "segoe_ui.ttf");
         recent_leads=view.findViewById(R.id.recent_leads);
@@ -321,7 +329,7 @@ public class ActivityFragment extends Fragment implements NavigationView.OnNavig
     }
 
     private void Health_Assement_List(View view) {
-        JSONObject jsonObject =new JSONObject();
+        final JSONObject jsonObject =new JSONObject();
         JSONObject J= null;
 
         try {
@@ -347,6 +355,10 @@ public class ActivityFragment extends Fragment implements NavigationView.OnNavig
 
                                 JSONArray ja = response.getJSONArray("finance");
                                 JSONArray ja1 = response.getJSONArray("checklist");
+                                JSONObject ja_post =response.getJSONObject("post_share");
+                                JSONArray ja2 = ja_post.getJSONArray("data");
+
+                                Log.e("the post share",ja2.toString());
                                 if (ja.length()>0){
                                     for(int i = 0;i<ja.length();i++){
 
@@ -375,6 +387,19 @@ public class ActivityFragment extends Fragment implements NavigationView.OnNavig
                                 Objs.a.ShowHideNoItems(getActivity(),true);
                             }
 
+                            if (ja2.length()>0){
+                                for(int i = 0;i<ja2.length();i++){
+
+                                    JSONObject J = ja2.getJSONObject(i);
+                                    items3.add(new post_item_freqent( J.getString("title"), J.getString("post_url"),J.getString("content")));
+                                    adapter3.notifyDataSetChanged();
+
+                                }
+                                recycler_view_share.setAdapter(adapter3);
+
+                            }else {
+                                Objs.a.ShowHideNoItems(getActivity(),true);
+                            }
 
                         } catch (JSONException e) {
                             e.printStackTrace();

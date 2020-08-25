@@ -890,7 +890,15 @@ public class Home extends AppCompatActivity {
 
                                    if(loanwiser_submit_str1.contains("step-1") || loanwiser_submit_str1.contains("step-2") )
                                    {
-                                       Viability_Check.setVisibility(View.GONE);
+
+                                      if(loanwiser_submit_str1.contains("step-2"))
+                                      {
+                                          Viability_Check.setVisibility(View.VISIBLE);
+                                      }else
+                                      {
+                                          Viability_Check.setVisibility(View.GONE);
+                                      }
+
                                        eligibility_check.setVisibility(View.GONE);
                                        CRIF_Check.setVisibility(View.GONE);
                                        Paymet.setVisibility(View.GONE);
@@ -899,6 +907,7 @@ public class Home extends AppCompatActivity {
                                        Document_Upload.setVisibility(View.GONE);
                                        offer.setVisibility(View.GONE);
                                        step2_card.setVisibility(View.GONE);
+                                       Credit_REport_Generation.setVisibility(View.GONE);
 
                                    }
 
@@ -914,6 +923,7 @@ public class Home extends AppCompatActivity {
                                    viability_Report.setVisibility(View.VISIBLE);
                                    offer.setVisibility(View.VISIBLE);
                                    step2_card.setVisibility(View.VISIBLE);
+                                   Credit_REport_Generation.setVisibility(View.VISIBLE);
                                    //
                                }
 
@@ -1011,23 +1021,31 @@ public class Home extends AppCompatActivity {
                             }
 
 
-                            if(crif_status.contains("completed"))
-                            {
-                                Credit_REport_Generation.setVisibility(View.VISIBLE);
-                                Credit_REport_Generation.setEnabled(true);
-                                credite_report_img.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
-                                crif_report_view.setText("completed");
-
-                            }else if(crif_status.contains("pending"))
-                            {
-                                Credit_REport_Generation.setVisibility(View.VISIBLE);
-                                Credit_REport_Generation.setEnabled(true);
-                                credite_report_img.setImageDrawable(getResources().getDrawable(R.drawable.ic_warning));
-                                crif_report_view.setText("Pending under you");
-                            }else if(crif_status.contains("not_wanted"))
+                            if( loanwiser_submit_str.contains("yes"))
                             {
                                 Credit_REport_Generation.setVisibility(View.GONE);
+                            }else
+                            {
+                                if(crif_status.contains("completed"))
+                                {
+                                    Credit_REport_Generation.setVisibility(View.VISIBLE);
+                                    Credit_REport_Generation.setEnabled(true);
+                                    credite_report_img.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
+                                    crif_report_view.setText("completed");
+
+                                }else if(crif_status.contains("pending"))
+                                {
+                                    Credit_REport_Generation.setVisibility(View.VISIBLE);
+                                    Credit_REport_Generation.setEnabled(true);
+                                    credite_report_img.setImageDrawable(getResources().getDrawable(R.drawable.ic_warning));
+                                    crif_report_view.setText("Pending under you");
+                                }else if(crif_status.contains("not_wanted"))
+                                {
+                                    Credit_REport_Generation.setVisibility(View.GONE);
+                                }
                             }
+
+
 
                         } catch (JSONException e) {
                             e.printStackTrace();

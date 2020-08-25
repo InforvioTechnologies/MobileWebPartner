@@ -739,12 +739,14 @@ public class PaymentDetails extends SimpleActivity {
 
         JSONObject J =new JSONObject();
         try {
+
             J.put("request", jsonArray);
             J.put("user_id", Pref.getUSERID(getApplicationContext()));
             J.put("b2buser_id", Pref.getID(getApplicationContext()));
             J.put("plan_choose", payment_plane);
             J.put("basicAmount", paymentamoubt);
             J.put("transaction_id",Pref.getTRANSACTIONID(getApplicationContext()));
+
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -848,11 +850,12 @@ public class PaymentDetails extends SimpleActivity {
 
     private void Do_Cashfree_Payment(String cftoken)
     {
+
         String stage = "TEST";
         String appId = "100221d5f45db701fd6552fc722001";
         String orderNote = "Test Order";
 
-      /*  String customerName = "mathayan";
+      /*String customerName = "mathayan";
         String customerPhone = "8883072458";
         String customerEmail = "arivindh321@gmail.com";*/
 

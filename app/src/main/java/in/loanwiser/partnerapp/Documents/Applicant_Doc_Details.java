@@ -66,7 +66,7 @@ public class Applicant_Doc_Details extends SimpleActivity {
      //   Log.e("doc",document);
         initTools1(document);
       //  initTools1(applicant_name);
-        progressDialog = new SpotsDialog(this, R.style.Custom);
+        progressDialog = new SpotsDialog(mCon, R.style.Custom);
 
         doc_id =  Objs.a.getBundle(this, Params.id);
         emp_state =  Objs.a.getBundle(this, Params.emp_state);
@@ -228,7 +228,7 @@ public class Applicant_Doc_Details extends SimpleActivity {
 
                 if(docuemt_upload.equals("1")){
 
-                    holder.uploaded_yes.setImageDrawable(getResources().getDrawable(R.drawable.don));
+                    holder.uploaded_yes.setImageDrawable(getResources().getDrawable(R.drawable.ic_right_done));
 
                 }else {
                     holder.uploaded_yes.setImageDrawable(getResources().getDrawable(R.drawable.notdon));
@@ -296,8 +296,6 @@ public class Applicant_Doc_Details extends SimpleActivity {
                             Intent intent = new Intent(Applicant_Doc_Details.this, Document_Details.class);
                             intent.putExtra("jsonArray", proof_String_JSonarray.toString());
                             startActivity(intent);
-
-
 
                         } catch (JSONException e) {
                             e.printStackTrace();

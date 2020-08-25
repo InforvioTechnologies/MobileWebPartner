@@ -53,7 +53,7 @@
 
                     <LinearLayout
                         android:id="@+id/Ly_first"
-
+                        android:visibility="gone"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
                         <LinearLayout
@@ -83,6 +83,7 @@
                                 android:layout_height="match_parent">
 
                                 <ImageView
+                                    android:visibility="gone"
                                     android:src="@drawable/notdon"
                                     android:id="@+id/uploaded_yes"
                                     android:gravity="center"
@@ -152,7 +153,7 @@
                                         android:layout_gravity="center"
                                         android:layout_width="25dp"
                                         android:layout_height="25dp"
-                                        android:src="@drawable/don" />
+                                        android:src="@drawable/ic_right_done" />
                                 </LinearLayout>
 
                             </RelativeLayout>

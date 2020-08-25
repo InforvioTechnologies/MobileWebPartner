@@ -311,7 +311,11 @@ public class Viability_Activity_Data_View extends SimpleActivity {
                             applicant_own_business_type=Applicant_object.getString("bus_vocation");
                             Co_Applicant_status=Viability_object.getString("coapplicant_status");
 
+                            String residence_pincode = Applicant_object.getString("per_pincode");
+                            String company_pincode = Applicant_object.getString("ofc_pincode");
 
+                            String ofc_area = Applicant_object.getString("ofc_area");
+                            String per_area = Applicant_object.getString("per_area");
 
 
                             if(Applicant_Status.contains("success"))
@@ -325,23 +329,47 @@ public class Viability_Activity_Data_View extends SimpleActivity {
                                  JSONArray work_areaarr_area =Applicant_object.getJSONArray("work_areaarr");
                                  JSONArray per_areaarr =Applicant_object.getJSONArray("per_areaarr");
 
-                                        try {
-                                           JSONObject J = work_areaarr_area.getJSONObject(0);
-                                            String area = J.getString("area");
-                                            loan_type_newcat_appl__are.setText(area);
+                                    if(work_areaarr_area.length()>0)
+                                        {
 
-                                        } catch (JSONException e) {
-                                            e.printStackTrace();
+                                            for (int i = 0; i < work_areaarr_area.length(); i++) {
+                                                try {
+
+                                                    JSONObject J = work_areaarr_area.getJSONObject(i);
+                                                    String area = J.getString("area");
+                                                    String id = J.getString("id");
+                                                    if (id.equals(ofc_area)) {
+                                                        loan_type_newcat_appl__are.setText(area);
+                                                    }
+
+                                                } catch (JSONException e) {
+                                                    e.printStackTrace();
+                                                }
+                                            }
+                                        }else
+                                        {
+
                                         }
 
+                                    if(per_areaarr.length()>0) {
 
-                                    try {
-                                        JSONObject J = per_areaarr.getJSONObject(0);
-                                        String area = J.getString("area");
-                                        loan_type_newcat_appl__res_area.setText(area);
+                                        for (int i = 0; i < per_areaarr.length(); i++) {
+                                            try {
+                                                JSONObject J = per_areaarr.getJSONObject(i);
+                                                String area13 = J.getString("area");
+                                                String id_area = J.getString("id");
+                                                if (id_area.equals(per_area)) {
+                                                    loan_type_newcat_appl__res_area.setText(area13);
+                                                }
 
-                                    } catch (JSONException e) {
-                                        e.printStackTrace();
+
+                                            } catch (JSONException e) {
+                                                e.printStackTrace();
+                                            }
+                                        }
+                                    }
+                                    else {
+
                                     }
 
                                     JSONArray assetsstr1 =Applicant_object.getJSONArray("assetsstr");
@@ -371,10 +399,9 @@ public class Viability_Activity_Data_View extends SimpleActivity {
                                     loan_type_newcat_appl_total.setText(total_experience);
 
 
-                                    String company_pincode = Applicant_object.getString("ofc_pincode");
                                     loan_type_newcat_appl__pincoe.setText(company_pincode);
 
-                                    String residence_pincode = Applicant_object.getString("per_pincode");
+
                                     loan_type_newcat_appl__res_pin.setText(residence_pincode);
 
 
@@ -425,14 +452,26 @@ public class Viability_Activity_Data_View extends SimpleActivity {
 
                                     if(ofc_area1.length()>0)
                                     {
-                                        try {
-                                            JSONObject J = ofc_area1.getJSONObject(0);
-                                            String area = J.getString("area");
-                                            off_residence_area.setText(area);
 
-                                        } catch (JSONException e) {
-                                            e.printStackTrace();
+                                        for(int i=0;i<ofc_area1.length();i++)
+                                        {
+                                            try {
+                                                JSONObject J = ofc_area1.getJSONObject(i);
+
+                                                String area = J.getString("area");
+                                                String id_area11 = J.getString("id");
+
+                                                if(id_area11.equals(ofc_area)) {
+                                                    off_residence_area.setText(area);
+                                                }
+
+
+                                            } catch (JSONException e) {
+                                                e.printStackTrace();
+                                            }
                                         }
+
+
                                     }
                                    }else
                                    {
@@ -625,6 +664,7 @@ public class Viability_Activity_Data_View extends SimpleActivity {
                                     try {
                                         JSONObject J = per_areaarr.getJSONObject(0);
                                         String area = J.getString("area");
+                                        String id_area1 = J.getString("id");
                                         self_residence_area.setText(area);
 
                                     } catch (JSONException e) {

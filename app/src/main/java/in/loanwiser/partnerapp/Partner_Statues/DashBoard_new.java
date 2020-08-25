@@ -394,7 +394,7 @@ public class DashBoard_new extends AppCompatActivity  implements NavigationView.
             @Override
             public void onErrorResponse(VolleyError error) {
 
-                Toast.makeText(getApplicationContext(),error.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(),"getFlag wallet", Toast.LENGTH_SHORT).show();
             }
         }) {
             @Override
@@ -502,7 +502,8 @@ public class DashBoard_new extends AppCompatActivity  implements NavigationView.
             @Override
             public void onErrorResponse(VolleyError error) {
 
-                Toast.makeText(getApplicationContext(),error.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(),"coin request", Toast.LENGTH_SHORT).show();
+              Log.e("the Error,",error.toString());
             }
         }) {
             @Override

@@ -41,6 +41,7 @@ import adhoc.app.applibrary.Config.AppUtils.Urls;
 import adhoc.app.applibrary.Config.AppUtils.VolleySignleton.AppController;
 import dmax.dialog.SpotsDialog;
 import in.loanwiser.partnerapp.PartnerActivitys.Dashboard_Activity;
+import in.loanwiser.partnerapp.PartnerActivitys.Home;
 import in.loanwiser.partnerapp.PartnerActivitys.SimpleActivity;
 import in.loanwiser.partnerapp.R;
 
@@ -356,7 +357,7 @@ public class Applicant_Details_Single extends SimpleActivity {
 
                               if(response.getBoolean("doc_uploadstatus")){
                                  // Objs.a.showToast( mCon,"Document uploaded");
-                                  Objs.ac.StartActivity(mCon, Dashboard_Activity.class);
+                                  Objs.ac.StartActivity(mCon, Home.class);
                                   finish();
                               }else {
 

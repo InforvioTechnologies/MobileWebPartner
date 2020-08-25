@@ -148,9 +148,9 @@ public class ManiActivity_Image2 extends SimpleActivity implements SingleUploadB
         Objs.a.setStubId(this, R.layout.main_activity);
         initTools(R.string.doc_upload);
 
-        progressDialog = new SpotsDialog(this, R.style.Custom);
+        progressDialog = new SpotsDialog(getApplicationContext(), R.style.Custom);
 
-        pDialog = new ProgressDialog(this);
+        pDialog = new ProgressDialog(getApplicationContext());
         pDialog.setMessage("Loading...");
 
         doc_typename =  Objs.a.getBundle(this, Params.doc_typename);
@@ -808,24 +808,19 @@ public class ManiActivity_Image2 extends SimpleActivity implements SingleUploadB
                 uploadReceiver.setUploadID(uploadId);
                 //Creating a multi part request
                 progressDialog.show();
-                new MultipartUploadRequest(this, uploadId, Urls.Bank_Statement_Upload)
-                      /*  .addFileToUpload(path, Params.img_url) //Adding file
+                new MultipartUploadRequest(this, uploadId, Urls.PDF_Document_Upload)
+                      .addFileToUpload(path, Params.img_url) //Adding file
                         .addParameter("legal_id", docid) //Adding text parameter to the request
                         .addParameter(Params.doc_name, doc_typename)
                         .addParameter(Params.transaction_id, transaction_id)
-                        .addParameter(Params.is_mobileupload, "4")*/
-
-                        .addFileToUpload(path, "img_url") //Adding file
-                        .addParameter("pdf_password", "") //Adding text parameter to the request
-                        .addParameter("relationship_type", "1")
-                        .addParameter("entity_id", "no")
-                        .addParameter("transaction_id   ", "11995")
                         .addParameter(Params.is_mobileupload, "4")
-
                        // .setNotificationConfig(new UploadNotificationConfig())
                         .setMaxRetries(2)
                         .startUpload(); //Starting the upload
-                Log.e("ComeON", "Upload multipart 3");
+                Log.e("img_url", path);
+                Log.e("relationship_type", "1");
+                Log.e("entity_id", "no");
+                Log.e("transaction_id", transaction_id);
 
             } catch (Exception exc) {
                 Log.e("AndroidUploadService", exc.getMessage(), exc);
@@ -874,7 +869,8 @@ public class ManiActivity_Image2 extends SimpleActivity implements SingleUploadB
 
         if(response.equals("200")){
             progressDialog.dismiss();
-            Objs.a.showToast(mCon, "Successfully uploaded");
+            //Objs.a.showToast(mCon, "Successfully uploaded");
+            Toast.makeText(this, "Successfully uploaded", Toast.LENGTH_SHORT).show();
             Objs.ac.StartActivityPutExtra(mCon,Document_Details.class, Params.user_type,user_type);
             finish();
            // Send_Reload(app_id);

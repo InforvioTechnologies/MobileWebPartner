@@ -270,8 +270,8 @@ public class CRIF_Report_Activity_PDF_View extends SimpleActivity {
                             String Staues_step2_complete = object.getString("status");
 
                             if(Staues_step2_complete.contains("success")) {
-
                                 Document_Details();
+                              //  Document_Details();
                             }else
                             {
                                 Toast.makeText(mCon, "CRIF Statues Failed",Toast.LENGTH_SHORT).show();
@@ -373,9 +373,9 @@ public class CRIF_Report_Activity_PDF_View extends SimpleActivity {
             J =new JSONObject();
 
            // J.put("trans_id",Pref.getTRANSACTIONID(getApplicationContext()));
-            J.put("trans_id","11828");
+            J.put("trans_id","53259");
           //  J.put("user_id","Pref.getUSERID(getApplicationContext())");
-            J.put("user_id","10367");
+            J.put("user_id","51647");
         } catch (JSONException e) {
             e.printStackTrace();
         }

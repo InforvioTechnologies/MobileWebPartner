@@ -348,9 +348,6 @@ public class PaymentActivity extends SimpleActivity implements CompoundButton.On
         }
 
 
-
-
-
     }
     private void makeJsonObjReq1() {
         progressDialog.show();
@@ -375,7 +372,7 @@ public class PaymentActivity extends SimpleActivity implements CompoundButton.On
             J =new JSONObject();
 
          //   J.put("app_count","1");
-           J.put("app_count",applicant_count);
+            J.put("app_count",applicant_count);
             J.put("b2buser_id", Pref.getID(getApplicationContext()));
         } catch (JSONException e) {
             e.printStackTrace();

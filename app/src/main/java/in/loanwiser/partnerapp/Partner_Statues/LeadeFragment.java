@@ -108,6 +108,8 @@ public class LeadeFragment extends Fragment implements OnLoadMoreListener {
     String b2b_user_id;
     SharedPreferences pref; // 0 - for private mode
 
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -128,7 +130,7 @@ public class LeadeFragment extends Fragment implements OnLoadMoreListener {
         Ly_no_leads_data = (LinearLayout) view.findViewById(R.id.Ly_no_leads_data);
         network_stat = (LinearLayout) view.findViewById(R.id.network_stat);
         mainlay = (LinearLayout) view.findViewById(R.id.mainlay);
-        progressDialog = new SpotsDialog(getActivity(), R.style.Custom);
+        progressDialog = new SpotsDialog(getContext(), R.style.Custom);
 
         if (isConnected()==false){
             progressDialog.dismiss();
@@ -207,8 +209,8 @@ public class LeadeFragment extends Fragment implements OnLoadMoreListener {
                                 if (ja.length()>0){
 
                                     for(int i = 0;i<ja.length();i++){
-                                        JSONObject J = ja.getJSONObject(i);
 
+                                        JSONObject J = ja.getJSONObject(i);
                                         String id = J.getString("id");
                                         String loan_typename = J.getString("loan_typename");
                                         String step_status = J.getString("step_status");
@@ -290,7 +292,10 @@ public class LeadeFragment extends Fragment implements OnLoadMoreListener {
                 }else
                 {
                     progressBar.setVisibility(View.GONE);
+
+
                 }
+                Log.e("errror",error.toString());
               //  Toast.makeText(getActivity(),error.getMessage(), Toast.LENGTH_SHORT).show();
             }
         }) {
