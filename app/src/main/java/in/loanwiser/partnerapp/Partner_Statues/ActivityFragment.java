@@ -285,8 +285,18 @@ public class ActivityFragment extends Fragment implements NavigationView.OnNavig
                         try {
                             if(response.getString("status").equals("success")){
 
-
                                 JSONArray ja = response.getJSONArray("data");
+                               /* JSONObject ja1 = response.getJSONObject("balance_coins");
+                                String credit_coin = ja1.getString("current_wallet_coins");
+
+                                SharedPreferences pref1 = getActivity().getSharedPreferences("MyPref", 0); // 0 - for private mode
+                                SharedPreferences.Editor editor = pref1.edit();
+                                editor.putString("credit_coin", credit_coin);
+                                editor.commit();*/
+/*
+                               String credit_coin1 =  pref1.getString("credit_coin", null);
+                                Log.e("credit_coin1",credit_coin1);*/
+
                                 if (ja.length()>0){
                                     for(int i = 0;i<ja.length();i++){
 
@@ -336,7 +346,6 @@ public class ActivityFragment extends Fragment implements NavigationView.OnNavig
             J =new JSONObject();
 
             J.put("b2buser_id", b2b_user_id);
-
 
         } catch (JSONException e) {
             e.printStackTrace();

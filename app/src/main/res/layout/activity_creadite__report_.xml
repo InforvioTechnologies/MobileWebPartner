@@ -169,7 +169,8 @@
                                         android:id="@+id/Pan_No_Edite_text"
                                         android:textColor="@color/colorPrimaryDark"
                                         android:textSize="16sp"
-                                        android:inputType="text"
+                                        android:inputType="textCapCharacters"
+                                        android:textAllCaps="true"
                                         android:imeOptions="actionNext"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"/>
@@ -550,7 +551,8 @@
                                     android:id="@+id/pl_co_app_Pan_No_Edite_text"
                                     android:textColor="@color/colorPrimaryDark"
                                     android:textSize="16sp"
-                                    android:inputType="text"
+                                    android:inputType="textCapCharacters"
+                                    android:textAllCaps="true"
                                     android:imeOptions="actionNext"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"/>

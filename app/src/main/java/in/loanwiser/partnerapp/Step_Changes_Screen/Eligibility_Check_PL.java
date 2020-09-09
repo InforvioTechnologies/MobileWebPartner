@@ -4,10 +4,13 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,7 +18,9 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -61,6 +66,8 @@ import in.loanwiser.partnerapp.SimpleActivity;
 
 public class Eligibility_Check_PL extends SimpleActivity {
 
+
+    JSONObject Applicant,Co_Applicant1;
     AppCompatButton lead_viy_step2;
     private String tag_json_obj = "jobj_req", tag_json_arry = "jarray_req";
     Typeface font;
@@ -155,7 +162,7 @@ public class Eligibility_Check_PL extends SimpleActivity {
               co_having_bank_Value,co_Educational_Value,co_Spinner_res_proof_Value,co_Other_income_Value,co_Gstreflect_Value,
               co_Business_registration_Id,co_Business_registration_Value,co_salaried_Educational_Id,co_salaried_Educational_Value;
      LinearLayout co_other_income_ifany;
-
+    PopupWindow popupWindow;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -170,11 +177,11 @@ public class Eligibility_Check_PL extends SimpleActivity {
       //  Company_type,Type_employee,Current_Residence,
 
 
-        residence_id = Pref.get_Residence_ID(getApplicationContext());
-        Co_Applicant = Pref.getCoAPPAVAILABLE(getApplicationContext());
+        residence_id = Pref.get_Residence_ID(context);
+        Co_Applicant = Pref.getCoAPPAVAILABLE(context);
 
-        IS_CO_Salried_Self = Pref.getCOAPPSALARYTYPE(getApplicationContext());
-        CO_Employement_Type = Pref.getCOEMPTYPE(getApplicationContext());
+        IS_CO_Salried_Self = Pref.getCOAPPSALARYTYPE(context);
+        CO_Employement_Type = Pref.getCOEMPTYPE(context);
 
         Intent intent = getIntent();
         user_id = intent.getStringExtra("user_id");
@@ -379,6 +386,7 @@ public class Eligibility_Check_PL extends SimpleActivity {
         co_sales_by_GStbill_edit_txt = (AppCompatEditText) findViewById(R.id.co_sales_by_GStbill_edit_txt);
         co_bank_cridit_by_edtxt = (AppCompatEditText) findViewById(R.id.co_bank_cridit_by_edtxt);
         co_Avg_monthly_income = (AppCompatEditText) findViewById(R.id.co_Avg_monthly_income);
+        co_Avg_monthly_income.addTextChangedListener(new NumberTextWatcher(co_Avg_monthly_income));
         co_other_income_edite_txt = (AppCompatEditText) findViewById(R.id.co_other_income_edite_txt);
         co_other_income_edite_txt.addTextChangedListener(new NumberTextWatcher(co_other_income_edite_txt));
 
@@ -3038,8 +3046,9 @@ public class Eligibility_Check_PL extends SimpleActivity {
 
 
         JSONObject jsonObject =new JSONObject();
-        JSONObject Applicant =new JSONObject();
-        JSONObject Co_Applicant =new JSONObject();
+         Applicant =new JSONObject();
+         Co_Applicant1 =new JSONObject();
+
 
         JSONArray other_income = new JSONArray();
         JSONArray other_amount = new JSONArray();
@@ -3086,48 +3095,48 @@ public class Eligibility_Check_PL extends SimpleActivity {
 
                 if(IS_CO_Salried_Self.equals("1"))
                 {
-                    Co_Applicant.put("has_pancardHave",Pl_Co_App_PAN_id);
-                    Co_Applicant.put("has_emp_id",pl_co_app_Employee_id);
-                    Co_Applicant.put("company_type",pl_co_app_Company_id);
-                    Co_Applicant.put("pl_co_app_Emp_type_id",pl_co_app_Emp_type_id);
-                    Co_Applicant.put("is_epf_deduct",pl_co_app_epf_id);
-                    Co_Applicant.put("marital_status",pl_co_app_maried_res_spinner_id);
-                    Co_Applicant.put("company_name",S_pl_co_app_company_name_edtxt);
-                    Co_Applicant.put("employees_count",S_pl_co_App_no_of_emp_edtxt);
-                    Co_Applicant.put("designation",S_pl_co_app_designation_in_company);
-                    Co_Applicant.put("no_of_dependency",S_pl_co_app_no_of_dependent_edt_txt);
-                    Co_Applicant.put("affordable_pay",S_pl_co_app_emi_amount_edit_txt);
-                    Co_Applicant.put("qualification",co_salaried_Educational_Id);
+                    Co_Applicant1.put("has_pancardHave",Pl_Co_App_PAN_id);
+                    Co_Applicant1.put("has_emp_id",pl_co_app_Employee_id);
+                    Co_Applicant1.put("company_type",pl_co_app_Company_id);
+                    Co_Applicant1.put("pl_co_app_Emp_type_id",pl_co_app_Emp_type_id);
+                    Co_Applicant1.put("is_epf_deduct",pl_co_app_epf_id);
+                    Co_Applicant1.put("marital_status",pl_co_app_maried_res_spinner_id);
+                    Co_Applicant1.put("company_name",S_pl_co_app_company_name_edtxt);
+                    Co_Applicant1.put("employees_count",S_pl_co_App_no_of_emp_edtxt);
+                    Co_Applicant1.put("designation",S_pl_co_app_designation_in_company);
+                    Co_Applicant1.put("no_of_dependency",S_pl_co_app_no_of_dependent_edt_txt);
+                    Co_Applicant1.put("affordable_pay",S_pl_co_app_emi_amount_edit_txt);
+                    Co_Applicant1.put("qualification",co_salaried_Educational_Id);
 
                     JSONArray co_Other_income_Id_ar = new JSONArray(Arrays.asList(pl_co_app_Other_income_id));
                     JSONArray S_co_other_income_edite_txt_ar = new JSONArray(Arrays.asList(S_pl_co_App_other_incom_amt_edtxt));
                     JSONArray S_co_Gstreflect_Id_ar = new JSONArray(Arrays.asList(pl_co_App_gst_reflect_id));
 
-                    Co_Applicant.put("other_from",co_Other_income_Id_ar);
-                    Co_Applicant.put("other_amount",S_co_other_income_edite_txt_ar);
-                    Co_Applicant.put("other_reflected",S_co_Gstreflect_Id_ar);
+                    Co_Applicant1.put("other_from",co_Other_income_Id_ar);
+                    Co_Applicant1.put("other_amount",S_co_other_income_edite_txt_ar);
+                    Co_Applicant1.put("other_reflected",S_co_Gstreflect_Id_ar);
 
                 }else if(IS_CO_Salried_Self.equals("2"))
                 {
-                    Co_Applicant.put("has_sb_account",co_having_bank_Id);
-                    Co_Applicant.put("qualification",co_Educational_Id);
-                    Co_Applicant.put("reference_name",co_business_ref_name_edt_txt);
-                    Co_Applicant.put("addr_proof_own",co_Spinner_res_proof_Id);
+                    Co_Applicant1.put("has_sb_account",co_having_bank_Id);
+                    Co_Applicant1.put("qualification",co_Educational_Id);
+                    Co_Applicant1.put("reference_name",co_business_ref_name_edt_txt);
+                    Co_Applicant1.put("addr_proof_own",co_Spinner_res_proof_Id);
 
                     JSONArray co_Other_income_Id_ar = new JSONArray(Arrays.asList(co_Other_income_Id));
                     JSONArray S_co_other_income_edite_txt_ar = new JSONArray(Arrays.asList(S_co_other_income_edite_txt));
                     JSONArray S_co_Gstreflect_Id_ar = new JSONArray(Arrays.asList(co_Gstreflect_Id));
 
-                    Co_Applicant.put("other_from",co_Other_income_Id_ar);
-                    Co_Applicant.put("other_amount",S_co_other_income_edite_txt_ar);
-                    Co_Applicant.put("other_reflected",S_co_Gstreflect_Id_ar);
-                    Co_Applicant.put("bussiness_registeration",co_Business_registration_Id);
+                    Co_Applicant1.put("other_from",co_Other_income_Id_ar);
+                    Co_Applicant1.put("other_amount",S_co_other_income_edite_txt_ar);
+                    Co_Applicant1.put("other_reflected",S_co_Gstreflect_Id_ar);
+                    Co_Applicant1.put("bussiness_registeration",co_Business_registration_Id);
 
-                    Co_Applicant.put("purpercent_bankacc",S_co_purchased_by_bank_edit_txt);
-                    Co_Applicant.put("purpercent_gstbill",S_co_purchased_by_GStbill_edit_txt);
-                    Co_Applicant.put("salepercent_gstbill",S_co_sales_by_GStbill_edit_txt);
-                    Co_Applicant.put("incomepercent_bank",S_co_bank_cridit_by_edtxt);
-                    Co_Applicant.put("avg_bankbalance",S_co_Avg_monthly_income);
+                    Co_Applicant1.put("purpercent_bankacc",S_co_purchased_by_bank_edit_txt);
+                    Co_Applicant1.put("purpercent_gstbill",S_co_purchased_by_GStbill_edit_txt);
+                    Co_Applicant1.put("salepercent_gstbill",S_co_sales_by_GStbill_edit_txt);
+                    Co_Applicant1.put("incomepercent_bank",S_co_bank_cridit_by_edtxt);
+                    Co_Applicant1.put("avg_bankbalance",S_co_Avg_monthly_income);
                 }
 
             } catch (JSONException e) {
@@ -3140,11 +3149,11 @@ public class Eligibility_Check_PL extends SimpleActivity {
         try {
             J =new JSONObject();
             //  J.put(Params.email_id,email);
-            J.put("applicant_count",app_count);
+            J.put("applicant_count","1");
             J.put("transaction_id",Pref.getTRANSACTIONID(getApplicationContext()));
             J.put("user_id",Pref.getUSERID(getApplicationContext()));
             J.put("applicant",Applicant);
-            J.put("co_applicant",Co_Applicant);
+
 
         } catch (JSONException e) {
             e.printStackTrace();
@@ -3152,7 +3161,7 @@ public class Eligibility_Check_PL extends SimpleActivity {
 
         Log.e("Add Home Laoan", String.valueOf(J));
         progressDialog.show();
-        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, Urls.Eligibility_Check, J,
+        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, Urls.Eligibility_Check_applicant, J,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
@@ -3162,13 +3171,163 @@ public class Eligibility_Check_PL extends SimpleActivity {
                         try {
                             JSONObject jsonObject1 = response.getJSONObject("response");
                             if(jsonObject1.getString("applicant_status").equals("success")) {
-                                if(jsonObject1.getString("eligibility_status").equals("success"))
-                                {
-                                    Toast.makeText(context,"Eligibility Created Successfully",Toast.LENGTH_SHORT).show();
 
-                                    Intent intent = new Intent(Eligibility_Check_PL.this, PaymentActivity.class);
-                                    startActivity(intent);
-                                    finish();
+                                progressDialog.dismiss();
+                                LayoutInflater layoutInflater = (LayoutInflater) Eligibility_Check_PL.this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                                View customView = layoutInflater.inflate(R.layout.popup_loading,null);
+                                popupWindow = new PopupWindow(customView, LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
+                                //display the popup window
+                                popupWindow.showAtLocation(lead_viy_step2, Gravity.CENTER, 0, 0);
+
+                                if(Co_Applicant.equals("1"))
+                                {
+                                    Eligibility_Co_Applicant();
+                                }else
+                                {
+                                    Eligibility_check_pass();
+                                }
+
+
+                            }else
+                            {
+                                Toast.makeText(mCon, "error, try after some time",Toast.LENGTH_SHORT).show();
+                            }
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                    }
+                }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                //Log.d(TAG, error.getMessage());
+                VolleyLog.d("TAG", "Error: " + error.getMessage());
+                Toast.makeText(mCon, "Network error, try after some time",Toast.LENGTH_SHORT).show();
+                progressDialog.dismiss();
+
+            }
+        }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("content-type", "application/json");
+                return headers;
+            }
+        };
+
+        // AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
+        int socketTimeout = 0;
+        RetryPolicy policy = new DefaultRetryPolicy(socketTimeout,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
+
+        jsonObjReq.setRetryPolicy(policy);
+
+        AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
+    }
+
+
+    private void Eligibility_Co_Applicant( ) {
+
+        JSONObject J= null;
+
+        try {
+            J =new JSONObject();
+            J.put("applicant_count","2");
+            J.put("transaction_id",Pref.getTRANSACTIONID(getApplicationContext()));
+            J.put("user_id",Pref.getUSERID(getApplicationContext()));
+            J.put("applicant",Co_Applicant1);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        Log.e("viability co_Applicant ", String.valueOf(J));
+        progressDialog.show();
+        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, Urls.Eligibility_Check_co_applicant, J,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        Log.e("viability response", String.valueOf(response));
+                        String data = String.valueOf(response);
+                        try {
+                            //  String Status = response.getString("status");
+                            JSONObject jsonObject1 = response.getJSONObject("response");
+                            if(jsonObject1.getString("applicant_status").equals("success")) {
+
+
+                                Eligibility_check_pass();
+
+                            }
+                            ///
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        Log.e("Lead creation", String.valueOf(response));
+
+
+                    }
+                }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                //Log.d(TAG, error.getMessage());
+                VolleyLog.d("TAG", "Error: " + error.getMessage());
+                Toast.makeText(mCon, "Network error, try after some time",Toast.LENGTH_SHORT).show();
+                progressDialog.dismiss();
+
+            }
+        }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("content-type", "application/json");
+                return headers;
+            }
+        };
+
+        // AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
+        int socketTimeout = 0;
+        RetryPolicy policy = new DefaultRetryPolicy(socketTimeout,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
+
+        jsonObjReq.setRetryPolicy(policy);
+
+        AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
+    }
+
+    private void Eligibility_check_pass( ) {
+
+        JSONObject J= null;
+
+        try {
+            J =new JSONObject();
+            J.put("transaction_id",Pref.getTRANSACTIONID(getApplicationContext()));
+            J.put("user_id", Pref.getUSERID(getApplicationContext()));
+            J.put("b2b_id", Pref.getID(mCon));
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        Log.e("viability", String.valueOf(J));
+       // progressDialog.show();
+        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, Urls.Eligibility_Check_eligibilitysavet, J,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        Log.e("viability response", String.valueOf(response));
+                        String data = String.valueOf(response);
+                        try {
+                            //  String Status = response.getString("status");
+                            JSONObject jsonObject1 = response.getJSONObject("response");
+
+                               if(jsonObject1.getString("eligibility_status").equals("success"))
+                                {
+                                    Eligibility_check_doc_checklist_generate();
                                 }else if(jsonObject1.getString("eligibility_status").equals("error"))
                                 {
                                     Toast.makeText(context,"Eligibility Failed",Toast.LENGTH_SHORT).show();
@@ -3178,12 +3337,15 @@ public class Eligibility_Check_PL extends SimpleActivity {
                                     startActivity(intent);
                                     finish();
                                 }
-                            }
+                            ///
+                          //  progressDialog.dismiss();
 
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
-                        progressDialog.dismiss();
+                        Log.e("Lead creation", String.valueOf(response));
+
+
                     }
                 }, new Response.ErrorListener() {
 
@@ -3191,6 +3353,96 @@ public class Eligibility_Check_PL extends SimpleActivity {
             public void onErrorResponse(VolleyError error) {
                 //Log.d(TAG, error.getMessage());
                 VolleyLog.d("TAG", "Error: " + error.getMessage());
+                Toast.makeText(mCon, "Network error, try after some time",Toast.LENGTH_SHORT).show();
+                progressDialog.dismiss();
+
+            }
+        }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("content-type", "application/json");
+                return headers;
+            }
+        };
+
+        // AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
+        int socketTimeout = 0;
+        RetryPolicy policy = new DefaultRetryPolicy(socketTimeout,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
+
+        jsonObjReq.setRetryPolicy(policy);
+
+        AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
+    }
+
+    private void Eligibility_check_doc_checklist_generate( ) {
+
+        JSONObject J= null;
+
+        try {
+            J =new JSONObject();
+            J.put("transaction_id",Pref.getTRANSACTIONID(getApplicationContext()));
+            J.put("user_id", Pref.getUSERID(getApplicationContext()));
+
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        Log.e("viability", String.valueOf(J));
+      //  progressDialog.show();
+        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, Urls.generate_doccklist, J,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        Log.e("viability response", String.valueOf(response));
+                        String data = String.valueOf(response);
+                        try {
+                             String Generate_Document_check_list = response.getString("Generate_Document_check_list");
+                            JSONObject jsonObject1 = response.getJSONObject("response");
+
+
+                            if(response.getString("Generate_Document_check_list").equals("success"))
+                            {
+                                LayoutInflater layoutInflater = (LayoutInflater) Eligibility_Check_PL.this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                                View customView = layoutInflater.inflate(R.layout.popup_loading,null);
+                                popupWindow = new PopupWindow(customView, LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
+                                //display the popup window
+                                popupWindow.dismiss();
+                                Toast.makeText(context,"Eligibility Created Successfully",Toast.LENGTH_SHORT).show();
+
+                                Intent intent = new Intent(Eligibility_Check_PL.this, PaymentActivity.class);
+                                startActivity(intent);
+                                finish();
+                            }else if(response.getString("Generate_Document_check_list").equals("error"))
+                            {
+                                Toast.makeText(context,"Eligibility Failed",Toast.LENGTH_SHORT).show();
+                                String viability_array =jsonObject1.getString("eligibility_arr");
+                                Intent intent = new Intent(Eligibility_Check_PL.this, Loan_Viyability_Check_Activity.class);
+                                intent.putExtra("viability_jsonArray", viability_array.toString());
+                                startActivity(intent);
+                                finish();
+                            }
+
+                            ///
+                           // progressDialog.dismiss();
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        Log.e("Lead creation", String.valueOf(response));
+
+
+                    }
+                }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                //Log.d(TAG, error.getMessage());
+                VolleyLog.d("TAG", "Error: " + error.getMessage());
+                Toast.makeText(mCon, "Network error, try after some time",Toast.LENGTH_SHORT).show();
                 progressDialog.dismiss();
 
             }
@@ -3216,7 +3468,6 @@ public class Eligibility_Check_PL extends SimpleActivity {
 
   /*  @Override
     public void onBackPressed() {
-
         Objs.ac.StartActivity(mCon, Dashboard_Activity.class);
         finish();
         super.onBackPressed();

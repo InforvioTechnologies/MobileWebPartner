@@ -63,6 +63,7 @@ import in.loanwiser.partnerapp.PartnerActivitys.Applicant_Details_Activity;
 import in.loanwiser.partnerapp.PartnerActivitys.Dashboard_Activity;
 import in.loanwiser.partnerapp.Payment.Bank_Statement_Activity;
 import in.loanwiser.partnerapp.Payment.PaymentActivity;
+import in.loanwiser.partnerapp.Payment.PaymentDetails;
 import in.loanwiser.partnerapp.R;
 import in.loanwiser.partnerapp.SimpleActivity;
 
@@ -138,14 +139,15 @@ public class Lead_Crration_Activity extends SimpleActivity {
         Loanwiser_Api();
 
 
- /*lead_cr_step1.setOnClickListener(new View.OnClickListener() {
+  /*lead_cr_step1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Lead_Crration_Activity.this, PaymentActivity.class);
+                Intent intent = new Intent(Lead_Crration_Activity.this, Viability_Check_HL_new.class);
                 startActivity(intent);
                 finish();
             }
         });*/
+
        /* lead_cr_step1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -174,7 +176,7 @@ public class Lead_Crration_Activity extends SimpleActivity {
             }
         });*/
 
-     if(Lontypename.contains("Personal Loan [Unsecured]") || Lontypename.contains("Business Loan [Unsecured]"))
+     if(Lontypename.contains("Personal Loan [Unsecured]") || Lontypename.contains("Business Loan (MSME)"))
      {
          type_of_empmnt.setVisibility(View.GONE);
          Type_of_employement_ID = "0";
@@ -1056,6 +1058,7 @@ public class Lead_Crration_Activity extends SimpleActivity {
         } catch (JSONException e) {
             e.printStackTrace();
         }
+        Log.e("request L_type", J.toString());
         JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, Urls.LOAN_TYPE_POST11, J,
                 new Response.Listener<JSONObject>() {
 

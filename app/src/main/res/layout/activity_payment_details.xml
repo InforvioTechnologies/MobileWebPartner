@@ -17,6 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
             <LinearLayout
+
             android:id="@+id/standard"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -232,6 +233,7 @@
                     android:layout_margin="15dp">
 
                     <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/current_bal"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/current_bal"
@@ -358,7 +360,7 @@
 
         </LinearLayout>
             <LinearLayout
-               android:visibility="gone"
+                android:visibility="gone"
                android:id="@+id/Custome"
                 android:orientation="vertical"
                 android:layout_width="match_parent"

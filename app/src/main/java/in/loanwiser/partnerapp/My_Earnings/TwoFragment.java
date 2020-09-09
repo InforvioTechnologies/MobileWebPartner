@@ -171,7 +171,6 @@ public class TwoFragment extends Fragment implements OnLoadMoreListener {
 
     private void Account_Listings_Details(View view) {
         items.clear();
-
         count12 = count12 +1;
         JSONObject jsonObject =new JSONObject();
         JSONObject J= null;
@@ -308,6 +307,7 @@ public class TwoFragment extends Fragment implements OnLoadMoreListener {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
+
                 items.clear();
                 Account_Listings_Details(getView());
 

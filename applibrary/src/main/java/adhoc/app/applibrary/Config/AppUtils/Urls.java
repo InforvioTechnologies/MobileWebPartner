@@ -12,7 +12,7 @@ import java.util.Map;
 public class Urls {
 
  /*UAT*/
-   /*public static String Urls = "http://cscapitest.propwiser.com/mobile/mortgage_updated.php?call=";
+ /*  public static String Urls = "http://cscapitest.propwiser.com/mobile/mortgage_updated.php?call=";
    public static String Urls_step = "http://cscapitest.propwiser.com/mobile/partner_loanapi.php?call=";
    public static String Urls_phamplet = "http://cscapitest.propwiser.com/mobile/pamphlet_distributor.php?call=";*/
 
@@ -89,7 +89,13 @@ public class Urls {
     //Step changes
     public static String Lead_Creation = Urls_step + "Lead_Creation";
     public static String VIABILITY_CHECK = Urls_step + "viability_check";
+    public static String VIABILITY_CHECK_applicant = Urls_step + "viability_applicant";
+    public static String VIABILITY_CHECK_co_applicant = Urls_step + "viability_coapplicant";
+   // public static String VIABILITY_CHECK = Urls_step + "insert_family";
     public static String Eligibility_Check = Urls_step + "eligibility_check";
+    public static String Eligibility_Check_applicant = Urls_step + "eligibility_applicant";
+    public static String Eligibility_Check_co_applicant = Urls_step + "eligibility_coapplicant";
+    public static String Eligibility_Check_eligibilitysavet = Urls_step + "eligibilitysave";
     public static String NOCRIFREPORT = Urls_step + "crfi_check";
     public static String PAYMENT_CONFIRMATION = Urls_step + "payarr";
     public static String PAYMENT_SCHEDULE = Urls_step + "get_payschedule";
@@ -120,7 +126,9 @@ public class Urls {
     public static String step2_complete  = Urls_step + "step2_complete ";
 
     public static String SUBMIT_TO_LOANWIER = Urls_step + "submit_loanwiser";
+    public static String viabilitysave = Urls_step + "viabilitysave";
     public static String COIN_Transaction = Urls_step + "coins_transaction";
+    public static String balance_wallentcoins = Urls_step + "balance_wallentcoins";
 
     public static String Payable_Amount = Urls_step + "payable_amount";
     public static String customplan_msg = Urls_step + "customplan_msg";
@@ -139,6 +147,7 @@ public class Urls {
     public static String My_Earnings  = Urls_step + "my_earnings";
     public static String POST_SHARE  = Urls_step + "post_share";
     public static String DOC_CHECKLIST  = Urls_step + "Get_allDocumentcklist";
+    public static String generate_doccklist  = Urls_step + "generate_doccklist";
 
    // public static String DOCUMENT_CHECK  = Urls_step + "Get_allDocumentcklist";
 

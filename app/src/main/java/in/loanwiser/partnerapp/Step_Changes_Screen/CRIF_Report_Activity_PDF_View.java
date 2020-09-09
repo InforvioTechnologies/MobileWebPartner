@@ -482,7 +482,7 @@ public class CRIF_Report_Activity_PDF_View extends SimpleActivity {
 
                 holder.class_name.setText(Objs.a.capitalize(J.getString("name")));
                 Objs.a.NewNormalFontStyle(mCon,holder.class_name);
-
+                holder.image_doc.setImageDrawable(getResources().getDrawable(R.drawable.ic_applicant));
                 holder.card_view_class_name.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {

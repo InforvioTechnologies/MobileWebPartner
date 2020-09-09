@@ -367,7 +367,8 @@ public class Applicant_Details_Single extends SimpleActivity {
                                       check_complete.setChecked(false);
                                   }
 
-                                  Objs.a.showToast(mCon,"You have not yet Uploaded any Document for Loan Process "+ "\n" + "Please Upload the Document");
+                                 // Objs.a.showToast(mCon,"You have not yet Uploaded any Document for Loan Process "+ "\n" + "Please Upload the Document");
+                                  Toast.makeText(getApplicationContext(),"You have not yet Uploaded any Document for Loan Process", Toast.LENGTH_SHORT).show();
 
                               }
 

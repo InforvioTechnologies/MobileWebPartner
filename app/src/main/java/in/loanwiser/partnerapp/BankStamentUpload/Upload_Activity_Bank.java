@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatTextView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
 import android.content.ContentUris;
 import android.content.Context;
 import android.content.Intent;
@@ -25,16 +26,30 @@ import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+
 import net.gotev.uploadservice.MultipartUploadRequest;
 import net.gotev.uploadservice.UploadNotificationConfig;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import adhoc.app.applibrary.Config.AppUtils.Objs;
 import adhoc.app.applibrary.Config.AppUtils.Params;
 import adhoc.app.applibrary.Config.AppUtils.Pref.Pref;
+import adhoc.app.applibrary.Config.AppUtils.Urls;
+import adhoc.app.applibrary.Config.AppUtils.VolleySignleton.AppController;
 import dmax.dialog.SpotsDialog;
 import in.loanwiser.partnerapp.Documents.Document_Details;
 import in.loanwiser.partnerapp.Documents.SingleUploadBroadcastReceiver;
@@ -82,6 +97,7 @@ public static final String Bankstatement_URl="http://cscapitest.propwiser.com/mo
 
         String fileget;
 
+        Context context = this;
         MultipartUploadRequest uploadRequest;
         AppCompatTextView skip_payment;
 
@@ -89,6 +105,7 @@ public static final String Bankstatement_URl="http://cscapitest.propwiser.com/mo
                 new SingleUploadBroadcastReceiver();
 
         EditText docpass_edt_txt;
+        private String tag_json_obj = "jobj_req", tag_json_arry = "jarray_req";
 
 @Override
 protected void onCreate(Bundle savedInstanceState) {
@@ -260,11 +277,8 @@ public void onClick(View v) {
                         if(uriarrayList.isEmpty()){
                                 Toast.makeText(Upload_Activity_Bank.this,"Please Select Bank statement",Toast.LENGTH_SHORT).show();
                         }
-                        else if(docpass_edt_txt.getText().toString().trim().length()==0){
-                                Toast.makeText(Upload_Activity_Bank.this,"Please fill Password field",Toast.LENGTH_SHORT).show();
-                        }
-                        else if(docpass_edt_txt.getText().toString().trim().length()==0 && uriarrayList.size()==0){
-                                Toast.makeText(Upload_Activity_Bank.this,"Please upload document and fill Password field",Toast.LENGTH_SHORT).show();
+                        else if(uriarrayList.size()==0){
+                                Toast.makeText(Upload_Activity_Bank.this,"Please upload document",Toast.LENGTH_SHORT).show();
                         }
                         else{
                                 uploadMultipart();
@@ -418,10 +432,7 @@ public void uploadMultipart() {
                 if(response.equals("200")){
                         progressDialog.dismiss();
 
-                       Toast.makeText(getApplicationContext(),"Successfully Uploaded",Toast.LENGTH_SHORT).show();
-                       Intent intent = new Intent(Upload_Activity_Bank.this, Dashboard_Activity.class);
-                       startActivity(intent);
-                        finish();
+                        Applicant_Status();
 
                         // Send_Reload(app_id);
 
@@ -449,7 +460,105 @@ public void uploadMultipart() {
 
 
 
+        public void Applicant_Status() {
 
+                // final String step_status11 = step_status1;
+                JSONObject jsonObject =new JSONObject();
+                JSONObject J= null;
+                try {
+                        J =new JSONObject();
+                        J.put("user_id", Pref.getUSERID(getApplicationContext()));
+                } catch (JSONException e) {
+                        e.printStackTrace();
+                }
+
+                progressDialog.show();
+                Log.e("Applicant Entry request", String.valueOf(J));
+
+                JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, Urls.PARTNER_STATUES_IDs, J,
+                        new Response.Listener<JSONObject>() {
+                                @SuppressLint("LongLogTag")
+                                @Override
+                                public void onResponse(JSONObject response) {
+
+                                        Log.e("Applicant Entry", String.valueOf(response));
+                                        JSONObject jsonObject1 = new JSONObject();
+
+                                        try {
+                                                String statues = response.getString("status");
+
+                                                if(statues.contains("success"))
+                                                {
+                                                        JSONObject jsonObject2 = response.getJSONObject("reponse");
+
+                                                        JSONArray jsonArray = jsonObject2.getJSONArray("emp_states");
+
+                                                        String user_id = jsonObject2.getString("user_id");
+                                                        String Loan_amount = jsonObject2.getString("loan_amount");
+                                                        String sub_categoryid =   jsonObject2.getString("sub_categoryid");
+                                                        String transaction_id1 =  jsonObject2.getString("transaction_id");
+                                                        String subtask_id =  jsonObject2.getString("subtask_id");
+                                                        String loan_type_id =  jsonObject2.getString("loan_type_id");
+                                                        String  loan_type =  jsonObject2.getString("loan_type");
+                                                        String payment =  jsonObject2.getString("payment");
+                                                        String applicant_id1 =  "APP-"+user_id;
+
+
+                                                        // String statues2 = "3";
+                                                        Pref.putUSERID(context,user_id);
+                                                        String _Emp_staus_jsonArray = jsonArray.toString();
+
+                                                        Objs.ac.StartActivityPutExtra(context, Home.class,
+                                                                Params.user_id,user_id,
+                                                                Params.transaction_id,transaction_id1,
+                                                                Params.applicant_id,applicant_id1,
+                                                                Params.sub_taskid,subtask_id, Params.Applicant_status,_Emp_staus_jsonArray,
+                                                                Params.loan_type_id,loan_type_id,Params.loan_type,loan_type);
+
+                              /*  if(payment.equals("error"))
+                                {
+                                    Intent intent = new Intent(Dashboard_Activity.this, Payment_Details_Activity.class);
+                                    startActivity(intent);
+                                    finish();
+                                }else
+                                {
+                                    Log.d("applicant_id1",loan_type);
+                                    Objs.ac.StartActivityPutExtra(mCon, Home.class,
+                                            Params.user_id,user_id,
+                                            Params.transaction_id,transaction_id1,
+                                            Params.applicant_id,applicant_id1,
+                                            Params.sub_taskid,subtask_id, Params.Applicant_status,_Emp_staus_jsonArray,
+                                            Params.loan_type_id,loan_type_id,Params.loan_type,loan_type);
+                                    finish();
+
+                                }*/
+
+
+                                                }
+
+                                        } catch (JSONException e) {
+                                                e.printStackTrace();
+                                        }
+                                        progressDialog.dismiss();
+                                }
+                        }, new Response.ErrorListener() {
+
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                                progressDialog.dismiss();
+                                Log.e("Applicant Entry request", String.valueOf(error));
+                                Toast.makeText(Upload_Activity_Bank.this,error.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                }) {
+                        @Override
+                        public Map<String, String> getHeaders() throws AuthFailureError {
+                                HashMap<String, String> headers = new HashMap<String, String>();
+                                headers.put("content-type", "application/json");
+                                return headers;
+                        }
+                };
+                AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
+        }
 
 public String getFileName(Uri uri) {
         String result = null;

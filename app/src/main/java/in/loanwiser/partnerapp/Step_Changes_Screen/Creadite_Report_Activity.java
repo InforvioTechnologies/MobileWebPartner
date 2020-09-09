@@ -13,6 +13,7 @@ import android.content.Intent;
 import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.InputFilter;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -106,7 +107,7 @@ public class Creadite_Report_Activity extends SimpleActivity {
         initTools(R.string.credit_report);
 
 
-        Co_Applicant = Pref.getCoAPPAVAILABLE(getApplicationContext());
+        Co_Applicant = Pref.getCoAPPAVAILABLE(context);
         progressDialog = new SpotsDialog(context, R.style.Custom);
         myCalendar = Calendar.getInstance();
         permissionUtils = new PermissionUtils();
@@ -145,6 +146,7 @@ public class Creadite_Report_Activity extends SimpleActivity {
         dob_Edite_text.setText(sdf.format(myCalendar.getTime()));
         pincode_edt_txt = (AppCompatEditText) findViewById(R.id.pincode_edt_txt);
         Pan_No_Edite_text = (AppCompatEditText) findViewById(R.id.Pan_No_Edite_text);
+        Pan_No_Edite_text.setFilters(new InputFilter[]{new InputFilter.AllCaps()});
         Email_Id_Edite_text = (AppCompatEditText) findViewById(R.id.Email_Id_Edite_text);
         Mobile_No_Edite_text = (AppCompatEditText) findViewById(R.id.Mobile_No_Edite_text);
 
@@ -152,6 +154,7 @@ public class Creadite_Report_Activity extends SimpleActivity {
         pl_co_app_first_name_Edite_text = (AppCompatEditText) findViewById(R.id.pl_co_app_first_name_Edite_text);
         pl_co_app_Last_name_Edite_text = (AppCompatEditText) findViewById(R.id.pl_co_app_Last_name_Edite_text);
         pl_co_app_Pan_No_Edite_text = (AppCompatEditText) findViewById(R.id.pl_co_app_Pan_No_Edite_text);
+        pl_co_app_Pan_No_Edite_text.setFilters(new InputFilter[]{new InputFilter.AllCaps()});
         pl_co_app_father_name_edt_txt = (AppCompatEditText) findViewById(R.id.pl_co_app_father_name_edt_txt);
         pl_co_app_Email_Id_Edite_text = (AppCompatEditText) findViewById(R.id.pl_co_app_Email_Id_Edite_text);
         pl_co_app_dob_Edite_text = (AppCompatEditText) findViewById(R.id.pl_co_app_dob_Edite_text);
@@ -786,6 +789,13 @@ public class Creadite_Report_Activity extends SimpleActivity {
                             if(jsonObject1.getString("applicant_status").equals("success")) {
 
                                 Toast.makeText(context,"Credite Generated Successfully ",Toast.LENGTH_SHORT).show();
+
+                                progressDialog.dismiss();
+                                LayoutInflater layoutInflater = (LayoutInflater) Creadite_Report_Activity.this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                                View customView = layoutInflater.inflate(R.layout.popup_loading,null);
+                                popupWindow = new PopupWindow(customView, LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
+                                //display the popup window
+                                popupWindow.showAtLocation(credit_det_cap_button, Gravity.CENTER, 0, 0);
                                 STEP2_COMPLETE();
 
                                 }else if(jsonObject1.getString("pay_status").equals("error"))
@@ -828,7 +838,7 @@ public class Creadite_Report_Activity extends SimpleActivity {
     }
 
     private void STEP2_COMPLETE() {
-        progressDialog.show();
+        //progressDialog.show();
 
         JSONObject J =new JSONObject();
 
@@ -851,12 +861,17 @@ public class Creadite_Report_Activity extends SimpleActivity {
                             String Staues_step2_complete = object.getString("status");
 
                             if(Staues_step2_complete.contains("success")) {
-
+                                LayoutInflater layoutInflater = (LayoutInflater) Creadite_Report_Activity.this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                                View customView = layoutInflater.inflate(R.layout.popup_loading,null);
+                                popupWindow = new PopupWindow(customView, LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
+                                //display the popup window
+                                popupWindow.dismiss();
                                 Intent intent = new Intent(Creadite_Report_Activity.this, Upload_Activity_Bank.class);
                                 startActivity(intent);
                                 finish();
                             }else
                             {
+                                progressDialog.dismiss();
                                 Toast.makeText(mCon, "CRIF Statues Failed",Toast.LENGTH_SHORT).show();
                             }
 
@@ -864,7 +879,7 @@ public class Creadite_Report_Activity extends SimpleActivity {
                             e.printStackTrace();
                         }
                         // Toast.makeText(mCon, response.toString(),Toast.LENGTH_SHORT).show();
-                        progressDialog.dismiss();
+
                     }
                 }, new Response.ErrorListener() {
 

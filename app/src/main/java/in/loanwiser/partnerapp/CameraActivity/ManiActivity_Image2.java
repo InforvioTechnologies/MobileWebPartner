@@ -148,9 +148,9 @@ public class ManiActivity_Image2 extends SimpleActivity implements SingleUploadB
         Objs.a.setStubId(this, R.layout.main_activity);
         initTools(R.string.doc_upload);
 
-        progressDialog = new SpotsDialog(getApplicationContext(), R.style.Custom);
+        progressDialog = new SpotsDialog(ManiActivity_Image2.this, R.style.Custom);
 
-        pDialog = new ProgressDialog(getApplicationContext());
+        pDialog = new ProgressDialog(ManiActivity_Image2.this);
         pDialog.setMessage("Loading...");
 
         doc_typename =  Objs.a.getBundle(this, Params.doc_typename);

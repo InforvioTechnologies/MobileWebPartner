@@ -7,6 +7,7 @@ import androidx.appcompat.widget.AppCompatTextView;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
@@ -64,7 +65,7 @@ public class PaymentDetails extends SimpleActivity {
     private PopupWindow mPopupWindow;
     PopupWindow popupWindow;
     LinearLayout linearLayout1;
-    AppCompatTextView back_button,back_button_b;
+    AppCompatTextView back_button,back_button_b,cus_back_button;
     ImageView closebtn;
     AppCompatTextView proceedany,back;
     private String tag_json_obj = "jobj_req", tag_json_arry = "jarray_req";
@@ -74,7 +75,7 @@ public class PaymentDetails extends SimpleActivity {
     private Context context = this;
     LinearLayout  standard,Custome,send_payment_link;
 
-    AppCompatTextView payment_amount_stand,payment_amout_cust,payment_amont_link;
+    AppCompatTextView payment_amount_stand,payment_amout_cust,payment_amont_link,current_bal;
 
     AppCompatEditText mobilenumber_edittext;
 
@@ -83,7 +84,7 @@ public class PaymentDetails extends SimpleActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-       // setContentView(R.layout.activity_payment_details);
+       //setContentView(R.layout.activity_payment_details);
         setContentView(R.layout.activity_simple);
         Objs.a.setStubId(this,R.layout.activity_payment_details);
         initTools(R.string.pay_ment);
@@ -93,7 +94,7 @@ public class PaymentDetails extends SimpleActivity {
         payment_id = intent.getStringExtra("payment_id");
         payment_plane = intent.getStringExtra("payment_plane");
 
-        Log.e("payment_plane",payment_plane);
+      //  Log.e("payment_plane",payment_plane);
 
         result1 = new ArrayList<>();
         payment_button=findViewById(R.id.payment_button);
@@ -102,6 +103,8 @@ public class PaymentDetails extends SimpleActivity {
         linearLayout1=findViewById(R.id.linearLayout1);
         back_button=findViewById(R.id.back_button);
         back_button_b=findViewById(R.id.back_button_b);
+        cus_back_button=findViewById(R.id.cus_back_button);
+        current_bal=findViewById(R.id.current_bal);
 
         standard=findViewById(R.id.standard);
         Custome=findViewById(R.id.Custome);
@@ -118,6 +121,11 @@ public class PaymentDetails extends SimpleActivity {
 
         send_payment_link=findViewById(R.id.send_payment_link);
         progressDialog = new SpotsDialog(context, R.style.Custom);
+
+     /*   SharedPreferences pref1 = getApplicationContext().getSharedPreferences("MyPref", 0);
+        String credit_coin =  pref1.getString("credit_coin", null);*/
+        Credit_coin_balence();
+
 
         if(payment_option.contains("2"))
         {
@@ -239,6 +247,53 @@ public class PaymentDetails extends SimpleActivity {
             @Override
             public void onClick(View v) {
                // Pay_Credit_Coins();
+                Intent intent = new Intent(PaymentDetails.this, PaymentActivity.class);
+                startActivity(intent);
+            }
+               /* linearLayout1.setVisibility(View.GONE);
+                LayoutInflater layoutInflater = (LayoutInflater) PaymentDetails.this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                View customView = layoutInflater.inflate(R.layout.popup2,null);
+                closebtn = (ImageView) customView.findViewById(R.id.closebtn);
+                proceedany=(AppCompatTextView)customView.findViewById(R.id.proceedany);
+                back=(AppCompatTextView)customView.findViewById(R.id.back);
+
+
+
+                popupWindow = new PopupWindow(customView, LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+                //display the popup window
+                popupWindow.showAtLocation(linearLayout1, Gravity.CENTER, 0, 0);
+
+                closebtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        popupWindow.dismiss();
+                        linearLayout1.setVisibility(View.VISIBLE);
+
+                    }
+                });
+
+                proceedany.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(PaymentDetails.this, Payment_Details_Activity.class);
+                        startActivity(intent);
+                    }
+                });
+
+                back.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                    }
+                });
+
+            }*/
+            //
+        });
+        cus_back_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Pay_Credit_Coins();
                 Intent intent = new Intent(PaymentDetails.this, PaymentActivity.class);
                 startActivity(intent);
             }
@@ -653,7 +708,68 @@ public class PaymentDetails extends SimpleActivity {
         AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
 
     }
+    private void Credit_coin_balence( ) {
 
+        JSONObject J= null;
+
+        try {
+            J =new JSONObject();
+            J.put("b2buser_id", Pref.getID(getApplicationContext()));
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        Log.e("request", String.valueOf(J));
+        progressDialog.show();
+        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, Urls.balance_wallentcoins, J,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+
+                        String data = String.valueOf(response);
+                        Log.e("Response", String.valueOf(response));
+
+                        try {
+                            JSONObject ja1 = response.getJSONObject("balance_coins");
+                            String credit_coin = ja1.getString("current_wallet_coins");
+                            current_bal.setText("Current Available Balance -"+credit_coin+" Credit Coins");
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                        progressDialog.dismiss();
+                    }
+                }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                //Log.d(TAG, error.getMessage());
+                VolleyLog.d("TAG", "Error: " + error.getMessage());
+                progressDialog.dismiss();
+
+            }
+        }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("content-type", "application/json");
+                return headers;
+            }
+        };
+
+        // AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
+        int socketTimeout = 0;
+        RetryPolicy policy = new DefaultRetryPolicy(socketTimeout,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
+
+        jsonObjReq.setRetryPolicy(policy);
+
+        AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
+
+
+    }
     private void Pay_Credit_Coins( ) {
 
         JSONObject J= null;
@@ -850,6 +966,23 @@ public class PaymentDetails extends SimpleActivity {
 
     private void Do_Cashfree_Payment(String cftoken)
     {
+
+
+
+        /*
+         * stage allows you to switch between sandboxed and production servers
+         * for CashFree Payment Gateway. The possible values are
+         *
+         * 1. TEST: Use the Test server. You can use this service while integrating
+         *      and testing the CashFree PG. No real money will be deducted from the
+         *      cards and bank accounts you use this stage. This mode is thus ideal
+         *      for use during the development. You can use the cards provided here
+         *      while in this stage: https://docs.cashfree.com/docs/resources/#test-data
+         *
+         * 2. PROD: Once you have completed the testing and integration and successfully
+         *      integrated the CashFree PG, use this value for stage variable. This will
+         *      enable live transactions
+         */
 
         String stage = "TEST";
         String appId = "100221d5f45db701fd6552fc722001";

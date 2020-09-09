@@ -164,7 +164,7 @@ public class Applicant_Details_Activity extends SimpleActivity {
 
                 String Loantype = "2";
                 Pref.putLoanType(mCon,Loantype);
-                String Loantype_name = "Business Loan [Unsecured]";
+                String Loantype_name = "Business Loan (MSME)";
                 Pref.putLoanTypename(mCon,Loantype_name);
 
                 Intent intent = new Intent(Applicant_Details_Activity.this, Step_Completion_Screen.class);

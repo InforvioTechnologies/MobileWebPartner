@@ -90,7 +90,8 @@ public class Home extends AppCompatActivity {
 
     String viability,eligibility,credit_request,payment,viability_report,viability_report_URL,
     document_checklist,document_upload,loan_type_id,loan_type,crif_status,submit_loanwiser,offer_Details,
-            part_compstatus,part_subcompstatus, loanwiser_submit_str,loanwiser_submit_str1,loan_status;
+            part_compstatus,part_subcompstatus, loanwiser_submit_str,loanwiser_submit_str1,loan_status,
+            reject_status;
     AppCompatImageView call_phone;
 
     AppCompatTextView lead_name,mobile_no,Loan_amount,loan_type_,loan_submit_statues1,viability_statues,
@@ -125,7 +126,7 @@ public class Home extends AppCompatActivity {
       //  user_id=prefs.getString("user_id","defaultStringIfNothingFound");
         user_id= Pref.getUSERID(getApplicationContext());
         Log.e("TAG", "onCreate:CO_Employement_Type "+user_id);
-
+        initCode();
         Applicant_Status();
 
       /*  user_id =  Objs.a.getBundle(this, Params.user_id);
@@ -191,8 +192,6 @@ public class Home extends AppCompatActivity {
     private void initCode() {
 
         initUI();
-        Step_copletions();
-        Work_flow_status(transaction_id);
         fonts();
         clicks();
 
@@ -268,13 +267,13 @@ public class Home extends AppCompatActivity {
                                 }
 
                                 Report_View_Fu();
-                                initCode();
+
                             }
 
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
-                        progressDialog.dismiss();
+
                     }
                 }, new Response.ErrorListener() {
 
@@ -282,7 +281,7 @@ public class Home extends AppCompatActivity {
             public void onErrorResponse(VolleyError error) {
                 progressDialog.dismiss();
                 Log.e("Applicant Entry request", String.valueOf(error));
-                Toast.makeText(getApplicationContext(),error.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(mCon, "Network error, try after some time",Toast.LENGTH_SHORT).show();
             }
         }) {
             @Override
@@ -520,45 +519,63 @@ public class Home extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
+                if(reject_status.equals("1"))
+                {
+                    if (permissionUtils.checkPermission(Home.this, STORAGE_PERMISSION_REQUEST_CODE, view)) {
+                        if (viability_report_URL.length() > 0) {
+                            try {
+                                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(viability_report_URL)));
+                            } catch (Exception e) {
+                                e.getStackTrace();
+                            }
+                        }
 
-                if(viability.contains("completed")) {
+                    }
+                }else
+                {
+                    if(viability.contains("completed")) {
 
-                    if (eligibility.contains("completed")) {
+                        if (eligibility.contains("completed")) {
 
-                        if (payment.contains("completed")) {
+                            if (payment.contains("completed")) {
 
-                            if(credit_request.contains("completed"))
-                            {
-                                if (permissionUtils.checkPermission(Home.this, STORAGE_PERMISSION_REQUEST_CODE, view)) {
-                                    if (viability_report_URL.length() > 0) {
-                                        try {
-                                            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(viability_report_URL)));
-                                        } catch (Exception e) {
-                                            e.getStackTrace();
+                                if(credit_request.contains("completed"))
+                                {
+                                    if (permissionUtils.checkPermission(Home.this, STORAGE_PERMISSION_REQUEST_CODE, view)) {
+                                        if (viability_report_URL.length() > 0) {
+                                            try {
+                                                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(viability_report_URL)));
+                                            } catch (Exception e) {
+                                                e.getStackTrace();
+                                            }
                                         }
+
                                     }
+                                }else
+                                {
+                                    Toast.makeText(getApplicationContext(),"Please Complete The Previous Steps To Proceed!!!", Toast.LENGTH_SHORT).show();
 
                                 }
+
                             }else
                             {
                                 Toast.makeText(getApplicationContext(),"Please Complete The Previous Steps To Proceed!!!", Toast.LENGTH_SHORT).show();
 
                             }
-
                         }else
                         {
                             Toast.makeText(getApplicationContext(),"Please Complete The Previous Steps To Proceed!!!", Toast.LENGTH_SHORT).show();
 
                         }
-                    }else
-                    {
+                    }else {
+
                         Toast.makeText(getApplicationContext(),"Please Complete The Previous Steps To Proceed!!!", Toast.LENGTH_SHORT).show();
 
-                    }
-                }else {
-                    Toast.makeText(getApplicationContext(),"Please Complete The Previous Steps To Proceed!!!", Toast.LENGTH_SHORT).show();
 
+                    }
                 }
+
+
 
 
               /*  if(viability_report.contains("completed"))
@@ -617,6 +634,8 @@ public class Home extends AppCompatActivity {
 
                     }
                 }else {
+
+
                     Toast.makeText(getApplicationContext(),"Please Complete The Previous Steps To Proceed!!!", Toast.LENGTH_SHORT).show();
 
                 }
@@ -656,7 +675,7 @@ public class Home extends AppCompatActivity {
             e.printStackTrace();
         }
         Log.e("Statues Request ",String.valueOf(J));
-        progressDialog.show();
+      //  progressDialog.show();
         JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, Urls.Lead_Details_statues, J,
                 new Response.Listener<JSONObject>() {
                     @Override
@@ -711,79 +730,7 @@ public class Home extends AppCompatActivity {
                                     stateProgressBar2.setVisibility(View.GONE);
                                 }
 
-
-
-
-                                /*
-                                  if(submit_loanwiser.equals("1"))
-                            {
-                               if(part_compstatus.equals("1"))
-                               {
-                                   step2_card.setEnabled(false);
-                                   Viability_Check.setEnabled(false);
-                                   eligibility_check.setEnabled(false);
-                                   Paymet.setEnabled(false);
-                                   CRIF_Check.setEnabled(false);
-                                   viability_Report.setEnabled(false);
-                                   Document_Upload.setEnabled(false);
-                                   offer_generation.setEnabled(false);
-
-                               }else if(part_compstatus.equals("2"))
-                               {
-
-                                   if(part_subcompstatus.equals("1"))
-                                   {
-
-                                       Viability_Check.setEnabled(true);
-                                       eligibility_check.setEnabled(false);
-                                       Paymet.setEnabled(false);
-                                       CRIF_Check.setEnabled(false);
-                                       viability_Report.setEnabled(false);
-
-                                   }else if(part_subcompstatus.equals("2"))
-                                   {
-
-                                       Viability_Check.setEnabled(true);
-                                       eligibility_check.setEnabled(true);
-                                       Paymet.setEnabled(false);
-                                       CRIF_Check.setEnabled(false);
-                                       viability_Report.setEnabled(false);
-
-                                   }else if(part_subcompstatus.equals("3"))
-                                   {
-
-                                       Viability_Check.setEnabled(true);
-                                       eligibility_check.setEnabled(true);
-                                       Paymet.setEnabled(true);
-                                       CRIF_Check.setEnabled(false);
-                                       viability_Report.setEnabled(false);
-
-                                   }else if(part_subcompstatus.equals("4"))
-                                   {
-                                       Viability_Check.setEnabled(true);
-                                       eligibility_check.setEnabled(true);
-                                       Paymet.setEnabled(true);
-                                       CRIF_Check.setEnabled(true);
-                                       viability_Report.setEnabled(false);
-
-                                   }else if(part_subcompstatus.equals("5"))
-                                   {
-
-                                           Viability_Check.setEnabled(true);
-                                           eligibility_check.setEnabled(true);
-                                           Paymet.setEnabled(true);
-                                           CRIF_Check.setEnabled(true);
-                                           viability_Report.setEnabled(true);
-                                   }
-
-                               }
-
-                            }else
-                            {
-
-                            }
-                                */
-
+                                Work_flow_status();
                             }else
                             {
                                 Toast.makeText(getApplicationContext(),"error please check!!!", Toast.LENGTH_SHORT).show();
@@ -794,14 +741,14 @@ public class Home extends AppCompatActivity {
                             e.printStackTrace();
                         }
 
-                        progressDialog.dismiss();
+
                     }
                 }, new Response.ErrorListener() {
 
             @Override
             public void onErrorResponse(VolleyError error) {
                 progressDialog.dismiss();
-                Toast.makeText(getApplicationContext(),error.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(mCon, "Network error, try after some time",Toast.LENGTH_SHORT).show();
             }
         }) {
             @Override
@@ -814,7 +761,7 @@ public class Home extends AppCompatActivity {
         AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
     }
 
-    private void Work_flow_status(String transaction_id) {
+    private void Work_flow_status() {
         JSONObject jsonObject =new JSONObject();
         JSONObject J= null;
         try {
@@ -824,7 +771,7 @@ public class Home extends AppCompatActivity {
             e.printStackTrace();
         }
         Log.e("Request List",String.valueOf(J));
-        progressDialog.show();
+       // progressDialog.show();
         JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, Urls.PARTNER_STATUES, J,
                 new Response.Listener<JSONObject>() {
                     @Override
@@ -838,7 +785,7 @@ public class Home extends AppCompatActivity {
                              JSONObject jsonObject3 = jsonObject1.getJSONObject("step3");
                              JSONObject jsonObject4 = jsonObject1.getJSONObject("step4");
                              JSONObject loanwiser_submit = jsonObject1.getJSONObject("loanwiser_submit");
-                             String reject_status = jsonObject1.getString("reject_status");
+                              reject_status = jsonObject1.getString("reject_status");
 
                              String step2_statues = jsonObject2.getString("status");
                              JSONObject step2_sub_statues = jsonObject2.getJSONObject("sub_status");
@@ -864,13 +811,14 @@ public class Home extends AppCompatActivity {
 
                             if(reject_status.equals("1"))
                             {
-                                Viability_Check.setVisibility(View.GONE);
+                                Viability_Check.setVisibility(View.VISIBLE);
                                 eligibility_check.setVisibility(View.GONE);
                                 CRIF_Check.setVisibility(View.GONE);
                                 Paymet.setVisibility(View.GONE);
                                 Document_check_list.setVisibility(View.GONE);
                                 Document_Upload.setVisibility(View.GONE);
                                 offer.setVisibility(View.GONE);
+                                Credit_REport_Generation.setVisibility(View.GONE);
 
                             }else
                             {
@@ -928,8 +876,6 @@ public class Home extends AppCompatActivity {
                                }
 
                             }
-
-
 
                             if(document_checklist.contains("pending"))
                             {
@@ -1006,9 +952,17 @@ public class Home extends AppCompatActivity {
                                 viability_report_cmp.setText("completed");
                             }else
                             {
-                                viability_Report.setEnabled(true);
-                                viability_report_image.setImageDrawable(getResources().getDrawable(R.drawable.ic_warning));
-                                viability_report_cmp.setText("Pending under you");
+                                if(reject_status.equals("1"))
+                                {
+                                    viability_report_cmp.setText("click to view reject status");
+                                    viability_Report.setEnabled(true);
+                                }else
+                                {
+                                    viability_Report.setEnabled(true);
+                                    viability_report_image.setImageDrawable(getResources().getDrawable(R.drawable.ic_warning));
+                                    viability_report_cmp.setText("Pending under you");
+                                }
+
                             }
 
                             if(offer_Details.contains("completed"))
@@ -1026,23 +980,29 @@ public class Home extends AppCompatActivity {
                                 Credit_REport_Generation.setVisibility(View.GONE);
                             }else
                             {
-                                if(crif_status.contains("completed"))
-                                {
-                                    Credit_REport_Generation.setVisibility(View.VISIBLE);
-                                    Credit_REport_Generation.setEnabled(true);
-                                    credite_report_img.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
-                                    crif_report_view.setText("completed");
-
-                                }else if(crif_status.contains("pending"))
-                                {
-                                    Credit_REport_Generation.setVisibility(View.VISIBLE);
-                                    Credit_REport_Generation.setEnabled(true);
-                                    credite_report_img.setImageDrawable(getResources().getDrawable(R.drawable.ic_warning));
-                                    crif_report_view.setText("Pending under you");
-                                }else if(crif_status.contains("not_wanted"))
+                                if(reject_status.equals("1"))
                                 {
                                     Credit_REport_Generation.setVisibility(View.GONE);
+                                }else {
+                                    if(crif_status.contains("completed"))
+                                    {
+                                        Credit_REport_Generation.setVisibility(View.VISIBLE);
+                                        Credit_REport_Generation.setEnabled(true);
+                                        credite_report_img.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
+                                        crif_report_view.setText("completed");
+
+                                    }else if(crif_status.contains("pending"))
+                                    {
+                                        Credit_REport_Generation.setVisibility(View.VISIBLE);
+                                        Credit_REport_Generation.setEnabled(true);
+                                        credite_report_img.setImageDrawable(getResources().getDrawable(R.drawable.ic_warning));
+                                        crif_report_view.setText("Pending under you");
+                                    }else if(crif_status.contains("not_wanted"))
+                                    {
+                                        Credit_REport_Generation.setVisibility(View.GONE);
+                                    }
                                 }
+
                             }
 
 
@@ -1058,7 +1018,7 @@ public class Home extends AppCompatActivity {
             @Override
             public void onErrorResponse(VolleyError error) {
                 progressDialog.dismiss();
-                Toast.makeText(getApplicationContext(),error.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(mCon, "Network error, try after some time",Toast.LENGTH_SHORT).show();
             }
         }) {
             @Override
@@ -1082,7 +1042,7 @@ public class Home extends AppCompatActivity {
             e.printStackTrace();
         }
         Log.e("Report Request ",String.valueOf(J));
-        progressDialog.show();
+      //  progressDialog.show();
         JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, Urls.Report_Activity, J,
                 new Response.Listener<JSONObject>() {
                     @Override
@@ -1094,20 +1054,22 @@ public class Home extends AppCompatActivity {
                             if(report_statues.equals("success"))
                             {
                                 viability_report_URL = response.getString("viability_report");
+
+                                Step_copletions();
                             }
 
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
 
-                        progressDialog.dismiss();
+                     //   progressDialog.dismiss();
                     }
                 }, new Response.ErrorListener() {
 
             @Override
             public void onErrorResponse(VolleyError error) {
                 progressDialog.dismiss();
-                Toast.makeText(getApplicationContext(),error.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(mCon, "Network error, try after some time",Toast.LENGTH_SHORT).show();
             }
         }) {
             @Override
@@ -1244,7 +1206,6 @@ public class Home extends AppCompatActivity {
                         try {
 
                             JSONObject Response = response.getJSONObject("reponse");
-
                             JSONObject jsonObject1 = Response.getJSONObject(Params.application_form);
                             String user_id  = Response.getString(Params.user_id);
                             String jsonStringObj  = String.valueOf(jsonObject1);

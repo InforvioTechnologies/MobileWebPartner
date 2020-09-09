@@ -65,12 +65,12 @@ public class Document_Check_List extends SimpleActivity implements CompoundButto
 
     int checklistname_count= 0;
 
-
+    ArrayList<String> list_key;
     //  String[] Str_Array = {"a","b","c"};
     //  String[] Str_Array = {" -Select Salary Details- ","Salaried Individual","Self Employed Profesional","Self Employed Non Profesional","Home Maker","Retired"};
 
 
-    String doc_typename,Current_iD_Proof,PERMANT_iD_Proof,INCOME,WRK,PHOTO,checklist_name1;
+    String doc_typename,Current_iD_Proof,PERMANT_iD_Proof,INCOME,WRK,PHOTO,checklist_name1,checked_statues;
     LinearLayout my_layout,my_layout1,my_layout2,my_layout3,my_layout4,my_layout5,check_list_name;
     JSONArray current_resdi_proof,current,permanent_addr,permant_add_proof,Income_pr,income_proof_arr,Wrk_Add_proof,wrk_prf__arr,
             Photo_proof,photo_prf__arr;
@@ -227,7 +227,8 @@ public class Document_Check_List extends SimpleActivity implements CompoundButto
             @Override
             public void onErrorResponse(VolleyError error) {
                 progressDialog.dismiss();
-                Toast.makeText(getApplicationContext(),error.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(mCon, "Network error, try after some time",Toast.LENGTH_SHORT).show();
+
             }
         }) {
             @Override
@@ -351,7 +352,10 @@ public class Document_Check_List extends SimpleActivity implements CompoundButto
 
                                 String key = (String)iterator.next();
                                 Log.e("value", key.toString());
+                                 list_key = new ArrayList<String>();
 
+
+                                Log.e("the value",list_key.toString());
                                 response_iD_proof_comon = doc_ar.getJSONArray(key);
                                 for (int i=0;i<response_iD_proof_comon.length();i++) {
                                     JSONObject J = null;
@@ -359,6 +363,7 @@ public class Document_Check_List extends SimpleActivity implements CompoundButto
 
                                         J = response_iD_proof_comon.getJSONObject(i);
                                         doc_ype_com = J.getJSONArray("doc_type_names");
+
                                         checklist_name(doc_ype_com,key);
 
                                     } catch (JSONException e) {
@@ -369,7 +374,6 @@ public class Document_Check_List extends SimpleActivity implements CompoundButto
                                 }
 
                             }
-
                         }
 
                         catch (JSONException e)
@@ -384,7 +388,8 @@ public class Document_Check_List extends SimpleActivity implements CompoundButto
             @Override
             public void onErrorResponse(VolleyError error) {
                 VolleyLog.d("TAG", "Error: " + error.getMessage());
-                     progressDialog.dismiss();
+                Toast.makeText(mCon, "Network error, try after some time",Toast.LENGTH_SHORT).show();
+                progressDialog.dismiss();
             }
         }) {
 
@@ -406,14 +411,27 @@ public class Document_Check_List extends SimpleActivity implements CompoundButto
 
     private void checklist_name(final JSONArray doc_ype_com, String key) {
 
+
         LinearLayout.LayoutParams lparams = new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-        TextView tv = new TextView(this);
-        tv.setLayoutParams(lparams);
-        tv.setText(key);
-        tv.setTextSize(18);
-        tv.setTextColor(Color.BLACK);
-        check_list_name.addView(tv);
+        if (!list_key.contains(key))
+        {
+
+            TextView tv = new TextView(this);
+            tv.setLayoutParams(lparams);
+            list_key.add(key);
+            tv.setText(key);
+            tv.setText(key);
+            tv.setTextSize(18);
+            tv.setTextColor(Color.BLACK);
+            check_list_name.addView(tv);
+        }else
+        {
+
+        }
+       Log.e("the list_key value",list_key.toString());
+
+
 
         checklistname_count = doc_ype_com.length();
         for (int i = 0; i < checklistname_count; i++) {
@@ -424,7 +442,7 @@ public class Document_Check_List extends SimpleActivity implements CompoundButto
                 rec5 = doc_ype_com.getJSONObject(i);
                 //  int id = rec.getInt("id");
                 checklist_name1 = rec5.getString("doc_typename");
-
+                checked_statues = rec5.getString("enable_status");
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -439,6 +457,12 @@ public class Document_Check_List extends SimpleActivity implements CompoundButto
             checkBox.setText(checklist_name1);
           //  row.addView(checkBox);
             check_list_name.addView(checkBox);
+
+            if(checked_statues.equals("1"))
+            {
+                checkBox.setChecked(true);
+            }
+
            // my_layout.addView(row);
             checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override

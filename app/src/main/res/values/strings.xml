@@ -611,7 +611,7 @@
     <string name="ER_EG">Employment Rank and Employment Grade </string>
     <string name="Own_house">Own House Condition</string>
 
-    <string name="app_pan_no">PAN Number</string>
+    <string name="app_pan_no">PAN Number(Enter PAN number in caps)</string>
     <string name="first_name">First name</string>
     <string name="last_name">Last name</string>
     <string name="father_name">Father name</string>
@@ -727,6 +727,7 @@
     <string name="crif_fail">Details provided do not match our loan viability criteria. You cannot process this lead further. View report for details.</string>
 
     <string name="crif_report">CRIF Report Activity</string>
+    <string name="we_process">We are processing your data, This usually takes less than a minute...</string>
 
     <string name="instantloan">Instant Loan Viability Report</string>
     <string name="fasttrack_loan">Fast Track Loan Processing</string>
@@ -902,7 +903,7 @@
     <string name="statemnt_info">(Please  ensure that all yourbank statements are from the same bank account)</string>
     <string name="upload_files">Upload Files</string>
     <string name="select_multiple">You can Select multiple files at same time</string>
-    <string name="enter_docpass">Please Enter Your Document Password</string>
+    <string name="enter_docpass">Please Enter Your Document Password(optional)</string>
 
     <string name="viewpdf">VIew PDF</string>
     <string name="no_trans">No Transaction Yet!</string>

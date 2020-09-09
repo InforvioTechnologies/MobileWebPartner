@@ -323,7 +323,7 @@
 
 
                         <LinearLayout
-                            android:visibility="gone"
+
                             android:id="@+id/self_business"
                             android:orientation="vertical"
                             android:layout_width="match_parent"
