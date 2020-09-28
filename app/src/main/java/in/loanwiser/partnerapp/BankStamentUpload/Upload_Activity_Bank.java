@@ -58,6 +58,7 @@ import in.loanwiser.partnerapp.PartnerActivitys.Home;
 import in.loanwiser.partnerapp.PartnerActivitys.SimpleActivity;
 import in.loanwiser.partnerapp.Partner_Statues.DashBoard_new;
 import in.loanwiser.partnerapp.R;
+import in.loanwiser.partnerapp.Step_Changes_Screen.Document_Checklist_Details_type;
 import in.loanwiser.partnerapp.Step_Changes_Screen.Lead_Crration_Activity;
 
 public class Upload_Activity_Bank extends SimpleActivity implements View.OnClickListener, SingleUploadBroadcastReceiver.Delegate {
@@ -502,18 +503,19 @@ public void uploadMultipart() {
                                                         String  loan_type =  jsonObject2.getString("loan_type");
                                                         String payment =  jsonObject2.getString("payment");
                                                         String applicant_id1 =  "APP-"+user_id;
-
-
                                                         // String statues2 = "3";
                                                         Pref.putUSERID(context,user_id);
                                                         String _Emp_staus_jsonArray = jsonArray.toString();
 
-                                                        Objs.ac.StartActivityPutExtra(context, Home.class,
+                                                       /* Objs.ac.StartActivityPutExtra(context, Home.class,
                                                                 Params.user_id,user_id,
                                                                 Params.transaction_id,transaction_id1,
                                                                 Params.applicant_id,applicant_id1,
                                                                 Params.sub_taskid,subtask_id, Params.Applicant_status,_Emp_staus_jsonArray,
-                                                                Params.loan_type_id,loan_type_id,Params.loan_type,loan_type);
+                                                                Params.loan_type_id,loan_type_id,Params.loan_type,loan_type);*/
+                                                        Intent intent = new Intent(Upload_Activity_Bank.this, Document_Checklist_Details_type.class);
+                                                        intent.putExtra("jsonArray", _Emp_staus_jsonArray.toString());
+                                                        startActivity(intent);
 
                               /*  if(payment.equals("error"))
                                 {

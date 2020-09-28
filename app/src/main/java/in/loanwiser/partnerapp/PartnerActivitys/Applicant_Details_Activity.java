@@ -13,6 +13,7 @@ import androidx.appcompat.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import adhoc.app.applibrary.Config.AppUtils.Objs;
 import adhoc.app.applibrary.Config.AppUtils.Pref.Pref;
@@ -179,14 +180,16 @@ public class Applicant_Details_Activity extends SimpleActivity {
             @Override
             public void onClick(View v) {
 
-                String Loancat_name = "Vehicle Loan";
+                Toast.makeText(mCon,"Vehicle Loan Under Process",Toast.LENGTH_SHORT).show();
+
+                /*String Loancat_name = "Vehicle Loan";
                 Pref.putLoanCat_Name(mCon,Loancat_name);
                 String Loantype = "3";
                 String sub_categoryid = "5";
                 Pref.putLoanType(mCon,Loantype);
                 Pref.putLoanTypeSub(mCon,sub_categoryid);
                 Intent intent = new Intent(Applicant_Details_Activity.this, MainActivity_Vehicle_Add_Lead1.class);
-                startActivity(intent);
+                startActivity(intent);*/
                 //finish();
             }
         });

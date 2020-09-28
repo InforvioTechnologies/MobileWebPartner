@@ -108,6 +108,8 @@ public class ActivityFragment extends Fragment implements NavigationView.OnNavig
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+
         View view = inflater.inflate(R.layout.fragment_activity, container, false);
 
         mDemoSlider = (SliderLayout)view.findViewById(R.id.slider);

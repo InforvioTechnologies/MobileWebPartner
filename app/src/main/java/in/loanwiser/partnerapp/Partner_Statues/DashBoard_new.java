@@ -1,13 +1,18 @@
 package in.loanwiser.partnerapp.Partner_Statues;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -35,6 +40,8 @@ import com.google.android.material.navigation.NavigationView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.core.view.GravityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
@@ -94,7 +101,8 @@ public class DashBoard_new extends AppCompatActivity  implements NavigationView.
 
     PermissionUtils permissionUtils;
     private static final int STORAGE_PERMISSION_REQUEST_CODE = 1;
-    
+    private static final int MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE = 1;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -113,6 +121,12 @@ public class DashBoard_new extends AppCompatActivity  implements NavigationView.
         nav_header_mobile_no = headerView.findViewById(R.id.nav_header_mobile_no);
 
         setSupportActionBar(toolbar);
+
+
+        if (checkPermissionREAD_EXTERNAL_STORAGE(this)) {
+            // do your stuff..
+        }
+
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -339,7 +353,118 @@ public class DashBoard_new extends AppCompatActivity  implements NavigationView.
         getMenuInflater().inflate(R.menu.dash_board_new, menu);
         return true;
     }*/
+   public boolean checkPermissionREAD_EXTERNAL_STORAGE(
+           final Context context) {
+       int currentAPIVersion = Build.VERSION.SDK_INT;
+       if (currentAPIVersion >= android.os.Build.VERSION_CODES.M) {
+           if (ContextCompat.checkSelfPermission(context,
+                   Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+               if (ActivityCompat.shouldShowRequestPermissionRationale(
+                       (Activity) context,
+                       Manifest.permission.READ_EXTERNAL_STORAGE)) {
+                   showDialog("External storage", context,
+                           Manifest.permission.READ_EXTERNAL_STORAGE);
 
+               } else {
+                   ActivityCompat
+                           .requestPermissions(
+                                   (Activity) context,
+                                   new String[] { Manifest.permission.READ_EXTERNAL_STORAGE },
+                                   MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE);
+               }
+               return false;
+           } else {
+               return true;
+           }
+
+       } else {
+           return true;
+       }
+   }
+
+    public void showDialog(final String msg, final Context context,
+                           final String permission) {
+        AlertDialog.Builder alertBuilder = new AlertDialog.Builder(context);
+        alertBuilder.setCancelable(true);
+        alertBuilder.setTitle("Permission necessary");
+        alertBuilder.setMessage(msg + " permission is necessary");
+        alertBuilder.setPositiveButton(android.R.string.yes,
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        ActivityCompat.requestPermissions((Activity) context,
+                                new String[] { permission },
+                                MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE);
+                    }
+                });
+        AlertDialog alert = alertBuilder.create();
+        alert.show();
+    }
+
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           String[] permissions, int[] grantResults) {
+        switch (requestCode) {
+            case MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE:
+                if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    // do your stuff
+                   /* binding.testShare.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+
+                            Glide.with(getApplicationContext())
+                                    .load(image_url)
+                                    .asBitmap().skipMemoryCache(true).diskCacheStrategy(DiskCacheStrategy.NONE)
+                                    .into(new SimpleTarget<Bitmap>() {
+                                        @Override
+                                        public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
+
+                                            Intent intent = new Intent(Intent.ACTION_SEND);
+                                            intent.putExtra(Intent.EXTRA_TEXT, "Hey view/download this image");
+                                            String path = MediaStore.Images.Media.insertImage(getContentResolver(), resource, "", null);
+                                            Log.i("quoteswahttodo", "is onresoursereddy" + path);
+                                            Uri screenshotUri = Uri.parse(path);
+                                            Log.i("quoteswahttodo", "is onresoursereddy" + screenshotUri);
+                                            intent.putExtra(Intent.EXTRA_STREAM, screenshotUri);
+                                            intent.setType("image/*");
+                                            // intent.setPackage("com.whatsapp");
+                                            try{
+                                                startActivity(Intent.createChooser(intent, "Share image via..."));
+
+                                            } catch (Exception e) {
+                                                Toast.makeText(DashBoard_new.this, "It seem like Whatsapp is not been installed", Toast.LENGTH_SHORT).show();
+                                                e.printStackTrace();
+                                            }
+
+                                        }
+                                        @Override public void onLoadFailed(Exception e, Drawable errorDrawable) {
+                                            Toast.makeText(getApplicationContext(), "Something went wrong", Toast.LENGTH_SHORT).show();
+                                            super.onLoadFailed(e, errorDrawable);
+                                        }
+
+                                        @Override public void onLoadStarted(Drawable placeholder) {
+                                            Toast.makeText(getApplicationContext(), "Starting", Toast.LENGTH_SHORT).show();
+                                        }
+
+
+                                    });
+
+
+                        }
+                    });*/
+
+
+
+                } else {
+                    Toast.makeText(DashBoard_new.this, "GET_ACCOUNTS Denied",
+                            Toast.LENGTH_SHORT).show();
+                }
+                break;
+            default:
+                super.onRequestPermissionsResult(requestCode, permissions,
+                        grantResults);
+        }
+    }
     private void Account_Listings_Details() {
 
         final JSONObject jsonObject =new JSONObject();

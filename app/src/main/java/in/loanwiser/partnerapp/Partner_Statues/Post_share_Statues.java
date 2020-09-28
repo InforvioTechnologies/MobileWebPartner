@@ -1,13 +1,18 @@
 package in.loanwiser.partnerapp.Partner_Statues;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.Build;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -23,6 +28,8 @@ import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.appcompat.widget.AppCompatTextView;
 import androidx.cardview.widget.CardView;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.AuthFailureError;
@@ -55,13 +62,13 @@ import dmax.dialog.SpotsDialog;
 import in.loanwiser.partnerapp.PartnerActivitys.Home;
 import in.loanwiser.partnerapp.R;
 
-public class Post_share_Statues extends RecyclerView.Adapter<Post_share_Statues.CustomViewHolder> {
+public class Post_share_Statues extends RecyclerView.Adapter<Post_share_Statues.CustomViewHolder> implements ActivityCompat.OnRequestPermissionsResultCallback {
 
     private Context context;
     private ArrayList<post_item_freqent> items;
     private String lead_id;
     private AlertDialog progressDialog;
-
+     String post_url;
     String Loan_amount,sub_categoryid,transaction_id1,subtask_id,loan_type_id,loan_type,
             payment,applicant_id1;
     private String tag_json_obj = "jobj_req", tag_json_arry = "jarray_req";
@@ -71,10 +78,14 @@ public class Post_share_Statues extends RecyclerView.Adapter<Post_share_Statues.
         this.items = items;
     }
 
+    private static final int MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE = 1;
+
     @NonNull
     @Override
     public CustomViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         return new CustomViewHolder(LayoutInflater.from(context).inflate(R.layout.poster_share, parent, false));
+
+
     }
 
     @SuppressLint("ResourceAsColor")
@@ -87,10 +98,13 @@ public class Post_share_Statues extends RecyclerView.Adapter<Post_share_Statues.
 
         String title  = items.get(position).gettitle();
        final String content  = items.get(position).getcontent();
-        final String post_url  = items.get(position).getpost_url();
+        post_url  = items.get(position).getpost_url();
         progressDialog = new SpotsDialog(context, R.style.Custom);
 
+        if (checkPermissionREAD_EXTERNAL_STORAGE(context)) {
 
+        }
+            // do your stuff..
         holder.Title.setText(title);
        // holder.loan_amount.setText(loan_amount);
         Objs.a.loadPicasso(context,post_url,holder.image_Pdf,holder.progressBarMaterial_pdf);
@@ -99,46 +113,51 @@ public class Post_share_Statues extends RecyclerView.Adapter<Post_share_Statues.
         holder.share_image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Glide.with(context)
-                        .load(post_url)
-                        .asBitmap().skipMemoryCache(true).diskCacheStrategy(DiskCacheStrategy.NONE)
-                        .into(new SimpleTarget<Bitmap>() {
-                            @Override
-                            public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
-                                progressDialog.dismiss();
-                                Intent intent = new Intent(Intent.ACTION_SEND);
-                                intent.putExtra(Intent.EXTRA_TEXT, content);
-                                String path = MediaStore.Images.Media.insertImage(context.getContentResolver(), resource, "", null);
-                                Log.i("quoteswahttodo", "is onresoursereddy" + path);
-                                Uri screenshotUri = Uri.parse(path);
-                                Log.i("quoteswahttodo", "is onresoursereddy" + screenshotUri);
-                                intent.putExtra(Intent.EXTRA_STREAM, screenshotUri);
-                                intent.setType("image/*");
+                    Glide.with(context)
+                            .load(items.get(position).getpost_url())
+                            .asBitmap().skipMemoryCache(true).diskCacheStrategy(DiskCacheStrategy.NONE)
+                            .into(new SimpleTarget<Bitmap>() {
+                                @Override
+                                public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
+                                    progressDialog.dismiss();
+                                    Intent intent = new Intent(Intent.ACTION_SEND);
+                                    intent.putExtra(Intent.EXTRA_TEXT, content);
+                                    intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                                    String path = MediaStore.Images.Media.insertImage(context.getContentResolver(), resource, "", null);
+                                    Log.i("quoteswahttodo", "is onresoursereddy" + path);
+                                    Uri screenshotUri = Uri.parse(path);
+                                    Log.i("quoteswahttodo", "is onresoursereddy" + screenshotUri);
+                                    intent.putExtra(Intent.EXTRA_STREAM, screenshotUri);
+                                    intent.setType("image/*");
 
-                                // intent.setPackage("com.whatsapp");
-                                try{
-                                    context.startActivity(Intent.createChooser(intent, "Share image via..."));
+                                    // intent.setPackage("com.whatsapp");
+                                    try {
+                                        context.startActivity(Intent.createChooser(intent, "Share image via..."));
 
-                                } catch (Exception e) {
-                                    Toast.makeText(context, "It seem like Whatsapp is not been installed", Toast.LENGTH_SHORT).show();
-                                    e.printStackTrace();
+                                    } catch (Exception e) {
+                                        Toast.makeText(context, "It seem like Whatsapp is not been installed", Toast.LENGTH_SHORT).show();
+                                        e.printStackTrace();
+                                    }
+
                                 }
 
-                            }
-                            @Override public void onLoadFailed(Exception e, Drawable errorDrawable) {
-                                progressDialog.dismiss();
-                                Toast.makeText(context, "Something went wrong", Toast.LENGTH_SHORT).show();
-                                super.onLoadFailed(e, errorDrawable);
-                            }
+                                @Override
+                                public void onLoadFailed(Exception e, Drawable errorDrawable) {
+                                    progressDialog.dismiss();
+                                    Toast.makeText(context, "Something went wrong", Toast.LENGTH_SHORT).show();
+                                    super.onLoadFailed(e, errorDrawable);
+                                }
 
-                            @Override public void onLoadStarted(Drawable placeholder) {
-                                progressDialog.show();
-                                // Toast.makeText(getActivity(), "Starting", Toast.LENGTH_SHORT).show();
-                            }
+                                @Override
+                                public void onLoadStarted(Drawable placeholder) {
+                                    progressDialog.show();
+                                    // Toast.makeText(getActivity(), "Starting", Toast.LENGTH_SHORT).show();
+                                }
 
 
-                        });
-            }
+                            });
+                }
+
         });
 
         holder.whats_app_share.setOnClickListener(new View.OnClickListener() {
@@ -146,7 +165,7 @@ public class Post_share_Statues extends RecyclerView.Adapter<Post_share_Statues.
             public void onClick(View view) {
 
                 Glide.with(context)
-                        .load(post_url)
+                        .load(items.get(position).getpost_url())
                         .asBitmap().skipMemoryCache(true).diskCacheStrategy(DiskCacheStrategy.NONE)
                         .into(new SimpleTarget<Bitmap>() {
                             @Override
@@ -154,6 +173,7 @@ public class Post_share_Statues extends RecyclerView.Adapter<Post_share_Statues.
                                 progressDialog.dismiss();
                                 Intent intent = new Intent(Intent.ACTION_SEND);
                                 intent.putExtra(Intent.EXTRA_TEXT, content);
+                                intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
                                 String path = MediaStore.Images.Media.insertImage(context.getContentResolver(), resource, "", null);
                                 Log.i("quoteswahttodo", "is onresoursereddy" + path);
                                 Uri screenshotUri = Uri.parse(path);
@@ -161,6 +181,7 @@ public class Post_share_Statues extends RecyclerView.Adapter<Post_share_Statues.
                                 intent.putExtra(Intent.EXTRA_STREAM, screenshotUri);
                                 intent.setType("image/*");
                                 intent.setPackage("com.whatsapp");
+
                                 // intent.setPackage("com.whatsapp");
                                 try{
                                     context.startActivity(Intent.createChooser(intent, "Share image via..."));
@@ -229,6 +250,7 @@ public class Post_share_Statues extends RecyclerView.Adapter<Post_share_Statues.
 
         public CustomViewHolder(View view) {
             super(view);
+
             Title = view.findViewById(R.id.Title);
             image_Pdf = view.findViewById(R.id.image_Pdf);
             progressBarMaterial_pdf = (ProgressBar) itemView.findViewById(R.id.progressBarMaterial_pdf);
@@ -237,6 +259,51 @@ public class Post_share_Statues extends RecyclerView.Adapter<Post_share_Statues.
         }
     }
 
+    public boolean checkPermissionREAD_EXTERNAL_STORAGE(
+            final Context context) {
+        int currentAPIVersion = Build.VERSION.SDK_INT;
+        if (currentAPIVersion >= android.os.Build.VERSION_CODES.M) {
+            if (ContextCompat.checkSelfPermission(context,
+                    Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                if (ActivityCompat.shouldShowRequestPermissionRationale(
+                        (Activity) context,
+                        Manifest.permission.READ_EXTERNAL_STORAGE)) {
+                    showDialog("External storage", context,
+                            Manifest.permission.READ_EXTERNAL_STORAGE);
+
+                } else {
+                    ActivityCompat
+                            .requestPermissions(
+                                    (Activity) context,
+                                    new String[] { Manifest.permission.READ_EXTERNAL_STORAGE },
+                                    MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE);
+                }
+                return false;
+            } else {
+                return true;
+            }
+
+        } else {
+            return true;
+        }
+    }
+    public void showDialog(final String msg, final Context context,
+                           final String permission) {
+        AlertDialog.Builder alertBuilder = new AlertDialog.Builder(context);
+        alertBuilder.setCancelable(true);
+        alertBuilder.setTitle("Permission necessary");
+        alertBuilder.setMessage(msg + " permission is necessary");
+        alertBuilder.setPositiveButton(android.R.string.yes,
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        ActivityCompat.requestPermissions((Activity) context,
+                                new String[] { permission },
+                                MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE);
+                    }
+                });
+        AlertDialog alert = alertBuilder.create();
+        alert.show();
+    }
     public String parseDateToddMMyyyy(String time) {
         String inputPattern = "yyyy-MM-dd";
         //  String inputPattern = "yyyy-MM-dd HH:mm:ss";
@@ -259,6 +326,23 @@ public class Post_share_Statues extends RecyclerView.Adapter<Post_share_Statues.
         return str;
     }
 
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           String[] permissions, int[] grantResults) {
+        switch (requestCode) {
+            case MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE:
+                if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    // do your stuff
 
+                } else {
+                    Toast.makeText(context, "GET_ACCOUNTS Denied",
+                            Toast.LENGTH_SHORT).show();
+                }
+                break;
+            default:
+                onRequestPermissionsResult(requestCode, permissions,
+                        grantResults);
+        }
+    }
 
 }

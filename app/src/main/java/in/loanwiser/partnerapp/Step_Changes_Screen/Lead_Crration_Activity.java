@@ -443,6 +443,9 @@ public class Lead_Crration_Activity extends SimpleActivity {
                 if(Loan_Cat_id.equals("0"))
                 {
                     Toast.makeText(context, "Please Select Loan Category", Toast.LENGTH_SHORT).show();
+                }else if(Loan_Cat_id.equals("3"))
+                {
+                    Toast.makeText(mCon, "Vehicle Loan is Under Process, Please Select Other Loan Category",Toast.LENGTH_SHORT).show();
                 }else
                 {
                         if(App.equals("0"))
@@ -1011,7 +1014,15 @@ public class Lead_Crration_Activity extends SimpleActivity {
 
                     try {
                         Loan_Cat_id = ja1.getJSONObject(position).getString("id");
-                        makeJsonObjReq1(Loan_Cat_id);
+
+                        if(Loan_Cat_id.contains("3"))
+                        {
+                             Toast.makeText(mCon, "Vehicle Loan is Under Process, Please Select Other Loan Category",Toast.LENGTH_SHORT).show();
+                        }else
+                        {
+                            makeJsonObjReq1(Loan_Cat_id);
+                        }
+
                         Log.e("Selected_cat_id", String.valueOf(Loan_Cat_id));
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -1447,7 +1458,6 @@ public class Lead_Crration_Activity extends SimpleActivity {
         jsonObjReq.setRetryPolicy(policy);
 
         AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
-
 
     }
 

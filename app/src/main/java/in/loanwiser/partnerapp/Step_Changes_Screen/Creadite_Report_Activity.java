@@ -845,6 +845,7 @@ public class Creadite_Report_Activity extends SimpleActivity {
         try {
 
             J.put("trans_id",Pref.getTRANSACTIONID(getApplicationContext()));
+            J.put("mode","open");
 
         } catch (JSONException e) {
             e.printStackTrace();

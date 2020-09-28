@@ -44,6 +44,7 @@ import adhoc.app.applibrary.Config.AppUtils.Pref.Pref;
 import adhoc.app.applibrary.Config.AppUtils.Urls;
 import adhoc.app.applibrary.Config.AppUtils.VolleySignleton.AppController;
 import dmax.dialog.SpotsDialog;
+import in.loanwiser.partnerapp.BankStamentUpload.Upload_Activity_Bank;
 import in.loanwiser.partnerapp.Documents.Applicant_Details_Single;
 import in.loanwiser.partnerapp.PDF_Dounloader.PermissionUtils;
 import in.loanwiser.partnerapp.Partner_Statues.DashBoard_new;
@@ -78,12 +79,12 @@ public class Home extends AppCompatActivity {
     private AlertDialog progressDialog;
     private CardView app,doc,offer;
     private String tag_json_obj = "jobj_req", tag_json_arry = "jarray_req";
-    private ImageView app_doc_img,app_info_img,app_info_img11,app_interview_img,app_offer_img,app_track_img;
+    private ImageView app_doc_img,app_info_img,app_info_img11,app_interview_img,app_offer_img,app_track_img,bank_statement_img;
     private TextView customerinterview,offerdetails,app_doc_message,app_info_message;
     private LinearLayout lead_cr_statues;
     CardView Applicant_info_ly,Document_check_list,Document_Upload,offer_generation,
             Viability_Check,eligibility_check,viability_Report,Credit_REport_Generation,Paymet,
-            CRIF_Check,step2_card;
+            CRIF_Check,step2_card,Bank_statement_Upload;
 
     ImageView viability_check_img2,eligibility_check_img,viability_report_image,Credite_report_image,
             payment_img,crif_img,credite_report_img;
@@ -91,12 +92,12 @@ public class Home extends AppCompatActivity {
     String viability,eligibility,credit_request,payment,viability_report,viability_report_URL,
     document_checklist,document_upload,loan_type_id,loan_type,crif_status,submit_loanwiser,offer_Details,
             part_compstatus,part_subcompstatus, loanwiser_submit_str,loanwiser_submit_str1,loan_status,
-            reject_status;
+            reject_status,bank_statement;
     AppCompatImageView call_phone;
 
     AppCompatTextView lead_name,mobile_no,Loan_amount,loan_type_,loan_submit_statues1,viability_statues,
             eligibility_check_cmp,payment_statues_comp,crif_report_cmp,viability_report_cmp,loan_statues,
-            sub_to_loanwiser,crif_report_view;
+            sub_to_loanwiser,crif_report_view,bank_stm;
 
 
     private static final int STORAGE_PERMISSION_REQUEST_CODE = 1;
@@ -308,6 +309,7 @@ public class Home extends AppCompatActivity {
         eligibility_check = (CardView) findViewById(R.id.eligibility_check);
         viability_Report = (CardView) findViewById(R.id.viability_Report);
         Credit_REport_Generation = (CardView) findViewById(R.id.Credit_REport_Generation);
+        Bank_statement_Upload = (CardView) findViewById(R.id.Bank_statement_Upload);
         CRIF_Check = (CardView) findViewById(R.id.CRIF_Check);
         step2_card = (CardView) findViewById(R.id.step2_card);
 
@@ -328,6 +330,7 @@ public class Home extends AppCompatActivity {
         payment_statues_comp = (AppCompatTextView) findViewById(R.id.payment_statues_comp);
         crif_report_cmp = (AppCompatTextView) findViewById(R.id.crif_report_cmp);
         viability_report_cmp = (AppCompatTextView) findViewById(R.id.viability_report_cmp);
+        bank_stm = (AppCompatTextView) findViewById(R.id.bank_stm);
         crif_report_view = (AppCompatTextView) findViewById(R.id.crif_report_view);
 
         lead_cr_statues = (LinearLayout) findViewById(R.id.lead_cr_statues);
@@ -339,6 +342,7 @@ public class Home extends AppCompatActivity {
 
 
         app_offer_img = (ImageView) findViewById(R.id.app_offer_img);
+        bank_statement_img = (ImageView) findViewById(R.id.bank_statement_img);
 
         //viability_check_img2,eligibility_check_img,viability_report_image,Credite_report_image;
 
@@ -603,15 +607,9 @@ public class Home extends AppCompatActivity {
         Credit_REport_Generation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-
-
                 if(viability.contains("completed")) {
-
                     if (eligibility.contains("completed")) {
-
                         if (payment.contains("completed")) {
-
                             if(credit_request.contains("completed"))
                             {
                                 Intent intent = new Intent(Home.this, CRIF_Report_Activity_PDF_View.class);
@@ -646,6 +644,47 @@ public class Home extends AppCompatActivity {
             }
         });
 
+        Bank_statement_Upload.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(viability.contains("completed")) {
+                    if (eligibility.contains("completed")) {
+                        if (payment.contains("completed")) {
+                            if(credit_request.contains("completed"))
+                            {
+                                if(bank_statement.contains("completed"))
+                                {
+
+                                }else
+                                {
+
+                                    Intent intent = new Intent(Home.this, Upload_Activity_Bank.class);
+                                    startActivity(intent);
+                                }
+
+                            }else
+                            {
+                                Toast.makeText(getApplicationContext(),"Please Complete The Previous Steps To Proceed!!!", Toast.LENGTH_SHORT).show();
+                            }
+
+                        }else
+                        {
+                            Toast.makeText(getApplicationContext(),"Please Complete The Previous Steps To Proceed!!!", Toast.LENGTH_SHORT).show();
+
+                        }
+                    }else
+                    {
+                        Toast.makeText(getApplicationContext(),"Please Complete The Previous Steps To Proceed!!!", Toast.LENGTH_SHORT).show();
+
+                    }
+                }else {
+
+
+                    Toast.makeText(getApplicationContext(),"Please Complete The Previous Steps To Proceed!!!", Toast.LENGTH_SHORT).show();
+
+                }
+            }
+        });
 
     }
     private void fonts() {
@@ -799,6 +838,7 @@ public class Home extends AppCompatActivity {
                              payment = step2_sub_statues.getString("payment");
                              viability_report = step2_sub_statues.getString("viability_report");
                             crif_status = step2_sub_statues.getString("crif_status");
+                            bank_statement = step2_sub_statues.getString("bank_statement");
 
                             offer_Details = step4_sub_statues.getString("offer_generate");
 
@@ -819,6 +859,7 @@ public class Home extends AppCompatActivity {
                                 Document_Upload.setVisibility(View.GONE);
                                 offer.setVisibility(View.GONE);
                                 Credit_REport_Generation.setVisibility(View.GONE);
+                                Bank_statement_Upload.setVisibility(View.GONE);
 
                             }else
                             {
@@ -856,7 +897,22 @@ public class Home extends AppCompatActivity {
                                        offer.setVisibility(View.GONE);
                                        step2_card.setVisibility(View.GONE);
                                        Credit_REport_Generation.setVisibility(View.GONE);
+                                       Bank_statement_Upload.setVisibility(View.GONE);
 
+                                   }else if(loanwiser_submit_str1.contains("step-3"))
+                                   {
+                                       loan_submit_statues1.setText(loan_status);
+                                       Viability_Check.setVisibility(View.VISIBLE);
+                                       eligibility_check.setVisibility(View.VISIBLE);
+                                       CRIF_Check.setVisibility(View.VISIBLE);
+                                       Paymet.setVisibility(View.VISIBLE);
+                                       Document_check_list.setVisibility(View.GONE);
+                                       Document_Upload.setVisibility(View.VISIBLE);
+                                       viability_Report.setVisibility(View.VISIBLE);
+                                       offer.setVisibility(View.VISIBLE);
+                                       step2_card.setVisibility(View.VISIBLE);
+                                       Credit_REport_Generation.setVisibility(View.VISIBLE);
+                                       Bank_statement_Upload.setVisibility(View.VISIBLE);
                                    }
 
                                }else {
@@ -872,6 +928,7 @@ public class Home extends AppCompatActivity {
                                    offer.setVisibility(View.VISIBLE);
                                    step2_card.setVisibility(View.VISIBLE);
                                    Credit_REport_Generation.setVisibility(View.VISIBLE);
+                                   Bank_statement_Upload.setVisibility(View.VISIBLE);
                                    //
                                }
 
@@ -973,16 +1030,34 @@ public class Home extends AppCompatActivity {
                             {
                                 app_offer_img.setImageDrawable(getResources().getDrawable(R.drawable.ic_not_tick));
                             }
+                            if(bank_statement.contains("completed"))
+                            {
+                                bank_statement_img.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
+                                bank_stm.setText("completed");
+                            }else
+                            {
+                                bank_statement_img.setImageDrawable(getResources().getDrawable(R.drawable.ic_not_tick));
+                                bank_stm.setText("Pending under you");
+                            }
 
 
                             if( loanwiser_submit_str.contains("yes"))
                             {
-                                Credit_REport_Generation.setVisibility(View.GONE);
+                                if(loanwiser_submit_str1.contains("step-3"))
+                                {
+                                    Credit_REport_Generation.setVisibility(View.VISIBLE);
+                                    Bank_statement_Upload.setVisibility(View.VISIBLE);
+                                }else
+                                {
+                                    Credit_REport_Generation.setVisibility(View.GONE);
+                                }
+
                             }else
                             {
                                 if(reject_status.equals("1"))
                                 {
                                     Credit_REport_Generation.setVisibility(View.GONE);
+                                    Bank_statement_Upload.setVisibility(View.GONE);
                                 }else {
                                     if(crif_status.contains("completed"))
                                     {
@@ -1145,8 +1220,6 @@ public class Home extends AppCompatActivity {
                     Account_Listings_Details(user_id);
 
                 }
-
-
 
             }
         });

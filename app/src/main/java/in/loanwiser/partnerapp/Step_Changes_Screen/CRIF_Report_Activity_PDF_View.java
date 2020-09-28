@@ -254,6 +254,7 @@ public class CRIF_Report_Activity_PDF_View extends SimpleActivity {
         try {
 
             J.put("trans_id",Pref.getTRANSACTIONID(getApplicationContext()));
+            J.put("mode","view");
 
         } catch (JSONException e) {
             e.printStackTrace();
