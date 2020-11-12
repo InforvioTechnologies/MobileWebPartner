@@ -2,7 +2,6 @@ package in.loanwiser.partnerapp.BankStamentUpload;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatTextView;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -33,7 +32,6 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 
 import net.gotev.uploadservice.MultipartUploadRequest;
-import net.gotev.uploadservice.UploadNotificationConfig;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -46,20 +44,15 @@ import java.util.Map;
 import java.util.UUID;
 
 import adhoc.app.applibrary.Config.AppUtils.Objs;
-import adhoc.app.applibrary.Config.AppUtils.Params;
 import adhoc.app.applibrary.Config.AppUtils.Pref.Pref;
 import adhoc.app.applibrary.Config.AppUtils.Urls;
 import adhoc.app.applibrary.Config.AppUtils.VolleySignleton.AppController;
 import dmax.dialog.SpotsDialog;
-import in.loanwiser.partnerapp.Documents.Document_Details;
 import in.loanwiser.partnerapp.Documents.SingleUploadBroadcastReceiver;
 import in.loanwiser.partnerapp.PartnerActivitys.Dashboard_Activity;
-import in.loanwiser.partnerapp.PartnerActivitys.Home;
 import in.loanwiser.partnerapp.PartnerActivitys.SimpleActivity;
-import in.loanwiser.partnerapp.Partner_Statues.DashBoard_new;
 import in.loanwiser.partnerapp.R;
 import in.loanwiser.partnerapp.Step_Changes_Screen.Document_Checklist_Details_type;
-import in.loanwiser.partnerapp.Step_Changes_Screen.Lead_Crration_Activity;
 
 public class Upload_Activity_Bank extends SimpleActivity implements View.OnClickListener, SingleUploadBroadcastReceiver.Delegate {
 
@@ -84,12 +77,12 @@ private List<String> fileDoneList;
 
         ArrayList<Uri> uriarrayList = new ArrayList<>();
 
-
+        ArrayList<String> pathlist;
 private android.app.AlertDialog progressDialog;
 
 
 
-public static final String Bankstatement_URl="http://cscapitest.propwiser.com/mobile/partner_loanapi.php?call=bank_statement_upload";
+public static final String Bankstatement_URl="https://cscapi.propwiser.com/mobile/partner_loanapi_test.php?call=bank_statement_upload";
 
 
         FileAdapter fileAdapter;
@@ -125,8 +118,16 @@ protected void onCreate(Bundle savedInstanceState) {
         fileNameList = new ArrayList<>();
         fileDoneList=new ArrayList<>();
 
-      //  upload.setOnClickListener(this);
+       upload.setOnClickListener(this);
         submit.setOnClickListener(this);
+
+        /*submit.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                        Intent intent = new Intent(Upload_Activity_Bank.this, Home_Activity.class);
+                        startActivity(intent);
+                }
+        });*/
 
         docpass_edt_txt = findViewById(R.id.docpass_edt_txt);
 
@@ -143,6 +144,10 @@ protected void onCreate(Bundle savedInstanceState) {
                 @Override
                 public void onClick(View view) {
 
+                       /* Intent intent = new Intent(Upload_Activity_Bank.this, Home.class);
+                        startActivity(intent);*/
+                        fileNameList.clear();
+                        uriarrayList.clear();
                         showFileChooser();
                 }
         });
@@ -176,9 +181,6 @@ public void onRadioButtonClicked(View v) {
         }
 
         }
-
-
-
 
 //method to show file chooser
 private void showFileChooser() {
@@ -282,7 +284,33 @@ public void onClick(View v) {
                                 Toast.makeText(Upload_Activity_Bank.this,"Please upload document",Toast.LENGTH_SHORT).show();
                         }
                         else{
-                                uploadMultipart();
+                            //    uploadMultipart();
+                                pathlist = new ArrayList<>();
+                                for (int i = 0; i < uriarrayList.size(); i++) {
+                                        Log.e("the Upload issues",uriarrayList.get(i).toString());
+                                        String uri_test = uriarrayList.get(i).toString();
+
+                                        Log.e("the Upload issues",uri_test);
+                                        //  String path= String.valueOf(filePath);
+                                        String filename = uri_test.substring(uri_test.lastIndexOf("/")+1);
+                                        String pdf1 = filename.substring(filename.lastIndexOf(".")+1);
+
+                                        String a= "pdf";
+
+                                        if(pdf1.equals(a))
+                                        {
+                                                String path = FilePath.getPath(this, uriarrayList.get(i));
+                                                pathlist.add(path);
+                                                uploadMultipart();
+                                        }
+                                        else
+                                        {
+
+                                                Toast.makeText(getApplicationContext(), "Please select the PDF file from the File Directory", Toast.LENGTH_SHORT).show();
+                                        }
+
+
+                                }
                         }
                         break;
 
@@ -337,12 +365,7 @@ public void uploadMultipart() {
             Log.i("TAG", "uploadMultipart:loop "+uriarrayList.get(n));
             String paths= String.valueOf(uriarrayList.get(n));
         }*/
-        ArrayList<String> pathlist = new ArrayList<>();
-        for (int i = 0; i < uriarrayList.size(); i++) {
-        String path = FilePath.getPath(this, uriarrayList.get(i));
-        pathlist.add(path);
 
-        }
 
         Log.i("TAG", "String_path: " + pathlist);
         if (pathlist == null) {
@@ -433,8 +456,8 @@ public void uploadMultipart() {
                 if(response.equals("200")){
                         progressDialog.dismiss();
 
-                        Applicant_Status();
 
+                        Bank_statues();
                         // Send_Reload(app_id);
 
                         //   getContentResolver().delete(uri, null, null);
@@ -452,14 +475,66 @@ public void uploadMultipart() {
 
         }
 
-
     /*    String uripath=String.valueOf(uriarrayList);
         Log.i("TAG", "uripath: "+uripath);*/
 
+        public void Bank_statues() {
 
+                // final String step_status11 = step_status1;
+                JSONObject jsonObject =new JSONObject();
+                JSONObject J= null;
+                try {
+                        J =new JSONObject();
+                        J.put("transaction_id",  Pref.getTRANSACTIONID(getApplicationContext()));
+                } catch (JSONException e) {
+                        e.printStackTrace();
+                }
 
+                progressDialog.show();
+                Log.e("Applicant Entry request", String.valueOf(J));
 
+                JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, Urls.update_bankstatementstatus, J,
+                        new Response.Listener<JSONObject>() {
+                                @SuppressLint("LongLogTag")
+                                @Override
+                                public void onResponse(JSONObject response) {
 
+                                        Log.e("Applicant Entry", String.valueOf(response));
+                                        JSONObject jsonObject1 = new JSONObject();
+
+                                        try {
+
+                                                JSONObject jsonObject2 = response.getJSONObject("response");
+                                                String statues = jsonObject2.getString("status");
+
+                                                if(statues.contains("success"))
+                                                {
+                                                        Applicant_Status();
+                                                }
+
+                                        } catch (JSONException e) {
+                                                e.printStackTrace();
+                                        }
+                                        progressDialog.dismiss();
+                                }
+                        }, new Response.ErrorListener() {
+
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                                progressDialog.dismiss();
+                                Log.e("Applicant Entry request", String.valueOf(error));
+                                Toast.makeText(Upload_Activity_Bank.this,error.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                }) {
+                        @Override
+                        public Map<String, String> getHeaders() throws AuthFailureError {
+                                HashMap<String, String> headers = new HashMap<String, String>();
+                                headers.put("content-type", "application/json");
+                                return headers;
+                        }
+                };
+                AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
+        }
 
         public void Applicant_Status() {
 

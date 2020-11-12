@@ -1415,6 +1415,7 @@ public class Viability_Check_HL_new extends SimpleActivity {
 
                 salary_proof_salary_array_App = new JSONArray();
                 salary_proof_salary_array_App = new JSONArray(Arrays.asList(salary_proof_salaried_app_SA));
+
             }
 
             if (!Validate_experience()) {
@@ -1954,7 +1955,6 @@ public class Viability_Check_HL_new extends SimpleActivity {
                         salary_proof_salary_array = new JSONArray();
                         salary_proof_salary_array = new JSONArray(Arrays.asList(salary_proof_salaried_SA));
                     }
-
 
                     if (!Validate_pl_co_app_slrd_experience_in_current_cmpy()) {
                         return;
@@ -3898,13 +3898,16 @@ public class Viability_Check_HL_new extends SimpleActivity {
                             Type_of_employement =object.getJSONArray("Type_of_employement");
                             have_pan_ar =object.getJSONArray("have_pan");
                             vocaton_ar =object.getJSONArray("vocaton");
+
                             Business_income_proof_ar =object.getJSONArray("Business_income_proof");
+                            Business_Proof =object.getJSONArray("Business_Proof");
+
                             Residence_ownership_ar =object.getJSONArray("Residence_ownership");
 
                             vocation_type_forming_ar =object.getJSONArray("vocation_type");
 
                             Business_type_own_business =object.getJSONArray("Business_type");
-                            Business_Proof =object.getJSONArray("Business_Proof");
+
 
                             Assets_own =object.getJSONArray("Assets_own");
                             office_shop =object.getJSONArray("office_shop");
@@ -3950,9 +3953,11 @@ public class Viability_Check_HL_new extends SimpleActivity {
                             vocation_type_forming(vocation_type_forming_ar);
                             Residence_Array(Residence_ownership_ar);
                             Business_type_own_business_Array(Business_type_own_business);
+
                             Business_Proof_individual(Business_income_proof_ar);
 
                             Runs_own_business_Vintage_Proof(Business_Proof);
+
                             Assets_own_fun(Assets_own);
 
                             Office_Shop_(office_shop);
@@ -8669,8 +8674,6 @@ public class Viability_Check_HL_new extends SimpleActivity {
                             }
                             break;
                         case 3:
-
-
                             JSONArray jsonArray = new JSONArray();
                             jsonArray.put(pl_co_own_business_own_type_id);
                             Co_applicant1.put("business_vocation",pl_co_own_business_own_type_id);

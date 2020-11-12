@@ -5439,7 +5439,6 @@ public class Viability_Check_PL extends SimpleActivity {
 
                                 if(jsonObject1.getString("viablity_status").equals("success"))
                                 {
-
                                     Toast.makeText(context,"Viability Passed Successfully",Toast.LENGTH_SHORT).show();
                                     LayoutInflater layoutInflater = (LayoutInflater) Viability_Check_PL.this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                                     View customView = layoutInflater.inflate(R.layout.popup,null);
@@ -5447,8 +5446,6 @@ public class Viability_Check_PL extends SimpleActivity {
                                     closePopupBtn = (Button) customView.findViewById(R.id.closePopupBtn);
                                     sub_to_next = (Button) customView.findViewById(R.id.sub_to_next);
                                     save_latter = (Button) customView.findViewById(R.id.save_latter);
-
-
 
                                     //instantiate popup window
                                     popupWindow = new PopupWindow(customView, LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
@@ -5518,7 +5515,7 @@ public class Viability_Check_PL extends SimpleActivity {
 
                                             //   String viability_array =jsonObject1.getString("viability_arr");
                                             Intent intent = new Intent(Viability_Check_PL.this, Dashboard_Activity.class);
-                                            //  intent.putExtra("viability_jsonArray", viability_array.toString());
+                                            //intent.putExtra("viability_jsonArray", viability_array.toString());
                                             startActivity(intent);
                                             finish();
                                         }

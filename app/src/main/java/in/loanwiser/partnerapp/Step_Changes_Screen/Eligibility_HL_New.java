@@ -5253,10 +5253,10 @@ public class Eligibility_HL_New extends SimpleActivity {
                                 //display the popup window
                                 popupWindow.dismiss();
                                 Toast.makeText(context,"Eligibility Created Successfully",Toast.LENGTH_SHORT).show();
-
                                 Intent intent = new Intent(Eligibility_HL_New.this, PaymentActivity.class);
                                 startActivity(intent);
                                 finish();
+
                             }else if(response.getString("Generate_Document_check_list").equals("error"))
                             {
                                 Toast.makeText(context,"Eligibility Failed",Toast.LENGTH_SHORT).show();

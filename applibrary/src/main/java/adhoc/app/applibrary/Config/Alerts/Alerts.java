@@ -1147,6 +1147,4 @@ public class Alerts {
         // Adding request to request queue
         AppController.getInstance().addToRequestQueue(req, Objs.tag_json_arry);
     }
-
-
 }

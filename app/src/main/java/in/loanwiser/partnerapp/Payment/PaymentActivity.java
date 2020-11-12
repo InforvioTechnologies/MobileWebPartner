@@ -1,6 +1,7 @@
 package in.loanwiser.partnerapp.Payment;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.appcompat.widget.AppCompatSpinner;
 import androidx.appcompat.widget.AppCompatTextView;
@@ -12,6 +13,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
@@ -34,8 +36,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.Response;
+import com.android.volley.RetryPolicy;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonObjectRequest;
@@ -56,7 +60,9 @@ import adhoc.app.applibrary.Config.AppUtils.Pref.Pref;
 import adhoc.app.applibrary.Config.AppUtils.Urls;
 import adhoc.app.applibrary.Config.AppUtils.VolleySignleton.AppController;
 import dmax.dialog.SpotsDialog;
+import in.loanwiser.partnerapp.BankStamentUpload.Upload_Activity_Bank;
 import in.loanwiser.partnerapp.PartnerActivitys.Dashboard_Activity;
+import in.loanwiser.partnerapp.PartnerActivitys.Home;
 import in.loanwiser.partnerapp.Partner_Statues.DashBoard_new;
 import in.loanwiser.partnerapp.R;
 import in.loanwiser.partnerapp.SimpleActivity;
@@ -73,6 +79,8 @@ public class PaymentActivity extends SimpleActivity implements CompoundButton.On
     private Context context = this;
 
     private String tag_json_obj = "jobj_req", tag_json_arry = "jarray_req";
+    String Loan_amount,sub_categoryid,transaction_id1,subtask_id,loan_type_id,loan_type,
+            payment,applicant_id1;
 
     String[] SALARY_Method;
     ArrayAdapter<String> Salary_Adapter;
@@ -92,7 +100,7 @@ public class PaymentActivity extends SimpleActivity implements CompoundButton.On
     Button  closePopupBtn,close,view_report;
     ImageView closebtn;
     AppCompatTextView standard_amount;
-
+    String Statues_vability;
     SharedPreferences pref;
     public static final String IS_CO_Applicant_Id = "IS_CO_Applicant_Id";
 
@@ -108,8 +116,9 @@ public class PaymentActivity extends SimpleActivity implements CompoundButton.On
 
         UI_Fields();
         Click();
-        makeJsonObjReq1();
+     //   makeJsonObjReq1();
        // get_pay_shedule();
+        send_payment_link();
     }
 
 
@@ -212,39 +221,174 @@ public class PaymentActivity extends SimpleActivity implements CompoundButton.On
         skip_payment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Update_Payment_Statues();
+               // Update_Payment_Statues();
             }
         });
 
     }
 
-    private void Update_Payment_Statues() {
+    private void send_payment_link() {
         progressDialog.show();
         JSONObject J =new JSONObject();
         try {
             J.put("transaction_id",Pref.getTRANSACTIONID(getApplicationContext()));
-            J.put("pay_skip","1");
+            J.put("user_id",Pref.getUSERID(getApplicationContext()));
         } catch (JSONException e) {
             e.printStackTrace();
         }
         Log.e("payment_st_request",J.toString());
-        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, Urls.UPDATE_PAYMENT_STATUES, J,
+        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, Urls.paymentlink_check, J,
                 new Response.Listener<JSONObject>() {
 
                     @Override
                     public void onResponse(JSONObject object) {
                         Log.e("payment_st_request",object.toString());
                         try {
-                            JSONObject response = object.getJSONObject("response");
+                           // JSONObject response = object.getJSONObject("response");
 
-                            String Staues_pay = response.getString("status");
-                            if(Staues_pay.contains("success"))
+                            String Staues_pay = object.getString("status");
+                            if(Staues_pay.equals("success"))
                             {
-                                Intent intent = new Intent(PaymentActivity.this, Dashboard_Activity.class);
-                                startActivity(intent);
-                                finish();
+                                viability_check_pass();
+                            }else {
+                               // progressDialog.dismiss();
+                                makeJsonObjReq1();
                             }
 
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        // Toast.makeText(mCon, response.toString(),Toast.LENGTH_SHORT).show();
+
+                    }
+                }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                VolleyLog.d("TAG", "Error: " + error.getMessage());
+                progressDialog.dismiss();
+            }
+        }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("Content-Type", "application/json");
+                return headers;
+            }
+        };
+        AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
+
+    }
+
+
+    private void viability_check_pass( ) {
+
+        JSONObject J= null;
+
+        try {
+            J =new JSONObject();
+            J.put("transaction_id",Pref.getTRANSACTIONID(getApplicationContext()));
+            J.put("user_id", Pref.getUSERID(getApplicationContext()));
+            J.put("b2b_id", Pref.getID(mCon));
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        Log.e("viability ", String.valueOf(J));
+        progressDialog.show();
+        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, Urls.viabilitysave, J,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        Log.e("viability response", String.valueOf(response));
+                        String data = String.valueOf(response);
+                        try {
+                            //  String Status = response.getString("status");
+                            JSONObject jsonObject1 = response.getJSONObject("response");
+
+                            if(jsonObject1.getString("viablity_status").equals("success"))
+                            {
+                                Statues_vability= jsonObject1.getString("viablity_status");
+                                Crif_Generation();
+                            }else if(jsonObject1.getString("viablity_status").equals("error"))
+                            {
+                                Statues_vability= jsonObject1.getString("viablity_status");
+                                Crif_Generation();
+
+                               // progressDialog.dismiss();
+                            }
+                          //  progressDialog.dismiss();
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        // Log.e("Lead creation", String.valueOf(response));
+
+
+                    }
+                }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                //Log.d(TAG, error.getMessage());
+                VolleyLog.d("TAG", "Error: " + error.getMessage());
+                Toast.makeText(mCon, "Network error, try after some time",Toast.LENGTH_SHORT).show();
+                progressDialog.dismiss();
+
+            }
+        }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("content-type", "application/json");
+                return headers;
+            }
+        };
+
+        // AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
+        int socketTimeout = 0;
+        RetryPolicy policy = new DefaultRetryPolicy(socketTimeout,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
+
+        jsonObjReq.setRetryPolicy(policy);
+
+        AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
+    }
+
+
+    private void Crif_Generation() {
+
+        JSONObject J =new JSONObject();
+        try {
+            J.put("transaction_id", Pref.getTRANSACTIONID(getApplicationContext()));
+            J.put("user_id",Pref.getUSERID(getApplicationContext()));
+            J.put("relationship_type",Pref.getCoAPPAVAILABLE(getApplicationContext()));
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        progressDialog.show();
+        Log.e("Crif Generation", String.valueOf(J));
+        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, Urls.CRIF_Generation, J,
+                new Response.Listener<JSONObject>() {
+
+                    @Override
+                    public void onResponse(JSONObject object) {
+                        Log.e("Payment", String.valueOf(object));
+                        try {
+
+                            String Statues = object.getString("status");
+
+                            if (Statues.contains("success")) {
+
+                                Applicant_Status();
+                            }else
+                            {
+
+                                // co_applicant_.setVisibility(View.VISIBLE);
+                            }
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -270,6 +414,106 @@ public class PaymentActivity extends SimpleActivity implements CompoundButton.On
 
     }
 
+    public void Applicant_Status() {
+
+        // final String step_status11 = step_status1;
+        JSONObject jsonObject =new JSONObject();
+        JSONObject J= null;
+        try {
+            J =new JSONObject();
+            J.put(Params.user_id, Pref.getUSERID(getApplicationContext()));
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        progressDialog.show();
+        Log.e("Applicant Entry request", String.valueOf(J));
+
+        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, Urls.PARTNER_STATUES_IDs, J,
+                new Response.Listener<JSONObject>() {
+                    @SuppressLint("LongLogTag")
+                    @Override
+                    public void onResponse(JSONObject response) {
+
+                        Log.e("Applicant Entry", String.valueOf(response));
+                        JSONObject jsonObject1 = new JSONObject();
+
+                        try {
+                            String statues = response.getString("status");
+
+                            if(statues.contains("success"))
+                            {
+                                JSONObject jsonObject2 = response.getJSONObject("reponse");
+
+                                JSONArray jsonArray = jsonObject2.getJSONArray("emp_states");
+
+                                String user_id = jsonObject2.getString("user_id");
+                                Loan_amount = jsonObject2.getString("loan_amount");
+                                sub_categoryid =   jsonObject2.getString("sub_categoryid");
+                                transaction_id1 =  jsonObject2.getString("transaction_id");
+                                subtask_id =  jsonObject2.getString("subtask_id");
+                                loan_type_id =  jsonObject2.getString("loan_type_id");
+                                loan_type =  jsonObject2.getString("loan_type");
+                                payment =  jsonObject2.getString("payment");
+                                applicant_id1 =  "APP-"+user_id;
+
+
+                                // String statues2 = "3";
+                                Pref.putUSERID(context,user_id);
+                                String _Emp_staus_jsonArray = jsonArray.toString();
+
+                                Objs.ac.StartActivityPutExtra(context, Home.class,
+                                        Params.user_id,user_id,
+                                        Params.transaction_id,transaction_id1,
+                                        Params.applicant_id,applicant_id1,
+                                        Params.sub_taskid,subtask_id, Params.Applicant_status,_Emp_staus_jsonArray,
+                                        Params.loan_type_id,loan_type_id,Params.loan_type,loan_type);
+
+                              /*  if(payment.equals("error"))
+                                {
+                                    Intent intent = new Intent(Dashboard_Activity.this, Payment_Details_Activity.class);
+                                    startActivity(intent);
+                                    finish();
+                                }else
+                                {
+                                    Log.d("applicant_id1",loan_type);
+                                    Objs.ac.StartActivityPutExtra(mCon, Home.class,
+                                            Params.user_id,user_id,
+                                            Params.transaction_id,transaction_id1,
+                                            Params.applicant_id,applicant_id1,
+                                            Params.sub_taskid,subtask_id, Params.Applicant_status,_Emp_staus_jsonArray,
+                                            Params.loan_type_id,loan_type_id,Params.loan_type,loan_type);
+                                    finish();
+
+                                }*/
+
+
+                            }
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        progressDialog.dismiss();
+                    }
+                }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                progressDialog.dismiss();
+                Log.e("Applicant Entry request", String.valueOf(error));
+                Toast.makeText(context,error.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("content-type", "application/json");
+                return headers;
+            }
+        };
+        AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
+    }
 /*    public void onRadioButtonClicked(View view) {
         boolean checked = ((RadioButton) view).isChecked();
 
@@ -353,15 +597,15 @@ public class PaymentActivity extends SimpleActivity implements CompoundButton.On
         progressDialog.show();
         JSONObject J= null;
 
-       //  co_app = Pref.getCoAPPAVAILABLE(getApplicationContext());
+         co_app = Pref.getCoAPPAVAILABLE(getApplicationContext());
 
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+       /* SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
         co_app=prefs.getString("co_applicant","defaultStringIfNothingFound");
-        Log.i("TAG", "onCreate:CO_Employement_Type "+co_app);
+        Log.i("TAG", "onCreate:CO_Employement_Type "+co_app);*/
        // String co_app =  pref.getString(IS_CO_Applicant_Id, null);
        // b2b_user_id =  pref.getString(b2b_user_id1, null);
 
-        if(co_app.equals("2"))
+        if(co_app.equals("1"))
         {
             applicant_count = "1";
         }else {
@@ -372,7 +616,7 @@ public class PaymentActivity extends SimpleActivity implements CompoundButton.On
             J =new JSONObject();
 
          //   J.put("app_count","1");
-            J.put("app_count",applicant_count);
+            J.put("app_count",co_app);
             J.put("b2buser_id", Pref.getID(getApplicationContext()));
         } catch (JSONException e) {
             e.printStackTrace();
@@ -403,9 +647,6 @@ public class PaymentActivity extends SimpleActivity implements CompoundButton.On
                             {
 
                             }
-
-
-
 
                         } catch (JSONException e) {
                             e.printStackTrace();

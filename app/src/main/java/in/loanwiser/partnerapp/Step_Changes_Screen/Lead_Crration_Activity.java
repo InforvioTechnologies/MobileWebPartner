@@ -58,12 +58,14 @@ import adhoc.app.applibrary.Config.AppUtils.Urls;
 import adhoc.app.applibrary.Config.AppUtils.VolleySignleton.AppController;
 import dmax.dialog.SpotsDialog;
 import in.loanwiser.partnerapp.BankStamentUpload.Bank_Statement_Upload;
+import in.loanwiser.partnerapp.BankStamentUpload.Upload_Activity_Bank;
 import in.loanwiser.partnerapp.NumberTextWatcher;
 import in.loanwiser.partnerapp.PartnerActivitys.Applicant_Details_Activity;
 import in.loanwiser.partnerapp.PartnerActivitys.Dashboard_Activity;
 import in.loanwiser.partnerapp.Payment.Bank_Statement_Activity;
 import in.loanwiser.partnerapp.Payment.PaymentActivity;
 import in.loanwiser.partnerapp.Payment.PaymentDetails;
+import in.loanwiser.partnerapp.Payment.Payment_Sucess_Screen;
 import in.loanwiser.partnerapp.R;
 import in.loanwiser.partnerapp.SimpleActivity;
 
@@ -136,17 +138,18 @@ public class Lead_Crration_Activity extends SimpleActivity {
         fonts();
         makeJsonObjReq1();
         Click();
-        Loanwiser_Api();
+       // Loanwiser_Api();
 
 
-  /*lead_cr_step1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(Lead_Crration_Activity.this, Viability_Check_HL_new.class);
-                startActivity(intent);
-                finish();
-            }
-        });*/
+    /*  lead_cr_step1.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                    Intent intent = new Intent(Lead_Crration_Activity.this, Upload_Activity_Bank.class);
+                    startActivity(intent);
+                    finish();
+                }
+            });*/
 
        /* lead_cr_step1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -203,7 +206,7 @@ public class Lead_Crration_Activity extends SimpleActivity {
          mobile.setText("7");
          do_you_have_coApp_txt.setText("8");
          wt_mobile.setText("9");*/
-         type_of_empmnt.setVisibility(View.VISIBLE);
+         type_of_empmnt.setVisibility(View.GONE);
          co_applicant_ly.setVisibility(View.GONE);
          co_applicant_emp_type.setVisibility(View.GONE);
      }
@@ -322,12 +325,9 @@ public class Lead_Crration_Activity extends SimpleActivity {
             }
         });
 
-
         if (!dialog.isShowing()) {
             dialog.show();
         }
-
-
 
     }
 
@@ -412,14 +412,7 @@ public class Lead_Crration_Activity extends SimpleActivity {
 
                     }else
                     {
-                        if(Type_of_employement_ID.equals("0"))
-                        {
-                            Toast.makeText(context, "Please Select Employement Type", Toast.LENGTH_SHORT).show();
-
-                        }else
-                        {
                             validation_lead();
-                        }
                     }
                 }
             }
@@ -458,14 +451,9 @@ public class Lead_Crration_Activity extends SimpleActivity {
 
                         }else
                         {
-                            if(Type_of_employement_ID.equals("0"))
-                            {
-                                Toast.makeText(context, "Please Select Employement Type", Toast.LENGTH_SHORT).show();
 
-                            }else
-                            {
                                 validation_lead();
-                            }
+
                         }
                 }
 
@@ -490,7 +478,6 @@ public class Lead_Crration_Activity extends SimpleActivity {
         }
 
             validate_wats_App();
-
     }
 
     private void validate_wats_App()
@@ -556,7 +543,6 @@ public class Lead_Crration_Activity extends SimpleActivity {
 
                             Employement =object.getJSONArray("Employement");
                             is_coapplicant =object.getJSONArray("is_coapplicant");
-
                             is_whatsapp =object.getJSONArray("is_whatsapp");
                             Log.e("is_whatsapp",String.valueOf(is_whatsapp));
 
@@ -1265,7 +1251,7 @@ public class Lead_Crration_Activity extends SimpleActivity {
                                 {
                                     if(App.equals("20"))
                                     {
-                                        Intent intent = new Intent(Lead_Crration_Activity.this, Viability_Check_BL.class);
+                                        Intent intent = new Intent(Lead_Crration_Activity.this, Viability_Screen_revamp_Pl_BL.class);
                                         intent.putExtra("user_id", user_id);
                                         intent.putExtra("transaction_id", transaction_id);
                                         startActivity(intent);
@@ -1274,14 +1260,14 @@ public class Lead_Crration_Activity extends SimpleActivity {
                                     } else if(App.equals("21"))
                                     {
                                         Toast.makeText(context,"Lead Created Successfully",Toast.LENGTH_SHORT).show();
-                                        Intent intent = new Intent(Lead_Crration_Activity.this, Viability_Check_PL.class);
+                                        Intent intent = new Intent(Lead_Crration_Activity.this, Viability_Screen_revamp_Pl_BL.class);
                                         intent.putExtra("user_id", user_id);
                                         intent.putExtra("transaction_id", transaction_id);
                                         startActivity(intent);
                                         finish();
                                     } else {
 
-                                        Intent intent = new Intent(Lead_Crration_Activity.this, Viability_Check_HL_new.class);
+                                        Intent intent = new Intent(Lead_Crration_Activity.this, Viability_Screen_revamp.class);
                                         startActivity(intent);
                                         finish();
                                     }
@@ -1397,7 +1383,7 @@ public class Lead_Crration_Activity extends SimpleActivity {
     }
 
 
-    private void Loanwiser_Api( ) {
+   /* private void Loanwiser_Api( ) {
 
         JSONObject J= null;
 
@@ -1459,7 +1445,7 @@ public class Lead_Crration_Activity extends SimpleActivity {
 
         AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
 
-    }
+    }*/
 
     @Override
     public void onBackPressed() {
@@ -1467,6 +1453,7 @@ public class Lead_Crration_Activity extends SimpleActivity {
         Objs.ac.StartActivity(mCon, Applicant_Details_Activity.class);
         finish();
         super.onBackPressed();
+
     }
 
 }

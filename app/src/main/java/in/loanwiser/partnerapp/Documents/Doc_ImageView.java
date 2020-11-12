@@ -46,7 +46,8 @@ public class Doc_ImageView extends SimpleActivity {
         v_Image = (ImageView) findViewById(R.id.image_Product);
         progressBar = (ProgressBar) findViewById(R.id.progressBarMaterial);
         type =  Objs.a.getBundle(this, Params.type);
-        document =  Objs.a.getBundle(this, Params.document);
+       document =  Objs.a.getBundle(this, Params.document);
+      //  document =  "https://callcenter.loanwiser.in/viewdocuments.php?imp=87c2c2771fd18671e386b8a02f145102&id=761404";
         Log.e("pfd",document);
         hash =  Objs.a.getBundle(this, Params.transaction_id);
         if(type.equals("pdf")){

@@ -41,6 +41,7 @@ public class Urls {
     public static String LOAN_CATAGORY  = Urls + "loanlatlist";
     public static String LOAN_TYPE_POST11  = Urls + "getloantypelist1";
     public static String GET_DROPDOWN_LIST  = Urls + "get_dropdown";
+    public static String get_selfemployvocation  = Urls + "get_selfemployvocation";
     public static String CITY_TYPE_POST  = Urls + "getDistrict";
     public static String GET_STATE_POST  = Urls + "getState";
     public static String GET_FIELDS_POST  = Urls + "GetFields";
@@ -90,7 +91,11 @@ public class Urls {
     public static String Lead_Creation = Urls_step + "Lead_Creation";
     public static String VIABILITY_CHECK = Urls_step + "viability_check";
     public static String VIABILITY_CHECK_applicant = Urls_step + "viability_applicant";
+    public static String VIABILITY_CHECK_applicant1 = Urls_step + "viability_fields_applicant";
     public static String VIABILITY_CHECK_co_applicant = Urls_step + "viability_coapplicant";
+    public static String VIABILITY_CHECK_co_applicant1 = Urls_step + "viability_fields_coapplicant";
+
+    public static String view_crifscore = Urls_step + "view_crifscore";
    // public static String VIABILITY_CHECK = Urls_step + "insert_family";
     public static String Eligibility_Check = Urls_step + "eligibility_check";
     public static String Eligibility_Check_applicant = Urls_step + "eligibility_applicant";
@@ -104,6 +109,7 @@ public class Urls {
     public static String UPDATED_ENABLE = Urls_step + "update_enable";
     public static String PARTNER_STATUES = Urls_step + "part_status";
     public static String PARTNER_STATUES_IDs = Urls_step + "appid_view";
+    public static String update_bankstatementstatus = Urls_step + "update_bankstatementstatus";
     public static String CAMERA_IMAGE_Upload = Urls_step + "multi_doc";
     public static String PDF_Document_Upload = Urls_step + "multi_docpdf";
     public static String DOC_IMAGE_VIEW = Urls_step + "docu_view";
@@ -119,11 +125,12 @@ public class Urls {
     public static String CRIF_DATA_Populate = Urls_step + "crifdata_view";
     public static String FIREBASE_TOKEN = Urls_step + "update_b2btoken";
     public static String UPDATE_PAYMENT_STATUES = Urls_step + "update_paymentstatus";
+    public static String paymentlink_check = Urls_step + "paymentlink_check";
 
 
     public static String CRIF_SCORE_CHECK = Urls_step + "get_crif_score";
     public static String CRIF_Gerneration = Urls_step + "crif_reportgen";
-    public static String step2_complete  = Urls_step + "step2_complete ";
+    public static String step2_complete  = Urls_step + "step2_complete";
 
     public static String SUBMIT_TO_LOANWIER = Urls_step + "submit_loanwiser";
     public static String viabilitysave = Urls_step + "viabilitysave";

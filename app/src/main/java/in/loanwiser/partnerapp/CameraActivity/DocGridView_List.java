@@ -356,21 +356,28 @@ public class DocGridView_List extends SimpleActivity {
             e.printStackTrace();
         }
         progressDialog.show();
+
+        Log.e("delete",J.toString());
         JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, Urls.DELETE_IMG_POST, J,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
                         progressDialog.dismiss();
+                        Log.e("delete",response.toString());
                         try {
                             if(response.getBoolean(Params.status)){
 
-                                Objs.a.showToast(DocGridView_List.this, "Succussfully deleted the Document...");
+                                Toast.makeText(mCon,"Succussfully deleted the Document...",Toast.LENGTH_SHORT).show();
+
+                              //  Objs.a.showToast(DocGridView_List.this, "Succussfully deleted the Document...");
                                 Objs.ac.StartActivityPutExtra(DocGridView_List.this, Document_Details.class,
                                         Params.user_type,user_type);
                                 finish();
                                 /// Document_Details(user_type,class_id,transaction_id,doc_id);
                             }else{
-                                Objs.a.showToast(mCon, "Something went wrong ");
+                              ///  Objs.a.showToast(mCon, "Something went wrong ");
+                                Toast.makeText(mCon,"Something went wrong",Toast.LENGTH_SHORT).show();
+
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -379,7 +386,8 @@ public class DocGridView_List extends SimpleActivity {
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Objs.a.showToast(mCon, error.getMessage());
+             //   Objs.a.showToast(mCon, error.getMessage());
+                Log.e("delete",error.toString());
                 progressDialog.dismiss();
             }
         }) {

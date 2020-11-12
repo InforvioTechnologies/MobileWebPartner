@@ -54,6 +54,7 @@ import in.loanwiser.partnerapp.BankStamentUpload.Upload_Activity_Bank;
 import in.loanwiser.partnerapp.Documents.Document_Details;
 import in.loanwiser.partnerapp.PDF_Dounloader.PermissionUtils;
 import in.loanwiser.partnerapp.PartnerActivitys.Dashboard_Activity;
+import in.loanwiser.partnerapp.PartnerActivitys.Doc_ImageView_Viability;
 import in.loanwiser.partnerapp.PartnerActivitys.Home;
 import in.loanwiser.partnerapp.PartnerActivitys.SimpleActivity;
 import in.loanwiser.partnerapp.R;
@@ -493,7 +494,9 @@ public class CRIF_Report_Activity_PDF_View extends SimpleActivity {
 
                             String viability_report_URL = J.getString("url");
 
-                            if (permissionUtils.checkPermission(CRIF_Report_Activity_PDF_View.this, STORAGE_PERMISSION_REQUEST_CODE, view)) {
+                            Objs.ac.StartActivityPutExtra(CRIF_Report_Activity_PDF_View.this, Doc_ImageView_Viability.class,
+                                    Params.document,viability_report_URL);
+                           /* if (permissionUtils.checkPermission(CRIF_Report_Activity_PDF_View.this, STORAGE_PERMISSION_REQUEST_CODE, view)) {
                                 if (viability_report_URL.length() > 0) {
                                     try {
                                         startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(viability_report_URL)));
@@ -502,7 +505,8 @@ public class CRIF_Report_Activity_PDF_View extends SimpleActivity {
                                     }
                                 }
 
-                            }
+                            }*/
+
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }

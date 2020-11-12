@@ -305,7 +305,7 @@ public class Viability_check_HL extends SimpleActivity {
 
         UISCREEN();
         fonts();
-      Click();
+        Click();
         makeJsonObjReq1();
 
 /*
@@ -854,6 +854,7 @@ public class Viability_check_HL extends SimpleActivity {
 
                             Salry_method_Spinner(Salary_method_ar);
                            Salry_Proof(Salary_proof_ar);
+
                             Residence_Array(Residence_ownership_ar);
                             Employee_ID_Array(employee_id_ar);
                             HAVE_PAN_Card(have_pan_ar);

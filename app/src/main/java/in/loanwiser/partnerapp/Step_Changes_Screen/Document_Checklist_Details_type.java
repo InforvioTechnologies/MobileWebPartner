@@ -292,6 +292,7 @@ public class Document_Checklist_Details_type extends SimpleActivity {
         } catch (JSONException e) {
             e.printStackTrace();
         }
+        Log.e("Documnet_upload_Status", String.valueOf(J));
         progressDialog.show();
         JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, Urls.UPDATE_STATUS_DOC, J,
                 new Response.Listener<JSONObject>() {

@@ -209,7 +209,6 @@ public class ActivityFragment extends Fragment implements NavigationView.OnNavig
         }
 
 
-
         Get_Allocation_List(view);
         Health_Assement_List(view);
         for(final String name : url_maps.keySet()){

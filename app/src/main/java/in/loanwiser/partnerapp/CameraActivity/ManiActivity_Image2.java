@@ -92,7 +92,7 @@ public class ManiActivity_Image2 extends SimpleActivity implements SingleUploadB
     private int PICK_PDF_REQUEST = 1;
     private static final int PERMISSION_REQUEST_CODE = 200;
     private Boolean isFabOpen = false;
-//    private FloatingActionButton fab,fab1,fab2;
+//  private FloatingActionButton fab,fab1,fab2;
     private Animation fab_open,fab_close,rotate_forward,rotate_backward;
     private Uri filePath;
     private final SingleUploadBroadcastReceiver uploadReceiver =
@@ -173,7 +173,6 @@ public class ManiActivity_Image2 extends SimpleActivity implements SingleUploadB
         1
         6555*/
 
-
         Checking();
         initImageLoader();
         init();
@@ -181,6 +180,7 @@ public class ManiActivity_Image2 extends SimpleActivity implements SingleUploadB
         StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
         StrictMode.setVmPolicy(builder.build());
         builder.detectFileUriExposure();
+
     }
     public void Checking(){
         if(checkPermission()== true) {
@@ -190,8 +190,6 @@ public class ManiActivity_Image2 extends SimpleActivity implements SingleUploadB
     }
 
     private boolean checkPermission() {
-
-
 
         // int result = ContextCompat.checkSelfPermission(getApplicationContext(), ACCESS_FINE_LOCATION);
         int result1 = ContextCompat.checkSelfPermission(getApplicationContext(), CAMERA);
@@ -794,7 +792,7 @@ public class ManiActivity_Image2 extends SimpleActivity implements SingleUploadB
         Log.d("Pdf file333333", String.valueOf(filePath));
         //getting the actual path of the pdf
         String path = FilePath.getPath(this, filePath);
-        Log.d("PDF File", String.valueOf(path));
+        Log.e("PDF File", String.valueOf(path));
        // File sourceFile = new File(path);
 
         if (path == null) {

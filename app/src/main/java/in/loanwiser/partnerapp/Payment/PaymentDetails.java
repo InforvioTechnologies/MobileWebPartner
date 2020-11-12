@@ -153,7 +153,7 @@ public class PaymentDetails extends SimpleActivity {
             @Override
             public void onClick(View v) {
                 Pay_Credit_Coins();
-               /* Intent intent = new Intent(PaymentDetails.this, Payment_Details_Activity.class);
+              /*  Intent intent = new Intent(PaymentDetails.this, Payment_Sucess_Screen.class);
                 startActivity(intent);*/
             }
                /* linearLayout1.setVisibility(View.GONE);
@@ -199,7 +199,7 @@ public class PaymentDetails extends SimpleActivity {
         back_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-              //  Pay_Credit_Coins();
+
                 Intent intent = new Intent(PaymentDetails.this, PaymentActivity.class);
                 startActivity(intent);
             }
@@ -246,7 +246,7 @@ public class PaymentDetails extends SimpleActivity {
         back_button_b.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               // Pay_Credit_Coins();
+
                 Intent intent = new Intent(PaymentDetails.this, PaymentActivity.class);
                 startActivity(intent);
             }
@@ -293,7 +293,7 @@ public class PaymentDetails extends SimpleActivity {
         cus_back_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Pay_Credit_Coins();
+
                 Intent intent = new Intent(PaymentDetails.this, PaymentActivity.class);
                 startActivity(intent);
             }
@@ -343,7 +343,7 @@ public class PaymentDetails extends SimpleActivity {
             public void onClick(View v) {
 
                 Do_payment_method();
-               /* Intent intent = new Intent(PaymentDetails.this, Payment_Details_Activity.class);
+               /* Intent intent = new Intent(PaymentDetails.this, Payment_Sucess_Screen.class);
                 startActivity(intent);*/
             }
                /* linearLayout1.setVisibility(View.GONE);
@@ -917,14 +917,16 @@ public class PaymentDetails extends SimpleActivity {
         progressDialog.show();
         JSONObject J =new JSONObject();
         try {
+
             J.put("transaction_id",Pref.getTRANSACTIONID(getApplicationContext()));
+            J.put("flag","1");
+
         } catch (JSONException e) {
             e.printStackTrace();
         }
         Log.e("payment_st_request",J.toString());
         JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, Urls.UPDATE_PAYMENT_STATUES, J,
                 new Response.Listener<JSONObject>() {
-
                     @Override
                     public void onResponse(JSONObject object) {
                         Log.e("payment_st_request",object.toString());

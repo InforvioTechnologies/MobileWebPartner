@@ -786,8 +786,6 @@
                             android:text="Residence Details"
                             android:layout_height="wrap_content" />
                     </LinearLayout>
-
-
                     <LinearLayout
                         android:orientation="vertical"
                         android:layout_width="match_parent"

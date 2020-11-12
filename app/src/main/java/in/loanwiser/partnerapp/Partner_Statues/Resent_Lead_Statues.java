@@ -117,7 +117,7 @@ public class Resent_Lead_Statues extends RecyclerView.Adapter<Resent_Lead_Statue
       holder.cardView.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View view) {
-
+               final String applicant_id  = items.get(position).getUser_ID();
 
                Applicant_Status(applicant_id);
 

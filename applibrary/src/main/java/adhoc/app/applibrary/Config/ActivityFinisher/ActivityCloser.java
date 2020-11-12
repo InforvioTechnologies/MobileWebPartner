@@ -133,7 +133,6 @@ public class ActivityCloser {
             Objs.a.setErrMsg(activity,e.getMessage());
         }
 
-
     }
     public  void StartActivityPutExtra(Context activity,Class cls,String ExtraKey1,String ExtraMsg1){
         try {

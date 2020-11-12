@@ -94,7 +94,7 @@ public class LeadListAdapter_Dashboard extends RecyclerView.Adapter<LeadListAdap
 
         }
 
-        public void bindPost(Lead_item post) {
+        public void bindPost(final Lead_item post) {
 
          /*   type.setText(a.capitalize(post.getid()+" "+ "( "+post.getusername()+" "+ post.getmobileno()+" )"));
             loantype.setText(post.getloan_typename()); */
@@ -152,11 +152,12 @@ public class LeadListAdapter_Dashboard extends RecyclerView.Adapter<LeadListAdap
                 @Override
                 public void onClick(View view) {
 
-
+                    id1 = post.getid1();
                         if(step_status.contains("Rejected"))
                         {
                             Log.e("the lead List","intiated ");
                             Objs.a.showToast(context, "This Lead is Rejected");
+
                             if (context instanceof Dashboard_Activity) {
                                 ((Dashboard_Activity)context).Applicant_Status(id1,step_status);
                             }

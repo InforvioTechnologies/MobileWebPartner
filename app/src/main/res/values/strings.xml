@@ -237,6 +237,7 @@
 
     <string name="des">Designation in Company</string>
     <string name="cmp_type">Company Type</string>
+    <string name="cmp_name">Company Name</string>
     <string name="emp_type">Type of Employee</string>
     <string name="emp_count">No of Employee in company</string>
     <string name="salary_credit">Salary Credit Method</string>
@@ -488,7 +489,9 @@
     <string name="business_proof">Business Income Proof</string>
     <string name="vehicle_type">Vehicle Type(MultiSelect)</string>
     <string name="nov">Number of vehicle</string>
-    <string name="nyw">Number of Months in Business</string>
+    <string name="nyw">Number of Months in Business(click and select)</string>
+    <string name="property_price1">Property Price</string>
+    <string name="cost_estimation">Cost Estimate</string>
     <string name="actual_business">Actual Business</string>
     <string name="avg">Average monthly income</string>
     <string name="bus_proof">Business Vintage Proof(MultiSelect)</string>
@@ -540,8 +543,9 @@
     <string name="is_mobile_">Is mobile Number Same as WhatsApp Number</string>
     <string name="saving_bank_acc">Have saving Bank Account</string>
     <string name="salary_proof">Salary Proof</string>
-    <string name="exp_current_cmp">Experience  in Current Company(months)</string>
-    <string name="total_exp_in_cmp">Total Work Experience(months)</string>
+
+    <string name="exp_current_cmp">Experience in Current Company(click and select)</string>
+    <string name="total_exp_in_cmp">Total Work Experience(click and select)</string>
     <string name="cmp_pin">Company Pincode</string>
     <string name="other_family_member">other Earning Members in family?</string>
     <string name="family_member_name">Family Member Name</string>
@@ -867,6 +871,7 @@
     <string name="basic_lead">Basic Lead Details</string>
     <string name="basic_leaddesc">You will get 50% of your Total Partner Benefit</string>
     <string name="viabilitycheck">Viability Check</string>
+    <string name="viabilitycheck1">Viability Check Report</string>
     <string name="via_descone">You will get 60% of your Total Partner Benefit</string>
     <string name="instant_credit">Instant Credit Assessment</string>
     <string name="instant_desc">You will get 80% of your Total Partner Benefit</string>
@@ -915,5 +920,48 @@
     <string name="latestlead">Latest Lead Updates</string>
     <string name="finance_ins">Financial Health Assessment Services</string>
     <string name="doc_check">Document Checklist</string>
+
+
+    <string name="pandetails">PAN Details</string>
+    <string name="pancard_num">Pancard Number  :</string>
+    <string name="dateofbith">Date of Birth  :</string>
+    <string name="fathername">Father\'s Name  :</string>
+    <string name="martical_stat">Marital Status  :</string>
+    <string name="monthly_sal">Monthly Net Salary  :</string>
+    <string name="residence_det">"Residence Details  "</string>
+    <string name="curent_respincode">Current Residence Pincode  :</string>
+    <string name="curr_resarea">Current Residence Area  :</string>
+    <string name="curr_restype">Current Residence Type  :</string>
+    <string name="employ_detail">Employement Details</string>
+    <string name="salarycredit_method">Salary Credit Method   :</string>
+
+    <string name="company_type">Company Type  :</string>
+    <string name="company_name">Company Name  :</string>
+    <string name="designation">Designation  :</string>
+    <string name="company_pincode">Company Pincode  :</string>
+    <string name="company_area">Company Area  :</string>
+    <string name="current_exp">Current company Experience  :</string>
+    <string name="tot_wrkexp">Total Work Experience  :</string>
+    <string name="othericome_source">Other income Sources  :</string>
+    <string name="othericome_source1">Other income Amount  :</string>
+    <string name="vocationtype">Vocation Type  :</string>
+    <string name="avarage_monthproof">Avarage Monthly Income  :</string>
+    <string name="num_business">Number of Month in Business</string>
+    <string name="business_vintageproof">Business vintage Proof  :</string>
+    <string name="business_income">Business Income proof  :</string>
+    <string name="office_shop">Office Shop Setup  :</string>
+    <string name="office_restype">Office Residence Type  :</string>
+    <string name="office_shoppin">Office Shop Pincode  :</string>
+    <string name="type_selfemp">Types of Self employment  :</string>
+    <string name="property_iden">Property Identified  :</string>
+    <string name="property_title1">Property Title  :</string>
+    <string name="property_pin1">Property Pincode   :</string>
+    <string name="property_type12">Property Type  :</string>
+    <string name="property_price12">Property Price   :</string>
+    <string name="prop_det">Property Details</string>
+    <string name="plot_value1">Plot Value  :</string>
+    <string name="cost_estimate1">Cost Estimate   :</string>
+    <string name="monthly_netsal">Monthly Net Salary  :</string>
+    <string name="salary_proof1">Salary Proof  :</string>
 
 </resources>

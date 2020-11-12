@@ -138,11 +138,15 @@ dependencies {
 
     implementation 'com.squareup.picasso:picasso:2.3.2'
     implementation 'com.github.bumptech.glide:glide:3.7.0'
+    implementation('com.thomashaertel:multispinner:0.1.1@aar') {
+    }
 
     debugCompile('com.github.ajitsing:sherlock:1.0.4@aar') {
         transitive = true
     }
+
     releaseCompile('com.github.ajitsing:sherlock-no-op:1.0.4@aar')
+
 
 }
 apply plugin: 'com.google.gms.google-services'

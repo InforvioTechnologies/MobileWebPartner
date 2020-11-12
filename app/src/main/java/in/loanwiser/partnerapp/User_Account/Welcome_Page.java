@@ -29,10 +29,16 @@ import com.google.firebase.iid.InstanceIdResult;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
+
+
 import adhoc.app.applibrary.Config.AppUtils.Objs;
 import in.loanwiser.partnerapp.Push_Notification.MainActivity;
 import in.loanwiser.partnerapp.R;
 import in.loanwiser.partnerapp.app.Config;
+
+
+
+
 
 public class Welcome_Page extends AppCompatActivity implements Animation.AnimationListener {
 
@@ -76,6 +82,9 @@ public class Welcome_Page extends AppCompatActivity implements Animation.Animati
         Toast.makeText(getApplicationContext(),appSignatures,Toast.LENGTH_LONG).show();*/
         displayFirebaseRegId();
     }
+
+
+
 
     private void initCode() {
         initUI();
