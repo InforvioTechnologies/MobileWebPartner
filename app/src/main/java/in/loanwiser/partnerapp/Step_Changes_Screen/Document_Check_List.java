@@ -346,6 +346,8 @@ public class Document_Check_List extends SimpleActivity implements CompoundButto
                             key_value=response_doc.getJSONArray("key_arr");
                             Log.e("KEY_ARR_VALUE", key_value.toString());
                             doc_ar=response_doc.getJSONObject("document_arr");
+
+                            Log.e("the doc array",doc_ar.toString());
                             //below few lines array key name
                             Iterator iterator = doc_ar.keys();
                             while (iterator.hasNext()) {
@@ -387,7 +389,7 @@ public class Document_Check_List extends SimpleActivity implements CompoundButto
 
             @Override
             public void onErrorResponse(VolleyError error) {
-                VolleyLog.d("TAG", "Error: " + error.getMessage());
+                Log.e("TAG", "Error: " + error.getMessage());
                 Toast.makeText(mCon, "Network error, try after some time",Toast.LENGTH_SHORT).show();
                 progressDialog.dismiss();
             }

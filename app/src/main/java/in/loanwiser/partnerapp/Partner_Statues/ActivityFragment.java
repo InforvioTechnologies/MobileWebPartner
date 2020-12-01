@@ -310,6 +310,7 @@ public class ActivityFragment extends Fragment implements NavigationView.OnNavig
                                     recycler_view.setAdapter(adapter);
 
                                 }else {
+                                    firstlay.setVisibility(View.GONE);
                                     Objs.a.ShowHideNoItems(getActivity(),true);
                                 }
                             }

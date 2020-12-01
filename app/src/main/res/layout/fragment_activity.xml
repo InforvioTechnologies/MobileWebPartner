@@ -79,6 +79,8 @@
                             android:background="@drawable/capsul_button_rect_out"/>
                     </LinearLayout>
                 </LinearLayout>
+
+                
                 <LinearLayout
                     android:id="@+id/firstlay"
                     android:layout_gravity="center"
@@ -89,7 +91,7 @@
                         android:id="@+id/recent_leads"
                         android:layout_marginTop="20dp"
                         android:layout_marginLeft="10dp"
-                        android:text="Latest Lead Updates"
+                        android:text="Most Active Leads"
                         android:textColor="#002B5D"
                         android:textSize="16dp"
                         android:layout_width="match_parent"

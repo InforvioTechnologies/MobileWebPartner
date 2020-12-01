@@ -19,13 +19,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/prop_det"
-                    android:textStyle="bold"
-                    android:layout_margin="10dp"
-                    android:textColor="#00bfff" />
+
 
 
                 <androidx.cardview.widget.CardView
@@ -40,7 +34,18 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
                         android:orientation="vertical">
+
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/securelap_prophead"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/prop_det"
+                            android:textStyle="bold"
+                            android:layout_margin="10dp"
+                            android:textColor="#00bfff" />
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -76,6 +81,7 @@
                                 android:layout_weight="1">
 
                                 <androidx.appcompat.widget.AppCompatTextView
+                                    android:id="@+id/securelap_proptitle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="match_parent"
                                     android:text="@string/property_title1"
@@ -91,7 +97,9 @@
                                         android:id="@+id/lap_proptitle"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:textSize="16sp" />
+                                        android:textSize="16sp"
+                                        android:textStyle="bold"
+                                        android:textColor="@color/text_blue"/>
 
                                 </LinearLayout>
 
@@ -113,6 +121,7 @@
                                 android:layout_weight="1">
 
                                 <androidx.appcompat.widget.AppCompatTextView
+                                    android:id="@+id/securelap_proppincode"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="@string/property_pin1"
@@ -129,7 +138,9 @@
                                         android:id="@+id/lap_proppincode"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:textSize="16sp" />
+                                        android:textSize="16sp"
+                                        android:textColor="@color/text_blue"
+                                        android:textStyle="bold"/>
 
                                 </LinearLayout>
 
@@ -151,6 +162,7 @@
                                 android:layout_weight="1">
 
                                 <androidx.appcompat.widget.AppCompatTextView
+                                    android:id="@+id/securelapproptype"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="@string/property_type12"
@@ -167,7 +179,9 @@
                                         android:id="@+id/lapprop_type"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:textSize="16sp" />
+                                        android:textSize="16sp"
+                                        android:textStyle="bold"
+                                        android:textColor="@color/text_blue"/>
 
                                 </LinearLayout>
 
@@ -188,6 +202,7 @@
                                 android:layout_weight="1">
 
                                 <androidx.appcompat.widget.AppCompatTextView
+                                    android:id="@+id/securelap_price"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="@string/property_price12"
@@ -204,7 +219,9 @@
                                         android:id="@+id/lapprop_price"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:textSize="16sp" />
+                                        android:textSize="16sp"
+                                        android:textStyle="bold"
+                                        android:textColor="@color/text_blue"/>
 
                                 </LinearLayout>
 

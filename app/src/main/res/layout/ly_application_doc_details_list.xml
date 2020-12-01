@@ -36,6 +36,7 @@
                     android:layout_height="match_parent"
                     android:orientation="horizontal">
                     <LinearLayout
+                        android:visibility="gone"
                         android:padding="10dp"
                         android:layout_width="50dp"
                         android:layout_gravity="center"
@@ -83,8 +84,8 @@
                                 android:layout_height="match_parent">
 
                                 <ImageView
-                                    android:visibility="gone"
-                                    android:src="@drawable/notdon"
+
+                                    android:src="@drawable/ic_grey_tick"
                                     android:id="@+id/uploaded_yes"
                                     android:gravity="center"
                                     android:layout_width="25dp"
@@ -153,7 +154,7 @@
                                         android:layout_gravity="center"
                                         android:layout_width="25dp"
                                         android:layout_height="25dp"
-                                        android:src="@drawable/ic_right_done" />
+                                        android:src="@drawable/ic_green_tick" />
                                 </LinearLayout>
 
                             </RelativeLayout>

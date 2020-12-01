@@ -272,8 +272,6 @@ public class DashBoard_new extends AppCompatActivity  implements NavigationView.
             startActivity(intent);
 
         } else if (id == R.id.nav_payout) {
-            
-
 
         }else if (id == R.id.nav_logout) {
             ExitAlert(DashBoard_new.this);
@@ -289,7 +287,7 @@ public class DashBoard_new extends AppCompatActivity  implements NavigationView.
             //Pay_Out_Screen
         }else if (id == R.id.pay_structure) {
 
-            String viability_report_URL1 = "http://callcenter.propwiser.com/includes/DETAILED-PAYOUT-STRUCTURE.pdf";
+            String viability_report_URL1 = "https://callcenter.loanwiser.in/includes/DETAILED-PAYOUT-STRUCTURE.pdf";
 
             View view = null;
             if (permissionUtils.checkPermission(DashBoard_new.this, STORAGE_PERMISSION_REQUEST_CODE,  view)) {
@@ -644,6 +642,7 @@ public class DashBoard_new extends AppCompatActivity  implements NavigationView.
                 x, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
 
         AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
-
     }
 }
+
+

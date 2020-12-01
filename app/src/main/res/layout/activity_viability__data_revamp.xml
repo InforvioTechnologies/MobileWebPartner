@@ -87,14 +87,7 @@
                 android:layout_margin="10dp"
                 android:orientation="vertical">
 
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/pandetails"
-                    android:textColor="#00bfff"
-                    android:textStyle="bold"
-                    android:textSize="16sp"
-                    />
+
             </LinearLayout>
 
             <androidx.cardview.widget.CardView
@@ -108,7 +101,18 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
                     android:orientation="vertical">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/pandetailshead"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/pandetails"
+                        android:textColor="#00bfff"
+                        android:textStyle="bold"
+                        android:textSize="16sp"
+                        android:layout_margin="10dp" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -119,11 +123,11 @@
                         android:layout_weight="1">
 
                         <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/pancardnumtxt"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/pancard_num"
-                            android:textSize="16sp"
-                            />
+                            android:textSize="16sp" />
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -135,6 +139,8 @@
                                 android:id="@+id/pancardtxt"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:textColor="@color/text_blue"
+                                android:textStyle="bold"
                                 android:textSize="16sp" />
 
                         </LinearLayout>
@@ -155,6 +161,7 @@
                             android:layout_weight="1">
 
                             <androidx.appcompat.widget.AppCompatTextView
+                                android:id="@+id/dateofborthhead"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="@string/dateofbith"
@@ -171,7 +178,10 @@
                                     android:id="@+id/dateofbithtxt"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:textSize="16sp" />
+                                    android:textSize="16sp"
+                                    android:textColor="@color/text_blue"
+                                    android:textStyle="bold"
+                                 />
 
                             </LinearLayout>
 
@@ -192,11 +202,11 @@
                             android:layout_weight="1">
 
                             <androidx.appcompat.widget.AppCompatTextView
+                                android:id="@+id/fathernametxthead"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="@string/fathername"
-                                android:textSize="16sp"
-                                />
+                                android:textSize="16sp" />
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -208,7 +218,9 @@
                                     android:id="@+id/fathernametxt"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:textSize="16sp" />
+                                    android:textSize="16sp"
+                                    android:textStyle="bold"
+                                    android:textColor="@color/text_blue"/>
 
                             </LinearLayout>
 
@@ -219,7 +231,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
-                        android:layout_marginBottom="5dp">
+                        >
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -230,6 +242,7 @@
                             android:layout_weight="1">
 
                             <androidx.appcompat.widget.AppCompatTextView
+                                android:id="@+id/maritical_statushead"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="@string/martical_stat"
@@ -246,7 +259,9 @@
                                     android:id="@+id/maritaltxt"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:textSize="16sp" />
+                                    android:textSize="16sp"
+                                    android:textStyle="bold"
+                                    android:textColor="@color/text_blue"/>
 
                             </LinearLayout>
 

@@ -11,26 +11,63 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
         <androidx.appcompat.widget.AppCompatTextView
-
-            android:id="@+id/choose_one"
-
-            style="@style/SmallText_Dashboard"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
-            android:layout_gravity="center"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="20dp"
+            android:id="@+id/prop_name"
+            style="@style/SmallText"
+            android:textSize="14dp"
+            android:layout_gravity="left"
+            android:textColor="@color/colorPrimary"
             android:text="@string/choose_one"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"/>
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_marginLeft="10dp"
+            android:id="@+id/prop_name_matatory"
+            android:layout_marginTop="5dp"
+            style="@style/SmallText"
+            android:textSize="14dp"
+            android:layout_gravity="left"
+            android:textColor="@color/colorPrimary"
+            android:text="@string/choose_one"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_marginLeft="10dp"
+            android:id="@+id/upload_any_one"
+            android:layout_marginTop="5dp"
+            android:layout_gravity="left"
+            style="@style/SmallText"
+            android:textSize="14dp"
+            android:textColor="@color/colorPrimary"
+            android:text="@string/choose_one"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
 
-        </androidx.appcompat.widget.AppCompatTextView>
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:padding="4dp"
             android:orientation="vertical">
 
-
             <include layout="@layout/ly_swipe_recyclerview"/>
+        </LinearLayout>
+        <LinearLayout
+
+            android:layout_gravity="center"
+            android:gravity="bottom"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:text="Next"
+                android:id="@+id/submit_update_status1"
+                android:textColor="@color/white"
+                android:background="@drawable/capsul_button8"
+                android:layout_height="wrap_content"/>
         </LinearLayout>
 
 

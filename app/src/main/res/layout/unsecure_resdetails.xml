@@ -16,13 +16,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/residence_det"
-                    android:textStyle="bold"
-                    android:layout_margin="10dp"
-                    android:textColor="#00bfff" />
+
                 <androidx.cardview.widget.CardView
                     android:id="@+id/residence_cardlay"
                     android:layout_width="match_parent"
@@ -35,6 +29,16 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/residence_detailshead"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/residence_det"
+                            android:textStyle="bold"
+                            android:textSize="16sp"
+                            android:layout_margin="10dp"
+                            android:textColor="#00bfff" />
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -43,6 +47,7 @@
                             android:layout_marginLeft="10dp"
                             android:layout_weight="1">
                             <androidx.appcompat.widget.AppCompatTextView
+                                android:id="@+id/curreshead"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="@string/curent_respincode"
@@ -58,6 +63,8 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:textSize="16sp"
+                                    android:textColor="@color/text_blue"
+                                    android:textStyle="bold"
                                     tools:ignore="DuplicateIds" />
                             </LinearLayout>
                         </LinearLayout>
@@ -73,6 +80,7 @@
                                 android:layout_marginLeft="10dp"
                                 android:layout_weight="1">
                                 <androidx.appcompat.widget.AppCompatTextView
+                                    android:id="@+id/curresareahead"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="@string/curr_resarea"
@@ -87,7 +95,9 @@
                                         android:id="@+id/unsecure_resarea"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:textSize="16sp" />
+                                        android:textSize="16sp"
+                                        android:textStyle="bold"
+                                        android:textColor="@color/text_blue"/>
                                 </LinearLayout>
                             </LinearLayout>
                         </LinearLayout>
@@ -104,6 +114,7 @@
                                 android:layout_marginLeft="10dp"
                                 android:layout_weight="1">
                                 <androidx.appcompat.widget.AppCompatTextView
+                                    android:id="@+id/restypehead"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="@string/curr_restype"
@@ -118,7 +129,9 @@
                                         android:id="@+id/unsecure_restype"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:textSize="16sp" />
+                                        android:textSize="16sp"
+                                        android:textColor="@color/text_blue"
+                                        android:textStyle="bold"/>
                                 </LinearLayout>
                             </LinearLayout>
                         </LinearLayout>

@@ -62,7 +62,7 @@ public class Applicant_Doc_Details extends SimpleActivity {
         setContentView(R.layout.activity_simple);
         Objs.a.setStubId(this, R.layout.activity_applicant__doc__details);
         applicant_name =  Objs.a.getBundle(this, Params.applicant_name);
-        String document= applicant_name+" Document";
+        String document= applicant_name+"Document";
      //   Log.e("doc",document);
         initTools1(document);
       //  initTools1(applicant_name);
@@ -78,10 +78,80 @@ public class Applicant_Doc_Details extends SimpleActivity {
         Pref.putDOC(mCon,doc_id);
         Pref.putTID(mCon,transaction_id);
         Pref.putEID(mCon,emp_state);
-
+     //   Account_Listings_Details();
         Document_Details();
 
 
+    }
+
+    private void Account_Listings_Details() {
+        JSONObject jsonObject =new JSONObject();
+        JSONObject J= null;
+        try {
+            J =new JSONObject();
+          //  J.put(Params.user_id, id);
+            J.put("user_id",Pref.getUSERID(getApplicationContext()));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        Log.e("the Document",J.toString());
+        progressDialog.show();
+        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, Urls.PARTNER_STATUES_IDs, J,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+
+                        Log.e("the reponse",response.toString());
+                        try {
+
+                            JSONObject Response = response.getJSONObject("reponse");
+                            JSONObject jsonObject1 = Response.getJSONObject(Params.application_form);
+                            String user_id  = Response.getString(Params.user_id);
+                            String jsonStringObj  = String.valueOf(jsonObject1);
+                            JSONArray jsonArray = Response.getJSONArray(Params.emp_states);
+
+                            if (jsonArray.length()>0){
+                                String jsonString  = String.valueOf(jsonArray);
+                                //   Log.e("ApplicantDetails_Single",jsonString);
+
+                                Objs.ac.StartActivityPutExtra(mCon,
+                                        Applicant_Details_Single.class,
+                                        Params.JSON, jsonString,
+                                        Params.id,user_id,
+                                        Params.transaction_id,transaction_id,
+                                        Params.JSONObj,jsonStringObj);
+
+                                //finish();
+                            }else {
+                                Objs.a.ShowHideNoItems(mCon,true);
+                            }
+
+                            //   JSONArray ja = response.getJSONArray(Params.emp_states);
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                        progressDialog.dismiss();
+                    }
+                }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                progressDialog.dismiss();
+
+                Log.e("the error",error.toString());
+                Toast.makeText(getApplicationContext(),error.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("content-type", "application/json");
+                return headers;
+            }
+        };
+        AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
     }
 
     private void Document_Details() {
@@ -154,7 +224,7 @@ public class Applicant_Doc_Details extends SimpleActivity {
             @Override
             public void onErrorResponse(VolleyError error) {
                 //Log.d(TAG, error.getMessage());
-                VolleyLog.d(TAG, "Error: " + error.getMessage());
+                VolleyLog.e(TAG, "Error: " + error.getMessage());
                 Toast.makeText(getApplicationContext(),error.getMessage(), Toast.LENGTH_SHORT).show();
                 progressDialog.dismiss();
             }

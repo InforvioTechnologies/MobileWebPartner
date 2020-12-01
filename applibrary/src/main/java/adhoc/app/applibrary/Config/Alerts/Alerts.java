@@ -699,6 +699,16 @@ public class Alerts {
         recyclerView.setNestedScrollingEnabled(false);
         return recyclerView;
     }
+    public RecyclerView getRecyleview1(AppCompatActivity activity) {
+        LinearLayoutManager llm = new LinearLayoutManager(activity);
+        llm.setOrientation(LinearLayoutManager.VERTICAL);
+
+        RecyclerView recyclerView = (RecyclerView) activity.findViewById(R.id.recycler_view);
+        recyclerView.setLayoutManager(llm);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setNestedScrollingEnabled(false);
+        return recyclerView;
+    }
 
     public RecyclerView getRecyleview_horizontal(AppCompatActivity activity) {
         LinearLayoutManager llm = new LinearLayoutManager(activity);

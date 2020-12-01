@@ -19,13 +19,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/prop_det"
-                    android:textStyle="bold"
-                    android:layout_margin="10dp"
-                    android:textColor="#00bfff" />
+
 
 
                 <androidx.cardview.widget.CardView
@@ -40,7 +34,17 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical">
+                        android:orientation="vertical"
+                        android:layout_marginBottom="10dp">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/imp_propheads"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/prop_det"
+                            android:textStyle="bold"
+                            android:layout_margin="10dp"
+                            android:textColor="#00bfff" />
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -76,6 +80,7 @@
                                 android:layout_weight="1">
 
                                 <androidx.appcompat.widget.AppCompatTextView
+                                    android:id="@+id/imp_proptitle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="@string/property_title1"
@@ -93,7 +98,9 @@
                                         android:id="@+id/imp_prop_title"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:textSize="14sp" />
+                                        android:textSize="16sp"
+                                        android:textColor="@color/text_blue"
+                                        android:textStyle="bold"/>
 
                                 </LinearLayout>
 
@@ -115,6 +122,7 @@
                                 android:layout_weight="1">
 
                                 <androidx.appcompat.widget.AppCompatTextView
+                                    android:id="@+id/imppin"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="@string/property_pin1"
@@ -131,7 +139,9 @@
                                         android:id="@+id/imp_prop_pincode"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:textSize="14sp" />
+                                        android:textSize="16sp"
+                                        android:textStyle="bold"
+                                        android:textColor="@color/text_blue"/>
 
                                 </LinearLayout>
 
@@ -153,6 +163,7 @@
                                 android:layout_weight="1">
 
                                 <androidx.appcompat.widget.AppCompatTextView
+                                    android:id="@+id/impproptype"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="@string/property_type12"
@@ -169,7 +180,9 @@
                                         android:id="@+id/imp_prop_type"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:textSize="14sp" />
+                                        android:textSize="16sp"
+                                        android:textStyle="bold"
+                                        android:textColor="@color/text_blue"/>
 
                                 </LinearLayout>
 
@@ -190,6 +203,7 @@
                                 android:layout_weight="1">
 
                                 <androidx.appcompat.widget.AppCompatTextView
+                                    android:id="@+id/impcost"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="@string/cost_estimate1"
@@ -206,7 +220,9 @@
                                         android:id="@+id/imp_prop_cost"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:textSize="14sp" />
+                                        android:textSize="16sp"
+                                        android:textColor="@color/text_blue"
+                                        android:textStyle="bold"/>
 
                                 </LinearLayout>
 
@@ -228,6 +244,7 @@
                                 android:layout_weight="1">
 
                                 <androidx.appcompat.widget.AppCompatTextView
+                                    android:id="@+id/impprice"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="@string/property_price12"
@@ -244,7 +261,9 @@
                                         android:id="@+id/imp_prop_price"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:textSize="14sp" />
+                                        android:textSize="16sp"
+                                        android:textStyle="bold"
+                                        android:textColor="@color/text_blue"/>
 
                                 </LinearLayout>
 

@@ -91,10 +91,10 @@ public class Applicant_Doc_Details_Property extends SimpleActivity {
             J =new JSONObject();
             J.put(Params.checklist_code, Params.EMITRA);
             J.put(Params.transaction_id, id);
-            J.put(Params.usertype, type);
+            J.put(Params.usertype, "11");
             J.put(Params.type, Pr_type);
-            J.put(Params.applicant_empstatus, emp_state);
-            Log.d("the value of J", String.valueOf(J));
+            J.put(Params.applicant_empstatus, "11");
+            Log.e("the value of J", String.valueOf(J));
 
         } catch (JSONException e) {
             e.printStackTrace();
@@ -129,7 +129,7 @@ public class Applicant_Doc_Details_Property extends SimpleActivity {
             @Override
             public void onErrorResponse(VolleyError error) {
                 //Log.d(TAG, error.getMessage());
-                VolleyLog.d(TAG, "Error: " + error.getMessage());
+                VolleyLog.e(TAG, "Error: " + error.getMessage());
                 Toast.makeText(getApplicationContext(),error.getMessage(), Toast.LENGTH_SHORT).show();
                 progressDialog.dismiss();
             }

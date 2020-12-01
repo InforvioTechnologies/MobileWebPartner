@@ -191,7 +191,7 @@ public class Splash_Screen extends AppCompatActivity {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-       // Log.e("Req", String.valueOf(J));
+        Log.e("Req", String.valueOf(J));
         JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, Urls.VERSION_CHECK_POST, J,
                 new Response.Listener<JSONObject>() {
                     @Override
@@ -241,7 +241,7 @@ public class Splash_Screen extends AppCompatActivity {
                 //Log.d(TAG, error.getMessage());
                 VolleyLog.d(TAG, "Error: " + error.getMessage());
                // Toast.makeText(getApplicationContext(),error.getMessage(),Toast.LENGTH_SHORT).show();
-              //  Log.e("Error", error.getMessage());
+                Log.e("Error", error.getMessage());
 
             }
         }) {

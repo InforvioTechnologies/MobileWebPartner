@@ -43,6 +43,7 @@ import adhoc.app.applibrary.Config.AppUtils.Urls;
 import adhoc.app.applibrary.Config.AppUtils.VolleySignleton.AppController;
 import dmax.dialog.SpotsDialog;
 import in.loanwiser.partnerapp.Documents.Applicant_Doc_Details_Property;
+import in.loanwiser.partnerapp.Documents.Applicant_Doc_Details_revamp;
 import in.loanwiser.partnerapp.Documents.SingleUploadBroadcastReceiver;
 import in.loanwiser.partnerapp.R;
 
@@ -226,7 +227,7 @@ public class UploadActivity1 extends Activity implements SingleUploadBroadcastRe
                                 String a = j.getString(Params.status);
                                 Objs.a.showToast(mCon, "successfully uploaded");
                                 applicant_name = Pref.getapplicant_name(mCon);
-                                Objs.ac.StartActivityPutExtra(mCon,Applicant_Doc_Details_Property.class, Params.user_type,user_type, Params.applicant_name,applicant_name);
+                                Objs.ac.StartActivityPutExtra(mCon, Applicant_Doc_Details_revamp.class, Params.user_type,user_type, Params.applicant_name,applicant_name);
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }

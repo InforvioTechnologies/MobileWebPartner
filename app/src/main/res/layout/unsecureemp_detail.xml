@@ -467,13 +467,7 @@
                 android:id="@+id/businesslay"
                 android:orientation="vertical">
 
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/employ_detail"
-                    android:textStyle="bold"
-                    android:layout_margin="10dp"
-                    android:textColor="#00bfff" />
+
 
 
                 <androidx.cardview.widget.CardView
@@ -490,6 +484,15 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/unsecureempdet"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/employ_detail"
+                            android:textStyle="bold"
+                            android:layout_margin="10dp"
+                            android:textColor="#00bfff" />
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -498,6 +501,7 @@
                             android:layout_marginLeft="10dp"
                             android:layout_weight="1">
                             <androidx.appcompat.widget.AppCompatTextView
+                                android:id="@+id/typeofemp_head"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="@string/type_of_emp"
@@ -513,6 +517,8 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:textSize="16sp"
+                                    android:textColor="@color/text_blue"
+                                    android:textStyle="bold"
                                     tools:ignore="DuplicateIds" />
                             </LinearLayout>
                         </LinearLayout>
@@ -525,6 +531,7 @@
                             android:layout_weight="1">
 
                             <androidx.appcompat.widget.AppCompatTextView
+                                android:id="@+id/typeself"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="@string/type_selfemp"
@@ -543,7 +550,10 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:textSize="16sp"
-                                    tools:ignore="DuplicateIds" />
+                                    tools:ignore="DuplicateIds"
+                                    android:textStyle="bold"
+                                    android:textColor="@color/text_blue"
+                                    />
 
                             </LinearLayout>
 
@@ -601,6 +611,7 @@
                                     android:layout_weight="1">
 
                                     <androidx.appcompat.widget.AppCompatTextView
+                                        android:id="@+id/vochead"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:text="@string/vocationtype"
@@ -617,7 +628,9 @@
                                             android:id="@+id/bus_vocationtype"
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
-                                            android:textSize="16sp" />
+                                            android:textSize="16sp"
+                                            android:textColor="@color/text_blue"
+                                            android:textStyle="bold"/>
 
                                     </LinearLayout>
 
@@ -639,6 +652,7 @@
                                     android:layout_weight="1">
 
                                     <androidx.appcompat.widget.AppCompatTextView
+                                        android:id="@+id/avghead"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:text="@string/avarage_monthproof"
@@ -655,7 +669,9 @@
                                             android:id="@+id/bus_avargeincome"
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
-                                            android:textSize="16sp" />
+                                            android:textSize="16sp"
+                                            android:textStyle="bold"
+                                            android:textColor="@color/text_blue"/>
 
                                     </LinearLayout>
 
@@ -677,6 +693,7 @@
                                     android:layout_weight="1">
 
                                     <androidx.appcompat.widget.AppCompatTextView
+                                        android:id="@+id/noofbushead"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:text="@string/num_business"
@@ -693,7 +710,9 @@
                                             android:id="@+id/bus_numof_month"
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
-                                            android:textSize="16sp" />
+                                            android:textSize="16sp"
+                                            android:textColor="@color/text_blue"
+                                            android:textStyle="bold"/>
 
                                     </LinearLayout>
                                 </LinearLayout>
@@ -714,6 +733,7 @@
                                     android:layout_weight="1">
 
                                     <androidx.appcompat.widget.AppCompatTextView
+                                        android:id="@+id/busvinhead"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:text="@string/business_vintageproof"
@@ -730,7 +750,9 @@
                                             android:id="@+id/business_vintageproof"
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
-                                            android:textSize="16sp" />
+                                            android:textSize="16sp"
+                                            android:textStyle="bold"
+                                            android:textColor="@color/text_blue"/>
 
                                     </LinearLayout>
 
@@ -751,6 +773,7 @@
                                     android:layout_weight="1">
 
                                     <androidx.appcompat.widget.AppCompatTextView
+                                        android:id="@+id/busincomehead"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:text="@string/business_income"
@@ -767,7 +790,9 @@
                                             android:id="@+id/businessincome_proof"
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
-                                            android:textSize="16sp" />
+                                            android:textSize="16sp"
+                                            android:textColor="@color/text_blue"
+                                            android:textStyle="bold"/>
 
                                     </LinearLayout>
 
@@ -788,6 +813,7 @@
                                     android:layout_weight="1">
 
                                     <androidx.appcompat.widget.AppCompatTextView
+                                        android:id="@+id/ofcsetuphead"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:text="@string/office_shop"
@@ -804,7 +830,9 @@
                                             android:id="@+id/officesetup"
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
-                                            android:textSize="16sp" />
+                                            android:textSize="16sp"
+                                            android:textStyle="bold"
+                                            android:textColor="@color/text_blue"/>
 
                                     </LinearLayout>
 
@@ -827,6 +855,7 @@
                                     android:layout_weight="1">
 
                                     <androidx.appcompat.widget.AppCompatTextView
+                                        android:id="@+id/ofcrestypehead"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:text="@string/office_restype"
@@ -843,7 +872,9 @@
                                             android:id="@+id/ofc_restype"
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
-                                            android:textSize="16sp" />
+                                            android:textSize="16sp"
+                                            android:textColor="@color/text_blue"
+                                            android:textStyle="bold"/>
 
                                     </LinearLayout>
 
@@ -866,6 +897,7 @@
                                     android:layout_weight="1">
 
                                     <androidx.appcompat.widget.AppCompatTextView
+                                        android:id="@+id/ofcpin"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:text="@string/office_shoppin"
@@ -882,7 +914,9 @@
                                             android:id="@+id/offshoppincode"
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
-                                            android:textSize="16sp" />
+                                            android:textSize="16sp"
+                                            android:textStyle="bold"
+                                            android:textColor="@color/text_blue"/>
 
                                     </LinearLayout>
 
@@ -904,6 +938,7 @@
                                     android:layout_weight="1">
 
                                     <androidx.appcompat.widget.AppCompatTextView
+                                        android:id="@+id/otherincomehead"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:text="@string/othericome_source"
@@ -920,7 +955,9 @@
                                             android:id="@+id/otherincome_self"
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
-                                            android:textSize="14sp" />
+                                            android:textSize="16sp"
+                                            android:textColor="@color/text_blue"
+                                            android:textStyle="bold"/>
 
                                     </LinearLayout>
 
@@ -942,6 +979,7 @@
                                     android:layout_weight="1">
 
                                     <androidx.appcompat.widget.AppCompatTextView
+                                        android:id="@+id/otheramount"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:text="@string/othericome_source1"
@@ -958,7 +996,9 @@
                                             android:id="@+id/otherincome_amount1_self"
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
-                                            android:textSize="14sp" />
+                                            android:textSize="16sp"
+                                            android:textStyle="bold"
+                                            android:textColor="@color/text_blue"/>
 
                                     </LinearLayout>
 

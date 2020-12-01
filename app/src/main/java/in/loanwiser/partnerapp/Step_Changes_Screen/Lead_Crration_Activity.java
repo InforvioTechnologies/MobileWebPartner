@@ -40,6 +40,7 @@ import com.android.volley.RetryPolicy;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.thekhaeng.pushdownanim.PushDownAnim;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -68,6 +69,8 @@ import in.loanwiser.partnerapp.Payment.PaymentDetails;
 import in.loanwiser.partnerapp.Payment.Payment_Sucess_Screen;
 import in.loanwiser.partnerapp.R;
 import in.loanwiser.partnerapp.SimpleActivity;
+
+import static com.thekhaeng.pushdownanim.PushDownAnim.MODE_STATIC_DP;
 
 
 public class Lead_Crration_Activity extends SimpleActivity {
@@ -141,16 +144,16 @@ public class Lead_Crration_Activity extends SimpleActivity {
        // Loanwiser_Api();
 
 
-    /*  lead_cr_step1.setOnClickListener(new View.OnClickListener() {
+     /* lead_cr_step1.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
 
-                    Intent intent = new Intent(Lead_Crration_Activity.this, Upload_Activity_Bank.class);
+                    Intent intent = new Intent(Lead_Crration_Activity.this, Viability_Screen_revamp_Pl_BL.class);
                     startActivity(intent);
                     finish();
                 }
-            });*/
-
+            });
+*/
        /* lead_cr_step1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -268,8 +271,8 @@ public class Lead_Crration_Activity extends SimpleActivity {
         Mobile = Pref.getMobileLead(getApplicationContext());
         Name = Pref.getName(getApplicationContext());
 
-        name_txt.setText(Name);
-        mobile_no_txt.setText(Mobile);
+      //  name_txt.setText(Name);
+      //  mobile_no_txt.setText(Mobile);
     }
 
     private void fonts() {
@@ -428,6 +431,8 @@ public class Lead_Crration_Activity extends SimpleActivity {
                 finish();
             }
         });
+
+
 
         lead_cr_step1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -978,18 +983,18 @@ public class Lead_Crration_Activity extends SimpleActivity {
           //  Log.e("catgory list",SPINNERLIST_CAT.toString());
             final List<String> Loan_cat_list = new ArrayList<>(Arrays.asList(SPINNERLIST_CAT));
             Loantype_cat = new ArrayAdapter<String>(context, R.layout.view_spinner_item, Loan_cat_list){
-                public View getView(int position, View convertView, ViewGroup parent) {
+               /* public View getView(int position, View convertView, ViewGroup parent) {
                     font = Typeface.createFromAsset(context.getAssets(),"Lato-Regular.ttf");
                      v = (TextView) super.getView(position, convertView, parent);
                     v.setTypeface(font);
                     return v;
-                }
+                }*/
 
-                public View getDropDownView(int position, View convertView, ViewGroup parent) {
+              /*  public View getDropDownView(int position, View convertView, ViewGroup parent) {
                      v = (TextView) super.getView(position, convertView, parent);
                     v.setTypeface(font);
                     return v;
-                }
+                }*/
             };
 
             Loantype_cat.setDropDownViewResource(R.layout.view_spinner_item);
@@ -1108,7 +1113,7 @@ public class Lead_Crration_Activity extends SimpleActivity {
             SPINNERLIST[i] = J.getString("loan_type");
             final List<String> loan_type_list = new ArrayList<>(Arrays.asList(SPINNERLIST));
             Loantype1 = new ArrayAdapter<String>(context, R.layout.view_spinner_item, loan_type_list){
-                public View getView(int position, View convertView, ViewGroup parent) {
+              /*  public View getView(int position, View convertView, ViewGroup parent) {
                     font = Typeface.createFromAsset(context.getAssets(),"Lato-Regular.ttf");
                     TextView v = (TextView) super.getView(position, convertView, parent);
                     v.setTypeface(font);
@@ -1119,7 +1124,7 @@ public class Lead_Crration_Activity extends SimpleActivity {
                     TextView v = (TextView) super.getView(position, convertView, parent);
                     v.setTypeface(font);
                     return v;
-                }
+                }*/
             };
 
             Loantype1.setDropDownViewResource(R.layout.view_spinner_item);

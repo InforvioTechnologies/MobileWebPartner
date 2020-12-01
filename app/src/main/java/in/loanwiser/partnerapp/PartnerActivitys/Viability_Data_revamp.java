@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatTextView;
 import androidx.cardview.widget.CardView;
 
+import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -28,6 +30,7 @@ import java.util.Map;
 
 import adhoc.app.applibrary.Config.AppUtils.Objs;
 import adhoc.app.applibrary.Config.AppUtils.Pref.Pref;
+import adhoc.app.applibrary.Config.AppUtils.Urls;
 import dmax.dialog.SpotsDialog;
 import in.loanwiser.partnerapp.R;
 import in.loanwiser.partnerapp.Step_Changes_Screen.Viability_Screen_revamp_Pl_BL;
@@ -100,6 +103,17 @@ public class Viability_Data_revamp extends SimpleActivity {
 
     String area,res_area;
 
+    //New declaration
+    AppCompatTextView property_detailhead,property_identexthead,pandetailshead,pancardnumtxt,dateofborthhead,
+            fathernametxthead,maritical_statushead,salarycredithead,monthlynethead,salaryprooftexthead,companytypetexthead,
+    companynamehead,designationhead,companypincode_head,companyareahead,curenthead,totalworkhead,otherincomethead,other_sourcehead,empdethead,
+            residence_detailshead,curreshead,curresareahead,restypehead,securelap_prophead,securelap_proptitle,securelap_proppincode,securelapproptype,
+    securelap_price,secureplot_propertytitle,secureplot_pincode,secureplotcons_proptype,secureplot_plotvalue,secureplot_costhead,
+            secureplot_propertyhead,secureplotpropiden,secureplotloan_proptitle,secureplot_proppincode,secureplot_proptype,secureplotvalie,
+    securebt_propertydetails,securebt_title,securebt_pin,securebt_proptype,securebt_propertyprice,curr_resarea,curr_restype,
+            prop_price,imp_propheads,imppin,impproptype,impcost,impprice,extern_prophead,exten_title,exten_pin,exten_proptype,costexten,exten_price,unsecureempdet,
+    typeofemp_head,typeself,vochead,avghead,noofbushead,busvinhead,busincomehead,ofcsetuphead,ofcrestypehead,ofcpin,otherincomehead,otheramount;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -110,6 +124,7 @@ public class Viability_Data_revamp extends SimpleActivity {
 
         Objs.a.setStubId(this,R.layout.activity_viability__data_revamp);
         initTools(R.string.viy_check);
+
         progressDialog = new SpotsDialog(Viability_Data_revamp.this, R.style.Custom);
         pancardview_lay=findViewById(R.id.pancardview_lay);
         unsecure_businessloan=findViewById(R.id.unsecure_businessloan);
@@ -227,6 +242,234 @@ public class Viability_Data_revamp extends SimpleActivity {
         secureplot_cost_estimate=findViewById(R.id.secureplot_cost_estimate);
 
 
+        //New added textview
+        property_detailhead=findViewById(R.id.property_detailhead);
+        property_identexthead=findViewById(R.id.property_identexthead);
+
+        pandetailshead=findViewById(R.id.pandetailshead);
+        pancardnumtxt=findViewById(R.id.pancardnumtxt);
+        dateofborthhead=findViewById(R.id.dateofborthhead);
+        fathernametxthead=findViewById(R.id.fathernametxthead);
+        maritical_statushead=findViewById(R.id.maritical_statushead);
+
+        salarycredithead=findViewById(R.id.salarycredithead);
+        monthlynethead=findViewById(R.id.monthlynethead);
+        salaryprooftexthead=findViewById(R.id.salaryprooftexthead);
+        companytypetexthead=findViewById(R.id.companytypetexthead);
+        companynamehead=findViewById(R.id.companynamehead);
+        designationhead=findViewById(R.id.designationhead);
+        companypincode_head=findViewById(R.id.companypincode_head);
+        companyareahead=findViewById(R.id.companyareahead);
+        curenthead=findViewById(R.id.curenthead);
+        totalworkhead=findViewById(R.id.totalworkhead);
+        otherincomethead=findViewById(R.id.otherincomethead);
+        other_sourcehead=findViewById(R.id.other_sourcehead);
+        empdethead=findViewById(R.id.empdethead);
+        residence_detailshead=findViewById(R.id.residence_detailshead);
+        curreshead=findViewById(R.id.curreshead);
+        curresareahead=findViewById(R.id.curresareahead);
+        restypehead=findViewById(R.id.restypehead);
+        securelap_prophead=findViewById(R.id.securelap_prophead);
+        securelap_proptitle=findViewById(R.id.securelap_proptitle);
+        securelap_proppincode=findViewById(R.id.securelap_proppincode);
+        securelapproptype=findViewById(R.id.securelapproptype);
+        securelap_price=findViewById(R.id.securelap_price);
+        secureplot_propertytitle=findViewById(R.id.secureplot_propertytitle);
+        secureplot_pincode=findViewById(R.id.secureplot_pincode);
+        secureplotcons_proptype=findViewById(R.id.secureplotcons_proptype);
+        secureplot_plotvalue=findViewById(R.id.secureplot_plotvalue);
+        secureplot_costhead=findViewById(R.id.secureplot_costhead);
+        secureplot_propertyhead=findViewById(R.id.secureplot_propertyhead);
+        secureplotpropiden=findViewById(R.id.secureplotpropiden);
+        secureplotloan_proptitle=findViewById(R.id.secureplotloan_proptitle);
+        secureplot_proppincode=findViewById(R.id.secureplot_proppincode);
+        secureplot_proptype=findViewById(R.id.secureplot_proptype);
+        secureplotvalie=findViewById(R.id.secureplotvalie);
+        prop_plot_cost_of_plot=findViewById(R.id.prop_plot_cost_of_plot);
+        securebt_propertydetails=findViewById(R.id.securebt_propertydetails);
+        securebt_title=findViewById(R.id.securebt_title);
+        securebt_pin=findViewById(R.id.securebt_pin);
+        securebt_proptype=findViewById(R.id.securebt_proptype);
+        securebt_propertyprice=findViewById(R.id.securebt_propertyprice);
+        curr_resarea=findViewById(R.id.curr_resarea);
+        curr_restype=findViewById(R.id.curr_restype);
+        prop_price=findViewById(R.id.prop_price);
+
+        imp_propheads=findViewById(R.id.imp_propheads);
+        imppin=findViewById(R.id.imppin);
+        impproptype=findViewById(R.id.impproptype);
+        impcost=findViewById(R.id.impcost);
+        impprice=findViewById(R.id.impprice);
+
+        extern_prophead=findViewById(R.id.extern_prophead);
+        exten_title=findViewById(R.id.exten_titles);
+        exten_pin=findViewById(R.id.exten_pin);
+        exten_proptype=findViewById(R.id.exten_proptype);
+        costexten=findViewById(R.id.costexten);
+        exten_price=findViewById(R.id.exten_price);
+        unsecureempdet=findViewById(R.id.unsecureempdet);
+        typeofemp_head=findViewById(R.id.typeofemp_head);
+        typeself=findViewById(R.id.typeself);
+        vochead=findViewById(R.id.vochead);
+        avghead=findViewById(R.id.avghead);
+        noofbushead=findViewById(R.id.noofbushead);
+        busvinhead=findViewById(R.id.busvinhead);
+        busincomehead=findViewById(R.id.busincomehead);
+        ofcsetuphead=findViewById(R.id.ofcsetuphead);
+        ofcrestypehead=findViewById(R.id.ofcrestypehead);
+        ofcpin=findViewById(R.id.ofcpin);
+        otherincomehead=findViewById(R.id.otherincomehead);
+        otheramount=findViewById(R.id.otheramount);
+
+
+
+
+
+
+
+
+
+
+        Typeface font = Typeface.createFromAsset(Viability_Data_revamp.this.getAssets(), "segoe_ui.ttf");
+        property_detailhead.setTypeface(font);
+        property_identexthead.setTypeface(font);
+        prop_identxt.setTypeface(font);
+        pandetailshead.setTypeface(font);
+        pancardnumtxt.setTypeface(font);
+        pancardtxt.setTypeface(font);
+        dateofborthhead.setTypeface(font);
+        dateofbithtxt.setTypeface(font);
+        fathernametxthead.setTypeface(font);
+        fathernametxt.setTypeface(font);
+        maritical_statushead.setTypeface(font);
+        maritaltxt.setTypeface(font);
+        salarycredithead.setTypeface(font);
+        salary_mode.setTypeface(font);
+        monthlynethead.setTypeface(font);
+        month_incometxt.setTypeface(font);
+        salaryprooftexthead.setTypeface(font);
+        salaryproof_txt.setTypeface(font);
+        companytypetexthead.setTypeface(font);
+        companytypetxt.setTypeface(font);
+        companynamehead.setTypeface(font);
+        companynametxt.setTypeface(font);
+        designationhead.setTypeface(font);
+        designationtxt.setTypeface(font);
+        companypincode_head.setTypeface(font);
+        cmpny_pintxt.setTypeface(font);
+        companyareahead.setTypeface(font);
+        companyarea_txt.setTypeface(font);
+        curenthead.setTypeface(font);
+        current_exptxt.setTypeface(font);
+        totalworkhead.setTypeface(font);
+        totalexp_txt.setTypeface(font);
+        otherincomethead.setTypeface(font);
+        otherincome.setTypeface(font);
+        other_sourcehead.setTypeface(font);
+        otherincome_amount1.setTypeface(font);
+        empdethead.setTypeface(font);
+        residence_detailshead.setTypeface(font);
+        curreshead.setTypeface(font);
+        unsecure_residence_pincode.setTypeface(font);
+        curresareahead.setTypeface(font);
+        unsecure_resarea.setTypeface(font);
+        restypehead.setTypeface(font);
+        unsecure_restype.setTypeface(font);
+        securelap_prophead.setTypeface(font);
+        securelap_proptitle.setTypeface(font);
+        lap_proptitle.setTypeface(font);
+        securelap_proppincode.setTypeface(font);
+        lap_proppincode.setTypeface(font);
+        securelapproptype.setTypeface(font);
+        lapprop_type.setTypeface(font);
+        securelap_price.setTypeface(font);
+        lapprop_price.setTypeface(font);
+        secureplot_propertytitle.setTypeface(font);
+        secureplot_cons.setTypeface(font);
+        secureplot_pincode.setTypeface(font);
+        secure_ploatoincode.setTypeface(font);
+        secureplotcons_proptype.setTypeface(font);
+        secureplot_prop_type.setTypeface(font);
+        secureplot_plotvalue.setTypeface(font);
+        secureplo_value.setTypeface(font);
+        secureplot_costhead.setTypeface(font);
+        secureplot_cost_estimate.setTypeface(font);
+        secureplot_propertyhead.setTypeface(font);
+        secureplotpropiden.setTypeface(font);
+        secureplotloan_proptitle.setTypeface(font);
+        prop_plot_title.setTypeface(font);
+        secureplot_proppincode.setTypeface(font);
+        prop_Pincode.setTypeface(font);
+        secureplot_proptype.setTypeface(font);
+        prop_plot_identified.setTypeface(font);
+        secureplotvalie.setTypeface(font);
+        prop_plot_cost_of_plot.setTypeface(font);
+        securebt_propertydetails.setTypeface(font);
+        securebt_title.setTypeface(font);
+        curr_resarea.setTypeface(font);
+        securebt_pin.setTypeface(font);
+        curr_restype.setTypeface(font);
+        securebt_proptype.setTypeface(font);
+        securebt_propertyprice.setTypeface(font);
+        prop_price.setTypeface(font);
+        imp_propheads.setTypeface(font);
+        imp_prop_title.setTypeface(font);
+        imppin.setTypeface(font);
+        imp_prop_pincode.setTypeface(font);
+        imp_prop_type.setTypeface(font);
+        impproptype.setTypeface(font);
+        impcost.setTypeface(font);
+        imp_prop_cost.setTypeface(font);
+        impprice.setTypeface(font);
+        imp_prop_price.setTypeface(font);
+        extern_prophead.setTypeface(font);
+        exten_title.setTypeface(font);
+        exten_proptitle.setTypeface(font);
+        exten_pin.setTypeface(font);
+        extension_proppincode.setTypeface(font);
+        exten_proptype.setTypeface(font);
+        extension_prop_type.setTypeface(font);
+        costexten.setTypeface(font);
+        exten_cost_extement.setTypeface(font);
+        exten_price.setTypeface(font);
+        exten_pro_price.setTypeface(font);
+        exten_title.setTypeface(font);
+        unsecureempdet.setTypeface(font);
+        typeofemp_head.setTypeface(font);
+        bus_typeemployemnt.setTypeface(font);
+        typeself.setTypeface(font);
+        bus_typeself.setTypeface(font);
+        vochead.setTypeface(font);
+        bus_vocationtype.setTypeface(font);
+        avghead.setTypeface(font);
+        bus_avargeincome.setTypeface(font);
+        noofbushead.setTypeface(font);
+        bus_numof_month.setTypeface(font);
+        busvinhead.setTypeface(font);
+        business_vintageproof.setTypeface(font);
+        busincomehead.setTypeface(font);
+        businessincome_proof.setTypeface(font);
+        ofcsetuphead.setTypeface(font);
+        officesetup.setTypeface(font);
+        ofcrestypehead.setTypeface(font);
+        ofc_restype.setTypeface(font);
+        ofcpin.setTypeface(font);
+        offshoppincode.setTypeface(font);
+        otherincomehead.setTypeface(font);
+        otherincome_self.setTypeface(font);
+        otheramount.setTypeface(font);
+        otherincome_amount1_self.setTypeface(font);
+
+
+
+
+
+
+
+
+
+
+
 
         Viabilityshow();
 
@@ -241,18 +484,19 @@ public class Viability_Data_revamp extends SimpleActivity {
         try {
             J =new JSONObject();
             J.put("transaction_id", Pref.getTRANSACTIONID(getApplicationContext()));
-            Log.e("TAG", "viability_transcation: "+Pref.getTRANSACTIONID(getApplicationContext()));
+          //  Log.e("TAG", "viability_transcation: "+Pref.getTRANSACTIONID(getApplicationContext()));
 
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, "https://cscapi.propwiser.com/mobile/partner_loanapi_test.php?call=view_viability_revamp", J,
+        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, Urls.URL_Viability_Detail_Show, J,
                 new Response.Listener<JSONObject>() {
 
                     @Override
                     public void onResponse(JSONObject object) {
                         Log.e("viablity_response", object.toString());
                         progressDialog.dismiss();
+
                         try {
                             jsonobj = object.getJSONObject("response");
                             Applicant_Status =jsonobj.getString("applicant_status");
@@ -291,9 +535,7 @@ public class Viability_Data_revamp extends SimpleActivity {
                                     }
                                 }
 
-
                                 //Residenence Pincode
-
                                 residence_pincode = Applicant_object.getString("per_pincode");
                                 //residence_perarea=Applicant_object.getString("per_area");
                                 residence_type = Applicant_object.getString("resident_statusstr");
@@ -317,8 +559,21 @@ public class Viability_Data_revamp extends SimpleActivity {
                                 companynametxt.setText(cmpny_name);
                                 designationtxt.setText(designation);
                                 cmpny_pintxt.setText(cmpny_pincode);
-                                totalexp_txt.setText(total_exp);
-                                current_exptxt.setText(curr_exp);
+
+
+                                String year,month,year1,month1;
+
+                                year = String.valueOf(Integer.parseInt(total_exp) / 12);
+                                month = String.valueOf(Integer.parseInt(total_exp)  % 12);
+
+                               // totalexp_txt.setText(total_exp);
+                                totalexp_txt.setText(year +" year ,"+ month+" month ");
+
+                                year1 = String.valueOf(Integer.parseInt(curr_exp) / 12);
+                                month1 = String.valueOf(Integer.parseInt(curr_exp)  % 12);
+                                //current_exptxt.setText(curr_exp);
+                                current_exptxt.setText(year1 +" year ,"+ month1+" month ");
+
                                 companyarea_txt.setText(area);
 
 
@@ -443,7 +698,13 @@ public class Viability_Data_revamp extends SimpleActivity {
                                 officesetup.setText(office_setup);
                                 bus_vocationtype.setText(work_vocationstr);
                                 bus_avargeincome.setText(month_income);
-                                bus_numof_month.setText(curr_exp);
+
+                                String year,month,year1,month1;
+
+                                year = String.valueOf(Integer.parseInt(curr_exp) / 12);
+                                month = String.valueOf(Integer.parseInt(curr_exp)  % 12);
+                                bus_numof_month.setText(year +" year ,"+ month+" month ");
+                               // bus_numof_month.setText(curr_exp);
                                 ofc_restype.setText(office_setupstr);
                                 offshoppincode.setText(office_pincode);
                                 business_vintageproof.setText(vintage_docstr);
@@ -556,8 +817,23 @@ public class Viability_Data_revamp extends SimpleActivity {
                                     companynametxt.setText(cmpny_name);
                                     designationtxt.setText(designation);
                                     cmpny_pintxt.setText(cmpny_pincode);
-                                    totalexp_txt.setText(total_exp);
-                                    current_exptxt.setText(curr_exp);
+
+
+
+                                    String year,month,year1,month1;
+
+                                    year = String.valueOf(Integer.parseInt(total_exp) / 12);
+                                    month = String.valueOf(Integer.parseInt(total_exp)  % 12);
+
+                                    // totalexp_txt.setText(total_exp);
+                                    totalexp_txt.setText(year +" year ,"+ month+" month ");
+
+                                    year1 = String.valueOf(Integer.parseInt(curr_exp) / 12);
+                                    month1 = String.valueOf(Integer.parseInt(curr_exp)  % 12);
+                                    //current_exptxt.setText(curr_exp);
+                                    current_exptxt.setText(year1 +" year ,"+ month1+" month ");
+
+                                    companyarea_txt.setText(area);
 
                                     //Residenence Pincode
 
@@ -727,7 +1003,11 @@ public class Viability_Data_revamp extends SimpleActivity {
 
                                     bus_vocationtype.setText(work_vocationstr);
                                     bus_avargeincome.setText(month_income);
-                                    bus_numof_month.setText(curr_exp);
+                                    String year,month,year1,month1;
+
+                                    year = String.valueOf(Integer.parseInt(curr_exp) / 12);
+                                    month = String.valueOf(Integer.parseInt(curr_exp)  % 12);
+                                    bus_numof_month.setText(year +" year ,"+ month+" month ");
                                     ofc_restype.setText(office_setupstr);
                                     offshoppincode.setText(office_pincode);
                                     business_vintageproof.setText(vintage_docstr);
@@ -817,8 +1097,22 @@ public class Viability_Data_revamp extends SimpleActivity {
                                     companynametxt.setText(cmpny_name);
                                     designationtxt.setText(designation);
                                     cmpny_pintxt.setText(cmpny_pincode);
-                                    totalexp_txt.setText(total_exp);
-                                    current_exptxt.setText(curr_exp);
+
+                                    String year,month,year1,month1;
+
+                                    year = String.valueOf(Integer.parseInt(total_exp) / 12);
+                                    month = String.valueOf(Integer.parseInt(total_exp)  % 12);
+
+                                    // totalexp_txt.setText(total_exp);
+                                    totalexp_txt.setText(year +" year ,"+ month+" month ");
+
+                                    year1 = String.valueOf(Integer.parseInt(curr_exp) / 12);
+                                    month1 = String.valueOf(Integer.parseInt(curr_exp)  % 12);
+                                    //current_exptxt.setText(curr_exp);
+                                    current_exptxt.setText(year1 +" year ,"+ month1+" month ");
+
+                                    companyarea_txt.setText(area);
+
 
                                     //Residenence Pincode
 
@@ -964,7 +1258,11 @@ public class Viability_Data_revamp extends SimpleActivity {
 
                                     bus_vocationtype.setText(work_vocationstr);
                                     bus_avargeincome.setText(month_income);
-                                    bus_numof_month.setText(curr_exp);
+                                    String year,month,year1,month1;
+
+                                    year = String.valueOf(Integer.parseInt(curr_exp) / 12);
+                                    month = String.valueOf(Integer.parseInt(curr_exp)  % 12);
+                                    bus_numof_month.setText(year +" year ,"+ month+" month ");
                                     ofc_restype.setText(office_setupstr);
                                     offshoppincode.setText(office_pincode);
                                     business_vintageproof.setText(vintage_docstr);
@@ -1042,8 +1340,21 @@ public class Viability_Data_revamp extends SimpleActivity {
                                     companynametxt.setText(cmpny_name);
                                     designationtxt.setText(designation);
                                     cmpny_pintxt.setText(cmpny_pincode);
-                                    totalexp_txt.setText(total_exp);
-                                    current_exptxt.setText(curr_exp);
+                                    String year,month,year1,month1;
+
+                                    year = String.valueOf(Integer.parseInt(total_exp) / 12);
+                                    month = String.valueOf(Integer.parseInt(total_exp)  % 12);
+
+                                    // totalexp_txt.setText(total_exp);
+                                    totalexp_txt.setText(year +" year ,"+ month+" month ");
+
+                                    year1 = String.valueOf(Integer.parseInt(curr_exp) / 12);
+                                    month1 = String.valueOf(Integer.parseInt(curr_exp)  % 12);
+                                    //current_exptxt.setText(curr_exp);
+                                    current_exptxt.setText(year1 +" year ,"+ month1+" month ");
+
+                                    companyarea_txt.setText(area);
+
 
                                     income_proof_typestr = Applicant_object.getString("income_proof_typestr");
                                     salaryproof_txt.setText(income_proof_typestr);
@@ -1211,7 +1522,11 @@ public class Viability_Data_revamp extends SimpleActivity {
 
                                     bus_vocationtype.setText(work_vocationstr);
                                     bus_avargeincome.setText(month_income);
-                                    bus_numof_month.setText(curr_exp);
+                                    String year,month,year1,month1;
+
+                                    year = String.valueOf(Integer.parseInt(curr_exp) / 12);
+                                    month = String.valueOf(Integer.parseInt(curr_exp)  % 12);
+                                    bus_numof_month.setText(year +" year ,"+ month+" month ");
                                     ofc_restype.setText(office_setupstr);
                                     offshoppincode.setText(office_pincode);
                                     business_vintageproof.setText(vintage_docstr);
@@ -1287,8 +1602,21 @@ public class Viability_Data_revamp extends SimpleActivity {
                                     companynametxt.setText(cmpny_name);
                                     designationtxt.setText(designation);
                                     cmpny_pintxt.setText(cmpny_pincode);
-                                    totalexp_txt.setText(total_exp);
-                                    current_exptxt.setText(curr_exp);
+                                    String year,month,year1,month1;
+
+                                    year = String.valueOf(Integer.parseInt(total_exp) / 12);
+                                    month = String.valueOf(Integer.parseInt(total_exp)  % 12);
+
+                                    // totalexp_txt.setText(total_exp);
+                                    totalexp_txt.setText(year +" year ,"+ month+" month ");
+
+                                    year1 = String.valueOf(Integer.parseInt(curr_exp) / 12);
+                                    month1 = String.valueOf(Integer.parseInt(curr_exp)  % 12);
+                                    //current_exptxt.setText(curr_exp);
+                                    current_exptxt.setText(year1 +" year ,"+ month1+" month ");
+
+                                    companyarea_txt.setText(area);
+
 
                                     income_proof_typestr = Applicant_object.getString("income_proof_typestr");
                                     salaryproof_txt.setText(income_proof_typestr);
@@ -1451,7 +1779,11 @@ public class Viability_Data_revamp extends SimpleActivity {
 
                                     bus_vocationtype.setText(work_vocationstr);
                                     bus_avargeincome.setText(month_income);
-                                    bus_numof_month.setText(curr_exp);
+                                    String year,month,year1,month1;
+
+                                    year = String.valueOf(Integer.parseInt(curr_exp) / 12);
+                                    month = String.valueOf(Integer.parseInt(curr_exp)  % 12);
+                                    bus_numof_month.setText(year +" year ,"+ month+" month ");
                                     ofc_restype.setText(office_setupstr);
                                     offshoppincode.setText(office_pincode);
                                     business_vintageproof.setText(vintage_docstr);
@@ -1530,8 +1862,21 @@ public class Viability_Data_revamp extends SimpleActivity {
                                     companynametxt.setText(cmpny_name);
                                     designationtxt.setText(designation);
                                     cmpny_pintxt.setText(cmpny_pincode);
-                                    totalexp_txt.setText(total_exp);
-                                    current_exptxt.setText(curr_exp);
+                                    String year,month,year1,month1;
+
+                                    year = String.valueOf(Integer.parseInt(total_exp) / 12);
+                                    month = String.valueOf(Integer.parseInt(total_exp)  % 12);
+
+                                    // totalexp_txt.setText(total_exp);
+                                    totalexp_txt.setText(year +" year ,"+ month+" month ");
+
+                                    year1 = String.valueOf(Integer.parseInt(curr_exp) / 12);
+                                    month1 = String.valueOf(Integer.parseInt(curr_exp)  % 12);
+                                    //current_exptxt.setText(curr_exp);
+                                    current_exptxt.setText(year1 +" year ,"+ month1+" month ");
+
+                                    companyarea_txt.setText(area);
+
 
                                     income_proof_typestr = Applicant_object.getString("income_proof_typestr");
                                     salaryproof_txt.setText(income_proof_typestr);
@@ -1697,7 +2042,11 @@ public class Viability_Data_revamp extends SimpleActivity {
 
                                     bus_vocationtype.setText(work_vocationstr);
                                     bus_avargeincome.setText(month_income);
-                                    bus_numof_month.setText(curr_exp);
+                                    String year,month,year1,month1;
+
+                                    year = String.valueOf(Integer.parseInt(curr_exp) / 12);
+                                    month = String.valueOf(Integer.parseInt(curr_exp)  % 12);
+                                    bus_numof_month.setText(year +" year ,"+ month+" month ");
                                     ofc_restype.setText(office_setupstr);
                                     offshoppincode.setText(office_pincode);
                                     business_vintageproof.setText(vintage_docstr);
@@ -1787,8 +2136,21 @@ public class Viability_Data_revamp extends SimpleActivity {
                                     companynametxt.setText(cmpny_name);
                                     designationtxt.setText(designation);
                                     cmpny_pintxt.setText(cmpny_pincode);
-                                    totalexp_txt.setText(total_exp);
-                                    current_exptxt.setText(curr_exp);
+                                    String year,month,year1,month1;
+
+                                    year = String.valueOf(Integer.parseInt(total_exp) / 12);
+                                    month = String.valueOf(Integer.parseInt(total_exp)  % 12);
+
+                                    // totalexp_txt.setText(total_exp);
+                                    totalexp_txt.setText(year +" year ,"+ month+" month ");
+
+                                    year1 = String.valueOf(Integer.parseInt(curr_exp) / 12);
+                                    month1 = String.valueOf(Integer.parseInt(curr_exp)  % 12);
+                                    //current_exptxt.setText(curr_exp);
+                                    current_exptxt.setText(year1 +" year ,"+ month1+" month ");
+
+                                    companyarea_txt.setText(area);
+
 
                                     income_proof_typestr = Applicant_object.getString("income_proof_typestr");
                                     salaryproof_txt.setText(income_proof_typestr);
@@ -1940,7 +2302,11 @@ public class Viability_Data_revamp extends SimpleActivity {
 
                                     bus_vocationtype.setText(work_vocationstr);
                                     bus_avargeincome.setText(month_income);
-                                    bus_numof_month.setText(curr_exp);
+                                    String year,month,year1,month1;
+
+                                    year = String.valueOf(Integer.parseInt(curr_exp) / 12);
+                                    month = String.valueOf(Integer.parseInt(curr_exp)  % 12);
+                                    bus_numof_month.setText(year +" year ,"+ month+" month ");
                                     ofc_restype.setText(office_setupstr);
                                     offshoppincode.setText(office_pincode);
                                     business_vintageproof.setText(vintage_docstr);

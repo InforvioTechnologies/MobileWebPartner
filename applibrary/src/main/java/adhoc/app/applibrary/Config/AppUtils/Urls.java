@@ -18,12 +18,17 @@ public class Urls {
 
     /*Live*/
 
-    public static String Urls = "https://cscapi.propwiser.com/mobile/mortgage_updated_test.php?call=";
+  /*  public static String Urls = "https://cscapi.propwiser.com/mobile/mortgage_updated_test.php?call=";
     public static String Urls_step = "https://cscapi.propwiser.com/mobile/partner_loanapi_test.php?call=";
     public static String Urls_phamplet = "https://cscapi.propwiser.com/mobile/pamphlet_distributor_test.php?call=";
+    public static  String Url_version = "http://cscapi.propwiser.com/mobile/appversion.php?call=";*/
+
+    public static String Urls = "https://apiuat.loanwiser.in/mobile/mortgage_updated_test.php?call=";
+    public static String Urls_step = "https://apiuat.loanwiser.in/mobile/partner_loanapi_test.php?call=";
+    public static String Urls_phamplet = "https://apiuat.loanwiser.in/mobile/pamphlet_distributor_test.php?call=";
 
 
-    public static  String Url_version = "http://cscapi.propwiser.com/mobile/appversion.php?call=";
+    public static  String Url_version = "https://apiuat.loanwiser.in/mobile/appversion.php?call=";
 
     public static String VERSION_CHECK_POST = Url_version + "version";
     public static String BUSINESS_reg_POST  = Urls + "register";
@@ -80,6 +85,7 @@ public class Urls {
     public static final String FILE_UPLOAD_URL = Urls + "multi_doc_scan";
     public static String IMG_UPLOAD_DOCUMENT_POST = Urls + "multi_doc";
     public static String PDF_UPLOAD_DOCUMENT_POST = Urls + "multi_docpdf";
+
     public static String APPLICATION_UPLOAD_POST = Urls + "applicationform_upload";
     public static String OFFER_POST = Urls + "getloanofferresult";
     public static String TRACK_POST = Urls + "gettrack_status";
@@ -113,6 +119,7 @@ public class Urls {
     public static String CAMERA_IMAGE_Upload = Urls_step + "multi_doc";
     public static String PDF_Document_Upload = Urls_step + "multi_docpdf";
     public static String DOC_IMAGE_VIEW = Urls_step + "docu_view";
+    public static String validate_upldoc = Urls_step + "validate_upldoc";
 
     public static String Bank_Statement_Upload = Urls_step + "bank_statement_upload";
 
@@ -126,6 +133,7 @@ public class Urls {
     public static String FIREBASE_TOKEN = Urls_step + "update_b2btoken";
     public static String UPDATE_PAYMENT_STATUES = Urls_step + "update_paymentstatus";
     public static String paymentlink_check = Urls_step + "paymentlink_check";
+    public static String URL_Viability_Detail_Show = Urls_step + "view_viability_revamp";
 
 
     public static String CRIF_SCORE_CHECK = Urls_step + "get_crif_score";
@@ -134,6 +142,7 @@ public class Urls {
 
     public static String SUBMIT_TO_LOANWIER = Urls_step + "submit_loanwiser";
     public static String viabilitysave = Urls_step + "viabilitysave";
+    public static String viable_rule_check = Urls_step + "viable_rule_check";
     public static String COIN_Transaction = Urls_step + "coins_transaction";
     public static String balance_wallentcoins = Urls_step + "balance_wallentcoins";
 

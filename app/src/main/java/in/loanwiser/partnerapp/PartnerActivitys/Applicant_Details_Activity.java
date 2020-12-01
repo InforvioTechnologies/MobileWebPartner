@@ -137,7 +137,7 @@ public class Applicant_Details_Activity extends SimpleActivity {
 
 
                 String sub_categoryid = "3";
-                String Loantype_name = "Personal Loan [Unsecured]";
+                String Loantype_name = "Personal Loan (Salaried)";
                 Pref.putLoanTypename(mCon,Loantype_name);
                 Pref.putLoanTypeSub(mCon,sub_categoryid);
                 String Loantype = "2";
@@ -165,7 +165,7 @@ public class Applicant_Details_Activity extends SimpleActivity {
 
                 String Loantype = "2";
                 Pref.putLoanType(mCon,Loantype);
-                String Loantype_name = "Business Loan (MSME)";
+                String Loantype_name = "Business Loan (Self Employed)";
                 Pref.putLoanTypename(mCon,Loantype_name);
 
                 Intent intent = new Intent(Applicant_Details_Activity.this, Step_Completion_Screen.class);

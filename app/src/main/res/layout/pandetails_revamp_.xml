@@ -155,7 +155,7 @@
                     style="@style/LorgeText2"
                     android:textColor="@color/colorPrimaryDark"
                     android:textColorHint="@color/colorPrimaryDark"
-                    android:text="Employment Type"
+                    android:text="@string/Employment_Details"
                     android:layout_height="wrap_content" />
             </LinearLayout>
 

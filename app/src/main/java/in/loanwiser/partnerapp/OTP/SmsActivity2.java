@@ -78,7 +78,7 @@ public class SmsActivity2 extends AppCompatActivity {
     private long totalTimeCountInMilliseconds;
     private long timeBlinkInMilliseconds;
     private boolean blink;
-    private AppCompatTextView verif,pls_enter,tvTimeCount;
+    private AppCompatTextView verif,pls_enter,tvTimeCount,resend_otp;
     private String S_pinview;
     String OTP, opt_bundle,no_bundle;
     private AlertDialog progressDialog;
@@ -215,6 +215,7 @@ public class SmsActivity2 extends AppCompatActivity {
     }
 
     private void initUI() {
+        resend_otp = (AppCompatTextView) findViewById(R.id.resend_otp);
         textViewShowTime = (AppCompatTextView) findViewById(R.id.tvTimeCount);
         appCompatButtonSubmit = (AppCompatButton) findViewById(R.id.appCompatButtonGen_OTP);
         verif = (AppCompatTextView) findViewById(R.id.verif);
@@ -249,6 +250,14 @@ public class SmsActivity2 extends AppCompatActivity {
 
             }
         });
+
+        resend_otp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Login_POST();
+            }
+        });
+
     }
 
    /* public void recivedSms(String message)
@@ -352,6 +361,65 @@ public class SmsActivity2 extends AppCompatActivity {
         AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
     }
 
+    private void Login_POST() {
+        JSONObject jsonObject =new JSONObject();
+        JSONObject J= null;
+        try {
+            J =new JSONObject();
+            J.put(Params.mobile_no,no_bundle);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        String data  = String.valueOf(J);
+        Log.d("Request :", data);
+        progressDialog.show();
+        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, Urls.BUSINESS_login_POST, J,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        progressDialog.dismiss();
+                        String JO_data  = String.valueOf(response);
+                        Log.d("Request :", JO_data.toString());
+                        try {
+                            if (response.getString(Params.status).equals(Params.ok)){
+                                String otp_new =  response.getString(Params.otp);
+                                setTimer();
+                                startTimer();
+                                Toast.makeText(mCon,"OTP will be sent to the mobile number",Toast.LENGTH_SHORT).show();
+                                // Objs.a.showToast(mCon,"OTP will be sent to the mobile number");
+                            }
+                            if (response.getString(Params.status).equals(Params.error)){
+                                //  Objs.a.showToast(mCon,"Mobile number is not registered. Please register it");
+                                Toast.makeText(mCon,"Mobile number is not registered. Please register it",Toast.LENGTH_SHORT).show();
+                            }
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                VolleyLog.d(TAG, "Error: " + error.getMessage());
+                Toast.makeText(getApplicationContext(),error.getMessage(),Toast.LENGTH_SHORT).show();
+                progressDialog.dismiss();
+            }
+        }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("content-type", "application/json");
+                return headers;
+            }
+        };
+
+        jsonObjReq.setRetryPolicy(new DefaultRetryPolicy(
+                0,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
+    }
 
     private void Firebase_Registration(String brb_userid) {
 
@@ -441,6 +509,7 @@ public class SmsActivity2 extends AppCompatActivity {
             public void onFinish() {
                 // this function will be called when the timecount is finished
                 textViewShowTime.setText("Time up!");
+                resend_otp.setVisibility(View.VISIBLE);
                 textViewShowTime.setVisibility(View.VISIBLE);
             }
         }.start();

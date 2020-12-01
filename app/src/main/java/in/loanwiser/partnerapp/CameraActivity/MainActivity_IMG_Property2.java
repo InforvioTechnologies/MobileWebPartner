@@ -17,9 +17,13 @@ import android.os.Handler;
 import android.os.StrictMode;
 import android.provider.MediaStore;
 import com.google.android.material.snackbar.Snackbar;
+
+import androidx.appcompat.widget.AppCompatTextView;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.appcompat.app.AlertDialog;
+
+import android.provider.OpenableColumns;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
@@ -70,6 +74,8 @@ import adhoc.app.applibrary.Config.AppUtils.Urls;
 import adhoc.app.applibrary.Config.AppUtils.VolleySignleton.AppController;
 import dmax.dialog.SpotsDialog;
 import in.loanwiser.partnerapp.Documents.Applicant_Doc_Details_Property;
+import in.loanwiser.partnerapp.Documents.Applicant_Doc_Details_revamp;
+import in.loanwiser.partnerapp.Documents.Document_Details;
 import in.loanwiser.partnerapp.Documents.FilePath;
 import in.loanwiser.partnerapp.Documents.MyCommand;
 import in.loanwiser.partnerapp.Documents.SingleUploadBroadcastReceiver;
@@ -135,7 +141,7 @@ public class MainActivity_IMG_Property2 extends SimpleActivity implements Single
   //  String id,doc_typename,docid,class_id,type,user_type,transaction_id;
     private Uri fileUri;
 
-
+    AppCompatTextView pdf_name;
     private Bitmap bitmap,photo;
     @SuppressLint("NewApi")
     @Override
@@ -317,6 +323,9 @@ public class MainActivity_IMG_Property2 extends SimpleActivity implements Single
         imgSinglePick = (ImageView) findViewById(R.id.imgSinglePick);
         imgSinglePick1 = (ImageView) findViewById(R.id.imgSinglePick1);
         upload = (Button) findViewById(R.id.upload);
+
+        pdf_name = (AppCompatTextView) findViewById(R.id.pdf_name);
+
         upload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -497,6 +506,11 @@ public class MainActivity_IMG_Property2 extends SimpleActivity implements Single
 
                 imgSinglePick1.setVisibility(View.VISIBLE);
                 imgSinglePick.setVisibility(View.GONE);
+
+                String path = FilePath.getPath(this, filePath);
+
+                String  fileName = getFileName(filePath);
+                pdf_name.setText(fileName);
             }
             //  String path = FilePath.getPath(this, filePath);
             //  Toast.makeText(MainActivity_Document.this,"PDF " + path ,Toast.LENGTH_SHORT).show();
@@ -576,6 +590,28 @@ public class MainActivity_IMG_Property2 extends SimpleActivity implements Single
             return null;
     }
 
+    public String getFileName(Uri uri) {
+        String result = null;
+        if (uri.getScheme().equals("content")) {
+            Cursor cursor = getContentResolver().query(uri, null, null, null, null);
+            try {
+                if (cursor != null && cursor.moveToFirst()) {
+                    result = cursor.getString(cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME));
+                }
+            } finally {
+                cursor.close();
+            }
+        }
+        if (result == null) {
+            result = uri.getPath();
+            int cut = result.lastIndexOf('/');
+            if (cut != -1) {
+                result = result.substring(cut + 1);
+            }
+        }
+        return result;
+    }
+
     public String getStringImage(Bitmap bmp){
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         bmp.compress(Bitmap.CompressFormat.JPEG, 100, baos);
@@ -632,6 +668,13 @@ public class MainActivity_IMG_Property2 extends SimpleActivity implements Single
                         params.put(Params.user_type, user_type);
                         params.put(Params.transaction_id, transaction_id);
                         params.put(Params.img_url, singleimage);
+
+                        Log.e("doc_id",id);
+                        Log.e("doc_typename",doc_typename);
+                        Log.e("class_id",class_id);
+                        Log.e("user_type",user_type);
+                        Log.e("transaction_id",transaction_id);
+
                         return params;
                     }
                 };
@@ -699,14 +742,16 @@ public class MainActivity_IMG_Property2 extends SimpleActivity implements Single
                                     JSONObject j = new JSONObject(response);
                                     status = j.getString(Params.status);
 
-
                                     count = count-1;
                                     Log.d("Galarel path length", String.valueOf(count));
                                     Objs.a.showToast(mCon, "Successfully uploaded" +"\n"+ "Please wait for all Document upload");
                                     if(count == 0)
                                     {
                                         applicant_name = Pref.getapplicant_name(mCon);
-                                        Objs.ac.StartActivityPutExtra(mCon, Applicant_Doc_Details_Property.class, Params.user_type,user_type, Params.applicant_name,applicant_name);
+                                        Toast.makeText(mCon, "Successfully uploaded", Toast.LENGTH_SHORT).show();
+                                        Objs.ac.StartActivityPutExtra(mCon, Applicant_Doc_Details_revamp.class, Params.user_type,user_type);
+                                        finish();
+                                      //  Objs.ac.StartActivityPutExtra(mCon, Applicant_Doc_Details_Property.class, Params.user_type,user_type, Params.applicant_name,applicant_name);
                                     }
                                    // Objs.a.showToast(mCon, "Successfully uploaded" +"\n"+ "Please wait for all Document upload");
                                 } catch (JSONException e) {
@@ -730,6 +775,13 @@ public class MainActivity_IMG_Property2 extends SimpleActivity implements Single
                                 params.put(Params.transaction_id, transaction_id);
                                 params.put(Params.is_mobileupload, "4");
                                 params.put(Params.img_url, encodedString);
+
+                                Log.e("doc_id",id);
+                                Log.e("doc_typename",doc_typename);
+                                Log.e("class_id",class_id);
+                                Log.e("user_type",user_type);
+                                Log.e("transaction_id",transaction_id);
+
                                 return params;
                             }
                         };
@@ -785,6 +837,12 @@ public class MainActivity_IMG_Property2 extends SimpleActivity implements Single
                         .setMaxRetries(2)
                         .startUpload(); //Starting the upload
                 Log.e("ComeON", "Upload multipart 3");
+
+                Log.e("doc_id",id);
+                Log.e("doc_typename",doc_typename);
+                Log.e("class_id",class_id);
+                Log.e("user_type",user_type);
+                Log.e("transaction_id",transaction_id);
             } catch (Exception exc) {
                 Log.e("AndroidUploadService", exc.getMessage(), exc);
                 Toast.makeText(this, exc.getMessage(), Toast.LENGTH_SHORT).show();
@@ -832,7 +890,9 @@ public class MainActivity_IMG_Property2 extends SimpleActivity implements Single
             progressDialog.dismiss();
             Objs.a.showToast(mCon, "Successfully uploaded");
             applicant_name = Pref.getapplicant_name(mCon);
-            Objs.ac.StartActivityPutExtra(mCon,Applicant_Doc_Details_Property.class, Params.user_type,user_type, Params.applicant_name,applicant_name);
+           // Objs.ac.StartActivityPutExtra(mCon,Applicant_Doc_Details_Property.class, Params.user_type,user_type, Params.applicant_name,applicant_name);
+            Intent intent = new Intent(mCon, Applicant_Doc_Details_revamp.class);
+            startActivity(intent);
             finish();
             // Send_Reload(app_id);
 

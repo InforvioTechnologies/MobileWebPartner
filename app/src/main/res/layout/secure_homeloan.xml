@@ -25,6 +25,7 @@
                     android:text="@string/prop_det"
                     android:textStyle="bold"
                     android:layout_margin="10dp"
+                    android:visibility="gone"
                     android:textColor="#00bfff" />
 
 
@@ -37,10 +38,21 @@
                     android:layout_margin="10dp"
                     android:layout_marginTop="10dp">
 
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical">
+                        android:orientation="vertical"
+                        android:layout_marginBottom="10dp">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/property_detailhead"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/prop_det"
+                            android:textStyle="bold"
+                            android:layout_margin="10dp"
+                            android:textColor="#00bfff" />
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -51,6 +63,7 @@
                             android:layout_weight="1">
 
                             <androidx.appcompat.widget.AppCompatTextView
+                                android:id="@+id/property_identexthead"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="@string/property_iden"
@@ -68,7 +81,11 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:textSize="16sp"
-                                    tools:ignore="DuplicateIds" />
+                                    android:textColor="@color/text_blue"
+                                    android:textAlignment="center"
+                                    tools:ignore="DuplicateIds"
+                                    android:textStyle="bold"
+                                    android:layout_gravity="center_horizontal" />
 
                             </LinearLayout>
 
@@ -224,8 +241,15 @@
                                         android:textSize="16sp" />
 
                                 </LinearLayout>
-
                             </LinearLayout>
+
+                       <!--     <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="10dp">
+
+                            </LinearLayout>-->
+
                         </LinearLayout>
 
                     </LinearLayout>

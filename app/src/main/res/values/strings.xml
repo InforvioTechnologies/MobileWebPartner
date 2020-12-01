@@ -413,7 +413,7 @@
 
     <string name="Current_Address">Current Address</string>
     <string name="Office_Address">Office Address</string>
-    <string name="Employment_Details">Employment Details</string>
+    <string name="Employment_Details">Employement Details</string>
     <string name="Income">Income from other sources</string>
     <string name="Existing_Loan">Existing Loan and EMI Details</string>
 
@@ -755,7 +755,7 @@
     <string name="imp_not">Important Note</string>
     <string name="imp_not_des1">Before you proceed to the next step, you need to have following details:</string>
     <string name="imp_not_des2">. Customers Pan Card Details </string>
-    <string name="imp_not_des3"> . Last 6 Months Bank Statement in PDF Format (Optional) </string>
+    <string name="imp_not_des3"> . Last 6 Months Bank Statement in PDF Format</string>
 
     <string name="sendpayment_linkcus">Send Payment Link to Customer</string>
     <string name="sendpayment_link">SEND PAYMENT LINK</string>
@@ -781,6 +781,7 @@
 
     <string name="save_later">SAVE FOR LATER</string>
     <string name="stepone_submit">Are you sure you want to Submit at Step1</string>
+    <string name="stepone_submit1">Please make sure all the entered details are correct, Once you click submit, you will not be able to edit it again</string>
     <string name="stepone_desc">if you proceed to step2 and step3 you can receive more payout and chance to earn instant cash benefit. If you submit at this stage.you\'ll only get payout percentage for the step 1 completion,and only when the loan is disbursed.</string>
     <string name="stepone_desc1">if you proceed to step3 you can receive more payout and chance to earn instant cash benefit. If you submit at this stage.you\'ll only get payout percentage for the step 1 and step 2 completion,and only when the loan is disbursed.</string>
     <string name="no_cancel">No, Cancel</string>
@@ -932,7 +933,7 @@
     <string name="curent_respincode">Current Residence Pincode  :</string>
     <string name="curr_resarea">Current Residence Area  :</string>
     <string name="curr_restype">Current Residence Type  :</string>
-    <string name="employ_detail">Employement Details</string>
+    <string name="employ_detail">Employment Details</string>
     <string name="salarycredit_method">Salary Credit Method   :</string>
 
     <string name="company_type">Company Type  :</string>
@@ -963,5 +964,14 @@
     <string name="cost_estimate1">Cost Estimate   :</string>
     <string name="monthly_netsal">Monthly Net Salary  :</string>
     <string name="salary_proof1">Salary Proof  :</string>
+
+
+    <string name="agefailure">Sorry.! Applicant age Should not be less than 21 for applying loan with us.</string>
+    <string name="further_step">We cannot process this application further</string>
+    <string name="gobackdas">Go Back to Dashboard</string>
+    <string name="income_failure">Sorry.! Income should not be less than \u20B9 12,000 for applying loan with us.</string>
+    <string name="location_failure">Sorry.! Currently we have no partner banks available in applicant\'s location</string>
+    <string name="onboard_soon">We are On-boarding as many new banks as possible. Stay tuned.! </string>
+    <string name="loanwiser">LoanWiser</string>
 
 </resources>

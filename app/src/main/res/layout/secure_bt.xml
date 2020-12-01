@@ -19,13 +19,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/prop_det"
-                    android:textStyle="bold"
-                    android:layout_margin="10dp"
-                    android:textColor="#00bfff" />
+
 
 
                 <androidx.cardview.widget.CardView
@@ -40,7 +34,17 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical">
+                        android:orientation="vertical"
+                        android:layout_marginBottom="10dp">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/securebt_propertydetails"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/prop_det"
+                            android:textStyle="bold"
+                            android:layout_margin="10dp"
+                            android:textColor="#00bfff" />
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -52,6 +56,7 @@
                             android:layout_weight="1">
 
                             <androidx.appcompat.widget.AppCompatTextView
+                                android:id="@+id/securebt_iden"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="@string/property_iden"
@@ -76,6 +81,7 @@
                                 android:layout_weight="1">
 
                                 <androidx.appcompat.widget.AppCompatTextView
+                                    android:id="@+id/securebt_title"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="@string/property_title1"
@@ -86,14 +92,15 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:orientation="horizontal"
-
                                     android:layout_weight="1">
 
                                     <androidx.appcompat.widget.AppCompatTextView
                                         android:id="@+id/curr_resarea"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:textSize="14sp" />
+                                        android:textSize="16sp"
+                                        android:textColor="@color/text_blue"
+                                        android:textStyle="bold" />
 
                                 </LinearLayout>
 
@@ -115,6 +122,7 @@
                                 android:layout_weight="1">
 
                                 <androidx.appcompat.widget.AppCompatTextView
+                                    android:id="@+id/securebt_pin"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="@string/property_pin1"
@@ -131,7 +139,9 @@
                                         android:id="@+id/curr_restype"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:textSize="14sp" />
+                                        android:textSize="16sp"
+                                        android:textStyle="bold"
+                                        android:textColor="@color/text_blue"/>
 
                                 </LinearLayout>
 
@@ -153,6 +163,7 @@
                                 android:layout_weight="1">
 
                                 <androidx.appcompat.widget.AppCompatTextView
+                                    android:id="@+id/securebt_proptype"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="@string/property_type12"
@@ -169,7 +180,9 @@
                                         android:id="@+id/prop_type"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:textSize="14sp" />
+                                        android:textSize="16sp"
+                                        android:textColor="@color/text_blue"
+                                        android:textStyle="bold"/>
 
                                 </LinearLayout>
 
@@ -190,6 +203,7 @@
                                 android:layout_weight="1">
 
                                 <androidx.appcompat.widget.AppCompatTextView
+                                    android:id="@+id/securebt_propertyprice"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="@string/property_price12"
@@ -206,7 +220,9 @@
                                         android:id="@+id/prop_price"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:textSize="14sp" />
+                                        android:textSize="16sp"
+                                        android:textStyle="bold"
+                                        android:textColor="@color/text_blue"/>
 
                                 </LinearLayout>
 

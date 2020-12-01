@@ -10,12 +10,16 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.thekhaeng.pushdownanim.PushDownAnim;
+
 import adhoc.app.applibrary.Config.AppUtils.Objs;
 import in.loanwiser.partnerapp.My_Earnings.My_Earnings;
 import in.loanwiser.partnerapp.PDF_Dounloader.PermissionUtils;
 import in.loanwiser.partnerapp.Partner_Statues.DashBoard_new;
 import in.loanwiser.partnerapp.R;
 import in.loanwiser.partnerapp.SimpleActivity;
+
+import static com.thekhaeng.pushdownanim.PushDownAnim.MODE_STATIC_DP;
 
 public class Step_Completion_Screen extends SimpleActivity {
 
@@ -58,13 +62,29 @@ public class Step_Completion_Screen extends SimpleActivity {
                 }
             }
         });
-        proceed_button.setOnClickListener(new View.OnClickListener() {
+       /* proceed_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent=new Intent(Step_Completion_Screen.this,Lead_Crration_Activity.class);
                 startActivity(intent);
             }
-        });
+        });*/
+
+
+        PushDownAnim.setPushDownAnimTo( proceed_button )
+                .setDurationPush( PushDownAnim.DEFAULT_PUSH_DURATION )
+                // .setScale(MODE_SCALE,0.89f)
+                .setScale(MODE_STATIC_DP,8)
+                .setDurationRelease( PushDownAnim.DEFAULT_RELEASE_DURATION )
+                .setInterpolatorPush( PushDownAnim.DEFAULT_INTERPOLATOR )
+                .setInterpolatorRelease( PushDownAnim.DEFAULT_INTERPOLATOR )
+                .setOnClickListener( new View.OnClickListener(){
+                    @Override
+                    public void onClick( View view ){
+                        Intent intent=new Intent(Step_Completion_Screen.this,Lead_Crration_Activity.class);
+                        startActivity(intent);
+                    }
+                } );
 
     }
 }

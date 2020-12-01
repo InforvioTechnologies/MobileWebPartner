@@ -4,8 +4,11 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+
+import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.AppCompatTextView;
 import androidx.cardview.widget.CardView;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -37,6 +40,7 @@ import adhoc.app.applibrary.Config.AppUtils.VolleySignleton.AppController;
 import dmax.dialog.SpotsDialog;
 import in.loanwiser.partnerapp.CameraActivity.DocGridView_List;
 import in.loanwiser.partnerapp.CameraActivity.ManiActivity_Image2;
+import in.loanwiser.partnerapp.PartnerActivitys.Home;
 import in.loanwiser.partnerapp.PartnerActivitys.SimpleActivity;
 import in.loanwiser.partnerapp.R;
 
@@ -45,12 +49,13 @@ public class Document_Details extends SimpleActivity {
     private Context mCon = this;
     String JSON;
     private String tag_json_obj = "jobj_req", tag_json_arry = "jarray_req";
-    private AppCompatTextView choose_one;
+    private AppCompatTextView prop_name,prop_name_matatory,upload_any_one;
+    private AppCompatButton submit_update_status;
     String doc_id,transaction_id,applicant_empstatus,classname1,type;
     private AlertDialog progressDialog;
     private String TAG = Document_Details.class.getSimpleName();
     MenuItem chat;
-    String jsonArray,Proof_DOC_KEY_;
+    String jsonArray,Proof_DOC_KEY_,document_req;
 
 
     @Override
@@ -64,18 +69,46 @@ public class Document_Details extends SimpleActivity {
         classname1 =  Objs.a.getBundle(Document_Details.this, Params.class_name);
         Pref.putapplicant_name(mCon,classname1);
 
-        choose_one =(AppCompatTextView)findViewById(R.id.choose_one);
-        Objs.a.NormalFontStyle(mCon,choose_one);
+        prop_name =(AppCompatTextView)findViewById(R.id.prop_name);
+        prop_name_matatory =(AppCompatTextView)findViewById(R.id.prop_name_matatory);
+        upload_any_one =(AppCompatTextView)findViewById(R.id.upload_any_one);
+        submit_update_status =(AppCompatButton)findViewById(R.id.submit_update_status1);
+
 
         doc_id =  Pref.getDOC(mCon);
         transaction_id = Pref.getTID(mCon);
         applicant_empstatus =  Pref.getEID(mCon);
         Proof_DOC_KEY_ =  Pref.getDOCKEY(mCon);
-        initTools1(Proof_DOC_KEY_);
+        initTools1("Document Upload");
+
+        prop_name.setText(Proof_DOC_KEY_);
         Intent intent = getIntent();
         jsonArray = intent.getStringExtra("jsonArray");
+        document_req = intent.getStringExtra("document_req");
 
+        if(document_req.equals("0"))
+        {
+            prop_name_matatory.setText("(Highly Increases Loan Approval)");
+            prop_name_matatory.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.green));
+
+        }else
+        {
+            prop_name_matatory.setText("(Mandatory Document)");
+            prop_name_matatory.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.green));
+        }
+        upload_any_one.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.pending_color));
         type =  Pref.getAEID(mCon);
+
+        submit_update_status.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Log.e("the value","y not working");
+                Intent intent = new Intent(mCon, Applicant_Doc_Details_revamp.class);
+                startActivity(intent);
+                finish();
+            }
+        });
 
        /* try {
             JSONArray ja = new JSONArray(jsonArray);

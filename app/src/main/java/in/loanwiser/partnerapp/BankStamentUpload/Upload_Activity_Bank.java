@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.annotation.SuppressLint;
 import android.content.ContentUris;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
@@ -51,8 +52,13 @@ import dmax.dialog.SpotsDialog;
 import in.loanwiser.partnerapp.Documents.SingleUploadBroadcastReceiver;
 import in.loanwiser.partnerapp.PartnerActivitys.Dashboard_Activity;
 import in.loanwiser.partnerapp.PartnerActivitys.SimpleActivity;
+import in.loanwiser.partnerapp.Partner_Statues.DashBoard_new;
 import in.loanwiser.partnerapp.R;
+import in.loanwiser.partnerapp.Step_Changes_Screen.DocumentChecklistActivity;
 import in.loanwiser.partnerapp.Step_Changes_Screen.Document_Checklist_Details_type;
+import in.loanwiser.partnerapp.User_Account.Welcome_Page;
+
+import static adhoc.app.applibrary.Config.AppUtils.Objs.a;
 
 public class Upload_Activity_Bank extends SimpleActivity implements View.OnClickListener, SingleUploadBroadcastReceiver.Delegate {
 
@@ -61,9 +67,6 @@ private static final int PICK_PDF_REQUEST =1 ;
         ListView listview;
 
         Button upload,submit;
-
-
-
 
 
 
@@ -305,7 +308,7 @@ public void onClick(View v) {
                                         }
                                         else
                                         {
-
+                                                ExitAlert(Upload_Activity_Bank.this);
                                                 Toast.makeText(getApplicationContext(), "Please select the PDF file from the File Directory", Toast.LENGTH_SHORT).show();
                                         }
 
@@ -456,8 +459,8 @@ public void uploadMultipart() {
                 if(response.equals("200")){
                         progressDialog.dismiss();
 
+                        ExitAlert1(Upload_Activity_Bank.this);
 
-                        Bank_statues();
                         // Send_Reload(app_id);
 
                         //   getContentResolver().delete(uri, null, null);
@@ -588,28 +591,9 @@ public void uploadMultipart() {
                                                                 Params.applicant_id,applicant_id1,
                                                                 Params.sub_taskid,subtask_id, Params.Applicant_status,_Emp_staus_jsonArray,
                                                                 Params.loan_type_id,loan_type_id,Params.loan_type,loan_type);*/
-                                                        Intent intent = new Intent(Upload_Activity_Bank.this, Document_Checklist_Details_type.class);
+                                                        Intent intent = new Intent(Upload_Activity_Bank.this, DocumentChecklistActivity.class);
                                                         intent.putExtra("jsonArray", _Emp_staus_jsonArray.toString());
                                                         startActivity(intent);
-
-                              /*  if(payment.equals("error"))
-                                {
-                                    Intent intent = new Intent(Dashboard_Activity.this, Payment_Details_Activity.class);
-                                    startActivity(intent);
-                                    finish();
-                                }else
-                                {
-                                    Log.d("applicant_id1",loan_type);
-                                    Objs.ac.StartActivityPutExtra(mCon, Home.class,
-                                            Params.user_id,user_id,
-                                            Params.transaction_id,transaction_id1,
-                                            Params.applicant_id,applicant_id1,
-                                            Params.sub_taskid,subtask_id, Params.Applicant_status,_Emp_staus_jsonArray,
-                                            Params.loan_type_id,loan_type_id,Params.loan_type,loan_type);
-                                    finish();
-
-                                }*/
-
 
                                                 }
 
@@ -666,4 +650,35 @@ protected void onResume() {
         uploadReceiver.register(this);
 
         }
+
+
+        public void ExitAlert(Context context) {
+                androidx.appcompat.app.AlertDialog.Builder builder = new  androidx.appcompat.app.AlertDialog.Builder(context, adhoc.app.applibrary.R.style.MyAlertDialogStyle);
+                builder.setTitle(context.getResources().getString(adhoc.app.applibrary.R.string.attention));
+                builder.setIcon(context.getResources().getDrawable(adhoc.app.applibrary.R.drawable.ic_info_outline_black_24dp));
+                builder.setMessage("Unable get correct pdf format. Please select the correct PDF file from File Directory/Internal Storage.");
+                builder.setNegativeButton("Okay", null);
+
+                androidx.appcompat.app.AlertDialog alert = builder.create();
+                alert.show();
+                a.DialogStyle(context, alert);
         }
+
+        public void ExitAlert1(Context context) {
+                androidx.appcompat.app.AlertDialog.Builder builder = new  androidx.appcompat.app.AlertDialog.Builder(context, adhoc.app.applibrary.R.style.MyAlertDialogStyle);
+                builder.setTitle(context.getResources().getString(adhoc.app.applibrary.R.string.attention));
+                builder.setIcon(context.getResources().getDrawable(R.drawable.ic_check));
+                builder.setMessage("Bank Statement Uploaded Sucessfully.");
+                builder.setPositiveButton("Okay", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                                Bank_statues();
+                        }
+                });
+                androidx.appcompat.app.AlertDialog alert = builder.create();
+                alert.show();
+                a.DialogStyle(context, alert);
+        }
+
+}
+

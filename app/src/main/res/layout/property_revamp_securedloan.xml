@@ -299,7 +299,7 @@
                             android:layout_height="wrap_content"
                             android:textSize="16sp"
                             android:inputType="number"
-                            android:imeOptions="actionNext"
+                            android:imeOptions="actionDone"
                             android:id="@+id/plot_Value"
                             android:textColor="@color/colorPrimaryDark"/>
                     </LinearLayout>
@@ -343,7 +343,7 @@
                             android:layout_height="wrap_content"
                             android:textSize="16sp"
                             android:inputType="number"
-                            android:imeOptions="actionNext"
+                            android:imeOptions="actionDone"
                             android:id="@+id/property_price_edt"
                             android:textColor="@color/colorPrimaryDark"/>
                     </LinearLayout>
@@ -387,7 +387,7 @@
                             android:layout_height="wrap_content"
                             android:textSize="16sp"
                             android:inputType="number"
-                            android:imeOptions="actionNext"
+                            android:imeOptions="actionDone"
                             android:id="@+id/cost_estimation_edit_text"
                             android:textColor="@color/colorPrimaryDark"/>
                     </LinearLayout>

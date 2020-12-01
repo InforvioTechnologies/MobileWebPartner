@@ -207,6 +207,12 @@
             android:name=".Step_Changes_Screen.Eligibility_HL_New"
             android:theme="@style/NoAction2"
             android:windowSoftInputMode="stateHidden" />
+
+        <activity
+            android:name=".Step_Changes_Screen.DocumentChecklistActivity"
+            android:theme="@style/NoAction2"
+            android:windowSoftInputMode="stateHidden" />
+
         <activity
             android:name=".Step_Changes_Screen.Loan_Viyability_Check_Activity"
             android:theme="@style/NoAction2"
@@ -389,6 +395,12 @@
             android:name=".Documents.Applicant_Doc_Details"
             android:theme="@style/NoAction2"
             android:windowSoftInputMode="stateHidden" />
+
+        <activity
+            android:name=".Documents.Applicant_Doc_Details_revamp"
+            android:theme="@style/NoAction2"
+            android:windowSoftInputMode="stateHidden" />
+
         <activity
             android:name=".Documents.Document_Details"
             android:theme="@style/NoAction2"

@@ -257,7 +257,6 @@ public class Document_Checklist_Details_type extends SimpleActivity {
             list = list1;
         }
 
-
         @Override
         public void onAttachedToRecyclerView(RecyclerView recyclerView) {
             super.onAttachedToRecyclerView(recyclerView);

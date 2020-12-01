@@ -281,7 +281,7 @@
                                     android:inputType="text"
                                     android:textColor="@color/colorPrimaryDark"
                                     android:textColorHint="@color/colorPrimaryDark"
-                                    android:hint="Name (as in pan card)"
+                                    android:hint="Applicant name"
                                     android:layout_height="wrap_content" />
                             </LinearLayout>
                             <LinearLayout

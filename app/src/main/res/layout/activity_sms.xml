@@ -74,9 +74,10 @@
                             android:gravity="center"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent">
-
-
-
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
                             <com.rengwuxian.materialedittext.MaterialEditText
                                 android:id="@+id/editTextOtp"
                                 android:layout_width="match_parent"
@@ -90,21 +91,25 @@
                                 app:met_iconLeft="@drawable/ic_mobile"
                                 app:met_iconPadding="@dimen/text_size"
                                 app:met_textColorHint="@color/black" />
-
-                            <androidx.appcompat.widget.AppCompatEditText
-                                android:visibility="gone"
-                                android:hint="@string/otp"
-                                android:inputType="numberPassword"
-                                android:imeOptions="actionNext"
-                                android:maxLength="5"
+                            </LinearLayout>
+                            <LinearLayout
+                                android:layout_gravity="end"
+                                android:orientation="vertical"
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginBottom="25dp"/>
+                                android:layout_height="wrap_content">
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:visibility="gone"
+                                    android:id="@+id/resend_otp"
+                                    android:gravity="end"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="Resend Otp"
+                                    android:textSize="10dp"
+                                    android:textColor="@color/colorPrimary"/>
+
+                            </LinearLayout>
 
                         </LinearLayout>
-
-
-
                     </LinearLayout>
 
 

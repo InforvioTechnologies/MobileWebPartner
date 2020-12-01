@@ -53,6 +53,7 @@ public final class Pref {
     public static String DOC_Status = "DOC_Status";
     public static String IDENTIFIED = "IDENTIFIED";
     public static String CoAPPAVAILABLE = "CoAPPAVAILABLE";
+    public static String Property_id = "Property_id";
     public static String ResidenceType = "ResidenceType";
     public static String COEMPTYPE = "COEMPTYPE";
     public static String COAPPSALARYTYPE = "COAPPSALARYTYPE";
@@ -174,6 +175,21 @@ public static void putapplicant_name(final Context context, String aUserId) {
         SharedPreferences prefs = Pref.get(context);
         SharedPreferences.Editor editor = prefs.edit();
         editor.remove(CoAPPAVAILABLE);
+        editor.commit();
+    }
+
+    public static void putProperty_id(final Context context, String aUserId) {
+        Pref.putPref(context, Property_id, aUserId);
+    }
+
+    public static String getProperty_id(final Context context) {
+        return Pref.getPref(context, Property_id, null);
+    }
+
+    public static void removeProperty_id(final Context context) {
+        SharedPreferences prefs = Pref.get(context);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.remove(Property_id);
         editor.commit();
     }
 

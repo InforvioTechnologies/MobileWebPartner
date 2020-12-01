@@ -127,7 +127,13 @@ public class Viability_Screen_revamp_co extends SimpleActivity implements Number
             residence_area_office,residence_area_district_id_office,residence_state_id_office,
             spinner_residence_type_res_id,spinner_residence_type_res_value,self_Employee_type_Id,self_Employee_type_Value,
             Emp_vocation_type_id,Emp_vocation_type_Value,company_area,
-            Other_income_id,Other_income_Value,Other_income_id_self,Other_income_Value_self;
+            Other_income_id,Other_income_Value,Other_income_id_self,Other_income_Value_self,residence_area_office1,company_area1;
+
+    String DOB,Fathers_Name_str,Pan_number,Name_,email_;
+
+    String monthly_net_salary,company_name,designation_,experience_in_current,
+            total_experience_,company_pincode,other_income_amt;
+    String ave_month_income,no_of_years_in_works,office_res_pincode,other_income_amt1_self;
 
     AppCompatAutoCompleteTextView company_pincode_txt,office_residence_pincode_edite_txt,
             residence_pincode1_edit_txt,residence_pincode1_edit_txt_resi,property_pincode1_edit_txt;
@@ -144,7 +150,8 @@ public class Viability_Screen_revamp_co extends SimpleActivity implements Number
     Calendar myCalendar;
     JSONObject Pan_Details,Employement_type,Residence,Property_jsonobject;
 
-    List<String> list_income_proof_self,list_vintage_proof,salry_proof;
+    List<String> list_income_proof_self,list_vintage_proof,salry_proof,salry_proof_value,list_vintage_proof_value,
+    list_income_proof_self_value;
 
     LinearLayout propert_identified_ly,property_title,property_type_ly,property_pincode,plot_value_ly,property_price_ly,
             cost_estimation_ly,ofiice_res_details,BL_self_office_ownership_type_ly;
@@ -161,6 +168,7 @@ public class Viability_Screen_revamp_co extends SimpleActivity implements Number
 
     private static final int STORAGE_PERMISSION_REQUEST_CODE = 1;
     LinearLayout other_income_amt_ly_,other_income_amt_ly_self;
+    ArrayList<String> rule_message = new ArrayList<String>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -177,7 +185,14 @@ public class Viability_Screen_revamp_co extends SimpleActivity implements Number
         myCalendar = Calendar.getInstance();
         salry_proof = new ArrayList<String>();
         list_income_proof_self = new ArrayList<String>();
+
+        list_vintage_proof_value = new ArrayList<String>();
+
+        list_income_proof_self_value = new ArrayList<String>();
+
         list_vintage_proof = new ArrayList<String>();
+        salry_proof_value = new ArrayList<String>();
+
         UI();
         makeJsonObjReq1();
         imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -908,14 +923,17 @@ public class Viability_Screen_revamp_co extends SimpleActivity implements Number
 
                         Pan_Details = new JSONObject();
 
-                        String DOB = date_of_birt_txt.getText().toString();
 
-                        String Fathers_Name_str = Fathers_Name.getText().toString();
-                        String Pan_number = PAN_Edit_text.getText().toString();
-                        String Name_ = name_edit_text.getText().toString();
-                        String email_ = email_edit_text.getText().toString();
+
+                         DOB = date_of_birt_txt.getText().toString();
+
+                         Fathers_Name_str = Fathers_Name.getText().toString();
+                         Pan_number = PAN_Edit_text.getText().toString();
+                         Name_ = name_edit_text.getText().toString();
+                         email_ = email_edit_text.getText().toString();
 
                         try {
+
                             Pan_Details.put("member_name",Name_);
                             Pan_Details.put("email id",email_);
                             Pan_Details.put("member_dob",DOB);
@@ -929,28 +947,8 @@ public class Viability_Screen_revamp_co extends SimpleActivity implements Number
                         }
 
                         Log.e("the PAN",Pan_Details.toString());
+                        Submit_PAN();
 
-                        property_btn.setVisibility(View.GONE);
-                        Pan_btn.setVisibility(View.GONE);
-                        pan_ly.setVisibility(View.GONE);
-                        salried_self_btn.setVisibility(View.VISIBLE);
-                        res_ly.setVisibility(View.GONE);
-                        residence_btn.setVisibility(View.GONE);
-
-                        prop_scroll.setBackgroundResource(R.drawable.capsul_button_icon1);
-                        pan_scroll.setBackgroundResource(R.drawable.capsul_button_icon1);
-                        salaried_scroll.setBackgroundResource(R.drawable.capsul_button_icon);
-
-                        if(Employee_type_Id.equals("1"))
-                        {
-                            salaried_ly.setVisibility(View.VISIBLE);
-                            self_ly.setVisibility(View.GONE);
-
-                        }else
-                        {
-                            salaried_ly.setVisibility(View.GONE);
-                            self_ly.setVisibility(View.VISIBLE);
-                        }
 
                     }
 
@@ -1016,13 +1014,16 @@ public class Viability_Screen_revamp_co extends SimpleActivity implements Number
 
                                     if (Other_income_id.equals("4")) {
                                         Employement_type = new JSONObject();
-                                        String monthly_net_salary = monthly_net_sal_edit_txt.getText().toString();
-                                        String company_name = company_name_edit_text.getText().toString();
-                                        String designation_ = designation_edit_text.getText().toString();
-                                        String experience_in_current = experience_in_current_cmpy.getText().toString();
-                                        String total_experience_ = total_experience_edit_txt.getText().toString();
-                                        String company_pincode = company_pincode_txt.getText().toString();
-                                        String other_income_amt = other_income_amt_txt_edit_txt.getText().toString();
+
+
+
+                                         monthly_net_salary = monthly_net_sal_edit_txt.getText().toString();
+                                         company_name = company_name_edit_text.getText().toString();
+                                         designation_ = designation_edit_text.getText().toString();
+                                         experience_in_current = experience_in_current_cmpy.getText().toString();
+                                         total_experience_ = total_experience_edit_txt.getText().toString();
+                                         company_pincode = company_pincode_txt.getText().toString();
+                                         other_income_amt = other_income_amt_txt_edit_txt.getText().toString();
 
                                         JSONArray Other_income_id_ = new JSONArray(Arrays.asList(Other_income_id));
                                         JSONArray other_income_amt_ = new JSONArray(Arrays.asList(other_income_amt));
@@ -1047,8 +1048,8 @@ public class Viability_Screen_revamp_co extends SimpleActivity implements Number
                                         } catch (JSONException e) {
                                             e.printStackTrace();
                                         }
+                                        Submit_EMP_salried();
 
-                                        viability_Applicant();
                                     } else {
 
 
@@ -1090,7 +1091,7 @@ public class Viability_Screen_revamp_co extends SimpleActivity implements Number
                                             e.printStackTrace();
                                         }
 
-                                        viability_Applicant();
+                                        Submit_EMP_salried();
                                     }
                                 }
 
@@ -1366,10 +1367,13 @@ public class Viability_Screen_revamp_co extends SimpleActivity implements Number
             if(Other_income_id_self.equals("4"))
             {
                 Employement_type = new JSONObject();
-                String ave_month_income = avg_monthly_incom_edit_txt.getText().toString();
-                String no_of_years_in_works = no_of_years_work_ind_edit_txt.getText().toString();
-                String office_res_pincode = office_residence_pincode_edite_txt.getText().toString();
-                String other_income_amt = other_income_amt_txt_edit_txt_self.getText().toString();
+
+
+
+                 ave_month_income = avg_monthly_incom_edit_txt.getText().toString();
+                 no_of_years_in_works = no_of_years_work_ind_edit_txt.getText().toString();
+                 office_res_pincode = office_residence_pincode_edite_txt.getText().toString();
+                 other_income_amt1_self = other_income_amt_txt_edit_txt_self.getText().toString();
 
                                      /*  JSONArray income_proof = new JSONArray();
                                        JSONArray vintage_proof = new JSONArray();
@@ -1377,7 +1381,7 @@ public class Viability_Screen_revamp_co extends SimpleActivity implements Number
                                        vintage_proof = new JSONArray(Arrays.asList(list_vintage_proof));*/
 
                 JSONArray Other_income_id_self_ = new JSONArray(Arrays.asList(Other_income_id_self));
-                JSONArray other_income_amt_ = new JSONArray(Arrays.asList(other_income_amt));
+                JSONArray other_income_amt_ = new JSONArray(Arrays.asList(other_income_amt1_self));
 
                 try {
                     Employement_type.put("bus_employment_type", self_Employee_type_Id);
@@ -1399,7 +1403,7 @@ public class Viability_Screen_revamp_co extends SimpleActivity implements Number
                     e.printStackTrace();
                 }
 
-                viability_Applicant();
+                Submit_EMP_self();
             }else {
 
 
@@ -1407,10 +1411,10 @@ public class Viability_Screen_revamp_co extends SimpleActivity implements Number
                     return;
                 }
                 Employement_type = new JSONObject();
-                String ave_month_income = avg_monthly_incom_edit_txt.getText().toString();
-                String no_of_years_in_works = no_of_years_work_ind_edit_txt.getText().toString();
-                String office_res_pincode = office_residence_pincode_edite_txt.getText().toString();
-                String other_income_amt = other_income_amt_txt_edit_txt_self.getText().toString();
+                 ave_month_income = avg_monthly_incom_edit_txt.getText().toString();
+                 no_of_years_in_works = no_of_years_work_ind_edit_txt.getText().toString();
+                 office_res_pincode = office_residence_pincode_edite_txt.getText().toString();
+                other_income_amt1_self = other_income_amt_txt_edit_txt_self.getText().toString();
 
                                      /*  JSONArray income_proof = new JSONArray();
                                        JSONArray vintage_proof = new JSONArray();
@@ -1418,7 +1422,7 @@ public class Viability_Screen_revamp_co extends SimpleActivity implements Number
                                        vintage_proof = new JSONArray(Arrays.asList(list_vintage_proof));*/
 
                 JSONArray Other_income_id_self_ = new JSONArray(Arrays.asList(Other_income_id_self));
-                JSONArray other_income_amt_ = new JSONArray(Arrays.asList(other_income_amt));
+                JSONArray other_income_amt_ = new JSONArray(Arrays.asList(other_income_amt1_self));
 
                 try {
                     Employement_type.put("bus_employment_type", Emp_vocation_type_id);
@@ -1440,12 +1444,265 @@ public class Viability_Screen_revamp_co extends SimpleActivity implements Number
                     e.printStackTrace();
                 }
 
-                viability_Applicant();
+                Submit_EMP_self();
 
             }
         }
     }
     ////////////////////////VALIDATION////
+
+    private void Submit_PAN(){
+        final Dialog dialog = new Dialog(this);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+        dialog.setContentView(R.layout.pan_sumbit_dialog);
+        //  dialog.getWindow().setLayout(display.getWidth() * 90 / 100, LinearLayout.LayoutParams.WRAP_CONTENT);
+        dialog.setCancelable(true);
+        dialog.setCanceledOnTouchOutside(false);
+        Button cancelbtn = (Button) dialog.findViewById(R.id.cancelbtn);
+        Button submitbtn=(Button)dialog.findViewById(R.id.submitbtn);
+
+        AppCompatTextView Pan_No_Show,dob_Show,father_name,marital_status,employement_Show,
+                employement_name,email_id;
+
+        LinearLayout employee_name_ly,employee_email_ly;
+
+        employee_name_ly = (LinearLayout) dialog.findViewById(R.id.employee_name_ly);
+        employee_email_ly = (LinearLayout) dialog.findViewById(R.id.employee_email_ly);
+
+
+        employement_name = (AppCompatTextView) dialog.findViewById(R.id.employement_name);
+        email_id = (AppCompatTextView) dialog.findViewById(R.id.email_id);
+        employement_Show = (AppCompatTextView) dialog.findViewById(R.id.employement_Show);
+        Pan_No_Show = (AppCompatTextView) dialog.findViewById(R.id.Pan_No_Show);
+        dob_Show = (AppCompatTextView) dialog.findViewById(R.id.dob_Show);
+        father_name = (AppCompatTextView) dialog.findViewById(R.id.father_name);
+        marital_status = (AppCompatTextView) dialog.findViewById(R.id.marital_status);
+       LinearLayout employee_id_ly = (LinearLayout) dialog.findViewById(R.id.employee_id_ly);
+
+        employee_id_ly.setVisibility(View.VISIBLE);
+        employee_name_ly.setVisibility(View.VISIBLE);
+        employee_email_ly.setVisibility(View.VISIBLE);
+
+        employement_name.setText(Name_);
+        email_id.setText(email_);
+        employement_Show.setText(Employee_type_Value);
+        Pan_No_Show.setText(Pan_number);
+        dob_Show.setText(DOB);
+        father_name.setText(Fathers_Name_str);
+        marital_status.setText(maritial_status_Value);
+
+
+        submitbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+                property_btn.setVisibility(View.GONE);
+                Pan_btn.setVisibility(View.GONE);
+                pan_ly.setVisibility(View.GONE);
+                salried_self_btn.setVisibility(View.VISIBLE);
+                res_ly.setVisibility(View.GONE);
+                residence_btn.setVisibility(View.GONE);
+
+                prop_scroll.setBackgroundResource(R.drawable.capsul_button_icon1);
+                pan_scroll.setBackgroundResource(R.drawable.capsul_button_icon1);
+                salaried_scroll.setBackgroundResource(R.drawable.capsul_button_icon);
+
+                if(Employee_type_Id.equals("1"))
+                {
+                    salaried_ly.setVisibility(View.VISIBLE);
+                    self_ly.setVisibility(View.GONE);
+
+                }else
+                {
+                    salaried_ly.setVisibility(View.GONE);
+                    self_ly.setVisibility(View.VISIBLE);
+                }
+
+            }
+        });
+        cancelbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+
+
+        if (!dialog.isShowing()) {
+            dialog.show();
+        }
+
+    }
+
+    private void Submit_EMP_salried(){
+        final Dialog dialog = new Dialog(this);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+        dialog.setContentView(R.layout.salaried_sumbit_dialog);
+        //  dialog.getWindow().setLayout(display.getWidth() * 90 / 100, LinearLayout.LayoutParams.WRAP_CONTENT);
+        dialog.setCancelable(true);
+        dialog.setCanceledOnTouchOutside(false);
+        Button cancelbtn = (Button) dialog.findViewById(R.id.cancelbtn);
+        Button submitbtn=(Button)dialog.findViewById(R.id.submitbtn);
+
+        LinearLayout other_income_amount_ly =   (LinearLayout)dialog.findViewById(R.id.other_income_amount_ly);
+
+        AppCompatTextView Monthly_net_salry_Show,salary_Show,salary_proof_show,company_type_show,company_name_show,
+                designation_show,current_show,total_experience_show,company_pincode_show,area_show,
+                other_income_source_show,other_income_amount;
+
+        Monthly_net_salry_Show = (AppCompatTextView) dialog.findViewById(R.id.Monthly_net_salry_Show);
+        salary_Show = (AppCompatTextView) dialog.findViewById(R.id.salary_Show);
+        salary_proof_show = (AppCompatTextView) dialog.findViewById(R.id.salary_proof_show);
+        company_type_show = (AppCompatTextView) dialog.findViewById(R.id.company_type_show);
+        company_name_show = (AppCompatTextView) dialog.findViewById(R.id.company_name_show);
+        designation_show = (AppCompatTextView) dialog.findViewById(R.id.designation_show);
+        current_show = (AppCompatTextView) dialog.findViewById(R.id.current_show);
+        total_experience_show = (AppCompatTextView) dialog.findViewById(R.id.total_experience_show);
+        company_pincode_show = (AppCompatTextView) dialog.findViewById(R.id.company_pincode_show);
+        area_show = (AppCompatTextView) dialog.findViewById(R.id.area_show);
+        other_income_source_show = (AppCompatTextView) dialog.findViewById(R.id.other_income_source_show);
+        other_income_amount = (AppCompatTextView) dialog.findViewById(R.id.other_income_amount);
+
+        Monthly_net_salry_Show.setText(monthly_net_salary);
+        salary_Show.setText(Salary_Value);
+        salary_proof_show.setText(salry_proof_value.toString());
+        company_type_show.setText(pl_co_app_Company_Value);
+        company_name_show.setText(company_name);
+        designation_show.setText(designation_);
+        current_show.setText(experience_in_current_cmpy.getText().toString());
+        total_experience_show.setText(total_experience_edit_txt.getText().toString());
+        company_pincode_show.setText(company_pincode);
+        area_show.setText(company_area1);
+
+        other_income_source_show.setText(Other_income_Value);
+        if(Other_income_id.equals("4"))
+        {
+            other_income_amount_ly.setVisibility(View.GONE);
+        }else
+        {
+            other_income_amount_ly.setVisibility(View.VISIBLE);
+            other_income_amount.setText(other_income_amt);
+        }
+
+
+        submitbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+                viability_Applicant();
+
+            }
+        });
+        cancelbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+
+
+        if (!dialog.isShowing()) {
+            dialog.show();
+        }
+
+    }
+
+    private void Submit_EMP_self(){
+        final Dialog dialog = new Dialog(this);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+        dialog.setContentView(R.layout.self_sumbit_dialog);
+        //  dialog.getWindow().setLayout(display.getWidth() * 90 / 100, LinearLayout.LayoutParams.WRAP_CONTENT);
+        dialog.setCancelable(true);
+        dialog.setCanceledOnTouchOutside(false);
+        Button cancelbtn = (Button) dialog.findViewById(R.id.cancelbtn);
+        Button submitbtn=(Button)dialog.findViewById(R.id.submitbtn);
+
+        LinearLayout other_income_amount_ly =   (LinearLayout)dialog.findViewById(R.id.other_income_amount_ly);
+
+        LinearLayout  office_res_type_ly =   (LinearLayout)dialog.findViewById(R.id.office_res_type_ly);
+        LinearLayout office_pincode_ly =   (LinearLayout)dialog.findViewById(R.id.office_pincode_ly);
+        LinearLayout  office_area_ly =   (LinearLayout)dialog.findViewById(R.id.office_area_ly);
+
+        AppCompatTextView type_of_self_emp_show,vocation_Show,monthly_income_show,no_of_month_bus_show,bus_vintage_show,
+                bus_income_proof_show,office_shop_show,office_residence_show,office_shop_pin_show,area_show,
+                other_income_source_show,other_income_amount;
+
+        type_of_self_emp_show = (AppCompatTextView) dialog.findViewById(R.id.type_of_self_emp_show);
+        vocation_Show = (AppCompatTextView) dialog.findViewById(R.id.vocation_Show);
+        monthly_income_show = (AppCompatTextView) dialog.findViewById(R.id.monthly_income_show);
+        no_of_month_bus_show = (AppCompatTextView) dialog.findViewById(R.id.no_of_month_bus_show);
+        bus_vintage_show = (AppCompatTextView) dialog.findViewById(R.id.bus_vintage_show);
+        bus_income_proof_show = (AppCompatTextView) dialog.findViewById(R.id.bus_income_proof_show);
+
+        office_shop_show = (AppCompatTextView) dialog.findViewById(R.id.office_shop_show);
+        office_residence_show = (AppCompatTextView) dialog.findViewById(R.id.office_residence_show);
+        office_shop_pin_show = (AppCompatTextView) dialog.findViewById(R.id.office_shop_pin_show);
+
+        area_show = (AppCompatTextView) dialog.findViewById(R.id.area_show);
+        other_income_source_show = (AppCompatTextView) dialog.findViewById(R.id.other_income_source_show);
+        other_income_amount = (AppCompatTextView) dialog.findViewById(R.id.other_income_amount);
+
+        type_of_self_emp_show.setText(self_Employee_type_Value);
+        vocation_Show.setText(Emp_vocation_type_Value);
+        monthly_income_show.setText(ave_month_income);
+        no_of_month_bus_show.setText(no_of_years_work_ind_edit_txt.getText().toString());
+        bus_income_proof_show.setText(list_income_proof_self_value.toString());
+        bus_vintage_show.setText(list_vintage_proof_value.toString());
+
+        office_shop_show.setText(pl_co_app_ind_Office_Shop__value);
+
+        if(pl_co_app_ind_Office_Shop__id.equals("1") || pl_co_app_ind_Office_Shop__id.equals("3"))
+        {
+            office_res_type_ly.setVisibility(View.GONE);
+            office_pincode_ly.setVisibility(View.GONE);
+            office_area_ly.setVisibility(View.GONE);
+        }else
+        {
+
+            office_res_type_ly.setVisibility(View.VISIBLE);
+            office_pincode_ly.setVisibility(View.VISIBLE);
+            office_area_ly.setVisibility(View.VISIBLE);
+
+            office_residence_show.setText(pl_co_app_ind_Office_Shop_Own_value);
+            office_shop_pin_show.setText(office_res_pincode);
+            area_show.setText(residence_area_office1);
+        }
+
+
+        other_income_source_show.setText(Other_income_Value_self);
+        if(Other_income_id_self.equals("4"))
+        {
+            other_income_amount_ly.setVisibility(View.GONE);
+        }else
+        {
+            other_income_amount_ly.setVisibility(View.VISIBLE);
+            other_income_amount.setText(other_income_amt1_self);
+        }
+
+
+        submitbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                viability_Applicant();
+
+            }
+        });
+        cancelbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+
+
+        if (!dialog.isShowing()) {
+            dialog.show();
+        }
+
+    }
 
     private boolean validate_DOB(){
         if (date_of_birt_txt.getText().toString().isEmpty()) {
@@ -2697,6 +2954,7 @@ public class Viability_Screen_revamp_co extends SimpleActivity implements Number
 
                             //   work_pincode_area = ja.getJSONObject(position).getString("id");
                             residence_area = ja.getJSONObject(position).getString("id");
+                            company_area1 = ja.getJSONObject(position).getString("area");
                             residence_area_district_id = ja.getJSONObject(position).getString("district_id");
                             residence_state_id = ja.getJSONObject(position).getString("state_id");
 
@@ -2805,6 +3063,7 @@ public class Viability_Screen_revamp_co extends SimpleActivity implements Number
 
                             //   work_pincode_area = ja.getJSONObject(position).getString("id");
                             residence_area_office = ja.getJSONObject(position).getString("id");
+                            residence_area_office1 = ja.getJSONObject(position).getString("area");
                             residence_area_district_id_office = ja.getJSONObject(position).getString("district_id");
                             residence_state_id_office = ja.getJSONObject(position).getString("state_id");
 
@@ -3168,7 +3427,7 @@ public class Viability_Screen_revamp_co extends SimpleActivity implements Number
 
                         //  City_loc_uniqueID = ja.getJSONObject(position).getString("city_id");
                         Emp_vocation_type_id = Company_type_ar.getJSONObject(position).getString("id");
-                        pl_co_app_Company_Value = Company_type_ar.getJSONObject(position).getString("value");
+                        Emp_vocation_type_Value = Company_type_ar.getJSONObject(position).getString("value");
                         //CAT_ID = ja.getJSONObject(position).getString("category_id");
 
                     } catch (JSONException e) {
@@ -3337,12 +3596,14 @@ public class Viability_Screen_revamp_co extends SimpleActivity implements Number
             spinner_salary_proof.setSelected(selected);
             StringBuilder builder = new StringBuilder();
 
+            // Income_proof_selected = selected;
+
             String selected_salary_proof;
 
             for (int i = 0; i <= selected.length-1; i++) {
                 if (selected[i]) {
-                  //  builder.append(companyproof_multiAdapter.getItem(i)).append(" ");
-                   // salry_proof.add(companyproof_multiAdapter.getItem(i));
+                    //  builder.append(companyproof_multiAdapter.getItem(i)).append(" ");
+                    // salry_proof.add(companyproof_multiAdapter.getItem(i));
 
                     selected_salary_proof = companyproof_multiAdapter.getItem(i);
                     for (int j = 0; j < Salary_proof_ar.length()-1; j++) {
@@ -3353,8 +3614,10 @@ public class Viability_Screen_revamp_co extends SimpleActivity implements Number
                             if(selected_salary_proof.equals(salary_proof))
                             {
                                 String vintage_proof_id = J.getString("id");
-                               // salry_proof.add(vintage_proof_id);
+                                String salary_proof1 = J.getString("value");
+                                // salry_proof.add(vintage_proof_id);
                                 salry_proof.add(vintage_proof_id);
+                                salry_proof_value.add(salary_proof1);
                             }
 
                         } catch (JSONException e) {
@@ -3367,8 +3630,12 @@ public class Viability_Screen_revamp_co extends SimpleActivity implements Number
             Set<String> listWithoutDuplicates = new LinkedHashSet<String>(salry_proof);
             salry_proof.clear();
             salry_proof.addAll(listWithoutDuplicates);
+
+            Set<String> listWithoutDuplicates1 = new LinkedHashSet<String>(salry_proof_value);
+            salry_proof_value.clear();
+            salry_proof_value.addAll(listWithoutDuplicates1);
             Log.e("the selected values",salry_proof.toString());
-           // Toast.makeText(Viability_Screen_revamp_Pl_BL.this, builder.toString(), Toast.LENGTH_SHORT).show();
+            // Toast.makeText(Viability_Screen_revamp_Pl_BL.this, builder.toString(), Toast.LENGTH_SHORT).show();
             // Toast.makeText(MainActivity.this, builder.toString(), Toast.LENGTH_SHORT).show();
         }
     };
@@ -3387,17 +3654,21 @@ public class Viability_Screen_revamp_co extends SimpleActivity implements Number
                     list_income_proof_self.add(Business_Proof_type_adapter.getItem(i));
 
                 }*/
+                business_proof_1 = Business_Proof_type_adapter.getItem(i);
+                Log.e("the  values1111",business_proof_1);
                 if (selected[i]) {
-                    business_proof_1 = Business_Proof_type_adapter.getItem(i);
-                    for (int j = 0; j < Business_type_own_business.length(); j++) {
+                    for (int j = 0; j < Business_type_own_business.length() - 1; j++) {
 
                         try {
-                            JSONObject J = Business_type_own_business.getJSONObject(i);
+                            JSONObject J = Business_type_own_business.getJSONObject(j);
                             String business_proof = J.getString("value");
 
                             if (business_proof_1.equals(business_proof)) {
+                                Log.e("the selected values", list_income_proof_self.toString());
                                 String vintage_proof_id = J.getString("id");
+                                String business_proof1 = J.getString("value");
                                 list_income_proof_self.add(vintage_proof_id);
+                                list_income_proof_self_value.add(business_proof1);
                             }
 
                         } catch (JSONException e) {
@@ -3406,10 +3677,13 @@ public class Viability_Screen_revamp_co extends SimpleActivity implements Number
                     }
                 }
             }
-
             Set<String> listWithoutDuplicates = new LinkedHashSet<String>(list_income_proof_self);
             list_income_proof_self.clear();
             list_income_proof_self.addAll(listWithoutDuplicates);
+
+            Set<String> listWithoutDuplicates1 = new LinkedHashSet<String>(list_income_proof_self_value);
+            list_income_proof_self_value.clear();
+            list_income_proof_self_value.addAll(listWithoutDuplicates1);
 
             Log.e("the selected values",list_income_proof_self.toString());
 
@@ -3432,15 +3706,17 @@ public class Viability_Screen_revamp_co extends SimpleActivity implements Number
                 }*/
                 if (selected[i]) {
                     Vintage_proof_1 = Business_vintage_Adapter.getItem(i);
-                    for (int j = 0; j < Business_Proof.length(); j++) {
+                    for (int j = 0; j < Business_Proof.length() - 1; j++) {
 
                         try {
-                            JSONObject J = Business_Proof.getJSONObject(i);
+                            JSONObject J = Business_Proof.getJSONObject(j);
                             String vintage_proof = J.getString("value");
 
                             if (Vintage_proof_1.equals(vintage_proof)) {
                                 String vintage_proof_id = J.getString("id");
+                                String vintage_proof_1 = J.getString("value");
                                 list_vintage_proof.add(vintage_proof_id);
+                                list_vintage_proof_value.add(vintage_proof_1);
                             }
 
                         } catch (JSONException e) {
@@ -3453,6 +3729,10 @@ public class Viability_Screen_revamp_co extends SimpleActivity implements Number
             Set<String> listWithoutDuplicates = new LinkedHashSet<String>(list_vintage_proof);
             list_vintage_proof.clear();
             list_vintage_proof.addAll(listWithoutDuplicates);
+
+            Set<String> listWithoutDuplicates1 = new LinkedHashSet<String>(list_vintage_proof_value);
+            list_vintage_proof_value.clear();
+            list_vintage_proof_value.addAll(listWithoutDuplicates1);
 
             Log.e("the selected values",list_vintage_proof.toString());
 
@@ -3515,7 +3795,7 @@ public class Viability_Screen_revamp_co extends SimpleActivity implements Number
                                 popupWindow = new PopupWindow(customView, LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
                                 //display the popup window
                                 popupWindow.showAtLocation(residence_btn, Gravity.CENTER, 0, 0);
-                                Eligibility_check_doc_checklist_generate();
+                                viability_check_rule();
                             }else
                             {
                                 Toast.makeText(mCon, "error, Please check...",Toast.LENGTH_SHORT).show();
@@ -3644,125 +3924,102 @@ public class Viability_Screen_revamp_co extends SimpleActivity implements Number
 
         AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
     }
-    private void viability_check_pass( ) {
+    private void viability_check_rule() {
 
         JSONObject J= null;
 
         try {
             J =new JSONObject();
             J.put("transaction_id",Pref.getTRANSACTIONID(getApplicationContext()));
-            J.put("user_id", Pref.getUSERID(getApplicationContext()));
-            J.put("b2b_id", Pref.getID(mCon));
+            J.put("relationship_type", "2");
 
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
-        Log.e("viability ", String.valueOf(J));
-        progressDialog.show();
-        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, Urls.viabilitysave, J,
+        Log.e("rule rune request ", String.valueOf(J));
+       // progressDialog.show();
+        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, Urls.viable_rule_check, J,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
-                        Log.e("viability response", String.valueOf(response));
+                        Log.e("rule run response", String.valueOf(response));
                         String data = String.valueOf(response);
                         try {
-                            //  String Status = response.getString("status");
-                            JSONObject jsonObject1 = response.getJSONObject("response");
+                            String Status = response.getString("status");
+                            //JSONObject jsonObject1 = response.getJSONObject("response");
 
-                            if(jsonObject1.getString("viablity_status").equals("success"))
+                            if(Status.equals("success"))
                             {
-                                Toast.makeText(context,"Viability Passed Successfully",Toast.LENGTH_SHORT).show();
-                                LayoutInflater layoutInflater = (LayoutInflater) Viability_Screen_revamp_co.this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                                View customView = layoutInflater.inflate(R.layout.popup,null);
+                                progressDialog.dismiss();
+                                Eligibility_check_doc_checklist_generate();
 
-                                closePopupBtn = (Button) customView.findViewById(R.id.closePopupBtn);
-                                sub_to_next = (Button) customView.findViewById(R.id.sub_to_next);
-                                save_latter = (Button) customView.findViewById(R.id.save_latter);
-
-                                //instantiate popup window
-                                popupWindow = new PopupWindow(customView, LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
-                                //display the popup window
-                                popupWindow.showAtLocation(closePopupBtn, Gravity.CENTER, 0, 0);
-
-                                //close the popup window on button click
-                                closePopupBtn.setOnClickListener(new View.OnClickListener() {
-                                    @Override
-                                    public void onClick(View v) {
-
-                                        Eligibility_check_doc_checklist_generate();
-                                    }
-                                });
-
-                                sub_to_next.setOnClickListener(new View.OnClickListener() {
-                                    @Override
-                                    public void onClick(View view) {
-                                        Submitloandialog();
-                                    }
-                                });
-
-                                save_latter.setOnClickListener(new View.OnClickListener() {
-                                    @Override
-                                    public void onClick(View view) {
-                                        Intent intent = new Intent(Viability_Screen_revamp_co.this, Dashboard_Activity.class);
-                                        //  intent.putExtra("viability_jsonArray", viability_array.toString());
-                                        startActivity(intent);
-                                        finish();
-                                    }
-                                });
-
-                                   /*  Intent intent = new Intent(Viability_Check_PL.this, Eligibility_Check_PL.class);
-                                     intent.putExtra("user_id", user_id);
-                                     intent.putExtra("transaction_id", transaction_id);
-                                     startActivity(intent);
-                                     finish();*/
-                            }else if(jsonObject1.getString("viablity_status").equals("error"))
+                            }else if(Status.equals("error"))
                             {
 
                                 Toast.makeText(context,"Viability Failed",Toast.LENGTH_SHORT).show();
-                                viability_report_URL = jsonObject1.getString("viable_reporturl");
+                                String rule_desc = null;
+                                String age_vale = null;
+                                String ind_salary = null;
+                                String bank_failure = null;
+                                JSONArray jsonArray = response.getJSONArray("rule_desc");
+                                JSONArray jsonArray1 = response.getJSONArray("rule_message");
+
+                                for (int i=0; i<jsonArray.length();i++) {
+                                    try {
+
+                                        JSONObject J = jsonArray.getJSONObject(i);
+
+                                        rule_desc = J.getString("rule_desc");
+                                        if(rule_desc.equals("Age"))
+                                        {
+                                            age_vale="Sorry.! Applicant age Should not be less than 21 for applying loan with us.";
+                                            rule_message.add(age_vale);
+                                        }else if(rule_desc.equals("Individual Salary"))
+                                        {
+                                            ind_salary="Sorry.! Income should not be less than \\u20B9 12,000 for applying loan with us.";
+                                            rule_message.add(ind_salary);
+                                        }else
+                                        {
+                                            bank_failure="Sorry.! Currently we have no partner banks available in applicant\\'s location" +
+                                                    "We are On-boarding as many new banks as possible. Stay tuned.! ";
+                                            rule_message.add(bank_failure);
+                                        }
+
+                                        Log.e("rule_desc",rule_desc);
+
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                    }
+
+                                }
+
                                 // Toast.makeText(context,"Viability Created Successfully",Toast.LENGTH_SHORT).show();
                                 LayoutInflater layoutInflater = (LayoutInflater) Viability_Screen_revamp_co.this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                                View customView = layoutInflater.inflate(R.layout.popup1,null);
+                                View customView = layoutInflater.inflate(R.layout.popup_rul_fail,null);
+                               Button godashboard = (Button) customView.findViewById(R.id.godashboard);
+                                TextView content_txt = (TextView) customView.findViewById(R.id.content_txt);
 
 
-                                view_report = (Button) customView.findViewById(R.id.view_report);
-                                close = (Button) customView.findViewById(R.id.close);
+                                content_txt.setText(rule_message.toString());
 
                                 //instantiate popup window
                                 popupWindow = new PopupWindow(customView, LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
 
                                 //display the popup window
-                                popupWindow.showAtLocation(close, Gravity.CENTER, 0, 0);
-
+                                popupWindow.showAtLocation(godashboard, Gravity.CENTER, 0, 0);
                                 //close the popup window on button click
-                                close.setOnClickListener(new View.OnClickListener() {
+                                godashboard.setOnClickListener(new View.OnClickListener() {
                                     @Override
                                     public void onClick(View v) {
 
-                                        //   String viability_array =jsonObject1.getString("viability_arr");
                                         Intent intent = new Intent(Viability_Screen_revamp_co.this, Dashboard_Activity.class);
-                                        //intent.putExtra("viability_jsonArray", viability_array.toString());
                                         startActivity(intent);
                                         finish();
                                     }
                                 });
 
-                                view_report.setOnClickListener(new View.OnClickListener() {
-                                    @Override
-                                    public void onClick(View view) {
-                                        if (permissionUtils.checkPermission(Viability_Screen_revamp_co.this, STORAGE_PERMISSION_REQUEST_CODE, view)) {
-                                            if (viability_report_URL.length() > 0) {
-                                                try {
-                                                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(viability_report_URL)));
-                                                } catch (Exception e) {
-                                                    e.getStackTrace();
-                                                }
-                                            }
 
-                                        }
-                                    }
-                                });
 
                                 progressDialog.dismiss();
                             }

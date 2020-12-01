@@ -267,6 +267,7 @@ public class Applicant_Details_Single extends SimpleActivity {
                                         Params.user_type,A_type,
                                         Params.type,A_Pr_type,
                                         Params.emp_state,A_empstatue);*/
+
                             }else{
 
                                     A_Pr_type = "0";

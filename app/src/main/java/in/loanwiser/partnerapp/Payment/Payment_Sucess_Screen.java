@@ -324,6 +324,9 @@ public class Payment_Sucess_Screen extends AppCompatActivity {
                                 Other_Earning(qus_dropdown);
                                 progressDialog.dismiss();
                                 // co_applicant_.setVisibility(View.VISIBLE);
+                            }else
+                            {
+                                Toast.makeText(mCon, "error, somthing went wrong!!!",Toast.LENGTH_SHORT).show();
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -336,6 +339,7 @@ public class Payment_Sucess_Screen extends AppCompatActivity {
             @Override
             public void onErrorResponse(VolleyError error) {
                 VolleyLog.d("TAG", "Error: " + error.getMessage());
+                Toast.makeText(mCon, "error, somthing went wrong!!!",Toast.LENGTH_SHORT).show();
                 progressDialog.dismiss();
             }
         }) {

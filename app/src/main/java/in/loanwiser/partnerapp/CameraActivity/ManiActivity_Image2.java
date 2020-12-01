@@ -17,9 +17,13 @@ import android.os.Handler;
 import android.os.StrictMode;
 import android.provider.MediaStore;
 import com.google.android.material.snackbar.Snackbar;
+
+import androidx.appcompat.widget.AppCompatTextView;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.appcompat.app.AlertDialog;
+
+import android.provider.OpenableColumns;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
@@ -119,6 +123,7 @@ public class ManiActivity_Image2 extends SimpleActivity implements SingleUploadB
     String[] all_path;
     String all_path1;
     String app_id,msg;
+    AppCompatTextView pdf_name;
 
     int count=0;
 
@@ -323,6 +328,7 @@ public class ManiActivity_Image2 extends SimpleActivity implements SingleUploadB
 
         imgSinglePick = (ImageView) findViewById(R.id.imgSinglePick);
         imgSinglePick1 = (ImageView) findViewById(R.id.imgSinglePick1);
+        pdf_name = (AppCompatTextView) findViewById(R.id.pdf_name);
         upload = (Button) findViewById(R.id.upload);
 
         upload.setOnClickListener(new View.OnClickListener() {
@@ -519,6 +525,12 @@ public class ManiActivity_Image2 extends SimpleActivity implements SingleUploadB
 
                 imgSinglePick1.setVisibility(View.VISIBLE);
                 imgSinglePick.setVisibility(View.GONE);
+
+                String path = FilePath.getPath(this, filePath);
+
+                String  fileName = getFileName(filePath);
+                pdf_name.setText(fileName);
+
             }
             //  String path = FilePath.getPath(this, filePath);
             //  Toast.makeText(MainActivity_Document.this,"PDF " + path ,Toast.LENGTH_SHORT).show();
@@ -603,7 +615,27 @@ public class ManiActivity_Image2 extends SimpleActivity implements SingleUploadB
         } else
             return null;
     }
-
+    public String getFileName(Uri uri) {
+        String result = null;
+        if (uri.getScheme().equals("content")) {
+            Cursor cursor = getContentResolver().query(uri, null, null, null, null);
+            try {
+                if (cursor != null && cursor.moveToFirst()) {
+                    result = cursor.getString(cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME));
+                }
+            } finally {
+                cursor.close();
+            }
+        }
+        if (result == null) {
+            result = uri.getPath();
+            int cut = result.lastIndexOf('/');
+            if (cut != -1) {
+                result = result.substring(cut + 1);
+            }
+        }
+        return result;
+    }
     public String getStringImage(Bitmap bmp){
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         bmp.compress(Bitmap.CompressFormat.JPEG, 100, baos);
