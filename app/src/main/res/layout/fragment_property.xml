@@ -1,0 +1,609 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+    <ScrollView
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:visibility="gone"
+                android:id="@+id/Signature_Proof"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/Signature_Proof1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/Signature_Proof_txt"
+                        style="@style/LorgeText2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="2dp"
+                        android:gravity="left"
+                        android:hint="1"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textColorHint="@color/colorPrimaryDark" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/Signature_id_txt"
+                        style="@style/LorgeText2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:gravity="left"
+                        android:hint="Signature Verification Document"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textColorHint="@color/colorPrimaryDark" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="22dp">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/Signature_id_txt_view"
+                        style="@style/LorgeText2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="2dp"
+                        android:gravity="left"
+                        android:hint="Pan Card is a must for applying Loan"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textColorHint="@color/colorOrange" />
+                </LinearLayout>
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_marginLeft="22dp"
+                android:orientation="vertical"
+                android:layout_width="400dp"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:id="@+id/check_list_name"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/check_list"
+                    android:orientation="vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                </LinearLayout>
+            </LinearLayout>
+            <LinearLayout
+                android:visibility="gone"
+                android:id="@+id/Identity_Proof"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/Identity_Proof1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/Identity_Proof_txt"
+                        style="@style/LorgeText2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="2dp"
+                        android:gravity="left"
+                        android:hint="2"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textColorHint="@color/colorPrimaryDark" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/Identity_id_txt"
+                        style="@style/LorgeText2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="2dp"
+                        android:gravity="left"
+                        android:hint="Identity Proof"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textColorHint="@color/colorPrimaryDark" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="22dp">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/Identity_id_txt_view"
+                        style="@style/LorgeText2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="2dp"
+                        android:gravity="left"
+                        android:hint="Any one document can be uploaded which has your Photo and Date of Birth"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textColorHint="@color/colorOrange" />
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:visibility="gone"
+                android:id="@+id/Current_Proof"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/Current_Proof1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/Current_Proof_txt"
+                        style="@style/LorgeText2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="2dp"
+                        android:gravity="left"
+                        android:hint="3"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textColorHint="@color/colorPrimaryDark" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/Current_id_txt"
+                        style="@style/LorgeText2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="2dp"
+                        android:gravity="left"
+                        android:hint="Current Address Proof"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textColorHint="@color/colorPrimaryDark" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="22dp">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/Current_id_txt_view"
+                        style="@style/LorgeText2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="2dp"
+                        android:gravity="left"
+                        android:hint="If You are living in Own house, then provide latest Property Tax/Water Tax Receipt. If Rented, Gas Bill is Preferred"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textColorHint="@color/colorOrange" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_marginLeft="22dp"
+                    android:orientation="vertical"
+                    android:layout_width="400dp"
+                    android:layout_height="wrap_content">
+                    <LinearLayout
+                        android:id="@+id/check_list1"
+                        android:orientation="vertical"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+                    </LinearLayout>
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+            <LinearLayout
+                android:visibility="gone"
+                android:id="@+id/Permanent_Proof"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/Permanent_Proof1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/Permanent_Proof_txt"
+                        style="@style/LorgeText2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="2dp"
+                        android:gravity="left"
+                        android:hint="4"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textColorHint="@color/colorPrimaryDark" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/Permanent_id_txt"
+                        style="@style/LorgeText2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="2dp"
+                        android:gravity="left"
+                        android:hint="Permanent Address Proof"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textColorHint="@color/colorPrimaryDark" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="22dp">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/Permanent_id_txt_view"
+                        style="@style/LorgeText2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="2dp"
+                        android:gravity="left"
+                        android:hint="If You have a Parent Owned house, provide the latest Property Tax/Water Tax Receipt of that house. If Your Parents doesn't own a house, provide the proof( latest Property Tax/Water Tax Receipt) of Own house, owned by any of your Blood relative"
+
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textColorHint="@color/colorOrange" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_marginLeft="22dp"
+                    android:orientation="vertical"
+                    android:layout_width="400dp"
+                    android:layout_height="wrap_content">
+                    <LinearLayout
+                        android:id="@+id/check_list2"
+                        android:orientation="vertical"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+                    </LinearLayout>
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+            <LinearLayout
+                android:visibility="gone"
+                android:id="@+id/Income_Proof"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/Income_Proof1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/Income_Proof_txt"
+                        style="@style/LorgeText2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="2dp"
+                        android:gravity="left"
+                        android:hint="5"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textColorHint="@color/colorPrimaryDark" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/Income_id_txt"
+                        style="@style/LorgeText2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="2dp"
+                        android:gravity="left"
+                        android:hint="Income Proof"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textColorHint="@color/colorPrimaryDark" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="22dp">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/Income_id_txt_view"
+                        style="@style/LorgeText2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="2dp"
+                        android:gravity="left"
+                        android:hint="PaySlip/Salary Certificate for last 3 months"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textColorHint="@color/colorOrange" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_marginLeft="22dp"
+                    android:orientation="vertical"
+                    android:layout_width="400dp"
+                    android:layout_height="wrap_content">
+                    <LinearLayout
+                        android:id="@+id/check_list3"
+                        android:orientation="vertical"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+                    </LinearLayout>
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+            <LinearLayout
+                android:visibility="gone"
+                android:id="@+id/Bank_Proof"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/Bank_Proof1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/Bank_Proof_txt"
+                        style="@style/LorgeText2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="2dp"
+                        android:gravity="left"
+                        android:hint="6"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textColorHint="@color/colorPrimaryDark" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/Bank_id_txt"
+                        style="@style/LorgeText2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="2dp"
+                        android:gravity="left"
+                        android:hint="Bank Statement proof"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textColorHint="@color/colorPrimaryDark" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="22dp">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/Bank_id_txt_view"
+                        style="@style/LorgeText2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="2dp"
+                        android:gravity="left"
+                        android:hint="Provide the Lastest 6 months Bank Statement in PDF Format"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textColorHint="@color/colorOrange" />
+                </LinearLayout>
+
+            </LinearLayout>
+            <LinearLayout
+                android:visibility="gone"
+                android:id="@+id/Work_Proof"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/Work_Proof1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/Work_Proof_txt"
+                        style="@style/LorgeText2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="2dp"
+                        android:gravity="left"
+                        android:hint="7"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textColorHint="@color/colorPrimaryDark" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/Work_id_txt"
+                        style="@style/LorgeText2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="2dp"
+                        android:gravity="left"
+                        android:hint="Work Experience Proof"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textColorHint="@color/colorPrimaryDark" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="22dp">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/Work_id_txt_view"
+                        style="@style/LorgeText2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="2dp"
+                        android:gravity="left"
+                        android:text="@string/doc_seven"
+                        android:textColor="@color/colorOrange"
+                        android:textColorHint="@color/colorOrange" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:visibility="gone"
+                android:id="@+id/Work_Proof_id"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/Work_Proof1_id"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/Work_Proof_txt_id"
+                        style="@style/LorgeText2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="2dp"
+                        android:gravity="left"
+                        android:hint="8"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textColorHint="@color/colorPrimaryDark" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/Work_id_txt_id"
+                        style="@style/LorgeText2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="2dp"
+                        android:gravity="left"
+                        android:hint="Work Address Proof"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textColorHint="@color/colorPrimaryDark" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="22dp">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/Work_id_txt_view_id"
+                        style="@style/LorgeText2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="2dp"
+                        android:gravity="left"
+                        android:hint="Provide Employment ID"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textColorHint="@color/colorOrange" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_marginLeft="22dp"
+                    android:orientation="vertical"
+                    android:layout_width="400dp"
+                    android:layout_height="wrap_content">
+                    <LinearLayout
+                        android:id="@+id/check_list4"
+                        android:orientation="vertical"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+                    </LinearLayout>
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:visibility="gone"
+                android:id="@+id/Photo_Proof"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/Photo_Proof1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/Photo_Proof_txt"
+                        style="@style/LorgeText2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="2dp"
+                        android:gravity="left"
+                        android:hint="9"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textColorHint="@color/colorPrimaryDark" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/Photo_id_txt"
+                        style="@style/LorgeText2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="2dp"
+                        android:gravity="left"
+                        android:hint="Photo Proof"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textColorHint="@color/colorPrimaryDark" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_marginLeft="22dp"
+                    android:orientation="vertical"
+                    android:layout_width="400dp"
+                    android:layout_height="wrap_content">
+                    <LinearLayout
+                        android:id="@+id/check_list5"
+                        android:orientation="vertical"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+
+
+
+            <LinearLayout
+
+                android:layout_marginTop="10dp"
+                android:elevation="4sp"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="?android:attr/actionBarSize"
+                android:orientation="vertical">
+                <LinearLayout
+                    android:gravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/Docum_ch_step1"
+                        android:text="@string/proceed"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="start"
+                        android:background="@drawable/capsul_button3"
+                        android:theme="@style/BtnStyleApp" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

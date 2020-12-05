@@ -71,6 +71,7 @@
     <string name="state_type">Select the State</string>
     <string name="mobileerror">Enter a valid mobile number</string>
     <string name="no_leads_data" tools:ignore="ExtraTranslation">No Leads found "\n" add your leads "\n" to Start with Loanwiser</string>
+    <string name="noask_leads_data" tools:ignore="ExtraTranslation">No Ask Leads found</string>
     <string name="listapp">List of Applications</string>
 
     <string name="addl">Add your Leads</string>

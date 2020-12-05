@@ -31,6 +31,8 @@ public class Params {
     public static String location = "location";
     public static String bankname = "bankname";
     public static String pay_mode = "pay_mode";
+    public static String ask_id = "ask_id";
+    public static String doc_classname = "doc_classname";
 
     public static String building_name = "building_name";
     public static String prop_address1 = "prop_address1";

@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    tools:context="in.loanwiser.partnerapp.PartnerActivitys.Dashboard_Activity">
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:theme="@style/AppTheme.AppBarOverlay">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?android:attr/actionBarSize"
+                android:elevation="5dp"
+                android:background="@drawable/greadient"
+                app:popupTheme="@style/AppTheme.PopupOverlay"
+                tools:ignore="NewApi" />
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <LinearLayout
+            android:id="@+id/linearLayout3"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="?android:attr/actionBarSize"
+            android:orientation="vertical">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:padding="5dp">
+
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:visibility="gone"
+            android:id="@+id/float_chat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            app:backgroundTint="@color/colorAccent"
+            android:src="@drawable/add"
+            android:layout_margin="@dimen/fab_margin"
+            />
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_anchor="@+id/linearLayout3"
+            app:layout_anchorGravity="center"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+
+
+                <androidx.core.widget.NestedScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+                    <LinearLayout
+                        android:layout_gravity="center"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+                        <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <LinearLayout
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginTop="10dp"
+                                android:background="@drawable/capsul_button_drop_down1"
+                                android:layout_width="120dp"
+                                android:layout_height="40dp">
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:id="@+id/pending_ask_List"
+                                    android:gravity="center"
+                                    android:text="Pending Ask (8)"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                     />
+                            </LinearLayout>
+                            <LinearLayout
+                                android:layout_marginLeft="20dp"
+                                android:layout_marginTop="10dp"
+                                android:background="@drawable/capsul_button_drop_down1"
+                                android:layout_width="200dp"
+                                android:layout_height="40dp">
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:id="@+id/resolved_ask"
+                                    android:gravity="center"
+                                    android:text="Resolved by Partner (4)"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    />
+                            </LinearLayout>
+
+
+                        </LinearLayout>
+                        <LinearLayout
+                            android:orientation="vertical"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <LinearLayout
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginTop="10dp"
+                                android:background="@drawable/capsul_button_drop_down1"
+                                android:layout_width="200dp"
+                                android:layout_height="40dp">
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:id="@+id/acceped_ask"
+                                    android:gravity="center"
+                                    android:text="Accepted by Loanwiser (3)"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                     />
+                            </LinearLayout>
+
+
+
+                        </LinearLayout>
+
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/label_status"
+                            style="@style/SmallText"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="10dp" />
+                        <LinearLayout
+                            android:visibility="gone"
+                            android:id="@+id/Ly_no_leads_data"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="150dp"
+                            android:orientation="vertical">
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:id="@+id/no_leads_data"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:text="@string/noask_leads_data"
+                                android:textColor="@color/colorPrimary"
+                                android:textSize="25dp" />
+
+                            <androidx.appcompat.widget.AppCompatButton
+                                android:id="@+id/leads_float_chat"
+                                android:layout_width="200dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginTop="20dp"
+                                android:background="@drawable/capsul_button3"
+                                android:text="Apply Loan"
+                                android:textColor="@color/white"
+                                android:textSize="15dp"
+                                android:visibility="gone" />
+                        </LinearLayout>
+
+                        <androidx.recyclerview.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
+                            xmlns:app="http://schemas.android.com/apk/res-auto"
+                            android:id="@+id/recycler_view"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@color/white"
+                            android:cacheColorHint="@android:color/transparent"
+                            android:clipToPadding="false"
+                            android:fadeScrollbars="true"
+                            android:orientation="vertical"
+                            android:scrollbars="none"
+                            android:visibility="visible"
+                            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+                        <ProgressBar
+                            android:id="@+id/progress_bar"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:layout_gravity="bottom|center"
+                            android:layout_marginBottom="8dp"
+                            android:visibility="gone" />
+
+                    </LinearLayout>
+                </androidx.core.widget.NestedScrollView>
+
+
+            </LinearLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+        <!-- <android.support.design.widget.FloatingActionButton
+             android:id="@+id/float_chat"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_gravity="bottom|end"
+             app:backgroundTint="@color/colorPrimary"
+             android:src="@drawable/ic_city_w"
+             android:layout_margin="@dimen/fab_margin"
+             />-->
+
+
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+
+
+
+</LinearLayout>

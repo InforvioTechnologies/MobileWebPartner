@@ -11,7 +11,7 @@
     android:background="@color/white"
     android:padding="10dp"
       android:gravity="center"
-        android:layout_height="200dp"
+        android:layout_height="wrap_content"
         android:layout_marginBottom="1.5dp"
         app:cardCornerRadius="4dp"
         android:clipToPadding="false"
@@ -223,6 +223,53 @@
                     android:textColor="@color/colorPrimary" />
 
             </LinearLayout>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_marginBottom="10dp"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:visibility="gone"
+                    android:text="View"
+                    android:id="@+id/Statues_update_view"
+                    android:gravity="center"
+                    style="@style/SmallText"
+                    android:textStyle="bold"
+                    android:textSize="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:textColor="@color/white"
+                    android:background="@drawable/capsul_button4"
+                    android:layout_width="200dp"
+                    android:layout_height="30dp"
+                    />
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:text="View"
+                    android:id="@+id/Statues_update_view1"
+                    android:gravity="center"
+                    style="@style/SmallText"
+                    android:textStyle="bold"
+                    android:textSize="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:textColor="@color/white"
+                    android:background="@drawable/capsul_button41"
+                    android:layout_width="200dp"
+                    android:layout_height="30dp"
+                    />
+            </LinearLayout>
+
 
         </LinearLayout>
     </LinearLayout>

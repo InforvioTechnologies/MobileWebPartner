@@ -86,16 +86,18 @@ public class ActivityFragment extends Fragment implements NavigationView.OnNavig
     private ActivityFragment mcon =this;
     private LinearLayout chat;
     private RecyclerView recycler_view,recycler_view_health_ass,
-            recycler_view_document_,recycler_view_share;
+            recycler_view_document_,recycler_view_share,ask_recycler_view;
     ArrayList<Suggestion_item_freqent> items;
     ArrayList<Health_Assesment_item_freqent> items1;
     ArrayList<Document_item_freqent> items2;
     ArrayList<post_item_freqent> items3;
+    ArrayList<Ask_item_freqent> items_ask;
     private String tag_json_obj = "jobj_req", tag_json_arry = "jarray_req";
     Resent_Lead_Statues adapter;
     Health_Assement_Adapter adapter1;
     Document_Adapter adapter2;
     Post_share_Statues adapter3;
+    Ask_Lead_Statues adapter_ask;
 
     AppCompatButton my_earnings,my_leads;
     DrawerLayout drawer;
@@ -103,7 +105,8 @@ public class ActivityFragment extends Fragment implements NavigationView.OnNavig
     String b2b_user_id;
     private AppCompatTextView profile,recent_leads,Document_cheklist,fhas,share_material;
 
-    LinearLayout firstlay,secondlay,thirdlay,Ly_allocate,ly_helth_assement_,ly_document_assement_,network_stat;
+    LinearLayout firstlay,secondlay,thirdlay,Ly_allocate,ly_helth_assement_,ly_document_assement_,network_stat,
+            view_all_ly, ask_Ly_allocate,asklay,view_all_ly1;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -118,6 +121,7 @@ public class ActivityFragment extends Fragment implements NavigationView.OnNavig
         items1 = new ArrayList<>();
         items2 = new ArrayList<>();
         items3 = new ArrayList<>();
+        items_ask = new ArrayList<>();
         HashMap<String,String> url_maps = new HashMap<String, String>();
 
         pref = getActivity().getSharedPreferences("MyPref", 0);
@@ -139,6 +143,7 @@ public class ActivityFragment extends Fragment implements NavigationView.OnNavig
         url_maps.put("Our Banks", "http://cscapi.propwiser.com/mobile/images/Our_Banking_Partnersl.png");
        // Ly_UI(view);
         recycler_view = (RecyclerView)view.findViewById(R.id.recycler_view);
+        ask_recycler_view = (RecyclerView)view.findViewById(R.id.ask_recycler_view);
         recycler_view_health_ass = (RecyclerView)view.findViewById(R.id.recycler_view_health_ass);
         recycler_view_document_ = (RecyclerView)view.findViewById(R.id.recycler_view_document_);
         recycler_view_share = (RecyclerView)view.findViewById(R.id.recycler_view_share);
@@ -158,13 +163,21 @@ public class ActivityFragment extends Fragment implements NavigationView.OnNavig
         my_earnings = (AppCompatButton) view.findViewById(R.id.my_earnings);
         my_leads = (AppCompatButton) view.findViewById(R.id.my_leads);
          drawer = (DrawerLayout) view.findViewById(R.id.drawer_layout);
+        view_all_ly = (LinearLayout) view.findViewById(R.id.view_all_ly);
+        view_all_ly1 = (LinearLayout) view.findViewById(R.id.view_all_ly1);
+
+
+        ask_Ly_allocate = (LinearLayout) view.findViewById(R.id.ask_Ly_allocate);
+        asklay = (LinearLayout) view.findViewById(R.id.asklay);
 
         adapter = new Resent_Lead_Statues(getActivity(), items);
+        adapter_ask = new Ask_Lead_Statues(getActivity(), items_ask);
         adapter1 = new Health_Assement_Adapter(getActivity(), items1);
         adapter2 = new Document_Adapter(getActivity(), items2);
         adapter3 = new Post_share_Statues(getActivity(), items3);
 
         recycler_view.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
+        ask_recycler_view.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
         recycler_view_health_ass.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
         recycler_view_document_.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
         recycler_view_share.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
@@ -184,10 +197,28 @@ public class ActivityFragment extends Fragment implements NavigationView.OnNavig
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), My_Earnings.class);
                 startActivity(intent);
+
             }
         });
 
         my_leads.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), Dashboard_Activity.class);
+                startActivity(intent);
+            }
+        });
+
+        view_all_ly.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), Ask_Dashboard_Activity.class);
+                startActivity(intent);
+
+            }
+        });
+
+        view_all_ly1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), Dashboard_Activity.class);
@@ -211,6 +242,7 @@ public class ActivityFragment extends Fragment implements NavigationView.OnNavig
 
         Get_Allocation_List(view);
         Health_Assement_List(view);
+        Get_Ask_List(view);
         for(final String name : url_maps.keySet()){
             // TextSliderView textSliderView = new TextSliderView(this);
             DefaultSliderView textSliderView = new DefaultSliderView(getActivity());
@@ -303,9 +335,11 @@ public class ActivityFragment extends Fragment implements NavigationView.OnNavig
 
                                         JSONObject J = ja.getJSONObject(i);
                                         items.add(new Suggestion_item_freqent( J.getString("user_id"), J.getString("user_id"),J.getString("username"),
-                                                J.getString("loan_type"),J.getString("loan_amount"),J.getString("status_disp")));
+                                                J.getString("loan_type"),J.getString("loan_amount"),J.getString("status_disp")
+                                                ));
                                         adapter.notifyDataSetChanged();
 
+                                        view_all_ly1.setVisibility(View.VISIBLE);
                                     }
                                     recycler_view.setAdapter(adapter);
 
@@ -325,6 +359,88 @@ public class ActivityFragment extends Fragment implements NavigationView.OnNavig
             public void onErrorResponse(VolleyError error) {
                 Log.e("Response",String.valueOf(error));
                // Toast.makeText(getActivity(),String.valueOf(error),Toast.LENGTH_SHORT).show();
+
+            }
+        }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("content-type", "application/json");
+                return headers;
+            }
+        };
+
+        Log.d("Response","Login Activity_Exitalert Login_POST33333333333333333333333333333333333");
+        AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
+    }
+    private void Get_Ask_List(View view) {
+        JSONObject jsonObject =new JSONObject();
+        JSONObject J= null;
+        try {
+            J =new JSONObject();
+          //  J.put("b2b_id", Pref.getID(getActivity()));
+            J.put("b2b_id", "49529");
+
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, Urls.getAsklist, J,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+
+                        Log.e("the recent",response.toString());
+
+                        try {
+                            if(response.getString("status").equals("success")){
+
+                                JSONArray ja = response.getJSONArray("data");
+                               /* JSONObject ja1 = response.getJSONObject("balance_coins");
+                                String credit_coin = ja1.getString("current_wallet_coins");
+
+                                SharedPreferences pref1 = getActivity().getSharedPreferences("MyPref", 0); // 0 - for private mode
+                                SharedPreferences.Editor editor = pref1.edit();
+                                editor.putString("credit_coin", credit_coin);
+                                editor.commit();*/
+/*
+                               String credit_coin1 =  pref1.getString("credit_coin", null);
+                                Log.e("credit_coin1",credit_coin1);*/
+
+                                if (ja.length()>0){
+                                    for(int i = 0;i<ja.length();i++){
+
+                                        JSONObject J = ja.getJSONObject(i);
+                                        items_ask.add(new Ask_item_freqent( J.getString("name"), J.getString("applicant"),J.getString("status_disp"),
+                                                J.getString("created_at"),J.getString("user_id"),J.getString("updated_at"),
+                                                J.getString("app_id"),J.getString("request_by"),J.getString("doc_typename"),J.getString("notes"),
+                                                J.getString("transaction_id"),J.getString("doc_classname"),J.getString("legaldoc_id"),J.getString("id")));
+                                        adapter_ask.notifyDataSetChanged();
+                                        view_all_ly.setVisibility(View.VISIBLE);
+
+                                    }
+                                    ask_recycler_view.setAdapter(adapter_ask);
+
+                                }else {
+                                    ask_recycler_view.setVisibility(View.GONE);
+
+                                    asklay.setVisibility(View.GONE);
+                                    ask_Ly_allocate.setVisibility(View.GONE);
+                                    Objs.a.ShowHideNoItems(getActivity(),true);
+                                }
+                            }
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e("Response",String.valueOf(error));
+                // Toast.makeText(getActivity(),String.valueOf(error),Toast.LENGTH_SHORT).show();
 
             }
         }) {

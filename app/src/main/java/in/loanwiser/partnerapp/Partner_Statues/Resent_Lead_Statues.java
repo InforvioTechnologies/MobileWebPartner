@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatButton;
+import androidx.appcompat.widget.AppCompatTextView;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -87,24 +88,55 @@ public class Resent_Lead_Statues extends RecyclerView.Adapter<Resent_Lead_Statue
         holder.loan_type.setText(loan_type);
         holder.Statues_update.setText(status_disp);
 
-        if(status_disp.contains("Pending under you"))
+        if(status_disp.equals("Pending under you"))
         {
             holder.Statues_update_dot.setTextColor(Color.parseColor("#FF9200"));
-        } else if(status_disp.contains("Submitted to Loanwiser"))
+            holder.Statues_update.setTextColor(Color.parseColor("#FF9200"));
+
+            holder.Statues_update_view.setVisibility(View.VISIBLE);
+            holder.Statues_update_view.setText("Complete Now");
+            holder.Statues_update_view1.setVisibility(View.GONE);
+
+        } else if(status_disp.equals("Submitted to Loanwiser"))
         {
             holder.Statues_update_dot.setTextColor(Color.parseColor("#F9F338"));
-        }else if(status_disp.contains("Sanctioned"))
+            holder.Statues_update.setTextColor(Color.parseColor("#F9F338"));
+
+
+            holder.Statues_update_view.setVisibility(View.GONE);
+            holder.Statues_update_view1.setText("View");
+            holder.Statues_update_view1.setVisibility(View.VISIBLE);
+
+        }else if(status_disp.equals("Sanctioned"))
         {
             holder.Statues_update_dot.setTextColor(Color.parseColor("#1592E6"));
-        }else if(status_disp.contains("Disbursed"))
+            holder.Statues_update.setTextColor(Color.parseColor("#1592E6"));
+            holder.Statues_update_view.setVisibility(View.GONE);
+            holder.Statues_update_view1.setText("View");
+            holder.Statues_update_view1.setVisibility(View.VISIBLE);
+        }else if(status_disp.equals("Disbursed"))
         {
             holder.Statues_update_dot.setTextColor(Color.parseColor("#15CE00"));
-        }else if(status_disp.contains("Sent to bank"))
+            holder.Statues_update.setTextColor(Color.parseColor("#15CE00"));
+            holder.Statues_update_view.setVisibility(View.GONE);
+            holder.Statues_update_view1.setText("View");
+            holder.Statues_update_view1.setVisibility(View.VISIBLE);
+
+        }else if(status_disp.equals("Sent to bank"))
         {
             holder.Statues_update_dot.setTextColor(Color.parseColor("#012B5D"));
+            holder.Statues_update.setTextColor(Color.parseColor("#012B5D"));
+            holder.Statues_update_view.setVisibility(View.GONE);
+            holder.Statues_update_view1.setText("View");
+            holder.Statues_update_view1.setVisibility(View.VISIBLE);
+
         }else
         {
             holder.Statues_update_dot.setTextColor(Color.parseColor("#E3434A"));
+            holder.Statues_update.setTextColor(Color.parseColor("#E3434A"));
+            holder.Statues_update_view.setVisibility(View.GONE);
+            holder.Statues_update_view1.setText("View");
+            holder.Statues_update_view1.setVisibility(View.VISIBLE);
         }
 
 
@@ -148,6 +180,7 @@ public class Resent_Lead_Statues extends RecyclerView.Adapter<Resent_Lead_Statue
         private TextView lead_name,loan_amount,loan_type,Statues_update_dot,Statues_update;
         private CardView cardView;
         private AppCompatButton Bt_create_appointment;
+        private AppCompatTextView Statues_update_view,Statues_update_view1;
 
         public CustomViewHolder(View view) {
             super(view);
@@ -158,6 +191,8 @@ public class Resent_Lead_Statues extends RecyclerView.Adapter<Resent_Lead_Statue
             cardView = view.findViewById(R.id.cardView);
             Bt_create_appointment = view.findViewById(R.id.Bt_create_appointment);
             Statues_update_dot = view.findViewById(R.id.Statues_update_dot);
+            Statues_update_view = view.findViewById(R.id.Statues_update_view);
+            Statues_update_view1 = view.findViewById(R.id.Statues_update_view1);
             progressDialog = new SpotsDialog(context, R.style.Custom);
         }
     }

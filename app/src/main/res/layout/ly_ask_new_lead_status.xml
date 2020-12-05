@@ -1,0 +1,315 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <androidx.cardview.widget.CardView
+    android:layout_marginTop="1.5dp"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:card_view="http://schemas.android.com/tools"
+    android:id="@+id/card_view_doc_typename"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:background="@color/white"
+    android:padding="10dp"
+      android:gravity="center"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="1.5dp"
+        app:cardCornerRadius="4dp"
+        android:clipToPadding="false"
+        app:cardUseCompatPadding="true"
+        app:cardElevation="4dp">
+    <LinearLayout
+        android:id="@+id/Over_all"
+        android:background="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    style="@style/SmallText1"
+                    android:gravity="left"
+                    android:textStyle="bold"
+                    android:id="@+id/App_id"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:text="APP-54678"
+                    android:textColor="@color/gray" />
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+               android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    style="@style/SmallText1"
+                    android:gravity="left"
+                    android:textStyle="bold"
+                    android:id="@+id/Lead_Name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:text="Name :"
+                    android:textColor="@color/gray" />
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_gravity="center"
+             android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_marginTop="10dp"
+                    android:gravity="left"
+                    android:id="@+id/name_applicant"
+                    android:textStyle="bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Mathayan"
+                    android:textColor="@color/colorPrimary" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    style="@style/SmallText1"
+                    android:gravity="center"
+                    android:id="@+id/app_id"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:text="Requester :"
+                    android:textColor="@color/gray" />
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_gravity="center"
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:gravity="left"
+                    android:id="@+id/name_callcenter"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Nadraj"
+                    android:textColor="@color/colorPrimary" />
+            </LinearLayout>
+
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_gravity="center"
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    style="@style/SmallText1"
+                    android:gravity="left"
+                    android:id="@+id/Staus"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:text="Status :"
+                    android:textColor="@color/gray" />
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_gravity="center"
+               android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:text="Pending Ask"
+                    android:id="@+id/status_Ask"
+                    android:gravity="center"
+                    android:textStyle="bold"
+                    android:textSize="10dp"
+                    android:textColor="@color/white"
+                    android:background="#F44336"
+                    android:layout_width="120dp"
+                    android:layout_height="30dp"
+                    />
+
+            </LinearLayout>
+
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_gravity="center"
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    style="@style/SmallText1"
+                    android:gravity="left"
+                    android:id="@+id/raised_on"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:text="Raised on :"
+                    android:textColor="@color/gray" />
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_gravity="center"
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:gravity="left"
+                    android:id="@+id/ask_crated_at"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="24/11/2020 Am"
+                    android:textColor="@color/colorPrimary" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_gravity="center"
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    style="@style/SmallText1"
+                    android:gravity="left"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:text="Details :"
+                    android:textColor="@color/gray" />
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_gravity="center"
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/documnet_name"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:gravity="left"
+                    style="@style/SmallText1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Documents, Need Aadhaar ID"
+                    android:textColor="@color/colorPrimary" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+        <LinearLayout
+            android:background="@color/colorPrimary12"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_gravity="center"
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    style="@style/SmallText1"
+                    android:gravity="left"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:text="Note :"
+                    android:id="@+id/notes"
+                    android:textColor="@color/white" />
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:text="Tack Action"
+                    android:id="@+id/ask_Tack_Action"
+                    android:gravity="center"
+                    style="@style/SmallText"
+                    android:textStyle="bold"
+                    android:textSize="10dp"
+                    android:textColor="@color/white"
+                    android:background="#B11C23"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    />
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+</androidx.cardview.widget.CardView>
+

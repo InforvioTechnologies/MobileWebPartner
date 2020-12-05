@@ -59,6 +59,7 @@ public final class Pref {
     public static String COAPPSALARYTYPE = "COAPPSALARYTYPE";
     public static String DOCKEY = "DOCKEY";
     public static String Employee_type_Id = "Employee_type_Id";
+    public static String ask_id = "ask_id";
 
     public static SharedPreferences get(final Context context) {
         return context.getSharedPreferences(context.getResources().getString(R.string.app_name),Context.MODE_PRIVATE);
@@ -400,6 +401,21 @@ public static void putapplicant_name(final Context context, String aUserId) {
         SharedPreferences prefs = Pref.get(context);
         SharedPreferences.Editor editor = prefs.edit();
         editor.remove(DOCID);
+        editor.commit();
+    }
+
+    public static void putask_id(final Context context, String aUserId) {
+        Pref.putPref(context, ask_id, aUserId);
+    }
+
+    public static String getask_id(final Context context) {
+        return Pref.getPref(context, ask_id, null);
+    }
+
+    public static void removeask_id(final Context context) {
+        SharedPreferences prefs = Pref.get(context);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.remove(ask_id);
         editor.commit();
     }
 

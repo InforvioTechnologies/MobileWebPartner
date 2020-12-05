@@ -115,6 +115,8 @@ public class Urls {
     public static String UPDATED_ENABLE = Urls_step + "update_enable";
     public static String PARTNER_STATUES = Urls_step + "part_status";
     public static String PARTNER_STATUES_IDs = Urls_step + "appid_view";
+    public static final String Bankstatement_URl=Urls_step+"bank_statement_upload";
+    public static String ask_countdisp = Urls_step + "ask_countdisp";
     public static String update_bankstatementstatus = Urls_step + "update_bankstatementstatus";
     public static String CAMERA_IMAGE_Upload = Urls_step + "multi_doc";
     public static String PDF_Document_Upload = Urls_step + "multi_docpdf";
@@ -149,10 +151,14 @@ public class Urls {
     public static String Payable_Amount = Urls_step + "payable_amount";
     public static String customplan_msg = Urls_step + "customplan_msg";
 
+    public static String Payment_Plan_Show = Urls_step + "payment_details";
+
     public static String GET_PAYLINK = Urls_step + "get_paylink";
     public static String send_paymentlink = Urls_step + "send_paymentlink";
     public static String Transaction_List = Urls_step + "transaction_list";
     public static String latest_lead_updates = Urls_step + "latest_lead_updates";
+    public static String ask_submit_loanw = Urls_step + "ask_submit_loanw";
+    public static String getAsklist = Urls_step + "getAsklist";
     public static String reference_board  = Urls_step + "reference_board ";
     public static String CREDIT_COINS  = Urls_step + "transaction_list";
 

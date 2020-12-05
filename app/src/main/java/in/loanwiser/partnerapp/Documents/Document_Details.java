@@ -282,21 +282,31 @@ public class Document_Details extends SimpleActivity {
                 J = getItem(position);
                 holder.Over_all.setVisibility(View.GONE);
 
-                holder.doc_typename.setText((J.getString("doc_typename")));
-                Objs.a.NewNormalFontStyle(mCon,holder.doc_typename);
-                holder.doc_typename_all.setText((J.getString("doc_typename")));
-                Objs.a.NewNormalFontStyle(mCon,holder.doc_typename_all);
+               String enable_status = J.getString("enable_status");
 
-              holder.count__all.setText(J.getString("doc_count"));
+               if(enable_status.equals("1"))
+               {
+                   holder.doc_typename.setText((J.getString("doc_typename")));
+                   Objs.a.NewNormalFontStyle(mCon,holder.doc_typename);
+                   holder.doc_typename_all.setText((J.getString("doc_typename")));
+                   Objs.a.NewNormalFontStyle(mCon,holder.doc_typename_all);
 
-                if(J.getString("upload_status").equals("1")){
-                    holder.Over_all.setVisibility(View.VISIBLE);
-                    holder.Ly_first.setVisibility(View.GONE);
-                }else{
-                    holder.Over_all.setVisibility(View.GONE);
-                    holder.Ly_first.setVisibility(View.VISIBLE);
+                   holder.count__all.setText(J.getString("doc_count"));
 
-                }
+                   if(J.getString("upload_status").equals("1")){
+                       holder.Over_all.setVisibility(View.VISIBLE);
+                       holder.Ly_first.setVisibility(View.GONE);
+                   }else{
+                       holder.Over_all.setVisibility(View.GONE);
+                       holder.Ly_first.setVisibility(View.VISIBLE);
+
+                   }
+               }else
+               {
+                   holder.card_view_doc_typename.setVisibility(View.GONE);
+               }
+
+
 
                 holder.Over_all.setOnClickListener(new View.OnClickListener() {
                     @Override

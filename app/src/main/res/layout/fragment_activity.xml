@@ -80,7 +80,59 @@
                     </LinearLayout>
                 </LinearLayout>
 
-                
+                <LinearLayout
+                    android:id="@+id/asklay"
+                    android:layout_gravity="center"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/ask_recent_leads"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginLeft="10dp"
+                        android:text="Ask Pending Under You"
+                        android:textColor="#002B5D"
+                        android:textSize="16dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_marginLeft="10dp"
+                    android:id="@+id/ask_Ly_allocate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/ask_recycler_view"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/view_all_ly"
+                    android:layout_gravity="right"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/viev_all"
+                        android:gravity="right"
+                        android:layout_marginLeft="10dp"
+                        android:text="View All"
+                        android:textColor="#002B5D"
+                        android:textSize="16dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:background="@drawable/ic_view_all"
+                        android:layout_marginLeft="10dp"
+                        android:text="View All"
+                        android:textColor="#002B5D"
+                        android:textSize="16dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"/>
+                </LinearLayout>
                 <LinearLayout
                     android:id="@+id/firstlay"
                     android:layout_gravity="center"
@@ -107,6 +159,32 @@
                         android:id="@+id/recycler_view"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content" />
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/view_all_ly1"
+                    android:layout_gravity="right"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/viev_all1"
+                        android:gravity="right"
+                        android:layout_marginLeft="10dp"
+                        android:text="View All"
+                        android:textColor="#002B5D"
+                        android:textSize="16dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:background="@drawable/ic_view_all"
+                        android:layout_marginLeft="10dp"
+                        android:text="View All"
+                        android:textColor="#002B5D"
+                        android:textSize="16dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"/>
                 </LinearLayout>
                 <LinearLayout
                     android:id="@+id/network_stat"

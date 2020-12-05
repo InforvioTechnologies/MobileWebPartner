@@ -277,8 +277,18 @@
             android:name=".PartnerActivitys.Applicant_Info_new"
             android:theme="@style/NoAction2"
             android:windowSoftInputMode="stateHidden" />
+
+        <activity
+            android:name=".PartnerActivitys.Ask_user_Dashboard_Activity"
+            android:theme="@style/NoAction2"
+            android:windowSoftInputMode="stateHidden" />
+
         <activity
             android:name=".Step_Changes_Screen.Eligibility_Check_PL"
+            android:theme="@style/NoAction2"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".Step_Changes_Screen.DocumentChecklist_Fragment"
             android:theme="@style/NoAction2"
             android:windowSoftInputMode="stateHidden" />
         <activity
@@ -286,9 +296,15 @@
             android:label="@string/title_activity_statues__dashboard__nav"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
+            android:name=".Partner_Statues.Ask_Dashboard_Activity"
+            android:label="@string/title_activity_statues__dashboard__nav"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <activity
             android:name=".User_Account.LoginNew"
             android:theme="@style/NoAction2"
             android:windowSoftInputMode="stateHidden" />
+
         <activity
             android:name=".User_Account.BankDetails"
             android:theme="@style/NoAction2"
@@ -448,6 +464,16 @@
             android:name=".CameraActivity.UploadActivity1"
             android:theme="@style/NoAction2"
             android:windowSoftInputMode="stateHidden" />
+
+        <activity
+            android:name=".CameraActivity.ASK_UploadActivity1"
+            android:theme="@style/NoAction2"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".CameraActivity.ASK_ManiActivity_Image2"
+            android:theme="@style/NoAction2"
+            android:windowSoftInputMode="stateHidden" />
+
         <activity
             android:name=".PartnerActivitys.Track_Status"
             android:theme="@style/NoAction2"

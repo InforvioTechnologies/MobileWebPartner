@@ -1,0 +1,143 @@
+package in.loanwiser.partnerapp.Infinite_Scrollview;
+
+public class Ask_Lead_item {
+
+    private String user_id;
+    private String app_id;
+    private String name;
+    private String request_by;
+    private String applicant;
+    private String created_at;
+    private String status_disp;
+    private String doc_typename;
+    private String notes;
+    private String ask_id;
+
+    private String doc_classname,doc_typeid,transaction_id;
+
+    public String getiuser_id() {
+        return user_id;
+    }
+
+    public void setuser_id(String user_id) {
+        this.user_id = user_id;
+    }
+
+    public String getapp_id() {
+        return app_id;
+    }
+
+    public void setapp_id(String app_id) {
+        this.app_id = app_id;
+    }
+
+
+
+    public String getname() {
+        return name;
+    }
+
+    public void setname(String name) {
+        this.name = name;
+    }
+
+    public String getrequest_by() {
+        return request_by;
+    }
+
+    public void setrequest_by(String request_by) {
+        this.request_by = request_by;
+    }
+
+    public String getapplicant() {
+        return applicant;
+    }
+
+    public void setapplicant(String applicant) {
+        this.applicant = applicant;
+    }
+
+    public String getcreated_at() {
+        return created_at;
+    }
+
+    public void setcreated_at(String created_at) {
+        this.created_at = created_at;
+    }
+
+    public String getstatus_disp() {
+        return status_disp;
+    }
+
+    public void setstatus_disp(String status_disp) {
+        this.status_disp = status_disp;
+    }
+
+    public String getdoc_typename() {
+        return doc_typename;
+    }
+
+    public void setdoc_typename(String doc_typename) {
+        this.doc_typename = doc_typename;
+    }
+
+    public String getnotes() {
+        return notes;
+    }
+
+    public void setnotes(String notes) {
+        this.notes = notes;
+    }
+
+    public String gettransaction_id() {
+        return transaction_id;
+    }
+
+    public void settransaction_id(String transaction_id) {
+        this.transaction_id = transaction_id;
+    }
+
+    public String getdoc_classname() {
+        return doc_classname;
+    }
+
+    public void setdoc_classname(String doc_classname) {
+        this.doc_classname = doc_classname;
+    }
+
+    public String getdoc_typeid() {
+        return doc_typeid;
+    }
+
+    public void setdoc_typeid(String doc_typeid) {
+        this.doc_typeid = doc_typeid;
+    }
+
+    public String getask_id() {
+        return ask_id;
+    }
+
+    public void setask_id(String ask_id) {
+        this.ask_id = ask_id;
+    }
+
+    public Ask_Lead_item(String user_id, String app_id, String name, String request_by, String applicant,
+                         String created_at , String status_disp, String doc_typename, String notes,
+                         String transaction_id,String doc_typeid, String ask_id ,String doc_classname) {
+        //
+        this.user_id = user_id;
+        this.app_id = app_id;
+        this.name = name;
+        this.request_by = request_by;
+        this.applicant = applicant;
+        this.created_at = created_at;
+        this.status_disp = status_disp;
+        this.doc_typename = doc_typename;
+        this.notes = notes;
+        this.transaction_id = transaction_id;
+        this.doc_typeid = doc_typeid;
+        this.ask_id = ask_id;
+        this.doc_classname = doc_classname;
+    }
+
+}

@@ -51,6 +51,7 @@ import adhoc.app.applibrary.Config.AppUtils.VolleySignleton.AppController;
 import dmax.dialog.SpotsDialog;
 import in.loanwiser.partnerapp.Documents.SingleUploadBroadcastReceiver;
 import in.loanwiser.partnerapp.PartnerActivitys.Dashboard_Activity;
+import in.loanwiser.partnerapp.PartnerActivitys.Home;
 import in.loanwiser.partnerapp.PartnerActivitys.SimpleActivity;
 import in.loanwiser.partnerapp.Partner_Statues.DashBoard_new;
 import in.loanwiser.partnerapp.R;
@@ -85,7 +86,7 @@ private android.app.AlertDialog progressDialog;
 
 
 
-public static final String Bankstatement_URl="https://cscapi.propwiser.com/mobile/partner_loanapi_test.php?call=bank_statement_upload";
+
 
 
         FileAdapter fileAdapter;
@@ -394,7 +395,7 @@ public void uploadMultipart() {
         for (int i=0;i<pathlist.size();i++){
         String finalpath= pathlist.get(i);
         progressDialog.show();
-        new MultipartUploadRequest(this, uploadId, Bankstatement_URl)
+        new MultipartUploadRequest(this, uploadId,  Urls.Bankstatement_URl)
         .addFileToUpload(finalpath, "img_url") //Adding file
         .addParameter("doc_name", String.valueOf(fileNameList.get(i))) //Adding text parameter to the request
         //Adding file
@@ -591,9 +592,9 @@ public void uploadMultipart() {
                                                                 Params.applicant_id,applicant_id1,
                                                                 Params.sub_taskid,subtask_id, Params.Applicant_status,_Emp_staus_jsonArray,
                                                                 Params.loan_type_id,loan_type_id,Params.loan_type,loan_type);*/
-                                                        Intent intent = new Intent(Upload_Activity_Bank.this, DocumentChecklistActivity.class);
-                                                        intent.putExtra("jsonArray", _Emp_staus_jsonArray.toString());
+                                                        Intent intent = new Intent(Upload_Activity_Bank.this, Home.class);
                                                         startActivity(intent);
+                                                        finish();
 
                                                 }
 

@@ -39,7 +39,7 @@ public class LeadListAdapter_Dashboard extends RecyclerView.Adapter<LeadListAdap
         this.context = context;
     }
 
-  //  private String tag_json_obj = "jobj_req", tag_json_arry = "jarray_req";
+    //  private String tag_json_obj = "jobj_req", tag_json_arry = "jarray_req";
 
     public void addPosts(List<Lead_item> posts) {
         this.posts.addAll(posts);
@@ -55,21 +55,22 @@ public class LeadListAdapter_Dashboard extends RecyclerView.Adapter<LeadListAdap
     @Override
     public void onBindViewHolder(@NonNull CustomViewHolder holder, int position) {
 
-         holder.bindPost(posts.get(position));
+        holder.bindPost(posts.get(position));
 
     }
 
     @Override
     public int getItemCount() {
         return posts.size();
-       // return 6;
+        // return 6;
     }
 
     public class CustomViewHolder extends RecyclerView.ViewHolder {
 
         AppCompatTextView type,doc_steps,doc_status,font1,font2,loantype,assigned;
         AppCompatTextView Statues_update_dot,
-                Lead_Name,loan_amount,app_id,loan_type,payment_plane,step_com,statues_new;
+                Lead_Name,loan_amount,app_id,loan_type,payment_plane,step_com,statues_new,
+                Statues_update_view,Statues_update_view1;
         ImageView v_Image;
         ProgressBar progressBar;
         AppCompatButton appCompatButtonSelect,add_notes,pipline,archive;
@@ -89,6 +90,8 @@ public class LeadListAdapter_Dashboard extends RecyclerView.Adapter<LeadListAdap
             step_com  = (AppCompatTextView) itemView.findViewById(R.id.step_com);
             Statues_update_dot  = (AppCompatTextView) itemView.findViewById(R.id.Statues_update_dot);
             statues_new  = (AppCompatTextView) itemView.findViewById(R.id.statues_new);
+            Statues_update_view  = (AppCompatTextView) itemView.findViewById(R.id.Statues_update_view);
+            Statues_update_view1  = (AppCompatTextView) itemView.findViewById(R.id.Statues_update_view1);
 
             Over_all = (LinearLayout) itemView.findViewById(R.id.Over_all);
 
@@ -101,6 +104,7 @@ public class LeadListAdapter_Dashboard extends RecyclerView.Adapter<LeadListAdap
 
             //doc_steps.setText(post.getstep_status());
 
+            String statues = post.getstatus_disp();
             Lead_Name.setText(post.getusername());
             loan_amount.setText("\u20B9"+post.getloan_amount());
             app_id.setText(post.getid());
@@ -108,13 +112,13 @@ public class LeadListAdapter_Dashboard extends RecyclerView.Adapter<LeadListAdap
             step_com.setText(post.getcomp_step());
             statues_new.setText(post.getstatus_disp());
             payment_plane.setText(post.getpayment_plan());
-          //
+            //
             //  Statues_update_dot.setText(post.getcolor_code());
-          //  payment_plane.setText(post.getloan_typename());
+            //  payment_plane.setText(post.getloan_typename());
 
             String color_code = post.getcolor_code();
             // loantype1 = post.getloan_typename();
-          //  field_status = post.getfield_status();
+            //  field_status = post.getfield_status();
             step_status = post.getstep_status();
 
             step_status = post.getstep_status();
@@ -127,10 +131,13 @@ public class LeadListAdapter_Dashboard extends RecyclerView.Adapter<LeadListAdap
                 loantype.setVisibility(View.GONE);
             }*/
 
-
+/*
             if(color_code.equals("1"))
             {
                 Statues_update_dot.setTextColor(Color.parseColor("#FF9200"));
+                Statues_update_view.setVisibility(View.VISIBLE);
+                Statues_update_view1.setVisibility(View.VISIBLE);
+
             } else if(color_code.equals("2"))
             {
                 Statues_update_dot.setTextColor(Color.parseColor("#F9F338"));
@@ -146,6 +153,54 @@ public class LeadListAdapter_Dashboard extends RecyclerView.Adapter<LeadListAdap
             }else
             {
                 Statues_update_dot.setTextColor(Color.parseColor("#E3434A"));
+            }*/
+            if(statues.equals("Pending under you"))
+            {
+                Statues_update_dot.setTextColor(Color.parseColor("#FF9200"));
+                statues_new.setTextColor(Color.parseColor("#FF9200"));
+
+                Statues_update_view.setVisibility(View.VISIBLE);
+                Statues_update_view.setText("Complete Now");
+                Statues_update_view1.setVisibility(View.GONE);
+
+            } else if(statues.equals("Submitted to Loanwiser"))
+            {
+                Statues_update_dot.setTextColor(Color.parseColor("#F9F338"));
+                statues_new.setTextColor(Color.parseColor("#F9F338"));
+                Statues_update_view.setVisibility(View.GONE);
+                Statues_update_view1.setText("View");
+                Statues_update_view1.setVisibility(View.VISIBLE);
+
+            }else if(statues.equals("Sanctioned"))
+            {
+                Statues_update_dot.setTextColor(Color.parseColor("#1592E6"));
+                statues_new.setTextColor(Color.parseColor("#1592E6"));
+                Statues_update_view.setVisibility(View.GONE);
+                Statues_update_view1.setText("View");
+                Statues_update_view1.setVisibility(View.VISIBLE);
+            }else if(statues.equals("Disbursed"))
+            {
+                Statues_update_dot.setTextColor(Color.parseColor("#15CE00"));
+                statues_new.setTextColor(Color.parseColor("#15CE00"));
+                Statues_update_view.setVisibility(View.GONE);
+                Statues_update_view1.setText("View");
+                Statues_update_view1.setVisibility(View.VISIBLE);
+
+            }else if(statues.equals("Sent to bank"))
+            {
+                Statues_update_dot.setTextColor(Color.parseColor("#012B5D"));
+                statues_new.setTextColor(Color.parseColor("#012B5D"));
+                Statues_update_view.setVisibility(View.GONE);
+                Statues_update_view1.setText("View");
+                Statues_update_view1.setVisibility(View.VISIBLE);
+
+            }else
+            {
+                Statues_update_dot.setTextColor(Color.parseColor("#E3434A"));
+                statues_new.setTextColor(Color.parseColor("#E3434A"));
+                Statues_update_view.setVisibility(View.GONE);
+                Statues_update_view1.setText("View");
+                Statues_update_view1.setVisibility(View.VISIBLE);
             }
 
             Over_all.setOnClickListener(new View.OnClickListener() {
@@ -153,22 +208,22 @@ public class LeadListAdapter_Dashboard extends RecyclerView.Adapter<LeadListAdap
                 public void onClick(View view) {
 
                     id1 = post.getid1();
-                        if(step_status.contains("Rejected"))
-                        {
-                            Log.e("the lead List","intiated ");
-                            Objs.a.showToast(context, "This Lead is Rejected");
+                    if(step_status.contains("Rejected"))
+                    {
+                        Log.e("the lead List","intiated ");
+                        Objs.a.showToast(context, "This Lead is Rejected");
 
-                            if (context instanceof Dashboard_Activity) {
-                                ((Dashboard_Activity)context).Applicant_Status(id1,step_status);
-                            }
+                        if (context instanceof Dashboard_Activity) {
+                            ((Dashboard_Activity)context).Applicant_Status(id1,step_status);
                         }
-                        else
-                        {
-                            if (context instanceof Dashboard_Activity) {
-                                ((Dashboard_Activity)context).Applicant_Status(id1,step_status);
-                            }
-                           // Applicant_Status(id);
+                    }
+                    else
+                    {
+                        if (context instanceof Dashboard_Activity) {
+                            ((Dashboard_Activity)context).Applicant_Status(id1,step_status);
                         }
+                        // Applicant_Status(id);
+                    }
 
 
                 }
@@ -176,10 +231,10 @@ public class LeadListAdapter_Dashboard extends RecyclerView.Adapter<LeadListAdap
 
             // Objs.a.OutfitNormalFontStyle(mCon, R.id.doc_typename_all);
             // Objs.a.OutfitNormalFontStyle(mCon, R.id.doc_steps);
-        //    a.NewNormalFontStyle(context,type);
-         //   a.NewNormalFontStyle(context,doc_steps);
-         //   a.NewNormalFontStyle(context,loantype);
-          //  a.NewNormalFontStyle(context,assigned);
+            //    a.NewNormalFontStyle(context,type);
+            //   a.NewNormalFontStyle(context,doc_steps);
+            //   a.NewNormalFontStyle(context,loantype);
+            //  a.NewNormalFontStyle(context,assigned);
 
         }
 
