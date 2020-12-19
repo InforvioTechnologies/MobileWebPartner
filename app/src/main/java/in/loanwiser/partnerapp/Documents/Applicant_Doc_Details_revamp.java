@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
@@ -108,6 +109,7 @@ public class Applicant_Doc_Details_revamp extends SimpleActivity {
 
         co_app = Pref.getCoAPPAVAILABLE(getApplicationContext());
         property_identified = Pref.getProperty_id(getApplicationContext());
+        Log.i(TAG, "onCreate:property_identified "+property_identified);
         applicant_txt.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.blue));
         co_applicant_txt.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.gray));
         In_Progress_txt.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.gray));
@@ -121,8 +123,11 @@ public class Applicant_Doc_Details_revamp extends SimpleActivity {
             Applicant_ly1.setVisibility(View.VISIBLE);
             Co_Applicant_ly1.setVisibility(View.VISIBLE);
         }
-        if(property_identified.equals("1"))
-        {
+       /* if (property_identified.equalsIgnoreCase("null")){
+            Property1.setVisibility(View.GONE);
+        }*/
+
+        if (property_identified != null && property_identified.equals("1")) {
             Property1.setVisibility(View.VISIBLE);
 
         }else {
@@ -653,11 +658,11 @@ public class Applicant_Doc_Details_revamp extends SimpleActivity {
                 if(document_req.equals("0"))
                 {
                     holder.mandatory_do.setText("(Highly Increases Loan Approval)");
-                    holder. mandatory_do.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.green));
+                    holder. mandatory_do.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.but_red));
                 }else
                 {
                     holder.mandatory_do.setText("(Mandatory Document)");
-                    holder. mandatory_do.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.green));
+                    holder. mandatory_do.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.but_red));
                 }
 
 
@@ -673,7 +678,7 @@ public class Applicant_Doc_Details_revamp extends SimpleActivity {
 
               //  holder.image_doc.setImageDrawable(getResources().getDrawable(R.drawable.file));
 
-                holder.card_view_class_name.setOnClickListener(new View.OnClickListener() {
+                holder.uploadbtn.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         J = getItem(position);
@@ -722,6 +727,7 @@ public class Applicant_Doc_Details_revamp extends SimpleActivity {
             CardView card_view_class_name;
             View view;
             ImageView image_doc,uploaded_yes;
+            Button uploadbtn;
 
             public ViewHolder(View itemView) {
                 super(itemView);
@@ -730,6 +736,7 @@ public class Applicant_Doc_Details_revamp extends SimpleActivity {
                 mandatory_do  = (AppCompatTextView) itemView.findViewById(R.id.mandatory_do);
                 image_doc  = (ImageView) itemView.findViewById(R.id.image_doc);
                 uploaded_yes  = (ImageView) itemView.findViewById(R.id.uploaded_yes);
+                uploadbtn=(Button)itemView.findViewById(R.id.uploadbtn);
 
                 card_view_class_name  = (CardView) itemView.findViewById(R.id.card_view_class_name);
 
@@ -764,14 +771,14 @@ public class Applicant_Doc_Details_revamp extends SimpleActivity {
         }
 
         @Override
-        public ListItemAdapter1.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             View itemView = LayoutInflater.from(parent.getContext())
                     .inflate(R.layout.ly_application_doc_details_list, parent, false);
-            return new ListItemAdapter1.ViewHolder(itemView);
+            return new ViewHolder(itemView);
         }
 
         @Override
-        public void onBindViewHolder(final ListItemAdapter1.ViewHolder holder, final int position) {
+        public void onBindViewHolder(final ViewHolder holder, final int position) {
             try {
                 String rupee = getResources().getString(R.string.Rs);
                 J = getItem(position);

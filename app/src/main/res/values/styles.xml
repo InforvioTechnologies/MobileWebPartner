@@ -35,7 +35,13 @@
     <style name="MyTabLayout" parent="Base.Widget.Design.TabLayout">
         <item name="tabTextAppearance">@style/MyTabTextAppearance</item>
     </style>
-
+    <style name="SmallTexts" parent="@android:style/TextAppearance">
+        <item name="android:paddingLeft">@dimen/activity_pading</item>
+        <item name="android:paddingRight">@dimen/activity_pading</item>
+        <item name="android:paddingTop">@dimen/activity_pading</item>
+        <item name="android:paddingBottom">@dimen/activity_pading</item>
+        <item name="android:textSize">@dimen/text_size_small</item>
+    </style>
     <style name="MyTabTextAppearance" parent="TextAppearance.AppCompat.Button">
         <item name="android:textSize">18sp</item>
         <item name="android:textColor">@android:color/white</item>

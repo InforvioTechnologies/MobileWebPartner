@@ -66,8 +66,8 @@ public class Document_Details extends SimpleActivity {
 
         progressDialog = new SpotsDialog(this, R.style.Custom);
         Objs.a.setStubId(this, R.layout.activity_document__details);
-        classname1 =  Objs.a.getBundle(Document_Details.this, Params.class_name);
-        Pref.putapplicant_name(mCon,classname1);
+      //  classname1 =  Objs.a.getBundle(Document_Details.this, Params.class_name);
+      //  Pref.putapplicant_name(mCon,classname1);
 
         prop_name =(AppCompatTextView)findViewById(R.id.prop_name);
         prop_name_matatory =(AppCompatTextView)findViewById(R.id.prop_name_matatory);
@@ -79,12 +79,13 @@ public class Document_Details extends SimpleActivity {
         transaction_id = Pref.getTID(mCon);
         applicant_empstatus =  Pref.getEID(mCon);
         Proof_DOC_KEY_ =  Pref.getDOCKEY(mCon);
+        document_req =  Pref.getdocument_req(mCon);
         initTools1("Document Upload");
 
         prop_name.setText(Proof_DOC_KEY_);
         Intent intent = getIntent();
         jsonArray = intent.getStringExtra("jsonArray");
-        document_req = intent.getStringExtra("document_req");
+       // document_req = intent.getStringExtra("document_req");
 
         if(document_req.equals("0"))
         {

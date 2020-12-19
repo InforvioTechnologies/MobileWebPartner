@@ -30,7 +30,7 @@
             <LinearLayout
                 android:layout_weight="1"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="match_parent">
 
                 <androidx.appcompat.widget.AppCompatTextView
                     style="@style/SmallText1"
@@ -41,7 +41,6 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginLeft="10dp"
-                    android:layout_marginTop="10dp"
                     android:text="Lead Name"
                     android:textColor="@color/colorPrimary1" />
 
@@ -49,12 +48,10 @@
             <LinearLayout
                 android:layout_weight="1"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="match_parent">
                 <androidx.appcompat.widget.AppCompatTextView
-                    android:layout_marginTop="10dp"
-                    android:layout_marginLeft="10dp"
                     android:layout_gravity="center"
-                    android:gravity="right"
+                    android:gravity="left"
                     android:id="@+id/loan_amount"
                     android:textStyle="bold"
                     style="@style/SmallText1"
@@ -73,7 +70,7 @@
             <LinearLayout
                 android:layout_weight="1"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="match_parent">
 
                 <androidx.appcompat.widget.AppCompatTextView
                     style="@style/SmallText1"
@@ -83,26 +80,25 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginLeft="10dp"
-                    android:layout_marginTop="10dp"
+                    android:textStyle="bold"
                     android:text="App id"
-                    android:textColor="@color/gray" />
+                    android:textColor="@color/colorPrimary" />
 
             </LinearLayout>
             <LinearLayout
                 android:layout_weight="1"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="match_parent">
                 <androidx.appcompat.widget.AppCompatTextView
-                    android:layout_marginTop="10dp"
-                    android:layout_marginLeft="10dp"
                     android:layout_gravity="center"
-                    android:gravity="right"
+                    android:gravity="left"
                     android:id="@+id/loan_type"
                     style="@style/SmallText1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Personal Loan"
-                    android:textColor="@color/gray" />
+                    android:textStyle="bold"
+                    android:textColor="@color/colorPrimary" />
             </LinearLayout>
 
         </LinearLayout>
@@ -111,20 +107,35 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="wrap_content"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <androidx.appcompat.widget.AppCompatTextView
+                            style="@style/SmallText1"
+                            android:gravity="left"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginLeft="10dp"
+                            android:text="Payment Plan"
+                            android:textStyle="bold"
+                            android:textColor="@color/gray_sade" />
+
+                    </LinearLayout>
+
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_weight="1"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <androidx.appcompat.widget.AppCompatTextView
-                    style="@style/SmallText1"
-                    android:gravity="left"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="10dp"
-                    android:text="Payment Plan"
-                    android:textColor="@color/colorPrimary1" />
                 <androidx.appcompat.widget.AppCompatTextView
                     style="@style/SmallText1"
                     android:gravity="left"
@@ -132,26 +143,45 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_marginTop="10dp"
                     android:textColor="#2699FB" />
+            </LinearLayout>
 
+        </LinearLayout>
+
+        <LinearLayout
+            android:gravity="left"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <androidx.appcompat.widget.AppCompatTextView
+                    style="@style/SmallText1"
+                    android:gravity="right"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="10dp"
+                    android:textStyle="bold"
+                    android:text="Completed up to"
+                    android:textColor="@color/gray_sade" />
             </LinearLayout>
             <LinearLayout
                 android:layout_weight="1"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="match_parent">
                 <androidx.appcompat.widget.AppCompatTextView
-                    android:visibility="gone"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_gravity="center"
-                    android:gravity="right"
                     style="@style/SmallText1"
-                    android:layout_width="match_parent"
+                    android:gravity="right"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Product Name"
-                    android:textColor="@color/colorPrimary1" />
-
+                    android:layout_gravity="center"
+                    android:text="Step"
+                    android:id="@+id/step_com"
+                    android:textColor="#2699FB" />
             </LinearLayout>
 
         </LinearLayout>
@@ -170,24 +200,15 @@
 
                     <androidx.appcompat.widget.AppCompatTextView
                         style="@style/SmallText1"
-                        android:gravity="left"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:text="Ask Status:"
+                        android:id="@+id/ask_statues"
+                        android:textStyle="bold"
                         android:layout_gravity="center"
                         android:layout_marginLeft="10dp"
-                        android:layout_marginTop="10dp"
-                        android:text="Completed up to"
-                        android:textColor="@color/colorPrimary1" />
-                    <androidx.appcompat.widget.AppCompatTextView
-                        style="@style/SmallText1"
-                        android:gravity="left"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginTop="10dp"
-                        android:text="Step"
-                        android:id="@+id/step_com"
-                        android:textColor="#2699FB" />
+                        android:textColor="@color/gray_sade" />
+
 
                 </LinearLayout>
             </LinearLayout>
@@ -198,8 +219,32 @@
                 android:layout_height="wrap_content">
 
                 <androidx.appcompat.widget.AppCompatTextView
+                    style="@style/SmallText1"
+                    android:text="Pending Ask(12)"
+                    android:id="@+id/status_Ask"
+                    android:textStyle="bold"
+                    android:layout_gravity="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="#F44336" />
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:visibility="gone"
                     android:id="@+id/Statues_update_dot"
-                    android:gravity="right"
+                    android:gravity="center"
                     style="@style/SmallText"
                     android:textSize="24dp"
                     android:layout_marginTop="10dp"
@@ -211,18 +256,33 @@
                     android:layout_height="wrap_content"
                     />
                 <androidx.appcompat.widget.AppCompatTextView
-                    android:layout_marginTop="12dp"
-                    android:gravity="right"
+                    android:gravity="left"
+                    android:id="@+id/statues_new1"
+                    style="@style/SmallText1"
+                    android:layout_gravity="center"
+                    android:textStyle="bold"
+                    android:layout_marginLeft="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="statues"
+                    android:textColor="@color/gray_sade" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:gravity="left"
                     android:id="@+id/statues_new"
                     style="@style/SmallText1"
                     android:layout_gravity="center"
                     android:textStyle="bold"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:text="statues"
                     android:textColor="@color/colorPrimary" />
-
             </LinearLayout>
+
 
         </LinearLayout>
         <LinearLayout

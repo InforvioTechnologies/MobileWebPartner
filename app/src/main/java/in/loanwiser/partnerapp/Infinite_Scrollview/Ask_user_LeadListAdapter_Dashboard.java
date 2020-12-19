@@ -70,15 +70,15 @@ public class Ask_user_LeadListAdapter_Dashboard extends RecyclerView.Adapter<Ask
 
     public class CustomViewHolder extends RecyclerView.ViewHolder {
 
-        AppCompatTextView App_id,name_applicant,name_callcenter,status_Ask,ask_crated_at,documnet_name,ask_Tack_Action,
-                notes1;
+        AppCompatTextView App_id,name_applicant,name_callcenter,status_Ask,ask_crated_at,documnet_name,
+                notes1,ask_completed,raised_on_resolved;
 
         ImageView v_Image;
         ProgressBar progressBar;
-        AppCompatButton add_notes,pipline,archive;
+        AppCompatButton add_notes,pipline,archive,ask_Tack_Action;
         AppCompatImageView loan_type_image;
 
-        LinearLayout Over_all,ly_question;
+        LinearLayout Over_all,resolve_ly;
         View view;
         String loantype1,statues12,step_status,transaction_id,id,id1;
 
@@ -92,11 +92,13 @@ public class Ask_user_LeadListAdapter_Dashboard extends RecyclerView.Adapter<Ask
             status_Ask  = (AppCompatTextView) itemView.findViewById(R.id.status_Ask);
             ask_crated_at  = (AppCompatTextView) itemView.findViewById(R.id.ask_crated_at);
             documnet_name  = (AppCompatTextView) itemView.findViewById(R.id.documnet_name);
-            ask_Tack_Action  = (AppCompatTextView) itemView.findViewById(R.id.ask_Tack_Action);
+            ask_Tack_Action  = (AppCompatButton) itemView.findViewById(R.id.ask_Tack_Action);
             notes1  = (AppCompatTextView) itemView.findViewById(R.id.notes);
-
+            ask_completed  = (AppCompatTextView) itemView.findViewById(R.id.ask_completed);
+            raised_on_resolved  = (AppCompatTextView) itemView.findViewById(R.id.raised_on_resolved);
 
             Over_all = (LinearLayout) itemView.findViewById(R.id.Over_all);
+            resolve_ly = (LinearLayout) itemView.findViewById(R.id.resolve_ly);
 
         }
 
@@ -117,6 +119,9 @@ public class Ask_user_LeadListAdapter_Dashboard extends RecyclerView.Adapter<Ask
             String doc_typename = post.getdoc_typename();
             String notes = post.getnotes();
 
+            String partner_resolved_date_org = post.getpartner_resolved_date_org();
+            String close_date = post.getclose_date();
+
             App_id.setText(App_id1);
          //   name_applicant.setText("\u20B9"+post.getloan_amount());
             name_applicant.setText(name_applicant1);
@@ -127,7 +132,21 @@ public class Ask_user_LeadListAdapter_Dashboard extends RecyclerView.Adapter<Ask
             documnet_name.setText(ask_applicant+ " "+ "Need"+ " "+ doc_typename);
 
 
+            if(status_disp.equals("Accepted by Loanwiser"))
+            {
+                resolve_ly.setVisibility(View.VISIBLE);
+                raised_on_resolved.setText("Accepted on");
+                ask_completed.setText(close_date);
 
+            }else if(status_disp.equals("Resolved by GSK"))
+            {
+                resolve_ly.setVisibility(View.VISIBLE);
+                raised_on_resolved.setText("Resolved on");
+                ask_completed.setText(partner_resolved_date_org);
+            }else
+            {
+                resolve_ly.setVisibility(View.GONE);
+            }
 /*
             if(loantype1.contains("null")) {
                 loantype.setVisibility(View.GONE);

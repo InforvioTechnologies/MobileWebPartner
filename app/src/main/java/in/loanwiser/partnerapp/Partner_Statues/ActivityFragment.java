@@ -378,20 +378,21 @@ public class ActivityFragment extends Fragment implements NavigationView.OnNavig
         JSONObject J= null;
         try {
             J =new JSONObject();
-          //  J.put("b2b_id", Pref.getID(getActivity()));
-            J.put("b2b_id", "49529");
+            J.put("b2b_id", Pref.getID(getActivity()));
+            J.put("type", "1");
+            //J.put("b2b_id", "49529");
 
 
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
+        Log.e("the b2b_id",J.toString());
         JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, Urls.getAsklist, J,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
 
-                        Log.e("the recent",response.toString());
+                        Log.e("the ask_recent",response.toString());
 
                         try {
                             if(response.getString("status").equals("success")){
@@ -429,6 +430,12 @@ public class ActivityFragment extends Fragment implements NavigationView.OnNavig
                                     ask_Ly_allocate.setVisibility(View.GONE);
                                     Objs.a.ShowHideNoItems(getActivity(),true);
                                 }
+                            }else
+                            {
+                                ask_recycler_view.setVisibility(View.GONE);
+                                view_all_ly.setVisibility(View.GONE);
+                                asklay.setVisibility(View.GONE);
+                                ask_Ly_allocate.setVisibility(View.GONE);
                             }
 
                         } catch (JSONException e) {

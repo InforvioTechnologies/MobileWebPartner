@@ -334,6 +334,10 @@ public class Viability_Data_revamp extends SimpleActivity {
         property_detailhead.setTypeface(font);
         property_identexthead.setTypeface(font);
         prop_identxt.setTypeface(font);
+        prop_titletxt.setTypeface(font);
+        prop_pincode.setTypeface(font);
+        prop_pricetxt.setTypeface(font);
+        prop_typetxt.setTypeface(font);
         pandetailshead.setTypeface(font);
         pancardnumtxt.setTypeface(font);
         pancardtxt.setTypeface(font);

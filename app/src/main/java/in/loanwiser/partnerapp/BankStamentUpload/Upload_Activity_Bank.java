@@ -6,11 +6,13 @@ import androidx.appcompat.widget.AppCompatTextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
+import android.app.Dialog;
 import android.content.ContentUris;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -20,6 +22,7 @@ import android.provider.MediaStore;
 import android.provider.OpenableColumns;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -56,6 +59,7 @@ import in.loanwiser.partnerapp.PartnerActivitys.SimpleActivity;
 import in.loanwiser.partnerapp.Partner_Statues.DashBoard_new;
 import in.loanwiser.partnerapp.R;
 import in.loanwiser.partnerapp.Step_Changes_Screen.DocumentChecklistActivity;
+import in.loanwiser.partnerapp.Step_Changes_Screen.DocumentChecklist_Fragment;
 import in.loanwiser.partnerapp.Step_Changes_Screen.Document_Checklist_Details_type;
 import in.loanwiser.partnerapp.User_Account.Welcome_Page;
 
@@ -309,8 +313,8 @@ public void onClick(View v) {
                                         }
                                         else
                                         {
-                                                ExitAlert(Upload_Activity_Bank.this);
-                                                Toast.makeText(getApplicationContext(), "Please select the PDF file from the File Directory", Toast.LENGTH_SHORT).show();
+                                                Submit_upload_filePath();
+                                               // Toast.makeText(getApplicationContext(), "Please select the PDF file from the File Directory", Toast.LENGTH_SHORT).show();
                                         }
 
 
@@ -348,12 +352,6 @@ public String getPath(Uri uri)
         cursor.close();
         return s;
         }
-
-
-
-
-
-
 
 @RequiresApi(api = Build.VERSION_CODES.KITKAT)
 public void uploadMultipart() {
@@ -460,7 +458,7 @@ public void uploadMultipart() {
                 if(response.equals("200")){
                         progressDialog.dismiss();
 
-                        ExitAlert1(Upload_Activity_Bank.this);
+                        Submit_upload_sucess();
 
                         // Send_Reload(app_id);
 
@@ -592,7 +590,7 @@ public void uploadMultipart() {
                                                                 Params.applicant_id,applicant_id1,
                                                                 Params.sub_taskid,subtask_id, Params.Applicant_status,_Emp_staus_jsonArray,
                                                                 Params.loan_type_id,loan_type_id,Params.loan_type,loan_type);*/
-                                                        Intent intent = new Intent(Upload_Activity_Bank.this, Home.class);
+                                                        Intent intent = new Intent(Upload_Activity_Bank.this, DocumentChecklist_Fragment.class);
                                                         startActivity(intent);
                                                         finish();
 
@@ -673,12 +671,83 @@ protected void onResume() {
                 builder.setPositiveButton("Okay", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                                Bank_statues();
+
                         }
                 });
                 androidx.appcompat.app.AlertDialog alert = builder.create();
                 alert.show();
                 a.DialogStyle(context, alert);
+        }
+
+        private void Submit_upload_sucess(){
+                final Dialog dialog = new Dialog(this);
+                dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+                dialog.setContentView(R.layout.bank_statement_sucess);
+                //  dialog.getWindow().setLayout(display.getWidth() * 90 / 100, LinearLayout.LayoutParams.WRAP_CONTENT);
+                dialog.setCancelable(true);
+                dialog.setCanceledOnTouchOutside(false);
+                Button cancelbtn = (Button) dialog.findViewById(R.id.cancelbtn);
+                Button submitbtn=(Button)dialog.findViewById(R.id.submitbtn);
+
+                AppCompatTextView Pan_No_Show,dob_Show,father_name,marital_status;
+
+
+
+
+                submitbtn.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                                dialog.dismiss();
+                                Bank_statues();
+
+                        }
+                });
+                cancelbtn.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                                dialog.dismiss();
+                        }
+                });
+
+
+                if (!dialog.isShowing()) {
+                        dialog.show();
+                }
+
+        }
+        private void Submit_upload_filePath(){
+                final Dialog dialog = new Dialog(this);
+                dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+                dialog.setContentView(R.layout.bank_statement_file);
+                //  dialog.getWindow().setLayout(display.getWidth() * 90 / 100, LinearLayout.LayoutParams.WRAP_CONTENT);
+                dialog.setCancelable(true);
+                dialog.setCanceledOnTouchOutside(false);
+                Button cancelbtn = (Button) dialog.findViewById(R.id.cancelbtn);
+                Button submitbtn=(Button)dialog.findViewById(R.id.submitbtn);
+
+                AppCompatTextView Pan_No_Show,dob_Show,father_name,marital_status;
+                submitbtn.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                                dialog.dismiss();
+                                Bank_statues();
+
+                        }
+                });
+                cancelbtn.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                                dialog.dismiss();
+                        }
+                });
+
+
+                if (!dialog.isShowing()) {
+                        dialog.show();
+                }
+
         }
 
 }

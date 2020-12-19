@@ -17,7 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
             <LinearLayout
-
+                android:visibility="gone"
             android:id="@+id/standard"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -25,7 +25,7 @@
 
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
-                android:layout_height="300dp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="50dp"
                 android:layout_margin="40dp"
                 app:cardCornerRadius="60dp">
@@ -84,7 +84,9 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="@string/plan"
-                                android:textColor="@color/colorBlack"
+                                android:textSize="14dp"
+                                android:textStyle="bold"
+                                android:textColor="@color/gray_sade"
                                 android:layout_marginLeft="20dp"
                                 />
 
@@ -102,7 +104,9 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="@string/standard"
-                                android:textColor="@color/colorBlack"
+                                android:textColor="@color/colorPrimary"
+                                android:textSize="14dp"
+                                android:textStyle="bold"
                                 />
 
                         </LinearLayout>
@@ -125,8 +129,10 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="@string/amount"
+                                android:textSize="14dp"
+                                android:textStyle="bold"
                                 android:layout_marginLeft="20dp"
-                                android:textColor="@color/colorBlack"
+                                android:textColor="@color/gray_sade"
                                 />
 
                         </LinearLayout>
@@ -142,7 +148,8 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="@string/rupee_symbol"
-                                android:textColor="@color/colorBlack"/>
+                                android:textColor="@color/colorPrimary"
+                                android:textSize="14dp"/>
 
 
 
@@ -151,35 +158,16 @@
                                 android:layout_height="wrap_content"
                                 android:text="100"
                                 android:id="@+id/payment_amount_stand"
-                                android:textColor="@color/colorBlack"
+                                android:textColor="@color/colorPrimary"
+                                android:textSize="14dp"
+                                android:textStyle="bold"
                                 />
 
                         </LinearLayout>
 
                     </LinearLayout>
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
 
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="15dp"
-                            android:gravity="left">
-
-                            <androidx.appcompat.widget.AppCompatTextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="@string/paymethod"
-                                android:layout_marginLeft="20dp"
-                                android:textColor="@color/mid_blue"/>
-
-
-                        </LinearLayout>
-
-                    </LinearLayout>
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -197,6 +185,39 @@
                     </LinearLayout>
 
                     <LinearLayout
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:orientation="vertical"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="@string/paymethod"
+                                android:textStyle="bold"
+                                android:textSize="13dp"
+                                android:textColor="@color/gray_sade"/>
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textSize="14dp"
+                                android:textStyle="bold"
+                                android:text="@string/loanwiser_credit"
+                                android:textColor="@color/colorPrimary"
+                                />
+
+
+
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
@@ -204,158 +225,135 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_margin="20dp">
+                            android:layout_margin="15dp">
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:id="@+id/current_bal"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="@string/current_bal"
+                                android:textColor="@color/but_red"/>
+
+                        </LinearLayout>
+
+
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="15dp">
 
                             <androidx.appcompat.widget.AppCompatTextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginLeft="20dp"
-                                android:text="@string/loanwiser_credit"
-                                android:textColor="@color/colorBlack"
+                                android:text="@string/loanwiser_wallet"
+                                android:textSize="18dp"
+                                android:textStyle="bold"
+                                android:textColor="@color/mid_blue"/>
+
+                        </LinearLayout>
+
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="15dp">
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="@string/loanwiserweller_desc"
+                                android:textSize="14sp"
+                                android:textColor="@color/colorBlack"/>
+
+                        </LinearLayout>
+
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:layout_margin="20dp">
+
+                            <Button
+                                android:id="@+id/payment_button"
+                                android:layout_width="240dp"
+                                android:layout_height="40dp"
+                                android:layout_gravity="center"
+                                android:gravity="center"
+                                android:text="@string/makepayment"
+                                android:textStyle="bold"
+                                android:textColor="@color/white"
+                                android:background="@drawable/payment_button"
                                 />
 
                         </LinearLayout>
 
                     </LinearLayout>
 
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:layout_margin="20dp">
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:id="@+id/back_button"
+                                android:layout_width="240dp"
+                                android:layout_height="40dp"
+                                android:layout_gravity="center"
+                                android:gravity="center"
+                                android:text="@string/back"
+                                android:textStyle="bold"
+                                android:textColor="@color/blue"
+                                android:background="@drawable/capsul_button_rect_viability1_blue"
+                                />
+
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_margin="20dp">
+
+                    </LinearLayout>
                 </LinearLayout>
 
             </androidx.cardview.widget.CardView>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="15dp">
-
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/current_bal"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/current_bal"
-                        android:layout_marginLeft="20dp"
-                        android:textColor="@color/but_red"/>
-
-                </LinearLayout>
-
-
-
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="15dp">
-
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/loanwiser_wallet"
-                        android:textSize="20sp"
-                        android:textStyle="bold"
-                        android:layout_marginLeft="20dp"
-                        android:textColor="@color/mid_blue"/>
-
-                </LinearLayout>
-
-
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="15dp">
-
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/loanwiserweller_desc"
-                        android:layout_marginLeft="20dp"
-                        android:textSize="14sp"
-                        android:textColor="@color/colorBlack"/>
-
-                </LinearLayout>
-
-
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:gravity="center"
-                    android:layout_margin="20dp"
-
-                    >
-
-                    <Button
-                        android:id="@+id/payment_button"
-                        android:layout_width="240dp"
-                        android:layout_height="40dp"
-                        android:layout_gravity="center"
-                        android:gravity="center"
-                        android:text="@string/makepayment"
-                        android:textStyle="bold"
-                        android:textColor="@color/white"
-                        android:background="@drawable/payment_button"
-                        />
-
-                </LinearLayout>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-
-                android:orientation="vertical">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:gravity="center"
-                    android:padding="10dp"
-                    android:paddingLeft="20dp"
-                    android:paddingStart="20dp"
-                    android:paddingEnd="20dp">
-
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/back_button"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/back"
-                        android:textColor="@color/mid_blue"/>
-                </LinearLayout>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_margin="20dp">
-
-            </LinearLayout>
 
 
         </LinearLayout>
@@ -424,7 +422,9 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="@string/plan"
-                                    android:textColor="@color/colorBlack"
+                                    android:textSize="14dp"
+                                    android:textStyle="bold"
+                                    android:textColor="@color/gray_sade"
                                     android:layout_marginLeft="20dp"
                                     />
 
@@ -442,7 +442,9 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="@string/customplan"
-                                    android:textColor="@color/colorBlack"
+                                    android:textStyle="bold"
+                                    android:textSize="14dp"
+                                    android:textColor="@color/colorPrimary"
                                     />
 
                             </LinearLayout>
@@ -464,8 +466,10 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="@string/amount"
+                                    android:textSize="14dp"
+                                    android:textStyle="bold"
                                     android:layout_marginLeft="20dp"
-                                    android:textColor="@color/colorBlack"
+                                    android:textColor="@color/gray_sade"
                                     />
 
                             </LinearLayout>
@@ -481,41 +485,24 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="@string/rupee_symbol"
-                                    android:textColor="@color/colorBlack"/>
+                                    android:textStyle="bold"
+                                    android:textSize="14dp"
+                                    android:textColor="@color/colorPrimary"/>
 
                                 <androidx.appcompat.widget.AppCompatTextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="300"
                                     android:id="@+id/payment_amout_cust"
-                                    android:textColor="@color/colorBlack"
+                                    android:textStyle="bold"
+                                    android:textSize="14dp"
+                                    android:textColor="@color/colorPrimary"
                                     />
 
                             </LinearLayout>
 
                         </LinearLayout>
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical">
 
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_margin="15dp"
-                                android:gravity="left">
-
-                                <androidx.appcompat.widget.AppCompatTextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:text="@string/paymethod"
-                                    android:layout_marginLeft="20dp"
-                                    android:textColor="@color/mid_blue"/>
-
-
-                            </LinearLayout>
-
-                        </LinearLayout>
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -532,57 +519,67 @@
                         </LinearLayout>
 
                         <LinearLayout
+                            android:layout_marginTop="20dp"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:orientation="vertical">
 
                             <LinearLayout
+                                android:layout_marginLeft="10dp"
+                                android:orientation="vertical"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content">
-
-                                <androidx.appcompat.widget.AppCompatTextView
+                                <LinearLayout
+                                    android:orientation="vertical"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="20dp"
-                                    android:text="@string/pay_collect_cash"
-                                    android:textColor="@color/colorBlack"
-                                    />
+                                    android:gravity="left">
+
+                                    <androidx.appcompat.widget.AppCompatTextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:text="@string/paymethod"
+                                        android:textStyle="bold"
+                                        android:textSize="13dp"
+                                        android:textColor="@color/gray_sade"/>
+
+                                    <androidx.appcompat.widget.AppCompatTextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:text="@string/pay_collect_cash"
+                                        android:textStyle="bold"
+                                        android:textSize="14dp"
+                                        android:textColor="@color/colorPrimary"
+                                        />
+                                </LinearLayout>
+
 
                             </LinearLayout>
+
                             <LinearLayout
+                                android:layout_marginTop="10dp"
+                                android:orientation="vertical"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:orientation="vertical">
-
+                                android:layout_margin="10dp">
                                 <LinearLayout
+                                    android:orientation="vertical"
                                     android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_margin="10dp">
+                                    android:layout_height="wrap_content">
 
                                     <androidx.appcompat.widget.AppCompatTextView
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
                                         android:text="@string/imp_note"
-                                        android:layout_marginLeft="20dp"
-                                        android:textColor="@color/but_red"/>
-
+                                        android:textColor="#D44D53"/>
+                                    <androidx.appcompat.widget.AppCompatTextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:text="@string/cus_note"
+                                        android:textSize="14sp"
+                                        android:textColor="@color/gray_sade"/>
                                 </LinearLayout>
 
-
-
-                            </LinearLayout>
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_margin="10dp">
-
-                                <androidx.appcompat.widget.AppCompatTextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:text="@string/cus_note"
-                                    android:layout_marginLeft="20dp"
-                                    android:textSize="14sp"
-                                    android:textColor="@color/colorBlack"/>
 
                             </LinearLayout>
 
@@ -627,17 +624,20 @@
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center"
                                     android:gravity="center"
-                                    android:padding="10dp"
-                                    android:paddingLeft="20dp"
-                                    android:paddingStart="20dp"
-                                    android:paddingEnd="20dp">
+                                    android:layout_margin="20dp">
 
                                     <androidx.appcompat.widget.AppCompatTextView
                                         android:id="@+id/cus_back_button"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
+                                        android:layout_width="240dp"
+                                        android:layout_height="40dp"
+                                        android:layout_gravity="center"
+                                        android:gravity="center"
                                         android:text="@string/back"
-                                        android:textColor="@color/mid_blue"/>
+                                        android:textStyle="bold"
+                                        android:textColor="@color/blue"
+                                        android:background="@drawable/capsul_button_rect_viability1_blue"
+                                        />
+
                                 </LinearLayout>
                             </LinearLayout>
 
@@ -654,7 +654,7 @@
 
             </LinearLayout>
             <LinearLayout
-                android:visibility="gone"
+
                 android:id="@+id/send_payment_link"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -662,7 +662,7 @@
 
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
-                    android:layout_height="300dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="50dp"
                     android:layout_margin="40dp"
                     app:cardCornerRadius="60dp">
@@ -684,7 +684,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="10dp"
                                 android:text="@string/paymentdet"
-                                android:textSize="20sp"
+                                android:textSize="18dp"
                                 android:textStyle="bold"
                                 android:textColor="@color/colorBlack"/>
 
@@ -721,7 +721,9 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="@string/plan"
-                                    android:textColor="@color/colorBlack"
+                                    android:textSize="14dp"
+                                    android:textStyle="bold"
+                                    android:textColor="@color/gray_sade"
                                     android:layout_marginLeft="20dp"
                                     />
 
@@ -739,7 +741,9 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="@string/standard"
-                                    android:textColor="@color/colorBlack"
+                                    android:textSize="14dp"
+                                    android:textStyle="bold"
+                                    android:textColor="@color/colorPrimary"
                                     />
 
                             </LinearLayout>
@@ -762,8 +766,10 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="@string/amount"
+                                    android:textSize="14dp"
+                                    android:textStyle="bold"
                                     android:layout_marginLeft="20dp"
-                                    android:textColor="@color/colorBlack"
+                                    android:textColor="@color/gray_sade"
                                     />
 
                             </LinearLayout>
@@ -779,44 +785,23 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="@string/rupee_symbol"
-                                    android:textColor="@color/colorBlack"/>
-
-
+                                    android:textColor="@color/colorPrimary"/>
 
                                 <androidx.appcompat.widget.AppCompatTextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="100"
+                                    android:textSize="14dp"
+                                    android:textStyle="bold"
                                     android:id="@+id/payment_amont_link"
-                                    android:textColor="@color/colorBlack"
+                                    android:textColor="@color/colorPrimary"
                                     />
 
                             </LinearLayout>
 
                         </LinearLayout>
 
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical">
 
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_margin="15dp"
-                                android:gravity="left">
-
-                                <androidx.appcompat.widget.AppCompatTextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:text="@string/paymethod"
-                                    android:layout_marginLeft="20dp"
-                                    android:textColor="@color/mid_blue"/>
-
-
-                            </LinearLayout>
-
-                        </LinearLayout>
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -834,7 +819,84 @@
                         </LinearLayout>
 
                         <LinearLayout
+                            android:layout_marginLeft="20dp"
+                            android:layout_marginTop="20dp"
                             android:id="@+id/paymentmethod_lay"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <LinearLayout
+                                android:orientation="vertical"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical">
+
+                                        <androidx.appcompat.widget.AppCompatTextView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:text="@string/paymethod"
+                                            android:textStyle="bold"
+                                            android:textSize="14dp"
+                                            android:textColor="@color/gray_sade"/>
+
+                                        <androidx.appcompat.widget.AppCompatTextView
+                                            android:id="@+id/paymentmethod_textview"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:textSize="15dp"
+                                            android:textStyle="bold"
+                                            android:text="@string/sendpayment_linkcus"
+                                            android:textColor="@color/colorPrimary"
+                                            />
+
+                                </LinearLayout>
+
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_marginTop="20dp"
+                            android:id="@+id/mobilenumber_edittextlay"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <LinearLayout
+                                android:orientation="vertical"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="15dp">
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/customer_num"
+
+                                    android:textSize="14sp"
+                                    android:textColor="@color/mid_blue"/>
+                                <androidx.appcompat.widget.AppCompatEditText
+                                    android:id="@+id/mobilenumber_edittext"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:hint="@string/enter_mobilenum"
+                                    android:inputType="number"
+                                    android:textSize="14sp"
+                                    android:maxLength="10"
+                                    android:textColor="@color/colorBlack"/>
+
+                            </LinearLayout>
+
+
+
+                        </LinearLayout>
+
+                        <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:orientation="vertical">
@@ -842,217 +904,66 @@
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_margin="20dp">
+                                android:layout_gravity="center"
+                                android:gravity="center"
+                                android:layout_margin="20dp"
 
-                                <androidx.appcompat.widget.AppCompatTextView
-                                    android:id="@+id/paymentmethod_textview"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginLeft="20dp"
-                                    android:text="@string/sendpayment_linkcus"
-                                    android:textColor="@color/colorBlack"
+                                >
+
+                                <Button
+                                    android:id="@+id/send_payment_link1"
+                                    android:layout_width="240dp"
+                                    android:layout_height="40dp"
+                                    android:layout_gravity="center"
+                                    android:gravity="center"
+                                    android:text="@string/sendpayment_link"
+                                    android:textStyle="bold"
+                                    android:textColor="@color/white"
+                                    android:background="@drawable/payment_button"
                                     />
 
                             </LinearLayout>
 
                         </LinearLayout>
 
+                        <LinearLayout
+                            android:id="@+id/backbtn_lay"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:gravity="center"
+                                android:layout_margin="20dp">
+
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:id="@+id/back_button_b"
+                                    android:layout_width="240dp"
+                                    android:layout_height="40dp"
+                                    android:layout_gravity="center"
+                                    android:gravity="center"
+                                    android:text="@string/back"
+                                    android:textStyle="bold"
+                                    android:textColor="@color/blue"
+                                    android:background="@drawable/capsul_button_rect_viability1_blue"
+                                    />
+
+                            </LinearLayout>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:layout_margin="20dp">
+
+                        </LinearLayout>
                     </LinearLayout>
 
                 </androidx.cardview.widget.CardView>
-
-                <LinearLayout
-                    android:id="@+id/currntbalance_lay"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:visibility="gone"
-                    android:orientation="vertical">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="15dp">
-
-                        <androidx.appcompat.widget.AppCompatTextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="@string/current_bal"
-                            android:layout_marginLeft="20dp"
-                            android:textColor="@color/but_red"/>
-
-                    </LinearLayout>
-
-
-
-                </LinearLayout>
-                <LinearLayout
-                    android:id="@+id/creditcoin_lay"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:visibility="gone"
-                    android:orientation="vertical">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="15dp">
-
-                        <androidx.appcompat.widget.AppCompatTextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="@string/loanwiser_wallet"
-                            android:textSize="20sp"
-                            android:textStyle="bold"
-                            android:layout_marginLeft="20dp"
-                            android:textColor="@color/mid_blue"/>
-
-                    </LinearLayout>
-
-
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/creditcoin_desclay"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:visibility="gone"
-                    android:orientation="vertical">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="15dp">
-
-                        <androidx.appcompat.widget.AppCompatTextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="@string/loanwiserweller_desc"
-                            android:layout_marginLeft="20dp"
-                            android:textSize="14sp"
-                            android:textColor="@color/colorBlack"/>
-
-                    </LinearLayout>
-
-
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/mobilenumber_lay"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="15dp">
-
-                        <androidx.appcompat.widget.AppCompatTextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="@string/customer_num"
-                            android:layout_marginLeft="20dp"
-                            android:textSize="14sp"
-                            android:textColor="@color/mid_blue"/>
-
-                    </LinearLayout>
-
-
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/mobilenumber_edittextlay"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="15dp">
-
-                        <androidx.appcompat.widget.AppCompatEditText
-                            android:id="@+id/mobilenumber_edittext"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:hint="@string/enter_mobilenum"
-                            android:inputType="number"
-                            android:layout_marginLeft="20dp"
-                            android:textSize="14sp"
-                            android:maxLength="10"
-                            android:textColor="@color/colorBlack"/>
-
-                    </LinearLayout>
-
-
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:gravity="center"
-                        android:layout_margin="20dp"
-
-                        >
-
-                        <Button
-                            android:id="@+id/send_payment_link1"
-                            android:layout_width="240dp"
-                            android:layout_height="40dp"
-                            android:layout_gravity="center"
-                            android:gravity="center"
-                            android:text="@string/sendpayment_link"
-                            android:textStyle="bold"
-                            android:textColor="@color/white"
-                            android:background="@drawable/payment_button"
-                            />
-
-                    </LinearLayout>
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/backbtn_lay"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:gravity="center"
-                        android:padding="10dp"
-                        android:paddingLeft="20dp"
-                        android:paddingStart="20dp"
-                        android:paddingEnd="20dp">
-
-                        <androidx.appcompat.widget.AppCompatTextView
-                            android:id="@+id/back_button_b"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/back"
-                            android:textColor="@color/mid_blue"/>
-                    </LinearLayout>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_margin="20dp">
-
-                </LinearLayout>
 
 
             </LinearLayout>

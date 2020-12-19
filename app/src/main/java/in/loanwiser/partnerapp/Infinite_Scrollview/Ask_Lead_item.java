@@ -11,7 +11,7 @@ public class Ask_Lead_item {
     private String status_disp;
     private String doc_typename;
     private String notes;
-    private String ask_id;
+    private String ask_id, close_date,partner_resolved_date_org;
 
     private String doc_classname,doc_typeid,transaction_id;
 
@@ -121,9 +121,26 @@ public class Ask_Lead_item {
         this.ask_id = ask_id;
     }
 
+    public String getclose_date() {
+        return close_date;
+    }
+
+    public void setclose_date(String close_date) {
+        this.close_date = close_date;
+    }
+
+    public String getpartner_resolved_date_org() {
+        return partner_resolved_date_org;
+    }
+
+    public void setpartner_resolved_date_org(String partner_resolved_date_org) {
+        this.partner_resolved_date_org = partner_resolved_date_org;
+    }
+
     public Ask_Lead_item(String user_id, String app_id, String name, String request_by, String applicant,
                          String created_at , String status_disp, String doc_typename, String notes,
-                         String transaction_id,String doc_typeid, String ask_id ,String doc_classname) {
+                         String transaction_id,String doc_typeid, String ask_id ,String doc_classname,
+                            String close_date, String partner_resolved_date_org) {
         //
         this.user_id = user_id;
         this.app_id = app_id;
@@ -138,6 +155,9 @@ public class Ask_Lead_item {
         this.doc_typeid = doc_typeid;
         this.ask_id = ask_id;
         this.doc_classname = doc_classname;
+        this.close_date = close_date;
+        this.partner_resolved_date_org = partner_resolved_date_org;
+
     }
 
 }

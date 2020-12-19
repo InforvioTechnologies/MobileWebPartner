@@ -13,6 +13,7 @@ import androidx.appcompat.widget.AppCompatTextView;
 import androidx.fragment.app.Fragment;
 
 import android.preference.PreferenceManager;
+import android.text.Html;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -133,6 +134,33 @@ public class FragmentApplicant extends Fragment implements CompoundButton.OnChec
         checkcondition();
         Document_check_lsit();
 
+        LinearLayout.LayoutParams lparams = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        TextView tv = new TextView(getActivity());
+        tv.setLayoutParams(lparams);
+        lparams.setMargins(10, 10, 10, 10);
+        tv.setText(R.string.notess);
+        tv.setTextSize(14);
+        Typeface fonts = Typeface.createFromAsset(getActivity().getAssets(), "segoe_ui.ttf");
+        tv.setTypeface(fonts);
+        tv.setTextColor(Color.parseColor("#D44D53"));
+        check_list_name.addView(tv);
+
+        TextView tvs = new TextView(getActivity());
+        tvs.setLayoutParams(lparams);
+        lparams.setMargins(10, 10, 10, 10);
+
+        String first = "*"+" "  ;
+        String firsttxt="<font color='#4D4D4D'>Marked documents are</font>";
+        String next = "<font color='#D44D53'><b>mandatory document</b></font>";
+        tvs.setText(Html.fromHtml(first +firsttxt+ " "+next));
+       // tvs.setText("*"+" "  +"Marked documents are mandatory document");
+        tvs.setTextSize(14);
+        Typeface fontss = Typeface.createFromAsset(getActivity().getAssets(), "segoe_ui.ttf");
+        tvs.setTypeface(fontss);
+        tvs.setTextColor(Color.parseColor("#D44D53"));
+        check_list_name.addView(tvs);
+
         Docum_ch_step1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -248,7 +276,7 @@ public class FragmentApplicant extends Fragment implements CompoundButton.OnChec
                                         String test=js.getString("document_req");
 
 
-                                        checklist_name(doc_ype_com,key,test);
+                                        checklist_name(doc_ype_com,key);
 
                                     } catch (JSONException e) {
                                         e.printStackTrace();
@@ -295,8 +323,7 @@ public class FragmentApplicant extends Fragment implements CompoundButton.OnChec
 
 
     @SuppressLint("ResourceAsColor")
-    private void checklist_name(final JSONArray doc_ype_com,String key,String test) {
-
+    private void checklist_name(final JSONArray doc_ype_com,String key) {
 
         LinearLayout.LayoutParams lparams = new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
@@ -305,42 +332,48 @@ public class FragmentApplicant extends Fragment implements CompoundButton.OnChec
 
             TextView tv = new TextView(getActivity());
             tv.setLayoutParams(lparams);
-            lparams.setMargins(10, 10, 10, 10);
-            list_key.add(key);
-            tv.setText(key);
-            tv.setText(key);
-            tv.setTextSize(18);
-            Typeface font = Typeface.createFromAsset(getActivity().getAssets(), "segoe_ui.ttf");
-            tv.setTypeface(font);
-            tv.setTextColor(Color.parseColor("#012B5D"));
-            check_list_name.addView(tv);
+            lparams.setMargins(30, 90, 30, 0);
 
-            TextView tvs = new TextView(getActivity());
+
+
+            String star="<font color='#D44D53'>*</font>";
+            list_key.add(key);
+            tv.setText(Html.fromHtml(key + " "+star));
+            //tv.setText(key+" "+star);
+          //  tv.setText(key+" "+star);
+            tv.setTextSize(16);
+            Typeface font = Typeface.createFromAsset(getActivity().getAssets(), "segoe_ui.ttf");
+            tv.setTypeface(font,Typeface.BOLD);
+            tv.setTextColor(Color.parseColor("#012B5D"));
+            check_list_name.addView(tv,lparams);
+
+            LinearLayout.LayoutParams lpara = new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+
+           TextView tvs = new TextView(getActivity());
             TextView tls=new TextView(getActivity());
-            tls.setLayoutParams(lparams);
+          //  tls.setLayoutParams(lparams);
             tvs.setLayoutParams(lparams);
-            lparams.setMargins(10, 10, 10, 10);
-            tvs.setTextSize(18);
-            tls.setTextSize(18);
+            lparams.setMargins(30, 20, 30, 0);
+            tvs.setTextSize(12);
+          //  tls.setTextSize(18);
             Typeface fonts = Typeface.createFromAsset(getActivity().getAssets(), "segoe_ui.ttf");
             tvs.setTypeface(fonts);
-            tls.setTypeface(fonts);
-            if (test.equals("1")){
-                tvs.setText("(Mandatory Document)");
-                tls.setText("Please Upload any one of the following");
-                tls.setTextColor(Color.parseColor("#D34D53"));
-                tvs.setTextColor(Color.parseColor("#25D366"));
+           // tls.setTypeface(fonts);
+            tvs.setText("Please Upload any one of the following");
+             //   tls.setTextColor(Color.parseColor("#D34D53"));
+                tvs.setTextColor(Color.parseColor("#D44D53"));
                 // tvs.setBackgroundColor(Color.GREEN);
-                check_list_name.addView(tvs);
-                check_list_name.addView(tls);
-            }else{
-                tvs.setText("Highly Increases Loan Approval");
+                check_list_name.addView(tvs,lparams);
+               // check_list_name.addView(tls);
+
+              /*  tvs.setText("Highly Increases Loan Approval");
                 tvs.setTextColor(R.color.green);
                 tls.setText("Please Upload any one of the following");
                 tls.setTextColor(Color.parseColor("#D34D53"));
                 tvs.setTextColor(Color.parseColor("#25D366"));
                 check_list_name.addView(tvs);
-                check_list_name.addView(tls);
+                check_list_name.addView(tls);*/
 
             }
 
@@ -348,7 +381,7 @@ public class FragmentApplicant extends Fragment implements CompoundButton.OnChec
 
 
 
-        }
+
 
         keyarray=doc_ype_com.length();
         for (int k=0;k<keyarray;k++){
@@ -364,17 +397,24 @@ public class FragmentApplicant extends Fragment implements CompoundButton.OnChec
             TableRow row =new TableRow(getActivity());
             row.setId(k);
             row.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT));
+          /*  LinearLayout.LayoutParams checkParams = new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+            checkParams.setMargins(10, 10, 10, 10);
+            checkParams.gravity = Gravity.CENTER;*/
+
             final CheckBox checkBox = new CheckBox(getActivity());
             checkBox.setOnCheckedChangeListener(this);
             checkBox.setId(k);
             Typeface font = Typeface.createFromAsset(getActivity().getAssets(), "segoe_ui.ttf");
             checkBox.setTypeface(font);
-            checkBox.setPadding(10, 10, 10, 10);
-            checkBox.setTextColor(R.color.black);
+            checkBox.setPadding(10, 10, 10, 0);
+
+            checkBox.setTextColor(Color.parseColor("#707070"));
             checkBox.setText(checklist_name1);
             checkBox.setTextSize(14);
             checkBox.setGravity(Gravity.LEFT);
             check_list_name.addView(checkBox);
+           // check_list_name.addView(checkBox,checkParams);
 
             if(checked_statues.equals("1"))
             {

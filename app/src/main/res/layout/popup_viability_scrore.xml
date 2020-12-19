@@ -67,7 +67,6 @@
                     android:textColor="@color/colorPrimary"/>
             </LinearLayout>
             <LinearLayout
-                android:visibility="gone"
                 android:id="@+id/co_applicant"
                 android:layout_gravity="center"
                 android:gravity="center"

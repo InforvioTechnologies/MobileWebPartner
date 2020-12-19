@@ -200,8 +200,10 @@ public class Ask_user_Dashboard_Activity extends AppCompatActivity implements On
         pending_ask_List.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.blue));
         pending_ask_List.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.white));
         resolved_ask.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.white));
+        resolved_ask.setBackground(getResources().getDrawable(R.drawable.capsul_button_drop_down1));
         resolved_ask.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.gray));
         acceped_ask.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.white));
+        acceped_ask.setBackground(getResources().getDrawable(R.drawable.capsul_button_drop_down1));
         acceped_ask.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.gray));
         Account_Listings_Details(type);
         ASK_Count_Display();
@@ -210,12 +212,15 @@ public class Ask_user_Dashboard_Activity extends AppCompatActivity implements On
             @Override
             public void onClick(View view) {
                 type = "1";
+                ASK_Count_Display();
                 Account_Listings_Details(type);
                 pending_ask_List.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.blue));
                 pending_ask_List.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.white));
                 resolved_ask.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.white));
+                resolved_ask.setBackground(getResources().getDrawable(R.drawable.capsul_button_drop_down1));
                 resolved_ask.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.gray));
                 acceped_ask.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.white));
+                acceped_ask.setBackground(getResources().getDrawable(R.drawable.capsul_button_drop_down1));
                 acceped_ask.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.gray));
 
             }
@@ -224,11 +229,14 @@ public class Ask_user_Dashboard_Activity extends AppCompatActivity implements On
             @Override
             public void onClick(View view) {
                 type = "2";
+                ASK_Count_Display();
                 pending_ask_List.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.white));
+                pending_ask_List.setBackground(getResources().getDrawable(R.drawable.capsul_button_drop_down1));
                 pending_ask_List.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.gray));
                 resolved_ask.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.blue));
                 resolved_ask.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.white));
                 acceped_ask.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.white));
+                acceped_ask.setBackground(getResources().getDrawable(R.drawable.capsul_button_drop_down1));
                 acceped_ask.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.gray));
                 Account_Listings_Details(type);
             }
@@ -237,9 +245,12 @@ public class Ask_user_Dashboard_Activity extends AppCompatActivity implements On
             @Override
             public void onClick(View view) {
                 type = "3";
+                ASK_Count_Display();
                 pending_ask_List.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.white));
+                pending_ask_List.setBackground(getResources().getDrawable(R.drawable.capsul_button_drop_down1));
                 pending_ask_List.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.gray));
                 resolved_ask.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.white));
+                resolved_ask.setBackground(getResources().getDrawable(R.drawable.capsul_button_drop_down1));
                 resolved_ask.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.gray));
                 acceped_ask.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.blue));
                 acceped_ask.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.white));
@@ -285,7 +296,8 @@ public class Ask_user_Dashboard_Activity extends AppCompatActivity implements On
             J =new JSONObject();
           //  J.put("b2b_id", Pref.getID(mCon));
           //  J.put("user_id", user_id);
-            J.put("user_id", "51647");
+           // J.put("user_id", "51647");
+            J.put("user_id",Pref.getUSERID(getApplicationContext()));
            // User : {"user_id":"51647"}
             Log.e("ASK Count response", String.valueOf(J));
         } catch (JSONException e) {
@@ -319,7 +331,7 @@ public class Ask_user_Dashboard_Activity extends AppCompatActivity implements On
                                 resolved_ask.setText("Resolved by Partner" +"("+resolve_count+")");
                                 acceped_ask.setText("Accepted by Loanwiser" +"("+accept_loanwiser+")");
 
-
+                                progressDialog.dismiss();
 
                             }
 
@@ -406,7 +418,8 @@ public class Ask_user_Dashboard_Activity extends AppCompatActivity implements On
           //  J.put("b2b_id", Pref.getID(mCon));
           //  J.put("b2b_id", "49529");
            // J.put("user_id", user_id);
-            J.put("user_id", "51647");
+          //  J.put("user_id", "51647");
+            J.put("user_id",Pref.getUSERID(getApplicationContext()));
             J.put("type", type);
            // J.put(Params.status_id, id);
             J.put("count", count12);
@@ -437,6 +450,7 @@ public class Ask_user_Dashboard_Activity extends AppCompatActivity implements On
 
                                 if (ja.length()>0){
                                     Ly_no_leads_data.setVisibility(View.GONE);
+                                    recyclerView.setVisibility(View.VISIBLE);
                                     for(int i = 0;i<ja.length();i++){
                                         JSONObject J = ja.getJSONObject(i);
 
@@ -454,7 +468,8 @@ public class Ask_user_Dashboard_Activity extends AppCompatActivity implements On
                                         String doc_classname= J.getString("doc_classname");
                                         String legaldoc_id= J.getString("legaldoc_id");
                                         String Ask_id = J.getString("id");
-
+                                        String partner_resolved_date_org = J.getString("partner_resolved_date");
+                                        String close_date = J.getString("close_date");
                                        /* String mobileno = J.getString("mobileno");
                                         String transaction_id = J.getString("transaction_id");
 
@@ -471,7 +486,8 @@ public class Ask_user_Dashboard_Activity extends AppCompatActivity implements On
 
                                         items.add(new Ask_Lead_item(user_id,app_id, name,request_by,
                                                 applicant,created_at,status_disp,doc_typename,notes,
-                                                transaction_id,legaldoc_id,Ask_id,doc_classname));
+                                                transaction_id,legaldoc_id,Ask_id,doc_classname,
+                                                close_date,partner_resolved_date_org));
 
                                         leadListAdapter_dashboard.notifyDataSetChanged();
                                     }
@@ -504,9 +520,11 @@ public class Ask_user_Dashboard_Activity extends AppCompatActivity implements On
 
 
                             }else {
-
+                                progressDialog.dismiss();
+                                Ly_no_leads_data.setVisibility(View.VISIBLE);
+                                recyclerView.setVisibility(View.GONE);
                                 label_status.setVisibility(View.GONE);
-                                float_chat.setVisibility(View.VISIBLE);
+                                float_chat.setVisibility(View.GONE);
                                 if(count12 == 0)
                                 {
                                     float_chat.setVisibility(View.GONE);

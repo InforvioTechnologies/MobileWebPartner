@@ -51,8 +51,9 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@drawable/btn_sel"
-            android:text="@string/btn_ok" />
+            android:textColor="@color/blue"
+            android:background="@drawable/capsul_button_rect_viability1_blue"
+            android:text="proceed" />
     </LinearLayout>
 
 </LinearLayout>

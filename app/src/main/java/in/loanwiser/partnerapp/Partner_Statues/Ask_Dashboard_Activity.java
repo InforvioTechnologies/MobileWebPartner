@@ -201,8 +201,10 @@ public class Ask_Dashboard_Activity extends AppCompatActivity implements OnLoadM
         pending_ask_List.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.blue));
         pending_ask_List.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.white));
         resolved_ask.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.white));
+        resolved_ask.setBackground(getResources().getDrawable(R.drawable.capsul_button_drop_down1));
         resolved_ask.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.gray));
         acceped_ask.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.white));
+        acceped_ask.setBackground(getResources().getDrawable(R.drawable.capsul_button_drop_down1));
         acceped_ask.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.gray));
         Account_Listings_Details(type);
         ASK_Count_Display();
@@ -215,8 +217,10 @@ public class Ask_Dashboard_Activity extends AppCompatActivity implements OnLoadM
                 pending_ask_List.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.blue));
                 pending_ask_List.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.white));
                 resolved_ask.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.white));
+                resolved_ask.setBackground(getResources().getDrawable(R.drawable.capsul_button_drop_down1));
                 resolved_ask.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.gray));
                 acceped_ask.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.white));
+                acceped_ask.setBackground(getResources().getDrawable(R.drawable.capsul_button_drop_down1));
                 acceped_ask.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.gray));
 
             }
@@ -226,10 +230,12 @@ public class Ask_Dashboard_Activity extends AppCompatActivity implements OnLoadM
             public void onClick(View view) {
                 type = "2";
                 pending_ask_List.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.white));
+                pending_ask_List.setBackground(getResources().getDrawable(R.drawable.capsul_button_drop_down1));
                 pending_ask_List.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.gray));
                 resolved_ask.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.blue));
                 resolved_ask.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.white));
-                acceped_ask.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.white));
+               acceped_ask.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.white));
+                acceped_ask.setBackground(getResources().getDrawable(R.drawable.capsul_button_drop_down1));
                 acceped_ask.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.gray));
                 Account_Listings_Details(type);
             }
@@ -239,8 +245,10 @@ public class Ask_Dashboard_Activity extends AppCompatActivity implements OnLoadM
             public void onClick(View view) {
                 type = "3";
                 pending_ask_List.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.white));
+                pending_ask_List.setBackground(getResources().getDrawable(R.drawable.capsul_button_drop_down1));
                 pending_ask_List.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.gray));
                 resolved_ask.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.white));
+                resolved_ask.setBackground(getResources().getDrawable(R.drawable.capsul_button_drop_down1));
                 resolved_ask.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.gray));
                 acceped_ask.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.blue));
                 acceped_ask.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.white));
@@ -284,8 +292,8 @@ public class Ask_Dashboard_Activity extends AppCompatActivity implements OnLoadM
         JSONObject J= null;
         try {
             J =new JSONObject();
-          //  J.put("b2b_id", Pref.getID(mCon));
-            J.put("b2b_id", "49529");
+            J.put("b2b_id", Pref.getID(mCon));
+          //  J.put("b2b_id", "49529");
             Log.e("ASK Count response", String.valueOf(J));
         } catch (JSONException e) {
             e.printStackTrace();
@@ -318,7 +326,7 @@ public class Ask_Dashboard_Activity extends AppCompatActivity implements OnLoadM
                                 resolved_ask.setText("Resolved by Partner" +"("+resolve_count+")");
                                 acceped_ask.setText("Accepted by Loanwiser" +"("+accept_loanwiser+")");
 
-
+                                progressDialog.dismiss();
 
                             }
 
@@ -402,8 +410,8 @@ public class Ask_Dashboard_Activity extends AppCompatActivity implements OnLoadM
         JSONObject J= null;
         try {
             J =new JSONObject();
-          //  J.put("b2b_id", Pref.getID(mCon));
-            J.put("b2b_id", "49529");
+            J.put("b2b_id", Pref.getID(mCon));
+          //  J.put("b2b_id", "49529");
             J.put("type", type);
            // J.put(Params.status_id, id);
             J.put("count", count12);
@@ -434,6 +442,7 @@ public class Ask_Dashboard_Activity extends AppCompatActivity implements OnLoadM
 
                                 if (ja.length()>0){
                                     Ly_no_leads_data.setVisibility(View.GONE);
+                                    recyclerView.setVisibility(View.VISIBLE);
                                     for(int i = 0;i<ja.length();i++){
                                         JSONObject J = ja.getJSONObject(i);
 
@@ -451,6 +460,8 @@ public class Ask_Dashboard_Activity extends AppCompatActivity implements OnLoadM
                                            String doc_classname= J.getString("doc_classname");
                                        String legaldoc_id= J.getString("legaldoc_id");
                                             String Ask_id = J.getString("id");
+                                            String partner_resolved_date_org = J.getString("partner_resolved_date");
+                                            String close_date = J.getString("close_date");
                                        /* String mobileno = J.getString("mobileno");
                                         String transaction_id = J.getString("transaction_id");
 
@@ -467,7 +478,7 @@ public class Ask_Dashboard_Activity extends AppCompatActivity implements OnLoadM
 
                                         items.add(new Ask_Lead_item(user_id,app_id, name,request_by,
                                                 applicant,created_at,status_disp,doc_typename,notes,
-                                                transaction_id,legaldoc_id,Ask_id,doc_classname));
+                                                transaction_id,legaldoc_id,Ask_id,doc_classname,close_date,partner_resolved_date_org));
                                         leadListAdapter_dashboard.notifyDataSetChanged();
                                     }
                                  //   Log.e("leadListA", String.valueOf(leadListAdapter_dashboard));
@@ -501,14 +512,16 @@ public class Ask_Dashboard_Activity extends AppCompatActivity implements OnLoadM
                             }else {
 
                                 label_status.setVisibility(View.GONE);
-                                float_chat.setVisibility(View.VISIBLE);
+                                float_chat.setVisibility(View.GONE);
+                                recyclerView.setVisibility(View.GONE);
+                                Ly_no_leads_data.setVisibility(View.VISIBLE);
                                 if(count12 == 0)
                                 {
                                     float_chat.setVisibility(View.GONE);
                                     Ly_no_leads_data.setVisibility(View.VISIBLE);
                                 }
 
-
+                                progressBar.setVisibility(View.GONE);
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();

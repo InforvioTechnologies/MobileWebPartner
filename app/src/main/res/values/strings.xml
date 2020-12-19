@@ -155,6 +155,9 @@
     <string name="loan_purpose3"> Medical treatments</string>
     <string name="loan_purpose4"> Child\'s marriage / higher studies</string>
 
+
+    <string name="notess">Note</string>
+
     <string name="home_loan">At Loanwiser, we are trying to make the home loan application and the process of obtaining a simple and hassle free loan to our every client.
         Home loan facility can be used to buy a house or flat or resale property ready to shift or under construction </string>
 
@@ -237,6 +240,7 @@
     </string-array>
 
     <string name="des">Designation in Company</string>
+    <string name="crifreportgen">CRIF Report Generation</string>
     <string name="cmp_type">Company Type</string>
     <string name="cmp_name">Company Name</string>
     <string name="emp_type">Type of Employee</string>
@@ -456,6 +460,16 @@
     <string name="income_proof">Income Proof</string>
     <string name="applicant_business_re">Business Registration</string>
     <string name="applicant_business_proof">Business Proof</string>
+
+
+    <string name="leadpass">Your Lead has Successfully Passed the Viability Check</string>
+    <string name="crifscore">Applicant <b>CRIF Score</b> </string>
+    <string name="crifscore1">Co Applicant <b>CRIF Score</b> </string>
+    <string name="viewreport">View Viablity Report</string>
+    <string name="viewreport1">View Applicant CRIF Report</string>
+    <string name="viewreport2">View Co Applicant CRIF Report</string>
+    <string name="notevialblepass">You can also download the Viability Report from Lead Detail Dashboard.</string>
+    <string name="proceednext">PROCEED TO NEXT STEP</string>
 
     <string-array name="busines_reg">
         <item>Select Business registration Type</item>
@@ -756,7 +770,7 @@
     <string name="imp_not">Important Note</string>
     <string name="imp_not_des1">Before you proceed to the next step, you need to have following details:</string>
     <string name="imp_not_des2">. Customers Pan Card Details </string>
-    <string name="imp_not_des3"> . Last 6 Months Bank Statement in PDF Format</string>
+    <string name="imp_not_des3"> Last 6 Months Bank Statement in PDF Format</string>
 
     <string name="sendpayment_linkcus">Send Payment Link to Customer</string>
     <string name="sendpayment_link">SEND PAYMENT LINK</string>
@@ -782,11 +796,11 @@
 
     <string name="save_later">SAVE FOR LATER</string>
     <string name="stepone_submit">Are you sure you want to Submit at Step1</string>
-    <string name="stepone_submit1">Please make sure all the entered details are correct, Once you click submit, you will not be able to edit it again</string>
+    <string name="stepone_submit1">Please make sure all the details included are correct and if you click Proceed, you will not be able to edit again.</string>
     <string name="stepone_desc">if you proceed to step2 and step3 you can receive more payout and chance to earn instant cash benefit. If you submit at this stage.you\'ll only get payout percentage for the step 1 completion,and only when the loan is disbursed.</string>
     <string name="stepone_desc1">if you proceed to step3 you can receive more payout and chance to earn instant cash benefit. If you submit at this stage.you\'ll only get payout percentage for the step 1 and step 2 completion,and only when the loan is disbursed.</string>
-    <string name="no_cancel">No, Cancel</string>
-    <string name="yes_submit">Yes, Submit</string>
+    <string name="no_cancel">Edit</string>
+    <string name="yes_submit">Proceed</string>
     <string name="doctupload_dialog">Do you have any lead Documents to be uploaded?</string>
     <string name="doctupload_desc">you can choose and upload the documents you have with you,in the next screen,it will help us in faster loan processing and hence,faster payouts</string>
     <string name="yes_documents">Yes I Have Documents</string>

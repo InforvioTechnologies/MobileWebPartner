@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -47,6 +48,7 @@ import adhoc.app.applibrary.Config.AppUtils.VolleySignleton.AppController;
 import dmax.dialog.SpotsDialog;
 import in.loanwiser.partnerapp.CameraActivity.ASK_ManiActivity_Image2;
 import in.loanwiser.partnerapp.CameraActivity.ManiActivity_Image2;
+import in.loanwiser.partnerapp.PartnerActivitys.Viability_Data_revamp;
 import in.loanwiser.partnerapp.R;
 
 public class Ask_Lead_Statues extends RecyclerView.Adapter<Ask_Lead_Statues.CustomViewHolder> {
@@ -309,8 +311,11 @@ public class Ask_Lead_Statues extends RecyclerView.Adapter<Ask_Lead_Statues.Cust
         Button submitbtn=(Button)dialog.findViewById(R.id.submitbtn);
         AppCompatImageView close_image=(AppCompatImageView)dialog.findViewById(R.id.close_image);
 
-        AppCompatTextView App_id,name_applicant,name_callcenter,status_Ask,ask_crated_at,documnet_name,notes;
+        AppCompatTextView App_id,name_applicant,name_callcenter,status_Ask,ask_crated_at,documnet_name,notes,
+                Lead_Name,requester,Staus,raised_on,details,notes1;
         AppCompatButton ask_Tack_Action;
+
+        Typeface font = Typeface.createFromAsset(context.getAssets(), "segoe_ui.ttf");
 
         App_id  = (AppCompatTextView) dialog.findViewById(R.id.App_id);
         name_applicant  = (AppCompatTextView) dialog.findViewById(R.id.name_applicant);
@@ -321,14 +326,37 @@ public class Ask_Lead_Statues extends RecyclerView.Adapter<Ask_Lead_Statues.Cust
         notes  = (AppCompatTextView) dialog.findViewById(R.id.notes);
         ask_Tack_Action  = (AppCompatButton) dialog.findViewById(R.id.ask_Tack_Action);
 
+
+        Lead_Name  = (AppCompatTextView) dialog.findViewById(R.id.Lead_Name);
+        requester  = (AppCompatTextView) dialog.findViewById(R.id.requester);
+        Staus  = (AppCompatTextView) dialog.findViewById(R.id.Staus);
+        raised_on  = (AppCompatTextView) dialog.findViewById(R.id.raised_on);
+        details  = (AppCompatTextView) dialog.findViewById(R.id.details);
+        notes1  = (AppCompatTextView) dialog.findViewById(R.id.notes1);
+
         App_id.setText(app_id);
         //   name_applicant.setText("\u20B9"+post.getloan_amount());
         name_applicant.setText(name);
         name_callcenter.setText(request_by);
         status_Ask.setText(status_disp1);
         ask_crated_at.setText(created_at);
-        documnet_name.setText(applicant1+ " "+ "Need"+ " "+ doc_typename);
+        documnet_name.setText(applicant1+","+ " "+ "Need"+ " "+ doc_typename);
         notes.setText(Notes);
+
+
+        App_id.setTypeface(font);
+        name_applicant.setTypeface(font);
+        name_callcenter.setTypeface(font);
+        status_Ask.setTypeface(font);
+        ask_crated_at.setTypeface(font);
+        documnet_name.setTypeface(font);
+        notes.setTypeface(font);
+        Lead_Name.setTypeface(font);
+        requester.setTypeface(font);
+        Staus.setTypeface(font);
+        raised_on.setTypeface(font);
+        details.setTypeface(font);
+        notes1.setTypeface(font);
 
         ask_Tack_Action.setOnClickListener(new View.OnClickListener() {
             @Override

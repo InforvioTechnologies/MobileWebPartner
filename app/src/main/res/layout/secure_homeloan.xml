@@ -122,7 +122,12 @@
                                         android:id="@+id/prop_titletxt"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:textSize="16sp" />
+                                        android:textSize="16sp"
+                                        android:textColor="@color/text_blue"
+                                        android:textAlignment="center"
+                                        tools:ignore="DuplicateIds"
+                                        android:textStyle="bold"
+                                        android:layout_gravity="center_horizontal"/>
 
                                 </LinearLayout>
 
@@ -161,7 +166,12 @@
                                         android:id="@+id/prop_pincode"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:textSize="16sp" />
+                                        android:textSize="16sp"
+                                        android:textColor="@color/text_blue"
+                                        android:textAlignment="center"
+                                        tools:ignore="DuplicateIds"
+                                        android:textStyle="bold"
+                                        android:layout_gravity="center_horizontal" />
 
                                 </LinearLayout>
 
@@ -200,7 +210,12 @@
                                         android:id="@+id/prop_typetxt"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:textSize="16sp" />
+                                        android:textSize="16sp"
+                                        android:textColor="@color/text_blue"
+                                        android:textAlignment="center"
+                                        tools:ignore="DuplicateIds"
+                                        android:textStyle="bold"
+                                        android:layout_gravity="center_horizontal" />
 
                                 </LinearLayout>
 
@@ -238,7 +253,12 @@
                                         android:id="@+id/prop_pricetxt"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:textSize="16sp" />
+                                        android:textSize="16sp"
+                                        android:textColor="@color/text_blue"
+                                        android:textAlignment="center"
+                                        tools:ignore="DuplicateIds"
+                                        android:textStyle="bold"
+                                        android:layout_gravity="center_horizontal" />
 
                                 </LinearLayout>
                             </LinearLayout>

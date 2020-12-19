@@ -22,7 +22,7 @@
         android:orientation="vertical">
 
         <LinearLayout
-            android:visibility="gone"
+
             android:id="@+id/credit_card_app"
             android:padding="5dp"
             android:orientation="vertical"
@@ -73,6 +73,26 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent" />
                 </LinearLayout>
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/proceedlay"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:gravity="center"
+                android:layout_margin="25dp"
+                android:orientation="vertical">
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/submit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:text="submit"
+                    android:textColor="@color/white"
+                    android:background="@drawable/capsul_button4"/>
+
             </LinearLayout>
         </LinearLayout>
         <LinearLayout

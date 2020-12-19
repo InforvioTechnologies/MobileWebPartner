@@ -525,7 +525,7 @@ public class ASK_ManiActivity_Image2 extends SimpleActivity implements SingleUpl
         super.onActivityResult(requestCode, resultCode, data);
         Uri selectedImageUri = null;
         // filePath = null;
-
+        materialDesignFAM.close(true);
         if (requestCode == PICK_PDF_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null) {
             filePath = data.getData();
 

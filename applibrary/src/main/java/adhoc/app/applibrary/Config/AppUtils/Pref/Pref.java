@@ -58,6 +58,7 @@ public final class Pref {
     public static String COEMPTYPE = "COEMPTYPE";
     public static String COAPPSALARYTYPE = "COAPPSALARYTYPE";
     public static String DOCKEY = "DOCKEY";
+    public static String document_req = "document_req";
     public static String Employee_type_Id = "Employee_type_Id";
     public static String ask_id = "ask_id";
 
@@ -748,6 +749,21 @@ public static void putName(final Context context, String aUserId) {
         SharedPreferences prefs = Pref.get(context);
         SharedPreferences.Editor editor = prefs.edit();
         editor.remove(DOCKEY);
+        editor.commit();
+    }
+
+    public static void putdocument_req(final Context context, String aUserId) {
+        Pref.putPref(context, document_req, aUserId);
+    }
+
+    public static String getdocument_req(final Context context) {
+        return Pref.getPref(context, document_req, null);
+    }
+
+    public static void removedocument_req(final Context context) {
+        SharedPreferences prefs = Pref.get(context);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.remove(document_req);
         editor.commit();
     }
 

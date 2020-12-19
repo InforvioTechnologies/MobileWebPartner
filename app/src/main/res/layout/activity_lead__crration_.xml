@@ -51,6 +51,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content">
                             <androidx.appcompat.widget.AppCompatTextView
+                                android:visibility="gone"
                                 android:gravity="left"
                                 android:layout_marginLeft="2dp"
                                 android:id="@+id/txt_loan_category"
@@ -62,7 +63,6 @@
                                 android:layout_height="wrap_content" />
                             <androidx.appcompat.widget.AppCompatTextView
                                 android:gravity="left"
-                                android:layout_marginLeft="2dp"
                                 android:id="@+id/txt_loan_category1"
                                 android:layout_width="match_parent"
                                 style="@style/LorgeText2"
@@ -72,12 +72,12 @@
                                 android:layout_height="wrap_content" />
                         </LinearLayout>
                         <LinearLayout
-                            android:gravity="center"
+
                             android:orientation="horizontal"
                             android:layout_width="match_parent"
                             android:layout_height="50dp">
                             <LinearLayout
-                                android:layout_marginLeft="30dp"
+
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent">
                                 <Spinner
@@ -105,6 +105,7 @@
                             android:layout_height="wrap_content">
                             <androidx.appcompat.widget.AppCompatTextView
                                 android:gravity="left"
+                                android:visibility="gone"
                                 android:layout_marginLeft="2dp"
                                 android:id="@+id/loan_type"
                                 android:layout_width="wrap_content"
@@ -131,7 +132,7 @@
                             android:layout_height="50dp">
 
                             <LinearLayout
-                                android:layout_marginLeft="30dp"
+
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent">
                                 <Spinner
@@ -159,6 +160,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content">
                             <androidx.appcompat.widget.AppCompatTextView
+                                android:visibility="gone"
                                 android:gravity="left"
                                 android:layout_marginLeft="2dp"
                                 android:id="@+id/type_of_empmnt_txt"
@@ -166,7 +168,6 @@
                                 style="@style/LorgeText2"
                                 android:textColor="@color/colorPrimaryDark"
                                 android:textColorHint="@color/colorPrimaryDark"
-
                                 android:layout_height="wrap_content" />
                             <androidx.appcompat.widget.AppCompatTextView
                                 android:gravity="left"
@@ -186,7 +187,6 @@
                             android:layout_height="50dp">
 
                             <LinearLayout
-                                android:layout_marginLeft="30dp"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent">
                                 <Spinner
@@ -219,13 +219,13 @@
                                 android:layout_height="wrap_content">
                                 <androidx.appcompat.widget.AppCompatTextView
                                     android:gravity="left"
+                                    android:visibility="gone"
                                     android:layout_marginLeft="2dp"
                                     android:id="@+id/Loan_amount"
                                     android:layout_width="wrap_content"
                                     style="@style/LorgeText2"
                                     android:textColor="@color/colorPrimaryDark"
                                     android:textColorHint="@color/colorPrimaryDark"
-
                                     android:layout_height="wrap_content" />
                                 <androidx.appcompat.widget.AppCompatTextView
                                     android:gravity="left"
@@ -239,13 +239,12 @@
                                     android:layout_height="wrap_content" />
                             </LinearLayout>
                             <LinearLayout
-                                android:layout_marginLeft="30dp"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent">
                                 <androidx.appcompat.widget.AppCompatEditText
                                     android:id="@+id/loan_amount_ext"
                                     android:textSize="16sp"
-                                    android:textColor="@color/colorPrimaryDark"
+                                    android:textColor="@color/black"
                                     android:inputType="number"
                                     android:maxLength="10"
                                     android:imeOptions="actionDone"
@@ -264,13 +263,13 @@
                                 android:layout_height="wrap_content">
                                 <androidx.appcompat.widget.AppCompatTextView
                                     android:gravity="left"
+                                    android:visibility="gone"
                                     android:layout_marginLeft="2dp"
                                     android:id="@+id/name"
                                     android:layout_width="wrap_content"
                                     style="@style/LorgeText2"
                                     android:textColor="@color/colorPrimaryDark"
                                     android:textColorHint="@color/colorPrimaryDark"
-
                                     android:layout_height="wrap_content" />
                                 <androidx.appcompat.widget.AppCompatTextView
                                     android:gravity="left"
@@ -285,7 +284,6 @@
                                     android:layout_height="wrap_content" />
                             </LinearLayout>
                             <LinearLayout
-                                android:layout_marginLeft="30dp"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent">
                                 <androidx.appcompat.widget.AppCompatEditText
@@ -295,7 +293,7 @@
                                     android:textSize="16sp"
                                     android:inputType="textEmailAddress"
                                     android:imeOptions="actionDone"
-                                    android:textColor="@color/colorPrimaryDark"/>
+                                    android:textColor="@color/black"/>
                             </LinearLayout>
                         </LinearLayout>
                         <LinearLayout
@@ -310,8 +308,8 @@
                                 android:layout_height="wrap_content">
                                 <androidx.appcompat.widget.AppCompatTextView
                                     android:gravity="left"
-                                    android:layout_marginLeft="2dp"
                                     android:id="@+id/email"
+                                    android:visibility="gone"
                                     android:layout_width="wrap_content"
                                     style="@style/LorgeText2"
                                     android:textColor="@color/colorPrimaryDark"
@@ -330,14 +328,13 @@
                                     android:layout_height="wrap_content" />
                             </LinearLayout>
                             <LinearLayout
-                                android:layout_marginLeft="30dp"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent">
                                 <androidx.appcompat.widget.AppCompatEditText
                                     android:id="@+id/email_edite_txt"
                                     android:textSize="16sp"
                                     android:inputType="textEmailAddress"
-                                    android:textColor="@color/colorPrimaryDark"
+                                    android:textColor="@color/black"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"/>
                             </LinearLayout>
@@ -353,13 +350,13 @@
                                 android:layout_height="wrap_content">
                                 <androidx.appcompat.widget.AppCompatTextView
                                     android:gravity="left"
+                                    android:visibility="gone"
                                     android:layout_marginLeft="2dp"
                                     android:id="@+id/mobile"
                                     android:layout_width="wrap_content"
                                     style="@style/LorgeText2"
                                     android:textColor="@color/colorPrimaryDark"
                                     android:textColorHint="@color/colorPrimaryDark"
-
                                     android:layout_height="wrap_content" />
                                 <androidx.appcompat.widget.AppCompatTextView
                                     android:gravity="left"
@@ -373,7 +370,6 @@
                                     android:layout_height="wrap_content" />
                             </LinearLayout>
                             <LinearLayout
-                                android:layout_marginLeft="30dp"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent">
                                 <androidx.appcompat.widget.AppCompatEditText
@@ -384,13 +380,12 @@
                                     android:inputType="number"
                                     android:maxLength="10"
                                     android:imeOptions="actionDone"
-                                    android:textColor="@color/colorPrimaryDark"/>
+                                    android:textColor="@color/black"/>
                             </LinearLayout>
                         </LinearLayout>
 
                         <LinearLayout
                             android:id="@+id/Is_Mobile_no"
-                            android:padding="5dp"
                             android:orientation="vertical"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content">
@@ -400,6 +395,7 @@
                                 android:layout_height="wrap_content">
                                 <androidx.appcompat.widget.AppCompatTextView
                                     android:gravity="left"
+                                    android:visibility="gone"
                                     android:layout_marginLeft="2dp"
                                     android:id="@+id/is_mobile_no"
                                     android:layout_width="wrap_content"
@@ -426,7 +422,6 @@
                                 android:layout_height="50dp">
 
                                 <LinearLayout
-                                    android:layout_marginLeft="30dp"
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent">
                                     <Spinner
@@ -443,7 +438,6 @@
                         </LinearLayout>
                         <LinearLayout
                             android:id="@+id/co_applicant_ly"
-                            android:padding="5dp"
                             android:orientation="vertical"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content">
@@ -459,7 +453,7 @@
                                     style="@style/LorgeText2"
                                     android:textColor="@color/colorPrimaryDark"
                                     android:textColorHint="@color/colorPrimaryDark"
-
+                                    android:visibility="gone"
                                     android:layout_height="wrap_content" />
                                 <androidx.appcompat.widget.AppCompatTextView
                                     android:gravity="left"
@@ -479,7 +473,6 @@
                                 android:layout_height="50dp">
 
                                 <LinearLayout
-                                    android:layout_marginLeft="30dp"
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent">
                                     <Spinner
@@ -497,7 +490,6 @@
 
                         <LinearLayout
                             android:id="@+id/co_applicant_emp_type"
-                            android:padding="5dp"
                             android:orientation="vertical"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content">
@@ -514,7 +506,7 @@
                                     style="@style/LorgeText2"
                                     android:textColor="@color/colorPrimaryDark"
                                     android:textColorHint="@color/colorPrimaryDark"
-
+                                    android:visibility="gone"
                                     android:layout_height="wrap_content" />
                                 <androidx.appcompat.widget.AppCompatTextView
                                     android:gravity="left"
@@ -534,7 +526,6 @@
                                 android:layout_height="50dp">
 
                                 <LinearLayout
-                                    android:layout_marginLeft="30dp"
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent">
                                     <Spinner
@@ -562,6 +553,7 @@
                                 android:layout_height="wrap_content">
                                 <androidx.appcompat.widget.AppCompatTextView
                                     android:gravity="left"
+                                    android:visibility="gone"
                                     android:layout_marginLeft="2dp"
                                     android:id="@+id/wt_mobile"
                                     android:layout_width="wrap_content"
@@ -582,7 +574,6 @@
 
                             </LinearLayout>
                             <LinearLayout
-                                android:layout_marginLeft="30dp"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent">
                                 <androidx.appcompat.widget.AppCompatEditText
@@ -593,7 +584,7 @@
                                     android:maxLength="10"
                                     android:inputType="number"
                                     android:imeOptions="actionDone"
-                                    android:textColor="@color/colorPrimaryDark"/>
+                                    android:textColor="@color/black"/>
                             </LinearLayout>
                         </LinearLayout>
 

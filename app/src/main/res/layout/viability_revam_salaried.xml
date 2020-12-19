@@ -35,16 +35,25 @@
 
             <LinearLayout
                 android:gravity="left"
-                android:orientation="vertical"
+                android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:gravity="left"
+                    android:layout_marginLeft="2dp"
+                    android:visibility="gone"
+                    android:layout_width="wrap_content"
+                    style="@style/LorgeText2"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textColorHint="@color/colorPrimaryDark"
+                    android:layout_height="wrap_content" />
                 <androidx.appcompat.widget.AppCompatTextView
                     android:layout_gravity="left"
                     android:layout_width="match_parent"
                     style="@style/LorgeText2"
                     android:textSize="18sp"
                     android:textStyle="bold"
-                    android:textColor="@color/colorPrimary12"
+                    android:textColor="@color/gray_sade1"
                     android:text="Employment Details"
                     android:layout_height="wrap_content" />
             </LinearLayout>
@@ -64,6 +73,7 @@
                     android:layout_height="wrap_content">
                     <androidx.appcompat.widget.AppCompatTextView
                         android:gravity="left"
+                        android:visibility="gone"
                         android:layout_marginLeft="2dp"
                         android:id="@+id/monthly_sal_txt"
                         android:layout_width="wrap_content"
@@ -83,17 +93,17 @@
                         android:layout_height="wrap_content" />
                 </LinearLayout>
                 <LinearLayout
-                    android:layout_marginLeft="30dp"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
                     <androidx.appcompat.widget.AppCompatEditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textSize="16sp"
+                        android:textSize="12dp"
+                        android:layout_marginLeft="2dp"
                         android:inputType="number"
                         android:imeOptions="actionDone"
                         android:id="@+id/monthly_net_sal_edit_txt"
-                        android:textColor="@color/colorPrimaryDark"/>
+                        android:textColor="@color/black"/>
                 </LinearLayout>
             </LinearLayout>
             <LinearLayout
@@ -107,6 +117,7 @@
                     android:layout_height="wrap_content">
                     <androidx.appcompat.widget.AppCompatTextView
                         android:gravity="left"
+                        android:visibility="gone"
                         android:layout_marginLeft="2dp"
                         android:id="@+id/salery_credite_method_txt"
                         android:layout_width="wrap_content"
@@ -133,14 +144,14 @@
                     android:layout_height="50dp">
 
                     <LinearLayout
-                        android:layout_marginLeft="30dp"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
                         <Spinner
                             style="@style/Base.Widget.AppCompat.Spinner.Underlined"
-                            android:backgroundTint="#ff000000"
+                            android:backgroundTint="@color/black"
                             android:backgroundTintMode="src_in"
                             android:spinnerMode="dropdown"
+                            android:layout_marginLeft="2dp"
                             android:id="@+id/spinn_salary_crt_mtd"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent" />
@@ -164,6 +175,7 @@
                         android:id="@+id/salary_proof_txt"
                         android:layout_width="wrap_content"
                         style="@style/LorgeText2"
+                        android:visibility="gone"
                         android:textColor="@color/colorPrimaryDark"
                         android:textColorHint="@color/colorPrimaryDark"
                         android:layout_height="wrap_content" />
@@ -184,17 +196,17 @@
                     android:gravity="center"
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
-                    android:layout_height="60dp">
+                    android:layout_height="50dp">
 
                     <LinearLayout
-                        android:layout_marginLeft="30dp"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
                         <com.thomashaertel.widget.MultiSpinner
                             style="@style/Base.Widget.AppCompat.Spinner.Underlined"
-                            android:backgroundTint="#ff000000"
+                            android:backgroundTint="@color/black"
                             android:backgroundTintMode="src_in"
                             android:spinnerMode="dropdown"
+                            android:layout_marginLeft="2dp"
                             android:id="@+id/spinner_salary_proof"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent" />
@@ -241,6 +253,7 @@
                         android:id="@+id/company_type_txt"
                         android:layout_width="wrap_content"
                         style="@style/LorgeText2"
+                        android:visibility="gone"
                         android:textColor="@color/colorPrimaryDark"
                         android:textColorHint="@color/colorPrimaryDark"
                         android:layout_height="wrap_content" />
@@ -261,17 +274,17 @@
                     android:gravity="center"
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
-                    android:layout_height="60dp">
+                    android:layout_height="50dp">
 
                     <LinearLayout
-                        android:layout_marginLeft="30dp"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
                         <Spinner
                             style="@style/Base.Widget.AppCompat.Spinner.Underlined"
-                            android:backgroundTint="#ff000000"
+                            android:backgroundTint="@color/black"
                             android:backgroundTintMode="src_in"
                             android:spinnerMode="dropdown"
+                            android:layout_marginLeft="2dp"
                             android:id="@+id/spinner_company_type"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent" />
@@ -295,6 +308,7 @@
                         android:id="@+id/company_name_text"
                         android:layout_width="wrap_content"
                         style="@style/LorgeText2"
+                        android:visibility="gone"
                         android:textColor="@color/colorPrimaryDark"
                         android:textColorHint="@color/colorPrimaryDark"
                         android:layout_height="wrap_content" />
@@ -310,17 +324,17 @@
                         android:layout_height="wrap_content" />
                 </LinearLayout>
                 <LinearLayout
-                    android:layout_marginLeft="30dp"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
                     <androidx.appcompat.widget.AppCompatEditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textSize="16sp"
+                        android:textSize="12dp"
+                        android:layout_marginLeft="2dp"
                         android:inputType="text"
                         android:imeOptions="actionDone"
                         android:id="@+id/company_name_edit_text"
-                        android:textColor="@color/colorPrimaryDark"/>
+                        android:textColor="@color/black"/>
                 </LinearLayout>
             </LinearLayout>
             <LinearLayout
@@ -338,6 +352,7 @@
                         android:id="@+id/des_in_cmp_txt"
                         android:layout_width="wrap_content"
                         style="@style/LorgeText2"
+                        android:visibility="gone"
                         android:textColor="@color/colorPrimaryDark"
                         android:textColorHint="@color/colorPrimaryDark"
                         android:layout_height="wrap_content" />
@@ -353,17 +368,17 @@
                         android:layout_height="wrap_content" />
                 </LinearLayout>
                 <LinearLayout
-                    android:layout_marginLeft="30dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
                     <androidx.appcompat.widget.AppCompatEditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textSize="16sp"
+                        android:textSize="12dp"
+                        android:layout_marginLeft="2dp"
                         android:inputType="text"
                         android:imeOptions="actionDone"
                         android:id="@+id/designation_edit_text"
-                        android:textColor="@color/colorPrimaryDark"/>
+                        android:textColor="@color/black"/>
                 </LinearLayout>
             </LinearLayout>
             <LinearLayout
@@ -381,6 +396,7 @@
                         android:id="@+id/Exp_in_current_txt"
                         android:layout_width="wrap_content"
                         style="@style/LorgeText2"
+                        android:visibility="gone"
                         android:textColor="@color/colorPrimaryDark"
                         android:textColorHint="@color/colorPrimaryDark"
                         android:layout_height="wrap_content" />
@@ -396,18 +412,18 @@
                         android:layout_height="wrap_content" />
                 </LinearLayout>
                 <LinearLayout
-                    android:layout_marginLeft="30dp"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
                     <androidx.appcompat.widget.AppCompatEditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textSize="16sp"
+                        android:textSize="12dp"
+                        android:layout_marginLeft="2dp"
                         android:clickable="true"
                         android:editable="false"
                         android:maxLength="20"
                         android:id="@+id/experience_in_current_cmpy"
-                        android:textColor="@color/colorPrimaryDark"/>
+                        android:textColor="@color/black"/>
                 </LinearLayout>
             </LinearLayout>
             <LinearLayout
@@ -425,6 +441,7 @@
                         android:id="@+id/total_workexperiecnce_txt"
                         android:layout_width="wrap_content"
                         style="@style/LorgeText2"
+                        android:visibility="gone"
                         android:textColor="@color/colorPrimaryDark"
                         android:textColorHint="@color/colorPrimaryDark"
                         android:layout_height="wrap_content" />
@@ -440,18 +457,18 @@
                         android:layout_height="wrap_content" />
                 </LinearLayout>
                 <LinearLayout
-                    android:layout_marginLeft="30dp"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
                     <androidx.appcompat.widget.AppCompatEditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textSize="16sp"
+                        android:textSize="12dp"
                         android:maxLength="30"
+                        android:layout_marginLeft="2dp"
                         android:clickable="true"
                         android:editable="false"
                         android:id="@+id/total_experience_edit_txt"
-                        android:textColor="@color/colorPrimaryDark"/>
+                        android:textColor="@color/black"/>
                 </LinearLayout>
             </LinearLayout>
             <LinearLayout
@@ -469,6 +486,7 @@
                         android:id="@+id/cmp_pincode_txt"
                         android:layout_width="wrap_content"
                         style="@style/LorgeText2"
+                        android:visibility="gone"
                         android:textColor="@color/colorPrimaryDark"
                         android:textColorHint="@color/colorPrimaryDark"
                         android:layout_height="wrap_content" />
@@ -484,18 +502,17 @@
                         android:layout_height="wrap_content" />
                 </LinearLayout>
                 <LinearLayout
-                    android:layout_marginLeft="30dp"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
                     <androidx.appcompat.widget.AppCompatAutoCompleteTextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textSize="16sp"
+                        android:textSize="12dp"
                         android:inputType="number"
                         android:maxLength="6"
                         android:imeOptions="actionDone"
                         android:id="@+id/company_pincode_txt"
-                        android:textColor="@color/colorPrimaryDark"/>
+                        android:textColor="@color/black"/>
                 </LinearLayout>
             </LinearLayout>
             <LinearLayout
@@ -513,6 +530,7 @@
                         android:id="@+id/area_txt"
                         android:layout_width="wrap_content"
                         style="@style/LorgeText2"
+                        android:visibility="gone"
                         android:textColor="@color/colorPrimaryDark"
                         android:textColorHint="@color/colorPrimaryDark"
                         android:layout_height="wrap_content" />
@@ -535,14 +553,14 @@
                     android:layout_height="50dp">
 
                     <LinearLayout
-                        android:layout_marginLeft="30dp"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
                         <Spinner
                             style="@style/Base.Widget.AppCompat.Spinner.Underlined"
-                            android:backgroundTint="#ff000000"
+                            android:backgroundTint="@color/black"
                             android:backgroundTintMode="src_in"
                             android:spinnerMode="dropdown"
+                            android:layout_marginLeft="2dp"
                             android:id="@+id/spinn_area"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent" />
@@ -564,6 +582,7 @@
                                     android:layout_marginLeft="2dp"
                                     android:layout_width="wrap_content"
                                     style="@style/LorgeText2"
+                                    android:visibility="gone"
                                     android:textColor="@color/colorPrimaryDark"
                                     android:textColorHint="@color/colorPrimaryDark"
                                     android:layout_height="wrap_content" />
@@ -585,12 +604,12 @@
                                 android:layout_height="50dp">
 
                                 <LinearLayout
-                                    android:layout_marginLeft="30dp"
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent">
                                     <Spinner
                                         style="@style/Base.Widget.AppCompat.Spinner.Underlined"
-                                        android:backgroundTint="#ff000000"
+                                        android:backgroundTint="@color/black"
+                                        android:layout_marginLeft="2dp"
                                         android:backgroundTintMode="src_in"
                                         android:spinnerMode="dropdown"
                                         android:id="@+id/other_income_source_salaried"
@@ -616,6 +635,7 @@
                                     android:id="@+id/other_income_amt_txt"
                                     android:layout_width="wrap_content"
                                     style="@style/LorgeText2"
+                                    android:visibility="gone"
                                     android:textColor="@color/colorPrimaryDark"
                                     android:textColorHint="@color/colorPrimaryDark"
                                     android:layout_height="wrap_content" />
@@ -631,17 +651,17 @@
                                     android:layout_height="wrap_content" />
                             </LinearLayout>
                             <LinearLayout
-                                android:layout_marginLeft="30dp"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent">
                                 <androidx.appcompat.widget.AppCompatEditText
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:textSize="16sp"
+                                    android:textSize="12dp"
+                                    android:layout_marginLeft="2dp"
                                     android:inputType="number"
                                     android:maxLength="30"
                                     android:id="@+id/other_income_amt_txt_edit_txt"
-                                    android:textColor="@color/colorPrimaryDark"/>
+                                    android:textColor="@color/black"/>
                             </LinearLayout>
                         </LinearLayout>
                     </LinearLayout>

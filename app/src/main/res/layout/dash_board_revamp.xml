@@ -62,35 +62,30 @@
                             android:layout_width="200dp"
                             android:layout_height="wrap_content" />
                     </LinearLayout>
+
+
                     <LinearLayout
-                        android:layout_marginRight="20dp"
-                        android:layout_weight="1"
-                        android:orientation="horizontal"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:layout_marginStart="70dp"
+                        android:layout_marginLeft="70dp">
+
 
                         <androidx.appcompat.widget.AppCompatImageView
-                            android:visibility="gone"
-                            android:layout_width="25dp"
-                            android:background="@drawable/ic_whatsapp"
-                            android:layout_marginLeft="10dp"
-                            android:layout_marginRight="10dp"
-                            android:layout_height="25dp"/>
-                        <androidx.appcompat.widget.AppCompatImageView
-
                             android:id="@+id/call_phone"
-                            android:layout_width="25dp"
-                            android:layout_marginLeft="10dp"
+                            android:layout_width="30dp"
                             android:layout_marginRight="10dp"
                             android:background="@drawable/ic_phone"
-                            android:layout_height="25dp"/>
+                            android:layout_marginEnd="10dp"
+                            android:layout_height="30dp"/>
                     </LinearLayout>
 
 
 
                 </LinearLayout>
                 <LinearLayout
-                    android:layout_marginTop="20dp"
+                    android:layout_marginTop="10dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="left"
@@ -105,11 +100,12 @@
 
                         <androidx.appcompat.widget.AppCompatTextView
                             style="@style/SmallText"
-                            android:layout_width="206dp"
+                            android:layout_width="150dp"
                             android:layout_height="wrap_content"
                             android:layout_gravity="left"
                             android:text="Loan Amount"
                             android:textSize="12dp"
+                            android:id="@+id/loanamounttxt"
                             android:textColor="#B0B0B0" />
 
                     </LinearLayout>
@@ -121,12 +117,12 @@
                         android:layout_height="wrap_content">
                         <androidx.appcompat.widget.AppCompatTextView
                             android:layout_gravity="left"
-                            style="@style/SmallText"
+                            style="@style/SmallTexts"
                             android:textStyle="bold"
                             android:textSize="14dp"
                             android:layout_marginRight="20dp"
                             android:id="@+id/Loan_amount"
-                            android:textColor="@color/black"
+                            android:textColor="#484848"
                             android:text=""
                             android:layout_width="200dp"
                             android:layout_height="wrap_content" />
@@ -148,11 +144,12 @@
 
                         <androidx.appcompat.widget.AppCompatTextView
                             style="@style/SmallText"
-                            android:layout_width="206dp"
+                            android:layout_width="150dp"
                             android:layout_height="wrap_content"
                             android:layout_gravity="left"
                             android:text="Loan type"
                             android:textSize="12dp"
+                            android:id="@+id/loantypetext"
                             android:textColor="#B0B0B0"  />
 
                     </LinearLayout>
@@ -164,10 +161,10 @@
                         android:layout_height="wrap_content">
                         <androidx.appcompat.widget.AppCompatTextView
                             android:layout_gravity="left"
-                            style="@style/SmallText"
+                            style="@style/SmallTexts"
                             android:textStyle="bold"
                             android:id="@+id/loan_type_"
-                            android:textColor="@color/black"
+                            android:textColor="#484848"
                             android:text=""
                             android:layout_marginRight="20dp"
                             android:layout_width="200dp"
@@ -178,7 +175,6 @@
                 </LinearLayout>
                 <LinearLayout
 
-                    android:layout_marginBottom="20dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="left"
@@ -193,10 +189,11 @@
 
                         <androidx.appcompat.widget.AppCompatTextView
                             style="@style/SmallText"
-                            android:layout_width="206dp"
+                            android:layout_width="150dp"
                             android:layout_height="wrap_content"
                             android:layout_gravity="left"
                             android:text="Loan Status"
+                            android:id="@+id/loan_statustxt"
                             android:textSize="12dp"
                             android:textColor="#B0B0B0"  />
 
@@ -208,23 +205,14 @@
                         android:layout_gravity="center_horizontal"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
-                        <androidx.appcompat.widget.AppCompatTextView
-                            android:id="@+id/sub_to_loanwiser"
-                            android:gravity="left"
-                            style="@style/SmallText"
-                            android:textSize="12dp"
-                            android:textStyle="bold"
-                            android:text="@string/text_with_bullet"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            />
+
                         <androidx.appcompat.widget.AppCompatTextView
                             android:gravity="left"
-                            style="@style/SmallText"
+                            style="@style/SmallTexts"
                             android:textStyle="bold"
                             android:layout_marginRight="20dp"
                             android:id="@+id/loan_submit_statues1"
-                            android:textColor="@color/black"
+                            android:textColor="#484848"
                             android:text=""
                             android:layout_width="200dp"
                             android:textSize="12dp"
@@ -232,6 +220,129 @@
                     </LinearLayout>
 
                 </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:layout_marginLeft="20dp"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            style="@style/SmallText"
+                            android:layout_width="150dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="left"
+                            android:text="Payment Plan"
+                            android:textSize="12dp"
+                            android:id="@+id/planamount"
+                            android:textColor="#B0B0B0"  />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_marginRight="20dp"
+                        android:layout_weight="1"
+                        android:orientation="horizontal"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:gravity="left"
+                            style="@style/SmallTexts"
+                            android:textStyle="bold"
+                            android:layout_marginRight="20dp"
+                            android:id="@+id/paymentstatus"
+                            android:textColor="#484848"
+                            android:text=""
+                            android:layout_width="200dp"
+                            android:textSize="12dp"
+                            android:layout_height="match_parent" />
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginBottom="10dp"
+                    android:orientation="vertical">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:gravity="left"
+                        style="@style/SmallTexts"
+                        android:textStyle="bold"
+                        android:layout_marginRight="20dp"
+                        android:id="@+id/sub_to_loanwiser"
+                        android:textColor="#484848"
+                        android:text=""
+                        android:layout_width="200dp"
+                        android:textSize="12dp"
+                        android:layout_height="match_parent" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginBottom="20dp"
+                    android:visibility="gone"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            style="@style/SmallText"
+                            android:layout_width="150dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="left"
+                            android:text="Payment Plan"
+                            android:id="@+id/paymentst"
+                            android:textSize="12dp"
+                            android:textColor="#B0B0B0"  />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_marginRight="20dp"
+                        android:layout_weight="1"
+                        android:orientation="horizontal"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:gravity="left"
+                            style="@style/SmallText"
+                            android:textStyle="bold"
+                            android:layout_marginRight="20dp"
+                            android:id="@+id/paymentstat"
+                            android:textColor="@color/black"
+                            android:text=""
+                            android:layout_width="200dp"
+                            android:textSize="12dp"
+                            android:layout_height="match_parent" />
+                    </LinearLayout>
+
+            </LinearLayout>
+
+
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
@@ -243,6 +354,7 @@
             android:textStyle="bold"
             android:layout_marginLeft="10dp"
             android:textColor="#002B5D"
+            android:id="@+id/askthis"
             android:text="Ask for this Lead"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
@@ -251,6 +363,7 @@
             android:id="@+id/ask_card"
             android:layout_marginLeft="3dp"
             android:layout_marginRight="3dp"
+            android:layout_marginTop="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <LinearLayout
@@ -274,15 +387,17 @@
                             style="@style/SmallText"
                             android:textColor="@color/gray"
                             android:text="Ask Staus"
+                            android:layout_marginLeft="10dp"
                             android:layout_width="wrap_content"
-                            android:textSize="14dp"
+                            android:textSize="12dp"
                             android:layout_height="wrap_content" />
                         <androidx.appcompat.widget.AppCompatTextView
                             android:layout_marginBottom="10dp"
                             style="@style/LorgeText"
-                            android:textSize="15dp"
+                            android:textSize="14dp"
                             android:id="@+id/ask_txt1_pending"
                             android:textColor="@color/black"
+                            android:layout_marginLeft="10dp"
                             android:text="Pending Ask(3)"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content" />
@@ -322,6 +437,7 @@
             android:textStyle="bold"
             android:layout_marginLeft="10dp"
             android:textColor="#002B5D"
+            android:id="@+id/step_comp"
             android:text="Your Step Completion Details"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
@@ -331,7 +447,7 @@
             android:id="@+id/Applicant_info_ly"
             android:layout_marginLeft="3dp"
             android:layout_marginRight="3dp"
-            android:layout_marginTop="3dp"
+            android:layout_marginTop="10dp"
             android:layout_width="match_parent"
             android:layout_height="100dp"
             app:cardCornerRadius="4dp">
@@ -599,7 +715,6 @@
                                 android:text="Complete View"
                                 android:layout_gravity="center"
                                 android:gravity="center"
-                                android:layout_marginLeft="10dp"
                                 android:textColor="@color/white"
                                 android:textSize="10sp"
                                 android:background="@drawable/but_shape"/>
@@ -741,7 +856,7 @@
                             android:orientation="vertical">
 
                             <androidx.appcompat.widget.AppCompatTextView
-                                android:id="@+id/payment"
+                                android:id="@+id/paymenttxt"
                                 style="@style/SmallText"
                                 android:textColor="@color/colorPrimary"
                                 android:text="@string/payment1"
@@ -775,7 +890,6 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="30dp"
                                 android:layout_gravity="center"
-                                android:layout_marginLeft="10dp"
                                 android:background="@drawable/but_shape"
                                 android:gravity="center"
                                 android:text="Complete View"
@@ -922,7 +1036,7 @@
                                 style="@style/SmallText"
                                 android:id="@+id/Doc_status"
                                 android:textColor="@color/colorPrimary"
-                                android:text="Assessment Report"
+                                android:text="Viability Report"
                                 android:layout_width="150dp"
                                 android:textSize="14dp"
                                 android:layout_height="wrap_content" />
@@ -957,7 +1071,6 @@
                                 android:text="Complete View"
                                 android:layout_gravity="center"
                                 android:gravity="center"
-                                android:layout_marginLeft="10dp"
                                 android:textColor="@color/white"
                                 android:textSize="10sp"
                                 android:background="@drawable/but_shape"/>
@@ -1058,7 +1171,6 @@
                                 android:text="Complete View"
                                 android:layout_gravity="center"
                                 android:gravity="center"
-                                android:layout_marginLeft="10dp"
                                 android:textColor="@color/white"
                                 android:textSize="10sp"
                                 android:background="@drawable/but_shape"/>
@@ -1352,7 +1464,6 @@
                                 android:text="Complete View"
                                 android:layout_gravity="center"
                                 android:gravity="center"
-                                android:layout_marginLeft="10dp"
                                 android:textColor="@color/white"
                                 android:textSize="10sp"
                                 android:background="@drawable/but_shape"/>
@@ -1447,7 +1558,6 @@
                                 android:text="Complete View"
                                 android:layout_gravity="center"
                                 android:gravity="center"
-                                android:layout_marginLeft="10dp"
                                 android:textColor="@color/white"
                                 android:textSize="10sp"
                                 android:background="@drawable/but_shape"/>
@@ -1542,7 +1652,6 @@
                                 android:text="Complete View"
                                 android:layout_gravity="center"
                                 android:gravity="center"
-                                android:layout_marginLeft="10dp"
                                 android:textColor="@color/white"
                                 android:textSize="10sp"
                                 android:background="@drawable/but_shape"/>
@@ -1638,7 +1747,6 @@
                                 android:text="Complete View"
                                 android:layout_gravity="center"
                                 android:gravity="center"
-                                android:layout_marginLeft="10dp"
                                 android:textColor="@color/white"
                                 android:textSize="10sp"
                                 android:background="@drawable/but_shape"/>
@@ -1733,7 +1841,6 @@
                                 android:text="Complete View"
                                 android:layout_gravity="center"
                                 android:gravity="center"
-                                android:layout_marginLeft="10dp"
                                 android:textColor="@color/white"
                                 android:textSize="10sp"
                                 android:background="@drawable/but_shape"/>
@@ -1754,6 +1861,7 @@
             </LinearLayout>
 
             <androidx.cardview.widget.CardView
+                android:visibility="gone"
                 android:id="@+id/offer_generation"
                 xmlns:card_view="http://schemas.android.com/apk/res-auto"
                 android:layout_marginLeft="3dp"

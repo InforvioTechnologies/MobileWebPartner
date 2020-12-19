@@ -88,7 +88,6 @@
                 android:layout_height="wrap_content">
                 <androidx.appcompat.widget.AppCompatTextView
                     android:visibility="gone"
-                    android:id="@+id/resend_otp"
                     android:gravity="end"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -136,17 +135,53 @@
             </LinearLayout>
 
         </LinearLayout>
-        <androidx.appcompat.widget.AppCompatButton
-            android:layout_marginTop="20dp"
-            android:layout_gravity="center"
-            android:id="@+id/appCompatButtonGen_OTP"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/capsul_button3"
-            android:text="@string/otp"
-            android:textColor="@color/white"
-            android:layout_marginBottom="10dp"
-            />
+
+            <LinearLayout
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:id="@+id/resend_ly"
+                    android:visibility="gone"
+                    android:gravity="center"
+                    android:layout_marginTop="10dp"
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/resend_otp"
+                        android:layout_marginRight="5dp"
+                        android:layout_gravity="center"
+                        android:layout_width="150dp"
+                        android:textSize="11dp"
+                        android:layout_height="40dp"
+                        android:background="@drawable/capsul_button_rect_viability1_blue"
+                        android:text="Resend Otp"
+                        android:textColor="@color/blue"
+                       />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_marginTop="10dp"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:layout_marginLeft="5dp"
+                        android:id="@+id/appCompatButtonGen_OTP"
+                        android:layout_gravity="center"
+                        android:layout_width="150dp"
+                        android:layout_height="40dp"
+                        android:textColor="@color/white"
+                        android:background="@drawable/capsul_button1"
+                        android:text="@string/submit"
+                        android:textSize="11dp"
+                     />
+                </LinearLayout>
+
+
+            </LinearLayout>
     </LinearLayout>
     </LinearLayout>
 </LinearLayout>

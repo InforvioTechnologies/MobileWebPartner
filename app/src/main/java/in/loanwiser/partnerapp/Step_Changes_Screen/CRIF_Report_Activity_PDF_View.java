@@ -22,6 +22,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.AppCompatTextView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.cardview.widget.CardView;
@@ -85,6 +86,7 @@ public class CRIF_Report_Activity_PDF_View extends SimpleActivity {
     ArrayAdapter<String> Other_Earning_Adapter;
     Spinner applicant_credite_card_spinner,co_applicant_Spinner;
     String  credit_issued_id,credit_issued_value,Report_ID,Order_ID;
+    AppCompatButton submit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -116,9 +118,24 @@ public class CRIF_Report_Activity_PDF_View extends SimpleActivity {
 
         applicant_credite_card_spinner = (Spinner) findViewById(R.id.applicant_credite_card_spinner);
         co_applicant_Spinner = (Spinner) findViewById(R.id.co_applicant_Spinner);
+        submit = (AppCompatButton) findViewById(R.id.submit);
         Intent intent = getIntent();
         applicant_id = intent.getStringExtra("user_id");
         Crif_Generation();
+
+       /* applicant_credite_card_spinner.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                CRIF_Question_Testing();
+            }
+        });*/
+
+        submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                CRIF_Question_Testing();
+            }
+        });
 
     }
     private void Crif_Generation() {
@@ -223,7 +240,7 @@ public class CRIF_Report_Activity_PDF_View extends SimpleActivity {
                         Log.d("Salary_id", credit_issued_id);
                         Log.d("Salary_Value", credit_issued_value);
 
-                        CRIF_Question_Testing();
+                       // CRIF_Question_Testing();
 
 
                     } catch (JSONException e) {
@@ -317,7 +334,7 @@ public class CRIF_Report_Activity_PDF_View extends SimpleActivity {
         }
         progressDialog.show();
         Log.e("Crif Generation", String.valueOf(J));
-        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, Urls.CRIF_Generation, J,
+        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, Urls.submit_question, J,
                 new Response.Listener<JSONObject>() {
 
                     @Override
@@ -326,22 +343,23 @@ public class CRIF_Report_Activity_PDF_View extends SimpleActivity {
                         try {
 
                             String Statues = object.getString("status");
-                            JSONObject data1 = object.getJSONObject("data");
+                           /* JSONObject data1 = object.getJSONObject("data");
                             Report_ID  = data1.getString("reportId");
-                            Order_ID  = data1.getString("orderId");
+                            Order_ID  = data1.getString("orderId");*/
 
 
                             if (Statues.equals("success")) {
-                                Document_Details();
-                            }else if (Statues.equals("question"))
-                            {
-                                String question = object.getString("question");
-                                JSONArray qus_dropdown = object.getJSONArray("qus_dropdown");
-                                cr_app1.setText(question);
-                                credit_card_app.setVisibility(View.VISIBLE);
-                                Other_Earning(qus_dropdown);
 
+
+                                Document_Details();
+
+                            }else if (Statues.equals("technical_error"))
+                            {
+                                Toast.makeText(mCon, " Technical Error, Please Contact Loanwiser",Toast.LENGTH_SHORT).show();
                                 // co_applicant_.setVisibility(View.VISIBLE);
+                            }else
+                            {
+                                Toast.makeText(mCon, " Error, Please Contact Loanwiser",Toast.LENGTH_SHORT).show();
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -494,9 +512,9 @@ public class CRIF_Report_Activity_PDF_View extends SimpleActivity {
 
                             String viability_report_URL = J.getString("url");
 
-                            Objs.ac.StartActivityPutExtra(CRIF_Report_Activity_PDF_View.this, Doc_ImageView_Viability.class,
-                                    Params.document,viability_report_URL);
-                           /* if (permissionUtils.checkPermission(CRIF_Report_Activity_PDF_View.this, STORAGE_PERMISSION_REQUEST_CODE, view)) {
+                          /*  Objs.ac.StartActivityPutExtra(CRIF_Report_Activity_PDF_View.this, Doc_ImageView_Viability.class,
+                                    Params.document,viability_report_URL);*/
+                            if (permissionUtils.checkPermission(CRIF_Report_Activity_PDF_View.this, STORAGE_PERMISSION_REQUEST_CODE, view)) {
                                 if (viability_report_URL.length() > 0) {
                                     try {
                                         startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(viability_report_URL)));
@@ -505,7 +523,7 @@ public class CRIF_Report_Activity_PDF_View extends SimpleActivity {
                                     }
                                 }
 
-                            }*/
+                            }
 
                         } catch (JSONException e) {
                             e.printStackTrace();

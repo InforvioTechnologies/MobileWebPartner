@@ -495,6 +495,7 @@ public class MainActivity_IMG_Property2 extends SimpleActivity implements Single
         super.onActivityResult(requestCode, resultCode, data);
         Uri selectedImageUri = null;
         // filePath = null;
+        materialDesignFAM.close(true);
         if (requestCode == PICK_PDF_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null) {
             filePath = data.getData();
 
@@ -747,7 +748,7 @@ public class MainActivity_IMG_Property2 extends SimpleActivity implements Single
                                     Objs.a.showToast(mCon, "Successfully uploaded" +"\n"+ "Please wait for all Document upload");
                                     if(count == 0)
                                     {
-                                        applicant_name = Pref.getapplicant_name(mCon);
+                                      //  applicant_name = Pref.getapplicant_name(mCon);
                                         Toast.makeText(mCon, "Successfully uploaded", Toast.LENGTH_SHORT).show();
                                         Objs.ac.StartActivityPutExtra(mCon, Applicant_Doc_Details_revamp.class, Params.user_type,user_type);
                                         finish();
@@ -889,7 +890,7 @@ public class MainActivity_IMG_Property2 extends SimpleActivity implements Single
         if(response.equals("200")){
             progressDialog.dismiss();
             Objs.a.showToast(mCon, "Successfully uploaded");
-            applicant_name = Pref.getapplicant_name(mCon);
+           // applicant_name = Pref.getapplicant_name(mCon);
            // Objs.ac.StartActivityPutExtra(mCon,Applicant_Doc_Details_Property.class, Params.user_type,user_type, Params.applicant_name,applicant_name);
             Intent intent = new Intent(mCon, Applicant_Doc_Details_revamp.class);
             startActivity(intent);

@@ -13,6 +13,7 @@ import androidx.appcompat.widget.AppCompatTextView;
 import androidx.fragment.app.Fragment;
 
 import android.preference.PreferenceManager;
+import android.text.Html;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -136,6 +137,33 @@ public class PropertyFragment extends Fragment implements CompoundButton.OnCheck
         checkcondition();
         Document_check_lsit();
 
+        LinearLayout.LayoutParams lparams = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        TextView tv = new TextView(getActivity());
+        tv.setLayoutParams(lparams);
+        lparams.setMargins(10, 10, 10, 10);
+        tv.setText(R.string.notess);
+        tv.setTextSize(14);
+        Typeface fonts = Typeface.createFromAsset(getActivity().getAssets(), "segoe_ui.ttf");
+        tv.setTypeface(fonts);
+        tv.setTextColor(Color.parseColor("#D44D53"));
+        check_list_name.addView(tv);
+
+        TextView tvs = new TextView(getActivity());
+        tvs.setLayoutParams(lparams);
+        lparams.setMargins(10, 10, 10, 10);
+
+        String first = "*"+" "  ;
+        String firsttxt="<font color='#4D4D4D'>Marked documents are</font>";
+        String next = "<font color='#D44D53'><b>mandatory document</b></font>";
+        tvs.setText(Html.fromHtml(first +firsttxt+ " "+next));
+        // tvs.setText("*"+" "  +"Marked documents are mandatory document");
+        tvs.setTextSize(14);
+        Typeface fontss = Typeface.createFromAsset(getActivity().getAssets(), "segoe_ui.ttf");
+        tvs.setTypeface(fontss);
+        tvs.setTextColor(Color.parseColor("#D44D53"));
+        check_list_name.addView(tvs);
+
         Docum_ch_step1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -249,7 +277,7 @@ public class PropertyFragment extends Fragment implements CompoundButton.OnCheck
                                         String test=js.getString("document_req");*/
 
                                         String test=J.getString("document_req");
-                                        checklist_name(doc_ype_com,key,test);
+                                        checklist_name(doc_ype_com,key);
 
                                     } catch (JSONException e) {
                                         e.printStackTrace();
@@ -296,7 +324,7 @@ public class PropertyFragment extends Fragment implements CompoundButton.OnCheck
 
 
     @SuppressLint("ResourceAsColor")
-    private void checklist_name(final JSONArray doc_ype_com,String key,String test) {
+    private void checklist_name(final JSONArray doc_ype_com,String key) {
 
 
         LinearLayout.LayoutParams lparams = new LinearLayout.LayoutParams(
@@ -307,16 +335,19 @@ public class PropertyFragment extends Fragment implements CompoundButton.OnCheck
             TextView tv = new TextView(getActivity());
             tv.setLayoutParams(lparams);
             lparams.setMargins(10, 10, 10, 10);
+           // list_key.add(key);
+            String star="<font color='#D44D53'>*</font>";
             list_key.add(key);
-            tv.setText(key);
-            tv.setText(key);
+            tv.setText(Html.fromHtml(key + " "+star));
+            //tv.setText(key);
+           // tv.setText(key);
             tv.setTextSize(18);
             Typeface font = Typeface.createFromAsset(getActivity().getAssets(), "segoe_ui.ttf");
             tv.setTypeface(font);
             tv.setTextColor(Color.parseColor("#012B5D"));
             check_list_name.addView(tv);
 
-            TextView tvs = new TextView(getActivity());
+      /*      TextView tvs = new TextView(getActivity());
             TextView tls=new TextView(getActivity());
             tls.setLayoutParams(lparams);
             tvs.setLayoutParams(lparams);
@@ -343,7 +374,7 @@ public class PropertyFragment extends Fragment implements CompoundButton.OnCheck
                 check_list_name.addView(tvs);
                 check_list_name.addView(tls);
 
-            }
+            }*/
 
 
 
@@ -364,7 +395,7 @@ public class PropertyFragment extends Fragment implements CompoundButton.OnCheck
             }
             TableRow row =new TableRow(getActivity());
             row.setId(k);
-            row.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT));
+            row.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.WRAP_CONTENT));
             final CheckBox checkBox = new CheckBox(getActivity());
             checkBox.setOnCheckedChangeListener(this);
             checkBox.setId(k);

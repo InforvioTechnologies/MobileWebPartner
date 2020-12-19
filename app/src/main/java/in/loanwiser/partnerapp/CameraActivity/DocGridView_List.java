@@ -3,6 +3,7 @@ package in.loanwiser.partnerapp.CameraActivity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Rect;
 import android.os.Bundle;
@@ -38,9 +39,11 @@ import java.util.Map;
 
 import adhoc.app.applibrary.Config.AppUtils.Objs;
 import adhoc.app.applibrary.Config.AppUtils.Params;
+import adhoc.app.applibrary.Config.AppUtils.Pref.Pref;
 import adhoc.app.applibrary.Config.AppUtils.Urls;
 import adhoc.app.applibrary.Config.AppUtils.VolleySignleton.AppController;
 import dmax.dialog.SpotsDialog;
+import in.loanwiser.partnerapp.Documents.Applicant_Doc_Details_revamp;
 import in.loanwiser.partnerapp.Documents.Doc_ImageView;
 import in.loanwiser.partnerapp.Documents.Document_Details;
 import in.loanwiser.partnerapp.PartnerActivitys.SimpleActivity;
@@ -367,11 +370,15 @@ public class DocGridView_List extends SimpleActivity {
                         try {
                             if(response.getBoolean(Params.status)){
 
-                                Toast.makeText(mCon,"Succussfully deleted the Document...",Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getApplication(),"Succussfully deleted the Document...",Toast.LENGTH_SHORT).show();
 
                               //  Objs.a.showToast(DocGridView_List.this, "Succussfully deleted the Document...");
                                 Objs.ac.StartActivityPutExtra(DocGridView_List.this, Document_Details.class,
                                         Params.user_type,user_type);
+
+                                Intent intent = new Intent(DocGridView_List.this, Document_Details.class);
+                                startActivity(intent);
+
                                 finish();
                                 /// Document_Details(user_type,class_id,transaction_id,doc_id);
                             }else{

@@ -226,11 +226,12 @@ public class LeadeFragment extends Fragment implements OnLoadMoreListener {
                                         applicant_id =   J.getString(Params.applicant_id);
                                         //  String id1 =   J.getString("id");
                                         // String field_status = J.getString("field_status");
-
+                                        String pending_asks_count = J.getString("pending_asks_count");
                                         Log.e("mobile no",mobileno);
 
                                         items.add(new Lead_item(applicant_id,loan_typename, step_status,username,
-                                                mobileno,transaction_id,loan_amount,comp_step,status_disp,color_code,payment_plan,id));
+                                                mobileno,transaction_id,loan_amount,comp_step,status_disp,color_code,payment_plan,id,
+                                                pending_asks_count));
                                         leadListAdapter_dashboard.notifyDataSetChanged();
                                     }
                                     Log.e("leadListA", String.valueOf(leadListAdapter_dashboard));

@@ -17,6 +17,7 @@ public class Lead_item {
     private String color_code;
     private String payment_plan;
     private String id1;
+    private String pending_asks_count;
 
 
 
@@ -118,6 +119,7 @@ public class Lead_item {
     public void setpayment_plan(String payment_plan) {
         this.payment_plan = payment_plan;
     }
+
     public String getid1() {
         return id1;
     }
@@ -126,8 +128,17 @@ public class Lead_item {
         this.id1 = id1;
     }
 
+    public String getpending_asks_count() {
+        return pending_asks_count;
+    }
+
+    public void setpending_asks_count(String pending_asks_count) {
+        this.pending_asks_count = pending_asks_count;
+    }
+
     public Lead_item(String id, String loan_typename, String step_status, String username, String mobileno,
-                     String transaction_id, String loan_amount,String comp_step,String status_disp,String color_code,String payment_plan,String id1 ) {
+                     String transaction_id, String loan_amount,String comp_step,String status_disp,String color_code,
+                     String payment_plan,String id1, String pending_asks_count ) {
         //
         this.id = id;
         this.loan_typename = loan_typename;
@@ -144,6 +155,7 @@ public class Lead_item {
         this.color_code = color_code;
         this.payment_plan = payment_plan;
         this.id1 = id1;
+        this.pending_asks_count = pending_asks_count;
 
 
     }

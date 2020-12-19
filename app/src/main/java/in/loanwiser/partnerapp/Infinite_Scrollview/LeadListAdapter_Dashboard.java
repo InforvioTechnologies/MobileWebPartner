@@ -70,7 +70,7 @@ public class LeadListAdapter_Dashboard extends RecyclerView.Adapter<LeadListAdap
         AppCompatTextView type,doc_steps,doc_status,font1,font2,loantype,assigned;
         AppCompatTextView Statues_update_dot,
                 Lead_Name,loan_amount,app_id,loan_type,payment_plane,step_com,statues_new,
-                Statues_update_view,Statues_update_view1;
+                Statues_update_view,Statues_update_view1,status_Ask;
         ImageView v_Image;
         ProgressBar progressBar;
         AppCompatButton appCompatButtonSelect,add_notes,pipline,archive;
@@ -92,6 +92,7 @@ public class LeadListAdapter_Dashboard extends RecyclerView.Adapter<LeadListAdap
             statues_new  = (AppCompatTextView) itemView.findViewById(R.id.statues_new);
             Statues_update_view  = (AppCompatTextView) itemView.findViewById(R.id.Statues_update_view);
             Statues_update_view1  = (AppCompatTextView) itemView.findViewById(R.id.Statues_update_view1);
+            status_Ask  = (AppCompatTextView) itemView.findViewById(R.id.status_Ask);
 
             Over_all = (LinearLayout) itemView.findViewById(R.id.Over_all);
 
@@ -112,6 +113,7 @@ public class LeadListAdapter_Dashboard extends RecyclerView.Adapter<LeadListAdap
             step_com.setText(post.getcomp_step());
             statues_new.setText(post.getstatus_disp());
             payment_plane.setText(post.getpayment_plan());
+          String  pending_asks_count = post.getpending_asks_count();
             //
             //  Statues_update_dot.setText(post.getcolor_code());
             //  payment_plane.setText(post.getloan_typename());
@@ -125,7 +127,7 @@ public class LeadListAdapter_Dashboard extends RecyclerView.Adapter<LeadListAdap
             id = post.getid();
             id1 = post.getid1();
             transaction_id = post.gettransaction_id();
-
+            status_Ask .setText("Pending Ask"+"("+pending_asks_count+")");
 /*
             if(loantype1.contains("null")) {
                 loantype.setVisibility(View.GONE);

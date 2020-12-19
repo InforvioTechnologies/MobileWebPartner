@@ -397,7 +397,7 @@
                 android:layout_gravity="center"
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
-                android:background="@drawable/capsul_button3"
+                android:background="@drawable/capsul_button4"
                 android:text="@string/generate"
                 android:theme="@style/ButtonStyle" />
 

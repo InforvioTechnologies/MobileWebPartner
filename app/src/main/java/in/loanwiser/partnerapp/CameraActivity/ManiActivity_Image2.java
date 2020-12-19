@@ -511,6 +511,7 @@ public class ManiActivity_Image2 extends SimpleActivity implements SingleUploadB
         Uri selectedImageUri = null;
         // filePath = null;
 
+        materialDesignFAM.close(true);
         if (requestCode == PICK_PDF_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null) {
             filePath = data.getData();
 

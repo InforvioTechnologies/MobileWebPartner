@@ -10,6 +10,7 @@
 
     <!-- our toolbar -->
     <androidx.appcompat.widget.Toolbar
+        android:visibility="gone"
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -18,7 +19,7 @@
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
         tools:ignore="MissingClass,MissingConstraints"
-        android:visibility="gone"/>
+        />
 
     <!-- our tablayout to display tabs  -->
     <com.google.android.material.tabs.TabLayout

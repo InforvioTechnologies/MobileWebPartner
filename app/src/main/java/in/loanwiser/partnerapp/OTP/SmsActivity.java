@@ -23,6 +23,7 @@ import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -79,7 +80,9 @@ public class SmsActivity extends AppCompatActivity {
     private long totalTimeCountInMilliseconds;
     private long timeBlinkInMilliseconds;
     private boolean blink;
-    private AppCompatTextView verif,pls_enter,tvTimeCount,resend_otp;
+    private AppCompatTextView verif,pls_enter,tvTimeCount;
+    AppCompatButton resend_otp;
+    LinearLayout resend_ly;
     private String S_pinview;
     String OTP, opt_bundle,no_bundle;
     private AlertDialog progressDialog;
@@ -129,7 +132,8 @@ public class SmsActivity extends AppCompatActivity {
             e.printStackTrace();
         }
         editTextOtp =(AppCompatEditText)findViewById(R.id.editTextOtp);
-        resend_otp =(AppCompatTextView)findViewById(R.id.resend_otp);
+        resend_otp =(AppCompatButton)findViewById(R.id.resend_otp);
+        resend_ly =(LinearLayout) findViewById(R.id.resend_ly);
         awesomeValidation = new AwesomeValidation(ValidationStyle.BASIC);
         initCode();
         editTextOtp.addTextChangedListener(new TextWatcher() {
@@ -414,14 +418,14 @@ public class SmsActivity extends AppCompatActivity {
         JSONObject J= null;
         try {
             J =new JSONObject();
-            J.put(Params.mobile_no,no_bundle);
+            J.put("mobile_number",no_bundle);
         } catch (JSONException e) {
             e.printStackTrace();
         }
         String data  = String.valueOf(J);
         Log.d("Request :", data);
         progressDialog.show();
-        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, Urls.BUSINESS_login_POST, J,
+        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, Urls.resendOtp, J,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
@@ -430,8 +434,9 @@ public class SmsActivity extends AppCompatActivity {
                         Log.d("Request :", JO_data.toString());
                         try {
                             if (response.getString(Params.status).equals(Params.ok)){
-                                String otp_new =  response.getString(Params.otp);
-
+                               // String otp_new =  response.getString(Params.otp);
+                                resend_otp.setVisibility(View.GONE);
+                                resend_ly.setVisibility(View.GONE);
                                 Toast.makeText(mCon,"OTP will be sent to the mobile number",Toast.LENGTH_SHORT).show();
                                 setTimer();
                                 startTimer();
@@ -584,6 +589,7 @@ public class SmsActivity extends AppCompatActivity {
                 // this function will be called when the timecount is finished
                 textViewShowTime.setText("Time up!");
                 resend_otp.setVisibility(View.VISIBLE);
+                resend_ly.setVisibility(View.VISIBLE);
                 textViewShowTime.setVisibility(View.VISIBLE);
             }
         }.start();

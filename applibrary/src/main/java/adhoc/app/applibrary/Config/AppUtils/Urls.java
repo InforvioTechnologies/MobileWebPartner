@@ -34,6 +34,7 @@ public class Urls {
     public static String BUSINESS_reg_POST  = Urls + "register";
     public static String BUSINESS_reg_POST1  = Urls + "register";
     public static String BUSINESS_login_POST  = Urls + "login";
+    public static String resendOtp  = Urls + "resendOtp";
     public static String PARTNER_LEAD_MOBILE_NUMBER  = Urls + "check_mobilenumber";
     public static String PARTNER_LEAD_MOBILE_OTP  = Urls + "verifyotp_mobilenumber";
     public static String MOBILE_UPDATE_POST  = Urls + "partner_mobileupdate";
@@ -129,7 +130,9 @@ public class Urls {
  public static String Report_Activity  = Urls_step + "crif_mail_gen";
  public static String Lead_Details_statues  = Urls_step + "lead_details";
 
- public static String CRIF_Generation  = Urls_step + "crif_generation";
+    public static String CRIF_Generation  = Urls_step + "crif_generation";
+    public static String submit_question  = Urls_step + "submit_question";
+    public static String report_links  = Urls_step + "report_links";
     public static String VIEW_VIABILITYDATA = Urls_step + "view_viabilitydata";
     public static String CRIF_DATA_Populate = Urls_step + "crifdata_view";
     public static String FIREBASE_TOKEN = Urls_step + "update_b2btoken";
