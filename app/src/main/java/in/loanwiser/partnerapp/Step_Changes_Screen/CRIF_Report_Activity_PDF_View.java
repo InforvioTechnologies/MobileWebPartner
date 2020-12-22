@@ -392,10 +392,10 @@ public class CRIF_Report_Activity_PDF_View extends SimpleActivity {
         try {
             J =new JSONObject();
 
-           // J.put("trans_id",Pref.getTRANSACTIONID(getApplicationContext()));
-            J.put("trans_id","53259");
-          //  J.put("user_id","Pref.getUSERID(getApplicationContext())");
-            J.put("user_id","51647");
+            J.put("trans_id",Pref.getTRANSACTIONID(getApplicationContext()));
+          //  J.put("trans_id","53259");
+            J.put("user_id","Pref.getUSERID(getApplicationContext())");
+          //  J.put("user_id","51647");
         } catch (JSONException e) {
             e.printStackTrace();
         }

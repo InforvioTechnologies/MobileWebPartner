@@ -133,7 +133,6 @@ public class Viability_Data_revamp extends SimpleActivity {
 
         propert_title=findViewById(R.id.propert_title);
 
-
         propert_pincode=findViewById(R.id.propert_pincode);
         proprty_type=findViewById(R.id.proprty_type);
         property_price=findViewById(R.id.property_price);
@@ -143,7 +142,6 @@ public class Viability_Data_revamp extends SimpleActivity {
         other_income_amount_self=findViewById(R.id.other_income_amount_self);
         otherincome_amount1=findViewById(R.id.otherincome_amount1);
         otherincome_amount1_self=findViewById(R.id.otherincome_amount1_self);
-
 
         secured_homeloanlay=findViewById(R.id.secured_homeloanlay);
         secureplot_loanlay=findViewById(R.id.secureplot_loanlay);
@@ -330,7 +328,7 @@ public class Viability_Data_revamp extends SimpleActivity {
 
 
 
-        Typeface font = Typeface.createFromAsset(Viability_Data_revamp.this.getAssets(), "segoe_ui.ttf");
+       /* Typeface font = Typeface.createFromAsset(Viability_Data_revamp.this.getAssets(), "segoe_ui.ttf");
         property_detailhead.setTypeface(font);
         property_identexthead.setTypeface(font);
         prop_identxt.setTypeface(font);
@@ -462,7 +460,7 @@ public class Viability_Data_revamp extends SimpleActivity {
         otherincomehead.setTypeface(font);
         otherincome_self.setTypeface(font);
         otheramount.setTypeface(font);
-        otherincome_amount1_self.setTypeface(font);
+        otherincome_amount1_self.setTypeface(font);*/
 
 
 
@@ -895,7 +893,6 @@ public class Viability_Data_revamp extends SimpleActivity {
                                         proprty_type.setVisibility(View.GONE);
                                         property_price.setVisibility(View.GONE);
 
-
                                     }else
                                     {
 
@@ -1150,7 +1147,6 @@ public class Viability_Data_revamp extends SimpleActivity {
                                         otherincome_amount1.setText(otherincome_details1);
                                         other_income_amount.setVisibility(View.VISIBLE);
 
-
                                     }
 
                                     unsecure_resarea.setText(res_area);
@@ -1294,7 +1290,6 @@ public class Viability_Data_revamp extends SimpleActivity {
                                 maritalstatus = Applicant_object.getString("marital_statusstr");
 
                                 //Salaried mode
-
 
                                 if (employee_status.equals("1")){
 

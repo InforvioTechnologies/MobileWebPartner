@@ -93,10 +93,12 @@
                         android:text="Ask Pending Under You"
                         android:textColor="#002B5D"
                         android:textSize="16dp"
+                        android:textStyle="bold"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"/>
                 </LinearLayout>
                 <LinearLayout
+                    android:layout_marginTop="10dp"
                     android:layout_marginLeft="10dp"
                     android:id="@+id/ask_Ly_allocate"
                     android:layout_width="match_parent"
@@ -119,7 +121,7 @@
                         android:gravity="right"
                         android:layout_marginLeft="10dp"
                         android:text="View All"
-                        android:textColor="#002B5D"
+                        android:textColor="#1592e6"
                         android:textSize="16dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"/>
@@ -146,10 +148,12 @@
                         android:text="Most Active Leads"
                         android:textColor="#002B5D"
                         android:textSize="16dp"
+                        android:textStyle="bold"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"/>
                 </LinearLayout>
                 <LinearLayout
+                    android:layout_marginTop="20dp"
                     android:layout_marginLeft="10dp"
                     android:id="@+id/Ly_allocate"
                     android:layout_width="match_parent"
@@ -227,6 +231,7 @@
                         android:layout_height="wrap_content"/>
                 </LinearLayout>
                 <LinearLayout
+                    android:layout_marginTop="20dp"
                     android:layout_marginLeft="10dp"
                     android:id="@+id/ly_helth_assement_"
                     android:layout_width="match_parent"
@@ -250,11 +255,13 @@
                         android:text="Document Checklist"
                         android:textColor="#002B5D"
                         android:textSize="16dp"
+                        android:textStyle="bold"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"/>
                 </LinearLayout>
                 <LinearLayout
                     android:layout_marginLeft="10dp"
+                    android:layout_marginTop="20dp"
                     android:id="@+id/ly_document_assement_"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -277,10 +284,12 @@
                         android:text="Sharing Materials"
                         android:textColor="#002B5D"
                         android:textSize="16dp"
+                        android:textStyle="bold"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"/>
                 </LinearLayout>
                 <LinearLayout
+                    android:layout_marginTop="10dp"
                     android:layout_marginLeft="10dp"
                     android:id="@+id/ly_share_material"
                     android:layout_width="match_parent"

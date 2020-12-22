@@ -465,9 +465,9 @@
     <string name="leadpass">Your Lead has Successfully Passed the Viability Check</string>
     <string name="crifscore">Applicant <b>CRIF Score</b> </string>
     <string name="crifscore1">Co Applicant <b>CRIF Score</b> </string>
-    <string name="viewreport">View Viablity Report</string>
-    <string name="viewreport1">View Applicant CRIF Report</string>
-    <string name="viewreport2">View Co Applicant CRIF Report</string>
+    <string name="viewreport">Viablity Report</string>
+    <string name="viewreport1">Applicant CRIF Report</string>
+    <string name="viewreport2">Co Applicant CRIF Report</string>
     <string name="notevialblepass">You can also download the Viability Report from Lead Detail Dashboard.</string>
     <string name="proceednext">PROCEED TO NEXT STEP</string>
 

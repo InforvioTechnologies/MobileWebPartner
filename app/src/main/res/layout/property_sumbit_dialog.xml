@@ -48,7 +48,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
                 android:text="@string/stepone_submit1"
-                android:textColor="@color/mid_blue"
+                android:textColor="@color/gray_sade"
                 android:textStyle="bold"
                 android:textSize="16dp"
                 android:layout_gravity="center_horizontal"
@@ -138,7 +138,6 @@
                         android:textColor="@color/gray_sade"
                         style="@style/SmallText"
                         android:textSize="14dp"
-                        android:textStyle="bold"
                         android:text="Property identified :"/>
 
                     <androidx.appcompat.widget.AppCompatTextView
@@ -181,7 +180,6 @@
                     android:textColor="@color/gray_sade"
                     style="@style/SmallText"
                     android:textSize="14dp"
-                    android:textStyle="bold"
                     android:text="Property Title :"/>
                 <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="match_parent"
@@ -223,7 +221,6 @@
                     android:textColor="@color/gray_sade"
                     style="@style/SmallText"
                     android:textSize="14dp"
-                    android:textStyle="bold"
                     android:text="Property Type :"/>
                 <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="match_parent"
@@ -265,7 +262,6 @@
                     android:textColor="@color/gray_sade"
                     style="@style/SmallText"
                     android:textSize="14dp"
-                    android:textStyle="bold"
                     android:text="Property Pincode :"/>
                 <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="match_parent"
@@ -308,7 +304,6 @@
                     android:id="@+id/loan_category"
                     style="@style/SmallText"
                     android:textSize="14dp"
-                    android:textStyle="bold"
                     android:text="Plot Value :"/>
                 <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="match_parent"
@@ -344,15 +339,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1">
+
                 <androidx.appcompat.widget.AppCompatTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/gray_sade"
                     android:id="@+id/plot_value"
                     style="@style/SmallText"
-                    android:textSize="14dp"
-                    android:textStyle="bold"
-                    android:text="Property Price :"/>
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Property Price :"
+                    android:textColor="@color/gray_sade"
+                    android:textSize="14dp" />
                 <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -392,7 +387,6 @@
                     android:textColor="@color/gray_sade"
                     style="@style/SmallText"
                     android:textSize="14dp"
-                    android:textStyle="bold"
                     android:text="Cost Estimate :"/>
                 <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="match_parent"

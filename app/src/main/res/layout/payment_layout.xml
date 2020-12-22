@@ -16,38 +16,49 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-        <LinearLayout
+          <LinearLayout
+              android:padding="5dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
+                android:gravity="left"
                 android:layout_gravity="center"
                 android:orientation="horizontal">
+              <LinearLayout
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content">
+                  <androidx.appcompat.widget.AppCompatTextView
+                      android:id="@+id/paydettext"
+                      android:layout_width="match_parent"
+                      android:layout_height="match_parent"
+                      android:layout_gravity="left"
+                      android:gravity="left"
+                      android:textSize="18dp"
+                      android:textColor="@color/text_blue"
+                      android:textStyle="bold"
+                      android:text="Payment Plan Details"/>
+              </LinearLayout>
 
+              <LinearLayout
+                  android:gravity="end"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content">
+                  <ImageView
+                      android:layout_gravity="end"
+                      android:id="@+id/closebtn"
+                      android:layout_width="30dp"
+                      android:layout_height="30dp"
+                      android:layout_marginEnd="30dp"
+                      android:src="@drawable/ic_close_icon"
+                      android:layout_marginRight="20dp" />
+              </LinearLayout>
 
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/paydettext"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:gravity="center"
-                    android:textSize="16sp"
-                    android:textColor="@color/text_blue"
-                    android:textStyle="bold"
-                    android:text="Payment Plan Details"/>
-
-                <ImageView
-                    android:id="@+id/closebtn"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_marginEnd="30dp"
-                    android:src="@drawable/ic_close_icon"
-                    android:layout_marginRight="20dp" />
 
             </LinearLayout>
 
 
 
             <LinearLayout
+                android:padding="5dp"
                 android:layout_marginTop="5sp"
                 android:orientation="vertical"
                 android:layout_width="match_parent"
@@ -55,7 +66,6 @@
 
                 <LinearLayout
                     android:id="@+id/Ly_loan_cate"
-                    android:padding="10dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
@@ -67,8 +77,10 @@
                         <androidx.appcompat.widget.AppCompatTextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textColor="@color/colorPrimary"
+                            android:textColor="@color/gray_sade1"
                             android:id="@+id/textplande"
+                            android:textStyle="bold"
+                            android:textSize="14dp"
                             style="@style/SmallText"
                             android:text="Plan Choose"/>
                         <androidx.appcompat.widget.AppCompatTextView
@@ -86,8 +98,10 @@
                         <androidx.appcompat.widget.AppCompatTextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textColor="@color/gray_1"
+                            android:textColor="@color/colorPrimary"
                             android:id="@+id/planchoose"
+                            android:textStyle="bold"
+                            android:textSize="14dp"
                             style="@style/SmallText"
 
                             />
@@ -96,7 +110,6 @@
 
                 <LinearLayout
                     android:id="@+id/Ly_loan_type_new_type"
-                    android:padding="10dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
@@ -108,9 +121,11 @@
                         <androidx.appcompat.widget.AppCompatTextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textColor="@color/colorPrimary"
+                            android:textColor="@color/gray_sade1"
                             android:id="@+id/texttransfer"
                             style="@style/SmallText"
+                            android:textStyle="bold"
+                            android:textSize="14dp"
                             android:text="Transferred by"/>
                         <androidx.appcompat.widget.AppCompatTextView
                             android:layout_width="match_parent"
@@ -127,8 +142,10 @@
                         <androidx.appcompat.widget.AppCompatTextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textColor="@color/gray_1"
+                            android:textColor="@color/colorPrimary"
                             android:id="@+id/transferdby"
+                            android:textStyle="bold"
+                            android:textSize="14dp"
                             style="@style/SmallText"
 
                             />
@@ -137,7 +154,6 @@
 
                 <LinearLayout
                     android:id="@+id/type_of_emploe"
-                    android:padding="10dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
@@ -149,9 +165,11 @@
                         <androidx.appcompat.widget.AppCompatTextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textColor="@color/colorPrimary"
+                            android:textColor="@color/gray_sade1"
                             android:id="@+id/textamount"
                             style="@style/SmallText"
+                            android:textStyle="bold"
+                            android:textSize="14dp"
                             android:text="Amount"/>
                         <androidx.appcompat.widget.AppCompatTextView
                             android:layout_width="match_parent"
@@ -168,8 +186,10 @@
                         <androidx.appcompat.widget.AppCompatTextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textColor="@color/gray_1"
+                            android:textColor="@color/colorPrimary"
                             android:id="@+id/planamt"
+                            android:textStyle="bold"
+                            android:textSize="14dp"
                             style="@style/SmallText"
 
                             />
@@ -178,7 +198,6 @@
 
                 <LinearLayout
                     android:id="@+id/benefitcoinlay"
-                    android:padding="10dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
@@ -190,9 +209,11 @@
                         <androidx.appcompat.widget.AppCompatTextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textColor="@color/colorPrimary"
+                            android:textColor="@color/gray_sade1"
                             android:id="@+id/textbene"
                             style="@style/SmallText"
+                            android:textStyle="bold"
+                            android:textSize="14dp"
                             android:text="Benifit Coin"/>
                         <androidx.appcompat.widget.AppCompatTextView
                             android:layout_width="match_parent"
@@ -209,8 +230,10 @@
                         <androidx.appcompat.widget.AppCompatTextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textColor="@color/gray_1"
+                            android:textColor="@color/colorPrimary"
                             android:id="@+id/benefitcoin"
+                            android:textStyle="bold"
+                            android:textSize="14dp"
                             style="@style/SmallText"
 
                             />
@@ -219,7 +242,7 @@
 
                 <LinearLayout
                     android:id="@+id/paydatelay"
-                    android:padding="10dp"
+
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="30dp"
@@ -232,9 +255,11 @@
                         <androidx.appcompat.widget.AppCompatTextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textColor="@color/colorPrimary"
+                            android:textColor="@color/gray_sade1"
                             android:id="@+id/paydates"
                             style="@style/SmallText"
+                            android:textStyle="bold"
+                            android:textSize="14dp"
                             android:text="Payment date"/>
                         <androidx.appcompat.widget.AppCompatTextView
                             android:layout_width="match_parent"
@@ -251,8 +276,10 @@
                         <androidx.appcompat.widget.AppCompatTextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textColor="@color/gray_1"
+                            android:textColor="@color/colorPrimary"
                             android:id="@+id/paydate"
+                            android:textStyle="bold"
+                            android:textSize="14dp"
                             style="@style/SmallText"
 
                             />

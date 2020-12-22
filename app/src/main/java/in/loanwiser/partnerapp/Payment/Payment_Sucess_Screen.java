@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.AppCompatSpinner;
 import androidx.appcompat.widget.AppCompatTextView;
+import androidx.cardview.widget.CardView;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -237,8 +238,6 @@ public class Payment_Sucess_Screen extends AppCompatActivity {
             J.put("user_id",Pref.getUSERID(getApplicationContext()));
             J.put("relationship_type","1");
             //  J.put("relationship_type","2");
-
-
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -288,8 +287,6 @@ public class Payment_Sucess_Screen extends AppCompatActivity {
                                 //  credit_card_app.setVisibility(View.VISIBLE);
                                 // Other_Earning(qus_dropdown);
                                 progressDialog.dismiss();
-
-
                                 final Dialog dialog = new Dialog(Payment_Sucess_Screen.this);
                                 dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
                                 dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
@@ -297,16 +294,18 @@ public class Payment_Sucess_Screen extends AppCompatActivity {
                                 //  dialog.getWindow().setLayout(display.getWidth() * 90 / 100, LinearLayout.LayoutParams.WRAP_CONTENT);
                                 dialog.setCancelable(true);
                                 dialog.setCanceledOnTouchOutside(false);
-                                AppCompatButton submit_buton=(AppCompatButton) dialog.findViewById(R.id.submit_buton);
-                                questions_spinner=(AppCompatSpinner)dialog.findViewById(R.id.question_spinner);
-                                AppCompatTextView question_tag=(AppCompatTextView)dialog.findViewById(R.id.question_tag);
-                                AppCompatTextView applicant_type=(AppCompatTextView)dialog.findViewById(R.id.applicant_type);
+                                final AppCompatButton submit_buton =(AppCompatButton) dialog.findViewById(R.id.submit_buton);
+                                AppCompatTextView applicant =(AppCompatTextView) dialog.findViewById(R.id.applicant);
+                                questions_spinner =(AppCompatSpinner)dialog.findViewById(R.id.question_spinner);
+                                AppCompatTextView question_tag =(AppCompatTextView)dialog.findViewById(R.id.question_tag);
+                                AppCompatTextView question_content =(AppCompatTextView)dialog.findViewById(R.id.question_content);
+                                AppCompatTextView applicant_type =(AppCompatTextView)dialog.findViewById(R.id.applicant_type);
                                 dialog.show();
 
-
-                                question_tag.setText("Dear" +" "+name+" "+question);
+                                question_tag.setText("Dear" +" "+name+" "+"Please answer this Question for verification ");
+                                question_content.setText(question + "?");
                                 //Other_Earning(qus_dropdown);
-
+                                applicant.setText("Applicant");
                                 Other_Earning_SA = new String[qus_dropdown.length()];
                                 for (int i=0;i<qus_dropdown.length();i++){
                                     JSONObject J =  qus_dropdown.getJSONObject(i);
@@ -367,12 +366,15 @@ public class Payment_Sucess_Screen extends AppCompatActivity {
                                     @Override
                                     public void onClick(View view) {
                                         dialog.dismiss();
+                                        LayoutInflater layoutInflater1 = (LayoutInflater) Payment_Sucess_Screen.this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                                        View customView1 = layoutInflater1.inflate(R.layout.popup_loading,null);
+                                        popupWindow1 = new PopupWindow(customView1, LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
+                                        //display the popup window
+                                        popupWindow1.showAtLocation(submit_buton, Gravity.CENTER, 0, 0);
                                         CRIF_Question_Testing();
 
                                     }
                                 });
-
-
 
                                 // co_applicant_.setVisibility(View.VISIBLE);
                             }else
@@ -528,7 +530,7 @@ public class Payment_Sucess_Screen extends AppCompatActivity {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        progressDialog.show();
+       // progressDialog.show();
         Log.e("Crif Generation_submit", String.valueOf(J));
         JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, Urls.submit_question, J,
                 new Response.Listener<JSONObject>() {
@@ -577,14 +579,14 @@ public class Payment_Sucess_Screen extends AppCompatActivity {
                             e.printStackTrace();
                         }
                         // Toast.makeText(mCon, response.toString(),Toast.LENGTH_SHORT).show();
-                        progressDialog.dismiss();
+                       // progressDialog.dismiss();
                     }
                 }, new Response.ErrorListener() {
 
             @Override
             public void onErrorResponse(VolleyError error) {
                 VolleyLog.d("TAG", "Error: " + error.getMessage());
-                progressDialog.dismiss();
+              //  progressDialog.dismiss();
             }
         }) {
             @Override
@@ -606,7 +608,7 @@ public class Payment_Sucess_Screen extends AppCompatActivity {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        progressDialog.show();
+      //  progressDialog.show();
         Log.e("Crif Generation_submit", String.valueOf(J));
         JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, Urls.submit_question, J,
                 new Response.Listener<JSONObject>() {
@@ -634,13 +636,13 @@ public class Payment_Sucess_Screen extends AppCompatActivity {
                             e.printStackTrace();
                         }
                         // Toast.makeText(mCon, response.toString(),Toast.LENGTH_SHORT).show();
-                        progressDialog.dismiss();
+                       // progressDialog.dismiss();
                     }
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 VolleyLog.d("TAG", "Error: " + error.getMessage());
-                progressDialog.dismiss();
+               // progressDialog.dismiss();
             }
         }) {
             @Override
@@ -657,16 +659,16 @@ public class Payment_Sucess_Screen extends AppCompatActivity {
 
         JSONObject J =new JSONObject();
         try {
-            J.put("transaction_id","58440");
-            J.put("user_id","56830");
-           /* J.put("transaction_id", Pref.getTRANSACTIONID(getApplicationContext()));
-            J.put("user_id",Pref.getUSERID(getApplicationContext()));*/
+          /*  J.put("transaction_id","58440");
+            J.put("user_id","56830");*/
+            J.put("transaction_id", Pref.getTRANSACTIONID(getApplicationContext()));
+            J.put("user_id",Pref.getUSERID(getApplicationContext()));
 
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        progressDialog.show();
-        Log.e("Crif Generation_submit", String.valueOf(J));
+      //  progressDialog.show();
+       // Log.e("Crif Generation_submit", String.valueOf(J));
         JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, Urls.report_links, J,
                 new Response.Listener<JSONObject>() {
 
@@ -683,7 +685,11 @@ public class Payment_Sucess_Screen extends AppCompatActivity {
                             Report_ID  = data1.getString("reportId");
                             Order_ID  = data1.getString("orderId");*/
 
-
+                            LayoutInflater layoutInflater = (LayoutInflater) Payment_Sucess_Screen.this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                            View customView = layoutInflater.inflate(R.layout.popup_loading,null);
+                            popupWindow1 = new PopupWindow(customView, LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
+                            //display the popup window
+                            popupWindow1.dismiss();
                             if (Statues.equals("success")) {
 
                                 Log.e("applicantcount", String.valueOf(applicantcount));
@@ -700,7 +706,7 @@ public class Payment_Sucess_Screen extends AppCompatActivity {
 
                                    AppCompatButton nextahed = (AppCompatButton) customView1.findViewById(R.id.nextahed);
                                    LinearLayout co_applicant = (LinearLayout) customView1.findViewById(R.id.co_applicant);
-                                   LinearLayout co_Applicant_ly = (LinearLayout) customView1.findViewById(R.id.co_Applicant_ly);
+                                    LinearLayout co_Applicant_ly = (LinearLayout) customView1.findViewById(R.id.co_Applicant_ly);
                                    AppCompatTextView crifscore = (AppCompatTextView) customView1.findViewById(R.id.crifscore);
                                     AppCompatButton view_viablity_report = (AppCompatButton) customView1.findViewById(R.id.view_viablity_report);
                                     AppCompatButton view_CRIF_report = (AppCompatButton) customView1.findViewById(R.id.view_CRIF_report);
@@ -875,14 +881,14 @@ public class Payment_Sucess_Screen extends AppCompatActivity {
                             e.printStackTrace();
                         }
                         // Toast.makeText(mCon, response.toString(),Toast.LENGTH_SHORT).show();
-                        progressDialog.dismiss();
+                       // progressDialog.dismiss();
                     }
                 }, new Response.ErrorListener() {
 
             @Override
             public void onErrorResponse(VolleyError error) {
                 VolleyLog.d("TAG", "Error: " + error.getMessage());
-                progressDialog.dismiss();
+              //  progressDialog.dismiss();
             }
         }) {
             @Override
@@ -922,20 +928,18 @@ public class Payment_Sucess_Screen extends AppCompatActivity {
                         try {
                             String Status = response.getString("status");
                             // JSONObject jsonObject1 = response.getJSONObject("response");
+
+
                             if(Status.equals("success")) {
 
-                                LayoutInflater layoutInflater = (LayoutInflater) Payment_Sucess_Screen.this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                                View customView = layoutInflater.inflate(R.layout.popup_loading,null);
-                                popupWindow = new PopupWindow(customView, LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
-                                //display the popup window
-                                popupWindow.dismiss();
+
 
                                 JSONObject applicant = response.getJSONObject("applicant");
                                 // JSONObject coapplicant = response.getJSONObject("coapplicant");
 
                                 String crif_Score = applicant.getString("crif_score");
                                 LayoutInflater layoutInflater1 = (LayoutInflater) Payment_Sucess_Screen.this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                                View customView1 = layoutInflater.inflate(R.layout.popup_viability_scrore,null);
+                                View customView1 = layoutInflater1.inflate(R.layout.popup_viability_scrore,null);
 
                                 view_report = (AppCompatButton) customView1.findViewById(R.id.view_report);
 
@@ -1132,16 +1136,20 @@ public class Payment_Sucess_Screen extends AppCompatActivity {
                                 //  dialog.getWindow().setLayout(display.getWidth() * 90 / 100, LinearLayout.LayoutParams.WRAP_CONTENT);
                                 dialog.setCancelable(true);
                                 dialog.setCanceledOnTouchOutside(false);
-                                AppCompatButton submit_buton=(AppCompatButton) dialog.findViewById(R.id.submit_buton);
+                                final AppCompatButton submit_buton=(AppCompatButton) dialog.findViewById(R.id.submit_buton);
                                 questions_spinner=(AppCompatSpinner)dialog.findViewById(R.id.question_spinner);
                                 AppCompatTextView question_tag=(AppCompatTextView)dialog.findViewById(R.id.question_tag);
+                                AppCompatTextView question_content=(AppCompatTextView)dialog.findViewById(R.id.question_content);
                                 AppCompatTextView applicant_type=(AppCompatTextView)dialog.findViewById(R.id.applicant_type);
+                                AppCompatTextView applicant =(AppCompatTextView) dialog.findViewById(R.id.applicant);
                                 dialog.show();
 
 
-                                question_tag.setText("Dear" +" "+name+" "+question);
+                               // question_tag.setText("Dear" +" "+name+" "+question);
                                 //Other_Earning(qus_dropdown);
-
+                                question_tag.setText("Dear" +" "+name+" "+"Please answer this Question for verification ");
+                                question_content.setText(question + "?");
+                                applicant.setText("Co Applicant");
                                 Other_Earning_SA = new String[qus_dropdown.length()];
                                 for (int i=0;i<qus_dropdown.length();i++){
                                     JSONObject J =  qus_dropdown.getJSONObject(i);
@@ -1201,7 +1209,11 @@ public class Payment_Sucess_Screen extends AppCompatActivity {
                                 submit_buton.setOnClickListener(new View.OnClickListener() {
                                     @Override
                                     public void onClick(View view) {
-
+                                        LayoutInflater layoutInflater1 = (LayoutInflater) Payment_Sucess_Screen.this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                                        View customView1 = layoutInflater1.inflate(R.layout.popup_loading,null);
+                                        popupWindow1 = new PopupWindow(customView1, LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
+                                        //display the popup window
+                                        popupWindow1.showAtLocation(submit_buton, Gravity.CENTER, 0, 0);
                                         CO_CRIF_Question_Testing();
                                     }
                                 });

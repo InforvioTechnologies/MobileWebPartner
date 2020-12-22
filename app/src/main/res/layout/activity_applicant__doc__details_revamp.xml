@@ -217,10 +217,10 @@
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/submit_update_status"
             android:layout_gravity="center"
-            android:layout_width="wrap_content"
+            android:layout_width="200dp"
             android:text="Save and Next"
             android:textColor="@color/white"
-            android:background="@drawable/capsul_button8"
+            android:background="@drawable/capsul_button4"
             android:layout_height="wrap_content"/>
     </LinearLayout>
     </LinearLayout>

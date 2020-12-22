@@ -11,7 +11,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="20dp"
+
         android:layout_marginTop="20dp"
         >
 
@@ -20,7 +20,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="50dp"
             android:layout_margin="20dp"
-            app:cardCornerRadius="70dp">
+            app:cardCornerRadius="20dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -54,13 +54,12 @@
                         android:textAlignment="center"
                         android:textColor="#032A57"
                         android:text="@string/leadpass"/>
-
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="100dp"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginTop="30dp"
                     android:layout_margin="20dp"
                     android:background="@drawable/capsul_button_rect_viability"
                     android:orientation="vertical"
@@ -126,12 +125,13 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:visibility="gone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="20dp"
                     android:gravity="center">
                     <androidx.appcompat.widget.AppCompatButton
-                        android:id="@+id/view_viablity_report"
+
                         android:layout_width="190dp"
                         android:layout_height="45dp"
                         android:layout_gravity="center"
@@ -141,12 +141,209 @@
                         android:textColor="@color/white"/>
 
                 </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_marginLeft="10dp"
+                        android:background="@color/white"
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp">
+
+                        <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <LinearLayout
+                                android:layout_gravity="left"
+                                android:gravity="center"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:orientation="vertical">
+
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:textSize="16dp"
+                                    android:gravity="center"
+                                    android:id="@+id/ask_txt1_pending"
+                                    android:textColor="@color/colorPrimary"
+                                    android:textStyle="bold"
+                                    android:text="@string/viewreport"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent" />
+                            </LinearLayout>
+
+                            <LinearLayout
+
+                                android:layout_marginRight="20dp"
+                                android:gravity="right"
+                                android:orientation="horizontal"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent">
+
+
+                                <androidx.appcompat.widget.AppCompatButton
+                                    android:id="@+id/view_viablity_report"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="30dp"
+                                    android:text="View"
+                                    android:layout_gravity="center"
+                                    android:gravity="center"
+                                    android:layout_marginLeft="10dp"
+                                    android:textColor="@color/white"
+                                    android:textSize="10sp"
+                                    android:background="@drawable/but_shape_blue"/>
+                            </LinearLayout>
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+
                 <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0.9dp"
+                        android:background="@color/white"/>
+                </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_marginLeft="10dp"
+                        android:background="@color/white"
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp">
+
+                        <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <LinearLayout
+                                android:layout_gravity="left"
+                                android:gravity="center"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:orientation="vertical">
+
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:textSize="16dp"
+                                    android:gravity="center"
+                                    android:textColor="@color/colorPrimary"
+                                    android:textStyle="bold"
+                                    android:text="@string/viewreport1"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_marginRight="20dp"
+                                android:gravity="right"
+                                android:orientation="horizontal"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent">
+
+
+                                <androidx.appcompat.widget.AppCompatButton
+                                    android:id="@+id/view_CRIF_report"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="30dp"
+                                    android:text="View"
+                                    android:layout_gravity="center"
+                                    android:gravity="center"
+                                    android:layout_marginLeft="10dp"
+                                    android:textColor="@color/white"
+                                    android:textSize="10sp"
+                                    android:background="@drawable/but_shape_blue"/>
+                            </LinearLayout>
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0.9dp"
+                        android:background="@color/white"/>
+                </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_marginLeft="10dp"
+                        android:id="@+id/co_Applicant_ly"
+                        android:background="@color/white"
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp">
+
+                        <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <LinearLayout
+                                android:layout_gravity="left"
+                                android:gravity="center"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:orientation="vertical">
+
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:textSize="16dp"
+                                    android:gravity="center"
+                                    android:textColor="@color/colorPrimary"
+                                    android:textStyle="bold"
+                                    android:text="@string/viewreport2"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_marginRight="20dp"
+                                android:gravity="right"
+                                android:orientation="horizontal"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent">
+
+
+                                <androidx.appcompat.widget.AppCompatButton
+                                    android:id="@+id/view_co_App_CRIF_report"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="30dp"
+                                    android:text="View"
+                                    android:layout_gravity="center"
+                                    android:gravity="center"
+                                    android:layout_marginLeft="10dp"
+                                    android:textColor="@color/white"
+                                    android:textSize="10sp"
+                                    android:background="@drawable/but_shape_blue"/>
+                            </LinearLayout>
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0.9dp"
+                        android:background="@color/white"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:visibility="gone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center">
                     <androidx.appcompat.widget.AppCompatButton
-                        android:id="@+id/view_CRIF_report"
                         android:layout_width="190dp"
                         android:layout_height="45dp"
                         android:layout_gravity="center"
@@ -157,13 +354,12 @@
 
                 </LinearLayout>
                 <LinearLayout
-                    android:id="@+id/co_Applicant_ly"
+                    android:visibility="gone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
                     android:gravity="center">
                     <androidx.appcompat.widget.AppCompatButton
-                        android:id="@+id/view_co_App_CRIF_report"
                         android:layout_width="190dp"
                         android:layout_height="45dp"
                         android:layout_gravity="center"
@@ -179,7 +375,7 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:gravity="center"
-                    android:layout_marginTop="10dp">
+                    android:layout_marginTop="20dp">
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:layout_width="wrap_content"
@@ -195,9 +391,11 @@
                 </LinearLayout>
 
                 <LinearLayout
+
+                    android:layout_marginBottom="40dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginTop="40dp"
                     android:orientation="vertical">
 
                     <androidx.appcompat.widget.AppCompatButton

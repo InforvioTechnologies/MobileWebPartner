@@ -49,7 +49,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
                 android:text="@string/stepone_submit1"
-                android:textColor="@color/mid_blue"
+                android:textColor="@color/gray_sade"
                 android:textStyle="bold"
                 android:textSize="16dp"
                 android:layout_gravity="center_horizontal"
@@ -98,7 +98,6 @@
                         android:textColor="@color/gray_sade"
                         style="@style/SmallText"
                         android:textSize="14dp"
-                        android:textStyle="bold"
                         android:text="Monthly Net Salary :"/>
 
                     <androidx.appcompat.widget.AppCompatTextView
@@ -142,7 +141,6 @@
                     android:textColor="@color/gray_sade"
                     style="@style/SmallText"
                     android:textSize="14dp"
-                    android:textStyle="bold"
                     android:text="Salary Credit Method :"/>
                 <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="match_parent"
@@ -187,7 +185,7 @@
                     android:textColor="@color/gray_sade"
                     style="@style/SmallText"
                     android:textSize="14dp"
-                    android:textStyle="bold"
+
                     android:text="Salary Proof :"/>
                 <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="match_parent"
@@ -231,7 +229,6 @@
                     android:id="@+id/loan_category"
                     style="@style/SmallText"
                     android:textSize="14dp"
-                    android:textStyle="bold"
                     android:text="Company Type :"/>
                 <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="match_parent"
@@ -272,7 +269,7 @@
                     android:textColor="@color/gray_sade"
                     style="@style/SmallText"
                     android:textSize="14dp"
-                    android:textStyle="bold"
+
                     android:text="Company Name :"/>
                 <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="match_parent"
@@ -313,7 +310,7 @@
                     android:textColor="@color/gray_sade"
                     style="@style/SmallText"
                     android:textSize="14dp"
-                    android:textStyle="bold"
+
                     android:text="Designation :"/>
                 <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="match_parent"
@@ -354,7 +351,6 @@
                     android:textColor="@color/gray_sade"
                     style="@style/SmallText"
                     android:textSize="14dp"
-                    android:textStyle="bold"
                     android:text="Current Experience :"/>
                 <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="match_parent"
@@ -395,7 +391,6 @@
                     android:textColor="@color/gray_sade"
                     style="@style/SmallText"
                     android:textSize="14dp"
-                    android:textStyle="bold"
                     android:text="Total Experience :"/>
                 <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="match_parent"
@@ -436,7 +431,6 @@
                     android:textColor="@color/gray_sade"
                     style="@style/SmallText"
                     android:textSize="14dp"
-                    android:textStyle="bold"
                     android:text="Company Pincode :"/>
                 <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="match_parent"
@@ -477,7 +471,6 @@
                     android:textColor="@color/gray_sade"
                     style="@style/SmallText"
                     android:textSize="14dp"
-                    android:textStyle="bold"
                     android:text="Area :"/>
                 <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="match_parent"
@@ -518,7 +511,6 @@
                     android:textColor="@color/gray_sade"
                     style="@style/SmallText"
                     android:textSize="14dp"
-                    android:textStyle="bold"
                     android:text="Other Income Sources :"/>
                 <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="match_parent"
@@ -560,7 +552,6 @@
                     android:textColor="@color/gray_sade"
                     style="@style/SmallText"
                     android:textSize="14dp"
-                    android:textStyle="bold"
                     android:text="Other Income Amount :"/>
                 <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="match_parent"

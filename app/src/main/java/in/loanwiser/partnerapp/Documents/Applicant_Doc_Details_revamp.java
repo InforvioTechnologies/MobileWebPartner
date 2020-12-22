@@ -6,7 +6,9 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Bundle;
+import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -113,7 +115,7 @@ public class Applicant_Doc_Details_revamp extends SimpleActivity {
         applicant_txt.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.blue));
         co_applicant_txt.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.gray));
         In_Progress_txt.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.gray));
-
+        Log.e(TAG, "onCreate:property_identified "+property_identified);
         if(co_app.equals("1"))
         {
             Applicant_ly1.setVisibility(View.VISIBLE);
@@ -647,14 +649,18 @@ public class Applicant_Doc_Details_revamp extends SimpleActivity {
                 J = getItem(position);
 
                 holder.class_name.setText(Objs.a.capitalize(J.getString("key")));
-                Objs.a.NewNormalFontStyle(mCon,holder.class_name);
+               // Objs.a.NewNormalFontStyle(mCon,holder.class_name);
 
                 String docuemt_upload= J.getString("docuemt_upload");
 
                 String key = J.getString("key");
                 String document_req = J.getString("document_req");
-                holder.class_name.setText(key);
+                String star="<font color='#D44D53'>*</font>";
 
+                holder.class_name.setText(Html.fromHtml(key + " "+star));
+                Typeface font = Typeface.createFromAsset(getApplicationContext().getAssets(), "segoe_ui.ttf");
+                holder.class_name.setTypeface(font,Typeface.BOLD);
+                holder.class_name.setTextSize(16);
                 if(document_req.equals("0"))
                 {
                     holder.mandatory_do.setText("(Highly Increases Loan Approval)");
@@ -664,7 +670,6 @@ public class Applicant_Doc_Details_revamp extends SimpleActivity {
                     holder.mandatory_do.setText("(Mandatory Document)");
                     holder. mandatory_do.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.but_red));
                 }
-
 
                 JSONArray Proof_Array12 = jsonobject_2.getJSONArray(key);
 

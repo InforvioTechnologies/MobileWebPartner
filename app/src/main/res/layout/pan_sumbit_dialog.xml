@@ -221,7 +221,6 @@
                         android:textColor="@color/gray_sade"
                         style="@style/SmallText"
                         android:textSize="14dp"
-                        android:textStyle="bold"
                         android:text="PAN Number :"/>
 
                     <androidx.appcompat.widget.AppCompatTextView
@@ -265,7 +264,6 @@
                     android:textColor="@color/gray_sade"
                     style="@style/SmallText"
                     android:textSize="14dp"
-                    android:textStyle="bold"
                     android:text="Date of Birth :"/>
                 <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="match_parent"
@@ -308,7 +306,6 @@
                     android:textColor="@color/gray_sade"
                     style="@style/SmallText"
                     android:textSize="14dp"
-                    android:textStyle="bold"
                     android:text="Father Name :"/>
                 <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="match_parent"
@@ -352,7 +349,6 @@
                     android:id="@+id/loan_category"
                     style="@style/SmallText"
                     android:textSize="14dp"
-                    android:textStyle="bold"
                     android:text="Marital Status :"/>
                 <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="match_parent"

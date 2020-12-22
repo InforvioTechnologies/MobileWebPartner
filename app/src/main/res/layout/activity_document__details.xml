@@ -62,11 +62,11 @@
 
             <androidx.appcompat.widget.AppCompatButton
                 android:layout_gravity="center"
-                android:layout_width="wrap_content"
+                android:layout_width="250dp"
                 android:text="Next"
                 android:id="@+id/submit_update_status1"
                 android:textColor="@color/white"
-                android:background="@drawable/capsul_button8"
+                android:background="@drawable/capsul_button4"
                 android:layout_height="wrap_content"/>
         </LinearLayout>
 

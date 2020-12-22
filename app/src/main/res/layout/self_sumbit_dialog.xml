@@ -47,7 +47,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
                 android:text="@string/stepone_submit1"
-                android:textColor="@color/mid_blue"
+                android:textColor="@color/gray_sade"
                 android:textStyle="bold"
                 android:textSize="16dp"
                 android:layout_gravity="center_horizontal"
@@ -94,7 +94,7 @@
                         android:layout_height="wrap_content"
                         android:textColor="@color/gray_sade"
                         style="@style/SmallText"
-                        android:textStyle="bold"
+
                         android:textSize="14dp"
                         android:text="Type of Self Employment :"/>
 
@@ -140,7 +140,6 @@
                     android:layout_height="wrap_content"
                     android:textColor="@color/gray_sade"
                     style="@style/SmallText"
-                    android:textStyle="bold"
                     android:textSize="14dp"
                     android:text="Vocation Type :"/>
                 <androidx.appcompat.widget.AppCompatTextView
@@ -184,7 +183,6 @@
                     android:layout_height="wrap_content"
                     android:textColor="@color/gray_sade"
                     style="@style/SmallText"
-                    android:textStyle="bold"
                     android:textSize="14dp"
                     android:text="Monthly income :"/>
                 <androidx.appcompat.widget.AppCompatTextView
@@ -222,15 +220,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1">
+
                 <androidx.appcompat.widget.AppCompatTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/gray_sade"
                     android:id="@+id/loan_category"
                     style="@style/SmallText"
-                    android:textStyle="bold"
-                    android:textSize="14dp"
-                    android:text="No of Month in Business :"/>
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="No of Month in Business :"
+                    android:textColor="@color/gray_sade"
+                    android:textSize="14dp" />
+
                 <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -270,7 +269,6 @@
                     android:layout_height="wrap_content"
                     android:textColor="@color/gray_sade"
                     style="@style/SmallText"
-                    android:textStyle="bold"
                     android:textSize="14dp"
                     android:text="Business Vintage Proof :"/>
                 <androidx.appcompat.widget.AppCompatTextView
@@ -312,7 +310,6 @@
                     android:layout_height="wrap_content"
                     android:textColor="@color/gray_sade"
                     style="@style/SmallText"
-                    android:textStyle="bold"
                     android:textSize="14dp"
                     android:text="Business Income Proof :"/>
                 <androidx.appcompat.widget.AppCompatTextView
@@ -354,7 +351,6 @@
                     android:layout_height="wrap_content"
                     android:textColor="@color/gray_sade"
                     style="@style/SmallText"
-                    android:textStyle="bold"
                     android:textSize="14dp"
                     android:text="Office/Shop Setup :"/>
                 <androidx.appcompat.widget.AppCompatTextView
@@ -397,7 +393,6 @@
                     android:layout_height="wrap_content"
                     android:textColor="@color/gray_sade"
                     style="@style/SmallText"
-                    android:textStyle="bold"
                     android:textSize="14dp"
                     android:text="Office Residence Type :"/>
                 <androidx.appcompat.widget.AppCompatTextView
@@ -440,7 +435,6 @@
                     android:layout_height="wrap_content"
                     android:textColor="@color/gray_sade"
                     style="@style/SmallText"
-                    android:textStyle="bold"
                     android:textSize="14dp"
                     android:text="Office/shop Pincode :"/>
                 <androidx.appcompat.widget.AppCompatTextView
@@ -483,7 +477,6 @@
                     android:layout_height="wrap_content"
                     android:textColor="@color/gray_sade"
                     style="@style/SmallText"
-                    android:textStyle="bold"
                     android:textSize="14dp"
                     android:text="Area :"/>
                 <androidx.appcompat.widget.AppCompatTextView
@@ -525,7 +518,6 @@
                     android:layout_height="wrap_content"
                     android:textColor="@color/gray_sade"
                     style="@style/SmallText"
-                    android:textStyle="bold"
                     android:textSize="14dp"
                     android:text="Other Income Sources :"/>
                 <androidx.appcompat.widget.AppCompatTextView
@@ -568,7 +560,6 @@
                     android:layout_height="wrap_content"
                     android:textColor="@color/gray_sade"
                     style="@style/SmallText"
-                    android:textStyle="bold"
                     android:textSize="14dp"
                     android:text="Other Income Amount :"/>
                 <androidx.appcompat.widget.AppCompatTextView

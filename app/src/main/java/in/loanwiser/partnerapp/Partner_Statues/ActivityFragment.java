@@ -186,9 +186,9 @@ public class ActivityFragment extends Fragment implements NavigationView.OnNavig
         recent_leads=view.findViewById(R.id.recent_leads);
         Document_cheklist=view.findViewById(R.id.Document_cheklist);
         fhas=view.findViewById(R.id.fhas);
-        recent_leads.setTypeface(font);
-        Document_cheklist.setTypeface(font);
-        fhas.setTypeface(font);
+      //  recent_leads.setTypeface(font);
+      //  Document_cheklist.setTypeface(font);
+      //  fhas.setTypeface(font);
 
 
 

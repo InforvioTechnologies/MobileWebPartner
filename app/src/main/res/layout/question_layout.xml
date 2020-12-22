@@ -15,18 +15,19 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:gravity="center"
+        android:layout_marginLeft="20dp"
+        android:gravity="left"
         >
 
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/crifreport"
-            android:layout_gravity="center"
-            android:gravity="center"
+            android:layout_gravity="left"
+            android:gravity="left"
             android:textStyle="bold"
             android:textColor="@color/black"
-            android:textSize="16sp"
+            android:textSize="18dp"
             android:text="@string/crifreportgen"/>
     </LinearLayout>
 
@@ -49,11 +50,27 @@
 
     </LinearLayout>
 
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="20dp">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/applicant"
+                android:textStyle="bold"
+                android:textColor="@color/gray_sade1"
+                android:gravity="left"
+                android:textSize="14dp"
+                android:text="Applicant"/>
+
+        </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
         android:layout_marginLeft="20dp">
 
         <androidx.appcompat.widget.AppCompatTextView
@@ -62,26 +79,44 @@
             android:id="@+id/question_tag"
             android:textStyle="bold"
             android:gravity="left"
-            android:textSize="16sp"
-            android:text="@string/crifreportgen"/>
+            android:textColor="@color/colorPrimary"
+            android:textSize="16dp"
+            android:text="question"/>
 
     </LinearLayout>
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="20dp">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/question_content"
+                android:textStyle="bold"
+                android:textColor="@color/colorPrimary"
+                android:gravity="left"
+                android:textSize="12dp"
+                android:text="Applicant"/>
+            <androidx.appcompat.widget.AppCompatSpinner
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/question_spinner"
+                android:textStyle="bold"
+                android:gravity="left"
+                android:textSize="10dp"
+                style="@style/Base.Widget.AppCompat.Spinner.Underlined" />
+
+        </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
         android:layout_marginLeft="20dp">
 
-        <androidx.appcompat.widget.AppCompatSpinner
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"
-            android:id="@+id/question_spinner"
-            android:textStyle="bold"
-            android:gravity="left"
-            android:textSize="16sp"
-            style="@style/Base.Widget.AppCompat.Spinner.Underlined"
-            android:text="@string/crifreportgen"/>
+
 
     </LinearLayout>
 
