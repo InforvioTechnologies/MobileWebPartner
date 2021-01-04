@@ -17,6 +17,7 @@ import android.text.Html;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
@@ -123,6 +124,15 @@ public class FragmentCoaplicant extends Fragment implements CompoundButton.OnChe
         Log.i("TAG", "onCreateView:coapplicant_statuscheck "+coapplicantstatus);
         checkcondition();
         Document_check_lsit();
+
+        rootview.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                return true;
+            }
+        });
+
+
        /* if (user_type.equals("2")){
             Document_check_lsit();
         }*/
@@ -337,9 +347,30 @@ public class FragmentCoaplicant extends Fragment implements CompoundButton.OnChe
            // tv.setText(key);
             tv.setTextSize(18);
             Typeface font = Typeface.createFromAsset(getActivity().getAssets(), "segoe_ui.ttf");
+            tv.setTypeface(font,Typeface.BOLD);
             tv.setTypeface(font);
             tv.setTextColor(Color.parseColor("#012B5D"));
             check_list_name.addView(tv);
+
+
+            LinearLayout.LayoutParams lpara = new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+
+            TextView tvs = new TextView(getActivity());
+            TextView tls=new TextView(getActivity());
+            //  tls.setLayoutParams(lparams);
+            tvs.setLayoutParams(lparams);
+            lparams.setMargins(10, 10, 10, 10);
+            tvs.setTextSize(12);
+            //  tls.setTextSize(18);
+            Typeface fonts = Typeface.createFromAsset(getActivity().getAssets(), "segoe_ui.ttf");
+            tvs.setTypeface(fonts);
+            // tls.setTypeface(fonts);
+            tvs.setText("Please Upload any one of the following");
+            //   tls.setTextColor(Color.parseColor("#D34D53"));
+            tvs.setTextColor(Color.parseColor("#D44D53"));
+            // tvs.setBackgroundColor(Color.GREEN);
+            check_list_name.addView(tvs,lparams);
 
            /* TextView tvs = new TextView(getActivity());
             TextView tls=new TextView(getActivity());
@@ -487,12 +518,6 @@ public class FragmentCoaplicant extends Fragment implements CompoundButton.OnChe
             checkBox.setText(checklist_name1);
             checkBox.setTextSize(14);
             checkBox.setGravity(Gravity.LEFT);
-
-
-
-
-
-
 
             //  row.addView(checkBox);
             check_list_name.addView(checkBox);

@@ -949,7 +949,6 @@ public class Viability_Screen_revamp_co extends SimpleActivity implements Number
                         Log.e("the PAN",Pan_Details.toString());
                         Submit_PAN();
 
-
                     }
 
                 }else
@@ -957,7 +956,6 @@ public class Viability_Screen_revamp_co extends SimpleActivity implements Number
                     PAN_Edit_text.setError(getText(R.string.pan_err));
                     PAN_Edit_text.requestFocus();
                 }
-
 
                 }
 

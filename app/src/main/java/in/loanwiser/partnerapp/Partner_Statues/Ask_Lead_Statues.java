@@ -92,7 +92,7 @@ public class Ask_Lead_Statues extends RecyclerView.Adapter<Ask_Lead_Statues.Cust
         String doc_classname1  = items.get(position).getdoc_classname();
 
 
-        holder.lead_name.setText(Name +"("+applicant +")");
+        holder.lead_name.setText(Name);
        // holder.loan_amount.setText(loan_amount);
        // holder.loan_amount.setText("\u20B9"+loan_amount);
         holder.status_pending_ask.setText(status_disp);
@@ -339,7 +339,7 @@ public class Ask_Lead_Statues extends RecyclerView.Adapter<Ask_Lead_Statues.Cust
         name_applicant.setText(name);
         name_callcenter.setText(request_by);
         status_Ask.setText(status_disp1);
-        ask_crated_at.setText(created_at);
+        ask_crated_at.setText("Raised on :"+" "+created_at);
         documnet_name.setText(applicant1+","+ " "+ "Need"+ " "+ doc_typename);
         notes.setText(Notes);
 
@@ -354,7 +354,7 @@ public class Ask_Lead_Statues extends RecyclerView.Adapter<Ask_Lead_Statues.Cust
         Lead_Name.setTypeface(font);
         requester.setTypeface(font);
         Staus.setTypeface(font);
-        raised_on.setTypeface(font);
+       // raised_on.setTypeface(font);
         details.setTypeface(font);
         notes1.setTypeface(font);
 

@@ -63,178 +63,231 @@
                                 android:textSize="16sp"
                                 />
 
-
-
                         </LinearLayout>
 
                         <LinearLayout
+                            android:id="@+id/Ly_loan_cate"
+                            android:padding="5dp"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="vertical">
+                            android:orientation="horizontal">
 
                             <LinearLayout
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:orientation="horizontal"
-                                android:layout_marginTop="10dp"
-                                android:layout_marginLeft="10dp"
+                                android:layout_height="match_parent"
                                 android:layout_weight="1">
-
                                 <androidx.appcompat.widget.AppCompatTextView
-                                    android:id="@+id/securebt_title"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:textColor="#8A8A8A"
+                                    android:id="@+id/securebt_title"
+                                    style="@style/SmallText"
                                     android:text="@string/property_title1"
-                                    android:textSize="16sp"
-                                    />
-
-                                <LinearLayout
+                                    android:textSize="16sp"/>
+                                <androidx.appcompat.widget.AppCompatTextView
                                     android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:gravity="end"
+                                    android:textColor="@color/colorPrimary"
+                                    style="@style/SmallText"
+                                    android:text=":"/>
+                            </LinearLayout>
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1">
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:orientation="horizontal"
-                                    android:layout_weight="1">
-
-                                    <androidx.appcompat.widget.AppCompatTextView
-                                        android:id="@+id/curr_resarea"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:textSize="16sp"
-                                        android:textColor="@color/text_blue"
-                                        android:textStyle="bold" />
-
-                                </LinearLayout>
-
+                                    android:id="@+id/curr_resarea"
+                                    style="@style/SmallText"
+                                    android:textColor="@color/text_blue"
+                                    android:textStyle="bold" />
                             </LinearLayout>
                         </LinearLayout>
 
+
+
                         <LinearLayout
+                            android:id="@+id/Ly_loan_type_new_type"
+                            android:padding="5dp"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginBottom="5dp"
-                            android:orientation="vertical">
+                            android:orientation="horizontal">
 
                             <LinearLayout
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:orientation="horizontal"
-                                android:layout_marginTop="10dp"
-                                android:layout_marginLeft="10dp"
+                                android:layout_height="match_parent"
                                 android:layout_weight="1">
 
                                 <androidx.appcompat.widget.AppCompatTextView
                                     android:id="@+id/securebt_pin"
+                                    style="@style/SmallText"
                                     android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
+                                    android:layout_height="match_parent"
                                     android:text="@string/property_pin1"
-                                    android:textSize="16sp"
-                                    />
-
-                                <LinearLayout
+                                    android:textColor="#8A8A8A"
+                                    android:textSize="16sp" />
+                                <androidx.appcompat.widget.AppCompatTextView
                                     android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:gravity="end"
+                                    android:textColor="@color/colorPrimary"
+                                    style="@style/SmallText"
+                                    android:text=":"/>
+                            </LinearLayout>
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1">
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:orientation="horizontal"
-                                    android:layout_weight="1">
+                                    android:textColor="#032C58"
+                                    android:textStyle="bold"
+                                    android:id="@+id/curr_restype"
+                                    style="@style/SmallText"
 
-                                    <androidx.appcompat.widget.AppCompatTextView
-                                        android:id="@+id/curr_restype"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:textSize="16sp"
-                                        android:textStyle="bold"
-                                        android:textColor="@color/text_blue"/>
-
-                                </LinearLayout>
-
+                                    />
                             </LinearLayout>
                         </LinearLayout>
 
                         <LinearLayout
+                            android:id="@+id/type_of_emploe"
+                            android:padding="5dp"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginBottom="5dp"
-                            android:orientation="vertical">
+                            android:orientation="horizontal">
 
                             <LinearLayout
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:orientation="horizontal"
-                                android:layout_marginTop="10dp"
-                                android:layout_marginLeft="10dp"
+                                android:layout_height="match_parent"
                                 android:layout_weight="1">
-
                                 <androidx.appcompat.widget.AppCompatTextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textColor="#8A8A8A"
                                     android:id="@+id/securebt_proptype"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
+                                    style="@style/SmallText"
                                     android:text="@string/property_type12"
-                                    android:textSize="16sp"
-                                    />
-
-                                <LinearLayout
+                                    android:textSize="16sp"/>
+                                <androidx.appcompat.widget.AppCompatTextView
                                     android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:orientation="horizontal"
-                                    android:layout_weight="1">
-
-                                    <androidx.appcompat.widget.AppCompatTextView
-                                        android:id="@+id/prop_type"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:textSize="16sp"
-                                        android:textColor="@color/text_blue"
-                                        android:textStyle="bold"/>
-
-                                </LinearLayout>
-
+                                    android:layout_height="match_parent"
+                                    android:gravity="end"
+                                    android:textColor="@color/colorPrimary"
+                                    style="@style/SmallText"
+                                    android:text=":"/>
                             </LinearLayout>
-                        </LinearLayout>
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="5dp"
-                            android:orientation="vertical">
-
                             <LinearLayout
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:orientation="horizontal"
-                                android:layout_marginTop="10dp"
-                                android:layout_marginLeft="10dp"
+                                android:layout_height="match_parent"
                                 android:layout_weight="1">
-
                                 <androidx.appcompat.widget.AppCompatTextView
-                                    android:id="@+id/securebt_propertyprice"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="@string/property_price12"
-                                    android:textSize="16sp"
+                                    android:textColor="#032C58"
+                                    android:textStyle="bold"
+                                    android:id="@+id/prop_type"
+                                    style="@style/SmallText"
+
                                     />
-
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:orientation="horizontal"
-                                    android:layout_weight="1">
-
-                                    <androidx.appcompat.widget.AppCompatTextView
-                                        android:id="@+id/prop_price"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:textSize="16sp"
-                                        android:textStyle="bold"
-                                        android:textColor="@color/text_blue"/>
-
-                                </LinearLayout>
-
                             </LinearLayout>
                         </LinearLayout>
 
+                        <LinearLayout
+                            android:id="@+id/benefitcoinlay"
+                            android:padding="5dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="horizontal"
+                                android:layout_weight="1">
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textColor="#8A8A8A"
+                                    android:id="@+id/securebt_propertyprice"
+                                    style="@style/SmallText"
+                                    android:text="@string/property_price12"
+                                    android:textSize="16sp"/>
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:gravity="end"
+                                    android:textColor="@color/colorPrimary"
+                                    style="@style/SmallText"
+                                    android:text=":"/>
+                            </LinearLayout>
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1">
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textColor="#032C58"
+                                    android:textStyle="bold"
+                                    android:id="@+id/prop_price"
+                                    style="@style/SmallText"
 
+                                    />
+                            </LinearLayout>
+                        </LinearLayout>
 
+                        <LinearLayout
+                            android:id="@+id/jus"
+                            android:padding="5dp"
+                            android:visibility="gone"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="30dp"
+                            android:orientation="horizontal">
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="horizontal"
+                                android:layout_weight="1">
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textColor="#8A8A8A"
+                                    android:id="@+id/paydates"
+                                    style="@style/SmallText"
+                                    />
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:gravity="end"
+                                    android:textColor="@color/colorPrimary"
+                                    style="@style/SmallText"
+                                    android:text=":"/>
+                            </LinearLayout>
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1">
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textColor="#032C58"
+                                    android:textStyle="bold"
+                                    style="@style/SmallText"
+
+                                    />
+                            </LinearLayout>
+                        </LinearLayout>
                     </LinearLayout>
 
 
-                </androidx.cardview.widget.CardView>
+
+
+
+
+        </androidx.cardview.widget.CardView>
 
             </LinearLayout>
 

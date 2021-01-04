@@ -332,7 +332,7 @@ public class FragmentApplicant extends Fragment implements CompoundButton.OnChec
 
             TextView tv = new TextView(getActivity());
             tv.setLayoutParams(lparams);
-            lparams.setMargins(30, 90, 30, 0);
+            lparams.setMargins(10, 10, 10, 10);
 
 
 
@@ -354,7 +354,7 @@ public class FragmentApplicant extends Fragment implements CompoundButton.OnChec
             TextView tls=new TextView(getActivity());
           //  tls.setLayoutParams(lparams);
             tvs.setLayoutParams(lparams);
-            lparams.setMargins(30, 20, 30, 0);
+            tvs.setPadding(10, 10, 10, 10);
             tvs.setTextSize(12);
           //  tls.setTextSize(18);
             Typeface fonts = Typeface.createFromAsset(getActivity().getAssets(), "segoe_ui.ttf");

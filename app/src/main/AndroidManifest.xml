@@ -461,6 +461,10 @@
             android:theme="@style/NoAction2"
             android:windowSoftInputMode="stateHidden" />
         <activity
+            android:name=".CameraActivity.Ask_DocGridView_List"
+            android:theme="@style/NoAction2"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
             android:name=".CameraActivity.UploadActivity1"
             android:theme="@style/NoAction2"
             android:windowSoftInputMode="stateHidden" />

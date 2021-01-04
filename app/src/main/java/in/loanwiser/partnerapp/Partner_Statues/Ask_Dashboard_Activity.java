@@ -459,9 +459,12 @@ public class Ask_Dashboard_Activity extends AppCompatActivity implements OnLoadM
                                         String transaction_id = J.getString("transaction_id");
                                            String doc_classname= J.getString("doc_classname");
                                        String legaldoc_id= J.getString("legaldoc_id");
+                                       String doc_typeid= J.getString("doc_typeid");
                                             String Ask_id = J.getString("id");
                                             String partner_resolved_date_org = J.getString("partner_resolved_date");
                                             String close_date = J.getString("close_date");
+                                            String relationship_type = J.getString("relationship_type");
+                                            String doc_classid = J.getString("doc_classid");
                                        /* String mobileno = J.getString("mobileno");
                                         String transaction_id = J.getString("transaction_id");
 
@@ -478,7 +481,8 @@ public class Ask_Dashboard_Activity extends AppCompatActivity implements OnLoadM
 
                                         items.add(new Ask_Lead_item(user_id,app_id, name,request_by,
                                                 applicant,created_at,status_disp,doc_typename,notes,
-                                                transaction_id,legaldoc_id,Ask_id,doc_classname,close_date,partner_resolved_date_org));
+                                                transaction_id,legaldoc_id,Ask_id,doc_classname,close_date,partner_resolved_date_org,
+                                                relationship_type,doc_classid,doc_typeid));
                                         leadListAdapter_dashboard.notifyDataSetChanged();
                                     }
                                  //   Log.e("leadListA", String.valueOf(leadListAdapter_dashboard));

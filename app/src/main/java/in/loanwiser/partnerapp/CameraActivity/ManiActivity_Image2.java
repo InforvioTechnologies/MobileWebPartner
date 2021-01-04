@@ -178,6 +178,9 @@ public class ManiActivity_Image2 extends SimpleActivity implements SingleUploadB
         1
         6555*/
 
+       /* Intent i = new Intent(Action.ACTION_MULTIPLE_PICK);
+        startActivityForResult(i, 200);*/
+
         Checking();
         initImageLoader();
         init();

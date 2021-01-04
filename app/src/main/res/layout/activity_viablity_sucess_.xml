@@ -391,8 +391,7 @@
                 </LinearLayout>
 
                 <LinearLayout
-
-                    android:layout_marginBottom="40dp"
+                    android:layout_marginBottom="20dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="40dp"
@@ -401,7 +400,7 @@
                     <androidx.appcompat.widget.AppCompatButton
                         android:id="@+id/nextahed"
                         android:layout_width="240dp"
-                        android:layout_height="40dp"
+                        android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:gravity="center"
                         android:layout_marginBottom="20dp"

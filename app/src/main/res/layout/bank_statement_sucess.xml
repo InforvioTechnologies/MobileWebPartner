@@ -3,6 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_margin="20dp"
     android:background="@drawable/white_roundcorner"
     android:orientation="vertical">
 <ScrollView
@@ -28,8 +29,8 @@
                 android:layout_height="wrap_content"
                 android:gravity="center">
                 <ImageView
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
                     android:src="@drawable/ic_green_tick"
                     />
 
@@ -37,6 +38,7 @@
 
         </LinearLayout>
         <LinearLayout
+            android:layout_marginTop="20dp"
             android:id="@+id/payment_sucesslay"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -48,8 +50,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginStart="18dp"
                 android:layout_marginLeft="5dp"
+                android:layout_marginRight="10dp"
                 android:text="Bank Statement Uploaded"
                 android:textAlignment="center"
                 android:textColor="#032A57"
@@ -59,8 +61,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginStart="10dp"
                 android:layout_marginLeft="5dp"
+                android:layout_marginRight="10dp"
                 android:text="Successfully"
                 android:textAlignment="center"
                 android:textColor="#00CEB4"
@@ -70,7 +72,7 @@
         </LinearLayout>
 
         <LinearLayout
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="20dp"
             android:layout_marginBottom="20dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -102,13 +104,12 @@
 
                 <Button
                     android:id="@+id/submitbtn"
-                    android:layout_width="100dp"
-                    android:layout_height="30dp"
+                    android:layout_width="219dp"
+                    android:layout_height="41dp"
                     android:background="@drawable/capsul_button4"
-                    android:text="@string/yes_submit"
+                    android:text="Proceed to next step"
                     android:textColor="@color/white"
                     android:textStyle="bold"/>
-
 
             </LinearLayout>
 

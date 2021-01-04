@@ -1,5 +1,6 @@
 package in.loanwiser.partnerapp.CameraActivity;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -7,11 +8,6 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Rect;
 import android.os.Bundle;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import androidx.appcompat.widget.AppCompatTextView;
-import androidx.recyclerview.widget.DefaultItemAnimator;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
@@ -23,12 +19,18 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import androidx.appcompat.widget.AppCompatTextView;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -39,27 +41,26 @@ import java.util.Map;
 
 import adhoc.app.applibrary.Config.AppUtils.Objs;
 import adhoc.app.applibrary.Config.AppUtils.Params;
-import adhoc.app.applibrary.Config.AppUtils.Pref.Pref;
 import adhoc.app.applibrary.Config.AppUtils.Urls;
 import adhoc.app.applibrary.Config.AppUtils.VolleySignleton.AppController;
 import dmax.dialog.SpotsDialog;
-import in.loanwiser.partnerapp.Documents.Applicant_Doc_Details_revamp;
 import in.loanwiser.partnerapp.Documents.Doc_ImageView;
 import in.loanwiser.partnerapp.Documents.Document_Details;
 import in.loanwiser.partnerapp.PartnerActivitys.SimpleActivity;
 import in.loanwiser.partnerapp.R;
 
-public class DocGridView_List extends SimpleActivity {
+public class Ask_DocGridView_List extends SimpleActivity {
 
     Context mCon;
     private String tag_json_obj = "jobj_req", tag_json_arry = "jarray_req";
-    private String TAG = DocGridView_List.class.getSimpleName();
+    private String TAG = Ask_DocGridView_List.class.getSimpleName();
     private AlertDialog progressDialog;
     String id,doc_name,docid,class_id,user_type,transaction_id,doc_id,doc_typename;
     String _class_id,_transaction_id,_user_type,_doc_id,type,docid1;
     private RecyclerView recyclerView;
     private FloatingActionButton fab_add_more;
 
+    @SuppressLint("RestrictedApi")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -77,7 +78,6 @@ public class DocGridView_List extends SimpleActivity {
         class_id =  Objs.a.getBundle(this, Params.class_id);
         user_type =  Objs.a.getBundle(this, Params.user_type);
         transaction_id =  Objs.a.getBundle(this, Params.transaction_id);
-        doc_id =  Objs.a.getBundle(this, Params.doc_id);
         docid1 =  Objs.a.getBundle(this, Params.docid1);
         //   type =  Objs.a.getBundle(this, Params.type);
 
@@ -89,13 +89,15 @@ public class DocGridView_List extends SimpleActivity {
 
         fab_add_more = (FloatingActionButton) findViewById(R.id.fab_add_more);
 
+        fab_add_more.setVisibility(View.GONE);
+
         Document_Details(user_type,class_id,transaction_id,doc_id);
 
 
         fab_add_more.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Objs.ac.StartActivityPutExtra(DocGridView_List.this, ManiActivity_Image2.class,
+                Objs.ac.StartActivityPutExtra(Ask_DocGridView_List.this, ASK_ManiActivity_Image2.class,
                          Params.doc_typename,doc_typename,
                         Params.docid,doc_id,
                         Params.transaction_id,transaction_id);
@@ -162,9 +164,9 @@ public class DocGridView_List extends SimpleActivity {
     }
 
     private void setAdapter(JSONArray ja) {
-        ListItemAdapter adapter = new ListItemAdapter(DocGridView_List.this,ja);
+        ListItemAdapter adapter = new ListItemAdapter(Ask_DocGridView_List.this,ja);
         // Objs.a.getRecyleview_horizontal(this).setAdapter(adapter);
-        RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(DocGridView_List.this, 2);
+        RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(Ask_DocGridView_List.this, 2);
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.addItemDecoration(new GridSpacingItemDecoration(2, dpToPx(10), true));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -233,7 +235,7 @@ public class DocGridView_List extends SimpleActivity {
                             String type =   J.getString(Params.type);
                             String doc =    J.getString(Params.document);
                             String hash =    J.getString(Params.hash);
-                            ExitAlert(DocGridView_List.this,type,doc,hash);
+                            ExitAlert(Ask_DocGridView_List.this,type,doc,hash);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -292,7 +294,7 @@ public class DocGridView_List extends SimpleActivity {
                 Log.d("Response11111111111",type);
                 Log.d("Response11111111112",doc);
                 Log.d("Response11111111113",hash);
-                Objs.ac.StartActivityPutExtra(DocGridView_List.this, Doc_ImageView.class, Params.type,type,
+                Objs.ac.StartActivityPutExtra(Ask_DocGridView_List.this, Doc_ImageView.class, Params.type,type,
                         Params.document,doc,
                         Params.hash,hash);
             }
@@ -373,11 +375,11 @@ public class DocGridView_List extends SimpleActivity {
                                 Toast.makeText(getApplication(),"Succussfully deleted the Document...",Toast.LENGTH_SHORT).show();
 
                               //  Objs.a.showToast(DocGridView_List.this, "Succussfully deleted the Document...");
-                              /*  Objs.ac.StartActivityPutExtra(DocGridView_List.this, Document_Details.class,
-                                        Params.user_type,user_type);*/
+                              /*  Objs.ac.StartActivityPutExtra(Ask_DocGridView_List.this, Document_Details.class,
+                                        Params.user_type,user_type);
 
-                                Intent intent = new Intent(DocGridView_List.this, Document_Details.class);
-                                startActivity(intent);
+                                Intent intent = new Intent(Ask_DocGridView_List.this, Document_Details.class);
+                                startActivity(intent);*/
 
                                 finish();
                                 /// Document_Details(user_type,class_id,transaction_id,doc_id);

@@ -494,519 +494,563 @@
                             android:layout_margin="10dp"
                             android:textColor="#00bfff" />
                         <LinearLayout
+                            android:id="@+id/Ly_loan_cate"
+                            android:padding="5dp"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            android:layout_marginTop="10dp"
-                            android:layout_marginLeft="10dp"
-                            android:layout_weight="1">
-                            <androidx.appcompat.widget.AppCompatTextView
-                                android:id="@+id/typeofemp_head"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="@string/type_of_emp"
-                                android:textSize="16sp"
-                                />
+                            android:orientation="horizontal">
+
                             <LinearLayout
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:orientation="horizontal"
+                                android:layout_height="match_parent"
                                 android:layout_weight="1">
                                 <androidx.appcompat.widget.AppCompatTextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textColor="#8A8A8A"
+                                    android:id="@+id/typeofemp_head"
+                                    style="@style/SmallText"
+                                    android:text="@string/type_of_emp"
+                                    android:textSize="16sp"/>
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:gravity="end"
+                                    android:textColor="@color/text_blue"
+                                    style="@style/SmallText"
+                                    android:text=":"/>
+                            </LinearLayout>
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1">
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
                                     android:id="@+id/bus_typeemployemnt"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:textSize="16sp"
+                                    style="@style/SmallText"
                                     android:textColor="@color/text_blue"
-                                    android:textStyle="bold"
-                                    tools:ignore="DuplicateIds" />
+                                    android:textStyle="bold" />
                             </LinearLayout>
                         </LinearLayout>
+
+
+
                         <LinearLayout
+                            android:id="@+id/Ly_loan_type_new_type"
+                            android:padding="5dp"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            android:layout_marginTop="10dp"
-                            android:layout_marginLeft="10dp"
-                            android:layout_weight="1">
-
-                            <androidx.appcompat.widget.AppCompatTextView
-                                android:id="@+id/typeself"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="@string/type_selfemp"
-                                android:textSize="16sp"
-                                />
+                            android:orientation="horizontal">
 
                             <LinearLayout
-
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:orientation="horizontal"
+                                android:layout_height="match_parent"
                                 android:layout_weight="1">
-
                                 <androidx.appcompat.widget.AppCompatTextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textColor="#8A8A8A"
+                                    android:id="@+id/typeself"
+                                    style="@style/SmallText"
+                                    android:text="@string/type_selfemp"
+                                    />
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:gravity="end"
+                                    android:textColor="@color/colorPrimary"
+                                    style="@style/SmallText"
+                                    android:text=":"/>
+                            </LinearLayout>
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1">
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textColor="#032C58"
+                                    android:textStyle="bold"
                                     android:id="@+id/bus_typeself"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:textSize="16sp"
-                                    tools:ignore="DuplicateIds"
-                                    android:textStyle="bold"
-                                    android:textColor="@color/text_blue"
+                                    style="@style/SmallText"
+
                                     />
-
                             </LinearLayout>
-
                         </LinearLayout>
 
                         <LinearLayout
+                            android:id="@+id/type_of_emploe"
+                            android:padding="5dp"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="vertical">
+                            android:orientation="horizontal">
 
                             <LinearLayout
-                                android:visibility="gone"
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:orientation="horizontal"
-                                android:layout_marginTop="10dp"
-                                android:layout_marginLeft="10dp"
+                                android:layout_height="match_parent"
                                 android:layout_weight="1">
-
                                 <androidx.appcompat.widget.AppCompatTextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:textColor="#8A8A8A"
+                                    android:id="@+id/fathernametxthead"
+                                    style="@style/SmallText"
                                     android:text="@string/salarycredit_method"
+                                    android:textSize="16sp"/>
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:gravity="end"
+                                    android:textColor="@color/colorPrimary"
+                                    style="@style/SmallText"
+                                    android:text=":"/>
+                            </LinearLayout>
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1">
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textColor="#032C58"
+                                    android:textStyle="bold"
+                                    android:id="@+id/bus_salrycredit"
+                                    style="@style/SmallText"
+
+                                    />
+                            </LinearLayout>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/benefitcoinlay"
+                            android:padding="5dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="horizontal"
+                                android:layout_weight="1">
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textColor="#8A8A8A"
+                                    android:id="@+id/vochead"
+                                    style="@style/SmallText"
+                                    android:text="@string/vocationtype"
+                                    android:textSize="16sp"/>
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:gravity="end"
+                                    android:textColor="@color/colorPrimary"
+                                    style="@style/SmallText"
+                                    android:text=":"/>
+                            </LinearLayout>
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1">
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textColor="#032C58"
+                                    android:textStyle="bold"
+                                    android:id="@+id/bus_vocationtype"
+                                    style="@style/SmallText"
+
+                                    />
+                            </LinearLayout>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/noofmonth"
+                            android:padding="5dp"
+                            android:visibility="visible"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="horizontal"
+                                android:layout_weight="1">
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textColor="#8A8A8A"
+                                    android:id="@+id/avghead"
+                                    style="@style/SmallText"
+                                    android:text="@string/avarage_monthproof"
                                     android:textSize="16sp"
                                     />
-
-                                <LinearLayout
+                                <androidx.appcompat.widget.AppCompatTextView
                                     android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:orientation="horizontal"
-                                    android:layout_weight="1">
-
-                                    <androidx.appcompat.widget.AppCompatTextView
-                                        android:id="@+id/bus_salrycredit"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:textSize="14sp"
-                                        tools:ignore="DuplicateIds" />
-
-                                </LinearLayout>
-
-                            </LinearLayout>
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:orientation="vertical">
-
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:orientation="horizontal"
-                                    android:layout_marginTop="10dp"
-                                    android:layout_marginLeft="10dp"
-                                    android:layout_weight="1">
-
-                                    <androidx.appcompat.widget.AppCompatTextView
-                                        android:id="@+id/vochead"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:text="@string/vocationtype"
-                                        android:textSize="16sp"
-                                        />
-
-                                    <LinearLayout
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:orientation="horizontal"
-                                        android:layout_weight="1">
-
-                                        <androidx.appcompat.widget.AppCompatTextView
-                                            android:id="@+id/bus_vocationtype"
-                                            android:layout_width="wrap_content"
-                                            android:layout_height="wrap_content"
-                                            android:textSize="16sp"
-                                            android:textColor="@color/text_blue"
-                                            android:textStyle="bold"/>
-
-                                    </LinearLayout>
-
-                                </LinearLayout>
-                            </LinearLayout>
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginBottom="5dp"
-                                android:orientation="vertical">
-
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:orientation="horizontal"
-                                    android:layout_marginTop="10dp"
-                                    android:layout_marginLeft="10dp"
-                                    android:layout_weight="1">
-
-                                    <androidx.appcompat.widget.AppCompatTextView
-                                        android:id="@+id/avghead"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:text="@string/avarage_monthproof"
-                                        android:textSize="16sp"
-                                        />
-
-                                    <LinearLayout
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:orientation="horizontal"
-                                        android:layout_weight="1">
-
-                                        <androidx.appcompat.widget.AppCompatTextView
-                                            android:id="@+id/bus_avargeincome"
-                                            android:layout_width="wrap_content"
-                                            android:layout_height="wrap_content"
-                                            android:textSize="16sp"
-                                            android:textStyle="bold"
-                                            android:textColor="@color/text_blue"/>
-
-                                    </LinearLayout>
-
-                                </LinearLayout>
-                            </LinearLayout>
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginBottom="5dp"
-                                android:orientation="vertical">
-
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:orientation="horizontal"
-                                    android:layout_marginTop="10dp"
-                                    android:layout_marginLeft="10dp"
-                                    android:layout_weight="1">
-
-                                    <androidx.appcompat.widget.AppCompatTextView
-                                        android:id="@+id/noofbushead"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:text="@string/num_business"
-                                        android:textSize="16sp"
-                                        />
-
-                                    <LinearLayout
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:orientation="horizontal"
-                                        android:layout_weight="1">
-
-                                        <androidx.appcompat.widget.AppCompatTextView
-                                            android:id="@+id/bus_numof_month"
-                                            android:layout_width="wrap_content"
-                                            android:layout_height="wrap_content"
-                                            android:textSize="16sp"
-                                            android:textColor="@color/text_blue"
-                                            android:textStyle="bold"/>
-
-                                    </LinearLayout>
-                                </LinearLayout>
-                            </LinearLayout>
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginBottom="5dp"
-                                android:orientation="vertical">
-
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:orientation="horizontal"
-                                    android:layout_marginTop="10dp"
-                                    android:layout_marginLeft="10dp"
-                                    android:layout_weight="1">
-
-                                    <androidx.appcompat.widget.AppCompatTextView
-                                        android:id="@+id/busvinhead"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:text="@string/business_vintageproof"
-                                        android:textSize="16sp"
-                                        />
-
-                                    <LinearLayout
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:orientation="horizontal"
-                                        android:layout_weight="1">
-
-                                        <androidx.appcompat.widget.AppCompatTextView
-                                            android:id="@+id/business_vintageproof"
-                                            android:layout_width="wrap_content"
-                                            android:layout_height="wrap_content"
-                                            android:textSize="16sp"
-                                            android:textStyle="bold"
-                                            android:textColor="@color/text_blue"/>
-
-                                    </LinearLayout>
-
-                                </LinearLayout>
+                                    android:layout_height="match_parent"
+                                    android:gravity="end"
+                                    android:textColor="@color/colorPrimary"
+                                    style="@style/SmallText"
+                                    android:text=":"/>
                             </LinearLayout>
                             <LinearLayout
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginBottom="5dp"
-                                android:orientation="vertical">
-
-                                <LinearLayout
-                                    android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1">
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:orientation="horizontal"
-                                    android:layout_marginTop="10dp"
-                                    android:layout_marginLeft="10dp"
-                                    android:layout_weight="1">
+                                    android:textColor="#032C58"
+                                    android:textStyle="bold"
+                                    style="@style/SmallText"
+                                    android:id="@+id/bus_avargeincome"
 
-                                    <androidx.appcompat.widget.AppCompatTextView
-                                        android:id="@+id/busincomehead"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:text="@string/business_income"
-                                        android:textSize="16sp"
-                                        />
-
-                                    <LinearLayout
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:orientation="horizontal"
-                                        android:layout_weight="1">
-
-                                        <androidx.appcompat.widget.AppCompatTextView
-                                            android:id="@+id/businessincome_proof"
-                                            android:layout_width="wrap_content"
-                                            android:layout_height="wrap_content"
-                                            android:textSize="16sp"
-                                            android:textColor="@color/text_blue"
-                                            android:textStyle="bold"/>
-
-                                    </LinearLayout>
-
-                                </LinearLayout>
+                                    />
                             </LinearLayout>
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginBottom="5dp"
-                                android:orientation="vertical">
-
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:orientation="horizontal"
-                                    android:layout_marginTop="10dp"
-                                    android:layout_marginLeft="10dp"
-                                    android:layout_weight="1">
-
-                                    <androidx.appcompat.widget.AppCompatTextView
-                                        android:id="@+id/ofcsetuphead"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:text="@string/office_shop"
-                                        android:textSize="16sp"
-                                        />
-
-                                    <LinearLayout
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:orientation="horizontal"
-                                        android:layout_weight="1">
-
-                                        <androidx.appcompat.widget.AppCompatTextView
-                                            android:id="@+id/officesetup"
-                                            android:layout_width="wrap_content"
-                                            android:layout_height="wrap_content"
-                                            android:textSize="16sp"
-                                            android:textStyle="bold"
-                                            android:textColor="@color/text_blue"/>
-
-                                    </LinearLayout>
-
-                                </LinearLayout>
-                            </LinearLayout>
-                            <LinearLayout
-                                android:id="@+id/office_residence_ly"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginBottom="5dp"
-                                android:orientation="vertical">
-
-                                <LinearLayout
-
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:orientation="horizontal"
-                                    android:layout_marginTop="10dp"
-                                    android:layout_marginLeft="10dp"
-                                    android:layout_weight="1">
-
-                                    <androidx.appcompat.widget.AppCompatTextView
-                                        android:id="@+id/ofcrestypehead"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:text="@string/office_restype"
-                                        android:textSize="16sp"
-                                        />
-
-                                    <LinearLayout
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:orientation="horizontal"
-                                        android:layout_weight="1">
-
-                                        <androidx.appcompat.widget.AppCompatTextView
-                                            android:id="@+id/ofc_restype"
-                                            android:layout_width="wrap_content"
-                                            android:layout_height="wrap_content"
-                                            android:textSize="16sp"
-                                            android:textColor="@color/text_blue"
-                                            android:textStyle="bold"/>
-
-                                    </LinearLayout>
-
-                                </LinearLayout>
-                            </LinearLayout>
-
-                            <LinearLayout
-                                android:id="@+id/rsidence_pincode"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginBottom="5dp"
-                                android:orientation="vertical">
-
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:orientation="horizontal"
-                                    android:layout_marginTop="10dp"
-                                    android:layout_marginLeft="10dp"
-                                    android:layout_weight="1">
-
-                                    <androidx.appcompat.widget.AppCompatTextView
-                                        android:id="@+id/ofcpin"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:text="@string/office_shoppin"
-                                        android:textSize="16sp"
-                                        />
-
-                                    <LinearLayout
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:orientation="horizontal"
-                                        android:layout_weight="1">
-
-                                        <androidx.appcompat.widget.AppCompatTextView
-                                            android:id="@+id/offshoppincode"
-                                            android:layout_width="wrap_content"
-                                            android:layout_height="wrap_content"
-                                            android:textSize="16sp"
-                                            android:textStyle="bold"
-                                            android:textColor="@color/text_blue"/>
-
-                                    </LinearLayout>
-
-                                </LinearLayout>
-                            </LinearLayout>
-                            <LinearLayout
-                                android:id="@+id/other_income_source_self"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginBottom="5dp"
-                                android:orientation="vertical">
-
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:orientation="horizontal"
-                                    android:layout_marginTop="10dp"
-                                    android:layout_marginLeft="10dp"
-                                    android:layout_weight="1">
-
-                                    <androidx.appcompat.widget.AppCompatTextView
-                                        android:id="@+id/otherincomehead"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:text="@string/othericome_source"
-                                        android:textSize="16sp"
-                                        />
-
-                                    <LinearLayout
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:orientation="horizontal"
-                                        android:layout_weight="1">
-
-                                        <androidx.appcompat.widget.AppCompatTextView
-                                            android:id="@+id/otherincome_self"
-                                            android:layout_width="wrap_content"
-                                            android:layout_height="wrap_content"
-                                            android:textSize="16sp"
-                                            android:textColor="@color/text_blue"
-                                            android:textStyle="bold"/>
-
-                                    </LinearLayout>
-
-                                </LinearLayout>
-                            </LinearLayout>
-                            <LinearLayout
-                                android:id="@+id/other_income_amount_self"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginBottom="5dp"
-                                android:orientation="vertical">
-
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:orientation="horizontal"
-                                    android:layout_marginTop="10dp"
-                                    android:layout_marginLeft="10dp"
-                                    android:layout_weight="1">
-
-                                    <androidx.appcompat.widget.AppCompatTextView
-                                        android:id="@+id/otheramount"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:text="@string/othericome_source1"
-                                        android:textSize="16sp"
-                                        />
-
-                                    <LinearLayout
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:orientation="horizontal"
-                                        android:layout_weight="1">
-
-                                        <androidx.appcompat.widget.AppCompatTextView
-                                            android:id="@+id/otherincome_amount1_self"
-                                            android:layout_width="wrap_content"
-                                            android:layout_height="wrap_content"
-                                            android:textSize="16sp"
-                                            android:textStyle="bold"
-                                            android:textColor="@color/text_blue"/>
-
-                                    </LinearLayout>
-
-                                </LinearLayout>
-                            </LinearLayout>
-
                         </LinearLayout>
+                        <LinearLayout
+                            android:id="@+id/vintage"
+                            android:padding="5dp"
+                            android:visibility="visible"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="horizontal"
+                                android:layout_weight="1">
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textColor="#8A8A8A"
+                                    android:id="@+id/noofbushead"
+                                    style="@style/SmallText"
+                                    android:text="@string/num_business"
+                                    android:textSize="16sp"
+                                    />
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:gravity="end"
+                                    android:textColor="@color/colorPrimary"
+                                    style="@style/SmallText"
+                                    android:text=":"/>
+                            </LinearLayout>
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1">
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textColor="#032C58"
+                                    android:textStyle="bold"
+                                    style="@style/SmallText"
+                                    android:id="@+id/bus_numof_month" />
+                            </LinearLayout>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/income"
+                            android:padding="5dp"
+                            android:visibility="visible"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="horizontal"
+                                android:layout_weight="1">
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textColor="#8A8A8A"
+                                    android:id="@+id/busvinhead"
+                                    style="@style/SmallText"
+                                    android:text="@string/business_vintageproof"
+                                    android:textSize="16sp"
+                                    />
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:gravity="end"
+                                    android:textColor="@color/colorPrimary"
+                                    style="@style/SmallText"
+                                    android:text=":"/>
+                            </LinearLayout>
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1">
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textColor="#032C58"
+                                    android:textStyle="bold"
+                                    style="@style/SmallText"
+                                    android:id="@+id/business_vintageproof" />
+                            </LinearLayout>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/jus"
+                            android:padding="5dp"
+                            android:visibility="visible"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="horizontal"
+                                android:layout_weight="1">
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textColor="#8A8A8A"
+                                    android:id="@+id/busincomehead"
+                                    style="@style/SmallText"
+                                    android:text="@string/business_income"
+                                    android:textSize="16sp"
+                                    />
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:gravity="end"
+                                    android:textColor="@color/colorPrimary"
+                                    style="@style/SmallText"
+                                    android:text=":"/>
+                            </LinearLayout>
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1">
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textColor="#032C58"
+                                    android:textStyle="bold"
+                                    style="@style/SmallText"
+                                    android:id="@+id/businessincome_proof" />
+                            </LinearLayout>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/ofc"
+                            android:padding="5dp"
+                            android:visibility="visible"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="horizontal"
+                                android:layout_weight="1">
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textColor="#8A8A8A"
+                                    android:id="@+id/ofcsetuphead"
+                                    style="@style/SmallText"
+                                    android:text="@string/office_shop"                                    />
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:gravity="end"
+                                    android:textColor="@color/colorPrimary"
+                                    style="@style/SmallText"
+                                    android:text=":"/>
+                            </LinearLayout>
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1">
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textColor="#032C58"
+                                    android:textStyle="bold"
+                                    style="@style/SmallText"
+                                    android:id="@+id/officesetup" />
+                            </LinearLayout>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/office_residence_ly"
+                            android:padding="5dp"
+                            android:visibility="visible"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="horizontal"
+                                android:layout_weight="1">
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textColor="#8A8A8A"
+                                    android:id="@+id/ofcrestypehead"
+                                    style="@style/SmallText"
+                                    android:text="@string/office_restype"            />
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:gravity="end"
+                                    android:textColor="@color/colorPrimary"
+                                    style="@style/SmallText"
+                                    android:text=":"/>
+                            </LinearLayout>
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1">
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textColor="#032C58"
+                                    android:textStyle="bold"
+                                    style="@style/SmallText"
+                                    android:id="@+id/ofc_restype" />
+                            </LinearLayout>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/rsidence_pincode"
+                            android:padding="5dp"
+                            android:visibility="visible"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="horizontal"
+                                android:layout_weight="1">
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textColor="#8A8A8A"
+                                    android:id="@+id/ofcpin"
+                                    style="@style/SmallText"
+                                    android:text="@string/office_shoppin"            />
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:gravity="end"
+                                    android:textColor="@color/colorPrimary"
+                                    style="@style/SmallText"
+                                    android:text=":"/>
+                            </LinearLayout>
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1">
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textColor="#032C58"
+                                    android:textStyle="bold"
+                                    style="@style/SmallText"
+                                    android:id="@+id/offshoppincode" />
+                            </LinearLayout>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/other_income_source_self"
+                            android:padding="5dp"
+                            android:visibility="visible"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="horizontal"
+                                android:layout_weight="1">
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textColor="#8A8A8A"
+                                    android:id="@+id/otherincomehead"
+                                    style="@style/SmallText"
+                                    android:text="@string/othericome_source"            />
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:gravity="end"
+                                    android:textColor="@color/colorPrimary"
+                                    style="@style/SmallText"
+                                    android:text=":"/>
+                            </LinearLayout>
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1">
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textColor="#032C58"
+                                    android:textStyle="bold"
+                                    style="@style/SmallText"
+                                    android:id="@+id/otherincome_self" />
+                            </LinearLayout>
+                        </LinearLayout>
+
+
+                        <LinearLayout
+                            android:id="@+id/other_income_amount_self"
+                            android:padding="5dp"
+                            android:visibility="visible"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="horizontal"
+                                android:layout_weight="1">
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textColor="#8A8A8A"
+                                    android:id="@+id/otheramount"
+                                    style="@style/SmallText"
+                                    android:text="@string/othericome_source1"            />
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:gravity="end"
+                                    android:textColor="@color/colorPrimary"
+                                    style="@style/SmallText"
+                                    android:text=":"/>
+                            </LinearLayout>
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1">
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textColor="#032C58"
+                                    android:textStyle="bold"
+                                    style="@style/SmallText"
+                                    android:id="@+id/otherincome_amount1_self" />
+                            </LinearLayout>
+                        </LinearLayout>
+
+
+
+
                     </LinearLayout>
+
+
+
                 </androidx.cardview.widget.CardView>
             </LinearLayout>
         </LinearLayout>

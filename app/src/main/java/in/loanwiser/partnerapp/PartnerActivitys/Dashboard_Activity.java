@@ -762,6 +762,7 @@ public class Dashboard_Activity extends AppCompatActivity implements OnLoadMoreL
                                         Params.sub_taskid,subtask_id, Params.Applicant_status,_Emp_staus_jsonArray,
                                         Params.loan_type_id,loan_type_id,Params.loan_type,loan_type);
                                 finish();
+
                               /*  if(payment.equals("error"))
                                 {
                                     Intent intent = new Intent(Dashboard_Activity.this, Payment_Details_Activity.class);

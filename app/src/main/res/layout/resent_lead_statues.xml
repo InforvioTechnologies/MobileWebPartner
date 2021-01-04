@@ -6,8 +6,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/cardView"
-    android:layout_width="156dp"
-    android:layout_height="wrap_content"
+    android:layout_width="160dp"
+    android:layout_height="160dp"
     app:cardBackgroundColor="@color/colorWhite"
     android:clickable="true"
     app:cardElevation="3dp"
@@ -32,6 +32,7 @@
                 android:layout_height="wrap_content">
                 <androidx.appcompat.widget.AppCompatTextView
                     android:text="Lead Name"
+                    android:inputType="textCapSentences"
                     android:id="@+id/lead_name"
                     android:gravity="left"
                     style="@style/SmallText"
@@ -137,8 +138,8 @@
 
 
                 <androidx.appcompat.widget.AppCompatTextView
-                    android:visibility="gone"
-                    android:text="View"
+
+                    android:text="Complete Now"
                     android:id="@+id/Statues_update_view"
                     android:gravity="center"
                     style="@style/SmallText"
@@ -148,10 +149,11 @@
                     android:layout_marginRight="10dp"
                     android:textColor="@color/white"
                     android:background="@drawable/capsul_button4"
-                    android:layout_width="match_parent"
-                    android:layout_height="30dp"
+                    android:layout_width="82dp"
+                    android:layout_height="21dp"
                     />
                 <androidx.appcompat.widget.AppCompatTextView
+                    android:visibility="gone"
                     android:text="View"
                     android:id="@+id/Statues_update_view1"
                     android:gravity="center"
@@ -162,9 +164,10 @@
                     android:layout_marginRight="10dp"
                     android:textColor="@color/white"
                     android:background="@drawable/capsul_button41"
-                    android:layout_width="match_parent"
-                    android:layout_height="30dp"
+                    android:layout_width="82dp"
+                    android:layout_height="21dp"
                     />
+
             </LinearLayout>
 
 

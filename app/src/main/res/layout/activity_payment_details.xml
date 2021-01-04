@@ -85,7 +85,6 @@
                                 android:layout_height="wrap_content"
                                 android:text="@string/plan"
                                 android:textSize="14dp"
-                                android:textStyle="bold"
                                 android:textColor="@color/gray_sade"
                                 android:layout_marginLeft="20dp"
                                 />
@@ -130,7 +129,6 @@
                                 android:layout_height="wrap_content"
                                 android:text="@string/amount"
                                 android:textSize="14dp"
-                                android:textStyle="bold"
                                 android:layout_marginLeft="20dp"
                                 android:textColor="@color/gray_sade"
                                 />
@@ -199,7 +197,6 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:text="@string/paymethod"
-                                android:textStyle="bold"
                                 android:textSize="13dp"
                                 android:textColor="@color/gray_sade"/>
                             <androidx.appcompat.widget.AppCompatTextView
@@ -231,6 +228,7 @@
                                 android:id="@+id/current_bal"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:textSize="13dp"
                                 android:text="@string/current_bal"
                                 android:textColor="@color/but_red"/>
 
@@ -253,7 +251,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:text="@string/loanwiser_wallet"
-                                android:textSize="18dp"
+                                android:textSize="14dp"
                                 android:textStyle="bold"
                                 android:textColor="@color/mid_blue"/>
 
@@ -277,7 +275,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:text="@string/loanwiserweller_desc"
-                                android:textSize="14sp"
+                                android:textSize="12dp"
                                 android:textColor="@color/colorBlack"/>
 
                         </LinearLayout>
@@ -423,7 +421,6 @@
                                     android:layout_height="wrap_content"
                                     android:text="@string/plan"
                                     android:textSize="14dp"
-                                    android:textStyle="bold"
                                     android:textColor="@color/gray_sade"
                                     android:layout_marginLeft="20dp"
                                     />
@@ -467,7 +464,6 @@
                                     android:layout_height="wrap_content"
                                     android:text="@string/amount"
                                     android:textSize="14dp"
-                                    android:textStyle="bold"
                                     android:layout_marginLeft="20dp"
                                     android:textColor="@color/gray_sade"
                                     />
@@ -539,7 +535,6 @@
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
                                         android:text="@string/paymethod"
-                                        android:textStyle="bold"
                                         android:textSize="13dp"
                                         android:textColor="@color/gray_sade"/>
 
@@ -557,7 +552,7 @@
                             </LinearLayout>
 
                             <LinearLayout
-                                android:layout_marginTop="10dp"
+                                android:layout_marginTop="20dp"
                                 android:orientation="vertical"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
@@ -571,12 +566,14 @@
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
                                         android:text="@string/imp_note"
+                                        android:textSize="13dp"
                                         android:textColor="#D44D53"/>
                                     <androidx.appcompat.widget.AppCompatTextView
+                                        android:layout_marginTop="10dp"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
                                         android:text="@string/cus_note"
-                                        android:textSize="14sp"
+                                        android:textSize="12dp"
                                         android:textColor="@color/gray_sade"/>
                                 </LinearLayout>
 
@@ -654,7 +651,6 @@
 
             </LinearLayout>
             <LinearLayout
-
                 android:id="@+id/send_payment_link"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -721,8 +717,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="@string/plan"
-                                    android:textSize="14dp"
-                                    android:textStyle="bold"
+                                    android:textSize="13dp"
                                     android:textColor="@color/gray_sade"
                                     android:layout_marginLeft="20dp"
                                     />
@@ -741,7 +736,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="@string/standard"
-                                    android:textSize="14dp"
+                                    android:textSize="13dp"
                                     android:textStyle="bold"
                                     android:textColor="@color/colorPrimary"
                                     />
@@ -766,8 +761,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="@string/amount"
-                                    android:textSize="14dp"
-                                    android:textStyle="bold"
+                                    android:textSize="13dp"
                                     android:layout_marginLeft="20dp"
                                     android:textColor="@color/gray_sade"
                                     />
@@ -791,7 +785,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="100"
-                                    android:textSize="14dp"
+                                    android:textSize="13dp"
                                     android:textStyle="bold"
                                     android:id="@+id/payment_amont_link"
                                     android:textColor="@color/colorPrimary"
@@ -840,15 +834,14 @@
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:text="@string/paymethod"
-                                            android:textStyle="bold"
-                                            android:textSize="14dp"
+                                            android:textSize="13dp"
                                             android:textColor="@color/gray_sade"/>
 
                                         <androidx.appcompat.widget.AppCompatTextView
                                             android:id="@+id/paymentmethod_textview"
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
-                                            android:textSize="15dp"
+                                            android:textSize="14dp"
                                             android:textStyle="bold"
                                             android:text="@string/sendpayment_linkcus"
                                             android:textColor="@color/colorPrimary"
@@ -877,8 +870,7 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:text="@string/customer_num"
-
-                                    android:textSize="14sp"
+                                    android:textSize="13dp"
                                     android:textColor="@color/mid_blue"/>
                                 <androidx.appcompat.widget.AppCompatEditText
                                     android:id="@+id/mobilenumber_edittext"

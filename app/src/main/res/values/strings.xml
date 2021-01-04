@@ -240,7 +240,6 @@
     </string-array>
 
     <string name="des">Designation in Company</string>
-    <string name="crifreportgen">CRIF Report Generation</string>
     <string name="cmp_type">Company Type</string>
     <string name="cmp_name">Company Name</string>
     <string name="emp_type">Type of Employee</string>
@@ -461,16 +460,6 @@
     <string name="applicant_business_re">Business Registration</string>
     <string name="applicant_business_proof">Business Proof</string>
 
-
-    <string name="leadpass">Your Lead has Successfully Passed the Viability Check</string>
-    <string name="crifscore">Applicant <b>CRIF Score</b> </string>
-    <string name="crifscore1">Co Applicant <b>CRIF Score</b> </string>
-    <string name="viewreport">Viablity Report</string>
-    <string name="viewreport1">Applicant CRIF Report</string>
-    <string name="viewreport2">Co Applicant CRIF Report</string>
-    <string name="notevialblepass">You can also download the Viability Report from Lead Detail Dashboard.</string>
-    <string name="proceednext">PROCEED TO NEXT STEP</string>
-
     <string-array name="busines_reg">
         <item>Select Business registration Type</item>
         <item>Proprietorship</item>
@@ -551,7 +540,7 @@
     <string name="bulding_approval">Building Approval</string>
     <string name="da_approval">DA Approval</string>
     <string name="property_category">Property Category</string>
-    <string name="type_of_emp">Type of employment</string>
+    <string name="type_of_emp">Employment type</string>
     <string name="type_of_co_emp">Type of Co Applicant employment</string>
 
     <string name="co_applicant">Do you Have Co Applicant</string>
@@ -939,46 +928,46 @@
 
 
     <string name="pandetails">PAN Details</string>
-    <string name="pancard_num">Pancard Number  :</string>
-    <string name="dateofbith">Date of Birth  :</string>
-    <string name="fathername">Father\'s Name  :</string>
-    <string name="martical_stat">Marital Status  :</string>
+    <string name="pancard_num">Pancard Number</string>
+    <string name="dateofbith">Date of Birth</string>
+    <string name="fathername">Father\'s Name</string>
+    <string name="martical_stat">Marital Status</string>
     <string name="monthly_sal">Monthly Net Salary  :</string>
-    <string name="residence_det">"Residence Details  "</string>
-    <string name="curent_respincode">Current Residence Pincode  :</string>
-    <string name="curr_resarea">Current Residence Area  :</string>
-    <string name="curr_restype">Current Residence Type  :</string>
+    <string name="residence_det">Current Residence Details</string>
+    <string name="curent_respincode">Residence Pincode</string>
+    <string name="curr_resarea">Residence Area</string>
+    <string name="curr_restype">Residence Type</string>
     <string name="employ_detail">Employment Details</string>
-    <string name="salarycredit_method">Salary Credit Method   :</string>
+    <string name="salarycredit_method">Salary Method</string>
 
-    <string name="company_type">Company Type  :</string>
-    <string name="company_name">Company Name  :</string>
-    <string name="designation">Designation  :</string>
-    <string name="company_pincode">Company Pincode  :</string>
-    <string name="company_area">Company Area  :</string>
-    <string name="current_exp">Current company Experience  :</string>
-    <string name="tot_wrkexp">Total Work Experience  :</string>
-    <string name="othericome_source">Other income Sources  :</string>
-    <string name="othericome_source1">Other income Amount  :</string>
-    <string name="vocationtype">Vocation Type  :</string>
-    <string name="avarage_monthproof">Avarage Monthly Income  :</string>
-    <string name="num_business">Number of Month in Business</string>
-    <string name="business_vintageproof">Business vintage Proof  :</string>
-    <string name="business_income">Business Income proof  :</string>
-    <string name="office_shop">Office Shop Setup  :</string>
-    <string name="office_restype">Office Residence Type  :</string>
-    <string name="office_shoppin">Office Shop Pincode  :</string>
-    <string name="type_selfemp">Types of Self employment  :</string>
-    <string name="property_iden">Property Identified  :</string>
-    <string name="property_title1">Property Title  :</string>
-    <string name="property_pin1">Property Pincode   :</string>
-    <string name="property_type12">Property Type  :</string>
-    <string name="property_price12">Property Price   :</string>
+    <string name="company_type">Company Type</string>
+    <string name="company_name">Company Name</string>
+    <string name="designation">Designation</string>
+    <string name="company_pincode">Company Pincode</string>
+    <string name="company_area">Company Area</string>
+    <string name="current_exp">company Exp</string>
+    <string name="tot_wrkexp">Total Work Exp</string>
+    <string name="othericome_source">income Sources</string>
+    <string name="othericome_source1">income Amount</string>
+    <string name="vocationtype">Vocation Type</string>
+    <string name="avarage_monthproof">Monthly Income</string>
+    <string name="num_business">Business Months</string>
+    <string name="business_vintageproof">vintage Proof</string>
+    <string name="business_income">Income proof</string>
+    <string name="office_shop">Office Shop Setup</string>
+    <string name="office_restype">Office Residence Type</string>
+    <string name="office_shoppin">Office Shop Pincode</string>
+    <string name="type_selfemp">Self Employment</string>
+    <string name="property_iden">Property Identified</string>
+    <string name="property_title1">Property Title</string>
+    <string name="property_pin1">Property Pincode</string>
+    <string name="property_type12">Property Type</string>
+    <string name="property_price12">Property Price</string>
     <string name="prop_det">Property Details</string>
-    <string name="plot_value1">Plot Value  :</string>
-    <string name="cost_estimate1">Cost Estimate   :</string>
-    <string name="monthly_netsal">Monthly Net Salary  :</string>
-    <string name="salary_proof1">Salary Proof  :</string>
+    <string name="plot_value1">Plot Value</string>
+    <string name="cost_estimate1">Cost Estimate</string>
+    <string name="monthly_netsal">Monthly Salary</string>
+    <string name="salary_proof1">Salary Proof</string>
 
 
     <string name="agefailure">Sorry.! Applicant age Should not be less than 21 for applying loan with us.</string>
@@ -988,5 +977,19 @@
     <string name="location_failure">Sorry.! Currently we have no partner banks available in applicant\'s location</string>
     <string name="onboard_soon">We are On-boarding as many new banks as possible. Stay tuned.! </string>
     <string name="loanwiser">LoanWiser</string>
+    <string name="crifreportgen">CRIF Report Generation</string>
+
+    <string name="viewreport1">View Applicant CRIF Report</string>
+    <string name="viewreport2">View Co Applicant CRIF Report</string>
+
+
+    <string name="leadpass">Your Lead has Successfully Passed the Viability Check</string>
+    <string name="crifscore">Applicant <b>CRIF Score</b> </string>
+    <string name="viewreport">View Viablity Report</string>
+    <string name="notevialblepass">You can also download the Viability Report from Lead Detail Dashboard.</string>
+    <string name="proceednext">PROCEED TO NEXT STEP</string>
+    <string name="crifscore1">Co Applicant <b>CRIF Score</b> </string>
+
+
 
 </resources>

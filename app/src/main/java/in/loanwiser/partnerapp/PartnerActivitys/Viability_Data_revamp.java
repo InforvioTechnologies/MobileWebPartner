@@ -835,7 +835,7 @@ public class Viability_Data_revamp extends SimpleActivity {
                                     //current_exptxt.setText(curr_exp);
                                     current_exptxt.setText(year1 +" year ,"+ month1+" month ");
 
-                                    companyarea_txt.setText(area);
+                                   // companyarea_txt.setText(area);
 
                                     //Residenence Pincode
 
@@ -843,7 +843,7 @@ public class Viability_Data_revamp extends SimpleActivity {
                                     //residence_perarea=Applicant_object.getString("per_area");
                                     residence_type = Applicant_object.getString("resident_statusstr");
                                     //residence area array value
-
+                                   // companyarea_txt.setText(area);
                                     JSONArray res_array = Applicant_object.getJSONArray("per_areaarr");
                                     if (res_array.length() > 0) {
                                         try {
@@ -1112,7 +1112,7 @@ public class Viability_Data_revamp extends SimpleActivity {
                                     //current_exptxt.setText(curr_exp);
                                     current_exptxt.setText(year1 +" year ,"+ month1+" month ");
 
-                                    companyarea_txt.setText(area);
+                                  //  companyarea_txt.setText(area);
 
 
                                     //Residenence Pincode
@@ -1352,7 +1352,7 @@ public class Viability_Data_revamp extends SimpleActivity {
                                     //current_exptxt.setText(curr_exp);
                                     current_exptxt.setText(year1 +" year ,"+ month1+" month ");
 
-                                    companyarea_txt.setText(area);
+                                  //  companyarea_txt.setText(area);
 
 
                                     income_proof_typestr = Applicant_object.getString("income_proof_typestr");
@@ -1614,7 +1614,7 @@ public class Viability_Data_revamp extends SimpleActivity {
                                     //current_exptxt.setText(curr_exp);
                                     current_exptxt.setText(year1 +" year ,"+ month1+" month ");
 
-                                    companyarea_txt.setText(area);
+                                   // companyarea_txt.setText(area);
 
 
                                     income_proof_typestr = Applicant_object.getString("income_proof_typestr");
@@ -1874,7 +1874,7 @@ public class Viability_Data_revamp extends SimpleActivity {
                                     //current_exptxt.setText(curr_exp);
                                     current_exptxt.setText(year1 +" year ,"+ month1+" month ");
 
-                                    companyarea_txt.setText(area);
+                                   // companyarea_txt.setText(area);
 
 
                                     income_proof_typestr = Applicant_object.getString("income_proof_typestr");
@@ -2148,7 +2148,7 @@ public class Viability_Data_revamp extends SimpleActivity {
                                     //current_exptxt.setText(curr_exp);
                                     current_exptxt.setText(year1 +" year ,"+ month1+" month ");
 
-                                    companyarea_txt.setText(area);
+                                   // companyarea_txt.setText(area);
 
 
                                     income_proof_typestr = Applicant_object.getString("income_proof_typestr");

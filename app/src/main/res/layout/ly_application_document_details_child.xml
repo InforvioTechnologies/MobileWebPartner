@@ -9,7 +9,7 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:card_view="http://schemas.android.com/tools"
-        android:id="@+id/card_view_class_name"
+        android:id="@+id/card_view_class_name_child"
         app:cardCornerRadius="4dp"
         android:clipToPadding="false"
         app:cardUseCompatPadding="true"
@@ -54,10 +54,11 @@
                         android:layout_height="match_parent"
                         android:orientation="horizontal">
                         <LinearLayout
+                            android:gravity="center"
                             android:layout_gravity="left"
                             android:orientation="vertical"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content">
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
 
                             <androidx.appcompat.widget.AppCompatTextView
                                 android:id="@+id/class_name"
@@ -69,14 +70,6 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content" />
 
-                            <androidx.appcompat.widget.AppCompatTextView
-                                android:id="@+id/mandatory_do"
-                                style="@style/SmallText"
-                                android:textSize="12dp"
-                                android:text="Mandatory Document"
-                                android:textColor="@color/but_red"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content" />
 
 
 
@@ -88,19 +81,19 @@
                         android:layout_height="match_parent"
                         android:orientation="horizontal">
                         <LinearLayout
-                            android:gravity="end"
-                            android:orientation="horizontal"
+                            android:gravity="center"
+                            android:orientation="vertical"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent">
 
-                            <ImageView
-                                android:layout_marginTop="10dp"
-                                android:layout_marginRight="20dp"
-                                android:layout_gravity="top"
-                                android:id="@+id/uploaded_yes"
-                                android:gravity="right"
-                                android:layout_width="25dp"
-                                android:layout_height="25dp" />
+                            <Button
+                                android:id="@+id/uploadbtn"
+                                android:layout_width="118dp"
+                                android:layout_height="33dp"
+                                android:text="UPLOAD"
+                                android:layout_gravity="center"
+                                android:textColor="@color/white"
+                                android:background="@drawable/but_shape_blue"/>
                         </LinearLayout>
                     </LinearLayout>
 
@@ -111,23 +104,14 @@
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
-                <Button
-                    android:visibility="gone"
-                    android:id="@+id/uploadbtn"
-                    android:layout_width="118dp"
-                    android:layout_height="33dp"
-                    android:text="UPLOAD"
-                    android:layout_marginTop="10dp"
-                    android:layout_gravity="center"
-                    android:layout_marginLeft="20dp"
-                    android:textColor="@color/white"
-                    android:background="@drawable/but_shape_blue"/>
+
 
                 <androidx.recyclerview.widget.RecyclerView
+
                     xmlns:android="http://schemas.android.com/apk/res/android"
                     xmlns:app="http://schemas.android.com/apk/res-auto"
                     android:orientation="vertical"
-                    android:id="@+id/recycler_view_chiled"
+                    android:id="@+id/recycler_view_sub_chiled"
                     app:layout_behavior="@string/appbar_scrolling_view_behavior"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"

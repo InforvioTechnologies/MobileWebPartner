@@ -995,6 +995,7 @@ public class Home extends AppCompatActivity {
                                    sub_to_loanwiser.setText("Pending with Loanwiser");
                                    sub_to_loanwiser.setTextColor(Color.parseColor("#FF9201"));
                                }else {
+
                                    sub_to_loanwiser.setText("Pending with Bank");
                                    sub_to_loanwiser.setTextColor(Color.parseColor("#FF9201"));
                                }
@@ -1157,7 +1158,6 @@ public class Home extends AppCompatActivity {
                                     step2payment_but.setBackgroundResource(R.drawable.but_shape_gray);
                                     step2payment_but.setText("Complete Now");
                                     step2payment_but.setFocusable(false);
-
                                 }
 
 

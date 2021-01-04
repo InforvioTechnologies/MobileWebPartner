@@ -1,6 +1,7 @@
 package in.loanwiser.partnerapp.Infinite_Scrollview;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,6 +23,7 @@ import java.util.List;
 import adhoc.app.applibrary.Config.AppUtils.Objs;
 import adhoc.app.applibrary.Config.AppUtils.Params;
 import in.loanwiser.partnerapp.CameraActivity.ASK_ManiActivity_Image2;
+import in.loanwiser.partnerapp.CameraActivity.Ask_DocGridView_List;
 import in.loanwiser.partnerapp.R;
 
 public class Ask_user_LeadListAdapter_Dashboard extends RecyclerView.Adapter<Ask_user_LeadListAdapter_Dashboard.CustomViewHolder> {
@@ -75,10 +77,10 @@ public class Ask_user_LeadListAdapter_Dashboard extends RecyclerView.Adapter<Ask
 
         ImageView v_Image;
         ProgressBar progressBar;
-        AppCompatButton add_notes,pipline,archive,ask_Tack_Action;
+        AppCompatButton add_notes,pipline,archive,ask_Tack_Action,ask_View_Action;
         AppCompatImageView loan_type_image;
 
-        LinearLayout Over_all,resolve_ly;
+        LinearLayout Over_all,resolve_ly,raised_on;
         View view;
         String loantype1,statues12,step_status,transaction_id,id,id1;
 
@@ -96,7 +98,8 @@ public class Ask_user_LeadListAdapter_Dashboard extends RecyclerView.Adapter<Ask
             notes1  = (AppCompatTextView) itemView.findViewById(R.id.notes);
             ask_completed  = (AppCompatTextView) itemView.findViewById(R.id.ask_completed);
             raised_on_resolved  = (AppCompatTextView) itemView.findViewById(R.id.raised_on_resolved);
-
+            ask_View_Action  = (AppCompatButton) itemView.findViewById(R.id.ask_View_Action);
+            raised_on = (LinearLayout) itemView.findViewById(R.id.raised_on_ly);
             Over_all = (LinearLayout) itemView.findViewById(R.id.Over_all);
             resolve_ly = (LinearLayout) itemView.findViewById(R.id.resolve_ly);
 
@@ -134,18 +137,30 @@ public class Ask_user_LeadListAdapter_Dashboard extends RecyclerView.Adapter<Ask
 
             if(status_disp.equals("Accepted by Loanwiser"))
             {
+                status_Ask.setTextColor(Color.parseColor("#4CAF50"));
                 resolve_ly.setVisibility(View.VISIBLE);
                 raised_on_resolved.setText("Accepted on");
                 ask_completed.setText(close_date);
+                ask_Tack_Action.setVisibility(View.GONE);
+                raised_on.setVisibility(View.GONE);
+                ask_View_Action.setVisibility(View.VISIBLE);
+
+
 
             }else if(status_disp.equals("Resolved by GSK"))
             {
+                status_Ask.setTextColor(Color.parseColor("#FF9800"));
                 resolve_ly.setVisibility(View.VISIBLE);
                 raised_on_resolved.setText("Resolved on");
                 ask_completed.setText(partner_resolved_date_org);
+                ask_Tack_Action.setVisibility(View.GONE);
+                raised_on.setVisibility(View.GONE);
+                ask_View_Action.setVisibility(View.VISIBLE);
             }else
             {
                 resolve_ly.setVisibility(View.GONE);
+                ask_Tack_Action.setVisibility(View.VISIBLE);
+                ask_View_Action.setVisibility(View.GONE);
             }
 /*
             if(loantype1.contains("null")) {
@@ -154,7 +169,7 @@ public class Ask_user_LeadListAdapter_Dashboard extends RecyclerView.Adapter<Ask
 
 
 
-            Over_all.setOnClickListener(new View.OnClickListener() {
+            ask_Tack_Action.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
 
@@ -171,6 +186,31 @@ public class Ask_user_LeadListAdapter_Dashboard extends RecyclerView.Adapter<Ask
                 }
             });
 
+
+            ask_View_Action.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                    id1 = post.getiuser_id();
+                    String doc_typename = post.getdoc_typename();
+                    ask_id = post.getask_id();
+                    doc_typeid = post.getdoc_typeid1();
+                    transaction_id = post.gettransaction_id();
+                    doc_classname = post.getdoc_classname();
+                  String relationship_type = post.getrelationship_type();
+                    String doc_classid = post.getdoc_classid();
+
+                    Objs.ac.StartActivityPutExtra(context, Ask_DocGridView_List.class,
+                            Params.class_id,doc_classid,
+                            Params.user_type,relationship_type,
+                            Params.transaction_id,transaction_id,Params.docid1,doc_typeid,
+                            Params.doc_typename,doc_typename);
+
+                   /* Intent intent = new Intent(context, Ask_user_Dashboard_Activity.class);
+                    intent.putExtra("user_id", id1);
+                    context.startActivity(intent);*/
+                }
+            });
             // Objs.a.OutfitNormalFontStyle(mCon, R.id.doc_typename_all);
             // Objs.a.OutfitNormalFontStyle(mCon, R.id.doc_steps);
         //    a.NewNormalFontStyle(context,type);

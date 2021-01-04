@@ -2,16 +2,19 @@ package in.loanwiser.partnerapp.Step_Changes_Screen;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.viewpager.widget.ViewPager;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Toast;
 import android.widget.Toolbar;
@@ -75,11 +78,28 @@ public class DocumentChecklist_Fragment extends SimpleActivity implements TabLay
 
         progressDialog = new SpotsDialog(this, R.style.Custom);
 
-        //Initializing the tablayout
-        tabLayout = (TabLayout) findViewById(R.id.tabLayout);
+
 
         Applicant_Status();
         //Adding the tabs using addTab() method
+
+        viewPager = (ViewPager) findViewById(R.id.pager);
+
+        //Initializing the tablayout
+        tabLayout = (TabLayout) findViewById(R.id.tabLayout);
+
+       // tabLayout.setupWithViewPager(viewPager);
+
+        viewPager.setOnPageChangeListener(
+                new ViewPager.SimpleOnPageChangeListener() {
+                    @Override
+                    public void onPageSelected(int position) {
+                        tabLayout.getTabAt(position).select();
+                    }
+                });
+
+
+
 
 
 
@@ -134,7 +154,8 @@ public class DocumentChecklist_Fragment extends SimpleActivity implements TabLay
 
         JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, Urls.PARTNER_STATUES_IDs, J,
                 new Response.Listener<JSONObject>() {
-                    @SuppressLint("LongLogTag")
+                    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+                    @SuppressLint({"LongLogTag", "Range"})
                     @Override
                     public void onResponse(JSONObject response) {
 
@@ -178,53 +199,109 @@ public class DocumentChecklist_Fragment extends SimpleActivity implements TabLay
                                 Pref.putTRANSACTIONID(mCon,transaction_id);
                                 Pref.putUSERID(mCon,user_id);
 
+
+
+
+                                tabLayout.setTabTextColors(ContextCompat.getColorStateList(DocumentChecklist_Fragment.this, R.color.text_blue));
+                                viewPager = (ViewPager) findViewById(R.id.pager);
+
+
+
+
                                 if (applicant_count.equals("1")&& property_identify.equals("1")){
                                     tabLayout.addTab(tabLayout.newTab().setText("Applicant"));
                                     tabLayout.addTab(tabLayout.newTab().setText("Property"));
                                     tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
+                                  //  tabLayout.setupWithViewPager(viewPager);
+
+                                    tabLayout.setTabTextColors(ContextCompat.getColorStateList(DocumentChecklist_Fragment.this, R.color.text_blue));
+
+
+
 
                                 }else if (applicant_count.equals("1")&& property_identify.equals("0")){
                                     tabLayout.addTab(tabLayout.newTab().setText("Applicant"));
                                     tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
+                                  //  tabLayout.setupWithViewPager(viewPager);
+                                    tabLayout.setTabTextColors(ContextCompat.getColorStateList(DocumentChecklist_Fragment.this, R.color.text_blue));
+
+
                                 }else if (applicant_count.equals("2")&& property_identify.equals("1"))
                                 {
                                     tabLayout.addTab(tabLayout.newTab().setText("Applicant"));
                                     tabLayout.addTab(tabLayout.newTab().setText("CO Applicant"));
                                     tabLayout.addTab(tabLayout.newTab().setText("Property"));
                                     tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
+                                   // tabLayout.setupWithViewPager(viewPager);
+                                    tabLayout.setTabTextColors(ContextCompat.getColorStateList(DocumentChecklist_Fragment.this, R.color.text_blue));
+
+
                                 } else if (applicant_count.equals("2")&& property_identify.equals("0"))
                                 {
                                     tabLayout.addTab(tabLayout.newTab().setText("Applicant"));
                                     tabLayout.addTab(tabLayout.newTab().setText("CO Applicant"));
                                     tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
+                                  //  tabLayout.setupWithViewPager(viewPager);
+                                    tabLayout.setTabTextColors(ContextCompat.getColorStateList(DocumentChecklist_Fragment.this, R.color.text_blue));
+
+
                                 }else if (applicant_count.equals("1")){
                                     tabLayout.addTab(tabLayout.newTab().setText("Applicant"));
                                     tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
+                                  //  tabLayout.setupWithViewPager(viewPager);
+                                    tabLayout.setTabTextColors(ContextCompat.getColorStateList(DocumentChecklist_Fragment.this, R.color.text_blue));
+
+
                                 }else if (applicant_count.equals("2")){
                                     tabLayout.addTab(tabLayout.newTab().setText("Applicant"));
                                     tabLayout.addTab(tabLayout.newTab().setText("CO Applicant"));
                                     tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
+                                  //  tabLayout.setupWithViewPager(viewPager);
+                                    tabLayout.setTabTextColors(ContextCompat.getColorStateList(DocumentChecklist_Fragment.this, R.color.text_blue));
+
+
                                 }
 
 
                                 if (applicant_count.equals("1")&& property_identify.equals("1")){
 
-                                    viewPager = (ViewPager) findViewById(R.id.pager);
+
+                                    viewPager.setOnTouchListener(new View.OnTouchListener() {
+                                        @Override
+                                        public boolean onTouch(View view, MotionEvent motionEvent) {
+                                            return false;
+                                        }
+                                    });
+                                  //  viewPager.setSaveFromParentEnabled(false);
+
 
                                     //Creating our pager adapter
                                     Pager1 adapter = new Pager1(getSupportFragmentManager(), tabLayout.getTabCount());
+                                    //tabLayout.setupWithViewPager(viewPager);
+
 
                                     //Adding adapter to pager
                                     viewPager.setAdapter(adapter);
+                                    tabLayout.setTabTextColors(ContextCompat.getColorStateList(DocumentChecklist_Fragment.this, R.color.text_blue));
+
+                                   // tabLayout.setupWithViewPager(viewPager);
                                 }else
                                 {
-                                    viewPager = (ViewPager) findViewById(R.id.pager);
+
+                                    //viewPager.setSaveFromParentEnabled(false);
+
+
+
 
                                     //Creating our pager adapter
                                     Pager adapter = new Pager(getSupportFragmentManager(), tabLayout.getTabCount());
+                                   // tabLayout.setupWithViewPager(viewPager);
+
 
                                     //Adding adapter to pager
                                     viewPager.setAdapter(adapter);
+                                    tabLayout.setTabTextColors(ContextCompat.getColorStateList(DocumentChecklist_Fragment.this, R.color.text_blue));
+                                   // tabLayout.setupWithViewPager(viewPager);
                                 }
                                 tabLayout.setOnTabSelectedListener(DocumentChecklist_Fragment.this);
                                 progressDialog.dismiss();

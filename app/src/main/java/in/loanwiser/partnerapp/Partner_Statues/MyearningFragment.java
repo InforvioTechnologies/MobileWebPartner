@@ -123,7 +123,7 @@ public class MyearningFragment extends  Fragment {
             public void onClick(View view) {
 
 
-                String viability_report_URL1 = "http://callcenter.propwiser.com/includes/DETAILED-PAYOUT-STRUCTURE.pdf";
+                String viability_report_URL1 = "https://callcenter.loanwiser.in/includes/DETAILED-PAYOUT-STRUCTURE.pdf";
 
                 if (permissionUtils.checkPermission(getActivity(), STORAGE_PERMISSION_REQUEST_CODE, view)) {
                     if (viability_report_URL1.length() > 0) {

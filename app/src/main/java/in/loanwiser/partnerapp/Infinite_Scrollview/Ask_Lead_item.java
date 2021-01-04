@@ -11,6 +11,9 @@ public class Ask_Lead_item {
     private String status_disp;
     private String doc_typename;
     private String notes;
+    private String relationship_type;
+    private String doc_classid;
+    private String doc_typeid1;
     private String ask_id, close_date,partner_resolved_date_org;
 
     private String doc_classname,doc_typeid,transaction_id;
@@ -137,10 +140,34 @@ public class Ask_Lead_item {
         this.partner_resolved_date_org = partner_resolved_date_org;
     }
 
+    public String getrelationship_type() {
+        return relationship_type;
+    }
+
+    public void setrelationship_type(String relationship_type) {
+        this.relationship_type = relationship_type;
+    }
+
+    public String getdoc_classid() {
+        return doc_classid;
+    }
+
+    public void setdoc_classid(String doc_classid) {
+        this.doc_classid = doc_classid;
+    }
+
+    public String getdoc_typeid1() {
+        return doc_typeid1;
+    }
+
+    public void setdoc_typeid1(String doc_typeid1) {
+        this.doc_typeid1 = doc_typeid1;
+    }
     public Ask_Lead_item(String user_id, String app_id, String name, String request_by, String applicant,
                          String created_at , String status_disp, String doc_typename, String notes,
                          String transaction_id,String doc_typeid, String ask_id ,String doc_classname,
-                            String close_date, String partner_resolved_date_org) {
+                            String close_date, String partner_resolved_date_org, String relationship_type,
+                         String doc_classid, String doc_typeid1) {
         //
         this.user_id = user_id;
         this.app_id = app_id;
@@ -157,6 +184,9 @@ public class Ask_Lead_item {
         this.doc_classname = doc_classname;
         this.close_date = close_date;
         this.partner_resolved_date_org = partner_resolved_date_org;
+        this.relationship_type = relationship_type;
+        this.doc_classid = doc_classid;
+        this.doc_typeid1 = doc_typeid1;
 
     }
 

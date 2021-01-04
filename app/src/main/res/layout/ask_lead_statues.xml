@@ -6,8 +6,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/cardView"
-    android:layout_width="200dp"
-    android:layout_height="wrap_content"
+    android:layout_width="136dp"
+    android:layout_height="117dp"
     app:cardBackgroundColor="@color/colorWhite"
     android:clickable="true"
     app:cardElevation="3dp"
@@ -34,6 +34,7 @@
                     android:text="Test Lead 1 (Applicant)"
                     android:id="@+id/lead_name"
                     android:gravity="left"
+                    android:inputType="textCapSentences"
                     style="@style/SmallText"
                     android:textSize="14dp"
                     android:textStyle="bold"
@@ -136,11 +137,12 @@
                     android:gravity="center"
                     style="@style/SmallText"
                     android:textStyle="bold"
+                    android:textAllCaps="false"
                     android:textSize="10dp"
                     android:textColor="@color/white"
                     android:background="@drawable/capsul_button4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="30dp"
+                    android:layout_width="60dp"
+                    android:layout_height="21dp"
                     />
             </LinearLayout>
 

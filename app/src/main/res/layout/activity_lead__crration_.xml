@@ -243,7 +243,7 @@
                                 android:layout_height="match_parent">
                                 <androidx.appcompat.widget.AppCompatEditText
                                     android:id="@+id/loan_amount_ext"
-                                    android:textSize="16sp"
+                                    android:textSize="12dp"
                                     android:textColor="@color/black"
                                     android:inputType="number"
                                     android:maxLength="10"
@@ -290,7 +290,7 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:id="@+id/name_txt"
-                                    android:textSize="16sp"
+                                    android:textSize="12dp"
                                     android:inputType="textEmailAddress"
                                     android:imeOptions="actionDone"
                                     android:textColor="@color/black"/>
@@ -332,7 +332,7 @@
                                 android:layout_height="match_parent">
                                 <androidx.appcompat.widget.AppCompatEditText
                                     android:id="@+id/email_edite_txt"
-                                    android:textSize="16sp"
+                                    android:textSize="12dp"
                                     android:inputType="textEmailAddress"
                                     android:textColor="@color/black"
                                     android:layout_width="match_parent"
@@ -376,7 +376,7 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:id="@+id/mobile_no_txt"
-                                    android:textSize="16sp"
+                                    android:textSize="12dp"
                                     android:inputType="number"
                                     android:maxLength="10"
                                     android:imeOptions="actionDone"
@@ -580,7 +580,7 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:id="@+id/whats_app_no"
-                                    android:textSize="16sp"
+                                    android:textSize="12dp"
                                     android:maxLength="10"
                                     android:inputType="number"
                                     android:imeOptions="actionDone"

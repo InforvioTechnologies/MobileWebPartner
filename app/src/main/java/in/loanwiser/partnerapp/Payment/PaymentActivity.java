@@ -705,7 +705,7 @@ public class PaymentActivity extends SimpleActivity implements CompoundButton.On
                 }
             };
 
-            Salary_Adapter.setDropDownViewResource(R.layout.view_spinner_item);
+            Salary_Adapter.setDropDownViewResource(R.layout.view_spinner_item_payment);
             customplan_amount.setAdapter(Salary_Adapter);
 
             customplan_amount.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {

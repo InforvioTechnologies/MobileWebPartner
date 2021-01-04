@@ -82,7 +82,11 @@ public class Resent_Lead_Statues extends RecyclerView.Adapter<Resent_Lead_Statue
         String status_disp  = items.get(position).getstatus_disp();
 
 
-        holder.lead_name.setText(name);
+      //  String input= "sentence";
+        String output = name.substring(0, 1).toUpperCase() + name.substring(1);
+       // textview.setText(output);
+
+        holder.lead_name.setText(output);
        // holder.loan_amount.setText(loan_amount);
         holder.loan_amount.setText("\u20B9"+loan_amount);
         holder.loan_type.setText(loan_type);

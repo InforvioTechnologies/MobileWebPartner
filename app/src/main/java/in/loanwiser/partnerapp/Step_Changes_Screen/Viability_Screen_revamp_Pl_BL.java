@@ -3439,7 +3439,7 @@ public class Viability_Screen_revamp_Pl_BL extends SimpleActivity implements Num
                                             rule_message.add(age_vale);
                                         }else if(rule_desc.equals("Individual Salary"))
                                         {
-                                            ind_salary="Sorry.! Income should not be less than \\u20B9 12,000 for applying loan with us.";
+                                            ind_salary="Sorry.! Income should not be less than \u20B9 12,000 for applying loan with us.";
                                             rule_message.add(ind_salary);
                                         }else
                                         {
