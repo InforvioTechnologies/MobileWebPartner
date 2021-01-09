@@ -3,11 +3,11 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-
     android:orientation="vertical">
 
 
         <LinearLayout
+            android:id="@+id/uploded_img"
             android:background="#EBF6FF"
             android:orientation="vertical"
             android:layout_width="match_parent"
@@ -57,7 +57,7 @@
                         android:layout_height="50dp">
 
                         <ImageView
-                            android:id="@+id/image_doc"
+                            android:id="@+id/image_doc_view"
                             android:layout_gravity="center"
                             android:layout_width="21.09dp"
                             android:background="@drawable/ic_eye"

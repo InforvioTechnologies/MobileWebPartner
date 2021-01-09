@@ -130,7 +130,7 @@
                 android:layout_weight="1">
 
                 <Button
-                    android:id="@+id/cancelbtn"
+                    android:id="@+id/delete"
                     android:layout_width="118dp"
                     android:layout_height="33dp"
                     android:text="Yes"
@@ -148,7 +148,7 @@
                 android:layout_weight="1">
 
                 <Button
-                    android:id="@+id/submitbtn"
+                    android:id="@+id/no"
                     android:layout_width="118dp"
                     android:layout_height="33dp"
                     android:background="@drawable/capsul_button41"

@@ -258,7 +258,7 @@ public class UploadActivity extends Activity implements SingleUploadBroadcastRec
                                // class_name1 = Pref.getapplicant_name(mCon);
                              //   Objs.ac.StartActivityPutExtra(mCon,Document_Details.class, Params.user_type,user_type, Params.class_name,class_name1);
                                 // Objs.ac.StartActivityPutExtra(mCon,Applicant_Doc_Details_Property.class, Params.user_type,user_type, Params.applicant_name,applicant_name);
-                                Intent intent = new Intent(mCon, Document_Details.class);
+                                Intent intent = new Intent(UploadActivity.this, Applicant_Doc_Details_revamp.class);
                                 startActivity(intent);
                                 finish();
                             } catch (JSONException e) {

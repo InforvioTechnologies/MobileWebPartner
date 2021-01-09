@@ -50,6 +50,7 @@ import adhoc.app.applibrary.Config.AppUtils.Urls;
 import adhoc.app.applibrary.Config.AppUtils.VolleySignleton.AppController;
 import dmax.dialog.SpotsDialog;
 import in.loanwiser.partnerapp.BankStamentUpload.Upload_Activity_Bank;
+import in.loanwiser.partnerapp.CameraActivity.DocGridView_List;
 import in.loanwiser.partnerapp.CameraActivity.DocGridView_List1;
 import in.loanwiser.partnerapp.CameraActivity.MainActivity_IMG_Property2;
 import in.loanwiser.partnerapp.CameraActivity.ManiActivity_Image2;
@@ -496,17 +497,17 @@ public class Applicant_Doc_Details_revamp extends SimpleActivity {
                                 // Objs.a.showToast(mCon, String.valueOf(object.getJSONArray(Params.products)));
 
                                 setAdapter(jsonArray);
-                                progressDialog.dismiss();
+
                             }else {
                                 Objs.a.ShowHideNoItems(mCon,true);
-                                progressDialog.dismiss();
+
                             }
 
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
 
-                       // progressDialog.dismiss();
+                        progressDialog.dismiss();
 
                     }
                 }, new Response.ErrorListener() {
@@ -536,19 +537,24 @@ public class Applicant_Doc_Details_revamp extends SimpleActivity {
         JSONObject jsonObject =new JSONObject();
         JSONObject J= null;
         try {
-            J =new JSONObject();
+          /*  J =new JSONObject();
             J.put(Params.checklist_code, Params.EMITRA);
             J.put(Params.transaction_id, transaction_id);
             J.put(Params.usertype, "0");
             J.put(Params.type, "1");
             J.put(Params.applicant_empstatus, "11");
-            Log.e("the value of J", String.valueOf(J));
-
+            Log.e("the value of J", String.valueOf(J));*/
+            J =new JSONObject();
+            J.put("transaction_id", transaction_id);
+            J.put("applicant_type", 0);
+            J.put("employement_type", "4");
+            J.put("type_request", 0);
+            J.put("status_flag", 1);
         } catch (JSONException e) {
             e.printStackTrace();
         }
         progressDialog.show();
-        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, Urls.GET_DOCUMENT_POST, J,
+        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, Urls.Get_DocumentcklistProp, J,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
@@ -557,16 +563,25 @@ public class Applicant_Doc_Details_revamp extends SimpleActivity {
                         //   Objs.a.showToast(mCon, data);
 
                         try {
-                            JSONArray ja = response.getJSONArray(Params.displayname);
+                           // JSONArray ja = response.getJSONArray(Params.displayname);
+                            JSONObject jsonObject1 = response.getJSONObject("response");
 
-                            Log.d("the value of ja", String.valueOf(ja));
-                            if (ja.length()>0){
+                            jsonobject_2 = jsonObject1.getJSONObject("document_arr");
+                            JSONArray Property_Document = jsonobject_2.getJSONArray("Property Document");
+                           // Log.d("the value of ja", String.valueOf(ja));
+                            if(Property_Document.length()>0){
+
+                                setAdapter1(Property_Document);
+
+                            }
+                          //  JSONArray jsonArray  = Property_Document.getJSONArray("doc_type_names");
+                           /* if (Property_Document.length()>0){
                                 //     Objs.a.showToast(mCon, String.valueOf(ja));
-                                setAdapter1(ja);
+
 
                             }else {
                                 Objs.a.ShowHideNoItems(mCon,true);
-                            }
+                            }*/
 
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -749,7 +764,7 @@ public class Applicant_Doc_Details_revamp extends SimpleActivity {
 
               //  holder.image_doc.setImageDrawable(getResources().getDrawable(R.drawable.file));
 
-                holder.uploadbtn.setOnClickListener(new View.OnClickListener() {
+               /* holder.uploadbtn.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         J = getItem(position);
@@ -775,7 +790,7 @@ public class Applicant_Doc_Details_revamp extends SimpleActivity {
                         }
 
                     }
-                });
+                });*/
             } catch (NullPointerException e) {
                 Objs.a.showToast(mCon, e.toString());
             } catch (Exception e) {
@@ -858,25 +873,32 @@ public class Applicant_Doc_Details_revamp extends SimpleActivity {
                 J = getItem(position);
 
                 String enable_status = J.getString("enable_status");
-                holder.class_name.setText(Objs.a.capitalize(J.getString("doc_typename")));
+               // holder.class_name.setText(Objs.a.capitalize(J.getString("doc_typename")));
 
                 if(enable_status.equals("1"))
                 {
                     holder.class_name.setText(Objs.a.capitalize(J.getString("doc_typename")));
 
-                    ListItemAdapter_sub_chiled adapter_sub_chile = new ListItemAdapter_sub_chiled(mCon,null);
-                    imagelist1.setVisibility(View.GONE);
-                    imagelist.setVisibility(View.VISIBLE);
+                    String upload_status = J.getString("upload_status");
+                    if(upload_status.equals("1"))
+                    {
+                        JSONArray file_array = J.getJSONArray("file_array");
+                        ListItemAdapter_sub_chiled adapter_sub_chile = new ListItemAdapter_sub_chiled(mCon,file_array);
+                        imagelist1.setVisibility(View.GONE);
+                        imagelist.setVisibility(View.VISIBLE);
+                        /// RecyclerView recyclerView = (RecyclerView) findViewById(adhoc.app.applibrary.R.id.recycler_view);
+                        // imagelist.setLayoutManager(llm);
+                        holder.recycler_view_sub_chiled.setHasFixedSize(true);
+                        holder.recycler_view_sub_chiled.setNestedScrollingEnabled(false);
+                        holder.recycler_view_sub_chiled.setLayoutManager(new LinearLayoutManager(mCon));
+                        holder.recycler_view_sub_chiled.setAdapter(adapter_sub_chile);
+                    }else
+                    {
+                        imagelist1.setVisibility(View.GONE);
+                        imagelist.setVisibility(View.VISIBLE);
+                    }
 
 
-
-
-                    /// RecyclerView recyclerView = (RecyclerView) findViewById(adhoc.app.applibrary.R.id.recycler_view);
-                    // imagelist.setLayoutManager(llm);
-                    holder.recycler_view_sub_chiled.setHasFixedSize(true);
-                    holder.recycler_view_sub_chiled.setNestedScrollingEnabled(false);
-                    holder.recycler_view_sub_chiled.setLayoutManager(new LinearLayoutManager(mCon));
-                    holder.recycler_view_sub_chiled.setAdapter(adapter_sub_chile);
                 }else
                 {
                     holder.card_view_class_name_child.setVisibility(View.GONE);
@@ -899,8 +921,13 @@ public class Applicant_Doc_Details_revamp extends SimpleActivity {
                             Log.e("legalid",docid);
                             Log.e("transaction_id",transaction_id);
 
-                            Objs.ac.StartActivityPutExtra(mCon, ManiActivity_Image2.class, Params.doc_typename,doc_typename,
-                                    Params.docid,docid,Params.transaction_id,transaction_id);
+                            Pref.putcamera_doc_typename(mCon,doc_typename);
+                            Pref.putcamera_docid(mCon,docid);
+                            Pref.putcamera_transaction_id(mCon,transaction_id);
+
+                            showBottomSheetDialogFragment();
+                           /* Objs.ac.StartActivityPutExtra(mCon, ManiActivity_Image2.class, Params.doc_typename,doc_typename,
+                                    Params.docid,docid,Params.transaction_id,transaction_id);*/
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -951,7 +978,10 @@ public class Applicant_Doc_Details_revamp extends SimpleActivity {
             }
         }
     }
-
+    public void showBottomSheetDialogFragment() {
+        BottomSheetFragment bottomSheetFragment = new BottomSheetFragment();
+        bottomSheetFragment.show(getSupportFragmentManager(), bottomSheetFragment.getTag());
+    }
     public class ListItemAdapter_sub_chiled extends RecyclerView.Adapter<ListItemAdapter_sub_chiled.ViewHolder> {
 
         JSONArray list = new JSONArray();
@@ -965,8 +995,8 @@ public class Applicant_Doc_Details_revamp extends SimpleActivity {
 
         @Override
         public int getItemCount() {
-            // return list.length();
-            return 2;
+             return list.length();
+          //  return 2;
         }
 
         public JSONObject getItem(int i) {
@@ -990,12 +1020,72 @@ public class Applicant_Doc_Details_revamp extends SimpleActivity {
             try {
                 String rupee = getResources().getString(R.string.Rs);
                 J = getItem(position);
+
                 holder.image_doc1.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Submit_Delete();
+                        String type = null;
+                        String hash = null;
+                        String document = null;
+                        String transaction_id = null;
+                        String docid = null;
+                        String class_id = null;
+                        String user_type = null;
+                        try {
+                            type = J.getString("type");
+                            hash = J.getString("hash");
+                            document = J.getString("document");
+                            transaction_id = J.getString("transaction_id");
+                            docid = J.getString("docid");
+                            class_id = J.getString("class_id");
+                            user_type = J.getString("user_type");
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        Submit_Delete(hash,type,document,transaction_id,docid,class_id,user_type);
                     }
                 });
+
+                holder.image_doc_view.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+
+                        String type = null;
+                        String hash = null;
+                        String document = null;
+                        try {
+                            type = J.getString("type");
+                             hash = J.getString("hash");
+                             document = J.getString("document");
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                        Objs.ac.StartActivityPutExtra(mCon, Doc_ImageView.class, Params.type,type,
+                                Params.document,document,
+                                Params.hash,hash);
+                    }
+                });
+
+
+
+
+
+                String upload_status= J.getString("upload_status");
+
+
+
+                if(upload_status.equals("0"))
+                {
+                    holder.uploded_img.setVisibility(View.GONE);
+                }else
+                {
+                    String mandatory_do= J.getString("document");
+                    holder.uploded_img.setVisibility(View.VISIBLE);
+                    holder.mandatory_do.setText(mandatory_do);
+                }
+
+
               /*  holder.class_name.setText(Objs.a.capitalize(J.getString("key")));
                 // Objs.a.NewNormalFontStyle(mCon,holder.class_name);
 
@@ -1059,9 +1149,9 @@ public class Applicant_Doc_Details_revamp extends SimpleActivity {
                     }
                 });*/
             } catch (NullPointerException e) {
-              //  Objs.a.showToast(mCon, e.toString());
+                Objs.a.showToast(mCon, e.toString());
             } catch (Exception e) {
-               // Objs.a.showToast(mCon, e.toString());
+                Objs.a.showToast(mCon, e.toString());
             }
         }
 
@@ -1080,14 +1170,18 @@ public class Applicant_Doc_Details_revamp extends SimpleActivity {
             AppCompatTextView class_name,mandatory_do;
             CardView card_view_class_name;
             View view;
-            ImageView image_doc1,uploaded_yes;
+            ImageView image_doc1,image_doc_view;
             Button uploadbtn;
             RecyclerView recycler_view_chiled;
+            LinearLayout uploded_img;
 
             public ViewHolder(View itemView) {
                 super(itemView);
 
                 image_doc1  = (ImageView) itemView.findViewById(R.id.image_doc1);
+                image_doc_view  = (ImageView) itemView.findViewById(R.id.image_doc_view);
+                mandatory_do  = (AppCompatTextView) itemView.findViewById(R.id.mandatory_do);
+                uploded_img  = (LinearLayout) itemView.findViewById(R.id.uploded_img);
               /*  class_name  = (AppCompatTextView) itemView.findViewById(R.id.class_name);
                 mandatory_do  = (AppCompatTextView) itemView.findViewById(R.id.mandatory_do);
                 image_doc  = (ImageView) itemView.findViewById(R.id.image_doc);
@@ -1100,28 +1194,29 @@ public class Applicant_Doc_Details_revamp extends SimpleActivity {
             }
         }
     }
-    private void Submit_Delete(){
+    private void Submit_Delete(String hash, String type, String document,String transaction_id, String docid,
+                                String class_id,String user_type){
         final Dialog dialog = new Dialog(this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-        dialog.setContentView(R.layout.pan_sumbit_dialog);
+        dialog.setContentView(R.layout.delete_dialog_document);
         //  dialog.getWindow().setLayout(display.getWidth() * 90 / 100, LinearLayout.LayoutParams.WRAP_CONTENT);
         dialog.setCancelable(true);
         dialog.setCanceledOnTouchOutside(false);
-        Button cancelbtn = (Button) dialog.findViewById(R.id.cancelbtn);
-        Button submitbtn=(Button)dialog.findViewById(R.id.submitbtn);
+        Button delete = (Button) dialog.findViewById(R.id.delete);
+        Button no=(Button)dialog.findViewById(R.id.no);
 
 
 
-        submitbtn.setOnClickListener(new View.OnClickListener() {
+        delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 dialog.dismiss();
-
+                Delete_Image(hash,type,document,transaction_id,docid,class_id,user_type);
 
             }
         });
-        cancelbtn.setOnClickListener(new View.OnClickListener() {
+        no.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 dialog.dismiss();
@@ -1133,6 +1228,70 @@ public class Applicant_Doc_Details_revamp extends SimpleActivity {
             dialog.show();
         }
 
+    }
+
+    private void Delete_Image(String hash, String type, String document,String transaction_id, String docid,
+                              String class_id,String user_type) {
+        JSONObject jsonObject =new JSONObject();
+        JSONObject J= null;
+        try {
+            J =new JSONObject();
+            J.put(Params.hash, hash);
+            J.put(Params.class_id, class_id);
+            J.put(Params.transaction_id, transaction_id);
+            J.put(Params.user_type, user_type);
+            J.put(Params.doc_id, docid);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        progressDialog.show();
+
+        Log.e("delete",J.toString());
+        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, Urls.DELETE_IMG_POST, J,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        progressDialog.dismiss();
+                        Log.e("delete",response.toString());
+                        try {
+                            if(response.getBoolean(Params.status)){
+
+                                Toast.makeText(getApplication(),"Succussfully deleted the Document...",Toast.LENGTH_SHORT).show();
+
+                                //  Objs.a.showToast(DocGridView_List.this, "Succussfully deleted the Document...");
+                              /*  Objs.ac.StartActivityPutExtra(DocGridView_List.this, Document_Details.class,
+                                        Params.user_type,user_type);*/
+
+                                Intent intent = new Intent(Applicant_Doc_Details_revamp.this, Applicant_Doc_Details_revamp.class);
+                                startActivity(intent);
+
+                                finish();
+                                /// Document_Details(user_type,class_id,transaction_id,doc_id);
+                            }else{
+                                ///  Objs.a.showToast(mCon, "Something went wrong ");
+                                Toast.makeText(mCon,"Something went wrong",Toast.LENGTH_SHORT).show();
+
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                //   Objs.a.showToast(mCon, error.getMessage());
+                Log.e("delete",error.toString());
+                progressDialog.dismiss();
+            }
+        }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("content-type", "application/json");
+                return headers;
+            }
+        };
+        AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
     }
     public class ListItemAdapter1 extends RecyclerView.Adapter<ListItemAdapter1.ViewHolder> {
 
@@ -1172,14 +1331,27 @@ public class Applicant_Doc_Details_revamp extends SimpleActivity {
                 String rupee = getResources().getString(R.string.Rs);
                 J = getItem(position);
 
-                holder.Over_all.setVisibility(View.GONE);
-                holder.doc_typename.setText((J.getString(Params.doc_typename)));
-                Objs.a.NewNormalFontStyle(mCon,holder.doc_typename);
-                holder.doc_typename_all.setText((J.getString(Params.doc_typename)));
-                Objs.a.NewNormalFontStyle(mCon,holder.doc_typename_all);
-                holder.count__all.setText(J.getString(Params.upload_count));
 
-                if(J.getString(Params.upload_status).equals("1")){
+
+                holder.Over_all.setVisibility(View.GONE);
+                holder.doc_typename.setText((J.getString("doc_typename")));
+                Objs.a.NewNormalFontStyle(mCon,holder.doc_typename);
+                holder.doc_typename_all.setText((J.getString("doc_typename")));
+                Objs.a.NewNormalFontStyle(mCon,holder.doc_typename_all);
+              //  holder.count__all.setText(J.getString(Params.upload_count));
+
+                if(J.getString("upload_status").equals("1")){
+
+                    JSONArray file_array = J.getJSONArray("file_array");
+                    ListItemAdapter_sub_chiled adapter_sub_chile = new ListItemAdapter_sub_chiled(mCon,file_array);
+
+
+                    /// RecyclerView recyclerView = (RecyclerView) findViewById(adhoc.app.applibrary.R.id.recycler_view);
+                    // imagelist.setLayoutManager(llm);
+                    holder.recycler_view_sub_chiled.setHasFixedSize(true);
+                    holder.recycler_view_sub_chiled.setNestedScrollingEnabled(false);
+                    holder.recycler_view_sub_chiled.setLayoutManager(new LinearLayoutManager(mCon));
+                    holder.recycler_view_sub_chiled.setAdapter(adapter_sub_chile);
                     holder.Over_all.setVisibility(View.VISIBLE);
                     holder.Ly_first.setVisibility(View.GONE);
                 }else{
@@ -1187,7 +1359,36 @@ public class Applicant_Doc_Details_revamp extends SimpleActivity {
                     holder.Ly_first.setVisibility(View.VISIBLE);
                 }
 
-                holder.Over_all.setOnClickListener(new View.OnClickListener() {
+                holder.uploadbtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        J = getItem(position);
+                        try {
+                            //  String id =   J.getString(Params.id);
+                            String doc_typename =   J.getString("doc_typename");
+                            String docid =   J.getString("legal_docid");
+                            //  String class_id =   J.getString(Params.class_id);
+                            //  String user_type =  Pref.getAEID(mCon);
+                            String transaction_id =   J.getString("transaction_id");
+
+                            Log.e("doc_typename",doc_typename);
+                            Log.e("legalid",docid);
+                            Log.e("transaction_id",transaction_id);
+
+                            Pref.putcamera_doc_typename(mCon,doc_typename);
+                            Pref.putcamera_docid(mCon,docid);
+                            Pref.putcamera_transaction_id(mCon,transaction_id);
+
+                            showBottomSheetDialogFragment();
+                           /* Objs.ac.StartActivityPutExtra(mCon, ManiActivity_Image2.class, Params.doc_typename,doc_typename,
+                                    Params.docid,docid,Params.transaction_id,transaction_id);*/
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
+
+               /* holder.Over_all.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         J = getItem(position);
@@ -1201,9 +1402,9 @@ public class Applicant_Doc_Details_revamp extends SimpleActivity {
                             String user_type =    J.getString(Params.user_type);
                             String transaction_id =   J.getString(Params.transaction_id);
 
-                           /*  Objs.a.showToast(mCon, "Gridview  " +id +"\n"+ transaction_id +"\n"+ doc_name
+                           *//*  Objs.a.showToast(mCon, "Gridview  " +id +"\n"+ transaction_id +"\n"+ doc_name
                                     +"\n"+  docid +"\n"+class_id +"\n"+
-                                    user_type );*/
+                                    user_type );*//*
 
 
                             Objs.ac.StartActivityPutExtra(mCon, DocGridView_List1.class,
@@ -1231,10 +1432,10 @@ public class Applicant_Doc_Details_revamp extends SimpleActivity {
                             String transaction_id =   J.getString(Params.transaction_id);
 
 
-                            /*Objs.a.showToast(mCon, "Upload  " +id +"\n"+ transaction_id +"\n"+ doc_typename
+                            *//*Objs.a.showToast(mCon, "Upload  " +id +"\n"+ transaction_id +"\n"+ doc_typename
                                     +"\n"+  docid +"\n"+class_id +"\n"+
                                    user_type );
-*/
+*//*
                             Objs.ac.StartActivityPutExtra(mCon, MainActivity_IMG_Property2.class,
                                     Params.id,id
                                     , Params.doc_typename,doc_typename,
@@ -1246,7 +1447,7 @@ public class Applicant_Doc_Details_revamp extends SimpleActivity {
                             e.printStackTrace();
                         }
                     }
-                });
+                });*/
 
 
 
@@ -1274,6 +1475,8 @@ public class Applicant_Doc_Details_revamp extends SimpleActivity {
             CardView card_view_doc_typename;
             LinearLayout lay_image_view,Ly_first,Over_all;
             View view;
+            RecyclerView recycler_view_sub_chiled;
+            Button uploadbtn;
 
             public ViewHolder(View itemView) {
                 super(itemView);
@@ -1284,6 +1487,8 @@ public class Applicant_Doc_Details_revamp extends SimpleActivity {
                 card_view_doc_typename  = (CardView) itemView.findViewById(R.id.card_view_doc_typename);
                 Ly_first  = (LinearLayout) itemView.findViewById(R.id.Ly_first);
                 Over_all  = (LinearLayout) itemView.findViewById(R.id.Over_all);
+                recycler_view_sub_chiled  = (RecyclerView) itemView.findViewById(R.id.recycler_view_sub_chiled);
+                uploadbtn  = (Button) itemView.findViewById(R.id.uploadbtn);
 
             }
         }

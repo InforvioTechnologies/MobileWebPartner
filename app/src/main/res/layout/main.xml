@@ -9,7 +9,8 @@
     android:orientation="vertical">
 
 
-<LinearLayout
+    <LinearLayout
+    android:id="@+id/pdf_gallery"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
@@ -117,9 +118,19 @@
                     android:layout_marginTop="5dp"
                        android:layout_marginBottom="10dp"
                     android:background="@drawable/capsul_button4"
-                    android:text="@string/upload1" />
+                    android:text="@string/submit_loanwiser" />
 
                 </LinearLayout>
     </LinearLayout>
 </LinearLayout>
+    <LinearLayout
+        android:visibility="gone"
+        android:id="@+id/camera_ly_upload"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:orientation="vertical">
+        <include layout="@layout/activity_upload" />
+    </LinearLayout>
+
 </LinearLayout>

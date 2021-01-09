@@ -61,6 +61,7 @@ public final class Pref {
     public static String document_req = "document_req";
     public static String Employee_type_Id = "Employee_type_Id";
     public static String ask_id = "ask_id";
+    public static String Galary_Path = "Galary_Path";
 
     public static SharedPreferences get(final Context context) {
         return context.getSharedPreferences(context.getResources().getString(R.string.app_name),Context.MODE_PRIVATE);
@@ -386,6 +387,21 @@ public static void putapplicant_name(final Context context, String aUserId) {
         SharedPreferences prefs = Pref.get(context);
         SharedPreferences.Editor editor = prefs.edit();
         editor.remove(CDOCTYPENAME);
+        editor.commit();
+    }
+
+    public static void putGalary_Path(final Context context, String aUserId) {
+        Pref.putPref(context, Galary_Path, aUserId);
+    }
+
+    public static String getGalary_Path(final Context context) {
+        return Pref.getPref(context, Galary_Path, null);
+    }
+
+    public static void removeGalary_Path(final Context context) {
+        SharedPreferences prefs = Pref.get(context);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.remove(Galary_Path);
         editor.commit();
     }
 

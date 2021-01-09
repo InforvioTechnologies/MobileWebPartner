@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/linearLayout"
+    android:orientation="vertical"
+   >
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="2">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/cameralay"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_weight="1"
+                    android:height="60dp"
+                    android:background="@drawable/curved_back1"
+                    android:drawableTop="@drawable/ic_camera"
+                    android:drawablePadding="2dp"
+                    android:gravity="left|center"
+                    android:padding="20dp"
+                    android:text="Camera"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:textSize="10dp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:orientation="horizontal">
+
+                <Button
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/curved_back1"
+                    android:drawableTop="@drawable/ic_pdf_1"
+                    android:drawablePadding="2dp"
+                    android:gravity="left|center"
+                    android:height="60dp"
+                    android:padding="20dp"
+                    android:text="PDF"
+                    android:id="@+id/pdflay"
+                    android:textAlignment="center"
+                    android:textSize="10dp"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    android:textColor="#FFFFFF" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:orientation="horizontal">
+
+                <Button
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/curved_back1"
+                    android:drawableTop="@drawable/ic_gallery"
+                    android:drawablePadding="2dp"
+                    android:gravity="left|center"
+                    android:height="60dp"
+                    android:padding="20dp"
+                    android:text="Gallery"
+                    android:textSize="10dp"
+                    android:id="@+id/gallerylay"
+                    android:textAlignment="center"
+                    android:textColor="#FFFFFF" />
+
+            </LinearLayout>
+
+        </TableRow>
+
+    </TableLayout>
+
+
+
+</LinearLayout>
