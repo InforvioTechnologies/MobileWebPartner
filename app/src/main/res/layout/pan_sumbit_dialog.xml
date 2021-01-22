@@ -126,7 +126,7 @@
             </LinearLayout>
         </LinearLayout>
         <LinearLayout
-
+            android:visibility="gone"
             android:id="@+id/employee_email_ly"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -170,7 +170,7 @@
         </LinearLayout>
 
         <LinearLayout
-
+            android:visibility="gone"
             android:id="@+id/employee_id_ly"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -396,10 +396,10 @@
 
                 <Button
                     android:id="@+id/cancelbtn"
-                    android:layout_width="100dp"
-                    android:layout_height="30dp"
+                    android:layout_width="118dp"
+                    android:layout_height="33dp"
                     android:text="@string/no_cancel"
-                    android:background="@drawable/capsul_button41"
+                    android:background="@drawable/capsul_button4"
                     style="@style/Widget.AppCompat.Button.Borderless"
                     android:textColor="@color/white"
                     android:textStyle="bold"/>
@@ -414,9 +414,9 @@
 
                 <Button
                     android:id="@+id/submitbtn"
-                    android:layout_width="100dp"
-                    android:layout_height="30dp"
-                    android:background="@drawable/capsul_button4"
+                    android:layout_width="118dp"
+                    android:layout_height="33dp"
+                    android:background="@drawable/capsul_button41"
                     android:text="@string/yes_submit"
                     android:textColor="@color/white"
                     android:textStyle="bold"/>

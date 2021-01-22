@@ -14,6 +14,7 @@
         android:layout_height="wrap_content"
         android:paddingLeft="?android:attr/expandableListPreferredItemPaddingLeft"
         android:textSize="20dp"
-        android:textColor="@color/black" />
+        android:text="Fulletran Urban"
+        android:textColor="@color/blue" />
 
 </LinearLayout>

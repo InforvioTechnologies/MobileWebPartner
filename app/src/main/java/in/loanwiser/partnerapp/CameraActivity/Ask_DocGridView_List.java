@@ -205,7 +205,7 @@ public class Ask_DocGridView_List extends SimpleActivity {
         public void onBindViewHolder(final ViewHolder holder, final int position) {
             try {
                 J = getItem(position);
-                holder.updated_.setText(Objs.a.capitalize(J.getString(Params.update_at)));
+                holder.updated_.setText(Objs.a.capitalize(J.getString("document_name")));
                 Objs.a.NewNormalFontStyle(mCon,holder.updated_);
                 if(J.getString(Params.type).equals("pdf")){
                     holder.Ly_Rl_pdf_reader.setVisibility(View.VISIBLE);
@@ -235,7 +235,9 @@ public class Ask_DocGridView_List extends SimpleActivity {
                             String type =   J.getString(Params.type);
                             String doc =    J.getString(Params.document);
                             String hash =    J.getString(Params.hash);
-                            ExitAlert(Ask_DocGridView_List.this,type,doc,hash);
+                            Objs.ac.StartActivityPutExtra(Ask_DocGridView_List.this, Doc_ImageView.class, Params.type,type,
+                                    Params.document,doc,
+                                    Params.hash,hash);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -285,7 +287,7 @@ public class Ask_DocGridView_List extends SimpleActivity {
                 new androidx.appcompat.app.AlertDialog.Builder(context, adhoc.app.applibrary.R.style.MyAlertDialogStyle);
         builder.setTitle(context.getResources().getString(adhoc.app.applibrary.R.string.attention));
         builder.setIcon(context.getResources().getDrawable(adhoc.app.applibrary.R.drawable.ic_info_outline_black_24dp));
-        builder.setMessage("Do you want to View or Delete a Document....?");
+        builder.setMessage("Do you want to View Document....?");
         builder.setNegativeButton("No", null);
         builder.setNeutralButton("View", new DialogInterface.OnClickListener() {
             @Override
@@ -294,17 +296,16 @@ public class Ask_DocGridView_List extends SimpleActivity {
                 Log.d("Response11111111111",type);
                 Log.d("Response11111111112",doc);
                 Log.d("Response11111111113",hash);
-                Objs.ac.StartActivityPutExtra(Ask_DocGridView_List.this, Doc_ImageView.class, Params.type,type,
-                        Params.document,doc,
-                        Params.hash,hash);
+
             }
         });
-        builder.setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+       /* builder.setPositiveButton("Delete", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 Delete_Image(hash);
             }
-        });
+        });*/
+
         androidx.appcompat.app.AlertDialog alert = builder.create();
         alert.show();
         Objs.a.DialogStyle(context, alert);

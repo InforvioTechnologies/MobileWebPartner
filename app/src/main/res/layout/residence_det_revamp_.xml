@@ -27,6 +27,8 @@
                 android:layout_height="wrap_content">
 
                 <LinearLayout
+                    android:layout_marginTop="10dp"
+                    android:padding="5dp"
                     android:gravity="center"
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
@@ -52,6 +54,8 @@
                         android:layout_height="wrap_content" />
                 </LinearLayout>
                 <LinearLayout
+                    android:layout_marginTop="10dp"
+                    android:padding="5dp"
                     android:orientation="vertical"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
@@ -65,7 +69,7 @@
                             android:layout_marginLeft="2dp"
                             android:id="@+id/txt_residence_pincode"
                             android:layout_width="wrap_content"
-                            style="@style/LorgeText2"
+
                             android:visibility="gone"
                             android:textColor="@color/colorPrimaryDark"
                             android:textColorHint="@color/colorPrimaryDark"
@@ -74,7 +78,7 @@
                             android:gravity="left"
                             android:layout_marginLeft="2dp"
                             android:layout_width="match_parent"
-                            style="@style/LorgeText2"
+                            android:textSize="14dp"
                             android:id="@+id/txt_residence_pincode1"
                             android:textColor="@color/colorPrimaryDark"
                             android:textColorHint="@color/colorPrimaryDark"
@@ -97,6 +101,8 @@
                     </LinearLayout>
                 </LinearLayout>
                 <LinearLayout
+                    android:layout_marginTop="10dp"
+                    android:padding="5dp"
                     android:orientation="vertical"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
@@ -120,7 +126,7 @@
                             android:layout_marginLeft="2dp"
                             android:id="@+id/res_area_txt1"
                             android:layout_width="match_parent"
-                            style="@style/LorgeText2"
+                            android:textSize="14dp"
                             android:textColor="@color/colorPrimaryDark"
                             android:textColorHint="@color/colorPrimaryDark"
                             android:text="@string/area"
@@ -151,6 +157,8 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:layout_marginTop="10dp"
+                    android:padding="5dp"
                     android:id="@+id/residence_type"
                     android:orientation="vertical"
                     android:layout_width="match_parent"
@@ -174,7 +182,7 @@
                             android:layout_marginLeft="2dp"
                             android:id="@+id/txt_residence_type1"
                             android:layout_width="match_parent"
-                            style="@style/LorgeText2"
+                            android:textSize="14dp"
                             android:textColor="@color/colorPrimaryDark"
                             android:textColorHint="@color/colorPrimaryDark"
                             android:text="@string/residence"
@@ -203,6 +211,7 @@
                     </LinearLayout>
                 </LinearLayout>
                 <LinearLayout
+
                     android:visibility="gone"
                     android:id="@+id/co_applicant_ly"
                     android:padding="5dp"

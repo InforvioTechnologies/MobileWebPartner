@@ -143,16 +143,15 @@ public class Lead_Crration_Activity extends SimpleActivity {
         Click();
        // Loanwiser_Api();
 
-      lead_cr_step1.setOnClickListener(new View.OnClickListener() {
+    /*  lead_cr_step1.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
 
-                    Intent intent = new Intent(Lead_Crration_Activity.this, Payment_Sucess_Screen.class);
+                    Intent intent = new Intent(Lead_Crration_Activity.this, Viability_Screen_revamp.class);
                     startActivity(intent);
                     finish();
                 }
-            });
-
+            });*/
        /* lead_cr_step1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

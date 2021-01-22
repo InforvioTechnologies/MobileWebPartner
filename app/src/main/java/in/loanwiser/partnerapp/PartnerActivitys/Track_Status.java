@@ -86,7 +86,6 @@ public class Track_Status extends SimpleActivity {
 
                         listDataHeader = new ArrayList<String>();
                         listDataChild = new HashMap<String, List<String>>();
-
                         try {
                             JSONArray ja = response.getJSONArray(Params.stages);
                             for(int i=0;i<ja.length();i++){

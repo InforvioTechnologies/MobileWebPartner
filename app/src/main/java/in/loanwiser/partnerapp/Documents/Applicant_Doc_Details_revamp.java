@@ -12,6 +12,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.text.Html;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -20,6 +21,7 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.Toast;
 
 import androidx.appcompat.widget.AppCompatButton;
@@ -75,13 +77,14 @@ public class Applicant_Doc_Details_revamp extends SimpleActivity {
     String emp_states;
 
     CardView Applicant_ly,Co_Applicant_ly,Property;
-    LinearLayout Applicant_ly1,Co_Applicant_ly1,Property1;
+    LinearLayout Applicant_ly1,Co_Applicant_ly1,Property1,Document_;
 
     String Applicant_what,co_app,Applicant_what1,Applicant_what2,applicant_count,property_identify;
     AppCompatTextView In_Progress_txt,co_applicant_txt,applicant_txt;
     RecyclerView imagelist1,imagelist;
 
     AppCompatButton submit_update_status;
+    PopupWindow popupWindow;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -100,6 +103,7 @@ public class Applicant_Doc_Details_revamp extends SimpleActivity {
         Co_Applicant_ly = (CardView) findViewById(R.id.Co_Applicant_ly);
         Property = (CardView) findViewById(R.id.Property);
 
+        Document_ = (LinearLayout) findViewById(R.id.Document_);
         Applicant_ly1 = (LinearLayout) findViewById(R.id.Applicant_ly1);
         Co_Applicant_ly1 = (LinearLayout) findViewById(R.id.Co_Applicant_ly1);
         Property1 = (LinearLayout) findViewById(R.id.Property1);
@@ -123,6 +127,10 @@ public class Applicant_Doc_Details_revamp extends SimpleActivity {
         Log.e(TAG, "onCreate:property_identified "+property_identified);
         Log.e(TAG, "onCreate:property_identified "+property_identified);
         Log.e(TAG, "onCreate:property_identified "+property_identified);
+
+
+        Document_.setVisibility(View.GONE);
+        submit_update_status.setVisibility(View.GONE);
         Account_Listings_Details();
 
 
@@ -214,6 +222,9 @@ public class Applicant_Doc_Details_revamp extends SimpleActivity {
                             transaction_id =  Response.getString("transaction_id");
                             applicant_count =  Response.getString("applicant_count");
                             property_identify =  Response.getString("property_identify");
+
+                            Document_.setVisibility(View.VISIBLE);
+                            submit_update_status.setVisibility(View.VISIBLE);
                             if(applicant_count.equals("1"))
                             {
                                 Applicant_ly1.setVisibility(View.VISIBLE);
@@ -298,7 +309,7 @@ public class Applicant_Doc_Details_revamp extends SimpleActivity {
                                         e.printStackTrace();
                                     }
 
-
+                                   // progressDialog.dismiss();
                                 }
 
                                 //finish();
@@ -312,13 +323,13 @@ public class Applicant_Doc_Details_revamp extends SimpleActivity {
                             e.printStackTrace();
                         }
 
-                        progressDialog.dismiss();
+
                     }
                 }, new Response.ErrorListener() {
 
             @Override
             public void onErrorResponse(VolleyError error) {
-                progressDialog.dismiss();
+               progressDialog.dismiss();
 
                 Log.e("the error",error.toString());
                 Toast.makeText(getApplicationContext(),error.getMessage(), Toast.LENGTH_SHORT).show();
@@ -497,7 +508,7 @@ public class Applicant_Doc_Details_revamp extends SimpleActivity {
                                 // Objs.a.showToast(mCon, String.valueOf(object.getJSONArray(Params.products)));
 
                                 setAdapter(jsonArray);
-
+                                progressDialog.dismiss();
                             }else {
                                 Objs.a.ShowHideNoItems(mCon,true);
 
@@ -507,7 +518,7 @@ public class Applicant_Doc_Details_revamp extends SimpleActivity {
                             e.printStackTrace();
                         }
 
-                        progressDialog.dismiss();
+
 
                     }
                 }, new Response.ErrorListener() {
@@ -553,6 +564,7 @@ public class Applicant_Doc_Details_revamp extends SimpleActivity {
         } catch (JSONException e) {
             e.printStackTrace();
         }
+        Log.e("the value of Property", String.valueOf(J));
         progressDialog.show();
         JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, Urls.Get_DocumentcklistProp, J,
                 new Response.Listener<JSONObject>() {
@@ -561,18 +573,18 @@ public class Applicant_Doc_Details_revamp extends SimpleActivity {
 
                         String data = String.valueOf(response);
                         //   Objs.a.showToast(mCon, data);
-
+                         Log.e("the value of Property", String.valueOf(data));
                         try {
                            // JSONArray ja = response.getJSONArray(Params.displayname);
                             JSONObject jsonObject1 = response.getJSONObject("response");
 
                             jsonobject_2 = jsonObject1.getJSONObject("document_arr");
                             JSONArray Property_Document = jsonobject_2.getJSONArray("Property Document");
-                           // Log.d("the value of ja", String.valueOf(ja));
+
                             if(Property_Document.length()>0){
 
                                 setAdapter1(Property_Document);
-
+                                progressDialog.dismiss();
                             }
                           //  JSONArray jsonArray  = Property_Document.getJSONArray("doc_type_names");
                            /* if (Property_Document.length()>0){
@@ -586,7 +598,7 @@ public class Applicant_Doc_Details_revamp extends SimpleActivity {
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
-                        progressDialog.dismiss();
+
                     }
                 }, new Response.ErrorListener() {
 
@@ -880,8 +892,18 @@ public class Applicant_Doc_Details_revamp extends SimpleActivity {
                     holder.class_name.setText(Objs.a.capitalize(J.getString("doc_typename")));
 
                     String upload_status = J.getString("upload_status");
+                    String submit_loanwiser = J.getString("submit_loanwiser");
                     if(upload_status.equals("1"))
                     {
+                        if(submit_loanwiser.equals("1"))
+                        {
+                            holder.uploadbtn.setVisibility(View.GONE);
+                        }else
+                        {
+                            holder.uploadbtn.setVisibility(View.VISIBLE);
+                        }
+
+                       // holder.uploadbtn.setVisibility(View.GONE);
                         JSONArray file_array = J.getJSONArray("file_array");
                         ListItemAdapter_sub_chiled adapter_sub_chile = new ListItemAdapter_sub_chiled(mCon,file_array);
                         imagelist1.setVisibility(View.GONE);
@@ -980,6 +1002,7 @@ public class Applicant_Doc_Details_revamp extends SimpleActivity {
     }
     public void showBottomSheetDialogFragment() {
         BottomSheetFragment bottomSheetFragment = new BottomSheetFragment();
+
         bottomSheetFragment.show(getSupportFragmentManager(), bottomSheetFragment.getTag());
     }
     public class ListItemAdapter_sub_chiled extends RecyclerView.Adapter<ListItemAdapter_sub_chiled.ViewHolder> {
@@ -1031,18 +1054,22 @@ public class Applicant_Doc_Details_revamp extends SimpleActivity {
                         String docid = null;
                         String class_id = null;
                         String user_type = null;
+                        String file_name = null;
+                        String file_name_withhash = null;
                         try {
                             type = J.getString("type");
                             hash = J.getString("hash");
                             document = J.getString("document");
                             transaction_id = J.getString("transaction_id");
                             docid = J.getString("docid");
+                            file_name_withhash= J.getString("file_name_withhash");
                             class_id = J.getString("class_id");
                             user_type = J.getString("user_type");
+                            file_name = J.getString("file_name");
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
-                        Submit_Delete(hash,type,document,transaction_id,docid,class_id,user_type);
+                        Submit_Delete(hash,type,document,transaction_id,docid,class_id,user_type,file_name,file_name_withhash);
                     }
                 });
 
@@ -1072,8 +1099,14 @@ public class Applicant_Doc_Details_revamp extends SimpleActivity {
 
 
                 String upload_status= J.getString("upload_status");
+                String submit_loanwiser= J.getString("submit_loanwiser");
 
-
+                if(submit_loanwiser.equals("1"))
+                {
+                    holder.image_doc1.setVisibility(View.GONE);
+                }else {
+                    holder.image_doc1.setVisibility(View.VISIBLE);
+                }
 
                 if(upload_status.equals("0"))
                 {
@@ -1081,8 +1114,10 @@ public class Applicant_Doc_Details_revamp extends SimpleActivity {
                 }else
                 {
                     String mandatory_do= J.getString("document");
+                    String file_name= J.getString("file_name_withhash");
+                    String hash= J.getString("hash");
                     holder.uploded_img.setVisibility(View.VISIBLE);
-                    holder.mandatory_do.setText(mandatory_do);
+                    holder.mandatory_do.setText(file_name);
                 }
 
 
@@ -1195,7 +1230,7 @@ public class Applicant_Doc_Details_revamp extends SimpleActivity {
         }
     }
     private void Submit_Delete(String hash, String type, String document,String transaction_id, String docid,
-                                String class_id,String user_type){
+                                String class_id,String user_type,String file_name, String file_name_withhash){
         final Dialog dialog = new Dialog(this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
@@ -1205,7 +1240,10 @@ public class Applicant_Doc_Details_revamp extends SimpleActivity {
         dialog.setCanceledOnTouchOutside(false);
         Button delete = (Button) dialog.findViewById(R.id.delete);
         Button no=(Button)dialog.findViewById(R.id.no);
-
+        AppCompatTextView doument_name=(AppCompatTextView)dialog.findViewById(R.id.doument_name);
+        AppCompatTextView document_url=(AppCompatTextView)dialog.findViewById(R.id.document_url);
+        doument_name.setText(file_name);
+        document_url.setText(file_name_withhash);
 
 
         delete.setOnClickListener(new View.OnClickListener() {
@@ -1340,8 +1378,17 @@ public class Applicant_Doc_Details_revamp extends SimpleActivity {
                 Objs.a.NewNormalFontStyle(mCon,holder.doc_typename_all);
               //  holder.count__all.setText(J.getString(Params.upload_count));
 
+
                 if(J.getString("upload_status").equals("1")){
 
+                    String submit_loanwiser = J.getString("submit_loanwiser");
+                    if(submit_loanwiser.equals("1"))
+                    {
+                        holder.uploadbtn.setVisibility(View.GONE);
+                    }else
+                    {
+                        holder.uploadbtn.setVisibility(View.VISIBLE);
+                    }
                     JSONArray file_array = J.getJSONArray("file_array");
                     ListItemAdapter_sub_chiled adapter_sub_chile = new ListItemAdapter_sub_chiled(mCon,file_array);
 

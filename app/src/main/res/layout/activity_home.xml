@@ -72,6 +72,7 @@
                             android:layout_height="wrap_content" />
 
 
+
                         <com.kofigyan.stateprogressbar.StateProgressBar
                             android:id="@+id/state_progressbar"
                             android:layout_marginTop="20dp"

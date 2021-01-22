@@ -86,6 +86,7 @@
                                 android:textColorHint="@color/gray_50"
                                 android:imeOptions="actionNext"
                                 android:inputType="phone"
+                                android:maxLength="5"
                                 android:textColor="@color/gray_50"
                                 app:met_floatingLabel="highlight"
                                 app:met_iconLeft="@drawable/ic_mobile"

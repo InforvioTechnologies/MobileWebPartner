@@ -197,6 +197,7 @@
                         android:inputType="textCapCharacters"
                         app:met_floatingLabel="highlight"
                         app:met_iconPadding="@dimen/text_size"
+
                         android:layout_marginBottom="13dp"
                         android:textColorHint="@color/gray_50"
                         android:textColor="@color/gray_50"

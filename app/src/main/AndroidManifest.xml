@@ -97,15 +97,17 @@
 
         <provider
             android:name="androidx.core.content.FileProvider"
-            android:authorities="${applicationId}"
+            android:authorities="${applicationId}.FileProvider"
             android:exported="false"
             android:grantUriPermissions="true"
             tools:replace="android:authorities">
             <meta-data
-                tools:replace="android:resource"
+
                 android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/file_provider_paths" />
+                android:resource="@xml/file_path" />
         </provider>
+
+       <!-- tools:replace="android:resource"-->
 
         <activity
             android:name=".BankStamentUpload.Upload_Activity_Bank"

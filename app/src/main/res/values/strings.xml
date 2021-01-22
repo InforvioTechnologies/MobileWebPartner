@@ -378,6 +378,7 @@
     <string name="app_details">Applicant Details</string>
     <string name="app_offer_updated">Loanwiser Customer Care will call you to complete the Step</string>
     <string name="doc_upload">Document Upload</string>
+    <string name="loan_status">Current Status of the Lead</string>
     <string name="doc_check_list1">Document Check List</string>
     <string name="app_track">Track Status</string>
     <string name="loan_type_new">Loan Type </string>
@@ -907,7 +908,7 @@
 
     <string name="account">Account 1</string>
     <string name="doc_type">Please Select document Type</string>
-    <string name="downloadver">Downloaded PDF Version</string>
+    <string name="downloadver">Bank Downloaded PDF(Preferred)</string>
     <string name="scanedpdf_doc">Scannned PDF Document</string>
     <string name="sixmonth_statement">Upload Your Last 6 Months Bank Statements associated with this bank account here</string>
     <string name="statemnt_info">(Please  ensure that all yourbank statements are from the same bank account)</string>

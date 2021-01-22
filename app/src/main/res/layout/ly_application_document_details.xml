@@ -130,7 +130,7 @@
                     android:id="@+id/recycler_view_chiled"
                     app:layout_behavior="@string/appbar_scrolling_view_behavior"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:cacheColorHint="@android:color/transparent"
                     android:background="@color/white"
                     android:clipToPadding="false"

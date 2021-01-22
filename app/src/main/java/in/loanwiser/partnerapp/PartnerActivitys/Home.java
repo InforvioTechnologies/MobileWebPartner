@@ -10,8 +10,10 @@ import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.appcompat.widget.AppCompatTextView;
@@ -20,10 +22,12 @@ import androidx.cardview.widget.CardView;
 import androidx.appcompat.widget.Toolbar;
 
 import android.preference.PreferenceManager;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.ExpandableListView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -33,6 +37,7 @@ import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.kofigyan.stateprogressbar.StateProgressBar;
 
@@ -40,7 +45,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 import adhoc.app.applibrary.Config.AppUtils.Objs;
@@ -82,7 +90,7 @@ public class Home extends AppCompatActivity {
     private ImageView app_doc_img,app_info_img,app_info_img11,app_interview_img,app_offer_img,app_track_img,bank_statement_img,
             document_img1,eligibility_statues_img,payment_img1,document_check_list_status;
     private TextView customerinterview,offerdetails,app_doc_message,app_info_message;
-    private LinearLayout lead_cr_statues,if_vaibility_faild;
+    private LinearLayout lead_cr_statues,if_vaibility_faild,bank_is_yes;
     CardView Applicant_info_ly,Document_check_list,Document_Upload,offer_generation,
             Viability_Check,eligibility_check,viability_Report,Credit_REport_Generation,Paymet,
             CRIF_Check,step2_card,Bank_statement_Upload;
@@ -109,18 +117,25 @@ public class Home extends AppCompatActivity {
 
         AppCompatButton view_ask;
     private static final int STORAGE_PERMISSION_REQUEST_CODE = 1;
+    private ImageView loan_statues_,loan_statues_1,step3_statue,step3_statue1;
+    private LinearLayout Loan_Submit_tracStatues,step3_sub_staus;
 
     PermissionUtils permissionUtils;
     String applicant_empstates,coapplicant_empstates,property_empstates;
-    String[] descriptionData = {"Send to Bank", "Sanctioned", "Disbursed"};
-    StateProgressBar stateProgressBar,stateProgressBar1,stateProgressBar2;
+    String[] descriptionData = {"Submit to Loanwiser","Send to Bank", "Sanctioned", "Disbursed"};
+    StateProgressBar stateProgressBar,stateProgressBar1,stateProgressBar2,state_progressbar_submit;
 
+    private List<String> listDataHeader;
+    private HashMap<String, List<String>> listDataChild;
 
     AppCompatTextView In_Progress,paymenttxt,Doc_status,Approved,bank_statenent,document_checklist_revamp,
             document_upload_revamp,payment1,step_1detail,ask_txt,
             loanamounttxt,loantypetext,loan_statustxt,step_comp,askthis,app_interview;
-    AppCompatTextView   paymentstatus;
-
+    AppCompatTextView   paymentstatus,loan_submit_statues_txt1,Document_verification_txt1,Applied_to_Bank_txt1;
+    private ExpandableListView exp_leaseoffer;
+    private ExpandableListAdapter1 expandableListAdapter;
+    String all;
+    ImageView loan_submit_statues_img,Document_verification_img,applied_to_bank_img;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -145,6 +160,7 @@ public class Home extends AppCompatActivity {
         initCode();
         Applicant_Status();
         ASK_Count_Display();
+        Loan_submit_statues();
       /*  user_id =  Objs.a.getBundle(this, Params.user_id);
         transaction_id =  Objs.a.getBundle(this, Params.transaction_id);
         applicant_id =  Objs.a.getBundle(this, Params.applicant_id);
@@ -158,6 +174,16 @@ public class Home extends AppCompatActivity {
          stateProgressBar = (StateProgressBar) findViewById(R.id.state_progressbar);
          stateProgressBar1 = (StateProgressBar) findViewById(R.id.state_progressbar1);
          stateProgressBar2 = (StateProgressBar) findViewById(R.id.state_progressbar2);
+
+        loan_submit_statues_img = (ImageView) findViewById(R.id.loan_submit_statues_img);
+        Document_verification_img = (ImageView) findViewById(R.id.Document_verification_img);
+        applied_to_bank_img = (ImageView) findViewById(R.id.applied_to_bank_img);
+        loan_submit_statues_txt1 = (AppCompatTextView) findViewById(R.id.loan_submit_statues_txt1);
+        Document_verification_txt1 = (AppCompatTextView) findViewById(R.id.Document_verification_txt1);
+        Applied_to_Bank_txt1 = (AppCompatTextView) findViewById(R.id.Applied_to_Bank_txt1);
+        bank_is_yes = (LinearLayout) findViewById(R.id.bank_is_yes);
+
+
         stateProgressBar.setStateDescriptionData(descriptionData);
         stateProgressBar1.setStateDescriptionData(descriptionData);
         stateProgressBar2.setStateDescriptionData(descriptionData);
@@ -332,7 +358,12 @@ public class Home extends AppCompatActivity {
         CRIF_Check = (CardView) findViewById(R.id.CRIF_Check);
         step2_card = (CardView) findViewById(R.id.step2_card);
 
-
+       /* DisplayMetrics metrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(metrics);
+        int width = metrics.widthPixels;*/
+        exp_leaseoffer = (ExpandableListView) findViewById(R.id.lvExp);
+      //  exp_leaseoffer.setIndicatorBounds(140, 150);
+       // exp_leaseoffer.setIndicatorBounds();
 
         lead_name = (AppCompatTextView) findViewById(R.id.lead_name);
         pending_ask_List = (AppCompatTextView) findViewById(R.id.ask_txt1_pending);
@@ -410,7 +441,47 @@ public class Home extends AppCompatActivity {
         eligibility_but=findViewById(R.id.eligibility_but);
         document_check_button=findViewById(R.id.document_check_button);
 
+        loan_statues_=findViewById(R.id.loan_statues_);
+        loan_statues_1=findViewById(R.id.loan_statues_1);
+        Loan_Submit_tracStatues=findViewById(R.id.Loan_Submit_tracStatues);
 
+        step3_statue=findViewById(R.id.step3_statue);
+        step3_statue1=findViewById(R.id.step3_statue1);
+        step3_sub_staus=findViewById(R.id.step3_sub_staus);
+
+        loan_statues_.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                loan_statues_.setVisibility(View.GONE);
+                loan_statues_1.setVisibility(View.VISIBLE);
+                Loan_Submit_tracStatues.setVisibility(View.VISIBLE);
+            }
+        });
+        loan_statues_1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                loan_statues_1.setVisibility(View.GONE);
+                loan_statues_.setVisibility(View.VISIBLE);
+                Loan_Submit_tracStatues.setVisibility(View.GONE);
+            }
+        });
+
+        step3_statue.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                step3_statue.setVisibility(View.GONE);
+                step3_statue1.setVisibility(View.VISIBLE);
+                step3_sub_staus.setVisibility(View.VISIBLE);
+            }
+        });
+        step3_statue1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                step3_statue1.setVisibility(View.GONE);
+                step3_statue.setVisibility(View.VISIBLE);
+                step3_sub_staus.setVisibility(View.GONE);
+            }
+        });
 
         //new
         In_Progress=findViewById(R.id.In_Progress);
@@ -791,6 +862,13 @@ public class Home extends AppCompatActivity {
         });*/
 
     }
+
+    public int GetPixelFromDips(float pixels) {
+        // Get the screen's density scale
+        final float scale = getResources().getDisplayMetrics().density;
+        // Convert the dps to pixels, based on density scale
+        return (int) (pixels * scale + 0.5f);
+    }
     private void fonts() {
 
         Objs.a.OutfitNormalFontStyle(mCon, R.id.step1);
@@ -1003,22 +1081,34 @@ public class Home extends AppCompatActivity {
                                Pref.putCoAPPAVAILABLE(mCon,applicant_count);
                                if(curr_status.equals("6"))
                                {
-                                   loan_statues.setVisibility(View.VISIBLE);
+                                 /*  loan_statues.setVisibility(View.VISIBLE);
                                    stateProgressBar.setVisibility(View.VISIBLE);
+                                   stateProgressBar1.setVisibility(View.GONE);
+                                   stateProgressBar2.setVisibility(View.GONE);*/
+                                   loan_statues.setVisibility(View.GONE);
+                                   stateProgressBar.setVisibility(View.GONE);
                                    stateProgressBar1.setVisibility(View.GONE);
                                    stateProgressBar2.setVisibility(View.GONE);
                                }else if(curr_status.equals("7"))
                                {
-                                   loan_statues.setVisibility(View.VISIBLE);
+                                 /*  loan_statues.setVisibility(View.VISIBLE);
                                    stateProgressBar.setVisibility(View.GONE);
                                    stateProgressBar1.setVisibility(View.VISIBLE);
+                                   stateProgressBar2.setVisibility(View.GONE);*/
+                                   loan_statues.setVisibility(View.GONE);
+                                   stateProgressBar.setVisibility(View.GONE);
+                                   stateProgressBar1.setVisibility(View.GONE);
                                    stateProgressBar2.setVisibility(View.GONE);
                                }else if(curr_status.equals("8"))
                                {
-                                   loan_statues.setVisibility(View.VISIBLE);
+                                  /* loan_statues.setVisibility(View.VISIBLE);
                                    stateProgressBar.setVisibility(View.GONE);
                                    stateProgressBar1.setVisibility(View.GONE);
-                                   stateProgressBar2.setVisibility(View.VISIBLE);
+                                   stateProgressBar2.setVisibility(View.VISIBLE);*/
+                                   loan_statues.setVisibility(View.GONE);
+                                   stateProgressBar.setVisibility(View.GONE);
+                                   stateProgressBar1.setVisibility(View.GONE);
+                                   stateProgressBar2.setVisibility(View.GONE);
                                }else
                                {
                                    loan_statues.setVisibility(View.GONE);
@@ -1243,6 +1333,13 @@ public class Home extends AppCompatActivity {
                                 {
                                     Credit_REport_Generation.setVisibility(View.VISIBLE);
                                     Bank_statement_Upload.setVisibility(View.VISIBLE);
+                                }else if(loanwiser_submit_str1.equals("step-1"))
+                                {
+                                    step2_card.setVisibility(View.GONE);
+                                    lead_cr_statues.setVisibility(View.GONE);
+                                    if_vaibility_faild.setVisibility(View.GONE);
+                                    sub_to_loanwiser.setText("submitted to Loanwiser");
+                                    sub_to_loanwiser.setTextColor(Color.parseColor("#FF9201"));
                                 }else
                                 {
                                     Credit_REport_Generation.setVisibility(View.VISIBLE);
@@ -1467,7 +1564,15 @@ public class Home extends AppCompatActivity {
                                 document_check_text.setTextColor(Color.parseColor("#00CEB4"));
                                 document_check_list_status.setImageDrawable(getResources().getDrawable(R.drawable.ic_green_tick));
                                 document_check_button.setBackgroundResource(R.drawable.but_shape_blue);
-                                document_upload_button.setBackgroundResource(R.drawable.but_shape);
+
+                                if(document_upload.equals("pending"))
+                                {
+                                    document_upload_button.setBackgroundResource(R.drawable.but_shape);
+                                }else
+                                {
+                                    document_upload_button.setBackgroundResource(R.drawable.but_shape_blue);
+                                }
+
                                 document_check_button.setText("View");
                             }
 
@@ -1718,6 +1823,156 @@ public class Home extends AppCompatActivity {
             }
         };
         AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
+    }
+
+    private void Loan_submit_statues() {
+        JSONObject J = null;
+        try {
+            J = new JSONObject();
+           // J.put("transaction_id", transaction_id);
+            J.put("transaction_id", 50745);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        progressDialog.show();
+        Log.e("Request _statues ", String.valueOf(J));
+
+        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, Urls.bank_status_fetch, J,
+                new Response.Listener<JSONObject>() {
+
+                    @RequiresApi(api = Build.VERSION_CODES.M)
+                    @Override
+                    public void onResponse(JSONObject object) {
+                        Log.e("Loawiser_Submit", object.toString());
+
+                        listDataHeader = new ArrayList<String>();
+                        listDataChild = new HashMap<String, List<String>>();
+                        try
+                        {
+                           JSONObject result=object.getJSONObject("result");
+
+                           String submit_loanwiser = result.getString("submit_loanwiser");
+                           String doc_verification = result.getString("doc_verification");
+                           String apply_completion_status = result.getString("apply_completion_status");
+
+                           if(submit_loanwiser.equals("1"))
+                            {
+                                String submit_date = result.getString("submit_date");
+                                loan_submit_statues_img.setImageDrawable(getResources().getDrawable(R.drawable.ic_green_tick));
+                                loan_submit_statues_txt1.setText("Completed "+"("+ submit_date+")");
+                                loan_submit_statues_txt1.setTextColor(Color.parseColor("#00ceb4"));
+
+                            }else
+                            {
+                                loan_submit_statues_img.setImageDrawable(getResources().getDrawable(R.drawable.ic_warning));
+                                loan_submit_statues_txt1.setText("Pending under you");
+                                loan_submit_statues_txt1.setTextColor(Color.parseColor("#FF9201"));
+                            }
+                            if(doc_verification.equals("1"))
+                            {
+                                String doc_verification_date = result.getString("doc_verification_date");
+                                Document_verification_img.setImageDrawable(getResources().getDrawable(R.drawable.ic_green_tick));
+                                Document_verification_txt1.setText("Completed "+"("+ doc_verification_date+")");
+                                Document_verification_txt1.setTextColor(Color.parseColor("#00ceb4"));
+                            }else
+                            {
+                                Document_verification_img.setImageDrawable(getResources().getDrawable(R.drawable.ic_warning));
+                                Document_verification_txt1.setText("Pending under you");
+                                Document_verification_txt1.setTextColor(Color.parseColor("#FF9201"));
+                            }
+
+                            if(apply_completion_status.equals("1"))
+                            {
+                                String apply_completion_date = result.getString("apply_completion_date");
+
+                                applied_to_bank_img.setImageDrawable(getResources().getDrawable(R.drawable.ic_green_tick));
+                                Applied_to_Bank_txt1.setText("Completed "+"("+ apply_completion_date+")");
+                                Applied_to_Bank_txt1.setTextColor(Color.parseColor("#00ceb4"));
+                                bank_is_yes.setVisibility(View.VISIBLE);
+                            }else
+                            {
+                                applied_to_bank_img.setImageDrawable(getResources().getDrawable(R.drawable.ic_warning));
+                                Applied_to_Bank_txt1.setText("Pending under you");
+                                Applied_to_Bank_txt1.setTextColor(Color.parseColor("#FF9201"));
+                                bank_is_yes.setVisibility(View.GONE);
+                            }
+
+                           JSONObject response_doc=result.getJSONObject("apply_bank");
+                           JSONObject banks =response_doc.getJSONObject("banks");
+
+                            //Log.i("TAG", "Keyarray "+key_value);
+                            Log.e("KEY_ARR_VALUE", banks.toString());
+
+
+
+                                Iterator iterator = banks.keys();
+                                int i =0;
+                                while (iterator.hasNext()) {
+
+                                    String key = (String) iterator.next();
+                                    //  JSONObject req_type=doc_ar.getJSONObject("document_req");
+
+                                    listDataHeader.add(key);
+                                    List<String> lease_offer = new ArrayList<String>();
+                                    //  Log.e("the value",list_key.toString());
+                                    JSONArray Bank_details = banks.getJSONArray(key);
+                                    Log.e("the value",Bank_details.toString());
+                                    for (int j = 0; j < Bank_details.length(); j++) {
+                                        JSONObject J = null;
+                                        try {
+
+                                            J = Bank_details.getJSONObject(j);
+                                            String stage_name = J.getString("stage_name");
+                                            String completion_date = J.getString("completion_date");
+                                            all = stage_name+"," + completion_date;
+                                            lease_offer.add(all);
+                                            Log.e("the i value", String.valueOf(i));
+                                            listDataChild.put(listDataHeader.get(i), lease_offer);
+                                        } catch (JSONException e) {
+                                            e.printStackTrace();
+                                        }
+                                    }
+
+                                    i =i+1;
+                            }
+
+                            exp_leaseoffer.setFocusable(false);
+                            expandableListAdapter = new ExpandableListAdapter1(mCon,listDataHeader, listDataChild);
+                            exp_leaseoffer.setAdapter(expandableListAdapter);
+                        }
+
+                        catch (JSONException e)
+                        {
+                            e.printStackTrace();
+                        }
+
+                        progressDialog.dismiss();
+                    }
+                }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                VolleyLog.d("TAG", "Error: " + error.getMessage());
+                Toast.makeText(mCon, "Network error, try after some time",Toast.LENGTH_SHORT).show();
+                progressDialog.dismiss();
+            }
+        }) {
+
+            /**
+             * Passing some request headers
+             * */
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("Content-Type", "application/json");
+                return headers;
+            }
+        };
+
+        // Adding request to request queue
+        AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
+
     }
 
     private void clicks() {

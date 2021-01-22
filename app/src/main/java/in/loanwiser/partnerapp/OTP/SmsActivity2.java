@@ -331,7 +331,7 @@ public class SmsActivity2 extends AppCompatActivity {
                             }
                             if(response.getString(Params.status).equals(Params.error)){
 
-                                Toast.makeText(mCon,"Already Verified",Toast.LENGTH_SHORT).show();
+                                Toast.makeText(mCon,"OTP is invalid!",Toast.LENGTH_SHORT).show();
                             }
 
                         } catch (JSONException e) {

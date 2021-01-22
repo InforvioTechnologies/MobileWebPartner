@@ -125,10 +125,14 @@ public class Ask_user_LeadListAdapter_Dashboard extends RecyclerView.Adapter<Ask
             String partner_resolved_date_org = post.getpartner_resolved_date_org();
             String close_date = post.getclose_date();
 
+            String input= "sentence";
+            String output = name_applicant1.substring(0, 1).toUpperCase() + name_applicant1.substring(1);
+            String output1 = name_callcenter1.substring(0, 1).toUpperCase() + name_callcenter1.substring(1);
+
             App_id.setText(App_id1);
          //   name_applicant.setText("\u20B9"+post.getloan_amount());
-            name_applicant.setText(name_applicant1);
-            name_callcenter.setText(name_callcenter1);
+            name_applicant.setText(output);
+            name_callcenter.setText(output1);
             status_Ask.setText(status_disp);
             ask_crated_at.setText(created_at);
             notes1.setText(notes);
@@ -158,6 +162,8 @@ public class Ask_user_LeadListAdapter_Dashboard extends RecyclerView.Adapter<Ask
                 ask_View_Action.setVisibility(View.VISIBLE);
             }else
             {
+                status_Ask.setTextColor(Color.parseColor("#F44336"));
+                raised_on.setVisibility(View.VISIBLE);
                 resolve_ly.setVisibility(View.GONE);
                 ask_Tack_Action.setVisibility(View.VISIBLE);
                 ask_View_Action.setVisibility(View.GONE);

@@ -2,6 +2,7 @@ package in.loanwiser.partnerapp.CameraActivity;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -9,6 +10,8 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -20,6 +23,7 @@ import android.provider.OpenableColumns;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
 import android.view.animation.Animation;
 import android.widget.Button;
 import android.widget.GridView;
@@ -79,6 +83,7 @@ import in.loanwiser.partnerapp.Documents.FilePath;
 import in.loanwiser.partnerapp.Documents.MyCommand;
 import in.loanwiser.partnerapp.Documents.SingleUploadBroadcastReceiver;
 import in.loanwiser.partnerapp.PartnerActivitys.SimpleActivity;
+import in.loanwiser.partnerapp.Partner_Statues.Ask_Dashboard_Activity;
 import in.loanwiser.partnerapp.Partner_Statues.DashBoard_new;
 import in.loanwiser.partnerapp.Partner_Statues.Suggestion_item_freqent;
 import in.loanwiser.partnerapp.R;
@@ -349,7 +354,8 @@ public class ASK_ManiActivity_Image2 extends SimpleActivity implements SingleUpl
         upload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                upload();
+
+                conformDialog();
             }
         });
 
@@ -517,6 +523,32 @@ public class ASK_ManiActivity_Image2 extends SimpleActivity implements SingleUpl
         intent.setType("application/pdf");
         intent.setAction(Intent.ACTION_GET_CONTENT);
         startActivityForResult(Intent.createChooser(intent, "Select Pdf"), PICK_PDF_REQUEST);
+    }
+
+    private void conformDialog() {
+        final Dialog dialog = new Dialog(this);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialog.setContentView(R.layout.submit_conform);
+        //  dialog.getWindow().setLayout(display.getWidth() * 90 / 100, LinearLayout.LayoutParams.WRAP_CONTENT);
+        dialog.setCancelable(true);
+        dialog.setCanceledOnTouchOutside(false);
+        ImageView closebutton = (ImageView) dialog.findViewById(R.id.closebtn);
+        Button submitbut = (Button) dialog.findViewById(R.id.yes_submit);
+        Button noedit = (Button) dialog.findViewById(R.id.no_edit);
+        dialog.show();
+        submitbut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                upload();
+            }
+        });
+        noedit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
     }
 
     @SuppressLint("LongLogTag")
@@ -786,7 +818,6 @@ public class ASK_ManiActivity_Image2 extends SimpleActivity implements SingleUpl
                                 } catch (JSONException e) {
 
                                     e.printStackTrace();
-
                                 }
                             }
                         }, new Response.ErrorListener() {
@@ -959,7 +990,7 @@ public class ASK_ManiActivity_Image2 extends SimpleActivity implements SingleUpl
                             if(response.getString("status").equals("success")){
                                 progressDialog.dismiss();
                                 Toast.makeText(mCon, "Successfully uploaded", Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent(mCon, DashBoard_new.class);
+                                Intent intent = new Intent(mCon, Ask_Dashboard_Activity.class);
                                 startActivity(intent);
                                 finish();
                                // JSONArray ja = response.getJSONArray("data");

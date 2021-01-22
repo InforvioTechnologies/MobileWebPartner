@@ -78,6 +78,7 @@
                     app:met_floatingLabel="highlight"
                     app:met_iconLeft="@drawable/ic_mobile"
                     app:met_iconPadding="@dimen/text_size"
+                    android:maxLength="5"
                     android:layout_marginBottom="13dp"
                     app:met_textColorHint="@color/colorPrimary1"/>
             </LinearLayout>

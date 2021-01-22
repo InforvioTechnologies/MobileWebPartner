@@ -127,7 +127,7 @@ public class LeadListAdapter_Dashboard extends RecyclerView.Adapter<LeadListAdap
             id = post.getid();
             id1 = post.getid1();
             transaction_id = post.gettransaction_id();
-            status_Ask .setText("Pending Ask"+"("+pending_asks_count+")");
+            status_Ask.setText("Pending Ask"+"("+pending_asks_count+")");
 /*
             if(loantype1.contains("null")) {
                 loantype.setVisibility(View.GONE);

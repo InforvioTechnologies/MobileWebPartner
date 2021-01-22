@@ -130,10 +130,17 @@ public class Ask_LeadListAdapter_Dashboard extends RecyclerView.Adapter<Ask_Lead
 
             String partner_resolved_date_org = post.getpartner_resolved_date_org();
             String close_date = post.getclose_date();
+            String output = null,output1 =null;
+            if(name_applicant1.isEmpty()){
 
-            String input= "sentence";
-            String output = input.substring(0, 1).toUpperCase() + name_applicant1.substring(1);
-            String output1 = input.substring(0, 1).toUpperCase() + name_callcenter1.substring(1);
+            }else
+            {
+                String input= "sentence";
+                 output = name_applicant1.substring(0, 1).toUpperCase() + name_applicant1.substring(1);
+                 output1 = name_callcenter1.substring(0, 1).toUpperCase() + name_callcenter1.substring(1);
+            }
+
+
             //textview.setText(output);
 
             App_id.setText(App_id1);
@@ -156,8 +163,7 @@ public class Ask_LeadListAdapter_Dashboard extends RecyclerView.Adapter<Ask_Lead
                 ask_View_Action.setVisibility(View.VISIBLE);
 
 
-
-            }else if(status_disp.equals("Resolved by GSK"))
+            }else if(status_disp.equals("Resolved by You"))
             {
                 status_Ask.setTextColor(Color.parseColor("#FF9800"));
                 resolve_ly.setVisibility(View.VISIBLE);
@@ -168,6 +174,8 @@ public class Ask_LeadListAdapter_Dashboard extends RecyclerView.Adapter<Ask_Lead
                 ask_View_Action.setVisibility(View.VISIBLE);
             }else
             {
+                status_Ask.setTextColor(Color.parseColor("#F44336"));
+                raised_on_ly.setVisibility(View.VISIBLE);
                 resolve_ly.setVisibility(View.GONE);
                 ask_Tack_Action.setVisibility(View.VISIBLE);
                 ask_View_Action.setVisibility(View.GONE);

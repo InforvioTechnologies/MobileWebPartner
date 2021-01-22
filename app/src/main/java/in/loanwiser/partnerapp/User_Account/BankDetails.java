@@ -9,6 +9,8 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.AppCompatEditText;
 import androidx.appcompat.widget.AppCompatTextView;
+
+import android.text.InputFilter;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
@@ -109,6 +111,7 @@ public class BankDetails extends SimpleActivity {
         spinner_bank = (Spinner)findViewById(R.id.spinner_bank);
         pan = (AppCompatEditText) findViewById(R.id.pan);
         ifsc = (AppCompatEditText) findViewById(R.id.ifsc);
+        ifsc.setFilters(new InputFilter[]{new InputFilter.AllCaps()});
         b_holder_name = (AppCompatEditText) findViewById(R.id.b_holder_name);
         b_ac_no = (AppCompatEditText) findViewById(R.id.b_ac_no);
         bank_name = (AppCompatTextView) findViewById(R.id.bank_name);
@@ -166,7 +169,7 @@ public class BankDetails extends SimpleActivity {
     }
     private void addValidationToViews() {
         //  awesomeValidation.addValidation(this, R.id.ifsc, "^^[A-Za-z]{4}[0-9]{6,7}$", R.string.invalid_phone);
-        awesomeValidation.addValidation(this, R.id.ifsc, "^^[A-Za-z]{4}[0-9]{7}$", R.string.invalid_ifcse);
+      //  awesomeValidation.addValidation(this, R.id.ifsc, "/^[A-Za-z]{4}\\d{7}$/", R.string.invalid_ifcse);
         awesomeValidation.addValidation( this, R.id.b_holder_name, RegexTemplate.NOT_EMPTY, R.string.error_name);
       //  awesomeValidation.addValidation( this, R.id.b_ac_no, RegexTemplate.NOT_EMPTY, R.string.error_account);
         //  awesomeValidation.addValidation( this, R.id.bank_name, RegexTemplate.NOT_EMPTY, R.string.error_postal);

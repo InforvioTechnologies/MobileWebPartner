@@ -62,4 +62,8 @@
 
     <color name="green">#25D366</color>
 
+    <string name="submit_confdorm">Once you \"Submit to Loanwiser\" you will not be allowed to edit again</string>
+    <string name="yes_submits">YES,SUBMIT TO LOANWISER</string>
+    <string name="nowant_edit">No, I WANT TO EDIT</string>
+
 </resources>

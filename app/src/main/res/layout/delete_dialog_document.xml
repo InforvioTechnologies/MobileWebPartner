@@ -47,11 +47,13 @@
             >
 
             <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/doument_name"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginStart="10dp"
                 android:layout_marginLeft="5dp"
+                android:maxLength="30"
                 android:text="Signature Verification Document"
                 android:textAlignment="center"
                 android:textColor="@color/colorPrimary"
@@ -79,12 +81,24 @@
             >
 
             <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/document_url"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginStart="10dp"
                 android:layout_marginLeft="5dp"
-                android:text="Imageeweewwewqw....."
+                android:maxLength="10"
+                android:text="Imageeweewwewqw"
+                android:textAlignment="center"
+                android:textColor="#1592E6"
+                android:textSize="16dp"
+                android:textStyle="bold" />
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_horizontal"
+                android:maxLength="5"
+                android:text="....."
                 android:textAlignment="center"
                 android:textColor="#1592E6"
                 android:textSize="16dp"

@@ -88,7 +88,8 @@ public class LeadListAdapter_Dashboard1 extends RecyclerView.Adapter<LeadListAda
 
         AppCompatTextView type,doc_steps,doc_status,font1,font2,loantype,assigned;
         AppCompatTextView Statues_update_dot,
-                Lead_Name,loan_amount,app_id,loan_type,payment_plane,step_com,statues_new;
+                Lead_Name,loan_amount,app_id,loan_type,payment_plane,step_com,statues_new,
+                status_Ask,Statues_update_view,Statues_update_view1;
         ImageView v_Image;
         ProgressBar progressBar;
         AppCompatButton appCompatButtonSelect,add_notes,pipline,archive;
@@ -108,8 +109,10 @@ public class LeadListAdapter_Dashboard1 extends RecyclerView.Adapter<LeadListAda
             step_com  = (AppCompatTextView) itemView.findViewById(R.id.step_com);
             Statues_update_dot  = (AppCompatTextView) itemView.findViewById(R.id.Statues_update_dot);
             statues_new  = (AppCompatTextView) itemView.findViewById(R.id.statues_new);
-
+            status_Ask  = (AppCompatTextView) itemView.findViewById(R.id.status_Ask);
             Over_all = (LinearLayout) itemView.findViewById(R.id.Over_all);
+            Statues_update_view  = (AppCompatTextView) itemView.findViewById(R.id.Statues_update_view);
+            Statues_update_view1  = (AppCompatTextView) itemView.findViewById(R.id.Statues_update_view1);
             progressDialog = new SpotsDialog(context, R.style.Custom);
         }
 
@@ -119,7 +122,7 @@ public class LeadListAdapter_Dashboard1 extends RecyclerView.Adapter<LeadListAda
             loantype.setText(post.getloan_typename()); */
 
             //doc_steps.setText(post.getstep_status());
-
+            String statues = post.getstatus_disp();
             Lead_Name.setText(post.getusername());
             loan_amount.setText("\u20B9"+post.getloan_amount());
             app_id.setText(post.getid());
@@ -127,6 +130,7 @@ public class LeadListAdapter_Dashboard1 extends RecyclerView.Adapter<LeadListAda
             step_com.setText(post.getcomp_step());
             statues_new.setText(post.getstatus_disp());
             payment_plane.setText(post.getpayment_plan());
+            String  pending_asks_count = post.getpending_asks_count();
           //
             //  Statues_update_dot.setText(post.getcolor_code());
           //  payment_plane.setText(post.getloan_typename());
@@ -140,25 +144,55 @@ public class LeadListAdapter_Dashboard1 extends RecyclerView.Adapter<LeadListAda
             id = post.getid();
             id1 = post.getid1();
             transaction_id = post.gettransaction_id();
+            status_Ask.setText("Pending Ask"+"("+pending_asks_count+")");
 
-            if(color_code.equals("1"))
+            if(statues.equals("Pending under you"))
             {
                 Statues_update_dot.setTextColor(Color.parseColor("#FF9200"));
-            } else if(color_code.equals("2"))
+                statues_new.setTextColor(Color.parseColor("#FF9200"));
+
+                Statues_update_view.setVisibility(View.VISIBLE);
+                Statues_update_view.setText("Complete Now");
+                Statues_update_view1.setVisibility(View.GONE);
+
+            } else if(statues.equals("Submitted to Loanwiser"))
             {
                 Statues_update_dot.setTextColor(Color.parseColor("#F9F338"));
-            }else if(color_code.equals("3"))
+                statues_new.setTextColor(Color.parseColor("#F9F338"));
+                Statues_update_view.setVisibility(View.GONE);
+                Statues_update_view1.setText("View");
+                Statues_update_view1.setVisibility(View.VISIBLE);
+
+            }else if(statues.equals("Sanctioned"))
             {
                 Statues_update_dot.setTextColor(Color.parseColor("#1592E6"));
-            }else if(color_code.equals("4"))
+                statues_new.setTextColor(Color.parseColor("#1592E6"));
+                Statues_update_view.setVisibility(View.GONE);
+                Statues_update_view1.setText("View");
+                Statues_update_view1.setVisibility(View.VISIBLE);
+            }else if(statues.equals("Disbursed"))
             {
                 Statues_update_dot.setTextColor(Color.parseColor("#15CE00"));
-            }else if(color_code.equals("5"))
+                statues_new.setTextColor(Color.parseColor("#15CE00"));
+                Statues_update_view.setVisibility(View.GONE);
+                Statues_update_view1.setText("View");
+                Statues_update_view1.setVisibility(View.VISIBLE);
+
+            }else if(statues.equals("Sent to bank"))
             {
                 Statues_update_dot.setTextColor(Color.parseColor("#012B5D"));
+                statues_new.setTextColor(Color.parseColor("#012B5D"));
+                Statues_update_view.setVisibility(View.GONE);
+                Statues_update_view1.setText("View");
+                Statues_update_view1.setVisibility(View.VISIBLE);
+
             }else
             {
                 Statues_update_dot.setTextColor(Color.parseColor("#E3434A"));
+                statues_new.setTextColor(Color.parseColor("#E3434A"));
+                Statues_update_view.setVisibility(View.GONE);
+                Statues_update_view1.setText("View");
+                Statues_update_view1.setVisibility(View.VISIBLE);
             }
 
             Over_all.setOnClickListener(new View.OnClickListener() {

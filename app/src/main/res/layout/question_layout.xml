@@ -98,7 +98,7 @@
                 android:textStyle="bold"
                 android:textColor="@color/colorPrimary"
                 android:gravity="left"
-                android:textSize="12dp"
+                android:textSize="14dp"
                 android:text="Applicant"/>
             <androidx.appcompat.widget.AppCompatSpinner
                 android:layout_width="match_parent"

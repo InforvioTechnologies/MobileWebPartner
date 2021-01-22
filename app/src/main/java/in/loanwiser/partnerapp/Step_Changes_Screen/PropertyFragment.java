@@ -144,8 +144,9 @@ public class PropertyFragment extends Fragment implements CompoundButton.OnCheck
         lparams.setMargins(10, 10, 10, 10);
         tv.setText(R.string.notess);
         tv.setTextSize(14);
-        Typeface fonts = Typeface.createFromAsset(getActivity().getAssets(), "segoe_ui.ttf");
-        tv.setTypeface(fonts);
+        /*Typeface fonts = Typeface.createFromAsset(getActivity().getAssets(), "segoe_ui.ttf");
+        tv.setTypeface(fonts);*/
+        tv.setTypeface(font,Typeface.BOLD);
         tv.setTextColor(Color.parseColor("#D44D53"));
         check_list_name.addView(tv);
 
@@ -401,7 +402,7 @@ public class PropertyFragment extends Fragment implements CompoundButton.OnCheck
             checkBox.setId(k);
             Typeface font = Typeface.createFromAsset(getActivity().getAssets(), "segoe_ui.ttf");
             checkBox.setTypeface(font);
-            checkBox.setPadding(10, 10, 10, 10);
+           // checkBox.setPadding(10, 10, 10, 10);
             checkBox.setTextColor(R.color.black);
             checkBox.setText(checklist_name1);
             checkBox.setTextSize(14);

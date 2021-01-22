@@ -21,6 +21,7 @@ import android.os.StrictMode;
 import android.provider.MediaStore;
 import com.google.android.material.snackbar.Snackbar;
 
+import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.AppCompatTextView;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -29,12 +30,15 @@ import androidx.appcompat.app.AlertDialog;
 import android.provider.OpenableColumns;
 import android.util.Base64;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.animation.Animation;
 import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 import android.widget.VideoView;
@@ -89,7 +93,9 @@ import in.loanwiser.partnerapp.Documents.FilePath;
 import in.loanwiser.partnerapp.Documents.MyCommand;
 import in.loanwiser.partnerapp.Documents.SingleUploadBroadcastReceiver;
 import in.loanwiser.partnerapp.PartnerActivitys.SimpleActivity;
+import in.loanwiser.partnerapp.Payment.PaymentActivity;
 import in.loanwiser.partnerapp.R;
+import in.loanwiser.partnerapp.Step_Changes_Screen.Viability_Screen_revamp_co;
 
 import static android.Manifest.permission.CAMERA;
 import static android.Manifest.permission.READ_EXTERNAL_STORAGE;
@@ -136,7 +142,7 @@ public class ManiActivity_Image2 extends SimpleActivity implements SingleUploadB
     String all_path1;
     String app_id,msg,filePath_camera;
     AppCompatTextView pdf_name;
-
+    PopupWindow popupWindow;
     int count=0;
 
     ///Camera image
@@ -833,10 +839,12 @@ public class ManiActivity_Image2 extends SimpleActivity implements SingleUploadB
 
             if (requestCode == 200 && resultCode == Activity.RESULT_OK) {
 
-
-
+                viewSwitcher.setVisibility(View.GONE);
+                viewSwitcher1.setVisibility(View.GONE);
                 all_path = data.getStringArrayExtra("all_path");
-
+                upload();
+               /*
+                all_path = data.getStringArrayExtra("all_path");
                 Log.e(TAG, "the galary list"+all_path);
                 //  Log.d("all images path", String.valueOf(all_path));
                 dataT = new ArrayList<CustomGallery>();
@@ -853,7 +861,7 @@ public class ManiActivity_Image2 extends SimpleActivity implements SingleUploadB
                 }
 
                 viewSwitcher.setDisplayedChild(0);
-                adapter.addAll(dataT);
+                adapter.addAll(dataT);*/
             }
 
         }
@@ -998,6 +1006,15 @@ public class ManiActivity_Image2 extends SimpleActivity implements SingleUploadB
             else
             {
 
+                LayoutInflater layoutInflater = (LayoutInflater) ManiActivity_Image2.this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                View customView = layoutInflater.inflate(R.layout.popup_loading,null);
+
+
+                //instantiate popup window
+                popupWindow = new PopupWindow(customView, LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
+                //display the popup window
+                popupWindow.showAtLocation(upload, Gravity.CENTER, 0, 0);
+
                 final MyCommand myCommand = new MyCommand(getApplicationContext());
                 for(String imagePath : all_path){
 
@@ -1008,7 +1025,7 @@ public class ManiActivity_Image2 extends SimpleActivity implements SingleUploadB
                     try {
                         bitmap = PhotoLoader.init().from(imagePath).requestSize(512, 512).getBitmap();
                         final String encodedString = ImageBase64.encode(bitmap);
-                        progressDialog.show();
+                       // progressDialog.show();
                         StringRequest stringRequest = new StringRequest(Request.Method.POST, Urls.CAMERA_IMAGE_Upload, new Response.Listener<String>() {
                             @Override
                             public void onResponse(String response) {
@@ -1024,10 +1041,12 @@ public class ManiActivity_Image2 extends SimpleActivity implements SingleUploadB
                                     Objs.a.showToast(mCon, "Successfully uploaded" +"\n"+ "Please wait for all Document upload");
                                     if(count == 0)
                                     {
-                                        progressDialog.dismiss();
+                                      //  popupWindow.dismiss();
+                                     //   progressDialog.dismiss();
                                        // Objs.ac.StartActivityPutExtra(mCon,Document_Details.class, Params.user_type,user_type);
                                         Intent intent = new Intent(ManiActivity_Image2.this, Applicant_Doc_Details_revamp.class);
                                         startActivity(intent);
+                                        finish();
                                     }
                                 } catch (JSONException e) {
 
@@ -1038,8 +1057,14 @@ public class ManiActivity_Image2 extends SimpleActivity implements SingleUploadB
                         }, new Response.ErrorListener() {
                             @Override
                             public void onErrorResponse(VolleyError error) {
-                                progressDialog.dismiss();
+                               // progressDialog.dismiss();
                                 Toast.makeText(getApplicationContext(), "Error while uploading image", Toast.LENGTH_SHORT).show();
+                               // popupWindow.dismiss();
+                                //   progressDialog.dismiss();
+                                // Objs.ac.StartActivityPutExtra(mCon,Document_Details.class, Params.user_type,user_type);
+                                Intent intent = new Intent(ManiActivity_Image2.this, Applicant_Doc_Details_revamp.class);
+                                startActivity(intent);
+                                finish();
                             }
                         }){
                             @Override
@@ -1071,6 +1096,13 @@ public class ManiActivity_Image2 extends SimpleActivity implements SingleUploadB
 
                     } catch (FileNotFoundException e) {
                         Toast.makeText(getApplicationContext(), "Error while loading image", Toast.LENGTH_SHORT).show();
+                      //  popupWindow.dismiss();
+
+                        //   progressDialog.dismiss();
+                        // Objs.ac.StartActivityPutExtra(mCon,Document_Details.class, Params.user_type,user_type);
+                        Intent intent = new Intent(ManiActivity_Image2.this, Applicant_Doc_Details_revamp.class);
+                        startActivity(intent);
+                        finish();
                     }
                 }
                 myCommand.execute();

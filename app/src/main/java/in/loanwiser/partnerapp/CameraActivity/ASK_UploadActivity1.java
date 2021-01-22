@@ -45,6 +45,7 @@ import adhoc.app.applibrary.Config.AppUtils.VolleySignleton.AppController;
 import dmax.dialog.SpotsDialog;
 import in.loanwiser.partnerapp.Documents.Applicant_Doc_Details_revamp;
 import in.loanwiser.partnerapp.Documents.SingleUploadBroadcastReceiver;
+import in.loanwiser.partnerapp.Partner_Statues.Ask_Dashboard_Activity;
 import in.loanwiser.partnerapp.Partner_Statues.DashBoard_new;
 import in.loanwiser.partnerapp.R;
 
@@ -428,7 +429,7 @@ public class ASK_UploadActivity1 extends Activity implements SingleUploadBroadca
                             if(response.getString("status").equals("success")){
                                 progressDialog.dismiss();
                                 Toast.makeText(mCon, "Successfully uploaded", Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent(mCon, DashBoard_new.class);
+                                Intent intent = new Intent(mCon, Ask_Dashboard_Activity.class);
                                 startActivity(intent);
                                 finish();
                                 // JSONArray ja = response.getJSONArray("data");

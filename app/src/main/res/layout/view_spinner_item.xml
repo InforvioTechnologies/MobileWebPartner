@@ -6,7 +6,6 @@
     android:layout_height="48dp"
     android:gravity="left|center_vertical"
     android:textColor="@color/black"
-    android:textSize="12dp"
-    style="@style/SmallText"
+    android:textSize="13dp"
     android:text="hi"
     android:textIsSelectable="false"/>

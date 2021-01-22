@@ -1,6 +1,8 @@
 package in.loanwiser.partnerapp.Documents;
 
+import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -49,6 +51,9 @@ public class BottomSheetFragment extends BottomSheetDialogFragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
       View view= inflater.inflate(R.layout.fragment_bottom_sheet_list_dialog, container, false);
+
+        final Dialog dialog = new Dialog(getContext());
+       // view.setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
        /* cameralay=view.findViewById(R.id.cameralay);
         gallerylay=view.findViewById(R.id.gallerylay);
         pdflay=view.findViewById(R.id.pdflay);*/

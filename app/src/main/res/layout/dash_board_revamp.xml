@@ -1378,493 +1378,681 @@
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent">
                             <ImageView
+                                android:visibility="gone"
                                 android:background="@drawable/ic_not_tick"
                                 android:gravity="center"
                                 android:id="@+id/app_interview_img"
                                 android:layout_width="30dp"
                                 android:layout_height="30dp" />
+                            <LinearLayout
+                                android:gravity="center"
+                                android:orientation="horizontal"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent">
+                                <ImageView
+                                    android:background="@drawable/ic_down_arrow"
+                                    android:gravity="center"
+                                    android:id="@+id/step3_statue"
+                                    android:layout_width="30dp"
+                                    android:layout_height="30dp" />
+                                <ImageView
+                                    android:visibility="gone"
+                                    android:background="@drawable/ic_uparrow_icon"
+                                    android:gravity="center"
+                                    android:id="@+id/step3_statue1"
+                                    android:layout_width="45dp"
+                                    android:layout_height="45dp"/>
+                            </LinearLayout>
                         </LinearLayout>
                     </LinearLayout>
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
-            <androidx.cardview.widget.CardView
-                xmlns:card_view="http://schemas.android.com/apk/res-auto"
-                android:id="@+id/Bank_statement_Upload"
-                android:layout_marginLeft="3dp"
-                android:layout_marginRight="3dp"
+            <LinearLayout
+                android:id="@+id/step3_sub_staus"
+                android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
-                <LinearLayout
-                    android:background="@color/white"
-                    android:orientation="vertical"
+                <androidx.cardview.widget.CardView
+                    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/Bank_statement_Upload"
+                    android:layout_marginLeft="3dp"
+                    android:layout_marginRight="3dp"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
+                    android:layout_height="wrap_content">
                     <LinearLayout
-                        android:orientation="horizontal"
+                        android:background="@color/white"
+                        android:orientation="vertical"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
 
                         <LinearLayout
-                            android:gravity="center"
                             android:orientation="horizontal"
-                            android:layout_width="80dp"
+                            android:layout_width="match_parent"
                             android:layout_height="match_parent">
-                            <ImageView
-                                android:id="@+id/bankstate_status"
-                                android:visibility="visible"
+
+                            <LinearLayout
                                 android:gravity="center"
-                                android:background="@drawable/ic_warning"
-                                android:layout_width="25dp"
-                                android:layout_height="25dp" />
-                        </LinearLayout>
+                                android:orientation="horizontal"
+                                android:layout_width="80dp"
+                                android:layout_height="match_parent">
+                                <ImageView
+                                    android:id="@+id/bankstate_status"
+                                    android:visibility="visible"
+                                    android:gravity="center"
+                                    android:background="@drawable/ic_warning"
+                                    android:layout_width="25dp"
+                                    android:layout_height="25dp" />
+                            </LinearLayout>
 
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:orientation="vertical">
-
-                            <androidx.appcompat.widget.AppCompatTextView
-                                style="@style/SmallText"
-                                android:id="@+id/bank_statenent"
-                                android:textColor="@color/colorPrimary"
-                                android:text="Bank Statement Upload"
-                                android:layout_width="150dp"
-                                android:textSize="14dp"
-                                android:layout_height="wrap_content" />
-                            <androidx.appcompat.widget.AppCompatTextView
-                                android:layout_marginBottom="10dp"
-                                style="@style/LorgeText"
-                                android:textSize="10dp"
-                                android:textColor="@color/black"
-                                android:text=""
-                                android:id="@+id/bank_stm"
-                                android:layout_width="150dp"
-                                android:layout_height="wrap_content" />
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:gravity="center"
-                            android:orientation="horizontal"
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent">
-                            <ImageView
-                                android:gravity="center"
-                                android:id="@+id/bank_statement_img"
-                                android:layout_width="25dp"
-                                android:layout_height="25dp"
-                                android:visibility="gone"/>
-
-                            <Button
-                                android:id="@+id/bankstatment_but"
+                            <LinearLayout
                                 android:layout_width="wrap_content"
-                                android:layout_height="30dp"
-                                android:text="Complete View"
+                                android:layout_height="wrap_content"
                                 android:layout_gravity="center"
+                                android:orientation="vertical">
+
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    style="@style/SmallText"
+                                    android:id="@+id/bank_statenent"
+                                    android:textColor="@color/colorPrimary"
+                                    android:text="Bank Statement Upload"
+                                    android:layout_width="150dp"
+                                    android:textSize="14dp"
+                                    android:layout_height="wrap_content" />
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:layout_marginBottom="10dp"
+                                    style="@style/LorgeText"
+                                    android:textSize="10dp"
+                                    android:textColor="@color/black"
+                                    android:text=""
+                                    android:id="@+id/bank_stm"
+                                    android:layout_width="150dp"
+                                    android:layout_height="wrap_content" />
+                            </LinearLayout>
+
+                            <LinearLayout
                                 android:gravity="center"
-                                android:textColor="@color/white"
-                                android:textSize="10sp"
-                                android:background="@drawable/but_shape"/>
+                                android:orientation="horizontal"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent">
+                                <ImageView
+                                    android:gravity="center"
+                                    android:id="@+id/bank_statement_img"
+                                    android:layout_width="25dp"
+                                    android:layout_height="25dp"
+                                    android:visibility="gone"/>
 
+                                <Button
+                                    android:id="@+id/bankstatment_but"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="30dp"
+                                    android:text="Complete View"
+                                    android:layout_gravity="center"
+                                    android:gravity="center"
+                                    android:textColor="@color/white"
+                                    android:textSize="10sp"
+                                    android:background="@drawable/but_shape"/>
+
+                            </LinearLayout>
                         </LinearLayout>
+
+
                     </LinearLayout>
-
-
-                </LinearLayout>
-            </androidx.cardview.widget.CardView>
-            <LinearLayout
-                android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="0.9dp"
-                    android:background="@color/white"/>
-            </LinearLayout>
-            <androidx.cardview.widget.CardView
-                android:id="@+id/document_check__Upload"
-                android:layout_marginLeft="3dp"
-                android:layout_marginRight="3dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                </androidx.cardview.widget.CardView>
                 <LinearLayout
-                    android:background="@color/white"
                     android:orientation="vertical"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
+                    android:layout_height="wrap_content">
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0.9dp"
+                        android:background="@color/white"/>
+                </LinearLayout>
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/document_check__Upload"
+                    android:layout_marginLeft="3dp"
+                    android:layout_marginRight="3dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
                     <LinearLayout
-                        android:orientation="horizontal"
+                        android:background="@color/white"
+                        android:orientation="vertical"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
 
                         <LinearLayout
-                            android:gravity="center"
                             android:orientation="horizontal"
-                            android:layout_width="80dp"
+                            android:layout_width="match_parent"
                             android:layout_height="match_parent">
 
-                            <ImageView
-                                android:id="@+id/document_check_list_status"
-                                android:layout_width="25dp"
-                                android:layout_height="25dp"
-                                android:background="@drawable/ic_warning"
+                            <LinearLayout
                                 android:gravity="center"
-                                android:visibility="visible" />
-                        </LinearLayout>
+                                android:orientation="horizontal"
+                                android:layout_width="80dp"
+                                android:layout_height="match_parent">
 
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:orientation="vertical">
+                                <ImageView
+                                    android:id="@+id/document_check_list_status"
+                                    android:layout_width="25dp"
+                                    android:layout_height="25dp"
+                                    android:background="@drawable/ic_warning"
+                                    android:gravity="center"
+                                    android:visibility="visible" />
+                            </LinearLayout>
 
-                            <androidx.appcompat.widget.AppCompatTextView
-                                android:id="@+id/document_checklist_revamp"
-                                style="@style/SmallText"
-                                android:textColor="@color/colorPrimary"
-                                android:text="@string/doc_check_list1"
-                                android:textSize="14dp"
-                                android:layout_width="150dp"
-                                android:layout_height="wrap_content" />
-                            <androidx.appcompat.widget.AppCompatTextView
-                                style="@style/LorgeText"
-                                android:textSize="10dp"
-                                android:layout_marginBottom="10dp"
-                                android:textColor="@color/black"
-                                android:text=""
-                                android:id="@+id/document_check_text"
-                                android:layout_width="150dp"
-                                android:layout_height="wrap_content" />
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:gravity="center"
-                            android:orientation="horizontal"
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent">
-                            <ImageView
-                                android:gravity="center"
-                                android:id="@+id/document_check_img1"
-                                android:layout_width="25dp"
-                                android:layout_height="25dp"
-                                android:visibility="gone"/>
-                            <Button
-                                android:id="@+id/document_check_button"
+                            <LinearLayout
                                 android:layout_width="wrap_content"
-                                android:layout_height="30dp"
-                                android:text="Complete View"
+                                android:layout_height="wrap_content"
                                 android:layout_gravity="center"
+                                android:orientation="vertical">
+
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:id="@+id/document_checklist_revamp"
+                                    style="@style/SmallText"
+                                    android:textColor="@color/colorPrimary"
+                                    android:text="@string/doc_check_list1"
+                                    android:textSize="14dp"
+                                    android:layout_width="150dp"
+                                    android:layout_height="wrap_content" />
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    style="@style/LorgeText"
+                                    android:textSize="10dp"
+                                    android:layout_marginBottom="10dp"
+                                    android:textColor="@color/black"
+                                    android:text=""
+                                    android:id="@+id/document_check_text"
+                                    android:layout_width="150dp"
+                                    android:layout_height="wrap_content" />
+                            </LinearLayout>
+
+                            <LinearLayout
                                 android:gravity="center"
-                                android:textColor="@color/white"
-                                android:textSize="10sp"
-                                android:background="@drawable/but_shape"/>
+                                android:orientation="horizontal"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent">
+                                <ImageView
+                                    android:gravity="center"
+                                    android:id="@+id/document_check_img1"
+                                    android:layout_width="25dp"
+                                    android:layout_height="25dp"
+                                    android:visibility="gone"/>
+                                <Button
+                                    android:id="@+id/document_check_button"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="30dp"
+                                    android:text="Complete View"
+                                    android:layout_gravity="center"
+                                    android:gravity="center"
+                                    android:textColor="@color/white"
+                                    android:textSize="10sp"
+                                    android:background="@drawable/but_shape"/>
 
+                            </LinearLayout>
                         </LinearLayout>
+
+
                     </LinearLayout>
-
-
-                </LinearLayout>
-            </androidx.cardview.widget.CardView>
-            <LinearLayout
-                android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="0.9dp"
-                    android:background="@color/white"/>
-            </LinearLayout>
-            <androidx.cardview.widget.CardView
-                xmlns:card_view="http://schemas.android.com/apk/res-auto"
-                android:id="@+id/document_Upload"
-                android:layout_marginLeft="3dp"
-                android:layout_marginRight="3dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                </androidx.cardview.widget.CardView>
                 <LinearLayout
-                    android:background="@color/white"
                     android:orientation="vertical"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
+                    android:layout_height="wrap_content">
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0.9dp"
+                        android:background="@color/white"/>
+                </LinearLayout>
+                <androidx.cardview.widget.CardView
+                    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/document_Upload"
+                    android:layout_marginLeft="3dp"
+                    android:layout_marginRight="3dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
                     <LinearLayout
-                        android:orientation="horizontal"
+                        android:background="@color/white"
+                        android:orientation="vertical"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
 
                         <LinearLayout
-                            android:gravity="center"
                             android:orientation="horizontal"
-                            android:layout_width="80dp"
+                            android:layout_width="match_parent"
                             android:layout_height="match_parent">
-                            <ImageView
-                                android:id="@+id/documentupload_status"
-                                android:visibility="visible"
+
+                            <LinearLayout
                                 android:gravity="center"
-                                android:background="@drawable/ic_warning"
-                                android:layout_width="25dp"
-                                android:layout_height="25dp" />
-                        </LinearLayout>
+                                android:orientation="horizontal"
+                                android:layout_width="80dp"
+                                android:layout_height="match_parent">
+                                <ImageView
+                                    android:id="@+id/documentupload_status"
+                                    android:visibility="visible"
+                                    android:gravity="center"
+                                    android:background="@drawable/ic_warning"
+                                    android:layout_width="25dp"
+                                    android:layout_height="25dp" />
+                            </LinearLayout>
 
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:orientation="vertical">
-
-                            <androidx.appcompat.widget.AppCompatTextView
-                                android:id="@+id/document_upload_revamp"
-                                style="@style/SmallText"
-                                android:textColor="@color/colorPrimary"
-                                android:text="@string/doc_upload"
-                                android:textSize="14dp"
-                                android:layout_width="150dp"
-                                android:layout_height="wrap_content" />
-                            <androidx.appcompat.widget.AppCompatTextView
-                                style="@style/LorgeText"
-                                android:textSize="10dp"
-                                android:layout_marginBottom="10dp"
-                                android:textColor="@color/black"
-                                android:text=""
-                                android:id="@+id/document_text"
-                                android:layout_width="150dp"
-                                android:layout_height="wrap_content" />
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:gravity="center"
-                            android:orientation="horizontal"
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent">
-                            <ImageView
-                                android:gravity="center"
-                                android:id="@+id/document_img1"
-                                android:layout_width="25dp"
-                                android:layout_height="25dp"
-                                android:visibility="gone"/>
-                            <Button
-                                android:id="@+id/document_upload_button"
+                            <LinearLayout
                                 android:layout_width="wrap_content"
-                                android:layout_height="30dp"
-                                android:text="Complete View"
+                                android:layout_height="wrap_content"
                                 android:layout_gravity="center"
+                                android:orientation="vertical">
+
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:id="@+id/document_upload_revamp"
+                                    style="@style/SmallText"
+                                    android:textColor="@color/colorPrimary"
+                                    android:text="@string/doc_upload"
+                                    android:textSize="14dp"
+                                    android:layout_width="150dp"
+                                    android:layout_height="wrap_content" />
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    style="@style/LorgeText"
+                                    android:textSize="10dp"
+                                    android:layout_marginBottom="10dp"
+                                    android:textColor="@color/black"
+                                    android:text=""
+                                    android:id="@+id/document_text"
+                                    android:layout_width="150dp"
+                                    android:layout_height="wrap_content" />
+                            </LinearLayout>
+
+                            <LinearLayout
                                 android:gravity="center"
-                                android:textColor="@color/white"
-                                android:textSize="10sp"
-                                android:background="@drawable/but_shape"/>
+                                android:orientation="horizontal"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent">
+                                <ImageView
+                                    android:gravity="center"
+                                    android:id="@+id/document_img1"
+                                    android:layout_width="25dp"
+                                    android:layout_height="25dp"
+                                    android:visibility="gone"/>
+                                <Button
+                                    android:id="@+id/document_upload_button"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="30dp"
+                                    android:text="Complete View"
+                                    android:layout_gravity="center"
+                                    android:gravity="center"
+                                    android:textColor="@color/white"
+                                    android:textSize="10sp"
+                                    android:background="@drawable/but_shape"/>
 
+                            </LinearLayout>
                         </LinearLayout>
+
+
                     </LinearLayout>
-
-
-                </LinearLayout>
-            </androidx.cardview.widget.CardView>
-            <LinearLayout
-                android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="0.9dp"
-                    android:background="@color/white"/>
-            </LinearLayout>
-            <androidx.cardview.widget.CardView
-                xmlns:card_view="http://schemas.android.com/apk/res-auto"
-                android:id="@+id/Paymet1"
-                android:layout_marginLeft="3dp"
-                android:layout_marginRight="3dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                </androidx.cardview.widget.CardView>
                 <LinearLayout
-                    android:background="@color/white"
                     android:orientation="vertical"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
+                    android:layout_height="wrap_content">
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0.9dp"
+                        android:background="@color/white"/>
+                </LinearLayout>
+                <androidx.cardview.widget.CardView
+                    android:visibility="gone"
+                    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/Paymet1"
+                    android:layout_marginLeft="3dp"
+                    android:layout_marginRight="3dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
                     <LinearLayout
-                        android:orientation="horizontal"
+                        android:background="@color/white"
+                        android:orientation="vertical"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
 
                         <LinearLayout
-                            android:gravity="center"
                             android:orientation="horizontal"
-                            android:layout_width="80dp"
+                            android:layout_width="match_parent"
                             android:layout_height="match_parent">
-                            <ImageView
-                                android:id="@+id/step3payment_status"
-                                android:visibility="visible"
+
+                            <LinearLayout
                                 android:gravity="center"
-                                android:background="@drawable/ic_warning"
-                                android:layout_width="25dp"
-                                android:layout_height="25dp" />
-                        </LinearLayout>
+                                android:orientation="horizontal"
+                                android:layout_width="80dp"
+                                android:layout_height="match_parent">
+                                <ImageView
+                                    android:id="@+id/step3payment_status"
+                                    android:visibility="visible"
+                                    android:gravity="center"
+                                    android:background="@drawable/ic_warning"
+                                    android:layout_width="25dp"
+                                    android:layout_height="25dp" />
+                            </LinearLayout>
 
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:orientation="vertical">
-
-                            <androidx.appcompat.widget.AppCompatTextView
-                                android:id="@+id/payment1"
-                                style="@style/SmallText"
-                                android:textColor="@color/colorPrimary"
-                                android:text="@string/payment1"
-                                android:textSize="14dp"
-                                android:layout_width="150dp"
-                                android:layout_height="wrap_content" />
-                            <androidx.appcompat.widget.AppCompatTextView
-                                android:layout_marginBottom="10dp"
-                                style="@style/LorgeText"
-                                android:textSize="10dp"
-                                android:textColor="@color/black"
-                                android:text=""
-                                android:id="@+id/payment_statues_comp1"
-                                android:layout_width="150dp"
-                                android:layout_height="wrap_content" />
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:gravity="center"
-                            android:orientation="horizontal"
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent">
-                            <ImageView
-                                android:gravity="center"
-                                android:id="@+id/payment_img1"
-                                android:layout_width="25dp"
-                                android:visibility="gone"
-                                android:layout_height="25dp"/>
-
-                            <Button
-                                android:id="@+id/step3payment_but"
+                            <LinearLayout
                                 android:layout_width="wrap_content"
-                                android:layout_height="30dp"
-                                android:text="Complete View"
+                                android:layout_height="wrap_content"
                                 android:layout_gravity="center"
+                                android:orientation="vertical">
+
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:id="@+id/payment1"
+                                    style="@style/SmallText"
+                                    android:textColor="@color/colorPrimary"
+                                    android:text="@string/payment1"
+                                    android:textSize="14dp"
+                                    android:layout_width="150dp"
+                                    android:layout_height="wrap_content" />
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:layout_marginBottom="10dp"
+                                    style="@style/LorgeText"
+                                    android:textSize="10dp"
+                                    android:textColor="@color/black"
+                                    android:text=""
+                                    android:id="@+id/payment_statues_comp1"
+                                    android:layout_width="150dp"
+                                    android:layout_height="wrap_content" />
+                            </LinearLayout>
+
+                            <LinearLayout
                                 android:gravity="center"
-                                android:textColor="@color/white"
-                                android:textSize="10sp"
-                                android:background="@drawable/but_shape"/>
+                                android:orientation="horizontal"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent">
+                                <ImageView
+                                    android:gravity="center"
+                                    android:id="@+id/payment_img1"
+                                    android:layout_width="25dp"
+                                    android:visibility="gone"
+                                    android:layout_height="25dp"/>
+
+                                <Button
+                                    android:id="@+id/step3payment_but"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="30dp"
+                                    android:text="Complete View"
+                                    android:layout_gravity="center"
+                                    android:gravity="center"
+                                    android:textColor="@color/white"
+                                    android:textSize="10sp"
+                                    android:background="@drawable/but_shape"/>
+                            </LinearLayout>
                         </LinearLayout>
+
+
                     </LinearLayout>
-
-
-                </LinearLayout>
-            </androidx.cardview.widget.CardView>
-            <LinearLayout
-                android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="0.9dp"
-                    android:background="@color/white"/>
-            </LinearLayout>
-            <androidx.cardview.widget.CardView
-                xmlns:card_view="http://schemas.android.com/apk/res-auto"
-                android:id="@+id/eligibility_card"
-                android:layout_marginLeft="3dp"
-                android:layout_marginRight="3dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                </androidx.cardview.widget.CardView>
                 <LinearLayout
-                    android:background="@color/white"
+                    android:visibility="gone"
                     android:orientation="vertical"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
+                    android:layout_height="wrap_content">
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0.9dp"
+                        android:background="@color/white"/>
+                </LinearLayout>
+                <androidx.cardview.widget.CardView
+                    android:visibility="gone"
+                    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/eligibility_card"
+                    android:layout_marginLeft="3dp"
+                    android:layout_marginRight="3dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
                     <LinearLayout
-                        android:orientation="horizontal"
+                        android:background="@color/white"
+                        android:orientation="vertical"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
 
                         <LinearLayout
-                            android:gravity="center"
                             android:orientation="horizontal"
-                            android:layout_width="80dp"
+                            android:layout_width="match_parent"
                             android:layout_height="match_parent">
-                            <ImageView
-                                android:id="@+id/eligiblitity_status"
-                                android:visibility="visible"
+
+                            <LinearLayout
                                 android:gravity="center"
-                                android:background="@drawable/ic_warning"
-                                android:layout_width="25dp"
-                                android:layout_height="25dp" />
-                        </LinearLayout>
+                                android:orientation="horizontal"
+                                android:layout_width="80dp"
+                                android:layout_height="match_parent">
+                                <ImageView
+                                    android:id="@+id/eligiblitity_status"
+                                    android:visibility="visible"
+                                    android:gravity="center"
+                                    android:background="@drawable/ic_warning"
+                                    android:layout_width="25dp"
+                                    android:layout_height="25dp" />
+                            </LinearLayout>
 
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:orientation="vertical">
-
-                            <androidx.appcompat.widget.AppCompatTextView
-                                android:id="@+id/eligibility_report"
-                                style="@style/SmallText"
-                                android:textColor="@color/colorPrimary"
-                                android:text="Eligibility Report"
-                                android:textSize="14dp"
-                                android:layout_width="150dp"
-                                android:layout_height="wrap_content" />
-                            <androidx.appcompat.widget.AppCompatTextView
-                                android:layout_marginBottom="10dp"
-                                style="@style/LorgeText"
-                                android:id="@+id/eligibility_Report"
-                                android:textSize="10dp"
-                                android:textColor="@color/black"
-                                android:text=""
-                                android:layout_width="150dp"
-                                android:layout_height="wrap_content" />
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:gravity="center"
-                            android:orientation="horizontal"
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent">
-                            <ImageView
-                                android:gravity="center"
-                                android:id="@+id/eligibility_statues_img"
-                                android:layout_width="25dp"
-                                android:layout_height="25dp"
-                                android:visibility="gone"/>
-
-                            <Button
-                                android:id="@+id/eligibility_but"
+                            <LinearLayout
                                 android:layout_width="wrap_content"
-                                android:layout_height="30dp"
-                                android:text="Complete View"
+                                android:layout_height="wrap_content"
                                 android:layout_gravity="center"
+                                android:orientation="vertical">
+
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:id="@+id/eligibility_report"
+                                    style="@style/SmallText"
+                                    android:textColor="@color/colorPrimary"
+                                    android:text="Eligibility Report"
+                                    android:textSize="14dp"
+                                    android:layout_width="150dp"
+                                    android:layout_height="wrap_content" />
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:layout_marginBottom="10dp"
+                                    style="@style/LorgeText"
+                                    android:id="@+id/eligibility_Report"
+                                    android:textSize="10dp"
+                                    android:textColor="@color/black"
+                                    android:text=""
+                                    android:layout_width="150dp"
+                                    android:layout_height="wrap_content" />
+                            </LinearLayout>
+
+                            <LinearLayout
                                 android:gravity="center"
-                                android:textColor="@color/white"
-                                android:textSize="10sp"
-                                android:background="@drawable/but_shape"/>
+                                android:orientation="horizontal"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent">
+                                <ImageView
+                                    android:gravity="center"
+                                    android:id="@+id/eligibility_statues_img"
+                                    android:layout_width="25dp"
+                                    android:layout_height="25dp"
+                                    android:visibility="gone"/>
+
+                                <Button
+                                    android:id="@+id/eligibility_but"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="30dp"
+                                    android:text="Complete View"
+                                    android:layout_gravity="center"
+                                    android:gravity="center"
+                                    android:textColor="@color/white"
+                                    android:textSize="10sp"
+                                    android:background="@drawable/but_shape"/>
+                            </LinearLayout>
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+                <LinearLayout
+                    android:visibility="gone"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0.9dp"
+                        android:background="@color/white"/>
+                </LinearLayout>
+
+                <androidx.cardview.widget.CardView
+                    android:visibility="gone"
+                    android:id="@+id/offer_generation"
+                    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                    android:layout_marginLeft="3dp"
+                    android:layout_marginBottom="25dp"
+                    android:layout_marginRight="3dp"
+                    android:layout_marginTop="3dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    app:cardCornerRadius="4dp">
+
+                    <LinearLayout
+                        android:background="@color/gray12"
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <LinearLayout
+                                android:gravity="center"
+                                android:orientation="horizontal"
+                                android:layout_width="80dp"
+                                android:layout_height="match_parent">
+                                <ImageView
+                                    android:gravity="center"
+                                    android:background="@drawable/offer_details"
+                                    android:layout_width="45dp"
+                                    android:layout_height="45dp" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_gravity="center"
+                                android:layout_width="200dp"
+                                android:orientation="vertical"
+                                android:layout_height="wrap_content">
+                                <LinearLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:orientation="vertical">
+                                    <androidx.appcompat.widget.AppCompatTextView
+                                        android:layout_gravity="center"
+                                        style="@style/LorgeText"
+                                        android:id="@+id/step4"
+                                        android:textSize="16dp"
+                                        android:textColor="#1592E6"
+                                        android:text="Step 4"
+                                        android:layout_width="200dp"
+                                        android:layout_height="wrap_content" />
+                                    <androidx.appcompat.widget.AppCompatTextView
+                                        android:layout_gravity="center"
+                                        android:id="@+id/app_offer"
+                                        style="@style/LorgeText"
+                                        android:textSize="12dp"
+                                        android:textColor="@color/colorPrimary"
+                                        android:text="Offers Details"
+                                        android:layout_width="200dp"
+                                        android:layout_height="wrap_content" />
+                                </LinearLayout>
+
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:visibility="gone"
+                                    android:layout_gravity="center"
+                                    android:id="@+id/callcenter_offer"
+                                    style="@style/SmallText"
+                                    android:textSize="12sp"
+                                    android:textColor="@color/gray"
+                                    android:text="@string/app_offer_updated"
+                                    android:layout_width="200dp"
+                                    android:layout_height="wrap_content" />
+
+                            </LinearLayout>
+
+
+                            <LinearLayout
+                                android:gravity="center"
+                                android:orientation="horizontal"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent">
+                                <ImageView
+                                    android:background="@drawable/ic_not_tick"
+                                    android:gravity="center"
+                                    android:id="@+id/app_offer_img"
+                                    android:layout_width="30dp"
+                                    android:layout_height="30dp" />
+                            </LinearLayout>
                         </LinearLayout>
                     </LinearLayout>
-
-
-                </LinearLayout>
-            </androidx.cardview.widget.CardView>
-            <LinearLayout
-                android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <View
+                </androidx.cardview.widget.CardView>
+                <androidx.cardview.widget.CardView
+                    android:visibility="gone"
+                    android:layout_marginBottom="20dp"
+                    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginLeft="3dp"
+                    android:layout_marginRight="3dp"
+                    android:id="@+id/CD_app_track"
                     android:layout_width="match_parent"
-                    android:layout_height="0.9dp"
-                    android:background="@color/white"/>
+                    android:layout_height="150dp"
+                    card_view:cardCornerRadius="4dp">
+
+                    <LinearLayout
+                        android:background="@drawable/ripple_effect"
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <LinearLayout
+
+                            android:orientation="horizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <LinearLayout
+                                android:gravity="center"
+                                android:orientation="horizontal"
+                                android:layout_width="90dp"
+                                android:layout_height="match_parent">
+                                <ImageView
+                                    android:gravity="center"
+
+                                    android:layout_width="45dp"
+                                    android:layout_height="45dp" />
+                            </LinearLayout>
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:layout_gravity="center"
+                                style="@style/LorgeText"
+                                android:id="@+id/app_track"
+                                android:textColor="@color/colorPrimaryDark"
+                                android:text="@string/app_track"
+                                android:layout_width="200dp"
+                                android:layout_height="wrap_content" />
+                            <LinearLayout
+                                android:gravity="center"
+                                android:orientation="horizontal"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent">
+                                <ImageView
+                                    android:gravity="center"
+                                    android:id="@+id/app_track_img"
+                                    android:layout_width="30dp"
+                                    android:layout_height="30dp" />
+                            </LinearLayout>
+                        </LinearLayout>
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
             </LinearLayout>
 
+
+
+        <LinearLayout
+            android:id="@+id/Loan_Statues"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
             <androidx.cardview.widget.CardView
-                android:visibility="gone"
-                android:id="@+id/offer_generation"
                 xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/Loan_Statues_crd"
                 android:layout_marginLeft="3dp"
-                android:layout_marginBottom="25dp"
                 android:layout_marginRight="3dp"
                 android:layout_marginTop="3dp"
                 android:layout_width="match_parent"
@@ -1889,11 +2077,10 @@
                             android:layout_height="match_parent">
                             <ImageView
                                 android:gravity="center"
-                                android:background="@drawable/offer_details"
+                                android:background="@drawable/document_verification_icon"
                                 android:layout_width="45dp"
                                 android:layout_height="45dp" />
                         </LinearLayout>
-
                         <LinearLayout
                             android:layout_gravity="center"
                             android:layout_width="200dp"
@@ -1907,7 +2094,7 @@
                                 <androidx.appcompat.widget.AppCompatTextView
                                     android:layout_gravity="center"
                                     style="@style/LorgeText"
-                                    android:id="@+id/step4"
+                                    android:id="@+id/step4_loan"
                                     android:textSize="16dp"
                                     android:textColor="#1592E6"
                                     android:text="Step 4"
@@ -1915,28 +2102,17 @@
                                     android:layout_height="wrap_content" />
                                 <androidx.appcompat.widget.AppCompatTextView
                                     android:layout_gravity="center"
-                                    android:id="@+id/app_offer"
                                     style="@style/LorgeText"
+                                    android:id="@+id/loan_status_txt"
                                     android:textSize="12dp"
                                     android:textColor="@color/colorPrimary"
-                                    android:text="Offers Details"
+                                    android:text="@string/loan_status"
                                     android:layout_width="200dp"
                                     android:layout_height="wrap_content" />
                             </LinearLayout>
 
-                            <androidx.appcompat.widget.AppCompatTextView
-                                android:visibility="gone"
-                                android:layout_gravity="center"
-                                android:id="@+id/callcenter_offer"
-                                style="@style/SmallText"
-                                android:textSize="12sp"
-                                android:textColor="@color/gray"
-                                android:text="@string/app_offer_updated"
-                                android:layout_width="200dp"
-                                android:layout_height="wrap_content" />
 
                         </LinearLayout>
-
 
                         <LinearLayout
                             android:gravity="center"
@@ -1944,76 +2120,253 @@
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent">
                             <ImageView
-                                android:background="@drawable/ic_not_tick"
+                                android:background="@drawable/ic_down_arrow"
                                 android:gravity="center"
-                                android:id="@+id/app_offer_img"
+                                android:id="@+id/loan_statues_"
                                 android:layout_width="30dp"
                                 android:layout_height="30dp" />
+                            <ImageView
+                                android:visibility="gone"
+                                android:background="@drawable/ic_uparrow_icon"
+                                android:gravity="center"
+                                android:id="@+id/loan_statues_1"
+                                android:layout_width="45dp"
+                                android:layout_height="45dp"/>
                         </LinearLayout>
                     </LinearLayout>
                 </LinearLayout>
+
             </androidx.cardview.widget.CardView>
-            <androidx.cardview.widget.CardView
-                android:visibility="gone"
-                android:layout_marginBottom="20dp"
-                xmlns:card_view="http://schemas.android.com/apk/res-auto"
-                android:layout_marginTop="3dp"
-                android:layout_marginLeft="3dp"
-                android:layout_marginRight="3dp"
-                android:id="@+id/CD_app_track"
+            <LinearLayout
+                android:id="@+id/Loan_Submit_tracStatues"
+                android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="150dp"
-                card_view:cardCornerRadius="4dp">
-
-                <LinearLayout
-                    android:background="@drawable/ripple_effect"
-                    android:orientation="vertical"
+                android:layout_height="wrap_content">
+                <androidx.cardview.widget.CardView
+                    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/Submiteed_to_Loanwiser"
+                    android:layout_marginLeft="3dp"
+                    android:layout_marginRight="3dp"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
+                    android:layout_height="wrap_content">
                     <LinearLayout
-
-                        android:orientation="horizontal"
+                        android:background="@color/white"
+                        android:orientation="vertical"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
 
                         <LinearLayout
-                            android:gravity="center"
                             android:orientation="horizontal"
-                            android:layout_width="90dp"
+                            android:layout_width="match_parent"
                             android:layout_height="match_parent">
-                            <ImageView
-                                android:gravity="center"
 
-                                android:layout_width="45dp"
-                                android:layout_height="45dp" />
+                            <LinearLayout
+                                android:gravity="center"
+                                android:orientation="horizontal"
+                                android:layout_width="80dp"
+                                android:layout_height="match_parent">
+                                <ImageView
+                                    android:id="@+id/loan_submit_statues_img"
+                                    android:visibility="visible"
+                                    android:gravity="center"
+                                    android:layout_width="25dp"
+                                    android:layout_height="25dp" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:orientation="vertical">
+
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    style="@style/SmallText"
+                                    android:id="@+id/loan_submit_statues_txt"
+                                    android:textColor="@color/colorPrimary"
+                                    android:text="Submitted to Loanwiser "
+                                    android:layout_width="wrap_content"
+                                    android:textSize="14dp"
+                                    android:layout_height="wrap_content" />
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:layout_marginBottom="10dp"
+                                    style="@style/LorgeText"
+                                    android:textSize="10dp"
+                                    android:textColor="#00ceb4"
+                                    android:text="Completed(19-09-2020)"
+                                    android:id="@+id/loan_submit_statues_txt1"
+                                    android:layout_width="150dp"
+                                    android:layout_height="wrap_content" />
+                            </LinearLayout>
+
+
                         </LinearLayout>
 
-                        <androidx.appcompat.widget.AppCompatTextView
-                            android:layout_gravity="center"
-                            style="@style/LorgeText"
-                            android:id="@+id/app_track"
-                            android:textColor="@color/colorPrimaryDark"
-                            android:text="@string/app_track"
-                            android:layout_width="200dp"
-                            android:layout_height="wrap_content" />
+
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0.9dp"
+                        android:background="@color/white"/>
+                </LinearLayout>
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/Document_verification"
+                    android:layout_marginLeft="3dp"
+                    android:layout_marginRight="3dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <LinearLayout
+                        android:background="@color/white"
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
                         <LinearLayout
-                            android:gravity="center"
                             android:orientation="horizontal"
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="match_parent">
-                            <ImageView
+
+                            <LinearLayout
                                 android:gravity="center"
-                                android:id="@+id/app_track_img"
-                                android:layout_width="30dp"
-                                android:layout_height="30dp" />
+                                android:orientation="horizontal"
+                                android:layout_width="80dp"
+                                android:layout_height="match_parent">
+
+                                <ImageView
+                                    android:id="@+id/Document_verification_img"
+                                    android:layout_width="25dp"
+                                    android:layout_height="25dp"
+
+                                    android:gravity="center"
+                                    android:visibility="visible" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:orientation="vertical">
+
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:id="@+id/Document_verification_txt"
+                                    style="@style/SmallText"
+                                    android:textColor="@color/colorPrimary"
+                                    android:text="Document Verification"
+                                    android:textSize="14dp"
+                                    android:layout_width="150dp"
+                                    android:layout_height="wrap_content" />
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    style="@style/LorgeText"
+                                    android:textSize="10dp"
+                                    android:layout_marginBottom="10dp"
+                                    android:textColor="#00ceb4"
+                                    android:text="Completed(19-09-2020)"
+                                    android:id="@+id/Document_verification_txt1"
+                                    android:layout_width="150dp"
+                                    android:layout_height="wrap_content" />
+                            </LinearLayout>
+                        </LinearLayout>
+
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0.9dp"
+                        android:background="@color/white"/>
+                </LinearLayout>
+                <androidx.cardview.widget.CardView
+                    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/Applied_to_Bank"
+                    android:layout_marginLeft="3dp"
+                    android:layout_marginRight="3dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <LinearLayout
+                        android:background="@color/white"
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <LinearLayout
+                                android:gravity="center"
+                                android:orientation="horizontal"
+                                android:layout_width="80dp"
+                                android:layout_height="match_parent">
+                                <ImageView
+                                    android:id="@+id/applied_to_bank_img"
+                                    android:visibility="visible"
+                                    android:gravity="center"
+                                    android:layout_width="25dp"
+                                    android:layout_height="25dp" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:orientation="vertical">
+
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:id="@+id/Applied_to_Bank_txt"
+                                    style="@style/SmallText"
+                                    android:textColor="@color/colorPrimary"
+                                    android:text="Applied to Bank"
+                                    android:textSize="14dp"
+                                    android:layout_width="150dp"
+                                    android:layout_height="wrap_content" />
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    style="@style/LorgeText"
+                                    android:textSize="10dp"
+                                    android:layout_marginBottom="10dp"
+                                    android:textColor="#00ceb4"
+                                    android:text="Completed(19-09-2020)"
+                                    android:id="@+id/Applied_to_Bank_txt1"
+                                    android:layout_width="150dp"
+                                    android:layout_height="wrap_content" />
+                            </LinearLayout>
+                        </LinearLayout>
+                        <LinearLayout
+                            android:id="@+id/bank_is_yes"
+                            android:gravity="center"
+                            android:layout_marginLeft="3dp"
+                            android:layout_marginRight="3dp"
+                            android:orientation="vertical"
+                            android:layout_width="match_parent"
+                            android:layout_height="400dp">
+                            <ExpandableListView
+                                android:layout_marginLeft="10dp"
+                                android:id="@+id/lvExp"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:divider="@color/blue"
+                                android:dividerHeight="0.5dp"
+                                android:layout_alignParentLeft="true"
+                                android:indicatorLeft="?android:attr/expandableListPreferredItemIndicatorLeft"
+                                />
                         </LinearLayout>
                     </LinearLayout>
-                </LinearLayout>
-            </androidx.cardview.widget.CardView>
+
+                </androidx.cardview.widget.CardView>
+            </LinearLayout>
+
+
+
         </LinearLayout>
-
-
+        </LinearLayout>
     </LinearLayout>
     </ScrollView>
 </LinearLayout>
+

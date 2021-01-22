@@ -8,7 +8,7 @@
 
         <LinearLayout
             android:id="@+id/uploded_img"
-            android:background="#EBF6FF"
+
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
@@ -18,6 +18,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <LinearLayout
+                    android:padding="5dp"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="horizontal">
@@ -25,37 +26,53 @@
                     <LinearLayout
                         android:layout_weight="1"
                         android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
+                        android:layout_height="50dp"
                         android:orientation="horizontal">
                         <LinearLayout
-                            android:layout_gravity="left"
-                            android:orientation="vertical"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content">
+                            android:background="#EBF6FF"
+                            android:layout_gravity="center"
+                            android:orientation="horizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="35dp">
 
 
 
                             <androidx.appcompat.widget.AppCompatTextView
                                 android:id="@+id/mandatory_do"
-                                style="@style/SmallText"
                                 android:textSize="12dp"
+                                android:layout_gravity="center"
+                                android:maxLength="10"
+
+                                android:layout_marginLeft="10dp"
                                 android:text="https://xd.adobe.com/view/d9ee06fb-ec69-4a7f-6668-3e1491e7bcf2-afdf/grid/"
                                 android:textColor="#1592E6"
-                                android:layout_width="250dp"
+                                android:layout_width="wrap_content"
                                 android:layout_height="wrap_content" />
-
-
-
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:id="@+id/mandatory_do1"
+                                android:textSize="12dp"
+                                android:layout_marginRight="10dp"
+                                android:layout_gravity="center"
+                                android:maxLength="10"
+                                android:text="..."
+                                android:textColor="#1592E6"
+                                android:layout_width="150dp"
+                                android:layout_height="wrap_content" />
                         </LinearLayout>
                     </LinearLayout>
                     <LinearLayout
                         android:layout_weight="1"
-                        android:padding="10dp"
                         android:layout_gravity="center"
                         android:orientation="horizontal"
                         android:layout_width="wrap_content"
+                        android:layout_marginRight="20dp"
                         android:layout_height="50dp">
-
+                        <LinearLayout
+                            android:background="#EBF6FF"
+                            android:layout_gravity="center"
+                            android:orientation="horizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="35dp">
                         <ImageView
                             android:id="@+id/image_doc_view"
                             android:layout_gravity="center"
@@ -63,13 +80,15 @@
                             android:background="@drawable/ic_eye"
                             android:layout_height="11.12dp" />
                         <ImageView
+
                             android:layout_marginRight="20dp"
                             android:layout_marginLeft="20dp"
                             android:id="@+id/image_doc1"
                             android:layout_gravity="center"
-                            android:layout_width="8.76dp"
+                            android:layout_width="15.09dp"
                             android:background="@drawable/ic_delete"
-                            android:layout_height="10.22dp" />
+                            android:layout_height="20.22dp" />
+                        </LinearLayout>
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>

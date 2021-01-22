@@ -113,6 +113,7 @@
                     android:id="@+id/view_all_ly"
                     android:layout_gravity="right"
                     android:gravity="center"
+                    android:layout_marginTop="10dp"
                     android:orientation="horizontal"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content">
@@ -122,7 +123,7 @@
                         android:layout_marginLeft="10dp"
                         android:text="View All"
                         android:textColor="#1592E6"
-                        android:textSize="11dp"
+                        android:textSize="14dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"/>
                     <androidx.appcompat.widget.AppCompatImageView
@@ -130,10 +131,10 @@
                         android:layout_marginLeft="10dp"
                         android:text="View All"
                         android:textColor="#002B5D"
-                        android:textSize="11dp"
+                        android:textSize="14dp"
                         android:layout_marginRight="10dp"
-                        android:layout_width="10dp"
-                        android:layout_height="10dp"/>
+                        android:layout_width="15dp"
+                        android:layout_height="15dp"/>
                 </LinearLayout>
                 <LinearLayout
                     android:id="@+id/firstlay"
@@ -168,6 +169,7 @@
                     android:id="@+id/view_all_ly1"
                     android:layout_gravity="right"
                     android:gravity="center"
+                    android:layout_marginTop="10dp"
                     android:orientation="horizontal"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content">
@@ -177,7 +179,7 @@
                         android:layout_marginLeft="10dp"
                         android:text="View All"
                         android:textColor="#1592E6"
-                        android:textSize="11dp"
+                        android:textSize="14dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"/>
                     <androidx.appcompat.widget.AppCompatImageView
@@ -185,10 +187,10 @@
                         android:layout_marginLeft="10dp"
                         android:text="View All"
                         android:textColor="#002B5D"
-                        android:textSize="16dp"
+                        android:textSize="13dp"
                         android:layout_marginRight="10dp"
-                        android:layout_width="10dp"
-                        android:layout_height="10dp"/>
+                        android:layout_width="15dp"
+                        android:layout_height="15dp"/>
                 </LinearLayout>
                 <LinearLayout
                     android:id="@+id/network_stat"
@@ -214,6 +216,7 @@
                         android:textStyle="bold"/>
                 </LinearLayout>
                 <LinearLayout
+                    android:visibility="gone"
                     android:id="@+id/secondlay"
                     android:layout_gravity="center"
                     android:orientation="vertical"
@@ -231,6 +234,7 @@
                         android:layout_height="wrap_content"/>
                 </LinearLayout>
                 <LinearLayout
+                    android:visibility="gone"
                     android:layout_marginTop="20dp"
                     android:layout_marginLeft="10dp"
                     android:id="@+id/ly_helth_assement_"

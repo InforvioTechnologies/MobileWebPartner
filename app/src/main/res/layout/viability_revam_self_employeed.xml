@@ -27,6 +27,8 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical">
         <LinearLayout
+            android:layout_marginTop="10dp"
+            android:padding="5dp"
             android:gravity="left"
             android:orientation="horizontal"
             android:layout_width="match_parent"
@@ -43,7 +45,6 @@
             <androidx.appcompat.widget.AppCompatTextView
                 android:layout_gravity="left"
                 android:layout_width="match_parent"
-                style="@style/LorgeText2"
                 android:textSize="18dp"
                 android:textStyle="bold"
                 android:textColor="@color/gray_sade1"
@@ -56,6 +57,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
         <LinearLayout
+            android:layout_marginTop="10dp"
             android:padding="5dp"
             android:orientation="vertical"
             android:layout_width="match_parent"
@@ -80,7 +82,7 @@
                     android:layout_marginLeft="2dp"
                     android:id="@+id/emp_type2"
                     android:layout_width="match_parent"
-                    style="@style/LorgeText2"
+                    android:textSize="14dp"
                     android:textColor="@color/colorPrimaryDark"
                     android:textColorHint="@color/colorPrimaryDark"
                     android:text="Type of Self Employment"
@@ -109,6 +111,8 @@
             </LinearLayout>
         </LinearLayout>
         <LinearLayout
+            android:layout_marginTop="10dp"
+            android:padding="5dp"
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -132,7 +136,7 @@
                     android:layout_marginLeft="2dp"
                     android:id="@+id/vocation_indiviual_txt1"
                     android:layout_width="match_parent"
-                    style="@style/LorgeText2"
+                    android:textSize="14dp"
                     android:textColor="@color/colorPrimaryDark"
                     android:textColorHint="@color/colorPrimaryDark"
                     android:text="@string/vocation_type"
@@ -161,6 +165,8 @@
             </LinearLayout>
         </LinearLayout>
         <LinearLayout
+            android:layout_marginTop="10dp"
+            android:padding="5dp"
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -183,7 +189,7 @@
                     android:gravity="left"
                     android:layout_marginLeft="2dp"
                     android:layout_width="match_parent"
-                    style="@style/LorgeText2"
+                    android:textSize="14dp"
                     android:inputType="number"
                     android:imeOptions="actionDone"
                     android:id="@+id/monthly_incom_txt1"
@@ -198,7 +204,7 @@
                 <androidx.appcompat.widget.AppCompatEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="12dp"
+                    android:textSize="14dp"
                     android:layout_marginLeft="2dp"
                     android:inputType="number"
                     android:imeOptions="actionDone"
@@ -207,6 +213,8 @@
             </LinearLayout>
         </LinearLayout>
         <LinearLayout
+            android:layout_marginTop="10dp"
+            android:padding="5dp"
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -229,7 +237,7 @@
                     android:gravity="left"
                     android:layout_marginLeft="2dp"
                     android:layout_width="match_parent"
-                    style="@style/LorgeText2"
+                    android:textSize="14dp"
                     android:id="@+id/no_of_year_ind_txt1"
                     android:textColor="@color/colorPrimaryDark"
                     android:textColorHint="@color/colorPrimaryDark"
@@ -242,7 +250,7 @@
                 <androidx.appcompat.widget.AppCompatEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="12dp"
+                    android:textSize="14dp"
                     android:layout_marginLeft="2dp"
                     android:clickable="true"
                     android:editable="false"
@@ -252,6 +260,8 @@
             </LinearLayout>
         </LinearLayout>
         <LinearLayout
+            android:layout_marginTop="10dp"
+            android:padding="5dp"
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -275,7 +285,7 @@
                     android:layout_marginLeft="2dp"
                     android:id="@+id/business_proof_txt1_P"
                     android:layout_width="match_parent"
-                    style="@style/LorgeText2"
+                    android:textSize="14dp"
                     android:textColor="@color/colorPrimaryDark"
                     android:textColorHint="@color/colorPrimaryDark"
                     android:text="@string/bus_proof"
@@ -326,6 +336,8 @@
 
         </LinearLayout>
         <LinearLayout
+            android:layout_marginTop="10dp"
+            android:padding="5dp"
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -349,7 +361,7 @@
                     android:layout_marginLeft="2dp"
                     android:id="@+id/busines_inco_proof_individua_txt1"
                     android:layout_width="match_parent"
-                    style="@style/LorgeText2"
+                    android:textSize="14dp"
                     android:textColor="@color/colorPrimaryDark"
                     android:textColorHint="@color/colorPrimaryDark"
                     android:text="@string/business_proof"
@@ -400,6 +412,8 @@
 
         </LinearLayout>
         <LinearLayout
+            android:layout_marginTop="10dp"
+            android:padding="5dp"
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -423,7 +437,7 @@
                     android:layout_marginLeft="2dp"
                     android:id="@+id/pl_co_app_ind_office_setup_txt_ind1"
                     android:layout_width="match_parent"
-                    style="@style/LorgeText2"
+                    android:textSize="14dp"
                     android:textColor="@color/colorPrimaryDark"
                     android:textColorHint="@color/colorPrimaryDark"
                     android:text="@string/office_shop_setup"
@@ -452,6 +466,8 @@
             </LinearLayout>
         </LinearLayout>
         <LinearLayout
+            android:layout_marginTop="10dp"
+            android:padding="5dp"
             android:id="@+id/ofiice_res_details"
             android:orientation="vertical"
             android:layout_width="match_parent"
@@ -480,7 +496,7 @@
                         android:layout_marginLeft="2dp"
                         android:id="@+id/office_txt_residence_type1"
                         android:layout_width="match_parent"
-                        style="@style/LorgeText2"
+                        android:textSize="14dp"
                         android:textColor="@color/colorPrimaryDark"
                         android:textColorHint="@color/colorPrimaryDark"
                         android:text="@string/off_residence"
@@ -509,6 +525,8 @@
                 </LinearLayout>
             </LinearLayout>
             <LinearLayout
+                android:layout_marginTop="10dp"
+                android:padding="5dp"
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
@@ -531,7 +549,7 @@
                         android:gravity="left"
                         android:layout_marginLeft="2dp"
                         android:layout_width="match_parent"
-                        style="@style/LorgeText2"
+                        android:textSize="14dp"
                         android:id="@+id/txt_residence_pincode1"
                         android:textColor="@color/colorPrimaryDark"
                         android:textColorHint="@color/colorPrimaryDark"
@@ -550,11 +568,13 @@
                         android:inputType="number"
                         android:layout_marginLeft="2dp"
                         android:textColor="@color/black"
-                        android:textSize="12dp" />
+                        android:textSize="14dp" />
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
         <LinearLayout
+            android:layout_marginTop="10dp"
+            android:padding="5dp"
             android:id="@+id/BL_self_office_ownership_type_ly"
             android:orientation="vertical"
             android:layout_width="match_parent"
@@ -579,7 +599,7 @@
                     android:layout_marginLeft="2dp"
                     android:id="@+id/pl_co_self_office_ownership_type_txt1"
                     android:layout_width="match_parent"
-                    style="@style/LorgeText2"
+                    android:textSize="14dp"
                     android:textColor="@color/colorPrimaryDark"
                     android:textColorHint="@color/colorPrimaryDark"
                     android:text="@string/office_shop_area"
@@ -608,6 +628,8 @@
             </LinearLayout>
         </LinearLayout>
                         <LinearLayout
+                            android:layout_marginTop="10dp"
+                            android:padding="5dp"
                             android:orientation="vertical"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content">
@@ -629,7 +651,7 @@
                                     android:gravity="left"
                                     android:layout_marginLeft="2dp"
                                     android:layout_width="match_parent"
-                                    style="@style/LorgeText2"
+                                    android:textSize="14dp"
                                     android:textColor="@color/colorPrimaryDark"
                                     android:textColorHint="@color/colorPrimaryDark"
                                     android:text="Other Income Sources"
@@ -659,6 +681,8 @@
                             </LinearLayout>
                         </LinearLayout>
                         <LinearLayout
+                            android:layout_marginTop="10dp"
+                            android:padding="5dp"
                             android:id="@+id/other_income_amt_ly_self"
                             android:orientation="vertical"
                             android:layout_width="match_parent"
@@ -683,7 +707,7 @@
                                     android:layout_marginLeft="2dp"
                                     android:layout_width="match_parent"
                                     android:id="@+id/other_income_amt_txt1"
-                                    style="@style/LorgeText2"
+                                    android:textSize="14dp"
                                     android:textColor="@color/colorPrimaryDark"
                                     android:textColorHint="@color/colorPrimaryDark"
                                     android:text="Other Income Amount"
@@ -695,7 +719,7 @@
                                 <androidx.appcompat.widget.AppCompatEditText
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:textSize="12dp"
+                                    android:textSize="14dp"
                                     android:layout_marginLeft="2dp"
                                     android:inputType="number"
                                     android:maxLength="30"

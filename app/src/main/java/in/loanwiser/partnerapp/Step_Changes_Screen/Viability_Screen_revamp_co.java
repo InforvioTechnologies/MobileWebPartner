@@ -1057,13 +1057,13 @@ public class Viability_Screen_revamp_co extends SimpleActivity implements Number
 
 
                                         Employement_type = new JSONObject();
-                                        String monthly_net_salary = monthly_net_sal_edit_txt.getText().toString();
-                                        String company_name = company_name_edit_text.getText().toString();
-                                        String designation_ = designation_edit_text.getText().toString();
-                                        String experience_in_current = experience_in_current_cmpy.getText().toString();
-                                        String total_experience_ = total_experience_edit_txt.getText().toString();
-                                        String company_pincode = company_pincode_txt.getText().toString();
-                                        String other_income_amt = other_income_amt_txt_edit_txt.getText().toString();
+                                         monthly_net_salary = monthly_net_sal_edit_txt.getText().toString();
+                                         company_name = company_name_edit_text.getText().toString();
+                                         designation_ = designation_edit_text.getText().toString();
+                                         experience_in_current = experience_in_current_cmpy.getText().toString();
+                                         total_experience_ = total_experience_edit_txt.getText().toString();
+                                         company_pincode = company_pincode_txt.getText().toString();
+                                         other_income_amt = other_income_amt_txt_edit_txt.getText().toString();
 
                                         JSONArray Other_income_id_ = new JSONArray(Arrays.asList(Other_income_id));
                                         JSONArray other_income_amt_ = new JSONArray(Arrays.asList(other_income_amt));

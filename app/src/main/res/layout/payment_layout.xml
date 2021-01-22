@@ -2,6 +2,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_margin="20dp"
     android:background="@drawable/white_roundcorner">
     <ScrollView
         android:layout_width="match_parent"
@@ -9,7 +10,7 @@
 
 
         <LinearLayout
-            android:padding="5dp"
+            android:layout_margin="10dp"
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -84,7 +85,6 @@
             <LinearLayout
                 android:layout_marginTop="10dp"
                 android:orientation="vertical"
-
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 

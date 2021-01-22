@@ -250,7 +250,7 @@
                     android:layout_marginLeft="40dp"
                     android:textSize="14sp"
                     android:visibility="gone"
-                    android:text="@string/about_phone"/>
+                    android:text="About Phone"/>
 
 
             </androidx.cardview.widget.CardView>

@@ -593,10 +593,10 @@
                     <androidx.appcompat.widget.AppCompatButton
                         android:id="@+id/Docum_ch_step1"
                         android:text="@string/proceed"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_width="240dp"
+                        android:layout_height="45dp"
                         android:layout_gravity="start"
-                        android:background="@drawable/capsul_button3"
+                        android:background="@drawable/capsul_button4"
                         android:theme="@style/BtnStyleApp" />
 
                 </LinearLayout>

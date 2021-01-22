@@ -3,17 +3,15 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-
     android:orientation="vertical">
     <androidx.cardview.widget.CardView
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:card_view="http://schemas.android.com/tools"
-        android:id="@+id/card_view_class_name_child"
-        app:cardCornerRadius="1dp"
         android:clipToPadding="false"
         app:cardUseCompatPadding="true"
-        app:cardElevation="1dp"
+        app:cardElevation="0dp"
+        android:id="@+id/card_view_class_name_child"
         android:layout_marginTop="3dp"
         android:layout_marginLeft="3dp"
         android:layout_marginRight="3dp"
@@ -107,14 +105,13 @@
 
 
                 <androidx.recyclerview.widget.RecyclerView
-
                     xmlns:android="http://schemas.android.com/apk/res/android"
                     xmlns:app="http://schemas.android.com/apk/res-auto"
                     android:orientation="vertical"
                     android:id="@+id/recycler_view_sub_chiled"
                     app:layout_behavior="@string/appbar_scrolling_view_behavior"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:cacheColorHint="@android:color/transparent"
                     android:background="@color/white"
                     android:clipToPadding="false"

@@ -197,12 +197,12 @@ public class Ask_Dashboard_Activity extends AppCompatActivity implements OnLoadM
             }
         });
 
-        type = "1";
-        pending_ask_List.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.blue));
-        pending_ask_List.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.white));
-        resolved_ask.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.white));
-        resolved_ask.setBackground(getResources().getDrawable(R.drawable.capsul_button_drop_down1));
-        resolved_ask.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.gray));
+        type = "2";
+        pending_ask_List.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.white));
+        pending_ask_List.setBackground(getResources().getDrawable(R.drawable.capsul_button_drop_down1));
+        pending_ask_List.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.gray));
+        resolved_ask.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.blue));
+        resolved_ask.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.white));
         acceped_ask.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.white));
         acceped_ask.setBackground(getResources().getDrawable(R.drawable.capsul_button_drop_down1));
         acceped_ask.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.gray));
@@ -707,7 +707,6 @@ public class Ask_Dashboard_Activity extends AppCompatActivity implements OnLoadM
                             // String all = id +"\n"+ applicant_id +"\n"+sub_taskid+"\n"+transaction_id +"\n"+ Pref.getID(mCon);
                             // Objs.a.showToast(mCon,all);
                             //  Objs.a.showToast(mCon, id);
-
 
                             if(step_status.contains("Rejected"))
                             {

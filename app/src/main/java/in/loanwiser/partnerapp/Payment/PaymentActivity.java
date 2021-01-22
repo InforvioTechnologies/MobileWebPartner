@@ -543,7 +543,7 @@ public class PaymentActivity extends SimpleActivity implements CompoundButton.On
 
         if(Chose_plan.contains("0"))
         {
-            Toast.makeText(this, "Select the choose Plane Option", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Select the choose Plan Option", Toast.LENGTH_SHORT).show();
 
         }else
         {

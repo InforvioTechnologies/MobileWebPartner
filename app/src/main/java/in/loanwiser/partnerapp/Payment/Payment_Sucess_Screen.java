@@ -866,8 +866,8 @@ public class Payment_Sucess_Screen extends AppCompatActivity {
                                          viable_url = object.getString("viable_url");
                                          app_crif_score = object.getString("app_crif_score");
                                          app_crif_url = object.getString("app_crif_url");
-                                         coapp_crif_score = object.getString("coapp_crif_score");
-                                         coapp_crif_url = object.getString("coapp_crif_url");
+                                        // coapp_crif_score = object.getString("coapp_crif_score");
+                                       //  coapp_crif_url = object.getString("coapp_crif_url");
 
 
                                     LayoutInflater layoutInflater1 = (LayoutInflater) Payment_Sucess_Screen.this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);

@@ -28,6 +28,7 @@
         android:layout_height="match_parent">
 
         <LinearLayout
+            android:padding="5dp"
             android:gravity="left"
             android:orientation="horizontal"
             android:layout_width="match_parent"
@@ -44,7 +45,7 @@
             <androidx.appcompat.widget.AppCompatTextView
                 android:layout_gravity="left"
                 android:layout_width="match_parent"
-                style="@style/LorgeText2"
+
                 android:textSize="18dp"
                 android:textStyle="bold"
                 android:textColor="@color/gray_sade1"
@@ -58,6 +59,8 @@
                 android:layout_height="wrap_content">
 
                 <LinearLayout
+                    android:layout_marginTop="10dp"
+                    android:padding="5dp"
                     android:id="@+id/name_ly"
                     android:orientation="vertical"
                     android:layout_width="match_parent"
@@ -79,7 +82,7 @@
                             android:gravity="left"
                             android:layout_marginLeft="2dp"
                             android:layout_width="match_parent"
-                            style="@style/LorgeText2"
+                            android:textSize="14dp"
                             android:textColor="@color/colorPrimaryDark"
                             android:textColorHint="@color/colorPrimaryDark"
                             android:text="Name"
@@ -91,7 +94,7 @@
                         <androidx.appcompat.widget.AppCompatEditText
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:textSize="12dp"
+                            android:textSize="14dp"
                             android:layout_marginLeft="2dp"
                             android:inputType="text"
                             android:id="@+id/name_edit_text"
@@ -100,6 +103,8 @@
                     </LinearLayout>
                 </LinearLayout>
                 <LinearLayout
+                    android:layout_marginTop="10dp"
+                    android:padding="5dp"
                     android:id="@+id/email_ly"
                     android:orientation="vertical"
                     android:layout_width="match_parent"
@@ -121,7 +126,7 @@
                             android:gravity="left"
                             android:layout_marginLeft="2dp"
                             android:layout_width="match_parent"
-                            style="@style/LorgeText2"
+                            android:textSize="14dp"
                             android:textColor="@color/colorPrimaryDark"
                             android:textColorHint="@color/colorPrimaryDark"
                             android:text="Email id"
@@ -133,7 +138,7 @@
                         <androidx.appcompat.widget.AppCompatEditText
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:textSize="12dp"
+                            android:textSize="14dp"
                             android:inputType="text"
                             android:layout_marginLeft="2dp"
                             android:id="@+id/email_edit_text"
@@ -142,6 +147,8 @@
                     </LinearLayout>
                 </LinearLayout>
         <LinearLayout
+            android:layout_marginTop="10dp"
+            android:padding="5dp"
             android:id="@+id/employement_selection_ly"
             android:orientation="vertical"
             android:layout_width="match_parent"
@@ -163,7 +170,7 @@
                     android:gravity="left"
                     android:layout_marginLeft="2dp"
                     android:layout_width="match_parent"
-                    style="@style/LorgeText2"
+                    android:textSize="14dp"
                     android:textColor="@color/colorPrimaryDark"
                     android:textColorHint="@color/colorPrimaryDark"
                     android:text="@string/Employment_Details"
@@ -193,6 +200,8 @@
             </LinearLayout>
         </LinearLayout>
        <LinearLayout
+           android:layout_marginTop="10dp"
+           android:padding="5dp"
                     android:orientation="vertical"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
@@ -213,7 +222,7 @@
                             android:gravity="left"
                             android:layout_marginLeft="2dp"
                             android:layout_width="match_parent"
-                            style="@style/LorgeText2"
+                            android:textSize="14dp"
                             android:textColor="@color/colorPrimaryDark"
                             android:textColorHint="@color/colorPrimaryDark"
                             android:text="PAN Card Number"
@@ -225,7 +234,7 @@
                         <androidx.appcompat.widget.AppCompatEditText
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:textSize="12dp"
+                            android:textSize="14dp"
                             android:id="@+id/PAN_Edit_text"
                             android:layout_marginLeft="2dp"
                             android:inputType="textCapCharacters"
@@ -234,6 +243,8 @@
                     </LinearLayout>
                 </LinearLayout>
         <LinearLayout
+            android:layout_marginTop="10dp"
+            android:padding="5dp"
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -254,7 +265,7 @@
                     android:gravity="left"
                     android:layout_marginLeft="2dp"
                     android:layout_width="match_parent"
-                    style="@style/LorgeText2"
+                    android:textSize="14dp"
                     android:textColor="@color/colorPrimaryDark"
                     android:textColorHint="@color/colorPrimaryDark"
                     android:text="Date of Birth"
@@ -266,7 +277,7 @@
                 <androidx.appcompat.widget.AppCompatEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="12dp"
+                    android:textSize="14dp"
                     android:clickable="true"
                     android:editable="false"
                     android:layout_marginLeft="2dp"
@@ -276,6 +287,8 @@
             </LinearLayout>
         </LinearLayout>
         <LinearLayout
+            android:layout_marginTop="10dp"
+            android:padding="5dp"
             android:visibility="gone"
             android:orientation="vertical"
             android:layout_width="match_parent"
@@ -318,6 +331,8 @@
         </LinearLayout>
 
         <LinearLayout
+            android:layout_marginTop="10dp"
+            android:padding="5dp"
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -338,7 +353,7 @@
                     android:gravity="left"
                     android:layout_marginLeft="2dp"
                     android:layout_width="match_parent"
-                    style="@style/LorgeText2"
+                    android:textSize="14dp"
                     android:textColor="@color/colorPrimaryDark"
                     android:textColorHint="@color/colorPrimaryDark"
                     android:text="Father’s Name"
@@ -350,7 +365,7 @@
                 <androidx.appcompat.widget.AppCompatEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="12dp"
+                    android:textSize="14dp"
                     android:inputType="text"
                     android:id="@+id/Fathers_Name"
                     android:layout_marginLeft="2dp"
@@ -360,6 +375,8 @@
         </LinearLayout>
 
         <LinearLayout
+            android:layout_marginTop="10dp"
+            android:padding="5dp"
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -380,7 +397,7 @@
                     android:gravity="left"
                     android:layout_marginLeft="2dp"
                     android:layout_width="match_parent"
-                    style="@style/LorgeText2"
+                    android:textSize="14dp"
                     android:textColor="@color/colorPrimaryDark"
                     android:textColorHint="@color/colorPrimaryDark"
                     android:text="Marital Status"

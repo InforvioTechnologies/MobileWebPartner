@@ -55,8 +55,6 @@ public class Urls {
     public static String GET_PINCODE_POST  = Urls + "getpincode";
     public static String GET_TOCKEN  = Urls_phamplet + "get_Token";
 
-
-
     public static String GET_AERA_POST  = Urls + "getarea";
     public static String BUSS_TYPE_POST  = Urls + "get_businesstype";
     public static String GET_CITY_POST  = Urls + "getcity&state_value=";
@@ -92,7 +90,8 @@ public class Urls {
     public static String TRACK_POST = Urls + "gettrack_status";
     public static String APPLICANT_INFO_POST = Urls + "getapplicationdetails";
     public static String APPLICANT_STATUS_POST = Urls + "get_applicantstatus";
-    public static String BANK_GET = "http://cscapi.propwiser.com/mobile/rental.php?call=bank_list";
+  //  public static String BANK_GET = "http://cscapi.propwiser.com/mobile/rental.php?call=bank_list";
+    public static String BANK_GET = Urls_step+"bank_list";
 
     //Step changes
     public static String Lead_Creation = Urls_step + "Lead_Creation";
@@ -112,6 +111,7 @@ public class Urls {
     public static String PAYMENT_CONFIRMATION = Urls_step + "payarr";
     public static String PAYMENT_SCHEDULE = Urls_step + "get_payschedule";
     public static String DOCUMENT_CHECK_LIST = Urls_step + "get_documentcklist";
+    public static String bank_status_fetch = Urls_step + "bank_status_fetch";
     public static String Get_DocumentcklistProp = Urls_step + "Get_DocumentcklistProp";
     public static String APPLICANT_INFO = Urls_step + "applicant_info";
     public static String UPDATED_ENABLE = Urls_step + "update_enable";
@@ -124,6 +124,7 @@ public class Urls {
     public static String PDF_Document_Upload = Urls_step + "multi_docpdf";
     public static String DOC_IMAGE_VIEW = Urls_step + "docu_view";
     public static String validate_upldoc = Urls_step + "validate_upldoc";
+    public static String validate_checklist = Urls_step + "validate_checklist";
 
     public static String Bank_Statement_Upload = Urls_step + "bank_statement_upload";
 

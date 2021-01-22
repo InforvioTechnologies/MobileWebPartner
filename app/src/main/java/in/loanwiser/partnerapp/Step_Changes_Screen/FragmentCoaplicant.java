@@ -12,6 +12,7 @@ import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.AppCompatTextView;
 import androidx.fragment.app.Fragment;
 
+import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.text.Html;
 import android.util.Log;
@@ -74,13 +75,13 @@ public class FragmentCoaplicant extends Fragment implements CompoundButton.OnChe
             Work_Proof_txt_id,Photo_Proof_txt,Signature_id_txt;
     String documentreq,documentre_type;
     int keyarray = 0;
-    String coapplicantstatus;
+    String coapplicantstatus,description,enable_status;
 
     public FragmentCoaplicant() {
         // Required empty public constructor
     }
 
-
+    int count,count1,prpceed;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -144,8 +145,9 @@ public class FragmentCoaplicant extends Fragment implements CompoundButton.OnChe
         lparams.setMargins(10, 10, 10, 10);
         tv.setText(R.string.notess);
         tv.setTextSize(14);
-        Typeface fonts = Typeface.createFromAsset(getActivity().getAssets(), "segoe_ui.ttf");
-        tv.setTypeface(fonts);
+        tv.setTypeface(font,Typeface.BOLD);
+       /* Typeface fonts = Typeface.createFromAsset(getActivity().getAssets(), "segoe_ui.ttf");
+        tv.setTypeface(fonts);*/
         tv.setTextColor(Color.parseColor("#D44D53"));
         check_list_name.addView(tv);
 
@@ -168,10 +170,109 @@ public class FragmentCoaplicant extends Fragment implements CompoundButton.OnChe
         Docum_ch_step1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                boolean oneChecked = false;
+                View v = null;
 
-                Intent intent = new Intent(getActivity(), Applicant_Doc_Details_revamp.class);
-                startActivity(intent);
-                getActivity().finish();
+
+                count1 =0;
+                Iterator iterator = doc_ar.keys();
+                while (iterator.hasNext()) {
+
+                    String key = (String) iterator.next();
+                    list_key = new ArrayList<String>();
+
+
+                    Log.e("the value", list_key.toString());
+                    try {
+                        response_iD_proof_comon = doc_ar.getJSONArray(key);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    //  JSONObject req_type=doc_ar.getJSONObject("document_req");
+
+                    outerloop:
+                    for (int h = 0; h < response_iD_proof_comon.length(); h++) {
+                        JSONObject J = null;
+                        try {
+
+                            J = response_iD_proof_comon.getJSONObject(h);
+                            doc_ype_com = J.getJSONArray("doc_type_names");
+                            JSONObject js=doc_ype_com.getJSONObject(h);
+                            description=J.getString("nameforhtml");
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        Log.e("length of", String.valueOf(doc_ype_com.length()));
+
+                        count = 0;
+                        for (int i=0;i<doc_ype_com.length();i++) {
+
+
+                            JSONObject rec5 = null;
+                            try {
+                                rec5 = doc_ype_com.getJSONObject(i);
+                                documentre_type=rec5.getString("document_req");
+                                checklist_name1 = rec5.getString("doc_typename");
+                                enable_status = rec5.getString("enable_status");
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+
+                            if(documentre_type.equals("1"))
+                            {
+
+                                if (enable_status.equals("1")) {
+                                    count= count + 1;
+                                    // Log.e("c", String.valueOf(count));
+                                    break ;
+                                }else
+                                {
+                                    continue;
+                                }
+                            }else
+                            {
+                                count= count + 2;
+                            }
+                        }
+                        // Log.e("count", String.valueOf(count));
+                        if(count>=1)
+                        {
+
+
+                        }else
+                        {
+                            count1= count1 + 1;
+                            Log.e("count1", String.valueOf(count1));
+                            Toast.makeText(getActivity(), "select any one from "+description,Toast.LENGTH_SHORT).show();
+                            break outerloop;
+                        }
+                        // Log.e("count1", String.valueOf(count1));
+                    }
+                }
+                Log.e("count", String.valueOf(count));
+                Log.e("count1", String.valueOf(count1));
+
+
+                if(count1 ==0) {
+
+                    if (count != 0 && count != count1) {
+
+                        Handler handler = new Handler();
+                        handler.postDelayed(new Runnable() {
+                            public void run() {
+                               // Document_Statues();
+                                Intent intent = new Intent(getActivity(), Applicant_Doc_Details_revamp.class);
+                                startActivity(intent);
+                                getActivity().finish();
+                            }
+                        }, 200);
+                    } else {
+
+                    }
+                }
+
+                //
             }
         });
 
@@ -278,10 +379,10 @@ public class FragmentCoaplicant extends Fragment implements CompoundButton.OnChe
                                         doc_ype_com = J.getJSONArray("doc_type_names");
                                         Log.e("DOCUMENTTYpe", String.valueOf(doc_ype_com));
                                         JSONObject js=doc_ype_com.getJSONObject(i);
-                                        String test=js.getString("document_req");
+                                        String document_req =js.getString("document_req");
 
 
-                                        checklist_name(doc_ype_com,key);
+                                        checklist_name(doc_ype_com,key,document_req);
 
                                     } catch (JSONException e) {
                                         e.printStackTrace();
@@ -328,7 +429,7 @@ public class FragmentCoaplicant extends Fragment implements CompoundButton.OnChe
 
 
     @SuppressLint("ResourceAsColor")
-    private void checklist_name(final JSONArray doc_ype_com,String key) {
+    private void checklist_name(final JSONArray doc_ype_com,String key,String document_req) {
 
 
         LinearLayout.LayoutParams lparams = new LinearLayout.LayoutParams(
@@ -341,7 +442,12 @@ public class FragmentCoaplicant extends Fragment implements CompoundButton.OnChe
             lparams.setMargins(10, 10, 10, 10);
             String star="<font color='#D44D53'>*</font>";
             list_key.add(key);
-            tv.setText(Html.fromHtml(key + " "+star));
+            if(document_req.equals("1"))
+            {
+                tv.setText(Html.fromHtml(key + " "+star));
+            }else {
+                tv.setText(Html.fromHtml(key));
+            }
             //list_key.add(key);
             //tv.setText(key);
            // tv.setText(key);
@@ -353,14 +459,14 @@ public class FragmentCoaplicant extends Fragment implements CompoundButton.OnChe
             check_list_name.addView(tv);
 
 
-            LinearLayout.LayoutParams lpara = new LinearLayout.LayoutParams(
-                    LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+          /*  LinearLayout.LayoutParams lpara = new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);*/
 
             TextView tvs = new TextView(getActivity());
             TextView tls=new TextView(getActivity());
             //  tls.setLayoutParams(lparams);
             tvs.setLayoutParams(lparams);
-            lparams.setMargins(10, 10, 10, 10);
+            //lparams.setMargins(10, 0, 10, 0);
             tvs.setTextSize(12);
             //  tls.setTextSize(18);
             Typeface fonts = Typeface.createFromAsset(getActivity().getAssets(), "segoe_ui.ttf");
@@ -370,7 +476,7 @@ public class FragmentCoaplicant extends Fragment implements CompoundButton.OnChe
             //   tls.setTextColor(Color.parseColor("#D34D53"));
             tvs.setTextColor(Color.parseColor("#D44D53"));
             // tvs.setBackgroundColor(Color.GREEN);
-            check_list_name.addView(tvs,lparams);
+            check_list_name.addView(tvs);
 
            /* TextView tvs = new TextView(getActivity());
             TextView tls=new TextView(getActivity());
@@ -476,8 +582,35 @@ public class FragmentCoaplicant extends Fragment implements CompoundButton.OnChe
                     }
                     else
                     {
-                        String status = "0";
-                        document_format(target_id6,status);
+
+                        String string5 = checkBox.getText().toString();
+                        Log.e("checkbox PHoto PF", string5);
+
+                        for (int i = 0; i < doc_ype_com.length(); i++) {
+
+
+                            try {
+                                jsonObjectUid5 = doc_ype_com.getJSONObject(i);
+
+                                doc_typename6 = jsonObjectUid5.getString("doc_typename");
+
+
+
+                                if (string5.equals(doc_typename6)) {
+                                    target_id6 = jsonObjectUid5.getString("legal_docid");
+                                    mList5.add(target_id6);
+                                    Log.e("target_id6", String.valueOf(target_id6));
+                                    String status = "0";
+                                    document_format(target_id6,status);
+                                }
+
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+
+                        }
+                        /*String status = "0";
+                        document_format(target_id6,status);*/
                     }
 
 
@@ -599,7 +732,7 @@ public class FragmentCoaplicant extends Fragment implements CompoundButton.OnChe
                     @Override
                     public void onResponse(JSONObject object) {
                         Log.e("RESPONSE cHECKBOXsTATUS", String.valueOf(object));
-
+                        Document_check_lsit1();
                         progressDialog.dismiss();
                     }
                 }, new Response.ErrorListener() {
@@ -624,7 +757,175 @@ public class FragmentCoaplicant extends Fragment implements CompoundButton.OnChe
 
     }
 
+    private void Document_check_lsit1() {
+        JSONObject J = null;
+        try {
+            J = new JSONObject();
+            J.put("transaction_id", transaction_id);
+            J.put("employement_type", coapplicantstatus);
+            J.put("applicant_type", "1");
+            J.put("type_req", 0);
+            J.put("status_flag", 1);
+            Log.i("TAG", "Document_check_lsit:request "+J.toString());
 
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        progressDialog.show();
+        Log.e("Request Applicant ", String.valueOf(J));
+
+        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, Urls.DOCUMENT_CHECK_LIST, J,
+                new Response.Listener<JSONObject>() {
+
+                    @Override
+                    public void onResponse(JSONObject object) {
+                        Log.e("Document_check_list", object.toString());
+                        try
+                        {
+                            response_doc=object.getJSONObject("response");
+                            key_value=response_doc.getJSONArray("key_arr");
+                            Log.i("TAG", "Keyarray "+key_value);
+                            Log.e("KEY_ARR_VALUE", key_value.toString());
+                            doc_ar=response_doc.getJSONObject("document_arr");
+                            // document_req=response_doc.getJSONObject("document_req");
+                            //below few lines array key name
+
+                            Iterator iterator = doc_ar.keys();
+                            while (iterator.hasNext()) {
+
+                                String key = (String)iterator.next();
+                                Log.i("TAG", "keyvaluecheck: "+key);
+                                Log.e("value", key.toString());
+                                list_key = new ArrayList<String>();
+
+
+                                Log.e("the value",list_key.toString());
+                                response_iD_proof_comon = doc_ar.getJSONArray(key);
+                                //  JSONObject req_type=doc_ar.getJSONObject("document_req");
+
+                                for (int i=0;i<response_iD_proof_comon.length();i++) {
+                                    JSONObject J = null;
+                                    try {
+
+                                        J = response_iD_proof_comon.getJSONObject(i);
+                                        doc_ype_com = J.getJSONArray("doc_type_names");
+                                        Log.e("DOCUMENTTYpe", String.valueOf(doc_ype_com));
+                                        JSONObject js=doc_ype_com.getJSONObject(i);
+                                        String test=js.getString("document_req");
+
+
+                                        //  checklist_name(doc_ype_com,key);
+
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                    }
+
+
+                                }
+
+                            }
+                        }
+
+                        catch (JSONException e)
+                        {
+                            e.printStackTrace();
+                        }
+
+                        progressDialog.dismiss();
+                    }
+                }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                VolleyLog.d("TAG", "Error: " + error.getMessage());
+                Toast.makeText(getActivity(), "Network error, try after some time",Toast.LENGTH_SHORT).show();
+                progressDialog.dismiss();
+            }
+        }) {
+
+            /**
+             * Passing some request headers
+             * */
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("Content-Type", "application/json");
+                return headers;
+            }
+        };
+
+        // Adding request to request queue
+        AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
+
+    }
+    private void Document_Statues() {
+        JSONObject jsonObject =new JSONObject();
+        JSONObject J= null;
+        try {
+            J =new JSONObject();
+            //  J.put(Params.user_id, id);
+            J.put("transaction_id", transaction_id);
+            J.put("employement_type", coapplicantstatus);
+            J.put("applicant_type", "2");
+            J.put("type_req", 0);
+            J.put("status_flag", 1);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        Log.e("the Document",J.toString());
+        progressDialog.show();
+        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, Urls.validate_checklist, J,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+
+                        Log.e("the reponse",response.toString());
+                        try {
+
+
+                            String status  = response.getString("status");
+                            String validate  = response.getString("validate");
+                            if(validate.equals("1"))
+                            {
+
+                                progressDialog.dismiss();
+                                Intent intent = new Intent(getActivity(), Applicant_Doc_Details_revamp.class);
+                                startActivity(intent);
+                                getActivity().finish();
+                            }else
+                            {
+
+                                Toast.makeText(getActivity(),"Please Check the mandatory Documents", Toast.LENGTH_SHORT).show();
+                                progressDialog.dismiss();
+                            }
+
+                            //   JSONArray ja = response.getJSONArray(Params.emp_states);
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+
+                    }
+                }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                progressDialog.dismiss();
+
+                Log.e("the error",error.toString());
+                Toast.makeText(getActivity(),error.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("content-type", "application/json");
+                return headers;
+            }
+        };
+        AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
+    }
     @Override
     public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
 

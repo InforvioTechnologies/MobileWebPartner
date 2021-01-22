@@ -6,8 +6,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/cardView"
-    android:layout_width="136dp"
-    android:layout_height="117dp"
+    android:layout_width="156dp"
+    android:layout_height="147dp"
     app:cardBackgroundColor="@color/colorWhite"
     android:clickable="true"
     app:cardElevation="3dp"
@@ -16,7 +16,6 @@
     android:orientation="vertical">
 
     <LinearLayout
-        android:layout_gravity="center"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -117,16 +116,13 @@
             </LinearLayout>
 
         </LinearLayout>
-        <LinearLayout
-            android:layout_marginBottom="10dp"
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+
 
             <LinearLayout
                 android:gravity="center"
                 android:layout_gravity="center"
                 android:orientation="horizontal"
+                android:layout_marginTop="13dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
@@ -141,8 +137,8 @@
                     android:textSize="10dp"
                     android:textColor="@color/white"
                     android:background="@drawable/capsul_button4"
-                    android:layout_width="60dp"
-                    android:layout_height="21dp"
+                    android:layout_width="70dp"
+                    android:layout_height="25dp"
                     />
             </LinearLayout>
 
@@ -150,6 +146,6 @@
         </LinearLayout>
 
 
-    </LinearLayout>
+
 
 </androidx.cardview.widget.CardView>

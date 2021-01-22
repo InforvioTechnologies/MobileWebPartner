@@ -1,0 +1,717 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".Step_Changes_Screen.Lead_Crration_Activity">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <ScrollView
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="0dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+            <LinearLayout
+                android:padding="15dp"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <com.kofigyan.stateprogressbar.StateProgressBar
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:spb_currentStateNumber="one"
+                    app:spb_currentStateDescriptionColor="@color/bc_green"
+                    app:spb_stateDescriptionColor="@color/white"
+                    app:spb_stateNumberBackgroundColor="@color/white"
+                    app:spb_stateForegroundColor="@color/colorPrimary"
+                    app:spb_stateNumberForegroundColor="@color/white"
+                    app:spb_stateBackgroundColor="@color/colorAccent"
+                    app:spb_maxStateNumber="four"/>
+
+
+                    <LinearLayout
+                        android:layout_marginTop="10dp"
+                        android:padding="5dp"
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <LinearLayout
+                            android:id="@+id/Ly_spinner_loan_category"
+                            android:orientation="horizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:visibility="gone"
+                                android:gravity="left"
+                                android:layout_marginLeft="2dp"
+                                android:id="@+id/txt_loan_category"
+                                android:layout_width="wrap_content"
+                                style="@style/LorgeText2"
+                                android:textColor="@color/colorPrimaryDark"
+                                android:textColorHint="@color/colorPrimaryDark"
+
+                                android:layout_height="wrap_content" />
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:gravity="left"
+                                android:id="@+id/txt_loan_category1"
+                                android:layout_width="match_parent"
+                               android:textSize="12dp"
+                                android:textColor="@color/colorPrimaryDark"
+                                android:textColorHint="@color/colorPrimaryDark"
+                                android:hint="Loan Category"
+                                android:layout_height="wrap_content" />
+                        </LinearLayout>
+                        <LinearLayout
+
+                            android:orientation="horizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp">
+                            <LinearLayout
+
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent">
+                                <Spinner
+                                    style="@style/Base.Widget.AppCompat.Spinner.Underlined"
+                                    android:backgroundTint="#ff000000"
+                                    android:backgroundTintMode="src_in"
+                                    android:spinnerMode="dropdown"
+                                    android:id="@+id/spinner_loan_category"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent" />
+                            </LinearLayout>
+
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:padding="5dp"
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <LinearLayout
+                            android:id="@+id/Ly_spinner_loan_type"
+                            android:orientation="horizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:gravity="left"
+                                android:visibility="gone"
+                                android:layout_marginLeft="2dp"
+                                android:id="@+id/loan_type"
+                                android:layout_width="wrap_content"
+                                style="@style/LorgeText2"
+                                android:textColor="@color/colorPrimaryDark"
+                                android:textColorHint="@color/colorPrimaryDark"
+
+                                android:layout_height="wrap_content" />
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:gravity="left"
+                                android:layout_marginLeft="2dp"
+                                android:id="@+id/loan_type1"
+                                android:layout_width="match_parent"
+                                android:textSize="12dp"
+                                android:textColor="@color/colorPrimaryDark"
+                                android:textColorHint="@color/colorPrimaryDark"
+                                android:hint="Loan Type"
+                                android:layout_height="wrap_content" />
+                        </LinearLayout>
+                        <LinearLayout
+                            android:gravity="center"
+                            android:orientation="horizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp">
+
+                            <LinearLayout
+
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent">
+                                <Spinner
+                                    style="@style/Base.Widget.AppCompat.Spinner.Underlined"
+                                    android:backgroundTint="#ff000000"
+                                    android:backgroundTintMode="src_in"
+                                    android:spinnerMode="dropdown"
+                                    android:id="@+id/spinner_loan_type"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent" />
+                            </LinearLayout>
+
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/type_of_empmnt"
+                        android:padding="5dp"
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <LinearLayout
+
+                            android:orientation="horizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:visibility="gone"
+                                android:gravity="left"
+                                android:layout_marginLeft="2dp"
+                                android:id="@+id/type_of_empmnt_txt"
+                                android:layout_width="wrap_content"
+                                style="@style/LorgeText2"
+                                android:textColor="@color/colorPrimaryDark"
+                                android:textColorHint="@color/colorPrimaryDark"
+                                android:layout_height="wrap_content" />
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:gravity="left"
+                                android:layout_marginLeft="2dp"
+                                android:id="@+id/type_of_empmnt_txt1"
+                                android:layout_width="match_parent"
+                                android:textSize="12dp"
+                                android:textColor="@color/colorPrimaryDark"
+                                android:textColorHint="@color/colorPrimaryDark"
+                                android:text="@string/type_of_emp"
+                                android:layout_height="wrap_content" />
+                        </LinearLayout>
+                        <LinearLayout
+                            android:gravity="center"
+                            android:orientation="horizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent">
+                                <Spinner
+                                    style="@style/Base.Widget.AppCompat.Spinner.Underlined"
+                                    android:backgroundTint="#ff000000"
+                                    android:backgroundTintMode="src_in"
+                                    android:spinnerMode="dropdown"
+                                    android:id="@+id/spnr_type_of_empmnt"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent" />
+                            </LinearLayout>
+
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:padding="5dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:orientation="vertical"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+                            <LinearLayout
+                                android:id="@+id/Ly_loan_amount"
+                                android:orientation="horizontal"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:gravity="left"
+                                    android:visibility="gone"
+                                    android:layout_marginLeft="2dp"
+                                    android:id="@+id/Loan_amount"
+                                    android:layout_width="wrap_content"
+                                    style="@style/LorgeText2"
+                                    android:textColor="@color/colorPrimaryDark"
+                                    android:textColorHint="@color/colorPrimaryDark"
+                                    android:layout_height="wrap_content" />
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:gravity="left"
+                                    android:layout_marginLeft="2dp"
+                                    android:layout_width="match_parent"
+                                    android:id="@+id/Loan_amount1"
+                                    android:textSize="12dp"
+                                    android:textColor="@color/colorPrimaryDark"
+                                    android:textColorHint="@color/colorPrimaryDark"
+                                    android:hint="Loan Amount"
+                                    android:layout_height="wrap_content" />
+                            </LinearLayout>
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent">
+                                <androidx.appcompat.widget.AppCompatEditText
+                                    android:id="@+id/loan_amount_ext"
+                                    android:textSize="12dp"
+                                    android:textColor="@color/black"
+                                    android:inputType="number"
+                                    android:maxLength="10"
+                                    android:imeOptions="actionDone"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"/>
+                            </LinearLayout>
+                        </LinearLayout>
+                        <LinearLayout
+                            android:orientation="vertical"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+                            <LinearLayout
+                                android:id="@+id/Ly_name"
+                                android:orientation="horizontal"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:gravity="left"
+                                    android:visibility="gone"
+                                    android:layout_marginLeft="2dp"
+                                    android:id="@+id/name"
+                                    android:layout_width="wrap_content"
+                                    style="@style/LorgeText2"
+                                    android:textColor="@color/colorPrimaryDark"
+                                    android:textColorHint="@color/colorPrimaryDark"
+                                    android:layout_height="wrap_content" />
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:gravity="left"
+                                    android:layout_marginLeft="2dp"
+                                    android:layout_width="match_parent"
+                                    android:textSize="12dp"
+                                    android:id="@+id/name1"
+                                    android:inputType="text"
+                                    android:textColor="@color/colorPrimaryDark"
+                                    android:textColorHint="@color/colorPrimaryDark"
+                                    android:hint="Applicant name"
+                                    android:layout_height="wrap_content" />
+                            </LinearLayout>
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent">
+                                <androidx.appcompat.widget.AppCompatEditText
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:id="@+id/name_txt"
+                                    android:textSize="12dp"
+                                    android:inputType="textEmailAddress"
+                                    android:imeOptions="actionDone"
+                                    android:textColor="@color/black"/>
+                            </LinearLayout>
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_marginTop="10dp"
+                            android:orientation="vertical"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+                            <LinearLayout
+                                android:id="@+id/Ly_email"
+                                android:orientation="horizontal"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:gravity="left"
+                                    android:id="@+id/email"
+                                    android:visibility="gone"
+                                    android:layout_width="wrap_content"
+                                    style="@style/LorgeText2"
+                                    android:textColor="@color/colorPrimaryDark"
+                                    android:textColorHint="@color/colorPrimaryDark"
+
+                                    android:layout_height="wrap_content" />
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:id="@+id/email1"
+                                    android:gravity="left"
+                                    android:layout_marginLeft="2dp"
+                                    android:layout_width="match_parent"
+                                    android:textSize="12dp"
+                                    android:textColor="@color/colorPrimaryDark"
+                                    android:textColorHint="@color/colorPrimaryDark"
+                                    android:hint="Email"
+                                    android:layout_height="wrap_content" />
+                            </LinearLayout>
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent">
+                                <androidx.appcompat.widget.AppCompatEditText
+                                    android:id="@+id/email_edite_txt"
+                                    android:textSize="12dp"
+                                    android:inputType="textEmailAddress"
+                                    android:textColor="@color/black"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"/>
+                            </LinearLayout>
+                        </LinearLayout>
+                        <LinearLayout
+                            android:orientation="vertical"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+                            <LinearLayout
+                                android:id="@+id/Ly_mob"
+                                android:orientation="horizontal"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:gravity="left"
+                                    android:visibility="gone"
+                                    android:layout_marginLeft="2dp"
+                                    android:id="@+id/mobile"
+                                    android:layout_width="wrap_content"
+                                    style="@style/LorgeText2"
+                                    android:textColor="@color/colorPrimaryDark"
+                                    android:textColorHint="@color/colorPrimaryDark"
+                                    android:layout_height="wrap_content" />
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:gravity="left"
+                                    android:layout_marginLeft="2dp"
+                                    android:layout_width="match_parent"
+                                    android:id="@+id/mobile1"
+                                    android:textSize="12dp"
+                                    android:textColor="@color/colorPrimaryDark"
+                                    android:textColorHint="@color/colorPrimaryDark"
+                                    android:hint="Mobile Number"
+                                    android:layout_height="wrap_content" />
+                            </LinearLayout>
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent">
+                                <androidx.appcompat.widget.AppCompatEditText
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:id="@+id/mobile_no_txt"
+                                    android:textSize="12dp"
+                                    android:inputType="number"
+                                    android:maxLength="10"
+                                    android:imeOptions="actionDone"
+                                    android:textColor="@color/black"/>
+                            </LinearLayout>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/Is_Mobile_no"
+                            android:orientation="vertical"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+                            <LinearLayout
+                                android:orientation="horizontal"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:gravity="left"
+                                    android:visibility="gone"
+                                    android:layout_marginLeft="2dp"
+                                    android:id="@+id/is_mobile_no"
+                                    android:layout_width="wrap_content"
+                                    style="@style/LorgeText2"
+                                    android:textColor="@color/colorPrimaryDark"
+                                    android:textColorHint="@color/colorPrimaryDark"
+
+                                    android:layout_height="wrap_content" />
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:gravity="left"
+                                    android:layout_marginLeft="2dp"
+                                    android:id="@+id/is_mobile_no1"
+                                    android:layout_width="match_parent"
+                                    android:textSize="12dp"
+                                    android:textColor="@color/colorPrimaryDark"
+                                    android:textColorHint="@color/colorPrimaryDark"
+                                    android:text="@string/is_mobile_"
+                                    android:layout_height="wrap_content" />
+                            </LinearLayout>
+                            <LinearLayout
+                                android:gravity="center"
+                                android:orientation="horizontal"
+                                android:layout_width="match_parent"
+                                android:layout_height="50dp">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent">
+                                    <Spinner
+                                        style="@style/Base.Widget.AppCompat.Spinner.Underlined"
+                                        android:backgroundTint="#ff000000"
+                                        android:backgroundTintMode="src_in"
+                                        android:spinnerMode="dropdown"
+                                        android:id="@+id/is_whats_app_spinner"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent" />
+                                </LinearLayout>
+
+                            </LinearLayout>
+                        </LinearLayout>
+                        <LinearLayout
+                            android:id="@+id/co_applicant_ly"
+                            android:orientation="vertical"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+                            <LinearLayout
+                                android:orientation="horizontal"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:gravity="left"
+                                    android:layout_marginLeft="2dp"
+                                    android:id="@+id/do_you_have_coApp_txt"
+                                    android:layout_width="wrap_content"
+                                    style="@style/LorgeText2"
+                                    android:textColor="@color/colorPrimaryDark"
+                                    android:textColorHint="@color/colorPrimaryDark"
+                                    android:visibility="gone"
+                                    android:layout_height="wrap_content" />
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:gravity="left"
+                                    android:layout_marginLeft="2dp"
+                                    android:id="@+id/do_you_have_coApp_txt1"
+                                    android:layout_width="match_parent"
+                                    android:textSize="12dp"
+                                    android:textColor="@color/colorPrimaryDark"
+                                    android:textColorHint="@color/colorPrimaryDark"
+                                    android:text="@string/co_applicant"
+                                    android:layout_height="wrap_content" />
+                            </LinearLayout>
+                            <LinearLayout
+                                android:gravity="center"
+                                android:orientation="horizontal"
+                                android:layout_width="match_parent"
+                                android:layout_height="50dp">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent">
+                                    <Spinner
+                                        style="@style/Base.Widget.AppCompat.Spinner.Underlined"
+                                        android:backgroundTint="#ff000000"
+                                        android:backgroundTintMode="src_in"
+                                        android:spinnerMode="dropdown"
+                                        android:id="@+id/co_applicant_spinner"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent" />
+                                </LinearLayout>
+
+                            </LinearLayout>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/co_applicant_emp_type"
+                            android:orientation="vertical"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+                            <LinearLayout
+
+                                android:orientation="horizontal"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:gravity="left"
+                                    android:layout_marginLeft="2dp"
+                                    android:id="@+id/coApp_txt_emp_type1"
+                                    android:layout_width="wrap_content"
+                                    style="@style/LorgeText2"
+                                    android:textColor="@color/colorPrimaryDark"
+                                    android:textColorHint="@color/colorPrimaryDark"
+                                    android:visibility="gone"
+                                    android:layout_height="wrap_content" />
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:gravity="left"
+                                    android:layout_marginLeft="2dp"
+                                    android:id="@+id/coApp_txt_emp_type2"
+                                    android:layout_width="match_parent"
+                                    android:textSize="12dp"
+                                    android:textColor="@color/colorPrimaryDark"
+                                    android:textColorHint="@color/colorPrimaryDark"
+                                    android:text="@string/type_of_emp"
+                                    android:layout_height="wrap_content" />
+                            </LinearLayout>
+                            <LinearLayout
+                                android:gravity="center"
+                                android:orientation="horizontal"
+                                android:layout_width="match_parent"
+                                android:layout_height="50dp">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent">
+                                    <Spinner
+                                        style="@style/Base.Widget.AppCompat.Spinner.Underlined"
+                                        android:backgroundTint="#ff000000"
+                                        android:backgroundTintMode="src_in"
+                                        android:spinnerMode="dropdown"
+                                        android:id="@+id/co_applicant_emp_spinner"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent" />
+                                </LinearLayout>
+
+                            </LinearLayout>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/Ly_wt_mob"
+                            android:orientation="vertical"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+                            <LinearLayout
+
+                                android:orientation="horizontal"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:gravity="left"
+                                    android:visibility="gone"
+                                    android:layout_marginLeft="2dp"
+                                    android:id="@+id/wt_mobile"
+                                    android:layout_width="wrap_content"
+                                    style="@style/LorgeText2"
+                                    android:textColor="@color/colorPrimaryDark"
+                                    android:textColorHint="@color/colorPrimaryDark"
+                                    android:layout_height="wrap_content" />
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:gravity="left"
+                                    android:layout_marginLeft="2dp"
+                                    android:layout_width="match_parent"
+                                    android:textSize="12dp"
+                                    android:id="@+id/wt_mobile1"
+                                    android:textColor="@color/colorPrimaryDark"
+                                    android:textColorHint="@color/colorPrimaryDark"
+                                    android:hint="WhatsApp Number"
+                                    android:layout_height="wrap_content" />
+
+                            </LinearLayout>
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent">
+                                <androidx.appcompat.widget.AppCompatEditText
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:id="@+id/whats_app_no"
+                                    android:textSize="12dp"
+                                    android:maxLength="10"
+                                    android:inputType="number"
+                                    android:imeOptions="actionDone"
+                                    android:textColor="@color/black"/>
+                            </LinearLayout>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_gravity="center"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+                            <CheckBox
+                                android:id="@+id/check_complete"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent" />
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:id="@+id/terms_and_condition"
+                                android:gravity="left"
+                                style="@style/SmallText"
+                                android:textColor="@color/colorPrimaryDark"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="@string/wt_termss"/>
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+
+
+                <LinearLayout
+                    android:visibility="gone"
+                    android:layout_marginTop="10dp"
+                    android:elevation="4sp"
+                    android:gravity="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="?android:attr/listPreferredItemHeight"
+                    android:orientation="vertical">
+                    <LinearLayout
+                        android:gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <androidx.appcompat.widget.AppCompatButton
+                            android:id="@+id/lead_cr_step11"
+                            android:text="@string/next"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="start"
+                            android:background="@drawable/capsul_button3"
+                            android:theme="@style/BtnStyleApp" />
+                    </LinearLayout>
+
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/proceedlay"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:gravity="center"
+                    android:layout_margin="25dp"
+                    android:orientation="vertical">
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/lead_cr_step1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:text="@string/proced_next"
+                        android:textColor="@color/white"
+                        android:background="@drawable/capsul_button4"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/submitloanlay"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <Button
+                            android:id="@+id/submitloanbtn"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="20dp"
+                            android:layout_marginRight="20dp"
+                            android:text="@string/submit_loanwiser"
+                            android:textColor="@color/but_red"
+                            android:background="@drawable/capsul_button_rect_out"/>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/savelaterlay"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:gravity="center"
+                    android:layout_margin="20dp"
+                    android:orientation="vertical">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/savelater_textview"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:layout_gravity="center"
+                            android:text="@string/save_later"
+                            android:textColor="@color/but_red"/>
+
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+            </LinearLayout>
+            </ScrollView>
+        </LinearLayout>
+
+
+</LinearLayout>

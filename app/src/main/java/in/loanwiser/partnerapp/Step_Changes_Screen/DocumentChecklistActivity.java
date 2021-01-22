@@ -294,7 +294,6 @@ public class DocumentChecklistActivity extends SimpleActivity implements Compoun
                                         e.printStackTrace();
                                     }
 
-
                                 }
 
                             }

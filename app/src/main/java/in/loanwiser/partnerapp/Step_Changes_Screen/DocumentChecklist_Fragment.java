@@ -178,7 +178,7 @@ public class DocumentChecklist_Fragment extends SimpleActivity implements TabLay
                                 property_identify =  jsonObject2.getString("property_identify");
 
                                 //  applicant_id =  "APP-"+user_id;
-
+                                Pref.putCoAPPAVAILABLE(mCon,"2");
                               String  applicant_empstates=response.getString("app_emp");
                                 String coapplicant_empstates=response.getString("coapp_emp");
                                 String property_empstates=response.getString("prop_emp");
