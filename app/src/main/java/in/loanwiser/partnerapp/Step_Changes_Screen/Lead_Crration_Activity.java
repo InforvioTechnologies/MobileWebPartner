@@ -63,6 +63,7 @@ import in.loanwiser.partnerapp.BankStamentUpload.Upload_Activity_Bank;
 import in.loanwiser.partnerapp.NumberTextWatcher;
 import in.loanwiser.partnerapp.PartnerActivitys.Applicant_Details_Activity;
 import in.loanwiser.partnerapp.PartnerActivitys.Dashboard_Activity;
+import in.loanwiser.partnerapp.PartnerActivitys.Submitsuccess_Activity;
 import in.loanwiser.partnerapp.Payment.Bank_Statement_Activity;
 import in.loanwiser.partnerapp.Payment.PaymentActivity;
 import in.loanwiser.partnerapp.Payment.PaymentDetails;
@@ -143,11 +144,11 @@ public class Lead_Crration_Activity extends SimpleActivity {
         Click();
        // Loanwiser_Api();
 
-    /*  lead_cr_step1.setOnClickListener(new View.OnClickListener() {
+   /*   lead_cr_step1.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
 
-                    Intent intent = new Intent(Lead_Crration_Activity.this, Viability_Screen_revamp.class);
+                    Intent intent = new Intent(Lead_Crration_Activity.this, Submitsuccess_Activity.class);
                     startActivity(intent);
                     finish();
                 }

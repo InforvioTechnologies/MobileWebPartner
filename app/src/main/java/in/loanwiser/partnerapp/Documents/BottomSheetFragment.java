@@ -22,6 +22,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import in.loanwiser.partnerapp.CameraActivity.MainActivity;
 import in.loanwiser.partnerapp.CameraActivity.ManiActivity_Image2;
 import in.loanwiser.partnerapp.R;
 
@@ -83,6 +84,9 @@ public class BottomSheetFragment extends BottomSheetDialogFragment {
                 Intent intent = new Intent(getActivity(), ManiActivity_Image2.class);
                 intent.putExtra("action", "2");
                 startActivity(intent);
+              /*  Intent intent = new Intent(getActivity(), MainActivity.class);
+                intent.putExtra("action", "2");
+                startActivity(intent);*/
             }
         });
         pdflay.setOnClickListener(new View.OnClickListener() {
@@ -91,14 +95,10 @@ public class BottomSheetFragment extends BottomSheetDialogFragment {
                 Intent intent = new Intent(getActivity(), ManiActivity_Image2.class);
                 intent.putExtra("action", "3");
                 startActivity(intent);
+
             }
         });
 
-
-
         return view;
     }
-
-
-
 }

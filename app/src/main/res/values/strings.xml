@@ -991,6 +991,13 @@
     <string name="proceednext">PROCEED TO NEXT STEP</string>
     <string name="crifscore1">Co Applicant <b>CRIF Score</b> </string>
 
+    <string name="congrats">Congrats.! Your Lead is Successfully Submitted to Loanwiser</string>
+    <string name="whatsnext">What\'s Next:</string>
+    <string name="sus1">Your Lead will be Verified and Submitted to Bank (if qualified) by our Loan Processing Executive.</string>
+    <string name="sus2">Our Loan Processing Executive will get in touch with you or the applicant, if we need further detail.</string>
+    <string name="sus3">You can check the recent status for this lead in its "Lead Detail Dashboard" Screen</string>
+    <string name="done">Done</string>
+    <string name="sus11"><b>●</b></string>
 
 
 </resources>

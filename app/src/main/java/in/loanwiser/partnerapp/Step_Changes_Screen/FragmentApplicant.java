@@ -535,7 +535,8 @@ public class FragmentApplicant extends Fragment implements CompoundButton.OnChec
 
             TextView tv = new TextView(getActivity());
             tv.setLayoutParams(lparams);
-            lparams.setMargins(10, 0, 10, 10);
+            lparams.setMargins(10, 12, 10, 12);
+
 
             String star="<font color='#D44D53'>*</font>";
 
@@ -558,13 +559,13 @@ public class FragmentApplicant extends Fragment implements CompoundButton.OnChec
             check_list_name.addView(tv);
            // check_list_name.addView(tv,lparams);
 
-           /* LinearLayout.LayoutParams lpara = new LinearLayout.LayoutParams(
-                    LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);*/
+            LinearLayout.LayoutParams lpara = new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
 
            TextView tvs = new TextView(getActivity());
             TextView tls=new TextView(getActivity());
-          //  tls.setLayoutParams(lparams);
-           // lpara.setMargins(10, 0, 10, 0);
+            tvs.setLayoutParams(lparams);
+            lpara.setMargins(10, 10, 10, 10);
 
             tvs.setLayoutParams(lparams);
             //tvs.setPadding(10, 10, 10, 10);
@@ -616,13 +617,12 @@ public class FragmentApplicant extends Fragment implements CompoundButton.OnChec
               LinearLayout ll2 = new LinearLayout(
                     getActivity());*/
 
-
             CheckBox checkBox= new CheckBox(getActivity());
             checkBox.setOnCheckedChangeListener(this);
             checkBox.setId(k);
             Typeface font = Typeface.createFromAsset(getActivity().getAssets(), "segoe_ui.ttf");
             checkBox.setTypeface(font);
-            checkBox.setLayoutParams(lparams);
+            //checkBox.setLayoutParams(lparams);
             checkBox.setPadding(10, 10, 10, 10);
             checkBox.setTextColor(Color.parseColor("#707070"));
             checkBox.setGravity(Gravity.LEFT);

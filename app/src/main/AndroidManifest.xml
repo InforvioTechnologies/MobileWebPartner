@@ -281,6 +281,11 @@
             android:windowSoftInputMode="stateHidden" />
 
         <activity
+            android:name=".PartnerActivitys.Submitsuccess_Activity"
+            android:theme="@style/NoAction2"
+            android:windowSoftInputMode="stateHidden" />
+
+        <activity
             android:name=".PartnerActivitys.Ask_user_Dashboard_Activity"
             android:theme="@style/NoAction2"
             android:windowSoftInputMode="stateHidden" />
@@ -299,6 +304,11 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Partner_Statues.Ask_Dashboard_Activity"
+            android:theme="@style/NoAction2"
+            android:windowSoftInputMode="stateHidden" />
+
+        <activity
+            android:name=".Partner_Statues.ChecklistShare"
             android:theme="@style/NoAction2"
             android:windowSoftInputMode="stateHidden" />
 
@@ -477,6 +487,10 @@
             android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".CameraActivity.ASK_ManiActivity_Image2"
+            android:theme="@style/NoAction2"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".CameraActivity.MainActivity"
             android:theme="@style/NoAction2"
             android:windowSoftInputMode="stateHidden" />
 

@@ -6,8 +6,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/cardView"
-    android:layout_width="156dp"
-    android:layout_height="147dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     app:cardBackgroundColor="@color/colorWhite"
     android:clickable="true"
     app:cardElevation="3dp"
@@ -16,6 +16,8 @@
     android:orientation="vertical">
 
     <LinearLayout
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -41,8 +43,45 @@
                     android:layout_height="wrap_content"
                     />
             </LinearLayout>
+            <LinearLayout
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:gravity="end"
+                    android:layout_marginRight="10dp"
+                    android:layout_gravity="center"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:text="View"
+                        android:id="@+id/Statues_update"
+                        android:gravity="center"
+                        style="@style/SmallText"
+                        android:textStyle="bold"
+                        android:textAllCaps="false"
+                        android:textSize="10dp"
+                        android:textColor="@color/white"
+                        android:background="@drawable/capsul_button4"
+                        android:layout_width="70dp"
+                        android:layout_height="25dp"
+                        />
+                </LinearLayout>
+            </LinearLayout>
 
         </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
@@ -80,70 +119,51 @@
                     />
             </LinearLayout>
         </LinearLayout>
+        </LinearLayout>
         <LinearLayout
-          android:orientation="horizontal"
+            android:layout_weight="1"
+            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
+            android:layout_height="wrap_content">
             <LinearLayout
-
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:text="Raised on :"
-                    android:id="@+id/raised_on"
-                    android:gravity="left"
-                    style="@style/SmallText"
-                    android:textSize="12dp"
-                    android:textColor="#B0B0B0"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    />
-            </LinearLayout>
-            <LinearLayout
-                android:layout_gravity="center"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:text="12/04/2020 04 25 am"
-                    android:id="@+id/raised_date"
-                    android:gravity="left"
-                    android:textSize="12dp"
-                    android:textColor="#B0B0B0"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    />
-            </LinearLayout>
-
-        </LinearLayout>
-
-
-            <LinearLayout
-                android:gravity="center"
-                android:layout_gravity="center"
                 android:orientation="horizontal"
-                android:layout_marginTop="13dp"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="match_parent">
 
+                <LinearLayout
+                    android:layout_gravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:text="Raised on :"
+                        android:id="@+id/raised_on"
+                        android:gravity="left"
+                        style="@style/SmallText"
+                        android:textSize="10dp"
+                        android:textColor="#B0B0B0"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_gravity="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:text="12/04/2020 04 25 am"
+                        android:id="@+id/raised_date"
+                        android:gravity="left"
+                        android:textSize="10dp"
+                        android:textColor="#B0B0B0"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        />
+                </LinearLayout>
 
-                <androidx.appcompat.widget.AppCompatButton
-                    android:text="View"
-                    android:id="@+id/Statues_update"
-                    android:gravity="center"
-                    style="@style/SmallText"
-                    android:textStyle="bold"
-                    android:textAllCaps="false"
-                    android:textSize="10dp"
-                    android:textColor="@color/white"
-                    android:background="@drawable/capsul_button4"
-                    android:layout_width="70dp"
-                    android:layout_height="25dp"
-                    />
             </LinearLayout>
-
-
         </LinearLayout>
+    </LinearLayout>
+  </LinearLayout>
 
 
 

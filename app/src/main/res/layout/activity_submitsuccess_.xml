@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".PartnerActivitys.Submitsuccess_Activity">
+
+    <LinearLayout
+        android:gravity="center"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="30dp"
+        android:gravity="center">
+
+        <ImageView
+            android:layout_width="91dp"
+            android:layout_height="91dp"
+            android:id="@+id/imageview"
+            android:src="@drawable/ic_green_tick"
+            android:layout_gravity="center"
+            android:scaleType="centerCrop"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="center"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="10dp">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/congrats"
+            android:layout_gravity="center"
+            android:layout_margin="10dp"
+            android:textAlignment="center"
+            android:textColor="@color/text_blue"
+            android:textSize="17dp"
+            android:textStyle="bold"
+            android:gravity="center"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_gravity="center"
+        >
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/whatsnext"
+            android:layout_margin="10dp"
+            android:textSize="14sp"
+            android:textColor="@color/sky_blue"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="center"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="10dp">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_marginLeft="10dp"
+            android:layout_gravity="center"
+            android:textSize="8px"
+            android:id="@+id/doc_status11"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/sus11"
+            android:textColor="@color/colorPrimaryDark1" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/sus1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/sus1"
+            android:layout_margin="10dp"
+            android:textSize="12dp"
+            android:textColor="@color/text_blue"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="center"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="10dp">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/sus11"
+            android:layout_marginLeft="10dp"
+            android:textColor="@color/colorPrimaryDark1"
+            android:textSize="8px" />
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/sus2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/sus2"
+            android:layout_margin="10dp"
+            android:textSize="12dp"
+            android:textColor="@color/text_blue"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="center"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="10dp">
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_marginLeft="10dp"
+            android:layout_gravity="center"
+            android:textSize="8px"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/sus11"
+            android:textColor="@color/colorPrimaryDark1" />
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/sus3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/sus3"
+            android:layout_margin="10dp"
+            android:textSize="12dp"
+            android:textColor="@color/text_blue"
+            />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="30dp"
+       >
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/done"
+            android:layout_width="138.27dp"
+            android:layout_height="44.68dp"
+            android:text="@string/done"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:layout_margin="10dp"
+            android:background="@drawable/sucess_but"
+            android:textSize="14sp"
+            android:textColor="@color/white"
+            />
+
+    </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

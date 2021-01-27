@@ -167,31 +167,31 @@ public class LeadListAdapter_Dashboard extends RecyclerView.Adapter<LeadListAdap
 
             } else if(statues.equals("Submitted to Loanwiser"))
             {
-                Statues_update_dot.setTextColor(Color.parseColor("#F9F338"));
-                statues_new.setTextColor(Color.parseColor("#F9F338"));
+                Statues_update_dot.setTextColor(Color.parseColor("#1592E6"));
+                statues_new.setTextColor(Color.parseColor("#1592E6"));
                 Statues_update_view.setVisibility(View.GONE);
                 Statues_update_view1.setText("View");
                 Statues_update_view1.setVisibility(View.VISIBLE);
 
             }else if(statues.equals("Sanctioned"))
             {
-                Statues_update_dot.setTextColor(Color.parseColor("#1592E6"));
-                statues_new.setTextColor(Color.parseColor("#1592E6"));
+                Statues_update_dot.setTextColor(Color.parseColor("#15CE00"));
+                statues_new.setTextColor(Color.parseColor("#15CE00"));
                 Statues_update_view.setVisibility(View.GONE);
                 Statues_update_view1.setText("View");
                 Statues_update_view1.setVisibility(View.VISIBLE);
             }else if(statues.equals("Disbursed"))
             {
-                Statues_update_dot.setTextColor(Color.parseColor("#15CE00"));
-                statues_new.setTextColor(Color.parseColor("#15CE00"));
+                Statues_update_dot.setTextColor(Color.parseColor("#D05AE9"));
+                statues_new.setTextColor(Color.parseColor("#D05AE9"));
                 Statues_update_view.setVisibility(View.GONE);
                 Statues_update_view1.setText("View");
                 Statues_update_view1.setVisibility(View.VISIBLE);
 
             }else if(statues.equals("Sent to bank"))
             {
-                Statues_update_dot.setTextColor(Color.parseColor("#012B5D"));
-                statues_new.setTextColor(Color.parseColor("#012B5D"));
+                Statues_update_dot.setTextColor(Color.parseColor("#00D1D1"));
+                statues_new.setTextColor(Color.parseColor("#00D1D1"));
                 Statues_update_view.setVisibility(View.GONE);
                 Statues_update_view1.setText("View");
                 Statues_update_view1.setVisibility(View.VISIBLE);

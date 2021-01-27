@@ -175,6 +175,7 @@ public class Urls {
     public static String POST_SHARE  = Urls_step + "post_share";
     public static String DOC_CHECKLIST  = Urls_step + "Get_allDocumentcklist";
     public static String generate_doccklist  = Urls_step + "generate_doccklist";
+    public static String CHECKLIST  = Urls_step + "fetch_loanchecklist";
 
    // public static String DOCUMENT_CHECK  = Urls_step + "Get_allDocumentcklist";
 

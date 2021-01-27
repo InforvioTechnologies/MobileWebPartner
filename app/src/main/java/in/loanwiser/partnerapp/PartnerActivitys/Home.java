@@ -118,7 +118,7 @@ public class Home extends AppCompatActivity {
         AppCompatButton view_ask;
     private static final int STORAGE_PERMISSION_REQUEST_CODE = 1;
     private ImageView loan_statues_,loan_statues_1,step3_statue,step3_statue1;
-    private LinearLayout Loan_Submit_tracStatues,step3_sub_staus;
+    private LinearLayout Loan_Submit_tracStatues,step3_sub_staus,Loan_Statue_submit_layout;
 
     PermissionUtils permissionUtils;
     String applicant_empstates,coapplicant_empstates,property_empstates;
@@ -437,6 +437,7 @@ public class Home extends AppCompatActivity {
         step2crif_but=findViewById(R.id.step2crif_but);
         bankstatment_but=findViewById(R.id.bankstatment_but);
         document_upload_button=findViewById(R.id.document_upload_button);
+        Loan_Statue_submit_layout=findViewById(R.id.Loan_Statue_submit_layout);
         step3payment_but=findViewById(R.id.step3payment_but);
         eligibility_but=findViewById(R.id.eligibility_but);
         document_check_button=findViewById(R.id.document_check_button);
@@ -1530,9 +1531,8 @@ public class Home extends AppCompatActivity {
                                     document_upload_button.setBackgroundResource(R.drawable.but_shape_gray);
                                 }
 
-
                                 document_upload_button.setText("Complete now");
-
+                                Loan_Statue_submit_layout.setVisibility(View.VISIBLE);
                             }else
                             {
                                 document_img1.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
@@ -1541,7 +1541,7 @@ public class Home extends AppCompatActivity {
                                 documentupload_status.setImageDrawable(getResources().getDrawable(R.drawable.ic_green_tick));
                                 document_upload_button.setBackgroundResource(R.drawable.but_shape_blue);
                                 document_upload_button.setText("View");
-
+                                Loan_Statue_submit_layout.setVisibility(View.VISIBLE);
                             }
 
                             if(document_checklist.equals("pending"))
@@ -1825,12 +1825,14 @@ public class Home extends AppCompatActivity {
         AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
     }
 
+
+
     private void Loan_submit_statues() {
         JSONObject J = null;
         try {
             J = new JSONObject();
            // J.put("transaction_id", transaction_id);
-            J.put("transaction_id", 50745);
+            J.put("transaction_id", 53277);
 
         } catch (JSONException e) {
             e.printStackTrace();
@@ -1855,6 +1857,8 @@ public class Home extends AppCompatActivity {
                            String submit_loanwiser = result.getString("submit_loanwiser");
                            String doc_verification = result.getString("doc_verification");
                            String apply_completion_status = result.getString("apply_completion_status");
+
+
 
                            if(submit_loanwiser.equals("1"))
                             {
@@ -1925,7 +1929,8 @@ public class Home extends AppCompatActivity {
                                             J = Bank_details.getJSONObject(j);
                                             String stage_name = J.getString("stage_name");
                                             String completion_date = J.getString("completion_date");
-                                            all = stage_name+"," + completion_date;
+                                            String is_reject = J.getString("is_reject");
+                                            all = stage_name+"," + completion_date+","+is_reject;
                                             lease_offer.add(all);
                                             Log.e("the i value", String.valueOf(i));
                                             listDataChild.put(listDataHeader.get(i), lease_offer);

@@ -57,6 +57,7 @@ public class ExpandableListAdapter1 extends BaseExpandableListAdapter {
         String[] separated = CurrentString.split(",");
         status = separated[0];
       String date =  separated[1];
+      String is_reject =  separated[1];
         /*completion_date = separated[1];
         completion_status = separated[2];
         date_status = separated[3];
@@ -83,8 +84,18 @@ public class ExpandableListAdapter1 extends BaseExpandableListAdapter {
        /* Typeface custom_font = Typeface.createFromAsset(_context.getAssets(), "AlegreyaSans-Regular.ttf");
         doc_status.setTypeface(custom_font);*/
         doc_status11.setText("\u25CF");
+
         doc_status.setText(status+"("+date+")");
-        doc_status11.setTextColor(Color.parseColor("#00ceb4"));
+        if(is_reject.equals("1"))
+        {
+
+            doc_status11.setTextColor(Color.parseColor("#D34D53"));
+        }else
+        {
+
+            doc_status11.setTextColor(Color.parseColor("#00ceb4"));
+        }
+
         //doc_date.setText(completion_date);
 
 
@@ -137,10 +148,16 @@ public class ExpandableListAdapter1 extends BaseExpandableListAdapter {
             convertView = layoutInflater.inflate(R.layout.ly_list_exp_group1, null);
         }
         TextView listTitle = (TextView) convertView.findViewById(R.id.lblListHeader);
+        ImageView app_info_img = (ImageView) convertView.findViewById(R.id.app_info_img);
 
+        int imageResourceId = isExpanded ? R.drawable.ic_down_arrow
+                : R.drawable.ic_uparrow_icon;
+        app_info_img.setImageResource(imageResourceId);
        /* Typeface custom_font = Typeface.createFromAsset(_context.getAssets(), "AlegreyaSans-Regular.ttf");
         listTitle.setTypeface(custom_font);*/
         listTitle.setText(headerTitle);
+
+
 
       /*  app_info_img.setOnClickListener(new View.OnClickListener() {
             @Override

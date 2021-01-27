@@ -66,7 +66,12 @@ public class Document_Adapter extends RecyclerView.Adapter<Document_Adapter.Cust
             @Override
             public void onClick(View view) {
 
-                Intent intent = new Intent(context, ShareLayoutActivity.class);
+              /*  Intent intent = new Intent(context, ShareLayoutActivity.class);
+                intent.putExtra("key",head_line);
+                intent.putExtra("image",icon);
+                intent.putExtra("loantype_id",loantype_id);
+                context.startActivity(intent);*/
+                Intent intent = new Intent(context, ChecklistShare.class);
                 intent.putExtra("key",head_line);
                 intent.putExtra("image",icon);
                 intent.putExtra("loantype_id",loantype_id);

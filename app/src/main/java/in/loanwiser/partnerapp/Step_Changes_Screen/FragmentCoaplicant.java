@@ -459,14 +459,14 @@ public class FragmentCoaplicant extends Fragment implements CompoundButton.OnChe
             check_list_name.addView(tv);
 
 
-          /*  LinearLayout.LayoutParams lpara = new LinearLayout.LayoutParams(
-                    LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);*/
+            LinearLayout.LayoutParams lpara = new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
 
             TextView tvs = new TextView(getActivity());
             TextView tls=new TextView(getActivity());
-            //  tls.setLayoutParams(lparams);
-            tvs.setLayoutParams(lparams);
-            //lparams.setMargins(10, 0, 10, 0);
+              tls.setLayoutParams(lparams);
+            //tvs.setLayoutParams(lparams);
+            lparams.setMargins(10, 10, 10, 10);
             tvs.setTextSize(12);
             //  tls.setTextSize(18);
             Typeface fonts = Typeface.createFromAsset(getActivity().getAssets(), "segoe_ui.ttf");

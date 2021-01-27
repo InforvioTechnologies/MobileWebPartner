@@ -92,7 +92,15 @@ public class Ask_Lead_Statues extends RecyclerView.Adapter<Ask_Lead_Statues.Cust
         String doc_classname1  = items.get(position).getdoc_classname();
 
 
-        holder.lead_name.setText(Name);
+        if(Name.isEmpty())
+        {
+            holder.lead_name.setText("No Name");
+        }else
+        {
+            String output = Name.substring(0, 1).toUpperCase() + Name.substring(1);
+            holder.lead_name.setText(output);
+        }
+
        // holder.loan_amount.setText(loan_amount);
        // holder.loan_amount.setText("\u20B9"+loan_amount);
         holder.status_pending_ask.setText(status_disp);

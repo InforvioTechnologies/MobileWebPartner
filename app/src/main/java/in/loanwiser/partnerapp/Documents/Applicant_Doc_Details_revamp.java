@@ -58,6 +58,7 @@ import in.loanwiser.partnerapp.CameraActivity.MainActivity_IMG_Property2;
 import in.loanwiser.partnerapp.CameraActivity.ManiActivity_Image2;
 import in.loanwiser.partnerapp.PartnerActivitys.Home;
 import in.loanwiser.partnerapp.PartnerActivitys.SimpleActivity;
+import in.loanwiser.partnerapp.PartnerActivitys.Submitsuccess_Activity;
 import in.loanwiser.partnerapp.R;
 
 public class Applicant_Doc_Details_revamp extends SimpleActivity {
@@ -432,7 +433,7 @@ public class Applicant_Doc_Details_revamp extends SimpleActivity {
                                 if(response.getBoolean("doc_uploadstatus")){
                                     // Objs.a.showToast( mCon,"Document uploaded");
                                   //  Objs.ac.StartActivity(mCon, Home.class);
-                                    Intent intent = new Intent(Applicant_Doc_Details_revamp.this, Home.class);
+                                    Intent intent = new Intent(Applicant_Doc_Details_revamp.this, Submitsuccess_Activity.class);
                                     startActivity(intent);
 
                                     finish();

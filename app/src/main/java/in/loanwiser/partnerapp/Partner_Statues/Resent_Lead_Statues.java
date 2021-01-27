@@ -86,6 +86,7 @@ public class Resent_Lead_Statues extends RecyclerView.Adapter<Resent_Lead_Statue
         String output = name.substring(0, 1).toUpperCase() + name.substring(1);
        // textview.setText(output);
 
+
         holder.lead_name.setText(output);
        // holder.loan_amount.setText(loan_amount);
         holder.loan_amount.setText("\u20B9"+loan_amount);
@@ -103,8 +104,8 @@ public class Resent_Lead_Statues extends RecyclerView.Adapter<Resent_Lead_Statue
 
         } else if(status_disp.equals("Submitted to Loanwiser"))
         {
-            holder.Statues_update_dot.setTextColor(Color.parseColor("#F9F338"));
-            holder.Statues_update.setTextColor(Color.parseColor("#F9F338"));
+            holder.Statues_update_dot.setTextColor(Color.parseColor("#1592E6"));
+            holder.Statues_update.setTextColor(Color.parseColor("#1592E6"));
 
 
             holder.Statues_update_view.setVisibility(View.GONE);
@@ -113,23 +114,23 @@ public class Resent_Lead_Statues extends RecyclerView.Adapter<Resent_Lead_Statue
 
         }else if(status_disp.equals("Sanctioned"))
         {
-            holder.Statues_update_dot.setTextColor(Color.parseColor("#1592E6"));
-            holder.Statues_update.setTextColor(Color.parseColor("#1592E6"));
+            holder.Statues_update_dot.setTextColor(Color.parseColor("#15CE00"));
+            holder.Statues_update.setTextColor(Color.parseColor("#15CE00"));
             holder.Statues_update_view.setVisibility(View.GONE);
             holder.Statues_update_view1.setText("View");
             holder.Statues_update_view1.setVisibility(View.VISIBLE);
         }else if(status_disp.equals("Disbursed"))
         {
-            holder.Statues_update_dot.setTextColor(Color.parseColor("#15CE00"));
-            holder.Statues_update.setTextColor(Color.parseColor("#15CE00"));
+            holder.Statues_update_dot.setTextColor(Color.parseColor("#D05AE9"));
+            holder.Statues_update.setTextColor(Color.parseColor("#D05AE9"));
             holder.Statues_update_view.setVisibility(View.GONE);
             holder.Statues_update_view1.setText("View");
             holder.Statues_update_view1.setVisibility(View.VISIBLE);
 
         }else if(status_disp.equals("Sent to bank"))
         {
-            holder.Statues_update_dot.setTextColor(Color.parseColor("#012B5D"));
-            holder.Statues_update.setTextColor(Color.parseColor("#012B5D"));
+            holder.Statues_update_dot.setTextColor(Color.parseColor("#00D1D1"));
+            holder.Statues_update.setTextColor(Color.parseColor("#00D1D1"));
             holder.Statues_update_view.setVisibility(View.GONE);
             holder.Statues_update_view1.setText("View");
             holder.Statues_update_view1.setVisibility(View.VISIBLE);
