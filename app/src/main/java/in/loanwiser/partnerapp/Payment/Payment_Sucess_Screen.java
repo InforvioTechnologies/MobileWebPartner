@@ -137,7 +137,7 @@ public class Payment_Sucess_Screen extends AppCompatActivity {
             }
         });
 
-        viability_check_pass();
+
     }
 
     private void viability_check_pass( ) {
@@ -236,7 +236,7 @@ public class Payment_Sucess_Screen extends AppCompatActivity {
         try {
             J.put("transaction_id", Pref.getTRANSACTIONID(getApplicationContext()));
             J.put("user_id",Pref.getUSERID(getApplicationContext()));
-            J.put("relationship_type","1");
+            J.put("relationship_type",applicantcount);
             //  J.put("relationship_type","2");
         } catch (JSONException e) {
             e.printStackTrace();
@@ -655,13 +655,13 @@ public class Payment_Sucess_Screen extends AppCompatActivity {
                                 // co_applicant_.setVisibility(View.VISIBLE);
                             }else
                             {
-                                if (applicantcount.equals("1"))
+                               /* if (applicantcount.equals("1"))
                                 {
                                     Viability_CRIF_report_Functions();
                                 }else
                                 {
                                     Co_applicant_Crif_Generation();
-                                }
+                                }*/
                                 Toast.makeText(mCon, " Error, Please Contact Loanwiser",Toast.LENGTH_SHORT).show();
                             }
                         } catch (JSONException e) {
@@ -719,7 +719,7 @@ public class Payment_Sucess_Screen extends AppCompatActivity {
                                 // co_applicant_.setVisibility(View.VISIBLE);
                             }else
                             {
-                                    Viability_CRIF_report_Functions();
+                                   // Viability_CRIF_report_Functions();
 
                                 Toast.makeText(mCon, " Error, Please Contact Loanwiser",Toast.LENGTH_SHORT).show();
                             }
@@ -759,7 +759,7 @@ public class Payment_Sucess_Screen extends AppCompatActivity {
             e.printStackTrace();
         }
       //  progressDialog.show();
-       // Log.e("Crif Generation_submit", String.valueOf(J));
+        Log.e("Crif Generation_submit", String.valueOf(J));
         JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, Urls.report_links, J,
                 new Response.Listener<JSONObject>() {
 
@@ -786,7 +786,7 @@ public class Payment_Sucess_Screen extends AppCompatActivity {
                                 Log.e("applicantcount", String.valueOf(applicantcount));
                                 if (applicantcount.equals("1"))
                                 {
-
+                                    viability_check_pass();
                                          viable_url = object.getString("viable_url");
                                          app_crif_score = object.getString("app_crif_score");
                                          app_crif_url = object.getString("app_crif_url");
@@ -796,6 +796,7 @@ public class Payment_Sucess_Screen extends AppCompatActivity {
                                     View customView1 = layoutInflater1.inflate(R.layout.activity_viablity_sucess_,null);
 
                                    AppCompatButton nextahed = (AppCompatButton) customView1.findViewById(R.id.nextahed);
+                                   LinearLayout background = (LinearLayout) customView1.findViewById(R.id.background);
                                    LinearLayout co_applicant = (LinearLayout) customView1.findViewById(R.id.co_applicant);
                                     LinearLayout co_Applicant_ly = (LinearLayout) customView1.findViewById(R.id.co_Applicant_ly);
                                    AppCompatTextView crifscore = (AppCompatTextView) customView1.findViewById(R.id.crifscore);
@@ -811,6 +812,7 @@ public class Payment_Sucess_Screen extends AppCompatActivity {
                                     popupWindow1 = new PopupWindow(customView1, LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
                                     //display the popup window
                                     popupWindow1.showAtLocation(nextahed, Gravity.CENTER, 0, 0);
+
 
                                     //close the popup window on button click
                                     nextahed.setOnClickListener(new View.OnClickListener() {
@@ -862,12 +864,14 @@ public class Payment_Sucess_Screen extends AppCompatActivity {
 
                                 }else
                                 {
+
+                                    viability_check_pass();
                                     Log.e("applicantcount 111", String.valueOf(applicantcount));
                                          viable_url = object.getString("viable_url");
                                          app_crif_score = object.getString("app_crif_score");
                                          app_crif_url = object.getString("app_crif_url");
-                                        // coapp_crif_score = object.getString("coapp_crif_score");
-                                       //  coapp_crif_url = object.getString("coapp_crif_url");
+                                         coapp_crif_score = object.getString("coapp_crif_score");
+                                         coapp_crif_url = object.getString("coapp_crif_url");
 
 
                                     LayoutInflater layoutInflater1 = (LayoutInflater) Payment_Sucess_Screen.this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -900,7 +904,7 @@ public class Payment_Sucess_Screen extends AppCompatActivity {
                                         @Override
                                         public void onClick(View v) {
 
-                                            Intent intent = new Intent(Payment_Sucess_Screen.this, DashBoard_new.class);
+                                            Intent intent = new Intent(Payment_Sucess_Screen.this, Upload_Activity_Bank.class);
                                             startActivity(intent);
                                             finish();
                                         }

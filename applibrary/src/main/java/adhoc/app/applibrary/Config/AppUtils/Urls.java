@@ -23,12 +23,20 @@ public class Urls {
     public static String Urls_phamplet = "https://cscapi.propwiser.com/mobile/pamphlet_distributor_test.php?call=";
     public static  String Url_version = "http://cscapi.propwiser.com/mobile/appversion.php?call=";*/
 
-    public static String Urls = "https://apiuat.loanwiser.in/mobile/mortgage_updated_test.php?call=";
+   /* public static String Urls = "https://apiuat.loanwiser.in/mobile/mortgage_updated_test.php?call=";
     public static String Urls_step = "https://apiuat.loanwiser.in/mobile/partner_loanapi_test.php?call=";
     public static String Urls_phamplet = "https://apiuat.loanwiser.in/mobile/pamphlet_distributor_test.php?call=";
 
 
-    public static  String Url_version = "https://apiuat.loanwiser.in/mobile/appversion.php?call=";
+    public static  String Url_version = "https://apiuat.loanwiser.in/mobile/appversion.php?call=";*/
+
+    public static String Urls = "https://cscapi.loanwiser.in/mobile/mortgage_updated_test.php?call=";
+    public static String Urls_step = "https://cscapi.loanwiser.in/mobile/partner_loanapi_test.php?call=";
+    public static String Urls_phamplet = "https://cscapi.loanwiser.in/mobile/pamphlet_distributor_test.php?call=";
+
+
+    public static  String Url_version = "https://cscapi.loanwiser.in/mobile/appversion.php?call=";
+
 
     public static String VERSION_CHECK_POST = Url_version + "version";
     public static String BUSINESS_reg_POST  = Urls + "register";

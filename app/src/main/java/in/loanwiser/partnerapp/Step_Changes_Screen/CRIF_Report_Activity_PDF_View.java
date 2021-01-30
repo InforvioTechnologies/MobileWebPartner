@@ -163,7 +163,7 @@ public class CRIF_Report_Activity_PDF_View extends SimpleActivity {
 
 
                             if (Statues.equals("success")) {
-
+                                credit_card_app.setVisibility(View.GONE);
                                 STEP2_COMPLETE();
 
                             }else if (Statues.equals("question"))
@@ -178,6 +178,8 @@ public class CRIF_Report_Activity_PDF_View extends SimpleActivity {
                                 Other_Earning(qus_dropdown);
 
                                // co_applicant_.setVisibility(View.VISIBLE);
+                            }else {
+                                Toast.makeText(mCon, "error, Please Check",Toast.LENGTH_SHORT).show();
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -394,7 +396,7 @@ public class CRIF_Report_Activity_PDF_View extends SimpleActivity {
 
             J.put("trans_id",Pref.getTRANSACTIONID(getApplicationContext()));
           //  J.put("trans_id","53259");
-            J.put("user_id","Pref.getUSERID(getApplicationContext())");
+            J.put("user_id",Pref.getUSERID(getApplicationContext()));
           //  J.put("user_id","51647");
         } catch (JSONException e) {
             e.printStackTrace();

@@ -64,6 +64,8 @@ import in.loanwiser.partnerapp.PDF_Dounloader.PermissionUtils;
 import in.loanwiser.partnerapp.Partner_Statues.DashBoard_new;
 import in.loanwiser.partnerapp.Partner_Statues.LeadeFragment;
 import in.loanwiser.partnerapp.Payment.PaymentActivity;
+import in.loanwiser.partnerapp.Payment.PaymentDetails;
+import in.loanwiser.partnerapp.Payment.Payment_Sucess_Screen;
 import in.loanwiser.partnerapp.R;
 //import in.loanwiser.partnerapp.Step_Changes_Screen.Applicant_fragment;
 import in.loanwiser.partnerapp.Step_Changes_Screen.CRIF_Report_Activity_PDF_View;
@@ -160,7 +162,7 @@ public class Home extends AppCompatActivity {
         initCode();
         Applicant_Status();
         ASK_Count_Display();
-        Loan_submit_statues();
+
       /*  user_id =  Objs.a.getBundle(this, Params.user_id);
         transaction_id =  Objs.a.getBundle(this, Params.transaction_id);
         applicant_id =  Objs.a.getBundle(this, Params.applicant_id);
@@ -274,6 +276,7 @@ public class Home extends AppCompatActivity {
                                 subtask_id =  jsonObject2.getString("subtask_id");
                                 loan_type_id =  jsonObject2.getString("loan_type_id");
                                 loan_type =  jsonObject2.getString("loan_type");
+                                applicant_id =  jsonObject2.getString("applicant_count");
                                 payment =  jsonObject2.getString("payment");
                               //  applicant_id =  "APP-"+user_id;
 
@@ -300,7 +303,7 @@ public class Home extends AppCompatActivity {
                                         try {
                                             J = array.getJSONObject(i);
 
-                                            applicant_id = J.getString("user_type");
+                                           // applicant_id = J.getString("user_type");
 
 
                                         } catch (JSONException e) {
@@ -661,36 +664,43 @@ public class Home extends AppCompatActivity {
             public void onClick(View view) {
                 if(payment.equals("completed"))
                 {
-                    if(reject_status.equals("1"))
-                    {
-                        /*Objs.ac.StartActivityPutExtra(Home.this, Doc_ImageView_Viability.class,
-                                Params.document,viability_report_URL);*/
-                        if (permissionUtils.checkPermission(Home.this, STORAGE_PERMISSION_REQUEST_CODE, view)) {
-                            if (viability_report_URL.length() > 0) {
-                                try {
-                                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(viability_report_URL)));
-                                } catch (Exception e) {
-                                    e.getStackTrace();
+                    if(viability.equals("completed") && crif_report.equals("completed"))  {
+
+                        if(reject_status.equals("1"))
+                        {
+                            /*Objs.ac.StartActivityPutExtra(Home.this, Doc_ImageView_Viability.class,
+                                    Params.document,viability_report_URL);*/
+                            if (permissionUtils.checkPermission(Home.this, STORAGE_PERMISSION_REQUEST_CODE, view)) {
+                                if (viability_report_URL.length() > 0) {
+                                    try {
+                                        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(viability_report_URL)));
+                                    } catch (Exception e) {
+                                        e.getStackTrace();
+                                    }
                                 }
+
+                            }
+
+                        }else
+                        {
+                            /*Objs.ac.StartActivityPutExtra(Home.this, Doc_ImageView_Viability.class,
+                                    Params.document,viability_report_URL);*/
+                            if (permissionUtils.checkPermission(Home.this, STORAGE_PERMISSION_REQUEST_CODE, view)) {
+                                if (viability_report_URL.length() > 0) {
+                                    try {
+                                        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(viability_report_URL)));
+                                    } catch (Exception e) {
+                                        e.getStackTrace();
+                                    }
+                                }
+
                             }
 
                         }
-
-
                     }else
                     {
-                        /*Objs.ac.StartActivityPutExtra(Home.this, Doc_ImageView_Viability.class,
-                                Params.document,viability_report_URL);*/
-                        if (permissionUtils.checkPermission(Home.this, STORAGE_PERMISSION_REQUEST_CODE, view)) {
-                            if (viability_report_URL.length() > 0) {
-                                try {
-                                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(viability_report_URL)));
-                                } catch (Exception e) {
-                                    e.getStackTrace();
-                                }
-                            }
-
-                        }
+                        Intent intent = new Intent(Home.this, Payment_Sucess_Screen.class);
+                        startActivity(intent);
 
                     }
                 }else  if(payment.equals("pending"))
@@ -769,9 +779,17 @@ public class Home extends AppCompatActivity {
             public void onClick(View view) {
                 if(viability.equals("completed")) {
                     if (payment.equals("completed")) {
-                        Intent intent = new Intent(Home.this, CRIF_Report_Activity_PDF_View.class);
-                        intent.putExtra("user_id", applicant_id);
-                        startActivity(intent);
+
+                        if(crif_report.equals("completed"))
+                        {
+                            Intent intent = new Intent(Home.this, CRIF_Report_Activity_PDF_View.class);
+                            intent.putExtra("user_id", applicant_id);
+                            startActivity(intent);
+                        }else
+                        {
+                            Toast.makeText(getApplicationContext(),"Please Complete The Previous Steps To Proceed!!!", Toast.LENGTH_SHORT).show();
+
+                        }
 
                     }else
                     {
@@ -816,14 +834,21 @@ public class Home extends AppCompatActivity {
                 if(viability.equals("completed")) {
                     if (payment.equals("completed")) {
 
-                        if(bank_statement.equals("completed"))
+                        if(crif_report.equals("completed"))
                         {
+                            if(bank_statement.equals("completed"))
+                            {
 
+                            }else
+                            {
+                                Intent intent = new Intent(Home.this, Upload_Activity_Bank.class);
+                                startActivity(intent);
+                            }
                         }else
                         {
-                            Intent intent = new Intent(Home.this, Upload_Activity_Bank.class);
-                            startActivity(intent);
+                            Toast.makeText(getApplicationContext(),"Please Complete The Previous Steps To Proceed!!!", Toast.LENGTH_SHORT).show();
                         }
+
 
                     }else
                     {
@@ -1532,7 +1557,7 @@ public class Home extends AppCompatActivity {
                                 }
 
                                 document_upload_button.setText("Complete now");
-                                Loan_Statue_submit_layout.setVisibility(View.VISIBLE);
+                                Loan_Statue_submit_layout.setVisibility(View.GONE);
                             }else
                             {
                                 document_img1.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
@@ -1541,6 +1566,7 @@ public class Home extends AppCompatActivity {
                                 documentupload_status.setImageDrawable(getResources().getDrawable(R.drawable.ic_green_tick));
                                 document_upload_button.setBackgroundResource(R.drawable.but_shape_blue);
                                 document_upload_button.setText("View");
+                                Loan_submit_statues();
                                 Loan_Statue_submit_layout.setVisibility(View.VISIBLE);
                             }
 
@@ -1831,8 +1857,8 @@ public class Home extends AppCompatActivity {
         JSONObject J = null;
         try {
             J = new JSONObject();
-           // J.put("transaction_id", transaction_id);
-            J.put("transaction_id", 53277);
+            J.put("transaction_id", transaction_id);
+           // J.put("transaction_id", 53277);
 
         } catch (JSONException e) {
             e.printStackTrace();

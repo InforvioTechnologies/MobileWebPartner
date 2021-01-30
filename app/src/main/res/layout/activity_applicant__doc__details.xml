@@ -22,7 +22,7 @@
         android:orientation="vertical">
 
         <LinearLayout
-
+            android:visibility="gone"
             android:id="@+id/credit_card_app"
             android:padding="5dp"
             android:orientation="vertical"

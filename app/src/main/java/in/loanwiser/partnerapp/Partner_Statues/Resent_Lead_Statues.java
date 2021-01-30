@@ -151,7 +151,7 @@ public class Resent_Lead_Statues extends RecyclerView.Adapter<Resent_Lead_Statue
       //  String dt = parseDateToddMMyyyy(appointment_date);
        // holder.applicant_date.setText(dt);
 
-      holder.cardView.setOnClickListener(new View.OnClickListener() {
+    /*  holder.cardView.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View view) {
                final String applicant_id  = items.get(position).getUser_ID();
@@ -159,8 +159,22 @@ public class Resent_Lead_Statues extends RecyclerView.Adapter<Resent_Lead_Statue
                Applicant_Status(applicant_id);
 
            }
-       });
+       });*/
 
+        holder.Statues_update_view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final String applicant_id  = items.get(position).getUser_ID();
+                Applicant_Status(applicant_id);
+            }
+        });
+        holder.Statues_update_view1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final String applicant_id  = items.get(position).getUser_ID();
+                Applicant_Status(applicant_id);
+            }
+        });
      /*  holder.Bt_create_appointment.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View view) {

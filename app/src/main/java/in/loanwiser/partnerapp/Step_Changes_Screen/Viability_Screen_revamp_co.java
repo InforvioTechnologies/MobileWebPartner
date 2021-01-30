@@ -935,7 +935,7 @@ public class Viability_Screen_revamp_co extends SimpleActivity implements Number
                         try {
 
                             Pan_Details.put("member_name",Name_);
-                            Pan_Details.put("email id",email_);
+                            Pan_Details.put("member_email",email_);
                             Pan_Details.put("member_dob",DOB);
                             Pan_Details.put("father_name",Fathers_Name_str);
                             Pan_Details.put("pan_no",Pan_number);

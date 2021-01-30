@@ -906,6 +906,7 @@ public class Applicant_Doc_Details_revamp extends SimpleActivity {
 
                        // holder.uploadbtn.setVisibility(View.GONE);
                         JSONArray file_array = J.getJSONArray("file_array");
+                        Log.e("file array",file_array.toString());
                         ListItemAdapter_sub_chiled adapter_sub_chile = new ListItemAdapter_sub_chiled(mCon,file_array);
                         imagelist1.setVisibility(View.GONE);
                         imagelist.setVisibility(View.VISIBLE);

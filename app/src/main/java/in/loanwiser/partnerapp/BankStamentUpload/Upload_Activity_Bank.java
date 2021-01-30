@@ -232,6 +232,8 @@ protected void onActivityResult(int requestCode, int resultCode, @Nullable Inten
 
         fileUri = data.getClipData().getItemAt(i).getUri();
         String path = fileUri.getPath(); // "/mnt/sdcard/FileName.mp3"
+
+
         Log.i("TAG", "onActivityResult:Stringpath "+path);
         fileget= String.valueOf(data.getClipData());
         fileName = getFileName(fileUri);
@@ -249,17 +251,20 @@ protected void onActivityResult(int requestCode, int resultCode, @Nullable Inten
         }
         else{
 
+       // fileUri = data.getData();
         fileUri = data.getData();
+      //  String path1 = getRealPathFromURI(this,fileUri);
         fileget= String.valueOf(data.getData());
         fileName=getFileName(data.getData());
         fileNameList.add(fileName);
         uriarrayList.add(fileUri);
+        String sav=fileUri.getPath();
+               // Log.e("the value",sav);
+      //  uriarrayList.add(Uri.parse(path1));
         fileAdapter.notifyDataSetChanged();
         }
 
         }
-
-
 
         }
 
@@ -302,7 +307,10 @@ public void onClick(View v) {
                                         //  String path= String.valueOf(filePath);
                                         String filename = uri_test.substring(uri_test.lastIndexOf("/")+1);
                                         String pdf1 = filename.substring(filename.lastIndexOf(".")+1);
+                                       // Bank_statues();
+                                        //Submit_upload_filePath();
 
+                                      //  uploadMultipart();
                                         String a= "pdf";
 
                                         if(pdf1.equals(a))
@@ -313,6 +321,13 @@ public void onClick(View v) {
                                         }
                                         else
                                         {
+                                             /*   String path = FilePath.getPath(this, uriarrayList.get(i));
+                                                Uri myUri = Uri.parse(path);
+                                                String getPDFPath= getPDFPath(myUri);
+                                                Log.e("the value uri is",getPDFPath);
+                                                pathlist.add(getPDFPath);*/
+
+                                              //  uploadMultipart();
                                                 Submit_upload_filePath();
                                                // Toast.makeText(getApplicationContext(), "Please select the PDF file from the File Directory", Toast.LENGTH_SHORT).show();
                                         }
@@ -336,6 +351,7 @@ final Uri contentUri = ContentUris.withAppendedId(
         int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
         cursor.moveToFirst();
         return cursor.getString(column_index);
+
         }
 
 

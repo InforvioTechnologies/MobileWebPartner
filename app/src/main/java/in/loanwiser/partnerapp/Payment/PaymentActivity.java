@@ -92,9 +92,9 @@ public class PaymentActivity extends SimpleActivity implements CompoundButton.On
             applicant_count,co_app;
     JSONArray payment_values;
 
-    String STAND="0",CUST="0",PAY_OPTION="0",Chose_plan="0";
+    String STAND="1",CUST="0",PAY_OPTION="1",Chose_plan="1";
 
-    String pay_plan;
+    String pay_plan ="1";
     PopupWindow popupWindow;
     AppCompatTextView proceedany,back;
     Button  closePopupBtn,close,view_report;
@@ -541,6 +541,7 @@ public class PaymentActivity extends SimpleActivity implements CompoundButton.On
         Log.e("CUST",CUST);
         Log.e("PAY_OPTION",PAY_OPTION);
 
+
         if(Chose_plan.contains("0"))
         {
             Toast.makeText(this, "Select the choose Plan Option", Toast.LENGTH_SHORT).show();
@@ -558,6 +559,9 @@ public class PaymentActivity extends SimpleActivity implements CompoundButton.On
                     Log.e("the value to fine STAND",STAND);
                      pay_plan = "1";
                     Log.e("the value to fine pay_plan pay_plan",pay_plan);
+                    Log.e("paymentamoubt",paymentamoubt);
+                    Log.e("PAY_OPTION",PAY_OPTION);
+                    payment_id = paymentamoubt;
                     Intent intent = new Intent(PaymentActivity.this, PaymentDetails.class);
                     intent.putExtra("payment_option", PAY_OPTION);
                     intent.putExtra("paymentamoubt", paymentamoubt);
@@ -729,7 +733,6 @@ public class PaymentActivity extends SimpleActivity implements CompoundButton.On
                         e.printStackTrace();
                     }
                 }
-
                 @Override
                 public void onNothingSelected(AdapterView<?> parent) {
 
@@ -818,6 +821,7 @@ public class PaymentActivity extends SimpleActivity implements CompoundButton.On
                 loancredit_radio.setEnabled(true);
                 loancredit_textview.setTextColor(Color.parseColor("#002B5D"));
                 STAND= "1";
+                CUST = "0";
                 Chose_plan= "1";
                 payment_id = paymentamoubt;
                 pay_plan = "1";
@@ -838,6 +842,7 @@ public class PaymentActivity extends SimpleActivity implements CompoundButton.On
                 loancredit_textview.setTextColor(Color.parseColor("#B6B6B6"));
                 payment_id = Payment_value;
                 CUST = "2";
+                STAND= "0";
                 Chose_plan = "1";
                 pay_plan = "2";
                 Log.e("the value to fine pay_plan",pay_plan);

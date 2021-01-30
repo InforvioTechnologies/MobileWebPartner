@@ -148,11 +148,12 @@ public class Lead_Crration_Activity extends SimpleActivity {
                 @Override
                 public void onClick(View view) {
 
-                    Intent intent = new Intent(Lead_Crration_Activity.this, Submitsuccess_Activity.class);
+                    Intent intent = new Intent(Lead_Crration_Activity.this, Upload_Activity_Bank.class);
                     startActivity(intent);
                     finish();
                 }
             });*/
+
        /* lead_cr_step1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -276,7 +277,7 @@ public class Lead_Crration_Activity extends SimpleActivity {
     private void fonts() {
 
         font = Typeface.createFromAsset(getApplicationContext().getAssets(), "Lato-Regular.ttf");
-        loan_amount_ext.setTypeface(font);
+       /* loan_amount_ext.setTypeface(font);
         name_txt.setTypeface(font);
         mobile_no_txt.setTypeface(font);
         whats_app_no.setTypeface(font);
@@ -297,7 +298,7 @@ public class Lead_Crration_Activity extends SimpleActivity {
         wt_mobile11.setTypeface(font);
         terms_and_condition.setTypeface(font);
         type_of_empmnt_txt.setTypeface(font);
-        type_of_empmnt_txt1.setTypeface(font);
+        type_of_empmnt_txt1.setTypeface(font);*/
 
     }
 

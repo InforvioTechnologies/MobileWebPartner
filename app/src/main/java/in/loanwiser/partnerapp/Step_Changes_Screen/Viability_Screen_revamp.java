@@ -1113,11 +1113,7 @@ public class Viability_Screen_revamp extends SimpleActivity implements NumberPic
                                 }
                             }
 
-
-
-
                             ///
-
                         }
                     }
 

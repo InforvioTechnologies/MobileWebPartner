@@ -6,7 +6,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/cardView"
-    android:layout_width="93dp"
+    android:layout_width="120dp"
     android:layout_height="120dp"
     app:cardBackgroundColor="@color/colorWhite"
     android:clickable="true"
@@ -24,25 +24,27 @@
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:gravity="center">
             <ImageView
                 android:id="@+id/helth_icons"
                 android:layout_gravity="center"
-                android:layout_marginRight="10dp"
-                android:layout_width="45.5dp"
-                android:layout_height="45.5dp"/>
+                android:layout_width="50dp"
+                android:layout_height="50dp"/>
         </LinearLayout>
 
         <LinearLayout
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="20dp"
+            android:layout_margin="10dp"
           android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_gravity="center">
                 <androidx.appcompat.widget.AppCompatTextView
                     android:text="Personal Loan"
                     android:id="@+id/su_head"

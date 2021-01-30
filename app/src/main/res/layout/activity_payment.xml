@@ -488,6 +488,7 @@
                         android:layout_height="wrap_content">
 
                         <RadioButton
+                            android:checked="true"
                             android:id="@+id/paymentcustomer_radio"
                             android:layout_width="30dp"
                             android:layout_height="30dp"

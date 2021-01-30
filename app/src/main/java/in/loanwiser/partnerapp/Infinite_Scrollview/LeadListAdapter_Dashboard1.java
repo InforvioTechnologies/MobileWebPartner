@@ -217,6 +217,8 @@ public class LeadListAdapter_Dashboard1 extends RecyclerView.Adapter<LeadListAda
                 }
             });
 
+
+
             // Objs.a.OutfitNormalFontStyle(mCon, R.id.doc_typename_all);
             // Objs.a.OutfitNormalFontStyle(mCon, R.id.doc_steps);
         //    a.NewNormalFontStyle(context,type);

@@ -331,6 +331,10 @@ public class ActivityFragment extends Fragment implements NavigationView.OnNavig
                                 Log.e("credit_coin1",credit_coin1);*/
 
                                 if (ja.length()>0){
+
+                                    view_all_ly1.setVisibility(View.VISIBLE);
+                                    Ly_allocate.setVisibility(View.VISIBLE);
+                                    firstlay.setVisibility(View.VISIBLE);
                                     for(int i = 0;i<ja.length();i++){
 
                                         JSONObject J = ja.getJSONObject(i);
@@ -344,9 +348,17 @@ public class ActivityFragment extends Fragment implements NavigationView.OnNavig
                                     recycler_view.setAdapter(adapter);
 
                                 }else {
+                                    view_all_ly1.setVisibility(View.GONE);
+                                    Ly_allocate.setVisibility(View.GONE);
                                     firstlay.setVisibility(View.GONE);
+
                                     Objs.a.ShowHideNoItems(getActivity(),true);
                                 }
+                            }else
+                            {
+                                view_all_ly1.setVisibility(View.GONE);
+                                Ly_allocate.setVisibility(View.GONE);
+                                firstlay.setVisibility(View.GONE);
                             }
 
                         } catch (JSONException e) {

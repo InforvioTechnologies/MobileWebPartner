@@ -67,9 +67,10 @@ public class ChecklistShare extends AppCompatActivity {
     final ArrayList<String> selflist = new ArrayList<String>();
     final ArrayList<String> contentlist = new ArrayList<String>();
     private android.app.AlertDialog progressDialog;
-    private JSONObject jsonObject1, propertyObject;
+    private JSONObject jsonObject1, propertyObject,Jsonobject2;
     private LinearLayout selfemploylay;
     private TextView salaried_textview,selfemp_textview;
+    private String loan_type;
 
 
     @Override
@@ -159,7 +160,8 @@ public class ChecklistShare extends AppCompatActivity {
         }
         Intent intent = new Intent(Intent.ACTION_SEND);
         intent.setType("text/plain");
-        intent.putExtra(Intent.EXTRA_TEXT, str.toString()+"\n"+str1.toString());
+        intent.putExtra(Intent.EXTRA_TEXT, loan_type+ "\n"+ "\n"  +str.toString()+"\n"+str1.toString());
+
         startActivity(intent);
 
     }
@@ -192,7 +194,9 @@ public class ChecklistShare extends AppCompatActivity {
             //sendIntent.setComponent(new ComponentName("com.whatsapp", "com.whatsapp.Conversation"));
             sendIntent.setAction(Intent.ACTION_SEND);
             sendIntent.setType("text/plain");
-            sendIntent.putExtra(Intent.EXTRA_TEXT, str.toString()+"\n"+str1.toString());
+            //sendIntent.putExtra(Intent.EXTRA_TEXT, str.toString()+"\n"+str1.toString());
+            sendIntent.putExtra(Intent.EXTRA_TEXT, loan_type+"\n" + "\n"+str.toString()+"\n"+str1.toString());
+
 
 
             // sendIntent.putStringArrayListExtra(Intent.EXTRA_TEXT,finalList);
@@ -249,6 +253,11 @@ public class ChecklistShare extends AppCompatActivity {
                         if (getvalue.equalsIgnoreCase("Business Loan")) {
                             try {
                                 jsonObject1 = response.getJSONObject("Applicant");
+                                Jsonobject2=response.getJSONObject("loan_typearr");
+                                loan_type=Jsonobject2.getString("loan_type");
+
+
+
                                 // first Array
                                 JSONArray jsonArray = jsonObject1.getJSONArray("Identity Proof");
                                 for (int i = 0; i < jsonArray.length(); i++) {
@@ -444,6 +453,9 @@ public class ChecklistShare extends AppCompatActivity {
                         else if (getvalue.equalsIgnoreCase("Personal Loan")) {
                             try {
                                 jsonObject1 = response.getJSONObject("Applicant");
+                                Jsonobject2=response.getJSONObject("loan_typearr");
+                                loan_type=Jsonobject2.getString("loan_type");
+
                                 // first Array
                                 JSONArray jsonArray = jsonObject1.getJSONArray("Identity Proof");
                                 for (int i = 0; i < jsonArray.length(); i++) {
@@ -608,6 +620,9 @@ public class ChecklistShare extends AppCompatActivity {
                             try {
                                 jsonObject1 = response.getJSONObject("Applicant");
                                 propertyObject = response.getJSONObject("Property");
+                                Jsonobject2=response.getJSONObject("loan_typearr");
+                                loan_type=Jsonobject2.getString("loan_type");
+
                                 // first Array
                                 JSONArray jsonArray = jsonObject1.getJSONArray("Identity Proof");
                                 for (int i = 0; i < jsonArray.length(); i++) {
@@ -791,6 +806,9 @@ public class ChecklistShare extends AppCompatActivity {
                             try {
                                 jsonObject1 = response.getJSONObject("Applicant");
                                 propertyObject = response.getJSONObject("Property");
+                                Jsonobject2=response.getJSONObject("loan_typearr");
+                                loan_type=Jsonobject2.getString("loan_type");
+
                                 // first Array
                                 JSONArray jsonArray = jsonObject1.getJSONArray("Identity Proof");
                                 for (int i = 0; i < jsonArray.length(); i++) {
@@ -957,7 +975,7 @@ public class ChecklistShare extends AppCompatActivity {
                                     @Override
                                     public View getView(int position, View convertView, ViewGroup parent) {
                                         TextView textView = (TextView) super.getView(position, convertView, parent);
-                                        textView.setTextColor(Color.parseColor("#1592E6"));
+                                        textView.setTextColor(Color.parseColor("#B4B4B4"));
                                         return textView;
                                     }
                                 });
@@ -1025,6 +1043,10 @@ public class ChecklistShare extends AppCompatActivity {
 
                         try {
                             jsonObject1 = response.getJSONObject("Applicant");
+                            Jsonobject2=response.getJSONObject("loan_typearr");
+
+                            loan_type=Jsonobject2.getString("loan_type");
+
                             // first Array
                             JSONArray jsonArray = jsonObject1.getJSONArray("Identity Proof");
                             for (int i = 0; i < jsonArray.length(); i++) {
@@ -1259,6 +1281,10 @@ public class ChecklistShare extends AppCompatActivity {
 
                         try {
                             jsonObject1 = response.getJSONObject("Applicant");
+                            Jsonobject2=response.getJSONObject("loan_typearr");
+
+                            loan_type=Jsonobject2.getString("loan_type");
+
                             // first Array
                             JSONArray jsonArray = jsonObject1.getJSONArray("Identity Proof");
                             for (int i = 0; i < jsonArray.length(); i++) {

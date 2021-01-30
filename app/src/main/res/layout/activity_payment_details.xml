@@ -17,7 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
             <LinearLayout
-                android:visibility="gone"
+
             android:id="@+id/standard"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -106,6 +106,7 @@
                                 android:textColor="@color/colorPrimary"
                                 android:textSize="14dp"
                                 android:textStyle="bold"
+                                android:id="@+id/pay_option_st"
                                 />
 
                         </LinearLayout>
@@ -356,7 +357,7 @@
 
         </LinearLayout>
             <LinearLayout
-                android:visibility="gone"
+               android:visibility="gone"
                android:id="@+id/Custome"
                 android:orientation="vertical"
                 android:layout_width="match_parent"
@@ -441,6 +442,7 @@
                                     android:text="@string/customplan"
                                     android:textStyle="bold"
                                     android:textSize="14dp"
+                                    android:id="@+id/pay_plane_cus"
                                     android:textColor="@color/colorPrimary"
                                     />
 
@@ -651,6 +653,7 @@
 
             </LinearLayout>
             <LinearLayout
+                android:visibility="gone"
                 android:id="@+id/send_payment_link"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -738,6 +741,7 @@
                                     android:text="@string/standard"
                                     android:textSize="13dp"
                                     android:textStyle="bold"
+                                    android:id="@+id/pay_option_send_link"
                                     android:textColor="@color/colorPrimary"
                                     />
 

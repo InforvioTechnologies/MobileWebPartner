@@ -75,7 +75,8 @@ public class PaymentDetails extends SimpleActivity {
     private Context context = this;
     LinearLayout  standard,Custome,send_payment_link;
 
-    AppCompatTextView payment_amount_stand,payment_amout_cust,payment_amont_link,current_bal;
+    AppCompatTextView payment_amount_stand,payment_amout_cust,payment_amont_link,current_bal,pay_option_st,
+            pay_plane_cus,pay_option_send_link;
 
     AppCompatEditText mobilenumber_edittext;
 
@@ -112,6 +113,9 @@ public class PaymentDetails extends SimpleActivity {
         payment_amount_stand=findViewById(R.id.payment_amount_stand);
         payment_amout_cust=findViewById(R.id.payment_amout_cust);
         payment_amont_link=findViewById(R.id.payment_amont_link);
+        pay_option_st=findViewById(R.id.pay_option_st);
+        pay_plane_cus=findViewById(R.id.pay_plane_cus);
+        pay_option_send_link=findViewById(R.id.pay_option_send_link);
 
         mobilenumber_edittext=findViewById(R.id.mobilenumber_edittext);
 
@@ -133,16 +137,40 @@ public class PaymentDetails extends SimpleActivity {
             Custome.setVisibility(View.GONE);
             send_payment_link.setVisibility(View.GONE);
 
+            if(payment_plane.equals("1"))
+            {
+                pay_option_st.setText("Standard");
+            }else {
+
+                pay_option_st.setText("Custom");
+            }
+
         }else if(payment_option.contains("3"))
         {
             standard.setVisibility(View.GONE);
             Custome.setVisibility(View.VISIBLE);
             send_payment_link.setVisibility(View.GONE);
+            if(payment_plane.equals("1"))
+            {
+                pay_plane_cus.setText("Standard");
+            }else {
+
+                pay_plane_cus.setText("Custom");
+            }
+
         }else  if(payment_option.contains("1"))
         {
             standard.setVisibility(View.GONE);
             Custome.setVisibility(View.GONE);
             send_payment_link.setVisibility(View.VISIBLE);
+
+            if(payment_plane.equals("1"))
+            {
+                pay_option_send_link.setText("Standard");
+            }else {
+
+                pay_option_send_link.setText("Custom");
+            }
             get_payment_Link();
 
         }

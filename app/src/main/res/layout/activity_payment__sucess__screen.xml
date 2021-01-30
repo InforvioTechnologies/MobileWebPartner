@@ -93,6 +93,14 @@
 
                         </LinearLayout>
                         <androidx.appcompat.widget.AppCompatTextView
+                            android:visibility="gone"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:text="@string/imp_not_des12"
+                            android:layout_marginLeft="20dp"
+                            android:textColor="@color/gray_sade"/>
+                        <androidx.appcompat.widget.AppCompatTextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"

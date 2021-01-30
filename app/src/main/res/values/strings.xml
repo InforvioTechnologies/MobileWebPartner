@@ -758,6 +758,7 @@
     <string name="payment_sucess">Payment Success</string>
 
     <string name="imp_not">Important Note</string>
+    <string name="imp_not_des12">Click proceed to generate Viability and CRIF report:</string>
     <string name="imp_not_des1">Before you proceed to the next step, you need to have following details:</string>
     <string name="imp_not_des2">. Customers Pan Card Details </string>
     <string name="imp_not_des3"> Last 6 Months Bank Statement in PDF Format</string>
