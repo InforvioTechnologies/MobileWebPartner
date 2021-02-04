@@ -13,6 +13,9 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.AppCompatTextView;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.viewpager.widget.ViewPager;
 
 import android.os.Handler;
 import android.preference.PreferenceManager;
@@ -82,8 +85,10 @@ public class FragmentApplicant extends Fragment implements CompoundButton.OnChec
 
     String applicant_empstatus,description;
 
+    private ViewPager viewPager;
 
-    public FragmentApplicant() {
+    public FragmentApplicant(ViewPager viewPager) {
+        this.viewPager=viewPager;
         // Required empty public constructor
     }
 
@@ -259,9 +264,28 @@ public class FragmentApplicant extends Fragment implements CompoundButton.OnChec
                         handler.postDelayed(new Runnable() {
                             public void run() {
                                // Document_Statues();
-                                Intent intent = new Intent(getActivity(), Applicant_Doc_Details_revamp.class);
-                                startActivity(intent);
-                                getActivity().finish();
+
+                                String applicant = Pref.getCoAPPAVAILABLE(getContext());
+                                if(applicant.equals("2"))
+                                {
+
+                                    Docum_ch_step1.setVisibility(View.GONE);
+                                    Toast.makeText(getActivity(), "Please Check the CO Applicant Checklist and Proceed!!!",Toast.LENGTH_SHORT).show();
+                                    viewPager.setCurrentItem(1);
+                                  /*  Fragment fragment = new FragmentCoApplicant1();
+                                    FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                                    fragmentTransaction.replace(R.id.tabLayout, fragment);
+                                    fragmentTransaction.addToBackStack(null);
+                                    fragmentTransaction.commit();*/
+
+                                }else {
+                                    Intent intent = new Intent(getActivity(), Applicant_Doc_Details_revamp.class);
+                                    startActivity(intent);
+                                    getActivity().finish();
+                                }
+
+
                             }
                         }, 300);
 
@@ -293,7 +317,7 @@ public class FragmentApplicant extends Fragment implements CompoundButton.OnChec
 
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
         String get_jsonArray = preferences.getString("get_jsonArray", "");
-        String applicant_count = preferences.getString("applicant_count", "");
+         applicant_count = preferences.getString("applicant_count", "");
         String property_identify = preferences.getString("property_identify", "");
         Log.i("TAG", "Applicant_count_checkcondition: "+applicant_count);
         Log.i("TAG", "property_identify_checkcondition: "+property_identify);
@@ -832,6 +856,7 @@ public class FragmentApplicant extends Fragment implements CompoundButton.OnChec
                     public void onResponse(JSONObject object) {
                         Log.e("RESPONSE cHECKBOXsTATUS", String.valueOf(object));
                         Document_check_lsit1();
+                        Docum_ch_step1.setVisibility(View.VISIBLE);
                         progressDialog.dismiss();
                     }
                 }, new Response.ErrorListener() {

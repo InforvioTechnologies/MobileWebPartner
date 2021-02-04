@@ -42,7 +42,7 @@ public class Doc_ImageView_Viability extends SimpleActivity {
 
         progressDialog = new SpotsDialog(this, R.style.Custom);
         Objs.a.setStubId(this, R.layout.activity_doc__image_view1);
-        initTools(R.string.viabilitycheck1);
+        initTools1("Bank Statement View");
 
         webview = (WebView)findViewById(R.id.webview);
         progressBar = findViewById(R.id.progressBar);
@@ -86,7 +86,7 @@ public class Doc_ImageView_Viability extends SimpleActivity {
         webSettings.setUseWideViewPort(true);
        // setContentView(webview);
        // webview.loadUrl(document);
-        webview.loadUrl(document);
+        webview.loadUrl("http://docs.google.com/gview?embedded=true&url="+document);
         Log.e("pfd",document);
 
     }

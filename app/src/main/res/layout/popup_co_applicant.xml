@@ -2,9 +2,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
+    android:gravity="top"
     android:background="#fff"
-    android:padding="10px">
+   >
 
     <LinearLayout
         android:background="@color/white"
@@ -14,7 +14,45 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="500dp">
+
+        <LinearLayout
+            android:id="@+id/background"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_margin="20dp"
+            android:background="@drawable/capsul_button_rect_viability"
+            android:orientation="vertical"
+            android:gravity="center">
+
+        <ImageView
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_green_tick"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_gravity="center"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="20dp">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:textSize="20dp"
+                android:textAlignment="center"
+                android:textColor="#032A57"
+                android:text="your Applicant Details are sucessfully saved"/>
+        </LinearLayout>
+        </LinearLayout>
         <TextView
+            android:visibility="gone"
             android:gravity="center"
             android:layout_marginTop="10dp"
             android:layout_width="wrap_content"
@@ -26,7 +64,7 @@
         <TextView
             android:layout_gravity="center"
             android:gravity="center"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Do you Want  to Add"
@@ -77,7 +115,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_gravity="start"
-                    android:background="@drawable/capsul_button4"
+                    android:background="#1592E6"
                     />
             </LinearLayout>
             <LinearLayout
@@ -94,8 +132,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_gravity="start"
-                    android:textColor="@color/colorAccent"
-                    android:background="@drawable/capsul_button_rect_out"
+                    android:textColor="#1592E6"
+                    android:background="@drawable/capul_submittoloanwiser"
                     />
             </LinearLayout>
 

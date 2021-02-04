@@ -57,6 +57,8 @@ import adhoc.app.applibrary.Config.AppUtils.Pref.Pref;
 import adhoc.app.applibrary.Config.AppUtils.Urls;
 import adhoc.app.applibrary.Config.AppUtils.VolleySignleton.AppController;
 import dmax.dialog.SpotsDialog;
+import in.loanwiser.partnerapp.BankStamentUpload.Bank_DocGridView_List;
+import in.loanwiser.partnerapp.BankStamentUpload.Doc_ImageView_Bank;
 import in.loanwiser.partnerapp.BankStamentUpload.Upload_Activity_Bank;
 import in.loanwiser.partnerapp.Documents.Applicant_Details_Single;
 import in.loanwiser.partnerapp.Documents.Applicant_Doc_Details_revamp;
@@ -838,7 +840,8 @@ public class Home extends AppCompatActivity {
                         {
                             if(bank_statement.equals("completed"))
                             {
-
+                                Intent intent = new Intent(Home.this, Bank_DocGridView_List.class);
+                                startActivity(intent);
                             }else
                             {
                                 Intent intent = new Intent(Home.this, Upload_Activity_Bank.class);
@@ -1908,7 +1911,7 @@ public class Home extends AppCompatActivity {
                             }else
                             {
                                 Document_verification_img.setImageDrawable(getResources().getDrawable(R.drawable.ic_warning));
-                                Document_verification_txt1.setText("Pending under you");
+                                Document_verification_txt1.setText("Pending with LoanWiser");
                                 Document_verification_txt1.setTextColor(Color.parseColor("#FF9201"));
                             }
 
@@ -1923,7 +1926,7 @@ public class Home extends AppCompatActivity {
                             }else
                             {
                                 applied_to_bank_img.setImageDrawable(getResources().getDrawable(R.drawable.ic_warning));
-                                Applied_to_Bank_txt1.setText("Pending under you");
+                                Applied_to_Bank_txt1.setText("Pending with LoanWiser");
                                 Applied_to_Bank_txt1.setTextColor(Color.parseColor("#FF9201"));
                                 bank_is_yes.setVisibility(View.GONE);
                             }

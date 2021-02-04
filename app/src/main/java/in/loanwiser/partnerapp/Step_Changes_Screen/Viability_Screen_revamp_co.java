@@ -1482,12 +1482,14 @@ public class Viability_Screen_revamp_co extends SimpleActivity implements Number
         employee_name_ly.setVisibility(View.VISIBLE);
         employee_email_ly.setVisibility(View.VISIBLE);
 
-        employement_name.setText(Name_);
+        String Fathers_Name_str1 = Fathers_Name_str.substring(0, 1).toUpperCase() + Fathers_Name_str.substring(1);
+        String Name_1 = Name_.substring(0, 1).toUpperCase() + Name_.substring(1);
+        employement_name.setText(Name_1);
         email_id.setText(email_);
         employement_Show.setText(Employee_type_Value);
         Pan_No_Show.setText(Pan_number);
         dob_Show.setText(DOB);
-        father_name.setText(Fathers_Name_str);
+        father_name.setText(Fathers_Name_str1);
         marital_status.setText(maritial_status_Value);
 
 

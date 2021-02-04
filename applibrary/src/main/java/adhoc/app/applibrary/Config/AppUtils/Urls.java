@@ -133,6 +133,7 @@ public class Urls {
     public static String DOC_IMAGE_VIEW = Urls_step + "docu_view";
     public static String validate_upldoc = Urls_step + "validate_upldoc";
     public static String validate_checklist = Urls_step + "validate_checklist";
+    public static String fetch_bankstatements = Urls_step + "fetch_bankstatements";
 
     public static String Bank_Statement_Upload = Urls_step + "bank_statement_upload";
 

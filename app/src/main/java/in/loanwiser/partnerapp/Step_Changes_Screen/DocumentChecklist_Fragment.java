@@ -97,13 +97,6 @@ public class DocumentChecklist_Fragment extends SimpleActivity implements TabLay
                         tabLayout.getTabAt(position).select();
                     }
                 });
-
-
-
-
-
-
-
        /* tabLayout.addTab(tabLayout.newTab().setText("Applicant"));
         tabLayout.addTab(tabLayout.newTab().setText("CO Applicant"));
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);*/
@@ -276,7 +269,7 @@ public class DocumentChecklist_Fragment extends SimpleActivity implements TabLay
 
 
                                     //Creating our pager adapter
-                                    Pager1 adapter = new Pager1(getSupportFragmentManager(), tabLayout.getTabCount());
+                                    Pager1 adapter = new Pager1(getSupportFragmentManager(), tabLayout.getTabCount(),viewPager);
                                     //tabLayout.setupWithViewPager(viewPager);
 
 
@@ -294,7 +287,7 @@ public class DocumentChecklist_Fragment extends SimpleActivity implements TabLay
 
 
                                     //Creating our pager adapter
-                                    Pager adapter = new Pager(getSupportFragmentManager(), tabLayout.getTabCount());
+                                    Pager adapter = new Pager(getSupportFragmentManager(), tabLayout.getTabCount(),viewPager);
                                    // tabLayout.setupWithViewPager(viewPager);
 
 

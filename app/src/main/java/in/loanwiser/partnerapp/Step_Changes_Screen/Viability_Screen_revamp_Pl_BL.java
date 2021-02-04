@@ -955,9 +955,11 @@ public class Viability_Screen_revamp_Pl_BL extends SimpleActivity implements Num
         father_name = (AppCompatTextView) dialog.findViewById(R.id.father_name);
         marital_status = (AppCompatTextView) dialog.findViewById(R.id.marital_status);
 
+        String Fathers_Name_str1 = Fathers_Name_str.substring(0, 1).toUpperCase() + Fathers_Name_str.substring(1);
+
         Pan_No_Show.setText(Pan_number);
         dob_Show.setText(DOB);
-        father_name.setText(Fathers_Name_str);
+        father_name.setText(Fathers_Name_str1);
         marital_status.setText(maritial_status_Value);
 
 

@@ -115,6 +115,14 @@
             android:theme="@style/NoAction2"
             android:windowSoftInputMode="stateHidden" />
         <activity
+            android:name=".BankStamentUpload.Bank_DocGridView_List"
+            android:theme="@style/NoAction2"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".BankStamentUpload.Doc_ImageView_Bank"
+            android:theme="@style/NoAction2"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
             android:name=".Payment.CRIF_Score_Activity"
             android:theme="@style/NoAction2"
             android:windowSoftInputMode="stateHidden" />

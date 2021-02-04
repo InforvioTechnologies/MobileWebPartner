@@ -54,8 +54,8 @@
     <string name="error_empty_mobile2">Please Enter the valid Pin code</string>
 
     <string name="verif">Mobile Verification</string>
-    <string name="otp_enter">Enter the otp below in case if we fail to detect the SMS automatically</string>
-    <string name="otp_lead_enter">Enter the otp send to the customer to verify mobile number</string>
+    <string name="otp_enter">Enter the OTP below in case if we fail to detect the SMS automatically</string>
+    <string name="otp_lead_enter">Enter the OTP send to the customer to verify mobile number</string>
     <string name="pls_enter">Please enter your mobile number</string>
     <string name="pls_enter_lead_mob">Please enter your Customer mobile number</string>
     <string name="pls_enter_new">Please enter your mobile number to update with exiting number</string>
@@ -95,7 +95,7 @@
     <string name="bank_name">Name of the Bank</string>
     <string name="branch">Bank Branch</string>
     <string name="pay_mode">Mode of Payment through</string>
-    <string name="proceed">proceed</string>
+    <string name="proceed">Proceed</string>
 
     <string name="pay_out_details">Payout Details</string>
     <string name="ifsc">IFSC Code</string>
@@ -541,7 +541,7 @@
     <string name="bulding_approval">Building Approval</string>
     <string name="da_approval">DA Approval</string>
     <string name="property_category">Property Category</string>
-    <string name="type_of_emp">Employment type</string>
+    <string name="type_of_emp">Employment Type</string>
     <string name="type_of_co_emp">Type of Co Applicant employment</string>
 
     <string name="co_applicant">Do you Have Co Applicant</string>
@@ -748,7 +748,7 @@
     <string name="paymethod">Payment Method</string>
     <string name="loanwiser_credit">LoanWiser Credit Coins</string>
     <string name="pay_collect_cash">Pay and Collect Cash</string>
-    <string name="current_bal">Current Available Balance - 500 Credit Coins</string>
+    <string name="current_bal">Current Available Balance 500 Credit Coins</string>
     <string name="imp_note">Important Note</string>
     <string name="loanwiser_wallet">You\'ll be Charged 100 Credit Coins from your Loanwiser Wallet</string>
     <string name="loanwiserweller_desc"> You\'ll receive 40 Credit Coins in your Loanwiser Wallet as the Partner Benefit if the customer profile is eligible for loan processing</string>
@@ -895,7 +895,7 @@
     <string name="save_proceed"><![CDATA[SAVE & PROCEED]]></string>
     <string name="skipstep">Skip this Step</string>
 
-
+    <string name="pls_anyone">(Please Upload any one of the documents under each section)</string>
     <string name="report_here">Your Instant Credit Assessment Report is here</string>
     <string name="download">Download</string>
     <string name="download_report">Please download and Share the report with the customer before proceeding to the next step.</string>
@@ -981,13 +981,13 @@
     <string name="loanwiser">LoanWiser</string>
     <string name="crifreportgen">CRIF Report Generation</string>
 
-    <string name="viewreport1">View Applicant CRIF Report</string>
-    <string name="viewreport2">View Co Applicant CRIF Report</string>
+    <string name="viewreport1">Applicant CRIF Report</string>
+    <string name="viewreport2">Co Applicant CRIF Report</string>
 
 
     <string name="leadpass">Your Lead has Successfully Passed the Viability Check</string>
     <string name="crifscore">Applicant <b>CRIF Score</b> </string>
-    <string name="viewreport">View Viablity Report</string>
+    <string name="viewreport">Viablity Report</string>
     <string name="notevialblepass">You can also download the Viability Report from Lead Detail Dashboard.</string>
     <string name="proceednext">PROCEED TO NEXT STEP</string>
     <string name="crifscore1">Co Applicant <b>CRIF Score</b> </string>

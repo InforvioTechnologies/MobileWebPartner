@@ -87,6 +87,8 @@ import adhoc.app.applibrary.Config.AppUtils.Pref.Pref;
 import adhoc.app.applibrary.Config.AppUtils.Urls;
 import adhoc.app.applibrary.Config.AppUtils.VolleySignleton.AppController;
 import dmax.dialog.SpotsDialog;
+import in.loanwiser.partnerapp.BankStamentUpload.FileUtils1;
+import in.loanwiser.partnerapp.BankStamentUpload.Upload_Activity_Bank;
 import in.loanwiser.partnerapp.Documents.Applicant_Doc_Details_revamp;
 import in.loanwiser.partnerapp.Documents.Document_Details;
 import in.loanwiser.partnerapp.Documents.FilePath;
@@ -144,7 +146,7 @@ public class ManiActivity_Image2 extends SimpleActivity implements SingleUploadB
     AppCompatTextView pdf_name;
     PopupWindow popupWindow;
     int count=0;
-
+    File orginalFile = null ;
     ///Camera image
 
     private static final String TAG1 = MainActivity_IMG_Property2.class.getSimpleName();
@@ -166,6 +168,8 @@ public class ManiActivity_Image2 extends SimpleActivity implements SingleUploadB
     private VideoView vidPreview;
     private Button btnUpload,rotation;
     private ExifInterface exifObject;
+
+    String path;
 
     LinearLayout pdf_gallery,camera_ly_upload;
 
@@ -783,7 +787,7 @@ public class ManiActivity_Image2 extends SimpleActivity implements SingleUploadB
                 imgSinglePick1.setVisibility(View.VISIBLE);
                 imgSinglePick.setVisibility(View.GONE);
 
-                String path = FilePath.getPath(this, filePath);
+               // String path = FilePath.getPath(this, filePath);
 
                 String  fileName = getFileName(filePath);
                 pdf_name.setText(fileName);
@@ -843,6 +847,17 @@ public class ManiActivity_Image2 extends SimpleActivity implements SingleUploadB
                 viewSwitcher1.setVisibility(View.GONE);
                 all_path = data.getStringArrayExtra("all_path");
                 upload();
+                if(all_path != null)
+                {
+
+                }else
+                {
+                    Toast.makeText(getApplicationContext(), "Please Select Images to upload!!!", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(ManiActivity_Image2.this, Applicant_Doc_Details_revamp.class);
+                    startActivity(intent);
+                    finish();
+                }
+
                /*
                 all_path = data.getStringArrayExtra("all_path");
                 Log.e(TAG, "the galary list"+all_path);
@@ -986,19 +1001,36 @@ public class ManiActivity_Image2 extends SimpleActivity implements SingleUploadB
 
             if(filePath != null){
 
-                String path= String.valueOf(filePath);
-                String filename = path.substring(path.lastIndexOf("/")+1);
+                String path1= String.valueOf(filePath);
+                String filename = path1.substring(path1.lastIndexOf("/")+1);
                 String pdf1 = filename.substring(filename.lastIndexOf(".")+1);
 
                 String a= "pdf";
 
                 if(pdf1.equals(a))
                 {
+                     path = FilePath.getPath(this, filePath);
                     uploadMultipart_PDF();
                 }
                 else
                 {
-                    Toast.makeText(getApplicationContext(), "Please select the PDF file from the File Directory", Toast.LENGTH_SHORT).show();
+                    if (Build.VERSION.SDK_INT < 11) {
+                        orginalFile = new File(FileUtils1.getRealPathFromURI_BelowAPI11(ManiActivity_Image2.this, filePath));
+                    }
+                    // SDK >= 11 && SDK < 19
+                    else if (Build.VERSION.SDK_INT < 19) {
+                        orginalFile = new File(FileUtils1.getRealPathFromURI_API11to18(ManiActivity_Image2.this, filePath));
+                    }
+                    // SDK > 19 (Android 4.4) and up
+                    else {
+                        orginalFile = new File(FileUtils1.getRealPathFromURI_API19(ManiActivity_Image2.this, filePath));
+                    }
+
+                     path = String.valueOf(orginalFile);
+                    Log.e("Upload_Activity_Ban", String.valueOf(orginalFile));
+
+                    uploadMultipart_PDF();
+                   // Toast.makeText(getApplicationContext(), "Please select the PDF file from the File Directory", Toast.LENGTH_SHORT).show();
                 }
 
             }
@@ -1190,7 +1222,7 @@ public class ManiActivity_Image2 extends SimpleActivity implements SingleUploadB
         //  String name = editText.getText().toString().trim();
         Log.d("Pdf file333333", String.valueOf(filePath));
         //getting the actual path of the pdf
-        String path = FilePath.getPath(this, filePath);
+
         Log.e("PDF File", String.valueOf(path));
        // File sourceFile = new File(path);
 

@@ -683,7 +683,7 @@ public class PaymentDetails extends SimpleActivity {
             e.printStackTrace();
         }
         Log.e("Payment tocken", String.valueOf(J));
-
+        progressDialog.show();
         JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, Urls.GET_TOCKEN, J,
                 new Response.Listener<JSONObject>() {
 
@@ -705,12 +705,13 @@ public class PaymentDetails extends SimpleActivity {
                                 Log.e("Payment Name", String.valueOf(Name));
                                 Log.e("Payment mobile_no", String.valueOf(mobile_no));
                                 Log.e("Payment email", String.valueOf(email));
+                               // Toast.makeText(mCon, response.toString(),Toast.LENGTH_SHORT).show();
                                 Do_Cashfree_Payment(cftoken);
 
                                 //  Log.e("message",msg);
                                 //  Log.e("cftoken",cftoken);
                                // Do_Cashfree_Payment(cftoken);
-
+                                progressDialog.show();
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();

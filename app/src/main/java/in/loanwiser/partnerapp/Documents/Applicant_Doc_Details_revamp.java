@@ -141,6 +141,7 @@ public class Applicant_Doc_Details_revamp extends SimpleActivity {
             @Override
             public void onClick(View view) {
                 Document_Statues();
+
             }
         });
 
@@ -375,7 +376,8 @@ public class Applicant_Doc_Details_revamp extends SimpleActivity {
                            }else
                            {
                                submit_update_status.setEnabled(false);
-                               Toast.makeText(getApplicationContext(),"Please Upload the mandatory Documents", Toast.LENGTH_SHORT).show();
+                               Submit_Co_Applicant();
+                              // Toast.makeText(getApplicationContext(),"Please Upload the mandatory Documents", Toast.LENGTH_SHORT).show();
                                progressDialog.dismiss();
                            }
 
@@ -714,9 +716,16 @@ public class Applicant_Doc_Details_revamp extends SimpleActivity {
 
                 String key = J.getString("key");
                 String document_req = J.getString("document_req");
-                String star="<font color='#D44D53'>*</font>";
+                if(document_req.equals("0"))
+                {
+                  //  String star="<font color='#D44D53'>*</font>";
+                    holder.class_name.setText((key ));
+                }else
+                {
+                    String star="<font color='#D44D53'>*</font>";
+                    holder.class_name.setText(Html.fromHtml(key + " "+star));
+                }
 
-                holder.class_name.setText(Html.fromHtml(key + " "+star));
                 Typeface font = Typeface.createFromAsset(getApplicationContext().getAssets(), "segoe_ui.ttf");
                 holder.class_name.setTypeface(font,Typeface.BOLD);
                 holder.class_name.setTextSize(16);
@@ -761,6 +770,8 @@ public class Applicant_Doc_Details_revamp extends SimpleActivity {
 
 
                 }
+
+
                 ListItemAdapter_chiled adapter_chile = new ListItemAdapter_chiled(mCon,doc_ype_com);
                 imagelist1.setVisibility(View.GONE);
                 imagelist.setVisibility(View.VISIBLE);
@@ -1262,6 +1273,41 @@ public class Applicant_Doc_Details_revamp extends SimpleActivity {
                 dialog.dismiss();
             }
         });
+
+
+        if (!dialog.isShowing()) {
+            dialog.show();
+        }
+
+    }
+
+    private void Submit_Co_Applicant(){
+        final Dialog dialog = new Dialog(this);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+        dialog.setContentView(R.layout.co_app_sub_dialog_document);
+        //  dialog.getWindow().setLayout(display.getWidth() * 90 / 100, LinearLayout.LayoutParams.WRAP_CONTENT);
+        dialog.setCancelable(true);
+        dialog.setCanceledOnTouchOutside(false);
+        Button delete = (Button) dialog.findViewById(R.id.delete);
+        Button no=(Button)dialog.findViewById(R.id.no);
+        AppCompatTextView doument_name=(AppCompatTextView)dialog.findViewById(R.id.doument_name);
+        AppCompatTextView document_url=(AppCompatTextView)dialog.findViewById(R.id.document_url);
+
+        delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+               // Delete_Image(hash,type,document,transaction_id,docid,class_id,user_type);
+
+            }
+        });
+       /* no.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });*/
 
 
         if (!dialog.isShowing()) {

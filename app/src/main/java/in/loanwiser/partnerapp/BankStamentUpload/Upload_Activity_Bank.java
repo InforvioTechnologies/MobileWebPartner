@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
 import android.app.Dialog;
+import android.content.ContentResolver;
 import android.content.ContentUris;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -16,6 +17,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.StrictMode;
 import android.provider.DocumentsContract;
 import android.provider.MediaStore;
@@ -30,8 +32,11 @@ import android.widget.RadioButton;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
+import com.android.volley.NetworkResponse;
+import com.android.volley.NoConnectionError;
 import com.android.volley.Request;
 import com.android.volley.Response;
+import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 
@@ -41,17 +46,20 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
+import java.util.stream.Stream;
 
 import adhoc.app.applibrary.Config.AppUtils.Objs;
 import adhoc.app.applibrary.Config.AppUtils.Pref.Pref;
 import adhoc.app.applibrary.Config.AppUtils.Urls;
 import adhoc.app.applibrary.Config.AppUtils.VolleySignleton.AppController;
 import dmax.dialog.SpotsDialog;
+import in.gauriinfotech.commons.Commons;
 import in.loanwiser.partnerapp.Documents.SingleUploadBroadcastReceiver;
 import in.loanwiser.partnerapp.PartnerActivitys.Dashboard_Activity;
 import in.loanwiser.partnerapp.PartnerActivitys.Home;
@@ -64,6 +72,10 @@ import in.loanwiser.partnerapp.Step_Changes_Screen.Document_Checklist_Details_ty
 import in.loanwiser.partnerapp.User_Account.Welcome_Page;
 
 import static adhoc.app.applibrary.Config.AppUtils.Objs.a;
+import static in.loanwiser.partnerapp.BankStamentUpload.FilePath.getDataColumn;
+import static in.loanwiser.partnerapp.BankStamentUpload.FilePath.isDownloadsDocument;
+import static in.loanwiser.partnerapp.BankStamentUpload.FilePath.isExternalStorageDocument;
+import static in.loanwiser.partnerapp.BankStamentUpload.FilePath.isMediaDocument;
 
 public class Upload_Activity_Bank extends SimpleActivity implements View.OnClickListener, SingleUploadBroadcastReceiver.Delegate {
 
@@ -89,14 +101,10 @@ private List<String> fileDoneList;
 private android.app.AlertDialog progressDialog;
 
 
-
-
-
-
         FileAdapter fileAdapter;
 
         String[] stringarray;
-
+        File orginalFile = null ;
         String fileget;
 
         Context context = this;
@@ -166,10 +174,6 @@ protected void onCreate(Bundle savedInstanceState) {
         fileAdapter=new FileAdapter(fileNameList,fileDoneList);
         listview.setAdapter(fileAdapter);
 
-
-
-
-
         }
 
 public void onRadioButtonClicked(View v) {
@@ -197,7 +201,131 @@ private void showFileChooser() {
         intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
         intent.setAction(Intent.ACTION_OPEN_DOCUMENT);
         startActivityForResult(Intent.createChooser(intent, "Select Pdf"), PICK_PDF_REQUEST);
+       /* Intent intent = new Intent();
+        intent.setType("application/pdf,application/msword");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        intent.addCategory(Intent.CATEGORY_BROWSABLE);
+        startActivityForResult(intent, PICK_PDF_REQUEST);*/
+
         }
+
+       /* public void upload(){
+                Intent intent = new Intent();
+                intent.setType("application/pdf,application/msword");
+                intent.setAction(Intent.ACTION_GET_CONTENT);
+                intent.addCategory(Intent.CATEGORY_BROWSABLE);
+                startActivityForResult(intent, PICK_PDF_REQUEST);
+
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT)
+                {
+                        File file=new File(getPath(Payment_upload.this,uri));
+                        String path=getPath(context,uri);
+                        upload_file=getStringFile(file);
+                }
+
+
+                VolleyMultipartRequest multipartRequest = new VolleyMultipartRequest(Request.Method.POST, u, new Response.Listener<NetworkResponse>() {
+                        @Override
+                        public void onResponse(NetworkResponse response) {
+                                String resultResponse = new String(response.data);
+
+                        }
+                }, new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                                NetworkResponse networkResponse = error.networkResponse;
+                                String errorMessage = "Unknown error";
+                                if (networkResponse == null) {
+                                        if (error.getClass().equals(TimeoutError.class)) {
+                                                errorMessage = "Request timeout";
+                                        } else if (error.getClass().equals(NoConnectionError.class)) {
+                                                errorMessage = "Failed to connect server";
+                                        }
+                                } else {
+                                        String result = new String(networkResponse.data);
+                                        System.out.println(result);
+                                }
+                                Log.i("Error", errorMessage);
+                                error.printStackTrace();
+                        }
+                }) {
+
+
+                        @Override
+                        protected Map<String, String> getParams() throws AuthFailureError {
+                                Map<String, String> parameters = new HashMap<String, String>();
+                                parameters.put("key", value);
+
+                                return parameters;
+                        }
+                };
+
+                VolleySingleton.getInstance(getBaseContext()).addToRequestQueue(multipartRequest);
+
+        }*/
+
+       /* @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+        public static String getPath(final Context context, final Uri uri) {
+
+                final boolean isKitKat = Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT;
+
+                // DocumentProvider
+                if (isKitKat && DocumentsContract.isDocumentUri(context, uri)) {
+                        // ExternalStorageProvider
+                        if (isExternalStorageDocument(uri)) {
+                                final String docId = DocumentsContract.getDocumentId(uri);
+                                final String[] split = docId.split(":");
+                                final String type = split[0];
+
+                                if ("primary".equalsIgnoreCase(type)) {
+                                        return Environment.getExternalStorageDirectory() + "/" + split[1];
+                                }
+
+
+                        }
+                        // DownloadsProvider
+                        else if (isDownloadsDocument(uri)) {
+
+                                final String id = DocumentsContract.getDocumentId(uri);
+                                final Uri contentUri = ContentUris.withAppendedId(
+                                        Uri.parse("content://downloads/public_downloads"), Long.valueOf(id));
+
+                                return getDataColumn(context, contentUri, null, null);
+                        }
+                        // MediaProvider
+                        else if (isMediaDocument(uri)) {
+                                final String docId = DocumentsContract.getDocumentId(uri);
+                                final String[] split = docId.split(":");
+                                final String type = split[0];
+
+                                Uri contentUri = null;
+                                if ("image".equals(type)) {
+                                        contentUri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI;
+                                } else if ("video".equals(type)) {
+                                        contentUri = MediaStore.Video.Media.EXTERNAL_CONTENT_URI;
+                                } else if ("audio".equals(type)) {
+                                        contentUri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;
+                                }
+
+                                final String selection = "_id=?";
+                                final String[] selectionArgs = new String[] {
+                                        split[1]
+                                };
+
+                                return getDataColumn(context, contentUri, selection, selectionArgs);
+                        }
+                }
+                // MediaStore (and general)
+                else if ("content".equalsIgnoreCase(uri.getScheme())) {
+                        return getDataColumn(context, uri, null, null);
+                }
+                // File
+                else if ("file".equalsIgnoreCase(uri.getScheme())) {
+                        return uri.getPath();
+                }
+
+                return null;
+        }*/
 
 @RequiresApi(api = Build.VERSION_CODES.KITKAT)
 @Override
@@ -205,8 +333,6 @@ protected void onActivityResult(int requestCode, int resultCode, @Nullable Inten
         super.onActivityResult(requestCode, resultCode, data);
 
         if(requestCode == PICK_PDF_REQUEST && resultCode == RESULT_OK) {
-
-
 
           /* ArrayList<File> Files = (ArrayList<File>) data.getSerializableExtra(FILES_TO_UPLOAD); //file array list
            String [] files_paths; //string array
@@ -268,6 +394,7 @@ protected void onActivityResult(int requestCode, int resultCode, @Nullable Inten
 
         }
 
+
 public String getRealPathFromURI(Context context, Uri contentUri) {
         Cursor cursor = null;
         try {
@@ -315,7 +442,8 @@ public void onClick(View v) {
 
                                         if(pdf1.equals(a))
                                         {
-                                                String path = FilePath.getPath(this, uriarrayList.get(i));
+                                               // String path = getPath(this, uriarrayList.get(i));
+                                                String path = getPDFPath( uriarrayList.get(i));
                                                 pathlist.add(path);
                                                 uploadMultipart();
                                         }
@@ -323,12 +451,38 @@ public void onClick(View v) {
                                         {
                                              /*   String path = FilePath.getPath(this, uriarrayList.get(i));
                                                 Uri myUri = Uri.parse(path);
-                                                String getPDFPath= getPDFPath(myUri);
+
                                                 Log.e("the value uri is",getPDFPath);
                                                 pathlist.add(getPDFPath);*/
 
                                               //  uploadMultipart();
-                                                Submit_upload_filePath();
+
+                                              //  Uri uri = uriarrayList.get(i);
+                                              //  String stream = uri.getPath();
+                                               // String fullPath = Commons.getPath(uriarrayList.get(i), context);
+                                               // Log.e("the Pdf Path",stream+fileName);
+
+                                              /*  */
+
+
+
+                                                if (Build.VERSION.SDK_INT < 11) {
+                                                        orginalFile = new File(FileUtils1.getRealPathFromURI_BelowAPI11(Upload_Activity_Bank.this, uriarrayList.get(i)));
+                                                }
+                                                // SDK >= 11 && SDK < 19
+                                                else if (Build.VERSION.SDK_INT < 19) {
+                                                        orginalFile = new File(FileUtils1.getRealPathFromURI_API11to18(Upload_Activity_Bank.this, uriarrayList.get(i)));
+                                                }
+                                                // SDK > 19 (Android 4.4) and up
+                                                else {
+                                                        orginalFile = new File(FileUtils1.getRealPathFromURI_API19(Upload_Activity_Bank.this, uriarrayList.get(i)));
+                                                }
+                                                String path = String.valueOf(orginalFile);
+                                                pathlist.add(path);
+                                                uploadMultipart();
+                                                Log.e("path", String.valueOf(path));
+                                                Log.e("Upload_Activity_Ban", String.valueOf(orginalFile));
+                                               // Submit_upload_filePath();
                                                // Toast.makeText(getApplicationContext(), "Please select the PDF file from the File Directory", Toast.LENGTH_SHORT).show();
                                         }
 
@@ -340,8 +494,10 @@ public void onClick(View v) {
         }
         }
 
+
+
 @RequiresApi(api = Build.VERSION_CODES.KITKAT)
-public String getPDFPath(Uri uri){
+public String getPDFPath1(Uri uri){
 final String id = DocumentsContract.getDocumentId(uri);
 final Uri contentUri = ContentUris.withAppendedId(
         Uri.parse("content://downloads/public_downloads"), Long.valueOf(id));
@@ -356,6 +512,57 @@ final Uri contentUri = ContentUris.withAppendedId(
 
 
 
+        @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+        private String getPDFPath(Uri uri) {
+                // DocumentProvider
+                if (DocumentsContract.isDocumentUri(context, uri)) {
+                        // ExternalStorageProvider
+                        if ("com.android.externalstorage.documents".equals(uri.getAuthority())) {
+                                String documentId = DocumentsContract.getDocumentId(uri);
+                                String[] split = documentId.split(":");
+                                String type = split[0];
+                                return Environment.getExternalStorageDirectory().toString() + "/" + split[1];
+
+                        } else if ("com.android.providers.downloads.documents".equals(uri.getAuthority())) {
+                                String decodedURI = Uri.decode(uri.toString());
+
+                                if (decodedURI.contains("raw:")) {
+                                        return decodedURI.substring(decodedURI.indexOf("raw:") + 4);
+                                }
+
+                                String id = DocumentsContract.getDocumentId(Uri.parse(decodedURI));
+
+                                Uri contentUri = ContentUris.withAppendedId(
+                                        Uri.parse("content://downloads/public_downloads"), java.lang.Long.valueOf(id));
+                              /// Android.Net.Uri uri = Android.Net.Uri.Parse(path);
+                                return getDataColumn(contentUri, null, null);
+                        }
+                }
+                return null;
+        }
+
+        public String getDataColumn(Uri uri, String selection,
+                                    String[] selectionArgs) {
+
+                Cursor cursor = null;
+                final String column = "_data";
+                final String[] projection = {
+                        column
+                };
+
+                try {
+                        cursor = context.getContentResolver().query(uri, projection, selection, selectionArgs,
+                                null);
+                        if (cursor != null && cursor.moveToFirst()) {
+                                final int index = cursor.getColumnIndexOrThrow(column);
+                                return cursor.getString(index);
+                        }
+                } finally {
+                        if (cursor != null)
+                                cursor.close();
+                }
+                return null;
+        }
 
 public String getPath(Uri uri)
         {
@@ -405,8 +612,11 @@ public void uploadMultipart() {
         String uris = String.valueOf(uriarrayList);
         Log.i("TAG", "urilist: " + uris);
         //Creating a multi part request
+                Log.i("getTRANSACTIONID", Pref.getTRANSACTIONID(getApplicationContext()));
+                Log.i("relation", Pref.getCoAPPAVAILABLE(getApplicationContext()));
 
         for (int i=0;i<pathlist.size();i++){
+
         String finalpath= pathlist.get(i);
         progressDialog.show();
         new MultipartUploadRequest(this, uploadId,  Urls.Bankstatement_URl)
@@ -414,18 +624,17 @@ public void uploadMultipart() {
         .addParameter("doc_name", String.valueOf(fileNameList.get(i))) //Adding text parameter to the request
         //Adding file
         //Adding text parameter to the request
-        .addParameter("pdf_password", "")
-        .addParameter("relationship_type", pdf_password)
-        .addParameter("is_mobileupload ", "4")
-        .addParameter("transaction_id  ", Pref.getTRANSACTIONID(getApplicationContext()))
+        .addParameter("pdf_password", pdf_password)
+        .addParameter("relationship_type",Pref.getCoAPPAVAILABLE(getApplicationContext()))
+        .addParameter("is_mobileupload", "4")
+        .addParameter("transaction_id", Pref.getTRANSACTIONID(getApplicationContext()))
        // .setNotificationConfig(new UploadNotificationConfig())
         .setMaxRetries(2)
         .startUpload(); //Starting the upload
+                Log.i("doc_name", String.valueOf(fileNameList.get(i)));
+                Log.i("finalpath", String.valueOf(finalpath));
 
         }
-
-
-
         } catch (Exception exc) {
         Toast.makeText(this, exc.getMessage(), Toast.LENGTH_SHORT).show();
         }
@@ -433,10 +642,6 @@ public void uploadMultipart() {
         }
 
         }
-
-
-
-
 
         @Override
         protected void onPause() {

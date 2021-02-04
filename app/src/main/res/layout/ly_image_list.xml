@@ -84,9 +84,6 @@
             </RelativeLayout>
 
         </LinearLayout>
-
-
-
     </LinearLayout>
     <LinearLayout
         android:orientation="horizontal"
@@ -100,7 +97,7 @@
             android:layout_margin="@dimen/activity_pading"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="" />
+            android:text="Bank_Statement.pdf" />
 
     </LinearLayout>
 

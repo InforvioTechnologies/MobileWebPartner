@@ -3634,6 +3634,8 @@ public class Viability_Screen_revamp extends SimpleActivity implements NumberPic
 
                                 co_applicant_yes = (AppCompatButton) customView.findViewById(R.id.co_applicant_yes);
                                 co_applicant_no = (AppCompatButton) customView.findViewById(R.id.co_applicant_no);
+                              LinearLayout  background = (LinearLayout) customView.findViewById(R.id.background);
+                                background.setBackground(getResources().getDrawable(R.drawable.capsul_button_rect_viability));
                                 //instantiate popup window
                                 popupWindow = new PopupWindow(customView, LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
                                 //display the popup window
@@ -4056,11 +4058,11 @@ public class Viability_Screen_revamp extends SimpleActivity implements NumberPic
         employee_id_ly = (LinearLayout) dialog.findViewById(R.id.employee_id_ly);
 
         employee_id_ly.setVisibility(View.VISIBLE);
-
+        String Fathers_Name_str1 = Fathers_Name_str.substring(0, 1).toUpperCase() + Fathers_Name_str.substring(1);
         employement_Show.setText(Employee_type_Value);
         Pan_No_Show.setText(Pan_number);
         dob_Show.setText(DOB);
-        father_name.setText(Fathers_Name_str);
+        father_name.setText(Fathers_Name_str1);
         marital_status.setText(maritial_status_Value);
 
 

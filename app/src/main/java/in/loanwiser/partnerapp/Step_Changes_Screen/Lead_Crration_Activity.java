@@ -31,6 +31,7 @@ import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.AppCompatEditText;
 import androidx.appcompat.widget.AppCompatTextView;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
@@ -104,7 +105,7 @@ public class Lead_Crration_Activity extends SimpleActivity {
     AppCompatTextView txt_loan_category,txt_loan_category1,loan_type,loan_type1,
                         Loan_amount,Loan_amount1,name,name1,mobile,mobile1,wt_mobile,wt_mobile11,terms_and_condition,
             type_of_empmnt_txt,type_of_empmnt_txt1,do_you_have_coApp_txt,do_you_have_coApp_txt1,coApp_txt_emp_type1
-            ,coApp_txt_emp_type2,age,email,email1;
+            ,coApp_txt_emp_type2,age,email,email1,savelater_textview;
 
     CheckBox check_complete;
     Spinner co_applicant_spinner,co_applicant_emp_spinner,is_whats_app_spinner;
@@ -144,7 +145,7 @@ public class Lead_Crration_Activity extends SimpleActivity {
         Click();
        // Loanwiser_Api();
 
-   /*   lead_cr_step1.setOnClickListener(new View.OnClickListener() {
+    /*  lead_cr_step1.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
 
@@ -226,8 +227,12 @@ public class Lead_Crration_Activity extends SimpleActivity {
         email1 = (AppCompatTextView) findViewById(R.id.email1);
         mobile_no_txt = (AppCompatEditText) findViewById(R.id.mobile_no_txt);
         whats_app_no = (AppCompatEditText) findViewById(R.id.whats_app_no);
+        savelater_textview = (AppCompatTextView) findViewById(R.id.savelater_textview);
 
         submitloanbtn=(Button)findViewById(R.id.submitloanbtn);
+        submitloanbtn.setBackground(getResources().getDrawable(R.drawable.capul_submittoloanwiser));
+        submitloanbtn.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.blue));
+        savelater_textview.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.black));
         savelaterlay=(LinearLayout)findViewById(R.id.savelaterlay);
 
         //TextView

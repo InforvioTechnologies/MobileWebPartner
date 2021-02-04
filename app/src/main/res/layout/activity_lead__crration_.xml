@@ -288,7 +288,7 @@
                                     android:inputType="text"
                                     android:textColor="@color/colorPrimaryDark"
                                     android:textColorHint="@color/colorPrimaryDark"
-                                    android:hint="Applicant name"
+                                    android:hint="Applicant Name"
                                     android:layout_height="wrap_content" />
                             </LinearLayout>
                             <LinearLayout
@@ -391,7 +391,7 @@
                                     android:id="@+id/mobile_no_txt"
                                     android:textSize="14dp"
                                     android:inputType="number"
-                                    android:maxLength="10"
+                                    android:maxLength="13"
                                     android:imeOptions="actionDone"
                                     android:textColor="@color/black"/>
                             </LinearLayout>
@@ -606,7 +606,7 @@
                                     android:layout_height="wrap_content"
                                     android:id="@+id/whats_app_no"
                                     android:textSize="14dp"
-                                    android:maxLength="10"
+                                    android:maxLength="13"
                                     android:inputType="number"
                                     android:imeOptions="actionDone"
                                     android:textColor="@color/black"/>
@@ -686,7 +686,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
-
                         android:orientation="vertical">
 
                         <LinearLayout

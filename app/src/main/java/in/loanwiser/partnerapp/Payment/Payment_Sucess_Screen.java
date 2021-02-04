@@ -804,6 +804,7 @@ public class Payment_Sucess_Screen extends AppCompatActivity {
                                     AppCompatButton view_CRIF_report = (AppCompatButton) customView1.findViewById(R.id.view_CRIF_report);
 
                                     TextView score= (TextView) customView1.findViewById(R.id.score);
+                                    background.setBackground(getResources().getDrawable(R.drawable.capsul_button_rect_viability));
                                     co_applicant.setVisibility(View.GONE);
                                     co_Applicant_ly.setVisibility(View.GONE);
                                     crifscore.setText(app_crif_score);
@@ -884,8 +885,9 @@ public class Payment_Sucess_Screen extends AppCompatActivity {
                                     LinearLayout co_applicant = (LinearLayout) customView1.findViewById(R.id.co_applicant);
                                     LinearLayout co_Applicant_ly = (LinearLayout) customView1.findViewById(R.id.co_Applicant_ly);
                                     AppCompatTextView crifscore = (AppCompatTextView) customView1.findViewById(R.id.crifscore);
+                                    LinearLayout background = (LinearLayout) customView1.findViewById(R.id.background);
                                     AppCompatTextView co_appcrifscore = (AppCompatTextView) customView1.findViewById(R.id.co_appcrifscore);
-
+                                    background.setBackground(getResources().getDrawable(R.drawable.capsul_button_rect_viability));
 
                                   //  TextView score= (TextView) customView1.findViewById(R.id.score);
                                     co_applicant.setVisibility(View.VISIBLE);
@@ -1037,7 +1039,8 @@ public class Payment_Sucess_Screen extends AppCompatActivity {
                                 View customView1 = layoutInflater1.inflate(R.layout.popup_viability_scrore,null);
 
                                 view_report = (AppCompatButton) customView1.findViewById(R.id.view_report);
-
+                                LinearLayout ly_viability = (LinearLayout) customView1.findViewById(R.id.ly_viability);
+                                ly_viability.setBackground(getResources().getDrawable(R.drawable.capsul_button_rect_viability));
                                 TextView score= (TextView) customView1.findViewById(R.id.score);
 
                                 score.setText(crif_Score);

@@ -5,15 +5,17 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.fragment.app.FragmentStatePagerAdapter;
+import androidx.viewpager.widget.ViewPager;
 
 public class Pager1 extends FragmentStatePagerAdapter {
 
     int tabCount;
+    ViewPager viewPager;
 
-    public Pager1(FragmentManager fm, int tabCount) {
+    public Pager1(FragmentManager fm, int tabCount,ViewPager viewPager) {
         super(fm);
         this.tabCount= tabCount;
-
+        this.viewPager=viewPager;
     }
 
     @NonNull
@@ -22,7 +24,7 @@ public class Pager1 extends FragmentStatePagerAdapter {
         //Returning the current tabs
         switch (position) {
             case 0:
-                FragmentApplicant tab1 = new FragmentApplicant();
+                FragmentApplicant tab1 = new FragmentApplicant(viewPager);
                 return tab1;
             case 1:
                 PropertyFragment tab3 = new  PropertyFragment();

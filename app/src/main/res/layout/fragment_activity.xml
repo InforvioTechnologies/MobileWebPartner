@@ -41,6 +41,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <LinearLayout
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
                     android:layout_marginTop="20dp"
                     android:id="@+id/submitloanlay"
                     android:layout_width="match_parent"
@@ -56,14 +58,13 @@
                             android:id="@+id/my_leads"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="20dp"
-                            android:layout_marginRight="20dp"
+
                             android:text="@string/my_leads"
                             android:textColor="@color/but_red"
                             android:background="@drawable/capsul_button_rect_out"/>
                     </LinearLayout>
                     <LinearLayout
-                        android:layout_marginRight="10dp"
+
                         android:layout_weight="1"
                         android:gravity="center"
                         android:layout_width="wrap_content"
@@ -72,8 +73,6 @@
                             android:id="@+id/my_earnings"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="20dp"
-                            android:layout_marginRight="20dp"
                             android:text="@string/my_earnings"
                             android:textColor="@color/but_red"
                             android:background="@drawable/capsul_button_rect_out"/>

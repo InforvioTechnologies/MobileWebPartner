@@ -9,12 +9,14 @@ import android.os.Environment;
 import android.os.Handler;
 import android.os.Looper;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.nostra13.universalimageloader.cache.disc.impl.UnlimitedDiscCache;
 import com.nostra13.universalimageloader.cache.memory.impl.WeakMemoryCache;
@@ -148,16 +150,28 @@ public class CustomGalleryActivity extends Activity {
 
 		@Override
 		public void onClick(View v) {
-			ArrayList<CustomGallery> selected = adapter.getSelected();
 
+			ArrayList<CustomGallery> selected = adapter.getSelected();
+			//Log.e("the ArrayList",selected.toString());
 			String[] allPath = new String[selected.size()];
 			for (int i = 0; i < allPath.length; i++) {
 				allPath[i] = selected.get(i).sdcardPath;
 			}
 
-			Intent data = new Intent().putExtra("all_path", allPath);
-			setResult(RESULT_OK, data);
-			finish();
+			String allPath1 = String.valueOf(allPath.length);
+
+			Log.e("the length",allPath1.toString());
+			if(allPath1.equals("0"))
+			{
+				Toast.makeText(getApplicationContext(), "Please Select Images to upload!!!", Toast.LENGTH_SHORT).show();
+			}else
+			{
+				Intent data = new Intent().putExtra("all_path", allPath);
+				setResult(RESULT_OK, data);
+				finish();
+
+			}
+
 
 		}
 	};
