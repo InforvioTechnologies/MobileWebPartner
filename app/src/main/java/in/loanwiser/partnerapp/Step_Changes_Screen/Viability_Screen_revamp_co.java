@@ -292,7 +292,7 @@ public class Viability_Screen_revamp_co extends SimpleActivity implements Number
         residence_layout = (LinearLayout) findViewById(R.id.residence_layout);
         pro_details = (LinearLayout) findViewById(R.id.pro_details);
         salaried = (LinearLayout) findViewById(R.id.salaried);
-        self_employeed = (LinearLayout) findViewById(R.id.self_employeed);
+       // self_employeed = (LinearLayout) findViewById(R.id.self_employeed);
         co_applicant_ly = (LinearLayout) findViewById(R.id.co_applicant_ly);
         applicant_ly = (LinearLayout) findViewById(R.id.applicant_ly);
         applicant_ly.setVisibility(View.VISIBLE);
@@ -1567,7 +1567,10 @@ public class Viability_Screen_revamp_co extends SimpleActivity implements Number
 
         Monthly_net_salry_Show.setText(monthly_net_salary);
         salary_Show.setText(Salary_Value);
-        salary_proof_show.setText(salry_proof_value.toString());
+      //  salary_proof_show.setText(salry_proof_value.toString());
+        String list = Arrays.toString(salry_proof_value.toArray()).replace("[", "").replace("]", "");
+        salary_proof_show.setText(list);
+
         company_type_show.setText(pl_co_app_Company_Value);
         company_name_show.setText(company_name);
         designation_show.setText(designation_);
@@ -3931,6 +3934,8 @@ public class Viability_Screen_revamp_co extends SimpleActivity implements Number
         try {
             J =new JSONObject();
             J.put("transaction_id",Pref.getTRANSACTIONID(getApplicationContext()));
+            J.put("user_id", Pref.getUSERID(getApplicationContext()));
+            J.put("b2b_id", Pref.getID(getApplicationContext()));
             J.put("relationship_type", "2");
 
         } catch (JSONException e) {
@@ -3981,7 +3986,7 @@ public class Viability_Screen_revamp_co extends SimpleActivity implements Number
                                             rule_message.add(ind_salary);
                                         }else
                                         {
-                                            bank_failure="Sorry.! Currently we have no partner banks available in applicant\\'s location" +
+                                            bank_failure="Sorry.! Currently we have no partner banks available in applicants location" +" "+
                                                     "We are On-boarding as many new banks as possible. Stay tuned.! ";
                                             rule_message.add(bank_failure);
                                         }
@@ -4000,8 +4005,9 @@ public class Viability_Screen_revamp_co extends SimpleActivity implements Number
                                Button godashboard = (Button) customView.findViewById(R.id.godashboard);
                                 TextView content_txt = (TextView) customView.findViewById(R.id.content_txt);
 
-
-                                content_txt.setText(rule_message.toString());
+                                String list = Arrays.toString(rule_message.toArray()).replace("[", "").replace("]", "");
+                                content_txt.setText(list);
+                               // content_txt.setText(rule_message.toString());
 
                                 //instantiate popup window
                                 popupWindow = new PopupWindow(customView, LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);

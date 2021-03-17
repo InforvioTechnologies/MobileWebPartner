@@ -7,7 +7,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
-import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
@@ -58,15 +57,11 @@ import in.loanwiser.partnerapp.PartnerActivitys.Ask_user_Dashboard_Activity;
 import in.loanwiser.partnerapp.PartnerActivitys.Offers_list;
 import in.loanwiser.partnerapp.PartnerActivitys.Viability_Data_revamp;
 import in.loanwiser.partnerapp.Partner_Statues.DashBoard_new;
-import in.loanwiser.partnerapp.Partner_Statues.LeadeFragment;
-import in.loanwiser.partnerapp.Payment.PaymentActivity;
 import in.loanwiser.partnerapp.R;
 //import in.loanwiser.partnerapp.Step_Changes_Screen.Applicant_fragment;
 import in.loanwiser.partnerapp.Step_Changes_Screen.CRIF_Report_Activity_PDF_View;
-import in.loanwiser.partnerapp.Step_Changes_Screen.DocumentChecklistActivity;
 import in.loanwiser.partnerapp.Step_Changes_Screen.DocumentChecklist_Fragment;
 //import in.loanwiser.partnerapp.Step_Changes_Screen.DocumentChecklist_new;
-import in.loanwiser.partnerapp.Step_Changes_Screen.Document_Checklist_Details_type;
 import in.loanwiser.partnerapp.Step_Changes_Screen.FragmentApplicant;
 import in.loanwiser.partnerapp.Step_Changes_Screen.Viability_Screen_revamp;
 import in.loanwiser.partnerapp.Step_Changes_Screen.Viability_Screen_revamp_Pl_BL;
@@ -105,7 +100,7 @@ public class Home extends AppCompatActivity {
     AppCompatTextView lead_name,mobile_no,Loan_amount,loan_type_,loan_submit_statues1,viability_statues,
             eligibility_check_cmp,payment_statues_comp,crif_report_cmp,viability_report_cmp,loan_statues,
             sub_to_loanwiser,crif_report_view,bank_stm,payment_statues_comp1,document_text,eligibility_Report,
-            document_check_text,pending_ask_List;
+            document_check_text,pending_ask_List,lead_name_id;
 
     ImageView step2_viablitystatus,step2_paymentstatus,step2_reportstatus,step2crifstatus,bankstate_status,documentupload_status,step3payment_status,eligiblitity_status;
     Button step2viablity_button,step2payment_but,step2report_but,step2crif_but,
@@ -339,6 +334,7 @@ public class Home extends AppCompatActivity {
 
 
         lead_name = (AppCompatTextView) findViewById(R.id.lead_name);
+        lead_name_id = (AppCompatTextView) findViewById(R.id.lead_name_id);
         pending_ask_List = (AppCompatTextView) findViewById(R.id.ask_txt1_pending);
         view_ask = (AppCompatButton) findViewById(R.id.view_ask);
         mobile_no = (AppCompatTextView) findViewById(R.id.mobile_no);
@@ -832,6 +828,7 @@ public class Home extends AppCompatActivity {
         Objs.a.OutfitNormalFontStyle(mCon, R.id.ask_txt);
         Objs.a.OutfitNormalFontStyle(mCon, R.id.ask_txt1_pending);
         Objs.a.OutfitNormalFontStyle(mCon, R.id.lead_name);
+        Objs.a.OutfitNormalFontStyle(mCon, R.id.lead_name_id);
         Objs.a.OutfitNormalFontStyle(mCon, R.id.mobile_no);
         Objs.a.OutfitNormalFontStyle(mCon, R.id.loanamounttxt);
         Objs.a.OutfitNormalFontStyle(mCon, R.id.loantypetext);
@@ -983,8 +980,10 @@ public class Home extends AppCompatActivity {
                                applicant_count = jsonObject1.getString("applicant_count");
                                property_identified=jsonObject1.getString("property_identified");
                                Log.i("TAG", "onResponse:applicant_count "+applicant_count);
+
                                lead_name.setText(user_name);
                                mobile_no.setText(mobileno);
+
                                Loan_amount.setText("\u20B9"+loan_amount);
                                Loan_amount.setTextColor(Color.parseColor("#484848"));
                                loan_type_.setText(loan_type);
@@ -1005,6 +1004,7 @@ public class Home extends AppCompatActivity {
                                }
                                Pref.putProperty_id(mCon,property_identified);
                                Pref.putCoAPPAVAILABLE(mCon,applicant_count);
+
                                if(curr_status.equals("6"))
                                {
                                    loan_statues.setVisibility(View.VISIBLE);

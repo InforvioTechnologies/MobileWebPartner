@@ -21,7 +21,6 @@ import android.os.StrictMode;
 import android.provider.MediaStore;
 import com.google.android.material.snackbar.Snackbar;
 
-import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.AppCompatTextView;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -39,7 +38,6 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
-import android.widget.ProgressBar;
 import android.widget.Toast;
 import android.widget.VideoView;
 import android.widget.ViewSwitcher;
@@ -63,7 +61,6 @@ import com.nostra13.universalimageloader.core.assist.ImageScaleType;
 
 import net.gotev.uploadservice.MultipartUploadRequest;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -73,10 +70,8 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.UUID;
@@ -88,16 +83,12 @@ import adhoc.app.applibrary.Config.AppUtils.Urls;
 import adhoc.app.applibrary.Config.AppUtils.VolleySignleton.AppController;
 import dmax.dialog.SpotsDialog;
 import in.loanwiser.partnerapp.BankStamentUpload.FileUtils1;
-import in.loanwiser.partnerapp.BankStamentUpload.Upload_Activity_Bank;
 import in.loanwiser.partnerapp.Documents.Applicant_Doc_Details_revamp;
-import in.loanwiser.partnerapp.Documents.Document_Details;
 import in.loanwiser.partnerapp.Documents.FilePath;
 import in.loanwiser.partnerapp.Documents.MyCommand;
 import in.loanwiser.partnerapp.Documents.SingleUploadBroadcastReceiver;
 import in.loanwiser.partnerapp.PartnerActivitys.SimpleActivity;
-import in.loanwiser.partnerapp.Payment.PaymentActivity;
 import in.loanwiser.partnerapp.R;
-import in.loanwiser.partnerapp.Step_Changes_Screen.Viability_Screen_revamp_co;
 
 import static android.Manifest.permission.CAMERA;
 import static android.Manifest.permission.READ_EXTERNAL_STORAGE;
@@ -947,7 +938,9 @@ public class ManiActivity_Image2 extends SimpleActivity implements SingleUploadB
                                 try {
                                     JSONObject j = new JSONObject(response);
                                     String a = j.getString(Params.status);
-                                    Objs.a.showToast(mCon, "successfully uploaded");
+                                  //  Objs.a.showToast(mCon, "successfully uploaded");
+                                    Toast.makeText(ManiActivity_Image2.this, "Successfully uploaded", Toast.LENGTH_LONG).show();
+
                                 } catch (JSONException e) {
                                     e.printStackTrace();
                                 }
@@ -1057,6 +1050,7 @@ public class ManiActivity_Image2 extends SimpleActivity implements SingleUploadB
                     try {
                         bitmap = PhotoLoader.init().from(imagePath).requestSize(512, 512).getBitmap();
                         final String encodedString = ImageBase64.encode(bitmap);
+                       // final String encodedString1 = Base64.encodeToString(bitmap, Base64.DEFAULT);
                        // progressDialog.show();
                         StringRequest stringRequest = new StringRequest(Request.Method.POST, Urls.CAMERA_IMAGE_Upload, new Response.Listener<String>() {
                             @Override
@@ -1069,8 +1063,9 @@ public class ManiActivity_Image2 extends SimpleActivity implements SingleUploadB
 
                                     count = count-1;
                                     Log.d("Galarel path length", String.valueOf(count));
+                                    Toast.makeText(ManiActivity_Image2.this, "Successfully uploaded", Toast.LENGTH_LONG).show();
 
-                                    Objs.a.showToast(mCon, "Successfully uploaded" +"\n"+ "Please wait for all Document upload");
+                                 //   Objs.a.showToast(mCon, "Successfully uploaded" +"\n"+ "Please wait for all Document upload");
                                     if(count == 0)
                                     {
                                       //  popupWindow.dismiss();
@@ -1166,7 +1161,9 @@ public class ManiActivity_Image2 extends SimpleActivity implements SingleUploadB
                                 JSONObject j = new JSONObject(response);
                                 String a = j.getString(Params.status);
 
-                                Objs.a.showToast(mCon, "successfully uploaded");
+                               // Objs.a.showToast(mCon, "successfully uploaded");
+                                Toast.makeText(ManiActivity_Image2.this, "Successfully uploaded", Toast.LENGTH_LONG).show();
+
                                 // class_name1 = Pref.getapplicant_name(mCon);
                                 //   Objs.ac.StartActivityPutExtra(mCon,Document_Details.class, Params.user_type,user_type, Params.class_name,class_name1);
                                 // Objs.ac.StartActivityPutExtra(mCon,Applicant_Doc_Details_Property.class, Params.user_type,user_type, Params.applicant_name,applicant_name);

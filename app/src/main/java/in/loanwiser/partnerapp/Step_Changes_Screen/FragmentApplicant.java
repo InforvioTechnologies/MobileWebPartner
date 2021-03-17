@@ -197,7 +197,7 @@ public class FragmentApplicant extends Fragment implements CompoundButton.OnChec
 
                             J = response_iD_proof_comon.getJSONObject(h);
                             doc_ype_com = J.getJSONArray("doc_type_names");
-                            JSONObject js=doc_ype_com.getJSONObject(h);
+                           // JSONObject js=doc_ype_com.getJSONObject(h);
                              description=J.getString("nameforhtml");
 
                         } catch (JSONException e) {
@@ -224,7 +224,7 @@ public class FragmentApplicant extends Fragment implements CompoundButton.OnChec
 
                                 if (enable_status.equals("1")) {
                                     count= count + 1;
-                                    // Log.e("c", String.valueOf(count));
+                                     Log.e("c", String.valueOf(count));
                                     break ;
                                 }else
                                 {
@@ -266,6 +266,8 @@ public class FragmentApplicant extends Fragment implements CompoundButton.OnChec
                                // Document_Statues();
 
                                 String applicant = Pref.getCoAPPAVAILABLE(getContext());
+
+                                Log.e("the Applicant",applicant);
                                 if(applicant.equals("2"))
                                 {
 

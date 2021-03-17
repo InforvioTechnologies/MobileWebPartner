@@ -5169,7 +5169,7 @@ public class Eligibility_HL_New extends SimpleActivity {
 
                             if(jsonObject1.getString("eligibility_status").equals("success"))
                             {
-                                Eligibility_check_doc_checklist_generate();
+                               // Eligibility_check_doc_checklist_generate();
                             }else if(jsonObject1.getString("eligibility_status").equals("error"))
                             {
                                 Toast.makeText(context,"Eligibility Failed",Toast.LENGTH_SHORT).show();
@@ -5218,7 +5218,7 @@ public class Eligibility_HL_New extends SimpleActivity {
 
         AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
     }
-    private void Eligibility_check_doc_checklist_generate( ) {
+   /* private void Eligibility_check_doc_checklist_generate( ) {
 
         JSONObject J= null;
 
@@ -5304,7 +5304,7 @@ public class Eligibility_HL_New extends SimpleActivity {
         jsonObjReq.setRetryPolicy(policy);
 
         AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
-    }
+    }*/
   /*  @Override
     public void onBackPressed() {
 

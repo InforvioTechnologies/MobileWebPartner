@@ -1,8 +1,5 @@
 package in.loanwiser.partnerapp.Payment;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.AppCompatButton;
-import androidx.appcompat.widget.AppCompatImageView;
 import androidx.appcompat.widget.AppCompatSpinner;
 import androidx.appcompat.widget.AppCompatTextView;
 
@@ -13,9 +10,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.Typeface;
-import android.net.Uri;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -30,8 +25,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.RadioButton;
-import android.widget.RadioGroup;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -60,14 +53,10 @@ import adhoc.app.applibrary.Config.AppUtils.Pref.Pref;
 import adhoc.app.applibrary.Config.AppUtils.Urls;
 import adhoc.app.applibrary.Config.AppUtils.VolleySignleton.AppController;
 import dmax.dialog.SpotsDialog;
-import in.loanwiser.partnerapp.BankStamentUpload.Upload_Activity_Bank;
 import in.loanwiser.partnerapp.PartnerActivitys.Dashboard_Activity;
 import in.loanwiser.partnerapp.PartnerActivitys.Home;
-import in.loanwiser.partnerapp.Partner_Statues.DashBoard_new;
 import in.loanwiser.partnerapp.R;
 import in.loanwiser.partnerapp.SimpleActivity;
-import in.loanwiser.partnerapp.Step_Changes_Screen.Eligibility_Check_PL;
-import in.loanwiser.partnerapp.Step_Changes_Screen.Viability_Check_PL;
 
 public class PaymentActivity extends SimpleActivity implements CompoundButton.OnCheckedChangeListener {
 
@@ -568,7 +557,7 @@ public class PaymentActivity extends SimpleActivity implements CompoundButton.On
                     intent.putExtra("payment_id", payment_id);
                     intent.putExtra("payment_plane", pay_plan);
                     startActivity(intent);
-                    // finish();
+                     finish();
                 }
 
             }else if(CUST.contains("2"))
@@ -588,7 +577,7 @@ public class PaymentActivity extends SimpleActivity implements CompoundButton.On
                     intent.putExtra("payment_id", payment_id);
                     intent.putExtra("payment_plane", pay_plan);
                     startActivity(intent);
-                    // finish();
+                     finish();
 
                 }
             }

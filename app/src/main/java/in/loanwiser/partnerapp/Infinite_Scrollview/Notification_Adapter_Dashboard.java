@@ -139,7 +139,7 @@ public class Notification_Adapter_Dashboard extends RecyclerView.Adapter<Notific
             Over_all.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-
+                    Notification_id = post.getnotification_id();
                     Log.e("this is working fine","works fine");
                   /* if( btn_invoke.equals("1"))
                     {

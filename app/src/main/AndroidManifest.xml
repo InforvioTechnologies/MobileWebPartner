@@ -13,6 +13,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
     <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="com.android.launcher.permission.INSTALL_SHORTCUT" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
@@ -31,7 +32,6 @@
         android:icon="@mipmap/ic_partner"
         android:label="@string/app_name"
         android:largeHeap="true"
-
         android:launchMode="singleInstance"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
@@ -77,10 +77,21 @@
             android:windowSoftInputMode="stateHidden">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+       <!-- <activity
+            android:name=".BankStamentUpload.Upload_Activity_Bank"
+            android:configChanges="screenSize|orientation"
+            android:theme="@style/NoAction2"
+            android:windowSoftInputMode="stateHidden">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>-->
         <activity android:name=".User_Account.VerifedOTP" /> <!-- Firebase Notifications -->
         <service android:name=".service.MyFirebaseMessagingService">
             <intent-filter>
@@ -110,10 +121,18 @@
 
        <!-- tools:replace="android:resource"-->
 
-        <activity
-            android:name=".BankStamentUpload.Upload_Activity_Bank"
+        <activity android:name=".BankStamentUpload.BankAnalysis"
             android:theme="@style/NoAction2"
-            android:windowSoftInputMode="stateHidden" />
+            android:windowSoftInputMode="stateHidden"/>
+        <activity android:name=".BankStamentUpload.Upload_Activity_Bank"
+            android:theme="@style/NoAction2"
+            android:windowSoftInputMode="stateHidden"/>
+
+        <activity android:name=".BankStamentUpload.ReportIssueActivity"
+            android:theme="@style/NoAction2"
+            android:windowSoftInputMode="stateHidden"/>
+
+
         <activity
             android:name=".BankStamentUpload.Bank_DocGridView_List"
             android:theme="@style/NoAction2"

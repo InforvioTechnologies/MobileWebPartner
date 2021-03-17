@@ -136,6 +136,7 @@
     <string name="choose_one">Upload any one of these Document</string>
     <string name="ApplicantSalary">Applicant Salary Details</string>
     <string name="app_imge">Uploaded Documents</string>
+    <string name="app_imge1">View Reports</string>
     <string name="error_pan">This Pan number is incorrect</string>
     <string name="pan_note">* Pan no used in Rental Agreements and Rental receipts</string>
     <string name="pan">Pan No</string>
@@ -906,6 +907,8 @@
 
     //Bank Statement Upload
 
+    <string name="crif_notavailabele">CRIF Score Not Available</string>
+    <string name="crif_failnote">(This may be due to incorrect details/technical error,Link to download Report will be sent to Customer once it is available)</string>
 
     <string name="account">Account 1</string>
     <string name="doc_type">Please Select document Type</string>
@@ -1000,5 +1003,50 @@
     <string name="done">Done</string>
     <string name="sus11"><b>●</b></string>
 
-
+    <string name="bankstatement">Bank Statement</string>
+    <string name="choosepdf">Choose the type of PDF file</string>
+    <string name="contwn1">PDFs that are directly downloaded from Bank\'s Online portal/Net banking/Mobile App/E Mail etc.,</string>
+    <string name="scanned_pdf">Scanned PDF</string>
+    <string name="contwn2">PDF files that are bank provided scanned copies or manually scanned and uploaded. Some banks will not accept this type of PDF.</string>
+    <string name="select_bank">Select Bank Account</string>
+    <string name="con1">All Files belonging to the same bank account/number should be submitted together. Incase, if you want to submit bank statements of 2 different bank accounts</string>
+    <string name="con2">- First, upload and submit all the files associated with one bank account and then proceed to upload and submit files associated with the second bank account.</string>
+    <string name="con3">Incase, if you are uploading the missing/required months of a previously submitted bank statement, please select the account no: to which the file belongs to.</string>
+    <string name="upload_password">Is the uploaded pdf file, password protected?</string>
+    <string name="upload_des">(If the uploaded file is password protected, please enter the password here for the system to access)</string>
+    <string name="passwordhint">Enter Password</string>
+    <string name="submit_bankste">SUBMIT BANK STATEMENT</string>
+    <string name="submit_banksta">Submitted Bank Statements</string>
+    <string name="view_anlysis">VIEW ANALYSIS</string>
+    <string name="bank_anlysis">Bank Statement Analysis</string>
+    <string name="bankste_list">Bank Statement List</string>
+    <string name="uploadedmonth">Uploaded Months</string>
+    <string name="requiredate">Required Date Range -</string>
+    <string name="require_month"> Required Months</string>
+    <string name="upload_month"> Uploaded Months</string>
+    <string name="missing_month"> Missing/Reconcilliation Error</string>
+    <string name="bankuploadlist">You Will Not Be Allowed To Submit Your Loan Application Unless You Upload It.</string>
+    <string name="upload_require_but">Upload Required Bank Statement</string>
+    <string name="overview">Overview</string>
+    <string name="user">User :</string>
+    <string name="nameon">Name :</string>
+    <string name="addresss">Address :</string>
+    <string name="accountw">Account</string>
+    <string name="acno">Account Number :</string>
+    <string name="bank">Bank :</string>
+    <string name="account_type">Account Type :</string>
+    <string name="analytics">Analytics</string>
+    <string name="from_tobank">From &amp; To Date of available Bank Statements :</string>
+    <string name="salary">Salary :</string>
+    <string name="approx">Approx. Total EMI Paid :</string>
+    <string name="abb">ABB :</string>
+    <string name="expenratio">Expense to Income Ratio :</string>
+    <string name="warning">Warnings</string>
+    <string name="balance_re">Balance Reconciliation Error :</string>
+    <string name="overalltrans">Overall Transaction Graph for Trend Analysis</string>
+    <string name="pls_upload">Please Upload Bank Statement For The Following Required Months - Feb-2020, Mar-2020, Apr-2020, May-2020 Aug-2020 in the above Bank Statement Upload Section.</string>
+    <string name="checkbounce">Cheque/NACH bounces :</string>
+    <string name="report_issue">Report an Issue</string>
+    <string name="issueinappid">Issue in Particular APP ID?</string>
+    <string name="upload_hint">(If you have more than 1 file, upload all files together using multi-select)</string>
 </resources>

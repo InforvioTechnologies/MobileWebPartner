@@ -10,6 +10,7 @@
 
 
     <LinearLayout
+        android:visibility="gone"
     android:id="@+id/pdf_gallery"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -118,13 +119,13 @@
                     android:layout_marginTop="5dp"
                        android:layout_marginBottom="10dp"
                     android:background="@drawable/capsul_button4"
-                    android:text="@string/submit_loanwiser" />
+                    android:text="@string/upload" />
 
                 </LinearLayout>
     </LinearLayout>
 </LinearLayout>
     <LinearLayout
-        android:visibility="gone"
+
         android:id="@+id/camera_ly_upload"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

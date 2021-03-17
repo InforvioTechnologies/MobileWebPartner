@@ -10,8 +10,6 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
-import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,7 +39,6 @@ import com.android.volley.RetryPolicy;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.thekhaeng.pushdownanim.PushDownAnim;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -59,20 +56,12 @@ import adhoc.app.applibrary.Config.AppUtils.Pref.Pref;
 import adhoc.app.applibrary.Config.AppUtils.Urls;
 import adhoc.app.applibrary.Config.AppUtils.VolleySignleton.AppController;
 import dmax.dialog.SpotsDialog;
-import in.loanwiser.partnerapp.BankStamentUpload.Bank_Statement_Upload;
-import in.loanwiser.partnerapp.BankStamentUpload.Upload_Activity_Bank;
 import in.loanwiser.partnerapp.NumberTextWatcher;
 import in.loanwiser.partnerapp.PartnerActivitys.Applicant_Details_Activity;
 import in.loanwiser.partnerapp.PartnerActivitys.Dashboard_Activity;
-import in.loanwiser.partnerapp.PartnerActivitys.Submitsuccess_Activity;
-import in.loanwiser.partnerapp.Payment.Bank_Statement_Activity;
-import in.loanwiser.partnerapp.Payment.PaymentActivity;
-import in.loanwiser.partnerapp.Payment.PaymentDetails;
 import in.loanwiser.partnerapp.Payment.Payment_Sucess_Screen;
 import in.loanwiser.partnerapp.R;
 import in.loanwiser.partnerapp.SimpleActivity;
-
-import static com.thekhaeng.pushdownanim.PushDownAnim.MODE_STATIC_DP;
 
 
 public class Lead_Crration_Activity extends SimpleActivity {
@@ -145,16 +134,16 @@ public class Lead_Crration_Activity extends SimpleActivity {
         Click();
        // Loanwiser_Api();
 
-    /*  lead_cr_step1.setOnClickListener(new View.OnClickListener() {
+     /*  lead_cr_step1.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
 
-                    Intent intent = new Intent(Lead_Crration_Activity.this, Upload_Activity_Bank.class);
+                    Intent intent = new Intent(Lead_Crration_Activity.this, Payment_Sucess_Screen.class);
                     startActivity(intent);
                     finish();
                 }
-            });*/
-
+            });
+*/
        /* lead_cr_step1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

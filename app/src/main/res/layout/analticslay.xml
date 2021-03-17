@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:background="@drawable/capsul_button_rect_viability">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/analytics"
+                android:textSize="14sp"
+                android:layout_marginLeft="10dp"
+                android:textColor="#012B5D"
+                android:textStyle="bold"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/from_tobank"
+                android:textSize="12sp"
+                android:layout_marginLeft="10dp"
+                android:textColor="#B4B4B4"
+                />
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/fromtodatetxt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="01/01/2020 - 31/01/2020"
+                android:textSize="12sp"
+                android:layout_marginLeft="10dp"
+                android:textColor="#535353"
+                android:textStyle="bold"/>
+
+        </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp">
+
+        <TextView
+            android:id="@+id/sala"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/salary"
+            android:textSize="12sp"/>
+
+        <TextView
+            android:id="@+id/salatxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="NA"
+            android:textColor="#535353"
+            android:textStyle="bold"
+            android:layout_toRightOf="@+id/sala"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_toRightOf="@+id/salatxt">
+
+            <TextView
+                android:id="@+id/appro"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/approx"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/approtxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0"
+                android:textStyle="bold"
+                android:textColor="#535353"
+                android:textSize="12sp"
+                android:layout_toRightOf="@+id/appro" />
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:paddingBottom="10dp">
+
+            <TextView
+                android:id="@+id/abb"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/abb"
+                android:textColor="#B4B4B4"
+                android:textSize="12sp"/>
+
+            <TextView
+                android:id="@+id/abbtxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" ₹ 23,417.66"
+                android:textColor="#535353"
+                android:textStyle="bold"
+                android:maxLength="14"
+                android:textSize="12sp"
+                android:layout_toRightOf="@+id/abb"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_toRightOf="@+id/abbtxt">
+
+                <TextView
+                    android:id="@+id/expen_ratio"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="12sp"
+                    android:text="@string/expenratio"
+                    />
+
+                <TextView
+                    android:id="@+id/expen_ratiotxt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="NA"
+                    android:textColor="#535353"
+                    android:textStyle="bold"
+                    android:textSize="12sp"
+                    android:layout_toRightOf="@+id/expen_ratio"
+                    />
+
+            </RelativeLayout>
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="10dp"
+
+        android:layout_marginEnd="10dp"
+        android:background="@drawable/capsul_button_rect_viability">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/warning"
+                android:textColor="#CE0000"
+                android:textSize="14sp"
+                android:textStyle="bold"/>
+        </LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/first"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:paddingBottom="10dp">
+
+            <TextView
+                android:id="@+id/balancere"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/balance_re"
+                android:textColor="#B4B4B4"
+                android:textSize="12sp"/>
+
+            <TextView
+                android:id="@+id/baltxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="No"
+                android:textColor="#0EBB9A"
+                android:textStyle="bold"
+                android:textSize="12sp"
+                android:layout_toRightOf="@+id/balancere"/>
+
+
+
+                <TextView
+                    android:id="@+id/cheque"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="12sp"
+                    android:layout_marginTop="10dp"
+                    android:layout_below="@+id/balancere"
+                    android:text="@string/checkbounce"
+                    android:textColor="#B4B4B4"
+                    />
+
+                <TextView
+                    android:id="@+id/expradio"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="NA"
+                    android:textColor="#0EBB9A"
+                    android:textStyle="bold"
+                    android:layout_marginTop="10dp"
+                    android:textSize="12sp"
+                    android:layout_below="@+id/baltxt"
+                    android:layout_toRightOf="@id/cheque"/>
+
+            </RelativeLayout>
+
+
+    </LinearLayout>
+</LinearLayout>

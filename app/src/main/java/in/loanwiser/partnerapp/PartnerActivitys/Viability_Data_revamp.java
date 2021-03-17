@@ -89,7 +89,7 @@ public class Viability_Data_revamp extends SimpleActivity {
 
     private String pancardnumber,dateofbirth,fathername,maritalstatus;
     private String salarymodes,month_income, cmpny_type,cmpny_name, designation, cmpny_pincode, curr_exp,total_exp,
-            income_proof_typestr,vintage_docstr;
+            income_proof_typestr,vintage_docstr,income_proof_typestr1;
 
     // propertyvalue
 
@@ -486,6 +486,7 @@ public class Viability_Data_revamp extends SimpleActivity {
         try {
             J =new JSONObject();
             J.put("transaction_id", Pref.getTRANSACTIONID(getApplicationContext()));
+            Log.i("TAG", "Viabilityshow: "+J.toString());
           //  Log.e("TAG", "viability_transcation: "+Pref.getTRANSACTIONID(getApplicationContext()));
 
         } catch (JSONException e) {
@@ -540,7 +541,7 @@ public class Viability_Data_revamp extends SimpleActivity {
                                 //Residenence Pincode
                                 residence_pincode = Applicant_object.getString("per_pincode");
                                 //residence_perarea=Applicant_object.getString("per_area");
-                                residence_type = Applicant_object.getString("resident_statusstr");
+                                residence_type = Applicant_object.optString("resident_statusstr");
                                 //residence area array value
 
                                 JSONArray res_array = Applicant_object.getJSONArray("per_areaarr");
@@ -601,7 +602,12 @@ public class Viability_Data_revamp extends SimpleActivity {
                                 fathernametxt.setText(fathername);
                                 maritaltxt.setText(maritalstatus);
                                 bus_salrycredit.setText(salarymodes);
-                                salaryproof_txt.setText(income_proof_typestr);
+                                String formattedString = income_proof_typestr.toString()
+                                        .replace("[", "")  //remove the right bracket
+                                        .replace("]", "")
+                                        .replaceAll("\"", "")
+                                        .trim();
+                                salaryproof_txt.setText(formattedString);
 
                                 unsecure_residence_pincode.setText(residence_pincode);
                                 unsecure_resarea.setText(res_area);
@@ -619,7 +625,10 @@ public class Viability_Data_revamp extends SimpleActivity {
                                 fathername = Applicant_object.getString("father_name");
                                 maritalstatus = Applicant_object.getString("marital_statusstr");
                                 curr_exp = Applicant_object.getString("working_experience");
+
                                 vintage_docstr = Applicant_object.getString("vintage_docstr");
+                                income_proof_typestr1=Applicant_object.getString("income_proof_typestr");
+
                                 //JSONArray jsonArray=Applicant_object.getJSONArray("income_proof_typestr");
                                 String income= String.valueOf(Applicant_object.getJSONArray("income_proof_typestr"));
                                 //String text = income.toString().replace("[", "").replace("]", "");
@@ -709,8 +718,22 @@ public class Viability_Data_revamp extends SimpleActivity {
                                // bus_numof_month.setText(curr_exp);
                                 ofc_restype.setText(office_setupstr);
                                 offshoppincode.setText(office_pincode);
-                                business_vintageproof.setText(vintage_docstr);
-                                businessincome_proof.setText(income);
+                                String formattedString = vintage_docstr.toString()
+                                        .replace("[", "")  //remove the right bracket
+                                        .replace("]", "")
+                                        .replaceAll("\"", "")
+                                        .trim();
+
+                                //business_vintageproof.setText(vintage_docstr);
+                                business_vintageproof.setText(formattedString);
+                                String formattedStrings = income_proof_typestr1.toString()
+                                        .replace("[", "")  //remove the right bracket
+                                        .replace("]", "")
+                                        .replaceAll("\"", "")
+                                        .trim();
+
+                                businessincome_proof.setText(formattedStrings);
+                               // businessincome_proof.setText(income);
                                 unsecure_resarea.setText(res_area);
                                 unsecure_restype.setText(residence_type);
                                 unsecure_residence_pincode.setText(residence_pincode);
@@ -784,7 +807,13 @@ public class Viability_Data_revamp extends SimpleActivity {
 
 
                                     income_proof_typestr = Applicant_object.getString("income_proof_typestr");
-                                    salaryproof_txt.setText(income_proof_typestr);
+                                    String formattedString = income_proof_typestr.toString()
+                                            .replace("[", "")  //remove the right bracket
+                                            .replace("]", "")
+                                            .replaceAll("\"", "")
+                                            .trim();
+                                  //  salaryproof_txt.setText(income_proof_typestr);
+                                    salaryproof_txt.setText(formattedString);
 
                                     //Showing Pancard Details
                                     pancardnumber = Applicant_object.getString("pan_no");
@@ -1062,7 +1091,13 @@ public class Viability_Data_revamp extends SimpleActivity {
                                     curr_exp = Applicant_object.getString("working_experience");
                                     total_exp = Applicant_object.getString("total_experience");
                                     income_proof_typestr = Applicant_object.getString("income_proof_typestr");
-                                    salaryproof_txt.setText(income_proof_typestr);
+                                    String formattedString = income_proof_typestr.toString()
+                                            .replace("[", "")  //remove the right bracket
+                                            .replace("]", "")
+                                            .replaceAll("\"", "")
+                                            .trim();
+                                   // salaryproof_txt.setText(income_proof_typestr);
+                                    salaryproof_txt.setText(formattedString);
                                     //working Area array
                                     JSONArray area_array = Applicant_object.getJSONArray("work_areaarr");
                                     if (area_array.length() > 0) {
@@ -1075,8 +1110,8 @@ public class Viability_Data_revamp extends SimpleActivity {
                                         }
                                     }
 
-                                    income_proof_typestr = Applicant_object.getString("income_proof_typestr");
-                                    salaryproof_txt.setText(income_proof_typestr);
+                                    /*income_proof_typestr = Applicant_object.getString("income_proof_typestr");
+                                    salaryproof_txt.setText(income_proof_typestr);*/
 
                                     //Showing Pancard Details
                                     pancardnumber = Applicant_object.getString("pan_no");
@@ -1356,7 +1391,13 @@ public class Viability_Data_revamp extends SimpleActivity {
 
 
                                     income_proof_typestr = Applicant_object.getString("income_proof_typestr");
-                                    salaryproof_txt.setText(income_proof_typestr);
+                                    String formattedString = income_proof_typestr.toString()
+                                            .replace("[", "")  //remove the right bracket
+                                            .replace("]", "")
+                                            .replaceAll("\"", "")
+                                            .trim();
+                                   // salaryproof_txt.setText(income_proof_typestr);
+                                    salaryproof_txt.setText(formattedString);
 
                                     //Showing Pancard Details
                                     pancardnumber = Applicant_object.getString("pan_no");
@@ -1618,7 +1659,13 @@ public class Viability_Data_revamp extends SimpleActivity {
 
 
                                     income_proof_typestr = Applicant_object.getString("income_proof_typestr");
-                                    salaryproof_txt.setText(income_proof_typestr);
+                                    String formattedString = income_proof_typestr.toString()
+                                            .replace("[", "")  //remove the right bracket
+                                            .replace("]", "")
+                                            .replaceAll("\"", "")
+                                            .trim();
+                                   // salaryproof_txt.setText(income_proof_typestr);
+                                    salaryproof_txt.setText(formattedString);
 
                                     //Showing Pancard Details
                                     pancardnumber = Applicant_object.getString("pan_no");
@@ -1878,7 +1925,13 @@ public class Viability_Data_revamp extends SimpleActivity {
 
 
                                     income_proof_typestr = Applicant_object.getString("income_proof_typestr");
-                                    salaryproof_txt.setText(income_proof_typestr);
+                                    String formattedString = income_proof_typestr.toString()
+                                            .replace("[", "")  //remove the right bracket
+                                            .replace("]", "")
+                                            .replaceAll("\"", "")
+                                            .trim();
+                                   // salaryproof_txt.setText(income_proof_typestr);
+                                    salaryproof_txt.setText(formattedString);
 
                                     //Showing Pancard Details
                                     pancardnumber = Applicant_object.getString("pan_no");
@@ -2152,7 +2205,13 @@ public class Viability_Data_revamp extends SimpleActivity {
 
 
                                     income_proof_typestr = Applicant_object.getString("income_proof_typestr");
-                                    salaryproof_txt.setText(income_proof_typestr);
+                                    String formattedString = income_proof_typestr.toString()
+                                            .replace("[", "")  //remove the right bracket
+                                            .replace("]", "")
+                                            .replaceAll("\"", "")
+                                            .trim();
+                                  //  salaryproof_txt.setText(income_proof_typestr);
+                                    salaryproof_txt.setText(formattedString);
 
                                     //Residenence Pincode
 

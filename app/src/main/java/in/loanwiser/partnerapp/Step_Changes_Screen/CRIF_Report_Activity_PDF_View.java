@@ -21,7 +21,6 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.AppCompatTextView;
 import androidx.appcompat.widget.Toolbar;
@@ -51,11 +50,8 @@ import adhoc.app.applibrary.Config.AppUtils.Pref.Pref;
 import adhoc.app.applibrary.Config.AppUtils.Urls;
 import adhoc.app.applibrary.Config.AppUtils.VolleySignleton.AppController;
 import dmax.dialog.SpotsDialog;
-import in.loanwiser.partnerapp.BankStamentUpload.Upload_Activity_Bank;
-import in.loanwiser.partnerapp.Documents.Document_Details;
+import in.loanwiser.partnerapp.BankStamentUpload.Doc_ImageView_Bank;
 import in.loanwiser.partnerapp.PDF_Dounloader.PermissionUtils;
-import in.loanwiser.partnerapp.PartnerActivitys.Dashboard_Activity;
-import in.loanwiser.partnerapp.PartnerActivitys.Doc_ImageView_Viability;
 import in.loanwiser.partnerapp.PartnerActivitys.Home;
 import in.loanwiser.partnerapp.PartnerActivitys.SimpleActivity;
 import in.loanwiser.partnerapp.R;
@@ -516,7 +512,7 @@ public class CRIF_Report_Activity_PDF_View extends SimpleActivity {
 
                           /*  Objs.ac.StartActivityPutExtra(CRIF_Report_Activity_PDF_View.this, Doc_ImageView_Viability.class,
                                     Params.document,viability_report_URL);*/
-                            if (permissionUtils.checkPermission(CRIF_Report_Activity_PDF_View.this, STORAGE_PERMISSION_REQUEST_CODE, view)) {
+                          /*  if (permissionUtils.checkPermission(CRIF_Report_Activity_PDF_View.this, STORAGE_PERMISSION_REQUEST_CODE, view)) {
                                 if (viability_report_URL.length() > 0) {
                                     try {
                                         startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(viability_report_URL)));
@@ -525,7 +521,11 @@ public class CRIF_Report_Activity_PDF_View extends SimpleActivity {
                                     }
                                 }
 
-                            }
+                            }*/
+                            String report="CRIF Report";
+                            Objs.ac.StartActivityPutExtra(CRIF_Report_Activity_PDF_View.this, Doc_ImageView_Bank.class,
+                                    Params.document,viability_report_URL,Params.report,report);
+
 
                         } catch (JSONException e) {
                             e.printStackTrace();

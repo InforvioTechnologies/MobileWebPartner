@@ -18,6 +18,7 @@
                 android:layout_height="100dp"
                 android:layout_margin="20dp"
                 app:cardBackgroundColor="@color/shadow_colour"
+                android:visibility="gone"
                 app:cardCornerRadius="10dp">
 
                 <LinearLayout
@@ -80,9 +81,10 @@
 
                 </LinearLayout>
                 <LinearLayout
-                    android:layout_marginBottom="28dp"
+                    android:layout_marginBottom="10dp"
                     android:layout_marginLeft="20dp"
-                    android:background="@drawable/ic_group_54"
+                    android:layout_marginTop="20dp"
+                    android:background="@drawable/ic_line"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
@@ -103,7 +105,7 @@
                         android:layout_height="150dp">
 
                     <TextView
-                        android:layout_marginTop="15dp"
+                        android:layout_marginTop="55dp"
                         android:id="@+id/steps"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -136,6 +138,7 @@
                         android:paddingRight="24dp"
                         android:paddingEnd="22sp"
                         android:textSize="12dp"
+                        android:visibility="invisible"
                         android:textColor="@color/text_blue"
                         android:clickable="true" />
                     </LinearLayout>
@@ -144,10 +147,10 @@
 
                         android:orientation="vertical"
                         android:layout_width="match_parent"
-                        android:layout_height="230dp">
+                        android:layout_height="210dp">
 
                         <TextView
-                            android:layout_marginTop="10dp"
+                            android:layout_marginTop="15dp"
                             android:id="@+id/steps2"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -160,7 +163,7 @@
                             android:clickable="true" />
 
                         <TextView
-                            android:layout_marginTop="5dp"
+                            android:layout_marginTop="7dp"
                             android:id="@+id/viability"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -180,6 +183,7 @@
                             android:paddingRight="24dp"
                             android:paddingEnd="22sp"
                             android:textSize="12dp"
+                            android:visibility="invisible"
                             android:layout_marginTop="10dp"
                             android:textColor="@color/text_blue"
                             android:clickable="true" />
@@ -188,7 +192,6 @@
                             android:id="@+id/instantcredit"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="20dp"
                             android:text="@string/instant_credit"
                             android:paddingRight="24dp"
                             android:paddingEnd="22sp"
@@ -204,6 +207,7 @@
                             android:paddingRight="24dp"
                             android:paddingEnd="22sp"
                             android:textSize="12dp"
+                            android:visibility="invisible"
                             android:layout_marginTop="10dp"
                             android:textColor="@color/text_blue"
                             android:clickable="true" />
@@ -213,7 +217,6 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="@string/eligiblity_check"
-                            android:layout_marginTop="20dp"
                             android:paddingRight="24dp"
                             android:paddingEnd="22sp"
                             android:textSize="14dp"
@@ -229,24 +232,24 @@
                             android:paddingRight="24dp"
                             android:paddingEnd="22sp"
                             android:textSize="12dp"
+                            android:visibility="invisible"
                             android:layout_marginTop="10dp"
                             android:textColor="@color/text_blue"
                             android:clickable="true" />
                     </LinearLayout>
                     <LinearLayout
-                        android:layout_marginTop="50dp"
                         android:orientation="vertical"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
 
                         <TextView
-                            android:layout_marginTop="20dp"
                             android:id="@+id/steps3"
+                            android:layout_marginTop="0dp"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="@string/step_three"
-                            android:paddingRight="24dp"
-                            android:paddingEnd="24dp"
+                            android:paddingRight="14dp"
+                            android:paddingEnd="14dp"
                             android:textSize="20dp"
                             android:textStyle="bold"
                             android:textColor="#2699FB"
@@ -257,6 +260,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="@string/document_title"
+                            android:layout_marginTop="7dp"
                             android:paddingRight="24dp"
                             android:paddingEnd="24dp"
                             android:textSize="14dp"
@@ -273,8 +277,31 @@
                             android:paddingRight="24dp"
                             android:paddingEnd="22sp"
                             android:textSize="12dp"
+                            android:visibility="invisible"
                             android:textColor="@color/text_blue"
                             android:clickable="true" />
+                    </LinearLayout>
+                    <LinearLayout
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="20dp"
+                        android:gravity="center"
+                        android:layout_marginTop="10dp"
+                        android:orientation="vertical">
+
+                        <Button
+                            android:id="@+id/proceed_button"
+                            android:layout_width="120dp"
+                            android:layout_height="45dp"
+                            android:layout_gravity="center"
+                            android:layout_margin="20dp"
+                            android:gravity="center"
+                            android:background="@drawable/background_button"
+                            android:textColor="@color/white"
+                            android:elevation="5dp"
+                            android:text="@string/proceed"/>
+
                     </LinearLayout>
                 </LinearLayout>
 
@@ -286,11 +313,12 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="20dp"
                 android:gravity="center"
+                android:visibility="gone"
                 android:layout_marginTop="10dp"
                 android:orientation="vertical">
 
                 <Button
-                    android:id="@+id/proceed_button"
+                    android:id="@+id/proceed_button1"
                     android:layout_width="120dp"
                     android:layout_height="45dp"
                     android:layout_gravity="center"

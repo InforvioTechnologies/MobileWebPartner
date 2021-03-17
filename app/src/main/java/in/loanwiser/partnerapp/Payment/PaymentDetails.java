@@ -678,6 +678,7 @@ public class PaymentDetails extends SimpleActivity {
         try {
             J.put("order_id", Order_Id);
             J.put("order_amount",payment_id);
+          //  J.put("order_amount","1");
 
         } catch (JSONException e) {
             e.printStackTrace();
@@ -1016,7 +1017,9 @@ public class PaymentDetails extends SimpleActivity {
          */
 
         String stage = "TEST";
+      //  String stage = "PROD";
         String appId = "100221d5f45db701fd6552fc722001";
+      //  String appId = "321800d9002e987a362ed233b08123";
         String orderNote = "Test Order";
 
       /*String customerName = "mathayan";

@@ -48,7 +48,7 @@
                 android:textSize="20dp"
                 android:textAlignment="center"
                 android:textColor="#032A57"
-                android:text="your Applicant Details are sucessfully saved"/>
+                android:text="Your Applicant details are sucessfully saved"/>
         </LinearLayout>
         </LinearLayout>
         <TextView
@@ -57,7 +57,7 @@
             android:layout_marginTop="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="your Applicant Details are sucessfully saved"
+            android:text="Your Applicant Details are sucessfully saved"
             android:textSize="22dp"
             android:textColor="@color/gray"/>
 
@@ -68,7 +68,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Do you Want  to Add"
-            android:textSize="28dp"
+            android:textSize="22dp"
             android:textStyle="bold"
             android:textColor="@color/colorPrimary12"/>
         <TextView
@@ -78,7 +78,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Co-Applicant?"
-            android:textSize="28dp"
+            android:textSize="22dp"
             android:textStyle="bold"
             android:textColor="@color/colorPrimary12"/>
 
@@ -103,19 +103,19 @@
             android:layout_height="?android:attr/listPreferredItemHeight"
             android:orientation="horizontal">
             <LinearLayout
-                android:layout_marginRight="10dp"
+
                 android:layout_weight="1"
-                android:gravity="center"
+                android:gravity="end"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/co_applicant_yes"
                     android:text="Yes"
                     android:textColor="@color/white"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_width="118dp"
+                    android:layout_height="40dp"
                     android:layout_gravity="start"
-                    android:background="#1592E6"
+                    android:background="@drawable/capsul_button41"
                     />
             </LinearLayout>
             <LinearLayout
@@ -129,8 +129,8 @@
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/co_applicant_no"
                     android:text="No"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_width="118dp"
+                    android:layout_height="40dp"
                     android:layout_gravity="start"
                     android:textColor="#1592E6"
                     android:background="@drawable/capul_submittoloanwiser"

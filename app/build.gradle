@@ -150,13 +150,27 @@ dependencies {
 
     implementation('com.thomashaertel:multispinner:0.1.1@aar') {
     }
-
+    implementation 'com.squareup.retrofit2:retrofit:2.6.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.6.0'
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.9.0'
     debugCompile('com.github.ajitsing:sherlock:1.0.4@aar') {
         transitive = true
     }
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
 
+    implementation 'com.github.lecho:hellocharts-library:1.5.8@aar'
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
+
+    implementation 'com.agrawalsuneet.androidlibs:dotsloader:1.4'
+
+    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
+    implementation 'com.github.PhilJay:MPAndroidChart:v2.2.4'
+    implementation 'com.android.support:support-vector-drawable:28.+'
+
+   // implementation 'com.github.PhilJay:MPAndroidChart:v2.0.9'
+
+  //  implementation 'com.cashfree.pg:android-sdk:1.5.1'
     releaseCompile('com.github.ajitsing:sherlock-no-op:1.0.4@aar')
-
 
 }
 apply plugin: 'com.google.gms.google-services'

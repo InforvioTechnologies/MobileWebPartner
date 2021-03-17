@@ -6,13 +6,11 @@ import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.text.Html;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -37,11 +35,13 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.github.mikephil.charting.data.BarEntry;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -51,12 +51,6 @@ import adhoc.app.applibrary.Config.AppUtils.Pref.Pref;
 import adhoc.app.applibrary.Config.AppUtils.Urls;
 import adhoc.app.applibrary.Config.AppUtils.VolleySignleton.AppController;
 import dmax.dialog.SpotsDialog;
-import in.loanwiser.partnerapp.BankStamentUpload.Upload_Activity_Bank;
-import in.loanwiser.partnerapp.CameraActivity.DocGridView_List;
-import in.loanwiser.partnerapp.CameraActivity.DocGridView_List1;
-import in.loanwiser.partnerapp.CameraActivity.MainActivity_IMG_Property2;
-import in.loanwiser.partnerapp.CameraActivity.ManiActivity_Image2;
-import in.loanwiser.partnerapp.PartnerActivitys.Home;
 import in.loanwiser.partnerapp.PartnerActivitys.SimpleActivity;
 import in.loanwiser.partnerapp.PartnerActivitys.Submitsuccess_Activity;
 import in.loanwiser.partnerapp.R;
@@ -86,6 +80,7 @@ public class Applicant_Doc_Details_revamp extends SimpleActivity {
 
     AppCompatButton submit_update_status;
     PopupWindow popupWindow;
+    ArrayList<String> message_list;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -129,6 +124,7 @@ public class Applicant_Doc_Details_revamp extends SimpleActivity {
         Log.e(TAG, "onCreate:property_identified "+property_identified);
         Log.e(TAG, "onCreate:property_identified "+property_identified);
 
+        message_list  = new ArrayList<String>();
 
         Document_.setVisibility(View.GONE);
         submit_update_status.setVisibility(View.GONE);
@@ -359,7 +355,7 @@ public class Applicant_Doc_Details_revamp extends SimpleActivity {
         }
         Log.e("the Document",J.toString());
         progressDialog.show();
-        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, Urls.validate_upldoc, J,
+        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, Urls.Check_Uploadsubmit, J,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
@@ -375,10 +371,34 @@ public class Applicant_Doc_Details_revamp extends SimpleActivity {
                                Documnet_upload_Status();
                            }else
                            {
-                               submit_update_status.setEnabled(false);
-                               Submit_Co_Applicant();
+
+                               JSONObject jsonObject1 = response.getJSONObject("response");
+                               JSONArray  label_arr=jsonObject1.getJSONArray("message");
+                               for (int i = 0; i < label_arr.length(); i++) {
+                                   // String value="12";
+                                   if(label_arr.getString(i).isEmpty())
+                                   {
+
+                                   }else
+                                   {
+                                       String value3= label_arr.getString(i);
+                                       Log.e("json", i+"="+value3);
+                                       String value=label_arr.getString(i);
+                                       message_list.add(String.valueOf(value));
+                                       submit_update_status.setEnabled(false);
+                                       Submit_Co_Applicant();
+                                       progressDialog.dismiss();
+                                   }
+
+
+                                   // x.add(value3);
+                                   // Log.e("json", i+"="+value3);
+                               }
+
+
+
                               // Toast.makeText(getApplicationContext(),"Please Upload the mandatory Documents", Toast.LENGTH_SHORT).show();
-                               progressDialog.dismiss();
+
                            }
 
                             //   JSONArray ja = response.getJSONArray(Params.emp_states);
@@ -419,9 +439,9 @@ public class Applicant_Doc_Details_revamp extends SimpleActivity {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        Log.e("Documnet_upload_Status", String.valueOf(J));
+        Log.e("submit_loanwiser", String.valueOf(J));
         progressDialog.show();
-        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, Urls.UPDATE_STATUS_DOC, J,
+        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, Urls.submit_loanwiser, J,
                 new Response.Listener<JSONObject>() {
                     @SuppressLint("RestrictedApi")
                     @Override
@@ -431,23 +451,28 @@ public class Applicant_Doc_Details_revamp extends SimpleActivity {
                         try {
 
                             if(response.getString(Params.status).equals("success")){
+                                Intent intent = new Intent(Applicant_Doc_Details_revamp.this, Submitsuccess_Activity.class);
+                                startActivity(intent);
 
-                                if(response.getBoolean("doc_uploadstatus")){
+                                finish();
+
+                               /* if(response.getBoolean("doc_uploadstatus")){
                                     // Objs.a.showToast( mCon,"Document uploaded");
                                   //  Objs.ac.StartActivity(mCon, Home.class);
                                     Intent intent = new Intent(Applicant_Doc_Details_revamp.this, Submitsuccess_Activity.class);
                                     startActivity(intent);
 
                                     finish();
-                                }else {
+                                }else {*/
 
                                     // Objs.a.showToast(mCon,"You have not yet Uploaded any Document for Loan Process "+ "\n" + "Please Upload the Document");
-                                    Toast.makeText(getApplicationContext(),"You have not yet Uploaded any Document for Loan Process", Toast.LENGTH_SHORT).show();
+                                 //   Toast.makeText(getApplicationContext(),"You have not yet Uploaded any Document for Loan Process", Toast.LENGTH_SHORT).show();
 
-                                }
+                               /* }*/
 
-                            /*  Objs.ac.StartActivity(mCon, Dashboard_Activity.class);
-                              finish();*/
+                            }else {
+                                Toast.makeText(getApplicationContext(),"Something went wrong, Please check!!!", Toast.LENGTH_SHORT).show();
+
                             }
 
                         } catch (JSONException e) {
@@ -897,13 +922,14 @@ public class Applicant_Doc_Details_revamp extends SimpleActivity {
                 J = getItem(position);
 
                 String enable_status = J.getString("enable_status");
+                String upload_status = J.getString("upload_status");
                // holder.class_name.setText(Objs.a.capitalize(J.getString("doc_typename")));
 
-                if(enable_status.equals("1"))
+                if(enable_status.equals("1") || upload_status.equals("1") )
                 {
                     holder.class_name.setText(Objs.a.capitalize(J.getString("doc_typename")));
 
-                    String upload_status = J.getString("upload_status");
+                   // String upload_status = J.getString("upload_status");
                     String submit_loanwiser = J.getString("submit_loanwiser");
                     if(upload_status.equals("1"))
                     {
@@ -1291,9 +1317,16 @@ public class Applicant_Doc_Details_revamp extends SimpleActivity {
         dialog.setCanceledOnTouchOutside(false);
         Button delete = (Button) dialog.findViewById(R.id.delete);
         Button no=(Button)dialog.findViewById(R.id.no);
-        AppCompatTextView doument_name=(AppCompatTextView)dialog.findViewById(R.id.doument_name);
+        AppCompatTextView bank_statement=(AppCompatTextView)dialog.findViewById(R.id.bank_statement);
         AppCompatTextView document_url=(AppCompatTextView)dialog.findViewById(R.id.document_url);
 
+        String formattedString = message_list.toString()
+                .replace("[", "")  //remove the right bracket
+                .replace("]", "")
+                .replaceAll("\"", "")
+                .trim();
+
+        bank_statement.setText(formattedString.toString());
         delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -1439,8 +1472,6 @@ public class Applicant_Doc_Details_revamp extends SimpleActivity {
                     }
                     JSONArray file_array = J.getJSONArray("file_array");
                     ListItemAdapter_sub_chiled adapter_sub_chile = new ListItemAdapter_sub_chiled(mCon,file_array);
-
-
                     /// RecyclerView recyclerView = (RecyclerView) findViewById(adhoc.app.applibrary.R.id.recycler_view);
                     // imagelist.setLayoutManager(llm);
                     holder.recycler_view_sub_chiled.setHasFixedSize(true);

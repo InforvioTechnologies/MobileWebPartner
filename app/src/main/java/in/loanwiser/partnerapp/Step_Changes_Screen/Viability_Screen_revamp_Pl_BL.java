@@ -1038,7 +1038,9 @@ public class Viability_Screen_revamp_Pl_BL extends SimpleActivity implements Num
 
         Monthly_net_salry_Show.setText(monthly_net_salary);
         salary_Show.setText(Salary_Value);
-        salary_proof_show.setText(salry_proof_value.toString());
+      //  salary_proof_show.setText(salry_proof_value.toString());
+        String list = Arrays.toString(salry_proof_value.toArray()).replace("[", "").replace("]", "");
+        salary_proof_show.setText(list);
         company_type_show.setText(pl_co_app_Company_Value);
         company_name_show.setText(company_name);
         designation_show.setText(designation_);
@@ -3396,6 +3398,8 @@ public class Viability_Screen_revamp_Pl_BL extends SimpleActivity implements Num
         try {
             J =new JSONObject();
             J.put("transaction_id",Pref.getTRANSACTIONID(getApplicationContext()));
+            J.put("user_id", Pref.getUSERID(getApplicationContext()));
+            J.put("b2b_id", Pref.getID(getApplicationContext()));
             J.put("relationship_type", "1");
 
         } catch (JSONException e) {
@@ -3445,7 +3449,7 @@ public class Viability_Screen_revamp_Pl_BL extends SimpleActivity implements Num
                                             rule_message.add(ind_salary);
                                         }else
                                         {
-                                            bank_failure="Sorry.! Currently we have no partner banks available in applicant\\'s location" +
+                                            bank_failure="Sorry.! Currently we have no partner banks available in applicants location" +" "+
                                                     "We are On-boarding as many new banks as possible. Stay tuned.! ";
                                             rule_message.add(bank_failure);
                                         }
@@ -3465,7 +3469,8 @@ public class Viability_Screen_revamp_Pl_BL extends SimpleActivity implements Num
                                 TextView content_txt = (TextView) customView.findViewById(R.id.content_txt);
 
 
-                                content_txt.setText(rule_message.toString());
+                                String list = Arrays.toString(rule_message.toArray()).replace("[", "").replace("]", "");
+                                content_txt.setText(list);
 
                                 //instantiate popup window
                                 popupWindow = new PopupWindow(customView, LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);

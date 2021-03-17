@@ -103,12 +103,20 @@ public class Bank_DocGridView_List extends SimpleActivity {
                            String statues = response.getString("response");
                            JSONArray jsonObject1 = response.getJSONArray("data");
 
+                           if(statues.equals("fail"))
+                           {
+                               Toast.makeText(getApplicationContext(),"ettor please check!!!",Toast.LENGTH_SHORT).show();
 
-                            if (jsonObject1.length()>0){
-                                setAdapter(jsonObject1);
-                            }else {
-                                Objs.a.ShowHideNoItems(mCon,true);
-                            }
+                           }else
+                           {
+                               if (jsonObject1.length()>0){
+                                   setAdapter(jsonObject1);
+                               }else {
+                                   Objs.a.ShowHideNoItems(mCon,true);
+                               }
+                           }
+
+
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }

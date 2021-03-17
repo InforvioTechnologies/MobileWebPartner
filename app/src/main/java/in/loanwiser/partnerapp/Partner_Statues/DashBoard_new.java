@@ -66,6 +66,7 @@ import adhoc.app.applibrary.Config.AppUtils.Pref.Pref;
 import adhoc.app.applibrary.Config.AppUtils.Urls;
 import adhoc.app.applibrary.Config.AppUtils.VolleySignleton.AppController;
 import dmax.dialog.SpotsDialog;
+import in.loanwiser.partnerapp.BankStamentUpload.ReportIssueActivity;
 import in.loanwiser.partnerapp.Infinite_Scrollview.Lead_item;
 import in.loanwiser.partnerapp.My_Earnings.My_Earnings;
 import in.loanwiser.partnerapp.PDF_Dounloader.PermissionUtils;
@@ -224,7 +225,8 @@ public class DashBoard_new extends AppCompatActivity  implements NavigationView.
         // load fragment
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.frame_container, fragment);
-        transaction.addToBackStack(null);
+       // transaction.addToBackStack(null);
+
         transaction.commit();
     }
 
@@ -309,6 +311,10 @@ public class DashBoard_new extends AppCompatActivity  implements NavigationView.
             } catch (android.content.ActivityNotFoundException ex) {
                 Toast.makeText(DashBoard_new.this, "Could not find an activity to place the call.", Toast.LENGTH_SHORT).show();
             }
+        }
+        else if (id==R.id.report){
+            Intent intent = new Intent(DashBoard_new.this, ReportIssueActivity.class);
+            startActivity(intent);
         }
         /*
         else if (id == R.id.nav_call) {

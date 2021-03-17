@@ -34,6 +34,8 @@ public class Urls {
     public static String Urls_step = "https://cscapi.loanwiser.in/mobile/partner_loanapi_test.php?call=";
     public static String Urls_phamplet = "https://cscapi.loanwiser.in/mobile/pamphlet_distributor_test.php?call=";
 
+    public static String Urls_Bank = "https://cscapi.loanwiser.in/integration/bank_statement.php?call=";
+
 
     public static  String Url_version = "https://cscapi.loanwiser.in/mobile/appversion.php?call=";
 
@@ -77,6 +79,7 @@ public class Urls {
 
     public static String LEAD_STATUES_LIST  = Urls + "get_status";
     public static String UPDATE_STATUS_DOC  = Urls + "update_uploadstatus";
+    public static String submit_loanwiser  = Urls_step + "submit_loanwiser";
     public static String BANK_DETAILS_POST  = Urls + "partner_banksearch";
     public static String PROFILE_DETAILS_POST  = Urls + "partner_profilesearch";
 
@@ -109,6 +112,9 @@ public class Urls {
     public static String VIABILITY_CHECK_co_applicant = Urls_step + "viability_coapplicant";
     public static String VIABILITY_CHECK_co_applicant1 = Urls_step + "viability_fields_coapplicant";
 
+    public static String BANK_STATEMENT_LIST = Urls_step + "bank_statementlist";
+    public static String BANK_STATEMENT_DETAILS = Urls_Bank + "get_bankstatement_det";
+
     public static String view_crifscore = Urls_step + "view_crifscore";
    // public static String VIABILITY_CHECK = Urls_step + "insert_family";
     public static String Eligibility_Check = Urls_step + "eligibility_check";
@@ -132,6 +138,7 @@ public class Urls {
     public static String PDF_Document_Upload = Urls_step + "multi_docpdf";
     public static String DOC_IMAGE_VIEW = Urls_step + "docu_view";
     public static String validate_upldoc = Urls_step + "validate_upldoc";
+    public static String Check_Uploadsubmit = Urls_step + "Check_Uploadsubmit";
     public static String validate_checklist = Urls_step + "validate_checklist";
     public static String fetch_bankstatements = Urls_step + "fetch_bankstatements";
 

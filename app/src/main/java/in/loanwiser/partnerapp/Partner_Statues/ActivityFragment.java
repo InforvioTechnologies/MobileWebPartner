@@ -303,7 +303,6 @@ public class ActivityFragment extends Fragment implements NavigationView.OnNavig
             J =new JSONObject();
             J.put("b2buser_id", Pref.getID(getActivity()));
 
-
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -482,13 +481,13 @@ public class ActivityFragment extends Fragment implements NavigationView.OnNavig
         try {
             J =new JSONObject();
 
-            J.put("b2buser_id", b2b_user_id);
+            J.put("b2buser_id", Pref.getID(getActivity()));
 
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
-        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, Urls.reference_board , null,
+        Log.e("the helth request",J.toString());
+        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, Urls.reference_board , J,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {

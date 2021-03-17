@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:tools="http://schemas.android.com/tools"
+    android:layout_marginLeft="10dp"
+    android:layout_marginTop="5dp"
+    android:layout_marginBottom="5dp"
+    android:layout_marginEnd="15dp"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cardView"
+    android:layout_width="107dp"
+    android:layout_height="38dp"
+    android:orientation="vertical">
+
+    <LinearLayout android:orientation="horizontal"
+        android:layout_height="fill_parent"
+        android:layout_width="100dp">
+
+        <LinearLayout
+            android:id="@+id/leftcarnerlay"
+            android:layout_weight="0.250"
+            android:layout_height="fill_parent"
+            android:layout_width="0dp"
+            android:orientation="vertical" />
+
+        <LinearLayout
+            android:id="@+id/rigltlay"
+            android:layout_weight="1"
+            android:layout_height="fill_parent"
+            android:layout_width="0dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/yeartxt"
+                android:layout_marginLeft="3dp"
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:text="2020 - Jan"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+
+
+
+</LinearLayout>

@@ -7,7 +7,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
-import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Build;
@@ -22,7 +21,6 @@ import androidx.cardview.widget.CardView;
 import androidx.appcompat.widget.Toolbar;
 
 import android.preference.PreferenceManager;
-import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
@@ -57,24 +55,19 @@ import adhoc.app.applibrary.Config.AppUtils.Pref.Pref;
 import adhoc.app.applibrary.Config.AppUtils.Urls;
 import adhoc.app.applibrary.Config.AppUtils.VolleySignleton.AppController;
 import dmax.dialog.SpotsDialog;
-import in.loanwiser.partnerapp.BankStamentUpload.Bank_DocGridView_List;
 import in.loanwiser.partnerapp.BankStamentUpload.Doc_ImageView_Bank;
 import in.loanwiser.partnerapp.BankStamentUpload.Upload_Activity_Bank;
 import in.loanwiser.partnerapp.Documents.Applicant_Details_Single;
 import in.loanwiser.partnerapp.Documents.Applicant_Doc_Details_revamp;
 import in.loanwiser.partnerapp.PDF_Dounloader.PermissionUtils;
 import in.loanwiser.partnerapp.Partner_Statues.DashBoard_new;
-import in.loanwiser.partnerapp.Partner_Statues.LeadeFragment;
 import in.loanwiser.partnerapp.Payment.PaymentActivity;
-import in.loanwiser.partnerapp.Payment.PaymentDetails;
 import in.loanwiser.partnerapp.Payment.Payment_Sucess_Screen;
 import in.loanwiser.partnerapp.R;
 //import in.loanwiser.partnerapp.Step_Changes_Screen.Applicant_fragment;
 import in.loanwiser.partnerapp.Step_Changes_Screen.CRIF_Report_Activity_PDF_View;
-import in.loanwiser.partnerapp.Step_Changes_Screen.DocumentChecklistActivity;
 import in.loanwiser.partnerapp.Step_Changes_Screen.DocumentChecklist_Fragment;
 //import in.loanwiser.partnerapp.Step_Changes_Screen.DocumentChecklist_new;
-import in.loanwiser.partnerapp.Step_Changes_Screen.Document_Checklist_Details_type;
 import in.loanwiser.partnerapp.Step_Changes_Screen.FragmentApplicant;
 import in.loanwiser.partnerapp.Step_Changes_Screen.Viability_Screen_revamp;
 import in.loanwiser.partnerapp.Step_Changes_Screen.Viability_Screen_revamp_Pl_BL;
@@ -113,7 +106,7 @@ public class Home extends AppCompatActivity {
     AppCompatTextView lead_name,mobile_no,Loan_amount,loan_type_,loan_submit_statues1,viability_statues,
             eligibility_check_cmp,payment_statues_comp,crif_report_cmp,viability_report_cmp,loan_statues,
             sub_to_loanwiser,crif_report_view,bank_stm,payment_statues_comp1,document_text,eligibility_Report,
-            document_check_text,pending_ask_List;
+            document_check_text,pending_ask_List,lead_name_id;
 
     ImageView step2_viablitystatus,step2_paymentstatus,step2_reportstatus,step2crifstatus,bankstate_status,documentupload_status,step3payment_status,eligiblitity_status;
     Button step2viablity_button,step2payment_but,step2report_but,step2crif_but,
@@ -371,6 +364,7 @@ public class Home extends AppCompatActivity {
        // exp_leaseoffer.setIndicatorBounds();
 
         lead_name = (AppCompatTextView) findViewById(R.id.lead_name);
+        lead_name_id = (AppCompatTextView) findViewById(R.id.lead_name_id);
         pending_ask_List = (AppCompatTextView) findViewById(R.id.ask_txt1_pending);
         view_ask = (AppCompatButton) findViewById(R.id.view_ask);
         mobile_no = (AppCompatTextView) findViewById(R.id.mobile_no);
@@ -666,13 +660,13 @@ public class Home extends AppCompatActivity {
             public void onClick(View view) {
                 if(payment.equals("completed"))
                 {
-                    if(viability.equals("completed") && crif_report.equals("completed"))  {
+                    if((viability.equals("completed") && crif_report.equals("completed")) || (viability.equals("completed") && crif_report.equals("error")))  {
 
                         if(reject_status.equals("1"))
                         {
                             /*Objs.ac.StartActivityPutExtra(Home.this, Doc_ImageView_Viability.class,
                                     Params.document,viability_report_URL);*/
-                            if (permissionUtils.checkPermission(Home.this, STORAGE_PERMISSION_REQUEST_CODE, view)) {
+                           /* if (permissionUtils.checkPermission(Home.this, STORAGE_PERMISSION_REQUEST_CODE, view)) {
                                 if (viability_report_URL.length() > 0) {
                                     try {
                                         startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(viability_report_URL)));
@@ -681,13 +675,16 @@ public class Home extends AppCompatActivity {
                                     }
                                 }
 
-                            }
+                            }*/
+                           String report="Viability Report";
+                            Objs.ac.StartActivityPutExtra(Home.this, Doc_ImageView_Bank.class,
+                                    Params.document,viability_report_URL,Params.report,report);
 
                         }else
                         {
                             /*Objs.ac.StartActivityPutExtra(Home.this, Doc_ImageView_Viability.class,
                                     Params.document,viability_report_URL);*/
-                            if (permissionUtils.checkPermission(Home.this, STORAGE_PERMISSION_REQUEST_CODE, view)) {
+                           /* if (permissionUtils.checkPermission(Home.this, STORAGE_PERMISSION_REQUEST_CODE, view)) {
                                 if (viability_report_URL.length() > 0) {
                                     try {
                                         startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(viability_report_URL)));
@@ -696,7 +693,10 @@ public class Home extends AppCompatActivity {
                                     }
                                 }
 
-                            }
+                            }*/
+                            String report="Viability Report";
+                            Objs.ac.StartActivityPutExtra(Home.this, Doc_ImageView_Bank.class,
+                                    Params.document,viability_report_URL,Params.report,report);
 
                         }
                     }else
@@ -707,7 +707,15 @@ public class Home extends AppCompatActivity {
                     }
                 }else  if(payment.equals("pending"))
                 {
-                    Toast.makeText(getApplicationContext(),"Please Complete The Previous Steps To Proceed!!!", Toast.LENGTH_SHORT).show();
+                    if (reject_status.equals("1")) {
+                        String report="Viability Report";
+                        Objs.ac.StartActivityPutExtra(Home.this, Doc_ImageView_Bank.class,
+                                Params.document,viability_report_URL,Params.report,report);
+                    }else
+                    {
+                        Toast.makeText(getApplicationContext(),"Please Complete The Previous Steps To Proceed!!!", Toast.LENGTH_SHORT).show();
+
+                    }
 
                 }
 
@@ -787,11 +795,20 @@ public class Home extends AppCompatActivity {
                             Intent intent = new Intent(Home.this, CRIF_Report_Activity_PDF_View.class);
                             intent.putExtra("user_id", applicant_id);
                             startActivity(intent);
+                          //  Criffail();
+
                         }else
                         {
-                            Toast.makeText(getApplicationContext(),"Please Complete The Previous Steps To Proceed!!!", Toast.LENGTH_SHORT).show();
+                            if(crif_report.equals("error"))
+                            {
+                                Criffail();
+                            }else
+                            {
+                                Toast.makeText(getApplicationContext(),"Please Complete The Previous Steps To Proceed!!!", Toast.LENGTH_SHORT).show();
 
+                            }
                         }
+
 
                     }else
                     {
@@ -840,7 +857,18 @@ public class Home extends AppCompatActivity {
                         {
                             if(bank_statement.equals("completed"))
                             {
-                                Intent intent = new Intent(Home.this, Bank_DocGridView_List.class);
+                                Intent intent = new Intent(Home.this, Upload_Activity_Bank.class);
+                                startActivity(intent);
+                            }else
+                            {
+                                Intent intent = new Intent(Home.this, Upload_Activity_Bank.class);
+                                startActivity(intent);
+                            }
+                        }else if(crif_report.equals("error"))
+                        {
+                            if(bank_statement.equals("completed"))
+                            {
+                                Intent intent = new Intent(Home.this, Upload_Activity_Bank.class);
                                 startActivity(intent);
                             }else
                             {
@@ -898,6 +926,25 @@ public class Home extends AppCompatActivity {
         // Convert the dps to pixels, based on density scale
         return (int) (pixels * scale + 0.5f);
     }
+    private void Criffail() {
+        final Dialog dialog = new Dialog(this);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialog.setContentView(R.layout.criffail);
+        //  dialog.getWindow().setLayout(display.getWidth() * 90 / 100, LinearLayout.LayoutParams.WRAP_CONTENT);
+        dialog.setCancelable(true);
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.show();
+        ImageView closebtn1=(ImageView) dialog.findViewById(R.id.closebtn1);
+        LinearLayout background=(LinearLayout) dialog.findViewById(R.id.background);
+        background.setBackground(getResources().getDrawable(R.drawable.capsul_button_rect_viability));
+        closebtn1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+    }
     private void fonts() {
 
         Objs.a.OutfitNormalFontStyle(mCon, R.id.step1);
@@ -935,6 +982,7 @@ public class Home extends AppCompatActivity {
         Objs.a.OutfitNormalFontStyle(mCon, R.id.ask_txt);
         Objs.a.OutfitNormalFontStyle(mCon, R.id.ask_txt1_pending);
         Objs.a.OutfitNormalFontStyle(mCon, R.id.lead_name);
+        Objs.a.OutfitNormalFontStyle(mCon, R.id.lead_name_id);
         Objs.a.OutfitNormalFontStyle(mCon, R.id.mobile_no);
         Objs.a.OutfitNormalFontStyle(mCon, R.id.loanamounttxt);
         Objs.a.OutfitNormalFontStyle(mCon, R.id.loantypetext);
@@ -1088,6 +1136,10 @@ public class Home extends AppCompatActivity {
                                Log.i("TAG", "onResponse:applicant_count "+applicant_count);
                                lead_name.setText(user_name);
                                mobile_no.setText(mobileno);
+                               String user_id = Pref.getUSERID(getApplicationContext());
+                               String App_id= "APP-"+user_id;
+                               lead_name_id.setText(App_id);
+                               Log.e("App_id",App_id);
                                Loan_amount.setText("\u20B9"+loan_amount);
                                Loan_amount.setTextColor(Color.parseColor("#484848"));
                                loan_type_.setText(loan_type);
@@ -1108,6 +1160,8 @@ public class Home extends AppCompatActivity {
                                }
                                Pref.putProperty_id(mCon,property_identified);
                                Pref.putCoAPPAVAILABLE(mCon,applicant_count);
+                               String applicant = Pref.getCoAPPAVAILABLE(mCon);
+                               Log.e("the Co", applicant);
                                if(curr_status.equals("6"))
                                {
                                  /*  loan_statues.setVisibility(View.VISIBLE);
@@ -1382,6 +1436,27 @@ public class Home extends AppCompatActivity {
                                     crif_report_view.setText("View CRIF Report");
                                     credite_report_img.setVisibility(View.GONE);
                                     Bank_statement_Upload.setVisibility(View.GONE);
+                                    if (payment.equals("pending")) {
+                                        Paymet.setVisibility(View.GONE);
+                                        Credit_REport_Generation.setVisibility(View.GONE);
+                                        if_vaibility_faild.setVisibility(View.GONE);
+
+                                        viability_report_cmp.setText("click to view reject status");
+                                        viability_Report.setEnabled(true);
+                                        if_vaibility_faild.setVisibility(View.GONE);
+                                        step2viablity_button.setVisibility(View.VISIBLE);
+                                        step2report_but.setVisibility(View.VISIBLE);
+                                        step2_reportstatus.setImageDrawable(getResources().getDrawable(R.drawable.ic_warning));
+                                        loan_submit_statues1.setText("Loan Rejected");
+                                        loan_submit_statues1.setTextColor(Color.parseColor("#FF9201"));
+                                        step2report_but.setBackgroundResource(R.drawable.but_shape_reject);
+                                        step2report_but.setText("View");
+                                    }else
+                                    {
+                                        Credit_REport_Generation.setVisibility(View.VISIBLE);
+                                        if_vaibility_faild.setVisibility(View.VISIBLE);
+                                        Paymet.setVisibility(View.VISIBLE);
+                                    }
 
                                 }else {
 
@@ -1414,6 +1489,20 @@ public class Home extends AppCompatActivity {
                                     }else if(crif_report.equals("not_wanted"))
                                     {
                                         Credit_REport_Generation.setVisibility(View.GONE);
+                                    }else
+                                    {
+                                        if (payment.equals("completed")) {
+                                            Credit_REport_Generation.setVisibility(View.VISIBLE);
+                                            Credit_REport_Generation.setEnabled(true);
+                                            credite_report_img.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
+                                            step2crifstatus.setImageDrawable(getResources().getDrawable(R.drawable.ic_green_tick));
+                                            crif_report_view.setText("Completed");
+                                            crif_report_view.setTextColor(Color.parseColor("#00CEB4"));
+                                            step2crif_but.setBackgroundResource(R.drawable.but_shape_blue);
+                                            step2crif_but.setText("View");
+                                            bankstatment_but.setBackgroundResource(R.drawable.but_shape);
+                                            document_check_button.setBackgroundResource(R.drawable.but_shape_gray);
+                                        }
                                     }
                                 }
 
@@ -1439,6 +1528,10 @@ public class Home extends AppCompatActivity {
                                 {
                                     bankstatment_but.setBackgroundResource(R.drawable.but_shape);
                                     if(crif_report.equals("completed"))
+                                    {
+                                        bankstatment_but.setBackgroundResource(R.drawable.but_shape);
+                                        document_check_button.setBackgroundResource(R.drawable.but_shape_gray);
+                                    }else if(crif_report.equals("error"))
                                     {
                                         bankstatment_but.setBackgroundResource(R.drawable.but_shape);
                                         document_check_button.setBackgroundResource(R.drawable.but_shape_gray);
@@ -1482,16 +1575,51 @@ public class Home extends AppCompatActivity {
 
                             }else if(crif_report.equals("pending"))
                             {
-                                Credit_REport_Generation.setVisibility(View.VISIBLE);
-                                Credit_REport_Generation.setEnabled(true);
-                                credite_report_img.setImageDrawable(getResources().getDrawable(R.drawable.ic_warning));
-                                crif_report_view.setText("Pending under you");
-                                crif_report_view.setTextColor(Color.parseColor("#FF9201"));
-                                step2crif_but.setBackgroundResource(R.drawable.but_shape_gray);
-                                step2crif_but.setText("Complete Now");
-                                bankstatment_but.setBackgroundResource(R.drawable.but_shape_gray);
-                                document_check_button.setBackgroundResource(R.drawable.but_shape_gray);
-                            }else if(crif_report.equals("not_wanted"))
+                                if(reject_status.equals("1"))
+                                {
+
+                                }else
+                                {
+                                    Credit_REport_Generation.setVisibility(View.VISIBLE);
+                                    Credit_REport_Generation.setEnabled(true);
+                                    credite_report_img.setImageDrawable(getResources().getDrawable(R.drawable.ic_warning));
+                                    crif_report_view.setText("Pending under you");
+                                    crif_report_view.setTextColor(Color.parseColor("#FF9201"));
+                                    step2crif_but.setBackgroundResource(R.drawable.but_shape_gray);
+                                    step2crif_but.setText("Complete Now");
+                                    bankstatment_but.setBackgroundResource(R.drawable.but_shape_gray);
+                                    document_check_button.setBackgroundResource(R.drawable.but_shape_gray);
+                                }
+
+                            }else if(crif_report.equals("error"))
+                            {
+                                if(reject_status.equals("1"))
+                                {
+
+                                }else
+                                {
+                                    if (payment.equals("completed")) {
+                                        Credit_REport_Generation.setVisibility(View.VISIBLE);
+                                        Credit_REport_Generation.setEnabled(true);
+                                        credite_report_img.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
+                                        step2crifstatus.setImageDrawable(getResources().getDrawable(R.drawable.ic_green_tick));
+                                        crif_report_view.setText("Completed");
+                                        crif_report_view.setTextColor(Color.parseColor("#00CEB4"));
+                                        step2crif_but.setBackgroundResource(R.drawable.but_shape_blue);
+                                        step2crif_but.setText("View");
+                                        if(bank_statement.equals("completed"))
+                                        {
+                                            bankstatment_but.setBackgroundResource(R.drawable.but_shape_blue);
+                                        }else
+                                        {
+                                            bankstatment_but.setBackgroundResource(R.drawable.but_shape);
+                                        }
+
+                                        document_check_button.setBackgroundResource(R.drawable.but_shape_gray);
+                                    }
+                                }
+
+                            }else
                             {
                                 Credit_REport_Generation.setVisibility(View.GONE);
                             }
@@ -1612,6 +1740,12 @@ public class Home extends AppCompatActivity {
                             }else
                             {
                                 app_offer_img.setImageDrawable(getResources().getDrawable(R.drawable.ic_not_tick));
+                            }
+
+                            if(crif_report.equals("error"))
+                            {
+                                step2crif_but.setBackgroundResource(R.drawable.but_shape_blue);
+                                step2crif_but.setText("View");
                             }
 
                         } catch (JSONException e) {
@@ -2110,16 +2244,18 @@ public class Home extends AppCompatActivity {
 
                     }else
                     {
-                        Intent intent=new Intent(Home.this, DocumentChecklist_Fragment.class);
+                       /* Intent intent=new Intent(Home.this, DocumentChecklist_Fragment.class);
                         intent.putExtra("jsonArray", Applicant_Statues.toString());
                         intent.putExtra("applicantcount",applicant_count);
                         intent.putExtra("propertyidentify",property_identified);
-                        startActivity(intent);
+                        startActivity(intent);*/
+                        Toast.makeText(getApplicationContext(),"Please Completed the Previous Step", Toast.LENGTH_SHORT).show();
+
 
                     }
                 }else
                 {
-                    Toast.makeText(getApplicationContext(),"Please the Previous Step Completed", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(),"Please Completed the Previous Step", Toast.LENGTH_SHORT).show();
                 }
 
 

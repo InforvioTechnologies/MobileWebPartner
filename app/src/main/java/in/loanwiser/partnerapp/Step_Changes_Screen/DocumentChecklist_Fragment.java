@@ -7,6 +7,7 @@ import androidx.viewpager.widget.ViewPager;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
@@ -14,15 +15,21 @@ import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.Toast;
 import android.widget.Toolbar;
 
 import com.android.volley.AuthFailureError;
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.Response;
+import com.android.volley.RetryPolicy;
 import com.android.volley.VolleyError;
+import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.google.android.material.tabs.TabLayout;
 
@@ -39,6 +46,7 @@ import adhoc.app.applibrary.Config.AppUtils.Urls;
 import adhoc.app.applibrary.Config.AppUtils.VolleySignleton.AppController;
 import dmax.dialog.SpotsDialog;
 import in.loanwiser.partnerapp.PartnerActivitys.Home;
+import in.loanwiser.partnerapp.Payment.PaymentActivity;
 import in.loanwiser.partnerapp.R;
 import in.loanwiser.partnerapp.PartnerActivitys.SimpleActivity;
 
@@ -78,7 +86,7 @@ public class DocumentChecklist_Fragment extends SimpleActivity implements TabLay
 
         progressDialog = new SpotsDialog(this, R.style.Custom);
 
-
+      /*  Eligibility_check_doc_checklist_generate();*/
 
         Applicant_Status();
         //Adding the tabs using addTab() method
@@ -171,7 +179,7 @@ public class DocumentChecklist_Fragment extends SimpleActivity implements TabLay
                                 property_identify =  jsonObject2.getString("property_identify");
 
                                 //  applicant_id =  "APP-"+user_id;
-                                Pref.putCoAPPAVAILABLE(mCon,"2");
+                                Pref.putCoAPPAVAILABLE(mCon,applicant_count);
                               String  applicant_empstates=response.getString("app_emp");
                                 String coapplicant_empstates=response.getString("coapp_emp");
                                 String property_empstates=response.getString("prop_emp");
@@ -236,7 +244,6 @@ public class DocumentChecklist_Fragment extends SimpleActivity implements TabLay
                                     tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
                                   //  tabLayout.setupWithViewPager(viewPager);
                                     tabLayout.setTabTextColors(ContextCompat.getColorStateList(DocumentChecklist_Fragment.this, R.color.text_blue));
-
 
                                 }else if (applicant_count.equals("1")){
                                     tabLayout.addTab(tabLayout.newTab().setText("Applicant"));
@@ -327,5 +334,6 @@ public class DocumentChecklist_Fragment extends SimpleActivity implements TabLay
         };
         AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
     }
+
 
 }

@@ -140,6 +140,7 @@ public class Params {
     public static String spec_id = "spec_id";
     public static String applicant_name = "applicant_name";
     public static String document = "document";
+    public static String report = "report";
     public static String hash = "hash";
     public static String pdf = "pdf";
     public static String doc_url = "doc_url";

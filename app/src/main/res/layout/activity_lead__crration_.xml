@@ -682,6 +682,7 @@
                     </LinearLayout>
 
                     <LinearLayout
+                        android:visibility="gone"
                         android:id="@+id/submitloanlay"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -696,7 +697,7 @@
                             android:gravity="center"
                             android:orientation="vertical">
 
-                            <Button
+                            <androidx.appcompat.widget.AppCompatButton
                                 android:id="@+id/submitloanbtn"
                                 android:layout_width="240dp"
                                 android:layout_height="45dp"

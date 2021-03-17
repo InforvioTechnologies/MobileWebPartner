@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.AppCompatSpinner;
 import androidx.appcompat.widget.AppCompatTextView;
-import androidx.cardview.widget.CardView;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -50,22 +49,20 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import adhoc.app.applibrary.Config.AppUtils.Objs;
+import adhoc.app.applibrary.Config.AppUtils.Params;
 import adhoc.app.applibrary.Config.AppUtils.Pref.Pref;
 import adhoc.app.applibrary.Config.AppUtils.Urls;
 import adhoc.app.applibrary.Config.AppUtils.VolleySignleton.AppController;
 import dmax.dialog.SpotsDialog;
+import in.loanwiser.partnerapp.BankStamentUpload.Doc_ImageView_Bank;
 import in.loanwiser.partnerapp.BankStamentUpload.Upload_Activity_Bank;
+import in.loanwiser.partnerapp.CameraActivity.DocGridView_List;
+import in.loanwiser.partnerapp.Documents.Doc_ImageView;
 import in.loanwiser.partnerapp.PDF_Dounloader.PermissionUtils;
 import in.loanwiser.partnerapp.PartnerActivitys.Dashboard_Activity;
-import in.loanwiser.partnerapp.Partner_Statues.DashBoard_new;
+import in.loanwiser.partnerapp.PartnerActivitys.Home;
 import in.loanwiser.partnerapp.R;
-import in.loanwiser.partnerapp.Step_Changes_Screen.CRIF_Report_Activity_PDF_View;
-import in.loanwiser.partnerapp.Step_Changes_Screen.Creadite_Report_Activity;
-import in.loanwiser.partnerapp.Step_Changes_Screen.Eligibility_HL_New;
-import in.loanwiser.partnerapp.Step_Changes_Screen.Lead_Crration_Activity;
-import in.loanwiser.partnerapp.Step_Changes_Screen.Viability_Screen_revamp;
-import in.loanwiser.partnerapp.Step_Changes_Screen.Viability_Screen_revamp_Pl_BL;
-import in.loanwiser.partnerapp.Step_Changes_Screen.Viability_Screen_revamp_co;
 
 public class Payment_Sucess_Screen extends AppCompatActivity {
 
@@ -388,7 +385,8 @@ public class Payment_Sucess_Screen extends AppCompatActivity {
                                 // co_applicant_.setVisibility(View.VISIBLE);
                             }else
                             {
-                                Toast.makeText(mCon, "error, somthing went wrong!!!",Toast.LENGTH_SHORT).show();
+                                Viability_CRIF_report_Functions1();
+                               // Toast.makeText(mCon, "Please Provide Valid PAN Details!!!",Toast.LENGTH_SHORT).show();
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -719,7 +717,6 @@ public class Payment_Sucess_Screen extends AppCompatActivity {
                                 // co_applicant_.setVisibility(View.VISIBLE);
                             }else
                             {
-                                   // Viability_CRIF_report_Functions();
 
                                 Toast.makeText(mCon, " Error, Please Contact Loanwiser",Toast.LENGTH_SHORT).show();
                             }
@@ -727,7 +724,7 @@ public class Payment_Sucess_Screen extends AppCompatActivity {
                             e.printStackTrace();
                         }
                         // Toast.makeText(mCon, response.toString(),Toast.LENGTH_SHORT).show();
-                       // progressDialog.dismiss();
+                       // progressDialog.dismiss();Please Provide Valid PAN Details
                     }
                 }, new Response.ErrorListener() {
             @Override
@@ -830,16 +827,21 @@ public class Payment_Sucess_Screen extends AppCompatActivity {
                                         @Override
                                         public void onClick(View view) {
 
-                                            if (permissionUtils.checkPermission(Payment_Sucess_Screen.this, STORAGE_PERMISSION_REQUEST_CODE, view)) {
+                                           /* if (permissionUtils.checkPermission(Payment_Sucess_Screen.this, STORAGE_PERMISSION_REQUEST_CODE, view)) {
                                                 if (viable_url.length() > 0) {
                                                     try {
                                                         startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(viable_url)));
                                                     } catch (Exception e) {
                                                         e.getStackTrace();
+                                                        Toast.makeText(mCon, "Please Try again",Toast.LENGTH_SHORT).show();
+
                                                     }
                                                 }
 
-                                            }
+                                            }*/
+                                            String report="Viability Report";
+                                            Objs.ac.StartActivityPutExtra(Payment_Sucess_Screen.this, Doc_ImageView_Bank.class,
+                                                    Params.document,viability_report_URL,Params.report,report);
 
                                         }
 
@@ -848,7 +850,7 @@ public class Payment_Sucess_Screen extends AppCompatActivity {
                                         @Override
                                         public void onClick(View view) {
 
-                                            if (permissionUtils.checkPermission(Payment_Sucess_Screen.this, STORAGE_PERMISSION_REQUEST_CODE, view)) {
+                                          /*  if (permissionUtils.checkPermission(Payment_Sucess_Screen.this, STORAGE_PERMISSION_REQUEST_CODE, view)) {
                                                 if (app_crif_url.length() > 0) {
                                                     try {
                                                         startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(app_crif_url)));
@@ -857,7 +859,12 @@ public class Payment_Sucess_Screen extends AppCompatActivity {
                                                     }
                                                 }
 
-                                            }
+                                            }*/
+                                            String report="CRIF Report";
+                                            Objs.ac.StartActivityPutExtra(Payment_Sucess_Screen.this, Doc_ImageView_Bank.class,
+                                                    Params.document,viability_report_URL,Params.report,report);
+                                           /* Objs.ac.StartActivityPutExtra(Payment_Sucess_Screen.this, Doc_ImageView_Bank.class,
+                                                    Params.document,app_crif_url);*/
 
                                         }
 
@@ -916,7 +923,7 @@ public class Payment_Sucess_Screen extends AppCompatActivity {
                                         @Override
                                         public void onClick(View view) {
 
-                                                    if (permissionUtils.checkPermission(Payment_Sucess_Screen.this, STORAGE_PERMISSION_REQUEST_CODE, view)) {
+                                                   /* if (permissionUtils.checkPermission(Payment_Sucess_Screen.this, STORAGE_PERMISSION_REQUEST_CODE, view)) {
                                                         if (viable_url.length() > 0) {
                                                             try {
                                                                 startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(viable_url)));
@@ -925,7 +932,9 @@ public class Payment_Sucess_Screen extends AppCompatActivity {
                                                             }
                                                         }
 
-                                                    }
+                                                    }*/
+                                            Objs.ac.StartActivityPutExtra(Payment_Sucess_Screen.this, Doc_ImageView_Bank.class,
+                                                    Params.document,viable_url);
 
                                             }
 
@@ -934,7 +943,7 @@ public class Payment_Sucess_Screen extends AppCompatActivity {
                                         @Override
                                         public void onClick(View view) {
 
-                                            if (permissionUtils.checkPermission(Payment_Sucess_Screen.this, STORAGE_PERMISSION_REQUEST_CODE, view)) {
+                                          /*  if (permissionUtils.checkPermission(Payment_Sucess_Screen.this, STORAGE_PERMISSION_REQUEST_CODE, view)) {
                                                 if (app_crif_url.length() > 0) {
                                                     try {
                                                         startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(app_crif_url)));
@@ -943,7 +952,9 @@ public class Payment_Sucess_Screen extends AppCompatActivity {
                                                     }
                                                 }
 
-                                            }
+                                            }*/
+                                            Objs.ac.StartActivityPutExtra(Payment_Sucess_Screen.this, Doc_ImageView_Bank.class,
+                                                    Params.document,app_crif_url);
 
                                         }
 
@@ -953,7 +964,7 @@ public class Payment_Sucess_Screen extends AppCompatActivity {
                                         @Override
                                         public void onClick(View view) {
 
-                                            if (permissionUtils.checkPermission(Payment_Sucess_Screen.this, STORAGE_PERMISSION_REQUEST_CODE, view)) {
+                                          /*  if (permissionUtils.checkPermission(Payment_Sucess_Screen.this, STORAGE_PERMISSION_REQUEST_CODE, view)) {
                                                 if (coapp_crif_url.length() > 0) {
                                                     try {
                                                         startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(coapp_crif_url)));
@@ -962,7 +973,9 @@ public class Payment_Sucess_Screen extends AppCompatActivity {
                                                     }
                                                 }
 
-                                            }
+                                            }*/
+                                            Objs.ac.StartActivityPutExtra(Payment_Sucess_Screen.this, Doc_ImageView_Bank.class,
+                                                    Params.document,coapp_crif_url);
 
                                         }
 
@@ -986,6 +999,172 @@ public class Payment_Sucess_Screen extends AppCompatActivity {
             public void onErrorResponse(VolleyError error) {
                 VolleyLog.d("TAG", "Error: " + error.getMessage());
               //  progressDialog.dismiss();
+            }
+        }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("Content-Type", "application/json");
+                return headers;
+            }
+        };
+        AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
+
+    }
+
+    private void Viability_CRIF_report_Functions1() {
+
+        JSONObject J =new JSONObject();
+        try {
+          /*  J.put("transaction_id","58440");
+            J.put("user_id","56830");*/
+            J.put("transaction_id", Pref.getTRANSACTIONID(getApplicationContext()));
+            J.put("user_id",Pref.getUSERID(getApplicationContext()));
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        //  progressDialog.show();
+        Log.e("Crif Generation_submit", String.valueOf(J));
+        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, Urls.report_links, J,
+                new Response.Listener<JSONObject>() {
+
+                    @Override
+                    public void onResponse(JSONObject object) {
+                        Log.e("Payment", String.valueOf(object));
+                        try {
+
+                            String Statues = object.getString("status");
+                            JSONObject jsonObject = object.getJSONObject("viable");
+                            viable_statues = jsonObject.getString("applicant_status");
+
+                          /*  JSONObject data1 = object.getJSONObject("data");
+                            Report_ID  = data1.getString("reportId");
+                            Order_ID  = data1.getString("orderId");*/
+
+                            LayoutInflater layoutInflater = (LayoutInflater) Payment_Sucess_Screen.this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                            View customView = layoutInflater.inflate(R.layout.popup_loading,null);
+                            popupWindow1 = new PopupWindow(customView, LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
+                            //display the popup window
+                            popupWindow1.dismiss();
+                            if (Statues.equals("success")) {
+
+                                Log.e("applicantcount", String.valueOf(applicantcount));
+                                if (applicantcount.equals("1"))
+                                {
+                                    viability_check_pass();
+                                    viable_url = object.getString("viable_url");
+                                   // app_crif_score = object.getString("app_crif_score");
+                                  //  app_crif_url = object.getString("app_crif_url");
+
+
+                                    LayoutInflater layoutInflater1 = (LayoutInflater) Payment_Sucess_Screen.this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                                    View customView1 = layoutInflater1.inflate(R.layout.activity_viablity_failure,null);
+                                   // view_report = (AppCompatButton) customView1.findViewById(R.id.view_viablity_report);
+                                    AppCompatButton  view_viablity_report=(AppCompatButton) customView1.findViewById(R.id.view_viablity_report);
+                                    AppCompatButton proceed_next=(AppCompatButton)customView1.findViewById(R.id.proceed_next);
+                                   // TextView score= (TextView) customView1.findViewById(R.id.score);
+                                    LinearLayout co_Applicant_ly = (LinearLayout) customView1.findViewById(R.id.co_Applicant_ly);
+                                    co_Applicant_ly.setVisibility(View.GONE);
+//instantiate popup window
+                                    popupWindow1 = new PopupWindow(customView1, LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
+//display the popup window
+                                    popupWindow1.showAtLocation(view_viablity_report, Gravity.CENTER, 0, 0);
+                                    view_viablity_report.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View view) {
+
+                                          /*  if (permissionUtils.checkPermission(Payment_Sucess_Screen.this, STORAGE_PERMISSION_REQUEST_CODE, view)) {
+                                                if (viable_url.length() > 0) {
+                                                    try {
+                                                        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(viable_url)));
+                                                    } catch (Exception e) {
+                                                        e.getStackTrace();
+                                                    }
+                                                }
+                                            }*/
+                                            String report="Viability Report";
+                                            Objs.ac.StartActivityPutExtra(Payment_Sucess_Screen.this, Doc_ImageView_Bank.class,
+                                                    Params.document,viability_report_URL,Params.report,report);
+
+                                        }
+                                    });
+                                    proceed_next.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View view) {
+                                            Intent intent=new Intent(Payment_Sucess_Screen.this,Upload_Activity_Bank.class);
+                                            startActivity(intent);
+                                        }
+                                    });
+
+                                }else
+                                {
+
+                                    viability_check_pass();
+                                    Log.e("applicantcount 111", String.valueOf(applicantcount));
+                                    viable_url = object.getString("viable_url");
+                                   // app_crif_score = object.getString("app_crif_score");
+                                  //  app_crif_url = object.getString("app_crif_url");
+                                   //// coapp_crif_score = object.getString("coapp_crif_score");
+                                  //  coapp_crif_url = object.getString("coapp_crif_url");
+
+
+                                    LayoutInflater layoutInflater1 = (LayoutInflater) Payment_Sucess_Screen.this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                                    View customView1 = layoutInflater1.inflate(R.layout.activity_viablity_failure,null);
+                                   // view_report = (AppCompatButton) customView1.findViewById(R.id.view_report);
+                                    AppCompatButton view_viablity_report=(AppCompatButton) customView1.findViewById(R.id.view_viablity_report);
+                                    AppCompatButton proceed_next=(AppCompatButton)customView1.findViewById(R.id.proceed_next);
+                                    LinearLayout co_Applicant_ly = (LinearLayout) customView1.findViewById(R.id.co_Applicant_ly);
+                                    co_Applicant_ly.setVisibility(View.VISIBLE);
+                                  //  TextView score= (TextView) customView1.findViewById(R.id.score);
+//instantiate popup window
+                                    popupWindow1 = new PopupWindow(customView1, LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
+//display the popup window
+                                    popupWindow1.showAtLocation(view_viablity_report, Gravity.CENTER, 0, 0);
+                                    view_viablity_report.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View view) {
+
+                                           /* if (permissionUtils.checkPermission(Payment_Sucess_Screen.this, STORAGE_PERMISSION_REQUEST_CODE, view)) {
+                                                if (viable_url.length() > 0) {
+                                                    try {
+                                                        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(viable_url)));
+                                                    } catch (Exception e) {
+                                                        e.getStackTrace();
+                                                    }
+                                                }
+                                            }*/
+                                            String report="Viability Report";
+                                            Objs.ac.StartActivityPutExtra(Payment_Sucess_Screen.this, Doc_ImageView_Bank.class,
+                                                    Params.document,viability_report_URL,Params.report,report);
+                                        }
+                                    });
+                                    proceed_next.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View view) {
+                                            Intent intent=new Intent(Payment_Sucess_Screen.this, Upload_Activity_Bank.class);
+                                            startActivity(intent);
+                                        }
+                                    });
+
+
+                                }
+
+                            } else{
+                                Toast.makeText(mCon, " Error, Please Contact Loanwiser",Toast.LENGTH_SHORT).show();
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        // Toast.makeText(mCon, response.toString(),Toast.LENGTH_SHORT).show();
+                        // progressDialog.dismiss();
+                    }
+                }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                VolleyLog.d("TAG", "Error: " + error.getMessage());
+                //  progressDialog.dismiss();
             }
         }) {
             @Override
@@ -1320,7 +1499,7 @@ public class Payment_Sucess_Screen extends AppCompatActivity {
                                 // co_applicant_.setVisibility(View.VISIBLE);
                             }else
                             {
-                                Toast.makeText(mCon, "error, somthing went wrong!!!",Toast.LENGTH_SHORT).show();
+                                Toast.makeText(mCon, "Please Provide Valid PAN Details!!!",Toast.LENGTH_SHORT).show();
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
