@@ -27,6 +27,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import androidx.appcompat.widget.AppCompatTextView;
 
@@ -87,7 +88,7 @@ public class Doc_ImageView_Bank extends SimpleActivity {
         document =  Objs.a.getBundle(this, Params.document);
 
       //  document =  "https://callcenter.loanwiser.in/viewdocuments.php?imp=87c2c2771fd18671e386b8a02f145102&id=761404";
-        Log.e("pfd",document);
+      //  Log.e("pfd",document);
        // Log.e("type",type);
        // hash =  Objs.a.getBundle(this, Params.transaction_id);
         progressbar = (ProgressBar) findViewById(R.id.progressbar);
@@ -96,21 +97,23 @@ public class Doc_ImageView_Bank extends SimpleActivity {
             Ly_image_reader.setVisibility(View.GONE);
             webview.getSettings().setJavaScriptEnabled(true);
              filename =  document;
-            webview.loadUrl("http://docs.google.com/gview?embedded=true&url=" + filename);
-            webview.setWebViewClient(new WebViewClient() {
+           webview.loadUrl("https://docs.google.com/gview?embedded=true&url=" + filename);
+         //   webview.loadUrl("https://stackoverflow.com/questions/18838779/how-to-compare-two-edittext-fields-in-android/29399267");
 
-                public void onPageFinished(WebView view, String url) {
-                    progressbar.setVisibility(View.GONE);
-
-                }
-            });
         webview.setWebViewClient(new HelloWebViewClient());
         // Enable Javascript
         WebSettings webSettings = webview.getSettings();
         webSettings.setJavaScriptEnabled(true);
 
         // Force links and redirects to open in the WebView instead of in a browser
-        webview.setWebViewClient(new WebViewClient());
+       // webview.setWebViewClient(new WebViewClient());
+          webview.setWebViewClient(new HelloWebViewClient() {
+
+                public void onPageFinished(WebView view, String url) {
+                    progressbar.setVisibility(View.GONE);
+
+                }
+            });
        /* String extStorageDirectory = Environment.getExternalStorageDirectory()
                 .toString();
         File folder = new File(extStorageDirectory, "Reports");
@@ -156,17 +159,18 @@ public class Doc_ImageView_Bank extends SimpleActivity {
         public void onPageFinished(WebView view, String url) {
             // TODO Auto-generated method stub
             super.onPageFinished(view, url);
-
             progressBar.setVisibility(view.GONE);
+
+
         }
 
         @SuppressLint("NewApi")
         @Override
         public void onReceivedSslError(WebView view, SslErrorHandler handler, SslError error) {
             handler.proceed(); // Ignore SSL certificate errors
+            Toast.makeText(mCon, "Please try again",Toast.LENGTH_SHORT).show();
+
         }
-
-
 
     }
 

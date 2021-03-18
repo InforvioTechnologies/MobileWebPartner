@@ -351,16 +351,25 @@ public class Viability_Screen_revamp_Pl_BL extends SimpleActivity implements Num
 
         };
 
+        date_of_birt_txt.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if(hasFocus) {
+                    new DatePickerDialog(Viability_Screen_revamp_Pl_BL.this, date, myCalendar
+                            .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
+                            myCalendar.get(Calendar.DAY_OF_MONTH)).show();
+                } else {
+                    // Hide your calender here
+                }
+            }
+        });
         date_of_birt_txt.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-
+            public void onClick(View view) {
                 new DatePickerDialog(Viability_Screen_revamp_Pl_BL.this, date, myCalendar
                         .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
                         myCalendar.get(Calendar.DAY_OF_MONTH)).show();
             }
-
-
         });
 
         Pan_btn.setOnClickListener(new View.OnClickListener() {
@@ -1139,8 +1148,13 @@ public class Viability_Screen_revamp_Pl_BL extends SimpleActivity implements Num
         vocation_Show.setText(Emp_vocation_type_Value);
         monthly_income_show.setText(ave_month_income);
         no_of_month_bus_show.setText(no_of_years_work_ind_edit_txt.getText().toString());
-        bus_income_proof_show.setText(list_income_proof_self_value.toString());
-        bus_vintage_show.setText(list_vintage_proof_value.toString());
+       // bus_income_proof_show.setText(list_income_proof_self_value.toString());
+        String list1 = Arrays.toString(list_income_proof_self_value.toArray()).replace("[", "").replace("]", "");
+// bus_income_proof_show.setText(list_income_proof_self_value.toString());
+        bus_income_proof_show.setText(list1);
+        String list = Arrays.toString(list_vintage_proof_value.toArray()).replace("[", "").replace("]", "");
+        bus_vintage_show.setText(list);
+      //  bus_vintage_show.setText(list_vintage_proof_value.toString());
 
         office_shop_show.setText(pl_co_app_ind_Office_Shop__value);
 
@@ -2363,7 +2377,15 @@ public class Viability_Screen_revamp_Pl_BL extends SimpleActivity implements Num
                                 JSONArray response = object.getJSONArray("response");
                                  Log.e("Pincode", String.valueOf(response));
 
-                                setArea(response);
+                                 if(response.length()>0)
+                                 {
+                                     setArea(response);
+                                 }else
+                                 {
+                                     company_pincode_txt.setFocusable(true);
+                                     company_pincode_txt.setEnabled(true);
+                                 }
+
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -2471,7 +2493,15 @@ public class Viability_Screen_revamp_Pl_BL extends SimpleActivity implements Num
                             if (object.getString(Params.status).equals("success")) {
                                 JSONArray response = object.getJSONArray("response");
                                 //    Log.e("Pincode", String.valueOf(response));
-                                setArea_resi(response);
+                                if(response.length()>0)
+                                {
+                                    setArea_resi(response);
+                                }else
+                                {
+                                    office_residence_pincode_edite_txt.setEnabled(true);
+                                    office_residence_pincode_edite_txt.setFocusable(true);
+                                }
+
                             }
 
                         } catch (JSONException e) {
@@ -2714,7 +2744,16 @@ public class Viability_Screen_revamp_Pl_BL extends SimpleActivity implements Num
                             if (object.getString(Params.status).equals("success")) {
                                 JSONArray response = object.getJSONArray("response");
                                 //    Log.e("Pincode", String.valueOf(response));
-                                setArea_resi1(response);
+
+                                if(response.length()>0)
+                                {
+                                    setArea_resi1(response);
+                                }else
+                                {
+                                    residence_pincode1_edit_txt_resi.setEnabled(true);
+                                    residence_pincode1_edit_txt_resi.setFocusable(true);
+                                }
+
                             }
 
                         } catch (JSONException e) {

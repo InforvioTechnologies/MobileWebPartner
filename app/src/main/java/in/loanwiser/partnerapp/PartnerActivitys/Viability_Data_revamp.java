@@ -870,7 +870,7 @@ public class Viability_Data_revamp extends SimpleActivity {
 
                                     residence_pincode = Applicant_object.getString("per_pincode");
                                     //residence_perarea=Applicant_object.getString("per_area");
-                                    residence_type = Applicant_object.getString("resident_statusstr");
+
                                     //residence area array value
                                    // companyarea_txt.setText(area);
                                     JSONArray res_array = Applicant_object.getJSONArray("per_areaarr");
@@ -902,8 +902,10 @@ public class Viability_Data_revamp extends SimpleActivity {
                                     }
 
                                     unsecure_resarea.setText(res_area);
-                                    unsecure_restype.setText(residence_type);
                                     unsecure_residence_pincode.setText(residence_pincode);
+                                    residence_type = Applicant_object.getString("resident_statusstr");
+                                    unsecure_restype.setText(residence_type);
+
                                 }
                                 //self employedd type
                                 else{

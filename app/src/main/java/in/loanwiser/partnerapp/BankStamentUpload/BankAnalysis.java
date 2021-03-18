@@ -9,21 +9,26 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.Response;
+import com.android.volley.RetryPolicy;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonObjectRequest;
@@ -60,9 +65,11 @@ import adhoc.app.applibrary.Config.AppUtils.Pref.Pref;
 import adhoc.app.applibrary.Config.AppUtils.Urls;
 import adhoc.app.applibrary.Config.AppUtils.VolleySignleton.AppController;
 import dmax.dialog.SpotsDialog;
+import in.loanwiser.partnerapp.Payment.PaymentActivity;
 import in.loanwiser.partnerapp.R;
 import in.loanwiser.partnerapp.SimpleActivity;
 import in.loanwiser.partnerapp.Step_Changes_Screen.DocumentChecklist_Fragment;
+import in.loanwiser.partnerapp.Step_Changes_Screen.Viability_Screen_revamp;
 import lecho.lib.hellocharts.model.AxisValue;
 import lecho.lib.hellocharts.model.Line;
 import lecho.lib.hellocharts.model.PointValue;
@@ -199,7 +206,8 @@ public class BankAnalysis extends SimpleActivity {
                /* Intent intent=new Intent(BankAnalysis.this, DocumentChecklist_Fragment.class);
                 startActivity(intent);
                 finish();*/
-                Applicant_Status();
+                Eligibility_check_doc_checklist_generate();
+
             }
         });
 
@@ -303,7 +311,78 @@ public class BankAnalysis extends SimpleActivity {
 
 
     }
+    private void Eligibility_check_doc_checklist_generate( ) {
 
+        JSONObject J= null;
+        try {
+            J =new JSONObject();
+            J.put("transaction_id",Pref.getTRANSACTIONID(getApplicationContext()));
+            J.put("user_id", Pref.getUSERID(getApplicationContext()));
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        Log.e("viability", String.valueOf(J));
+        // progressDialog.show();
+        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, Urls.generate_doccklist, J,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        Log.e("viability response", String.valueOf(response));
+                        String data = String.valueOf(response);
+                        try {
+                            String Generate_Document_check_list = response.getString("Generate_Document_check_list");
+                            JSONObject jsonObject1 = response.getJSONObject("response");
+
+                            if(response.getString("Generate_Document_check_list").equals("success"))
+                            {
+                                Applicant_Status();
+
+                            }else if(response.getString("Generate_Document_check_list").equals("error"))
+                            {
+
+
+                            }
+                            ///
+                            // progressDialog.dismiss();
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        Log.e("Lead creation", String.valueOf(response));
+
+
+                    }
+                }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                //Log.d(TAG, error.getMessage());
+                VolleyLog.d("TAG", "Error: " + error.getMessage());
+                Toast.makeText(mCon, "Network error, try after some time",Toast.LENGTH_SHORT).show();
+                progressDialog.dismiss();
+
+            }
+        }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("content-type", "application/json");
+                return headers;
+            }
+        };
+
+        // AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
+        int socketTimeout = 0;
+        RetryPolicy policy = new DefaultRetryPolicy(socketTimeout,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
+
+        jsonObjReq.setRetryPolicy(policy);
+
+        AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
+    }
     public void Applicant_Status() {
 
         // final String step_status11 = step_status1;

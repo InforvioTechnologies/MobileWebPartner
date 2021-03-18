@@ -430,6 +430,7 @@ public class Viability_Screen_revamp_co extends SimpleActivity implements Number
                     @Override
                     public void onClick(View view) {
                         popupWindow.dismiss();
+                        Pref.putCoAPPAVAILABLE(context,"2");
                         Intent intent = new Intent(Viability_Screen_revamp_co.this, PaymentActivity.class);
                         startActivity(intent);
                         finish();
@@ -440,6 +441,7 @@ public class Viability_Screen_revamp_co extends SimpleActivity implements Number
                 co_applicant_no.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+                        Pref.putCoAPPAVAILABLE(context,"1");
                         popupWindow.dismiss();
                     }
                 });
@@ -879,6 +881,15 @@ public class Viability_Screen_revamp_co extends SimpleActivity implements Number
                 } else {
                     // Hide your calender here
                 }
+            }
+        });
+
+        date_of_birt_txt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new DatePickerDialog(Viability_Screen_revamp_co.this, date, myCalendar
+                        .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
+                        myCalendar.get(Calendar.DAY_OF_MONTH)).show();
             }
         });
 

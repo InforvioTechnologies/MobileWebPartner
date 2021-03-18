@@ -783,7 +783,7 @@ public class Payment_Sucess_Screen extends AppCompatActivity {
                                 Log.e("applicantcount", String.valueOf(applicantcount));
                                 if (applicantcount.equals("1"))
                                 {
-                                    viability_check_pass();
+
                                          viable_url = object.getString("viable_url");
                                          app_crif_score = object.getString("app_crif_score");
                                          app_crif_url = object.getString("app_crif_url");
@@ -841,7 +841,7 @@ public class Payment_Sucess_Screen extends AppCompatActivity {
                                             }*/
                                             String report="Viability Report";
                                             Objs.ac.StartActivityPutExtra(Payment_Sucess_Screen.this, Doc_ImageView_Bank.class,
-                                                    Params.document,viability_report_URL,Params.report,report);
+                                                    Params.document,viable_url,Params.report,report);
 
                                         }
 
@@ -862,18 +862,18 @@ public class Payment_Sucess_Screen extends AppCompatActivity {
                                             }*/
                                             String report="CRIF Report";
                                             Objs.ac.StartActivityPutExtra(Payment_Sucess_Screen.this, Doc_ImageView_Bank.class,
-                                                    Params.document,viability_report_URL,Params.report,report);
+                                                    Params.document,app_crif_url,Params.report,report);
                                            /* Objs.ac.StartActivityPutExtra(Payment_Sucess_Screen.this, Doc_ImageView_Bank.class,
                                                     Params.document,app_crif_url);*/
 
                                         }
 
                                     });
-
+                                    viability_check_pass();
                                 }else
                                 {
 
-                                    viability_check_pass();
+
                                     Log.e("applicantcount 111", String.valueOf(applicantcount));
                                          viable_url = object.getString("viable_url");
                                          app_crif_score = object.getString("app_crif_score");
@@ -981,7 +981,7 @@ public class Payment_Sucess_Screen extends AppCompatActivity {
 
                                     });
 
-
+                                    viability_check_pass();
                                 }
 
                                 } else{
@@ -1052,7 +1052,7 @@ public class Payment_Sucess_Screen extends AppCompatActivity {
                                 Log.e("applicantcount", String.valueOf(applicantcount));
                                 if (applicantcount.equals("1"))
                                 {
-                                    viability_check_pass();
+
                                     viable_url = object.getString("viable_url");
                                    // app_crif_score = object.getString("app_crif_score");
                                   //  app_crif_url = object.getString("app_crif_url");
@@ -1085,7 +1085,7 @@ public class Payment_Sucess_Screen extends AppCompatActivity {
                                             }*/
                                             String report="Viability Report";
                                             Objs.ac.StartActivityPutExtra(Payment_Sucess_Screen.this, Doc_ImageView_Bank.class,
-                                                    Params.document,viability_report_URL,Params.report,report);
+                                                    Params.document,viable_url,Params.report,report);
 
                                         }
                                     });
@@ -1096,11 +1096,11 @@ public class Payment_Sucess_Screen extends AppCompatActivity {
                                             startActivity(intent);
                                         }
                                     });
-
+                                    viability_check_pass();
                                 }else
                                 {
 
-                                    viability_check_pass();
+
                                     Log.e("applicantcount 111", String.valueOf(applicantcount));
                                     viable_url = object.getString("viable_url");
                                    // app_crif_score = object.getString("app_crif_score");
@@ -1136,7 +1136,7 @@ public class Payment_Sucess_Screen extends AppCompatActivity {
                                             }*/
                                             String report="Viability Report";
                                             Objs.ac.StartActivityPutExtra(Payment_Sucess_Screen.this, Doc_ImageView_Bank.class,
-                                                    Params.document,viability_report_URL,Params.report,report);
+                                                    Params.document,viable_url,Params.report,report);
                                         }
                                     });
                                     proceed_next.setOnClickListener(new View.OnClickListener() {
@@ -1147,7 +1147,7 @@ public class Payment_Sucess_Screen extends AppCompatActivity {
                                         }
                                     });
 
-
+                                    viability_check_pass();
                                 }
 
                             } else{

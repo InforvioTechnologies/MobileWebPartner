@@ -1,5 +1,6 @@
 package in.loanwiser.partnerapp.Documents;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.os.Bundle;
 import android.util.Log;
@@ -10,6 +11,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import adhoc.app.applibrary.Config.AppUtils.Objs;
 import adhoc.app.applibrary.Config.AppUtils.Params;
@@ -30,6 +33,8 @@ public class Doc_ImageView extends SimpleActivity {
     LinearLayout Ly_image_reader;
     RelativeLayout Rl_pdf_reader;
     String type,document,hash;
+    FloatingActionButton float_chat;
+    @SuppressLint("RestrictedApi")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,6 +46,8 @@ public class Doc_ImageView extends SimpleActivity {
         initTools(R.string.app_imge);
         Ly_image_reader = (LinearLayout)findViewById(R.id.Ly_image_reader);
         Rl_pdf_reader = (RelativeLayout)findViewById(R.id.Rl_pdf_reader);
+        float_chat = (FloatingActionButton)findViewById(R.id.float_chat);
+        float_chat.setVisibility(View.GONE);
         webview = (WebView)findViewById(R.id.webview);
         progressbar = (ProgressBar) findViewById(R.id.progressbar);
         v_Image = (ImageView) findViewById(R.id.image_Product);

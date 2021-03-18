@@ -907,7 +907,7 @@ public class Upload_Activity_Bank extends SimpleActivity implements  View.OnClic
                                     // button1.setChecked(i == entity_ID_selected); // Only select button with same index as currently selected number of hours
                                     /// button.setBackgroundResource(R.drawable.ca); // This is a custom button drawable, defined in XML
                                     Bank_Statement_radio_list.addView(button1);
-
+                                    view_analysisbut.setVisibility(View.VISIBLE);
                                 }
 
 

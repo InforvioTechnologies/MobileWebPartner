@@ -67,6 +67,19 @@
                         android:layout_height="wrap_content"
                         android:hint="@string/b_ac_no"
                         android:imeOptions="actionNext"
+                        android:inputType="numberPassword"
+                        app:met_floatingLabel="highlight"
+                        app:met_iconPadding="@dimen/text_size"
+                        android:layout_marginBottom="13dp"
+                        android:textColorHint="@color/gray_50"
+                        android:textColor="@color/gray_50"
+                        app:met_textColorHint="@color/black" />
+                    <com.rengwuxian.materialedittext.MaterialEditText
+                        android:id="@+id/b_ac_no11"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/b_ac_no1"
+                        android:imeOptions="actionNext"
                         android:inputType="number"
                         app:met_floatingLabel="highlight"
                         app:met_iconPadding="@dimen/text_size"
@@ -74,7 +87,6 @@
                         android:textColorHint="@color/gray_50"
                         android:textColor="@color/gray_50"
                         app:met_textColorHint="@color/black" />
-
 
 
                     <com.rengwuxian.materialedittext.MaterialEditText

@@ -89,16 +89,17 @@
     <string name="available_Operation">Please Select the Available Operational States:</string>
     <string name="st">Tamil Nadu"\n" Karnataka"\n" Andhra"\n" Thelungana"\n" Rajasthan</string>
     <string name="offer">Lists of offers generated</string>
-    <string name="b_holder_name">Account Holder Name</string>
-    <string name="b_ac_no">Account Number</string>
+    <string name="b_holder_name">Account holder name</string>
+    <string name="b_ac_no">Account number</string>
+    <string name="b_ac_no1">Confirm account number</string>
     <string name="b_ac_type">Account Type</string>
-    <string name="bank_name">Name of the Bank</string>
+    <string name="bank_name">Name of the bank</string>
     <string name="branch">Bank Branch</string>
     <string name="pay_mode">Mode of Payment through</string>
     <string name="proceed">Proceed</string>
 
     <string name="pay_out_details">Payout Details</string>
-    <string name="ifsc">IFSC Code</string>
+    <string name="ifsc">IFSC code</string>
     <string name="internet">Internet</string>
     <string name="mbank">Mobile</string>
     <string name="d_leads">Disbursed Leads List</string>
@@ -652,6 +653,8 @@
 
     <string name="error_emi">Enter the EMI Amount</string>
     <string name="error_rise">This Field is Required</string>
+    <string name="error_rise_acc">Account number does not match! please check and enter again</string>
+
     <string name="pan_err">Enter a Valid PAN No</string>
     <string name="phone_err">Enter a Valid Phone No</string>
     <string name="error_bank_name">Enter the Bank Name</string>

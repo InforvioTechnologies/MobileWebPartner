@@ -149,7 +149,7 @@
                                             android:textColor="#8A8A8A"
                                             android:id="@+id/restypehead"
                                             style="@style/SmallText"
-                                            android:text="@string/curr_resarea"
+                                            android:text="@string/curr_restype"
                                             android:textSize="16sp"/>
                                         <androidx.appcompat.widget.AppCompatTextView
                                             android:layout_width="match_parent"

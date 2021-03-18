@@ -10,7 +10,9 @@ import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.AppCompatEditText;
 import androidx.appcompat.widget.AppCompatTextView;
 
+import android.text.Editable;
 import android.text.InputFilter;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
@@ -66,7 +68,7 @@ public class BankDetails extends SimpleActivity {
     private AppCompatEditText ifsc,b_holder_name,b_ac_no,branch;
     private AppCompatTextView b_ac_type,pay_mode,bank_name,pan_note,provide;
     private AwesomeValidation awesomeValidation;
-    private AppCompatEditText txt_bank_name,txt_bank_account,txt_bank_mode,pan;
+    private AppCompatEditText txt_bank_name,txt_bank_account,txt_bank_mode,pan,b_ac_no11;
     String bank_id,Search_bank_name;
     String B_radio_Ac_Type,B_radio_Pay,Bank_Id,B_Bank_Id;
     String S_radio_Ac_Type,S_radio_Pay;
@@ -114,6 +116,7 @@ public class BankDetails extends SimpleActivity {
         ifsc.setFilters(new InputFilter[]{new InputFilter.AllCaps()});
         b_holder_name = (AppCompatEditText) findViewById(R.id.b_holder_name);
         b_ac_no = (AppCompatEditText) findViewById(R.id.b_ac_no);
+        b_ac_no11 = (AppCompatEditText) findViewById(R.id.b_ac_no11);
         bank_name = (AppCompatTextView) findViewById(R.id.bank_name);
         provide = (AppCompatTextView) findViewById(R.id.provide);
         branch = (AppCompatEditText) findViewById(R.id.branch);
@@ -125,6 +128,7 @@ public class BankDetails extends SimpleActivity {
         txt_bank_mode = (AppCompatEditText) findViewById(R.id.txt_bank_mode);
 
         b_ac_type = (AppCompatTextView) findViewById(R.id.b_ac_type);
+
         pay_mode = (AppCompatTextView) findViewById(R.id.pay_mode);
 
         Ly_edit_type_mode = (LinearLayout)findViewById(R.id.Ly_edit_type_mode);
@@ -148,6 +152,37 @@ public class BankDetails extends SimpleActivity {
 
         fab = (FloatingActionButton)findViewById(R.id.fab);
         fab1 = (FloatingActionButton)findViewById(R.id.fab1);
+
+        b_ac_no11.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+                String Ac_No1 = b_ac_no.getText().toString();
+                String Ac_No2 = b_ac_no11.getText().toString();
+
+              if(Ac_No1.equals(Ac_No2))
+              {
+
+              }else if(Ac_No1.length() == Ac_No2.length() ||Ac_No2.length() > Ac_No1.length())
+              {
+                  b_ac_no11.requestFocus();
+                  b_ac_no11.setError(getText(R.string.error_rise_acc));
+
+              }
+
+
+            }
+        });
 
         addValidationToViews();
     }
@@ -214,6 +249,7 @@ public class BankDetails extends SimpleActivity {
 
                                 b_holder_name.setText(jobj.getString(Params.beneficiary_name));
                                 b_ac_no.setText(jobj.getString(Params.bank_acc_no));
+                                b_ac_no11.setText(jobj.getString(Params.bank_acc_no));
                                // branch.setText(jobj.getString(Params.bank_brand));
                                 ifsc.setText(jobj.getString(Params.ifsc_code));
                               //  pan.setText(jobj.getString(Params.pan_no));
@@ -283,7 +319,7 @@ public class BankDetails extends SimpleActivity {
     }
     private void clicks() {
 
-        update();
+       // update();
        // Ly_edit_type_mode.setVisibility(View.GONE);
        // Ly_txt_type_mode.setVisibility(View.VISIBLE);
         txt_bank_name.setVisibility(View.VISIBLE);
@@ -297,6 +333,7 @@ public class BankDetails extends SimpleActivity {
                 next.setVisibility(View.VISIBLE);
                 findViewById(R.id.fab).setVisibility(View.GONE);
                 findViewById(R.id.fab1).setVisibility(View.VISIBLE);
+                b_ac_no11.setVisibility(View.VISIBLE);
              //   Ly_txt_type_mode.setVisibility(View.GONE);
                 txt_bank_name.setVisibility(View.GONE);
                /// Ly_edit_type_mode.setVisibility(View.VISIBLE);
@@ -326,6 +363,7 @@ public class BankDetails extends SimpleActivity {
               //  Ly_edit_type_mode.setVisibility(View.GONE);
                 txt_bank_name.setVisibility(View.VISIBLE);
                 spinner_bank_name.setVisibility(View.GONE);
+                b_ac_no11.setVisibility(View.GONE);
 
             }
         });
@@ -344,6 +382,7 @@ public class BankDetails extends SimpleActivity {
         b_holder_name.setFocusable(false);
 
         b_ac_no.setFocusable(false);
+        b_ac_no11.setFocusable(false);
     //    pan.setFocusable(false);
         txt_bank_name.setFocusable(false);
      //   branch.setFocusable(false);
@@ -355,6 +394,7 @@ public class BankDetails extends SimpleActivity {
     private void edite() {
         b_holder_name.setFocusable(true);
         b_ac_no.setFocusable(true);
+        b_ac_no11.setFocusable(true);
      //   pan.setFocusable(true);
      //   branch.setFocusable(true);
         ifsc.setFocusable(true);
@@ -383,16 +423,37 @@ public class BankDetails extends SimpleActivity {
                     B_ifsc = ifsc.getText().toString();
                     B_Bank_Id = Bank_Id;
 
-                    if (B_Bank_Id != "0" && B_Bank_Id != null && !B_Bank_Id.isEmpty() && !B_Bank_Id.equals("null")) {
-                        String all = B_beneficiary_name + "\n" + B_acc_no + "\n" + B_bank_branch + "\n" + B_ifsc + "\n" +
-                                B_radio_Ac_Type + "\n" + B_radio_Pay + "\n" + B_Bank_Id;
-                        Log.e("Banks Details", all);
-                        Updated_Profile();
+                    String Ac_No1 = b_ac_no.getText().toString();
+                    String Ac_No2 = b_ac_no11.getText().toString();
+                    if(Ac_No1.equals(Ac_No2))
+                    {
+                        if (!Bank_Id.equals("0")) {
+                            String all = B_beneficiary_name + "\n" + B_acc_no + "\n" + B_bank_branch + "\n" + B_ifsc + "\n" +
+                                    B_radio_Ac_Type + "\n" + B_radio_Pay + "\n" + B_Bank_Id;
+                            Log.e("Banks Details", all);
+                            if(B_ifsc.isEmpty())
+                            {
+                                ifsc.requestFocus();
+                                ifsc.setError(getText(R.string.error_rise));
 
-                    } else {
-                        Objs.a.showToast(mCon, "Select the Bank Name");
+                            }else {
+                                Updated_Profile();
+                            }
+
+
+                        } else {
+                            // Objs.a.showToast(mCon, "Select the Bank Name");
+                            Toast.makeText(getApplicationContext(),"Select the Bank Name",Toast.LENGTH_SHORT).show();
+
+                        }
+                    }else if(Ac_No1.length() != Ac_No2.length())
+                    {
+                        b_ac_no11.requestFocus();
+                        b_ac_no11.setError(getText(R.string.error_rise_acc));
 
                     }
+
+
                 } else {
                     //  System.out.println("Invalid Number");
                     b_ac_no.setError(getText(R.string.error_account));
@@ -441,7 +502,9 @@ public class BankDetails extends SimpleActivity {
                         try {
                             if(response.getString(Params.status).equals(Params.success)) {
 
-                                Objs.a.showToast(mCon,"Successfully Updated");
+                               // Objs.a.showToast(mCon,"Successfully Updated");
+                                Toast.makeText(getApplicationContext(),"Successfully Updated",Toast.LENGTH_SHORT).show();
+
                                 finish();
                             }
                         } catch (JSONException e) {

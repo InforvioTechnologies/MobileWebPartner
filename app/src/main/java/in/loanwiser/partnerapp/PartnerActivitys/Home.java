@@ -1231,6 +1231,7 @@ public class Home extends AppCompatActivity {
         try {
             J =new JSONObject();
             J.put("trans_id", transaction_id);
+            J.put("user_id",Pref.getUSERID(getApplicationContext()));
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -1448,6 +1449,7 @@ public class Home extends AppCompatActivity {
                                         step2report_but.setVisibility(View.VISIBLE);
                                         step2_reportstatus.setImageDrawable(getResources().getDrawable(R.drawable.ic_warning));
                                         loan_submit_statues1.setText("Loan Rejected");
+                                        sub_to_loanwiser.setText("\u25CF"+" "+"Loan Rejected");
                                         loan_submit_statues1.setTextColor(Color.parseColor("#FF9201"));
                                         step2report_but.setBackgroundResource(R.drawable.but_shape_reject);
                                         step2report_but.setText("View");
@@ -1672,34 +1674,7 @@ public class Home extends AppCompatActivity {
 
                             }*/
 
-                            if(document_upload.equals("pending"))
-                            {
-                                document_text.setText("Pending under you");
-                                document_text.setTextColor(Color.parseColor("#FF9201"));
-                                document_img1.setImageDrawable(getResources().getDrawable(R.drawable.ic_warning));
-                                documentupload_status.setImageDrawable(getResources().getDrawable(R.drawable.ic_warning));
 
-                                if(viability.equals("completed"))
-                                {
-                                    document_upload_button.setBackgroundResource(R.drawable.but_shape);
-                                }else
-                                {
-                                    document_upload_button.setBackgroundResource(R.drawable.but_shape_gray);
-                                }
-
-                                document_upload_button.setText("Complete now");
-                                Loan_Statue_submit_layout.setVisibility(View.GONE);
-                            }else
-                            {
-                                document_img1.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
-                                document_text.setText("Completed");
-                                document_text.setTextColor(Color.parseColor("#00CEB4"));
-                                documentupload_status.setImageDrawable(getResources().getDrawable(R.drawable.ic_green_tick));
-                                document_upload_button.setBackgroundResource(R.drawable.but_shape_blue);
-                                document_upload_button.setText("View");
-                                Loan_submit_statues();
-                                Loan_Statue_submit_layout.setVisibility(View.VISIBLE);
-                            }
 
                             if(document_checklist.equals("pending"))
                             {
@@ -1725,12 +1700,54 @@ public class Home extends AppCompatActivity {
                                 if(document_upload.equals("pending"))
                                 {
                                     document_upload_button.setBackgroundResource(R.drawable.but_shape);
+                                    document_check_button.setBackgroundResource(R.drawable.but_shape_gray);
                                 }else
                                 {
                                     document_upload_button.setBackgroundResource(R.drawable.but_shape_blue);
+                                    document_check_button.setBackgroundResource(R.drawable.but_shape_blue);
+                                }
+                                document_check_button.setBackgroundResource(R.drawable.but_shape_blue);
+                                document_check_button.setText("View");
+                            }
+
+                            if(document_upload.equals("pending"))
+                            {
+                                document_text.setText("Pending under you");
+                                document_text.setTextColor(Color.parseColor("#FF9201"));
+                                document_img1.setImageDrawable(getResources().getDrawable(R.drawable.ic_warning));
+                                documentupload_status.setImageDrawable(getResources().getDrawable(R.drawable.ic_warning));
+
+
+                                if(viability.equals("completed"))
+                                {
+                                    if(document_checklist.equals("pending"))
+                                    {
+                                        document_upload_button.setBackgroundResource(R.drawable.but_shape_gray);
+                                        document_check_button.setBackgroundResource(R.drawable.but_shape_gray);
+                                    }else
+                                    {
+                                        document_upload_button.setBackgroundResource(R.drawable.but_shape);
+                                        document_check_button.setBackgroundResource(R.drawable.but_shape_blue);
+                                        document_check_button.setText("View");
+                                    }
+
+                                }else
+                                {
+                                    document_upload_button.setBackgroundResource(R.drawable.but_shape_gray);
                                 }
 
-                                document_check_button.setText("View");
+                                document_upload_button.setText("Complete now");
+                                Loan_Statue_submit_layout.setVisibility(View.GONE);
+                            }else
+                            {
+                                document_img1.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
+                                document_text.setText("Completed");
+                                document_text.setTextColor(Color.parseColor("#00CEB4"));
+                                documentupload_status.setImageDrawable(getResources().getDrawable(R.drawable.ic_green_tick));
+                                document_upload_button.setBackgroundResource(R.drawable.but_shape_blue);
+                                document_upload_button.setText("View");
+                                Loan_submit_statues();
+                                Loan_Statue_submit_layout.setVisibility(View.VISIBLE);
                             }
 
                             if(offer_Details.equals("completed"))
@@ -2244,13 +2261,12 @@ public class Home extends AppCompatActivity {
 
                     }else
                     {
-                       /* Intent intent=new Intent(Home.this, DocumentChecklist_Fragment.class);
+                        Intent intent=new Intent(Home.this, DocumentChecklist_Fragment.class);
                         intent.putExtra("jsonArray", Applicant_Statues.toString());
                         intent.putExtra("applicantcount",applicant_count);
                         intent.putExtra("propertyidentify",property_identified);
-                        startActivity(intent);*/
-                        Toast.makeText(getApplicationContext(),"Please Completed the Previous Step", Toast.LENGTH_SHORT).show();
-
+                        startActivity(intent);
+                       // Toast.makeText(getApplicationContext(),"Please Completed the Previous Step", Toast.LENGTH_SHORT).show();
 
                     }
                 }else

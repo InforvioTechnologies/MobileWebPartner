@@ -51,6 +51,7 @@ import adhoc.app.applibrary.Config.AppUtils.Pref.Pref;
 import adhoc.app.applibrary.Config.AppUtils.Urls;
 import adhoc.app.applibrary.Config.AppUtils.VolleySignleton.AppController;
 import dmax.dialog.SpotsDialog;
+import in.loanwiser.partnerapp.PartnerActivitys.Home;
 import in.loanwiser.partnerapp.PartnerActivitys.SimpleActivity;
 import in.loanwiser.partnerapp.PartnerActivitys.Submitsuccess_Activity;
 import in.loanwiser.partnerapp.R;
@@ -384,8 +385,8 @@ public class Applicant_Doc_Details_revamp extends SimpleActivity {
                                        String value3= label_arr.getString(i);
                                        Log.e("json", i+"="+value3);
                                        String value=label_arr.getString(i);
-                                       message_list.add(String.valueOf(value));
-                                       submit_update_status.setEnabled(false);
+                                       message_list.add(String.valueOf(value) +"\n");
+                                       //submit_update_status.setEnabled(false);
                                        Submit_Co_Applicant();
                                        progressDialog.dismiss();
                                    }
@@ -456,19 +457,6 @@ public class Applicant_Doc_Details_revamp extends SimpleActivity {
 
                                 finish();
 
-                               /* if(response.getBoolean("doc_uploadstatus")){
-                                    // Objs.a.showToast( mCon,"Document uploaded");
-                                  //  Objs.ac.StartActivity(mCon, Home.class);
-                                    Intent intent = new Intent(Applicant_Doc_Details_revamp.this, Submitsuccess_Activity.class);
-                                    startActivity(intent);
-
-                                    finish();
-                                }else {*/
-
-                                    // Objs.a.showToast(mCon,"You have not yet Uploaded any Document for Loan Process "+ "\n" + "Please Upload the Document");
-                                 //   Toast.makeText(getApplicationContext(),"You have not yet Uploaded any Document for Loan Process", Toast.LENGTH_SHORT).show();
-
-                               /* }*/
 
                             }else {
                                 Toast.makeText(getApplicationContext(),"Something went wrong, Please check!!!", Toast.LENGTH_SHORT).show();
@@ -1308,14 +1296,14 @@ public class Applicant_Doc_Details_revamp extends SimpleActivity {
     }
 
     private void Submit_Co_Applicant(){
-        final Dialog dialog = new Dialog(this);
+         Dialog dialog = new Dialog(mCon);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
         dialog.setContentView(R.layout.co_app_sub_dialog_document);
         //  dialog.getWindow().setLayout(display.getWidth() * 90 / 100, LinearLayout.LayoutParams.WRAP_CONTENT);
         dialog.setCancelable(true);
         dialog.setCanceledOnTouchOutside(false);
-        Button delete = (Button) dialog.findViewById(R.id.delete);
+        AppCompatButton delete = (AppCompatButton) dialog.findViewById(R.id.delete);
         Button no=(Button)dialog.findViewById(R.id.no);
         AppCompatTextView bank_statement=(AppCompatTextView)dialog.findViewById(R.id.bank_statement);
         AppCompatTextView document_url=(AppCompatTextView)dialog.findViewById(R.id.document_url);
@@ -1326,11 +1314,12 @@ public class Applicant_Doc_Details_revamp extends SimpleActivity {
                 .replaceAll("\"", "")
                 .trim();
 
-        bank_statement.setText(formattedString.toString());
+        bank_statement.setText(formattedString);
         delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 dialog.dismiss();
+                message_list.clear();
                // Delete_Image(hash,type,document,transaction_id,docid,class_id,user_type);
 
             }
@@ -1342,10 +1331,10 @@ public class Applicant_Doc_Details_revamp extends SimpleActivity {
             }
         });*/
 
-
         if (!dialog.isShowing()) {
             dialog.show();
         }
+
 
     }
 
@@ -1627,7 +1616,10 @@ public class Applicant_Doc_Details_revamp extends SimpleActivity {
         Pref.removeTID(mCon);
         Pref.removeEID(mCon);
         Pref.removeAEID(mCon);
-        super.onBackPressed();
+            Intent intent = new Intent(Applicant_Doc_Details_revamp.this,Home.class);
+            startActivity(intent);
+            finish();
+            super.onBackPressed();
 
     }
 }

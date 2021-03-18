@@ -468,6 +468,7 @@
                 android:layout_marginLeft="10dp">
 
                 <Button
+                    android:visibility="gone"
                     android:id="@+id/view_analysisbut"
                     android:layout_width="210dp"
                     android:layout_height="45dp"
@@ -476,7 +477,6 @@
                     android:layout_gravity="center"
                     android:background="@drawable/but_shape"
                     android:text="@string/view_anlysis"/>
-
 
             </LinearLayout>
 
