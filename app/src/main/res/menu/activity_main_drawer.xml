@@ -44,7 +44,7 @@
             <item
                 android:id="@+id/report"
                 android:icon="@drawable/ic_report_"
-                android:title="Report" />
+                android:title="report issue" />
             <item
                 android:id="@+id/nav_logout"
                 android:icon="@drawable/logout"

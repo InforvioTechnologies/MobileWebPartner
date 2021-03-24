@@ -299,7 +299,8 @@
                                     android:layout_height="wrap_content"
                                     android:id="@+id/name_txt"
                                     android:textSize="14dp"
-                                    android:inputType="textEmailAddress"
+                                    android:inputType="text"
+                                    android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
                                     android:imeOptions="actionDone"
                                     android:textColor="@color/black"/>
                             </LinearLayout>

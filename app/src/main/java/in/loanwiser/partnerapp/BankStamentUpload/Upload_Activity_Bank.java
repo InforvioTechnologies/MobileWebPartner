@@ -640,7 +640,7 @@ public class Upload_Activity_Bank extends SimpleActivity implements  View.OnClic
                                 //  Intent in=new Intent(context,BankAnalysis.class);
                                 intent.putExtra("adapter","upload");
                                 startActivity(intent);
-                                finish();
+                               // finish();
                             }
 
                         } catch (JSONException e) {

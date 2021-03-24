@@ -189,8 +189,8 @@ public class Resent_Lead_Statues extends RecyclerView.Adapter<Resent_Lead_Statue
 
     @Override
     public int getItemCount() {
-        return items.size();
-       // return 6;
+       // return ;
+        return 3;
     }
 
     public class CustomViewHolder extends RecyclerView.ViewHolder {

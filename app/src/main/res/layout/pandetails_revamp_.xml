@@ -367,6 +367,7 @@
                     android:layout_height="wrap_content"
                     android:textSize="14dp"
                     android:inputType="text"
+                    android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
                     android:id="@+id/Fathers_Name"
                     android:layout_marginLeft="2dp"
                     android:imeOptions="actionNext"

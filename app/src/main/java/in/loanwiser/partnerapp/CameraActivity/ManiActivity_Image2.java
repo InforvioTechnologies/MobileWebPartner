@@ -1002,7 +1002,21 @@ public class ManiActivity_Image2 extends SimpleActivity implements SingleUploadB
 
                 if(pdf1.equals(a))
                 {
-                     path = FilePath.getPath(this, filePath);
+                   //  path = FilePath.getPath(this, filePath);
+
+                    if (Build.VERSION.SDK_INT < 11) {
+                        orginalFile = new File(FileUtils1.getRealPathFromURI_BelowAPI11(ManiActivity_Image2.this, filePath));
+                    }
+                    // SDK >= 11 && SDK < 19
+                    else if (Build.VERSION.SDK_INT < 19) {
+                        orginalFile = new File(FileUtils1.getRealPathFromURI_API11to18(ManiActivity_Image2.this, filePath));
+                    }
+                    // SDK > 19 (Android 4.4) and up
+                    else {
+                        orginalFile = new File(FileUtils1.getRealPathFromURI_API19(ManiActivity_Image2.this, filePath));
+                    }
+
+                    path = String.valueOf(orginalFile);
                     uploadMultipart_PDF();
                 }
                 else
@@ -1120,7 +1134,6 @@ public class ManiActivity_Image2 extends SimpleActivity implements SingleUploadB
                         stringRequest.setRetryPolicy(policy);
 
                         myCommand.add(stringRequest);
-
                     } catch (FileNotFoundException e) {
                         Toast.makeText(getApplicationContext(), "Error while loading image", Toast.LENGTH_SHORT).show();
                       //  popupWindow.dismiss();

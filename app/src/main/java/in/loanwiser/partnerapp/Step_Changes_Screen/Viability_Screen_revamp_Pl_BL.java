@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.text.Editable;
 import android.text.InputFilter;
+import android.text.Spanned;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.Gravity;
@@ -165,7 +166,7 @@ public class Viability_Screen_revamp_Pl_BL extends SimpleActivity implements Num
     LinearLayout name_ly,email_ly,other_income_amt_ly_,other_income_amt_ly_self,ofiice_res_details,
     BL_self_office_ownership_type_ly,other_income_amount_ly;
     ArrayList<String> rule_message = new ArrayList<String>();
-
+    private String blockCharacterSet = "~#^|$%&*!";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -180,6 +181,7 @@ public class Viability_Screen_revamp_Pl_BL extends SimpleActivity implements Num
         permissionUtils = new PermissionUtils();
         preferences = PreferenceManager.getDefaultSharedPreferences(Viability_Screen_revamp_Pl_BL.this);
         myCalendar = Calendar.getInstance();
+        myCalendar.add(Calendar.YEAR, -26);
         salry_proof = new ArrayList<String>();
         salry_proof_value = new ArrayList<String>();
         list_income_proof_self = new ArrayList<String>();
@@ -230,8 +232,11 @@ public class Viability_Screen_revamp_Pl_BL extends SimpleActivity implements Num
         monthly_net_sal_edit_txt = (AppCompatEditText) findViewById(R.id.monthly_net_sal_edit_txt);
         monthly_net_sal_edit_txt.addTextChangedListener(new NumberTextWatcher(monthly_net_sal_edit_txt));
         Fathers_Name = (AppCompatEditText) findViewById(R.id.Fathers_Name);
+        Fathers_Name.setFilters(new InputFilter[] { filter });
         PAN_Edit_text = (AppCompatEditText) findViewById(R.id.PAN_Edit_text);
         PAN_Edit_text.setFilters(new InputFilter[]{new InputFilter.AllCaps()});
+
+
 
         spinn_salary_crt_mtd = (Spinner) findViewById(R.id.spinn_salary_crt_mtd);
         spi_vocation_type_ = (Spinner) findViewById(R.id.spi_vocation_type_);
@@ -334,6 +339,15 @@ public class Viability_Screen_revamp_Pl_BL extends SimpleActivity implements Num
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
         date_of_birt_txt.setText(sdf.format(myCalendar.getTime()));
     }
+    private InputFilter filter = new InputFilter() {
+        @Override
+        public CharSequence filter(CharSequence source, int start, int end, Spanned dest, int dstart, int dend) {
+            if (source != null && blockCharacterSet.contains(("" + source))) {
+                return "";
+            }
+            return null;
+        }
+    };
     private void click()
     {
 
@@ -346,6 +360,7 @@ public class Viability_Screen_revamp_Pl_BL extends SimpleActivity implements Num
                 myCalendar.set(Calendar.YEAR, year);
                 myCalendar.set(Calendar.MONTH, monthOfYear);
                 myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+
                 updateLabel();
             }
 
@@ -1301,15 +1316,13 @@ public class Viability_Screen_revamp_Pl_BL extends SimpleActivity implements Num
     }
 
     private boolean validate_Fathers_Name(){
-        if (Fathers_Name.getText().toString().isEmpty()) {
-            Fathers_Name.setError(getText(R.string.error_rise));
+        String name = Fathers_Name.getText().toString();
+        if (Fathers_Name.getText().toString().trim().isEmpty() || Fathers_Name.length() < 3 || !(Pattern.matches("^[\\p{L} .'-]+$", Fathers_Name.getText()))) {
+            Fathers_Name.setError(getText(R.string.vali_name));
             Fathers_Name.requestFocus();
             return false;
         } else {
-            Fathers_Name.setError(null);
-            //inputLayoutLname.setErrorEnabled(false);
         }
-
         return true;
     }
 
@@ -3114,7 +3127,7 @@ public class Viability_Screen_revamp_Pl_BL extends SimpleActivity implements Num
                     // salry_proof.add(companyproof_multiAdapter.getItem(i));
 
                     selected_salary_proof = companyproof_multiAdapter.getItem(i);
-                    for (int j = 0; j < Salary_proof_ar.length()-1; j++) {
+                    for (int j = 0; j < Salary_proof_ar.length(); j++) {
                         try {
                             JSONObject J = Salary_proof_ar.getJSONObject(i);
                             String salary_proof = J.getString("value");
@@ -3165,7 +3178,7 @@ public class Viability_Screen_revamp_Pl_BL extends SimpleActivity implements Num
                business_proof_1 = Business_Proof_type_adapter.getItem(i);
                 Log.e("the  values1111",business_proof_1);
                 if (selected[i]) {
-                    for (int j = 0; j < Business_type_own_business.length() - 1; j++) {
+                    for (int j = 0; j < Business_type_own_business.length(); j++) {
 
                         try {
                             JSONObject J = Business_type_own_business.getJSONObject(j);
@@ -3214,7 +3227,7 @@ public class Viability_Screen_revamp_Pl_BL extends SimpleActivity implements Num
                 }*/
                 if (selected[i]) {
                     Vintage_proof_1 = Business_vintage_Adapter.getItem(i);
-                    for (int j = 0; j < Business_Proof.length() - 1; j++) {
+                    for (int j = 0; j < Business_Proof.length(); j++) {
 
                         try {
                             JSONObject J = Business_Proof.getJSONObject(j);

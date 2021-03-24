@@ -141,6 +141,12 @@
             android:name=".BankStamentUpload.Doc_ImageView_Bank"
             android:theme="@style/NoAction2"
             android:windowSoftInputMode="stateHidden" />
+
+        <activity
+            android:name=".BankStamentUpload.Doc_ImageView_pay_structur"
+            android:theme="@style/NoAction2"
+            android:windowSoftInputMode="stateHidden" />
+
         <activity
             android:name=".Payment.CRIF_Score_Activity"
             android:theme="@style/NoAction2"

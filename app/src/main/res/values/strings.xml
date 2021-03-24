@@ -700,6 +700,7 @@
 
 
     <string name="net_salary">Please Enter the valid amount</string>
+    <string name="vali_name">Please Enter the valid name</string>
 
     <string name="err_curent">This field is required</string>
     <string name="permanent_res_type">Permanent Residence Type</string>

@@ -185,6 +185,7 @@ public class Viability_Screen_revamp extends SimpleActivity implements NumberPic
         permissionUtils = new PermissionUtils();
         preferences = PreferenceManager.getDefaultSharedPreferences(Viability_Screen_revamp.this);
         myCalendar = Calendar.getInstance();
+        myCalendar.add(Calendar.YEAR, -26);
         salry_proof = new ArrayList<String>();
         list_income_proof_self = new ArrayList<String>();
         list_vintage_proof = new ArrayList<String>();
@@ -1436,15 +1437,13 @@ public class Viability_Screen_revamp extends SimpleActivity implements NumberPic
     }
 
     private boolean validate_Fathers_Name(){
-        if (Fathers_Name.getText().toString().isEmpty()) {
-            Fathers_Name.setError(getText(R.string.error_rise));
+        String name = Fathers_Name.getText().toString();
+        if (Fathers_Name.getText().toString().trim().isEmpty() || Fathers_Name.length() < 3 || !(Pattern.matches("^[\\p{L} .'-]+$", Fathers_Name.getText()))) {
+            Fathers_Name.setError(getText(R.string.vali_name));
             Fathers_Name.requestFocus();
             return false;
         } else {
-            Fathers_Name.setError(null);
-            //inputLayoutLname.setErrorEnabled(false);
         }
-
         return true;
     }
 

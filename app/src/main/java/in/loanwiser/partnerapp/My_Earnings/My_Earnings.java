@@ -41,8 +41,10 @@ import adhoc.app.applibrary.Config.AppUtils.Pref.Pref;
 import adhoc.app.applibrary.Config.AppUtils.Urls;
 import adhoc.app.applibrary.Config.AppUtils.VolleySignleton.AppController;
 import dmax.dialog.SpotsDialog;
+import in.loanwiser.partnerapp.BankStamentUpload.Doc_ImageView_pay_structur;
 import in.loanwiser.partnerapp.PDF_Dounloader.PermissionUtils;
 import in.loanwiser.partnerapp.PartnerActivitys.SimpleActivity;
+import in.loanwiser.partnerapp.Partner_Statues.DashBoard_new;
 import in.loanwiser.partnerapp.R;
 import in.loanwiser.partnerapp.Step_Changes_Screen.Pay_Out_Screen;
 
@@ -96,7 +98,7 @@ public class My_Earnings extends SimpleActivity {
         my_earning1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String viability_report_URL1 = "http://callcenter.propwiser.com/includes/DETAILED-PAYOUT-STRUCTURE.pdf";
+              /*  String viability_report_URL1 = "http://callcenter.propwiser.com/includes/DETAILED-PAYOUT-STRUCTURE.pdf";
 
                 if (permissionUtils.checkPermission(My_Earnings.this, STORAGE_PERMISSION_REQUEST_CODE, view)) {
                     if (viability_report_URL1.length() > 0) {
@@ -107,7 +109,9 @@ public class My_Earnings extends SimpleActivity {
                         }
                     }
 
-                }
+                }*/
+                Intent intent = new Intent(My_Earnings.this, Doc_ImageView_pay_structur.class);
+                startActivity(intent);
             }
         });
 

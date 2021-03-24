@@ -4,13 +4,8 @@ import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
-import android.content.Context;
-import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.drawable.ColorDrawable;
-import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.net.http.SslError;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -32,30 +27,23 @@ import android.widget.Toast;
 import androidx.appcompat.widget.AppCompatTextView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.squareup.picasso.Downloader;
 
 import java.io.BufferedInputStream;
-import java.io.File;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
-import java.util.List;
 
 import adhoc.app.applibrary.Config.AppUtils.Objs;
 import adhoc.app.applibrary.Config.AppUtils.Params;
 import dmax.dialog.SpotsDialog;
 import in.loanwiser.partnerapp.PartnerActivitys.SimpleActivity;
 import in.loanwiser.partnerapp.R;
-import in.loanwiser.partnerapp.User_Account.LoginNew;
-import in.loanwiser.partnerapp.User_Account.Registration;
 
-public class Doc_ImageView_Bank extends SimpleActivity {
+public class Doc_ImageView_pay_structur extends SimpleActivity {
     private String tag_json_obj = "jobj_req", tag_json_arry = "jarray_req";
-    private String TAG = Doc_ImageView_Bank.class.getSimpleName();
+    private String TAG = Doc_ImageView_pay_structur.class.getSimpleName();
     private AlertDialog progressDialog;
     String id,doc_typename,docid,class_id,user_type,transaction_id,doc_id;
     ImageView v_Image;
@@ -80,15 +68,15 @@ public class Doc_ImageView_Bank extends SimpleActivity {
 
         progressDialog = new SpotsDialog(this, R.style.Custom);
         Objs.a.setStubId(this, R.layout.activity_doc__image_view);
-        report =  Objs.a.getBundle(this, Params.report);
-        initTools1(report);
+       // report =  Objs.a.getBundle(this, Params.report);
+        initTools1("Payout Structure");
         Ly_image_reader = (LinearLayout)findViewById(R.id.Ly_image_reader);
         Rl_pdf_reader = (RelativeLayout)findViewById(R.id.Rl_pdf_reader);
         float_chat = (FloatingActionButton) findViewById(R.id.float_chat);
-        document =  Objs.a.getBundle(this, Params.document);
+     //   document =  Objs.a.getBundle(this, Params.document);
 
-      //  document =  "https://callcenter.loanwiser.in/viewdocuments.php?imp=87c2c2771fd18671e386b8a02f145102&id=761404";
-        Log.e("pfd",document);
+        document =  "https://callcenter.loanwiser.in/includes/DETAILED-PAYOUT-STRUCTURE.pdf";
+       // Log.e("pfd",document);
        // Log.e("type",type);
        // hash =  Objs.a.getBundle(this, Params.transaction_id);
         progressbar = (ProgressBar) findViewById(R.id.progressbar);
@@ -257,7 +245,7 @@ public class Doc_ImageView_Bank extends SimpleActivity {
                 InputStream input = new BufferedInputStream(url.openStream(), 8192);
 
                 // Output stream
-                OutputStream output = new FileOutputStream("/sdcard/Reports/"+report+".pdf");
+                OutputStream output = new FileOutputStream("/sdcard/Reports/Payout_Structure.pdf");
 
                 byte data[] = new byte[1024];
 
@@ -306,7 +294,7 @@ public class Doc_ImageView_Bank extends SimpleActivity {
 
             // Displaying downloaded image into image view
             // Reading image path from sdcard
-            String imagePath = Environment.getExternalStorageDirectory().toString() + "/report.pdf";
+            String imagePath = Environment.getExternalStorageDirectory().toString() + "/Payout_Structure.pdf";
             // setting downloaded into image view
           //  my_image.setImageDrawable(Drawable.createFromPath(imagePath));
             ErrorStatus();
@@ -343,7 +331,5 @@ public class Doc_ImageView_Bank extends SimpleActivity {
         }
     }
 }
-
-
 
 

@@ -580,6 +580,7 @@
                         </LinearLayout>
 
                         <LinearLayout
+                            android:visibility="gone"
                             android:id="@+id/type_of_emploe"
                             android:padding="5dp"
                             android:layout_width="match_parent"

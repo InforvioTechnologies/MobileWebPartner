@@ -175,8 +175,8 @@ public class Ask_Lead_Statues extends RecyclerView.Adapter<Ask_Lead_Statues.Cust
 
     @Override
     public int getItemCount() {
-        return items.size();
-       // return 6;
+      //  return items.size();
+        return 3;
     }
 
     public class CustomViewHolder extends RecyclerView.ViewHolder {

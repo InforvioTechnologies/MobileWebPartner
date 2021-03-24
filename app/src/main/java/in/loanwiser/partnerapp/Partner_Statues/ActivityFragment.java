@@ -334,7 +334,7 @@ public class ActivityFragment extends Fragment implements NavigationView.OnNavig
                                     view_all_ly1.setVisibility(View.VISIBLE);
                                     Ly_allocate.setVisibility(View.VISIBLE);
                                     firstlay.setVisibility(View.VISIBLE);
-                                    for(int i = 0;i<3;i++){
+                                    for(int i = 0;i<ja.length();i++){
 
                                         JSONObject J = ja.getJSONObject(i);
                                         items.add(new Suggestion_item_freqent( J.getString("user_id"), J.getString("user_id"),J.getString("username"),
@@ -421,7 +421,7 @@ public class ActivityFragment extends Fragment implements NavigationView.OnNavig
                                 Log.e("credit_coin1",credit_coin1);*/
 
                                 if (ja.length()>0){
-                                    for(int i = 0;i<3;i++){
+                                    for(int i = 0;i<ja.length();i++){
 
                                         JSONObject J = ja.getJSONObject(i);
                                         items_ask.add(new Ask_item_freqent( J.getString("name"), J.getString("applicant"),J.getString("status_disp"),

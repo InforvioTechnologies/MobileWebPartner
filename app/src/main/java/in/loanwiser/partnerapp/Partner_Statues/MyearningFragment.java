@@ -41,6 +41,7 @@ import adhoc.app.applibrary.Config.AppUtils.Pref.Pref;
 import adhoc.app.applibrary.Config.AppUtils.Urls;
 import adhoc.app.applibrary.Config.AppUtils.VolleySignleton.AppController;
 import dmax.dialog.SpotsDialog;
+import in.loanwiser.partnerapp.BankStamentUpload.Doc_ImageView_pay_structur;
 import in.loanwiser.partnerapp.My_Earnings.My_Earnings;
 import in.loanwiser.partnerapp.My_Earnings.OneFragment;
 import in.loanwiser.partnerapp.My_Earnings.TwoFragment;
@@ -122,8 +123,9 @@ public class MyearningFragment extends  Fragment {
             @Override
             public void onClick(View view) {
 
-
-                String viability_report_URL1 = "https://callcenter.loanwiser.in/includes/DETAILED-PAYOUT-STRUCTURE.pdf";
+                Intent intent = new Intent(getContext(), Doc_ImageView_pay_structur.class);
+                startActivity(intent);
+              /*  String viability_report_URL1 = "https://callcenter.loanwiser.in/includes/DETAILED-PAYOUT-STRUCTURE.pdf";
 
                 if (permissionUtils.checkPermission(getActivity(), STORAGE_PERMISSION_REQUEST_CODE, view)) {
                     if (viability_report_URL1.length() > 0) {
@@ -134,7 +136,7 @@ public class MyearningFragment extends  Fragment {
                         }
                     }
 
-                }
+                }*/
             }
         });
 

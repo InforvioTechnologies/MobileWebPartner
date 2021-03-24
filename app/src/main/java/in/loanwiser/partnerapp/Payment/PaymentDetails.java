@@ -1083,12 +1083,12 @@ public class PaymentDetails extends SimpleActivity {
 
     }
 
-   /*@Override
+   @Override
     public void onBackPressed() {
 
-        Objs.ac.StartActivity(mCon, Dashboard_Activity.class);
+        Objs.ac.StartActivity(mCon, PaymentActivity.class);
         finish();
         super.onBackPressed();
-    }*/
+    }
 
 }

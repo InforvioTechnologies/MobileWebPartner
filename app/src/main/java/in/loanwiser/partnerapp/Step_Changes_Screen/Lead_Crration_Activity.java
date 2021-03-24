@@ -9,6 +9,8 @@ import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.text.InputFilter;
+import android.text.Spanned;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
@@ -49,6 +51,8 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import adhoc.app.applibrary.Config.AppUtils.Objs;
 import adhoc.app.applibrary.Config.AppUtils.Params;
@@ -106,6 +110,8 @@ public class Lead_Crration_Activity extends SimpleActivity {
     PopupWindow popupWindow;
     Button  closePopupBtn;
     String string_lead_or_submit,user_id,transaction_id;
+    private String blockCharacterSet = "~#^|$%&*!";
+    Pattern pattern = Pattern.compile(new String ("^[a-zA-Z\\s]*$"));
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -212,6 +218,7 @@ public class Lead_Crration_Activity extends SimpleActivity {
         loan_amount_ext = (AppCompatEditText) findViewById(R.id.loan_amount_ext);
         loan_amount_ext.addTextChangedListener(new NumberTextWatcher(loan_amount_ext));
         name_txt = (AppCompatEditText) findViewById(R.id.name_txt);
+        name_txt.setFilters(new InputFilter[] { filter });
         email = (AppCompatTextView) findViewById(R.id.email);
         email1 = (AppCompatTextView) findViewById(R.id.email1);
         mobile_no_txt = (AppCompatEditText) findViewById(R.id.mobile_no_txt);
@@ -525,6 +532,16 @@ public class Lead_Crration_Activity extends SimpleActivity {
         }
 
     }
+
+    private InputFilter filter = new InputFilter() {
+        @Override
+        public CharSequence filter(CharSequence source, int start, int end, Spanned dest, int dstart, int dend) {
+            if (source != null && blockCharacterSet.contains(("" + source))) {
+                return "";
+            }
+            return null;
+        }
+    };
 
     private void makeJsonObjReq1() {
 
@@ -859,15 +876,26 @@ public class Lead_Crration_Activity extends SimpleActivity {
     }
 
     private boolean validateName(){
-        if (name_txt.getText().toString().trim().isEmpty() || name_txt.length() < 3) {
-            name_txt.setError(getText(R.string.err_curent));
+        String name = name_txt.getText().toString();
+        if (name_txt.getText().toString().trim().isEmpty() || name_txt.length() < 3 || !(Pattern.matches("^[\\p{L} .'-]+$", name_txt.getText()))) {
+            name_txt.setError(getText(R.string.vali_name));
             name_txt.requestFocus();
-            return false;
+
+           return false;
+
         } else {
 
         }
 
         return true;
+    }
+    public static boolean validateLetters(String txt) {
+
+        String regx = "^[\\p{L} .'-]+$";
+        Pattern pattern = Pattern.compile(regx,Pattern.CASE_INSENSITIVE);
+        Matcher matcher = pattern.matcher(txt);
+        return matcher.find();
+
     }
 
     private boolean validate_email(){
