@@ -66,6 +66,7 @@ import adhoc.app.applibrary.Config.AppUtils.Pref.Pref;
 import adhoc.app.applibrary.Config.AppUtils.Urls;
 import adhoc.app.applibrary.Config.AppUtils.VolleySignleton.AppController;
 import dmax.dialog.SpotsDialog;
+import in.loanwiser.partnerapp.BankStamentUpload.Doc_ImageView_pay_structur;
 import in.loanwiser.partnerapp.BankStamentUpload.ReportIssueActivity;
 import in.loanwiser.partnerapp.Infinite_Scrollview.Lead_item;
 import in.loanwiser.partnerapp.My_Earnings.My_Earnings;
@@ -289,6 +290,10 @@ public class DashBoard_new extends AppCompatActivity  implements NavigationView.
             //Pay_Out_Screen
         }else if (id == R.id.pay_structure) {
 
+            Intent intent = new Intent(DashBoard_new.this, Doc_ImageView_pay_structur.class);
+            startActivity(intent);
+
+/*
             String viability_report_URL1 = "https://callcenter.loanwiser.in/includes/DETAILED-PAYOUT-STRUCTURE.pdf";
 
             View view = null;
@@ -300,11 +305,11 @@ public class DashBoard_new extends AppCompatActivity  implements NavigationView.
                         e.getStackTrace();
                     }
                 }
-            }
+            }*/
             //Pay_Out_Screen
         } else if(id == R.id.nav_item_six){
             Intent callIntent = new Intent(Intent.ACTION_DIAL);
-            String mobileno="6369626669";
+            String mobileno="8883565000";
             callIntent.setData(Uri.parse("tel:" +mobileno));
             try {
                 startActivity(callIntent);
