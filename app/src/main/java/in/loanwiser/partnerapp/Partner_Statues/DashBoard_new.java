@@ -77,6 +77,7 @@ import in.loanwiser.partnerapp.Partner_Statues.ui.gallery.GalleryFragment;
 import in.loanwiser.partnerapp.Partner_Statues.ui.home.HomeFragment;
 import in.loanwiser.partnerapp.Push_Notification.Push_Notification_List;
 import in.loanwiser.partnerapp.R;
+import in.loanwiser.partnerapp.Step_Changes_Screen.HelpSupportActivity;
 import in.loanwiser.partnerapp.Step_Changes_Screen.Pay_Out_Screen;
 import in.loanwiser.partnerapp.Step_Changes_Screen.Step_Completion_Screen;
 import in.loanwiser.partnerapp.User_Account.BankDetails;
@@ -123,7 +124,7 @@ public class DashBoard_new extends AppCompatActivity  implements NavigationView.
         nav_header_mobile_no = headerView.findViewById(R.id.nav_header_mobile_no);
 
         setSupportActionBar(toolbar);
-
+       // permissionUtils = new PermissionUtils();
 
         if (checkPermissionREAD_EXTERNAL_STORAGE(this)) {
             // do your stuff..
@@ -318,7 +319,7 @@ public class DashBoard_new extends AppCompatActivity  implements NavigationView.
             }
         }
         else if (id==R.id.report){
-            Intent intent = new Intent(DashBoard_new.this, ReportIssueActivity.class);
+            Intent intent = new Intent(DashBoard_new.this, HelpSupportActivity.class);
             startActivity(intent);
         }
         /*

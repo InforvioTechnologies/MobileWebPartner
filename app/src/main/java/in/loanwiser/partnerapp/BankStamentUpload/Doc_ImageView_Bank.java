@@ -1,18 +1,24 @@
 package in.loanwiser.partnerapp.BankStamentUpload;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.app.DownloadManager;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.net.http.SslError;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
@@ -29,7 +35,10 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.AppCompatTextView;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.squareup.picasso.Downloader;
@@ -40,14 +49,17 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
+import java.net.URLEncoder;
 import java.util.List;
 
 import adhoc.app.applibrary.Config.AppUtils.Objs;
 import adhoc.app.applibrary.Config.AppUtils.Params;
 import dmax.dialog.SpotsDialog;
+import in.loanwiser.partnerapp.PDF_Dounloader.PermissionUtils;
 import in.loanwiser.partnerapp.PartnerActivitys.SimpleActivity;
 import in.loanwiser.partnerapp.R;
 import in.loanwiser.partnerapp.User_Account.LoginNew;
@@ -67,11 +79,14 @@ public class Doc_ImageView_Bank extends SimpleActivity {
     RelativeLayout Rl_pdf_reader;
     String type,document,hash,filename,report;
     FloatingActionButton float_chat;
-
+    private static final int STORAGE_PERMISSION_REQUEST_CODE = 1;
+    PermissionUtils permissionUtils;
     private ProgressDialog pDialog;
     ImageView my_image;
     // Progress dialog type (0 - for Horizontal progress bar)
     public static final int progress_bar_type = 0;
+    public static final int MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE = 123;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -97,24 +112,39 @@ public class Doc_ImageView_Bank extends SimpleActivity {
             Ly_image_reader.setVisibility(View.GONE);
             webview.getSettings().setJavaScriptEnabled(true);
              filename =  document;
-           webview.loadUrl("https://docs.google.com/gview?embedded=true&url=" + filename);
-            //webview.loadUrl("https://stackoverflow.com/questions/18838779/how-to-compare-two-edittext-fields-in-android/29399267");
+        try {
+            webview.loadUrl("https://docs.google.com/gview?embedded=true&url=" + URLEncoder.encode(filename, "ISO-8859-1"));
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        //  webview.loadUrl("https://stackoverflow.com/questions/18838779/how-to-compare-two-edittext-fields-in-android/29399267");
            // webview.loadUrl(filename);
 
         webview.setWebViewClient(new HelloWebViewClient());
         // Enable Javascript
         WebSettings webSettings = webview.getSettings();
         webSettings.setJavaScriptEnabled(true);
+        webview.getSettings().setAllowFileAccessFromFileURLs(true);
+        webview.getSettings().setAllowUniversalAccessFromFileURLs(true);
+        webview.getSettings().setBuiltInZoomControls(true);
 
         // Force links and redirects to open in the WebView instead of in a browser
        // webview.setWebViewClient(new WebViewClient());
           webview.setWebViewClient(new HelloWebViewClient() {
 
                 public void onPageFinished(WebView view, String url) {
-                    progressbar.setVisibility(View.GONE);
+                    if (view.getTitle().equals(""))
+                    {
+                        view.reload();
+                    }else
+                    {
+                        progressbar.setVisibility(View.GONE);
+                    }
+
 
                 }
             });
+        permissionUtils = new PermissionUtils();
        /* String extStorageDirectory = Environment.getExternalStorageDirectory()
                 .toString();
         File folder = new File(extStorageDirectory, "Reports");
@@ -129,7 +159,11 @@ public class Doc_ImageView_Bank extends SimpleActivity {
             @Override
             public void onClick(View view) {
                // Downloader.DownloadFile(document, file);
-                new DownloadFileFromURL().execute(document);
+              //  new DownloadFileFromURL().execute(document);
+                Toast.makeText(mCon, "your file is downloading, Please wait...",Toast.LENGTH_SHORT).show();
+
+                haveStoragePermission();
+
             }
         });
 
@@ -139,7 +173,61 @@ public class Doc_ImageView_Bank extends SimpleActivity {
 
 
     }
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if(grantResults[0]== PackageManager.PERMISSION_GRANTED){
+            //you have the permission now.
+            Pdfdownload();
+        }
+    }
+    public boolean checkPermissionREAD_EXTERNAL_STORAGE(
+            final Context context) {
+        int currentAPIVersion = Build.VERSION.SDK_INT;
+        if (currentAPIVersion >= Build.VERSION_CODES.O_MR1) {
+            if (ContextCompat.checkSelfPermission(context,
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                if (ActivityCompat.shouldShowRequestPermissionRationale(
+                        (Activity) context,
+                        Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+                    showDialog("External storage", context,
+                            Manifest.permission.WRITE_EXTERNAL_STORAGE);
 
+                } else {
+                    ActivityCompat
+                            .requestPermissions(
+                                    (Activity) context,
+                                    new String[] { Manifest.permission.WRITE_EXTERNAL_STORAGE },
+                                    MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE);
+                }
+                return false;
+            } else {
+                return true;
+            }
+
+        } else {
+            return true;
+        }
+    }
+
+
+    public void showDialog(final String msg, final Context context,
+                           final String permission) {
+        AlertDialog.Builder alertBuilder = new AlertDialog.Builder(context);
+        alertBuilder.setCancelable(true);
+        alertBuilder.setTitle("Permission necessary");
+        alertBuilder.setMessage(msg + " permission is necessary");
+        alertBuilder.setPositiveButton(android.R.string.yes,
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        ActivityCompat.requestPermissions((Activity) context,
+                                new String[] { permission },
+                                MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE);
+                    }
+                });
+        AlertDialog alert = alertBuilder.create();
+        alert.show();
+    }
 
     private class HelloWebViewClient extends WebViewClient {
 
@@ -160,6 +248,8 @@ public class Doc_ImageView_Bank extends SimpleActivity {
         public void onPageFinished(WebView view, String url) {
             // TODO Auto-generated method stub
             super.onPageFinished(view, url);
+            if (view.getTitle().equals(""))
+                view.reload();
             progressBar.setVisibility(view.GONE);
 
 
@@ -257,7 +347,8 @@ public class Doc_ImageView_Bank extends SimpleActivity {
                 InputStream input = new BufferedInputStream(url.openStream(), 8192);
 
                 // Output stream
-                OutputStream output = new FileOutputStream("/sdcard/Reports/"+report+".pdf");
+
+                OutputStream output = new FileOutputStream("/sdcard/"+report+".pdf");
 
                 byte data[] = new byte[1024];
 
@@ -313,6 +404,58 @@ public class Doc_ImageView_Bank extends SimpleActivity {
         }
 
     }
+    public boolean Pdfdownload(){
+
+        boolean flag = true;
+        boolean downloading =true;
+        Uri Download_Uri = Uri.parse(document);
+        try {
+            DownloadManager downloadManager= (DownloadManager) getSystemService(DOWNLOAD_SERVICE);
+            DownloadManager.Request request = new DownloadManager.Request(Download_Uri);
+            request.setAllowedNetworkTypes(DownloadManager.Request.NETWORK_WIFI | DownloadManager.Request.NETWORK_MOBILE);
+            request.setAllowedOverRoaming(false);
+            request.setTitle(report + ".pdf");
+            request.setDescription("Downloading " + report + ".pdf");
+            request.setVisibleInDownloadsUi(true);
+            request.setMimeType("application/pdf");
+            request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
+            request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS,     report + ".pdf");
+            //  downloadManager.enqueue(request);
+            long idDownLoad=downloadManager.enqueue(request);
+            DownloadManager.Query query = null;
+            query = new DownloadManager.Query();
+            Cursor c = null;
+            if(query!=null) {
+                query.setFilterByStatus(DownloadManager.STATUS_FAILED|DownloadManager.STATUS_PAUSED|DownloadManager.STATUS_SUCCESSFUL|DownloadManager.STATUS_RUNNING|DownloadManager.STATUS_PENDING);
+            } else {
+                return flag;
+            }
+            while (downloading) {
+                c = downloadManager.query(query);
+
+                if(c.moveToFirst()) {
+                    Log.i ("FLAG","Downloading");
+                    int status =c.getInt(c.getColumnIndex(DownloadManager.COLUMN_STATUS));
+                    if (status==DownloadManager.STATUS_SUCCESSFUL) {
+                        Log.i ("FLAG","done");
+                        downloading = false;
+                        flag=true;
+                        ErrorStatus();
+                        break;
+                    }
+                    if (status==DownloadManager.STATUS_FAILED) {
+                        Log.i ("FLAG","Fail");
+                        downloading = false;
+                        flag=false;
+                        break;
+                    }
+                }
+            }
+        } catch (NullPointerException e) {
+            Log.d("DownloadError", e.getMessage());
+        }
+        return flag;
+    }
 
     private void ErrorStatus() {
         final Dialog dialog = new Dialog(this);
@@ -324,15 +467,27 @@ public class Doc_ImageView_Bank extends SimpleActivity {
         dialog.setCanceledOnTouchOutside(false);
         AppCompatTextView bankstatement_message=(AppCompatTextView) dialog.findViewById(R.id.bankstatement_message);
         Button cancelbtn = (Button) dialog.findViewById(R.id.cancelbtn);
-        Button submitbtn = (Button) dialog.findViewById(R.id.submitbtn);
-        submitbtn.setOnClickListener(new View.OnClickListener() {
+        AppCompatButton submitbtn = (AppCompatButton) dialog.findViewById(R.id.submitbtn);
+        AppCompatButton submitbtn1 = (AppCompatButton) dialog.findViewById(R.id.submitbtn1);
+        submitbtn1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 dialog.dismiss();
+                if (permissionUtils.checkPermission(Doc_ImageView_Bank.this, STORAGE_PERMISSION_REQUEST_CODE, view)) {
+                    if (filename.length() > 0) {
+                        try {
+                            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(filename)));
+                        } catch (Exception e) {
+                            e.getStackTrace();
+                        }
+                    }
+
+                }
+
             }
+
         });
-        cancelbtn.setOnClickListener(new View.OnClickListener() {
+        submitbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 dialog.dismiss();
@@ -340,6 +495,26 @@ public class Doc_ImageView_Bank extends SimpleActivity {
         });
         if (!dialog.isShowing()) {
             dialog.show();
+        }
+    }
+
+    public  boolean haveStoragePermission() {
+        if (Build.VERSION.SDK_INT >= 23) {
+            if (checkSelfPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                    == PackageManager.PERMISSION_GRANTED) {
+                Log.e("Permission error","You have permission");
+                Pdfdownload();
+                return true;
+            } else {
+                Toast.makeText(this,"You need a Storage Permission",Toast.LENGTH_SHORT).show();
+                Log.e("Permission error","You have asked for permission");
+                ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
+                return false;
+            }
+        }
+        else { //you dont need to worry about these stuff below api level 23
+            Log.e("Permission error","You already have the permission");
+            return true;
         }
     }
 }

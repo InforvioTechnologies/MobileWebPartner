@@ -53,7 +53,7 @@
                     android:layout_gravity="center_horizontal"
                     android:layout_marginLeft="5dp"
                     android:layout_marginRight="10dp"
-                    android:text="Your Report is Sucessfully Downloded at Folder /Reports"
+                    android:text="Your Report is Sucessfully Downloded in Downloads."
                     android:textAlignment="center"
                     android:textColor="#032A57"
                     android:textSize="18dp"
@@ -104,12 +104,26 @@
                     android:gravity="center"
                     android:layout_weight="1">
 
-                    <Button
+                    <androidx.appcompat.widget.AppCompatButton
+
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="5dp"
                         android:id="@+id/submitbtn"
                         android:layout_width="149dp"
                         android:layout_height="41dp"
                         android:background="@drawable/capsul_button4"
-                        android:text="Ok"
+                        android:text="ok"
+                        android:visibility="visible"
+                        android:textColor="@color/white"
+                        android:textStyle="bold"/>
+                    <androidx.appcompat.widget.AppCompatButton
+                       android:layout_marginLeft="5dp"
+                        android:layout_marginRight="5dp"
+                        android:id="@+id/submitbtn1"
+                        android:layout_width="149dp"
+                        android:layout_height="41dp"
+                        android:background="@drawable/capsul_button41"
+                        android:text="open"
                         android:visibility="visible"
                         android:textColor="@color/white"
                         android:textStyle="bold"/>

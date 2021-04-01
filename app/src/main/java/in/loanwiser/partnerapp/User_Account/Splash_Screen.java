@@ -21,6 +21,7 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
@@ -240,7 +241,7 @@ public class Splash_Screen extends AppCompatActivity {
             public void onErrorResponse(VolleyError error) {
                 //Log.d(TAG, error.getMessage());
                 VolleyLog.d(TAG, "Error: " + error.getMessage());
-               // Toast.makeText(getApplicationContext(),error.getMessage(),Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(),"Error",Toast.LENGTH_SHORT).show();
                 Log.e("Error", error.getMessage());
 
             }

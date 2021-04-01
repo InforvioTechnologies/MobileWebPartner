@@ -359,7 +359,7 @@ public class Upload_Activity_Bank extends SimpleActivity implements  View.OnClic
                                 String path = getPDFPath(uriarrayList.get(i));
                                 pathlist.add(path);
                                 // uploadMultipart();
-                                MultifileUploadRetrofit();
+                                CheckUploadcondition();
 
                             } else {
                                 if (Build.VERSION.SDK_INT < 11) {

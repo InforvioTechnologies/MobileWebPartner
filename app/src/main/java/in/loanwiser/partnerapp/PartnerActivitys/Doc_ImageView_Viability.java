@@ -1,12 +1,15 @@
 package in.loanwiser.partnerapp.PartnerActivitys;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.net.http.SslError;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.webkit.SslErrorHandler;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -14,10 +17,12 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import adhoc.app.applibrary.Config.AppUtils.Objs;
 import adhoc.app.applibrary.Config.AppUtils.Params;
 import dmax.dialog.SpotsDialog;
+import in.loanwiser.partnerapp.BankStamentUpload.Doc_ImageView_Bank;
 import in.loanwiser.partnerapp.R;
 
 public class Doc_ImageView_Viability extends SimpleActivity {
@@ -53,26 +58,19 @@ public class Doc_ImageView_Viability extends SimpleActivity {
         webview.setInitialScale(1);
         webview.getSettings().setPluginState(WebSettings.PluginState.ON);
         webview.setVisibility(View.GONE);
-        webview.setWebViewClient(new WebViewClient() {
+        webview.setWebViewClient(new HelloWebViewClient() {
 
-            public void onPageStarted(WebView view, String url, Bitmap favicon) {
-                super.onPageStarted(view, url, favicon);
-                progressBar.setVisibility(View.VISIBLE);
-            }
-
-            @Override
-            public boolean shouldOverrideUrlLoading(WebView view, String url) {
-                view.loadUrl(url);
-                return true;
-            }
-
-            @Override
             public void onPageFinished(WebView view, String url) {
-                super.onPageFinished(view, url);
-                webview.setVisibility(View.VISIBLE);
-                progressBar.setVisibility(View.GONE);
-            }
+                if (view.getTitle().equals(""))
+                {
+                    view.reload();
+                }else
+                {
+                    progressbar.setVisibility(View.GONE);
+                }
 
+
+            }
         });
 
         WebSettings webSettings = webview.getSettings();
@@ -91,5 +89,41 @@ public class Doc_ImageView_Viability extends SimpleActivity {
 
     }
 
+
+    private class HelloWebViewClient extends WebViewClient {
+
+
+        @Override
+        public void onPageStarted(WebView view, String url, Bitmap favicon) {
+            // TODO Auto-generated method stub
+            super.onPageStarted(view, url, favicon);
+        }
+
+        @Override
+        public boolean shouldOverrideUrlLoading(WebView webView, String url) {
+            webView.loadUrl(url);
+            return true;
+        }
+
+        @Override
+        public void onPageFinished(WebView view, String url) {
+            // TODO Auto-generated method stub
+            super.onPageFinished(view, url);
+            if (view.getTitle().equals(""))
+                view.reload();
+            progressBar.setVisibility(view.GONE);
+
+
+        }
+
+        @SuppressLint("NewApi")
+        @Override
+        public void onReceivedSslError(WebView view, SslErrorHandler handler, SslError error) {
+            handler.proceed(); // Ignore SSL certificate errors
+            Toast.makeText(mCon, "Please try again",Toast.LENGTH_SHORT).show();
+
+        }
+
+    }
 }
 

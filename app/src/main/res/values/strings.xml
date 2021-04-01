@@ -1053,4 +1053,15 @@
     <string name="report_issue">Report an Issue</string>
     <string name="issueinappid">Issue in Particular APP ID?</string>
     <string name="upload_hint">(If you have more than 1 file, upload all files together using multi-select)</string>
+
+
+    <string name="help_des">Do you need help with something? Get back to us on the below details or directly send us screenshot of the problem you our currently facing.</string>
+    <string name="contact_rm">Contact Your RM</string>
+    <string name="email_feedback">Email Your Feedback</string>
+    <string name="help_sup">Help &amp; Support</string>
+    <string name="rs_desc">Please get in touch with your RM, if you are facing issues while submitting the leads.</string>
+    <string name="contactdet">Contact Details</string>
+    <string name="contactno">Contact No</string>
+    <string name="relationmanagar">Relationship Manager</string>
+    <string name="report_yurissue">Report Your Issues</string>
 </resources>

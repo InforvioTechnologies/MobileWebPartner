@@ -271,6 +271,7 @@ public class ReportIssueActivity extends SimpleActivity implements View.OnClickL
         RequestBody titleissue = RequestBody.create(MediaType.parse("multipart/form-data"), titletxt.getText().toString().trim());
         RequestBody descissue = RequestBody.create(MediaType.parse("multipart/form-data"), desc_txt.getText().toString().trim());
         Call<IssueUpload> call = getResponse.imageupload("Auth Token", fileParts, appid, b2b_userid, titleissue, descissue);
+
         call.enqueue(new Callback<IssueUpload>() {
             @Override
             public void onResponse(Call<IssueUpload> call, retrofit2.Response<IssueUpload> response) {

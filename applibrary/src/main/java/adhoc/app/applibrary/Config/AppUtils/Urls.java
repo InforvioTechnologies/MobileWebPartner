@@ -57,6 +57,7 @@ public class Urls {
     public static String LOAN_CATAGORY  = Urls + "loanlatlist";
     public static String LOAN_TYPE_POST11  = Urls + "getloantypelist1";
     public static String GET_DROPDOWN_LIST  = Urls + "get_dropdown";
+    public static String relationship_mangement  = Urls_step + "relationship_mangement";
     public static String get_selfemployvocation  = Urls + "get_selfemployvocation";
     public static String CITY_TYPE_POST  = Urls + "getDistrict";
     public static String GET_STATE_POST  = Urls + "getState";

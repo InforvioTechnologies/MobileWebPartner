@@ -1,13 +1,23 @@
 package in.loanwiser.partnerapp.BankStamentUpload;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.app.DownloadManager;
 import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
 import android.net.http.SslError;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
@@ -25,6 +35,8 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import androidx.appcompat.widget.AppCompatTextView;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -38,6 +50,7 @@ import java.net.URLConnection;
 import adhoc.app.applibrary.Config.AppUtils.Objs;
 import adhoc.app.applibrary.Config.AppUtils.Params;
 import dmax.dialog.SpotsDialog;
+import in.loanwiser.partnerapp.PDF_Dounloader.PermissionUtils;
 import in.loanwiser.partnerapp.PartnerActivitys.SimpleActivity;
 import in.loanwiser.partnerapp.R;
 
@@ -55,10 +68,12 @@ public class Doc_ImageView_pay_structur extends SimpleActivity {
     RelativeLayout Rl_pdf_reader;
     String type,document,hash,filename,report;
     FloatingActionButton float_chat;
-
+    private static final int STORAGE_PERMISSION_REQUEST_CODE = 1;
+    PermissionUtils permissionUtils;
     private ProgressDialog pDialog;
     ImageView my_image;
     // Progress dialog type (0 - for Horizontal progress bar)
+    public static final int MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE = 123;
     public static final int progress_bar_type = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,6 +91,7 @@ public class Doc_ImageView_pay_structur extends SimpleActivity {
      //   document =  Objs.a.getBundle(this, Params.document);
 
         document =  "https://callcenter.loanwiser.in/includes/DETAILED-PAYOUT-STRUCTURE.pdf";
+        permissionUtils = new PermissionUtils();
        // Log.e("pfd",document);
        // Log.e("type",type);
        // hash =  Objs.a.getBundle(this, Params.transaction_id);
@@ -99,7 +115,13 @@ public class Doc_ImageView_pay_structur extends SimpleActivity {
           webview.setWebViewClient(new HelloWebViewClient() {
 
                 public void onPageFinished(WebView view, String url) {
-                    progressbar.setVisibility(View.GONE);
+                    if (view.getTitle().equals(""))
+                    {
+                        view.reload();
+                    }else
+                    {
+                        progressbar.setVisibility(View.GONE);
+                    }
 
                 }
             });
@@ -117,7 +139,10 @@ public class Doc_ImageView_pay_structur extends SimpleActivity {
             @Override
             public void onClick(View view) {
                // Downloader.DownloadFile(document, file);
-                new DownloadFileFromURL().execute(document);
+               // new DownloadFileFromURL().execute(document);
+                Toast.makeText(mCon, "your file is downloading, Please wait...",Toast.LENGTH_SHORT).show();
+                haveStoragePermission();
+
             }
         });
 
@@ -148,7 +173,13 @@ public class Doc_ImageView_pay_structur extends SimpleActivity {
         public void onPageFinished(WebView view, String url) {
             // TODO Auto-generated method stub
             super.onPageFinished(view, url);
-            progressBar.setVisibility(view.GONE);
+            if (view.getTitle().equals(""))
+            {
+                view.reload();
+            }else
+            {
+                progressbar.setVisibility(View.GONE);
+            }
 
 
         }
@@ -216,6 +247,66 @@ public class Doc_ImageView_pay_structur extends SimpleActivity {
         }
     }
 
+    public boolean Pdfdownload(){
+        boolean flag = true;
+        boolean downloading =true;
+        Uri Download_Uri = Uri.parse(document);
+        try {
+            DownloadManager downloadManager= (DownloadManager) getSystemService(DOWNLOAD_SERVICE);
+            DownloadManager.Request request = new DownloadManager.Request(Download_Uri);
+            request.setAllowedNetworkTypes(DownloadManager.Request.NETWORK_WIFI | DownloadManager.Request.NETWORK_MOBILE);
+            request.setAllowedOverRoaming(false);
+            request.setTitle("PayoutStructure" + ".pdf");
+            request.setDescription("Downloading " + "PayoutStructure" + ".pdf");
+            request.setVisibleInDownloadsUi(true);
+            request.setMimeType("application/pdf");
+            request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
+            request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS,     "PayoutStructure" + ".pdf");
+            //  downloadManager.enqueue(request);
+            long idDownLoad=downloadManager.enqueue(request);
+            DownloadManager.Query query = null;
+            query = new DownloadManager.Query();
+            Cursor c = null;
+            if(query!=null) {
+                query.setFilterByStatus(DownloadManager.STATUS_FAILED|DownloadManager.STATUS_PAUSED|DownloadManager.STATUS_SUCCESSFUL|DownloadManager.STATUS_RUNNING|DownloadManager.STATUS_PENDING);
+            } else {
+                return flag;
+            }
+            while (downloading) {
+                c = downloadManager.query(query);
+                if(c.moveToFirst()) {
+                    Log.i ("FLAG","Downloading");
+                    int status =c.getInt(c.getColumnIndex(DownloadManager.COLUMN_STATUS));
+                    if (status==DownloadManager.STATUS_SUCCESSFUL) {
+                        Log.i ("FLAG","done");
+                        downloading = false;
+                        flag=true;
+                        ErrorStatus();
+                        break;
+                    }
+                    if (status==DownloadManager.STATUS_FAILED) {
+                        Log.i ("FLAG","Fail");
+                        downloading = false;
+                        flag=false;
+                        break;
+                    }
+                }
+            }
+        } catch (NullPointerException e) {
+            Log.d("DownloadError", e.getMessage());
+        }
+        return flag;
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if(grantResults[0]== PackageManager.PERMISSION_GRANTED){
+            //you have the permission now.
+            Pdfdownload();
+        }
+    }
+
     class DownloadFileFromURL extends AsyncTask<String, String, String> {
 
         /**
@@ -245,7 +336,7 @@ public class Doc_ImageView_pay_structur extends SimpleActivity {
                 InputStream input = new BufferedInputStream(url.openStream(), 8192);
 
                 // Output stream
-                OutputStream output = new FileOutputStream("/sdcard/Reports/Payout_Structure.pdf");
+                OutputStream output = new FileOutputStream("/sdcard/Payout_Structure.pdf");
 
                 byte data[] = new byte[1024];
 
@@ -294,7 +385,7 @@ public class Doc_ImageView_pay_structur extends SimpleActivity {
 
             // Displaying downloaded image into image view
             // Reading image path from sdcard
-            String imagePath = Environment.getExternalStorageDirectory().toString() + "/Payout_Structure.pdf";
+            String imagePath = Environment.getExternalStorageDirectory().toString() + "/sdcard/Payout_Structure.pdf";
             // setting downloaded into image view
           //  my_image.setImageDrawable(Drawable.createFromPath(imagePath));
             ErrorStatus();
@@ -313,6 +404,7 @@ public class Doc_ImageView_pay_structur extends SimpleActivity {
         AppCompatTextView bankstatement_message=(AppCompatTextView) dialog.findViewById(R.id.bankstatement_message);
         Button cancelbtn = (Button) dialog.findViewById(R.id.cancelbtn);
         Button submitbtn = (Button) dialog.findViewById(R.id.submitbtn);
+        Button submitbtn1 = (Button) dialog.findViewById(R.id.submitbtn1);
         submitbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -320,14 +412,45 @@ public class Doc_ImageView_pay_structur extends SimpleActivity {
                 dialog.dismiss();
             }
         });
-        cancelbtn.setOnClickListener(new View.OnClickListener() {
+        submitbtn1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 dialog.dismiss();
+
+                if (permissionUtils.checkPermission(Doc_ImageView_pay_structur.this, STORAGE_PERMISSION_REQUEST_CODE, view)) {
+                    if (filename.length() > 0) {
+                        try {
+                            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(filename)));
+                        } catch (Exception e) {
+                            e.getStackTrace();
+                        }
+                    }
+
+                }
             }
         });
         if (!dialog.isShowing()) {
             dialog.show();
+        }
+    }
+
+    public  boolean haveStoragePermission() {
+        if (Build.VERSION.SDK_INT >= 23) {
+            if (checkSelfPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                    == PackageManager.PERMISSION_GRANTED) {
+                Log.e("Permission error","You have permission");
+                Pdfdownload();
+                return true;
+            } else {
+                Toast.makeText(this,"You need a Storage Permission",Toast.LENGTH_SHORT).show();
+                Log.e("Permission error","You have asked for permission");
+                ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
+                return false;
+            }
+        }
+        else { //you dont need to worry about these stuff below api level 23
+            Log.e("Permission error","You already have the permission");
+            return true;
         }
     }
 }

@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Step_Changes_Screen.HelpSupportActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="vertical">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:text="@string/help_des"
+                android:textSize="16sp"
+                android:textColor="@color/black"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:orientation="vertical">
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/crm_btn"
+                    android:layout_width="match_parent"
+                    android:background="@drawable/but_shape_blue"
+                    android:drawableLeft="@drawable/ic_contacts"
+                    android:drawableTint="@color/white"
+                    android:drawablePadding="36dp"
+                    android:gravity="left|center"
+                    android:height="60dp"
+                    android:padding="6dp"
+                    android:text="@string/contact_rm"
+                    android:textColor="@color/white"
+                    android:textStyle="bold"
+                    android:layout_height="45dp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:orientation="vertical">
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/reportissue_btn"
+                    android:layout_width="match_parent"
+                    android:background="@drawable/but_shape_blue"
+                    android:drawableLeft="@drawable/ic_report_back"
+                    android:drawableTint="@color/white"
+                    android:drawablePadding="36dp"
+                    android:gravity="left|center"
+                    android:height="60dp"
+                    android:padding="6dp"
+                    android:text="@string/report_yurissue"
+                    android:textColor="@color/white"
+                    android:textStyle="bold"
+                    android:layout_height="45dp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:orientation="vertical">
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/emailsend_btn"
+                    android:layout_width="match_parent"
+                    android:background="@drawable/but_shape_blue"
+                    android:drawableLeft="@drawable/ic_email_back"
+                    android:drawableTint="@color/white"
+                    android:drawablePadding="36dp"
+                    android:gravity="left|center"
+                    android:height="60dp"
+                    android:padding="6dp"
+                    android:text="@string/email_feedback"
+                    android:textColor="@color/white"
+                    android:textStyle="bold"
+                    android:layout_height="45dp" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+
+    </ScrollView>
+
+</LinearLayout>

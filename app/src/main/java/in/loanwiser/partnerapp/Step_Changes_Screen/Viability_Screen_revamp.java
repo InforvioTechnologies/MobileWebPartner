@@ -3704,9 +3704,10 @@ public class Viability_Screen_revamp extends SimpleActivity implements NumberPic
                                             rule_message.add(ind_salary);
                                         }else
                                         {
+                                            rule_desc = J.getString("fail_message");
                                             bank_failure="Sorry.! Currently we have no partner banks available in applicants location" +" "+
                                                     "We are On-boarding as many new banks as possible. Stay tuned.! ";
-                                            rule_message.add(bank_failure);
+                                            rule_message.add(rule_desc);
                                         }
 
                                          Log.e("rule_desc",rule_desc);
@@ -4336,6 +4337,7 @@ public class Viability_Screen_revamp extends SimpleActivity implements NumberPic
             @Override
             public void onClick(View v) {
                 dialog.dismiss();
+                rule_message.clear();
                 viability_Applicant();
 
             }

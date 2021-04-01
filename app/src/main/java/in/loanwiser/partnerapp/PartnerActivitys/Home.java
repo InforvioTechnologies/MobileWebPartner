@@ -682,18 +682,7 @@ public class Home extends AppCompatActivity {
 
                         }else
                         {
-                            /*Objs.ac.StartActivityPutExtra(Home.this, Doc_ImageView_Viability.class,
-                                    Params.document,viability_report_URL);*/
-                           /* if (permissionUtils.checkPermission(Home.this, STORAGE_PERMISSION_REQUEST_CODE, view)) {
-                                if (viability_report_URL.length() > 0) {
-                                    try {
-                                        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(viability_report_URL)));
-                                    } catch (Exception e) {
-                                        e.getStackTrace();
-                                    }
-                                }
 
-                            }*/
                             String report="Viability Report";
                             Objs.ac.StartActivityPutExtra(Home.this, Doc_ImageView_Bank.class,
                                     Params.document,viability_report_URL,Params.report,report);
@@ -1125,6 +1114,7 @@ public class Home extends AppCompatActivity {
                                String paymentplan_show=jsonObject1.getString("payment_plan");
                                String pending_status=jsonObject1.getString("pending_status");
                                String pending_status_code=jsonObject1.getString("pending_status_code");
+                               String curr_status_name=jsonObject1.getString("curr_status_name");
                                String loan_amount = jsonObject1.getString("loan_amount");
                                loan_status = jsonObject1.getString("loan_status");
                                String curr_status = jsonObject1.getString("curr_status");
@@ -1155,7 +1145,7 @@ public class Home extends AppCompatActivity {
                                    sub_to_loanwiser.setTextColor(Color.parseColor("#FF9201"));
                                }else {
 
-                                   sub_to_loanwiser.setText("Pending with Bank");
+                                   sub_to_loanwiser.setText(curr_status_name);
                                    sub_to_loanwiser.setTextColor(Color.parseColor("#FF9201"));
                                }
                                Pref.putProperty_id(mCon,property_identified);

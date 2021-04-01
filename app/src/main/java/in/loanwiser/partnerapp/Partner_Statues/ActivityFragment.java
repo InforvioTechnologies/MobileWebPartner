@@ -335,14 +335,17 @@ public class ActivityFragment extends Fragment implements NavigationView.OnNavig
                                     Ly_allocate.setVisibility(View.VISIBLE);
                                     firstlay.setVisibility(View.VISIBLE);
                                     for(int i = 0;i<ja.length();i++){
-
-                                        JSONObject J = ja.getJSONObject(i);
-                                        items.add(new Suggestion_item_freqent( J.getString("user_id"), J.getString("user_id"),J.getString("username"),
-                                                J.getString("loan_type"),J.getString("loan_amount"),J.getString("status_disp")
+                                            if( i < 3)
+                                            {
+                                                JSONObject J = ja.getJSONObject(i);
+                                                items.add(new Suggestion_item_freqent( J.getString("user_id"), J.getString("user_id"),J.getString("username"),
+                                                        J.getString("loan_type"),J.getString("loan_amount"),J.getString("status_disp")
                                                 ));
-                                        adapter.notifyDataSetChanged();
+                                                adapter.notifyDataSetChanged();
 
-                                        view_all_ly1.setVisibility(View.VISIBLE);
+                                                view_all_ly1.setVisibility(View.VISIBLE);
+                                            }
+
                                     }
                                     recycler_view.setAdapter(adapter);
 
@@ -422,14 +425,17 @@ public class ActivityFragment extends Fragment implements NavigationView.OnNavig
 
                                 if (ja.length()>0){
                                     for(int i = 0;i<ja.length();i++){
+                                        if( i < 3)
+                                        {
+                                            JSONObject J = ja.getJSONObject(i);
+                                            items_ask.add(new Ask_item_freqent( J.getString("name"), J.getString("applicant"),J.getString("status_disp"),
+                                                    J.getString("created_at"),J.getString("user_id"),J.getString("updated_at"),
+                                                    J.getString("app_id"),J.getString("request_by"),J.getString("doc_typename"),J.getString("notes"),
+                                                    J.getString("transaction_id"),J.getString("doc_classname"),J.getString("legaldoc_id"),J.getString("id")));
+                                            adapter_ask.notifyDataSetChanged();
+                                            view_all_ly.setVisibility(View.VISIBLE);
+                                        }
 
-                                        JSONObject J = ja.getJSONObject(i);
-                                        items_ask.add(new Ask_item_freqent( J.getString("name"), J.getString("applicant"),J.getString("status_disp"),
-                                                J.getString("created_at"),J.getString("user_id"),J.getString("updated_at"),
-                                                J.getString("app_id"),J.getString("request_by"),J.getString("doc_typename"),J.getString("notes"),
-                                                J.getString("transaction_id"),J.getString("doc_classname"),J.getString("legaldoc_id"),J.getString("id")));
-                                        adapter_ask.notifyDataSetChanged();
-                                        view_all_ly.setVisibility(View.VISIBLE);
 
                                     }
                                     ask_recycler_view.setAdapter(adapter_ask);

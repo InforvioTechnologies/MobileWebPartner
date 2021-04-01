@@ -410,6 +410,15 @@ public class Payment_Sucess_Screen extends AppCompatActivity {
                 return headers;
             }
         };
+
+        int socketTimeout = 0;
+        RetryPolicy policy = new DefaultRetryPolicy(socketTimeout,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
+
+        jsonObjReq.setRetryPolicy(policy);
+
+       // AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
         AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
 
     }
@@ -603,7 +612,15 @@ public class Payment_Sucess_Screen extends AppCompatActivity {
                 return headers;
             }
         };
+        int socketTimeout = 0;
+        RetryPolicy policy = new DefaultRetryPolicy(socketTimeout,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
+
+        jsonObjReq.setRetryPolicy(policy);
+
         AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
+     //   AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
 
     }
     private void CRIF_Question_Testing1() {
@@ -683,6 +700,15 @@ public class Payment_Sucess_Screen extends AppCompatActivity {
                 return headers;
             }
         };
+
+        int socketTimeout = 0;
+        RetryPolicy policy = new DefaultRetryPolicy(socketTimeout,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
+
+        jsonObjReq.setRetryPolicy(policy);
+
+       // AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
         AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
 
     }
@@ -740,6 +766,14 @@ public class Payment_Sucess_Screen extends AppCompatActivity {
                 return headers;
             }
         };
+        int socketTimeout = 0;
+        RetryPolicy policy = new DefaultRetryPolicy(socketTimeout,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
+
+        jsonObjReq.setRetryPolicy(policy);
+
+      //  AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
         AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
     }
 
@@ -1008,8 +1042,15 @@ public class Payment_Sucess_Screen extends AppCompatActivity {
                 return headers;
             }
         };
-        AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
+        //AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
+        int socketTimeout = 0;
+        RetryPolicy policy = new DefaultRetryPolicy(socketTimeout,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
 
+        jsonObjReq.setRetryPolicy(policy);
+
+        AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
     }
 
     private void Viability_CRIF_report_Functions1() {
@@ -1174,7 +1215,15 @@ public class Payment_Sucess_Screen extends AppCompatActivity {
                 return headers;
             }
         };
+        int socketTimeout = 0;
+        RetryPolicy policy = new DefaultRetryPolicy(socketTimeout,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
+
+        jsonObjReq.setRetryPolicy(policy);
+
         AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
+       // AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
 
     }
 
@@ -1523,7 +1572,16 @@ public class Payment_Sucess_Screen extends AppCompatActivity {
                 return headers;
             }
         };
+
+        int socketTimeout = 0;
+        RetryPolicy policy = new DefaultRetryPolicy(socketTimeout,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
+
+        jsonObjReq.setRetryPolicy(policy);
+
         AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
+       // AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
 
     }
 
