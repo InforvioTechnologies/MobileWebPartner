@@ -87,12 +87,12 @@ public class SmsActivity extends AppCompatActivity {
     String OTP, opt_bundle,no_bundle;
     private AlertDialog progressDialog;
     private String JSON,new_otp;
-    private String S_moblie,S_name,S_door,S_buliding,S_street,S_pincode,S_city,S_state,S_business_type;
+    private String S_moblie,S_name,S_door,S_email,S_address,S_pincode,S_city,S_state,S_business_type;
     private ProgressDialog pDialog ,Sms_Dialog;
     InputMethodManager imm;
     public static final String OTP_REGEX = "[0-9]{1,5}";
     String  user_array,partner_code;
-    String token;
+    String token,utmSource,from_campaign;
 
     SharedPreferences pref;
     SharedPreferences.Editor editor;
@@ -111,6 +111,8 @@ public class SmsActivity extends AppCompatActivity {
         JSON =  Objs.a.getBundle(this, Params.JSON);
         opt_bundle =  Objs.a.getBundle(this, Params.otp);
         no_bundle =  Objs.a.getBundle(this, Params.mobile_no);
+        from_campaign =  Objs.a.getBundle(this, Params.from_campaign);
+        utmSource =  Objs.a.getBundle(this, Params.utmSource);
 
         pref = getApplicationContext().getSharedPreferences("MyPref", 0); // 0 - for private mode
          editor = pref.edit();
@@ -121,9 +123,11 @@ public class SmsActivity extends AppCompatActivity {
             S_moblie = j.getString(Params.mobile_no);
             S_city =  j.getString(Params.district_id);
             S_state =  j.getString(Params.state_id);
-//            S_pincode =  j.getString(Params.pincode);
+          S_pincode =  j.getString("pincode");
             S_business_type = j.getString(Params.business_type);
-
+            S_email =  j.getString("email_id");
+           // S_pincode =  pincode.getText().toString();
+            S_address =  j.getString("profile_address");
             //    String all = opt_bundle +"\n"+ S_moblie +"\n"+S_name +"\n"+ S_pincode +"\n"+
             //    S_city +"\n"+ S_state +"\n"+ S_business_type;
             //    Objs.a.showToast(mCon, all );
@@ -320,9 +324,11 @@ public class SmsActivity extends AppCompatActivity {
             J.put(Params.mobile_no,S_moblie);
             J.put(Params.district_id, S_city);
             J.put(Params.state_id, S_state);
-        //    J.put(Params.pincode, S_pincode);
+            J.put("pincode", S_pincode);
             J.put(Params.business_type, S_business_type);
-
+            J.put("email_id",S_email);
+            J.put("profile_address", S_address);
+            J.put("office_address", S_address);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -481,6 +487,8 @@ public class SmsActivity extends AppCompatActivity {
         JSONObject J= null;
         try {
             J = new JSONObject();
+            J.put("from_campaign", from_campaign);
+            J.put("utm_code", utmSource);
             J.put("mobile_token", token);
             J.put("b2b_userid", brb_userid);
         }catch (JSONException e) {
@@ -532,6 +540,63 @@ public class SmsActivity extends AppCompatActivity {
 
     }
 
+    private void Campain_Registration(String brb_userid) {
+
+        JSONObject jsonObject =new JSONObject();
+        JSONObject J= null;
+        try {
+            J = new JSONObject();
+            J.put("from_campaign", from_campaign);
+            J.put("utm_code", from_campaign);
+            J.put("b2b_userid", brb_userid);
+        }catch (JSONException e) {
+            e.printStackTrace();
+        }
+        //Log.e("state_id", String.valueOf(J));
+        progressDialog.show();
+        Log.e("Request Firebase", String.valueOf(J));
+        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, Urls.FIREBASE_TOKEN, J,
+                new Response.Listener<JSONObject>() {
+
+                    @Override
+                    public void onResponse(JSONObject object) {
+                        Log.e("Response Firebase", String.valueOf(object));
+                        try {
+
+                            String Register_Token_statues = object.getString("status");
+                            if(Register_Token_statues.contains("success"))
+                            {
+                                Intent intent = new Intent(SmsActivity.this, DashBoard_new.class);
+                                startActivity(intent);
+                                finish();
+                            }
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        // Toast.makeText(mCon, response.toString(),Toast.LENGTH_SHORT).show();
+                        progressDialog.dismiss();
+                    }
+                }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                VolleyLog.d("TAG", "Error: " + error.getMessage());
+                progressDialog.dismiss();
+            }
+        }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("Content-Type", "application/json");
+                return headers;
+            }
+        };
+
+        // Adding request to request queue
+        AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
+
+    }
     public void ExitAlert(Context context, final String pd_code,final String u_array ) {
         //http://android.support.v7.app/
         androidx.appcompat.app.AlertDialog.Builder builder = new androidx.appcompat.app.AlertDialog.Builder(context, R.style.MyAlertDialogStyle);

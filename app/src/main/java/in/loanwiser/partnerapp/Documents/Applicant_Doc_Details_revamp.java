@@ -51,6 +51,7 @@ import adhoc.app.applibrary.Config.AppUtils.Pref.Pref;
 import adhoc.app.applibrary.Config.AppUtils.Urls;
 import adhoc.app.applibrary.Config.AppUtils.VolleySignleton.AppController;
 import dmax.dialog.SpotsDialog;
+import in.loanwiser.partnerapp.BankStamentUpload.Upload_Activity_Bank;
 import in.loanwiser.partnerapp.PartnerActivitys.Home;
 import in.loanwiser.partnerapp.PartnerActivitys.SimpleActivity;
 import in.loanwiser.partnerapp.PartnerActivitys.Submitsuccess_Activity;
@@ -137,7 +138,8 @@ public class Applicant_Doc_Details_revamp extends SimpleActivity {
         submit_update_status.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Document_Statues();
+
+                Document_generate_checklist_rule();
 
             }
         });
@@ -344,79 +346,47 @@ public class Applicant_Doc_Details_revamp extends SimpleActivity {
         AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
     }
 
-    private void Document_Statues() {
+    private void Document_generate_checklist_rule() {
         JSONObject jsonObject =new JSONObject();
         JSONObject J= null;
         try {
             J =new JSONObject();
-            //  J.put(Params.user_id, id);
-            J.put("transaction_id",Pref.getTRANSACTIONID(getApplicationContext()));
+             J.put("transaction_id", Pref.getTRANSACTIONID(getApplicationContext()));
+           // J.put("transaction_id", "61359");
+
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        Log.e("the Document",J.toString());
+        Log.e("submit_loanwiser", String.valueOf(J));
         progressDialog.show();
-        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, Urls.Check_Uploadsubmit, J,
+        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, Urls.generate_docuverifyrule, J,
                 new Response.Listener<JSONObject>() {
+                    @SuppressLint("RestrictedApi")
                     @Override
                     public void onResponse(JSONObject response) {
-
-                        Log.e("the reponse",response.toString());
+                        Log.e("Documnet_upload_Status1", String.valueOf(response));
+                        //{"request":{"transaction_id":"10194"},"response":true,"status":"success"}
                         try {
 
+                            if(response.getString("status").equals("success")){
 
-                            String status  = response.getString("status");
-                           if(status.equals("success"))
-                           {
-                               progressDialog.dismiss();
-                               Documnet_upload_Status();
-                           }else
-                           {
+                                Intent intent = new Intent(Applicant_Doc_Details_revamp.this,Document_Availability_Check.class);
+                                startActivity(intent);
+                            }else {
+                                Toast.makeText(getApplicationContext(),"Something went wrong, Please check!!!", Toast.LENGTH_SHORT).show();
 
-                               JSONObject jsonObject1 = response.getJSONObject("response");
-                               JSONArray  label_arr=jsonObject1.getJSONArray("message");
-                               for (int i = 0; i < label_arr.length(); i++) {
-                                   // String value="12";
-                                   if(label_arr.getString(i).isEmpty())
-                                   {
-
-                                   }else
-                                   {
-                                       String value3= label_arr.getString(i);
-                                       Log.e("json", i+"="+value3);
-                                       String value=label_arr.getString(i);
-                                       message_list.add(String.valueOf(value) +"\n");
-                                       //submit_update_status.setEnabled(false);
-                                       Submit_Co_Applicant();
-                                       progressDialog.dismiss();
-                                   }
-
-
-                                   // x.add(value3);
-                                   // Log.e("json", i+"="+value3);
-                               }
-
-
-
-                              // Toast.makeText(getApplicationContext(),"Please Upload the mandatory Documents", Toast.LENGTH_SHORT).show();
-
-                           }
-
-                            //   JSONArray ja = response.getJSONArray(Params.emp_states);
+                            }
 
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
-
-
+                        progressDialog.dismiss();
                     }
                 }, new Response.ErrorListener() {
 
             @Override
             public void onErrorResponse(VolleyError error) {
                 progressDialog.dismiss();
-
-                Log.e("the error",error.toString());
                 Toast.makeText(getApplicationContext(),error.getMessage(), Toast.LENGTH_SHORT).show();
             }
         }) {
@@ -519,6 +489,23 @@ public class Applicant_Doc_Details_revamp extends SimpleActivity {
                             JSONArray jsonArray = jsonObject1.getJSONArray("key_arr");
                             jsonobject_2 = jsonObject1.getJSONObject("document_arr");
                             Log.e("KEY_ARRar",jsonArray.toString());
+
+                           /* for (int i=0;i<jsonArray.length();i++) {
+                                JSONObject J = null;
+
+                                try {
+
+                                    J = jsonArray.getJSONObject(i);
+
+
+                                    String test=jsonArray.getString("document_req");
+
+
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }*/
+
                             Log.e("jsonobject_2",jsonobject_2.toString());
                             if (jsonArray.length()>0){
                                 // Objs.a.showToast(mCon, String.valueOf(object.getJSONArray(Params.products)));
@@ -729,6 +716,7 @@ public class Applicant_Doc_Details_revamp extends SimpleActivity {
 
                 String key = J.getString("key");
                 String document_req = J.getString("document_req");
+                String enable_status = J.getString("enable_status");
                 if(document_req.equals("0"))
                 {
                   //  String star="<font color='#D44D53'>*</font>";
@@ -736,19 +724,31 @@ public class Applicant_Doc_Details_revamp extends SimpleActivity {
                 }else
                 {
                     String star="<font color='#D44D53'>*</font>";
-                    holder.class_name.setText(Html.fromHtml(key + " "+star));
+                  //  holder.class_name.setText(Html.fromHtml(key + " "+star));
+                    holder.class_name.setText(Html.fromHtml(key));
                 }
 
                 Typeface font = Typeface.createFromAsset(getApplicationContext().getAssets(), "segoe_ui.ttf");
                 holder.class_name.setTypeface(font,Typeface.BOLD);
                 holder.class_name.setTextSize(16);
-                if(document_req.equals("0"))
+                if(enable_status.equals("0"))
                 {
-                    holder.mandatory_do.setText("(Highly Increases Loan Approval)");
-                    holder. mandatory_do.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.but_red));
+                    if(document_req.equals("0") || enable_status.equals("0"))
+                    {
+                        holder. mandatory_do.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.but_red));
+                        holder.card_view_class_name.setVisibility(View.GONE);
+                    }else
+                    {
+                        holder.card_view_class_name.setVisibility(View.VISIBLE);
+                        //   holder.mandatory_do.setText("(Mandatory Document)");
+                        holder. mandatory_do.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.but_red));
+                    }
+                 //   holder.mandatory_do.setText("(Highly Increases Loan Approval)");
+
                 }else
                 {
-                    holder.mandatory_do.setText("(Mandatory Document)");
+                    holder.card_view_class_name.setVisibility(View.VISIBLE);
+                 //   holder.mandatory_do.setText("(Mandatory Document)");
                     holder. mandatory_do.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.but_red));
                 }
 
@@ -758,8 +758,10 @@ public class Applicant_Doc_Details_revamp extends SimpleActivity {
 
                     holder.uploaded_yes.setImageDrawable(getResources().getDrawable(R.drawable.ic_green_tick));
 
+
                 }else {
                     holder.uploaded_yes.setImageDrawable(getResources().getDrawable(R.drawable.ic_grey_tick));
+
                 }
 
                // jsonobject_2
@@ -1303,7 +1305,8 @@ public class Applicant_Doc_Details_revamp extends SimpleActivity {
         //  dialog.getWindow().setLayout(display.getWidth() * 90 / 100, LinearLayout.LayoutParams.WRAP_CONTENT);
         dialog.setCancelable(true);
         dialog.setCanceledOnTouchOutside(false);
-        AppCompatButton delete = (AppCompatButton) dialog.findViewById(R.id.delete);
+        AppCompatTextView delete = (AppCompatTextView) dialog.findViewById(R.id.delete);
+        AppCompatButton upload = (AppCompatButton) dialog.findViewById(R.id.upload);
         Button no=(Button)dialog.findViewById(R.id.no);
         AppCompatTextView bank_statement=(AppCompatTextView)dialog.findViewById(R.id.bank_statement);
         AppCompatTextView document_url=(AppCompatTextView)dialog.findViewById(R.id.document_url);
@@ -1311,6 +1314,7 @@ public class Applicant_Doc_Details_revamp extends SimpleActivity {
         String formattedString = message_list.toString()
                 .replace("[", "")  //remove the right bracket
                 .replace("]", "")
+                .replace(",", "")
                 .replaceAll("\"", "")
                 .trim();
 
@@ -1324,12 +1328,14 @@ public class Applicant_Doc_Details_revamp extends SimpleActivity {
 
             }
         });
-       /* no.setOnClickListener(new View.OnClickListener() {
+
+        upload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                dialog.dismiss();
+                Intent intent = new Intent(Applicant_Doc_Details_revamp.this, Upload_Activity_Bank.class);
+                startActivity(intent);
             }
-        });*/
+        });
 
         if (!dialog.isShowing()) {
             dialog.show();
@@ -1502,68 +1508,6 @@ public class Applicant_Doc_Details_revamp extends SimpleActivity {
                         }
                     }
                 });
-
-               /* holder.Over_all.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        J = getItem(position);
-                        try {
-
-                            String id =   J.getString(Params.id);
-                            String doc_name =   J.getString(Params.doc_typename);
-                            String docid =   J.getString(Params.doc_id);
-                            String class_id =   J.getString(Params.class_id);
-                            String doc_typename =   J.getString(Params.doc_typename);
-                            String user_type =    J.getString(Params.user_type);
-                            String transaction_id =   J.getString(Params.transaction_id);
-
-                           *//*  Objs.a.showToast(mCon, "Gridview  " +id +"\n"+ transaction_id +"\n"+ doc_name
-                                    +"\n"+  docid +"\n"+class_id +"\n"+
-                                    user_type );*//*
-
-
-                            Objs.ac.StartActivityPutExtra(mCon, DocGridView_List1.class,
-                                    Params.class_id,class_id,
-                                    Params.user_type,user_type,
-                                    Params.transaction_id,transaction_id,
-                                    Params.doc_id,docid,
-                                    Params.id,id,
-                                    Params.doc_typename,doc_typename);
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                });
-                holder.Ly_first.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        J = getItem(position);
-                        try {
-                            String id =   J.getString(Params.id);
-                            String doc_typename =   J.getString(Params.doc_typename);
-                            String docid =   J.getString(Params.doc_id);
-                            String class_id =   J.getString(Params.class_id);
-                            String user_type =    J.getString(Params.user_type);
-                            String transaction_id =   J.getString(Params.transaction_id);
-
-
-                            *//*Objs.a.showToast(mCon, "Upload  " +id +"\n"+ transaction_id +"\n"+ doc_typename
-                                    +"\n"+  docid +"\n"+class_id +"\n"+
-                                   user_type );
-*//*
-                            Objs.ac.StartActivityPutExtra(mCon, MainActivity_IMG_Property2.class,
-                                    Params.id,id
-                                    , Params.doc_typename,doc_typename,
-                                    Params.docid,docid
-                                    , Params.class_id,class_id,
-                                    Params.user_type,user_type,
-                                    Params.transaction_id,transaction_id);
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                });*/
-
 
 
             } catch (NullPointerException e) {

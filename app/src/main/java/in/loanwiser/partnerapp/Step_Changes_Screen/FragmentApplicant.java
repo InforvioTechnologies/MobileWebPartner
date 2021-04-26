@@ -167,7 +167,7 @@ public class FragmentApplicant extends Fragment implements CompoundButton.OnChec
         tvs.setTextColor(Color.parseColor("#D44D53"));
         check_list_name.addView(tvs);
 
-        Docum_ch_step1.setOnClickListener(new View.OnClickListener() {
+       /* Docum_ch_step1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 boolean oneChecked = false;
@@ -274,12 +274,12 @@ public class FragmentApplicant extends Fragment implements CompoundButton.OnChec
                                     Docum_ch_step1.setVisibility(View.GONE);
                                     Toast.makeText(getActivity(), "Please Check the CO Applicant Checklist and Proceed!!!",Toast.LENGTH_SHORT).show();
                                     viewPager.setCurrentItem(1);
-                                  /*  Fragment fragment = new FragmentCoApplicant1();
+                                  *//*  Fragment fragment = new FragmentCoApplicant1();
                                     FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                                     FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                                     fragmentTransaction.replace(R.id.tabLayout, fragment);
                                     fragmentTransaction.addToBackStack(null);
-                                    fragmentTransaction.commit();*/
+                                    fragmentTransaction.commit();*//*
 
                                 }else {
                                     Intent intent = new Intent(getActivity(), Applicant_Doc_Details_revamp.class);
@@ -298,6 +298,15 @@ public class FragmentApplicant extends Fragment implements CompoundButton.OnChec
                 }
 
            //
+            }
+        });*/
+
+        Docum_ch_step1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), Applicant_Doc_Details_revamp.class);
+                startActivity(intent);
+                getActivity().finish();
             }
         });
 
@@ -570,7 +579,8 @@ public class FragmentApplicant extends Fragment implements CompoundButton.OnChec
 
             if(document_req.equals("1"))
             {
-                tv.setText(Html.fromHtml(key + " "+star));
+               // tv.setText(Html.fromHtml(key + " "+star));
+                tv.setText(Html.fromHtml(key));
             }else {
                 tv.setText(Html.fromHtml(key));
             }

@@ -1417,7 +1417,7 @@ public class Viability_Screen_revamp_Pl_BL extends SimpleActivity implements Num
     }
 
     private boolean validate_company_pincode_txt(){
-        if (company_pincode_txt.getText().toString().isEmpty()) {
+        if (company_pincode_txt.getText().toString().isEmpty() || company_pincode_txt.length() <6) {
             company_pincode_txt.setError(getText(R.string.error_rise));
             company_pincode_txt.requestFocus();
             return false;
@@ -1430,7 +1430,7 @@ public class Viability_Screen_revamp_Pl_BL extends SimpleActivity implements Num
     }
 
     private boolean validate_residence_pincode1_edit_txt(){
-        if (residence_pincode1_edit_txt_resi.getText().toString().isEmpty()) {
+        if (residence_pincode1_edit_txt_resi.getText().toString().isEmpty()|| residence_pincode1_edit_txt_resi.length() <6) {
             residence_pincode1_edit_txt_resi.setError(getText(R.string.error_rise));
             residence_pincode1_edit_txt_resi.requestFocus();
             return false;
@@ -3115,7 +3115,9 @@ public class Viability_Screen_revamp_Pl_BL extends SimpleActivity implements Num
 
         public void onItemsSelected(boolean[] selected) {
             // Do something here with the selected items
+            Log.e("the value",selected.toString());
             spinner_salary_proof.setSelected(selected);
+
             StringBuilder builder = new StringBuilder();
 
             Income_proof_selected = selected;
@@ -3163,6 +3165,7 @@ public class Viability_Screen_revamp_Pl_BL extends SimpleActivity implements Num
     };
 
     private MultiSpinner.MultiSpinnerListener onSelectedListener1 = new MultiSpinner.MultiSpinnerListener() {
+
 
         public void onItemsSelected(boolean[] selected) {
             // Do something here with the selected items

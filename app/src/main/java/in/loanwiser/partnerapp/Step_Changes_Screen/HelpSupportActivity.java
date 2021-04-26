@@ -33,7 +33,9 @@ public class HelpSupportActivity extends SimpleActivity {
         reportissue_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(HelpSupportActivity.this, ReportIssueActivity.class));
+
+                Intent intent = new Intent(HelpSupportActivity.this,ReportIssueActivity.class);
+                startActivity(intent);
             }
         });
 

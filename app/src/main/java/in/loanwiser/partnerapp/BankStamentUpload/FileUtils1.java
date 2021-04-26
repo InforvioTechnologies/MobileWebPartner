@@ -10,6 +10,8 @@ import android.os.Environment;
 import android.provider.DocumentsContract;
 import android.provider.MediaStore;
 
+import org.json.JSONException;
+
 import java.io.File;
 
 public class FileUtils1 {
@@ -153,21 +155,24 @@ public class FileUtils1 {
 
         Cursor cursor = null;
         final String column = "_data";
-        final String[] projection = {
+      /*  final String[] projection = {
                 column
-        };
-
+        };*/
+        String[] projection = {MediaStore.Images.Media.DATA};
+         cursor = context.getContentResolver().query(uri, projection, null, null, null);
+        if (cursor == null) return null;
         try {
             cursor = context.getContentResolver().query(uri, projection, selection, selectionArgs,
                     null);
             if (cursor != null && cursor.moveToFirst()) {
-                final int index = cursor.getColumnIndexOrThrow(column);
+                final int index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
                 return cursor.getString(index);
             }
         } finally {
             if (cursor != null)
                 cursor.close();
         }
+
         return null;
     }
 
@@ -190,6 +195,7 @@ public class FileUtils1 {
             if (cursor != null)
                 cursor.close();
         }
+
         return null;
     }
 

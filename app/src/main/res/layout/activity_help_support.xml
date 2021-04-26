@@ -27,16 +27,17 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
+                android:layout_marginTop="20dp"
                 android:orientation="vertical">
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/crm_btn"
                     android:layout_width="match_parent"
                     android:background="@drawable/but_shape_blue"
-                    android:drawableLeft="@drawable/ic_contacts"
+                    android:drawableLeft="@drawable/contacts_rm"
                     android:drawableTint="@color/white"
                     android:drawablePadding="36dp"
+                    android:layout_margin="10dp"
                     android:gravity="left|center"
                     android:height="60dp"
                     android:padding="6dp"

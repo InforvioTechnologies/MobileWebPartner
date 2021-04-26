@@ -49,29 +49,30 @@ public class Welcome_Page extends AppCompatActivity implements Animation.Animati
     AppCompatTextView textview1,emp2,emp3;
     AppCompatImageView imageView;
     private AppCompatButton Bt_Register, Bt_Login;
+    AppCompatTextView earntxt,typeloan;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_welcome__page);
+        setContentView(R.layout.welcome_layout);
 
         animFadein = AnimationUtils.loadAnimation(getApplicationContext(),
                 R.anim.fade_in);
 
         // set animation listener
-        textview1 =(AppCompatTextView) findViewById(R.id.welcome);
+    /*    textview1 =(AppCompatTextView) findViewById(R.id.welcome);
         emp2 =(AppCompatTextView) findViewById(R.id.emp2);
         emp3 =(AppCompatTextView) findViewById(R.id.emp3);
-        imageView =(AppCompatImageView) findViewById(R.id.logo);
+        imageView =(AppCompatImageView) findViewById(R.id.logo);*/
 
-        animFadein.setAnimationListener(this);
+      //  animFadein.setAnimationListener(this);
 
-        textview1.setVisibility(View.VISIBLE);
-        imageView.setVisibility(View.VISIBLE);
+       /* textview1.setVisibility(View.VISIBLE);
+        imageView.setVisibility(View.VISIBLE);*/
 
         // start the animation
-        textview1.startAnimation(animFadein);
-        imageView.startAnimation(animFadein);
+      /*  textview1.startAnimation(animFadein);
+        imageView.startAnimation(animFadein);*/
 
         initCode();
 
@@ -107,18 +108,22 @@ public class Welcome_Page extends AppCompatActivity implements Animation.Animati
 
     private void initUI() {
 
-        welcome = (AppCompatTextView) findViewById(R.id.welcome);
-        emp2 = (AppCompatTextView) findViewById(R.id.emp2);
+      /*  welcome = (AppCompatTextView) findViewById(R.id.welcome);
+        emp2 = (AppCompatTextView) findViewById(R.id.emp2);*/
         Bt_Register = (AppCompatButton) findViewById(R.id.Bt_Register);
         Bt_Login = (AppCompatButton) findViewById(R.id.Bt_Login);
+        earntxt = (AppCompatTextView) findViewById(R.id.earntxt);
+        typeloan = (AppCompatTextView) findViewById(R.id.typeloan);
 
     }
 
     private void fonts() {
         // Objs.a.OutfitEditTextStyle(mCon,editTextOtp);
-        Objs.a.OutfitNormalFontStyle(mCon, R.id.welcome);
+     /*   Objs.a.OutfitNormalFontStyle(mCon, R.id.welcome);
         Objs.a.OutfitNormalFontStyle(mCon, R.id.emp2);
-        Objs.a.OutfitNormalFontStyle(mCon, R.id.emp3);
+        Objs.a.OutfitNormalFontStyle(mCon, R.id.emp3);*/
+        Objs.a.OutfitNormalFontStyle(mCon, R.id.earntxt);
+        Objs.a.OutfitNormalFontStyle(mCon, R.id.typeloan);
 
         //Objs.a.ButtonFontStyle(mCon, R.id.Bt_Register);
       // Objs.a.ButtonFontStyle(mCon, R.id.Bt_Login);

@@ -1,5 +1,6 @@
 package in.loanwiser.partnerapp.Partner_Statues;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -13,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
@@ -81,7 +83,7 @@ public class ActivityFragment extends Fragment implements NavigationView.OnNavig
     }
 
 
-    private AppCompatButton navigate,navigate1;
+    private AppCompatButton navigate,navigate1,button_website,button_businessview;
     private SliderLayout mDemoSlider;
     private ActivityFragment mcon =this;
     private LinearLayout chat;
@@ -98,6 +100,7 @@ public class ActivityFragment extends Fragment implements NavigationView.OnNavig
     Document_Adapter adapter2;
     Post_share_Statues adapter3;
     Ask_Lead_Statues adapter_ask;
+    FrameLayout framelayout;
 
     AppCompatButton my_earnings,my_leads;
     DrawerLayout drawer;
@@ -135,18 +138,19 @@ public class ActivityFragment extends Fragment implements NavigationView.OnNavig
         url_maps.put("Vehicle Loan", "http://cscapi.propwiser.com/mobile/images/Our_Banking_Partnersl.png");
         url_maps.put("Vehicle Loan1", "http://cscapi.propwiser.com/mobile/images/Our_Banking_Partnersl.png");*/
 
-        url_maps.put("Home Loan", "http://cscapi.propwiser.com/mobile/images/home_loan.png");
-        url_maps.put("Loan Against Property", "http://cscapi.propwiser.com/mobile/images/Loan_aganst_property.png");
-        url_maps.put("Personal Loan", "http://cscapi.propwiser.com/mobile/images/Personal_loan.png");
-        url_maps.put("Business Loan", "http://cscapi.propwiser.com/mobile/images/Busines_loan.png");
-        url_maps.put("Vehicle Loan", "http://cscapi.propwiser.com/mobile/images/vehicle_Loan.png");
-        url_maps.put("Our Banks", "http://cscapi.propwiser.com/mobile/images/Our_Banking_Partnersl.png");
-       // Ly_UI(view);
+        url_maps.put("Home Loan", "https://cscapi.loanwiser.in/mobile/images/home_loan.png");
+        url_maps.put("Loan Against Property", "https://cscapi.loanwiser.in/mobile/images/Loan_aganst_property.png");
+        url_maps.put("Personal Loan", "https://cscapi.loanwiser.in/mobile/images/Personal_loan.png");
+        url_maps.put("Business Loan", "https://cscapi.loanwiser.in/mobile/images/Busines_loan.png");
+        url_maps.put("Vehicle Loan", "https://cscapi.loanwiser.in/mobile/images/vehicle_Loan.png");
+        url_maps.put("Our Banks", "https://cscapi.loanwiser.in/mobile/images/Our_Banking_Partnersl.png");
+        // Ly_UI(view);
         recycler_view = (RecyclerView)view.findViewById(R.id.recycler_view);
         ask_recycler_view = (RecyclerView)view.findViewById(R.id.ask_recycler_view);
         recycler_view_health_ass = (RecyclerView)view.findViewById(R.id.recycler_view_health_ass);
         recycler_view_document_ = (RecyclerView)view.findViewById(R.id.recycler_view_document_);
         recycler_view_share = (RecyclerView)view.findViewById(R.id.recycler_view_share);
+        framelayout = (FrameLayout) view.findViewById(R.id.framelayout);
 
 
 
@@ -159,6 +163,9 @@ public class ActivityFragment extends Fragment implements NavigationView.OnNavig
         ly_document_assement_=view.findViewById(R.id.ly_document_assement_);
         network_stat=view.findViewById(R.id.network_stat);
         share_material=view.findViewById(R.id.share_material);
+
+        button_businessview=view.findViewById(R.id.button_businessview);
+        button_website=view.findViewById(R.id.button_website);
 
         my_earnings = (AppCompatButton) view.findViewById(R.id.my_earnings);
         my_leads = (AppCompatButton) view.findViewById(R.id.my_leads);
@@ -189,6 +196,22 @@ public class ActivityFragment extends Fragment implements NavigationView.OnNavig
       //  recent_leads.setTypeface(font);
       //  Document_cheklist.setTypeface(font);
       //  fhas.setTypeface(font);
+
+        button_website.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), WebsiteActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        button_businessview.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(getActivity(),BusinessCardActivity.class);
+                startActivity(intent);
+            }
+        });
 
 
 
@@ -335,17 +358,17 @@ public class ActivityFragment extends Fragment implements NavigationView.OnNavig
                                     Ly_allocate.setVisibility(View.VISIBLE);
                                     firstlay.setVisibility(View.VISIBLE);
                                     for(int i = 0;i<ja.length();i++){
-                                            if( i < 3)
-                                            {
-                                                JSONObject J = ja.getJSONObject(i);
-                                                items.add(new Suggestion_item_freqent( J.getString("user_id"), J.getString("user_id"),J.getString("username"),
-                                                        J.getString("loan_type"),J.getString("loan_amount"),J.getString("status_disp")
-                                                ));
-                                                adapter.notifyDataSetChanged();
 
-                                                view_all_ly1.setVisibility(View.VISIBLE);
-                                            }
+                                        if( i < 3)
+                                        {
+                                            JSONObject J = ja.getJSONObject(i);
+                                            items.add(new Suggestion_item_freqent( J.getString("user_id"), J.getString("user_id"),J.getString("username"),
+                                                    J.getString("loan_type"),J.getString("loan_amount"),J.getString("status_disp")
+                                            ));
+                                            adapter.notifyDataSetChanged();
 
+                                            view_all_ly1.setVisibility(View.VISIBLE);
+                                        }
                                     }
                                     recycler_view.setAdapter(adapter);
 
@@ -425,6 +448,7 @@ public class ActivityFragment extends Fragment implements NavigationView.OnNavig
 
                                 if (ja.length()>0){
                                     for(int i = 0;i<ja.length();i++){
+
                                         if( i < 3)
                                         {
                                             JSONObject J = ja.getJSONObject(i);
@@ -435,7 +459,6 @@ public class ActivityFragment extends Fragment implements NavigationView.OnNavig
                                             adapter_ask.notifyDataSetChanged();
                                             view_all_ly.setVisibility(View.VISIBLE);
                                         }
-
 
                                     }
                                     ask_recycler_view.setAdapter(adapter_ask);
@@ -630,33 +653,10 @@ public class ActivityFragment extends Fragment implements NavigationView.OnNavig
         return true;
     }
 
-   /* public void ExitAlert(Context context) {
 
 
 
-        Log.e("it is called ","it is called ");
-        //android.app.AlertDialog;
-        androidx.appcompat.app.AlertDialog.Builder builder = new androidx.appcompat.app.AlertDialog.Builder(context, adhoc.app.applibrary.R.style.MyAlertDialogStyle);
-        builder.setTitle(context.getResources().getString(adhoc.app.applibrary.R.string.attention));
-        builder.setIcon(context.getResources().getDrawable(adhoc.app.applibrary.R.drawable.ic_info_outline_black_24dp));
-        builder.setMessage("Do you want to Logout..?");
-        builder.setNegativeButton("No", null);
-        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                Pref.removeLogin(getActivity());
-                Pref.removeID(getActivity());
-                Pref.removeMOB(getActivity());
-                Pref.removeMobile(getActivity());
-                Pref.removePART(getActivity());
-                Intent i = new Intent(getActivity(), Welcome_Page.class);
-                i.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-                startActivity(i);
-                getActivity().finish();
-            }
-        });
-        androidx.appcompat.app.AlertDialog alert = builder.create();
-        alert.show();
-        Objs.a.DialogStyle(context, alert);
-    }*/
+ 
+
+
 }

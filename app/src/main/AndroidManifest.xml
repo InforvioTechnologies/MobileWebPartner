@@ -20,7 +20,6 @@
     <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
-
     <uses-feature android:name="android.hardware.camera" />
     <uses-feature
         android:glEsVersion="0x00020000"
@@ -30,10 +29,11 @@
         android:name="adhoc.app.applibrary.Config.AppUtils.VolleySignleton.AppController"
         android:allowBackup="true"
         android:hardwareAccelerated="true"
-        android:icon="@mipmap/ic_partner"
+        android:icon="@mipmap/ic_partner_new"
         android:label="@string/app_name"
         android:largeHeap="true"
         android:launchMode="singleInstance"
+        android:requestLegacyExternalStorage="true"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
@@ -78,11 +78,26 @@
             android:windowSoftInputMode="stateHidden">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
-       <!-- <activity
+        <activity android:name=".User_Account.Pic_Doc_File"></activity>
+
+        <activity android:name=".Partner_Statues.BusinessCardActivity"
+            android:theme="@style/NoAction2"
+            android:windowSoftInputMode="stateHidden"/>
+        <activity
+            android:name=".Partner_Statues.WebsiteActivity"
+            android:theme="@style/NoAction2"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".Partner_Statues.BusinesscardEditActivity"
+            android:theme="@style/NoAction2"
+            android:windowSoftInputMode="stateHidden" />
+        <!--
+ <activity
             android:name=".BankStamentUpload.Upload_Activity_Bank"
             android:configChanges="screenSize|orientation"
             android:theme="@style/NoAction2"
@@ -92,7 +107,8 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>-->
+        </activity>
+        -->
         <activity android:name=".User_Account.VerifedOTP" /> <!-- Firebase Notifications -->
         <service android:name=".service.MyFirebaseMessagingService">
             <intent-filter>
@@ -107,41 +123,71 @@
                 <action android:name="com.google.android.gms.auth.api.phone.SMS_RETRIEVED" />
             </intent-filter>
         </receiver>
+       <!-- <receiver
+            android:name=".User_Account.InstallReferrerReceiver"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.google.android.gms.auth.api.phone.SMS_RETRIEVED" />
+            </intent-filter>
+        </receiver>-->
 
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="${applicationId}.FileProvider"
+            android:enabled="true"
             android:exported="false"
             android:grantUriPermissions="true"
+            android:initOrder="100"
+            android:permission="android.permission.MANAGE_DOCUMENTS"
             tools:replace="android:authorities">
-            <meta-data
+            <intent-filter>
+                <action android:name="android.content.action.DOCUMENTS_PROVIDER" />
+            </intent-filter>
 
+            <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_path" />
-        </provider>
-
-       <!-- tools:replace="android:resource"-->
-
-        <activity android:name=".BankStamentUpload.BankAnalysis"
+        </provider> <!-- tools:replace="android:resource" -->
+        <activity
+            android:name=".BankStamentUpload.BankAnalysis"
             android:theme="@style/NoAction2"
-            android:windowSoftInputMode="stateHidden"/>
-        <activity android:name=".BankStamentUpload.Upload_Activity_Bank"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".BankStamentUpload.Upload_Activity_Bank"
             android:theme="@style/NoAction2"
-            android:windowSoftInputMode="stateHidden"/>
-
-        <activity android:name=".BankStamentUpload.ReportIssueActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".Documents.Document_Availability_Check"
             android:theme="@style/NoAction2"
-            android:windowSoftInputMode="stateHidden"/>
-
-        <activity android:name=".Step_Changes_Screen.RelationshipContact"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".PartnerActivitys.Activity_Streem_list"
             android:theme="@style/NoAction2"
-            android:windowSoftInputMode="stateHidden"/>
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".Step_Changes_Screen.LoanwiserAcadmy"
+            android:theme="@style/NoAction2"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".Documents.ActivityStreamActivity"
+            android:theme="@style/NoAction2"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".BankStamentUpload.ReportIssueActivity"
+            android:theme="@style/NoAction2"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".Step_Changes_Screen.RelationshipContact"
+            android:theme="@style/NoAction2"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".Partner_Statues.ShareActivity"
+            android:theme="@style/NoAction2"
+            android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".Step_Changes_Screen.HelpSupportActivity"
             android:theme="@style/NoAction2"
             android:windowSoftInputMode="stateHidden" />
-
-
         <activity
             android:name=".BankStamentUpload.Bank_DocGridView_List"
             android:theme="@style/NoAction2"
@@ -150,12 +196,10 @@
             android:name=".BankStamentUpload.Doc_ImageView_Bank"
             android:theme="@style/NoAction2"
             android:windowSoftInputMode="stateHidden" />
-
         <activity
             android:name=".BankStamentUpload.Doc_ImageView_pay_structur"
             android:theme="@style/NoAction2"
             android:windowSoftInputMode="stateHidden" />
-
         <activity
             android:name=".Payment.CRIF_Score_Activity"
             android:theme="@style/NoAction2"
@@ -252,12 +296,10 @@
             android:name=".Step_Changes_Screen.Eligibility_HL_New"
             android:theme="@style/NoAction2"
             android:windowSoftInputMode="stateHidden" />
-
         <activity
             android:name=".Step_Changes_Screen.DocumentChecklistActivity"
             android:theme="@style/NoAction2"
             android:windowSoftInputMode="stateHidden" />
-
         <activity
             android:name=".Step_Changes_Screen.Loan_Viyability_Check_Activity"
             android:theme="@style/NoAction2"
@@ -322,17 +364,14 @@
             android:name=".PartnerActivitys.Applicant_Info_new"
             android:theme="@style/NoAction2"
             android:windowSoftInputMode="stateHidden" />
-
         <activity
             android:name=".PartnerActivitys.Submitsuccess_Activity"
             android:theme="@style/NoAction2"
             android:windowSoftInputMode="stateHidden" />
-
         <activity
             android:name=".PartnerActivitys.Ask_user_Dashboard_Activity"
             android:theme="@style/NoAction2"
             android:windowSoftInputMode="stateHidden" />
-
         <activity
             android:name=".Step_Changes_Screen.Eligibility_Check_PL"
             android:theme="@style/NoAction2"
@@ -349,17 +388,14 @@
             android:name=".Partner_Statues.Ask_Dashboard_Activity"
             android:theme="@style/NoAction2"
             android:windowSoftInputMode="stateHidden" />
-
         <activity
             android:name=".Partner_Statues.ChecklistShare"
             android:theme="@style/NoAction2"
             android:windowSoftInputMode="stateHidden" />
-
         <activity
             android:name=".User_Account.LoginNew"
             android:theme="@style/NoAction2"
             android:windowSoftInputMode="stateHidden" />
-
         <activity
             android:name=".User_Account.BankDetails"
             android:theme="@style/NoAction2"
@@ -432,12 +468,10 @@
             android:name=".PartnerActivitys.MainActivity_Add_Lead"
             android:theme="@style/NoAction2"
             android:windowSoftInputMode="stateHidden" />
-
         <activity
             android:name=".PartnerActivitys.Doc_ImageView_Viability"
             android:theme="@style/NoAction2"
             android:windowSoftInputMode="stateHidden" />
-
         <activity
             android:name=".Lead_Website.MainActivity_Add_Lead_Website"
             android:theme="@style/NoAction2"
@@ -466,12 +500,10 @@
             android:name=".Documents.Applicant_Doc_Details"
             android:theme="@style/NoAction2"
             android:windowSoftInputMode="stateHidden" />
-
         <activity
             android:name=".Documents.Applicant_Doc_Details_revamp"
             android:theme="@style/NoAction2"
             android:windowSoftInputMode="stateHidden" />
-
         <activity
             android:name=".Documents.Document_Details"
             android:theme="@style/NoAction2"
@@ -523,7 +555,6 @@
             android:name=".CameraActivity.UploadActivity1"
             android:theme="@style/NoAction2"
             android:windowSoftInputMode="stateHidden" />
-
         <activity
             android:name=".CameraActivity.ASK_UploadActivity1"
             android:theme="@style/NoAction2"
@@ -536,7 +567,6 @@
             android:name=".CameraActivity.MainActivity"
             android:theme="@style/NoAction2"
             android:windowSoftInputMode="stateHidden" />
-
         <activity
             android:name=".PartnerActivitys.Track_Status"
             android:theme="@style/NoAction2"

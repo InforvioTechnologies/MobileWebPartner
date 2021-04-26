@@ -65,12 +65,13 @@
     <string name="generate">Get OTP</string>
     <string name="submit">Verify OTP</string>
     <string name="upload_doc">Upload Document</string>
-    <string name="track_status">Track Status</string>
+    <string name="track_status">Track Status \n(These steps are processed by Loanwiser)</string>
     <string name="error_postal">Please enter the Pincode</string>
     <string name="city_type">Select the City</string>
     <string name="state_type">Select the State</string>
     <string name="mobileerror">Enter a valid mobile number</string>
-    <string name="no_leads_data" tools:ignore="ExtraTranslation">No Leads found "\n" add your leads "\n" to Start with Loanwiser</string>
+    <string name="no_leads_data" tools:ignore="ExtraTranslation">You have not added any lead yet.
+        Your leads will \n appear hear once you start adding them </string>
     <string name="noask_leads_data" tools:ignore="ExtraTranslation">No Ask Leads found</string>
     <string name="listapp">List of Applications</string>
 
@@ -90,7 +91,7 @@
     <string name="st">Tamil Nadu"\n" Karnataka"\n" Andhra"\n" Thelungana"\n" Rajasthan</string>
     <string name="offer">Lists of offers generated</string>
     <string name="b_holder_name">Account holder name</string>
-    <string name="b_ac_no">Account number</string>
+    <string name="b_ac_no">Account number :</string>
     <string name="b_ac_no1">Confirm account number</string>
     <string name="b_ac_type">Account Type</string>
     <string name="bank_name">Name of the bank</string>
@@ -114,6 +115,14 @@
     <string name="doc_upload1">Document Upload</string>
     <string name="bank_statement_anlysis_report">Bank Statement Analysis Report Generation</string>
 
+    <string name="bank_analysis_met">Congrats.! You have successfully \n met
+        the document requirement for \n at least one of the eligible banks. \n\n\n To make this applicant
+        eligible for \n multiple banks, try submitting \n documents for other eligible banks, \n if any.</string>
+
+    <string name="bank_analysis_not_met">Sorry, you have not met the document \n requirement of
+        any of the eligible \n banks. Please try to provide
+        the \n documents for at least one of the bank \n listed below. \n\n\n
+    Without the required Documents, this \n lead cannot be processed further.</string>
     <string name="internet_b">Internet Banking</string>
     <string name="mbank_b">Mobile Banking</string>
     <string name="open_my">Open My</string>
@@ -692,6 +701,7 @@
     <string name="error_bus_setup_invest">Enter the business set up investment</string>
     <string name="error_value_of_machinaries">Enter the Value of machinaries</string>
     <string name="payment1">Payment</string>
+    <string name="doc_availability">Bank Availability Check</string>
     <string name="crif_request">CRIF Request</string>
 
     <string name="error_monthly_income">Enter the no monthly income</string>
@@ -723,7 +733,7 @@
     <string name="pay_desc">(Custom Plan cannot be paid using Loanwiser Coins)</string>
     <string name="paylink_cus">Send Payment Link to Customer</string>
     <string name="pay_coin">Pay using LoanWiser Credit Coins</string>
-    <string name="collect_cash">Pay &amp; Collect Cash</string>
+    <string name="collect_cash">Pay online &amp; Collect cash from customer</string>
     <string name="skippayment">Skip Payment &amp; Proceed</string>
     <string name="skippayment1">Skip &amp; Proceed</string>
     <string name="note_desc"><b>Note :</b> Any amount of payment made do not assure a guaranteed loan. if you skip this payment for credit Analysis,there will be delay in your loan processing</string>
@@ -742,6 +752,7 @@
 
     <string name="crif_report">CRIF Report Activity</string>
     <string name="we_process">We are processing your data, This usually takes less than a minute...</string>
+    <string name="we_process1">We are uploading your documents to   Server, please wait...</string>
 
     <string name="instantloan">Instant Loan Viability Report</string>
     <string name="fasttrack_loan">Fast Track Loan Processing</string>
@@ -756,7 +767,7 @@
     <string name="current_bal">Current Available Balance 500 Credit Coins</string>
     <string name="imp_note">Important Note</string>
     <string name="loanwiser_wallet">You\'ll be Charged 100 Credit Coins from your Loanwiser Wallet</string>
-    <string name="loanwiserweller_desc"> You\'ll receive 40 Credit Coins in your Loanwiser Wallet as the Partner Benefit if the customer profile is eligible for loan processing</string>
+    <string name="loanwiserweller_desc"> You\'ll receive 50 Credit Coins in your Loanwiser Wallet as the Partner Benefit if the customer profile is eligible for loan processing</string>
     <string name="makepayment">Make Payment</string>
     <string name="back">Back</string>
     <string name="paymentdet">Payment Details</string>
@@ -789,6 +800,18 @@
 
     <string name="my_leads">MY LEADS</string>
     <string name="my_earnings">MY EARNINGS</string>
+
+
+    <string name="act_detail">Activity Details</string>
+    <string name="cusname">Customer Name -</string>
+    <string name="no_activity_stream">No Activity List Found !!!</string>
+    <string name="cusmobile">Customer Mobile -</string>
+    <string name="applicantid">Applicant id -</string>
+    <string name="businessname">Business Name -</string>
+    <string name="pending_with">Pending with -</string>
+    <string name="ask_status">Ask Status :-</string>
+    <string name="ask_status_txt">Ask status -</string>
+    <string name="activities">Activities</string>
 
     <string name="save_later">SAVE FOR LATER</string>
     <string name="stepone_submit">Are you sure you want to Submit at Step1</string>
@@ -1023,6 +1046,10 @@
     <string name="submit_banksta">Submitted Bank Statements</string>
     <string name="view_anlysis">VIEW ANALYSIS</string>
     <string name="bank_anlysis">Bank Statement Analysis</string>
+
+    <string name="bank_anlysis_available_bank">Eligible and Available Banks</string>
+    <string name="bank_anlysis_available_bank1">Select the bank name to view the rules</string>
+
     <string name="bankste_list">Bank Statement List</string>
     <string name="uploadedmonth">Uploaded Months</string>
     <string name="requiredate">Required Date Range -</string>
@@ -1032,7 +1059,7 @@
     <string name="bankuploadlist">You Will Not Be Allowed To Submit Your Loan Application Unless You Upload It.</string>
     <string name="upload_require_but">Upload Required Bank Statement</string>
     <string name="overview">Overview</string>
-    <string name="user">User :</string>
+    <string name="user">Customer name :</string>
     <string name="nameon">Name :</string>
     <string name="addresss">Address :</string>
     <string name="accountw">Account</string>
@@ -1064,4 +1091,35 @@
     <string name="contactno">Contact No</string>
     <string name="relationmanagar">Relationship Manager</string>
     <string name="report_yurissue">Report Your Issues</string>
+    <string name="acd_learn">A Place to Learn and Up-Skill yourself on loan services business you are Providing to your Customers.</string>
+    <string name="loan_acddmy">Loanwiser Academy</string>
+
+    <string name="earnincometxt">Earn Extra Income by Referring Loan Leads</string>
+    <string name="typeloan">Personal Loan | Business Loan | Vehicle Loan | Home Loan | LAP | Credit Cards</string>
+    <string name="register">Register</string>
+    <string name="notes_txt"><b>Note:</b> Payment do not assure a guaranteed loan.</string>
+    <string name="firstone">In the next screen, You will have to enter customer mobile number, to which a payment link has to be sent. Customer can make payment himself by clicking on that link.</string>
+    <string name="secondone"><br>You\'ll be charged 100 Credit Coins from your Loanwiser credit coin wallet.\n\n</br> </string>
+    <string name="thrdone">You\'ve chosen to pay from your account and collect cash from customer. You should collect the exact amount mentioned above. We will call the customer for verification.</string>
+    <string name="sharepromo">Share Promos</string>
+
+
+    <string name="businessedit">Business Card - Edit</string>
+    <string name="temp_des">Door Step Loan services from 40+Banks</string>
+    <string name="websiteadd">Your Website Address</string>
+    <string name="copyurl">Copy URL</string>
+    <string name="instruction">Instructions</string>
+    <string name="info1">Your customer Can use this to apply for loan themselves</string>
+    <string name="info2">Once a Lead is Created i.e Step 1 Completed, the lead will also appear in your portal.</string>
+    <string name="info3">Either, you or Customer themselves Can Complete all the remaining steps</string>
+    <string name="info4">Share this in your social network to get more customers</string>
+    <string name="mywebsite">My Website</string>
+    <string name="edit"><u>Edit</u></string>
+    <string name="info5">Share this in your social network to get more customers</string>
+    <string name="businesscard">Business Card</string>
+
+    <string name="relationship">To Get a Relationship Manager(RM) appointed,you need to at-least submit one lead to Loanwiser</string>
+    <string name="techissue">While facing any Technical difficulties give a call on</string>
+    <string name="yogesnum"><u>8447909227</u></string>
+
 </resources>

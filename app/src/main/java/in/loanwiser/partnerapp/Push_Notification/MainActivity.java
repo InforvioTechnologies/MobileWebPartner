@@ -49,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
                     // now subscribe to `global` topic to receive app wide notifications
                     FirebaseMessaging.getInstance().subscribeToTopic(Config.TOPIC_GLOBAL);
 
+
                     displayFirebaseRegId();
 
                 } else if (intent.getAction().equals(Config.PUSH_NOTIFICATION)) {
@@ -116,6 +117,7 @@ public class MainActivity extends AppCompatActivity {
         // by doing this, the activity will be notified each time a new message arrives
         LocalBroadcastManager.getInstance(this).registerReceiver(mRegistrationBroadcastReceiver,
                 new IntentFilter(Config.PUSH_NOTIFICATION));
+
 
         // clear the notification area when the app is opened
         NotificationUtils.clearNotifications(getApplicationContext());

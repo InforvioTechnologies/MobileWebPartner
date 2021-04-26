@@ -158,7 +158,7 @@ public class FragmentCoApplicant1 extends Fragment implements CompoundButton.OnC
         tvs.setTextColor(Color.parseColor("#D44D53"));
         check_list_name.addView(tvs);
 
-        Docum_ch_step1.setOnClickListener(new View.OnClickListener() {
+       /* Docum_ch_step1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 boolean oneChecked = false;
@@ -269,8 +269,16 @@ public class FragmentCoApplicant1 extends Fragment implements CompoundButton.OnC
 
            //
             }
-        });
+        });*/
 
+        Docum_ch_step1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), Applicant_Doc_Details_revamp.class);
+                startActivity(intent);
+                getActivity().finish();
+            }
+        });
         return rootview;
 
 
@@ -541,6 +549,7 @@ public class FragmentCoApplicant1 extends Fragment implements CompoundButton.OnC
             if(document_req.equals("1"))
             {
                 tv.setText(Html.fromHtml(key + " "+star));
+                tv.setText(Html.fromHtml(key));
             }else {
                 tv.setText(Html.fromHtml(key));
             }

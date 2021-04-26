@@ -57,7 +57,7 @@ public class DocumentChecklist_Fragment extends SimpleActivity implements TabLay
 
     //This is our viewPager
     private ViewPager viewPager;
-    String get_jsonArray,userstatus,transaction_id,user_type,emp_states,applicant_count,property_identify;
+    String get_jsonArray,userstatus,transaction_id,user_type,emp_states,applicant_count,property_identify,loan_categoryid;
     private String tag_json_obj = "jobj_req", tag_json_arry = "jarray_req";
     private AlertDialog progressDialog;
 
@@ -177,6 +177,7 @@ public class DocumentChecklist_Fragment extends SimpleActivity implements TabLay
                                 transaction_id =  jsonObject2.getString("transaction_id");
                                 applicant_count =  jsonObject2.getString("applicant_count");
                                 property_identify =  jsonObject2.getString("property_identify");
+
 
                                 //  applicant_id =  "APP-"+user_id;
                                 Pref.putCoAPPAVAILABLE(mCon,applicant_count);

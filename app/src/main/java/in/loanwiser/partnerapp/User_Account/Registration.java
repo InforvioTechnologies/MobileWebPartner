@@ -18,6 +18,9 @@ import android.os.Handler;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.android.installreferrer.api.InstallReferrerClient;
+import com.android.installreferrer.api.InstallReferrerStateListener;
+import com.android.installreferrer.api.ReferrerDetails;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.material.snackbar.Snackbar;
 import androidx.core.app.ActivityCompat;
@@ -26,6 +29,9 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.AppCompatEditText;
 import androidx.appcompat.widget.AppCompatTextView;
+
+import android.os.RemoteException;
+import android.preference.PreferenceManager;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -76,6 +82,8 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -100,7 +108,7 @@ public class Registration extends SimpleActivity implements GoogleApiClient.Conn
     private GoogleApiClient mCredentialsApiClient;
     private static final int RC_HINT = 1000;
     private AppCompatEditText door,buliding,street,pincode,city,state;
-    private AppCompatEditText editTextName,phoneField;
+    private AppCompatEditText editTextName,phoneField,addess;
     private AwesomeValidation awesomeValidation;
     private AppCompatButton appCompatButtonGen_OTP;
     InputMethodManager imm;
@@ -115,7 +123,7 @@ public class Registration extends SimpleActivity implements GoogleApiClient.Conn
     private Spinner spinner_state;
     private AppCompatTextView txt_bussiness,state_you,city_you;
     private Spinner spinner_business_type;
-    private String S_moblie,S_name,S_door,S_buliding,S_street,S_pincode,S_city,S_city_name,S_state,S_business_type,S_business_type1;
+    private String S_moblie,S_name,S_email,S_buliding,S_address,S_pincode,S_city,S_city_name,S_state,S_business_type,S_business_type1;
     private static final int PERMISSION_REQUEST_CODE = 200;
     private android.app.AlertDialog progressDialog;
     private String Sdatanew;
@@ -143,10 +151,18 @@ public class Registration extends SimpleActivity implements GoogleApiClient.Conn
     private TextView txtName, txtEmail;
     Boolean alreadyLoggedIn=false;
     String PhotoUrl;
-    String email;
-    String personId;
+    AppCompatEditText email;
+    String personId,utmSource,from_campaign;
 
 
+    String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
+
+    private final String prefKey = "checkedInstallReferrer";
+
+    private final Executor backgroundExecutor = Executors.newSingleThreadExecutor();
+    public static final String KEY_UTM_SOURCE = "utm_source";
+    public static final String KEY_UTM_CONTENT = "utm_content";
+    public static final String KEY_UTM_CAMPAIGN = "utm_campaign";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -167,7 +183,7 @@ public class Registration extends SimpleActivity implements GoogleApiClient.Conn
         phoneField.setOnClickListener(this);
         setSubmitEnabled(true);
 
-
+        checkInstallReferrer();
         mCredentialsApiClient = new GoogleApiClient.Builder(this)
                 .addConnectionCallbacks(this)
                 .enableAutoManage(this, this)
@@ -181,11 +197,117 @@ public class Registration extends SimpleActivity implements GoogleApiClient.Conn
         Checking();
         Select_Bussiness_Type();
         Select_State();
+/*
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        String strChannel=preferences.getString("referral_code","Default").toString();
+        Toast.makeText(getApplicationContext(), strChannel, Toast.LENGTH_LONG).show();
 
-
-
+        Log.e("the refferel code",strChannel);*/
         smsreciver();
       //  displayFirebaseRegId();
+    }
+
+    void checkInstallReferrer() {
+        Log.e("invockedInstallRef","checkInstallReferrer");
+        if (getPreferences(MODE_PRIVATE).getBoolean(prefKey, false)) {
+            return;
+        }
+
+        InstallReferrerClient referrerClient = InstallReferrerClient.newBuilder(this).build();
+        backgroundExecutor.execute(() -> getInstallReferrerFromClient(referrerClient));
+    }
+
+    void getInstallReferrerFromClient(InstallReferrerClient referrerClient) {
+
+        referrerClient.startConnection(new InstallReferrerStateListener() {
+            @Override
+            public void onInstallReferrerSetupFinished(int responseCode) {
+                switch (responseCode) {
+                    case InstallReferrerClient.InstallReferrerResponse.OK:
+                        ReferrerDetails response = null;
+                        try {
+                            response = referrerClient.getInstallReferrer();
+                        } catch (RemoteException e) {
+                            e.printStackTrace();
+                            return;
+                        }
+                        final String referrerUrl = response.getInstallReferrer();
+
+                        if (referrerUrl != null && !referrerUrl.equals("")) {
+                            // Utils.log("Referral Received - " + referrer);
+                            String[] referrerParts = referrerUrl.split("&");
+                             utmSource = getData(KEY_UTM_SOURCE, referrerParts);
+                            String utmContent = getData(KEY_UTM_CONTENT, referrerParts);
+                            String utmCampaign = getData(KEY_UTM_CAMPAIGN, referrerParts);
+                            from_campaign = "1";
+                            if (utmSource != null && utmSource.equals("google")) {
+                                //  sendLogToMobisocServer(context, utmContent);
+
+                                Log.e("the utm",utmContent);
+                            } else if (utmSource != null && utmSource.equals("app_share")) {
+                                // RawStorageProvider.getInstance(context).dumpDataToStorage(RaghuKakaConstants.REFFERAL_FOR, utmContent);
+                            }
+                            // updateRKServerForReferral(context, utmSource, utmCampaign, utmContent);
+                        }else
+                        {
+                            from_campaign = "0";
+                        }
+
+                     //   trackInstallReferrerforGTM(referrerUrl);
+                        Log.e("the referat url ",referrerUrl);
+
+                        // TODO: If you're using GTM, call trackInstallReferrerforGTM instead.
+                        //  trackInstallReferrer(referrerUrl);
+
+
+                        // Only check this once.
+                        getPreferences(MODE_PRIVATE).edit().putBoolean(prefKey, true).commit();
+
+                        // End the connection
+                        referrerClient.endConnection();
+
+                        break;
+                    case InstallReferrerClient.InstallReferrerResponse.FEATURE_NOT_SUPPORTED:
+                        // API not available on the current Play Store app.
+                        break;
+                    case InstallReferrerClient.InstallReferrerResponse.SERVICE_UNAVAILABLE:
+                        // Connection couldn't be established.
+                        break;
+                }
+            }
+
+            @Override
+            public void onInstallReferrerServiceDisconnected() {
+
+            }
+        });
+    }
+
+    // Tracker for Classic GA (call this if you are using Classic GA only)
+    private void trackInstallReferrer(final String referrerUrl) {
+        new Handler(getMainLooper()).post(new Runnable() {
+            @Override
+            public void run() {
+                CampaignTrackingReceiver receiver = new CampaignTrackingReceiver();
+                Intent intent = new Intent("com.android.vending.INSTALL_REFERRER");
+                intent.putExtra("referrer", referrerUrl);
+                receiver.onReceive(getApplicationContext(), intent);
+            }
+        });
+    }
+
+    // Tracker for GTM + Classic GA (call this if you are using GTM + Classic GA only)
+    private void trackInstallReferrerforGTM(final String referrerUrl) {
+        Log.e("referat url1 ",referrerUrl);
+        new Handler(getMainLooper()).post(new Runnable() {
+            @Override
+            public void run() {
+                InstallReferrerReceiver receiver = new InstallReferrerReceiver();
+                Intent intent = new Intent("com.android.vending.INSTALL_REFERRER");
+                intent.putExtra("referrer", referrerUrl);
+                receiver.onReceive(getApplicationContext(), intent);
+            }
+        });
     }
 
     private void initCode() {
@@ -298,6 +420,13 @@ public class Registration extends SimpleActivity implements GoogleApiClient.Conn
         return (m.find() && m.group().equals(s));
     }
 
+    private String getData(String key, String[] allData) {
+        for (String selected : allData)
+            if (selected.contains(key)) {
+                return selected.split("=")[1];
+            }
+        return "";
+    }
 
     protected void doSubmit(String phoneValue) {
         if(phoneValue.contains("+91")){
@@ -416,11 +545,12 @@ public class Registration extends SimpleActivity implements GoogleApiClient.Conn
 
         name = (AppCompatEditText) findViewById(R.id.name);
         mob = (AppCompatEditText) findViewById(R.id.mob);
-        pincode1 = (MaterialEditText) findViewById(R.id.pincode);
+        email = (AppCompatEditText) findViewById(R.id.email);
+      //  pincode1 = (MaterialEditText) findViewById(R.id.pincode);
 
         editTextName = (AppCompatEditText) findViewById(R.id.name);
 
-
+        addess = (AppCompatEditText) findViewById(R.id.addess);
         spinner_city = (Spinner) findViewById(R.id.spinner_city);
         spinner_state = (Spinner) findViewById(R.id.spinner_state);
         pincode = (AppCompatEditText)findViewById(R.id.pincode);
@@ -437,7 +567,7 @@ public class Registration extends SimpleActivity implements GoogleApiClient.Conn
        // Objs.a.OutfitNormalFontStyle(mCon,R.id.verif);
         Objs.a.OutfitREgEditTextStyle(mCon, name);
         Objs.a.OutfitREgEditTextStyle(mCon, mob);
-        Objs.a.OutfitREgEditTextStyle(mCon, pincode1);
+        Objs.a.OutfitREgEditTextStyle(mCon, pincode);
         Objs.a.NormalFontStyle(mCon, txt_bussiness);
        Objs.a.NormalFontStyle(mCon, state_you);
        Objs.a.NormalFontStyle(mCon, city_you);
@@ -791,11 +921,14 @@ public class Registration extends SimpleActivity implements GoogleApiClient.Conn
 
                 S_name =  name.getText().toString();
                 S_moblie =  moblie;
+
                 S_state = State_Loc_uniqueID;
                 S_city = City_loc_uniqueID;
                 S_business_type1 = Bussiness_uniqueID;
 
-
+            if (!validate_email()) {
+                return;
+            }
             if(S_business_type!="0" && S_business_type != null &&
                     !S_business_type.isEmpty() && !S_business_type.equals("null") && !S_business_type.equals("0")){
 
@@ -803,19 +936,73 @@ public class Registration extends SimpleActivity implements GoogleApiClient.Conn
                 if ( S_state!="0" && S_state != null && !S_state.isEmpty() && !S_state.equals("null")&& !S_state.equals("0") &&
                         S_city!="0" && S_city != null && !S_city.isEmpty() && !S_city.equals("null") &&!S_city.equals("0")){
 
+                    if (!validate_addres()) {
+                        return;
+                    }
+                    if (!validate_pincode()) {
+                        return;
+                    }
+
                     reg_POST();
                     //Objs.a.showToast(mCon,"Sucess");
                 }else {
-                  //  Toast.makeText(Registration.this, "Select your State and City", Toast.LENGTH_SHORT).show();
-                    Objs.a.showToast(mCon,"Select your State and City");
+                    Toast.makeText(Registration.this, "Select your State and City", Toast.LENGTH_SHORT).show();
+                   // Objs.a.showToast(mCon,"Select your State and City");
                 }
             }else{
               //  Toast.makeText(Registration.this, "Select your Business Type", Toast.LENGTH_SHORT).show();
-                Objs.a.showToast(mCon,"Select your Business Type");
+              //  Objs.a.showToast(mCon,"Select your Business Type");
+                Toast.makeText(Registration.this, "Select your Business Type", Toast.LENGTH_SHORT).show();
 
             }
 
             }
+
+    }
+    private boolean validate_email(){
+       /* if (email_edite_txt.getText().toString().trim().isEmpty() || email_edite_txt.length() < 3) {
+
+            email_edite_txt.requestFocus();
+            return false;
+        }*/
+        if(email.getText().toString().isEmpty()) {
+            email.setError(getText(R.string.err_curent));
+            email.requestFocus();
+            return false;
+        }else {
+            if (email.getText().toString().trim().matches(emailPattern)) {
+                //Toast.makeText(getApplicationContext(),"valid email address",Toast.LENGTH_SHORT).show();
+                return true;
+            }else {
+
+                Toast.makeText(getApplicationContext(),"", Toast.LENGTH_SHORT).show();
+                email.setError("Invalid email address");
+                email.requestFocus();
+                return false;
+            }
+        }
+
+    }
+    private boolean validate_addres(){
+
+        if(addess.getText().toString().isEmpty()) {
+            addess.setError(getText(R.string.err_curent));
+            addess.requestFocus();
+            return false;
+        }else {
+           return true;
+        }
+
+    }
+    private boolean validate_pincode(){
+
+        if(pincode.getText().toString().isEmpty() || pincode.length() <6) {
+            pincode.setError(getText(R.string.err_curent));
+            pincode.requestFocus();
+            return false;
+        }else {
+            return true;
+        }
 
     }
 
@@ -864,18 +1051,24 @@ public class Registration extends SimpleActivity implements GoogleApiClient.Conn
 
 
     private void reg_POST() {
+        S_email =  email.getText().toString();
+        S_pincode =  pincode.getText().toString();
+        S_address =  addess.getText().toString();
         JSONObject jsonObject =new JSONObject();
         JSONObject J= null;
         try {
             J =new JSONObject();
             J.put(Params.contact_person, S_name);
             J.put(Params.mobile_no,S_moblie);
+            J.put("email_id",S_email);
            // J.put(Params.comp_building_no, "");
           //  J.put(Params.comp_building_name, "");
            // J.put(Params.comp_building_street, "");
             J.put(Params.state_id, S_state);
             J.put(Params.district_id, S_city);
-         //   J.put(Params.pincode, S_pincode);
+            J.put("pincode", S_pincode);
+            J.put("profile_address", S_address);
+            J.put("office_address", S_address);
             J.put(Params.business_type, S_business_type1);
             Log.d("Request :", String.valueOf(J));
         } catch (JSONException e) {
@@ -907,7 +1100,7 @@ public class Registration extends SimpleActivity implements GoogleApiClient.Conn
                                 JSONObject jsonObject1 = response.getJSONObject(Params.inputs);
                                 String JSON = String.valueOf(jsonObject1);
                                 Objs.ac.StartActivityPutExtra(mCon, SmsActivity.class, Params.otp,otp_new
-                                        , Params.mobile_no,S_moblie, Params.JSON,JSON);
+                                        , Params.mobile_no,S_moblie, Params.JSON,JSON,Params.from_campaign,from_campaign,Params.utmSource,utmSource);
                                 finish();
 
                             }

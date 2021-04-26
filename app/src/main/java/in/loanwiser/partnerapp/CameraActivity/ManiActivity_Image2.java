@@ -1,5 +1,6 @@
 package in.loanwiser.partnerapp.CameraActivity;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -21,6 +22,7 @@ import android.os.StrictMode;
 import android.provider.MediaStore;
 import com.google.android.material.snackbar.Snackbar;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatTextView;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -29,6 +31,7 @@ import androidx.appcompat.app.AlertDialog;
 import android.provider.OpenableColumns;
 import android.util.Base64;
 import android.util.Log;
+import android.view.ContextThemeWrapper;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -38,6 +41,8 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.VideoView;
 import android.widget.ViewSwitcher;
@@ -51,6 +56,8 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.github.clans.fab.FloatingActionButton;
 import com.github.clans.fab.FloatingActionMenu;
+import com.hbisoft.pickit.PickiT;
+import com.hbisoft.pickit.PickiTCallbacks;
 import com.kosalgeek.android.photoutil.ImageBase64;
 import com.kosalgeek.android.photoutil.PhotoLoader;
 import com.nostra13.universalimageloader.cache.memory.impl.WeakMemoryCache;
@@ -88,6 +95,7 @@ import in.loanwiser.partnerapp.Documents.FilePath;
 import in.loanwiser.partnerapp.Documents.MyCommand;
 import in.loanwiser.partnerapp.Documents.SingleUploadBroadcastReceiver;
 import in.loanwiser.partnerapp.PartnerActivitys.SimpleActivity;
+import in.loanwiser.partnerapp.Partner_Statues.DashBoard_new;
 import in.loanwiser.partnerapp.R;
 
 import static android.Manifest.permission.CAMERA;
@@ -95,7 +103,7 @@ import static android.Manifest.permission.READ_EXTERNAL_STORAGE;
 import static android.Manifest.permission.READ_SMS;
 import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
 
-public class ManiActivity_Image2 extends SimpleActivity implements SingleUploadBroadcastReceiver.Delegate {
+public class ManiActivity_Image2 extends SimpleActivity implements SingleUploadBroadcastReceiver.Delegate, PickiTCallbacks {
 
     //
     //private Bitmap bitmap;
@@ -159,10 +167,12 @@ public class ManiActivity_Image2 extends SimpleActivity implements SingleUploadB
     private VideoView vidPreview;
     private Button btnUpload,rotation;
     private ExifInterface exifObject;
-
+    private static final int PERMISSION_REQ_ID_RECORD_AUDIO = 22;
+    private static final int PERMISSION_REQ_ID_WRITE_EXTERNAL_STORAGE = PERMISSION_REQ_ID_RECORD_AUDIO + 1;
     String path;
-
+    File orginalFile_pic = null;
     LinearLayout pdf_gallery,camera_ly_upload;
+    PickiT pickiT;
 
     @SuppressLint("NewApi")
     @Override
@@ -182,7 +192,7 @@ public class ManiActivity_Image2 extends SimpleActivity implements SingleUploadB
         docid = Pref.getcamera_docid(mCon);
 
         transaction_id = Pref.getcamera_transaction_id(mCon);
-
+        pickiT = new PickiT(this, this, this);
        // doc_typename =  Objs.a.getBundle(this, Params.doc_typename);
         initTools1(doc_typename);
        // docid =  Objs.a.getBundle(this, Params.docid);
@@ -278,54 +288,7 @@ public class ManiActivity_Image2 extends SimpleActivity implements SingleUploadB
                 WRITE_EXTERNAL_STORAGE}, PERMISSION_REQUEST_CODE);
     }
 
-    @Override
-    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
-        switch (requestCode) {
-            case PERMISSION_REQUEST_CODE:
-                if (grantResults.length > 0) {
-                    //  boolean locationAccepted = grantResults[0] == PackageManager.PERMISSION_GRANTED;
-                    boolean cameraAccepted = grantResults[0] == PackageManager.PERMISSION_GRANTED;
-                    boolean smsAccepted = grantResults[1] == PackageManager.PERMISSION_GRANTED;
-                    boolean externalAccepted = grantResults[2] == PackageManager.PERMISSION_GRANTED;
-                    boolean externalAccepted1 = grantResults[3] == PackageManager.PERMISSION_GRANTED;
 
-                    if (cameraAccepted && smsAccepted && externalAccepted && externalAccepted1)
-                        Snackbar.make(findViewById(R.id.fab), "Permission Granted", Snackbar.LENGTH_LONG).show();
-                    else {
-
-                       // Snackbar.make(findViewById(R.id.fab), "Permission Denied, You cannot access SMS and camera.", Snackbar.LENGTH_LONG).show();
-
-                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                            if (shouldShowRequestPermissionRationale(CAMERA)) {
-                                showMessageOKCancel("You need to allow access to all the permissions",
-                                        new DialogInterface.OnClickListener() {
-                                            @Override
-                                            public void onClick(DialogInterface dialog, int which) {
-                                                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                                                    requestPermissions(new String[]{ CAMERA,
-                                                                    READ_SMS,READ_EXTERNAL_STORAGE,WRITE_EXTERNAL_STORAGE},
-                                                            PERMISSION_REQUEST_CODE);
-                                                }
-                                            }
-                                        });
-                                return;
-                            }
-                        }
-                    }
-                }
-
-                break;
-        }
-    }
-
-    private void showMessageOKCancel(String message, DialogInterface.OnClickListener okListener) {
-        new AlertDialog.Builder(mCon)
-                .setMessage(message)
-                .setPositiveButton("OK", okListener)
-                .setNegativeButton("Cancel", null)
-                .create()
-                .show();
-    }
   /*  //Fab
     public void animateFAB(){
 
@@ -747,10 +710,14 @@ public class ManiActivity_Image2 extends SimpleActivity implements SingleUploadB
     }
     //
     private void showFilePDF() {
+        if (checkSelfPermission()) {
+
+
         Intent intent = new Intent();
         intent.setType("application/pdf");
         intent.setAction(Intent.ACTION_GET_CONTENT);
         startActivityForResult(Intent.createChooser(intent, "Select Pdf"), PICK_PDF_REQUEST);
+        }
     }
 
     @SuppressLint("LongLogTag")
@@ -779,7 +746,7 @@ public class ManiActivity_Image2 extends SimpleActivity implements SingleUploadB
                 imgSinglePick.setVisibility(View.GONE);
 
                // String path = FilePath.getPath(this, filePath);
-
+                pickiT.getPath(data.getData(), Build.VERSION.SDK_INT);
                 String  fileName = getFileName(filePath);
                 pdf_name.setText(fileName);
 
@@ -796,7 +763,6 @@ public class ManiActivity_Image2 extends SimpleActivity implements SingleUploadB
                 // successfully captured the image
                 // launching upload activity
                 launchUploadActivity(true);
-
 
             } else if (resultCode == RESULT_CANCELED) {
                 upload.setEnabled(false);
@@ -1002,7 +968,7 @@ public class ManiActivity_Image2 extends SimpleActivity implements SingleUploadB
 
                 if(pdf1.equals(a))
                 {
-                   //  path = FilePath.getPath(this, filePath);
+                  /* //  path = FilePath.getPath(this, filePath);
 
                     if (Build.VERSION.SDK_INT < 11) {
                         orginalFile = new File(FileUtils1.getRealPathFromURI_BelowAPI11(ManiActivity_Image2.this, filePath));
@@ -1016,12 +982,12 @@ public class ManiActivity_Image2 extends SimpleActivity implements SingleUploadB
                         orginalFile = new File(FileUtils1.getRealPathFromURI_API19(ManiActivity_Image2.this, filePath));
                     }
 
-                    path = String.valueOf(orginalFile);
+                    path = String.valueOf(orginalFile);*/
                     uploadMultipart_PDF();
                 }
                 else
                 {
-                    if (Build.VERSION.SDK_INT < 11) {
+                   /* if (Build.VERSION.SDK_INT < 11) {
                         orginalFile = new File(FileUtils1.getRealPathFromURI_BelowAPI11(ManiActivity_Image2.this, filePath));
                     }
                     // SDK >= 11 && SDK < 19
@@ -1034,7 +1000,7 @@ public class ManiActivity_Image2 extends SimpleActivity implements SingleUploadB
                     }
 
                      path = String.valueOf(orginalFile);
-                    Log.e("Upload_Activity_Ban", String.valueOf(orginalFile));
+                    Log.e("Upload_Activity_Ban", String.valueOf(orginalFile));*/
 
                     uploadMultipart_PDF();
                    // Toast.makeText(getApplicationContext(), "Please select the PDF file from the File Directory", Toast.LENGTH_SHORT).show();
@@ -1046,7 +1012,7 @@ public class ManiActivity_Image2 extends SimpleActivity implements SingleUploadB
             {
 
                 LayoutInflater layoutInflater = (LayoutInflater) ManiActivity_Image2.this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                View customView = layoutInflater.inflate(R.layout.popup_loading,null);
+                View customView = layoutInflater.inflate(R.layout.popup_loading1,null);
 
 
                 //instantiate popup window
@@ -1230,16 +1196,13 @@ public class ManiActivity_Image2 extends SimpleActivity implements SingleUploadB
     public void uploadMultipart_PDF() {
         //getting name for the pdf
         //  String name = editText.getText().toString().trim();
-        Log.d("Pdf file333333", String.valueOf(filePath));
+      //  Log.d("Pdf file333333", String.valueOf(filePath));
         //getting the actual path of the pdf
 
-        Log.e("PDF File", String.valueOf(path));
+      //  Log.e("PDF File", String.valueOf(path));
        // File sourceFile = new File(path);
 
-        if (path == null) {
 
-            Toast.makeText(this, "Please move your .pdf file to internal storage and retry", Toast.LENGTH_LONG).show();
-        } else {
             //Uploading code
             try {
                 String uploadId = UUID.randomUUID().toString();
@@ -1248,7 +1211,7 @@ public class ManiActivity_Image2 extends SimpleActivity implements SingleUploadB
                 //Creating a multi part request
                 progressDialog.show();
                 new MultipartUploadRequest(this, uploadId, Urls.PDF_Document_Upload)
-                      .addFileToUpload(path, Params.img_url) //Adding file
+                      .addFileToUpload(orginalFile_pic.toString(), Params.img_url) //Adding file
                         .addParameter("legal_id", docid) //Adding text parameter to the request
                         .addParameter(Params.doc_name, doc_typename)
                         .addParameter(Params.transaction_id, transaction_id)
@@ -1256,7 +1219,7 @@ public class ManiActivity_Image2 extends SimpleActivity implements SingleUploadB
                        // .setNotificationConfig(new UploadNotificationConfig())
                         .setMaxRetries(2)
                         .startUpload(); //Starting the upload
-                Log.e("img_url", path);
+              //  Log.e("img_url", path);
                 Log.e("relationship_type", "1");
                 Log.e("entity_id", "no");
                 Log.e("transaction_id", transaction_id);
@@ -1265,7 +1228,7 @@ public class ManiActivity_Image2 extends SimpleActivity implements SingleUploadB
                 Log.e("AndroidUploadService", exc.getMessage(), exc);
                 Toast.makeText(this, exc.getMessage(), Toast.LENGTH_SHORT).show();
             }
-        }
+
     }
 
     @Override
@@ -1330,6 +1293,140 @@ public class ManiActivity_Image2 extends SimpleActivity implements SingleUploadB
     public void onCancelled() {
 
     }
+
+    @Override
+    public void onBackPressed() {
+        pickiT.deleteTemporaryFile(this);
+
+        Intent intent = new Intent(mCon, DashBoard_new.class);
+        startActivity(intent);
+        // Objs.ac.StartActivity(mCon, LeadeFragment.class);
+        finish();
+        super.onBackPressed();
+
+    }
+
+
+    //  Check if permissions was granted
+    private boolean checkSelfPermission() {
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE}, PERMISSION_REQ_ID_WRITE_EXTERNAL_STORAGE);
+            return false;
+        }
+        return true;
+    }
+
+    //  Handle permissions
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        if (requestCode == PERMISSION_REQ_ID_WRITE_EXTERNAL_STORAGE) {
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                //  Permissions was granted, open the gallery
+                showFilePDF();
+            }
+            //  Permissions was not granted
+            else {
+                showLongToast("No permission for " + Manifest.permission.WRITE_EXTERNAL_STORAGE);
+            }
+        }
+    }
+
+    //Show Toast
+    private void showLongToast(final String msg) {
+        Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_LONG).show();
+    }
+    ProgressBar mProgressBar;
+    TextView percentText;
+    private AlertDialog mdialog;
+    ProgressDialog progressBar;
+
+    @Override
+    public void PickiTonUriReturned() {
+        progressBar = new ProgressDialog(this);
+        progressBar.setMessage("Waiting to receive file...");
+        progressBar.setCancelable(false);
+        progressBar.show();
+    }
+
+    @Override
+    public void PickiTonStartListener() {
+        if (progressBar.isShowing()){
+            progressBar.cancel();
+        }
+        final AlertDialog.Builder mPro = new AlertDialog.Builder(new ContextThemeWrapper(this, R.style.myDialog));
+        @SuppressLint("InflateParams") final View mPView = LayoutInflater.from(this).inflate(R.layout.dailog_layout, null);
+        percentText = mPView.findViewById(R.id.percentText);
+
+        percentText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                pickiT.cancelTask();
+                if (mdialog != null && mdialog.isShowing()) {
+                    mdialog.cancel();
+                }
+            }
+        });
+
+        mProgressBar = mPView.findViewById(R.id.mProgressBar);
+        mProgressBar.setMax(100);
+        mPro.setView(mPView);
+        mdialog = mPro.create();
+        mdialog.show();
+
+    }
+
+    @Override
+    public void PickiTonProgressUpdate(int progress) {
+        String progressPlusPercent = progress + "%";
+        percentText.setText(progressPlusPercent);
+        mProgressBar.setProgress(progress);
+    }
+
+    @Override
+    public void PickiTonCompleteListener(String path, boolean wasDriveFile, boolean wasUnknownProvider, boolean wasSuccessful, String reason) {
+
+        if (mdialog != null && mdialog.isShowing()) {
+            mdialog.cancel();
+        }
+
+        //  Check if it was a Drive/local/unknown provider file and display a Toast
+        if (wasDriveFile){
+            //   showLongToast("Drive file was selected");
+        }else if (wasUnknownProvider){
+            //  showLongToast("File was selected from unknown provider");
+        }else {
+            //   showLongToast("Local file was selected");
+        }
+
+        //  Chick if it was successful
+        if (wasSuccessful) {
+            //  Set returned path to TextView
+          //  uriarrayList_pic.add(new File(path));
+            orginalFile_pic = new File(path);
+            Log.e("the Path selected PIC",orginalFile_pic.toString());
+
+        }else {
+            showLongToast("Error, please see the log..");
+
+        }
+    }
+
+
+    //
+    //  Lifecycle methods
+    //
+
+    //  Deleting the temporary file if it exists
+    //  As we know, this might not even be called if the system kills the application before onDestroy is called
+    //  So, it is best to call pickiT.deleteTemporaryFile(); as soon as you are done with the file
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (!isChangingConfigurations()) {
+            pickiT.deleteTemporaryFile(this);
+        }
+    }
+
 
 }
 

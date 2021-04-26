@@ -356,6 +356,27 @@
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
+        <LinearLayout
+            android:layout_marginTop="20dp"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.appcompat.widget.AppCompatButton
+
+                android:id="@+id/view_activity"
+                android:layout_width="106dp"
+                android:layout_height="34dp"
+                android:text="View Activity"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:layout_marginLeft="10dp"
+                android:textColor="@color/white"
+                android:textSize="10sp"
+                android:background="@drawable/capsul_button_icon"/>
+        </LinearLayout>
+
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_gravity="left"
             style="@style/LorgeText"
@@ -611,14 +632,19 @@
                     <LinearLayout
                         android:gravity="center"
                         android:orientation="horizontal"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="match_parent">
 
                         <ImageView
-
+                            android:background="@drawable/ic_check"
+                            android:gravity="center"
+                            android:id="@+id/step2_image_completed"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp" />
+                        <ImageView
                             android:id="@+id/app_info_img"
-                            android:layout_width="45dp"
-                            android:layout_height="45dp"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
                             android:background="@drawable/ic_down_arrow"
                             android:gravity="center" />
 
@@ -1004,6 +1030,105 @@
                     android:layout_height="0.9dp"
                     android:background="@color/white"/>
             </LinearLayout>
+
+            <androidx.cardview.widget.CardView
+
+                xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/Credit_REport_Generation"
+                android:layout_marginLeft="3dp"
+                android:layout_marginRight="3dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:background="@color/white"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <LinearLayout
+                            android:gravity="center"
+                            android:orientation="horizontal"
+                            android:layout_width="80dp"
+                            android:layout_height="match_parent">
+                            <ImageView
+                                android:id="@+id/step2crifstatus"
+                                android:visibility="visible"
+                                android:gravity="center"
+                                android:background="@drawable/ic_warning"
+                                android:layout_width="25dp"
+                                android:layout_height="25dp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:orientation="vertical">
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                style="@style/SmallText"
+                                android:id="@+id/Approved"
+                                android:textColor="@color/colorPrimary"
+                                android:text="CRIF Report"
+                                android:layout_width="150dp"
+                                android:textSize="14dp"
+                                android:layout_height="wrap_content" />
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:layout_marginBottom="10dp"
+                                style="@style/LorgeText"
+                                android:textSize="10dp"
+                                android:textColor="@color/black"
+                                android:text=""
+                                android:id="@+id/crif_report_view"
+                                android:layout_width="150dp"
+                                android:layout_height="wrap_content" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:gravity="center"
+                            android:orientation="horizontal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent">
+                            <ImageView
+                                android:background="@drawable/ic_not_tick"
+                                android:gravity="center"
+                                android:id="@+id/credite_report_img"
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"
+                                android:visibility="gone"/>
+
+                            <Button
+                                android:id="@+id/step2crif_but"
+                                android:layout_width="wrap_content"
+                                android:layout_height="30dp"
+                                android:text="Complete View"
+                                android:layout_gravity="center"
+                                android:gravity="center"
+                                android:textColor="@color/white"
+                                android:textSize="10sp"
+                                android:background="@drawable/but_shape"/>
+                        </LinearLayout>
+                    </LinearLayout>
+
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.9dp"
+                    android:background="@color/white"/>
+            </LinearLayout>
             <androidx.cardview.widget.CardView
                 xmlns:card_view="http://schemas.android.com/apk/res-auto"
                 android:id="@+id/viability_Report"
@@ -1100,104 +1225,7 @@
                     android:background="@color/white"/>
             </LinearLayout>
 
-            <androidx.cardview.widget.CardView
 
-                xmlns:card_view="http://schemas.android.com/apk/res-auto"
-                android:id="@+id/Credit_REport_Generation"
-                android:layout_marginLeft="3dp"
-                android:layout_marginRight="3dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <LinearLayout
-                    android:background="@color/white"
-                    android:orientation="vertical"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <LinearLayout
-                        android:orientation="horizontal"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
-
-                        <LinearLayout
-                            android:gravity="center"
-                            android:orientation="horizontal"
-                            android:layout_width="80dp"
-                            android:layout_height="match_parent">
-                            <ImageView
-                                android:id="@+id/step2crifstatus"
-                                android:visibility="visible"
-                                android:gravity="center"
-                                android:background="@drawable/ic_warning"
-                                android:layout_width="25dp"
-                                android:layout_height="25dp" />
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:orientation="vertical">
-
-                            <androidx.appcompat.widget.AppCompatTextView
-                                style="@style/SmallText"
-                                android:id="@+id/Approved"
-                                android:textColor="@color/colorPrimary"
-                                android:text="CRIF Report"
-                                android:layout_width="150dp"
-                                android:textSize="14dp"
-                                android:layout_height="wrap_content" />
-
-                            <androidx.appcompat.widget.AppCompatTextView
-                                android:layout_marginBottom="10dp"
-                                style="@style/LorgeText"
-                                android:textSize="10dp"
-                                android:textColor="@color/black"
-                                android:text=""
-                                android:id="@+id/crif_report_view"
-                                android:layout_width="150dp"
-                                android:layout_height="wrap_content" />
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:gravity="center"
-                            android:orientation="horizontal"
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent">
-                            <ImageView
-                            android:background="@drawable/ic_not_tick"
-                            android:gravity="center"
-                            android:id="@+id/credite_report_img"
-                            android:layout_width="25dp"
-                            android:layout_height="25dp"
-                                android:visibility="gone"/>
-
-                            <Button
-                                android:id="@+id/step2crif_but"
-                                android:layout_width="wrap_content"
-                                android:layout_height="30dp"
-                                android:text="Complete View"
-                                android:layout_gravity="center"
-                                android:gravity="center"
-                                android:textColor="@color/white"
-                                android:textSize="10sp"
-                                android:background="@drawable/but_shape"/>
-                        </LinearLayout>
-                    </LinearLayout>
-
-
-                </LinearLayout>
-            </androidx.cardview.widget.CardView>
-            <LinearLayout
-                android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="0.9dp"
-                    android:background="@color/white"/>
-            </LinearLayout>
 
             <View
                 android:padding="2dp"
@@ -1397,8 +1425,15 @@
                             <LinearLayout
                                 android:gravity="center"
                                 android:orientation="horizontal"
-                                android:layout_width="wrap_content"
+                                android:layout_width="match_parent"
                                 android:layout_height="match_parent">
+
+                                <ImageView
+                                    android:background="@drawable/ic_check"
+                                    android:gravity="center"
+                                    android:id="@+id/step3_image_completed"
+                                    android:layout_width="30dp"
+                                    android:layout_height="30dp" />
                                 <ImageView
                                     android:background="@drawable/ic_down_arrow"
                                     android:gravity="center"
@@ -1683,7 +1718,7 @@
                                     android:id="@+id/document_upload_button"
                                     android:layout_width="wrap_content"
                                     android:layout_height="30dp"
-                                    android:text="Complete View"
+                                    android:text="Complete Now"
                                     android:layout_gravity="center"
                                     android:gravity="center"
                                     android:textColor="@color/white"
@@ -1706,7 +1741,7 @@
                         android:background="@color/white"/>
                 </LinearLayout>
                 <androidx.cardview.widget.CardView
-                    android:visibility="gone"
+
                     xmlns:card_view="http://schemas.android.com/apk/res-auto"
                     android:id="@+id/Paymet1"
                     android:layout_marginLeft="3dp"
@@ -1748,7 +1783,7 @@
                                     android:id="@+id/payment1"
                                     style="@style/SmallText"
                                     android:textColor="@color/colorPrimary"
-                                    android:text="@string/payment1"
+                                    android:text="@string/doc_availability"
                                     android:textSize="14dp"
                                     android:layout_width="150dp"
                                     android:layout_height="wrap_content" />
@@ -1779,7 +1814,7 @@
                                     android:id="@+id/step3payment_but"
                                     android:layout_width="wrap_content"
                                     android:layout_height="30dp"
-                                    android:text="Complete View"
+                                    android:text="Complete Now"
                                     android:layout_gravity="center"
                                     android:gravity="center"
                                     android:textColor="@color/white"
@@ -1793,6 +1828,77 @@
                 </androidx.cardview.widget.CardView>
                 <LinearLayout
                     android:visibility="gone"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0.9dp"
+                        android:background="@color/white"/>
+                </LinearLayout>
+                <androidx.cardview.widget.CardView
+                    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/Submiteed_to_Loanwiser"
+                    android:layout_marginLeft="3dp"
+                    android:layout_marginRight="3dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <LinearLayout
+                        android:background="@color/white"
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <LinearLayout
+                                android:gravity="center"
+                                android:orientation="horizontal"
+                                android:layout_width="80dp"
+                                android:layout_height="match_parent">
+                                <ImageView
+                                    android:id="@+id/loan_submit_statues_img"
+                                    android:visibility="visible"
+                                    android:gravity="center"
+                                    android:layout_width="25dp"
+                                    android:layout_height="25dp" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:orientation="vertical">
+
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    style="@style/SmallText"
+                                    android:id="@+id/loan_submit_statues_txt"
+                                    android:textColor="@color/colorPrimary"
+                                    android:text="Submitted to Loanwiser "
+                                    android:layout_width="wrap_content"
+                                    android:textSize="14dp"
+                                    android:layout_height="wrap_content" />
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:layout_marginBottom="10dp"
+                                    style="@style/LorgeText"
+                                    android:textSize="10dp"
+                                    android:textColor="#00ceb4"
+                                    android:text="Completed(19-09-2020)"
+                                    android:id="@+id/loan_submit_statues_txt1"
+                                    android:layout_width="150dp"
+                                    android:layout_height="wrap_content" />
+                            </LinearLayout>
+
+
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+                <LinearLayout
                     android:orientation="vertical"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
@@ -2116,7 +2222,7 @@
                                     android:id="@+id/loan_status_txt"
                                     android:textSize="12dp"
                                     android:textColor="@color/colorPrimary"
-                                    android:text="@string/loan_status"
+                                    android:text="@string/track_status"
                                     android:layout_width="200dp"
                                     android:layout_height="wrap_content" />
                             </LinearLayout>
@@ -2152,77 +2258,7 @@
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
-                <androidx.cardview.widget.CardView
-                    xmlns:card_view="http://schemas.android.com/apk/res-auto"
-                    android:id="@+id/Submiteed_to_Loanwiser"
-                    android:layout_marginLeft="3dp"
-                    android:layout_marginRight="3dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                    <LinearLayout
-                        android:background="@color/white"
-                        android:orientation="vertical"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
 
-                        <LinearLayout
-                            android:orientation="horizontal"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent">
-
-                            <LinearLayout
-                                android:gravity="center"
-                                android:orientation="horizontal"
-                                android:layout_width="80dp"
-                                android:layout_height="match_parent">
-                                <ImageView
-                                    android:id="@+id/loan_submit_statues_img"
-                                    android:visibility="visible"
-                                    android:gravity="center"
-                                    android:layout_width="25dp"
-                                    android:layout_height="25dp" />
-                            </LinearLayout>
-
-                            <LinearLayout
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:orientation="vertical">
-
-                                <androidx.appcompat.widget.AppCompatTextView
-                                    style="@style/SmallText"
-                                    android:id="@+id/loan_submit_statues_txt"
-                                    android:textColor="@color/colorPrimary"
-                                    android:text="Submitted to Loanwiser "
-                                    android:layout_width="wrap_content"
-                                    android:textSize="14dp"
-                                    android:layout_height="wrap_content" />
-                                <androidx.appcompat.widget.AppCompatTextView
-                                    android:layout_marginBottom="10dp"
-                                    style="@style/LorgeText"
-                                    android:textSize="10dp"
-                                    android:textColor="#00ceb4"
-                                    android:text="Completed(19-09-2020)"
-                                    android:id="@+id/loan_submit_statues_txt1"
-                                    android:layout_width="150dp"
-                                    android:layout_height="wrap_content" />
-                            </LinearLayout>
-
-
-                        </LinearLayout>
-
-
-                    </LinearLayout>
-                </androidx.cardview.widget.CardView>
-                <LinearLayout
-                    android:orientation="vertical"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="0.9dp"
-                        android:background="@color/white"/>
-                </LinearLayout>
                 <androidx.cardview.widget.CardView
                     android:id="@+id/Document_verification"
                     android:layout_marginLeft="3dp"

@@ -11,6 +11,7 @@
         android:layout_height="match_parent">
 
         <LinearLayout
+            android:padding="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
@@ -21,97 +22,177 @@
                 android:layout_height="wrap_content"
                 android:text="@string/rs_desc"
                 android:textColor="@color/black"
+                android:textStyle="bold"
+
                 android:textSize="18sp"/>
 
-            <LinearLayout
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:orientation="horizontal">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                   >
+                android:layout_marginTop="20dp">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
                 <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/contactimg"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:layout_gravity="center"
+                    android:tint="@color/colorPrimary"
                     android:src="@drawable/ic_contacts"/>
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/contactdet"
+                    android:layout_marginTop="10dp"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="10dp"
+                    android:textSize="18sp"
+                    android:textColor="@color/colorPrimary"
+                    android:layout_toRightOf="@+id/contactimg"
+                    android:textStyle="bold"/>
+            </RelativeLayout>
+            </RelativeLayout>
 
-                </LinearLayout>
-
-                <LinearLayout
+            <LinearLayout
+                android:id="@+id/rm_available"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <RelativeLayout
+                    android:layout_marginTop="20dp"
+                    android:layout_marginLeft="10dp"
+                    android:orientation="horizontal"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.25">
+                    android:layout_weight="1">
                     <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/balancere"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/contactdet"
-                        android:layout_marginTop="10dp"
-                        android:layout_gravity="center"
-                        android:textSize="18sp"
-                        android:textStyle="bold"/>
+                        android:text="@string/name"
+                        android:textColor="@color/black"
+                        android:textSize="12sp"/>
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/accnum"
+                        android:layout_toRightOf="@+id/balancere"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:textColor="#535353"
+                        android:textStyle="bold"
+                        android:textSize="12sp"
+                        />
+                </RelativeLayout>
+                <RelativeLayout
+                    android:layout_marginLeft="10dp"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/ac_type"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="12sp"
+                        android:layout_marginTop="15dp"
+                        android:text="@string/email"
+                        android:textColor="@color/black"
+                        />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/ac_typetxt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_toRightOf="@+id/ac_type"
+                        android:textColor="#535353"
+                        android:layout_marginTop="15dp"
+                        android:textStyle="bold"
+                        android:textSize="12sp"
+                        />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_marginLeft="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp">
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/mobnum"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Mobile Number"
+                        android:textColor="@color/black"
+                        android:textSize="12dp"/>
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/call_2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_phone_24"
+                        android:tint="#FFE5147D"
+                        android:layout_marginLeft="10dp"
+                        android:layout_toRightOf="@+id/mobnum"/>
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/mobile_1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Mobile Number"
+                        android:textSize="12dp"
+                        android:textStyle="bold"
+                        android:textColor="@color/black"
+                        android:layout_marginLeft="10dp"
+                        android:layout_toRightOf="@+id/call_2"/>
+                </RelativeLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/rm_not_available"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:visibility="gone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:orientation="horizontal">
+
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.25">
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="call us"
+                            android:layout_marginTop="10dp"
+                            android:gravity="center"
+                            android:textSize="18sp"
+                            android:textStyle="bold"/>
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        >
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_gravity="center"
+                            android:id="@+id/call_1"
+                            android:src="@drawable/ic_call"/>
+
+                    </LinearLayout>
 
                 </LinearLayout>
 
-
             </LinearLayout>
 
-        <LinearLayout
-            android:layout_marginTop="20dp"
-            android:layout_marginLeft="10dp"
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1">
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/balancere"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/name"
-                android:textColor="@color/black"
-                android:textSize="12sp"/>
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/accnum"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="3dp"
-                android:textColor="#535353"
-                android:textStyle="bold"
-                android:textSize="12sp"
-               />
-        </LinearLayout>
-            <LinearLayout
-                android:layout_marginLeft="10dp"
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1">
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/ac_type"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="12sp"
-                    android:layout_marginTop="15dp"
-                    android:text="@string/email"
-                    android:textColor="@color/black"
-                    />
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/ac_typetxt"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="3dp"
-                    android:textColor="#535353"
-                    android:layout_marginTop="15dp"
-                    android:textStyle="bold"
-                    android:textSize="12sp"
-                    />
-            </LinearLayout>
 
 
 

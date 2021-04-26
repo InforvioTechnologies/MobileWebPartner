@@ -59,28 +59,37 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent">
                             <LinearLayout
-                               android:visibility="gone"
+                                android:visibility="gone"
                                 android:id="@+id/Ly_no_leads_data"
-                                android:layout_marginTop="150dp"
+                                android:layout_marginTop="20dp"
                                 android:layout_gravity="center"
                                 android:orientation="vertical"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent">
+                               <androidx.appcompat.widget.AppCompatImageView
+                                   android:background="@drawable/ic_report1_no_lead"
+                                   android:layout_width="70.5px"
+                                   android:gravity="center"
+                                   android:layout_gravity="center"
+                                   android:layout_height="73.71px"/>
+
+
 
                                 <androidx.appcompat.widget.AppCompatTextView
                                     android:gravity="center"
                                     android:id="@+id/no_leads_data"
                                     android:layout_width="match_parent"
                                     android:text="@string/no_leads_data"
-                                    android:textColor="@color/colorPrimary"
-                                    android:textSize="25dp"
+                                    android:textColor="@color/gray"
+                                    android:textSize="14dp"
                                     android:layout_height="wrap_content" />
+
                                 <androidx.appcompat.widget.AppCompatButton
                                     android:layout_marginTop="20dp"
                                     android:layout_gravity="center"
                                     android:id="@+id/leads_float_chat"
                                     android:layout_width="200dp"
-                                    android:background="@drawable/capsul_button3"
+                                    android:background="@drawable/capsul_button41"
                                     android:textColor="@color/white"
                                     android:textSize="15dp"
                                     android:text="Apply Loan"
@@ -140,6 +149,8 @@
 
         </LinearLayout>
 
+
+
         <com.google.android.material.floatingactionbutton.FloatingActionButton
 
             android:id="@+id/float_chat"
@@ -150,6 +161,7 @@
             android:src="@drawable/add"
             android:layout_margin="@dimen/fab_margin"
             />
+
 
         <!-- <android.support.design.widget.FloatingActionButton
              android:id="@+id/float_chat"

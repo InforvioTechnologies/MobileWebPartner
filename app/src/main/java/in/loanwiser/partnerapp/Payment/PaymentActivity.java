@@ -60,8 +60,8 @@ import in.loanwiser.partnerapp.SimpleActivity;
 
 public class PaymentActivity extends SimpleActivity implements CompoundButton.OnCheckedChangeListener {
 
-    AppCompatTextView skip_payment,cusben_textviewone,cusben_textviewsecond,partner_textviewone,partner_textviewtwo,loancredit_textview;
-    Button proceed_button;
+    AppCompatTextView skip_payment,cusben_textviewone,cusben_textviewsecond,partner_textviewone,partner_textviewtwo,loancredit_textview,notestxt;
+    Button proceed_button,proceed_button1;
     AppCompatSpinner customplan_amount;
     RadioButton custom_radio, standard_radio,paymentcustomer_radio,loancredit_radio,paycollect_radio;
     LinearLayout customben_laysecond,customben_layone,partnerben_laysecond,partnerben_layone,skip_payment1;
@@ -97,7 +97,7 @@ public class PaymentActivity extends SimpleActivity implements CompoundButton.On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_simple);
-        Objs.a.setStubId(this,R.layout.activity_payment);
+        Objs.a.setStubId(this,R.layout.paymentlayout);
         initTools(R.string.pay_ment);
 
         progressDialog = new SpotsDialog(context, R.style.Custom);
@@ -115,12 +115,14 @@ public class PaymentActivity extends SimpleActivity implements CompoundButton.On
     {
         skip_payment = findViewById(R.id.skip_payment);
         proceed_button=findViewById(R.id.proceed_button);
-        customplan_amount=findViewById(R.id.customplan_amount);
+        notestxt=findViewById(R.id.notestxt);
+      //  proceed_button1=findViewById(R.id.proceed_button1);
+       // customplan_amount=findViewById(R.id.customplan_amount);
         skip_payment=findViewById(R.id.skip_payment);
 
-        custom_radio=(RadioButton) findViewById(R.id.custom_radio);
+      //  custom_radio=(RadioButton) findViewById(R.id.custom_radio);
         standard_radio=(RadioButton) findViewById(R.id.standard_radio);
-        paymentcustomer_radio=(RadioButton)findViewById(R.id.paymentcustomer_radio);
+        paymentcustomer_radio=(RadioButton)findViewById(R.id.paymentcustomer_radios);
         loancredit_radio=(RadioButton)findViewById(R.id.loancredit_radio);
         paycollect_radio=(RadioButton)findViewById(R.id.paycollect_radio);
 
@@ -144,8 +146,9 @@ public class PaymentActivity extends SimpleActivity implements CompoundButton.On
 
     private void Click()
     {
-        custom_radio.setOnCheckedChangeListener(this);
-        standard_radio.setOnCheckedChangeListener(this);
+     //   paymentcustomer_radio.setChecked(true);
+       // custom_radio.setOnCheckedChangeListener(this);
+       // standard_radio.setOnCheckedChangeListener(this);
         paymentcustomer_radio.setOnCheckedChangeListener(this);
         loancredit_radio.setOnCheckedChangeListener(this);
         paycollect_radio.setOnCheckedChangeListener(this);
@@ -157,7 +160,7 @@ public class PaymentActivity extends SimpleActivity implements CompoundButton.On
             }
         });
 
-        skip_payment1.setOnClickListener(new View.OnClickListener() {
+       /* skip_payment1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
@@ -202,17 +205,17 @@ public class PaymentActivity extends SimpleActivity implements CompoundButton.On
                 });
 
 
-              /*  */
+              *//*  *//*
             }
         });
+*/
 
-
-        skip_payment.setOnClickListener(new View.OnClickListener() {
+     /*   skip_payment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                // Update_Payment_Statues();
             }
-        });
+        });*/
 
     }
 
@@ -634,7 +637,7 @@ public class PaymentActivity extends SimpleActivity implements CompoundButton.On
                                 payment_values =object.getJSONArray("custom_plan");
                                 Log.e("Salary_proof_ar",String.valueOf(payment_values));
 
-                                Salry_method_Spinner(payment_values);
+                             //   Salry_method_Spinner(payment_values);
                                 standard_amount.setText(paymentamoubt);
                             }else
                             {
@@ -676,7 +679,7 @@ public class PaymentActivity extends SimpleActivity implements CompoundButton.On
 
 
 
-    private void Salry_method_Spinner(final JSONArray Salary_method_ar) throws JSONException {
+  /*  private void Salry_method_Spinner(final JSONArray Salary_method_ar) throws JSONException {
         //   SPINNERLIST = new String[ja.length()];
         SALARY_Method = new String[Salary_method_ar.length()];
         for (int i=0;i<Salary_method_ar.length();i++){
@@ -738,7 +741,7 @@ public class PaymentActivity extends SimpleActivity implements CompoundButton.On
 
         }
 
-    }
+    }*/
 
     private void get_credit_coins_points(String Payment_value ) {
         progressDialog.show();
@@ -801,8 +804,8 @@ public class PaymentActivity extends SimpleActivity implements CompoundButton.On
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 
         if (isChecked) {
-            if (buttonView.getId() == R.id.standard_radio) {
-                custom_radio.setChecked(false);
+           /* if (buttonView.getId() == R.id.standard_radio) {
+               // custom_radio.setChecked(false);
                 customben_laysecond.setVisibility(View.GONE);
                 cusben_textviewone.setText(getString(R.string.cusben_desc));
                 partner_textviewone.setText(getString(R.string.par_desc));
@@ -815,8 +818,8 @@ public class PaymentActivity extends SimpleActivity implements CompoundButton.On
                 payment_id = paymentamoubt;
                 pay_plan = "1";
                 Log.e("the value to fine pay_plan",pay_plan);
-            }
-            if (buttonView.getId() == R.id.custom_radio) {
+            }*/
+        /*    if (buttonView.getId() == R.id.custom_radio) {
                 standard_radio.setChecked(false);
                 customben_laysecond.setVisibility(View.VISIBLE);
                 partnerben_laysecond.setVisibility(View.VISIBLE);
@@ -835,11 +838,13 @@ public class PaymentActivity extends SimpleActivity implements CompoundButton.On
                 Chose_plan = "1";
                 pay_plan = "2";
                 Log.e("the value to fine pay_plan",pay_plan);
-            }
+            }*/
 
-            if (buttonView.getId()==R.id.paymentcustomer_radio){
+            if (buttonView.getId()==R.id.paymentcustomer_radios){
                 paycollect_radio.setChecked(false);
                 loancredit_radio.setChecked(false);
+                paymentcustomer_radio.setChecked(true);
+                notestxt.setText(getString(R.string.firstone));
                 PAY_OPTION = "1";
 
             }
@@ -847,12 +852,16 @@ public class PaymentActivity extends SimpleActivity implements CompoundButton.On
             if (buttonView.getId()==R.id.loancredit_radio){
                 paymentcustomer_radio.setChecked(false);
                 paycollect_radio.setChecked(false);
+                loancredit_radio.setChecked(true);
+                notestxt.setText(getString(R.string.secondone));
                 PAY_OPTION = "2";
             }
 
             if (buttonView.getId()==R.id.paycollect_radio){
                 paymentcustomer_radio.setChecked(false);
                 loancredit_radio.setChecked(false);
+                paycollect_radio.setChecked(true);
+                notestxt.setText(getString(R.string.thrdone));
                 PAY_OPTION = "3";
             }
         }

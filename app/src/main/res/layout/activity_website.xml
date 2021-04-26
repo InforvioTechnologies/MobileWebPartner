@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Partner_Statues.WebsiteActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_margin="10dp"
+                android:orientation="vertical">
+
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:cardCornerRadius="10dp"
+                    app:cardElevation="5dp"
+                    app:strokeColor="#002B5D"
+                    app:strokeWidth="1dp"
+                    android:paddingBottom="10dp"
+                    android:theme="@style/Theme.MaterialComponents.Light"
+                    android:background="@drawable/businesscard_background"
+                    app:cardBackgroundColor="@color/white">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="20dp"
+                        android:orientation="vertical">
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:layout_width="60dp"
+                            android:layout_height="60dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/web_design"/>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginLeft="5dp"
+                            android:layout_margin="10dp"
+                            android:orientation="vertical">
+                            
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/websiteadd"
+                                android:textColor="@color/colorPrimary"
+                                android:textStyle="bold"
+                                android:textSize="14sp"/>
+
+                        </LinearLayout>
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginLeft="5dp"
+                            android:layout_margin="10dp"
+                            android:background="@drawable/edittext_border"
+                            android:orientation="horizontal">
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:id="@+id/websiteurltxt"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="10dp"
+                                android:layout_marginLeft="5dp"
+                                android:textColor="@color/colorPrimary"
+                                android:textSize="14sp"/>
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:id="@+id/urlopentxt"
+                                android:layout_width="wrap_content"
+                                android:layout_height="40dp"
+                                android:text="Open"
+                                android:textColor="@color/white"
+                                android:background="@color/colorPrimary"
+                                android:gravity="center"
+                                android:padding="10dp"
+                                android:tint="@color/colorPrimary"
+                                android:layout_alignParentRight="true"
+                                />
+
+                        </RelativeLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:orientation="vertical">
+
+                            <androidx.appcompat.widget.AppCompatButton
+                                android:layout_width="180dp"
+                                android:layout_height="45dp"
+                                android:id="@+id/copyurlbutton"
+                                android:layout_gravity="center"
+                                android:text="@string/copyurl"
+                                android:textColor="@color/white"
+                                android:background="@drawable/but_shape_blue"/>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+
+
+                </com.google.android.material.card.MaterialCardView>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_gravity="center"
+                >
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/instruction"
+                    android:layout_margin="10dp"
+                    android:textSize="14sp"
+                    android:textColor="@color/but_red"
+                    />
+
+            </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_marginLeft="10dp"
+                    android:layout_gravity="center"
+                    android:textSize="10sp"
+                    android:id="@+id/doc_status11"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/sus11"
+                    android:textColor="@color/colorPrimaryDark1" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_marginLeft="10dp"
+                    android:layout_gravity="center"
+                    android:textSize="12sp"
+                    android:id="@+id/info1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/info1"
+                    android:layout_toRightOf="@+id/doc_status11"
+                    android:textColor="@color/colorPrimaryDark1" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="20dp">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_marginLeft="10dp"
+                    android:layout_gravity="center"
+                    android:textSize="10sp"
+                    android:id="@+id/doc_status112"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/sus11"
+                    android:textColor="@color/colorPrimaryDark1" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_marginLeft="10dp"
+                    android:layout_gravity="center"
+                    android:textSize="12sp"
+                    android:id="@+id/info2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/info2"
+                    android:layout_toRightOf="@+id/doc_status112"
+                    android:textColor="@color/colorPrimaryDark1" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="20dp">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_marginLeft="10dp"
+                    android:layout_gravity="center"
+                    android:textSize="10sp"
+                    android:id="@+id/doc_status1123"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/sus11"
+                    android:textColor="@color/colorPrimaryDark1" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_marginLeft="10dp"
+                    android:layout_gravity="center"
+                    android:textSize="12sp"
+                    android:id="@+id/info3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/info3"
+                    android:layout_toRightOf="@+id/doc_status1123"
+                    android:textColor="@color/colorPrimaryDark1" />
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="30dp"
+                android:layout_marginLeft="20dp">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/info4"
+                    android:layout_gravity="center"
+                    android:textSize="12sp"
+                    android:textColor="@color/colorPrimaryDark1"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="20dp"
+                android:orientation="vertical">
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/whatsappbtn"
+                    android:layout_width="240dp"
+                    android:layout_height="55dp"
+                    android:padding="16dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="10dp"
+                    android:text="Share in whatsapp"
+                    android:textColor="#2CB742"
+                    android:background="#ADFFAA"
+                    android:drawableLeft="@drawable/whatsapp"
+                    android:textSize="14sp"/>
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/othernetworkbtn"
+                    android:layout_width="240dp"
+                    android:layout_height="55dp"
+                    android:padding="16dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="10dp"
+                    android:background="#B9D9FF"
+                    android:textColor="#2680EB"
+                    android:text="Share in Others"
+                    android:drawableLeft="@drawable/ic_sharing"
+                    android:textSize="14sp"/>
+
+            </LinearLayout>
+
+
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>

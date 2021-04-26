@@ -71,6 +71,7 @@
 
                             <androidx.appcompat.widget.AppCompatTextView
                                 android:id="@+id/mandatory_do"
+                                android:visibility="gone"
                                 style="@style/SmallText"
                                 android:textSize="12dp"
                                 android:text="Mandatory Document"

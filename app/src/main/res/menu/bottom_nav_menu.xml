@@ -11,6 +11,9 @@
         android:icon="@drawable/ic_flags"
         android:title="@string/title_leads"/>
     <item
+        android:id="@+id/add_leadd"
+        android:title="@string/add_leads"/>
+    <item
         android:id="@+id/earnings"
         android:icon="@drawable/ic_wallet"
         android:title="@string/title_earnings"/>

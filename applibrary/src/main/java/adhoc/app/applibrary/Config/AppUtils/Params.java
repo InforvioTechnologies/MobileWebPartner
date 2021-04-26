@@ -15,6 +15,8 @@ public class Params {
     public static String param="param";
     public static String err = "err";
     public static String JSON = "JSON";
+    public static String from_campaign = "from_campaign";
+    public static String utmSource = "utmSource";
 
 
 

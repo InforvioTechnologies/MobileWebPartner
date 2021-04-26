@@ -31,6 +31,7 @@
     </item>
         <group>
             <item android:id="@+id/nav_item_six"
+                android:visible="false"
                 android:icon="@drawable/ic_call_us"
                 android:title="call us" />
             <item android:id="@+id/nav_item_six1"
@@ -41,10 +42,17 @@
                 android:visible="false"
                 android:icon="@drawable/ic_contract"
                 android:title="Terms and Condition" />
+
+            <item android:id="@+id/loan_acadmy"
+                android:icon="@drawable/ic_light_bulb"
+                android:title="Loanwiser Academy" />
+
             <item
                 android:id="@+id/report"
                 android:icon="@drawable/ic_report_"
                 android:title="Help &amp; Support"/>
+
+
             <item
                 android:id="@+id/nav_logout"
                 android:icon="@drawable/logout"

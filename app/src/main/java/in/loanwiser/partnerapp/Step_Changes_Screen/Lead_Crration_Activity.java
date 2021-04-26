@@ -63,6 +63,7 @@ import dmax.dialog.SpotsDialog;
 import in.loanwiser.partnerapp.NumberTextWatcher;
 import in.loanwiser.partnerapp.PartnerActivitys.Applicant_Details_Activity;
 import in.loanwiser.partnerapp.PartnerActivitys.Dashboard_Activity;
+import in.loanwiser.partnerapp.Payment.PaymentActivity;
 import in.loanwiser.partnerapp.Payment.Payment_Sucess_Screen;
 import in.loanwiser.partnerapp.R;
 import in.loanwiser.partnerapp.SimpleActivity;
@@ -144,12 +145,11 @@ public class Lead_Crration_Activity extends SimpleActivity {
                 @Override
                 public void onClick(View view) {
 
-                    Intent intent = new Intent(Lead_Crration_Activity.this, Payment_Sucess_Screen.class);
+                    Intent intent = new Intent(Lead_Crration_Activity.this, PaymentActivity.class);
                     startActivity(intent);
                     finish();
                 }
-            });
-*/
+            });*/
        /* lead_cr_step1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

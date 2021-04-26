@@ -80,16 +80,34 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/uploadedmonth_lay"
+                android:orientation="vertical"
+
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 >
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/uploadedmonth_recycleview"
+                <RelativeLayout
+                    android:id="@+id/uploadedmonth_lay"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:orientation="vertical"
+                    >
+                    <androidx.recyclerview.widget.RecyclerView
+
+                        android:id="@+id/uploadedmonth_recycleview"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+                    <com.wang.avi.AVLoadingIndicatorView
+                        android:id="@+id/material_design_ball_scale_ripple_loader"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:visibility="gone"
+                        android:layout_centerInParent="true"
+                        app:indicator="LineSpinFadeLoader"
+                        app:indicator_color="#9FCBFF" />
+                </RelativeLayout>
 
             </LinearLayout>
 
@@ -184,7 +202,7 @@
                 android:orientation="vertical"
                 >
 
-                <Button
+                <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/upload_requirebtn"
                     android:layout_width="260dp"
                     android:layout_height="40dp"
@@ -261,6 +279,73 @@
                 android:layout_height="wrap_content">
                 <include
                     layout="@layout/analticslay"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="20dp"
+                android:layout_marginEnd="10dp"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="15dp"
+                    android:orientation="vertical">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/bank_anlysis_available_bank"
+                        android:textColor="#082A4F"
+                        android:textStyle="bold"
+                        android:layout_marginLeft="5dp"
+                        android:textSize="16sp"/>
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:text="@string/bank_anlysis_available_bank1"
+                        android:textColor="#8A8A8A"
+                        android:layout_marginLeft="5dp"
+                        android:textSize="12sp"/>
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_marginTop="20dp"
+                    android:layout_marginLeft="10dp"
+                    android:id="@+id/ly_helth_assement_"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recycler_view_bank_available_"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+
+                <HorizontalScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TableLayout
+                        android:padding="5dp"
+                        xmlns:android="http://schemas.android.com/apk/res/android"
+                        xmlns:app="http://schemas.android.com/apk/res-auto"
+                        android:orientation="vertical"
+                        android:id="@+id/tabel_row"
+                        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:cacheColorHint="@android:color/transparent"
+                        android:background="@color/white"
+                        android:clipToPadding="false"
+                        android:fadeScrollbars="true"
+                        android:scrollbars="none" />
+                </HorizontalScrollView>
             </LinearLayout>
 
             <LinearLayout

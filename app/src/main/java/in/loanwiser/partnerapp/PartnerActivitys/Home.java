@@ -57,8 +57,10 @@ import adhoc.app.applibrary.Config.AppUtils.VolleySignleton.AppController;
 import dmax.dialog.SpotsDialog;
 import in.loanwiser.partnerapp.BankStamentUpload.Doc_ImageView_Bank;
 import in.loanwiser.partnerapp.BankStamentUpload.Upload_Activity_Bank;
+import in.loanwiser.partnerapp.Documents.ActivityStreamActivity;
 import in.loanwiser.partnerapp.Documents.Applicant_Details_Single;
 import in.loanwiser.partnerapp.Documents.Applicant_Doc_Details_revamp;
+import in.loanwiser.partnerapp.Documents.Document_Availability_Check;
 import in.loanwiser.partnerapp.PDF_Dounloader.PermissionUtils;
 import in.loanwiser.partnerapp.Partner_Statues.DashBoard_new;
 import in.loanwiser.partnerapp.Payment.PaymentActivity;
@@ -90,7 +92,7 @@ public class Home extends AppCompatActivity {
     private LinearLayout lead_cr_statues,if_vaibility_faild,bank_is_yes;
     CardView Applicant_info_ly,Document_check_list,Document_Upload,offer_generation,
             Viability_Check,eligibility_check,viability_Report,Credit_REport_Generation,Paymet,
-            CRIF_Check,step2_card,Bank_statement_Upload;
+            CRIF_Check,step2_card,Bank_statement_Upload,Submiteed_to_Loanwiser;
 
     FragmentApplicant fragmentApplicant=null;
 
@@ -114,7 +116,7 @@ public class Home extends AppCompatActivity {
 
         AppCompatButton view_ask;
     private static final int STORAGE_PERMISSION_REQUEST_CODE = 1;
-    private ImageView loan_statues_,loan_statues_1,step3_statue,step3_statue1;
+    private ImageView loan_statues_,loan_statues_1,step3_statue,step3_statue1,step2_image_completed,step3_image_completed;
     private LinearLayout Loan_Submit_tracStatues,step3_sub_staus,Loan_Statue_submit_layout;
 
     PermissionUtils permissionUtils;
@@ -133,6 +135,8 @@ public class Home extends AppCompatActivity {
     private ExpandableListAdapter1 expandableListAdapter;
     String all;
     ImageView loan_submit_statues_img,Document_verification_img,applied_to_bank_img;
+    AppCompatButton view_activity;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -173,11 +177,14 @@ public class Home extends AppCompatActivity {
          stateProgressBar2 = (StateProgressBar) findViewById(R.id.state_progressbar2);
 
         loan_submit_statues_img = (ImageView) findViewById(R.id.loan_submit_statues_img);
+        step2_image_completed = (ImageView) findViewById(R.id.step2_image_completed);
+        step3_image_completed = (ImageView) findViewById(R.id.step3_image_completed);
         Document_verification_img = (ImageView) findViewById(R.id.Document_verification_img);
         applied_to_bank_img = (ImageView) findViewById(R.id.applied_to_bank_img);
         loan_submit_statues_txt1 = (AppCompatTextView) findViewById(R.id.loan_submit_statues_txt1);
         Document_verification_txt1 = (AppCompatTextView) findViewById(R.id.Document_verification_txt1);
         Applied_to_Bank_txt1 = (AppCompatTextView) findViewById(R.id.Applied_to_Bank_txt1);
+        view_activity = (AppCompatButton) findViewById(R.id.view_activity);
         bank_is_yes = (LinearLayout) findViewById(R.id.bank_is_yes);
 
 
@@ -210,6 +217,15 @@ public class Home extends AppCompatActivity {
             }
         });
 
+        view_activity.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intent = new Intent(Home.this, ActivityStreamActivity.class);
+                startActivity(intent);
+
+            }
+        });
       //  step_status =  Objs.a.getBundle(this, Params.step_status);
 
         permissionUtils = new PermissionUtils();
@@ -437,6 +453,7 @@ public class Home extends AppCompatActivity {
         bankstatment_but=findViewById(R.id.bankstatment_but);
         document_upload_button=findViewById(R.id.document_upload_button);
         Loan_Statue_submit_layout=findViewById(R.id.Loan_Statue_submit_layout);
+        Submiteed_to_Loanwiser=findViewById(R.id.Submiteed_to_Loanwiser);
         step3payment_but=findViewById(R.id.step3payment_but);
         eligibility_but=findViewById(R.id.eligibility_but);
         document_check_button=findViewById(R.id.document_check_button);
@@ -474,6 +491,25 @@ public class Home extends AppCompatActivity {
                 step3_sub_staus.setVisibility(View.VISIBLE);
             }
         });
+
+        step3payment_but.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                if(document_upload.equals("pending"))
+                {
+                  //  Document_generate_checklist_rule();
+                    Toast.makeText(getApplicationContext(),"Please Complete The Previous Steps To Proceed!!!", Toast.LENGTH_SHORT).show();
+
+                }else
+                {
+                    Document_generate_checklist_rule();
+                }
+
+            }
+        });
+
+
         step3_statue1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -513,51 +549,7 @@ public class Home extends AppCompatActivity {
                 finish();
             }
         });
-       /* Viability_Check.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
 
-                if(viability.equals("completed"))
-                {
-                  //  Intent intent = new Intent(Home.this, Viability_Activity_Data_View.class);
-                    Intent intent = new Intent(Home.this, Viability_Data_revamp.class);
-                    intent.putExtra("user_id", user_id);
-                    intent.putExtra("transaction_id", transaction_id);
-                    startActivity(intent);
-                   // finish();
-                }else
-                {
-                    Pref.putLoanType(mCon,loan_type_id);
-
-                    if(loan_type_id.equals("21"))
-                    {
-
-                        Intent intent = new Intent(Home.this, Viability_Screen_revamp_Pl_BL.class);
-                        intent.putExtra("user_id", user_id);
-                        intent.putExtra("transaction_id", transaction_id);
-                        startActivity(intent);
-                       // finish();
-
-                    }else if(loan_type_id.equals("20"))
-                    {
-                        Intent intent = new Intent(Home.this, Viability_Screen_revamp_Pl_BL.class);
-                        intent.putExtra("user_id", user_id);
-                        intent.putExtra("transaction_id", transaction_id);
-                        startActivity(intent);
-                      //  finish();
-
-                    }else
-                    {
-                        Intent intent = new Intent(Home.this, Viability_Screen_revamp.class);
-                        startActivity(intent);
-                       // finish();
-                    }
-
-
-                }
-
-            }
-        });*/
 
         step2viablity_button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -629,30 +621,6 @@ public class Home extends AppCompatActivity {
             }
         });
 
-    /*    Paymet.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-
-                if(viability.equals("completed")) {
-                        if(payment.equals("completed"))
-                        {
-
-                        }else  if(payment.equals("pending"))
-                        {
-                            Intent intent = new Intent(Home.this, PaymentActivity.class);
-                            startActivity(intent);
-                            // finish();
-                        }
-
-                }else
-                {
-                    Toast.makeText(getApplicationContext(),"Please Complete The Previous Steps To Proceed!!!", Toast.LENGTH_SHORT).show();
-
-                }
-
-            }
-        });*/
 
 
         step2report_but.setOnClickListener(new View.OnClickListener() {
@@ -664,18 +632,7 @@ public class Home extends AppCompatActivity {
 
                         if(reject_status.equals("1"))
                         {
-                            /*Objs.ac.StartActivityPutExtra(Home.this, Doc_ImageView_Viability.class,
-                                    Params.document,viability_report_URL);*/
-                           /* if (permissionUtils.checkPermission(Home.this, STORAGE_PERMISSION_REQUEST_CODE, view)) {
-                                if (viability_report_URL.length() > 0) {
-                                    try {
-                                        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(viability_report_URL)));
-                                    } catch (Exception e) {
-                                        e.getStackTrace();
-                                    }
-                                }
 
-                            }*/
                            String report="Viability Report";
                             Objs.ac.StartActivityPutExtra(Home.this, Doc_ImageView_Bank.class,
                                     Params.document,viability_report_URL,Params.report,report);
@@ -712,66 +669,7 @@ public class Home extends AppCompatActivity {
         });
 
 
-       /* viability_Report.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
 
-                if(payment.equals("completed"))
-                {
-                    if(reject_status.equals("1"))
-                    {
-                   *//* if (permissionUtils.checkPermission(Home.this, STORAGE_PERMISSION_REQUEST_CODE, view)) {
-                        if (viability_report_URL.length() > 0) {
-                            try {
-                                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(viability_report_URL)));
-                            } catch (Exception e) {
-                                e.getStackTrace();
-                            }
-                        }
-
-                    }*//*
-                        Objs.ac.StartActivityPutExtra(Home.this, Doc_ImageView_Viability.class,
-                                Params.document,viability_report_URL);
-
-                    }else
-                    {
-                   *//* if(viability.contains("completed")) {
-                            if (payment.contains("completed")) {
-
-                                    if (permissionUtils.checkPermission(Home.this, STORAGE_PERMISSION_REQUEST_CODE, view)) {
-                                        if (viability_report_URL.length() > 0) {
-                                            try {
-                                                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(viability_report_URL)));
-                                            } catch (Exception e) {
-                                                e.getStackTrace();
-                                            }
-                                        }
-
-                                    }
-
-                            }else
-                            {
-                                Toast.makeText(getApplicationContext(),"Please Complete The Previous Steps To Proceed!!!", Toast.LENGTH_SHORT).show();
-
-                            }
-                    }else {
-
-                        Toast.makeText(getApplicationContext(),"Please Complete The Previous Steps To Proceed!!!", Toast.LENGTH_SHORT).show();
-                    }*//*
-                        //
-                        Objs.ac.StartActivityPutExtra(Home.this, Doc_ImageView_Viability.class,
-                                Params.document,viability_report_URL);
-                    }
-                }else  if(payment.equals("pending"))
-                {
-                    Toast.makeText(getApplicationContext(),"Please Complete The Previous Steps To Proceed!!!", Toast.LENGTH_SHORT).show();
-
-                }
-
-
-
-            }
-        });*/
 
         step2crif_but.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -811,30 +709,7 @@ public class Home extends AppCompatActivity {
             }
         });
 
-      /*  Credit_REport_Generation.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(viability.equals("completed")) {
-                        if (payment.equals("completed")) {
-                                Intent intent = new Intent(Home.this, CRIF_Report_Activity_PDF_View.class);
-                                intent.putExtra("user_id", applicant_id);
-                                startActivity(intent);
 
-                        }else
-                        {
-                            Toast.makeText(getApplicationContext(),"Please Complete The Previous Steps To Proceed!!!", Toast.LENGTH_SHORT).show();
-                        }
-                }else {
-
-                    Toast.makeText(getApplicationContext(),"Please Complete The Previous Steps To Proceed!!!", Toast.LENGTH_SHORT).show();
-
-                }
-
-
-
-
-            }
-        });*/
 
         bankstatment_but.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -881,31 +756,6 @@ public class Home extends AppCompatActivity {
             }
         });
 
-        /*Bank_statement_Upload.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(viability.equals("completed")) {
-                        if (payment.equals("completed")) {
-
-                                if(bank_statement.equals("completed"))
-                                {
-
-                                }else
-                                {
-                                    Intent intent = new Intent(Home.this, Upload_Activity_Bank.class);
-                                    startActivity(intent);
-                                }
-
-                        }else
-                        {
-                            Toast.makeText(getApplicationContext(),"Please Complete The Previous Steps To Proceed!!!", Toast.LENGTH_SHORT).show();
-                        }
-                }else {
-                    Toast.makeText(getApplicationContext(),"Please Complete The Previous Steps To Proceed!!!", Toast.LENGTH_SHORT).show();
-
-                }
-            }
-        });*/
 
     }
 
@@ -984,7 +834,59 @@ public class Home extends AppCompatActivity {
         Objs.a.OutfitNormalFontStyle(mCon, R.id.askthis);
         Objs.a.OutfitNormalFontStyle(mCon, R.id.app_interview);
     }
+    private void Document_generate_checklist_rule() {
+        JSONObject jsonObject =new JSONObject();
+        JSONObject J= null;
+        try {
+            J =new JSONObject();
+            J.put("transaction_id", Pref.getTRANSACTIONID(getApplicationContext()));
+            // J.put("transaction_id", "61359");
 
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        Log.e("submit_loanwiser", String.valueOf(J));
+        progressDialog.show();
+        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, Urls.generate_docuverifyrule, J,
+                new Response.Listener<JSONObject>() {
+                    @SuppressLint("RestrictedApi")
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        Log.e("Documnet_upload_Status1", String.valueOf(response));
+                        //{"request":{"transaction_id":"10194"},"response":true,"status":"success"}
+                        try {
+
+                            if(response.getString("status").equals("success")){
+
+                                Intent intent = new Intent(Home.this, Document_Availability_Check.class);
+                                startActivity(intent);
+                            }else {
+                                Toast.makeText(getApplicationContext(),"Something went wrong, Please check!!!", Toast.LENGTH_SHORT).show();
+
+                            }
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        progressDialog.dismiss();
+                    }
+                }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                progressDialog.dismiss();
+                Toast.makeText(getApplicationContext(),error.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("content-type", "application/json");
+                return headers;
+            }
+        };
+        AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
+    }
 
    /* private void Step_copletions() {
         JSONObject jsonObject =new JSONObject();
@@ -1245,6 +1147,22 @@ public class Home extends AppCompatActivity {
 
                              String step2_statues = jsonObject2.getString("status");
                              String step3_statues = jsonObject3.getString("status");
+
+                             if(step2_statues.equals("completed"))
+                             {
+
+                                 step2_image_completed.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
+                             }else
+                             {
+                                 step2_image_completed.setImageDrawable(getResources().getDrawable(R.drawable.ic_not_tick));
+                             }
+                            if(step3_statues.equals("completed"))
+                            {
+                                step3_image_completed.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
+                            }else
+                            {
+                                step3_image_completed.setImageDrawable(getResources().getDrawable(R.drawable.ic_not_tick));
+                            }
 
                              JSONObject step2_sub_statues = jsonObject2.getJSONObject("sub_status");
 
@@ -1616,7 +1534,7 @@ public class Home extends AppCompatActivity {
                                 Credit_REport_Generation.setVisibility(View.GONE);
                             }
 
-                            if(payment_eligility.equals("completed"))
+                           /* if(payment_eligility.equals("completed"))
                             {
                                 payment_img1.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
                                 step3payment_status.setImageDrawable(getResources().getDrawable(R.drawable.ic_green_tick));
@@ -1633,7 +1551,7 @@ public class Home extends AppCompatActivity {
                                 step3payment_but.setBackgroundResource(R.drawable.but_shape_gray);
                                 step3payment_but.setText("Complete Now");
                                 step3payment_but.setFocusable(false);
-                            }
+                            }*/
                             if(eligibility_status.equals("completed"))
                             {
                                 eligibility_statues_img.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
@@ -1680,6 +1598,9 @@ public class Home extends AppCompatActivity {
                                     document_check_button.setBackgroundResource(R.drawable.but_shape_gray);
                                 }
                                 document_upload_button.setBackgroundResource(R.drawable.but_shape_gray);
+
+
+
                             }else
                             {
                                 document_check_text.setText("Completed");
@@ -1698,6 +1619,8 @@ public class Home extends AppCompatActivity {
                                 }
                                 document_check_button.setBackgroundResource(R.drawable.but_shape_blue);
                                 document_check_button.setText("View");
+
+
                             }
 
                             if(document_upload.equals("pending"))
@@ -1725,9 +1648,21 @@ public class Home extends AppCompatActivity {
                                 {
                                     document_upload_button.setBackgroundResource(R.drawable.but_shape_gray);
                                 }
+                                if(document_upload.equals("pending"))
+                                {
+                                    payment_img1.setImageDrawable(getResources().getDrawable(R.drawable.ic_warning));
+                                    step3payment_status.setImageDrawable(getResources().getDrawable(R.drawable.ic_warning));
+                                    payment_statues_comp1.setText("Pending under you");
+                                    payment_statues_comp1.setTextColor(Color.parseColor("#FF9201"));
+                                    step3payment_but.setBackgroundResource(R.drawable.but_shape_gray);
+                                    step3payment_but.setText("Complete Now");
+                                    step3payment_but.setFocusable(false);
+                                }
 
                                 document_upload_button.setText("Complete now");
                                 Loan_Statue_submit_layout.setVisibility(View.GONE);
+                                Submiteed_to_Loanwiser.setVisibility(View.VISIBLE);
+                                Loan_submit_statues();
                             }else
                             {
                                 document_img1.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
@@ -1736,6 +1671,16 @@ public class Home extends AppCompatActivity {
                                 documentupload_status.setImageDrawable(getResources().getDrawable(R.drawable.ic_green_tick));
                                 document_upload_button.setBackgroundResource(R.drawable.but_shape_blue);
                                 document_upload_button.setText("View");
+
+                                if(document_upload.equals("completed"))
+                                {
+                                    payment_img1.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
+                                    step3payment_status.setImageDrawable(getResources().getDrawable(R.drawable.ic_green_tick));
+                                    payment_statues_comp1.setText("Completed");
+                                    payment_statues_comp1.setTextColor(Color.parseColor("#00CEB4"));
+                                    step3payment_but.setBackgroundResource(R.drawable.but_shape_blue);
+                                    step3payment_but.setText("View");
+                                }
                                 Loan_submit_statues();
                                 Loan_Statue_submit_layout.setVisibility(View.VISIBLE);
                             }

@@ -117,26 +117,28 @@
             android:orientation="vertical"
             android:layout_gravity="center_horizontal"
             >
-            <androidx.appcompat.widget.AppCompatTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginStart="10dp"
-                android:layout_marginLeft="5dp"
-                android:text="Please upload the below mandatory documents in every section to Proceed."
-                android:textAlignment="center"
-                android:textColor="#818181"
-                android:textSize="16dp"
-                android:textStyle="bold" />
+
             <androidx.appcompat.widget.AppCompatTextView
                 android:layout_marginTop="10dp"
                 android:id="@+id/bank_statement"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginStart="10dp"
-                android:layout_marginLeft="5dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
                 android:text="Please upload the mandatory documents in every section to Proceed."
+                android:textAlignment="center"
+                android:textColor="#818181"
+                android:textSize="16dp"
+                android:textStyle="bold" />
+            <androidx.appcompat.widget.AppCompatTextView
+                android:visibility="gone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:text="Please provide following missing months in bank statement. Otherwise you'll not be able to submit this lead"
                 android:textAlignment="center"
                 android:textColor="#818181"
                 android:textSize="16dp"
@@ -151,43 +153,43 @@
             android:layout_marginBottom="20dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="vertical">
             <LinearLayout
+
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:layout_weight="1">
 
                 <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/delete"
-                    android:layout_width="118dp"
-                    android:layout_height="33dp"
-                    android:text="Ok"
+                    android:id="@+id/upload"
+                    android:layout_width="208dp"
+                    android:layout_height="37dp"
                     android:background="@drawable/capsul_button41"
-                    style="@style/Widget.AppCompat.Button.Borderless"
+                    android:text="Upload Missing Months"
                     android:textColor="@color/white"
                     android:textStyle="bold"/>
 
 
             </LinearLayout>
             <LinearLayout
-                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:layout_weight="1">
 
-                <Button
-                    android:id="@+id/no"
-                    android:layout_width="118dp"
-                    android:layout_height="33dp"
-                    android:background="@drawable/capsul_button41"
-                    android:text="No"
-                    android:textColor="@color/white"
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/delete"
+                    android:layout_width="158dp"
+                    android:layout_height="37dp"
+                    android:text="Close"
+                    style="@style/Widget.AppCompat.Button.Borderless"
+                    android:textColor="@color/colorPrimary12"
                     android:textStyle="bold"/>
 
 
             </LinearLayout>
+
 
         </LinearLayout>
         <LinearLayout

@@ -65,7 +65,7 @@ public class ProfileSettings extends SimpleActivity {
     String State_Loc_uniqueID,City_loc_uniqueID;
     private android.app.AlertDialog progressDialog;
 
-    private AppCompatEditText door,buliding,street,pincode,city,state,pan,bussiness_type;
+    private AppCompatEditText door,buliding,street,pincode,city,state,pan,bussiness_type,pincode_edt;
     private AppCompatEditText editTextName,editTextMobile;
     private AppCompatEditText email,addess;
     private AwesomeValidation awesomeValidation;
@@ -83,7 +83,7 @@ public class ProfileSettings extends SimpleActivity {
     private String Sdatanew;
     ArrayAdapter<String> A_state,A_City,A_Type;
     private AppCompatImageView fab_edit_1,fab_edit_2;
-    private LinearLayout Ly_spinner_edt,Ly_spinner,Ly_business_type,Ly_edit_option;
+    private LinearLayout Ly_spinner_edt,Ly_spinner,Ly_business_type,Ly_edit_option,business_type_pl,pincode_type_pl;
     private String searched_State,searched_City,searched_Type;
     private String get_state_id,state_name;
     private ImageButton edit_option;
@@ -139,6 +139,9 @@ public class ProfileSettings extends SimpleActivity {
         editTextMobile = (AppCompatEditText) findViewById(R.id.mob);
         addess = (AppCompatEditText) findViewById(R.id.addess);
         bussiness_type = (AppCompatEditText) findViewById(R.id.bussiness_type);
+        pincode_edt = (AppCompatEditText) findViewById(R.id.pincode_edt);
+        business_type_pl = (LinearLayout) findViewById(R.id.business_type_pl);
+        pincode_type_pl = (LinearLayout) findViewById(R.id.pincode_type_pl);
         // editTextMobile.setText(Pref.getMOB(mCon));
         email = (AppCompatEditText) findViewById(R.id.email);
         pan = (AppCompatEditText) findViewById(R.id.pan);
@@ -163,6 +166,7 @@ public class ProfileSettings extends SimpleActivity {
         Objs.a.OutfitEditTextStyle(mCon, editTextMobile);
         Objs.a.OutfitEditTextStyle(mCon, addess);
         Objs.a.OutfitEditTextStyle(mCon, bussiness_type);
+        Objs.a.OutfitEditTextStyle(mCon, pincode_edt);
         Objs.a.OutfitEditTextStyle(mCon, email);
         Objs.a.OutfitEditTextStyle(mCon, state);
         Objs.a.OutfitEditTextStyle(mCon, city);
@@ -201,6 +205,9 @@ public class ProfileSettings extends SimpleActivity {
         update();
         Ly_spinner_edt.setVisibility(View.VISIBLE);
         bussiness_type.setVisibility(View.VISIBLE);
+        pincode_edt.setVisibility(View.VISIBLE);
+        business_type_pl.setVisibility(View.VISIBLE);
+        pincode_type_pl.setVisibility(View.VISIBLE);
 
         appCompatButtonGen_OTP.setVisibility(View.GONE);
         findViewById(R.id.fab).setVisibility(View.VISIBLE);
@@ -212,7 +219,10 @@ public class ProfileSettings extends SimpleActivity {
                 findViewById(R.id.fab).setVisibility(View.GONE);
                 findViewById(R.id.fab1).setVisibility(View.VISIBLE);
                 Ly_spinner_edt.setVisibility(View.GONE);
+                business_type_pl.setVisibility(View.GONE);
+                pincode_type_pl.setVisibility(View.GONE);
                 bussiness_type.setVisibility(View.GONE);
+                pincode_edt.setVisibility(View.GONE);
                 Ly_spinner.setVisibility(View.VISIBLE);
                 Ly_edit_option.setVisibility(View.VISIBLE);
                 Ly_business_type.setVisibility(View.VISIBLE);
@@ -274,6 +284,9 @@ public class ProfileSettings extends SimpleActivity {
                 update();
                 Ly_spinner_edt.setVisibility(View.VISIBLE);
                 bussiness_type.setVisibility(View.VISIBLE);
+                pincode_edt.setVisibility(View.VISIBLE);
+                business_type_pl.setVisibility(View.VISIBLE);
+                pincode_type_pl.setVisibility(View.VISIBLE);
                 Ly_spinner.setVisibility(View.GONE);
                 Ly_edit_option.setVisibility(View.GONE);
                 Ly_business_type.setVisibility(View.GONE);
@@ -360,6 +373,7 @@ public class ProfileSettings extends SimpleActivity {
         email.setFocusable(false);
         addess.setFocusable(false);
         bussiness_type.setFocusable(false);
+        pincode_edt.setFocusable(false);
         state.setFocusable(false);
         city.setFocusable(false);
         pan.setFocusable(false);
@@ -820,7 +834,7 @@ public class ProfileSettings extends SimpleActivity {
         }
 
         progressDialog.show();
-
+        Log.e("Profile Request" , String.valueOf(J));
         JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, Urls.PROFILE_DETAILS_POST, J,
                 new Response.Listener<JSONObject>() {
                     @Override
@@ -842,7 +856,7 @@ public class ProfileSettings extends SimpleActivity {
 
                                 bussiness_type.setText(searched_Type);
                                // pan.setText(jobj.getString(Params.pan_no));
-
+                                pincode_edt.setText(jobj.getString("pincode"));
                                 if ( R_state!="0" && R_state != null && !R_state.isEmpty() && !R_state.equals("null")){
                                  //   makeJsonObjReq_State();
                                     Select_City(R_state);

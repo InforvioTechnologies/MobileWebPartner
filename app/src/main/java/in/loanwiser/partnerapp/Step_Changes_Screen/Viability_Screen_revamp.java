@@ -1537,7 +1537,7 @@ public class Viability_Screen_revamp extends SimpleActivity implements NumberPic
     }
 
     private boolean validate_company_pincode_txt(){
-        if (company_pincode_txt.getText().toString().isEmpty()) {
+        if (company_pincode_txt.getText().toString().isEmpty() || company_pincode_txt.length() <6) {
             company_pincode_txt.setError(getText(R.string.error_rise));
             company_pincode_txt.requestFocus();
             return false;
@@ -1550,7 +1550,7 @@ public class Viability_Screen_revamp extends SimpleActivity implements NumberPic
     }
 
     private boolean validate_residence_pincode1_edit_txt(){
-        if (residence_pincode1_edit_txt_resi.getText().toString().isEmpty()) {
+        if (residence_pincode1_edit_txt_resi.getText().toString().isEmpty() || residence_pincode1_edit_txt_resi.length() <6) {
             residence_pincode1_edit_txt_resi.setError(getText(R.string.error_rise));
             residence_pincode1_edit_txt_resi.requestFocus();
             return false;
@@ -1562,7 +1562,7 @@ public class Viability_Screen_revamp extends SimpleActivity implements NumberPic
         return true;
     }
     private boolean validate_property_pincode1_edit_txt(){
-        if (property_pincode1_edit_txt.getText().toString().isEmpty()) {
+        if (property_pincode1_edit_txt.getText().toString().isEmpty() || property_pincode1_edit_txt.length() <6) {
             property_pincode1_edit_txt.setError(getText(R.string.error_rise));
             property_pincode1_edit_txt.requestFocus();
             return false;

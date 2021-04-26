@@ -51,6 +51,7 @@ import java.io.File;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -129,7 +130,9 @@ public class Post_share_Statues extends RecyclerView.Adapter<Post_share_Statues.
                                         Intent intent = new Intent(Intent.ACTION_SEND);
                                         intent.putExtra(Intent.EXTRA_TEXT, content);
                                         intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-                                        String path = MediaStore.Images.Media.insertImage(context.getContentResolver(), resource, "", null);
+                                        String path = MediaStore.Images.Media.insertImage(context.getContentResolver(), resource, "IMG_" + Calendar.getInstance().getTime(), null);
+
+                                        //  String path = MediaStore.Images.Media.insertImage(context.getContentResolver(), resource, "", null);
                                         Log.i("quoteswahttodo", "is onresoursereddy" + path);
                                         Uri screenshotUri = Uri.parse(path);
                                         if(screenshotUri!=null){
@@ -174,6 +177,19 @@ public class Post_share_Statues extends RecyclerView.Adapter<Post_share_Statues.
 
         });
 
+        holder.cardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                String image_url = items.get(position).getpost_url();
+                Intent intent=new Intent(context,ShareActivity.class);
+                intent.putExtra("content",content);
+                intent.putExtra("imgurl",image_url);
+                context.startActivity(intent);
+
+            }
+        });
+
         holder.whats_app_share.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -196,8 +212,9 @@ public class Post_share_Statues extends RecyclerView.Adapter<Post_share_Statues.
                                         intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
 
 
+                                        String path = MediaStore.Images.Media.insertImage(context.getContentResolver(), resource, "IMG_" + Calendar.getInstance().getTime(), null);
 
-                                        String path = MediaStore.Images.Media.insertImage(context.getContentResolver(), resource, "", null);
+                                      //  String path = MediaStore.Images.Media.insertImage(context.getContentResolver(), resource, "", null);
 
                                         Log.i("quoteswahttodo", "is onresoursereddy" + path);
                                         Uri screenshotUri = Uri.parse(path);
@@ -242,22 +259,6 @@ public class Post_share_Statues extends RecyclerView.Adapter<Post_share_Statues.
             }
         });
 
-
-        //  Log.e("The Appointment Date",name);
-      //  String dt = parseDateToddMMyyyy(appointment_date);
-       // holder.applicant_date.setText(dt);
-
-
-     /*  holder.Bt_create_appointment.setOnClickListener(new View.OnClickListener() {
-           @Override
-           public void onClick(View view) {
-               String appoint_id  = items.get(position).getAppointment_id();
-               String applicant_id  = items.get(position).getUser_ID();
-               String lead_id = "1";
-               String SOD_EOD_ID = "11";
-
-           }
-       });*/
     }
 
     private void getImageInfo(int sdk, String uriPath,String realPath){
@@ -293,6 +294,7 @@ public class Post_share_Statues extends RecyclerView.Adapter<Post_share_Statues.
             progressBarMaterial_pdf = (ProgressBar) itemView.findViewById(R.id.progressBarMaterial_pdf);
             share_image = (AppCompatImageView) itemView.findViewById(R.id.share_image);
             whats_app_share = (AppCompatImageView) itemView.findViewById(R.id.whats_app_share);
+            cardView = (CardView) itemView.findViewById(R.id.cardView);
         }
     }
 

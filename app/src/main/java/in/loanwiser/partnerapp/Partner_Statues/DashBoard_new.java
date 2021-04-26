@@ -15,6 +15,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Menu;
@@ -78,6 +79,7 @@ import in.loanwiser.partnerapp.Partner_Statues.ui.home.HomeFragment;
 import in.loanwiser.partnerapp.Push_Notification.Push_Notification_List;
 import in.loanwiser.partnerapp.R;
 import in.loanwiser.partnerapp.Step_Changes_Screen.HelpSupportActivity;
+import in.loanwiser.partnerapp.Step_Changes_Screen.LoanwiserAcadmy;
 import in.loanwiser.partnerapp.Step_Changes_Screen.Pay_Out_Screen;
 import in.loanwiser.partnerapp.Step_Changes_Screen.Step_Completion_Screen;
 import in.loanwiser.partnerapp.User_Account.BankDetails;
@@ -210,6 +212,9 @@ public class DashBoard_new extends AppCompatActivity  implements NavigationView.
                             case R.id.share:
                                 selectedFragment = new ShareFragment();
                                 break;
+                            case R.id.add_leadd:
+                                selectedFragment = new ActivityFragment();
+                                break;
 
                         }
                         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
@@ -321,7 +326,11 @@ public class DashBoard_new extends AppCompatActivity  implements NavigationView.
         else if (id==R.id.report){
             Intent intent = new Intent(DashBoard_new.this, HelpSupportActivity.class);
             startActivity(intent);
+        }else if (id == R.id.loan_acadmy){
+            Intent intent = new Intent(DashBoard_new.this, LoanwiserAcadmy.class);
+            startActivity(intent);
         }
+
         /*
         else if (id == R.id.nav_call) {
             Objs.ac.StartActivity(mCon, CustomerCare.class);
@@ -654,6 +663,30 @@ public class DashBoard_new extends AppCompatActivity  implements NavigationView.
                 x, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
 
         AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
+    }
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        //Handle the back button
+        if(keyCode == KeyEvent.KEYCODE_BACK) {
+            //Ask the user if they want to quit
+            new AlertDialog.Builder(this)
+                    // .setIcon(android.R.drawable.ic_dialog_alert)
+                    .setTitle("Are you sure you want to exit")
+                    //  .setMessage("Yes")
+                    .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            //Stop the activity
+                            DashBoard_new.this.finish();
+                        }
+                    })
+                    .setNegativeButton(R.string.no, null)
+                    .show();
+            return true;
+        }
+        else {
+            return super.onKeyDown(keyCode, event);
+        }
     }
 }
 

@@ -1,19 +1,25 @@
 package in.loanwiser.partnerapp.BankStamentUpload;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.AppCompatTextView;
+import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.ContentResolver;
 import android.content.ContentUris;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
@@ -25,7 +31,10 @@ import android.os.StrictMode;
 import android.provider.DocumentsContract;
 import android.provider.MediaStore;
 import android.provider.OpenableColumns;
+import android.provider.Settings;
 import android.util.Log;
+import android.view.ContextThemeWrapper;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
@@ -36,6 +45,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
@@ -53,6 +63,8 @@ import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
+import com.hbisoft.pickit.PickiT;
+import com.hbisoft.pickit.PickiTCallbacks;
 
 import net.gotev.uploadservice.MultipartUploadRequest;
 
@@ -97,13 +109,16 @@ import retrofit2.Callback;
 import retrofit2.http.Part;
 
 import static adhoc.app.applibrary.Config.AppUtils.Objs.a;
+import static android.Manifest.permission.READ_EXTERNAL_STORAGE;
+import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
+import static android.os.Build.VERSION.SDK_INT;
 import static in.loanwiser.partnerapp.BankStamentUpload.FilePath.getDataColumn;
 import static in.loanwiser.partnerapp.BankStamentUpload.FilePath.isDownloadsDocument;
 import static in.loanwiser.partnerapp.BankStamentUpload.FilePath.isExternalStorageDocument;
 import static in.loanwiser.partnerapp.BankStamentUpload.FilePath.isMediaDocument;
 import static in.loanwiser.partnerapp.BankStamentUpload.FileUtils1.isGooglePhotosUri;
 
-public class Upload_Activity_Bank extends SimpleActivity implements  View.OnClickListener, CompoundButton.OnCheckedChangeListener, SingleUploadBroadcastReceiver.Delegate  {
+public class Upload_Activity_Bank extends SimpleActivity implements  View.OnClickListener, CompoundButton.OnCheckedChangeListener, SingleUploadBroadcastReceiver.Delegate, PickiTCallbacks {
 
     private static final int PICK_PDF_REQUEST = 1;
     private static final String TAG =Upload_Activity_Bank.class.getSimpleName() ;
@@ -118,12 +133,14 @@ public class Upload_Activity_Bank extends SimpleActivity implements  View.OnClic
     private List<String> fileNameList;
     private List<String> fileDoneList;
     ArrayList<Uri> uriarrayList = new ArrayList<>();
+    ArrayList<File> uriarrayList_pic;
     List<Uri> uriarraylist1;
     ArrayList<String> pathlist;
     private android.app.AlertDialog progressDialog;
     FileAdapter fileAdapter;
     String[] stringarray;
     File orginalFile = null;
+    File orginalFile_pic = null;
     String fileget;
     Context context = this;
     MultipartUploadRequest uploadRequest;
@@ -154,7 +171,13 @@ public class Upload_Activity_Bank extends SimpleActivity implements  View.OnClic
     RadioGroup Bank_Statement_radio_list;
     String selectedtext;
     LinearLayout loader,bankhorizontallist,banklisttxt_lay;
+    //Permissions
+    private static final int SELECT_VIDEO_REQUEST = 777;
+    private static final int PERMISSION_REQ_ID_RECORD_AUDIO = 22;
+    private static final int PERMISSION_REQ_ID_WRITE_EXTERNAL_STORAGE = PERMISSION_REQ_ID_RECORD_AUDIO + 1;
 
+    //Declare PickiT
+    PickiT pickiT;
 
     @SuppressLint("WrongViewCast")
     @Override
@@ -189,9 +212,9 @@ public class Upload_Activity_Bank extends SimpleActivity implements  View.OnClic
         recyclerView=(RecyclerView)findViewById(R.id.banklist_recycleview);
         entity_id="";
         items1=new ArrayList<>();
-
+        pickiT = new PickiT(this, this, this);
         loader=findViewById(R.id.loader);
-
+        uriarrayList_pic = new ArrayList<>();
         downpdf_btns.setOnCheckedChangeListener(this);
         scanpdf_btns.setOnCheckedChangeListener(this);
         downpdf_btns.setChecked(true);
@@ -223,6 +246,7 @@ public class Upload_Activity_Bank extends SimpleActivity implements  View.OnClic
             public void onClick(View view) {
                 fileNameList.clear();
                 uriarrayList.clear();
+                uriarrayList_pic.clear();
                 showFileChooser();
             }
         });
@@ -263,11 +287,14 @@ public class Upload_Activity_Bank extends SimpleActivity implements  View.OnClic
 
     //method to show file chooser
     private void showFileChooser() {
-        Intent intent = new Intent();
-        intent.setType("application/pdf");
-        intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
-        intent.setAction(Intent.ACTION_OPEN_DOCUMENT);
-        startActivityForResult(Intent.createChooser(intent, "Select Pdf"), PICK_PDF_REQUEST);
+        if (checkSelfPermission()) {
+            Intent intent = new Intent();
+            intent.setType("application/pdf");
+            intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
+            intent.setAction(Intent.ACTION_OPEN_DOCUMENT);
+            startActivityForResult(Intent.createChooser(intent, "Select Pdf"), PICK_PDF_REQUEST);
+        }
+
     }
 
 
@@ -292,8 +319,10 @@ public class Upload_Activity_Bank extends SimpleActivity implements  View.OnClic
                     //getmultiplelist.add(fileUri);
                     fileAdapter.notifyDataSetChanged();
 
-
+                    pickiT.getPath(data.getClipData().getItemAt(i).getUri(), Build.VERSION.SDK_INT);
                     // fileDoneList.add("uploading");
+
+                    Log.e("the URI SIZE", String.valueOf(uriarrayList.size()));
                     Log.i("TAG", "onActivityResult:uriarrayList " + uriarrayList);
                     Log.i("Upload_Activity_Bank", "onActivityResult_fileuri: " + fileUri);
                     Log.i("Upload_Activity_Bank", "onActivityResult_path: " + fileget);
@@ -306,6 +335,7 @@ public class Upload_Activity_Bank extends SimpleActivity implements  View.OnClic
                 fileName = getFileName(data.getData());
                 fileNameList.add(fileName);
                 uriarrayList.add(fileUri);
+                pickiT.getPath(data.getData(), Build.VERSION.SDK_INT);
                 String sav = fileUri.getPath();
                 fileAdapter.notifyDataSetChanged();
             }
@@ -355,33 +385,104 @@ public class Upload_Activity_Bank extends SimpleActivity implements  View.OnClic
                             String a = "pdf";
 
                             if (pdf1.equals(a)) {
-                                // String path = getPath(this, uriarrayList.get(i));
-                                String path = getPDFPath(uriarrayList.get(i));
-                                pathlist.add(path);
-                                // uploadMultipart();
-                                CheckUploadcondition();
 
-                            } else {
-                                if (Build.VERSION.SDK_INT < 11) {
+                                for(i=0;i<uriarrayList_pic.size();i++)
+                                {
+                                    orginalFile_pic = uriarrayList_pic.get(i);
+
+
+                                    String path = String.valueOf(orginalFile_pic);
+
+                                    pathlist.add(path);
+
+                                    long fileSizeInBytes = orginalFile_pic.length();
+                                    long fileSizeInKB = fileSizeInBytes / 1024;
+                                    long fileSizeInMB = fileSizeInKB / 1024;
+                                    Log.e("the Size is", String.valueOf(fileSizeInMB));
+                                    if (fileSizeInMB < 3) {
+                                        CheckUploadcondition();
+                                    }else
+                                    {
+                                        pdf_error();
+                                        // Toast.makeText(this,"Please upload file less than 3MB.",Toast.LENGTH_SHORT).show();
+
+                                    }
+                                    // uploadMultipart();
+
+                                    //  MultifileUploadRetrofit();
+
+                                    //  Log.e("path", orginalFile_pic);
+                                    Log.e("Activity_Ban path1", String.valueOf(orginalFile_pic));
+                                }
+                               /* if (SDK_INT < 11) {
                                     orginalFile = new File(FileUtils1.getRealPathFromURI_BelowAPI11(Upload_Activity_Bank.this, uriarrayList.get(i)));
                                 }
                                 // SDK >= 11 && SDK < 19
-                                else if (Build.VERSION.SDK_INT < 19) {
+                                else if (SDK_INT < 19) {
                                     orginalFile = new File(FileUtils1.getRealPathFromURI_API11to18(Upload_Activity_Bank.this, uriarrayList.get(i)));
                                 }
                                 // SDK > 19 (Android 4.4) and up
                                 else {
+                                    Log.e("path", "api 19 called");
                                     orginalFile = new File(FileUtils1.getRealPathFromURI_API19(Upload_Activity_Bank.this, uriarrayList.get(i)));
+
                                 }
                                 String path = String.valueOf(orginalFile);
+
                                 pathlist.add(path);
+
+                                long fileSizeInBytes = orginalFile.length();
+                                long fileSizeInKB = fileSizeInBytes / 1024;
+                                long fileSizeInMB = fileSizeInKB / 1024;
+                                Log.e("the Size is", String.valueOf(fileSizeInMB));
+                                if (fileSizeInMB < 3) {
+
+                                    CheckUploadcondition();
+                                }else
+                                {
+                                    pdf_error();
+
+                                    // Toast.makeText(this,"Please upload file less than 3MB.",Toast.LENGTH_SHORT).show();
+
+                                }
                                 // uploadMultipart();
-                                CheckUploadcondition();
+
                                 //  MultifileUploadRetrofit();
 
                                 Log.e("path", path);
-                                Log.e("Upload_Activity_Ban", String.valueOf(orginalFile));
+                                Log.e("Upload_Activity_Ban", String.valueOf(orginalFile));*/
 
+                            } else {
+
+
+                                 for(i=0;i<uriarrayList_pic.size();i++)
+                                {
+                                    orginalFile_pic = uriarrayList_pic.get(i);
+
+
+                                String path = String.valueOf(orginalFile_pic);
+
+                                pathlist.add(path);
+
+                                long fileSizeInBytes = orginalFile_pic.length();
+                                long fileSizeInKB = fileSizeInBytes / 1024;
+                                long fileSizeInMB = fileSizeInKB / 1024;
+                                Log.e("the Size is", String.valueOf(fileSizeInMB));
+                                if (fileSizeInMB < 3) {
+                                    CheckUploadcondition();
+                                }else
+                                {
+                                    pdf_error();
+                                   // Toast.makeText(this,"Please upload file less than 3MB.",Toast.LENGTH_SHORT).show();
+
+                                }
+                                // uploadMultipart();
+
+                                //  MultifileUploadRetrofit();
+
+                              //  Log.e("path", orginalFile_pic);
+                                Log.e("Activity_Ban path", String.valueOf(orginalFile_pic));
+                                }
                             }
 
 
@@ -405,6 +506,7 @@ public class Upload_Activity_Bank extends SimpleActivity implements  View.OnClic
             MultifileUploadRetrofitGlib();
         }
     }
+
 
 
 
@@ -996,31 +1098,33 @@ public class Upload_Activity_Bank extends SimpleActivity implements  View.OnClic
             //  uploadMultipart();
             String a = "pdf";
 
-            if (Build.VERSION.SDK_INT < 11) {
+          /*  if (SDK_INT < 11) {
                 orginalFile = new File(FileUtils1.getRealPathFromURI_BelowAPI11(Upload_Activity_Bank.this, uriarrayList.get(i)));
             }
             // SDK >= 11 && SDK < 19
-            else if (Build.VERSION.SDK_INT < 19) {
+            else if (SDK_INT < 19) {
                 orginalFile = new File(FileUtils1.getRealPathFromURI_API11to18(Upload_Activity_Bank.this, uriarrayList.get(i)));
             }
             // SDK > 19 (Android 4.4) and up
             else {
                 orginalFile = new File(FileUtils1.getRealPathFromURI_API19(Upload_Activity_Bank.this, uriarrayList.get(i)));
-            }
+            }*/
+            orginalFile_pic = uriarrayList_pic.get(i);
+
             // String path = String.valueOf(orginalFile);
             // pathlist.add(path);
             // uploadMultipart();
             //  MultifileUploadRetrofit();
 
-            Log.e("path", String.valueOf(orginalFile));
-            Log.e("Upload_Activity_Ban", String.valueOf(orginalFile));
+            Log.e("path", String.valueOf(orginalFile_pic));
+            Log.e("Upload_Activity_Ban", String.valueOf(orginalFile_pic));
 
 
             //File file = new File(uriarrayList.get(i).getPath());
             // File file = new File(orginalFile);
-            RequestBody fileBody = RequestBody.create(mediaType, orginalFile);
+            RequestBody fileBody = RequestBody.create(mediaType, orginalFile_pic);
             //Setting the file name as an empty string here causes the same issue, which is sending the request successfully without saving the files in the backend, so don't neglect the file name parameter.
-            fileParts[i] = MultipartBody.Part.createFormData(String.format(Locale.ENGLISH, "img_url[%d]", i), orginalFile.getName(), fileBody);
+            fileParts[i] = MultipartBody.Part.createFormData(String.format(Locale.ENGLISH, "img_url[%d]", i), orginalFile_pic.getName(), fileBody);
             // fileParts[i] = MultipartBody.Part.createFormData("img_url", file.getName(), fileBody);
         }
         String transcation_id="60775";
@@ -1043,7 +1147,9 @@ public class Upload_Activity_Bank extends SimpleActivity implements  View.OnClic
                 progressDialog.dismiss();
                 if (response.isSuccessful()){
                     UploadFileResponse response1=(UploadFileResponse) response.body();
+
                     int status=response1.getResponse().getStatus();
+
                     bankstatement_msg=response1.getResponse().getMessage();
                     Log.i(TAG, "onResponse:status "+status);
                     if (status==1){
@@ -1060,6 +1166,13 @@ public class Upload_Activity_Bank extends SimpleActivity implements  View.OnClic
                     }else if (status==7){
                         ErrorStatus();
                         bankstatement_msg=response1.getResponse().getMessage();
+                    }else if(status==3)
+                    {
+                        bankstatement_msg=response1.getResponse().getMessage();
+                        Log.e("the response 3",bankstatement_msg);
+                        ErrorStatus1();
+                       // Toast.makeText(Upload_Activity_Bank.this,bankstatement_msg,Toast.LENGTH_SHORT).show();
+
                     }
                 }
 
@@ -1077,7 +1190,7 @@ public class Upload_Activity_Bank extends SimpleActivity implements  View.OnClic
 
 
     public String getRealPathFromUri(Uri uri) { // function for file path from uri,
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT && DocumentsContract.isDocumentUri(this, uri)) {
+        if (SDK_INT >= Build.VERSION_CODES.KITKAT && DocumentsContract.isDocumentUri(this, uri)) {
             // ExternalStorageProvider
             if (isExternalStorageDocument(uri)) {
                 final String docId = DocumentsContract.getDocumentId(uri);
@@ -1232,202 +1345,7 @@ public class Upload_Activity_Bank extends SimpleActivity implements  View.OnClic
     }
 
 
-/*    private void BankverticalList() {
-        Log.i(TAG, "makeJsonObjReq1: "+"Make");
-        final JSONObject jsonObject = new JSONObject();
-        JSONObject J = null;
-        JSONArray ja1 = null;
-        J = new JSONObject();
-        try {
-            J.put("transaction_id", Pref.getTRANSACTIONID(getApplicationContext()));
-            J.put("relationship_type","0");
-            Log.i(TAG, "Banklist:Request "+J.toString());
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        progressDialog.show();
-        Log.e("Request Dreopdown", "called");
-        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, "https://cscapi.loanwiser.in/mobile/partner_loanapi_test.php?call=bank_statementlist", J,
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject object) {
-                        JSONArray cast = null;
-                        JSONArray ja = null;
-                        JSONArray ja1 = null;
-                        try {
-                            String s=object.getString("display_select");
-                            Log.i(TAG, "onResponse: "+s);
-                            ja = object.getJSONArray("bank_statementarr");
-                            ja1 = object.getJSONArray("ban_statementlist");
-                            Log.i(TAG, "onResponse:Value "+ja);
-                            Log.i(TAG, "onResponse: Array"+ja.length());
-                            if (ja.length()==0){
-                                recycleview_lay.setVisibility(View.GONE);
-                                submitbanktxt_lay.setVisibility(View.GONE);
-                            }
-                            for(int i = 0;i<ja.length();i++){
-                                recycleview_lay.setVisibility(View.VISIBLE);
-                                submitbanktxt_lay.setVisibility(View.VISIBLE);
-                                JSONObject J = ja.getJSONObject(i);
-                                String name=J.getString("name");
-                                String url=J.getString("url");
-                                items.add(new Bankitems(J.getString("name"),J.getString("url")));
-                                bankstatement_recycleview.setAdapter(statementlist);
-                                statementlist.notifyDataSetChanged();
-                            }
-                            if(ja1.length()==0)
-                            {
-                                Log.e("BankverticalList"," executed");
-                                Log.e("ja",ja.toString());
-                                final RadioButton button = new RadioButton(Upload_Activity_Bank.this);
-                                button.setId(0);
-                                button.setText("new");
-                                Log.i(TAG, "onResponse: beforeloop"+"value come");
-                                Bank_Statement_radio_list.addView(button);
-                                for (int i = 0; i < ja1.length(); i++) {
-                                    Log.i(TAG, "onResponse: afterloop"+"value not come");
-                                    JSONObject J = ja1.getJSONObject(i);
-                                    String entity_id=J.getString("entity_id");
-                                    Log.i(TAG, "onResponse:entity_id "+entity_id);
-                                    final RadioButton button1 = new RadioButton(Upload_Activity_Bank.this);
-                                    button1.setId(i);
-                                    button1.setText(entity_id);
-                                    // button1.setChecked(i == entity_ID_selected); // Only select button with same index as currently selected number of hours
-                                    /// button.setBackgroundResource(R.drawable.ca); // This is a custom button drawable, defined in XML
-                                    Bank_Statement_radio_list.addView(button1);
-                                    button1.setOnClickListener(new View.OnClickListener() {
-                                        @Override
-                                        public void onClick(View view) {
-                                            selectedtext = button1.getText().toString();
-                                            Log.e("the selected value is",selectedtext);
-                                        }
-                                    });
-                                }
-                                button.setOnClickListener(new View.OnClickListener() {
-                                    @Override
-                                    public void onClick(View view) {
-                                        selectedtext = button.getText().toString();
-                                        Log.e("the selected value is",selectedtext);
-                                    }
-                                });
 
-
-                            }
-                        } catch (JSONException ex) {
-                            ex.printStackTrace();
-                        }
-                        // Toast.makeText(mCon, response.toString(),Toast.LENGTH_SHORT).show();
-                        progressDialog.dismiss();
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                VolleyLog.d("TAG", "Error: " + error.getMessage());
-                progressDialog.dismiss();
-            }
-        }) {
-            *//**
-     * Passing some request headers
-     * *//*
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                HashMap<String, String> headers = new HashMap<String, String>();
-                headers.put("Content-Type", "application/json");
-                return headers;
-            }
-        };
-        // Adding request to request queue
-        AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
-    }
-
-    private void BankItemhorizontallist() {
-        Log.i(TAG, "makeJsonObjReq1: "+"Make");
-        final JSONObject jsonObject = new JSONObject();
-        JSONObject J = null;
-        J = new JSONObject();
-        try {
-            J.put("transaction_id", Pref.getTRANSACTIONID(getApplicationContext()));
-            //J.put("transaction_id","60775");
-            J.put("relationship_type","0");
-            Log.i(TAG, "Bankitems:Request "+J.toString());
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        progressDialog.show();
-        Log.e("Request Dreopdown", "called");
-        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, "https://cscapi.loanwiser.in/mobile/partner_loanapi_test.php?call=bank_statementlist", J,
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject object) {
-                        JSONArray cast = null;
-                        JSONArray ja = null;
-                        JSONArray ja1=null;
-                        try {
-                            String s=object.getString("display_select");
-                            Log.i(TAG, "onResponse: "+s);
-                            ja = object.getJSONArray("ban_statementlist");
-                            if (ja!=null){
-                                ja = object.getJSONArray("ban_statementlist");
-                                for(int i = 0;i<ja.length();i++){
-                                    JSONObject J = ja.getJSONObject(i);
-                                    String acc_number=J.getString("acc_number");
-                                    String entity_id=J.getString("entity_id");
-                                    String bank_name=J.getString("bank_name");
-                                    String achold_name=J.getString("acchold_name");
-                                    items1.add(new Bankdetails_model(J.getString("acc_number"),J.getString("entity_id"),J.getString("bank_name"),J.getString("acchold_name")));
-                                    recyclerView.setLayoutManager(new LinearLayoutManager(Upload_Activity_Bank.this, LinearLayoutManager.HORIZONTAL, false));
-                                    recyclerView.setHasFixedSize(true);
-                                    banklistAdapter = new BanklistAdapter(Upload_Activity_Bank.this, items1);
-                                    recyclerView.setAdapter(banklistAdapter);
-                                    banklistAdapter.notifyDataSetChanged();
-                                }
-                            }
-                            else{
-                                Log.i(TAG, "arraynull: "+"arraynull");
-                                bankhorizontallist.setVisibility(View.GONE);
-                                submitbanktxt_lay.setVisibility(View.GONE);
-                            }
-                            if(ja.length()<0)
-                            {
-                                Log.e("BankItemhorizontallist"," executed");
-                                Log.e("ja",ja.toString());
-                                final RadioButton button = new RadioButton(Upload_Activity_Bank.this);
-                                button.setId(0);
-                                button.setText("New");
-                                Bank_Statement_radio_list.addView(button);
-                                button.setOnClickListener(new View.OnClickListener() {
-                                    @Override
-                                    public void onClick(View view) {
-                                        selectedtext="new";
-                                    }
-                                });
-                            }
-                        } catch (JSONException ex) {
-                            ex.printStackTrace();
-                        }
-                        // Toast.makeText(mCon, response.toString(),Toast.LENGTH_SHORT).show();
-                        progressDialog.dismiss();
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                VolleyLog.d("TAG", "Error: " + error.getMessage());
-                progressDialog.dismiss();
-            }
-        }) {
-            *//**
-     * Passing some request headers
-     * *//*
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                HashMap<String, String> headers = new HashMap<String, String>();
-                headers.put("Content-Type", "application/json");
-                return headers;
-            }
-        };
-        // Adding request to request queue
-        AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
-    }*/
 
 
     private void ErrorStatus() {
@@ -1439,6 +1357,40 @@ public class Upload_Activity_Bank extends SimpleActivity implements  View.OnClic
         dialog.setCancelable(true);
         dialog.setCanceledOnTouchOutside(false);
         AppCompatTextView bankstatement_message=(AppCompatTextView) dialog.findViewById(R.id.bankstatement_message);
+
+        Button cancelbtn = (Button) dialog.findViewById(R.id.cancelbtn);
+        Button submitbtn = (Button) dialog.findViewById(R.id.submitbtn);
+
+        submitbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+
+            }
+        });
+        cancelbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+
+
+        if (!dialog.isShowing()) {
+            dialog.show();
+        }
+
+    }
+    private void ErrorStatus1() {
+        final Dialog dialog = new Dialog(this);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+        dialog.setContentView(R.layout.bankstatement_error1);
+        //  dialog.getWindow().setLayout(display.getWidth() * 90 / 100, LinearLayout.LayoutParams.WRAP_CONTENT);
+        dialog.setCancelable(true);
+        dialog.setCanceledOnTouchOutside(false);
+        AppCompatTextView bankstatement_message=(AppCompatTextView) dialog.findViewById(R.id.bankstatement_message);
+
         Button cancelbtn = (Button) dialog.findViewById(R.id.cancelbtn);
         Button submitbtn = (Button) dialog.findViewById(R.id.submitbtn);
 
@@ -1496,153 +1448,38 @@ public class Upload_Activity_Bank extends SimpleActivity implements  View.OnClic
 
     }
 
+    private void pdf_error() {
+        final Dialog dialog = new Dialog(this);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+        dialog.setContentView(R.layout.pdf_error);
+        //  dialog.getWindow().setLayout(display.getWidth() * 90 / 100, LinearLayout.LayoutParams.WRAP_CONTENT);
+        dialog.setCancelable(true);
+        dialog.setCanceledOnTouchOutside(false);
+        AppCompatTextView bankstatement_message=(AppCompatTextView) dialog.findViewById(R.id.bankstatement_message);
+        Button cancelbtn = (Button) dialog.findViewById(R.id.cancelbtn);
+        Button submitbtn = (Button) dialog.findViewById(R.id.submitbtn);
 
+        submitbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
 
-  /*  private void MultifileUploadRetrofitGlib(){
-        final ApiConfig getResponse = Appconfig.getRetrofit().create(ApiConfig.class);
-        Log.e(TAG, "MultifileUploadRetrofit: "+"check");
-        progressDialog.show();
-        // List<Uri> uriList = null; //These are the uris for the files to be uploaded
-        MediaType mediaType = MediaType.parse("application/pdf");//Based on the Postman logs,it's not specifying Content-Type, this is why I've made this empty content/mediaType
-        MultipartBody.Part[] fileParts = new MultipartBody.Part[uriarrayList.size()];
-        for (int i = 0; i < uriarrayList.size(); i++) {
-            //  String filePath =getRealPathFromUri(uriarrayList.get(i));
-            String uri_test = uriarrayList.get(i).toString();
-            Log.e("the Upload issues", uri_test);
-            String filename = uri_test.substring(uri_test.lastIndexOf("/") + 1);
-            String pdf1 = filename.substring(filename.lastIndexOf(".") + 1);
-            //  uploadMultipart();
-            String a = "pdf";
-            if (Build.VERSION.SDK_INT < 11) {
-                orginalFile = new File(FileUtils1.getRealPathFromURI_BelowAPI11(Upload_Activity_Bank.this, uriarrayList.get(i)));
-            }
-            // SDK >= 11 && SDK < 19
-            else if (Build.VERSION.SDK_INT < 19) {
-                orginalFile = new File(FileUtils1.getRealPathFromURI_API11to18(Upload_Activity_Bank.this, uriarrayList.get(i)));
-            }
-            // SDK > 19 (Android 4.4) and up
-            else {
-                orginalFile = new File(FileUtils1.getRealPathFromURI_API19(Upload_Activity_Bank.this, uriarrayList.get(i)));
-            }
-            // String path = String.valueOf(orginalFile);
-            // pathlist.add(path);
-            // uploadMultipart();
-            //  MultifileUploadRetrofit();
-            //  Log.e("path", String.valueOf(orginalFile));
-            //  Log.e("Upload_Activity_Ban", String.valueOf(orginalFile));
-            //File file = new File(uriarrayList.get(i).getPath());
-            //  File file = new File(filePath);
-            RequestBody fileBody = RequestBody.create(mediaType, orginalFile);
-            //Setting the file name as an empty string here causes the same issue, which is sending the request successfully without saving the files in the backend, so don't neglect the file name parameter.
-            fileParts[i] = MultipartBody.Part.createFormData(String.format(Locale.ENGLISH, "img_url[%d]", i), orginalFile.getName(), fileBody);
-            // fileParts[i] = MultipartBody.Part.createFormData("img_url", file.getName(), fileBody);
-        }
-        String transcation_id="60775";
-        String analysis_status="1";
-        String workorder_id="";
-        String entity_id="";
-        String pdf_password=docpass_edt_txt.getText().toString().trim();
-        final String relationship_type="1";
-        RequestBody transaction_id1 = RequestBody.create(MediaType.parse("multipart/form-data"), Pref.getTRANSACTIONID(getApplicationContext()));
-        RequestBody analysis_status1 = RequestBody.create(MediaType.parse("multipart/form-data"), checkradiobutton_value);
-        RequestBody workorder_id1 = RequestBody.create(MediaType.parse("multipart/form-data"), workorder_id);
-        RequestBody entity_id1 = RequestBody.create(MediaType.parse("multipart/form-data"), entity_id);
-        RequestBody pdf_password1 = RequestBody.create(MediaType.parse("multipart/form-data"), pdf_password);
-        RequestBody relationship_type1 = RequestBody.create(MediaType.parse("multipart/form-data"), relationship_type);
-        Call<GlibResponse> call =getResponse.submitNews("Auth Token", fileParts,transaction_id1,analysis_status1,workorder_id1,entity_id1,relationship_type1,pdf_password1);
-        call.enqueue(new Callback<GlibResponse>() {
-            @Override
-            public void onResponse(Call<GlibResponse> call, retrofit2.Response<GlibResponse> response) {
-                progressDialog.dismiss();
-                Log.i(TAG, "onResponse:Glib "+"Check Glib status");
-                if (response.isSuccessful()){
-                    GlibResponse response2=(GlibResponse) response.body();
-                    String status=response2.getResponse().getStatus();
-                    if (status!=null && status!=""){
-                        if (status.equalsIgnoreCase("success")){
-                            String workorder=response2.getResponse().getWORKORDERID();
-                            Log.i(TAG, "onResponse: workorder"+workorder);
-                            String msg=response2.getResponse().getMSG();
-                            if (msg.equalsIgnoreCase("Workorder Created")){
-                                GlibAPICheck(workorder);
-                            }
-                        }
-                        else if (status.equalsIgnoreCase("invalid_bankstatement")){
-                            GlibErrorStatus();
-                        }
-                    }else{
-                        ErrorStatus();
-                    }
-                }
-            }
-            @Override
-            public void onFailure(Call<GlibResponse> call, Throwable t) {
-                Toast.makeText(Upload_Activity_Bank.this,"Network issue",Toast.LENGTH_SHORT).show();
-                Log.e(TAG, "onFailure: "+t.getMessage());
             }
         });
-    }*/
-/*  private void MultifileUploadRetrofitGlib(){
-      final ApiConfig getResponse = Appconfig.getRetrofit().create(ApiConfig.class);
-      Log.i(TAG, "MultifileUploadRetrofit: "+"check");
-      progressDialog.show();
-      // List<Uri> uriList = null; //These are the uris for the files to be uploaded
-      MediaType mediaType = MediaType.parse("application/pdf");//Based on the Postman logs,it's not specifying Content-Type, this is why I've made this empty content/mediaType
-      MultipartBody.Part[] fileParts = new MultipartBody.Part[uriarrayList.size()];
-      for (int i = 0; i < uriarrayList.size(); i++) {
-          String filePath =getRealPathFromUri(uriarrayList.get(i));
-          //File file = new File(uriarrayList.get(i).getPath());
-          File file = new File(filePath);
-          RequestBody fileBody = RequestBody.create(mediaType, file);
-          //Setting the file name as an empty string here causes the same issue, which is sending the request successfully without saving the files in the backend, so don't neglect the file name parameter.
-          fileParts[i] = MultipartBody.Part.createFormData(String.format(Locale.ENGLISH, "img_url[%d]", i), file.getName(), fileBody);
-          // fileParts[i] = MultipartBody.Part.createFormData("img_url", file.getName(), fileBody);
-      }
-      String transcation_id="60775";
-      String analysis_status="1";
-      String workorder_id="";
-       entity_id="";
-      String pdf_password=docpass_edt_txt.getText().toString().trim();
-      final String relationship_type="1";
-      RequestBody transaction_id1 = RequestBody.create(MediaType.parse("multipart/form-data"), Pref.getTRANSACTIONID(getApplicationContext()));
-      RequestBody analysis_status1 = RequestBody.create(MediaType.parse("multipart/form-data"), checkradiobutton_value);
-      RequestBody workorder_id1 = RequestBody.create(MediaType.parse("multipart/form-data"), entity_id);
-      RequestBody entity_id1 = RequestBody.create(MediaType.parse("multipart/form-data"), entity_id);
-      RequestBody pdf_password1 = RequestBody.create(MediaType.parse("multipart/form-data"), pdf_password);
-      RequestBody relationship_type1 = RequestBody.create(MediaType.parse("multipart/form-data"), relationship_type);
-      Call<GlibResponse> call =getResponse.submitNews("Auth Token", fileParts,transaction_id1,analysis_status1,workorder_id1,entity_id1,relationship_type1,pdf_password1);
-      call.enqueue(new Callback<GlibResponse>() {
-          @Override
-          public void onResponse(Call<GlibResponse> call, retrofit2.Response<GlibResponse> response) {
-              progressDialog.dismiss();
-              Log.i(TAG, "onResponse:Glib "+"Check Glib status");
-              if (response.isSuccessful()){
-                  GlibResponse response2=(GlibResponse) response.body();
-                  String status=response2.getResponse().getStatus();
-                  if (status!=null && status!=""){
-                      if (status.equalsIgnoreCase("success")){
-                          String workorder=response2.getResponse().getWORKORDERID();
-                          Log.i(TAG, "onResponse: workorder"+workorder);
-                          String msg=response2.getResponse().getMSG();
-                          if (msg.equalsIgnoreCase("Workorder Created")){
-                              GlibAPICheck(workorder);
-                          }
-                      }
-                      else if (status.equalsIgnoreCase("invalid_bankstatement")){
-                          GlibErrorStatus();
-                      }
-                  }else{
-                      ErrorStatus();
-                  }
-              }
-          }
-          @Override
-          public void onFailure(Call<GlibResponse> call, Throwable t) {
-              Toast.makeText(Upload_Activity_Bank.this,"Network issue",Toast.LENGTH_SHORT).show();
-              Log.i(TAG, "onFailure: "+t.getMessage());
-          }
-      });
-  }*/
+        cancelbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+
+
+        if (!dialog.isShowing()) {
+            dialog.show();
+        }
+
+    }
 
     private void MultifileUploadRetrofitGlib(){
         final ApiConfig getResponse = Appconfig.getRetrofit().create(ApiConfig.class);
@@ -1659,17 +1496,18 @@ public class Upload_Activity_Bank extends SimpleActivity implements  View.OnClic
             String pdf1 = filename.substring(filename.lastIndexOf(".") + 1);
             //  uploadMultipart();
             String a = "pdf";
-            if (Build.VERSION.SDK_INT < 11) {
+          /*  if (SDK_INT < 11) {
                 orginalFile = new File(FileUtils1.getRealPathFromURI_BelowAPI11(Upload_Activity_Bank.this, uriarrayList.get(i)));
             }
             // SDK >= 11 && SDK < 19
-            else if (Build.VERSION.SDK_INT < 19) {
+            else if (SDK_INT < 19) {
                 orginalFile = new File(FileUtils1.getRealPathFromURI_API11to18(Upload_Activity_Bank.this, uriarrayList.get(i)));
             }
             // SDK > 19 (Android 4.4) and up
             else {
                 orginalFile = new File(FileUtils1.getRealPathFromURI_API19(Upload_Activity_Bank.this, uriarrayList.get(i)));
-            }
+            }*/
+            orginalFile_pic = uriarrayList_pic.get(i);
             // String path = String.valueOf(orginalFile);
             // pathlist.add(path);
             // uploadMultipart();
@@ -1678,9 +1516,9 @@ public class Upload_Activity_Bank extends SimpleActivity implements  View.OnClic
             //  Log.e("Upload_Activity_Ban", String.valueOf(orginalFile));
             //File file = new File(uriarrayList.get(i).getPath());
             //  File file = new File(filePath);
-            RequestBody fileBody = RequestBody.create(mediaType, orginalFile);
+            RequestBody fileBody = RequestBody.create(mediaType, orginalFile_pic);
             //Setting the file name as an empty string here causes the same issue, which is sending the request successfully without saving the files in the backend, so don't neglect the file name parameter.
-            fileParts[i] = MultipartBody.Part.createFormData(String.format(Locale.ENGLISH, "img_url[%d]", i), orginalFile.getName(), fileBody);
+            fileParts[i] = MultipartBody.Part.createFormData(String.format(Locale.ENGLISH, "img_url[%d]", i), orginalFile_pic.getName(), fileBody);
             // fileParts[i] = MultipartBody.Part.createFormData("img_url", file.getName(), fileBody);
         }
         String transcation_id="60775";
@@ -1811,6 +1649,7 @@ public class Upload_Activity_Bank extends SimpleActivity implements  View.OnClic
 
     @Override
     public void onBackPressed() {
+        pickiT.deleteTemporaryFile(this);
 
         Intent intent = new Intent(mCon, DashBoard_new.class);
         startActivity(intent);
@@ -1819,5 +1658,129 @@ public class Upload_Activity_Bank extends SimpleActivity implements  View.OnClic
         super.onBackPressed();
 
     }
+
+
+    //  Check if permissions was granted
+    private boolean checkSelfPermission() {
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE}, PERMISSION_REQ_ID_WRITE_EXTERNAL_STORAGE);
+            return false;
+        }
+        return true;
+    }
+
+    //  Handle permissions
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        if (requestCode == PERMISSION_REQ_ID_WRITE_EXTERNAL_STORAGE) {
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                //  Permissions was granted, open the gallery
+                showFileChooser();
+            }
+            //  Permissions was not granted
+            else {
+                showLongToast("No permission for " + Manifest.permission.WRITE_EXTERNAL_STORAGE);
+            }
+        }
+    }
+
+    //Show Toast
+    private void showLongToast(final String msg) {
+        Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_LONG).show();
+    }
+    ProgressBar mProgressBar;
+    TextView percentText;
+    private AlertDialog mdialog;
+    ProgressDialog progressBar;
+
+    @Override
+    public void PickiTonUriReturned() {
+        progressBar = new ProgressDialog(this);
+        progressBar.setMessage("Waiting to receive file...");
+        progressBar.setCancelable(false);
+        progressBar.show();
+    }
+
+    @Override
+    public void PickiTonStartListener() {
+        if (progressBar.isShowing()){
+            progressBar.cancel();
+        }
+        final AlertDialog.Builder mPro = new AlertDialog.Builder(new ContextThemeWrapper(this, R.style.myDialog));
+        @SuppressLint("InflateParams") final View mPView = LayoutInflater.from(this).inflate(R.layout.dailog_layout, null);
+        percentText = mPView.findViewById(R.id.percentText);
+
+        percentText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                pickiT.cancelTask();
+                if (mdialog != null && mdialog.isShowing()) {
+                    mdialog.cancel();
+                }
+            }
+        });
+
+        mProgressBar = mPView.findViewById(R.id.mProgressBar);
+        mProgressBar.setMax(100);
+        mPro.setView(mPView);
+        mdialog = mPro.create();
+        mdialog.show();
+
+    }
+
+    @Override
+    public void PickiTonProgressUpdate(int progress) {
+        String progressPlusPercent = progress + "%";
+        percentText.setText(progressPlusPercent);
+        mProgressBar.setProgress(progress);
+    }
+
+    @Override
+    public void PickiTonCompleteListener(String path, boolean wasDriveFile, boolean wasUnknownProvider, boolean wasSuccessful, String reason) {
+
+        if (mdialog != null && mdialog.isShowing()) {
+            mdialog.cancel();
+        }
+
+        //  Check if it was a Drive/local/unknown provider file and display a Toast
+        if (wasDriveFile){
+         //   showLongToast("Drive file was selected");
+        }else if (wasUnknownProvider){
+          //  showLongToast("File was selected from unknown provider");
+        }else {
+         //   showLongToast("Local file was selected");
+        }
+
+        //  Chick if it was successful
+        if (wasSuccessful) {
+            //  Set returned path to TextView
+            uriarrayList_pic.add(new File(path));
+
+            Log.e("the Path selected PIC",uriarrayList_pic.toString());
+            Log.e("the URI SIZE", String.valueOf(uriarrayList.size()));
+            Log.e("the URI SIZE1", String.valueOf(uriarrayList_pic.size()));
+        }else {
+            showLongToast("Error, please see the log..");
+
+        }
+    }
+
+
+    //
+    //  Lifecycle methods
+    //
+
+    //  Deleting the temporary file if it exists
+    //  As we know, this might not even be called if the system kills the application before onDestroy is called
+    //  So, it is best to call pickiT.deleteTemporaryFile(); as soon as you are done with the file
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (!isChangingConfigurations()) {
+            pickiT.deleteTemporaryFile(this);
+        }
+    }
+
+
 }
 

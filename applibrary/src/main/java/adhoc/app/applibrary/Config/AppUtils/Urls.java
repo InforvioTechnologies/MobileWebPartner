@@ -74,13 +74,17 @@ public class Urls {
     public static String ADD_LEAD_POST  = Urls + "createapplication";
     public static String UPDATE_ADD_LEAD_POST  = Urls + "update_basicdata";
     public static String LEAD_LIST_POST  = Urls + "getapplicationusers";
-
+    public static  String ACTIVITY_NOTES= Urls_step+"Activity_Notes";
     public static String GET_FLAG_WALLET  = Urls_step + "getflag_wallet";
     public static String walletreg  = Urls_step + "walletreg";
+
+    public static  String GETBUSINESSCARD= Urls_step+"getuser_vscard";
+    public static  String UPDATEBSCARD= Urls_step+"updateuser_vscard";
 
     public static String LEAD_STATUES_LIST  = Urls + "get_status";
     public static String UPDATE_STATUS_DOC  = Urls + "update_uploadstatus";
     public static String submit_loanwiser  = Urls_step + "submit_loanwiser";
+    public static String generate_docuverifyrule  = Urls_step + "generate_docuverifyrule";
     public static String BANK_DETAILS_POST  = Urls + "partner_banksearch";
     public static String PROFILE_DETAILS_POST  = Urls + "partner_profilesearch";
 
@@ -96,7 +100,7 @@ public class Urls {
     public static final String FILE_UPLOAD_URL = Urls + "multi_doc_scan";
     public static String IMG_UPLOAD_DOCUMENT_POST = Urls + "multi_doc";
     public static String PDF_UPLOAD_DOCUMENT_POST = Urls + "multi_docpdf";
-
+    public static String ACADEMY_DETAILS  = Urls_step + "Loanwiser_Academy";
     public static String APPLICATION_UPLOAD_POST = Urls + "applicationform_upload";
     public static String OFFER_POST = Urls + "getloanofferresult";
     public static String TRACK_POST = Urls + "gettrack_status";
@@ -126,12 +130,16 @@ public class Urls {
     public static String PAYMENT_CONFIRMATION = Urls_step + "payarr";
     public static String PAYMENT_SCHEDULE = Urls_step + "get_payschedule";
     public static String DOCUMENT_CHECK_LIST = Urls_step + "get_documentcklist";
+    public static String get_partbankup = Urls_step + "get_partbankup";
+    public static String Eligible_Banklist = Urls_step + "Eligible_Banklist";
+    public static String Activity_Notes = Urls_step + "Activity_Notes";
     public static String bank_status_fetch = Urls_step + "bank_status_fetch";
     public static String Get_DocumentcklistProp = Urls_step + "Get_DocumentcklistProp";
     public static String APPLICANT_INFO = Urls_step + "applicant_info";
     public static String UPDATED_ENABLE = Urls_step + "update_enable";
     public static String PARTNER_STATUES = Urls_step + "part_status";
     public static String PARTNER_STATUES_IDs = Urls_step + "appid_view";
+    public static String get_bankstaterules = Urls_step + "get_bankstaterules";
     public static final String Bankstatement_URl=Urls_step+"bank_statement_upload";
     public static String ask_countdisp = Urls_step + "ask_countdisp";
     public static String update_bankstatementstatus = Urls_step + "update_bankstatementstatus";

@@ -289,12 +289,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     tools:ignore="NewApi"
-                    android:background="?android:attr/colorPrimary"
                     android:minHeight="?android:attr/actionBarSize"
                     style="@style/MyTabLayout"
                     app:tabMode="fixed"
+                    app:tabTextColor="@color/colorPrimary"
                     app:tabGravity="fill"
-                    app:tabIndicatorColor="@android:color/white"
+                    app:tabIndicatorColor="@color/colorPrimary"
                     app:tabIndicatorHeight="4dp"/>
 
             </androidx.viewpager.widget.ViewPager>

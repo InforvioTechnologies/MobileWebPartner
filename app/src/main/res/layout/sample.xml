@@ -254,32 +254,31 @@
             android:layout_height="1000dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
-
         </LinearLayout>
-
-
-
             <androidx.viewpager.widget.ViewPager
-                android:layout_margin="10dp"
                 android:id="@+id/viewpager"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
                 >
+
                 <com.google.android.material.tabs.TabLayout
                     android:id="@+id/tabs"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     tools:ignore="NewApi"
-                    android:background="?android:attr/colorPrimary"
                     android:minHeight="?android:attr/actionBarSize"
                     style="@style/MyTabLayout"
                     app:tabMode="fixed"
+                    app:tabTextColor="@color/colorPrimary"
                     app:tabGravity="fill"
-                    app:tabIndicatorColor="@android:color/white"
+                    app:tabIndicatorColor="@color/colorPrimary"
                     app:tabIndicatorHeight="4dp"/>
 
             </androidx.viewpager.widget.ViewPager>
+
+
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>

@@ -17,10 +17,14 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.RadioGroup;
+import android.widget.RelativeLayout;
+import android.widget.TableLayout;
+import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -45,6 +49,7 @@ import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import com.github.mikephil.charting.utils.ColorTemplate;
+import com.wang.avi.AVLoadingIndicatorView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -65,6 +70,7 @@ import adhoc.app.applibrary.Config.AppUtils.Pref.Pref;
 import adhoc.app.applibrary.Config.AppUtils.Urls;
 import adhoc.app.applibrary.Config.AppUtils.VolleySignleton.AppController;
 import dmax.dialog.SpotsDialog;
+import in.loanwiser.partnerapp.Partner_Statues.Health_Assement_Adapter;
 import in.loanwiser.partnerapp.Payment.PaymentActivity;
 import in.loanwiser.partnerapp.R;
 import in.loanwiser.partnerapp.SimpleActivity;
@@ -78,17 +84,20 @@ public class BankAnalysis extends SimpleActivity {
     public static final String TAG=BankAnalysis.class.getSimpleName();
 
     private String tag_json_obj = "jobj_req", tag_json_arry = "jarray_req";
-    private AlertDialog progressDialog;
-    RecyclerView recyclerView,uploadedmonth_recycleview;
+
+    RecyclerView recyclerView,uploadedmonth_recycleview,recycler_view_bank_available_;
     ArrayList<String> allNames = new ArrayList<String>();
     BanklistAdapter banklistAdapter;
+    Bank_available_listAdapter bank_available_listAdapter;
+
     UploadmonthAdapter uploadmonthAdapter;
     ArrayList<Bankitems> items;
     ArrayList<Bankdetails_model> items1;
+    ArrayList<Bank_available_details_model> Bank_available_list;
     ProgressDialog dialog;
     TextView requiremonth,uploadmonth,missingerror;
     String documentget,adapter,statusintvalue,entitynumvalue;
-
+    private android.app.AlertDialog progressDialog;
     private List studentDataList = new ArrayList<>();
     String document;
     TextView requiredatetxt,usernametxt,user_address,account_no,bank_name,account_typetxt;
@@ -102,16 +111,17 @@ public class BankAnalysis extends SimpleActivity {
     ArrayList lineEntries;
     ArrayList barEntries;
     JSONArray labelarr;
+    JSONObject rule_arr;
     LineChart lineChart;
     RadioGroup hour_radio_group;
-    Button upload_requirebtn;
+    AppCompatButton upload_requirebtn;
     AppCompatButton proceed_button;
 
-
-    LinearLayout grapiclay_parent,uploaded_monthtextlay,requiretxtlay,uploadedmonth_lay,requirelay_detailslay,missingerror_lay,requiremonthbox_lay,
+    AVLoadingIndicatorView material_design_ball_scale_ripple_loader;
+    LinearLayout grapiclay_parent,uploaded_monthtextlay,requiretxtlay,requirelay_detailslay,missingerror_lay,requiremonthbox_lay,
             uploadrequirebutton_lay,proceednext_lay;
 
-
+    RelativeLayout uploadedmonth_lay;
 
 
     String namevalue,addressvalue;
@@ -138,7 +148,9 @@ public class BankAnalysis extends SimpleActivity {
     BarDataSet barDataSet;
 
     int count = 0;
+    int count_but = 0;
 
+    TableLayout tabel_row;
     @RequiresApi(api = Build.VERSION_CODES.P)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -155,6 +167,7 @@ public class BankAnalysis extends SimpleActivity {
         uploadmonth=findViewById(R.id.missingmonth);
         missingerror=findViewById(R.id.missing_error);
         hour_radio_group=findViewById(R.id.hour_radio_group);
+        tabel_row=findViewById(R.id.tabel_row);
 
         requiredatetxt=findViewById(R.id.requiredatetxt);
         usernametxt=findViewById(R.id.usernametext);
@@ -163,7 +176,7 @@ public class BankAnalysis extends SimpleActivity {
         account_typetxt=findViewById(R.id.ac_typetxt);
         bank_name=findViewById(R.id.banknametxt);
 
-
+        progressDialog = new SpotsDialog(this, R.style.Custom);
 
         fromtodatetxt=findViewById(R.id.fromtodatetxt);
         proceed_button=findViewById(R.id.proceed_button);
@@ -186,7 +199,7 @@ public class BankAnalysis extends SimpleActivity {
         uploadrequirebutton_lay=findViewById(R.id.uploadrequirebutton_lay);
         proceednext_lay=findViewById(R.id.proceednext_lay);
         upload_requirebtn=findViewById(R.id.upload_requirebtn);
-
+        material_design_ball_scale_ripple_loader=findViewById(R.id.material_design_ball_scale_ripple_loader);
 
 
 
@@ -223,10 +236,11 @@ public class BankAnalysis extends SimpleActivity {
         progressDialog = new SpotsDialog(BankAnalysis.this, R.style.Custom);
         items=new ArrayList<>();
         items1=new ArrayList<>();
-        dialog=new ProgressDialog(this);
-        dialog.setTitle("Bank statement");
+        Bank_available_list=new ArrayList<>();
+     /*   dialog=new ProgressDialog(this);
+        dialog.setTitle("Bank statement");*/
 
-
+        recycler_view_bank_available_ = (RecyclerView) findViewById(R.id.recycler_view_bank_available_);
         uploadedmonth_recycleview = findViewById(R.id.uploadedmonth_recycleview);
         uploadmonthAdapter = new UploadmonthAdapter(studentDataList);
         RecyclerView.LayoutManager manager = new GridLayoutManager(this, 3);
@@ -234,11 +248,15 @@ public class BankAnalysis extends SimpleActivity {
       //  uploadedmonth_recycleview.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
         uploadedmonth_recycleview.setAdapter(uploadmonthAdapter);
        // StudentDataPrepare();
-
+     //   Bank_details_list();
 
         recyclerView.setLayoutManager(new LinearLayoutManager(BankAnalysis.this, LinearLayoutManager.HORIZONTAL, false));
         recyclerView.setHasFixedSize(true);
         banklistAdapter = new BanklistAdapter(BankAnalysis.this, items1);
+
+        recycler_view_bank_available_.setLayoutManager(new LinearLayoutManager(BankAnalysis.this, LinearLayoutManager.HORIZONTAL, false));
+        recyclerView.setHasFixedSize(true);
+        bank_available_listAdapter = new Bank_available_listAdapter(BankAnalysis.this,Bank_available_list);
 
         final Intent in=getIntent();
         adapter=in.getStringExtra("adapter");
@@ -311,7 +329,7 @@ public class BankAnalysis extends SimpleActivity {
 
 
     }
-    private void Eligibility_check_doc_checklist_generate( ) {
+    protected void Eligibility_check_doc_checklist_generate() {
 
         JSONObject J= null;
         try {
@@ -324,7 +342,7 @@ public class BankAnalysis extends SimpleActivity {
         }
 
         Log.e("viability", String.valueOf(J));
-        // progressDialog.show();
+         progressDialog.show();
         JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, Urls.generate_doccklist, J,
                 new Response.Listener<JSONObject>() {
                     @Override
@@ -345,14 +363,14 @@ public class BankAnalysis extends SimpleActivity {
 
                             }
                             ///
-                            // progressDialog.dismiss();
+
 
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
                         Log.e("Lead creation", String.valueOf(response));
 
-
+                        progressDialog.dismiss();
                     }
                 }, new Response.ErrorListener() {
 
@@ -381,6 +399,159 @@ public class BankAnalysis extends SimpleActivity {
 
         jsonObjReq.setRetryPolicy(policy);
 
+        AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
+    }
+
+    protected void Applicant_Status(final String id) {
+        tabel_row.removeAllViews();
+        // final String step_status11 = step_status1;
+        JSONObject jsonObject =new JSONObject();
+        JSONObject J= null;
+        try {
+            J =new JSONObject();
+
+            J.put("bank_id", id);
+          //  J.put("bank_id", id);
+            J.put("transaction_id", Pref.getTRANSACTIONID(getApplicationContext()));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        progressDialog.show();
+        Log.e("bank state rule request", String.valueOf(J));
+
+        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, Urls.get_bankstaterules, J,
+                new Response.Listener<JSONObject>() {
+                    @SuppressLint({"LongLogTag", "ResourceType"})
+                    @Override
+                    public void onResponse(JSONObject response) {
+
+                        Log.e("rule response", String.valueOf(response));
+                        try {
+                            String status = response.getString("status");
+
+                            TableRow tr_head = new TableRow(getApplicationContext());
+                            tr_head.setId(10);
+                            tr_head.setBackgroundColor(Color.GRAY);
+                            tr_head.setLayoutParams(new ViewGroup.LayoutParams(
+                                    ViewGroup.LayoutParams.FILL_PARENT,
+                                    ViewGroup.LayoutParams.WRAP_CONTENT));
+
+                            TextView label_date = new TextView(getApplicationContext());
+                            label_date.setId(20);
+                            label_date.setText("Rule Description"+"  ");
+                            label_date.setTextColor(Color.WHITE);
+                            label_date.setPadding(5, 5, 5, 5);
+                            tr_head.addView(label_date);// add the column to the table row here
+
+                            TextView label_weight_kg = new TextView(getApplicationContext());
+                            label_weight_kg.setId(21);// define id that must be unique
+                            label_weight_kg.setText("Statues"+"  "); // set the text for the header
+                            label_weight_kg.setTextColor(Color.WHITE); // set the color
+                            label_weight_kg.setPadding(5, 5, 5, 5); // set the padding (if required)
+                            tr_head.addView(label_weight_kg); // add the column to the table row here
+
+                            TextView Fail_Message = new TextView(getApplicationContext());
+                            Fail_Message.setId(21);// define id that must be unique
+                            Fail_Message.setText("Fail Message"+"  "); // set the text for the header
+                            Fail_Message.setTextColor(Color.WHITE); // set the color
+                            Fail_Message.setPadding(5, 5, 5, 5); // set the padding (if required)
+                            tr_head.addView(Fail_Message); // add the column to the table row here
+
+
+                            tabel_row.addView(tr_head, new TableLayout.LayoutParams(
+                                    ViewGroup.LayoutParams.FILL_PARENT,
+                                    ViewGroup.LayoutParams.WRAP_CONTENT));
+
+                            JSONObject jsonObject1=null;
+                            if(status.equals("success"))
+                            {
+                                JSONArray response1 = response.getJSONArray("response");
+                                for(int i = 0; i < response1.length(); i++){
+
+                                    JSONObject J = null;
+                                    try {
+
+                                        J = response1.getJSONObject(i);
+
+                                        String rule_type=J.getString("rule_desc");
+                                        String fail_message=J.getString("fail_message");
+                                        String rule_status=J.getString("rule_status");
+                                        TableRow tr = new TableRow(getApplicationContext());
+                                        tr.setId(100+i);
+                                        tr.setLayoutParams(new ViewGroup.LayoutParams(
+                                                ViewGroup.LayoutParams.FILL_PARENT,
+                                                ViewGroup.LayoutParams.WRAP_CONTENT));
+
+                                        TextView rule_description = new TextView(getApplicationContext());
+                                        rule_description.setId(200+i);
+                                        rule_description.setText(rule_type+"  ");
+                                        label_weight_kg.setPadding(5, 5, 5, 5);
+                                        tr.addView(rule_description);
+
+                                        TextView fail_message1 = new TextView(getApplicationContext());
+                                        fail_message1.setId(300+i);
+                                        if(rule_status.equals("1"))
+                                        {
+                                            fail_message1.setText("Pass"+"  ");
+                                            label_weight_kg.setPadding(5, 5, 5, 5);
+                                            tr.addView(fail_message1);
+
+                                        }else {
+                                            fail_message1.setText("Fail"+"  ");
+                                            label_weight_kg.setPadding(5, 5, 5, 5);
+                                            tr.addView(fail_message1);
+
+                                        }
+
+
+                                        TextView rule_status1 = new TextView(getApplicationContext());
+                                        rule_status1.setId(300+i);
+                                        rule_status1.setText(fail_message+"  ");
+                                        label_weight_kg.setPadding(5, 5, 5, 5);
+                                        tr.addView(rule_status1);
+
+                                        tabel_row.addView(tr, new TableLayout.LayoutParams(
+                                                ViewGroup.LayoutParams.FILL_PARENT,
+                                                ViewGroup.LayoutParams.WRAP_CONTENT));
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                    }
+
+
+
+                                }
+                            }
+
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                        JSONObject jsonObject1 = new JSONObject();
+
+
+                        // TableLayout prices = (TableLayout) holder.findViewById(R.id.prices);
+
+
+                        progressDialog.dismiss();
+                    }
+                }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                progressDialog.dismiss();
+                Log.e("Applicant Entry request", String.valueOf(error));
+                Toast.makeText(getApplicationContext(),error.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("content-type", "application/json");
+                return headers;
+            }
+        };
         AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
     }
     public void Applicant_Status() {
@@ -463,11 +634,15 @@ public class BankAnalysis extends SimpleActivity {
         };
         AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
     }
+
+
+
     private void makeJsonObjReq1() {
         Log.i(TAG, "makeJsonObjReq1: "+"Make");
         final JSONObject jsonObject = new JSONObject();
         JSONObject J = null;
         J = new JSONObject();
+        material_design_ball_scale_ripple_loader.setVisibility(View.VISIBLE);
         try {
             J.put("transaction_id", Pref.getTRANSACTIONID(getApplicationContext()));
             J.put("relationship_type",Pref.getCoAPPAVAILABLE(getApplicationContext()));
@@ -478,6 +653,7 @@ public class BankAnalysis extends SimpleActivity {
 
         //Log.e("state_id", String.valueOf(J))
         progressDialog.show();
+
         Log.e("Request Dreopdown", "called");
         JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, Urls.BANK_STATEMENT_LIST, J,
                 new Response.Listener<JSONObject>() {
@@ -567,125 +743,7 @@ public class BankAnalysis extends SimpleActivity {
 
     }
 
-         private void FinboxAPI() {
-             Log.i(TAG, "Which API: "+"Finbox");
-             final JSONObject jsonObject = new JSONObject();
-             JSONObject J = null;
-             J = new JSONObject();
-             try {
-                 J.put("transaction_id","60775");
-                 J.put("typecnt","0");
-                 J.put("bankaccno","10170004547463");
-                 Log.i(TAG, "FInbox:Request "+J.toString());
-             } catch (JSONException e) {
-                 e.printStackTrace();
-             }
 
-             //Log.e("state_id", String.valueOf(J))
-             progressDialog.show();
-             Log.e("Request Dreopdown", "called");
-             JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, "https://cscapi.loanwiser.in/integration/bank_statement.php?call=get_bankstatement_det", J,
-                     new Response.Listener<JSONObject>() {
-                         @Override
-                         public void onResponse(JSONObject object) {
-                             JSONArray cast = null;
-                             JSONArray ja = null;
-                             JSONArray ja1=null;
-                             try {
-                                // String s=object.getString("display_select");
-                                 JSONObject bankarr=object.getJSONObject("bank_arr");
-                                 JSONObject jsonObject1=object.getJSONObject("uploaded_month");
-                                 JSONObject jsonObject2=jsonObject1.getJSONObject("month_arr");
-                                 Log.i(TAG, "onResponse: "+jsonObject1);
-                                 String startdate=jsonObject1.getString("start_date");
-                                 String todate=jsonObject1.getString("end_date");
-                                 String username=bankarr.getString("acchold_name");
-                                 String user_addres=bankarr.getString("cust_address");
-                                 String accnumber=bankarr.getString("acc_number");
-                                 String bankname=bankarr.getString("bank_name");
-                                 String account_type=bankarr.getString("acc_type");
-                                 Log.i(TAG, "startdate: "+startdate);
-                                 Log.i(TAG, "todate: "+todate);
-                                 Log.i(TAG, "acchold_name: "+username);
-                                 requiredatetxt.setText(startdate+" " +"to"+ todate);
-                                 usernametxt.setText(username);
-                                 user_address.setText(user_addres);
-                                 account_no.setText(accnumber);
-                                 bank_name.setText(bankname);
-                                 account_typetxt.setText(account_type);
-                                 Iterator iterator = jsonObject2.keys();
-                                 while (iterator.hasNext()) {
-                                     String key = (String) iterator.next();
-                                     Log.e("value", key.toString());
-                                     ArrayList<String> list_key = new ArrayList<String>();
-                                     Log.e("the value",list_key.toString());
-
-                                     JSONArray jsonAray = jsonObject2.getJSONArray(key);
-                                     for (int i = 0; i < jsonAray.length(); i++) {
-                                         JSONObject childrenObject = jsonAray.getJSONObject(i);
-                                         Log.i(TAG, "onResponse:lops "+childrenObject);
-                                         upload_detstatus=childrenObject.getString("upload_detstatus");
-                                         Log.i(TAG, "onResponse: upload_detstatus"+upload_detstatus);
-                                         year=childrenObject.getString("year");
-                                         month_details=childrenObject.getString("month_str");
-
-                                         if (upload_detstatus.equalsIgnoreCase("required")){
-                                             requirelist.add(year+month_details);
-                                             missing_yeartxt.setText(String.valueOf(requirelist));
-                                             Log.i(TAG, "onResponse:requirelist "+requirelist);
-                                             studentData data = new studentData(year+" "+month_details,upload_detstatus);
-                                             studentDataList.add(data);
-                                             uploadmonthAdapter = new UploadmonthAdapter(studentDataList);
-                                             RecyclerView.LayoutManager manager = new GridLayoutManager(BankAnalysis.this, 3);
-                                             uploadedmonth_recycleview.setLayoutManager(manager);
-                                             //  uploadedmonth_recycleview.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
-                                             uploadedmonth_recycleview.setAdapter(uploadmonthAdapter);
-
-
-                                         }
-                                        // uploadmonthAdapter.notifyDataSetChanged();
-
-                                     }
-
-
-
-                                 }
-
-
-
-
-
-
-                                 } catch (JSONException ex) {
-                                 ex.printStackTrace();
-                             }
-                             // Toast.makeText(mCon, response.toString(),Toast.LENGTH_SHORT).show();
-                             progressDialog.dismiss();
-                         }
-                     }, new Response.ErrorListener() {
-
-                 @Override
-                 public void onErrorResponse(VolleyError error) {
-                     VolleyLog.d("TAG", "Error: " + error.getMessage());
-                     progressDialog.dismiss();
-                 }
-             }) {
-
-                 /**
-                  * Passing some request headers
-                  * */
-                 @Override
-                 public Map<String, String> getHeaders() throws AuthFailureError {
-                     HashMap<String, String> headers = new HashMap<String, String>();
-                     headers.put("Content-Type", "application/json");
-                     return headers;
-                 }
-             };
-
-             // Adding request to request queue
-             AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
-
-        }
 
 
     private void FinboxAPICheck(String documentget) {
@@ -694,6 +752,7 @@ public class BankAnalysis extends SimpleActivity {
         final JSONObject jsonObject = new JSONObject();
         JSONObject J = null;
         J = new JSONObject();
+        material_design_ball_scale_ripple_loader.setVisibility(View.VISIBLE);
         try {
             J.put("transaction_id", Pref.getTRANSACTIONID(getApplicationContext()));
             J.put("typecnt","0");
@@ -702,6 +761,7 @@ public class BankAnalysis extends SimpleActivity {
         } catch (JSONException e) {
             e.printStackTrace();
         }
+      //  progressDialog.dismiss();
         Log.e("Request Dreopdown", "called");
         JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, "https://cscapi.loanwiser.in/integration/bank_statement.php?call=get_bankstatement_det", J,
                 new Response.Listener<JSONObject>() {
@@ -713,6 +773,7 @@ public class BankAnalysis extends SimpleActivity {
                         try {
                             // String s=object.getString("display_select");
                             JSONObject bankarr=object.getJSONObject("bank_arr");
+                             rule_arr=object.getJSONObject("rule_arr");
                            // labelarr=bankarr.getJSONArray("label_arr");
                             JSONArray  label_arr=bankarr.getJSONArray("label_arr");
                             JSONArray  amount_arr=bankarr.getJSONArray("amount_arr");
@@ -743,7 +804,7 @@ public class BankAnalysis extends SimpleActivity {
                             Log.i(TAG, "todate: "+todate);
                             Log.i(TAG, "acchold_name: "+username);
                             salatxt.setText(salary);
-                            requiredatetxt.setText(startdate+" " +"to"+ todate);
+                            requiredatetxt.setText(startdate+" " +"to "+ todate);
                             usernametxt.setText(username);
                             user_address.setText(user_addres);
                             account_no.setText(accnumber);
@@ -758,6 +819,55 @@ public class BankAnalysis extends SimpleActivity {
                             expradio.setText(chequeboun_penal);
                             missing_yeartxt.setText("Please Upload Bank Statement For The Following Required Months -"+required_monthstr+" "+"in the above Bank Statement Upload Section.");
                             TextView fromtodatetxt,salatxt ,abbtxt, approtxt,expen_ratiotxt ,baltxt ,expradio;
+
+                            if(rule_arr.length()>0)
+                            {
+                                for(int i = 0;i<rule_arr.length();i++) {
+                                    Iterator iterator = rule_arr.keys();
+                                    while (iterator.hasNext()) {
+
+                                        String key = (String) iterator.next();
+                                        Log.i("TAG", "keyvaluecheck: " + key);
+                                        Log.e("value", key.toString());
+
+                                       JSONObject response_iD_proof_comon = rule_arr.getJSONObject(key);
+
+                                       String status = response_iD_proof_comon.getString("status");
+                                        if(status.equals("1"))
+                                       {
+                                           JSONObject response_iD_proof_comon1 = response_iD_proof_comon.getJSONObject("bank_data");
+                                           String bank_logo_cc = response_iD_proof_comon1.getString("bank_logo_cc");
+                                           String bank_categorystr = response_iD_proof_comon1.getString("category_name");
+                                           String bank_category = response_iD_proof_comon1.getString("bus_category");
+                                           String id = response_iD_proof_comon1.getString("id");
+
+
+                                           Bank_available_list.add(new Bank_available_details_model(bank_logo_cc,bank_categorystr, bank_category,status,id));
+                                           bank_available_listAdapter.notifyDataSetChanged();
+                                        }else
+                                        {
+                                            JSONObject response_iD_proof_comon1 = response_iD_proof_comon.getJSONObject("bank_data");
+                                            String bank_logo_cc = response_iD_proof_comon1.getString("bank_logo_cc");
+                                            String bank_categorystr = response_iD_proof_comon1.getString("category_name");
+                                            String bank_category = response_iD_proof_comon1.getString("bus_category");
+                                            String id = response_iD_proof_comon1.getString("id");
+                                            Bank_available_list.add(new Bank_available_details_model(bank_logo_cc,bank_categorystr, bank_category,status,id));
+                                            bank_available_listAdapter.notifyDataSetChanged();
+                                        }
+
+
+
+
+                                    }
+                                    //  String acc_number=J.getString("acc_number");
+                                    // String entity_id=J.getString("entity_id");
+
+                                }
+
+                                recycler_view_bank_available_.setAdapter(bank_available_listAdapter);
+                              //  progressDialog.dismiss();
+                            }
+
 
                             for (int i = 0; i < amount_arr.length(); i++) {
                                 // String value="12";
@@ -900,8 +1010,17 @@ public class BankAnalysis extends SimpleActivity {
                                     if (upload_detstatus.equalsIgnoreCase("required")){
                                         requirelist.add(year+month_details);
                                         Log.i(TAG, "onResponse:requirelist "+requirelist);
+                                        if (upload_det.equals("required")){
+
+                                            count_but = count_but+1;
+                                        }else
+                                        {
+
+                                        }
                                         studentData data1 = new studentData(year+" "+month_details,upload_det);
                                         studentDataList.add(data1);
+
+
                                         uploadmonthAdapter = new UploadmonthAdapter(studentDataList);
                                         RecyclerView.LayoutManager manager = new GridLayoutManager(BankAnalysis.this, 3);
                                         uploadedmonth_recycleview.setLayoutManager(manager);
@@ -913,6 +1032,14 @@ public class BankAnalysis extends SimpleActivity {
 
                                 }
 
+                                if(count_but >1)
+                                {
+                                    upload_requirebtn.setVisibility(View.VISIBLE);
+                                }else
+                                {
+                                    upload_requirebtn.setVisibility(View.GONE);
+                                }
+
                             }
 
                         } catch (JSONException ex) {
@@ -920,13 +1047,15 @@ public class BankAnalysis extends SimpleActivity {
                         }
                         // Toast.makeText(mCon, response.toString(),Toast.LENGTH_SHORT).show();
                         progressDialog.dismiss();
+                        material_design_ball_scale_ripple_loader.setVisibility(View.GONE);
                     }
                 }, new Response.ErrorListener() {
 
             @Override
             public void onErrorResponse(VolleyError error) {
                 VolleyLog.d("TAG", "Error: " + error.getMessage());
-                progressDialog.dismiss();
+              //  progressDialog.dismiss();
+                material_design_ball_scale_ripple_loader.setVisibility(View.VISIBLE);
             }
         }) {
 
@@ -976,6 +1105,7 @@ public class BankAnalysis extends SimpleActivity {
         Log.i(TAG, "Which API: "+"Glib");
         final JSONObject jsonObject = new JSONObject();
         JSONObject J = null;
+        material_design_ball_scale_ripple_loader.setVisibility(View.VISIBLE);
         J = new JSONObject();
         try {
             J.put("transaction_id", Pref.getTRANSACTIONID(getApplicationContext()));
@@ -985,6 +1115,7 @@ public class BankAnalysis extends SimpleActivity {
         } catch (JSONException e) {
             e.printStackTrace();
         }
+      //  progressDialog.dismiss();
         JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, "https://cscapi.loanwiser.in/integration/bank_statement.php?call=get_bankstatement_detnew", J,
                 new Response.Listener<JSONObject>() {
                     @Override
@@ -994,7 +1125,7 @@ public class BankAnalysis extends SimpleActivity {
                         JSONArray ja1=null;
                         try {
                             JSONObject bankarr=object.getJSONObject("bank_arr");
-
+                            rule_arr=object.getJSONObject("rule_arr");
                             JSONArray  label_arr=bankarr.getJSONArray("label_arr");
                             JSONArray  amount_arr=bankarr.getJSONArray("amount_arr");
                             JSONArray creditdet_arr=bankarr.getJSONArray("creditdet_arr");
@@ -1018,6 +1149,55 @@ public class BankAnalysis extends SimpleActivity {
                             String required_monthstr=object.getString("required_monthstr");
                             String acnum=accountno.getString("account_number");
                             String avgbankbal=avgbal.getString("avg_monthly_balance");
+
+
+
+                            if(rule_arr.length()>0)
+                            {
+                                for(int i = 0;i<rule_arr.length();i++) {
+                                    Iterator iterator = rule_arr.keys();
+                                    while (iterator.hasNext()) {
+
+                                        String key = (String) iterator.next();
+                                        Log.i("TAG", "keyvaluecheck: " + key);
+                                        Log.e("value", key.toString());
+
+                                        JSONObject response_iD_proof_comon = rule_arr.getJSONObject(key);
+
+                                        String status = response_iD_proof_comon.getString("status");
+                                        if(status.equals("1"))
+                                        {
+                                            JSONObject response_iD_proof_comon1 = response_iD_proof_comon.getJSONObject("bank_data");
+                                            String bank_logo_cc = response_iD_proof_comon1.getString("bank_logo_cc");
+                                            String bank_categorystr = response_iD_proof_comon1.getString("category_name");
+                                            String bank_category = response_iD_proof_comon1.getString("bus_category");
+                                            String id = response_iD_proof_comon1.getString("id");
+
+                                            Bank_available_list.add(new Bank_available_details_model(bank_logo_cc,bank_categorystr, bank_category,status,id));
+                                            bank_available_listAdapter.notifyDataSetChanged();
+                                        }else
+                                        {
+                                            JSONObject response_iD_proof_comon1 = response_iD_proof_comon.getJSONObject("bank_data");
+                                            String bank_logo_cc = response_iD_proof_comon1.getString("bank_logo_cc");
+                                            String bank_categorystr = response_iD_proof_comon1.getString("category_name");
+                                            String bank_category = response_iD_proof_comon1.getString("bus_category");
+                                            String id = response_iD_proof_comon1.getString("id");
+                                            Bank_available_list.add(new Bank_available_details_model(bank_logo_cc,bank_categorystr, bank_category,status,id));
+                                            bank_available_listAdapter.notifyDataSetChanged();
+                                        }
+
+
+
+
+                                    }
+                                    //  String acc_number=J.getString("acc_number");
+                                    // String entity_id=J.getString("entity_id");
+
+                                }
+
+                                recycler_view_bank_available_.setAdapter(bank_available_listAdapter);
+                                progressDialog.dismiss();
+                            }
 
                             for (int i = 0; i < amount_arr.length(); i++) {
                                 // String value="12";
@@ -1192,6 +1372,13 @@ public class BankAnalysis extends SimpleActivity {
                                     if (upload_detstatus.equalsIgnoreCase("required")){
                                         requirelist.add(year+month_details);
                                         Log.i(TAG, "onResponse:requirelist "+requirelist);
+                                        if (upload_det.equals("required")){
+
+                                            count_but = count_but+1;
+                                        }else
+                                        {
+
+                                        }
                                         studentData data1 = new studentData(year+" "+month_details,upload_det);
                                         studentDataList.add(data1);
                                         uploadmonthAdapter = new UploadmonthAdapter(studentDataList);
@@ -1202,18 +1389,26 @@ public class BankAnalysis extends SimpleActivity {
                                         uploadmonthAdapter.notifyDataSetChanged();
                                     }
                                 }
+                                if(count_but >1)
+                                {
+                                    upload_requirebtn.setVisibility(View.VISIBLE);
+                                }else
+                                {
+                                    upload_requirebtn.setVisibility(View.GONE);
+                                }
                             }
                         } catch (JSONException ex) {
                             ex.printStackTrace();
                         }
                         // Toast.makeText(mCon, response.toString(),Toast.LENGTH_SHORT).show();
-                        progressDialog.dismiss();
+                        material_design_ball_scale_ripple_loader.setVisibility(View.VISIBLE);
                     }
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 VolleyLog.d("TAG", "Error: " + error.getMessage());
-                progressDialog.dismiss();
+                material_design_ball_scale_ripple_loader.setVisibility(View.VISIBLE);
+               // progressDialog.dismiss();
             }
         }) {
             /**

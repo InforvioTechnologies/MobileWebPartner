@@ -226,7 +226,7 @@
             android:id="@+id/submit_update_status"
             android:layout_gravity="center"
             android:layout_width="200dp"
-            android:text="@string/submit_loanwiser"
+            android:text="@string/proceed"
             android:textColor="@color/white"
             android:background="@drawable/capsul_button4"
             android:layout_height="wrap_content"/>

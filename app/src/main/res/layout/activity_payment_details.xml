@@ -17,7 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
             <LinearLayout
-                android:visibility="gone"
+
             android:id="@+id/standard"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -355,7 +355,7 @@
 
         </LinearLayout>
             <LinearLayout
-
+                android:visibility="gone"
                android:id="@+id/Custome"
                 android:orientation="vertical"
                 android:layout_width="match_parent"

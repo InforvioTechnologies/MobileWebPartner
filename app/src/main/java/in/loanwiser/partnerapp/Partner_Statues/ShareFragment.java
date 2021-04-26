@@ -71,6 +71,7 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -249,6 +250,7 @@ public class ShareFragment extends Fragment{
                                 progressDialog.dismiss();
                                 Intent intent = new Intent(Intent.ACTION_SEND);
                                 intent.putExtra(Intent.EXTRA_TEXT, "Hey view/download this image");
+
                                 String path = MediaStore.Images.Media.insertImage(getActivity().getContentResolver(), resource, "", null);
                                 Log.i("quoteswahttodo", "is onresoursereddy" + path);
                                 Uri screenshotUri = Uri.parse(path);
@@ -491,7 +493,9 @@ public class ShareFragment extends Fragment{
                                             try {
                                                 Intent intent = new Intent(Intent.ACTION_SEND);
                                                 intent.putExtra(Intent.EXTRA_TEXT, content);
-                                                String path = MediaStore.Images.Media.insertImage(getActivity().getContentResolver(), resource, "", null);
+                                                String path = MediaStore.Images.Media.insertImage(getActivity().getContentResolver(), resource, "IMG_" + Calendar.getInstance().getTime(), null);
+
+                                               // String path = MediaStore.Images.Media.insertImage(getActivity().getContentResolver(), resource, "", null);
                                                 Log.i("quoteswahttodo", "is onresoursereddy" + path);
                                                 Uri screenshotUri = Uri.parse(path);
                                                 Log.i("quoteswahttodo", "is onresoursereddy" + screenshotUri);
@@ -541,7 +545,9 @@ public class ShareFragment extends Fragment{
                                             try {
                                                 Intent intent = new Intent(Intent.ACTION_SEND);
                                                 intent.putExtra(Intent.EXTRA_TEXT, content);
-                                                String path = MediaStore.Images.Media.insertImage(getActivity().getContentResolver(), resource, "", null);
+                                                String path = MediaStore.Images.Media.insertImage(getActivity().getContentResolver(), resource, "IMG_" + Calendar.getInstance().getTime(), null);
+
+                                                // String path = MediaStore.Images.Media.insertImage(getActivity().getContentResolver(), resource, "", null);
                                                 Log.i("quoteswahttodo", "is onresoursereddy" + path);
                                                 Uri screenshotUri = Uri.parse(path);
                                                 Log.i("quoteswahttodo", "is onresoursereddy" + screenshotUri);

@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Partner_Statues.BusinessCardActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_marginBottom="20dp"
+            android:orientation="vertical">
+
+           <RelativeLayout
+               android:layout_width="match_parent"
+               android:layout_height="300dp"
+               android:layout_marginTop="20dp"
+               android:orientation="vertical">
+
+               <androidx.appcompat.widget.AppCompatImageView
+                   android:id="@+id/imageview"
+                   android:layout_width="match_parent"
+                   android:layout_height="300dp" />
+
+
+
+               <ProgressBar
+                   android:layout_alignBottom="@+id/image_Pdf"
+                   android:id="@+id/progressBarMaterial_pdf"
+                   android:layout_gravity="center"
+                   android:gravity="center"
+                   android:layout_marginTop="30dp"
+                   android:theme="@style/CircularProgress"
+                   style="@style/Widget.AppCompat.ProgressBar"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"/>
+
+               <RelativeLayout
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:layout_below="@+id/imgview">
+
+                   <androidx.appcompat.widget.AppCompatTextView
+                       android:id="@+id/editbtn"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:layout_alignParentEnd="true"
+                       android:text="@string/edit"
+                       android:textSize="14sp"
+                       android:textColor="#002B5D"
+                       android:layout_marginEnd="20dp"/>
+
+               </RelativeLayout>
+
+           </RelativeLayout>
+
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:layout_gravity="center"
+                android:gravity="center">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@string/info5"
+                    android:textSize="14sp"
+                    android:textColor="#002B5D"
+                    />
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="20dp"
+                android:orientation="vertical">
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/whatsappbutton"
+                    android:layout_width="240dp"
+                    android:layout_height="55dp"
+                    android:padding="16dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="10dp"
+                    android:text="Share in whatsapp"
+                    android:textColor="#2CB742"
+                    android:background="#ADFFAA"
+                    android:drawableLeft="@drawable/whatsapp"
+                    android:textSize="14sp"/>
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/othernetworkbutton"
+                    android:layout_width="240dp"
+                    android:layout_height="55dp"
+                    android:padding="16dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="10dp"
+                    android:background="#B9D9FF"
+                    android:textColor="#2680EB"
+                    android:text="Share in Others"
+                    android:drawableLeft="@drawable/ic_sharing"
+                    android:textSize="14sp"/>
+
+            </LinearLayout>
+
+
+
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>
