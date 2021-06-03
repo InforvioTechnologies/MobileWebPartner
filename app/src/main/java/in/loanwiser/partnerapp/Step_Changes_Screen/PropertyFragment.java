@@ -44,6 +44,7 @@ import java.util.List;
 import java.util.Map;
 
 import adhoc.app.applibrary.Config.AppUtils.Objs;
+import adhoc.app.applibrary.Config.AppUtils.Pref.Pref;
 import adhoc.app.applibrary.Config.AppUtils.Urls;
 import adhoc.app.applibrary.Config.AppUtils.VolleySignleton.AppController;
 import dmax.dialog.SpotsDialog;
@@ -228,7 +229,8 @@ public class PropertyFragment extends Fragment implements CompoundButton.OnCheck
             J.put("employement_type", property_empstates);
             J.put("applicant_type", "0");
             J.put("type_req", 0);
-            J.put("status_flag", 1);
+            //J.put("status_flag", 1);
+            J.put("status_flag", Pref.getSTATUES_FLAG(getActivity()));
             Log.i("TAG", "Document_check_lsit:request "+J.toString());
 
         } catch (JSONException e) {

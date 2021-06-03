@@ -36,8 +36,9 @@
             </LinearLayout>
 
             <LinearLayout
+                android:padding="10dp"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="500dp"
                 android:gravity="center"
                 android:layout_marginTop="10dp"
                 android:layout_gravity="center"
@@ -50,7 +51,7 @@
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/shareimage"
                     android:layout_width="match_parent"
-                    android:layout_height="400dp"
+                    android:layout_height="500dp"
                     android:layout_gravity="center"
                     />
                 <ProgressBar

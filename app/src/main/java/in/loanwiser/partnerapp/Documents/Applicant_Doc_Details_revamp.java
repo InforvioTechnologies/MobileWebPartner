@@ -60,6 +60,7 @@ import in.loanwiser.partnerapp.R;
 public class Applicant_Doc_Details_revamp extends SimpleActivity {
 
     private Context mCon = this;
+    String loan_type_id;
     String doc_id,emp_state,type,applicant_name;
     private AppCompatTextView appl_id;
     private CardView app_id_card;
@@ -130,6 +131,8 @@ public class Applicant_Doc_Details_revamp extends SimpleActivity {
 
         Document_.setVisibility(View.GONE);
         submit_update_status.setVisibility(View.GONE);
+        loan_type_id = Pref.getLoanType(this);
+        Log.i("TAG", "onCreate:loantypeid1 "+loan_type_id);
         Account_Listings_Details();
 
 
@@ -181,9 +184,31 @@ public class Applicant_Doc_Details_revamp extends SimpleActivity {
         Property.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Applicant_what ="no";
-                Applicant_what1 ="no";
-                Applicant_what2 ="Property";
+                if(loan_type_id.equals("31")){
+                    Applicant_what ="no";
+                    Applicant_what1 ="no";
+                    Applicant_what2 ="Vehicle";
+                    Log.i(TAG, "onClick:Property "+Applicant_what2);
+                }else if(loan_type_id.equals("22")){
+                    Applicant_what ="no";
+                    Applicant_what1 ="no";
+                    Applicant_what2 ="Vehicle";
+                    Log.i(TAG, "onClick:Property "+Applicant_what2);
+                }else if(loan_type_id.equals("32")){
+                    Applicant_what ="no";
+                    Applicant_what1 ="no";
+                    Applicant_what2 ="Vehicle";
+                    Log.i(TAG, "onClick:Property "+Applicant_what2);
+                }
+                else{
+                    Applicant_what ="no";
+                    Applicant_what1 ="no";
+                    Applicant_what2 ="Property";
+                    Log.i(TAG, "onClick:Property1 "+Applicant_what2);
+
+                }
+
+
                 Log.e("Applicant_what Tabs", Applicant_what+"Works");
                 applicant_txt.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.gray));
                 co_applicant_txt.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.gray));
@@ -200,6 +225,8 @@ public class Applicant_Doc_Details_revamp extends SimpleActivity {
             J =new JSONObject();
           //  J.put(Params.user_id, id);
             J.put("user_id",Pref.getUSERID(getApplicationContext()));
+            Log.i(TAG, "Account_Listings_Details: "+J.toString());
+
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -257,6 +284,7 @@ public class Applicant_Doc_Details_revamp extends SimpleActivity {
                                       //  Log.e("Length Tabs", String.valueOf(jsonArray.length()));
 
                                         applicant_name = J.getString("applicant_name");
+                                        Log.i(TAG, "onResponse: applicant_name"+applicant_name);
 
                                         if(Applicant_what.equals(applicant_name))
                                         {
@@ -287,7 +315,8 @@ public class Applicant_Doc_Details_revamp extends SimpleActivity {
                                             Pref.putEID(mCon,emp_states);
                                             Document_Details();
 
-                                        }else if(Applicant_what2.equals(applicant_name))
+                                        }
+                                        else if(Applicant_what2.equals(applicant_name))
                                         {
                                          //   Log.e("Applicant_what Tabs", Applicant_what2+"Works");
                                             emp_states = J.getString("emp_states");
@@ -303,6 +332,39 @@ public class Applicant_Doc_Details_revamp extends SimpleActivity {
                                             Document_Details1();
 
                                         }
+
+                                        else if(Applicant_what2.equalsIgnoreCase("Vehicle"))
+                                        {
+                                            //   Log.e("Applicant_what Tabs", Applicant_what2+"Works");
+                                            emp_states = J.getString("emp_states");
+                                            Applicant_type = J.getString("user_type");
+                                            transaction_id = J.getString("transaction_id");
+                                            doc_id = J.getString("transaction_id");
+                                            //  checklist_name_validate(doc_ype_com,key);
+
+                                            Pref.putAEID(mCon,Applicant_type);
+                                            Pref.putDOC(mCon,doc_id);
+                                            Pref.putTID(mCon,transaction_id);
+                                            Pref.putEID(mCon,emp_states);
+                                            Document_Details1();
+
+                                        }
+                                       /* else if(applicant_name.equals("Vehicle"))
+                                        {
+                                            //   Log.e("Applicant_what Tabs", Applicant_what2+"Works");
+                                            emp_states = J.getString("emp_states");
+                                            Applicant_type = J.getString("user_type");
+                                            transaction_id = J.getString("transaction_id");
+                                            doc_id = J.getString("transaction_id");
+                                            //  checklist_name_validate(doc_ype_com,key);
+
+                                            Pref.putAEID(mCon,Applicant_type);
+                                            Pref.putDOC(mCon,doc_id);
+                                            Pref.putTID(mCon,transaction_id);
+                                            Pref.putEID(mCon,emp_states);
+                                            Document_Details1();
+
+                                        }*/
 
 
 
@@ -466,7 +528,8 @@ public class Applicant_Doc_Details_revamp extends SimpleActivity {
             J.put("applicant_type", Applicant_type);
             J.put("employement_type", emp_states);
             J.put("type_request", 0);
-            J.put("status_flag", 1);
+          //  J.put("status_flag", 1);
+            J.put("status_flag", Pref.getSTATUES_FLAG(getApplicationContext()));
 
         } catch (JSONException e) {
             e.printStackTrace();
@@ -489,23 +552,6 @@ public class Applicant_Doc_Details_revamp extends SimpleActivity {
                             JSONArray jsonArray = jsonObject1.getJSONArray("key_arr");
                             jsonobject_2 = jsonObject1.getJSONObject("document_arr");
                             Log.e("KEY_ARRar",jsonArray.toString());
-
-                           /* for (int i=0;i<jsonArray.length();i++) {
-                                JSONObject J = null;
-
-                                try {
-
-                                    J = jsonArray.getJSONObject(i);
-
-
-                                    String test=jsonArray.getString("document_req");
-
-
-                                } catch (JSONException e) {
-                                    e.printStackTrace();
-                                }
-                            }*/
-
                             Log.e("jsonobject_2",jsonobject_2.toString());
                             if (jsonArray.length()>0){
                                 // Objs.a.showToast(mCon, String.valueOf(object.getJSONArray(Params.products)));
@@ -563,7 +609,8 @@ public class Applicant_Doc_Details_revamp extends SimpleActivity {
             J.put("applicant_type", 0);
             J.put("employement_type", "4");
             J.put("type_request", 0);
-            J.put("status_flag", 1);
+          //  J.put("status_flag", 1);
+            J.put("status_flag", Pref.getSTATUES_FLAG(getApplicationContext()));
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -582,12 +629,35 @@ public class Applicant_Doc_Details_revamp extends SimpleActivity {
                             JSONObject jsonObject1 = response.getJSONObject("response");
 
                             jsonobject_2 = jsonObject1.getJSONObject("document_arr");
-                            JSONArray Property_Document = jsonobject_2.getJSONArray("Property Document");
+                            if(loan_type_id.equals("31")){
+                                JSONArray Property_Document = jsonobject_2.getJSONArray("Vehicle Documents");
+                                if(Property_Document.length()>0){
 
-                            if(Property_Document.length()>0){
+                                    setAdapter1(Property_Document);
+                                    progressDialog.dismiss();
+                                }
+                            }else if(loan_type_id.equals("22")){
+                                JSONArray Property_Document = jsonobject_2.getJSONArray("Vehicle Documents");
+                                if(Property_Document.length()>0){
 
-                                setAdapter1(Property_Document);
-                                progressDialog.dismiss();
+                                    setAdapter1(Property_Document);
+                                    progressDialog.dismiss();
+                                }
+                            }else if(loan_type_id.equals("32")){
+                                JSONArray Property_Document = jsonobject_2.getJSONArray("Vehicle Documents");
+                                if(Property_Document.length()>0){
+
+                                    setAdapter1(Property_Document);
+                                    progressDialog.dismiss();
+                                }
+                            }else {
+                                JSONArray Property_Document = jsonobject_2.getJSONArray("Property Document");
+
+                                if (Property_Document.length() > 0) {
+
+                                    setAdapter1(Property_Document);
+                                    progressDialog.dismiss();
+                                }
                             }
                           //  JSONArray jsonArray  = Property_Document.getJSONArray("doc_type_names");
                            /* if (Property_Document.length()>0){

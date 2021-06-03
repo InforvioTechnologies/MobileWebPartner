@@ -234,6 +234,75 @@
         </LinearLayout>
 
         <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <androidx.appcompat.widget.AppCompatTextView
+                android:visibility="gone"
+                android:gravity="center"
+                style="@style/SmallText"
+                android:textSize="24dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"
+                android:textStyle="bold"
+                android:layout_gravity="center"
+                android:text="@string/text_with_bullet"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                />
+            <androidx.appcompat.widget.AppCompatTextView
+                android:gravity="left"
+                android:id="@+id/statues_new1"
+                style="@style/SmallText1"
+                android:layout_gravity="center"
+                android:textStyle="bold"
+                android:layout_marginLeft="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="statues :"
+                android:textColor="@color/gray_sade" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_gravity="center"
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/Statues_update_dot"
+                    android:gravity="center"
+                    style="@style/SmallText"
+                    android:textSize="17dp"
+                    android:textStyle="bold"
+                    android:text="@string/text_with_bullet"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    />
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:gravity="left"
+                    android:id="@+id/statues_new"
+                    style="@style/SmallText1"
+                    android:layout_gravity="center"
+                    android:textStyle="bold"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="statues"
+                    android:textColor="@color/colorPrimary" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+        <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -256,14 +325,14 @@
                     />
                 <androidx.appcompat.widget.AppCompatTextView
                     android:gravity="left"
-                    android:id="@+id/statues_new1"
+                    android:id="@+id/created_date"
                     style="@style/SmallText1"
                     android:layout_gravity="center"
                     android:textStyle="bold"
                     android:layout_marginLeft="10dp"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:text="statues :"
+                    android:text="Lead Created:"
                     android:textColor="@color/gray_sade" />
             </LinearLayout>
             <LinearLayout
@@ -276,25 +345,77 @@
                     android:orientation="horizontal"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content">
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/Statues_update_dot"
-                        android:gravity="center"
-                        style="@style/SmallText"
-                        android:textSize="17dp"
-                        android:textStyle="bold"
-                        android:text="@string/text_with_bullet"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        />
+
                     <androidx.appcompat.widget.AppCompatTextView
                         android:gravity="left"
-                        android:id="@+id/statues_new"
+                        android:id="@+id/Lead_crated_"
                         style="@style/SmallText1"
                         android:layout_gravity="center"
                         android:textStyle="bold"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:text="statues"
+                        android:textColor="@color/colorPrimary" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+        <LinearLayout
+
+            android:id="@+id/cobrand"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:visibility="gone"
+                    android:gravity="center"
+                    style="@style/SmallText"
+                    android:textSize="24dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:textStyle="bold"
+                    android:layout_gravity="center"
+                    android:text="@string/text_with_bullet"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    />
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:gravity="left"
+
+                    style="@style/SmallText1"
+                    android:layout_gravity="center"
+                    android:textStyle="bold"
+                    android:layout_marginLeft="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="Lead from:"
+                    android:textColor="@color/gray_sade" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:layout_gravity="center"
+                    android:orientation="horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:gravity="left"
+                        style="@style/SmallText1"
+                        android:layout_gravity="center"
+                        android:textStyle="bold"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="Website"
                         android:textColor="@color/colorPrimary" />
                 </LinearLayout>
 

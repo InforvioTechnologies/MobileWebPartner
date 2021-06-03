@@ -9,6 +9,7 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.graphics.Typeface;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 
@@ -39,7 +40,13 @@ import com.android.volley.toolbox.Volley;
 import com.basgeekball.awesomevalidation.AwesomeValidation;
 import com.basgeekball.awesomevalidation.ValidationStyle;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.analytics.FirebaseAnalytics;
+import com.google.firebase.dynamiclinks.FirebaseDynamicLinks;
+import com.google.firebase.dynamiclinks.PendingDynamicLinkData;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.InstanceIdResult;
 
@@ -364,6 +371,7 @@ public class SmsActivity extends AppCompatActivity {
                                   //  Objs.a.showToast(mCon, "Welcome to Loanwiser, you have successfully logged in");
 
                                    // Toast.makeText(mCon,"Welcome to Loanwiser, you have successfully logged in",Toast.LENGTH_SHORT).show();
+
                                     Firebase_Registration(user_array);
                                     Pref.putUID(mCon, no_bundle);
                                     Pref.putMobile(mCon, S_moblie);
@@ -508,9 +516,20 @@ public class SmsActivity extends AppCompatActivity {
                             String Register_Token_statues = object.getString("status");
                             if(Register_Token_statues.contains("success"))
                             {
-                                Intent intent = new Intent(SmsActivity.this, DashBoard_new.class);
-                                startActivity(intent);
-                                finish();
+                                SharedPreferences prfs = getSharedPreferences("AUTHENTICATION_FILE_NAME", Context.MODE_PRIVATE);
+                                String Astatus = prfs.getString("customerid", "");
+                                String Astatus1 = prfs.getString("propid", "");
+                                if (Astatus!=null){
+                                    Referaldetails(Astatus,Astatus1);
+                                  //  Toast.makeText(SmsActivity.this,"Function call",Toast.LENGTH_SHORT).show();
+                                }else{
+                                    Intent intent = new Intent(SmsActivity.this, DashBoard_new.class);
+                                    startActivity(intent);
+                                    finish();
+                                }
+
+                               // FirebaseReceive();
+
                             }
 
                         } catch (JSONException e) {
@@ -538,6 +557,139 @@ public class SmsActivity extends AppCompatActivity {
         // Adding request to request queue
         AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
 
+    }
+
+    private void FirebaseReceive() {
+        // [START get_deep_link]
+        FirebaseAnalytics mFirebaseAnalytics;
+        mFirebaseAnalytics=FirebaseAnalytics.getInstance(this);
+        FirebaseDynamicLinks.getInstance()
+                .getDynamicLink(getIntent())
+                .addOnSuccessListener(this, new OnSuccessListener<PendingDynamicLinkData>() {
+                    @Override
+                    public void onSuccess(PendingDynamicLinkData pendingDynamicLinkData) {
+                        // Get deep link from result (may be null if no link is found)
+                        Uri deepLink = null;
+                        Log.i(TAG, "pendingdynamicdata: "+pendingDynamicLinkData);
+                   /* deepLink=pendingDynamicLinkData.getLink();
+                    Log.i(TAG, "onSuccess:deep"+deepLink)*/;
+                        if (pendingDynamicLinkData != null) {
+                            deepLink = pendingDynamicLinkData.getLink();
+                            Log.i(TAG, "onSuccessuri: "+deepLink);
+                            Log.i(TAG, "onSuccessstring: "+deepLink.toString());
+                            String referlink=deepLink.toString();
+                            try{
+                                referlink=referlink.substring(referlink.lastIndexOf("=")+1);
+                                String custid=referlink.substring(0,referlink.indexOf("-"));
+                                String propid=referlink.substring(referlink.indexOf("-")+1);
+                                Referaldetails(custid,propid);
+                                Log.e(TAG, "custid: "+custid+"----propid"+propid);
+                            }catch (Exception e){
+                            }
+                            Log.w("deepLink", "" + deepLink);
+                            Log.e(TAG, "deepLink: " +deepLink);
+                            String cn=String.valueOf(deepLink.getQueryParameters("utm_campaign"));
+                            String cm = String.valueOf(deepLink. getQueryParameters("utm_medium"));
+                            String cs = String.valueOf(deepLink.getQueryParameters("utm_source"));
+                            if (cs != null && cn != null) {
+                                Bundle params = new Bundle();
+                                params.putString(FirebaseAnalytics.Param.CAMPAIGN, cn);
+                                params.putString(FirebaseAnalytics.Param.MEDIUM, cm);
+                                params.putString(FirebaseAnalytics.Param.SOURCE, cs);
+                                mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.CAMPAIGN_DETAILS, params);
+                                mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.APP_OPEN, params);
+                            }
+                        }else{
+                            Log.i(TAG, "dynamicdatanull: "+null);
+                            Intent intent = new Intent(SmsActivity.this, DashBoard_new.class);
+                            startActivity(intent);
+                            finish();
+                        }
+                        // Handle the deep link. For example, open the linked
+                        // content, or apply promotional credit to the user's
+                        // account.
+                        // ...
+                        // [START_EXCLUDE]
+                        // Display deep link in the UI
+                        if (deepLink != null) {
+                            Snackbar.make(findViewById(android.R.id.content),
+                                    "Found deep link!", Snackbar.LENGTH_LONG).show();
+                            Log.i(TAG, "onSuccessstring1: "+deepLink.toString());
+                            //linkReceiveTextView.setText(deepLink.toString());
+                        } else {
+                            Intent intent = new Intent(SmsActivity.this, DashBoard_new.class);
+                            startActivity(intent);
+                            finish();
+                            Log.d(TAG, "getDynamicLink: no link found");
+                        }
+                        // [END_EXCLUDE]
+                    }
+                })
+                .addOnFailureListener(this, new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w(TAG, "getDynamicLink:onFailure", e);
+                    }
+                });
+        // [END get_deep_link]
+    }
+
+    private void Referaldetails(String custid,String propid) {
+        JSONObject jsonObject =new JSONObject();
+        JSONObject J= null;
+        try {
+            J =new JSONObject();
+            J.put("b2b_id", custid);
+            J.put("referal_id", propid);
+            Log.i("TAG", "RequestREFERAL "+J.toString());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        String data  = String.valueOf(J);
+        Log.d("Request reffer:", data);
+        //  progressDialog.show();
+        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, Urls.REFERALCODE, J,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        //progressDialog.dismiss();
+                        String JO_data  = String.valueOf(response);
+                        Log.d("Request :", JO_data.toString());
+                        try {
+                          String statuscheck=response.getString("status");
+                            if(statuscheck.equalsIgnoreCase("success")){
+                                Intent intent = new Intent(SmsActivity.this, DashBoard_new.class);
+                                startActivity(intent);
+                                finish();
+                            }else{
+                                Intent intent = new Intent(SmsActivity.this, DashBoard_new.class);
+                                startActivity(intent);
+                                finish();
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                VolleyLog.d("TAG", "Error: " + error.getMessage());
+                Toast.makeText(getApplicationContext(),error.getMessage(),Toast.LENGTH_SHORT).show();
+                //  progressDialog.dismiss();
+            }
+        }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("content-type", "application/json");
+                return headers;
+            }
+        };
+        jsonObjReq.setRetryPolicy(new DefaultRetryPolicy(
+                0,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
     }
 
     private void Campain_Registration(String brb_userid) {

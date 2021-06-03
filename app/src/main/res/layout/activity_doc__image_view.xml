@@ -62,7 +62,6 @@
 
                 />
 
-
             <ProgressBar
                 android:id="@+id/progressBarMaterial"
                 style="@style/Widget.AppCompat.ProgressBar"

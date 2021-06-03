@@ -142,6 +142,9 @@ public class Params {
     public static String spec_id = "spec_id";
     public static String applicant_name = "applicant_name";
     public static String document = "document";
+    public static String app_crif_url_view = "app_crif_url_view";
+    public static String coapp_crif_url_view = "coapp_crif_url_view";
+    public static String viable_url_view = "viable_url_view";
     public static String report = "report";
     public static String hash = "hash";
     public static String pdf = "pdf";

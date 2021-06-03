@@ -156,7 +156,7 @@ public class PaymentActivity extends SimpleActivity implements CompoundButton.On
         proceed_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Validate();
+                Payment_schedule();
             }
         });
 
@@ -376,6 +376,61 @@ public class PaymentActivity extends SimpleActivity implements CompoundButton.On
                             if (Statues.contains("success")) {
 
                                 Applicant_Status();
+                            }else
+                            {
+
+                                // co_applicant_.setVisibility(View.VISIBLE);
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        // Toast.makeText(mCon, response.toString(),Toast.LENGTH_SHORT).show();
+                        progressDialog.dismiss();
+                    }
+                }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                VolleyLog.d("TAG", "Error: " + error.getMessage());
+                progressDialog.dismiss();
+            }
+        }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("Content-Type", "application/json");
+                return headers;
+            }
+        };
+        AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
+
+    }
+
+    private void Payment_schedule() {
+
+        JSONObject J =new JSONObject();
+        try {
+            J.put("user_id",Pref.getUSERID(getApplicationContext()));
+            J.put("app_cnt",Pref.getCoAPPAVAILABLE(getApplicationContext()));
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        progressDialog.show();
+        Log.e("Crif Generation", String.valueOf(J));
+        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, Urls.payment_schedule, J,
+                new Response.Listener<JSONObject>() {
+
+                    @Override
+                    public void onResponse(JSONObject object) {
+                        Log.e("Payment", String.valueOf(object));
+                        try {
+
+                            String Statues = object.getString("status");
+
+                            if (Statues.contains("success")) {
+
+                                Validate();
                             }else
                             {
 

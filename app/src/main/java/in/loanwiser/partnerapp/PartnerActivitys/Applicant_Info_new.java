@@ -63,6 +63,8 @@ public class Applicant_Info_new extends SimpleActivity {
     Typeface font;
     String CAT_ID, loan_cat_id,loan_type, employement_type;
     JSONArray Employement;
+    String loantype_id;
+    LinearLayout type_of_emploe,loan_amount_new;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,6 +73,7 @@ public class Applicant_Info_new extends SimpleActivity {
 
         Objs.a.setStubId(this, R.layout.activity_applicant_new);
         initTools(R.string.app_info);
+
         loan_type_newcat  = (AppCompatTextView)findViewById(R.id.loan_type_newcat) ;
         loan_type_new_val_type  = (AppCompatTextView)findViewById(R.id.loan_type_new_val_type) ;
         type_of_employee_new_val_type  = (AppCompatTextView)findViewById(R.id.type_of_employee_new_val_type) ;
@@ -81,6 +84,8 @@ public class Applicant_Info_new extends SimpleActivity {
         app_mobile1_co_applicant = (AppCompatTextView)findViewById(R.id.app_mobile1_co_applicant) ;
         type_of_employee_new_val_type_co_applica = (AppCompatTextView)findViewById(R.id.type_of_employee_new_val_type_co_applica);
         app_mobile1_new_txt_whats_app = (AppCompatTextView)findViewById(R.id.app_mobile1_new_txt_whats_app) ;
+        loan_amount_new = (LinearLayout) findViewById(R.id.loan_amount_new) ;
+        type_of_emploe=findViewById(R.id.type_of_emploe);
 
         applicant_response();
 
@@ -92,6 +97,7 @@ public class Applicant_Info_new extends SimpleActivity {
         try {
             J = new JSONObject();
             J.put("user_id",Pref.getUSERID(getApplicationContext()));
+            Log.i("TAG", "applicant_response: "+Pref.getUSERID(getApplicationContext()));
 
 
         } catch (JSONException e) {
@@ -112,7 +118,7 @@ public class Applicant_Info_new extends SimpleActivity {
                            // employement_type=applicant_info_object.getString("employement_type");
                             employement_type=applicant_info_object.getString("employment_typestr");
                            // type_of_employement( employement_type);
-                            type_of_employee_new_val_type.setText(employement_type);
+
                             String user_name=applicant_info_object.getString("username");
                             app_name1_pan_txt.setText(user_name);
                             String email=applicant_info_object.getString("email");
@@ -131,6 +137,12 @@ public class Applicant_Info_new extends SimpleActivity {
 
                             String amount=applicant_info_object2.getString("loan_amount");
                             Loan_amount_new_txt.setText(amount);
+                            if (loan_type.equals("33")){
+                                type_of_emploe.setVisibility(View.GONE);
+                                loan_amount_new.setVisibility(View.GONE);
+                            }else {
+                                type_of_employee_new_val_type.setText(employement_type);
+                            }
 
 
                         } catch (JSONException e) {

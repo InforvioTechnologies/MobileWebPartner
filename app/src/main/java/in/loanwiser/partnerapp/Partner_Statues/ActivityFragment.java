@@ -9,6 +9,7 @@ import android.graphics.Typeface;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.os.RemoteException;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -27,6 +28,9 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.android.installreferrer.api.InstallReferrerClient;
+import com.android.installreferrer.api.InstallReferrerStateListener;
+import com.android.installreferrer.api.ReferrerDetails;
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -61,6 +65,8 @@ import in.loanwiser.partnerapp.Step_Changes_Screen.Pay_Out_Screen;
 import in.loanwiser.partnerapp.User_Account.BankDetails;
 import in.loanwiser.partnerapp.User_Account.ProfileSettings;
 import in.loanwiser.partnerapp.User_Account.Welcome_Page;
+
+import static android.content.Context.MODE_PRIVATE;
 
 
 public class ActivityFragment extends Fragment implements NavigationView.OnNavigationItemSelectedListener, BaseSliderView.OnSliderClickListener, ViewPagerEx.OnPageChangeListener {
@@ -319,6 +325,7 @@ public class ActivityFragment extends Fragment implements NavigationView.OnNavig
     }
 
 
+
     private void Get_Allocation_List(View view) {
         JSONObject jsonObject =new JSONObject();
         JSONObject J= null;
@@ -364,7 +371,7 @@ public class ActivityFragment extends Fragment implements NavigationView.OnNavig
                                             JSONObject J = ja.getJSONObject(i);
                                             items.add(new Suggestion_item_freqent( J.getString("user_id"), J.getString("user_id"),J.getString("username"),
                                                     J.getString("loan_type"),J.getString("loan_amount"),J.getString("status_disp")
-                                            ));
+                                            ,J.getString("from_cobrand"),J.getString("cobrand_mobile"),J.getString("loan_typeid")));
                                             adapter.notifyDataSetChanged();
 
                                             view_all_ly1.setVisibility(View.VISIBLE);
@@ -503,6 +510,8 @@ public class ActivityFragment extends Fragment implements NavigationView.OnNavig
         AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
     }
 
+
+
     private void Health_Assement_List(View view) {
         final JSONObject jsonObject =new JSONObject();
         JSONObject J= null;
@@ -563,10 +572,11 @@ public class ActivityFragment extends Fragment implements NavigationView.OnNavig
 
                             if (ja2.length()>0){
                                 for(int i = 0;i<ja2.length();i++){
-
-                                    JSONObject J = ja2.getJSONObject(i);
-                                    items3.add(new post_item_freqent( J.getString("title"), J.getString("post_url"),J.getString("content")));
-                                    adapter3.notifyDataSetChanged();
+                                    if( i < 3) {
+                                        JSONObject J = ja2.getJSONObject(i);
+                                        items3.add(new post_item_freqent(J.getString("title"), J.getString("post_url"), J.getString("content"),J.getString("id")));
+                                        adapter3.notifyDataSetChanged();
+                                    }
 
                                 }
                                 recycler_view_share.setAdapter(adapter3);

@@ -70,6 +70,7 @@ import adhoc.app.applibrary.Config.AppUtils.Pref.Pref;
 import adhoc.app.applibrary.Config.AppUtils.Urls;
 import adhoc.app.applibrary.Config.AppUtils.VolleySignleton.AppController;
 import dmax.dialog.SpotsDialog;
+import in.loanwiser.partnerapp.PartnerActivitys.Home;
 import in.loanwiser.partnerapp.Partner_Statues.Health_Assement_Adapter;
 import in.loanwiser.partnerapp.Payment.PaymentActivity;
 import in.loanwiser.partnerapp.R;
@@ -115,11 +116,11 @@ public class BankAnalysis extends SimpleActivity {
     LineChart lineChart;
     RadioGroup hour_radio_group;
     AppCompatButton upload_requirebtn;
-    AppCompatButton proceed_button;
+    AppCompatButton proceed_button,proceed_button1;
 
     AVLoadingIndicatorView material_design_ball_scale_ripple_loader;
     LinearLayout grapiclay_parent,uploaded_monthtextlay,requiretxtlay,requirelay_detailslay,missingerror_lay,requiremonthbox_lay,
-            uploadrequirebutton_lay,proceednext_lay;
+            uploadrequirebutton_lay,proceednext_lay,eligible_available,proceednext_lay1;
 
     RelativeLayout uploadedmonth_lay;
 
@@ -180,6 +181,7 @@ public class BankAnalysis extends SimpleActivity {
 
         fromtodatetxt=findViewById(R.id.fromtodatetxt);
         proceed_button=findViewById(R.id.proceed_button);
+        proceed_button1=findViewById(R.id.proceed_button1);
         salatxt=findViewById(R.id.salatxt);
         abbtxt=findViewById(R.id.abbtxt);
         approtxt=findViewById(R.id.approtxt);
@@ -191,6 +193,7 @@ public class BankAnalysis extends SimpleActivity {
 
 
         uploaded_monthtextlay=findViewById(R.id.uploaded_monthtextlay);
+        eligible_available=findViewById(R.id.eligible_available);
         requiretxtlay=findViewById(R.id.requiretxtlay);
         uploadedmonth_lay=findViewById(R.id.uploadedmonth_lay);
         requirelay_detailslay=findViewById(R.id.requirelay_detailslay);
@@ -198,10 +201,11 @@ public class BankAnalysis extends SimpleActivity {
         requiremonthbox_lay=findViewById(R.id.requiremonthbox_lay);
         uploadrequirebutton_lay=findViewById(R.id.uploadrequirebutton_lay);
         proceednext_lay=findViewById(R.id.proceednext_lay);
+        proceednext_lay1=findViewById(R.id.proceednext_lay1);
         upload_requirebtn=findViewById(R.id.upload_requirebtn);
         material_design_ball_scale_ripple_loader=findViewById(R.id.material_design_ball_scale_ripple_loader);
 
-
+        Loan_submit_statues();
 
 
         upload_requirebtn.setOnClickListener(new View.OnClickListener() {
@@ -219,7 +223,18 @@ public class BankAnalysis extends SimpleActivity {
                /* Intent intent=new Intent(BankAnalysis.this, DocumentChecklist_Fragment.class);
                 startActivity(intent);
                 finish();*/
-                Eligibility_check_doc_checklist_generate();
+              // Eligibility_check_doc_checklist_generate();
+                Applicant_Status();
+            }
+        });
+
+        proceed_button1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(BankAnalysis.this, Home.class);
+                startActivity(intent);
+                finish();
+              //  Eligibility_check_doc_checklist_generate();
 
             }
         });
@@ -329,7 +344,162 @@ public class BankAnalysis extends SimpleActivity {
 
 
     }
-    protected void Eligibility_check_doc_checklist_generate() {
+    private void Loan_submit_statues() {
+        JSONObject J = null;
+        try {
+            J = new JSONObject();
+            J.put("transaction_id", Pref.getTRANSACTIONID(getApplicationContext()));
+            // J.put("transaction_id", 53277);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+      //  progressDialog.show();
+        Log.e("Request _statues ", String.valueOf(J));
+
+        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, Urls.bank_status_fetch, J,
+                new Response.Listener<JSONObject>() {
+
+                    @RequiresApi(api = Build.VERSION_CODES.M)
+                    @Override
+                    public void onResponse(JSONObject object) {
+                        Log.e("Loawiser_Submit", object.toString());
+
+
+                        try
+                        {
+                            JSONObject result=object.getJSONObject("result");
+
+
+                            String  submit_loanwiser = result.getString("submit_loanwiser");
+                            String doc_verification = result.getString("doc_verification");
+                            String apply_completion_status = result.getString("apply_completion_status");
+
+
+
+                            if(submit_loanwiser.equals("1"))
+                            {
+                                proceed_button.setVisibility(View.GONE);
+                                proceed_button1.setVisibility(View.VISIBLE);
+                                eligible_available.setVisibility(View.VISIBLE);
+
+                            }else
+                            {
+                                Bank_statues();
+                            }
+
+
+                        }
+
+                        catch (JSONException e)
+                        {
+                            e.printStackTrace();
+                        }
+
+                      //  progressDialog.dismiss();
+                    }
+                }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                VolleyLog.d("TAG", "Error: " + error.getMessage());
+                Toast.makeText(mCon, "Network error, try after some time",Toast.LENGTH_SHORT).show();
+                progressDialog.dismiss();
+            }
+        }) {
+
+            /**
+             * Passing some request headers
+             * */
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("Content-Type", "application/json");
+                return headers;
+            }
+        };
+
+        // Adding request to request queue
+        AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
+
+    }
+    public void Bank_statues() {
+
+        // final String step_status11 = step_status1;
+        JSONObject jsonObject = new JSONObject();
+        JSONObject J = null;
+        try {
+            J = new JSONObject();
+            J.put("transaction_id", Pref.getTRANSACTIONID(getApplicationContext()));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+       // progressDialog.show();
+        Log.e("Applicant Entry request", String.valueOf(J));
+
+        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, Urls.update_bankstatementstatus, J,
+                new Response.Listener<JSONObject>() {
+                    @SuppressLint("LongLogTag")
+                    @Override
+                    public void onResponse(JSONObject response) {
+
+                        Log.e("Applicant Entry", String.valueOf(response));
+                        JSONObject jsonObject1 = new JSONObject();
+
+                        try {
+
+                            JSONObject jsonObject2 = response.getJSONObject("response");
+                            String statues = response.getString("status");
+                            String eligible_status = jsonObject2.getString("eligible_status");
+
+
+                            if (statues.contains("success")) {
+                                // Applicant_Status();
+
+                                if(eligible_status.equals("0"))
+                                {
+
+                                    proceed_button.setVisibility(View.GONE);
+                                    proceed_button1.setVisibility(View.VISIBLE);
+                                    eligible_available.setVisibility(View.GONE);
+                                   // progressDialog.dismiss();
+                                    //   Toast.makeText(Upload_Activity_Bank.this, "Bank Statement Analysis Failed", Toast.LENGTH_SHORT).show();
+                                }else
+                                {
+                                    eligible_available.setVisibility(View.VISIBLE);
+                                    proceed_button.setVisibility(View.VISIBLE);
+                                    proceed_button1.setVisibility(View.GONE);
+                                }
+                               // progressDialog.dismiss();
+                                // finish();
+                            }
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                      //  progressDialog.dismiss();
+                    }
+                }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+              //  progressDialog.dismiss();
+                Log.e("Applicant Entry request", String.valueOf(error));
+                Toast.makeText(BankAnalysis.this, error.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("content-type", "application/json");
+                return headers;
+            }
+        };
+        AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
+    }
+
+   /* protected void Eligibility_check_doc_checklist_generate() {
 
         JSONObject J= null;
         try {
@@ -400,7 +570,7 @@ public class BankAnalysis extends SimpleActivity {
         jsonObjReq.setRetryPolicy(policy);
 
         AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
-    }
+    }*/
 
     protected void Applicant_Status(final String id) {
         tabel_row.removeAllViews();
@@ -773,7 +943,28 @@ public class BankAnalysis extends SimpleActivity {
                         try {
                             // String s=object.getString("display_select");
                             JSONObject bankarr=object.getJSONObject("bank_arr");
-                             rule_arr=object.getJSONObject("rule_arr");
+
+                           //  rule_arr=object.getJSONObject("rule_arr");
+
+                            if (object.has("rule_arr")) {
+
+                                JSONObject dataObject = object.optJSONObject("rule_arr");
+
+                                if (dataObject != null) {
+
+                                    rule_arr=object.getJSONObject("rule_arr");
+                                    //Do things with object.
+                                    Log.e("the works ",rule_arr.toString());
+
+                                } else {
+                                    rule_arr = null;
+                                    JSONArray array = object.optJSONArray("rule_arr");
+
+                                    //Do things with array
+                                }
+                            } else {
+                                // Do nothing or throw exception if "data" is a mandatory field
+                            }
                            // labelarr=bankarr.getJSONArray("label_arr");
                             JSONArray  label_arr=bankarr.getJSONArray("label_arr");
                             JSONArray  amount_arr=bankarr.getJSONArray("amount_arr");
@@ -820,6 +1011,8 @@ public class BankAnalysis extends SimpleActivity {
                             missing_yeartxt.setText("Please Upload Bank Statement For The Following Required Months -"+required_monthstr+" "+"in the above Bank Statement Upload Section.");
                             TextView fromtodatetxt,salatxt ,abbtxt, approtxt,expen_ratiotxt ,baltxt ,expradio;
 
+                            if(rule_arr != null)
+                            {
                             if(rule_arr.length()>0)
                             {
                                 for(int i = 0;i<rule_arr.length();i++) {
@@ -868,7 +1061,7 @@ public class BankAnalysis extends SimpleActivity {
                               //  progressDialog.dismiss();
                             }
 
-
+                            }
                             for (int i = 0; i < amount_arr.length(); i++) {
                                 // String value="12";
                                 float value3= Float.parseFloat(amount_arr.getString(i));

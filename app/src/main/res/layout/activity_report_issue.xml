@@ -87,6 +87,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="10dp"
                         android:hint="APP ID"
+                        android:id="@+id/notextinput"
                         app:boxCornerRadiusBottomEnd="5dp"
                         app:boxCornerRadiusBottomStart="5dp"
                         app:boxCornerRadiusTopEnd="5dp"

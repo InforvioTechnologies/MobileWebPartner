@@ -43,7 +43,9 @@ import in.loanwiser.partnerapp.Infinite_Scrollview.Lead_item;
 import in.loanwiser.partnerapp.Infinite_Scrollview.Notification_Adapter_Dashboard;
 import in.loanwiser.partnerapp.Infinite_Scrollview.Notification_item;
 import in.loanwiser.partnerapp.Infinite_Scrollview.OnLoadMoreListener;
+import in.loanwiser.partnerapp.PartnerActivitys.Applicant_Details_Activity;
 import in.loanwiser.partnerapp.PartnerActivitys.Home;
+import in.loanwiser.partnerapp.Partner_Statues.DashBoard_new;
 import in.loanwiser.partnerapp.R;
 import in.loanwiser.partnerapp.SimpleActivity;
 
@@ -333,6 +335,15 @@ public class Push_Notification_List extends SimpleActivity implements OnLoadMore
 
             }
         },1500);
+    }
+
+    @Override
+    public void onBackPressed() {
+
+        Objs.ac.StartActivity(mCon, DashBoard_new.class);
+        finish();
+        super.onBackPressed();
+
     }
 
 }

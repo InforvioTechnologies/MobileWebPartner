@@ -13,7 +13,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_margin="20dp"
             android:orientation="vertical">
 
@@ -39,38 +39,32 @@
 
             </LinearLayout>
             <LinearLayout
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="10dp"
                 android:id="@+id/payment_sucesslay"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal"
                 android:orientation="vertical"
-                android:layout_gravity="center_horizontal"
-                >
+                android:layout_gravity="center_horizontal">
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/bankstatement_message"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginLeft="5dp"
                     android:layout_marginRight="10dp"
-                    android:text="To Get an Relationship \n manager(RM) assigned to \n you, at-least submit \n one lead on the portal"
+                    android:text="@string/relationship1"
                     android:textAlignment="center"
-                    android:textColor="#032A57"
+                    android:textColor="@color/black"
                     android:textSize="18dp"
                     android:textStyle="bold" />
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginRight="10dp"
-                    android:text="Successfully"
-                    android:visibility="gone"
-                    android:textAlignment="center"
-                    android:textColor="#00CEB4"
-                    android:textSize="18dp"
-                    android:textStyle="bold" />
+
+                <View
+                    android:layout_width="fill_parent"
+                    android:layout_height="2dip"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/gray" />
+
 
             </LinearLayout>
 
@@ -99,39 +93,81 @@
 
 
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:layout_weight="1">
+                    android:layout_gravity="center_horizontal"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
 
-                    <androidx.appcompat.widget.AppCompatButton
-
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/test"
+                        android:layout_gravity="center_horizontal"
                         android:layout_marginLeft="5dp"
-                        android:layout_marginRight="5dp"
-                        android:id="@+id/submitbtn"
-                        android:layout_width="149dp"
-                        android:layout_height="41dp"
-                        android:background="@drawable/capsul_button4"
-                        android:text="ok"
-                        android:visibility="gone"
-                        android:textColor="@color/white"
-                        android:textStyle="bold"/>
-                    <androidx.appcompat.widget.AppCompatButton
-                       android:layout_marginLeft="5dp"
-                        android:layout_marginRight="5dp"
-                        android:id="@+id/submitbtn1"
-                        android:layout_width="149dp"
-                        android:layout_height="41dp"
-                        android:background="@drawable/capsul_button41"
-                        android:text="ok"
-                        android:visibility="visible"
-                        android:textColor="@color/white"
+                        android:layout_marginRight="10dp"
+                        android:text="@string/techissue"
+                        android:textAlignment="center"
+                        android:textColor="@color/black"
+                        android:textSize="18dp"
                         android:textStyle="bold"/>
 
                 </LinearLayout>
 
+
             </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:gravity="center_horizontal">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/imgphn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_phone_24"
+                    android:tint="#FFE5147D"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/phonenumber"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_toEndOf="@+id/imgphn"
+                    android:layout_toRightOf="@+id/imgphn"
+                    android:text="@string/yogesnum"
+                    android:textColor="#FFE5147D"
+                    android:textSize="18dp"
+                    android:textStyle="bold" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:gravity="center_horizontal"
+                android:layout_marginTop="15dp">
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/submitbtn1"
+                    android:layout_width="150dp"
+                    android:layout_height="45dp"
+                    android:background="@drawable/bluebut_back"
+                    android:gravity="center"
+                    android:text="Okay"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:textSize="18dp"
+                    android:textStyle="bold" />
+
+            </RelativeLayout>
+
+
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

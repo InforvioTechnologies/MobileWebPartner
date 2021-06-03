@@ -13,29 +13,35 @@ import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
+import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.appcompat.widget.AppCompatTextView;
 import androidx.cardview.widget.CardView;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.AuthFailureError;
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.androidquery.util.Constants;
 import com.bumptech.glide.Glide;
@@ -72,6 +78,7 @@ public class Post_share_Statues extends RecyclerView.Adapter<Post_share_Statues.
     private String lead_id;
     private AlertDialog progressDialog;
      String post_url;
+     int count =0;
     String Loan_amount,sub_categoryid,transaction_id1,subtask_id,loan_type_id,loan_type,
             payment,applicant_id1;
     private String tag_json_obj = "jobj_req", tag_json_arry = "jarray_req";
@@ -102,10 +109,20 @@ public class Post_share_Statues extends RecyclerView.Adapter<Post_share_Statues.
         String title  = items.get(position).gettitle();
        final String content  = items.get(position).getcontent();
         post_url  = items.get(position).getpost_url();
+
         progressDialog = new SpotsDialog(context, R.style.Custom);
 
+        count = count +1;
+        Log.e("item size", String.valueOf(items.size()));
+        Log.e("item count", String.valueOf(count));
 
 
+        String c = String.valueOf(count);
+        if(count ==3)
+        {
+            holder.item_2.setVisibility(View.GONE);
+            holder.item_3.setVisibility(View.VISIBLE);
+        }
 
             // do your stuff..
         holder.Title.setText(title);
@@ -116,7 +133,8 @@ public class Post_share_Statues extends RecyclerView.Adapter<Post_share_Statues.
         holder.share_image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                String post_id  = items.get(position).getid();
+                Postshare_update(post_id);
                 if (checkPermissionREAD_EXTERNAL_STORAGE(context)) {
                     Glide.with(context)
                             .load(items.get(position).getpost_url())
@@ -177,24 +195,41 @@ public class Post_share_Statues extends RecyclerView.Adapter<Post_share_Statues.
 
         });
 
-        holder.cardView.setOnClickListener(new View.OnClickListener() {
+        holder.item_2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                final String content  = items.get(position).getcontent();
                 String image_url = items.get(position).getpost_url();
+                String title  = items.get(position).gettitle();
                 Intent intent=new Intent(context,ShareActivity.class);
                 intent.putExtra("content",content);
                 intent.putExtra("imgurl",image_url);
+                intent.putExtra("title",title);
                 context.startActivity(intent);
 
             }
         });
+        holder.item_3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+              ShareFragment  mFragment = new ShareFragment();
+                Bundle  mBundle = new Bundle();
+                //mBundle.putParcelable("item_selected_key", mItemSelected);
+                mFragment.setArguments(mBundle);
+                switchContent(R.id.share, mFragment);
+
+            }
+        });
+
+
+
 
         holder.whats_app_share.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-
+                String post_id  = items.get(position).getid();
+                Postshare_update(post_id);
                 if (checkPermissionREAD_EXTERNAL_STORAGE(context)) {
                     Glide.with(context)
                             .load(items.get(position).getpost_url())
@@ -261,6 +296,17 @@ public class Post_share_Statues extends RecyclerView.Adapter<Post_share_Statues.
 
     }
 
+    public void switchContent(int id, Fragment fragment) {
+        if (context == null)
+            return;
+        if (context instanceof DashBoard_new) {
+            DashBoard_new mainActivity = (DashBoard_new) context;
+            Fragment frag = fragment;
+            mainActivity.switchContent(id, frag);
+        }
+
+    }
+
     private void getImageInfo(int sdk, String uriPath,String realPath){
 
         Uri uriFromPath = Uri.fromFile(new File(realPath));
@@ -285,12 +331,15 @@ public class Post_share_Statues extends RecyclerView.Adapter<Post_share_Statues.
         AppCompatTextView Title;
         ProgressBar progressBarMaterial_pdf;
         AppCompatImageView share_image,whats_app_share;
+        LinearLayout item_3,item_2;
 
         public CustomViewHolder(View view) {
             super(view);
 
             Title = view.findViewById(R.id.Title);
             image_Pdf = view.findViewById(R.id.image_Pdf);
+            item_3 = view.findViewById(R.id.item_3);
+            item_2 = view.findViewById(R.id.item_2);
             progressBarMaterial_pdf = (ProgressBar) itemView.findViewById(R.id.progressBarMaterial_pdf);
             share_image = (AppCompatImageView) itemView.findViewById(R.id.share_image);
             whats_app_share = (AppCompatImageView) itemView.findViewById(R.id.whats_app_share);
@@ -385,5 +434,77 @@ public class Post_share_Statues extends RecyclerView.Adapter<Post_share_Statues.
                         grantResults);
         }
     }
+
+    private void Postshare_update(String post_id) {
+        JSONObject jsonObject =new JSONObject();
+        JSONObject J= null;
+        try {
+            J =new JSONObject();
+
+            J.put("partner_id", Pref.getID(context));
+            J.put("post_id", post_id);
+            Log.i("TAG", "Request "+J.toString());
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        String data  = String.valueOf(J);
+        Log.d("Request :", data);
+        progressDialog.show();
+        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, Urls.websitelink_stracking, J,
+                new Response.Listener<JSONObject>() {
+                    @SuppressLint("NewApi")
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        progressDialog.dismiss();
+                        String JO_data  = String.valueOf(response);
+                        Log.d("v response :", JO_data.toString());
+                        try {
+                            String status=response.getString("status");
+                            if(status.equals("success"))
+                            {
+                               /* if(which.equals("whatsapp") )
+                                {
+                                    shareViaWhatsApp();
+                                }else
+                                {
+                                    Othernetwork();
+                                }*/
+
+
+                            }else
+                            {
+                                Toast.makeText(context,"error",Toast.LENGTH_SHORT).show();
+
+                            }
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                VolleyLog.d("TAG", "Error: " + error.getMessage());
+                Toast.makeText(context,error.getMessage(),Toast.LENGTH_SHORT).show();
+                progressDialog.dismiss();
+            }
+        }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("content-type", "application/json");
+                return headers;
+            }
+        };
+
+        jsonObjReq.setRetryPolicy(new DefaultRetryPolicy(
+                0,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
+    }
+
 
 }

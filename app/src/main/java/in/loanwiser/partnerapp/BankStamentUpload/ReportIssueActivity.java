@@ -26,9 +26,11 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -70,7 +72,9 @@ public class ReportIssueActivity extends SimpleActivity implements View.OnClickL
     String title_txts,desc_txts,appid;
     Context context = this;
     File orginalFile = null;
-
+  ///  RadioButton yes_radio,no_radio;
+    RadioGroup issueradio;
+    TextInputLayout notextinput;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,8 +84,14 @@ public class ReportIssueActivity extends SimpleActivity implements View.OnClickL
        initTools(R.string.report_issue);
 
         appidtxt=findViewById(R.id.appidtxt);
+
+        yes_radio=findViewById(R.id.yes_radio);
+        no_radio=findViewById(R.id.no_radio);
+        issueradio=findViewById(R.id.issueradio);
+
         titletxt=findViewById(R.id.titletxt);
         desc_txt=findViewById(R.id.desc_txt);
+        notextinput=findViewById(R.id.notextinput);
 
         uploadbutton=findViewById(R.id.uploadbutton);
         sendbtn=findViewById(R.id.sendbtn);
@@ -105,7 +115,22 @@ public class ReportIssueActivity extends SimpleActivity implements View.OnClickL
         desc_txts=desc_txt.getText().toString().trim();
         appid = appidtxt.getText().toString().trim();
 
-
+        issueradio.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                RadioButton rb=(RadioButton)findViewById(checkedId);
+                //  Toast.makeText(getApplicationContext(), rb.getText(), Toast.LENGTH_SHORT).show();
+                if (rb.getText().toString().equalsIgnoreCase("NO")){
+                    appidtxt.setVisibility(View.GONE);
+                    notextinput.setVisibility(View.GONE);
+                }else{
+                    notextinput.setVisibility(View.VISIBLE);
+                    appidtxt.setVisibility(View.VISIBLE);
+                }
+                // Log.i("TAG", "onCheckedChanged: "+rb.getText());
+                //  Log.i("TAG", "onCheckedChanged_id: "+idx);
+            }
+        });
 
     }
 

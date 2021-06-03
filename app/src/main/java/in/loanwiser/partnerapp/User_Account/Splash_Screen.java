@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.graphics.Color;
 import android.net.ConnectivityManager;
@@ -15,8 +16,12 @@ import android.os.Handler;
 import com.android.installreferrer.api.InstallReferrerClient;
 import com.android.installreferrer.api.InstallReferrerStateListener;
 import com.android.installreferrer.api.ReferrerDetails;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatTextView;
@@ -27,6 +32,7 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
@@ -36,12 +42,16 @@ import com.android.volley.RetryPolicy;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.google.firebase.analytics.FirebaseAnalytics;
+import com.google.firebase.dynamiclinks.FirebaseDynamicLinks;
+import com.google.firebase.dynamiclinks.PendingDynamicLinkData;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
@@ -52,7 +62,7 @@ import adhoc.app.applibrary.Config.AppUtils.Urls;
 import adhoc.app.applibrary.Config.AppUtils.VolleySignleton.AppController;
 import in.loanwiser.partnerapp.BuildConfig;
 import in.loanwiser.partnerapp.Partner_Statues.DashBoard_new;
-import in.loanwiser.partnerapp.Partner_Statues.Statues_Dashboard_Nav;
+import in.loanwiser.partnerapp.Push_Notification.Push_Notification_List;
 import in.loanwiser.partnerapp.R;
 
 public class Splash_Screen extends AppCompatActivity {
@@ -63,7 +73,7 @@ public class Splash_Screen extends AppCompatActivity {
     private String tag_json_obj = "jobj_req", tag_json_arry = "jarray_req";
     private String TAG = Splash_Screen.class.getSimpleName();
     private ProgressDialog pDialog;
-    public static String PACKAGE_NAME;
+    public static String PACKAGE_NAME,statuscheck;
     String version,VersionUpdate;
     int verCode;
     private ProgressBar spinner;
@@ -271,9 +281,34 @@ public class Splash_Screen extends AppCompatActivity {
                 }else {
                     // String mobile = Pref.getUID(mCon);
                   //  Objs.ac.StartActivity(mCon, DashBoard_new.class);
-                    Intent intent = new Intent(Splash_Screen.this,DashBoard_new.class);
-                    startActivity(intent);
-                    finish();
+                    Intent intent=new Intent();
+                    Intent fromIntent = getIntent();
+
+                    if (Splash_Screen.this.getIntent().getExtras() != null)
+                    {
+                     //  String notification_title =  Pref.getPush_Notification_Title(mCon);
+                     //  Log.e("the title",notification_title);
+                        if (getIntent().hasExtra("pushnotification")){
+                            Log.e("pushnotification","push");
+                            intent = new Intent(Splash_Screen.this, Push_Notification_List.class);
+                            startActivity(intent);
+                            finish();
+
+                        }else
+                        {
+                            intent = new Intent(Splash_Screen.this,DashBoard_new.class);
+                            startActivity(intent);
+                            finish();
+                        }
+                    }
+                  else
+                    {
+                        Log.e("the Splash call","Splash");
+                         intent = new Intent(Splash_Screen.this,DashBoard_new.class);
+                        startActivity(intent);
+                        finish();
+                    }
+
 
                 }
 
@@ -303,15 +338,16 @@ public class Splash_Screen extends AppCompatActivity {
                                 VersionUpdate = object.getString(Params.version_name);
                                 String VersionName = BuildConfig.VERSION_NAME;
                                 if (VersionUpdate.equals(VersionName)){
-                                    main_function();
+                                  //  main_function();
+                                    FirebaseReceive();
                                      //     Objs.a.showToast(mCon, "No Updated Avaliable");
                                 }else{
                                     AlertDialog.Builder builder = new AlertDialog.Builder(Splash_Screen.this);
-                                    builder.setTitle("Our App got Update");
+                                    builder.setTitle("Update Available");
                                     builder.setIcon(R.mipmap.ic_partner);
                                     builder.setCancelable(false);
-                                    builder.setMessage("New version available, select update to update our app")
-                                            .setPositiveButton("UPDATE", new DialogInterface.OnClickListener() {
+                                    builder.setMessage("We have updated the app with new features. Please update and continue.")
+                                            .setPositiveButton("Update", new DialogInterface.OnClickListener() {
                                                 @Override
                                                 public void onClick(DialogInterface dialog, int which) {
                                                     final String appName = getPackageName();
@@ -319,7 +355,7 @@ public class Splash_Screen extends AppCompatActivity {
                                                     try {
                                                         startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + appName)));
                                                     } catch (android.content.ActivityNotFoundException anfe) {
-                                                        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://play.google.com/store/apps/details?id=" + appName)));
+                                                        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=" + appName)));
                                                     }
                                                     finish();
                                                 }
@@ -362,5 +398,136 @@ public class Splash_Screen extends AppCompatActivity {
 
         AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
 
+    }
+
+    private void FirebaseReceive() {
+        // [START get_deep_link]
+        FirebaseAnalytics mFirebaseAnalytics;
+        mFirebaseAnalytics=FirebaseAnalytics.getInstance(this);
+        FirebaseDynamicLinks.getInstance()
+                .getDynamicLink(getIntent())
+                .addOnSuccessListener(this, new OnSuccessListener<PendingDynamicLinkData>() {
+                    @Override
+                    public void onSuccess(PendingDynamicLinkData pendingDynamicLinkData) {
+                        // Get deep link from result (may be null if no link is found)
+                        Uri deepLink = null;
+                        Log.i(TAG, "pendingdynamicdata: "+pendingDynamicLinkData);
+                   /* deepLink=pendingDynamicLinkData.getLink();
+                    Log.i(TAG, "onSuccess:deep"+deepLink)*/;
+                        if (pendingDynamicLinkData != null) {
+                            deepLink = pendingDynamicLinkData.getLink();
+                            Log.i(TAG, "onSuccessuri: "+deepLink);
+                            Log.i(TAG, "onSuccessstring: "+deepLink.toString());
+                            String referlink=deepLink.toString();
+                            try{
+                                referlink=referlink.substring(referlink.lastIndexOf("=")+1);
+                                String custid=referlink.substring(0,referlink.indexOf("-"));
+                                String propid=referlink.substring(referlink.indexOf("-")+1);
+                               // Referaldetails(custid,propid);
+
+                                SharedPreferences preferences = getSharedPreferences("AUTHENTICATION_FILE_NAME", Context.MODE_PRIVATE);
+                                SharedPreferences.Editor editor = preferences.edit();
+                                editor.putString("customerid",custid);
+                                editor.putString("propid",propid);
+// editor.putString("Authentication_Status","true");
+                                editor.apply();
+                                Log.e(TAG, "custid: "+custid+"----propid"+propid);
+                            }catch (Exception e){
+                            }
+                            Log.w("deepLink", "" + deepLink);
+                            Log.e(TAG, "deepLink: " +deepLink);
+                            String cn=String.valueOf(deepLink.getQueryParameters("utm_campaign"));
+                            String cm = String.valueOf(deepLink. getQueryParameters("utm_medium"));
+                            String cs = String.valueOf(deepLink.getQueryParameters("utm_source"));
+                            if (cs != null && cn != null) {
+                                Bundle params = new Bundle();
+                                params.putString(FirebaseAnalytics.Param.CAMPAIGN, cn);
+                                params.putString(FirebaseAnalytics.Param.MEDIUM, cm);
+                                params.putString(FirebaseAnalytics.Param.SOURCE, cs);
+                                mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.CAMPAIGN_DETAILS, params);
+                                mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.APP_OPEN, params);
+                            }
+                        }else{
+                            Log.i(TAG, "dynamicdatanull: "+null);
+                            main_function();
+                        }
+                        // Handle the deep link. For example, open the linked
+                        // content, or apply promotional credit to the user's
+                        // account.
+                        // ...
+                        // [START_EXCLUDE]
+                        // Display deep link in the UI
+                        if (deepLink != null) {
+                            main_function();
+                            Log.i(TAG, "onSuccessstring1: "+deepLink.toString());
+                            //linkReceiveTextView.setText(deepLink.toString());
+                        } else {
+                            main_function();
+                            Log.d(TAG, "getDynamicLink: no link found");
+                        }
+                        // [END_EXCLUDE]
+                    }
+                })
+                .addOnFailureListener(this, new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w(TAG, "getDynamicLink:onFailure", e);
+                    }
+                });
+        // [END get_deep_link]
+    }
+
+    private void Referaldetails(String custid,String propid) {
+        JSONObject jsonObject =new JSONObject();
+        JSONObject J= null;
+        try {
+            J =new JSONObject();
+            J.put("b2b_id", custid);
+            J.put("referal_id", propid);
+            Log.i("TAG", "RequestREFERAL "+J.toString());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        String data  = String.valueOf(J);
+        Log.d("Request :", data);
+        //  progressDialog.show();
+        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, Urls.REFERALCODE, J,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        //progressDialog.dismiss();
+                        String JO_data  = String.valueOf(response);
+                        Log.d("Request :", JO_data.toString());
+                        try {
+                            statuscheck=response.getString("status");
+                            if(statuscheck.equalsIgnoreCase("success")){
+                                main_function();
+                            }else{
+                                main_function();
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                VolleyLog.d("TAG", "Error: " + error.getMessage());
+                Toast.makeText(getApplicationContext(),error.getMessage(),Toast.LENGTH_SHORT).show();
+                //  progressDialog.dismiss();
+            }
+        }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("content-type", "application/json");
+                return headers;
+            }
+        };
+        jsonObjReq.setRetryPolicy(new DefaultRetryPolicy(
+                0,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
     }
 }

@@ -21,6 +21,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Build;
@@ -92,6 +93,7 @@ import eu.inmite.android.lib.validations.form.iface.IFieldAdapter;
 import in.loanwiser.partnerapp.BankStamentUpload.modelglib.GlibResponse;
 import in.loanwiser.partnerapp.Documents.SingleUploadBroadcastReceiver;
 import in.loanwiser.partnerapp.PartnerActivitys.Dashboard_Activity;
+import in.loanwiser.partnerapp.PartnerActivitys.ExpandableListAdapter1;
 import in.loanwiser.partnerapp.PartnerActivitys.Home;
 import in.loanwiser.partnerapp.PartnerActivitys.SimpleActivity;
 import in.loanwiser.partnerapp.Partner_Statues.DashBoard_new;
@@ -269,7 +271,7 @@ public class Upload_Activity_Bank extends SimpleActivity implements  View.OnClic
         listview.setAdapter(fileAdapter);
 
 
-
+        Loan_submit_statues();
 
         BankverticalList();
       //  BankItemhorizontallist();
@@ -706,7 +708,85 @@ public class Upload_Activity_Bank extends SimpleActivity implements  View.OnClic
 
     }
 
+    private void Loan_submit_statues() {
+        JSONObject J = null;
+        try {
+            J = new JSONObject();
+            J.put("transaction_id", Pref.getTRANSACTIONID(getApplicationContext()));
+            // J.put("transaction_id", 53277);
 
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        progressDialog.show();
+        Log.e("Request _statues ", String.valueOf(J));
+
+        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, Urls.bank_status_fetch, J,
+                new Response.Listener<JSONObject>() {
+
+                    @RequiresApi(api = Build.VERSION_CODES.M)
+                    @Override
+                    public void onResponse(JSONObject object) {
+                        Log.e("Loawiser_Submit", object.toString());
+
+
+                        try
+                        {
+                            JSONObject result=object.getJSONObject("result");
+
+
+                            String  submit_loanwiser = result.getString("submit_loanwiser");
+                            String doc_verification = result.getString("doc_verification");
+                            String apply_completion_status = result.getString("apply_completion_status");
+
+
+
+                            if(submit_loanwiser.equals("1"))
+                            {
+
+                                upload.setVisibility(View.GONE);
+                                submit.setVisibility(View.GONE);
+                            }else
+                            {
+                                upload.setVisibility(View.VISIBLE);
+                                submit.setVisibility(View.VISIBLE);
+                            }
+
+
+                        }
+
+                        catch (JSONException e)
+                        {
+                            e.printStackTrace();
+                        }
+
+                        progressDialog.dismiss();
+                    }
+                }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                VolleyLog.d("TAG", "Error: " + error.getMessage());
+                Toast.makeText(mCon, "Network error, try after some time",Toast.LENGTH_SHORT).show();
+                progressDialog.dismiss();
+            }
+        }) {
+
+            /**
+             * Passing some request headers
+             * */
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("Content-Type", "application/json");
+                return headers;
+            }
+        };
+
+        // Adding request to request queue
+        AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
+
+    }
     public void Bank_statues() {
 
         // final String step_status11 = step_status1;
@@ -734,14 +814,25 @@ public class Upload_Activity_Bank extends SimpleActivity implements  View.OnClic
                         try {
 
                             JSONObject jsonObject2 = response.getJSONObject("response");
-                            String statues = jsonObject2.getString("status");
+                            String statues = response.getString("status");
+                            String eligible_status = jsonObject2.getString("eligible_status");
+
 
                             if (statues.contains("success")) {
                                // Applicant_Status();
-                                Intent intent = new Intent(Upload_Activity_Bank.this, BankAnalysis.class);
-                                //  Intent in=new Intent(context,BankAnalysis.class);
-                                intent.putExtra("adapter","upload");
-                                startActivity(intent);
+
+                                if(eligible_status.equals("0"))
+                                {
+                                    Bank_analysis_ErrorStatus();
+                                 //   Toast.makeText(Upload_Activity_Bank.this, "Bank Statement Analysis Failed", Toast.LENGTH_SHORT).show();
+                                }else
+                                {
+                                    Intent intent = new Intent(Upload_Activity_Bank.this, BankAnalysis.class);
+                                    //  Intent in=new Intent(context,BankAnalysis.class);
+                                    intent.putExtra("adapter","upload");
+                                    startActivity(intent);
+                                }
+
                                // finish();
                             }
 
@@ -884,6 +975,7 @@ public class Upload_Activity_Bank extends SimpleActivity implements  View.OnClic
             @Override
             public void onClick(View v) {
                 dialog.dismiss();
+
                 Bank_statues();
 
             }
@@ -957,9 +1049,9 @@ public class Upload_Activity_Bank extends SimpleActivity implements  View.OnClic
                             Log.i(TAG, "onResponse: "+s);
                             ja = object.getJSONArray("bank_statementarr");
                             ja1 = object.getJSONArray("ban_statementlist");
-                            Log.i(TAG, "onResponse:Value "+ja);
-                            Log.i(TAG, "onResponse: Array"+ja.length());
+
                             if (ja.length()==0 && ja!=null){
+
                                 recycleview_lay.setVisibility(View.GONE);
                                 submitbanktxt_lay.setVisibility(View.GONE);
                                 sub_banktextlay.setVisibility(View.GONE);
@@ -967,6 +1059,7 @@ public class Upload_Activity_Bank extends SimpleActivity implements  View.OnClic
 
                             }
                             for(int i = 0;i<ja.length();i++){
+
                                 recycleview_lay.setVisibility(View.VISIBLE);
                                 submitbanktxt_lay.setVisibility(View.VISIBLE);
                                 JSONObject J = ja.getJSONObject(i);
@@ -975,6 +1068,7 @@ public class Upload_Activity_Bank extends SimpleActivity implements  View.OnClic
                                 items.add(new Bankitems(J.getString("name"),J.getString("url")));
                                 statementlist.notifyDataSetChanged();
                                 bankstatement_recycleview.setAdapter(statementlist);
+
                             }
                             Log.i(TAG, "onResponse: ja 1length"+ja1.length());
                             RadioButton button = new RadioButton(Upload_Activity_Bank.this);
@@ -1447,6 +1541,36 @@ public class Upload_Activity_Bank extends SimpleActivity implements  View.OnClic
         }
 
     }
+    private void Bank_analysis_ErrorStatus() {
+        final Dialog dialog = new Dialog(this);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+        dialog.setContentView(R.layout.bank_statement_analysis_error);
+        //  dialog.getWindow().setLayout(display.getWidth() * 90 / 100, LinearLayout.LayoutParams.WRAP_CONTENT);
+        dialog.setCancelable(true);
+        dialog.setCanceledOnTouchOutside(false);
+        AppCompatTextView bankstatement_message=(AppCompatTextView) dialog.findViewById(R.id.bankstatement_message);
+        Button cancelbtn = (Button) dialog.findViewById(R.id.cancelbtn);
+        Button submitbtn = (Button) dialog.findViewById(R.id.submitbtn);
+
+        submitbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+
+                Intent intent = new Intent(Upload_Activity_Bank.this,Home.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+
+
+
+        if (!dialog.isShowing()) {
+            dialog.show();
+        }
+
+    }
 
     private void pdf_error() {
         final Dialog dialog = new Dialog(this);
@@ -1605,7 +1729,7 @@ public class Upload_Activity_Bank extends SimpleActivity implements  View.OnClic
                             }else if (status==5){
                                 progressDialog.dismiss();
                                 Toast.makeText(Upload_Activity_Bank.this,"Success",Toast.LENGTH_SHORT).show();
-                                Bank_statues();
+                                Submit_upload_sucess();
                         /*    Intent intent=new Intent(Upload_Activity_Bank.this,BankAnalysis.class);
                             intent.putExtra("fromglib","fromglib");
                             intent.putExtra("glibentityid",entity);
@@ -1651,10 +1775,10 @@ public class Upload_Activity_Bank extends SimpleActivity implements  View.OnClic
     public void onBackPressed() {
         pickiT.deleteTemporaryFile(this);
 
-        Intent intent = new Intent(mCon, DashBoard_new.class);
+      /*  Intent intent = new Intent(mCon, DashBoard_new.class);
         startActivity(intent);
         // Objs.ac.StartActivity(mCon, LeadeFragment.class);
-        finish();
+        finish();*/
         super.onBackPressed();
 
     }

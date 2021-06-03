@@ -5,6 +5,7 @@ public class post_item_freqent {
     private String title;
     private String post_url;
     private String content;
+    private String id;
 
     public String gettitle() {
         return title;
@@ -30,11 +31,20 @@ public class post_item_freqent {
         this.content = content;
     }
 
-    public post_item_freqent(String title, String post_url,String content) {
+    public String getid() {
+        return id;
+    }
+
+    public void setid(String id) {
+        this.id = id;
+    }
+
+    public post_item_freqent(String title, String post_url,String content, String id) {
 
         this.title = title;
         this.post_url = post_url;
         this.content = content;
+        this.id = id;
 
     }
 

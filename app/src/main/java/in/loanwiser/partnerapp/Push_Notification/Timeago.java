@@ -44,8 +44,10 @@ public class Timeago {
                 } else {
                     convTime = (day / 7) + " Week " + suffix;
                 }
-            } else if (day < 7) {
+            } else if (day < 7 && day >1) {
                 convTime = day+" Days "+suffix;
+            }if (day < 7 && day == 1) {
+                convTime = day+" Day "+suffix;
             }
 
         } catch (ParseException e) {

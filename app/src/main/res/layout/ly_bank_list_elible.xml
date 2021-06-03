@@ -67,12 +67,14 @@
                                     android:layout_height="wrap_content"
                                     >
                                     <ImageView
-
-                                        android:layout_gravity="center"
+                                        android:padding="5dp"
+                                        android:layout_gravity="center_horizontal"
+                                        android:adjustViewBounds="true"
+                                        android:scaleType="centerInside"
                                         android:id="@+id/uploaded_yes"
                                         android:gravity="center"
                                         android:layout_width="358px"
-                                        android:layout_height="100px" />
+                                        android:layout_height="150px" />
                                 </androidx.cardview.widget.CardView>
 
                                 <ProgressBar

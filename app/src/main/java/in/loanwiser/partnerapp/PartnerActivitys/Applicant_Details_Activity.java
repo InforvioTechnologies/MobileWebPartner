@@ -31,7 +31,8 @@ public class Applicant_Details_Activity extends SimpleActivity {
     Toolbar toolbar1;
     DrawerLayout drawerLayout;
     View drawerView;
-    private CardView homeloan,loanaganstpropert,personal_loan,Businessloan,vehicle_loan;
+    private CardView homeloan,loanaganstpropert,personal_loan,Businessloan,vehicle_loan,
+            creditcard;
     private FloatingActionButton float_chat;
 
     private String tag_json_obj = "jobj_req", tag_json_arry = "jarray_req";
@@ -61,7 +62,8 @@ public class Applicant_Details_Activity extends SimpleActivity {
         personal_loan = findViewById(R.id.PL);
         Businessloan = findViewById(R.id.Bl);
         vehicle_loan = findViewById(R.id.vl);
-
+        //vehicle_loan = findViewById(R.id.vl);
+        creditcard = findViewById(R.id.creditcard);
 
         homeloan.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -180,17 +182,32 @@ public class Applicant_Details_Activity extends SimpleActivity {
             @Override
             public void onClick(View v) {
 
-                Toast.makeText(mCon,"Vehicle Loan Under Process",Toast.LENGTH_SHORT).show();
+               // Toast.makeText(mCon,"Vehicle Loan Under Process",Toast.LENGTH_SHORT).show();
 
-                /*String Loancat_name = "Vehicle Loan";
-                Pref.putLoanCat_Name(mCon,Loancat_name);
-                String Loantype = "3";
-                String sub_categoryid = "5";
-                Pref.putLoanType(mCon,Loantype);
+                String sub_categoryid = "3";
+                String Loantype_name = "vehicleloan";
+                Pref.putLoanTypename(mCon,Loantype_name);
                 Pref.putLoanTypeSub(mCon,sub_categoryid);
-                Intent intent = new Intent(Applicant_Details_Activity.this, MainActivity_Vehicle_Add_Lead1.class);
-                startActivity(intent);*/
-                //finish();
+                String Loantype = "3";
+                Pref.putLoanType(mCon,Loantype);
+                Intent intent = new Intent(Applicant_Details_Activity.this, Step_Completion_Screen.class);
+                startActivity(intent);
+            }
+        });
+
+        creditcard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                String sub_categoryid = "4";
+                String Loantype_name = "creditcard";
+                Pref.putLoanTypename(mCon,Loantype_name);
+                Pref.putLoanTypeSub(mCon,sub_categoryid);
+                String Loantype = "4";
+                Pref.putLoanType(mCon,Loantype);
+                Intent intent = new Intent(Applicant_Details_Activity.this, Step_Completion_Screen.class);
+                startActivity(intent);
+
             }
         });
 

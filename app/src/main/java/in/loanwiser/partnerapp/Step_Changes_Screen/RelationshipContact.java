@@ -142,7 +142,7 @@ public class RelationshipContact extends SimpleActivity {
                                // ErrorStatus();
                             }else if(response.equals("no_lead")){
                               //  Toast.makeText(getApplicationContext(),"no lead found",Toast.LENGTH_SHORT).show();
-                                ErrorStatus();
+                                ErrorStatus1();
                                 rm_not_available.setVisibility(View.VISIBLE);
                                 rm_available.setVisibility(View.GONE);
 
@@ -206,7 +206,7 @@ public class RelationshipContact extends SimpleActivity {
             @Override
             public void onClick(View v) {
                 Intent callIntent = new Intent(Intent.ACTION_DIAL);
-                String mobileno="8447909227";
+                String mobileno="8999023498";
                 callIntent.setData(Uri.parse("tel:" +mobileno));
                 try {
                     startActivity(callIntent);
@@ -219,7 +219,61 @@ public class RelationshipContact extends SimpleActivity {
             @Override
             public void onClick(View v) {
                 Intent callIntent = new Intent(Intent.ACTION_DIAL);
-                String mobileno="8447909227";
+                String mobileno="8999023498";
+                callIntent.setData(Uri.parse("tel:" +mobileno));
+                try {
+                    startActivity(callIntent);
+                } catch (android.content.ActivityNotFoundException ex) {
+                    Toast.makeText(RelationshipContact.this, "Could not find an activity to place the call.", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+        submitbtn1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+                Intent intent = new Intent(RelationshipContact.this,HelpSupportActivity.class);
+                startActivity(intent);
+                finish();
+
+            }
+        });
+        if (!dialog.isShowing()) {
+            dialog.show();
+        }
+    }
+    private void ErrorStatus1() {
+        final Dialog dialog = new Dialog(this);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+        dialog.setContentView(R.layout.rm_popup1);
+        //  dialog.getWindow().setLayout(display.getWidth() * 90 / 100, LinearLayout.LayoutParams.WRAP_CONTENT);
+        dialog.setCancelable(true);
+        dialog.setCanceledOnTouchOutside(false);
+        AppCompatTextView bankstatement_message=(AppCompatTextView) dialog.findViewById(R.id.bankstatement_message);
+        Button submitbtn = (Button) dialog.findViewById(R.id.submitbtn);
+        Button submitbtn1 = (Button) dialog.findViewById(R.id.submitbtn1);
+        AppCompatTextView phonenum=(AppCompatTextView)dialog.findViewById(R.id.phonenumber);
+        AppCompatImageView imageView=(AppCompatImageView)dialog.findViewById(R.id.imgphn);
+        //submitbtn.setVisibility(View.GONE);
+        phonenum.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent callIntent = new Intent(Intent.ACTION_DIAL);
+                String mobileno="8999023498";
+                callIntent.setData(Uri.parse("tel:" +mobileno));
+                try {
+                    startActivity(callIntent);
+                } catch (android.content.ActivityNotFoundException ex) {
+                    Toast.makeText(RelationshipContact.this, "Could not find an activity to place the call.", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent callIntent = new Intent(Intent.ACTION_DIAL);
+                String mobileno="8999023498";
                 callIntent.setData(Uri.parse("tel:" +mobileno));
                 try {
                     startActivity(callIntent);

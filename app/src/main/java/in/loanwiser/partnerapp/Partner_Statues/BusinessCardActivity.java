@@ -6,6 +6,7 @@ import androidx.appcompat.widget.AppCompatImageView;
 import androidx.appcompat.widget.AppCompatTextView;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.Manifest;
 import android.app.Activity;
@@ -16,13 +17,18 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.Matrix;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
@@ -44,6 +50,7 @@ import org.json.JSONObject;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.NoSuchElementException;
 
 import adhoc.app.applibrary.Config.AppUtils.Objs;
 import adhoc.app.applibrary.Config.AppUtils.Urls;
@@ -52,7 +59,7 @@ import dmax.dialog.SpotsDialog;
 import in.loanwiser.partnerapp.R;
 import in.loanwiser.partnerapp.SimpleActivity;
 
-public class BusinessCardActivity extends SimpleActivity {
+public class BusinessCardActivity extends SimpleActivity implements SwipeRefreshLayout.OnRefreshListener {
 
     AppCompatButton whatsappbutton,othernetworkbutton;
     AppCompatTextView editbtn;
@@ -66,17 +73,20 @@ public class BusinessCardActivity extends SimpleActivity {
     String email,mobilenumber,contactperson,location,url,visitincard_url;
     ProgressBar progressBarMaterial_pdf;
 
-
-
-
+    private SwipeRefreshLayout mSwipeRefreshLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+
         //setContentView(R.layout.activity_business_card);
         setContentView(R.layout.activity_simple);
         Objs.a.setStubId(this,R.layout.activity_business_card);
         initTools(R.string.businesscard);
+
+
+        mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swife);
+        mSwipeRefreshLayout.setOnRefreshListener(BusinessCardActivity.this);
+        super.onCreate(savedInstanceState);
         whatsappbutton=findViewById(R.id.whatsappbutton);
         othernetworkbutton=findViewById(R.id.othernetworkbutton);
         progressDialog = new SpotsDialog(this, R.style.Custom);
@@ -95,6 +105,8 @@ public class BusinessCardActivity extends SimpleActivity {
                 startActivity(intent);
             }
         });
+
+
 
         Businesscarddetails();
 
@@ -348,5 +360,19 @@ public class BusinessCardActivity extends SimpleActivity {
                 DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
                 DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
+    }
+
+
+
+    @Override
+    public void onRefresh() {
+       // Toast.makeText(this, "Refresh", Toast.LENGTH_SHORT).show();
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                Businesscarddetails();
+                mSwipeRefreshLayout.setRefreshing(false);
+            }
+        }, 2000);
     }
 }

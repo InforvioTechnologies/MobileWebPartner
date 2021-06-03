@@ -3,7 +3,10 @@
     <string name="welcome">Welcome to </string>
     <string name="login">Login</string>
     <string name="registr">Register</string>
-
+    <string name="share">Share</string>
+    <string name="title_receive">Receive</string>
+    <string name="title_send">Send</string>
+    <string name="msg_no_deep_link">No deep link received.</string>
     <string name="dashboards">Lead Dashboard</string>
     <string name="lead_details">Lead Detail Dashboard</string>
     <string name="cinterview">Customer Interview</string>
@@ -12,11 +15,18 @@
     <string name="next">Next</string>
     <string name="via_">Save and </string>
     <string name="Download">Download</string>
-
+    <string name="bank_analay_txt">Without the required Documents, this  lead cannot be processed further.</string>
     <string name="lead_creation">Lead Creation</string>
-    <string name="bank_statment">Bank Statment Upload</string>
+    <string name="bank_statment">Bank Statement Upload</string>
     <string name="payment">Payment</string>
-
+    <string name="referfriend">Refer <b>Loanwiser App</b> to your friends and Earn referral income of 50 Credit Coins</string>
+    <string name="referfriend12">* Credit coins can be used in fetching Credit Reports and in running Bank Statement Analysis for your Leads.</string>
+    <string name="referfriend1">Refer <b> Loanwiser partner App </b>to Your Friends in loan services business and Earn referral bonus
+                        as follows.  \n  \u2022 50 credit coins when your friend installs the app \n  \u2022 150 credit coins when your friend submits a lead to Loanwiser
+                        (Step 3 Completed lead)"</string>
+    <string name="refereran"><![CDATA[Refer & earn]]></string>
+    <string name="refereran1"><![CDATA[Share & Earn]]></string>
+    <string name="dynamic_links_uri_prefix">https://loanwiser.page.link/iGuj</string>
     <string name="name">Name</string>
     <string name="DFD">Disbursed From Date</string>
     <string name="DTD">Disbursed To Date</string>
@@ -98,7 +108,7 @@
     <string name="branch">Bank Branch</string>
     <string name="pay_mode">Mode of Payment through</string>
     <string name="proceed">Proceed</string>
-
+    <string name="notestr">Note*-Please submit to Loanwiser by clicking on the button if you want to process for below Banks.</string>
     <string name="pay_out_details">Payout Details</string>
     <string name="ifsc">IFSC code</string>
     <string name="internet">Internet</string>
@@ -115,9 +125,9 @@
     <string name="doc_upload1">Document Upload</string>
     <string name="bank_statement_anlysis_report">Bank Statement Analysis Report Generation</string>
 
-    <string name="bank_analysis_met">Congrats.! You have successfully \n met
+    <!--  <string name="bank_analysis_met">Congrats.! You have successfully \n met
         the document requirement for \n at least one of the eligible banks. \n\n\n To make this applicant
-        eligible for \n multiple banks, try submitting \n documents for other eligible banks, \n if any.</string>
+        eligible for \n multiple banks, try submitting \n documents for other eligible banks, \n if any.</string>-->
 
     <string name="bank_analysis_not_met">Sorry, you have not met the document \n requirement of
         any of the eligible \n banks. Please try to provide
@@ -318,6 +328,7 @@
     <string name="gst_reflect">Is ITR Reflected</string>
 
     <string name="add_leads">Add Leads</string>
+    <string name="my_webinar">Start health insurance- Family \n health Opticma</string>
     <string name="leads">List of Leads</string>
     <string name="my_earings">My Earnings</string>
     //Business Loan
@@ -796,6 +807,7 @@
 
 
     <string name="proced_next">PROCEED TO NEXT STEP</string>
+    <string name="proced_next1">GO TO HOME</string>
     <string name="submit_loanwiser">SUBMIT TO LOANWISER</string>
 
     <string name="my_leads">MY LEADS</string>
@@ -803,6 +815,7 @@
 
 
     <string name="act_detail">Activity Details</string>
+    <string name="act_detail1">Activity </string>
     <string name="cusname">Customer Name -</string>
     <string name="no_activity_stream">No Activity List Found !!!</string>
     <string name="cusmobile">Customer Mobile -</string>
@@ -867,6 +880,10 @@
 
     <string name="text_with_bullet">\u2022</string>
 
+    <string name="bank_analysis_met">Congrats.! You have successfully \n met
+    the document requirement for \n at least one of the eligible banks.</string>
+    <string name="bank_analysis_mets">To make this applicant
+    eligible for multiple banks, try submitting documents for other eligible banks,if any.</string>
 
     //my earnings
     <string name="total_earnings">Total Earnings</string>
@@ -1016,10 +1033,13 @@
 
 
     <string name="leadpass">Your Lead has Successfully Passed the Viability Check</string>
+    <string name="leadfail">Sorry Your Lead Has Failed the viability check</string>
     <string name="crifscore">Applicant <b>CRIF Score</b> </string>
     <string name="viewreport">Viablity Report</string>
     <string name="notevialblepass">You can also download the Viability Report from Lead Detail Dashboard.</string>
+    <string name="note_reson">Reason: Days Past Due (DPD) - Greater than 30 \n days in last 1 year. CRIF Score must be greater \n than 550.</string>
     <string name="proceednext">PROCEED TO NEXT STEP</string>
+    <string name="go_back">Go Back to Dashboard</string>
     <string name="crifscore1">Co Applicant <b>CRIF Score</b> </string>
 
     <string name="congrats">Congrats.! Your Lead is Successfully Submitted to Loanwiser</string>
@@ -1119,7 +1139,12 @@
     <string name="businesscard">Business Card</string>
 
     <string name="relationship">To Get a Relationship Manager(RM) appointed,you need to at-least submit one lead to Loanwiser</string>
+    <string name="relationship1">Relationship Manager(RM) is Not appointed, please wait</string>
     <string name="techissue">While facing any Technical difficulties give a call on</string>
-    <string name="yogesnum"><u>8447909227</u></string>
+    <string name="yogesnum"><u>8999023498</u></string>
+
+    <string name="whatsinclude">What\'s included in this price</string>
+
+    <string name="check"><b>50 Credit Coins</b> will be credited in LoanWiser Wallet on successful lead submission.</string>
 
 </resources>

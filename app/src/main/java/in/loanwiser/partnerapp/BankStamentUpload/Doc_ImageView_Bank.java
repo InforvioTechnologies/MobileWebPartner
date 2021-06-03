@@ -60,6 +60,7 @@ import adhoc.app.applibrary.Config.AppUtils.Objs;
 import adhoc.app.applibrary.Config.AppUtils.Params;
 import dmax.dialog.SpotsDialog;
 import in.loanwiser.partnerapp.PDF_Dounloader.PermissionUtils;
+import in.loanwiser.partnerapp.PartnerActivitys.FileDownloader;
 import in.loanwiser.partnerapp.PartnerActivitys.SimpleActivity;
 import in.loanwiser.partnerapp.R;
 import in.loanwiser.partnerapp.User_Account.LoginNew;
@@ -77,7 +78,7 @@ public class Doc_ImageView_Bank extends SimpleActivity {
     ProgressBar progressbar;
     LinearLayout Ly_image_reader;
     RelativeLayout Rl_pdf_reader;
-    String type,document,hash,filename,report;
+    String type,document,hash,filename,report,viable_url_view,filename1;
     FloatingActionButton float_chat;
     private static final int STORAGE_PERMISSION_REQUEST_CODE = 1;
     PermissionUtils permissionUtils;
@@ -101,9 +102,11 @@ public class Doc_ImageView_Bank extends SimpleActivity {
         Rl_pdf_reader = (RelativeLayout)findViewById(R.id.Rl_pdf_reader);
         float_chat = (FloatingActionButton) findViewById(R.id.float_chat);
         document =  Objs.a.getBundle(this, Params.document);
+        viable_url_view =  Objs.a.getBundle(this, Params.viable_url_view);
 
       //  document =  "https://callcenter.loanwiser.in/viewdocuments.php?imp=87c2c2771fd18671e386b8a02f145102&id=761404";
         Log.e("pfd",document);
+      //  Log.e("viable_url_view",viable_url_view);
        // Log.e("type",type);
        // hash =  Objs.a.getBundle(this, Params.transaction_id);
         progressbar = (ProgressBar) findViewById(R.id.progressbar);
@@ -112,13 +115,19 @@ public class Doc_ImageView_Bank extends SimpleActivity {
             Ly_image_reader.setVisibility(View.GONE);
             webview.getSettings().setJavaScriptEnabled(true);
              filename =  document;
+
+        try {
+            filename=URLEncoder.encode(document,"UTF-8"); //Url Convert to UTF-8 It important.
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
         try {
             webview.loadUrl("https://docs.google.com/gview?embedded=true&url=" + URLEncoder.encode(filename, "ISO-8859-1"));
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
         //  webview.loadUrl("https://stackoverflow.com/questions/18838779/how-to-compare-two-edittext-fields-in-android/29399267");
-           // webview.loadUrl(filename);
+          //  webview.loadUrl(filename);
 
         webview.setWebViewClient(new HelloWebViewClient());
         // Enable Javascript
@@ -252,16 +261,9 @@ public class Doc_ImageView_Bank extends SimpleActivity {
                 view.reload();
             progressBar.setVisibility(view.GONE);
 
-
         }
 
-        @SuppressLint("NewApi")
-        @Override
-        public void onReceivedSslError(WebView view, SslErrorHandler handler, SslError error) {
-            handler.proceed(); // Ignore SSL certificate errors
-            Toast.makeText(mCon, "Please try again",Toast.LENGTH_SHORT).show();
 
-        }
 
     }
 
@@ -318,92 +320,29 @@ public class Doc_ImageView_Bank extends SimpleActivity {
         }
     }
 
-    class DownloadFileFromURL extends AsyncTask<String, String, String> {
+    private class DownloadFile extends AsyncTask<String, Void, Void>{
 
-        /**
-         * Before starting background thread
-         * Show Progress Bar Dialog
-         * */
         @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-            showDialog(progress_bar_type);
-        }
+        protected Void doInBackground(String... strings) {
+            String fileUrl = strings[0];   // -> http://maven.apache.org/maven-1.x/maven.pdf
+            String fileName = strings[1];  // -> maven.pdf
+            String extStorageDirectory = Environment.getExternalStorageDirectory().toString();
+            File folder = new File(extStorageDirectory, "testthreepdf");
+            folder.mkdir();
 
-        /**
-         * Downloading file in background thread
-         * */
-        @Override
-        protected String doInBackground(String... f_url) {
-            int count;
-            try {
-                URL url = new URL(f_url[0]);
-                URLConnection conection = url.openConnection();
-                conection.connect();
-                // this will be useful so that you can show a tipical 0-100% progress bar
-                int lenghtOfFile = conection.getContentLength();
+            File pdfFile = new File(folder, fileName);
 
-                // download the file
-                InputStream input = new BufferedInputStream(url.openStream(), 8192);
-
-                // Output stream
-
-                OutputStream output = new FileOutputStream("/sdcard/"+report+".pdf");
-
-                byte data[] = new byte[1024];
-
-                long total = 0;
-
-                while ((count = input.read(data)) != -1) {
-                    total += count;
-                    // publishing the progress....
-                    // After this onProgressUpdate will be called
-                    publishProgress(""+(int)((total*100)/lenghtOfFile));
-
-                    // writing data to file
-                    output.write(data, 0, count);
-                }
-
-                // flushing output
-                output.flush();
-
-                // closing streams
-                output.close();
-                input.close();
-
-            } catch (Exception e) {
-                Log.e("Error: ", e.getMessage());
+            try{
+                pdfFile.createNewFile();
+            }catch (IOException e){
+                e.printStackTrace();
             }
-
+            FileDownloader.downloadFile(fileUrl, pdfFile);
             return null;
         }
-
-        /**
-         * Updating progress bar
-         * */
-        protected void onProgressUpdate(String... progress) {
-            // setting progress percentage
-            pDialog.setProgress(Integer.parseInt(progress[0]));
-        }
-
-        /**
-         * After completing background task
-         * Dismiss the progress dialog
-         * **/
-        @Override
-        protected void onPostExecute(String file_url) {
-            // dismiss the dialog after the file was downloaded
-            dismissDialog(progress_bar_type);
-
-            // Displaying downloaded image into image view
-            // Reading image path from sdcard
-            String imagePath = Environment.getExternalStorageDirectory().toString() + "/report.pdf";
-            // setting downloaded into image view
-          //  my_image.setImageDrawable(Drawable.createFromPath(imagePath));
-            ErrorStatus();
-        }
-
     }
+
+
     public boolean Pdfdownload(){
 
         boolean flag = true;

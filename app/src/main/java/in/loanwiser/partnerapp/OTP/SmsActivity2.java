@@ -94,7 +94,7 @@ public class SmsActivity2 extends AppCompatActivity {
 
     SharedPreferences pref;
     SharedPreferences.Editor editor;
-
+    String utmSource,from_campaign;
     @SuppressLint("LongLogTag")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -111,7 +111,8 @@ public class SmsActivity2 extends AppCompatActivity {
         JSON =  Objs.a.getBundle(this, Params.JSON);
         //  opt_bundle =  Objs.a.getBundle(this, Params.otp);
         no_bundle =  Objs.a.getBundle(this, Params.mobile_no);
-
+        from_campaign =  Objs.a.getBundle(this, Params.from_campaign);
+        utmSource =  Objs.a.getBundle(this, Params.utmSource);
         // Mobile = Pref.getmobile(mCon);
         //  Log.d("OTP number11111111111111", Mobile);
         // Log.d("OTP number", no_bundle);
@@ -429,10 +430,27 @@ public class SmsActivity2 extends AppCompatActivity {
 
     private void Firebase_Registration(String brb_userid) {
 
+
+        if(utmSource == null)
+        {
+            from_campaign = "0";
+        }else
+        {
+            if(utmSource.equals("google-play"))
+            {
+                from_campaign = "0";
+            }else
+            {
+
+            }
+        }
+      //  utmSource = "test";
         JSONObject jsonObject =new JSONObject();
         JSONObject J= null;
         try {
             J = new JSONObject();
+            J.put("from_campaign", from_campaign);
+            J.put("utm_code", utmSource);
             J.put("mobile_token", token);
             J.put("b2b_userid", brb_userid);
         }catch (JSONException e) {

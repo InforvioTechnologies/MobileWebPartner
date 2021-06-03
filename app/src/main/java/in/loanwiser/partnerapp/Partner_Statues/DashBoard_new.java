@@ -9,21 +9,22 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.graphics.Typeface;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.RemoteException;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.Menu;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.installreferrer.api.InstallReferrerClient;
+import com.android.installreferrer.api.InstallReferrerStateListener;
+import com.android.installreferrer.api.ReferrerDetails;
 import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
@@ -36,7 +37,6 @@ import com.daimajia.slider.library.SliderTypes.BaseSliderView;
 import com.daimajia.slider.library.Tricks.ViewPagerEx;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
 
 import androidx.annotation.NonNull;
@@ -46,42 +46,34 @@ import androidx.core.content.ContextCompat;
 import androidx.core.view.GravityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
 
-import adhoc.app.applibrary.Config.AppUtils.Objs;
 import adhoc.app.applibrary.Config.AppUtils.Params;
 import adhoc.app.applibrary.Config.AppUtils.Pref.Pref;
 import adhoc.app.applibrary.Config.AppUtils.Urls;
 import adhoc.app.applibrary.Config.AppUtils.VolleySignleton.AppController;
 import dmax.dialog.SpotsDialog;
+import in.loanwiser.partnerapp.Refer_Earn.ReferEarnActivity;
 import in.loanwiser.partnerapp.BankStamentUpload.Doc_ImageView_pay_structur;
-import in.loanwiser.partnerapp.BankStamentUpload.ReportIssueActivity;
-import in.loanwiser.partnerapp.Infinite_Scrollview.Lead_item;
 import in.loanwiser.partnerapp.My_Earnings.My_Earnings;
 import in.loanwiser.partnerapp.PDF_Dounloader.PermissionUtils;
 import in.loanwiser.partnerapp.PartnerActivitys.Applicant_Details_Activity;
 import in.loanwiser.partnerapp.PartnerActivitys.Dashboard_Activity;
-import in.loanwiser.partnerapp.Partner_Statues.ui.gallery.GalleryFragment;
-import in.loanwiser.partnerapp.Partner_Statues.ui.home.HomeFragment;
 import in.loanwiser.partnerapp.Push_Notification.Push_Notification_List;
 import in.loanwiser.partnerapp.R;
 import in.loanwiser.partnerapp.Step_Changes_Screen.HelpSupportActivity;
 import in.loanwiser.partnerapp.Step_Changes_Screen.LoanwiserAcadmy;
-import in.loanwiser.partnerapp.Step_Changes_Screen.Pay_Out_Screen;
-import in.loanwiser.partnerapp.Step_Changes_Screen.Step_Completion_Screen;
 import in.loanwiser.partnerapp.User_Account.BankDetails;
 import in.loanwiser.partnerapp.User_Account.ProfileSettings;
 import in.loanwiser.partnerapp.User_Account.Welcome_Page;
@@ -100,6 +92,7 @@ public class DashBoard_new extends AppCompatActivity  implements NavigationView.
     RelativeLayout relative_layout_multiple;
 
     TextView textview,nav_header_textView,nav_header_mobile_no;
+    String contact_person;
 
     SharedPreferences.Editor editor;
     private String tag_json_obj = "jobj_req", tag_json_arry = "jarray_req";
@@ -107,6 +100,13 @@ public class DashBoard_new extends AppCompatActivity  implements NavigationView.
     PermissionUtils permissionUtils;
     private static final int STORAGE_PERMISSION_REQUEST_CODE = 1;
     private static final int MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE = 1;
+
+    private final String prefKey = "checkedInstallReferrer";
+    String personId,utmSource,from_campaign;
+    private final Executor backgroundExecutor = Executors.newSingleThreadExecutor();
+    public static final String KEY_UTM_SOURCE = "utm_source";
+    public static final String KEY_UTM_CONTENT = "utm_content";
+    public static final String KEY_UTM_CAMPAIGN = "utm_campaign";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -126,8 +126,9 @@ public class DashBoard_new extends AppCompatActivity  implements NavigationView.
         nav_header_mobile_no = headerView.findViewById(R.id.nav_header_mobile_no);
 
         setSupportActionBar(toolbar);
-       // permissionUtils = new PermissionUtils();
 
+       // permissionUtils = new PermissionUtils();
+        checkInstallReferrer();
         if (checkPermissionREAD_EXTERNAL_STORAGE(this)) {
             // do your stuff..
         }
@@ -147,6 +148,9 @@ public class DashBoard_new extends AppCompatActivity  implements NavigationView.
         editor = pref.edit();
 
         Account_Listings_Details1();
+
+
+
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -227,6 +231,102 @@ public class DashBoard_new extends AppCompatActivity  implements NavigationView.
         Account_Listings_Details();
 
 
+    }
+
+    public void switchContent(int id, Fragment fragment) {
+      /*  FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.replace(id, fragment, fragment.toString());
+        ft.addToBackStack(null);
+        ft.commit();*/
+        Fragment selectedFragment = null;
+        selectedFragment = new ShareFragment();
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.frame_container, selectedFragment);
+        transaction.commit();
+     //   return true;
+    }
+
+    void checkInstallReferrer() {
+        Log.e("invockedInstallRef","checkInstallReferrer");
+        if (getPreferences(MODE_PRIVATE).getBoolean(prefKey, false)) {
+            return;
+        }
+
+        InstallReferrerClient referrerClient = InstallReferrerClient.newBuilder(this).build();
+        backgroundExecutor.execute(() -> getInstallReferrerFromClient(referrerClient));
+    }
+
+    void getInstallReferrerFromClient(InstallReferrerClient referrerClient) {
+
+        referrerClient.startConnection(new InstallReferrerStateListener() {
+            @Override
+            public void onInstallReferrerSetupFinished(int responseCode) {
+                switch (responseCode) {
+                    case InstallReferrerClient.InstallReferrerResponse.OK:
+                        ReferrerDetails response = null;
+                        try {
+                            response = referrerClient.getInstallReferrer();
+                        } catch (RemoteException e) {
+                            e.printStackTrace();
+                            return;
+                        }
+                        final String referrerUrl = response.getInstallReferrer();
+
+                        if (referrerUrl != null && !referrerUrl.equals("")) {
+                            // Utils.log("Referral Received - " + referrer);
+                            String[] referrerParts = referrerUrl.split("&");
+                            utmSource = getData(KEY_UTM_SOURCE, referrerParts);
+                            String utmContent = getData(KEY_UTM_CONTENT, referrerParts);
+                            String utmCampaign = getData(KEY_UTM_CAMPAIGN, referrerParts);
+                            from_campaign = "1";
+                            if (utmSource != null && utmSource.equals("google")) {
+                                //  sendLogToMobisocServer(context, utmContent);
+
+                                Log.e("the utm",utmContent);
+                            } else if (utmSource != null && utmSource.equals("app_share")) {
+                                // RawStorageProvider.getInstance(context).dumpDataToStorage(RaghuKakaConstants.REFFERAL_FOR, utmContent);
+                            }
+                            // updateRKServerForReferral(context, utmSource, utmCampaign, utmContent);
+                        }else
+                        {
+                            from_campaign = "0";
+                        }
+
+                        //   trackInstallReferrerforGTM(referrerUrl);
+                        Log.e("the referat url ",referrerUrl);
+
+                        // TODO: If you're using GTM, call trackInstallReferrerforGTM instead.
+                        //  trackInstallReferrer(referrerUrl);
+
+
+                        // Only check this once.
+                        getPreferences(MODE_PRIVATE).edit().putBoolean(prefKey, true).commit();
+
+                        // End the connection
+                        referrerClient.endConnection();
+
+                        break;
+                    case InstallReferrerClient.InstallReferrerResponse.FEATURE_NOT_SUPPORTED:
+                        // API not available on the current Play Store app.
+                        break;
+                    case InstallReferrerClient.InstallReferrerResponse.SERVICE_UNAVAILABLE:
+                        // Connection couldn't be established.
+                        break;
+                }
+            }
+
+            @Override
+            public void onInstallReferrerServiceDisconnected() {
+
+            }
+        });
+    }
+    private String getData(String key, String[] allData) {
+        for (String selected : allData)
+            if (selected.contains(key)) {
+                return selected.split("=")[1];
+            }
+        return "";
     }
     private void loadFragment(Fragment fragment) {
         // load fragment
@@ -328,6 +428,13 @@ public class DashBoard_new extends AppCompatActivity  implements NavigationView.
             startActivity(intent);
         }else if (id == R.id.loan_acadmy){
             Intent intent = new Intent(DashBoard_new.this, LoanwiserAcadmy.class);
+            startActivity(intent);
+        }
+        else if (id == R.id.loan_webinars){
+            Intent intent = new Intent(DashBoard_new.this, Loanwiser_Academy_webinar.class);
+            startActivity(intent);
+        }else if (id==R.id.referearn){
+            Intent intent = new Intent(DashBoard_new.this, ReferEarnActivity.class);
             startActivity(intent);
         }
 
@@ -486,12 +593,27 @@ public class DashBoard_new extends AppCompatActivity  implements NavigationView.
     }
     private void Account_Listings_Details() {
 
+        if(utmSource == null)
+        {
+            from_campaign = "0";
+        }else
+        {
+            if(utmSource.equals("google-play"))
+            {
+                from_campaign = "0";
+            }else
+            {
+
+            }
+        }
+
         final JSONObject jsonObject =new JSONObject();
         JSONObject J= null;
         try {
             J =new JSONObject();
             J.put(Params.b2b_userid, Pref.getID(getApplicationContext()));
-
+            J.put("from_campaign", from_campaign);
+            J.put("utm_code", utmSource);
 
         } catch (JSONException e) {
             e.printStackTrace();
@@ -515,6 +637,18 @@ public class DashBoard_new extends AppCompatActivity  implements NavigationView.
                                JSONObject jsonObject1 = response.getJSONObject("data");
 
                                String initiate_coins_transact = jsonObject1.getString("initiate_coins_transact");
+                                contact_person = jsonObject1.getString("contact_person");
+                                if(contact_person.isEmpty())
+                                {
+                                    getSupportActionBar().setTitle("Hi");
+                                }else
+                                {
+                                    String output = contact_person.substring(0, 1).toUpperCase() + contact_person.substring(1);
+                                    getSupportActionBar().setTitle("Hi "+output);
+                                }
+
+                              //  getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+                             //   getSupportActionBar().setHomeButtonEnabled(true);
                                if(initiate_coins_transact.equals("0"))
                                {
                                    Intiat_Coin_Transaction();
@@ -582,7 +716,15 @@ public class DashBoard_new extends AppCompatActivity  implements NavigationView.
                                 Log.e("Profile Page" , String.valueOf(jobj));
 
                                 String notification_count = jobj.getString("notification_count");
-                                String contact_person = jobj.getString("contact_person");
+                                 contact_person = jobj.getString("contact_person");
+                                if(contact_person.isEmpty())
+                                {
+                                    getSupportActionBar().setTitle("Hi");
+                                }else
+                                {
+                                    String output = contact_person.substring(0, 1).toUpperCase() + contact_person.substring(1);
+                                    getSupportActionBar().setTitle("Hi "+output);
+                                }
                                 String mobile_no = jobj.getString("mobile_no");
 
 

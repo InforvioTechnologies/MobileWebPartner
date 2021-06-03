@@ -229,10 +229,10 @@ public class TwoFragment extends Fragment implements OnLoadMoreListener {
 
                                         String welcome_bonus= J.getString("welcome_bonus");
                                         if (welcome_bonus.equals("1")){
-                                            app_id="Not applicable";
-                                            user_name="Not applicable";
-                                            loan_type="Not applicable";
-                                            current_step="Not applicable";
+                                            app_id="";
+                                            user_name=" - ";
+                                            loan_type="";
+                                            current_step="";
                                         }
 
                                         Log.e("mobile no",date_disp);

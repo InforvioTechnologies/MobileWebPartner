@@ -359,13 +359,14 @@
         <LinearLayout
             android:layout_marginTop="20dp"
             android:gravity="center"
+            android:visibility="gone"
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <androidx.appcompat.widget.AppCompatButton
 
-                android:id="@+id/view_activity"
+                android:id="@+id/view_activitys"
                 android:layout_width="106dp"
                 android:layout_height="34dp"
                 android:text="View Activity"
@@ -377,6 +378,76 @@
                 android:background="@drawable/capsul_button_icon"/>
         </LinearLayout>
 
+        <androidx.cardview.widget.CardView
+            xmlns:card_view="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/trackcard"
+            android:layout_marginLeft="3dp"
+            android:layout_marginRight="3dp"
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:background="@color/white"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tracktxt"
+                            style="@style/SmallText"
+                            android:textColor="@color/gray"
+                            android:text="Track Current Lead Status"
+                            android:layout_marginLeft="10dp"
+                            android:layout_width="wrap_content"
+                            android:textSize="12dp"
+                            android:layout_height="wrap_content" />
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_marginBottom="10dp"
+                            style="@style/LorgeText"
+                            android:textSize="14dp"
+                            android:id="@+id/trackactivity"
+                            android:textColor="@color/black"
+                            android:layout_marginLeft="10dp"
+                            android:text="Track Activity"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_marginRight="20dp"
+                        android:gravity="right"
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <androidx.appcompat.widget.AppCompatButton
+                            android:id="@+id/view_activity"
+                            android:layout_width="wrap_content"
+                            android:layout_height="30dp"
+                            android:text="Check Status"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:layout_marginLeft="10dp"
+                            android:textColor="@color/white"
+                            android:textSize="8sp"
+                            android:background="@drawable/but_shape_blue"/>
+                    </LinearLayout>
+                </LinearLayout>
+
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_gravity="left"
             style="@style/LorgeText"
@@ -386,6 +457,7 @@
             android:layout_marginLeft="10dp"
             android:textColor="#002B5D"
             android:id="@+id/askthis"
+            android:visibility="gone"
             android:text="Ask for this Lead"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
@@ -417,7 +489,7 @@
                             android:id="@+id/ask_txt"
                             style="@style/SmallText"
                             android:textColor="@color/gray"
-                            android:text="Ask Staus"
+                            android:text="Additional Document Required"
                             android:layout_marginLeft="10dp"
                             android:layout_width="wrap_content"
                             android:textSize="12dp"
@@ -445,12 +517,12 @@
                             android:id="@+id/view_ask"
                             android:layout_width="wrap_content"
                             android:layout_height="30dp"
-                            android:text="View All Ask"
+                            android:text="Upload Document"
                             android:layout_gravity="center"
                             android:gravity="center"
                             android:layout_marginLeft="10dp"
                             android:textColor="@color/white"
-                            android:textSize="10sp"
+                            android:textSize="8sp"
                             android:background="@drawable/but_shape_blue"/>
                     </LinearLayout>
                 </LinearLayout>
@@ -1033,7 +1105,6 @@
 
             <androidx.cardview.widget.CardView
 
-                xmlns:card_view="http://schemas.android.com/apk/res-auto"
                 android:id="@+id/Credit_REport_Generation"
                 android:layout_marginLeft="3dp"
                 android:layout_marginRight="3dp"
@@ -1108,12 +1179,12 @@
                                 android:id="@+id/step2crif_but"
                                 android:layout_width="wrap_content"
                                 android:layout_height="30dp"
-                                android:text="Complete View"
                                 android:layout_gravity="center"
+                                android:background="@drawable/but_shape"
                                 android:gravity="center"
+                                android:text="Complete View"
                                 android:textColor="@color/white"
-                                android:textSize="10sp"
-                                android:background="@drawable/but_shape"/>
+                                android:textSize="10sp" />
                         </LinearLayout>
                     </LinearLayout>
 
@@ -1743,7 +1814,7 @@
                 <androidx.cardview.widget.CardView
 
                     xmlns:card_view="http://schemas.android.com/apk/res-auto"
-                    android:id="@+id/Paymet1"
+                    android:id="@+id/ban_available"
                     android:layout_marginLeft="3dp"
                     android:layout_marginRight="3dp"
                     android:layout_width="match_parent"

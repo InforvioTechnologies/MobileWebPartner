@@ -45,6 +45,7 @@ import adhoc.app.applibrary.Config.AppUtils.Pref.Pref;
 import adhoc.app.applibrary.Config.AppUtils.Urls;
 import adhoc.app.applibrary.Config.AppUtils.VolleySignleton.AppController;
 import dmax.dialog.SpotsDialog;
+import in.loanwiser.partnerapp.Documents.Applicant_Doc_Details_revamp;
 import in.loanwiser.partnerapp.PartnerActivitys.Home;
 import in.loanwiser.partnerapp.Payment.PaymentActivity;
 import in.loanwiser.partnerapp.R;
@@ -336,5 +337,17 @@ public class DocumentChecklist_Fragment extends SimpleActivity implements TabLay
         AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
     }
 
+    @Override
+    public void onBackPressed() {
 
+        Pref.removeDOC(mCon);
+        Pref.removeTID(mCon);
+        Pref.removeEID(mCon);
+        Pref.removeAEID(mCon);
+        Intent intent = new Intent(DocumentChecklist_Fragment.this,Home.class);
+        startActivity(intent);
+        finish();
+        super.onBackPressed();
+
+    }
 }

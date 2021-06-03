@@ -363,7 +363,8 @@ public class FragmentApplicant extends Fragment implements CompoundButton.OnChec
             J.put("employement_type", applicant_empstatus);
             J.put("applicant_type", "1");
             J.put("type_req", 0);
-            J.put("status_flag", 1);
+          //  J.put("status_flag", 1);
+            J.put("status_flag", Pref.getSTATUES_FLAG(getActivity()));
             Log.i("TAG", "Document_check_lsit:request "+J.toString());
 
         } catch (JSONException e) {
@@ -466,7 +467,8 @@ public class FragmentApplicant extends Fragment implements CompoundButton.OnChec
             J.put("employement_type", applicant_empstatus);
             J.put("applicant_type", "1");
             J.put("type_req", 0);
-            J.put("status_flag", 1);
+          //  J.put("status_flag", 1);
+            J.put("status_flag", Pref.getSTATUES_FLAG(getActivity()));
             Log.i("TAG", "Document_check_lsit:request "+J.toString());
 
         } catch (JSONException e) {

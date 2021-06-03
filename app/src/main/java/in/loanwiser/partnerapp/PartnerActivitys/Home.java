@@ -92,7 +92,8 @@ public class Home extends AppCompatActivity {
     private LinearLayout lead_cr_statues,if_vaibility_faild,bank_is_yes;
     CardView Applicant_info_ly,Document_check_list,Document_Upload,offer_generation,
             Viability_Check,eligibility_check,viability_Report,Credit_REport_Generation,Paymet,
-            CRIF_Check,step2_card,Bank_statement_Upload,Submiteed_to_Loanwiser;
+            CRIF_Check,step2_card,Bank_statement_Upload,Submiteed_to_Loanwiser,document_check__Upload,
+            document_Upload,ban_available;
 
     FragmentApplicant fragmentApplicant=null;
 
@@ -102,7 +103,8 @@ public class Home extends AppCompatActivity {
     String viability,eligibility,credit_request,payment,viability_report,viability_report_URL,
     document_checklist,document_upload,loan_type_id,loan_type,crif_status,submit_loanwiser,offer_Details,
             part_compstatus,part_subcompstatus, loanwiser_submit_str,loanwiser_submit_str1,loan_status,
-            reject_status,bank_statement,payment_eligility,crif_report,eligibility_status,applicant_count,property_identified;
+            reject_status,bank_statement,payment_eligility,crif_report,
+            eligibility_status,applicant_count,property_identified,crif_report_gen,auto_reject_status;
     AppCompatImageView call_phone;
 
     AppCompatTextView lead_name,mobile_no,Loan_amount,loan_type_,loan_submit_statues1,viability_statues,
@@ -133,7 +135,7 @@ public class Home extends AppCompatActivity {
     AppCompatTextView   paymentstatus,loan_submit_statues_txt1,Document_verification_txt1,Applied_to_Bank_txt1;
     private ExpandableListView exp_leaseoffer;
     private ExpandableListAdapter1 expandableListAdapter;
-    String all;
+    String all,bank_eligible;
     ImageView loan_submit_statues_img,Document_verification_img,applied_to_bank_img;
     AppCompatButton view_activity;
 
@@ -453,6 +455,9 @@ public class Home extends AppCompatActivity {
         bankstatment_but=findViewById(R.id.bankstatment_but);
         document_upload_button=findViewById(R.id.document_upload_button);
         Loan_Statue_submit_layout=findViewById(R.id.Loan_Statue_submit_layout);
+        document_check__Upload=findViewById(R.id.document_check__Upload);
+        document_Upload=findViewById(R.id.document_Upload);
+        ban_available=findViewById(R.id.ban_available);
         Submiteed_to_Loanwiser=findViewById(R.id.Submiteed_to_Loanwiser);
         step3payment_but=findViewById(R.id.step3payment_but);
         eligibility_but=findViewById(R.id.eligibility_but);
@@ -499,8 +504,8 @@ public class Home extends AppCompatActivity {
                 if(document_upload.equals("pending"))
                 {
                   //  Document_generate_checklist_rule();
-                    Toast.makeText(getApplicationContext(),"Please Complete The Previous Steps To Proceed!!!", Toast.LENGTH_SHORT).show();
-
+                 //   Toast.makeText(getApplicationContext(),"Please Complete The Previous Steps To Proceed!!!", Toast.LENGTH_SHORT).show();
+                    Document_generate_checklist_rule();
                 }else
                 {
                     Document_generate_checklist_rule();
@@ -559,10 +564,43 @@ public class Home extends AppCompatActivity {
                 if(viability.equals("completed"))
                 {
                     //  Intent intent = new Intent(Home.this, Viability_Activity_Data_View.class);
+                    //vehicle loan type
+                 if(loan_type_id.equals("22"))
+                {
+                    Intent intent = new Intent(Home.this, in.loanwiser.partnerapp.Credit_Vehicle_.Viability_Data_revamp.class);
+                    intent.putExtra("user_id", user_id);
+                    intent.putExtra("transaction_id", transaction_id);
+                    startActivity(intent);
+                    //  finish();
+                }
+                else if (loan_type_id.equals("31")){
+                    Intent intent = new Intent(Home.this, in.loanwiser.partnerapp.Credit_Vehicle_.Viability_Data_revamp.class);
+                    intent.putExtra("user_id", user_id);
+                    intent.putExtra("transaction_id", transaction_id);
+                    startActivity(intent);
+                }
+                else if (loan_type_id.equals("32")){
+                    Intent intent = new Intent(Home.this, in.loanwiser.partnerapp.Credit_Vehicle_.Viability_Data_revamp.class);
+                    intent.putExtra("user_id", user_id);
+                    intent.putExtra("transaction_id", transaction_id);
+                    startActivity(intent);
+                }
+                //CreditCard loan type
+                else if(loan_type_id.equals("33"))
+                {
+                    Intent intent = new Intent(Home.this, in.loanwiser.partnerapp.Credit_Vehicle_.Viability_Data_revamp.class);
+                    intent.putExtra("user_id", user_id);
+                    intent.putExtra("transaction_id", transaction_id);
+                    startActivity(intent);
+                    //  finish();
+                }
+                else
+                {
                     Intent intent = new Intent(Home.this, Viability_Data_revamp.class);
                     intent.putExtra("user_id", user_id);
                     intent.putExtra("transaction_id", transaction_id);
                     startActivity(intent);
+                }
                     // finish();
                 }else
                 {
@@ -585,7 +623,37 @@ public class Home extends AppCompatActivity {
                         startActivity(intent);
                         //  finish();
 
-                    }else
+                    }  //vehicle loan type
+                    else if(loan_type_id.equals("22"))
+                    {
+                        Intent intent = new Intent(Home.this, in.loanwiser.partnerapp.Credit_Vehicle_.Viability_Screen_revamp.class);
+                        intent.putExtra("user_id", user_id);
+                        intent.putExtra("transaction_id", transaction_id);
+                        startActivity(intent);
+                        //  finish();
+                    }
+                    else if (loan_type_id.equals("31")){
+                        Intent intent = new Intent(Home.this, in.loanwiser.partnerapp.Credit_Vehicle_.Viability_Screen_revamp.class);
+                        intent.putExtra("user_id", user_id);
+                        intent.putExtra("transaction_id", transaction_id);
+                        startActivity(intent);
+                    }
+                    else if (loan_type_id.equals("32")){
+                        Intent intent = new Intent(Home.this, in.loanwiser.partnerapp.Credit_Vehicle_.Viability_Screen_revamp.class);
+                        intent.putExtra("user_id", user_id);
+                        intent.putExtra("transaction_id", transaction_id);
+                        startActivity(intent);
+                    }
+                    //CreditCard loan type
+                    else if(loan_type_id.equals("33"))
+                    {
+                        Intent intent = new Intent(Home.this, in.loanwiser.partnerapp.Credit_Vehicle_.Viability_Screen_revamp_Pl_BL.class);
+                        intent.putExtra("user_id", user_id);
+                        intent.putExtra("transaction_id", transaction_id);
+                        startActivity(intent);
+                        //  finish();
+                    }
+                    else
                     {
                         Intent intent = new Intent(Home.this, Viability_Screen_revamp.class);
                         startActivity(intent);
@@ -647,8 +715,16 @@ public class Home extends AppCompatActivity {
                         }
                     }else
                     {
-                        Intent intent = new Intent(Home.this, Payment_Sucess_Screen.class);
-                        startActivity(intent);
+                        if(crif_report_gen.equals("completed"))
+                        {
+                            String report="Viability Report";
+                            Objs.ac.StartActivityPutExtra(Home.this, Doc_ImageView_Bank.class,
+                                    Params.document,viability_report_URL,Params.report,report);
+                        }else
+                        {
+                            Intent intent = new Intent(Home.this, Payment_Sucess_Screen.class);
+                            startActivity(intent);
+                        }
 
                     }
                 }else  if(payment.equals("pending"))
@@ -677,7 +753,7 @@ public class Home extends AppCompatActivity {
                 if(viability.equals("completed")) {
                     if (payment.equals("completed")) {
 
-                        if(crif_report.equals("completed"))
+                        if(crif_report.equals("completed") || crif_report_gen.equals("completed"))
                         {
                             Intent intent = new Intent(Home.this, CRIF_Report_Activity_PDF_View.class);
                             intent.putExtra("user_id", applicant_id);
@@ -691,7 +767,9 @@ public class Home extends AppCompatActivity {
                                 Criffail();
                             }else
                             {
-                                Toast.makeText(getApplicationContext(),"Please Complete The Previous Steps To Proceed!!!", Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(Home.this, Payment_Sucess_Screen.class);
+                                startActivity(intent);
+                               // Toast.makeText(getApplicationContext(),"Please Complete The Previous Steps To Proceed!!!", Toast.LENGTH_SHORT).show();
 
                             }
                         }
@@ -888,106 +966,7 @@ public class Home extends AppCompatActivity {
         AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
     }
 
-   /* private void Step_copletions() {
-        JSONObject jsonObject =new JSONObject();
-        JSONObject J= null;
-        try {
-            J =new JSONObject();
-            J.put("user_id",Pref.getUSERID(getApplicationContext()));
-            Log.i("TAG", "Checkuserid: "+Pref.getUSERID(getApplicationContext()));
 
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        Log.e("Statues Request ",String.valueOf(J));
-      //  progressDialog.show();
-        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, Urls.Lead_Details_statues, J,
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        try {
-
-                            Log.e("Statues response",String.valueOf(response));
-                            String report_statues = response.getString("status");
-                            if(report_statues.equals("success"))
-                            {
-                                JSONObject jsonObject1 = response.getJSONObject("data");
-                                String user_name = jsonObject1.getString("user_name");
-                                 mobileno = jsonObject1.getString("mobileno");
-                                String loan_type = jsonObject1.getString("loan_type");
-                                String loan_amount = jsonObject1.getString("loan_amount");
-                                 loan_status = jsonObject1.getString("loan_status");
-                                String curr_status = jsonObject1.getString("curr_status");
-                                 submit_loanwiser = jsonObject1.getString("submit_loanwiser");
-                                part_compstatus = jsonObject1.getString("part_compstatus");
-                                part_subcompstatus = jsonObject1.getString("part_subcompstatus");
-                                applicant_count = jsonObject1.getString("applicant_count");
-                                property_identified=jsonObject1.getString("property_identified");
-                                Log.i("TAG", "onResponse:applicant_count "+applicant_count);
-
-                                lead_name.setText(user_name);
-                                mobile_no.setText(mobileno);
-                                Loan_amount.setText("\u20B9"+loan_amount);
-                                loan_type_.setText(loan_type);
-                                loan_submit_statues1.setText(loan_status);
-
-                                Pref.putCoAPPAVAILABLE(mCon,applicant_count);
-                                if(curr_status.equals("6"))
-                                {
-                                    loan_statues.setVisibility(View.VISIBLE);
-                                    stateProgressBar.setVisibility(View.VISIBLE);
-                                    stateProgressBar1.setVisibility(View.GONE);
-                                    stateProgressBar2.setVisibility(View.GONE);
-                                }else if(curr_status.equals("7"))
-                                {
-                                    loan_statues.setVisibility(View.VISIBLE);
-                                    stateProgressBar.setVisibility(View.GONE);
-                                    stateProgressBar1.setVisibility(View.VISIBLE);
-                                    stateProgressBar2.setVisibility(View.GONE);
-                                }else if(curr_status.equals("8"))
-                                {
-                                    loan_statues.setVisibility(View.VISIBLE);
-                                    stateProgressBar.setVisibility(View.GONE);
-                                    stateProgressBar1.setVisibility(View.GONE);
-                                    stateProgressBar2.setVisibility(View.VISIBLE);
-                                }else
-                                {
-                                    loan_statues.setVisibility(View.GONE);
-                                    stateProgressBar.setVisibility(View.GONE);
-                                    stateProgressBar1.setVisibility(View.GONE);
-                                    stateProgressBar2.setVisibility(View.GONE);
-                                }
-
-                                Work_flow_status();
-                            }else
-                            {
-                                Toast.makeText(getApplicationContext(),"error please check!!!", Toast.LENGTH_SHORT).show();
-
-                            }
-
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-
-
-                    }
-                }, new Response.ErrorListener() {
-
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                progressDialog.dismiss();
-                Toast.makeText(mCon, "Network error, try after some time",Toast.LENGTH_SHORT).show();
-            }
-        }) {
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                HashMap<String, String> headers = new HashMap<String, String>();
-                headers.put("content-type", "application/json");
-                return headers;
-            }
-        };
-        AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
-    }*/
    private void Step_copletions() {
        JSONObject jsonObject =new JSONObject();
        JSONObject J= null;
@@ -1144,6 +1123,7 @@ public class Home extends AppCompatActivity {
                              JSONObject jsonObject4 = jsonObject1.getJSONObject("step4");
                              JSONObject loanwiser_submit = jsonObject1.getJSONObject("loanwiser_submit");
                               reject_status = jsonObject1.getString("reject_status");
+                            auto_reject_status = jsonObject1.getString("auto_reject_status");
 
                              String step2_statues = jsonObject2.getString("status");
                              String step3_statues = jsonObject3.getString("status");
@@ -1152,6 +1132,9 @@ public class Home extends AppCompatActivity {
                              {
 
                                  step2_image_completed.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
+                                 lead_cr_statues.setVisibility(View.GONE);
+                                 app_info_img.setVisibility(View.VISIBLE);
+                                 app_info_img11.setVisibility(View.GONE);
                              }else
                              {
                                  step2_image_completed.setImageDrawable(getResources().getDrawable(R.drawable.ic_not_tick));
@@ -1176,8 +1159,10 @@ public class Home extends AppCompatActivity {
                              viability_report = step2_sub_statues.getString("viability_report");
                           //  crif_status = step2_sub_statues.getString("crif_status");
                             crif_report = step2_sub_statues.getString("crif_report");
+                            crif_report_gen = step2_sub_statues.getString("crif_report_gen");
 
                             bank_statement = step3_sub_statues.getString("bank_statement");
+                            bank_eligible = step3_sub_statues.getString("bank_eligible");
                             payment_eligility = step3_sub_statues.getString("payment");
                             eligibility_status = step3_sub_statues.getString("eligibility_status");
 
@@ -1276,7 +1261,15 @@ public class Home extends AppCompatActivity {
                                         viability_Report.setEnabled(true);
                                         if_vaibility_faild.setVisibility(View.GONE);
                                         step2_reportstatus.setImageDrawable(getResources().getDrawable(R.drawable.ic_warning));
-                                        loan_submit_statues1.setText("Loan Rejected");
+                                        if(auto_reject_status.equals("1"))
+                                        {
+                                            loan_submit_statues1.setText("Auto Rejected");
+                                            sub_to_loanwiser.setText("\u25CF"+" "+"Auto Rejected");
+                                        }else
+                                        {
+                                            loan_submit_statues1.setText("Loan Rejected");
+                                            sub_to_loanwiser.setText("\u25CF"+" "+"Loan Rejected");
+                                        }
                                         loan_submit_statues1.setTextColor(Color.parseColor("#FF9201"));
                                         step2report_but.setBackgroundResource(R.drawable.but_shape_reject);
                                         step2report_but.setText("View");
@@ -1299,7 +1292,20 @@ public class Home extends AppCompatActivity {
                                 {
                                     viability_report_cmp.setText("click to view reject status");
                                     viability_Report.setEnabled(true);
-                                    step2report_but.setVisibility(View.GONE);
+                                    if(auto_reject_status.equals("1"))
+                                    {
+                                        loan_submit_statues1.setText("Auto Rejected");
+                                        sub_to_loanwiser.setText("\u25CF"+" "+"Auto Rejected");
+                                    }else
+                                    {
+                                        loan_submit_statues1.setText("Loan Rejected");
+                                        sub_to_loanwiser.setText("\u25CF"+" "+"Loan Rejected");
+                                    }
+                                    loan_submit_statues1.setTextColor(Color.parseColor("#FF9201"));
+                                    step2_reportstatus.setImageDrawable(getResources().getDrawable(R.drawable.ic_warning));
+                                    step2report_but.setBackgroundResource(R.drawable.but_shape_reject);
+                                    step2report_but.setText("View");
+                                    step2report_but.setVisibility(View.VISIBLE);
 
                                 }else
                                 {
@@ -1356,6 +1362,16 @@ public class Home extends AppCompatActivity {
                                         step2viablity_button.setVisibility(View.VISIBLE);
                                         step2report_but.setVisibility(View.VISIBLE);
                                         step2_reportstatus.setImageDrawable(getResources().getDrawable(R.drawable.ic_warning));
+
+                                        if(auto_reject_status.equals("1"))
+                                        {
+                                            loan_submit_statues1.setText("Auto Rejected");
+                                            sub_to_loanwiser.setText("\u25CF"+" "+"Auto Rejected");
+                                        }else
+                                        {
+                                            loan_submit_statues1.setText("Loan Rejected");
+                                            sub_to_loanwiser.setText("\u25CF"+" "+"Loan Rejected");
+                                        }
                                         loan_submit_statues1.setText("Loan Rejected");
                                         sub_to_loanwiser.setText("\u25CF"+" "+"Loan Rejected");
                                         loan_submit_statues1.setTextColor(Color.parseColor("#FF9201"));
@@ -1487,7 +1503,15 @@ public class Home extends AppCompatActivity {
                             {
                                 if(reject_status.equals("1"))
                                 {
-
+                                    if(auto_reject_status.equals("1"))
+                                    {
+                                        loan_submit_statues1.setText("Auto Rejected");
+                                        sub_to_loanwiser.setText("\u25CF"+" "+"Auto Rejected");
+                                    }else
+                                    {
+                                        loan_submit_statues1.setText("Loan Rejected");
+                                        sub_to_loanwiser.setText("\u25CF"+" "+"Loan Rejected");
+                                    }
                                 }else
                                 {
                                     Credit_REport_Generation.setVisibility(View.VISIBLE);
@@ -1505,7 +1529,15 @@ public class Home extends AppCompatActivity {
                             {
                                 if(reject_status.equals("1"))
                                 {
-
+                                    if(auto_reject_status.equals("1"))
+                                    {
+                                        loan_submit_statues1.setText("Auto Rejected");
+                                        sub_to_loanwiser.setText("\u25CF"+" "+"Auto Rejected");
+                                    }else
+                                    {
+                                        loan_submit_statues1.setText("Loan Rejected");
+                                        sub_to_loanwiser.setText("\u25CF"+" "+"Loan Rejected");
+                                    }
                                 }else
                                 {
                                     if (payment.equals("completed")) {
@@ -1660,9 +1692,19 @@ public class Home extends AppCompatActivity {
                                 }
 
                                 document_upload_button.setText("Complete now");
-                                Loan_Statue_submit_layout.setVisibility(View.GONE);
+
                                 Submiteed_to_Loanwiser.setVisibility(View.VISIBLE);
-                                Loan_submit_statues();
+
+                                if(submit_loanwiser.equals("1"))
+                                {
+                                    Loan_Statue_submit_layout.setVisibility(View.VISIBLE);
+                                    Loan_submit_statues();
+                                }else
+                                {
+                                    Loan_Statue_submit_layout.setVisibility(View.VISIBLE);
+                                    Loan_submit_statues();
+                                }
+
                             }else
                             {
                                 document_img1.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
@@ -1684,6 +1726,11 @@ public class Home extends AppCompatActivity {
                                 Loan_submit_statues();
                                 Loan_Statue_submit_layout.setVisibility(View.VISIBLE);
                             }
+                            if(document_checklist.equals("completed"))
+                            {
+                                step3payment_but.setBackgroundResource(R.drawable.but_shape);
+                                step3payment_but.setText("Complete Now");
+                            }
 
                             if(offer_Details.equals("completed"))
                             {
@@ -1699,6 +1746,59 @@ public class Home extends AppCompatActivity {
                                 step2crif_but.setBackgroundResource(R.drawable.but_shape_blue);
                                 step2crif_but.setText("View");
                             }
+
+                            if(crif_report.equals("completed"))
+                            {
+                                if(crif_report_gen.equals("pending"))
+                                {
+                                    if_vaibility_faild.setVisibility(View.GONE);
+                                }else
+                                {
+                                    if_vaibility_faild.setVisibility(View.VISIBLE);
+                                }
+                            }
+
+
+                            if(bank_statement.equals("completed"))
+                            {
+                                if(bank_eligible.equals("0"))
+                                {
+                                    if_vaibility_faild.setVisibility(View.VISIBLE);
+                                    Document_Upload.setVisibility(View.VISIBLE);
+                                    step3_sub_staus.setVisibility(View.VISIBLE);
+                                    Bank_statement_Upload.setVisibility(View.VISIBLE);
+                                    document_check__Upload.setVisibility(View.GONE);
+                                    document_Upload.setVisibility(View.GONE);
+                                    ban_available.setVisibility(View.GONE);
+                                    Submiteed_to_Loanwiser.setVisibility(View.GONE);
+
+                                }else
+                                {
+                                    if_vaibility_faild.setVisibility(View.VISIBLE);
+                                    Document_Upload.setVisibility(View.VISIBLE);
+                                    step3_sub_staus.setVisibility(View.VISIBLE);
+                                    Bank_statement_Upload.setVisibility(View.VISIBLE);
+                                    document_check__Upload.setVisibility(View.VISIBLE);
+                                    document_Upload.setVisibility(View.VISIBLE);
+                                    ban_available.setVisibility(View.VISIBLE);
+                                    Submiteed_to_Loanwiser.setVisibility(View.VISIBLE);
+                                }
+                            }else
+                            {
+                                if(auto_reject_status.equals("1"))
+                                {
+                                    Bank_statement_Upload.setVisibility(View.GONE);
+                                    document_check__Upload.setVisibility(View.GONE);
+                                    document_Upload.setVisibility(View.GONE);
+                                    ban_available.setVisibility(View.GONE);
+                                    Submiteed_to_Loanwiser.setVisibility(View.GONE);
+                                    if_vaibility_faild.setVisibility(View.GONE);
+                                }else
+                                {
+
+                                }
+                            }
+
 
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -1760,7 +1860,13 @@ public class Home extends AppCompatActivity {
                                 String resolve_count= jsonObject2.getString("resolve_count");
                                 String accept_loanwiser= jsonObject2.getString("accept_loanwiser");
 
-                                pending_ask_List.setText("Pending Ask" +"("+pending_count+")");
+                                if(pending_count.equals("0")){
+                                    view_ask.setVisibility(View.GONE);
+                                    pending_ask_List.setText("Pending Ask" +"("+pending_count+")");
+                                }else{
+                                    view_ask.setVisibility(View.VISIBLE);
+                                    pending_ask_List.setText("Pending Ask" +"("+pending_count+")");
+                                }
 
                             }
 
@@ -1969,7 +2075,8 @@ public class Home extends AppCompatActivity {
                         {
                            JSONObject result=object.getJSONObject("result");
 
-                           String submit_loanwiser = result.getString("submit_loanwiser");
+
+                            submit_loanwiser = result.getString("submit_loanwiser");
                            String doc_verification = result.getString("doc_verification");
                            String apply_completion_status = result.getString("apply_completion_status");
 
@@ -1977,6 +2084,9 @@ public class Home extends AppCompatActivity {
 
                            if(submit_loanwiser.equals("1"))
                             {
+                                String statues = "0";
+                                Pref.putSTATUES_FLAG(getApplicationContext(),statues);
+
                                 String submit_date = result.getString("submit_date");
                                 loan_submit_statues_img.setImageDrawable(getResources().getDrawable(R.drawable.ic_green_tick));
                                 loan_submit_statues_txt1.setText("Completed "+"("+ submit_date+")");
@@ -1984,6 +2094,9 @@ public class Home extends AppCompatActivity {
 
                             }else
                             {
+                                String statues = "1";
+                                Pref.putSTATUES_FLAG(getApplicationContext(),statues);
+
                                 loan_submit_statues_img.setImageDrawable(getResources().getDrawable(R.drawable.ic_warning));
                                 loan_submit_statues_txt1.setText("Pending under you");
                                 loan_submit_statues_txt1.setTextColor(Color.parseColor("#FF9201"));
@@ -1997,7 +2110,7 @@ public class Home extends AppCompatActivity {
                             }else
                             {
                                 Document_verification_img.setImageDrawable(getResources().getDrawable(R.drawable.ic_warning));
-                                Document_verification_txt1.setText("Pending with LoanWiser");
+                                Document_verification_txt1.setText("Not Started");
                                 Document_verification_txt1.setTextColor(Color.parseColor("#FF9201"));
                             }
 
@@ -2012,7 +2125,7 @@ public class Home extends AppCompatActivity {
                             }else
                             {
                                 applied_to_bank_img.setImageDrawable(getResources().getDrawable(R.drawable.ic_warning));
-                                Applied_to_Bank_txt1.setText("Pending with LoanWiser");
+                                Applied_to_Bank_txt1.setText("Not Started");
                                 Applied_to_Bank_txt1.setTextColor(Color.parseColor("#FF9201"));
                                 bank_is_yes.setVisibility(View.GONE);
                             }

@@ -1007,10 +1007,13 @@ public class Alerts {
     public void loadPicasso(Context mCon, String url, final ImageView imageView, final ProgressBar progressBar){
         try {
             Picasso.with(mCon)
-                    .load(url)
+                    .load(url).centerCrop().fit()
                     //.resize(600,600)
                     .placeholder(R.drawable.default_placeholder)
                     .error(R.drawable.failed)
+                    .fit()
+                    // To prevent fade animation
+                    .noFade()
                     .into(imageView,  new Callback() {
                         @Override
                         public void onSuccess() {

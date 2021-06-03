@@ -13,6 +13,7 @@ import com.google.firebase.messaging.RemoteMessage;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import adhoc.app.applibrary.Config.AppUtils.Pref.Pref;
 import in.loanwiser.partnerapp.Push_Notification.MainActivity;
 import in.loanwiser.partnerapp.app.Config;
 import in.loanwiser.partnerapp.util.NotificationUtils;
@@ -34,6 +35,10 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         // Check if message contains a notification payload.
         if (remoteMessage.getNotification() != null) {
             Log.e(TAG, "Notification Body: " + remoteMessage.getNotification().getBody());
+
+            String click_action = remoteMessage.getNotification().getClickAction();
+            Intent intent = new Intent(click_action);
+          //  Pref.putPush_Notification_Title(getApplication(), remoteMessage.getNotification().getBody());
             handleNotification(remoteMessage.getNotification().getBody());
         }
 
@@ -85,6 +90,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
             Log.e(TAG, "imageUrl: " + imageUrl);
             Log.e(TAG, "timestamp: " + timestamp);
 
+          //  Pref.putPush_Notification_Title(getApplication(), title);
 
             if (!NotificationUtils.isAppIsInBackground(getApplicationContext())) {
                 // app is in foreground, broadcast the push message
@@ -123,7 +129,9 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
     private void showNotificationMessage(Context context, String title, String message, String timeStamp, Intent intent) {
         notificationUtils = new NotificationUtils(context);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        intent.putExtra("pushnotification", "yes");
         notificationUtils.showNotificationMessage(title, message, timeStamp, intent);
+
     }
 
     /**
@@ -132,6 +140,8 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
     private void showNotificationMessageWithBigImage(Context context, String title, String message, String timeStamp, Intent intent, String imageUrl) {
         notificationUtils = new NotificationUtils(context);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        intent.putExtra("pushnotification", "yes");
         notificationUtils.showNotificationMessage(title, message, timeStamp, intent, imageUrl);
+
     }
 }

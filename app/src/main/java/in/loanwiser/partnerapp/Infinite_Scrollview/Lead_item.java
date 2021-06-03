@@ -18,6 +18,10 @@ public class Lead_item {
     private String payment_plan;
     private String id1;
     private String pending_asks_count;
+    private String loan_type;
+    private String from_cobrand;
+    private String cobrand_mobile;
+    private String created_at;
 
 
 
@@ -136,17 +140,53 @@ public class Lead_item {
         this.pending_asks_count = pending_asks_count;
     }
 
+    public String getfrom_cobrand() {
+        return from_cobrand;
+    }
+
+    public void setfrom_cobrand(String from_cobrand) {
+        this.from_cobrand = from_cobrand;
+    }
+
+    public String getloan_type() {
+        return loan_type;
+    }
+
+    public void setloan_type(String loan_type) {
+        this.loan_type = loan_type;
+    }
+
+    public String getcobrand_mobile() {
+        return cobrand_mobile;
+    }
+
+    public void setcreated_at(String created_at) {
+        this.created_at = created_at;
+    }
+
+    public String getcreated_at() {
+        return created_at;
+    }
+
+    public void setcobrand_mobile(String cobrand_mobile) {
+        this.cobrand_mobile = cobrand_mobile;
+    }
     public Lead_item(String id, String loan_typename, String step_status, String username, String mobileno,
                      String transaction_id, String loan_amount,String comp_step,String status_disp,String color_code,
-                     String payment_plan,String id1, String pending_asks_count ) {
+                     String payment_plan,String id1, String pending_asks_count, String from_cobrand, String loan_type,
+                     String cobrand_mobile, String created_at) {
         //
         this.id = id;
+        this.cobrand_mobile = cobrand_mobile;
         this.loan_typename = loan_typename;
         this.step_status = step_status;
         this.username = username;
         this.mobileno = mobileno;
         this.transaction_id = transaction_id;
         this.field_status = field_status;
+        this.from_cobrand = from_cobrand;
+        this.loan_type = loan_type;
+        this.created_at = created_at;
 
 
         this.loan_amount = loan_amount;

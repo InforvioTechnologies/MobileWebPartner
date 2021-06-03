@@ -3,6 +3,7 @@ package in.loanwiser.partnerapp.Infinite_Scrollview;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.preference.PreferenceManager;
@@ -31,6 +32,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -42,9 +45,12 @@ import adhoc.app.applibrary.Config.AppUtils.Pref.Pref;
 import adhoc.app.applibrary.Config.AppUtils.Urls;
 import adhoc.app.applibrary.Config.AppUtils.VolleySignleton.AppController;
 import dmax.dialog.SpotsDialog;
+import in.loanwiser.partnerapp.PartnerActivitys.Applicant_Details_Activity;
 import in.loanwiser.partnerapp.PartnerActivitys.Dashboard_Activity;
 import in.loanwiser.partnerapp.PartnerActivitys.Home;
 import in.loanwiser.partnerapp.R;
+import in.loanwiser.partnerapp.Step_Changes_Screen.Viability_Screen_revamp;
+import in.loanwiser.partnerapp.Step_Changes_Screen.Viability_Screen_revamp_Pl_BL;
 
 public class LeadListAdapter_Dashboard1 extends RecyclerView.Adapter<LeadListAdapter_Dashboard1.CustomViewHolder> {
 
@@ -89,13 +95,13 @@ public class LeadListAdapter_Dashboard1 extends RecyclerView.Adapter<LeadListAda
         AppCompatTextView type,doc_steps,doc_status,font1,font2,loantype,assigned;
         AppCompatTextView Statues_update_dot,
                 Lead_Name,loan_amount,app_id,loan_type,payment_plane,step_com,statues_new,
-                status_Ask,Statues_update_view,Statues_update_view1;
+                status_Ask,Statues_update_view,Statues_update_view1,Lead_crated_;
         ImageView v_Image;
         ProgressBar progressBar;
         AppCompatButton appCompatButtonSelect,add_notes,pipline,archive;
         AppCompatImageView loan_type_image;
 
-        LinearLayout Over_all,ly_question;
+        LinearLayout Over_all,cobrand;
         View view;
         String loantype1,statues12,step_status,transaction_id,id,id1;
 
@@ -111,8 +117,10 @@ public class LeadListAdapter_Dashboard1 extends RecyclerView.Adapter<LeadListAda
             statues_new  = (AppCompatTextView) itemView.findViewById(R.id.statues_new);
             status_Ask  = (AppCompatTextView) itemView.findViewById(R.id.status_Ask);
             Over_all = (LinearLayout) itemView.findViewById(R.id.Over_all);
+            cobrand = (LinearLayout) itemView.findViewById(R.id.cobrand);
             Statues_update_view  = (AppCompatTextView) itemView.findViewById(R.id.Statues_update_view);
             Statues_update_view1  = (AppCompatTextView) itemView.findViewById(R.id.Statues_update_view1);
+            Lead_crated_  = (AppCompatTextView) itemView.findViewById(R.id.Lead_crated_);
             progressDialog = new SpotsDialog(context, R.style.Custom);
         }
 
@@ -124,9 +132,30 @@ public class LeadListAdapter_Dashboard1 extends RecyclerView.Adapter<LeadListAda
             //doc_steps.setText(post.getstep_status());
             String statues = post.getstatus_disp();
             Lead_Name.setText(post.getusername());
-            loan_amount.setText("\u20B9"+post.getloan_amount());
+            String loan_amount_name = post.getloan_typename();
+            if(loan_amount_name.equals("null"))
+            {
+                loan_amount.setText("Co-Branded");
+                loan_type.setText("Please Complete from your side");
+            }else
+            {
+                loan_amount.setText("\u20B9"+post.getloan_amount());
+                loan_type.setText(post.getloan_typename());
+            }
+
+            String from_cobrand1 = post.getfrom_cobrand();
+            if(from_cobrand1.equals("1"))
+            {
+                cobrand.setVisibility(View.VISIBLE);
+            }else
+            {
+                cobrand.setVisibility(View.GONE);
+            }
+
+            String createdat = post.getcreated_at();
             app_id.setText(post.getid());
-            loan_type.setText(post.getloan_typename());
+            Lead_crated_.setText(parseDateToddMMyyyy(createdat));
+          //  loan_type.setText(post.getloan_typename());
             step_com.setText(post.getcomp_step());
             statues_new.setText(post.getstatus_disp());
             payment_plane.setText(post.getpayment_plan());
@@ -194,7 +223,15 @@ public class LeadListAdapter_Dashboard1 extends RecyclerView.Adapter<LeadListAda
                 Statues_update_view1.setText("View");
                 Statues_update_view1.setVisibility(View.VISIBLE);
             }
+           /* String from_cobrand = post.getfrom_cobrand();
 
+            if(from_cobrand.equals("1"))
+            {
+                Statues_update_dot.setTextColor(Color.parseColor("#FF9200"));
+                statues_new.setTextColor(Color.parseColor("#FF9200"));
+                statues_new.setText("Cobranded website");
+
+            }*/
             Over_all.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -208,8 +245,39 @@ public class LeadListAdapter_Dashboard1 extends RecyclerView.Adapter<LeadListAda
                         }
                         else
                         {
-                            Log.e("the lead List","intiated ");
-                            Applicant_Status(id1,step_status);
+                            String from_cobrand = post.getfrom_cobrand();
+                            String mobile_cobrank = post.getcobrand_mobile();
+
+                            if(from_cobrand.equals("1"))
+                            {
+                                if(mobile_cobrank.equals("no"))
+                                {
+
+                                      String loan_type  = post.getloan_typename();
+                                    String loan_type_id = post.getloan_type();
+                                    Pref.putLoanType(context,loan_type_id);
+                                    if(loan_type.equals("Personal Loan (Salaried)")||loan_type.equals("Business Loan (Self Employed)"))
+                                    {
+                                        Intent intent = new Intent(context, Viability_Screen_revamp_Pl_BL.class);
+                                        context.startActivity(intent);
+                                    }else
+                                    {
+                                        Intent intent = new Intent(context, Viability_Screen_revamp.class);
+                                        context.startActivity(intent);
+
+                                    }
+
+                                }else
+                                {
+                                    Log.e("the lead List","intiated ");
+                                    Applicant_Status(id1,step_status);
+                                }
+                            }else
+                            {
+
+                            }
+
+
                            // Applicant_Status(id);
                         }
 
@@ -233,6 +301,21 @@ public class LeadListAdapter_Dashboard1 extends RecyclerView.Adapter<LeadListAda
 
     }
 
+    public String parseDateToddMMyyyy(String time) {
+        String inputPattern = "yyyy-MM-dd";
+        String outputPattern = "dd-MM-yyyy";
+        SimpleDateFormat inputFormat = new SimpleDateFormat(inputPattern);
+        SimpleDateFormat outputFormat = new SimpleDateFormat(outputPattern);
+        java.util.Date date = null;
+        String str = null;
+        try {
+            date = inputFormat.parse(time);
+            str = outputFormat.format(date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return str;
+    }
 
     public void Applicant_Status(final String id, final String step_status1) {
 

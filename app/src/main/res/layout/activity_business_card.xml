@@ -5,8 +5,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Partner_Statues.BusinessCardActivity">
-
-    <ScrollView
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swife"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    <HorizontalScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -14,60 +17,73 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:layout_marginBottom="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="20dp"
             android:orientation="vertical">
 
-           <RelativeLayout
-               android:layout_width="match_parent"
-               android:layout_height="300dp"
-               android:layout_marginTop="20dp"
-               android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="500dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="20dp"
+                android:orientation="vertical">
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/imgview">
 
-               <androidx.appcompat.widget.AppCompatImageView
-                   android:id="@+id/imageview"
-                   android:layout_width="match_parent"
-                   android:layout_height="300dp" />
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/editbtn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="20dp"
+                        android:text="@string/edit"
+                        android:textStyle="bold"
+                        android:textColor="#002B5D"
+                        android:textSize="18dp" />
 
-
-
-               <ProgressBar
-                   android:layout_alignBottom="@+id/image_Pdf"
-                   android:id="@+id/progressBarMaterial_pdf"
-                   android:layout_gravity="center"
-                   android:gravity="center"
-                   android:layout_marginTop="30dp"
-                   android:theme="@style/CircularProgress"
-                   style="@style/Widget.AppCompat.ProgressBar"
-                   android:layout_width="match_parent"
-                   android:layout_height="wrap_content"/>
-
-               <RelativeLayout
-                   android:layout_width="match_parent"
-                   android:layout_height="wrap_content"
-                   android:layout_below="@+id/imgview">
-
-                   <androidx.appcompat.widget.AppCompatTextView
-                       android:id="@+id/editbtn"
-                       android:layout_width="wrap_content"
-                       android:layout_height="wrap_content"
-                       android:layout_alignParentEnd="true"
-                       android:text="@string/edit"
-                       android:textSize="14sp"
-                       android:textColor="#002B5D"
-                       android:layout_marginEnd="20dp"/>
-
-               </RelativeLayout>
-
-           </RelativeLayout>
+                </RelativeLayout>
+                <RelativeLayout
+                    android:layout_marginTop="10dp"
+                    android:layout_width="500dp"
+                    android:layout_height="300dp"
+                    android:orientation="vertical">
 
 
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/imageview"
+                        android:layout_width="500dp"
+                        android:layout_height="400dp"
+                        android:layout_marginRight="25dp"
+                        android:layout_gravity="center_horizontal"
+                        android:adjustViewBounds="true"
+                        android:scaleType="centerInside" />
+
+
+                    <ProgressBar
+                        android:id="@+id/progressBarMaterial_pdf"
+                        style="@style/Widget.AppCompat.ProgressBar"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBottom="@+id/image_Pdf"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="30dp"
+                        android:gravity="center"
+                        android:theme="@style/CircularProgress" />
+
+
+
+                </RelativeLayout>
+
+            </LinearLayout>
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="40dp"
                 android:layout_gravity="center"
+                android:layout_marginTop="40dp"
                 android:gravity="center">
 
                 <androidx.appcompat.widget.AppCompatTextView
@@ -75,9 +91,8 @@
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:text="@string/info5"
-                    android:textSize="14sp"
                     android:textColor="#002B5D"
-                    />
+                    android:textSize="14sp" />
 
             </RelativeLayout>
 
@@ -92,35 +107,33 @@
                     android:id="@+id/whatsappbutton"
                     android:layout_width="240dp"
                     android:layout_height="55dp"
-                    android:padding="16dp"
                     android:layout_gravity="center"
                     android:layout_marginTop="10dp"
-                    android:text="Share in whatsapp"
-                    android:textColor="#2CB742"
                     android:background="#ADFFAA"
                     android:drawableLeft="@drawable/whatsapp"
-                    android:textSize="14sp"/>
+                    android:padding="16dp"
+                    android:text="Share in whatsapp"
+                    android:textColor="#2CB742"
+                    android:textSize="14sp" />
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/othernetworkbutton"
                     android:layout_width="240dp"
                     android:layout_height="55dp"
-                    android:padding="16dp"
                     android:layout_gravity="center"
                     android:layout_marginTop="10dp"
                     android:background="#B9D9FF"
-                    android:textColor="#2680EB"
-                    android:text="Share in Others"
                     android:drawableLeft="@drawable/ic_sharing"
-                    android:textSize="14sp"/>
+                    android:padding="16dp"
+                    android:text="Share in Others"
+                    android:textColor="#2680EB"
+                    android:textSize="14sp" />
 
             </LinearLayout>
 
 
-
-
         </LinearLayout>
 
-    </ScrollView>
-
+    </HorizontalScrollView>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 </LinearLayout>

@@ -88,7 +88,7 @@ public class Viability_Screen_revamp_co extends SimpleActivity implements Number
     AppCompatImageView prop_scroll,pan_scroll,salaried_scroll,res_scroll1_img;
     LinearLayout residence_layout,pro_details,salaried,self_employeed,property_Scroll,Pan_scroll,salaried_Scroll,
             property_ly,pan_ly,salaried_ly,self_ly,res_scroll,res_ly,co_applicant_ly,applicant_ly,prop_details_identified,
-            employement_selection_ly;
+            employement_selection_ly,email_ly,name_ly;
 
     AppCompatButton property_btn,Pan_btn,salried_self_btn,residence_btn,co_applicant_yes,co_applicant_no;
     PopupWindow popupWindow;
@@ -303,6 +303,8 @@ public class Viability_Screen_revamp_co extends SimpleActivity implements Number
         self_ly = (LinearLayout) findViewById(R.id.self_ly);
 
         employement_selection_ly = (LinearLayout) findViewById(R.id.employement_selection_ly);
+        email_ly=(LinearLayout)findViewById(R.id.email_ly);
+        name_ly=(LinearLayout)findViewById(R.id.name_ly);
 
 
         property_btn = (AppCompatButton) findViewById(R.id.property_btn);
@@ -400,6 +402,23 @@ public class Viability_Screen_revamp_co extends SimpleActivity implements Number
             property_price_ly.setVisibility(View.GONE);
             plot_value_ly.setVisibility(View.GONE);
             propert_identified_ly.setVisibility(View.GONE);
+        }else if(loan_type_id.equals("22")){
+            pan_ly.setVisibility(View.VISIBLE);
+            email_ly.setVisibility(View.VISIBLE);
+            name_ly.setVisibility(View.VISIBLE);
+
+        }else if (loan_type_id.equals("31")){
+            pan_ly.setVisibility(View.VISIBLE);
+
+            email_ly.setVisibility(View.VISIBLE);
+            name_ly.setVisibility(View.VISIBLE);
+
+        }else if (loan_type_id.equals("32")){
+            pan_ly.setVisibility(View.VISIBLE);
+
+            email_ly.setVisibility(View.VISIBLE);
+            name_ly.setVisibility(View.VISIBLE);
+
         }
 
     }
@@ -454,26 +473,19 @@ public class Viability_Screen_revamp_co extends SimpleActivity implements Number
             public void onClick(View view) {
 
 
-                if(loan_type_id.equals("1") )
-                {
-                    if(Property_Identified_ID.equals("0"))
-                    {
-                        Toast.makeText(context,"Select Property Identified Type",Toast.LENGTH_SHORT).show();
+                if (loan_type_id.equals("1")) {
+                    if (Property_Identified_ID.equals("0")) {
+                        Toast.makeText(context, "Select Property Identified Type", Toast.LENGTH_SHORT).show();
 
-                    }else
-                    {
-                        if(Property_Title_ID.equals("0"))
-                        {
-                            Toast.makeText(context,"Select Property Title",Toast.LENGTH_SHORT).show();
+                    } else {
+                        if (Property_Title_ID.equals("0")) {
+                            Toast.makeText(context, "Select Property Title", Toast.LENGTH_SHORT).show();
 
-                        }else
-                        {
-                            if(Propery_Type_ID.equals("0"))
-                            {
-                                Toast.makeText(context,"Select Property Type",Toast.LENGTH_SHORT).show();
+                        } else {
+                            if (Propery_Type_ID.equals("0")) {
+                                Toast.makeText(context, "Select Property Type", Toast.LENGTH_SHORT).show();
 
-                            }else
-                            {
+                            } else {
                                 if (!validate_property_pincode1_edit_txt()) {
                                     return;
                                 }
@@ -487,16 +499,16 @@ public class Viability_Screen_revamp_co extends SimpleActivity implements Number
                                 String property_price_ = property_price_edt.getText().toString();
 
                                 try {
-                                    Property_jsonobject.put("property_identify",Property_Identified_ID);
-                                    Property_jsonobject.put("property_title",Property_Title_ID);
-                                    Property_jsonobject.put("property_type",Propery_Type_ID);
-                                    Property_jsonobject.put("prop_pincode",property_pincode1_);
-                                    Property_jsonobject.put("property_price",property_price_);
+                                    Property_jsonobject.put("property_identify", Property_Identified_ID);
+                                    Property_jsonobject.put("property_title", Property_Title_ID);
+                                    Property_jsonobject.put("property_type", Propery_Type_ID);
+                                    Property_jsonobject.put("prop_pincode", property_pincode1_);
+                                    Property_jsonobject.put("property_price", property_price_);
                                 } catch (JSONException e) {
                                     e.printStackTrace();
                                 }
 
-                                Log.e("the value",Property_jsonobject.toString());
+                                Log.e("the value", Property_jsonobject.toString());
                                 property_btn.setVisibility(View.GONE);
                                 Pan_btn.setVisibility(View.VISIBLE);
                                 salried_self_btn.setVisibility(View.GONE);
@@ -524,22 +536,16 @@ public class Viability_Screen_revamp_co extends SimpleActivity implements Number
                     }
 
 
+                } else if (loan_type_id.equals("2") || loan_type_id.equals("5") || loan_type_id.equals("10")) {
 
+                    if (Property_Title_ID.equals("0")) {
+                        Toast.makeText(context, "Select Property Title", Toast.LENGTH_SHORT).show();
 
-                } else if(loan_type_id.equals("2") ||loan_type_id.equals("5") ||loan_type_id.equals("10")){
+                    } else {
+                        if (Propery_Type_ID.equals("0")) {
+                            Toast.makeText(context, "Select Property Type", Toast.LENGTH_SHORT).show();
 
-                    if(Property_Title_ID.equals("0"))
-                    {
-                        Toast.makeText(context,"Select Property Title",Toast.LENGTH_SHORT).show();
-
-                    }else
-                    {
-                        if(Propery_Type_ID.equals("0"))
-                        {
-                            Toast.makeText(context,"Select Property Type",Toast.LENGTH_SHORT).show();
-
-                        }else
-                        {
+                        } else {
                             if (!validate_property_pincode1_edit_txt()) {
                                 return;
                             }
@@ -553,16 +559,16 @@ public class Viability_Screen_revamp_co extends SimpleActivity implements Number
                             String property_price_ = property_price_edt.getText().toString();
 
                             try {
-                              //  Property_jsonobject.put("property_identify",Property_Identified_ID);
-                                Property_jsonobject.put("property_title",Property_Title_ID);
-                                Property_jsonobject.put("property_type",Propery_Type_ID);
-                                Property_jsonobject.put("prop_pincode",property_pincode1_);
-                                Property_jsonobject.put("property_price",property_price_);
+                                //  Property_jsonobject.put("property_identify",Property_Identified_ID);
+                                Property_jsonobject.put("property_title", Property_Title_ID);
+                                Property_jsonobject.put("property_type", Propery_Type_ID);
+                                Property_jsonobject.put("prop_pincode", property_pincode1_);
+                                Property_jsonobject.put("property_price", property_price_);
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
 
-                            Log.e("the value",Property_jsonobject.toString());
+                            Log.e("the value", Property_jsonobject.toString());
                             property_btn.setVisibility(View.GONE);
                             Pan_btn.setVisibility(View.VISIBLE);
                             salried_self_btn.setVisibility(View.GONE);
@@ -586,21 +592,16 @@ public class Viability_Screen_revamp_co extends SimpleActivity implements Number
 
                     }
 
-                } else if(loan_type_id.equals("3") )
-                {
+                } else if (loan_type_id.equals("3")) {
 
-                    if(Property_Title_ID.equals("0"))
-                    {
-                        Toast.makeText(context,"Select Property Title",Toast.LENGTH_SHORT).show();
+                    if (Property_Title_ID.equals("0")) {
+                        Toast.makeText(context, "Select Property Title", Toast.LENGTH_SHORT).show();
 
-                    }else
-                    {
-                        if(Propery_Type_ID.equals("0"))
-                        {
-                            Toast.makeText(context,"Select Property Type",Toast.LENGTH_SHORT).show();
+                    } else {
+                        if (Propery_Type_ID.equals("0")) {
+                            Toast.makeText(context, "Select Property Type", Toast.LENGTH_SHORT).show();
 
-                        }else
-                        {
+                        } else {
                             if (!validate_property_pincode1_edit_txt()) {
                                 return;
                             }
@@ -619,17 +620,17 @@ public class Viability_Screen_revamp_co extends SimpleActivity implements Number
 
                             try {
 
-                                Property_jsonobject.put("property_title",Property_Title_ID);
-                                Property_jsonobject.put("property_type",Propery_Type_ID);
-                                Property_jsonobject.put("prop_pincode",property_pincode1_);
-                                Property_jsonobject.put("plot_value",plot_Value_str);
-                                Property_jsonobject.put("cost_estimation",cost_estimation_);
+                                Property_jsonobject.put("property_title", Property_Title_ID);
+                                Property_jsonobject.put("property_type", Propery_Type_ID);
+                                Property_jsonobject.put("prop_pincode", property_pincode1_);
+                                Property_jsonobject.put("plot_value", plot_Value_str);
+                                Property_jsonobject.put("cost_estimation", cost_estimation_);
 
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
 
-                            Log.e("the value",Property_jsonobject.toString());
+                            Log.e("the value", Property_jsonobject.toString());
                             property_btn.setVisibility(View.GONE);
                             Pan_btn.setVisibility(View.VISIBLE);
                             salried_self_btn.setVisibility(View.GONE);
@@ -653,20 +654,15 @@ public class Viability_Screen_revamp_co extends SimpleActivity implements Number
 
                     }
 
-                }else if(loan_type_id.equals("4"))
-                {
-                    if(Property_Title_ID.equals("0"))
-                    {
-                        Toast.makeText(context,"Select Property Title",Toast.LENGTH_SHORT).show();
+                } else if (loan_type_id.equals("4")) {
+                    if (Property_Title_ID.equals("0")) {
+                        Toast.makeText(context, "Select Property Title", Toast.LENGTH_SHORT).show();
 
-                    }else
-                    {
-                        if(Propery_Type_ID.equals("0"))
-                        {
-                            Toast.makeText(context,"Select Property Type",Toast.LENGTH_SHORT).show();
+                    } else {
+                        if (Propery_Type_ID.equals("0")) {
+                            Toast.makeText(context, "Select Property Type", Toast.LENGTH_SHORT).show();
 
-                        }else
-                        {
+                        } else {
                             if (!validate_property_pincode1_edit_txt()) {
                                 return;
                             }
@@ -677,21 +673,21 @@ public class Viability_Screen_revamp_co extends SimpleActivity implements Number
 
                             String property_pincode1_ = property_pincode1_edit_txt.getText().toString();
                             String plot_Value_str = plot_Value.getText().toString();
-                           // String cost_estimation_ = cost_estimation_edit_text.getText().toString();
+                            // String cost_estimation_ = cost_estimation_edit_text.getText().toString();
 
                             try {
 
-                                Property_jsonobject.put("property_title",Property_Title_ID);
-                                Property_jsonobject.put("property_type",Propery_Type_ID);
-                                Property_jsonobject.put("prop_pincode",property_pincode1_);
-                                Property_jsonobject.put("plot_value",plot_Value_str);
-                               // Property_jsonobject.put("cost_estimation",cost_estimation_);
+                                Property_jsonobject.put("property_title", Property_Title_ID);
+                                Property_jsonobject.put("property_type", Propery_Type_ID);
+                                Property_jsonobject.put("prop_pincode", property_pincode1_);
+                                Property_jsonobject.put("plot_value", plot_Value_str);
+                                // Property_jsonobject.put("cost_estimation",cost_estimation_);
 
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
 
-                            Log.e("the value",Property_jsonobject.toString());
+                            Log.e("the value", Property_jsonobject.toString());
                             property_btn.setVisibility(View.GONE);
                             Pan_btn.setVisibility(View.VISIBLE);
                             salried_self_btn.setVisibility(View.GONE);
@@ -715,21 +711,15 @@ public class Viability_Screen_revamp_co extends SimpleActivity implements Number
 
                     }
 
-                }
-                else if(loan_type_id.equals("6") ||loan_type_id.equals("9"))
-                {
-                    if(Property_Title_ID.equals("0"))
-                    {
-                        Toast.makeText(context,"Select Property Title",Toast.LENGTH_SHORT).show();
+                } else if (loan_type_id.equals("6") || loan_type_id.equals("9")) {
+                    if (Property_Title_ID.equals("0")) {
+                        Toast.makeText(context, "Select Property Title", Toast.LENGTH_SHORT).show();
 
-                    }else
-                    {
-                        if(Propery_Type_ID.equals("0"))
-                        {
-                            Toast.makeText(context,"Select Property Type",Toast.LENGTH_SHORT).show();
+                    } else {
+                        if (Propery_Type_ID.equals("0")) {
+                            Toast.makeText(context, "Select Property Type", Toast.LENGTH_SHORT).show();
 
-                        }else
-                        {
+                        } else {
                             if (!validate_property_pincode1_edit_txt()) {
                                 return;
                             }
@@ -748,17 +738,17 @@ public class Viability_Screen_revamp_co extends SimpleActivity implements Number
 
                             try {
 
-                                Property_jsonobject.put("property_title",Property_Title_ID);
-                                Property_jsonobject.put("property_type",Propery_Type_ID);
-                                Property_jsonobject.put("prop_pincode",property_pincode1_);
-                                Property_jsonobject.put("plot_value",property_price_);
-                                 Property_jsonobject.put("cost_estimation",cost_estimation_);
+                                Property_jsonobject.put("property_title", Property_Title_ID);
+                                Property_jsonobject.put("property_type", Propery_Type_ID);
+                                Property_jsonobject.put("prop_pincode", property_pincode1_);
+                                Property_jsonobject.put("plot_value", property_price_);
+                                Property_jsonobject.put("cost_estimation", cost_estimation_);
 
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
 
-                            Log.e("the value",Property_jsonobject.toString());
+                            Log.e("the value", Property_jsonobject.toString());
                             property_btn.setVisibility(View.GONE);
                             Pan_btn.setVisibility(View.VISIBLE);
                             salried_self_btn.setVisibility(View.GONE);
@@ -781,25 +771,21 @@ public class Viability_Screen_revamp_co extends SimpleActivity implements Number
 
                     }
 
-                } else if(loan_type_id.equals("8")) {
+                } else if (loan_type_id.equals("8")) {
 
                     property_type_ly.setVisibility(View.VISIBLE);
                     property_title.setVisibility(View.VISIBLE);
                     property_pincode.setVisibility(View.VISIBLE);
                     cost_estimation_ly.setVisibility(View.VISIBLE);
 
-                    if(Property_Title_ID.equals("0"))
-                    {
-                        Toast.makeText(context,"Select Property Title",Toast.LENGTH_SHORT).show();
+                    if (Property_Title_ID.equals("0")) {
+                        Toast.makeText(context, "Select Property Title", Toast.LENGTH_SHORT).show();
 
-                    }else
-                    {
-                        if(Propery_Type_ID.equals("0"))
-                        {
-                            Toast.makeText(context,"Select Property Type",Toast.LENGTH_SHORT).show();
+                    } else {
+                        if (Propery_Type_ID.equals("0")) {
+                            Toast.makeText(context, "Select Property Type", Toast.LENGTH_SHORT).show();
 
-                        }else
-                        {
+                        } else {
                             if (!validate_property_pincode1_edit_txt()) {
                                 return;
                             }
@@ -811,22 +797,22 @@ public class Viability_Screen_revamp_co extends SimpleActivity implements Number
                             Property_jsonobject = new JSONObject();
 
                             String property_pincode1_ = property_pincode1_edit_txt.getText().toString();
-                          //  String property_price_ = property_price_edt.getText().toString();
+                            //  String property_price_ = property_price_edt.getText().toString();
                             String cost_estimation_ = cost_estimation_edit_text.getText().toString();
 
                             try {
 
-                                Property_jsonobject.put("property_title",Property_Title_ID);
-                                Property_jsonobject.put("property_type",Propery_Type_ID);
-                                Property_jsonobject.put("prop_pincode",property_pincode1_);
-                               // Property_jsonobject.put("plot_value",property_price_);
-                                Property_jsonobject.put("cost_estimation",cost_estimation_);
+                                Property_jsonobject.put("property_title", Property_Title_ID);
+                                Property_jsonobject.put("property_type", Propery_Type_ID);
+                                Property_jsonobject.put("prop_pincode", property_pincode1_);
+                                // Property_jsonobject.put("plot_value",property_price_);
+                                Property_jsonobject.put("cost_estimation", cost_estimation_);
 
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
 
-                            Log.e("the value",Property_jsonobject.toString());
+                            Log.e("the value", Property_jsonobject.toString());
                             property_btn.setVisibility(View.GONE);
                             Pan_btn.setVisibility(View.VISIBLE);
                             salried_self_btn.setVisibility(View.GONE);
@@ -849,11 +835,84 @@ public class Viability_Screen_revamp_co extends SimpleActivity implements Number
                         }
 
                     }
+                } else if (loan_type_id.equals("22")) {
+
+
+                    String DOB1 = date_of_birt_txt.getText().toString();
+                    Log.e("DOB", DOB1);
+                    String Pan = PAN_Edit_text.getText().toString();
+
+                    Pattern pattern = Pattern.compile("[A-Z]{5}[0-9]{4}[A-Z]{1}");
+
+                    Matcher matcher = pattern.matcher(Pan);
+
+                    if (!validate_name_edit_text()) {
+                        return;
+                    }
+                    if (!validate_email()) {
+                        return;
+                    }
+                    if (Employee_type_Id.equals("0")) {
+                        Toast.makeText(context, "Select Employment Type", Toast.LENGTH_SHORT).show();
+
+                    } else {
+                        if (matcher.matches()) {
+
+                            if (!validate_DOB()) {
+                                return;
+                            }
+                            if (!validate_Fathers_Name()) {
+                                return;
+                            }
+
+                            if (maritial_status_id.equals("0")) {
+                                Toast.makeText(context, "Select marital Status", Toast.LENGTH_SHORT).show();
+                            } else {
+
+                                Pan_Details = new JSONObject();
+
+
+                                DOB = date_of_birt_txt.getText().toString();
+
+                                Fathers_Name_str = Fathers_Name.getText().toString();
+                                Pan_number = PAN_Edit_text.getText().toString();
+                                Name_ = name_edit_text.getText().toString();
+                                email_ = email_edit_text.getText().toString();
+
+                                try {
+
+                                    Pan_Details.put("member_name", Name_);
+                                    Pan_Details.put("member_email", email_);
+                                    Pan_Details.put("member_dob", DOB);
+                                    Pan_Details.put("father_name", Fathers_Name_str);
+                                    Pan_Details.put("pan_no", Pan_number);
+                                    Pan_Details.put("marital_status", maritial_status_id);
+                                    Pan_Details.put("has_pancard", "1");
+
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+
+                                Log.e("the PAN", Pan_Details.toString());
+                                Submit_PAN();
+
+                            }
+
+                        } else {
+                            PAN_Edit_text.setError(getText(R.string.pan_err));
+                            PAN_Edit_text.requestFocus();
+                        }
+
+                    }
+
+
                 }
 
-
-
             }
+
+
+
+
         });
 
         final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
@@ -897,6 +956,8 @@ public class Viability_Screen_revamp_co extends SimpleActivity implements Number
         Pan_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                email_ly.setVisibility(View.VISIBLE);
+                name_ly.setVisibility(View.VISIBLE);
 
                 String DOB1 = date_of_birt_txt.getText().toString();
                 Log.e("DOB",DOB1);
@@ -3938,7 +3999,151 @@ public class Viability_Screen_revamp_co extends SimpleActivity implements Number
 
         AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
     }
+
+
+
+
     private void viability_check_rule() {
+        JSONObject J= null;
+        try {
+            J =new JSONObject();
+            J.put("transaction_id",Pref.getTRANSACTIONID(getApplicationContext()));
+            J.put("user_id", Pref.getUSERID(getApplicationContext()));
+            J.put("b2b_id", Pref.getID(getApplicationContext()));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        Log.e("rule rune request ", String.valueOf(J));
+        progressDialog.show();
+        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, Urls.viability_eligibilitycheck, J,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        Log.e("rule run response", String.valueOf(response));
+                        String data = String.valueOf(response);
+                        try {
+                            String Status = response.getString("status");
+                            JSONObject response_ = response.getJSONObject("response");
+                            String eligible_status = response_.getString("eligible_status");
+                            if(eligible_status.equals("1"))
+                            {
+                                progressDialog.dismiss();
+                                // viability_check_pass();
+                                Eligibility_check_doc_checklist_generate();
+                            }else
+                            {
+                                String viability_status = response_.getString("viability_status");
+                                if(viability_status.equals("1"))
+                                {
+                                    Toast.makeText(context,"Viability Failed",Toast.LENGTH_SHORT).show();
+                                    String rule_desc = null;
+                                    String age_vale = null;
+                                    String ind_salary = null;
+                                    String bank_failure = null;
+                                    JSONArray jsonArray = response.getJSONArray("rule_desc");
+                                    JSONArray jsonArray1 = response.getJSONArray("rule_message");
+                                    for (int i=0; i<jsonArray.length();i++) {
+                                        try {
+                                            JSONObject J = jsonArray.getJSONObject(i);
+                                            rule_desc = J.getString("rule_desc");
+                                            if(rule_desc.equals("Age"))
+                                            {
+                                                age_vale="Sorry.! Age Criteria Not Met | You can apply for a loan in the name of - any one of your family members, whose Age is between 20 and 55.";
+                                                rule_message.add(age_vale);
+                                            }else if(rule_desc.equals("Individual Salary"))
+                                            {
+                                                ind_salary="Sorry.! Income should not be less than \u20B9 12,000 for applying loan with us.";
+                                                rule_message.add(ind_salary);
+                                            }else
+                                            {
+                                                rule_desc = J.getString("fail_message");
+                                                bank_failure="Sorry.! Currently we have no partner banks available in applicants location" +" "+
+                                                        "We are On-boarding as many new banks as possible. Stay tuned.! ";
+                                                rule_message.add(rule_desc);
+                                            }
+                                            Log.e("rule_desc",rule_desc);
+                                        } catch (JSONException e) {
+                                            e.printStackTrace();
+                                        }
+                                    }
+                                    // Toast.makeText(context,"Viability Created Successfully",Toast.LENGTH_SHORT).show();
+                                    LayoutInflater layoutInflater = (LayoutInflater) Viability_Screen_revamp_co.this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                                    View customView = layoutInflater.inflate(R.layout.popup_rul_fail,null);
+                                    Button godashboard = (Button) customView.findViewById(R.id.godashboard);
+                                    TextView content_txt = (TextView) customView.findViewById(R.id.content_txt);
+                                    String list = Arrays.toString(rule_message.toArray()).replace("[", "").replace("]", "");
+                                    content_txt.setText(list);
+                                    //instantiate popup window
+                                    popupWindow = new PopupWindow(customView, LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
+                                    //display the popup window
+                                    popupWindow.showAtLocation(godashboard, Gravity.CENTER, 0, 0);
+                                    //close the popup window on button click
+                                    godashboard.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View v) {
+                                            Intent intent = new Intent(Viability_Screen_revamp_co.this, Dashboard_Activity.class);
+                                            startActivity(intent);
+                                            finish();
+                                        }
+                                    });
+                                    progressDialog.dismiss();
+                                }else
+                                {
+                                    LayoutInflater layoutInflater = (LayoutInflater) Viability_Screen_revamp_co.this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                                    View customView = layoutInflater.inflate(R.layout.popup_rul_fail,null);
+                                    Button godashboard = (Button) customView.findViewById(R.id.godashboard);
+                                    TextView content_txt = (TextView) customView.findViewById(R.id.content_txt);
+                                    //  String list = Arrays.toString(rule_message.toArray()).replace("[", "").replace("]", "");
+                                    content_txt.setText("Bank Requirement Not Met");
+                                    //instantiate popup window
+                                    popupWindow = new PopupWindow(customView, LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
+                                    //display the popup window
+                                    popupWindow.showAtLocation(godashboard, Gravity.CENTER, 0, 0);
+                                    //close the popup window on button click
+                                    godashboard.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View v) {
+                                            Intent intent = new Intent(Viability_Screen_revamp_co.this, Dashboard_Activity.class);
+                                            startActivity(intent);
+                                            finish();
+                                        }
+                                    });
+                                    progressDialog.dismiss();
+                                }
+                            }
+                            //JSONObject jsonObject1 = response.getJSONObject("response");
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        Log.e("Lead creation", String.valueOf(response));
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                //Log.d(TAG, error.getMessage());
+                VolleyLog.d("TAG", "Error: " + error.getMessage());
+                Toast.makeText(mCon, "Network error, try after some time",Toast.LENGTH_SHORT).show();
+                progressDialog.dismiss();
+            }
+        }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("content-type", "application/json");
+                return headers;
+            }
+        };
+        // AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
+        int socketTimeout = 0;
+        RetryPolicy policy = new DefaultRetryPolicy(socketTimeout,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
+        jsonObjReq.setRetryPolicy(policy);
+        AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
+    }
+
+
+    private void viability_check_rules() {
 
         JSONObject J= null;
 

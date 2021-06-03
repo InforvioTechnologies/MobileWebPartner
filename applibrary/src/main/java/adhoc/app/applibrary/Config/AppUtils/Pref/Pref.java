@@ -24,6 +24,7 @@ public final class Pref {
     public static String DOC = "DOC";
     public static String PRO = "PRO";
     public static String UserID = "UserID";
+    public static String STATUES_FLAG = "STATUES_FLAG";
     public static String UserCode = "UserCode";
     public static String CID = "CID";
     public static String CM1 = "CM1";
@@ -62,6 +63,7 @@ public final class Pref {
     public static String Employee_type_Id = "Employee_type_Id";
     public static String ask_id = "ask_id";
     public static String Galary_Path = "Galary_Path";
+    public static String Push_Notification_Title = "Push_Notification_Title";
 
     public static SharedPreferences get(final Context context) {
         return context.getSharedPreferences(context.getResources().getString(R.string.app_name),Context.MODE_PRIVATE);
@@ -228,7 +230,20 @@ public static void putapplicant_name(final Context context, String aUserId) {
         editor.commit();
     }
 
+    public static void putSTATUES_FLAG(final Context context, String aUserId) {
+        Pref.putPref(context, STATUES_FLAG, aUserId);
+    }
 
+    public static String getSTATUES_FLAG(final Context context) {
+        return Pref.getPref(context, STATUES_FLAG, null);
+    }
+
+    public static void removeSTATUES_FLAG(final Context context) {
+        SharedPreferences prefs = Pref.get(context);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.remove(STATUES_FLAG);
+        editor.commit();
+    }
 
     //Residence Type
     public static void putResidenceType(final Context context, String aUserId) {
@@ -640,6 +655,21 @@ public static void putapplicant_name(final Context context, String aUserId) {
         SharedPreferences prefs = Pref.get(context);
         SharedPreferences.Editor editor = prefs.edit();
         editor.remove(MOBILE);
+        editor.commit();
+    }
+
+    public static void putPush_Notification_Title(final Context context, String aUserId) {
+        Pref.putPref(context, Push_Notification_Title, aUserId);
+    }
+
+    public static String getPush_Notification_Title(final Context context) {
+        return Pref.getPref(context, Push_Notification_Title, null);
+    }
+
+    public static void removePush_Notification_Title(final Context context) {
+        SharedPreferences prefs = Pref.get(context);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.remove(Push_Notification_Title);
         editor.commit();
     }
 

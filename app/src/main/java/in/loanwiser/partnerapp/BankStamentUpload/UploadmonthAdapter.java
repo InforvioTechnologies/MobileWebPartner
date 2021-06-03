@@ -47,6 +47,12 @@ public class UploadmonthAdapter extends RecyclerView.Adapter<UploadmonthAdapter.
             holder.yeartext.setTextColor(Color.parseColor("#0EBB9A"));
             holder.rightcarnerlay.setBackgroundColor(Color.parseColor("#CCF5ED"));
             holder.leftcarnerlay.setBackgroundColor(Color.parseColor("#0EBB9A"));
+        }else if (requiremonth.equalsIgnoreCase("missing"))
+        {
+            holder.yeartext.setText(data.name);
+            holder.yeartext.setTextColor(Color.parseColor("#FF9201"));
+            holder.rightcarnerlay.setBackgroundColor(Color.parseColor("#FFE6CE"));
+            holder.leftcarnerlay.setBackgroundColor(Color.parseColor("#FF9201"));
         }
         Log.i("TAG", "onBindViewHolder:requiremonth "+requiremonth);
 

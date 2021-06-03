@@ -3,12 +3,14 @@ package in.loanwiser.partnerapp.Partner_Statues;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -41,8 +43,12 @@ import adhoc.app.applibrary.Config.AppUtils.Pref.Pref;
 import adhoc.app.applibrary.Config.AppUtils.Urls;
 import adhoc.app.applibrary.Config.AppUtils.VolleySignleton.AppController;
 import dmax.dialog.SpotsDialog;
+import in.loanwiser.partnerapp.PartnerActivitys.Applicant_Details_Activity;
 import in.loanwiser.partnerapp.PartnerActivitys.Home;
 import in.loanwiser.partnerapp.R;
+import in.loanwiser.partnerapp.Step_Changes_Screen.Lead_Crration_Activity;
+import in.loanwiser.partnerapp.Step_Changes_Screen.Viability_Screen_revamp;
+import in.loanwiser.partnerapp.Step_Changes_Screen.Viability_Screen_revamp_Pl_BL;
 
 public class Resent_Lead_Statues extends RecyclerView.Adapter<Resent_Lead_Statues.CustomViewHolder> {
 
@@ -82,15 +88,39 @@ public class Resent_Lead_Statues extends RecyclerView.Adapter<Resent_Lead_Statue
         String status_disp  = items.get(position).getstatus_disp();
 
 
+
       //  String input= "sentence";
-        String output = name.substring(0, 1).toUpperCase() + name.substring(1);
+        if(name.isEmpty())
+        {
+            holder.lead_name.setText(name);
+        }else
+        {
+            String output = name.substring(0, 1).toUpperCase() + name.substring(1);
+            holder.lead_name.setText(output);
+        }
        // textview.setText(output);
+      /*  String output = name.substring(0, 1).toUpperCase() + name.substring(1);
+        holder.lead_name.setText(output);*/
 
-
-        holder.lead_name.setText(output);
        // holder.loan_amount.setText(loan_amount);
-        holder.loan_amount.setText("\u20B9"+loan_amount);
-        holder.loan_type.setText(loan_type);
+        if(loan_type.equals("null"))
+        {
+            holder.loan_amount.setText("Co-Branded");
+            holder.loan_type.setText("Complete from your side");
+        }else
+        {
+            holder.loan_amount.setText("\u20B9"+loan_amount);
+            holder.loan_type.setText(loan_type);
+        }
+        String From_cobrand  = items.get(position).getfrom_cobrand();
+        if(From_cobrand.equals("1"))
+        {
+            holder.cobrand.setVisibility(View.VISIBLE);
+        }else
+        {
+            holder.cobrand.setVisibility(View.GONE);
+        }
+
         holder.Statues_update.setText(status_disp);
 
         if(status_disp.equals("Pending under you"))
@@ -143,9 +173,15 @@ public class Resent_Lead_Statues extends RecyclerView.Adapter<Resent_Lead_Statue
             holder.Statues_update_view1.setText("View");
             holder.Statues_update_view1.setVisibility(View.VISIBLE);
         }
+      /*  String From_cobrand  = items.get(position).getfrom_cobrand();
 
+        if(From_cobrand.equals("1"))
+        {
+            holder.Statues_update_dot.setTextColor(Color.parseColor("#FF9200"));
+            holder.Statues_update.setTextColor(Color.parseColor("#FF9200"));
 
-
+                holder.Statues_update.setText("Cobranded website");
+        }*/
 
       //  Log.e("The Appointment Date",name);
       //  String dt = parseDateToddMMyyyy(appointment_date);
@@ -164,8 +200,38 @@ public class Resent_Lead_Statues extends RecyclerView.Adapter<Resent_Lead_Statue
         holder.Statues_update_view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                final String applicant_id  = items.get(position).getUser_ID();
-                Applicant_Status(applicant_id);
+                String From_cobrand  = items.get(position).getfrom_cobrand();
+                String mobile_cobrank  = items.get(position).getcobrank_mobile();
+
+                if(From_cobrand.equals("1"))
+                {
+                    if(mobile_cobrank.equals("no"))
+                    {
+                        String loan_type  = items.get(position).getloan_type();
+                        String loan_type_id  = items.get(position).getloan_typeid();
+                        Pref.putLoanType(context,loan_type_id);
+                        if(loan_type.equals("Personal Loan (Salaried)")||loan_type.equals("Business Loan (Self Employed)"))
+                        {
+                            Intent intent = new Intent(context, Viability_Screen_revamp_Pl_BL.class);
+                            context.startActivity(intent);
+                        }else
+                        {
+                            Intent intent = new Intent(context, Viability_Screen_revamp.class);
+                            context.startActivity(intent);
+
+                        }
+
+                    }else
+                    {
+                        Intent intent = new Intent(context, Applicant_Details_Activity.class);
+                        context.startActivity(intent);
+                    }
+                }else
+                {
+                    final String applicant_id  = items.get(position).getUser_ID();
+                    Applicant_Status(applicant_id);
+                }
+
             }
         });
         holder.Statues_update_view1.setOnClickListener(new View.OnClickListener() {
@@ -200,6 +266,7 @@ public class Resent_Lead_Statues extends RecyclerView.Adapter<Resent_Lead_Statue
         private CardView cardView;
         private AppCompatButton Bt_create_appointment;
         private AppCompatTextView Statues_update_view,Statues_update_view1;
+        private LinearLayout cobrand;
 
         public CustomViewHolder(View view) {
             super(view);
@@ -207,6 +274,7 @@ public class Resent_Lead_Statues extends RecyclerView.Adapter<Resent_Lead_Statue
             loan_amount = view.findViewById(R.id.loan_amount);
             loan_type = view.findViewById(R.id.loan_type);
             Statues_update = view.findViewById(R.id.Statues_update);
+            cobrand = view.findViewById(R.id.cobrand);
             cardView = view.findViewById(R.id.cardView);
             Bt_create_appointment = view.findViewById(R.id.Bt_create_appointment);
             Statues_update_dot = view.findViewById(R.id.Statues_update_dot);

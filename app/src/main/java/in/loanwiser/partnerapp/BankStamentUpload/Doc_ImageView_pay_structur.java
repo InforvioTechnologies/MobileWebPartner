@@ -184,14 +184,6 @@ public class Doc_ImageView_pay_structur extends SimpleActivity {
 
         }
 
-        @SuppressLint("NewApi")
-        @Override
-        public void onReceivedSslError(WebView view, SslErrorHandler handler, SslError error) {
-            handler.proceed(); // Ignore SSL certificate errors
-            Toast.makeText(mCon, "Please try again",Toast.LENGTH_SHORT).show();
-
-        }
-
     }
 
   /*  public static class Downloader {

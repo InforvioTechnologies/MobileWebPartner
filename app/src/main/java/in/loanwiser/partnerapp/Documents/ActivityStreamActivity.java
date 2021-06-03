@@ -28,6 +28,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import adhoc.app.applibrary.Config.AppUtils.Objs;
 import adhoc.app.applibrary.Config.AppUtils.Params;
 import adhoc.app.applibrary.Config.AppUtils.Pref.Pref;
 import adhoc.app.applibrary.Config.AppUtils.Urls;
@@ -54,8 +55,10 @@ public class ActivityStreamActivity extends SimpleActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_stream);
-
+      //  setContentView(R.layout.activity_stream);
+        setContentView(R.layout.activity_simple);
+        Objs.a.setStubId(this, R.layout.activity_stream);
+        initTools(R.string.act_detail1);
 
         progressDialog = new SpotsDialog(this, R.style.Custom);
         streamlistarray = new ArrayList<>();

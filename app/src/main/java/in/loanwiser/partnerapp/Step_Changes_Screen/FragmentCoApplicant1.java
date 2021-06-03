@@ -46,6 +46,7 @@ import java.util.List;
 import java.util.Map;
 
 import adhoc.app.applibrary.Config.AppUtils.Objs;
+import adhoc.app.applibrary.Config.AppUtils.Pref.Pref;
 import adhoc.app.applibrary.Config.AppUtils.Urls;
 import adhoc.app.applibrary.Config.AppUtils.VolleySignleton.AppController;
 import dmax.dialog.SpotsDialog;
@@ -332,7 +333,8 @@ public class FragmentCoApplicant1 extends Fragment implements CompoundButton.OnC
             J.put("employement_type", applicant_empstatus);
             J.put("applicant_type", "2");
             J.put("type_req", 0);
-            J.put("status_flag", 1);
+            //J.put("status_flag", 1);
+            J.put("status_flag", Pref.getSTATUES_FLAG(getActivity()));
             Log.i("TAG", "Document_check_lsit:request "+J.toString());
 
         } catch (JSONException e) {
@@ -435,7 +437,8 @@ public class FragmentCoApplicant1 extends Fragment implements CompoundButton.OnC
             J.put("employement_type", applicant_empstatus);
             J.put("applicant_type", "1");
             J.put("type_req", 0);
-            J.put("status_flag", 1);
+          //  J.put("status_flag", 1);
+            J.put("status_flag", Pref.getSTATUES_FLAG(getActivity()));
             Log.i("TAG", "Document_check_lsit:request "+J.toString());
 
         } catch (JSONException e) {

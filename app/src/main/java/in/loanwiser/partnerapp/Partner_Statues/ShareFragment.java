@@ -1,6 +1,7 @@
 package in.loanwiser.partnerapp.Partner_Statues;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
@@ -33,6 +34,7 @@ import android.widget.Toast;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.appcompat.widget.AppCompatTextView;
+import androidx.cardview.widget.CardView;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
@@ -44,6 +46,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.AuthFailureError;
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -134,7 +137,7 @@ public class ShareFragment extends Fragment{
     Button button_share,imageShare,testShare;
     private AlertDialog progressDialog;
     RecyclerView recyclerView;
-
+    String img_url1_,content_,title1;
     LinearLayout network_stat,mainlay;
 
     @Override
@@ -443,6 +446,7 @@ public class ShareFragment extends Fragment{
              /*   holder.updated_.setText(Objs.a.capitalize(J.getString(Params.update_at)));
                 Objs.a.NewNormalFontStyle(mCon,holder.updated_);*/
 
+                final String id = J.getString("id");
                 final String img_url1 = J.getString("post_url");
                 final String content = J.getString("content");
 
@@ -476,9 +480,42 @@ public class ShareFragment extends Fragment{
 
                 }*/
 
+                holder.cardView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        J = getItem(position);
+                        try {
+                             img_url1_ = J.getString("post_url");
+                              content_ = J.getString("content");
+                              title1 = J.getString("title");
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+
+                        Intent intent=new Intent(getActivity(),ShareActivity.class);
+                        intent.putExtra("content",content_);
+                        intent.putExtra("imgurl",img_url1_);
+                        intent.putExtra("title",title1);
+                        getActivity().startActivity(intent);
+
+                    }
+                });
+
                 holder.share_image.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+                        J = getItem(position);
+
+             /*   holder.updated_.setText(Objs.a.capitalize(J.getString(Params.update_at)));
+                Objs.a.NewNormalFontStyle(mCon,holder.updated_);*/
+
+                        try {
+                            final String id = J.getString("id");
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        Postshare_update(id);
                         if (checkPermissionREAD_EXTERNAL_STORAGE(getContext())) {
                             Glide.with(getContext())
                                     .load(img_url1)
@@ -532,6 +569,18 @@ public class ShareFragment extends Fragment{
                 holder.whats_app_share.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+
+                        J = getItem(position);
+
+             /*   holder.updated_.setText(Objs.a.capitalize(J.getString(Params.update_at)));
+                Objs.a.NewNormalFontStyle(mCon,holder.updated_);*/
+
+                        try {
+                            final String id = J.getString("id");
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        Postshare_update(id);
                         if (checkPermissionREAD_EXTERNAL_STORAGE(getContext())) {
                             Glide.with(getContext())
                                     .load(img_url1)
@@ -610,6 +659,7 @@ public class ShareFragment extends Fragment{
             AppCompatTextView Title;
             ProgressBar progressbar;
             LinearLayout Ly_image_reader,Ly_Rl_pdf_reader,Ly_item;
+            CardView cardView;
 
             public ViewHolder(View itemView) {
                 super(itemView);
@@ -619,6 +669,7 @@ public class ShareFragment extends Fragment{
                 //  progressbar = (ProgressBar) itemView.findViewById(R.id.progressbar);
                 v_Image = (ImageView) itemView.findViewById(R.id.image_Product);
                 image_Pdf = (ImageView) itemView.findViewById(R.id.image_Pdf);
+                cardView = (CardView) itemView.findViewById(R.id.cardView);
 
                 share_image = (AppCompatImageView) itemView.findViewById(R.id.share_image);
                 whats_app_share = (AppCompatImageView) itemView.findViewById(R.id.whats_app_share);
@@ -730,5 +781,74 @@ public class ShareFragment extends Fragment{
         AlertDialog alert = alertBuilder.create();
         alert.show();
     }
+    private void Postshare_update(String post_id) {
+        JSONObject jsonObject =new JSONObject();
+        JSONObject J= null;
+        try {
+            J =new JSONObject();
 
+            J.put("partner_id", Pref.getID(getActivity()));
+            J.put("post_id", post_id);
+            Log.i("TAG", "Request "+J.toString());
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        String data  = String.valueOf(J);
+        Log.d("Request :", data);
+        progressDialog.show();
+        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, Urls.websitelink_stracking, J,
+                new Response.Listener<JSONObject>() {
+                    @SuppressLint("NewApi")
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        progressDialog.dismiss();
+                        String JO_data  = String.valueOf(response);
+                        Log.d("v response :", JO_data.toString());
+                        try {
+                            String status=response.getString("status");
+                            if(status.equals("success"))
+                            {
+                               /* if(which.equals("whatsapp") )
+                                {
+                                    shareViaWhatsApp();
+                                }else
+                                {
+                                    Othernetwork();
+                                }*/
+
+
+                            }else
+                            {
+                                Toast.makeText(getActivity(),"error",Toast.LENGTH_SHORT).show();
+
+                            }
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                VolleyLog.d("TAG", "Error: " + error.getMessage());
+                Toast.makeText(getContext(),error.getMessage(),Toast.LENGTH_SHORT).show();
+                progressDialog.dismiss();
+            }
+        }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("content-type", "application/json");
+                return headers;
+            }
+        };
+
+        jsonObjReq.setRetryPolicy(new DefaultRetryPolicy(
+                0,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
+    }
 }

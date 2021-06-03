@@ -73,6 +73,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="35dp">
                         <ImageView
+                            android:layout_marginLeft="2dp"
                             android:id="@+id/image_doc_view"
                             android:layout_gravity="center"
                             android:layout_width="21.09dp"
@@ -81,7 +82,7 @@
                         <ImageView
 
                             android:layout_marginRight="20dp"
-                            android:layout_marginLeft="20dp"
+                            android:layout_marginLeft="25dp"
                             android:id="@+id/image_doc1"
                             android:layout_gravity="center"
                             android:layout_width="15.09dp"

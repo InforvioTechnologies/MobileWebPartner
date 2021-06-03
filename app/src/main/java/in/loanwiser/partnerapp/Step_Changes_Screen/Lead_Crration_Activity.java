@@ -60,6 +60,7 @@ import adhoc.app.applibrary.Config.AppUtils.Pref.Pref;
 import adhoc.app.applibrary.Config.AppUtils.Urls;
 import adhoc.app.applibrary.Config.AppUtils.VolleySignleton.AppController;
 import dmax.dialog.SpotsDialog;
+import in.loanwiser.partnerapp.Credit_Vehicle_.Viability_Data_revamp;
 import in.loanwiser.partnerapp.NumberTextWatcher;
 import in.loanwiser.partnerapp.PartnerActivitys.Applicant_Details_Activity;
 import in.loanwiser.partnerapp.PartnerActivitys.Dashboard_Activity;
@@ -97,13 +98,13 @@ public class Lead_Crration_Activity extends SimpleActivity {
     JSONArray Employement,is_coapplicant,is_whatsapp;
     AppCompatEditText loan_amount_ext,name_txt,mobile_no_txt,whats_app_no,age_edite_txt,email_edite_txt;
     AppCompatTextView txt_loan_category,txt_loan_category1,loan_type,loan_type1,
-                        Loan_amount,Loan_amount1,name,name1,mobile,mobile1,wt_mobile,wt_mobile11,terms_and_condition,
+            Loan_amount,Loan_amount1,name,name1,mobile,mobile1,wt_mobile,wt_mobile11,terms_and_condition,
             type_of_empmnt_txt,type_of_empmnt_txt1,do_you_have_coApp_txt,do_you_have_coApp_txt1,coApp_txt_emp_type1
             ,coApp_txt_emp_type2,age,email,email1,savelater_textview;
 
     CheckBox check_complete;
     Spinner co_applicant_spinner,co_applicant_emp_spinner,is_whats_app_spinner;
-    LinearLayout type_of_empmnt,co_applicant_ly,co_applicant_emp_type;
+    LinearLayout type_of_empmnt,co_applicant_ly,co_applicant_emp_type,loanamountlay;
     TextView v;
     String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
 
@@ -117,7 +118,7 @@ public class Lead_Crration_Activity extends SimpleActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-      //  setContentView(R.layout.activity_lead__crration_);
+        //  setContentView(R.layout.activity_lead__crration_);
         setContentView(R.layout.activity_simple);
         Objs.a.setStubId(this,R.layout.activity_lead__crration_);
         initTools(R.string.lead_creation);
@@ -125,11 +126,11 @@ public class Lead_Crration_Activity extends SimpleActivity {
         Lontype = Pref.getLoanType(getApplicationContext());
         Lontypename = Pref.getLoanTypename(context);
 
-       // LoanCat_Name = Pref.getLoanCat_Name(context);
+        // LoanCat_Name = Pref.getLoanCat_Name(context);
 
         Log.e("Loantype_Name",Lontypename);
         Log.e("Get ID",Pref.getID(getApplicationContext()));
-
+        loanamountlay=findViewById(R.id.loanamountliny);
         font = Typeface.createFromAsset(context.getAssets(), "Lato-Regular.ttf");
         progressDialog = new SpotsDialog(context, R.style.Custom);
         imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -139,13 +140,13 @@ public class Lead_Crration_Activity extends SimpleActivity {
         fonts();
         makeJsonObjReq1();
         Click();
-       // Loanwiser_Api();
+        // Loanwiser_Api();
 
-     /*  lead_cr_step1.setOnClickListener(new View.OnClickListener() {
+    /*   lead_cr_step1.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
 
-                    Intent intent = new Intent(Lead_Crration_Activity.this, PaymentActivity.class);
+                    Intent intent = new Intent(Lead_Crration_Activity.this, Payment_Sucess_Screen.class);
                     startActivity(intent);
                     finish();
                 }
@@ -177,37 +178,31 @@ public class Lead_Crration_Activity extends SimpleActivity {
             }
         });*/
 
-     if(Lontypename.contains("Personal Loan [Unsecured]") || Lontypename.contains("Business Loan (MSME)"))
-     {
-         type_of_empmnt.setVisibility(View.GONE);
-         Type_of_employement_ID = "0";
-         co_applicant_ly.setVisibility(View.GONE);
-         co_applicant_emp_type.setVisibility(View.GONE);
-         //txt_loan_category,loan_type,type_of_empmnt_txt,Loan_amount,name,age,mobile,do_you_have_coApp_txt,coApp_txt_emp_type1
-         //wt_mobile
-        /* txt_loan_category.setText("1");
-         loan_type.setText("2");
-         Loan_amount.setText("3");
-         name.setText("4");
-         email.setText("5");
-         mobile.setText("6");
-         wt_mobile.setText("7");*/
+        if(Lontypename.contains("Personal Loan [Unsecured]") || Lontypename.contains("Business Loan (MSME)"))
+        {
+            type_of_empmnt.setVisibility(View.GONE);
+            Type_of_employement_ID = "0";
+            co_applicant_ly.setVisibility(View.GONE);
+            co_applicant_emp_type.setVisibility(View.GONE);
 
-     }else
-     {
-        /* txt_loan_category.setText("1");
-         loan_type.setText("2");
-         type_of_empmnt_txt.setText("3");
-         Loan_amount.setText("4");
-         name.setText("5");
-         email.setText("6");
-         mobile.setText("7");
-         do_you_have_coApp_txt.setText("8");
-         wt_mobile.setText("9");*/
-         type_of_empmnt.setVisibility(View.GONE);
-         co_applicant_ly.setVisibility(View.GONE);
-         co_applicant_emp_type.setVisibility(View.GONE);
-     }
+
+        }else  if(Lontypename.contains("vehicleloan")){
+            type_of_empmnt.setVisibility(View.GONE);
+            co_applicant_ly.setVisibility(View.GONE);
+            //  loanamountlay.setVisibility(View.VISIBLE);
+            co_applicant_emp_type.setVisibility(View.GONE);
+        }else if (Lontypename.contains("creditcard")){
+            // loanamountlay.setVisibility(View.GONE);
+            type_of_empmnt.setVisibility(View.GONE);
+            co_applicant_ly.setVisibility(View.GONE);
+            co_applicant_emp_type.setVisibility(View.GONE);
+        }else
+        {
+
+            type_of_empmnt.setVisibility(View.GONE);
+            co_applicant_ly.setVisibility(View.GONE);
+            co_applicant_emp_type.setVisibility(View.GONE);
+        }
 
     }
 
@@ -271,8 +266,8 @@ public class Lead_Crration_Activity extends SimpleActivity {
         Mobile = Pref.getMobileLead(getApplicationContext());
         Name = Pref.getName(getApplicationContext());
 
-      //  name_txt.setText(Name);
-      //  mobile_no_txt.setText(Mobile);
+        //  name_txt.setText(Name);
+        //  mobile_no_txt.setText(Mobile);
     }
 
     private void fonts() {
@@ -392,12 +387,12 @@ public class Lead_Crration_Activity extends SimpleActivity {
 
     }
 
-  private void Click()
+    private void Click()
     {
         submitloanbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-             //   Submitloandialog();
+                //   Submitloandialog();
 
                 string_lead_or_submit = "1";
                 if(Loan_Cat_id.equals("0"))
@@ -415,7 +410,7 @@ public class Lead_Crration_Activity extends SimpleActivity {
 
                     }else
                     {
-                            validation_lead();
+                        validation_lead();
                     }
                 }
             }
@@ -441,32 +436,63 @@ public class Lead_Crration_Activity extends SimpleActivity {
                 if(Loan_Cat_id.equals("0"))
                 {
                     Toast.makeText(context, "Please Select Loan Category", Toast.LENGTH_SHORT).show();
-                }else if(Loan_Cat_id.equals("3"))
+                }/*else if(Loan_Cat_id.equals("3"))
                 {
                     Toast.makeText(mCon, "Vehicle Loan is Under Process, Please Select Other Loan Category",Toast.LENGTH_SHORT).show();
-                }else
-                {
-                        if(App.equals("0"))
-                        {
-                            Toast.makeText(context, "Please Select Loan Type", Toast.LENGTH_SHORT).show();
-                        }
-                        else if((App.equals("20")) || (App.equals("21")))
-                        {
-                            validation_lead();
+                }else*/
+                else{
+                    if(App.equals("0"))
+                    {
+                        Toast.makeText(context, "Please Select Loan Type", Toast.LENGTH_SHORT).show();
+                    }
+                    else if((App.equals("20")) || (App.equals("21")))
+                    {
+                        validation_lead();
 
-                        }else
-                        {
+                    }//creditcard
+                    else if((App.equals("33")))
+                    {
+                        /*    Intent intent=new Intent(Lead_Crration_Activity.this,Viability_Screen_revamp_Pl_BL.class);
+                            startActivity(intent);*/
+                        // Toast.makeText(context, "Selected Credit card loan", Toast.LENGTH_SHORT).show();
 
-                                validation_lead();
+                        validation_creditcardlead();
 
-                        }
+                    } //vehicle loan
+                    else if (App.equals("22")){
+                            /*Intent intent=new Intent(Lead_Crration_Activity.this,Viability_Screen_revamp.class);
+                            startActivity(intent);*/
+                           /* Intent intent=new Intent(Lead_Crration_Activity.this,Viability_Screen_revamp_co.class);
+                            startActivity(intent);*/
+                        validation_lead();
+                        // validation_lead();
+                        // Toast.makeText(Lead_Crration_Activity.this,"Succcess",Toast.LENGTH_SHORT).show();
+                    }else
+                    {
+
+                        validation_lead();
+
+                    }
                 }
 
             }
         });
     }
 
+    private  void validation_creditcardlead()
+    {
+        if (!validateName()) {
+            return;
+        }
+        if (!validate_email()) {
+            return;
+        }
+        if (!validateMobile()) {
+            return;
+        }
 
+        validate_wats_Appcreditcard();
+    }
     private  void validation_lead()
     {
         if (!validateLoanamount()) {
@@ -482,11 +508,60 @@ public class Lead_Crration_Activity extends SimpleActivity {
             return;
         }
 
-            validate_wats_App();
+        validate_wats_App();
     }
 
     private void validate_wats_App()
     {
+        if(Is_Whats_app_ID.equals("1"))
+        {
+            if(check_complete.isChecked())
+            {
+               /* if(string_lead_or_submit.contains("1"))
+                {
+                    Submitloandialog();
+                }else
+                {
+                    lead_cr();
+                }*/
+                lead_cr();
+                Log.e("App",App);
+                // click_action();
+            }else
+            {
+                Toast.makeText(context, "Please accept the Terms and condition", Toast.LENGTH_SHORT).show();
+            }
+
+        }else
+        {
+            if (!validate_wt_Mobile()) {
+                return;
+            }
+            if(check_complete.isChecked())
+            {
+
+              /*  if(string_lead_or_submit.contains("1"))
+                {
+                    Submitloandialog();
+                }else
+                {
+                    lead_cr();
+                }*/
+                lead_cr();
+                Log.e("App",App);
+                // click_action();
+
+            }else
+            {
+                Toast.makeText(context, "Please accept the Terms and condition", Toast.LENGTH_SHORT).show();
+            }
+        }
+
+    }
+
+    private void validate_wats_Appcreditcard()
+    {
+        Log.i("TAG", "validate_wats_App: "+Is_Whats_app_ID);
         if(Is_Whats_app_ID.equals("1"))
         {
             if(check_complete.isChecked())
@@ -630,7 +705,7 @@ public class Lead_Crration_Activity extends SimpleActivity {
                         Type_of_employement_ID = Type_Of_Employement.getJSONObject(position).getString("id");
                         Type_of_employement_Value = Type_Of_Employement.getJSONObject(position).getString("value");
 
-                       // Pref.putSALARYTYPE(context,Type_of_employement_ID);
+                        // Pref.putSALARYTYPE(context,Type_of_employement_ID);
                         SharedPreferences.Editor prefEditor = PreferenceManager.getDefaultSharedPreferences(context).edit();
                         prefEditor.putString("emp_type", Type_of_employement_ID);
                         prefEditor.apply();
@@ -757,7 +832,7 @@ public class Lead_Crration_Activity extends SimpleActivity {
                         CO_Type_of_employement_ID = Type_Of_emp_ar.getJSONObject(position).getString("id");
                         CO_Type_of_employement_Value = Type_Of_emp_ar.getJSONObject(position).getString("value");
 
-                       // Pref.putCOSALARYTYPE(context,CO_Type_of_employement_ID);
+                        // Pref.putCOSALARYTYPE(context,CO_Type_of_employement_ID);
 
                         Log.e("The salary Type",CO_Type_of_employement_Value);
                         //CAT_ID = ja.getJSONObject(position).getString("category_id");
@@ -816,7 +891,7 @@ public class Lead_Crration_Activity extends SimpleActivity {
                         IS_CO_Applicant_Id = do_u_have_co_.getJSONObject(position).getString("id");
                         IS_CO_Applicant_Value = do_u_have_co_.getJSONObject(position).getString("value");
 
-                      //  Pref.putCoAPPAVAILABLE(context,IS_CO_Applicant_Id);
+                        //  Pref.putCoAPPAVAILABLE(context,IS_CO_Applicant_Id);
 
 
 
@@ -881,7 +956,7 @@ public class Lead_Crration_Activity extends SimpleActivity {
             name_txt.setError(getText(R.string.vali_name));
             name_txt.requestFocus();
 
-           return false;
+            return false;
 
         } else {
 
@@ -1001,7 +1076,7 @@ public class Lead_Crration_Activity extends SimpleActivity {
         for (int i=0; i < ja1.length(); i++){
             JSONObject J =  ja1.getJSONObject(i);
             SPINNERLIST_CAT[i] = J.getString("category_type");
-          //  Log.e("catgory list",SPINNERLIST_CAT.toString());
+            //  Log.e("catgory list",SPINNERLIST_CAT.toString());
             final List<String> Loan_cat_list = new ArrayList<>(Arrays.asList(SPINNERLIST_CAT));
             Loantype_cat = new ArrayAdapter<String>(context, R.layout.view_spinner_item, Loan_cat_list){
                /* public View getView(int position, View convertView, ViewGroup parent) {
@@ -1027,11 +1102,19 @@ public class Lead_Crration_Activity extends SimpleActivity {
                     try {
                         Loan_Cat_id = ja1.getJSONObject(position).getString("id");
 
-                        if(Loan_Cat_id.contains("3"))
+                        if(Loan_Cat_id.equals("3"))
                         {
-                             Toast.makeText(mCon, "Vehicle Loan is Under Process, Please Select Other Loan Category",Toast.LENGTH_SHORT).show();
-                        }else
+                            loanamountlay.setVisibility(View.VISIBLE);
+                            makeJsonObjReq1(Loan_Cat_id);
+                            // Toast.makeText(mCon, "Vehicle Loan is Under Process, Please Select Other Loan Category",Toast.LENGTH_SHORT).show();
+                        }
+                        else if (Loan_Cat_id.equals("6")){
+                            loanamountlay.setVisibility(View.GONE);
+                            makeJsonObjReq1(Loan_Cat_id);
+                        }
+                        else
                         {
+                            loanamountlay.setVisibility(View.VISIBLE);
                             makeJsonObjReq1(Loan_Cat_id);
                         }
 
@@ -1193,7 +1276,7 @@ public class Lead_Crration_Activity extends SimpleActivity {
         {
             spinner_loan_type.setSelection(loantypename1);
             String message = Lontypename + " : Item found and selected.";
-           // Toast.makeText(context,message,Toast.LENGTH_SHORT).show();
+            // Toast.makeText(context,message,Toast.LENGTH_SHORT).show();
         }
         /// loadSubLocations(ja.getJSONObject(0).getString("countryid"));
     }
@@ -1232,7 +1315,7 @@ public class Lead_Crration_Activity extends SimpleActivity {
 
         try {
             J =new JSONObject();
-             J.put("b2b_userid",Pref.getID(getApplicationContext()));
+            J.put("b2b_userid",Pref.getID(getApplicationContext()));
             J.put("user_name",C_name_txt);
             J.put("email_id",C_email_edite_txt);
             J.put("mobileno",C_mobile_no_txt);
@@ -1264,8 +1347,8 @@ public class Lead_Crration_Activity extends SimpleActivity {
                             if(jsonObject1.getString("status").equals("success")) {
 
 
-                                 user_id = jsonObject1.getString("user_id");
-                                 transaction_id = jsonObject1.getString("transaction_id");
+                                user_id = jsonObject1.getString("user_id");
+                                transaction_id = jsonObject1.getString("transaction_id");
 
                                 Pref.putTRANSACTIONID(context,transaction_id);
                                 Pref.putUSERID(context,user_id);
@@ -1287,6 +1370,42 @@ public class Lead_Crration_Activity extends SimpleActivity {
                                     {
                                         Toast.makeText(context,"Lead Created Successfully",Toast.LENGTH_SHORT).show();
                                         Intent intent = new Intent(Lead_Crration_Activity.this, Viability_Screen_revamp_Pl_BL.class);
+                                        intent.putExtra("user_id", user_id);
+                                        intent.putExtra("transaction_id", transaction_id);
+                                        startActivity(intent);
+                                        finish();
+                                    }else if(App.equals("33"))
+                                    {
+                                        Toast.makeText(context,"Lead Created Successfully",Toast.LENGTH_SHORT).show();
+                                        Intent intent = new Intent(Lead_Crration_Activity.this, in.loanwiser.partnerapp.Credit_Vehicle_.Viability_Screen_revamp_Pl_BL.class);
+                                        intent.putExtra("user_id", user_id);
+                                        intent.putExtra("transaction_id", transaction_id);
+                                        startActivity(intent);
+                                        finish();
+                                    }
+                                    //vehicle loan
+                                    else if(App.equals("22"))
+                                    {
+                                        Toast.makeText(context,"Lead Created Successfully",Toast.LENGTH_SHORT).show();
+                                        Intent intent = new Intent(Lead_Crration_Activity.this, in.loanwiser.partnerapp.Credit_Vehicle_.Viability_Screen_revamp.class);
+                                        intent.putExtra("user_id", user_id);
+                                        intent.putExtra("transaction_id", transaction_id);
+                                        startActivity(intent);
+                                        finish();
+                                    }
+                                    else if(App.equals("31"))
+                                    {
+                                        Toast.makeText(context,"Lead Created Successfully",Toast.LENGTH_SHORT).show();
+                                        Intent intent = new Intent(Lead_Crration_Activity.this, in.loanwiser.partnerapp.Credit_Vehicle_.Viability_Screen_revamp.class);
+                                        intent.putExtra("user_id", user_id);
+                                        intent.putExtra("transaction_id", transaction_id);
+                                        startActivity(intent);
+                                        finish();
+                                    }
+                                    else if(App.equals("32"))
+                                    {
+                                        Toast.makeText(context,"Lead Created Successfully",Toast.LENGTH_SHORT).show();
+                                        Intent intent = new Intent(Lead_Crration_Activity.this, in.loanwiser.partnerapp.Credit_Vehicle_.Viability_Screen_revamp.class);
                                         intent.putExtra("user_id", user_id);
                                         intent.putExtra("transaction_id", transaction_id);
                                         startActivity(intent);

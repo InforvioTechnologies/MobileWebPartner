@@ -13,7 +13,6 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-
     <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="com.android.launcher.permission.INSTALL_SHORTCUT" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
@@ -27,7 +26,8 @@
 
     <application
         android:name="adhoc.app.applibrary.Config.AppUtils.VolleySignleton.AppController"
-        android:allowBackup="true"
+        android:allowBackup="false"
+        android:fullBackupContent="false"
         android:hardwareAccelerated="true"
         android:icon="@mipmap/ic_partner_new"
         android:label="@string/app_name"
@@ -38,8 +38,8 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:node="merge"
-        tools:replace="android:icon">
-
+        tools:replace="android:allowBackup">
+        <activity android:name=".Push_Notification.Refer_and_Earn_Activity"></activity>
         <activity
             android:name=".Partner_Statues.DashBoard_new"
             android:label="@string/title_activity_dash_board_new"
@@ -71,6 +71,7 @@
         -->
         <!-- <activity android:name=".User_Account.Main2Activity"></activity> -->
         <!-- <activity android:name=".User_Account.AppGoogleLogin"></activity> -->
+
         <activity
             android:name=".User_Account.Splash_Screen"
             android:configChanges="screenSize|orientation"
@@ -81,13 +82,40 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
+            <intent-filter android:autoVerify="true">
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <data
+                    android:host="loanwiser.page.link"
+                    android:scheme="https" />
+                <!-- <data android:host="example.com" android:scheme="https"
+                     android:pathPrefix="/applinks"/>-->
+            </intent-filter>
         </activity>
-
-        <activity android:name=".User_Account.Pic_Doc_File"></activity>
-
-        <activity android:name=".Partner_Statues.BusinessCardActivity"
+        <activity android:name=".User_Account.Pic_Doc_File" />
+        <activity
+            android:name=".Partner_Statues.Loanwiser_Academy_webinar"
             android:theme="@style/NoAction2"
-            android:windowSoftInputMode="stateHidden"/>
+            android:windowSoftInputMode="stateHidden"
+            >
+            <intent-filter>
+                <action android:name=".Partner_Statues.Loanwiser_Academy_webinar" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".Partner_Statues.BusinessCardActivity"
+            android:theme="@style/NoAction2"
+            android:windowSoftInputMode="stateHidden" />
+
+        <activity
+            android:name=".Refer_Earn.ReferEarnActivity"
+            android:theme="@style/NoAction2"
+            android:windowSoftInputMode="stateHidden" />
+
         <activity
             android:name=".Partner_Statues.WebsiteActivity"
             android:theme="@style/NoAction2"
@@ -123,14 +151,15 @@
                 <action android:name="com.google.android.gms.auth.api.phone.SMS_RETRIEVED" />
             </intent-filter>
         </receiver>
-       <!-- <receiver
+        <!--
+ <receiver
             android:name=".User_Account.InstallReferrerReceiver"
             android:exported="true">
             <intent-filter>
                 <action android:name="com.google.android.gms.auth.api.phone.SMS_RETRIEVED" />
             </intent-filter>
-        </receiver>-->
-
+        </receiver>
+        -->
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="${applicationId}.FileProvider"
@@ -196,6 +225,12 @@
             android:name=".BankStamentUpload.Doc_ImageView_Bank"
             android:theme="@style/NoAction2"
             android:windowSoftInputMode="stateHidden" />
+
+        <activity
+            android:name=".BankStamentUpload.Doc_ImageView_Bank1"
+            android:theme="@style/NoAction2"
+            android:windowSoftInputMode="stateHidden" />
+
         <activity
             android:name=".BankStamentUpload.Doc_ImageView_pay_structur"
             android:theme="@style/NoAction2"
@@ -217,9 +252,27 @@
             android:theme="@style/NoAction2"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name=".Push_Notification.Push_Notification_List"
+            android:name=".Credit_Vehicle_.Viability_Screen_revamp_Pl_BL"
             android:theme="@style/NoAction2"
             android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".Credit_Vehicle_.Viability_Screen_revamp"
+            android:theme="@style/NoAction2"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".Credit_Vehicle_.Viability_Data_revamp"
+            android:theme="@style/NoAction2"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".Push_Notification.Push_Notification_List"
+            android:theme="@style/NoAction2"
+            android:windowSoftInputMode="stateHidden">
+            <intent-filter>
+                <action android:name=".Push_Notification.Push_Notification_List" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".BankStamentUpload.Bank_Statement_Upload"
             android:theme="@style/NoAction2"

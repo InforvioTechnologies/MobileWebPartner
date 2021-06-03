@@ -83,6 +83,7 @@ public class Step_Completion_Screen extends SimpleActivity {
                     public void onClick( View view ){
                         Intent intent=new Intent(Step_Completion_Screen.this,Lead_Crration_Activity.class);
                         startActivity(intent);
+                        finish();
                     }
                 } );
 

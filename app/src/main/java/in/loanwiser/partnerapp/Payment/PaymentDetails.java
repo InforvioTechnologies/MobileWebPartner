@@ -230,6 +230,7 @@ public class PaymentDetails extends SimpleActivity {
 
                 Intent intent = new Intent(PaymentDetails.this, PaymentActivity.class);
                 startActivity(intent);
+                finish();
             }
                /* linearLayout1.setVisibility(View.GONE);
                 LayoutInflater layoutInflater = (LayoutInflater) PaymentDetails.this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -277,6 +278,7 @@ public class PaymentDetails extends SimpleActivity {
 
                 Intent intent = new Intent(PaymentDetails.this, PaymentActivity.class);
                 startActivity(intent);
+                finish();
             }
                /* linearLayout1.setVisibility(View.GONE);
                 LayoutInflater layoutInflater = (LayoutInflater) PaymentDetails.this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -324,6 +326,7 @@ public class PaymentDetails extends SimpleActivity {
 
                 Intent intent = new Intent(PaymentDetails.this, PaymentActivity.class);
                 startActivity(intent);
+                finish();
             }
                /* linearLayout1.setVisibility(View.GONE);
                 LayoutInflater layoutInflater = (LayoutInflater) PaymentDetails.this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);

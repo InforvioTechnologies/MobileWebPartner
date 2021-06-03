@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.AppCompatTextView;
 
+import android.annotation.SuppressLint;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
@@ -49,6 +50,8 @@ public class WebsiteActivity extends SimpleActivity {
     String email,mobilenumber,contactperson,location,url;
     AppCompatButton whatsappbtn,othernetworkbtn,copyurlbutton;
 
+    String which;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,14 +78,17 @@ public class WebsiteActivity extends SimpleActivity {
             @RequiresApi(api = Build.VERSION_CODES.KITKAT)
             @Override
             public void onClick(View v) {
-                shareViaWhatsApp();
+                which = "whatsapp";
+                Businesscard_update();
+
             }
         });
 
         othernetworkbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Othernetwork();
+                which = "other";
+                Businesscard_update();
             }
         });
 
@@ -129,6 +135,75 @@ public class WebsiteActivity extends SimpleActivity {
                         try {
                             url=response.getString("url");
                             websiteurltxt.setText(url);
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                VolleyLog.d("TAG", "Error: " + error.getMessage());
+                Toast.makeText(getApplicationContext(),error.getMessage(),Toast.LENGTH_SHORT).show();
+                progressDialog.dismiss();
+            }
+        }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("content-type", "application/json");
+                return headers;
+            }
+        };
+
+        jsonObjReq.setRetryPolicy(new DefaultRetryPolicy(
+                0,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
+    }
+
+    private void Businesscard_update() {
+        JSONObject jsonObject =new JSONObject();
+        JSONObject J= null;
+        try {
+            J =new JSONObject();
+            J.put("b2b_userid", b2b_user_id);
+            Log.i("TAG", "Request "+J.toString());
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        String data  = String.valueOf(J);
+        Log.d("Request :", data);
+        progressDialog.show();
+        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, Urls.websitelink_stracking, J,
+                new Response.Listener<JSONObject>() {
+                    @SuppressLint("NewApi")
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        progressDialog.dismiss();
+                        String JO_data  = String.valueOf(response);
+                        Log.d("v response :", JO_data.toString());
+                        try {
+                            String status=response.getString("status");
+                           if(status.equals("success"))
+                           {
+                               if(which.equals("whatsapp") )
+                               {
+                                   shareViaWhatsApp();
+                               }else
+                               {
+                                   Othernetwork();
+                               }
+
+
+                           }else
+                           {
+                               Toast.makeText(getApplicationContext(),"error",Toast.LENGTH_SHORT).show();
+
+                           }
 
                         } catch (JSONException e) {
                             e.printStackTrace();

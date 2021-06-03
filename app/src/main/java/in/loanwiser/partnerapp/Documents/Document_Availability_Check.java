@@ -42,6 +42,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.bumptech.glide.Glide;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -69,7 +70,7 @@ public class Document_Availability_Check extends SimpleActivity {
 
     private Context mCon = this;
     String doc_id,emp_state,type,applicant_name;
-    private AppCompatTextView appl_id;
+    private AppCompatTextView appl_id,cat_c;
     private CardView app_id_card;
     private ProgressDialog pDialog;
     private String tag_json_obj = "jobj_req", tag_json_arry = "jarray_req";
@@ -119,6 +120,7 @@ public class Document_Availability_Check extends SimpleActivity {
 
         bank_statement_met_ly = (LinearLayout) findViewById(R.id.bank_statement_met_ly);
         bank_statement_not_met_ly = (LinearLayout) findViewById(R.id.bank_statement_not_met_ly);
+        cat_c = (AppCompatTextView) findViewById(R.id.cat_c);
 
 
         In_Progress_txt = (AppCompatTextView) findViewById(R.id.In_Progress_txt);
@@ -524,16 +526,10 @@ public class Document_Availability_Check extends SimpleActivity {
         JSONObject J= null;
         try {
             J =new JSONObject();
-
-         //   J.put("transaction_id", transaction_id);
             J.put("transaction_id",Pref.getTRANSACTIONID(getApplicationContext()));
-           // J.put("transaction_id", "61359");
-
-
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
         Log.e("Applicant Document", String.valueOf(J));
 
         progressDialog.show();
@@ -544,22 +540,14 @@ public class Document_Availability_Check extends SimpleActivity {
 
                         Log.e("Applicant_Doc Response",response.toString());
                         String data = String.valueOf(response);
-                        //   Objs.a.showToast(mCon, data);
-
-
                         try {
                             String status = response.getString("status");
 
                             if(status.equals("success"))
                             {
                                 JSONObject jsonObject1 = response.getJSONObject("response");
-
-
-
-
                                 String bankeligible_sts = jsonObject1.getString("bankeligible_sts");
                                 String banknoteligible_sts = jsonObject1.getString("banknoteligible_sts");
-
                                 if(bankeligible_sts.equals("1"))
                                 {
                                     JSONArray bank_eligiblearr = jsonObject1.getJSONArray("bank_eligiblearr");
@@ -570,6 +558,9 @@ public class Document_Availability_Check extends SimpleActivity {
                                         bank_statement_met_ly.setVisibility(View.VISIBLE);
                                         setAdapter(bank_eligiblearr);
                                     }
+                                }else{
+                                    cat_c.setText("Sorry....!\n" +
+                                            "You have not met the document requirement for any of the eligible and available bank near you.");
                                 }
                                 if(banknoteligible_sts.equals("1"))
                                 {
@@ -594,6 +585,10 @@ public class Document_Availability_Check extends SimpleActivity {
 
                                     }
 
+                                }else{
+
+                                    cat_c.setText("Sorry....!\n" +
+                                            "You have not met the document requirement for any of the eligible and available bank near you.");
                                 }
 
                             }else
@@ -838,7 +833,11 @@ public class Document_Availability_Check extends SimpleActivity {
                 String bank_categorystr= J.getString("bank_categorystr");
                 holder.done_tick.setImageDrawable(getResources().getDrawable(R.drawable.ic_caution));
                 holder.cat_A.setText(bank_categorystr);
-                Objs.a.loadPicasso(mCon,bank_logo_cc,holder.uploaded_yes,holder.progressBarMaterial);
+
+
+               // Objs.a.loadPicasso(mCon,bank_logo_cc,holder.uploaded_yes,holder.progressBarMaterial);
+                Glide.with(mCon).load(bank_logo_cc).into(holder.uploaded_yes);
+
 
                 if(bank_category.equals("1"))
                 {
@@ -1480,7 +1479,7 @@ public class Document_Availability_Check extends SimpleActivity {
                                 String class_id,String user_type,String file_name, String file_name_withhash){
         final Dialog dialog = new Dialog(this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         dialog.setContentView(R.layout.delete_dialog_document);
         //  dialog.getWindow().setLayout(display.getWidth() * 90 / 100, LinearLayout.LayoutParams.WRAP_CONTENT);
         dialog.setCancelable(true);
@@ -1518,7 +1517,7 @@ public class Document_Availability_Check extends SimpleActivity {
     private void Submit_Co_Applicant(){
          Dialog dialog = new Dialog(mCon);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         dialog.setContentView(R.layout.co_app_sub_dialog_document);
         //  dialog.getWindow().setLayout(display.getWidth() * 90 / 100, LinearLayout.LayoutParams.WRAP_CONTENT);
         dialog.setCancelable(true);

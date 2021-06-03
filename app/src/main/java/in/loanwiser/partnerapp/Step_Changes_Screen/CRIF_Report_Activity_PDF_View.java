@@ -160,7 +160,8 @@ public class CRIF_Report_Activity_PDF_View extends SimpleActivity {
 
                             if (Statues.equals("success")) {
                                 credit_card_app.setVisibility(View.GONE);
-                                STEP2_COMPLETE();
+                                Document_Details();
+                              //  STEP2_COMPLETE();
 
                             }else if (Statues.equals("question"))
                             {

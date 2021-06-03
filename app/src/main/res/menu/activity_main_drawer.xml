@@ -43,7 +43,18 @@
                 android:icon="@drawable/ic_contract"
                 android:title="Terms and Condition" />
 
-            <item android:id="@+id/loan_acadmy"
+            <item
+                android:visible="false"
+                android:id="@+id/loan_acadmy"
+                android:icon="@drawable/ic_light_bulb"
+                android:title="Loanwiser Academy" />
+
+            <item
+                android:id="@+id/referearn"
+                android:icon="@drawable/ic_report_"
+                android:title="Refer &amp; Earn"/>
+
+            <item android:id="@+id/loan_webinars"
                 android:icon="@drawable/ic_light_bulb"
                 android:title="Loanwiser Academy" />
 
@@ -51,7 +62,6 @@
                 android:id="@+id/report"
                 android:icon="@drawable/ic_report_"
                 android:title="Help &amp; Support"/>
-
 
             <item
                 android:id="@+id/nav_logout"

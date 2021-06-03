@@ -339,11 +339,15 @@ public class Dashboard_Activity extends AppCompatActivity implements OnLoadMoreL
                                         JSONObject J = ja.getJSONObject(i);
 
                                         String id = J.getString("id");
+                                        String from_cobrand = J.getString("from_cobrand");
+                                        String cobrand_mobile = J.getString("cobrand_mobile");
+                                        String loan_type = J.getString("loan_type");
                                         String loan_typename = J.getString("loan_typename");
                                         String step_status = J.getString("step_status");
                                         String username = J.getString("username");
                                         String mobileno = J.getString("mobileno");
                                         String transaction_id = J.getString("transaction_id");
+                                        String created_at = J.getString("created_at");
 
                                         String loan_amount = J.getString("loan_amount");
                                         String comp_step = J.getString("comp_step");
@@ -358,7 +362,8 @@ public class Dashboard_Activity extends AppCompatActivity implements OnLoadMoreL
                                        // Log.e("mobile no",mobileno);
 
                                         items.add(new Lead_item(applicant_id,loan_typename, step_status,username,
-                                                mobileno,transaction_id,loan_amount,comp_step,status_disp,color_code,payment_plan,id,pending_asks_count));
+                                                mobileno,transaction_id,loan_amount,comp_step,status_disp,color_code,payment_plan,id,pending_asks_count,from_cobrand,
+                                                loan_type,cobrand_mobile,created_at));
                                         leadListAdapter_dashboard.notifyDataSetChanged();
                                     }
                                  //   Log.e("leadListA", String.valueOf(leadListAdapter_dashboard));

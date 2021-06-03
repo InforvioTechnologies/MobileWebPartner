@@ -65,7 +65,7 @@ public class Urls {
     public static String GET_OCC_POST  = Urls + "getoccupation";
     public static String GET_PINCODE_POST  = Urls + "getpincode";
     public static String GET_TOCKEN  = Urls_phamplet + "get_Token";
-
+    public static String REFERALCODE = Urls_step + "referal_save";
     public static String GET_AERA_POST  = Urls + "getarea";
     public static String BUSS_TYPE_POST  = Urls + "get_businesstype";
     public static String GET_CITY_POST  = Urls + "getcity&state_value=";
@@ -79,6 +79,7 @@ public class Urls {
     public static String walletreg  = Urls_step + "walletreg";
 
     public static  String GETBUSINESSCARD= Urls_step+"getuser_vscard";
+    public static  String websitelink_stracking= Urls_step+"websitelink_stracking";
     public static  String UPDATEBSCARD= Urls_step+"updateuser_vscard";
 
     public static String LEAD_STATUES_LIST  = Urls + "get_status";
@@ -139,6 +140,13 @@ public class Urls {
     public static String UPDATED_ENABLE = Urls_step + "update_enable";
     public static String PARTNER_STATUES = Urls_step + "part_status";
     public static String PARTNER_STATUES_IDs = Urls_step + "appid_view";
+
+    public static String webinar_register = Urls_step + "webinar_register";
+    public static String webinar_join = Urls_step + "webinar_join";
+
+    public static String GET_DROPDOWN_LISTVEHICLEBRAND  = Urls_step + "vh_brand";
+    public static String GET_DROPDOWN_LISTVEHICLEMODEL  = Urls_step + "vh_modal";
+
     public static String get_bankstaterules = Urls_step + "get_bankstaterules";
     public static final String Bankstatement_URl=Urls_step+"bank_statement_upload";
     public static String ask_countdisp = Urls_step + "ask_countdisp";
@@ -158,6 +166,7 @@ public class Urls {
  public static String Lead_Details_statues  = Urls_step + "lead_details";
 
     public static String CRIF_Generation  = Urls_step + "crif_generation";
+    public static String payment_schedule  = Urls_step + "payment_schedule";
     public static String submit_question  = Urls_step + "submit_question";
     public static String report_links  = Urls_step + "report_links";
     public static String VIEW_VIABILITYDATA = Urls_step + "view_viabilitydata";
@@ -172,9 +181,13 @@ public class Urls {
     public static String CRIF_Gerneration = Urls_step + "crif_reportgen";
     public static String step2_complete  = Urls_step + "step2_complete";
 
+
+    public static String cibil_report1  = Urls_step + "cibil_report1";
+
     public static String SUBMIT_TO_LOANWIER = Urls_step + "submit_loanwiser";
     public static String viabilitysave = Urls_step + "viabilitysave";
     public static String viable_rule_check = Urls_step + "viable_rule_check";
+    public static String viability_eligibilitycheck = Urls_step + "viability_eligibilitycheck";
     public static String COIN_Transaction = Urls_step + "coins_transaction";
     public static String balance_wallentcoins = Urls_step + "balance_wallentcoins";
 
@@ -187,6 +200,7 @@ public class Urls {
     public static String send_paymentlink = Urls_step + "send_paymentlink";
     public static String Transaction_List = Urls_step + "transaction_list";
     public static String latest_lead_updates = Urls_step + "latest_lead_updates";
+    public static String getwebinars_b2b = Urls_step + "getwebinars_b2b";
     public static String ask_submit_loanw = Urls_step + "ask_submit_loanw";
     public static String getAsklist = Urls_step + "getAsklist";
     public static String reference_board  = Urls_step + "reference_board ";

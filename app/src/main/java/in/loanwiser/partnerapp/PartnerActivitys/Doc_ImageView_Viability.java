@@ -2,6 +2,7 @@ package in.loanwiser.partnerapp.PartnerActivitys;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -66,7 +67,7 @@ public class Doc_ImageView_Viability extends SimpleActivity {
                     view.reload();
                 }else
                 {
-                    progressbar.setVisibility(View.GONE);
+                    progressBar.setVisibility(View.GONE);
                 }
 
 
@@ -116,13 +117,52 @@ public class Doc_ImageView_Viability extends SimpleActivity {
 
         }
 
-        @SuppressLint("NewApi")
         @Override
-        public void onReceivedSslError(WebView view, SslErrorHandler handler, SslError error) {
-            handler.proceed(); // Ignore SSL certificate errors
-            Toast.makeText(mCon, "Please try again",Toast.LENGTH_SHORT).show();
+        public void onReceivedSslError(WebView view, final SslErrorHandler handler, SslError error) {
+            //final AlertDialog.Builder builder = new AlertDialog.Builder(OnlinePayment.this);
+            String msg="";
+            if(error.getPrimaryError()==SslError.SSL_DATE_INVALID
+                    || error.getPrimaryError()== SslError.SSL_EXPIRED
+                    || error.getPrimaryError()== SslError.SSL_IDMISMATCH
+                    || error.getPrimaryError()== SslError.SSL_INVALID
+                    || error.getPrimaryError()== SslError.SSL_NOTYETVALID
+                    || error.getPrimaryError()==SslError.SSL_UNTRUSTED) {
+                if(error.getPrimaryError()==SslError.SSL_DATE_INVALID){
+                    msg="The date of the certificate is invalid";
+                }else if(error.getPrimaryError()==SslError.SSL_INVALID){
+                    msg="A generic error occurred";
+                }
+                else if(error.getPrimaryError()== SslError.SSL_EXPIRED){
+                    msg="The certificate has expired";
+                }else if(error.getPrimaryError()== SslError.SSL_IDMISMATCH){
+                    msg="Hostname mismatch";
+                }
+                else if(error.getPrimaryError()== SslError.SSL_NOTYETVALID){
+                    msg="The certificate is not yet valid";
+                }
+                else if(error.getPrimaryError()==SslError.SSL_UNTRUSTED){
+                    msg="The certificate authority is not trusted";
+                }
+            }
+            final AlertDialog.Builder builder = new AlertDialog.Builder(Doc_ImageView_Viability.this);
+            builder.setMessage(msg);
+            builder.setPositiveButton("continue", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    handler.proceed();
+                }
+            });
+            builder.setNegativeButton("cancel", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    handler.cancel();
+                }
+            });
+            final AlertDialog dialog = builder.create();
+            dialog.show();
 
         }
+
 
     }
 }

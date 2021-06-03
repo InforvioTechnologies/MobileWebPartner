@@ -9,6 +9,7 @@ import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
@@ -28,21 +29,34 @@ import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.VolleyLog;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.bumptech.glide.request.Request;
 import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.target.SizeReadyCallback;
 import com.bumptech.glide.request.target.Target;
 import com.squareup.picasso.Picasso;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Map;
 
 import adhoc.app.applibrary.Config.AppUtils.Objs;
+import adhoc.app.applibrary.Config.AppUtils.Urls;
+import adhoc.app.applibrary.Config.AppUtils.VolleySignleton.AppController;
 import dmax.dialog.SpotsDialog;
 import in.loanwiser.partnerapp.R;
 import in.loanwiser.partnerapp.SimpleActivity;
@@ -51,7 +65,7 @@ import static in.loanwiser.partnerapp.Partner_Statues.Post_share_Statues.MY_PERM
 
 public class ShareActivity extends SimpleActivity {
 
-    String content,imgurl;
+    String content,imgurl,title;
     AppCompatImageView shareimage;
     AppCompatTextView contenttxt;
     AppCompatButton whatsappshare,othernetworkshare;
@@ -71,16 +85,18 @@ public class ShareActivity extends SimpleActivity {
         contenttxt=findViewById(R.id.contenttxt);
         progressBarMaterial_pdf=findViewById(R.id.progressBarMaterial_pdf);
         whatsappshare=findViewById(R.id.whatsappshare);
+        contenttxt=findViewById(R.id.contenttxt);
         othernetworkshare=findViewById(R.id.othernetwork);
         progressDialog = new SpotsDialog(this, R.style.Custom);
 
         Intent intent=getIntent();
         content=intent.getStringExtra("content");
         imgurl=intent.getStringExtra("imgurl");
+        title=intent.getStringExtra("title");
 
         Log.i("TAG", "onCreate:imgurl "+imgurl);
         Log.e("the value",imgurl);
-
+        contenttxt.setText(title);
       /*  Glide.with(this)
                 .load(imgurl)
                 .into(shareimage);

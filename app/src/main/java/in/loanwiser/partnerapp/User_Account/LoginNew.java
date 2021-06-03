@@ -10,6 +10,10 @@ import android.os.Build;
 import android.os.Handler;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+
+import com.android.installreferrer.api.InstallReferrerClient;
+import com.android.installreferrer.api.InstallReferrerStateListener;
+import com.android.installreferrer.api.ReferrerDetails;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import androidx.core.app.ActivityCompat;
@@ -19,6 +23,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.AppCompatEditText;
+
+import android.os.RemoteException;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -51,6 +57,8 @@ import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -84,7 +92,12 @@ public class LoginNew extends AppCompatActivity implements GoogleApiClient.Conne
     private String Moblie;
     private Context mCon = this;
     private FloatingActionButton fab;
-
+    private final String prefKey = "checkedInstallReferrer";
+    String personId,utmSource,from_campaign;
+    private final Executor backgroundExecutor = Executors.newSingleThreadExecutor();
+    public static final String KEY_UTM_SOURCE = "utm_source";
+    public static final String KEY_UTM_CONTENT = "utm_content";
+    public static final String KEY_UTM_CAMPAIGN = "utm_campaign";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -99,7 +112,7 @@ public class LoginNew extends AppCompatActivity implements GoogleApiClient.Conne
         submit.setOnClickListener(this);
         phoneField.setOnClickListener(this);
         setSubmitEnabled(true);
-
+        checkInstallReferrer();
         mCredentialsApiClient = new GoogleApiClient.Builder(this)
                 .addConnectionCallbacks(this)
                 .enableAutoManage(this, this)
@@ -139,6 +152,115 @@ public class LoginNew extends AppCompatActivity implements GoogleApiClient.Conne
         });
     }
 
+    void checkInstallReferrer() {
+        Log.e("invockedInstallRef","checkInstallReferrer");
+        if (getPreferences(MODE_PRIVATE).getBoolean(prefKey, false)) {
+            return;
+        }
+
+        InstallReferrerClient referrerClient = InstallReferrerClient.newBuilder(this).build();
+        backgroundExecutor.execute(() -> getInstallReferrerFromClient(referrerClient));
+    }
+
+    void getInstallReferrerFromClient(InstallReferrerClient referrerClient) {
+
+        referrerClient.startConnection(new InstallReferrerStateListener() {
+            @Override
+            public void onInstallReferrerSetupFinished(int responseCode) {
+                switch (responseCode) {
+                    case InstallReferrerClient.InstallReferrerResponse.OK:
+                        ReferrerDetails response = null;
+                        try {
+                            response = referrerClient.getInstallReferrer();
+                        } catch (RemoteException e) {
+                            e.printStackTrace();
+                            return;
+                        }
+                        final String referrerUrl = response.getInstallReferrer();
+
+                        if (referrerUrl != null && !referrerUrl.equals("")) {
+                            // Utils.log("Referral Received - " + referrer);
+                            String[] referrerParts = referrerUrl.split("&");
+                            utmSource = getData(KEY_UTM_SOURCE, referrerParts);
+                            String utmContent = getData(KEY_UTM_CONTENT, referrerParts);
+                            String utmCampaign = getData(KEY_UTM_CAMPAIGN, referrerParts);
+                            from_campaign = "1";
+                            if (utmSource != null && utmSource.equals("google")) {
+                                //  sendLogToMobisocServer(context, utmContent);
+
+                                Log.e("the utm",utmContent);
+                            } else if (utmSource != null && utmSource.equals("app_share")) {
+                                // RawStorageProvider.getInstance(context).dumpDataToStorage(RaghuKakaConstants.REFFERAL_FOR, utmContent);
+                            }
+                            // updateRKServerForReferral(context, utmSource, utmCampaign, utmContent);
+                        }else
+                        {
+                            from_campaign = "0";
+                        }
+
+                        //   trackInstallReferrerforGTM(referrerUrl);
+                        Log.e("the referat url ",referrerUrl);
+
+                        // TODO: If you're using GTM, call trackInstallReferrerforGTM instead.
+                        //  trackInstallReferrer(referrerUrl);
+
+
+                        // Only check this once.
+                        getPreferences(MODE_PRIVATE).edit().putBoolean(prefKey, true).commit();
+
+                        // End the connection
+                        referrerClient.endConnection();
+
+                        break;
+                    case InstallReferrerClient.InstallReferrerResponse.FEATURE_NOT_SUPPORTED:
+                        // API not available on the current Play Store app.
+                        break;
+                    case InstallReferrerClient.InstallReferrerResponse.SERVICE_UNAVAILABLE:
+                        // Connection couldn't be established.
+                        break;
+                }
+            }
+
+            @Override
+            public void onInstallReferrerServiceDisconnected() {
+
+            }
+        });
+    }
+
+    // Tracker for Classic GA (call this if you are using Classic GA only)
+    private void trackInstallReferrer(final String referrerUrl) {
+        new Handler(getMainLooper()).post(new Runnable() {
+            @Override
+            public void run() {
+                CampaignTrackingReceiver receiver = new CampaignTrackingReceiver();
+                Intent intent = new Intent("com.android.vending.INSTALL_REFERRER");
+                intent.putExtra("referrer", referrerUrl);
+                receiver.onReceive(getApplicationContext(), intent);
+            }
+        });
+    }
+
+    // Tracker for GTM + Classic GA (call this if you are using GTM + Classic GA only)
+    private void trackInstallReferrerforGTM(final String referrerUrl) {
+        Log.e("referat url1 ",referrerUrl);
+        new Handler(getMainLooper()).post(new Runnable() {
+            @Override
+            public void run() {
+                InstallReferrerReceiver receiver = new InstallReferrerReceiver();
+                Intent intent = new Intent("com.android.vending.INSTALL_REFERRER");
+                intent.putExtra("referrer", referrerUrl);
+                receiver.onReceive(getApplicationContext(), intent);
+            }
+        });
+    }
+    private String getData(String key, String[] allData) {
+        for (String selected : allData)
+            if (selected.contains(key)) {
+                return selected.split("=")[1];
+            }
+        return "";
+    }
     public void Checking(){
         if(checkPermission()== true) {
         }else{
@@ -444,7 +566,7 @@ public class LoginNew extends AppCompatActivity implements GoogleApiClient.Conne
                                 Toast.makeText(mCon,"OTP will be sent to the mobile number",Toast.LENGTH_SHORT).show();
                                // Objs.a.showToast(mCon,"OTP will be sent to the mobile number");
                                 Objs.ac.StartActivityPutExtra(mCon, SmsActivity2.class, Params.otp,otp_new,
-                                        Params.mobile_no,Moblie);
+                                        Params.mobile_no,Moblie,Params.from_campaign,from_campaign,Params.utmSource,utmSource);
                                 finish();
 
                             }

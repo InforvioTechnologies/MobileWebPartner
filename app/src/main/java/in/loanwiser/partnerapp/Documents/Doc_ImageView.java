@@ -74,8 +74,10 @@ public class Doc_ImageView extends SimpleActivity {
             });
 
         }else{
+
             Rl_pdf_reader.setVisibility(View.GONE);
             Ly_image_reader.setVisibility(View.VISIBLE);
+            v_Image.setVisibility(View.VISIBLE);
             Objs.a.loadPicasso(mCon,document,v_Image,progressBar);
         }
     }

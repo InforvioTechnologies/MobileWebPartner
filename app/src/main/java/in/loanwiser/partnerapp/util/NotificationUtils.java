@@ -29,6 +29,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+import in.loanwiser.partnerapp.Push_Notification.Push_Notification_List;
 import in.loanwiser.partnerapp.R;
 import in.loanwiser.partnerapp.app.Config;
 
@@ -62,6 +63,8 @@ public class NotificationUtils {
                         intent,
                         PendingIntent.FLAG_CANCEL_CURRENT
                 );
+       // resultPendingIntent = (mContext, Push_Notification_List.class);
+
 
         final NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(
                 mContext);
@@ -93,6 +96,7 @@ public class NotificationUtils {
         NotificationCompat.InboxStyle inboxStyle = new NotificationCompat.InboxStyle();
 
         inboxStyle.addLine(message);
+        PendingIntent pendingIntent = PendingIntent.getActivity(mContext, 0, new Intent(mContext, Push_Notification_List.class), PendingIntent.FLAG_UPDATE_CURRENT);
 
         Notification notification;
         notification = mBuilder.setSmallIcon(icon).setTicker(title).setWhen(0)
@@ -109,9 +113,13 @@ public class NotificationUtils {
 
         NotificationManager notificationManager = (NotificationManager) mContext.getSystemService(Context.NOTIFICATION_SERVICE);
         notificationManager.notify(Config.NOTIFICATION_ID, notification);
+        Intent activityIntent = new Intent(mContext, Push_Notification_List.class);
+        activityIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
     }
 
     private void showBigNotification(Bitmap bitmap, NotificationCompat.Builder mBuilder, int icon, String title, String message, String timeStamp, PendingIntent resultPendingIntent, Uri alarmSound) {
+        PendingIntent pendingIntent = PendingIntent.getActivity(mContext, 0, new Intent(mContext, Push_Notification_List.class), PendingIntent.FLAG_UPDATE_CURRENT);
+
         NotificationCompat.BigPictureStyle bigPictureStyle = new NotificationCompat.BigPictureStyle();
         bigPictureStyle.setBigContentTitle(title);
         bigPictureStyle.setSummaryText(Html.fromHtml(message).toString());
@@ -131,6 +139,8 @@ public class NotificationUtils {
 
         NotificationManager notificationManager = (NotificationManager) mContext.getSystemService(Context.NOTIFICATION_SERVICE);
         notificationManager.notify(Config.NOTIFICATION_ID_BIG_IMAGE, notification);
+        Intent activityIntent = new Intent(mContext, Push_Notification_List.class);
+        activityIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
     }
 
     /**
@@ -157,6 +167,9 @@ public class NotificationUtils {
         try {
             Uri alarmSound = Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE
                     + "://" + mContext.getPackageName() + "/raw/notification");
+
+        //    Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+
             Ringtone r = RingtoneManager.getRingtone(mContext, alarmSound);
             r.play();
         } catch (Exception e) {

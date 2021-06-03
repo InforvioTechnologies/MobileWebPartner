@@ -8,6 +8,9 @@ public class Suggestion_item_freqent {
     private String loan_type;
     private String status_disp;
     private String loan_amount;
+    private String cobrank_mobile;
+    private String from_cobrand;
+    private String loan_typeid;
 
 
 
@@ -61,9 +64,33 @@ public class Suggestion_item_freqent {
         this.status_disp = status_disp;
     }
 
+    public String getfrom_cobrand() {
+        return from_cobrand;
+    }
+
+    public void setfrom_cobrand(String from_cobrand) {
+        this.from_cobrand = from_cobrand;
+    }
+
+    public String getcobrank_mobile() {
+        return cobrank_mobile;
+    }
+
+    public void setcobrank_mobile(String cobrank_mobile) {
+        this.cobrank_mobile = cobrank_mobile;
+    }
+
+    public String getloan_typeid() {
+        return loan_typeid;
+    }
+
+    public void setloan_typeid(String loan_typeid) {
+        this.loan_typeid = loan_typeid;
+    }
+
 
     public Suggestion_item_freqent(String Appointment_id, String user_id, String user_name, String loan_type, String loan_amount
-    , String status_disp) {
+    , String status_disp, String from_cobrand,String cobrank_mobile, String loan_typeid) {
 
         this.Appointment_id = Appointment_id;
         this.user_id = user_id;
@@ -71,6 +98,9 @@ public class Suggestion_item_freqent {
         this.loan_type = loan_type;
         this.loan_amount = loan_amount;
         this.status_disp = status_disp;
+        this.from_cobrand = from_cobrand;
+        this.cobrank_mobile = cobrank_mobile;
+        this.loan_typeid = loan_typeid;
 
     }
 

@@ -140,6 +140,7 @@ public class Notification_Adapter_Dashboard extends RecyclerView.Adapter<Notific
                 @Override
                 public void onClick(View view) {
                     Notification_id = post.getnotification_id();
+                    user_id = post.getuser_id();
                     Log.e("this is working fine","works fine");
                   /* if( btn_invoke.equals("1"))
                     {
@@ -188,9 +189,18 @@ public class Notification_Adapter_Dashboard extends RecyclerView.Adapter<Notific
 
                             if(status.contains("success"))
                             {
-                                if (context instanceof Push_Notification_List) {
-                                    ((Push_Notification_List)context).Applicant_Status(user_id,step_status);
+                                if(user_id.equals("0"))
+                                {
+                                   // Toast.makeText(context,"share this poster with someone...", Toast.LENGTH_SHORT).show();
+
+                                }else
+                                {
+                                    if (context instanceof Push_Notification_List) {
+                                        ((Push_Notification_List)context).Applicant_Status(user_id,step_status);
+                                    }
                                 }
+
+
                             }else {
 
                             }

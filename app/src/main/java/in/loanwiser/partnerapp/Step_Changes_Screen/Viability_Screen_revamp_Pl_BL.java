@@ -48,6 +48,7 @@ import com.android.volley.RetryPolicy;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.google.gson.JsonObject;
 import com.thomashaertel.widget.MultiSpinner;
 
 import org.json.JSONArray;
@@ -3456,7 +3457,7 @@ public class Viability_Screen_revamp_Pl_BL extends SimpleActivity implements Num
             J.put("transaction_id",Pref.getTRANSACTIONID(getApplicationContext()));
             J.put("user_id", Pref.getUSERID(getApplicationContext()));
             J.put("b2b_id", Pref.getID(getApplicationContext()));
-            J.put("relationship_type", "1");
+
 
         } catch (JSONException e) {
             e.printStackTrace();
@@ -3464,7 +3465,7 @@ public class Viability_Screen_revamp_Pl_BL extends SimpleActivity implements Num
 
         Log.e("rule rune request ", String.valueOf(J));
         progressDialog.show();
-        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, Urls.viable_rule_check, J,
+        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, Urls.viability_eligibilitycheck, J,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
@@ -3472,84 +3473,116 @@ public class Viability_Screen_revamp_Pl_BL extends SimpleActivity implements Num
                         String data = String.valueOf(response);
                         try {
                             String Status = response.getString("status");
-                            //JSONObject jsonObject1 = response.getJSONObject("response");
+                            JSONObject response_ = response.getJSONObject("response");
 
-                            if(Status.equals("success"))
+                            String eligible_status = response_.getString("eligible_status");
+                            if(eligible_status.equals("1"))
                             {
                                 progressDialog.dismiss();
+                                // viability_check_pass();
                                 Eligibility_check_doc_checklist_generate();
-
-                            }else if(Status.equals("error"))
+                            }else
                             {
-                                Toast.makeText(context,"Viability Failed",Toast.LENGTH_SHORT).show();
-                                String rule_desc = null;
-                                String age_vale = null;
-                                String ind_salary = null;
-                                String bank_failure = null;
-                                JSONArray jsonArray = response.getJSONArray("rule_desc");
-                                JSONArray jsonArray1 = response.getJSONArray("rule_message");
+                                String viability_status = response_.getString("viability_status");
+                                if(viability_status.equals("1"))
+                                {
+                                    Toast.makeText(context,"Viability Failed",Toast.LENGTH_SHORT).show();
+                                    String rule_desc = null;
+                                    String age_vale = null;
+                                    String ind_salary = null;
+                                    String bank_failure = null;
+                                    JSONArray jsonArray = response.getJSONArray("rule_desc");
+                                    JSONArray jsonArray1 = response.getJSONArray("rule_message");
 
-                                for (int i=0; i<jsonArray.length();i++) {
-                                    try {
+                                    for (int i=0; i<jsonArray.length();i++) {
+                                        try {
 
-                                        JSONObject J = jsonArray.getJSONObject(i);
+                                            JSONObject J = jsonArray.getJSONObject(i);
 
-                                        rule_desc = J.getString("rule_desc");
-                                        if(rule_desc.equals("Age"))
-                                        {
-                                            age_vale="Sorry.! Applicant age Should not be less than 21 for applying loan with us.";
-                                            rule_message.add(age_vale);
-                                        }else if(rule_desc.equals("Individual Salary"))
-                                        {
-                                            ind_salary="Sorry.! Income should not be less than \u20B9 12,000 for applying loan with us.";
-                                            rule_message.add(ind_salary);
-                                        }else
-                                        {
-                                            rule_desc = J.getString("fail_message");
-                                            bank_failure="Sorry.! Currently we have no partner banks available in applicants location" +" "+
-                                                    "We are On-boarding as many new banks as possible. Stay tuned.! ";
-                                            rule_message.add(rule_desc);
+                                            rule_desc = J.getString("rule_desc");
+                                            if(rule_desc.equals("Age"))
+                                            {
+                                                age_vale="Sorry.! Age Criteria Not Met | You can apply for a loan in the name of - any one of your family members, whose Age is between 20 and 55.";
+                                                rule_message.add(age_vale);
+                                            }else if(rule_desc.equals("Individual Salary"))
+                                            {
+                                                ind_salary="Sorry.! Income should not be less than \u20B9 12,000 for applying loan with us.";
+                                                rule_message.add(ind_salary);
+                                            }else
+                                            {
+                                                rule_desc = J.getString("fail_message");
+                                                bank_failure="Sorry.! Currently we have no partner banks available in applicants location" +" "+
+                                                        "We are On-boarding as many new banks as possible. Stay tuned.! ";
+                                                rule_message.add(rule_desc);
+                                            }
+
+                                            Log.e("rule_desc",rule_desc);
+
+                                        } catch (JSONException e) {
+                                            e.printStackTrace();
                                         }
 
-                                        Log.e("rule_desc",rule_desc);
-
-                                    } catch (JSONException e) {
-                                        e.printStackTrace();
                                     }
 
+                                    // Toast.makeText(context,"Viability Created Successfully",Toast.LENGTH_SHORT).show();
+                                    LayoutInflater layoutInflater = (LayoutInflater) Viability_Screen_revamp_Pl_BL.this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                                    View customView = layoutInflater.inflate(R.layout.popup_rul_fail,null);
+                                    Button godashboard = (Button) customView.findViewById(R.id.godashboard);
+                                    TextView content_txt = (TextView) customView.findViewById(R.id.content_txt);
+
+
+                                    String list = Arrays.toString(rule_message.toArray()).replace("[", "").replace("]", "");
+                                    content_txt.setText(list);
+
+                                    //instantiate popup window
+                                    popupWindow = new PopupWindow(customView, LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
+
+                                    //display the popup window
+                                    popupWindow.showAtLocation(godashboard, Gravity.CENTER, 0, 0);
+                                    //close the popup window on button click
+                                    godashboard.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View v) {
+
+                                            Intent intent = new Intent(Viability_Screen_revamp_Pl_BL.this, Dashboard_Activity.class);
+                                            startActivity(intent);
+                                            finish();
+                                        }
+                                    });
+                                    progressDialog.dismiss();
+                                }else
+                                {
+                                    LayoutInflater layoutInflater = (LayoutInflater) Viability_Screen_revamp_Pl_BL.this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                                    View customView = layoutInflater.inflate(R.layout.popup_rul_fail,null);
+                                    Button godashboard = (Button) customView.findViewById(R.id.godashboard);
+                                    TextView content_txt = (TextView) customView.findViewById(R.id.content_txt);
+
+
+                                  //  String list = Arrays.toString(rule_message.toArray()).replace("[", "").replace("]", "");
+                                    content_txt.setText("Bank Requirement Not Met");
+
+                                    //instantiate popup window
+                                    popupWindow = new PopupWindow(customView, LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
+
+                                    //display the popup window
+                                    popupWindow.showAtLocation(godashboard, Gravity.CENTER, 0, 0);
+                                    //close the popup window on button click
+                                    godashboard.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View v) {
+
+                                            Intent intent = new Intent(Viability_Screen_revamp_Pl_BL.this, Dashboard_Activity.class);
+                                            startActivity(intent);
+                                            finish();
+                                        }
+                                    });
+
+                                    progressDialog.dismiss();
                                 }
 
-                                // Toast.makeText(context,"Viability Created Successfully",Toast.LENGTH_SHORT).show();
-                                LayoutInflater layoutInflater = (LayoutInflater) Viability_Screen_revamp_Pl_BL.this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                                View customView = layoutInflater.inflate(R.layout.popup_rul_fail,null);
-                                Button godashboard = (Button) customView.findViewById(R.id.godashboard);
-                                TextView content_txt = (TextView) customView.findViewById(R.id.content_txt);
-
-
-                                String list = Arrays.toString(rule_message.toArray()).replace("[", "").replace("]", "");
-                                content_txt.setText(list);
-
-                                //instantiate popup window
-                                popupWindow = new PopupWindow(customView, LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
-
-                                //display the popup window
-                                popupWindow.showAtLocation(godashboard, Gravity.CENTER, 0, 0);
-                                //close the popup window on button click
-                                godashboard.setOnClickListener(new View.OnClickListener() {
-                                    @Override
-                                    public void onClick(View v) {
-
-                                        Intent intent = new Intent(Viability_Screen_revamp_Pl_BL.this, Dashboard_Activity.class);
-                                        startActivity(intent);
-                                        finish();
-                                    }
-                                });
-
-
-
-                                progressDialog.dismiss();
                             }
-                            progressDialog.dismiss();
+                            //JSONObject jsonObject1 = response.getJSONObject("response");
+
 
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -3565,6 +3598,78 @@ public class Viability_Screen_revamp_Pl_BL extends SimpleActivity implements Num
                 //Log.d(TAG, error.getMessage());
                 VolleyLog.d("TAG", "Error: " + error.getMessage());
                 Toast.makeText(mCon, "Network error, try after some time",Toast.LENGTH_SHORT).show();
+                progressDialog.dismiss();
+
+            }
+        }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("content-type", "application/json");
+                return headers;
+            }
+        };
+
+        // AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
+        int socketTimeout = 0;
+        RetryPolicy policy = new DefaultRetryPolicy(socketTimeout,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
+
+        jsonObjReq.setRetryPolicy(policy);
+
+        AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
+    }
+
+    private void viability_check_pass( ) {
+
+        JSONObject J= null;
+
+        try {
+            J =new JSONObject();
+            J.put("transaction_id",Pref.getTRANSACTIONID(getApplicationContext()));
+            J.put("user_id", Pref.getUSERID(getApplicationContext()));
+            J.put("b2b_id", Pref.getID(mCon));
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        Log.e("viability pass ", String.valueOf(J));
+        // progressDialog.show();
+        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, Urls.viabilitysave, J,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        Log.e("viability response", String.valueOf(response));
+                        String data = String.valueOf(response);
+                        try {
+                            //  String Status = response.getString("status");
+                            JSONObject jsonObject1 = response.getJSONObject("response");
+
+                            if(jsonObject1.getString("viablity_status").equals("success"))
+                            {
+
+                            }else if(jsonObject1.getString("viablity_status").equals("error"))
+                            {
+
+                            }
+                            //  progressDialog.dismiss();
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        Log.e("Lead creation", String.valueOf(response));
+
+
+                    }
+                }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                //Log.d(TAG, error.getMessage());
+                Toast.makeText(mCon, "Network error, try after some time",Toast.LENGTH_SHORT).show();
+                VolleyLog.d("TAG", "Error: " + error.getMessage());
                 progressDialog.dismiss();
 
             }

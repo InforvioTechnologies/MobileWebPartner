@@ -72,7 +72,8 @@ public class Payment_Sucess_Screen extends AppCompatActivity {
     private AlertDialog progressDialog;
     private Context mCon = this;
     private String tag_json_obj = "jobj_req", tag_json_arry = "jarray_req";
-    String  credit_issued_id,credit_issued_value,Report_ID,Order_ID,viability_report_URL;
+    String  credit_issued_id,credit_issued_value,Report_ID,Order_ID,viability_report_URL,
+            trans_id,user_id;
 
     Spinner applicant_credite_card_spinner,co_applicant_Spinner;
     Typeface font;
@@ -86,7 +87,8 @@ public class Payment_Sucess_Screen extends AppCompatActivity {
     AppCompatSpinner questions_spinner;
 
 
-    String Statues_vability,viable_url,app_crif_score,app_crif_url,coapp_crif_score,coapp_crif_url,viable_statues;
+    String Statues_vability,viable_url,app_crif_score,app_crif_url,coapp_crif_score,coapp_crif_url,viable_statues,
+            overall_status,crif_fail,app_crif_url_view,coapp_crif_url_view,viable_url_view;
 
     PermissionUtils permissionUtils;
     private static final int STORAGE_PERMISSION_REQUEST_CODE = 1;
@@ -120,6 +122,7 @@ public class Payment_Sucess_Screen extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
+                payment_button.setEnabled(false);
                 Crif_Generation();
 
             }
@@ -250,31 +253,30 @@ public class Payment_Sucess_Screen extends AppCompatActivity {
 
                             String Statues = object.getString("status");
 
+
                             if (Statues.equals("success")) {
-                                if (applicantcount.equals("1"))
-                                {
-                                    CRIF_Question_Testing();
-                                }else
-                                {
+                                JSONObject data = object.getJSONObject("data");
+                                overall_status = data.getString("overall_status");
+                                if (applicantcount.equals("1")) {
+
+                                    if(overall_status.equals("0"))
+                                    {
+                                        Viability_CRIF_report_Functions();
+                                    }else
+                                    {
+                                        Viability_CRIF_report_Functions();
+                                    }
+
+                                } else {
                                     Co_applicant_Crif_Generation();
                                 }
 
-                              /*  JSONObject data = object.getJSONObject("data");
 
-                                String rule_status = data.getString("rule_status");
-                                String cibil_score = data.getString("cibil_score");
-
-                                if(Statues_vability.equals("success"))
-                                {
-
-                                STEP2_COMPLETE();*/
-
-                            }else if (Statues.contains("question"))
-                            {
+                           } else if (Statues.equals("question")) {
                                 // standard.setVisibility(View.GONE);
                                 JSONObject data1 = object.getJSONObject("data");
-                                Report_ID  = data1.getString("reportId");
-                                Order_ID  = data1.getString("orderId");
+                                Report_ID = data1.getString("reportId");
+                                Order_ID = data1.getString("orderId");
                                 String question = object.getString("question");
                                 String name = object.getString("name");
                                 final JSONArray qus_dropdown = object.getJSONArray("qus_dropdown");
@@ -291,26 +293,26 @@ public class Payment_Sucess_Screen extends AppCompatActivity {
                                 //  dialog.getWindow().setLayout(display.getWidth() * 90 / 100, LinearLayout.LayoutParams.WRAP_CONTENT);
                                 dialog.setCancelable(true);
                                 dialog.setCanceledOnTouchOutside(false);
-                                final AppCompatButton submit_buton =(AppCompatButton) dialog.findViewById(R.id.submit_buton);
-                                AppCompatTextView applicant =(AppCompatTextView) dialog.findViewById(R.id.applicant);
-                                questions_spinner =(AppCompatSpinner)dialog.findViewById(R.id.question_spinner);
-                                AppCompatTextView question_tag =(AppCompatTextView)dialog.findViewById(R.id.question_tag);
-                                AppCompatTextView question_content =(AppCompatTextView)dialog.findViewById(R.id.question_content);
-                                AppCompatTextView applicant_type =(AppCompatTextView)dialog.findViewById(R.id.applicant_type);
+                                final AppCompatButton submit_buton = (AppCompatButton) dialog.findViewById(R.id.submit_buton);
+                                AppCompatTextView applicant = (AppCompatTextView) dialog.findViewById(R.id.applicant);
+                                questions_spinner = (AppCompatSpinner) dialog.findViewById(R.id.question_spinner);
+                                AppCompatTextView question_tag = (AppCompatTextView) dialog.findViewById(R.id.question_tag);
+                                AppCompatTextView question_content = (AppCompatTextView) dialog.findViewById(R.id.question_content);
+                                AppCompatTextView applicant_type = (AppCompatTextView) dialog.findViewById(R.id.applicant_type);
                                 dialog.show();
 
-                                question_tag.setText("Dear" +" "+name+" "+"Please answer this Question for verification ");
+                                question_tag.setText("Dear" + " " + name + " " + "Please answer this Question for verification ");
                                 question_content.setText(question + "?");
                                 //Other_Earning(qus_dropdown);
                                 applicant.setText("Applicant");
                                 Other_Earning_SA = new String[qus_dropdown.length()];
-                                for (int i=0;i<qus_dropdown.length();i++){
-                                    JSONObject J =  qus_dropdown.getJSONObject(i);
+                                for (int i = 0; i < qus_dropdown.length(); i++) {
+                                    JSONObject J = qus_dropdown.getJSONObject(i);
                                     Other_Earning_SA[i] = J.getString("value");
                                     final List<String> loan_type_list = new ArrayList<>(Arrays.asList(Other_Earning_SA));
-                                    Other_Earning_Adapter = new ArrayAdapter<String>(mCon, R.layout.view_spinner_item, loan_type_list){
+                                    Other_Earning_Adapter = new ArrayAdapter<String>(mCon, R.layout.view_spinner_item, loan_type_list) {
                                         public View getView(int position, View convertView, ViewGroup parent) {
-                                            font = Typeface.createFromAsset(mCon.getAssets(),"Lato-Regular.ttf");
+                                            font = Typeface.createFromAsset(mCon.getAssets(), "Lato-Regular.ttf");
                                             TextView v = (TextView) super.getView(position, convertView, parent);
                                             v.setTypeface(font);
                                             return v;
@@ -363,17 +365,15 @@ public class Payment_Sucess_Screen extends AppCompatActivity {
                                     @Override
                                     public void onClick(View view) {
 
-                                        if (applicantcount.equals("1"))
-                                        {
+                                        if (applicantcount.equals("1")) {
                                             dialog.dismiss();
                                             LayoutInflater layoutInflater1 = (LayoutInflater) Payment_Sucess_Screen.this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                                            View customView1 = layoutInflater1.inflate(R.layout.popup_loading,null);
+                                            View customView1 = layoutInflater1.inflate(R.layout.popup_loading, null);
                                             popupWindow1 = new PopupWindow(customView1, LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
                                             //display the popup window
                                             popupWindow1.showAtLocation(submit_buton, Gravity.CENTER, 0, 0);
                                             CRIF_Question_Testing();
-                                        }else
-                                        {
+                                        } else {
                                             dialog.dismiss();
                                             CRIF_Question_Testing1();
                                         }
@@ -383,11 +383,11 @@ public class Payment_Sucess_Screen extends AppCompatActivity {
                                 });
 
                                 // co_applicant_.setVisibility(View.VISIBLE);
-                            }else
-                            {
+                            } else {
                                 Viability_CRIF_report_Functions1();
-                               // Toast.makeText(mCon, "Please Provide Valid PAN Details!!!",Toast.LENGTH_SHORT).show();
+                                // Toast.makeText(mCon, "Please Provide Valid PAN Details!!!",Toast.LENGTH_SHORT).show();
                             }
+
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -422,19 +422,19 @@ public class Payment_Sucess_Screen extends AppCompatActivity {
         AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
 
     }
-    private void STEP2_COMPLETE() {
+    private void CRIF_Fails() {
         //    progressDialog.show();
         JSONObject J =new JSONObject();
         try {
 
-            J.put("trans_id",Pref.getTRANSACTIONID(getApplicationContext()));
-            J.put("mode","view");
+            J.put("user_id",Pref.getUSERID(getApplicationContext()));
+            J.put("relationship_type",applicantcount);
 
         } catch (JSONException e) {
             e.printStackTrace();
         }
         Log.e("Step2 Complete request",J.toString());
-        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, Urls.step2_complete, J,
+        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, Urls.cibil_report1, J,
                 new Response.Listener<JSONObject>() {
 
                     @Override
@@ -443,11 +443,222 @@ public class Payment_Sucess_Screen extends AppCompatActivity {
                         try {
 
                             String Staues_step2_complete = object.getString("status");
-
+                            JSONObject jsonObject1 = object.getJSONObject("response");
                             if(Staues_step2_complete.contains("success")) {
 
-                                viability_CRIF_Score();
-                                //  Document_Details();
+                            JSONObject jsonObject = jsonObject1.getJSONObject("ovrl_loandet");
+
+                            Log.e("the over_all",jsonObject.toString());
+                             crif_fail = jsonObject.getString("crif_fail");
+
+                                if (applicantcount.equals("1")) {
+                                    LayoutInflater layoutInflater1 = (LayoutInflater) Payment_Sucess_Screen.this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                                    View customView1 = layoutInflater1.inflate(R.layout.activity_viablity_fail1_, null);
+
+                                    AppCompatButton nextahed1 = (AppCompatButton) customView1.findViewById(R.id.nextahed1);
+                                    AppCompatButton GO_Back_To_Dashboard = (AppCompatButton) customView1.findViewById(R.id.GO_Back_To_Dashboard);
+                                    AppCompatTextView crif_fail_reason = (AppCompatTextView) customView1.findViewById(R.id.crif_fail_reason);
+                                    LinearLayout background = (LinearLayout) customView1.findViewById(R.id.background);
+                                    LinearLayout co_applicant = (LinearLayout) customView1.findViewById(R.id.co_applicant);
+                                    LinearLayout co_Applicant_ly = (LinearLayout) customView1.findViewById(R.id.co_Applicant_ly);
+                                    AppCompatTextView crifscore = (AppCompatTextView) customView1.findViewById(R.id.crifscore);
+                                    AppCompatButton view_viablity_report = (AppCompatButton) customView1.findViewById(R.id.view_viablity_report);
+                                    AppCompatButton view_CRIF_report = (AppCompatButton) customView1.findViewById(R.id.view_CRIF_report);
+
+                                    TextView score = (TextView) customView1.findViewById(R.id.score);
+                                    background.setBackground(getResources().getDrawable(R.drawable.capsul_button_rect_viability1));
+                                    co_applicant.setVisibility(View.GONE);
+                                    co_Applicant_ly.setVisibility(View.GONE);
+                                    crifscore.setText(app_crif_score);
+                                    crif_fail_reason.setText("Reason: "+crif_fail);
+                                    Log.e("crif_Score", app_crif_score);
+                                    //instantiate popup window
+                                    popupWindow1 = new PopupWindow(customView1, LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
+                                    //display the popup window
+                                    popupWindow1.showAtLocation(GO_Back_To_Dashboard, Gravity.CENTER, 0, 0);
+
+
+                                    //close the popup window on button click
+                                    nextahed1.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View v) {
+
+                                              /*  Intent intent = new Intent(Payment_Sucess_Screen.this, Upload_Activity_Bank.class);
+                                                startActivity(intent);
+                                                finish();*/
+                                        }
+                                    });
+                                    GO_Back_To_Dashboard.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View v) {
+
+                                            Intent intent = new Intent(Payment_Sucess_Screen.this, Dashboard_Activity.class);
+                                            startActivity(intent);
+                                            finish();
+                                        }
+                                    });
+
+                                    view_viablity_report.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View view) {
+
+                                           /* if (permissionUtils.checkPermission(Payment_Sucess_Screen.this, STORAGE_PERMISSION_REQUEST_CODE, view)) {
+                                                if (viable_url.length() > 0) {
+                                                    try {
+                                                        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(viable_url)));
+                                                    } catch (Exception e) {
+                                                        e.getStackTrace();
+                                                        Toast.makeText(mCon, "Please Try again",Toast.LENGTH_SHORT).show();
+
+                                                    }
+                                                }
+
+                                            }*/
+                                            String report = "Viability Report";
+                                            Objs.ac.StartActivityPutExtra(Payment_Sucess_Screen.this, Doc_ImageView_Bank.class,
+                                                    Params.document, viable_url, Params.report, report);
+
+                                        }
+
+                                    });
+                                    view_CRIF_report.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View view) {
+
+                                          /*  if (permissionUtils.checkPermission(Payment_Sucess_Screen.this, STORAGE_PERMISSION_REQUEST_CODE, view)) {
+                                                if (app_crif_url.length() > 0) {
+                                                    try {
+                                                        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(app_crif_url)));
+                                                    } catch (Exception e) {
+                                                        e.getStackTrace();
+                                                    }
+                                                }
+
+                                            }*/
+                                            String report = "CRIF Report";
+                                            Objs.ac.StartActivityPutExtra(Payment_Sucess_Screen.this, Doc_ImageView_Bank.class,
+                                                    Params.document, app_crif_url, Params.report, report);
+                                           /* Objs.ac.StartActivityPutExtra(Payment_Sucess_Screen.this, Doc_ImageView_Bank.class,
+                                                    Params.document,app_crif_url);*/
+
+                                        }
+
+                                    });
+                                 //   viability_check_pass();
+                                }else
+                                {
+                                    LayoutInflater layoutInflater1 = (LayoutInflater) Payment_Sucess_Screen.this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                                    View customView1 = layoutInflater1.inflate(R.layout.activity_viablity_fail1_, null);
+
+                                    AppCompatButton nextahed1 = (AppCompatButton) customView1.findViewById(R.id.nextahed1);
+                                    AppCompatTextView crif_fail_reason = (AppCompatTextView) customView1.findViewById(R.id.crif_fail_reason);
+                                    AppCompatButton GO_Back_To_Dashboard = (AppCompatButton) customView1.findViewById(R.id.GO_Back_To_Dashboard);
+                                    AppCompatButton view_viablity_report = (AppCompatButton) customView1.findViewById(R.id.view_viablity_report);
+                                    AppCompatButton view_CRIF_report = (AppCompatButton) customView1.findViewById(R.id.view_CRIF_report);
+                                    AppCompatButton view_co_App_CRIF_report = (AppCompatButton) customView1.findViewById(R.id.view_co_App_CRIF_report);
+                                    LinearLayout co_applicant = (LinearLayout) customView1.findViewById(R.id.co_applicant);
+                                    LinearLayout co_Applicant_ly = (LinearLayout) customView1.findViewById(R.id.co_Applicant_ly);
+                                    AppCompatTextView crifscore = (AppCompatTextView) customView1.findViewById(R.id.crifscore);
+                                    LinearLayout background = (LinearLayout) customView1.findViewById(R.id.background);
+                                    AppCompatTextView co_appcrifscore = (AppCompatTextView) customView1.findViewById(R.id.co_appcrifscore);
+                                    background.setBackground(getResources().getDrawable(R.drawable.capsul_button_rect_viability1));
+
+                                    //  TextView score= (TextView) customView1.findViewById(R.id.score);
+                                    co_applicant.setVisibility(View.VISIBLE);
+                                    co_Applicant_ly.setVisibility(View.VISIBLE);
+                                    crifscore.setText(app_crif_score);
+                                    co_appcrifscore.setText(coapp_crif_score);
+                                    Log.e("crif_Score", app_crif_score);
+                                    crif_fail_reason.setText("Reason: "+crif_fail);
+                                    //instantiate popup window
+                                    popupWindow1 = new PopupWindow(customView1, LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
+                                    //display the popup window
+                                    popupWindow1.showAtLocation(nextahed1, Gravity.CENTER, 0, 0);
+
+                                    //close the popup window on button click
+                                    nextahed1.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View v) {
+
+                                               /* Intent intent = new Intent(Payment_Sucess_Screen.this, Upload_Activity_Bank.class);
+                                                startActivity(intent);
+                                                finish();*/
+                                        }
+                                    });
+                                    GO_Back_To_Dashboard.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View v) {
+
+                                            Intent intent = new Intent(Payment_Sucess_Screen.this, Dashboard_Activity.class);
+                                            startActivity(intent);
+                                            finish();
+                                        }
+                                    });
+
+                                    view_viablity_report.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View view) {
+
+                                                   /* if (permissionUtils.checkPermission(Payment_Sucess_Screen.this, STORAGE_PERMISSION_REQUEST_CODE, view)) {
+                                                        if (viable_url.length() > 0) {
+                                                            try {
+                                                                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(viable_url)));
+                                                            } catch (Exception e) {
+                                                                e.getStackTrace();
+                                                            }
+                                                        }
+
+                                                    }*/
+                                            Objs.ac.StartActivityPutExtra(Payment_Sucess_Screen.this, Doc_ImageView_Bank.class,
+                                                    Params.document, viable_url);
+
+                                        }
+
+                                    });
+                                    view_CRIF_report.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View view) {
+
+                                          /*  if (permissionUtils.checkPermission(Payment_Sucess_Screen.this, STORAGE_PERMISSION_REQUEST_CODE, view)) {
+                                                if (app_crif_url.length() > 0) {
+                                                    try {
+                                                        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(app_crif_url)));
+                                                    } catch (Exception e) {
+                                                        e.getStackTrace();
+                                                    }
+                                                }
+
+                                            }*/
+                                            Objs.ac.StartActivityPutExtra(Payment_Sucess_Screen.this, Doc_ImageView_Bank.class,
+                                                    Params.document, app_crif_url);
+
+                                        }
+
+                                    });
+
+                                    view_co_App_CRIF_report.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View view) {
+
+                                          /*  if (permissionUtils.checkPermission(Payment_Sucess_Screen.this, STORAGE_PERMISSION_REQUEST_CODE, view)) {
+                                                if (coapp_crif_url.length() > 0) {
+                                                    try {
+                                                        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(coapp_crif_url)));
+                                                    } catch (Exception e) {
+                                                        e.getStackTrace();
+                                                    }
+                                                }
+
+                                            }*/
+                                            Objs.ac.StartActivityPutExtra(Payment_Sucess_Screen.this, Doc_ImageView_Bank.class,
+                                                    Params.document, coapp_crif_url);
+
+                                        }
+
+                                    });
+
+                                   // viability_check_pass();
+                                }
                             }else
                             {
                                 Toast.makeText(mCon, "CRIF Statues Failed",Toast.LENGTH_SHORT).show();
@@ -474,9 +685,18 @@ public class Payment_Sucess_Screen extends AppCompatActivity {
                 return headers;
             }
         };
+
+        int socketTimeout = 0;
+        RetryPolicy policy = new DefaultRetryPolicy(socketTimeout,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
+
+        jsonObjReq.setRetryPolicy(policy);
         AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
 
     }
+
+
     private void Other_Earning(final JSONArray other_earning_ar) throws JSONException {
         //   SPINNERLIST = new String[ja.length()];
         Other_Earning_SA = new String[other_earning_ar.length()];
@@ -561,10 +781,10 @@ public class Payment_Sucess_Screen extends AppCompatActivity {
                             Report_ID  = data1.getString("reportId");
                             Order_ID  = data1.getString("orderId");*/
 
-
                             if (Statues.equals("success")) {
 
-
+                                JSONObject data = object.getJSONObject("data");
+                                overall_status = data.getString("overall_status");
                                 if (applicantcount.equals("1"))
                                 {
                                     Viability_CRIF_report_Functions();
@@ -572,8 +792,6 @@ public class Payment_Sucess_Screen extends AppCompatActivity {
                                 {
                                     Co_applicant_Crif_Generation();
                                 }
-
-
 
                                 // viability_CRIF_Score();
                             } else if (Statues.equals("technical_error"))
@@ -648,10 +866,10 @@ public class Payment_Sucess_Screen extends AppCompatActivity {
                           /*  JSONObject data1 = object.getJSONObject("data");
                             Report_ID  = data1.getString("reportId");
                             Order_ID  = data1.getString("orderId");*/
-
-
                             if (Statues.equals("success")) {
 
+                                JSONObject data1 = object.getJSONObject("data");
+                                overall_status = data1.getString("overall_status");
 
                                 if (applicantcount.equals("1"))
                                 {
@@ -734,16 +952,18 @@ public class Payment_Sucess_Screen extends AppCompatActivity {
                             Report_ID  = data1.getString("reportId");
                             Order_ID  = data1.getString("orderId");*/
                             if (Statues.equals("success")) {
-
+                                JSONObject data1 = object.getJSONObject("data");
+                                overall_status = data1.getString("overall_status");
                                 Viability_CRIF_report_Functions();
 
                             }else if (Statues.equals("technical_error"))
                             {
+                                overall_status = "3";
                                 Toast.makeText(mCon, " Technical Error, Please Contact Loanwiser",Toast.LENGTH_SHORT).show();
                                 // co_applicant_.setVisibility(View.VISIBLE);
                             }else
                             {
-
+                                overall_status = "3";
                                 Toast.makeText(mCon, " Error, Please Contact Loanwiser",Toast.LENGTH_SHORT).show();
                             }
                         } catch (JSONException e) {
@@ -815,31 +1035,46 @@ public class Payment_Sucess_Screen extends AppCompatActivity {
                             if (Statues.equals("success")) {
 
                                 Log.e("applicantcount", String.valueOf(applicantcount));
-                                if (applicantcount.equals("1"))
-                                {
+                                if (applicantcount.equals("1")) {
+                                    if (overall_status.equals("0")) {
 
-                                         viable_url = object.getString("viable_url");
-                                         app_crif_score = object.getString("app_crif_score");
-                                         app_crif_url = object.getString("app_crif_url");
+                                        viable_url = object.getString("viable_url");
+                                        app_crif_score = object.getString("app_crif_score");
+                                        app_crif_url = object.getString("app_crif_url");
+                                        app_crif_url_view = object.getString("app_crif_url_view");
+                                        viable_url_view = object.getString("viable_url_view");
+                                        trans_id = object.getString("trans_id");
+                                        user_id = object.getString("user_id");
+                                        CRIF_Fails();
+
+                                    } else if(overall_status.equals("1")){
 
 
-                                     LayoutInflater layoutInflater1 = (LayoutInflater) Payment_Sucess_Screen.this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                                    View customView1 = layoutInflater1.inflate(R.layout.activity_viablity_sucess_,null);
+                                    viable_url = object.getString("viable_url");
+                                    app_crif_score = object.getString("app_crif_score");
+                                    app_crif_url = object.getString("app_crif_url");
+                                        app_crif_url_view = object.getString("app_crif_url_view");
+                                        viable_url_view = object.getString("viable_url_view");
 
-                                   AppCompatButton nextahed = (AppCompatButton) customView1.findViewById(R.id.nextahed);
-                                   LinearLayout background = (LinearLayout) customView1.findViewById(R.id.background);
-                                   LinearLayout co_applicant = (LinearLayout) customView1.findViewById(R.id.co_applicant);
+
+
+                                    LayoutInflater layoutInflater1 = (LayoutInflater) Payment_Sucess_Screen.this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                                    View customView1 = layoutInflater1.inflate(R.layout.activity_viablity_sucess_, null);
+
+                                    AppCompatButton nextahed = (AppCompatButton) customView1.findViewById(R.id.nextahed);
+                                    LinearLayout background = (LinearLayout) customView1.findViewById(R.id.background);
+                                    LinearLayout co_applicant = (LinearLayout) customView1.findViewById(R.id.co_applicant);
                                     LinearLayout co_Applicant_ly = (LinearLayout) customView1.findViewById(R.id.co_Applicant_ly);
-                                   AppCompatTextView crifscore = (AppCompatTextView) customView1.findViewById(R.id.crifscore);
+                                    AppCompatTextView crifscore = (AppCompatTextView) customView1.findViewById(R.id.crifscore);
                                     AppCompatButton view_viablity_report = (AppCompatButton) customView1.findViewById(R.id.view_viablity_report);
                                     AppCompatButton view_CRIF_report = (AppCompatButton) customView1.findViewById(R.id.view_CRIF_report);
 
-                                    TextView score= (TextView) customView1.findViewById(R.id.score);
+                                    TextView score = (TextView) customView1.findViewById(R.id.score);
                                     background.setBackground(getResources().getDrawable(R.drawable.capsul_button_rect_viability));
                                     co_applicant.setVisibility(View.GONE);
                                     co_Applicant_ly.setVisibility(View.GONE);
                                     crifscore.setText(app_crif_score);
-                                    Log.e("crif_Score",app_crif_score);
+                                    Log.e("crif_Score", app_crif_score);
                                     //instantiate popup window
                                     popupWindow1 = new PopupWindow(customView1, LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
                                     //display the popup window
@@ -850,10 +1085,8 @@ public class Payment_Sucess_Screen extends AppCompatActivity {
                                     nextahed.setOnClickListener(new View.OnClickListener() {
                                         @Override
                                         public void onClick(View v) {
+                                            STEP2_COMPLETE();
 
-                                            Intent intent = new Intent(Payment_Sucess_Screen.this, Upload_Activity_Bank.class);
-                                            startActivity(intent);
-                                            finish();
                                         }
                                     });
 
@@ -873,9 +1106,10 @@ public class Payment_Sucess_Screen extends AppCompatActivity {
                                                 }
 
                                             }*/
-                                            String report="Viability Report";
+                                            String report = "Viability Report";
                                             Objs.ac.StartActivityPutExtra(Payment_Sucess_Screen.this, Doc_ImageView_Bank.class,
-                                                    Params.document,viable_url,Params.report,report);
+                                                    Params.document, viable_url, Params.report, report,
+                                                    Params.viable_url_view, viable_url_view);
 
                                         }
 
@@ -894,68 +1128,86 @@ public class Payment_Sucess_Screen extends AppCompatActivity {
                                                 }
 
                                             }*/
-                                            String report="CRIF Report";
+                                            String report = "CRIF Report";
                                             Objs.ac.StartActivityPutExtra(Payment_Sucess_Screen.this, Doc_ImageView_Bank.class,
-                                                    Params.document,app_crif_url,Params.report,report);
+                                                    Params.document, app_crif_url, Params.report, report,
+                                                    Params.viable_url_view, app_crif_url_view
+                                                    );
                                            /* Objs.ac.StartActivityPutExtra(Payment_Sucess_Screen.this, Doc_ImageView_Bank.class,
                                                     Params.document,app_crif_url);*/
 
                                         }
 
                                     });
-                                    viability_check_pass();
-                                }else
-                                {
+                                  //  viability_check_pass();
+
+                                }
+                                }else {
+                                    if (overall_status.equals("0")) {
 
 
-                                    Log.e("applicantcount 111", String.valueOf(applicantcount));
-                                         viable_url = object.getString("viable_url");
-                                         app_crif_score = object.getString("app_crif_score");
-                                         app_crif_url = object.getString("app_crif_url");
-                                         coapp_crif_score = object.getString("coapp_crif_score");
-                                         coapp_crif_url = object.getString("coapp_crif_url");
+                                        Log.e("applicantcount 111", String.valueOf(applicantcount));
+                                        viable_url = object.getString("viable_url");
+                                        app_crif_score = object.getString("app_crif_score");
+                                        app_crif_url = object.getString("app_crif_url");
+                                        coapp_crif_score = object.getString("coapp_crif_score");
+                                        coapp_crif_url = object.getString("coapp_crif_url");
+                                        app_crif_url_view = object.getString("app_crif_url_view");
+                                        coapp_crif_url_view = object.getString("app_crif_url_view");
+                                        viable_url_view = object.getString("viable_url_view");
 
+                                        CRIF_Fails();
 
-                                    LayoutInflater layoutInflater1 = (LayoutInflater) Payment_Sucess_Screen.this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                                    View customView1 = layoutInflater1.inflate(R.layout.activity_viablity_sucess_,null);
+                                    } else  if(overall_status.equals("1")){
 
-                                    AppCompatButton nextahed = (AppCompatButton) customView1.findViewById(R.id.nextahed);
-                                    AppCompatButton view_viablity_report = (AppCompatButton) customView1.findViewById(R.id.view_viablity_report);
-                                    AppCompatButton view_CRIF_report = (AppCompatButton) customView1.findViewById(R.id.view_CRIF_report);
-                                    AppCompatButton view_co_App_CRIF_report = (AppCompatButton) customView1.findViewById(R.id.view_co_App_CRIF_report);
-                                    LinearLayout co_applicant = (LinearLayout) customView1.findViewById(R.id.co_applicant);
-                                    LinearLayout co_Applicant_ly = (LinearLayout) customView1.findViewById(R.id.co_Applicant_ly);
-                                    AppCompatTextView crifscore = (AppCompatTextView) customView1.findViewById(R.id.crifscore);
-                                    LinearLayout background = (LinearLayout) customView1.findViewById(R.id.background);
-                                    AppCompatTextView co_appcrifscore = (AppCompatTextView) customView1.findViewById(R.id.co_appcrifscore);
-                                    background.setBackground(getResources().getDrawable(R.drawable.capsul_button_rect_viability));
+                                        Log.e("applicantcount 111", String.valueOf(applicantcount));
+                                        viable_url = object.getString("viable_url");
+                                        app_crif_score = object.getString("app_crif_score");
+                                        app_crif_url = object.getString("app_crif_url");
+                                        coapp_crif_score = object.getString("coapp_crif_score");
+                                        coapp_crif_url = object.getString("coapp_crif_url");
+                                        app_crif_url_view = object.getString("app_crif_url_view");
+                                        coapp_crif_url_view = object.getString("app_crif_url_view");
+                                        viable_url_view = object.getString("viable_url_view");
 
-                                  //  TextView score= (TextView) customView1.findViewById(R.id.score);
-                                    co_applicant.setVisibility(View.VISIBLE);
-                                    co_Applicant_ly.setVisibility(View.VISIBLE);
-                                    crifscore.setText(app_crif_score);
-                                    co_appcrifscore.setText(coapp_crif_score);
-                                    Log.e("crif_Score",app_crif_score);
+                                        LayoutInflater layoutInflater1 = (LayoutInflater) Payment_Sucess_Screen.this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                                        View customView1 = layoutInflater1.inflate(R.layout.activity_viablity_sucess_, null);
 
-                                    //instantiate popup window
-                                    popupWindow1 = new PopupWindow(customView1, LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
-                                    //display the popup window
-                                    popupWindow1.showAtLocation(nextahed, Gravity.CENTER, 0, 0);
+                                        AppCompatButton nextahed = (AppCompatButton) customView1.findViewById(R.id.nextahed);
+                                        AppCompatButton view_viablity_report = (AppCompatButton) customView1.findViewById(R.id.view_viablity_report);
+                                        AppCompatButton view_CRIF_report = (AppCompatButton) customView1.findViewById(R.id.view_CRIF_report);
+                                        AppCompatButton view_co_App_CRIF_report = (AppCompatButton) customView1.findViewById(R.id.view_co_App_CRIF_report);
+                                        LinearLayout co_applicant = (LinearLayout) customView1.findViewById(R.id.co_applicant);
+                                        LinearLayout co_Applicant_ly = (LinearLayout) customView1.findViewById(R.id.co_Applicant_ly);
+                                        AppCompatTextView crifscore = (AppCompatTextView) customView1.findViewById(R.id.crifscore);
+                                        LinearLayout background = (LinearLayout) customView1.findViewById(R.id.background);
+                                        AppCompatTextView co_appcrifscore = (AppCompatTextView) customView1.findViewById(R.id.co_appcrifscore);
+                                        background.setBackground(getResources().getDrawable(R.drawable.capsul_button_rect_viability));
 
-                                    //close the popup window on button click
-                                    nextahed.setOnClickListener(new View.OnClickListener() {
-                                        @Override
-                                        public void onClick(View v) {
+                                        //  TextView score= (TextView) customView1.findViewById(R.id.score);
+                                        co_applicant.setVisibility(View.VISIBLE);
+                                        co_Applicant_ly.setVisibility(View.VISIBLE);
+                                        crifscore.setText(app_crif_score);
+                                        co_appcrifscore.setText(coapp_crif_score);
+                                        Log.e("crif_Score", app_crif_score);
 
-                                            Intent intent = new Intent(Payment_Sucess_Screen.this, Upload_Activity_Bank.class);
-                                            startActivity(intent);
-                                            finish();
-                                        }
-                                    });
+                                        //instantiate popup window
+                                        popupWindow1 = new PopupWindow(customView1, LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
+                                        //display the popup window
+                                        popupWindow1.showAtLocation(nextahed, Gravity.CENTER, 0, 0);
 
-                                    view_viablity_report.setOnClickListener(new View.OnClickListener() {
-                                        @Override
-                                        public void onClick(View view) {
+                                        //close the popup window on button click
+                                        nextahed.setOnClickListener(new View.OnClickListener() {
+                                            @Override
+                                            public void onClick(View v) {
+
+                                                STEP2_COMPLETE();
+                                            }
+                                        });
+
+                                        view_viablity_report.setOnClickListener(new View.OnClickListener() {
+                                            @Override
+                                            public void onClick(View view) {
 
                                                    /* if (permissionUtils.checkPermission(Payment_Sucess_Screen.this, STORAGE_PERMISSION_REQUEST_CODE, view)) {
                                                         if (viable_url.length() > 0) {
@@ -967,15 +1219,16 @@ public class Payment_Sucess_Screen extends AppCompatActivity {
                                                         }
 
                                                     }*/
-                                            Objs.ac.StartActivityPutExtra(Payment_Sucess_Screen.this, Doc_ImageView_Bank.class,
-                                                    Params.document,viable_url);
+                                                String report = "Viability Report";
+                                                Objs.ac.StartActivityPutExtra(Payment_Sucess_Screen.this, Doc_ImageView_Bank.class,
+                                                        Params.document, viable_url,Params.report, report,Params.viable_url_view, viable_url_view);
 
                                             }
 
-                                    });
-                                    view_CRIF_report.setOnClickListener(new View.OnClickListener() {
-                                        @Override
-                                        public void onClick(View view) {
+                                        });
+                                        view_CRIF_report.setOnClickListener(new View.OnClickListener() {
+                                            @Override
+                                            public void onClick(View view) {
 
                                           /*  if (permissionUtils.checkPermission(Payment_Sucess_Screen.this, STORAGE_PERMISSION_REQUEST_CODE, view)) {
                                                 if (app_crif_url.length() > 0) {
@@ -987,16 +1240,18 @@ public class Payment_Sucess_Screen extends AppCompatActivity {
                                                 }
 
                                             }*/
-                                            Objs.ac.StartActivityPutExtra(Payment_Sucess_Screen.this, Doc_ImageView_Bank.class,
-                                                    Params.document,app_crif_url);
+                                                String report = "CRIF Report";
+                                                Objs.ac.StartActivityPutExtra(Payment_Sucess_Screen.this, Doc_ImageView_Bank.class,
+                                                        Params.document, app_crif_url,
+                                                        Params.viable_url_view,Params.report, report, app_crif_url_view);
 
-                                        }
+                                            }
 
-                                    });
+                                        });
 
-                                    view_co_App_CRIF_report.setOnClickListener(new View.OnClickListener() {
-                                        @Override
-                                        public void onClick(View view) {
+                                        view_co_App_CRIF_report.setOnClickListener(new View.OnClickListener() {
+                                            @Override
+                                            public void onClick(View view) {
 
                                           /*  if (permissionUtils.checkPermission(Payment_Sucess_Screen.this, STORAGE_PERMISSION_REQUEST_CODE, view)) {
                                                 if (coapp_crif_url.length() > 0) {
@@ -1008,16 +1263,19 @@ public class Payment_Sucess_Screen extends AppCompatActivity {
                                                 }
 
                                             }*/
-                                            Objs.ac.StartActivityPutExtra(Payment_Sucess_Screen.this, Doc_ImageView_Bank.class,
-                                                    Params.document,coapp_crif_url);
+                                                String report = "CRIF Report";
+                                                Objs.ac.StartActivityPutExtra(Payment_Sucess_Screen.this, Doc_ImageView_Bank.class,
+                                                        Params.document, coapp_crif_url,Params.report, report,
+                                                        Params.viable_url_view, coapp_crif_url_view);
 
-                                        }
+                                            }
 
-                                    });
+                                        });
 
-                                    viability_check_pass();
+                                       // viability_check_pass();
+                                    }
+
                                 }
-
                                 } else{
                                 Toast.makeText(mCon, " Error, Please Contact Loanwiser",Toast.LENGTH_SHORT).show();
                             }
@@ -1091,80 +1349,61 @@ public class Payment_Sucess_Screen extends AppCompatActivity {
                             if (Statues.equals("success")) {
 
                                 Log.e("applicantcount", String.valueOf(applicantcount));
-                                if (applicantcount.equals("1"))
-                                {
+                                if (applicantcount.equals("1")) {
+                                    if (overall_status.equals("0")) {
 
-                                    viable_url = object.getString("viable_url");
-                                   // app_crif_score = object.getString("app_crif_score");
-                                  //  app_crif_url = object.getString("app_crif_url");
+                                        viable_url = object.getString("viable_url");
+                                        app_crif_score = object.getString("app_crif_score");
+                                        app_crif_url = object.getString("app_crif_url");
+                                        app_crif_url_view = object.getString("app_crif_url_view");
+                                        viable_url_view = object.getString("viable_url_view");
+                                        CRIF_Fails();
 
-
-                                    LayoutInflater layoutInflater1 = (LayoutInflater) Payment_Sucess_Screen.this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                                    View customView1 = layoutInflater1.inflate(R.layout.activity_viablity_failure,null);
-                                   // view_report = (AppCompatButton) customView1.findViewById(R.id.view_viablity_report);
-                                    AppCompatButton  view_viablity_report=(AppCompatButton) customView1.findViewById(R.id.view_viablity_report);
-                                    AppCompatButton proceed_next=(AppCompatButton)customView1.findViewById(R.id.proceed_next);
-                                   // TextView score= (TextView) customView1.findViewById(R.id.score);
-                                    LinearLayout co_Applicant_ly = (LinearLayout) customView1.findViewById(R.id.co_Applicant_ly);
-                                    co_Applicant_ly.setVisibility(View.GONE);
-//instantiate popup window
-                                    popupWindow1 = new PopupWindow(customView1, LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
-//display the popup window
-                                    popupWindow1.showAtLocation(view_viablity_report, Gravity.CENTER, 0, 0);
-                                    view_viablity_report.setOnClickListener(new View.OnClickListener() {
-                                        @Override
-                                        public void onClick(View view) {
-
-                                          /*  if (permissionUtils.checkPermission(Payment_Sucess_Screen.this, STORAGE_PERMISSION_REQUEST_CODE, view)) {
-                                                if (viable_url.length() > 0) {
-                                                    try {
-                                                        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(viable_url)));
-                                                    } catch (Exception e) {
-                                                        e.getStackTrace();
-                                                    }
-                                                }
-                                            }*/
-                                            String report="Viability Report";
-                                            Objs.ac.StartActivityPutExtra(Payment_Sucess_Screen.this, Doc_ImageView_Bank.class,
-                                                    Params.document,viable_url,Params.report,report);
-
-                                        }
-                                    });
-                                    proceed_next.setOnClickListener(new View.OnClickListener() {
-                                        @Override
-                                        public void onClick(View view) {
-                                            Intent intent=new Intent(Payment_Sucess_Screen.this,Upload_Activity_Bank.class);
-                                            startActivity(intent);
-                                        }
-                                    });
-                                    viability_check_pass();
-                                }else
-                                {
+                                    } else if(overall_status.equals("1")){
 
 
-                                    Log.e("applicantcount 111", String.valueOf(applicantcount));
-                                    viable_url = object.getString("viable_url");
-                                   // app_crif_score = object.getString("app_crif_score");
-                                  //  app_crif_url = object.getString("app_crif_url");
-                                   //// coapp_crif_score = object.getString("coapp_crif_score");
-                                  //  coapp_crif_url = object.getString("coapp_crif_url");
+                                        viable_url = object.getString("viable_url");
+                                        app_crif_score = object.getString("app_crif_score");
+                                        app_crif_url = object.getString("app_crif_url");
+                                        app_crif_url_view = object.getString("app_crif_url_view");
+                                        viable_url_view = object.getString("viable_url_view");
 
 
-                                    LayoutInflater layoutInflater1 = (LayoutInflater) Payment_Sucess_Screen.this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                                    View customView1 = layoutInflater1.inflate(R.layout.activity_viablity_failure,null);
-                                   // view_report = (AppCompatButton) customView1.findViewById(R.id.view_report);
-                                    AppCompatButton view_viablity_report=(AppCompatButton) customView1.findViewById(R.id.view_viablity_report);
-                                    AppCompatButton proceed_next=(AppCompatButton)customView1.findViewById(R.id.proceed_next);
-                                    LinearLayout co_Applicant_ly = (LinearLayout) customView1.findViewById(R.id.co_Applicant_ly);
-                                    co_Applicant_ly.setVisibility(View.VISIBLE);
-                                  //  TextView score= (TextView) customView1.findViewById(R.id.score);
-//instantiate popup window
-                                    popupWindow1 = new PopupWindow(customView1, LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
-//display the popup window
-                                    popupWindow1.showAtLocation(view_viablity_report, Gravity.CENTER, 0, 0);
-                                    view_viablity_report.setOnClickListener(new View.OnClickListener() {
-                                        @Override
-                                        public void onClick(View view) {
+                                        LayoutInflater layoutInflater1 = (LayoutInflater) Payment_Sucess_Screen.this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                                        View customView1 = layoutInflater1.inflate(R.layout.activity_viablity_sucess_, null);
+
+                                        AppCompatButton nextahed = (AppCompatButton) customView1.findViewById(R.id.nextahed);
+                                        LinearLayout background = (LinearLayout) customView1.findViewById(R.id.background);
+                                        LinearLayout co_applicant = (LinearLayout) customView1.findViewById(R.id.co_applicant);
+                                        LinearLayout co_Applicant_ly = (LinearLayout) customView1.findViewById(R.id.co_Applicant_ly);
+                                        AppCompatTextView crifscore = (AppCompatTextView) customView1.findViewById(R.id.crifscore);
+                                        AppCompatButton view_viablity_report = (AppCompatButton) customView1.findViewById(R.id.view_viablity_report);
+                                        AppCompatButton view_CRIF_report = (AppCompatButton) customView1.findViewById(R.id.view_CRIF_report);
+
+                                        TextView score = (TextView) customView1.findViewById(R.id.score);
+                                        background.setBackground(getResources().getDrawable(R.drawable.capsul_button_rect_viability));
+                                        co_applicant.setVisibility(View.GONE);
+                                        co_Applicant_ly.setVisibility(View.GONE);
+                                        crifscore.setText(app_crif_score);
+                                        Log.e("crif_Score", app_crif_score);
+                                        //instantiate popup window
+                                        popupWindow1 = new PopupWindow(customView1, LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
+                                        //display the popup window
+                                        popupWindow1.showAtLocation(nextahed, Gravity.CENTER, 0, 0);
+
+
+                                        //close the popup window on button click
+                                        nextahed.setOnClickListener(new View.OnClickListener() {
+                                            @Override
+                                            public void onClick(View v) {
+                                                STEP2_COMPLETE();
+
+                                            }
+                                        });
+
+                                        view_viablity_report.setOnClickListener(new View.OnClickListener() {
+                                            @Override
+                                            public void onClick(View view) {
 
                                            /* if (permissionUtils.checkPermission(Payment_Sucess_Screen.this, STORAGE_PERMISSION_REQUEST_CODE, view)) {
                                                 if (viable_url.length() > 0) {
@@ -1172,25 +1411,182 @@ public class Payment_Sucess_Screen extends AppCompatActivity {
                                                         startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(viable_url)));
                                                     } catch (Exception e) {
                                                         e.getStackTrace();
+                                                        Toast.makeText(mCon, "Please Try again",Toast.LENGTH_SHORT).show();
+
                                                     }
                                                 }
+
                                             }*/
-                                            String report="Viability Report";
-                                            Objs.ac.StartActivityPutExtra(Payment_Sucess_Screen.this, Doc_ImageView_Bank.class,
-                                                    Params.document,viable_url,Params.report,report);
-                                        }
-                                    });
-                                    proceed_next.setOnClickListener(new View.OnClickListener() {
-                                        @Override
-                                        public void onClick(View view) {
-                                            Intent intent=new Intent(Payment_Sucess_Screen.this, Upload_Activity_Bank.class);
-                                            startActivity(intent);
-                                        }
-                                    });
+                                                String report = "Viability Report";
+                                                Objs.ac.StartActivityPutExtra(Payment_Sucess_Screen.this, Doc_ImageView_Bank.class,
+                                                        Params.document, viable_url, Params.report, report,
+                                                        Params.viable_url_view, viable_url_view);
 
-                                    viability_check_pass();
+                                            }
+
+                                        });
+                                        view_CRIF_report.setOnClickListener(new View.OnClickListener() {
+                                            @Override
+                                            public void onClick(View view) {
+
+                                          /*  if (permissionUtils.checkPermission(Payment_Sucess_Screen.this, STORAGE_PERMISSION_REQUEST_CODE, view)) {
+                                                if (app_crif_url.length() > 0) {
+                                                    try {
+                                                        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(app_crif_url)));
+                                                    } catch (Exception e) {
+                                                        e.getStackTrace();
+                                                    }
+                                                }
+
+                                            }*/
+                                                String report = "CRIF Report";
+                                                Objs.ac.StartActivityPutExtra(Payment_Sucess_Screen.this, Doc_ImageView_Bank.class,
+                                                        Params.document, app_crif_url, Params.report, report,
+                                                        Params.viable_url_view, app_crif_url_view
+                                                );
+                                           /* Objs.ac.StartActivityPutExtra(Payment_Sucess_Screen.this, Doc_ImageView_Bank.class,
+                                                    Params.document,app_crif_url);*/
+
+                                            }
+
+                                        });
+                                        //  viability_check_pass();
+
+                                    }
+                                }else {
+                                    if (overall_status.equals("0")) {
+
+
+                                        Log.e("applicantcount 111", String.valueOf(applicantcount));
+                                        viable_url = object.getString("viable_url");
+                                        app_crif_score = object.getString("app_crif_score");
+                                        app_crif_url = object.getString("app_crif_url");
+                                        coapp_crif_score = object.getString("coapp_crif_score");
+                                        coapp_crif_url = object.getString("coapp_crif_url");
+                                        app_crif_url_view = object.getString("app_crif_url_view");
+                                        coapp_crif_url_view = object.getString("app_crif_url_view");
+                                        viable_url_view = object.getString("viable_url_view");
+
+                                        CRIF_Fails();
+
+                                    } else  if(overall_status.equals("1")){
+
+                                        Log.e("applicantcount 111", String.valueOf(applicantcount));
+                                        viable_url = object.getString("viable_url");
+                                        app_crif_score = object.getString("app_crif_score");
+                                        app_crif_url = object.getString("app_crif_url");
+                                        coapp_crif_score = object.getString("coapp_crif_score");
+                                        coapp_crif_url = object.getString("coapp_crif_url");
+                                        app_crif_url_view = object.getString("app_crif_url_view");
+                                        coapp_crif_url_view = object.getString("app_crif_url_view");
+                                        viable_url_view = object.getString("viable_url_view");
+
+                                        LayoutInflater layoutInflater1 = (LayoutInflater) Payment_Sucess_Screen.this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                                        View customView1 = layoutInflater1.inflate(R.layout.activity_viablity_sucess_, null);
+
+                                        AppCompatButton nextahed = (AppCompatButton) customView1.findViewById(R.id.nextahed);
+                                        AppCompatButton view_viablity_report = (AppCompatButton) customView1.findViewById(R.id.view_viablity_report);
+                                        AppCompatButton view_CRIF_report = (AppCompatButton) customView1.findViewById(R.id.view_CRIF_report);
+                                        AppCompatButton view_co_App_CRIF_report = (AppCompatButton) customView1.findViewById(R.id.view_co_App_CRIF_report);
+                                        LinearLayout co_applicant = (LinearLayout) customView1.findViewById(R.id.co_applicant);
+                                        LinearLayout co_Applicant_ly = (LinearLayout) customView1.findViewById(R.id.co_Applicant_ly);
+                                        AppCompatTextView crifscore = (AppCompatTextView) customView1.findViewById(R.id.crifscore);
+                                        LinearLayout background = (LinearLayout) customView1.findViewById(R.id.background);
+                                        AppCompatTextView co_appcrifscore = (AppCompatTextView) customView1.findViewById(R.id.co_appcrifscore);
+                                        background.setBackground(getResources().getDrawable(R.drawable.capsul_button_rect_viability));
+
+                                        //  TextView score= (TextView) customView1.findViewById(R.id.score);
+                                        co_applicant.setVisibility(View.VISIBLE);
+                                        co_Applicant_ly.setVisibility(View.VISIBLE);
+                                        crifscore.setText(app_crif_score);
+                                        co_appcrifscore.setText(coapp_crif_score);
+                                        Log.e("crif_Score", app_crif_score);
+
+                                        //instantiate popup window
+                                        popupWindow1 = new PopupWindow(customView1, LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
+                                        //display the popup window
+                                        popupWindow1.showAtLocation(nextahed, Gravity.CENTER, 0, 0);
+
+                                        //close the popup window on button click
+                                        nextahed.setOnClickListener(new View.OnClickListener() {
+                                            @Override
+                                            public void onClick(View v) {
+
+                                                STEP2_COMPLETE();
+                                            }
+                                        });
+
+                                        view_viablity_report.setOnClickListener(new View.OnClickListener() {
+                                            @Override
+                                            public void onClick(View view) {
+
+                                                   /* if (permissionUtils.checkPermission(Payment_Sucess_Screen.this, STORAGE_PERMISSION_REQUEST_CODE, view)) {
+                                                        if (viable_url.length() > 0) {
+                                                            try {
+                                                                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(viable_url)));
+                                                            } catch (Exception e) {
+                                                                e.getStackTrace();
+                                                            }
+                                                        }
+
+                                                    }*/
+                                                String report = "Viability Report";
+                                                Objs.ac.StartActivityPutExtra(Payment_Sucess_Screen.this, Doc_ImageView_Bank.class,
+                                                        Params.document, viable_url,Params.report, report,Params.viable_url_view, viable_url_view);
+
+                                            }
+
+                                        });
+                                        view_CRIF_report.setOnClickListener(new View.OnClickListener() {
+                                            @Override
+                                            public void onClick(View view) {
+
+                                          /*  if (permissionUtils.checkPermission(Payment_Sucess_Screen.this, STORAGE_PERMISSION_REQUEST_CODE, view)) {
+                                                if (app_crif_url.length() > 0) {
+                                                    try {
+                                                        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(app_crif_url)));
+                                                    } catch (Exception e) {
+                                                        e.getStackTrace();
+                                                    }
+                                                }
+
+                                            }*/
+                                                String report = "CRIF Report";
+                                                Objs.ac.StartActivityPutExtra(Payment_Sucess_Screen.this, Doc_ImageView_Bank.class,
+                                                        Params.document, app_crif_url,
+                                                        Params.viable_url_view,Params.report, report, app_crif_url_view);
+
+                                            }
+
+                                        });
+
+                                        view_co_App_CRIF_report.setOnClickListener(new View.OnClickListener() {
+                                            @Override
+                                            public void onClick(View view) {
+
+                                          /*  if (permissionUtils.checkPermission(Payment_Sucess_Screen.this, STORAGE_PERMISSION_REQUEST_CODE, view)) {
+                                                if (coapp_crif_url.length() > 0) {
+                                                    try {
+                                                        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(coapp_crif_url)));
+                                                    } catch (Exception e) {
+                                                        e.getStackTrace();
+                                                    }
+                                                }
+
+                                            }*/
+                                                String report = "CRIF Report";
+                                                Objs.ac.StartActivityPutExtra(Payment_Sucess_Screen.this, Doc_ImageView_Bank.class,
+                                                        Params.document, coapp_crif_url,Params.report, report,
+                                                        Params.viable_url_view, coapp_crif_url_view);
+
+                                            }
+
+                                        });
+
+                                        // viability_check_pass();
+                                    }
+
                                 }
-
                             } else{
                                 Toast.makeText(mCon, " Error, Please Contact Loanwiser",Toast.LENGTH_SHORT).show();
                             }
@@ -1215,6 +1611,7 @@ public class Payment_Sucess_Screen extends AppCompatActivity {
                 return headers;
             }
         };
+        //AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
         int socketTimeout = 0;
         RetryPolicy policy = new DefaultRetryPolicy(socketTimeout,
                 DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
@@ -1223,8 +1620,6 @@ public class Payment_Sucess_Screen extends AppCompatActivity {
         jsonObjReq.setRetryPolicy(policy);
 
         AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
-       // AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
-
     }
 
     private void viability_CRIF_Score( ) {
@@ -1435,7 +1830,9 @@ public class Payment_Sucess_Screen extends AppCompatActivity {
                             }
 
                             if (Statues.equals("success")) {
-                                CO_CRIF_Question_Testing();
+                                JSONObject data = object.getJSONObject("data");
+                                overall_status = data.getString("overall_status");
+                                Viability_CRIF_report_Functions1();
                                 Toast.makeText(Payment_Sucess_Screen.this,"Sucess",Toast.LENGTH_SHORT);
 
                             }else if (Statues.equals("question"))
@@ -1549,6 +1946,7 @@ public class Payment_Sucess_Screen extends AppCompatActivity {
                             }else
                             {
                                 Toast.makeText(mCon, "Please Provide Valid PAN Details!!!",Toast.LENGTH_SHORT).show();
+                                overall_status = "3";
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -1582,6 +1980,65 @@ public class Payment_Sucess_Screen extends AppCompatActivity {
 
         AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
        // AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
+
+    }
+
+    private void STEP2_COMPLETE() {
+        progressDialog.show();
+
+        JSONObject J =new JSONObject();
+
+        try {
+
+            J.put("trans_id",Pref.getTRANSACTIONID(getApplicationContext()));
+          //  J.put("mode","view");
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        Log.e("Step2 Complete request",J.toString());
+        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, Urls.step2_complete, J,
+                new Response.Listener<JSONObject>() {
+
+                    @Override
+                    public void onResponse(JSONObject object) {
+                        Log.e("Step2 complete response",object.toString());
+                        try {
+
+                            String Staues_step2_complete = object.getString("status");
+
+                            if(Staues_step2_complete.equals("success")) {
+                                Intent intent = new Intent(Payment_Sucess_Screen.this, Upload_Activity_Bank.class);
+                                startActivity(intent);
+                                finish();
+                                //  Document_Details();
+                            }else
+                            {
+                                Toast.makeText(mCon, "CRIF Statues Failed",Toast.LENGTH_SHORT).show();
+                            }
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        // Toast.makeText(mCon, response.toString(),Toast.LENGTH_SHORT).show();
+                        progressDialog.dismiss();
+                    }
+                }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                VolleyLog.d("TAG", "Error: " + error.getMessage());
+                progressDialog.dismiss();
+            }
+        }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("Content-Type", "application/json");
+                return headers;
+            }
+        };
+        AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
 
     }
 

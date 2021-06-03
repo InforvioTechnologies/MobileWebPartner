@@ -194,7 +194,6 @@
                 android:orientation="vertical">
 
             <LinearLayout
-
                 android:background="@drawable/capsul_button_bank"
                 android:layout_marginBottom="10dp"
                 android:layout_gravity="center"
@@ -212,14 +211,60 @@
                 <androidx.appcompat.widget.AppCompatTextView
                     android:layout_marginTop="10dp"
                     android:layout_marginRight="20dp"
+                    android:layout_marginLeft="10dp"
                     android:layout_gravity="center"
                     android:gravity="center"
                     android:text="@string/bank_analysis_met"
-                    android:textSize="16dp"
+                    android:textSize="12dp"
                     android:textColor="@color/black"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
             </LinearLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/bank_eligible_met2"
+                    android:layout_marginBottom="10dp"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_marginTop="10dp"
+                        android:layout_marginRight="20dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_gravity="center"
+                        android:id="@+id/cat_A2"
+                        android:gravity="center"
+                        android:text="@string/bank_analysis_mets"
+                        android:textSize="12dp"
+                        android:textColor="@color/black"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/bank_eligible_met1"
+                    android:layout_marginBottom="10dp"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_marginTop="10dp"
+                        android:layout_marginRight="20dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_gravity="center"
+                        android:id="@+id/cat_A1"
+                        android:gravity="center"
+                        android:text="@string/notestr"
+                        android:textSize="12dp"
+                        android:textColor="#FF922B"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
                 <LinearLayout
                     android:id="@+id/bank_eligible_met"
                     android:layout_marginBottom="10dp"
@@ -234,7 +279,7 @@
                         android:id="@+id/cat_A"
                         android:gravity="center"
                         android:text="Banks For Which Document \n Requirements Successfully Met"
-                        android:textSize="16dp"
+                        android:textSize="12dp"
                         android:textColor="@color/black"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
@@ -274,7 +319,7 @@
                     android:layout_marginBottom="10dp"
                     android:layout_gravity="center"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:orientation="vertical">
                     <androidx.appcompat.widget.AppCompatImageView
                         android:layout_marginRight="20dp"
@@ -287,6 +332,7 @@
                     <androidx.appcompat.widget.AppCompatTextView
                         android:layout_marginTop="10dp"
                         android:layout_marginRight="20dp"
+                        android:layout_marginLeft="20dp"
                         android:layout_gravity="center"
                         android:gravity="center"
                         android:text="@string/bank_analysis_not_met"
@@ -294,6 +340,20 @@
                         android:textColor="@color/black"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_marginTop="10dp"
+                        android:layout_marginRight="20dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginBottom="10dp"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:text="@string/bank_analay_txt"
+                        android:textSize="16dp"
+                        android:textColor="@color/black"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
                 </LinearLayout>
             </LinearLayout>
             <LinearLayout
@@ -308,6 +368,7 @@
                     android:layout_marginTop="10dp"
                     android:layout_marginRight="20dp"
                     android:layout_gravity="center"
+                    android:layout_marginLeft="10dp"
                     android:id="@+id/cat_B"
                     android:gravity="center"
                     android:text="Other Eligible and Available Banks - For Which \n Document Requirements Not Met"
@@ -318,6 +379,7 @@
                 <androidx.appcompat.widget.AppCompatTextView
                     android:layout_marginTop="10dp"
                     android:layout_marginRight="20dp"
+                    android:layout_marginLeft="20dp"
                     android:layout_gravity="center"
                     android:id="@+id/cat_c"
                     android:gravity="center"
