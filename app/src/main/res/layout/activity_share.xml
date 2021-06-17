@@ -86,6 +86,17 @@
                     android:textColor="@color/black"
                     android:textStyle="bold"/>
 
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_margin="10dp"
+                    android:layout_marginTop="20dp"
+                    android:id="@+id/contenttxt1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="14dp"
+                    android:layout_gravity="center"
+                    android:text=""
+                    android:textColor="@color/black" />
+
             </LinearLayout>
 
             <LinearLayout

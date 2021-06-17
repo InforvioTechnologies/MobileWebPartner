@@ -36,10 +36,7 @@ import adhoc.app.applibrary.Config.AppUtils.Params;
 import adhoc.app.applibrary.Config.AppUtils.Pref.Pref;
 import adhoc.app.applibrary.Config.AppUtils.Urls;
 import adhoc.app.applibrary.Config.AppUtils.VolleySignleton.AppController;
-import in.loanwiser.partnerapp.PartnerActivitys.Doc_ImageView_Viability;
 import in.loanwiser.partnerapp.PartnerActivitys.Home;
-import in.loanwiser.partnerapp.Partner_Statues.Resent_Lead_Statues;
-import in.loanwiser.partnerapp.Partner_Statues.Suggestion_item_freqent;
 import in.loanwiser.partnerapp.R;
 
 public class BanklistAdapter extends RecyclerView.Adapter<BanklistAdapter.ViewHolder> {

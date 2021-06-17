@@ -534,8 +534,6 @@ public class ActivityFragment extends Fragment implements NavigationView.OnNavig
 
                         try {
 
-
-
                                 JSONArray ja = response.getJSONArray("finance");
                                 JSONArray ja1 = response.getJSONArray("checklist");
                                 JSONObject ja_post =response.getJSONObject("post_share");
@@ -574,7 +572,7 @@ public class ActivityFragment extends Fragment implements NavigationView.OnNavig
                                 for(int i = 0;i<ja2.length();i++){
                                     if( i < 3) {
                                         JSONObject J = ja2.getJSONObject(i);
-                                        items3.add(new post_item_freqent(J.getString("title"), J.getString("post_url"), J.getString("content"),J.getString("id")));
+                                        items3.add(new post_item_freqent(J.getString("title"), J.getString("post_url"), J.getString("content"),J.getString("id"),J.getString("app_content")));
                                         adapter3.notifyDataSetChanged();
                                     }
 

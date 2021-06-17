@@ -74,6 +74,7 @@ public class BusinessCardActivity extends SimpleActivity implements SwipeRefresh
     ProgressBar progressBarMaterial_pdf;
 
     private SwipeRefreshLayout mSwipeRefreshLayout;
+    AppCompatTextView nametxt,emailtxt,webtxt,phntxt,locationtxt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,6 +94,12 @@ public class BusinessCardActivity extends SimpleActivity implements SwipeRefresh
         imageview=findViewById(R.id.imageview);
         progressBarMaterial_pdf=findViewById(R.id.progressBarMaterial_pdf);
         editbtn=findViewById(R.id.editbtn);
+
+        nametxt=findViewById(R.id.nametxt);
+        emailtxt=findViewById(R.id.emailtxt);
+        webtxt=findViewById(R.id.webtxt);
+        phntxt=findViewById(R.id.phntxt);
+        locationtxt=findViewById(R.id.locationtxt);
 
         pref = this.getSharedPreferences("MyPref", 0);
         b2b_user_id =  pref.getString(b2b_user_id1, null);
@@ -130,11 +137,18 @@ public class BusinessCardActivity extends SimpleActivity implements SwipeRefresh
                                         String path = MediaStore.Images.Media.insertImage(getApplicationContext().getContentResolver(), resource, "IMG_Url" + Calendar.getInstance().getTime(), null);
                                         Log.i("quoteswahttodo", "is onresoursereddy" + path);
                                         Uri screenshotUri = Uri.parse(path);
+                                        String content="\n" +
+                                                "Glad to be your Financial Consultant. Contact me at";
+                                        String content3="" +"to assist you with your Loan needs." +
+                                                "\n\nYou can also access my services through my website ";
+                                        String content1= "I would be happy to assist you.";
+
                                         if(screenshotUri!=null){
                                             Log.i("quoteswahttodo", "is onresoursereddy" + screenshotUri);
                                             intent.putExtra(Intent.EXTRA_STREAM, screenshotUri);
                                             intent.setType("image/*");
                                             intent.setPackage("com.whatsapp");
+                                            intent.putExtra(Intent.EXTRA_TEXT, content+" " +mobilenumber+" "+content3+url+". "+content1);
                                             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                                             startActivity(Intent.createChooser(intent, "Share image via..."));
                                         }else
@@ -192,10 +206,16 @@ public class BusinessCardActivity extends SimpleActivity implements SwipeRefresh
 
                                         // String path = MediaStore.Images.Media.insertImage(getApplicationContext().getContentResolver(), resource, "", null);
                                         Log.i("quoteswahttodo", "is onresoursereddy" + path);
+                                        String content="\n" +
+                                                "Glad to be your Financial Consultant. Contact me at";
+                                        String content3="" +"to assist you with your Loan needs." +
+                                                "\n\nYou can also access my services through my website ";
+                                        String content1= "I would be happy to assist you.";
                                         Uri screenshotUri = Uri.parse(path);
                                         if(screenshotUri!=null){
                                             Log.i("quoteswahttodo", "is onresoursereddy" + screenshotUri);
                                             intent.putExtra(Intent.EXTRA_STREAM, screenshotUri);
+                                            intent.putExtra(Intent.EXTRA_TEXT, content+" " +mobilenumber+" "+content3+url+". "+content1);
                                             intent.setType("image/*");
                                             startActivity(Intent.createChooser(intent, "Share image via..."));
                                         }else
@@ -312,7 +332,8 @@ public class BusinessCardActivity extends SimpleActivity implements SwipeRefresh
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
+        String data  = String.valueOf(J);
+        Log.d("Request :", data);
         progressDialog.show();
         JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, Urls.GETBUSINESSCARD, J,
                 new Response.Listener<JSONObject>() {
@@ -327,11 +348,15 @@ public class BusinessCardActivity extends SimpleActivity implements SwipeRefresh
                             contactperson=response.getString("contact_person");
                             location=response.getString("location");
                             url=response.getString("url");
+
+                            nametxt.setText(contactperson);
+                            emailtxt.setText(email);
+                            phntxt.setText(mobilenumber);
+                            locationtxt.setText(location);
+                            webtxt.setText(url);
                             visitincard_url=response.getString("visit_card");
                             Log.i("TAG", "onResponse:url "+visitincard_url);
-
-                            Objs.a.loadPicasso(getApplicationContext(),visitincard_url,imageview,progressBarMaterial_pdf);
-
+                      //      Objs.a.loadPicasso(getApplicationContext(),visitincard_url,imageview,progressBarMaterial_pdf);
 
 
                         } catch (JSONException e) {

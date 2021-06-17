@@ -134,6 +134,7 @@ public class WebsiteActivity extends SimpleActivity {
                         Log.d("Request :", JO_data.toString());
                         try {
                             url=response.getString("url");
+                            mobilenumber=response.getString("mobile_no");
                             websiteurltxt.setText(url);
 
                         } catch (JSONException e) {
@@ -235,10 +236,17 @@ public class WebsiteActivity extends SimpleActivity {
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     public void shareViaWhatsApp() {
+
+        String content="\n" +
+                "Glad to be your Financial Consultant. Contact me at ";
+        String content3="" +" to assist you with your Loan needs." +
+                "\n\nYou can also access my services through my website ";
+        String content1= "I would be happy to assist you.";
+
         Intent whatsappIntent = new Intent(Intent.ACTION_SEND);
         whatsappIntent.setType("text/plain");
         whatsappIntent.setPackage("com.whatsapp");
-        whatsappIntent.putExtra(Intent.EXTRA_TEXT, url);
+        whatsappIntent.putExtra(Intent.EXTRA_TEXT, content+" " +mobilenumber+" "+content3+url+". "+content1);
         whatsappIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         try {
             Objects.requireNonNull(getApplicationContext()).startActivity(whatsappIntent);
@@ -248,10 +256,17 @@ public class WebsiteActivity extends SimpleActivity {
     }
 
     public void Othernetwork(){
+
+        String content="\n" +
+                "Glad to be your Financial Consultant. Contact me at";
+        String content3="" +"to assist you with your Loan needs." +
+                "\n\nYou can also access my services through my website ";
+        String content1= "I would be happy to assist you.";
+
         Intent intent = new Intent();
         intent.setAction(Intent.ACTION_SEND);
         intent.setType("text/plain");
-        intent.putExtra(Intent.EXTRA_TEXT, url);
+        intent.putExtra(Intent.EXTRA_TEXT, content+" " +mobilenumber+" "+content3+url+". "+content1);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(Intent.createChooser(intent, "Share"));
     }

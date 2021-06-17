@@ -3,10 +3,6 @@ package in.loanwiser.partnerapp.BankStamentUpload;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Paint;
-import android.net.Uri;
-import android.text.Html;
-import android.text.SpannableString;
-import android.text.style.UnderlineSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,10 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-import adhoc.app.applibrary.Config.AppUtils.Objs;
-import adhoc.app.applibrary.Config.AppUtils.Params;
-import in.loanwiser.partnerapp.CameraActivity.DocGridView_List;
-import in.loanwiser.partnerapp.PartnerActivitys.Doc_ImageView_Viability;
+import in.loanwiser.partnerapp.PDF_Viewer.MainActivity;
 import in.loanwiser.partnerapp.R;
 
 public class Statementlist extends RecyclerView.Adapter<Statementlist.ViewHolder> {
@@ -58,9 +51,16 @@ public class Statementlist extends RecyclerView.Adapter<Statementlist.ViewHolder
         holder.statementlist.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 String path =url;
-                Objs.ac.StartActivityPutExtra(context, Doc_ImageView_Viability.class,
-                        Params.document,path);
+               /* Objs.ac.StartActivityPutExtra(context, Doc_ImageView_Viability.class,
+                        Params.document,path);*/
+                String report="Bank Statement";
+                Intent intent = new Intent(context, MainActivity.class);
+                intent.putExtra("viability_report_URL", path);
+                intent.putExtra("report", report);
+                context.startActivity(intent);
+
             }
         });
 

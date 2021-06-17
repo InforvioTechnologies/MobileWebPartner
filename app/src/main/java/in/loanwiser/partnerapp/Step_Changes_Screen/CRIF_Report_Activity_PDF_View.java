@@ -33,6 +33,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.rajat.pdfviewer.PdfViewerActivity;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -52,6 +53,8 @@ import adhoc.app.applibrary.Config.AppUtils.VolleySignleton.AppController;
 import dmax.dialog.SpotsDialog;
 import in.loanwiser.partnerapp.BankStamentUpload.Doc_ImageView_Bank;
 import in.loanwiser.partnerapp.PDF_Dounloader.PermissionUtils;
+
+import in.loanwiser.partnerapp.PDF_Viewer.MainActivity;
 import in.loanwiser.partnerapp.PartnerActivitys.Home;
 import in.loanwiser.partnerapp.PartnerActivitys.SimpleActivity;
 import in.loanwiser.partnerapp.R;
@@ -510,22 +513,35 @@ public class CRIF_Report_Activity_PDF_View extends SimpleActivity {
                         try {
 
                             String viability_report_URL = J.getString("url");
+                            String report="CRIF Report";
 
-                          /*  Objs.ac.StartActivityPutExtra(CRIF_Report_Activity_PDF_View.this, Doc_ImageView_Viability.class,
-                                    Params.document,viability_report_URL);*/
-                          /*  if (permissionUtils.checkPermission(CRIF_Report_Activity_PDF_View.this, STORAGE_PERMISSION_REQUEST_CODE, view)) {
+                           // Toast.makeText(getApplicationContext(),"clicked", Toast.LENGTH_SHORT).show();
+
+                          //  String URL_LOADER = "https:\\/\\/callcenter.loanwiser.in\\/trans_id\\/RTdqa0lmcDBkL2srTkpSN0dRKy9Gdz09\\/user_id\\/YVZUU2lDL0s5WUVRdEYyMkszV1F2UT09\\/Loan_Viability_Report.pdf";
+
+                           /* if (permissionUtils.checkPermission(CRIF_Report_Activity_PDF_View.this, STORAGE_PERMISSION_REQUEST_CODE, view)) {
                                 if (viability_report_URL.length() > 0) {
                                     try {
                                         startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(viability_report_URL)));
                                     } catch (Exception e) {
+                                      //  startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(viability_report_URL)));
                                         e.getStackTrace();
                                     }
                                 }
 
                             }*/
-                            String report="CRIF Report";
+                           /* PdfViewerActivity.Companion.launchPdfFromUrl( CRIF_Report_Activity_PDF_View.this,s,
+                                    "Title", "dir",true);*/
+                            Intent intent = new Intent(CRIF_Report_Activity_PDF_View.this, MainActivity.class);
+                            intent.putExtra("viability_report_URL", viability_report_URL);
+                            intent.putExtra("report", report);
+                            startActivity(intent);
+
+
+
+                         /*   String report="CRIF Report";
                             Objs.ac.StartActivityPutExtra(CRIF_Report_Activity_PDF_View.this, Doc_ImageView_Bank.class,
-                                    Params.document,viability_report_URL,Params.report,report);
+                                    Params.document,viability_report_URL,Params.report,report);*/
 
 
                         } catch (JSONException e) {
@@ -570,6 +586,8 @@ public class CRIF_Report_Activity_PDF_View extends SimpleActivity {
             }
         }
     }
+
+
 
     @Override
     public void onBackPressed() {

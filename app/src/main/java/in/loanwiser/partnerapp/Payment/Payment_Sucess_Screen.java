@@ -60,6 +60,7 @@ import in.loanwiser.partnerapp.BankStamentUpload.Upload_Activity_Bank;
 import in.loanwiser.partnerapp.CameraActivity.DocGridView_List;
 import in.loanwiser.partnerapp.Documents.Doc_ImageView;
 import in.loanwiser.partnerapp.PDF_Dounloader.PermissionUtils;
+import in.loanwiser.partnerapp.PDF_Viewer.MainActivity;
 import in.loanwiser.partnerapp.PartnerActivitys.Dashboard_Activity;
 import in.loanwiser.partnerapp.PartnerActivitys.Home;
 import in.loanwiser.partnerapp.R;
@@ -514,9 +515,17 @@ public class Payment_Sucess_Screen extends AppCompatActivity {
                                                 }
 
                                             }*/
-                                            String report = "Viability Report";
+
+                                            String report="Viability Report";
+                                            Intent intent = new Intent(Payment_Sucess_Screen.this, MainActivity.class);
+                                            intent.putExtra("viability_report_URL", viable_url);
+                                            intent.putExtra("report", report);
+                                            startActivity(intent);
+
+                                          /* String report = "Viability Report";
                                             Objs.ac.StartActivityPutExtra(Payment_Sucess_Screen.this, Doc_ImageView_Bank.class,
-                                                    Params.document, viable_url, Params.report, report);
+                                                    Params.document, viable_url, Params.report, report);*/
+
 
                                         }
 
@@ -525,7 +534,7 @@ public class Payment_Sucess_Screen extends AppCompatActivity {
                                         @Override
                                         public void onClick(View view) {
 
-                                          /*  if (permissionUtils.checkPermission(Payment_Sucess_Screen.this, STORAGE_PERMISSION_REQUEST_CODE, view)) {
+                                           /* if (permissionUtils.checkPermission(Payment_Sucess_Screen.this, STORAGE_PERMISSION_REQUEST_CODE, view)) {
                                                 if (app_crif_url.length() > 0) {
                                                     try {
                                                         startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(app_crif_url)));
@@ -535,9 +544,15 @@ public class Payment_Sucess_Screen extends AppCompatActivity {
                                                 }
 
                                             }*/
-                                            String report = "CRIF Report";
+
+                                            String report="CRIF Report";
+                                            Intent intent = new Intent(Payment_Sucess_Screen.this, MainActivity.class);
+                                            intent.putExtra("viability_report_URL", app_crif_url);
+                                            intent.putExtra("report", report);
+                                            startActivity(intent);
+                                          /*  String report = "CRIF Report";
                                             Objs.ac.StartActivityPutExtra(Payment_Sucess_Screen.this, Doc_ImageView_Bank.class,
-                                                    Params.document, app_crif_url, Params.report, report);
+                                                    Params.document, app_crif_url, Params.report, report);*/
                                            /* Objs.ac.StartActivityPutExtra(Payment_Sucess_Screen.this, Doc_ImageView_Bank.class,
                                                     Params.document,app_crif_url);*/
 
@@ -599,7 +614,7 @@ public class Payment_Sucess_Screen extends AppCompatActivity {
                                         @Override
                                         public void onClick(View view) {
 
-                                                   /* if (permissionUtils.checkPermission(Payment_Sucess_Screen.this, STORAGE_PERMISSION_REQUEST_CODE, view)) {
+                                                 /*   if (permissionUtils.checkPermission(Payment_Sucess_Screen.this, STORAGE_PERMISSION_REQUEST_CODE, view)) {
                                                         if (viable_url.length() > 0) {
                                                             try {
                                                                 startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(viable_url)));
@@ -609,8 +624,14 @@ public class Payment_Sucess_Screen extends AppCompatActivity {
                                                         }
 
                                                     }*/
-                                            Objs.ac.StartActivityPutExtra(Payment_Sucess_Screen.this, Doc_ImageView_Bank.class,
-                                                    Params.document, viable_url);
+
+                                            String report="Viability Report";
+                                            Intent intent = new Intent(Payment_Sucess_Screen.this, MainActivity.class);
+                                            intent.putExtra("viability_report_URL", viable_url);
+                                            intent.putExtra("report", report);
+                                            startActivity(intent);
+                                          /*  Objs.ac.StartActivityPutExtra(Payment_Sucess_Screen.this, Doc_ImageView_Bank.class,
+                                                    Params.document, viable_url);*/
 
                                         }
 
@@ -619,7 +640,7 @@ public class Payment_Sucess_Screen extends AppCompatActivity {
                                         @Override
                                         public void onClick(View view) {
 
-                                          /*  if (permissionUtils.checkPermission(Payment_Sucess_Screen.this, STORAGE_PERMISSION_REQUEST_CODE, view)) {
+                                           /* if (permissionUtils.checkPermission(Payment_Sucess_Screen.this, STORAGE_PERMISSION_REQUEST_CODE, view)) {
                                                 if (app_crif_url.length() > 0) {
                                                     try {
                                                         startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(app_crif_url)));
@@ -629,8 +650,14 @@ public class Payment_Sucess_Screen extends AppCompatActivity {
                                                 }
 
                                             }*/
-                                            Objs.ac.StartActivityPutExtra(Payment_Sucess_Screen.this, Doc_ImageView_Bank.class,
-                                                    Params.document, app_crif_url);
+
+                                            String report="CRIF Report";
+                                            Intent intent = new Intent(Payment_Sucess_Screen.this, MainActivity.class);
+                                            intent.putExtra("viability_report_URL", app_crif_url);
+                                            intent.putExtra("report", report);
+                                            startActivity(intent);
+                                           /* Objs.ac.StartActivityPutExtra(Payment_Sucess_Screen.this, Doc_ImageView_Bank.class,
+                                                    Params.document, app_crif_url);*/
 
                                         }
 
@@ -640,7 +667,7 @@ public class Payment_Sucess_Screen extends AppCompatActivity {
                                         @Override
                                         public void onClick(View view) {
 
-                                          /*  if (permissionUtils.checkPermission(Payment_Sucess_Screen.this, STORAGE_PERMISSION_REQUEST_CODE, view)) {
+                                           /* if (permissionUtils.checkPermission(Payment_Sucess_Screen.this, STORAGE_PERMISSION_REQUEST_CODE, view)) {
                                                 if (coapp_crif_url.length() > 0) {
                                                     try {
                                                         startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(coapp_crif_url)));
@@ -650,8 +677,15 @@ public class Payment_Sucess_Screen extends AppCompatActivity {
                                                 }
 
                                             }*/
-                                            Objs.ac.StartActivityPutExtra(Payment_Sucess_Screen.this, Doc_ImageView_Bank.class,
-                                                    Params.document, coapp_crif_url);
+
+                                            String report="CRIF Report";
+                                            Intent intent = new Intent(Payment_Sucess_Screen.this, MainActivity.class);
+                                            intent.putExtra("viability_report_URL", coapp_crif_url);
+                                            intent.putExtra("report", report);
+                                            startActivity(intent);
+
+                                          /*  Objs.ac.StartActivityPutExtra(Payment_Sucess_Screen.this, Doc_ImageView_Bank.class,
+                                                    Params.document, coapp_crif_url);*/
 
                                         }
 
@@ -1106,11 +1140,17 @@ public class Payment_Sucess_Screen extends AppCompatActivity {
                                                 }
 
                                             }*/
-                                            String report = "Viability Report";
+
+                                            String report="Viability Report";
+                                            Intent intent = new Intent(Payment_Sucess_Screen.this, MainActivity.class);
+                                            intent.putExtra("viability_report_URL", viable_url);
+                                            intent.putExtra("report", report);
+                                            startActivity(intent);
+                                         /*   String report = "Viability Report";
                                             Objs.ac.StartActivityPutExtra(Payment_Sucess_Screen.this, Doc_ImageView_Bank.class,
                                                     Params.document, viable_url, Params.report, report,
                                                     Params.viable_url_view, viable_url_view);
-
+*/
                                         }
 
                                     });
@@ -1118,7 +1158,7 @@ public class Payment_Sucess_Screen extends AppCompatActivity {
                                         @Override
                                         public void onClick(View view) {
 
-                                          /*  if (permissionUtils.checkPermission(Payment_Sucess_Screen.this, STORAGE_PERMISSION_REQUEST_CODE, view)) {
+                                           /* if (permissionUtils.checkPermission(Payment_Sucess_Screen.this, STORAGE_PERMISSION_REQUEST_CODE, view)) {
                                                 if (app_crif_url.length() > 0) {
                                                     try {
                                                         startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(app_crif_url)));
@@ -1128,11 +1168,18 @@ public class Payment_Sucess_Screen extends AppCompatActivity {
                                                 }
 
                                             }*/
-                                            String report = "CRIF Report";
+
+                                            String report="CRIF Report";
+                                            Intent intent = new Intent(Payment_Sucess_Screen.this, MainActivity.class);
+                                            intent.putExtra("viability_report_URL", app_crif_url);
+                                            intent.putExtra("report", report);
+                                            startActivity(intent);
+
+                                           /* String report = "CRIF Report";
                                             Objs.ac.StartActivityPutExtra(Payment_Sucess_Screen.this, Doc_ImageView_Bank.class,
                                                     Params.document, app_crif_url, Params.report, report,
                                                     Params.viable_url_view, app_crif_url_view
-                                                    );
+                                                    );*/
                                            /* Objs.ac.StartActivityPutExtra(Payment_Sucess_Screen.this, Doc_ImageView_Bank.class,
                                                     Params.document,app_crif_url);*/
 
@@ -1209,7 +1256,7 @@ public class Payment_Sucess_Screen extends AppCompatActivity {
                                             @Override
                                             public void onClick(View view) {
 
-                                                   /* if (permissionUtils.checkPermission(Payment_Sucess_Screen.this, STORAGE_PERMISSION_REQUEST_CODE, view)) {
+                                                  /*  if (permissionUtils.checkPermission(Payment_Sucess_Screen.this, STORAGE_PERMISSION_REQUEST_CODE, view)) {
                                                         if (viable_url.length() > 0) {
                                                             try {
                                                                 startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(viable_url)));
@@ -1219,10 +1266,17 @@ public class Payment_Sucess_Screen extends AppCompatActivity {
                                                         }
 
                                                     }*/
-                                                String report = "Viability Report";
+
+                                                String report="Viability Report";
+                                                Intent intent = new Intent(Payment_Sucess_Screen.this, MainActivity.class);
+                                                intent.putExtra("viability_report_URL", viable_url);
+                                                intent.putExtra("report", report);
+                                                startActivity(intent);
+
+                                              /*  String report = "Viability Report";
                                                 Objs.ac.StartActivityPutExtra(Payment_Sucess_Screen.this, Doc_ImageView_Bank.class,
                                                         Params.document, viable_url,Params.report, report,Params.viable_url_view, viable_url_view);
-
+*/
                                             }
 
                                         });
@@ -1230,7 +1284,7 @@ public class Payment_Sucess_Screen extends AppCompatActivity {
                                             @Override
                                             public void onClick(View view) {
 
-                                          /*  if (permissionUtils.checkPermission(Payment_Sucess_Screen.this, STORAGE_PERMISSION_REQUEST_CODE, view)) {
+                                           /* if (permissionUtils.checkPermission(Payment_Sucess_Screen.this, STORAGE_PERMISSION_REQUEST_CODE, view)) {
                                                 if (app_crif_url.length() > 0) {
                                                     try {
                                                         startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(app_crif_url)));
@@ -1240,10 +1294,17 @@ public class Payment_Sucess_Screen extends AppCompatActivity {
                                                 }
 
                                             }*/
-                                                String report = "CRIF Report";
+
+                                                String report="CRIF Report";
+                                                Intent intent = new Intent(Payment_Sucess_Screen.this, MainActivity.class);
+                                                intent.putExtra("viability_report_URL", app_crif_url);
+                                                intent.putExtra("report", report);
+                                                startActivity(intent);
+
+                                               /* String report = "CRIF Report";
                                                 Objs.ac.StartActivityPutExtra(Payment_Sucess_Screen.this, Doc_ImageView_Bank.class,
                                                         Params.document, app_crif_url,
-                                                        Params.viable_url_view,Params.report, report, app_crif_url_view);
+                                                        Params.viable_url_view,Params.report, report, app_crif_url_view);*/
 
                                             }
 
@@ -1253,7 +1314,7 @@ public class Payment_Sucess_Screen extends AppCompatActivity {
                                             @Override
                                             public void onClick(View view) {
 
-                                          /*  if (permissionUtils.checkPermission(Payment_Sucess_Screen.this, STORAGE_PERMISSION_REQUEST_CODE, view)) {
+                                           /* if (permissionUtils.checkPermission(Payment_Sucess_Screen.this, STORAGE_PERMISSION_REQUEST_CODE, view)) {
                                                 if (coapp_crif_url.length() > 0) {
                                                     try {
                                                         startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(coapp_crif_url)));
@@ -1263,10 +1324,17 @@ public class Payment_Sucess_Screen extends AppCompatActivity {
                                                 }
 
                                             }*/
-                                                String report = "CRIF Report";
+
+                                                String report="CRIF Report";
+                                                Intent intent = new Intent(Payment_Sucess_Screen.this, MainActivity.class);
+                                                intent.putExtra("viability_report_URL", coapp_crif_url);
+                                                intent.putExtra("report", report);
+                                                startActivity(intent);
+
+                                               /* String report = "CRIF Report";
                                                 Objs.ac.StartActivityPutExtra(Payment_Sucess_Screen.this, Doc_ImageView_Bank.class,
                                                         Params.document, coapp_crif_url,Params.report, report,
-                                                        Params.viable_url_view, coapp_crif_url_view);
+                                                        Params.viable_url_view, coapp_crif_url_view);*/
 
                                             }
 
@@ -1405,7 +1473,7 @@ public class Payment_Sucess_Screen extends AppCompatActivity {
                                             @Override
                                             public void onClick(View view) {
 
-                                           /* if (permissionUtils.checkPermission(Payment_Sucess_Screen.this, STORAGE_PERMISSION_REQUEST_CODE, view)) {
+                                          /*  if (permissionUtils.checkPermission(Payment_Sucess_Screen.this, STORAGE_PERMISSION_REQUEST_CODE, view)) {
                                                 if (viable_url.length() > 0) {
                                                     try {
                                                         startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(viable_url)));
@@ -1417,10 +1485,17 @@ public class Payment_Sucess_Screen extends AppCompatActivity {
                                                 }
 
                                             }*/
-                                                String report = "Viability Report";
+
+                                                String report="Viability Report";
+                                                Intent intent = new Intent(Payment_Sucess_Screen.this, MainActivity.class);
+                                                intent.putExtra("viability_report_URL", viable_url);
+                                                intent.putExtra("report", report);
+                                                startActivity(intent);
+
+                                              /*  String report = "Viability Report";
                                                 Objs.ac.StartActivityPutExtra(Payment_Sucess_Screen.this, Doc_ImageView_Bank.class,
                                                         Params.document, viable_url, Params.report, report,
-                                                        Params.viable_url_view, viable_url_view);
+                                                        Params.viable_url_view, viable_url_view);*/
 
                                             }
 
@@ -1429,7 +1504,7 @@ public class Payment_Sucess_Screen extends AppCompatActivity {
                                             @Override
                                             public void onClick(View view) {
 
-                                          /*  if (permissionUtils.checkPermission(Payment_Sucess_Screen.this, STORAGE_PERMISSION_REQUEST_CODE, view)) {
+                                            /*if (permissionUtils.checkPermission(Payment_Sucess_Screen.this, STORAGE_PERMISSION_REQUEST_CODE, view)) {
                                                 if (app_crif_url.length() > 0) {
                                                     try {
                                                         startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(app_crif_url)));
@@ -1439,11 +1514,18 @@ public class Payment_Sucess_Screen extends AppCompatActivity {
                                                 }
 
                                             }*/
-                                                String report = "CRIF Report";
+
+                                                    String report="CRIF Report";
+                                                Intent intent = new Intent(Payment_Sucess_Screen.this, MainActivity.class);
+                                                intent.putExtra("viability_report_URL", app_crif_url);
+                                                intent.putExtra("report", report);
+                                                startActivity(intent);
+
+                                              /*  String report = "CRIF Report";
                                                 Objs.ac.StartActivityPutExtra(Payment_Sucess_Screen.this, Doc_ImageView_Bank.class,
                                                         Params.document, app_crif_url, Params.report, report,
                                                         Params.viable_url_view, app_crif_url_view
-                                                );
+                                                );*/
                                            /* Objs.ac.StartActivityPutExtra(Payment_Sucess_Screen.this, Doc_ImageView_Bank.class,
                                                     Params.document,app_crif_url);*/
 
@@ -1530,9 +1612,16 @@ public class Payment_Sucess_Screen extends AppCompatActivity {
                                                         }
 
                                                     }*/
-                                                String report = "Viability Report";
+
+                                                String report="Viability Report";
+                                                Intent intent = new Intent(Payment_Sucess_Screen.this, MainActivity.class);
+                                                intent.putExtra("viability_report_URL", viable_url);
+                                                intent.putExtra("report", report);
+                                                startActivity(intent);
+
+                                              /*  String report = "Viability Report";
                                                 Objs.ac.StartActivityPutExtra(Payment_Sucess_Screen.this, Doc_ImageView_Bank.class,
-                                                        Params.document, viable_url,Params.report, report,Params.viable_url_view, viable_url_view);
+                                                        Params.document, viable_url,Params.report, report,Params.viable_url_view, viable_url_view);*/
 
                                             }
 
@@ -1541,7 +1630,7 @@ public class Payment_Sucess_Screen extends AppCompatActivity {
                                             @Override
                                             public void onClick(View view) {
 
-                                          /*  if (permissionUtils.checkPermission(Payment_Sucess_Screen.this, STORAGE_PERMISSION_REQUEST_CODE, view)) {
+                                           /* if (permissionUtils.checkPermission(Payment_Sucess_Screen.this, STORAGE_PERMISSION_REQUEST_CODE, view)) {
                                                 if (app_crif_url.length() > 0) {
                                                     try {
                                                         startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(app_crif_url)));
@@ -1551,10 +1640,17 @@ public class Payment_Sucess_Screen extends AppCompatActivity {
                                                 }
 
                                             }*/
-                                                String report = "CRIF Report";
+
+                                                String report="CRIF Report";
+                                                Intent intent = new Intent(Payment_Sucess_Screen.this, MainActivity.class);
+                                                intent.putExtra("viability_report_URL", app_crif_url);
+                                                intent.putExtra("report", report);
+                                                startActivity(intent);
+
+                                             /*   String report = "CRIF Report";
                                                 Objs.ac.StartActivityPutExtra(Payment_Sucess_Screen.this, Doc_ImageView_Bank.class,
                                                         Params.document, app_crif_url,
-                                                        Params.viable_url_view,Params.report, report, app_crif_url_view);
+                                                        Params.viable_url_view,Params.report, report, app_crif_url_view);*/
 
                                             }
 
@@ -1564,7 +1660,7 @@ public class Payment_Sucess_Screen extends AppCompatActivity {
                                             @Override
                                             public void onClick(View view) {
 
-                                          /*  if (permissionUtils.checkPermission(Payment_Sucess_Screen.this, STORAGE_PERMISSION_REQUEST_CODE, view)) {
+                                           /* if (permissionUtils.checkPermission(Payment_Sucess_Screen.this, STORAGE_PERMISSION_REQUEST_CODE, view)) {
                                                 if (coapp_crif_url.length() > 0) {
                                                     try {
                                                         startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(coapp_crif_url)));
@@ -1574,10 +1670,17 @@ public class Payment_Sucess_Screen extends AppCompatActivity {
                                                 }
 
                                             }*/
-                                                String report = "CRIF Report";
+
+                                                    String report="CRIF Report";
+                                                Intent intent = new Intent(Payment_Sucess_Screen.this, MainActivity.class);
+                                                intent.putExtra("viability_report_URL", coapp_crif_url);
+                                                intent.putExtra("report", report);
+                                                startActivity(intent);
+
+                                               /* String report = "CRIF Report";
                                                 Objs.ac.StartActivityPutExtra(Payment_Sucess_Screen.this, Doc_ImageView_Bank.class,
                                                         Params.document, coapp_crif_url,Params.report, report,
-                                                        Params.viable_url_view, coapp_crif_url_view);
+                                                        Params.viable_url_view, coapp_crif_url_view);*/
 
                                             }
 

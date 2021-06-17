@@ -142,7 +142,7 @@ public class Lead_Crration_Activity extends SimpleActivity {
         Click();
         // Loanwiser_Api();
 
-    /*   lead_cr_step1.setOnClickListener(new View.OnClickListener() {
+      /* lead_cr_step1.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
 

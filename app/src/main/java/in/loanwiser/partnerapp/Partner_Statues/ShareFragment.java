@@ -121,6 +121,7 @@ public class ShareFragment extends Fragment{
 
     AppCompatButton my_earnings,my_leads;
 
+    String app_content;
 
   //  private ActivityMainBinding binding;
 
@@ -449,6 +450,7 @@ public class ShareFragment extends Fragment{
                 final String id = J.getString("id");
                 final String img_url1 = J.getString("post_url");
                 final String content = J.getString("content");
+                  app_content = J.getString("app_content");
 
                 holder.Title.setText(J.getString("title"));
                 Log.e("img_url",img_url1);
@@ -487,6 +489,7 @@ public class ShareFragment extends Fragment{
                         try {
                              img_url1_ = J.getString("post_url");
                               content_ = J.getString("content");
+                            app_content = J.getString("app_content");
                               title1 = J.getString("title");
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -495,6 +498,7 @@ public class ShareFragment extends Fragment{
 
                         Intent intent=new Intent(getActivity(),ShareActivity.class);
                         intent.putExtra("content",content_);
+                        intent.putExtra("app_content",app_content);
                         intent.putExtra("imgurl",img_url1_);
                         intent.putExtra("title",title1);
                         getActivity().startActivity(intent);

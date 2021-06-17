@@ -15,7 +15,7 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
-import android.net.http.SslError;
+
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -23,7 +23,7 @@ import android.os.Environment;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
-import android.webkit.SslErrorHandler;
+
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -48,7 +48,7 @@ import java.net.URL;
 import java.net.URLConnection;
 
 import adhoc.app.applibrary.Config.AppUtils.Objs;
-import adhoc.app.applibrary.Config.AppUtils.Params;
+
 import dmax.dialog.SpotsDialog;
 import in.loanwiser.partnerapp.PDF_Dounloader.PermissionUtils;
 import in.loanwiser.partnerapp.PartnerActivitys.SimpleActivity;

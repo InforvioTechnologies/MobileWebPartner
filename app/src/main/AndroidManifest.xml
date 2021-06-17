@@ -39,7 +39,7 @@
         android:usesCleartextTraffic="true"
         tools:node="merge"
         tools:replace="android:allowBackup">
-        <activity android:name=".Push_Notification.Refer_and_Earn_Activity"></activity>
+
         <activity
             android:name=".Partner_Statues.DashBoard_new"
             android:label="@string/title_activity_dash_board_new"
@@ -71,7 +71,6 @@
         -->
         <!-- <activity android:name=".User_Account.Main2Activity"></activity> -->
         <!-- <activity android:name=".User_Account.AppGoogleLogin"></activity> -->
-
         <activity
             android:name=".User_Account.Splash_Screen"
             android:configChanges="screenSize|orientation"
@@ -82,40 +81,52 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
             <intent-filter android:autoVerify="true">
-                <action android:name="android.intent.action.VIEW"/>
-                <category android:name="android.intent.category.DEFAULT"/>
-                <category android:name="android.intent.category.BROWSABLE"/>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
                 <data
                     android:host="loanwiser.page.link"
                     android:scheme="https" />
-                <!-- <data android:host="example.com" android:scheme="https"
-                     android:pathPrefix="/applinks"/>-->
+                <!--
+                     <data android:host="example.com" android:scheme="https"
+                     android:pathPrefix="/applinks"/>
+                -->
             </intent-filter>
         </activity>
         <activity android:name=".User_Account.Pic_Doc_File" />
         <activity
             android:name=".Partner_Statues.Loanwiser_Academy_webinar"
             android:theme="@style/NoAction2"
-            android:windowSoftInputMode="stateHidden"
-            >
+            android:windowSoftInputMode="stateHidden">
             <intent-filter>
                 <action android:name=".Partner_Statues.Loanwiser_Academy_webinar" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+
+        <activity android:name=".Partner_Statues.Share_Activity_Notification"
+            android:theme="@style/NoAction2"
+            android:windowSoftInputMode="stateHidden">
+            <intent-filter>
+                <action android:name=".Partner_Statues.Share_Activity_Notification" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
         <activity
             android:name=".Partner_Statues.BusinessCardActivity"
             android:theme="@style/NoAction2"
             android:windowSoftInputMode="stateHidden" />
-
         <activity
             android:name=".Refer_Earn.ReferEarnActivity"
             android:theme="@style/NoAction2"
             android:windowSoftInputMode="stateHidden" />
-
+        <activity android:name=".Push_Notification.Refer_and_Earn_Activity"></activity>
         <activity
             android:name=".Partner_Statues.WebsiteActivity"
             android:theme="@style/NoAction2"
@@ -225,12 +236,14 @@
             android:name=".BankStamentUpload.Doc_ImageView_Bank"
             android:theme="@style/NoAction2"
             android:windowSoftInputMode="stateHidden" />
-
         <activity
             android:name=".BankStamentUpload.Doc_ImageView_Bank1"
             android:theme="@style/NoAction2"
             android:windowSoftInputMode="stateHidden" />
-
+        <activity
+            android:name=".PDF_Viewer.MainActivity"
+            android:theme="@style/NoAction2"
+            android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".BankStamentUpload.Doc_ImageView_pay_structur"
             android:theme="@style/NoAction2"
@@ -335,10 +348,6 @@
             android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".Step_Changes_Screen.Viability_Check_HL_new"
-            android:theme="@style/NoAction2"
-            android:windowSoftInputMode="stateHidden" />
-        <activity
-            android:name=".Step_Changes_Screen.Viability_Report_Activity_New"
             android:theme="@style/NoAction2"
             android:windowSoftInputMode="stateHidden" />
         <activity
@@ -508,7 +517,13 @@
         <activity
             android:name=".PartnerActivitys.Dashboard_Activity"
             android:theme="@style/NoAction2"
-            android:windowSoftInputMode="stateHidden" />
+            android:windowSoftInputMode="stateHidden">
+            <intent-filter>
+                <action android:name=".PartnerActivitys.Dashboard_Activity" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".PartnerActivitys.Applicant_Details_Activity"
             android:theme="@style/NoAction2"
@@ -519,14 +534,6 @@
             android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".PartnerActivitys.MainActivity_Add_Lead"
-            android:theme="@style/NoAction2"
-            android:windowSoftInputMode="stateHidden" />
-        <activity
-            android:name=".PartnerActivitys.Doc_ImageView_Viability"
-            android:theme="@style/NoAction2"
-            android:windowSoftInputMode="stateHidden" />
-        <activity
-            android:name=".Lead_Website.MainActivity_Add_Lead_Website"
             android:theme="@style/NoAction2"
             android:windowSoftInputMode="stateHidden" />
         <activity

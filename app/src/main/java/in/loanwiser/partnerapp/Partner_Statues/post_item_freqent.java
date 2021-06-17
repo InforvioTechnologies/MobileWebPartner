@@ -6,6 +6,7 @@ public class post_item_freqent {
     private String post_url;
     private String content;
     private String id;
+    private String app_content;
 
     public String gettitle() {
         return title;
@@ -39,12 +40,21 @@ public class post_item_freqent {
         this.id = id;
     }
 
-    public post_item_freqent(String title, String post_url,String content, String id) {
+    public String getapp_content() {
+        return app_content;
+    }
+
+    public void setapp_content(String app_content) {
+        this.app_content = app_content;
+    }
+
+    public post_item_freqent(String title, String post_url,String content, String id, String app_content) {
 
         this.title = title;
         this.post_url = post_url;
         this.content = content;
         this.id = id;
+        this.app_content = app_content;
 
     }
 

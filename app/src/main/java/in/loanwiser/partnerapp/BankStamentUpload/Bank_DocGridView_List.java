@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Rect;
 import android.os.Bundle;
@@ -44,9 +45,7 @@ import adhoc.app.applibrary.Config.AppUtils.Pref.Pref;
 import adhoc.app.applibrary.Config.AppUtils.Urls;
 import adhoc.app.applibrary.Config.AppUtils.VolleySignleton.AppController;
 import dmax.dialog.SpotsDialog;
-import in.loanwiser.partnerapp.CameraActivity.ASK_ManiActivity_Image2;
-import in.loanwiser.partnerapp.Documents.Doc_ImageView;
-import in.loanwiser.partnerapp.PartnerActivitys.Doc_ImageView_Viability;
+import in.loanwiser.partnerapp.PDF_Viewer.MainActivity;
 import in.loanwiser.partnerapp.PartnerActivitys.SimpleActivity;
 import in.loanwiser.partnerapp.R;
 
@@ -198,8 +197,14 @@ public class Bank_DocGridView_List extends SimpleActivity {
                         J = getItem(position);
                         try {
                             String path =J.getString("url");
-                            Objs.ac.StartActivityPutExtra(Bank_DocGridView_List.this, Doc_ImageView_Viability.class,
-                                    Params.document,path);
+                          /*  Objs.ac.StartActivityPutExtra(Bank_DocGridView_List.this, Doc_ImageView_Viability.class,
+                                    Params.document,path);*/
+                            String report="Bank Statement";
+                            Intent intent = new Intent(Bank_DocGridView_List.this, MainActivity.class);
+                            intent.putExtra("viability_report_URL", path);
+                            intent.putExtra("report", report);
+                            startActivity(intent);
+
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }

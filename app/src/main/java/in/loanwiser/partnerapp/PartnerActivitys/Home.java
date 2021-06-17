@@ -62,6 +62,7 @@ import in.loanwiser.partnerapp.Documents.Applicant_Details_Single;
 import in.loanwiser.partnerapp.Documents.Applicant_Doc_Details_revamp;
 import in.loanwiser.partnerapp.Documents.Document_Availability_Check;
 import in.loanwiser.partnerapp.PDF_Dounloader.PermissionUtils;
+import in.loanwiser.partnerapp.PDF_Viewer.MainActivity;
 import in.loanwiser.partnerapp.Partner_Statues.DashBoard_new;
 import in.loanwiser.partnerapp.Payment.PaymentActivity;
 import in.loanwiser.partnerapp.Payment.Payment_Sucess_Screen;
@@ -701,25 +702,73 @@ public class Home extends AppCompatActivity {
                         if(reject_status.equals("1"))
                         {
 
-                           String report="Viability Report";
+                          /* String report="Viability Report";
                             Objs.ac.StartActivityPutExtra(Home.this, Doc_ImageView_Bank.class,
-                                    Params.document,viability_report_URL,Params.report,report);
+                                    Params.document,viability_report_URL,Params.report,report);*/
+
+                            /*if (permissionUtils.checkPermission(Home.this, STORAGE_PERMISSION_REQUEST_CODE, view)) {
+                                if (viability_report_URL.length() > 0) {
+                                    try {
+                                        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(viability_report_URL)));
+                                    } catch (Exception e) {
+
+                                        e.getStackTrace();
+                                    }
+                                }
+
+                            }*/
+                            String report="Viability Report";
+                            Intent intent = new Intent(Home.this, MainActivity.class);
+                            intent.putExtra("viability_report_URL", viability_report_URL);
+                            intent.putExtra("report", report);
+                            startActivity(intent);
 
                         }else
                         {
 
-                            String report="Viability Report";
+                         /*   String report="Viability Report";
                             Objs.ac.StartActivityPutExtra(Home.this, Doc_ImageView_Bank.class,
-                                    Params.document,viability_report_URL,Params.report,report);
+                                    Params.document,viability_report_URL,Params.report,report);*/
+                           /* if (permissionUtils.checkPermission(Home.this, STORAGE_PERMISSION_REQUEST_CODE, view)) {
+                                if (viability_report_URL.length() > 0) {
+                                    try {
+                                        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(viability_report_URL)));
+                                    } catch (Exception e) {
+                                        e.getStackTrace();
+                                    }
+                                }
+
+                            }*/
+                            String report="Viability Report";
+                            Intent intent = new Intent(Home.this, MainActivity.class);
+                            intent.putExtra("viability_report_URL", viability_report_URL);
+                            intent.putExtra("report", report);
+                            startActivity(intent);
 
                         }
                     }else
                     {
                         if(crif_report_gen.equals("completed"))
                         {
-                            String report="Viability Report";
+                           /* String report="Viability Report";
                             Objs.ac.StartActivityPutExtra(Home.this, Doc_ImageView_Bank.class,
-                                    Params.document,viability_report_URL,Params.report,report);
+                                    Params.document,viability_report_URL,Params.report,report);*/
+                           /* if (permissionUtils.checkPermission(Home.this, STORAGE_PERMISSION_REQUEST_CODE, view)) {
+                                if (viability_report_URL.length() > 0) {
+                                    try {
+                                        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(viability_report_URL)));
+                                    } catch (Exception e) {
+
+                                        e.getStackTrace();
+                                    }
+                                }
+
+                            }*/
+                            String report="Viability Report";
+                            Intent intent = new Intent(Home.this, MainActivity.class);
+                            intent.putExtra("viability_report_URL", viability_report_URL);
+                            intent.putExtra("report", report);
+                            startActivity(intent);
                         }else
                         {
                             Intent intent = new Intent(Home.this, Payment_Sucess_Screen.class);
@@ -730,9 +779,25 @@ public class Home extends AppCompatActivity {
                 }else  if(payment.equals("pending"))
                 {
                     if (reject_status.equals("1")) {
-                        String report="Viability Report";
+                      /*  String report="Viability Report";
                         Objs.ac.StartActivityPutExtra(Home.this, Doc_ImageView_Bank.class,
-                                Params.document,viability_report_URL,Params.report,report);
+                                Params.document,viability_report_URL,Params.report,report);*/
+
+                       /* if (permissionUtils.checkPermission(Home.this, STORAGE_PERMISSION_REQUEST_CODE, view)) {
+                            if (viability_report_URL.length() > 0) {
+                                try {
+                                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(viability_report_URL)));
+                                } catch (Exception e) {
+                                    e.getStackTrace();
+                                }
+                            }
+
+                        }*/
+                        String report="Viability Report";
+                        Intent intent = new Intent(Home.this, MainActivity.class);
+                        intent.putExtra("viability_report_URL", viability_report_URL);
+                        intent.putExtra("report", report);
+                        startActivity(intent);
                     }else
                     {
                         Toast.makeText(getApplicationContext(),"Please Complete The Previous Steps To Proceed!!!", Toast.LENGTH_SHORT).show();
@@ -1728,7 +1793,7 @@ public class Home extends AppCompatActivity {
                             }
                             if(document_checklist.equals("completed"))
                             {
-                                step3payment_but.setBackgroundResource(R.drawable.but_shape);
+                                step3payment_but.setBackgroundResource(R.drawable.but_shape_blue);
                                 step3payment_but.setText("Complete Now");
                             }
 

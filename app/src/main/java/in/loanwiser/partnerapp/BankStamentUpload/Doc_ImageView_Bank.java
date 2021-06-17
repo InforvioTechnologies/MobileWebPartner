@@ -24,7 +24,7 @@ import android.os.Environment;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
-import android.webkit.SslErrorHandler;
+
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -122,6 +122,7 @@ public class Doc_ImageView_Bank extends SimpleActivity {
             e.printStackTrace();
         }
         try {
+          //  webview.loadUrl("https://docs.google.com/gview?embedded=true&url=" + URLEncoder.encode(filename, "ISO-8859-1"));
             webview.loadUrl("https://docs.google.com/gview?embedded=true&url=" + URLEncoder.encode(filename, "ISO-8859-1"));
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
@@ -129,7 +130,7 @@ public class Doc_ImageView_Bank extends SimpleActivity {
         //  webview.loadUrl("https://stackoverflow.com/questions/18838779/how-to-compare-two-edittext-fields-in-android/29399267");
           //  webview.loadUrl(filename);
 
-        webview.setWebViewClient(new HelloWebViewClient());
+     /*   webview.setWebViewClient(new HelloWebViewClient());*/
         // Enable Javascript
         WebSettings webSettings = webview.getSettings();
         webSettings.setJavaScriptEnabled(true);
@@ -139,7 +140,7 @@ public class Doc_ImageView_Bank extends SimpleActivity {
 
         // Force links and redirects to open in the WebView instead of in a browser
        // webview.setWebViewClient(new WebViewClient());
-          webview.setWebViewClient(new HelloWebViewClient() {
+         /* webview.setWebViewClient(new HelloWebViewClient() {
 
                 public void onPageFinished(WebView view, String url) {
                     if (view.getTitle().equals(""))
@@ -152,7 +153,7 @@ public class Doc_ImageView_Bank extends SimpleActivity {
 
 
                 }
-            });
+            });*/
         permissionUtils = new PermissionUtils();
        /* String extStorageDirectory = Environment.getExternalStorageDirectory()
                 .toString();
@@ -175,8 +176,6 @@ public class Doc_ImageView_Bank extends SimpleActivity {
 
             }
         });
-
-
 
      //   showPdf();
 
@@ -238,34 +237,7 @@ public class Doc_ImageView_Bank extends SimpleActivity {
         alert.show();
     }
 
-    private class HelloWebViewClient extends WebViewClient {
 
-
-        @Override
-        public void onPageStarted(WebView view, String url, Bitmap favicon) {
-            // TODO Auto-generated method stub
-            super.onPageStarted(view, url, favicon);
-        }
-
-        @Override
-        public boolean shouldOverrideUrlLoading(WebView webView, String url) {
-            webView.loadUrl(url);
-            return true;
-        }
-
-        @Override
-        public void onPageFinished(WebView view, String url) {
-            // TODO Auto-generated method stub
-            super.onPageFinished(view, url);
-            if (view.getTitle().equals(""))
-                view.reload();
-            progressBar.setVisibility(view.GONE);
-
-        }
-
-
-
-    }
 
   /*  public static class Downloader {
 

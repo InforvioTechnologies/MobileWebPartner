@@ -201,8 +201,10 @@ public class Post_share_Statues extends RecyclerView.Adapter<Post_share_Statues.
                 final String content  = items.get(position).getcontent();
                 String image_url = items.get(position).getpost_url();
                 String title  = items.get(position).gettitle();
+                String app_content  = items.get(position).getapp_content();
                 Intent intent=new Intent(context,ShareActivity.class);
                 intent.putExtra("content",content);
+                intent.putExtra("app_content",app_content);
                 intent.putExtra("imgurl",image_url);
                 intent.putExtra("title",title);
                 context.startActivity(intent);

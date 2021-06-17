@@ -65,9 +65,9 @@ import static in.loanwiser.partnerapp.Partner_Statues.Post_share_Statues.MY_PERM
 
 public class ShareActivity extends SimpleActivity {
 
-    String content,imgurl,title;
+    String content,imgurl,title,app_content;
     AppCompatImageView shareimage;
-    AppCompatTextView contenttxt;
+    AppCompatTextView contenttxt,contenttxt1;
     AppCompatButton whatsappshare,othernetworkshare;
     private AlertDialog progressDialog;
 
@@ -83,6 +83,7 @@ public class ShareActivity extends SimpleActivity {
         initTools(R.string.sharepromo);
         shareimage=findViewById(R.id.shareimage);
         contenttxt=findViewById(R.id.contenttxt);
+        contenttxt1=findViewById(R.id.contenttxt1);
         progressBarMaterial_pdf=findViewById(R.id.progressBarMaterial_pdf);
         whatsappshare=findViewById(R.id.whatsappshare);
         contenttxt=findViewById(R.id.contenttxt);
@@ -91,12 +92,18 @@ public class ShareActivity extends SimpleActivity {
 
         Intent intent=getIntent();
         content=intent.getStringExtra("content");
+        app_content=intent.getStringExtra("app_content");
         imgurl=intent.getStringExtra("imgurl");
         title=intent.getStringExtra("title");
 
         Log.i("TAG", "onCreate:imgurl "+imgurl);
         Log.e("the value",imgurl);
         contenttxt.setText(title);
+        if(!app_content.equals("null") && !app_content.isEmpty())
+        {
+            contenttxt1.setText(app_content);
+        }
+       // contenttxt1.setText(app_content);
       /*  Glide.with(this)
                 .load(imgurl)
                 .into(shareimage);
@@ -320,11 +327,5 @@ public class ShareActivity extends SimpleActivity {
                         grantResults);
         }
     }
-
-
-
-
-
-
-
+    
 }

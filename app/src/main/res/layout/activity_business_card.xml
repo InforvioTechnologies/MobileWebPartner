@@ -9,9 +9,7 @@
         android:id="@+id/swife"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-    <HorizontalScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+
 
 
         <LinearLayout
@@ -21,34 +19,219 @@
             android:layout_marginTop="10dp"
             android:layout_marginRight="20dp"
             android:orientation="vertical">
-
-            <LinearLayout
-                android:layout_width="500dp"
+            <RelativeLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="20dp"
+                android:layout_below="@+id/imgview">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/editbtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="20dp"
+                    android:text="@string/edit"
+                    android:textStyle="bold"
+                    android:textColor="#002B5D"
+                    android:textSize="18dp" />
+
+            </RelativeLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_margin="10dp"
                 android:orientation="vertical">
-                <RelativeLayout
+                <com.google.android.material.card.MaterialCardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/imgview">
+                    app:cardCornerRadius="10dp"
+                    app:cardElevation="5dp"
+                    app:strokeColor="#002B5D"
+                    app:strokeWidth="1dp"
+                    android:theme="@style/Theme.MaterialComponents.Light"
+                    android:background="@drawable/businesscard_background"
+                    app:cardBackgroundColor="@color/white">
 
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/editbtn"
+                    <RelativeLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignParentRight="true"
-                        android:layout_marginRight="20dp"
-                        android:text="@string/edit"
-                        android:textStyle="bold"
-                        android:textColor="#002B5D"
-                        android:textSize="18dp" />
+                        android:layout_marginTop="5dp"
+                        android:layout_marginBottom="20dp">
 
-                </RelativeLayout>
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:id="@+id/imgview"
+                            android:layout_width="100dp"
+                            android:layout_height="25dp"
+                            android:src="@drawable/loanwiser_logo_vc"
+                            android:layout_alignParentRight="true"
+                            android:layout_marginRight="10dp" />
+
+                        <RelativeLayout
+                            android:id="@+id/profilelay"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginLeft="10dp"
+                            android:layout_below="@+id/imgview">
+
+                            <androidx.appcompat.widget.AppCompatImageView
+                                android:id="@+id/profileimg"
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
+                                android:tint="#BCE0FD"
+                                android:src="@drawable/ic_profile"/>
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:id="@+id/nametxt"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_toRightOf="@+id/profileimg"
+                                android:layout_marginLeft="5dp"
+                                android:textColor="@color/colorPrimary"/>
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:id="@+id/positiontxt"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_toRightOf="@+id/profileimg"
+                                android:layout_marginLeft="5dp"
+                                android:layout_marginTop="5dp"
+                                android:text="Official Loanwiser Partner"
+                                android:layout_below="@+id/nametxt"
+                                android:textColor="@color/sky_blue"/>
+
+                            <RelativeLayout
+                                android:id="@+id/detailslay"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@+id/positiontxt"
+                                android:layout_marginLeft="25dp"
+                                android:layout_marginTop="20dp">
+
+                                <androidx.appcompat.widget.AppCompatImageView
+                                    android:id="@+id/emailicon"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:src="@drawable/ic_email_24"
+                                    android:tint="#002B5D" />
+
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:id="@+id/emailtxt"
+                                    android:textColor="#002B5D"
+                                    android:layout_marginTop="2dp"
+                                    android:layout_marginLeft="10dp"
+                                    android:layout_toRightOf="@id/emailicon"/>
+
+                                <RelativeLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_below="@+id/emailtxt"
+                                    android:layout_marginTop="10dp">
+
+                                    <androidx.appcompat.widget.AppCompatImageView
+                                        android:id="@+id/webicon"
+                                        android:layout_width="20dp"
+                                        android:layout_height="20dp"
+                                        android:src="@drawable/ic_webicon"
+                                        android:tint="#002B5D"/>
+
+                                    <androidx.appcompat.widget.AppCompatTextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:id="@+id/webtxt"
+                                        android:textColor="#002B5D"
+                                        android:layout_marginTop="2dp"
+                                        android:layout_marginLeft="10dp"
+                                        android:layout_toRightOf="@id/webicon"/>
+
+                                    <RelativeLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_below="@+id/webtxt"
+                                        android:layout_marginTop="10dp">
+
+                                        <androidx.appcompat.widget.AppCompatImageView
+                                            android:id="@+id/phnicon"
+                                            android:layout_width="24dp"
+                                            android:layout_height="24dp"
+                                            android:src="@drawable/ic_phone_24"
+                                            android:tint="#002B5D"/>
+
+                                        <androidx.appcompat.widget.AppCompatTextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:id="@+id/phntxt"
+                                            android:textColor="#002B5D"
+                                            android:layout_marginTop="2dp"
+                                            android:layout_marginLeft="10dp"
+                                            android:layout_toRightOf="@id/phnicon"/>
+
+                                        <RelativeLayout
+                                            android:id="@+id/locationlay"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_below="@+id/phntxt"
+                                            android:layout_marginTop="10dp">
+
+                                            <androidx.appcompat.widget.AppCompatImageView
+                                                android:id="@+id/location_icon"
+                                                android:layout_width="24dp"
+                                                android:layout_height="24dp"
+                                                android:src="@drawable/ic_location24"
+                                                android:tint="#002B5D"/>
+
+                                            <androidx.appcompat.widget.AppCompatTextView
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:id="@+id/locationtxt"
+                                                android:textColor="#002B5D"
+                                                android:layout_marginTop="2dp"
+                                                android:layout_marginLeft="10dp"
+                                                android:layout_toRightOf="@id/location_icon"/>
+
+
+                                        </RelativeLayout>
+
+
+
+
+                                    </RelativeLayout>
+                                </RelativeLayout>
+                            </RelativeLayout>
+                            <LinearLayout
+                                android:layout_marginRight="10dp"
+                                android:gravity="center_horizontal"
+                                android:layout_width="match_parent"
+                                android:layout_height="40dp"
+                                android:layout_below="@+id/detailslay"
+                                android:background="@color/colorPrimary1">
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="5dp"
+                                    android:layout_gravity="center"
+                                    android:layout_marginTop="5dp"
+                                    android:text="Door step Loan Services From 40+ Banks"
+                                    android:layout_below="@+id/nametxt"
+                                    android:textColor="@color/white"/>
+                            </LinearLayout>
+                        </RelativeLayout>
+
+
+
+
+                    </RelativeLayout>
+
+
+                </com.google.android.material.card.MaterialCardView>
                 <RelativeLayout
+                    android:visibility="gone"
                     android:layout_marginTop="10dp"
-                    android:layout_width="500dp"
-                    android:layout_height="300dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:orientation="vertical">
 
 
@@ -134,6 +317,6 @@
 
         </LinearLayout>
 
-    </HorizontalScrollView>
+
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 </LinearLayout>

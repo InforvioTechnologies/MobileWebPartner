@@ -24,7 +24,7 @@ import android.os.Environment;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
-import android.webkit.SslErrorHandler;
+
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -274,35 +274,7 @@ public class Doc_ImageView_Bank1 extends SimpleActivity {
         alert.show();
     }
 
-    private class HelloWebViewClient extends WebViewClient {
 
-
-        @Override
-        public void onPageStarted(WebView view, String url, Bitmap favicon) {
-            // TODO Auto-generated method stub
-            super.onPageStarted(view, url, favicon);
-        }
-
-        @Override
-        public boolean shouldOverrideUrlLoading(WebView webView, String url) {
-            webView.loadUrl(url);
-            return true;
-        }
-
-        @Override
-        public void onPageFinished(WebView view, String url) {
-            // TODO Auto-generated method stub
-            super.onPageFinished(view, url);
-            if (view.getTitle().equals(""))
-                view.reload();
-            progressBar.setVisibility(view.GONE);
-
-
-        }
-
-
-
-    }
 
   /*  public static class Downloader {
 
