@@ -70,11 +70,10 @@
                                 android:layout_height="wrap_content" />
 
                             <androidx.appcompat.widget.AppCompatTextView
-                                android:id="@+id/mandatory_do"
                                 android:visibility="gone"
                                 style="@style/SmallText"
                                 android:textSize="12dp"
-                                android:text="Mandatory Document"
+                                android:text="Please upload any one Document"
                                 android:textColor="@color/but_red"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content" />
@@ -106,7 +105,17 @@
                     </LinearLayout>
 
                 </LinearLayout>
+
             </LinearLayout>
+            <androidx.appcompat.widget.AppCompatTextView
+
+                android:id="@+id/mandatory_do"
+                style="@style/SmallText"
+                android:textSize="12dp"
+                android:text="Please upload any one Document"
+                android:textColor="@color/but_red"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
             <LinearLayout
                 android:layout_marginBottom="10dp"
                 android:orientation="vertical"

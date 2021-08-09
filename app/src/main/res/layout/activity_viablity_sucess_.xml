@@ -25,8 +25,23 @@
                 android:layout_marginTop="25dp"
                 android:orientation="vertical"
                 >
+                <LinearLayout
+                    android:gravity="end"
+                    android:layout_gravity="end"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <ImageView
+                        android:id="@+id/close"
+                        android:layout_width="36dp"
+                        android:layout_height="36dp"
+
+                        android:layout_gravity="end"
+                        android:src="@drawable/ic_close_icon"/>
+                </LinearLayout>
 
                 <ImageView
+                    android:layout_marginTop="10dp"
                     android:layout_width="36dp"
                     android:layout_height="36dp"
                     android:layout_gravity="center"
@@ -142,6 +157,7 @@
 
 
                     <LinearLayout
+                        android:visibility="gone"
                         android:layout_marginLeft="10dp"
                         android:background="@color/white"
                         android:orientation="vertical"
@@ -402,7 +418,7 @@
                         android:layout_gravity="center"
                         android:gravity="center"
                         android:layout_marginBottom="20dp"
-                        android:text="@string/proceednext"
+                        android:text="Close"
                         android:textStyle="bold"
                         android:textColor="@color/white"
                         android:background="@drawable/payment_button"

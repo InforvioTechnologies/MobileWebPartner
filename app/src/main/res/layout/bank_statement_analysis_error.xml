@@ -53,7 +53,7 @@
                     android:layout_gravity="center_horizontal"
                     android:layout_marginLeft="5dp"
                     android:layout_marginRight="10dp"
-                    android:text="Bank Statement Analysis Failed, Check the viability report."
+                    android:text="Sorry for the inconvenience, we have Updated the Partner App flow to Continue pleae re-do the Step3 it won't affect your payment completion. if you have face any issues contack our Relationship Manager assigned to you. Thank you"
                     android:textAlignment="center"
                     android:textColor="#032A57"
                     android:textSize="18dp"

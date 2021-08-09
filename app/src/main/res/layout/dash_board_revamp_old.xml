@@ -1,0 +1,2500 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_height="match_parent">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:background="@color/white"
+        android:padding="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.cardview.widget.CardView
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="3dp"
+            android:layout_marginRight="3dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:layout_marginTop="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:layout_marginLeft="20dp"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_gravity="left"
+                            style="@style/SmallText"
+                            android:id="@+id/lead_name_id"
+                            android:textStyle="bold"
+                            android:textColor="@color/black"
+                            android:text=""
+                            android:textSize="14dp"
+                            android:layout_width="200dp"
+                            android:layout_height="wrap_content" />
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_gravity="left"
+                            style="@style/SmallText"
+                            android:id="@+id/lead_name"
+                            android:textStyle="bold"
+                            android:textColor="@color/black"
+                            android:text="-"
+                            android:textSize="14dp"
+                            android:layout_width="200dp"
+                            android:layout_height="wrap_content" />
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_gravity="left"
+                            style="@style/SmallText"
+                            android:id="@+id/mobile_no"
+                            android:textSize="12dp"
+                            android:textColor="#B0B0B0"
+                            android:text="-"
+                            android:layout_width="200dp"
+                            android:layout_height="wrap_content" />
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:layout_marginStart="70dp"
+                        android:layout_marginLeft="70dp">
+
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:id="@+id/call_phone"
+                            android:layout_width="30dp"
+                            android:layout_marginRight="10dp"
+                            android:background="@drawable/ic_phone"
+                            android:layout_marginEnd="10dp"
+                            android:layout_height="30dp"/>
+                    </LinearLayout>
+
+
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_marginTop="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:layout_marginLeft="20dp"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            style="@style/SmallText"
+                            android:layout_width="150dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="left"
+                            android:text="Loan Amount"
+                            android:textSize="12dp"
+                            android:id="@+id/loanamounttxt"
+                            android:textColor="#B0B0B0" />
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_marginRight="20dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_gravity="left"
+                            style="@style/SmallTexts"
+                            android:textStyle="bold"
+                            android:textSize="14dp"
+                            android:layout_marginRight="20dp"
+                            android:id="@+id/Loan_amount"
+                            android:textColor="#484848"
+                            android:text=""
+                            android:layout_width="200dp"
+                            android:layout_height="wrap_content" />
+                    </LinearLayout>
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:layout_marginLeft="20dp"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            style="@style/SmallText"
+                            android:layout_width="150dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="left"
+                            android:text="Loan type"
+                            android:textSize="12dp"
+                            android:id="@+id/loantypetext"
+                            android:textColor="#B0B0B0"  />
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_marginRight="20dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_gravity="left"
+                            style="@style/SmallTexts"
+                            android:textStyle="bold"
+                            android:id="@+id/loan_type_"
+                            android:textColor="#484848"
+                            android:text=""
+                            android:layout_marginRight="20dp"
+                            android:layout_width="200dp"
+                            android:textSize="12dp"
+                            android:layout_height="wrap_content" />
+                    </LinearLayout>
+
+                </LinearLayout>
+                <LinearLayout
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:layout_marginLeft="20dp"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            style="@style/SmallText"
+                            android:layout_width="150dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="left"
+                            android:text="Loan Status"
+                            android:id="@+id/loan_statustxt"
+                            android:textSize="12dp"
+                            android:textColor="#B0B0B0"  />
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_marginRight="20dp"
+                        android:layout_weight="1"
+                        android:orientation="horizontal"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:gravity="left"
+                            style="@style/SmallTexts"
+                            android:textStyle="bold"
+                            android:layout_marginRight="20dp"
+                            android:id="@+id/loan_submit_statues1"
+                            android:textColor="#484848"
+                            android:text=""
+                            android:layout_width="200dp"
+                            android:textSize="12dp"
+                            android:layout_height="match_parent" />
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:layout_marginLeft="20dp"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            style="@style/SmallText"
+                            android:layout_width="150dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="left"
+                            android:text="Payment Plan"
+                            android:textSize="12dp"
+                            android:id="@+id/planamount"
+                            android:textColor="#B0B0B0"  />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_marginRight="20dp"
+                        android:layout_weight="1"
+                        android:orientation="horizontal"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:gravity="left"
+                            style="@style/SmallTexts"
+                            android:textStyle="bold"
+                            android:layout_marginRight="20dp"
+                            android:id="@+id/paymentstatus"
+                            android:textColor="#484848"
+                            android:text=""
+                            android:layout_width="200dp"
+                            android:textSize="12dp"
+                            android:layout_height="match_parent" />
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginBottom="10dp"
+                    android:orientation="vertical">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:gravity="left"
+                        style="@style/SmallTexts"
+                        android:textStyle="bold"
+                        android:layout_marginRight="20dp"
+                        android:id="@+id/sub_to_loanwiser"
+                        android:textColor="#484848"
+                        android:text=""
+                        android:layout_width="200dp"
+                        android:textSize="12dp"
+                        android:layout_height="match_parent" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginBottom="20dp"
+                    android:visibility="gone"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            style="@style/SmallText"
+                            android:layout_width="150dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="left"
+                            android:text="Payment Plan"
+                            android:id="@+id/paymentst"
+                            android:textSize="12dp"
+                            android:textColor="#B0B0B0"  />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_marginRight="20dp"
+                        android:layout_weight="1"
+                        android:orientation="horizontal"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:gravity="left"
+                            style="@style/SmallText"
+                            android:textStyle="bold"
+                            android:layout_marginRight="20dp"
+                            android:id="@+id/paymentstat"
+                            android:textColor="@color/black"
+                            android:text=""
+                            android:layout_width="200dp"
+                            android:textSize="12dp"
+                            android:layout_height="match_parent" />
+                    </LinearLayout>
+
+            </LinearLayout>
+
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <LinearLayout
+            android:layout_marginTop="20dp"
+            android:gravity="center"
+            android:visibility="gone"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.appcompat.widget.AppCompatButton
+
+                android:id="@+id/view_activitys"
+                android:layout_width="106dp"
+                android:layout_height="34dp"
+                android:text="View Activity"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:layout_marginLeft="10dp"
+                android:textColor="@color/white"
+                android:textSize="10sp"
+                android:background="@drawable/capsul_button_icon"/>
+        </LinearLayout>
+
+        <androidx.cardview.widget.CardView
+            xmlns:card_view="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/trackcard"
+            android:layout_marginLeft="3dp"
+            android:layout_marginRight="3dp"
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:background="@color/white"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tracktxt"
+                            style="@style/SmallText"
+                            android:textColor="@color/gray"
+                            android:text="Track Current Lead Status"
+                            android:layout_marginLeft="10dp"
+                            android:layout_width="wrap_content"
+                            android:textSize="12dp"
+                            android:layout_height="wrap_content" />
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_marginBottom="10dp"
+                            style="@style/LorgeText"
+                            android:textSize="14dp"
+                            android:id="@+id/trackactivity"
+                            android:textColor="@color/black"
+                            android:layout_marginLeft="10dp"
+                            android:text="Track Activity"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_marginRight="20dp"
+                        android:gravity="right"
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <androidx.appcompat.widget.AppCompatButton
+                            android:id="@+id/view_activity"
+                            android:layout_width="wrap_content"
+                            android:layout_height="30dp"
+                            android:text="Check Status"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:layout_marginLeft="10dp"
+                            android:textColor="@color/white"
+                            android:textSize="8sp"
+                            android:background="@drawable/but_shape_blue"/>
+                    </LinearLayout>
+                </LinearLayout>
+
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_gravity="left"
+            style="@style/LorgeText"
+            android:textSize="16dp"
+            android:layout_marginTop="20dp"
+            android:textStyle="bold"
+            android:layout_marginLeft="10dp"
+            android:textColor="#002B5D"
+            android:id="@+id/askthis"
+            android:visibility="gone"
+            android:text="Ask for this Lead"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <androidx.cardview.widget.CardView
+            xmlns:card_view="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/ask_card"
+            android:layout_marginLeft="3dp"
+            android:layout_marginRight="3dp"
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:background="@color/white"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/ask_txt"
+                            style="@style/SmallText"
+                            android:textColor="@color/gray"
+                            android:text="Additional Document Required"
+                            android:layout_marginLeft="10dp"
+                            android:layout_width="wrap_content"
+                            android:textSize="12dp"
+                            android:layout_height="wrap_content" />
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_marginBottom="10dp"
+                            style="@style/LorgeText"
+                            android:textSize="14dp"
+                            android:id="@+id/ask_txt1_pending"
+                            android:textColor="@color/black"
+                            android:layout_marginLeft="10dp"
+                            android:text="Pending Ask(3)"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_marginRight="20dp"
+                        android:gravity="right"
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <androidx.appcompat.widget.AppCompatButton
+                            android:id="@+id/view_ask"
+                            android:layout_width="wrap_content"
+                            android:layout_height="30dp"
+                            android:text="Upload Document"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:layout_marginLeft="10dp"
+                            android:textColor="@color/white"
+                            android:textSize="8sp"
+                            android:background="@drawable/but_shape_blue"/>
+                    </LinearLayout>
+                </LinearLayout>
+
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_gravity="left"
+            style="@style/LorgeText"
+            android:textSize="16dp"
+            android:layout_marginTop="20dp"
+            android:textStyle="bold"
+            android:layout_marginLeft="10dp"
+            android:textColor="#002B5D"
+            android:id="@+id/step_comp"
+            android:text="Your Step Completion Details"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <androidx.cardview.widget.CardView
+            xmlns:card_view="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/Applicant_info_ly"
+            android:layout_marginLeft="3dp"
+            android:layout_marginRight="3dp"
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            app:cardCornerRadius="4dp">
+
+            <LinearLayout
+                android:background="@color/gray12"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <LinearLayout
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        android:layout_width="80dp"
+                        android:layout_height="match_parent">
+                        <ImageView
+                            android:gravity="center"
+                            android:background="@drawable/ic_applicant_detail"
+                            android:layout_width="45dp"
+                            android:layout_height="45dp" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_gravity="center"
+                        android:layout_width="200dp"
+                        android:orientation="vertical"
+                        android:layout_height="wrap_content">
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:orientation="vertical">
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:layout_gravity="center"
+                                style="@style/LorgeText"
+                                android:id="@+id/step1"
+                                android:textSize="16dp"
+                                android:textColor="#1592E6"
+                                android:text="Step 1"
+                                android:layout_width="200dp"
+                                android:layout_height="wrap_content" />
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:layout_gravity="center"
+                                style="@style/LorgeText"
+                                android:id="@+id/step_1detail"
+                                android:textSize="12dp"
+                                android:textColor="@color/colorPrimary"
+                                android:text="Basic Lead Details"
+                                android:layout_width="200dp"
+                                android:layout_height="wrap_content" />
+                        </LinearLayout>
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:visibility="gone"
+                            android:layout_gravity="center"
+                            style="@style/SmallText"
+                            android:textSize="12sp"
+                            android:textColor="@color/colorPrimary"
+                            android:text="@string/upload_fast"
+                            android:layout_width="200dp"
+                            android:layout_height="wrap_content" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent">
+                        <ImageView
+                            android:background="@drawable/ic_check"
+                            android:gravity="center"
+                            android:id="@+id/step1_image_completed"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp" />
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+        <androidx.cardview.widget.CardView
+            android:id="@+id/step2_card"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="3dp"
+            android:layout_marginRight="3dp"
+            android:layout_width="match_parent"
+            app:cardCornerRadius="4dp"
+            android:layout_height="100dp">
+
+            <LinearLayout
+                android:background="@color/gray12"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <LinearLayout
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        android:layout_width="80dp"
+                        android:layout_height="match_parent">
+                        <ImageView
+                            android:gravity="center"
+                            android:background="@drawable/ic_applicant_detail"
+                            android:layout_width="45dp"
+                            android:layout_height="45dp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:orientation="vertical">
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_gravity="center"
+                            style="@style/LorgeText"
+                            android:id="@+id/step21"
+                            android:textSize="16dp"
+                            android:textColor="#1592E6"
+                            android:text="Step 2"
+                            android:layout_width="200dp"
+                            android:layout_height="wrap_content" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_marginBottom="10dp"
+                            android:layout_gravity="center"
+                            style="@style/LorgeText"
+                            android:id="@+id/app_info"
+                            android:textSize="12dp"
+                            android:textColor="@color/colorPrimary"
+                            android:text="Lead Viability"
+                            android:layout_width="200dp"
+                            android:layout_height="wrap_content" />
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:visibility="gone"
+                            android:layout_gravity="center"
+                            style="@style/SmallText"
+                            android:textSize="12dp"
+                            android:id="@+id/app_info_message"
+                            android:textColor="@color/colorPrimary"
+                            android:text="@string/thanks_apply"
+                            android:layout_width="200dp"
+                            android:layout_height="wrap_content" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <ImageView
+                            android:background="@drawable/ic_check"
+                            android:gravity="center"
+                            android:id="@+id/step2_image_completed"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp" />
+                        <ImageView
+                            android:id="@+id/app_info_img"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:background="@drawable/ic_down_arrow"
+                            android:gravity="center" />
+
+                        <ImageView
+                            android:visibility="gone"
+                            android:background="@drawable/ic_uparrow_icon"
+                            android:gravity="center"
+                            android:id="@+id/app_info_img11"
+                            android:layout_width="45dp"
+                            android:layout_height="45dp"/>
+                    </LinearLayout>
+                </LinearLayout>
+
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.9dp"
+                android:background="@color/white"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/lead_cr_statues"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.cardview.widget.CardView
+                xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/Viability_Check"
+                android:layout_marginLeft="3dp"
+                android:layout_marginRight="3dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:background="@color/white"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <LinearLayout
+                            android:gravity="center"
+                            android:orientation="horizontal"
+                            android:layout_width="80dp"
+                            android:layout_height="match_parent">
+                            <ImageView
+                                android:id="@+id/step2_viablitystatus"
+                                android:visibility="visible"
+                                android:gravity="center"
+                                android:layout_width="25dp"
+                                android:layout_height="25dp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:id="@+id/In_Progress"
+                                style="@style/SmallText"
+                                android:textColor="@color/colorPrimary"
+                                android:text="Viability Check"
+                                android:layout_width="150dp"
+                                android:textSize="14dp"
+                                android:layout_height="wrap_content" />
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:layout_marginBottom="10dp"
+                                style="@style/LorgeText"
+                                android:textSize="10dp"
+                                android:id="@+id/viability_statues"
+                                android:textColor="@color/black"
+                                android:text="Submitted to Loanwiser"
+                                android:layout_width="150dp"
+                                android:layout_height="wrap_content" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent">
+                            <ImageView
+                                android:gravity="center"
+                                android:id="@+id/viability_check_img2"
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"
+                                android:visibility="gone"/>
+
+                            <Button
+                                android:id="@+id/step2viablity_button"
+                                android:layout_width="wrap_content"
+                                android:layout_height="30dp"
+                                android:text="Complete View"
+                                android:layout_gravity="center"
+                                android:gravity="center"
+                                android:textColor="@color/white"
+                                android:textSize="10sp"
+                                android:background="@drawable/but_shape"/>
+                        </LinearLayout>
+                    </LinearLayout>
+
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.9dp"
+                    android:background="@color/white"/>
+            </LinearLayout>
+            <androidx.cardview.widget.CardView
+                android:visibility="gone"
+                xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/eligibility_check"
+                android:layout_marginLeft="3dp"
+                android:layout_marginRight="3dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:background="@color/white"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <LinearLayout
+                            android:gravity="center"
+                            android:orientation="horizontal"
+                            android:layout_width="80dp"
+                            android:layout_height="match_parent">
+                            <ImageView
+                                android:visibility="gone"
+                                android:gravity="center"
+                                android:background="@drawable/app_pro"
+                                android:layout_width="25dp"
+                                android:layout_height="25dp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:visibility="gone"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:orientation="vertical">
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:layout_gravity="center"
+                                android:id="@+id/eligibility"
+                                style="@style/SmallText"
+                                android:textColor="@color/colorPrimary"
+                                android:text="@string/eligi_check"
+                                android:layout_width="200dp"
+                                android:textSize="14dp"
+                                android:layout_height="wrap_content" />
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:layout_marginBottom="10dp"
+                                android:layout_gravity="center"
+                                style="@style/LorgeText"
+                                android:textSize="10dp"
+                                android:textColor="@color/black"
+                                android:text="Pending under you"
+                                android:layout_width="200dp"
+                                android:id="@+id/eligibility_check_cmp"
+                                android:layout_height="wrap_content" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:gravity="center"
+                            android:orientation="horizontal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent">
+                            <ImageView
+                                android:gravity="center"
+                                android:id="@+id/eligibility_check_img"
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"/>
+                        </LinearLayout>
+                    </LinearLayout>
+
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.9dp"
+                    android:background="@color/white"/>
+            </LinearLayout>
+            <androidx.cardview.widget.CardView
+                android:id="@+id/Paymet"
+                android:layout_marginLeft="3dp"
+                android:layout_marginRight="3dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:background="@color/white"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <LinearLayout
+                            android:gravity="center"
+                            android:orientation="horizontal"
+                            android:layout_width="80dp"
+                            android:layout_height="match_parent">
+
+                            <ImageView
+                                android:id="@+id/step2_paymentstatus"
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"
+                                android:gravity="center"
+                                android:visibility="visible" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:orientation="vertical">
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:id="@+id/paymenttxt"
+                                style="@style/SmallText"
+                                android:textColor="@color/colorPrimary"
+                                android:text="@string/payment1"
+                                android:textSize="14dp"
+                                android:layout_width="150dp"
+                                android:layout_height="wrap_content" />
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:layout_marginBottom="10dp"
+                                style="@style/LorgeText"
+                                android:textSize="10dp"
+                                android:textColor="@color/black"
+                                android:text=""
+                                android:id="@+id/payment_statues_comp"
+                                android:layout_width="150dp"
+                                android:layout_height="wrap_content" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:gravity="center"
+                            android:orientation="horizontal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent">
+                            <ImageView
+                                android:visibility="gone"
+                                android:id="@+id/payment_img"
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"/>
+
+                            <Button
+                                android:id="@+id/step2payment_but"
+                                android:layout_width="wrap_content"
+                                android:layout_height="30dp"
+                                android:layout_gravity="center"
+                                android:background="@drawable/but_shape"
+                                android:gravity="center"
+                                android:text="Complete View"
+                                android:textColor="@color/white"
+                                android:textSize="10sp" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.9dp"
+                    android:background="@color/white"/>
+            </LinearLayout>
+            <androidx.cardview.widget.CardView
+                android:visibility="gone"
+                xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/CRIF_Check"
+                android:layout_marginLeft="3dp"
+                android:layout_marginRight="3dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:background="@color/white"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <LinearLayout
+                            android:gravity="center"
+                            android:orientation="horizontal"
+                            android:layout_width="80dp"
+                            android:layout_height="match_parent">
+                            <ImageView
+                                android:visibility="gone"
+                                android:gravity="center"
+                                android:background="@drawable/app_pro"
+                                android:layout_width="25dp"
+                                android:layout_height="25dp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:orientation="vertical">
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:layout_gravity="center"
+                                android:id="@+id/crif_check_text"
+                                style="@style/SmallText"
+                                android:textColor="@color/colorPrimary"
+                                android:text="Details for Report"
+                                android:layout_width="200dp"
+                                android:textSize="14dp"
+                                android:layout_height="wrap_content" />
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:layout_marginBottom="10dp"
+                                android:layout_gravity="center"
+                                style="@style/LorgeText"
+                                android:textSize="10dp"
+                                android:textColor="@color/black"
+                                android:text=""
+                                android:id="@+id/crif_report_cmp"
+                                android:layout_width="200dp"
+                                android:layout_height="wrap_content" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:gravity="center"
+                            android:orientation="horizontal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent">
+                            <ImageView
+                                android:gravity="center"
+                                android:id="@+id/crif_img"
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"/>
+                        </LinearLayout>
+                    </LinearLayout>
+
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.9dp"
+                    android:background="@color/white"/>
+            </LinearLayout>
+
+            <androidx.cardview.widget.CardView
+
+                android:id="@+id/Credit_REport_Generation"
+                android:layout_marginLeft="3dp"
+                android:layout_marginRight="3dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:background="@color/white"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <LinearLayout
+                            android:gravity="center"
+                            android:orientation="horizontal"
+                            android:layout_width="80dp"
+                            android:layout_height="match_parent">
+                            <ImageView
+                                android:id="@+id/step2crifstatus"
+                                android:visibility="visible"
+                                android:gravity="center"
+                                android:background="@drawable/ic_warning"
+                                android:layout_width="25dp"
+                                android:layout_height="25dp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:orientation="vertical">
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                style="@style/SmallText"
+                                android:id="@+id/Approved"
+                                android:textColor="@color/colorPrimary"
+                                android:text="CRIF Report"
+                                android:layout_width="150dp"
+                                android:textSize="14dp"
+                                android:layout_height="wrap_content" />
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:layout_marginBottom="10dp"
+                                style="@style/LorgeText"
+                                android:textSize="10dp"
+                                android:textColor="@color/black"
+                                android:text=""
+                                android:id="@+id/crif_report_view"
+                                android:layout_width="150dp"
+                                android:layout_height="wrap_content" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:gravity="center"
+                            android:orientation="horizontal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent">
+                            <ImageView
+                                android:background="@drawable/ic_not_tick"
+                                android:gravity="center"
+                                android:id="@+id/credite_report_img"
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"
+                                android:visibility="gone"/>
+
+                            <Button
+                                android:id="@+id/step2crif_but"
+                                android:layout_width="wrap_content"
+                                android:layout_height="30dp"
+                                android:layout_gravity="center"
+                                android:background="@drawable/but_shape"
+                                android:gravity="center"
+                                android:text="Complete View"
+                                android:textColor="@color/white"
+                                android:textSize="10sp" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.9dp"
+                    android:background="@color/white"/>
+            </LinearLayout>
+            <androidx.cardview.widget.CardView
+                xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/viability_Report"
+                android:layout_marginLeft="3dp"
+                android:layout_marginRight="3dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:background="@color/white"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <LinearLayout
+                            android:gravity="center"
+                            android:orientation="horizontal"
+                            android:layout_width="80dp"
+                            android:layout_height="match_parent">
+                            <ImageView
+                                android:id="@+id/step2_reportstatus"
+                                android:visibility="visible"
+                                android:gravity="center"
+                                android:layout_width="25dp"
+                                android:layout_height="25dp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:orientation="vertical">
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                style="@style/SmallText"
+                                android:id="@+id/Doc_status"
+                                android:textColor="@color/colorPrimary"
+                                android:text="Viability Report"
+                                android:layout_width="150dp"
+                                android:textSize="14dp"
+                                android:layout_height="wrap_content" />
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:layout_marginBottom="10dp"
+                                android:layout_gravity="center"
+                                style="@style/LorgeText"
+                                android:textSize="10dp"
+                                android:textColor="@color/black"
+                                android:text=""
+                                android:id="@+id/viability_report_cmp"
+                                android:layout_width="150dp"
+                                android:layout_height="wrap_content" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:gravity="center"
+                            android:orientation="horizontal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent">
+                            <ImageView
+                                android:gravity="center"
+                                android:id="@+id/viability_report_image"
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"
+                                android:visibility="gone"/>
+
+                            <Button
+                                android:id="@+id/step2report_but"
+                                android:layout_width="wrap_content"
+                                android:layout_height="30dp"
+                                android:text="Complete View"
+                                android:layout_gravity="center"
+                                android:gravity="center"
+                                android:textColor="@color/white"
+                                android:textSize="10sp"
+                                android:background="@drawable/but_shape"/>
+
+                        </LinearLayout>
+                    </LinearLayout>
+
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.9dp"
+                    android:background="@color/white"/>
+            </LinearLayout>
+
+
+
+            <View
+                android:padding="2dp"
+                android:layout_width="match_parent"
+                android:layout_height="0.7dp"
+                android:layout_marginTop="10dp"
+                android:background="#d0d8e8"/>
+        </LinearLayout>
+
+
+        <androidx.cardview.widget.CardView
+            android:visibility="gone"
+            xmlns:card_view="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/Document_check_list"
+            android:layout_marginLeft="3dp"
+            android:layout_marginRight="3dp"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_marginTop="3dp"
+            app:cardCornerRadius="4dp">
+
+            <LinearLayout
+                android:background="@color/gray12"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <LinearLayout
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        android:layout_width="80dp"
+                        android:layout_height="match_parent">
+                        <ImageView
+                            android:gravity="center"
+                            android:background="@drawable/ic_document_upload"
+                            android:layout_width="45dp"
+                            android:layout_height="45dp" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:orientation="vertical">
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:visibility="gone"
+                            android:layout_gravity="center"
+                            style="@style/LorgeText"
+                            android:id="@+id/step2"
+                            android:textSize="18sp"
+                            android:textColor="@color/colorAccent"
+                            android:text="Step 2"
+                            android:layout_width="200dp"
+                            android:layout_height="wrap_content" />
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_gravity="center"
+                            style="@style/LorgeText"
+                            android:id="@+id/app_doc"
+                            android:textSize="16dp"
+                            android:textColor="@color/colorPrimary"
+                            android:text="Document Check List"
+                            android:layout_width="200dp"
+                            android:layout_height="wrap_content" />
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_gravity="center"
+                            style="@style/SmallText"
+                            android:textSize="12dp"
+                            android:id="@+id/app_doc_message"
+                            android:textColor="@color/colorPrimary"
+                            android:text="@string/upload_fast"
+                            android:layout_width="200dp"
+                            android:layout_height="wrap_content" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent">
+                        <ImageView
+                            android:background="@drawable/ic_not_tick"
+                            android:gravity="center"
+                            android:id="@+id/app_doc_img"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:visibility="gone" />
+                        <Button
+                            android:id="@+id/pay3_button"
+                            android:layout_width="wrap_content"
+                            android:layout_height="30dp"
+                            android:text="Complete View"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:layout_marginLeft="10dp"
+                            android:textColor="@color/white"
+                            android:textSize="10sp"
+                            android:background="@drawable/but_shape"/>
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <LinearLayout
+            android:id="@+id/if_vaibility_faild"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <androidx.cardview.widget.CardView
+                xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/Document_Upload"
+                android:layout_marginLeft="3dp"
+                android:layout_marginRight="3dp"
+                android:layout_marginTop="3dp"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                app:cardCornerRadius="4dp">
+
+                <LinearLayout
+                    android:background="@color/gray12"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <LinearLayout
+                            android:gravity="center"
+                            android:orientation="horizontal"
+                            android:layout_width="80dp"
+                            android:layout_height="match_parent">
+                            <ImageView
+                                android:gravity="center"
+                                android:background="@drawable/document_verification_icon"
+                                android:layout_width="45dp"
+                                android:layout_height="45dp" />
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_gravity="center"
+                            android:layout_width="200dp"
+                            android:orientation="vertical"
+                            android:layout_height="wrap_content">
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:orientation="vertical">
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:layout_gravity="center"
+                                    style="@style/LorgeText"
+                                    android:id="@+id/step3"
+                                    android:textSize="16dp"
+                                    android:textColor="#1592E6"
+                                    android:text="Step 3"
+                                    android:layout_width="200dp"
+                                    android:layout_height="wrap_content" />
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:layout_gravity="center"
+                                    style="@style/LorgeText"
+                                    android:id="@+id/app_interview"
+                                    android:textSize="12dp"
+                                    android:textColor="@color/colorPrimary"
+                                    android:text="@string/doc_upload"
+                                    android:layout_width="200dp"
+                                    android:layout_height="wrap_content" />
+                            </LinearLayout>
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:visibility="gone"
+                                android:layout_gravity="center"
+                                android:id="@+id/customerinterview_offer"
+                                style="@style/SmallText"
+                                android:textSize="12sp"
+                                android:textColor="@color/colorPrimary"
+                                android:text="@string/upload_fast"
+                                android:layout_width="200dp"
+                                android:layout_height="wrap_content" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:gravity="center"
+                            android:orientation="horizontal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent">
+                            <ImageView
+                                android:visibility="gone"
+                                android:background="@drawable/ic_not_tick"
+                                android:gravity="center"
+                                android:id="@+id/app_interview_img"
+                                android:layout_width="30dp"
+                                android:layout_height="30dp" />
+                            <LinearLayout
+                                android:gravity="center"
+                                android:orientation="horizontal"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent">
+
+                                <ImageView
+                                    android:background="@drawable/ic_check"
+                                    android:gravity="center"
+                                    android:id="@+id/step3_image_completed"
+                                    android:layout_width="30dp"
+                                    android:layout_height="30dp" />
+                                <ImageView
+                                    android:background="@drawable/ic_down_arrow"
+                                    android:gravity="center"
+                                    android:id="@+id/step3_statue"
+                                    android:layout_width="30dp"
+                                    android:layout_height="30dp" />
+                                <ImageView
+                                    android:visibility="gone"
+                                    android:background="@drawable/ic_uparrow_icon"
+                                    android:gravity="center"
+                                    android:id="@+id/step3_statue1"
+                                    android:layout_width="45dp"
+                                    android:layout_height="45dp"/>
+                            </LinearLayout>
+                        </LinearLayout>
+                    </LinearLayout>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+            <LinearLayout
+                android:id="@+id/step3_sub_staus"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <androidx.cardview.widget.CardView
+                    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/Bank_statement_Upload"
+                    android:layout_marginLeft="3dp"
+                    android:layout_marginRight="3dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <LinearLayout
+                        android:background="@color/white"
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <LinearLayout
+                                android:gravity="center"
+                                android:orientation="horizontal"
+                                android:layout_width="80dp"
+                                android:layout_height="match_parent">
+                                <ImageView
+                                    android:id="@+id/bankstate_status"
+                                    android:visibility="visible"
+                                    android:gravity="center"
+                                    android:background="@drawable/ic_warning"
+                                    android:layout_width="25dp"
+                                    android:layout_height="25dp" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:orientation="vertical">
+
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    style="@style/SmallText"
+                                    android:id="@+id/bank_statenent"
+                                    android:textColor="@color/colorPrimary"
+                                    android:text="Bank Statement Upload"
+                                    android:layout_width="150dp"
+                                    android:textSize="14dp"
+                                    android:layout_height="wrap_content" />
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:layout_marginBottom="10dp"
+                                    style="@style/LorgeText"
+                                    android:textSize="10dp"
+                                    android:textColor="@color/black"
+                                    android:text=""
+                                    android:id="@+id/bank_stm"
+                                    android:layout_width="150dp"
+                                    android:layout_height="wrap_content" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:gravity="center"
+                                android:orientation="horizontal"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent">
+                                <ImageView
+                                    android:gravity="center"
+                                    android:id="@+id/bank_statement_img"
+                                    android:layout_width="25dp"
+                                    android:layout_height="25dp"
+                                    android:visibility="gone"/>
+
+                                <Button
+                                    android:id="@+id/bankstatment_but"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="30dp"
+                                    android:text="Complete Now"
+                                    android:layout_gravity="center"
+                                    android:gravity="center"
+                                    android:textColor="@color/white"
+                                    android:textSize="10sp"
+                                    android:background="@drawable/but_shape"/>
+
+                            </LinearLayout>
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0.9dp"
+                        android:background="@color/white"/>
+                </LinearLayout>
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/document_check__Upload"
+                    android:layout_marginLeft="3dp"
+                    android:layout_marginRight="3dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <LinearLayout
+                        android:background="@color/white"
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <LinearLayout
+                                android:gravity="center"
+                                android:orientation="horizontal"
+                                android:layout_width="80dp"
+                                android:layout_height="match_parent">
+
+                                <ImageView
+                                    android:id="@+id/document_check_list_status"
+                                    android:layout_width="25dp"
+                                    android:layout_height="25dp"
+                                    android:background="@drawable/ic_warning"
+                                    android:gravity="center"
+                                    android:visibility="visible" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:orientation="vertical">
+
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:id="@+id/document_checklist_revamp"
+                                    style="@style/SmallText"
+                                    android:textColor="@color/colorPrimary"
+                                    android:text="@string/doc_check_list1"
+                                    android:textSize="14dp"
+                                    android:layout_width="150dp"
+                                    android:layout_height="wrap_content" />
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    style="@style/LorgeText"
+                                    android:textSize="10dp"
+                                    android:layout_marginBottom="10dp"
+                                    android:textColor="@color/black"
+                                    android:text=""
+                                    android:id="@+id/document_check_text"
+                                    android:layout_width="150dp"
+                                    android:layout_height="wrap_content" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:gravity="center"
+                                android:orientation="horizontal"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent">
+                                <ImageView
+                                    android:gravity="center"
+                                    android:id="@+id/document_check_img1"
+                                    android:layout_width="25dp"
+                                    android:layout_height="25dp"
+                                    android:visibility="gone"/>
+                                <Button
+                                    android:id="@+id/document_check_button"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="30dp"
+                                    android:text="Complete Now"
+                                    android:layout_gravity="center"
+                                    android:gravity="center"
+                                    android:textColor="@color/white"
+                                    android:textSize="10sp"
+                                    android:background="@drawable/but_shape_gray"/>
+
+                            </LinearLayout>
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0.9dp"
+                        android:background="@color/white"/>
+                </LinearLayout>
+                <androidx.cardview.widget.CardView
+                    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/document_Upload"
+                    android:layout_marginLeft="3dp"
+                    android:layout_marginRight="3dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <LinearLayout
+                        android:background="@color/white"
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <LinearLayout
+                                android:gravity="center"
+                                android:orientation="horizontal"
+                                android:layout_width="80dp"
+                                android:layout_height="match_parent">
+                                <ImageView
+                                    android:id="@+id/documentupload_status"
+                                    android:visibility="visible"
+                                    android:gravity="center"
+                                    android:background="@drawable/ic_warning"
+                                    android:layout_width="25dp"
+                                    android:layout_height="25dp" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:orientation="vertical">
+
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:id="@+id/document_upload_revamp"
+                                    style="@style/SmallText"
+                                    android:textColor="@color/colorPrimary"
+                                    android:text="@string/doc_upload"
+                                    android:textSize="14dp"
+                                    android:layout_width="150dp"
+                                    android:layout_height="wrap_content" />
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    style="@style/LorgeText"
+                                    android:textSize="10dp"
+                                    android:layout_marginBottom="10dp"
+                                    android:textColor="@color/black"
+                                    android:text=""
+                                    android:id="@+id/document_text"
+                                    android:layout_width="150dp"
+                                    android:layout_height="wrap_content" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:gravity="center"
+                                android:orientation="horizontal"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent">
+                                <ImageView
+                                    android:gravity="center"
+                                    android:id="@+id/document_img1"
+                                    android:layout_width="25dp"
+                                    android:layout_height="25dp"
+                                    android:visibility="gone"/>
+                                <Button
+                                    android:id="@+id/document_upload_button"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="30dp"
+                                    android:text="Complete Now"
+                                    android:layout_gravity="center"
+                                    android:gravity="center"
+                                    android:textColor="@color/white"
+                                    android:textSize="10sp"
+                                    android:background="@drawable/but_shape"/>
+
+                            </LinearLayout>
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0.9dp"
+                        android:background="@color/white"/>
+                </LinearLayout>
+                <androidx.cardview.widget.CardView
+
+                    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/ban_available"
+                    android:layout_marginLeft="3dp"
+                    android:layout_marginRight="3dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <LinearLayout
+                        android:background="@color/white"
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <LinearLayout
+                                android:gravity="center"
+                                android:orientation="horizontal"
+                                android:layout_width="80dp"
+                                android:layout_height="match_parent">
+                                <ImageView
+                                    android:id="@+id/step3payment_status"
+                                    android:visibility="visible"
+                                    android:gravity="center"
+                                    android:background="@drawable/ic_warning"
+                                    android:layout_width="25dp"
+                                    android:layout_height="25dp" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:orientation="vertical">
+
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:id="@+id/payment1"
+                                    style="@style/SmallText"
+                                    android:textColor="@color/colorPrimary"
+                                    android:text="@string/doc_availability"
+                                    android:textSize="14dp"
+                                    android:layout_width="150dp"
+                                    android:layout_height="wrap_content" />
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:layout_marginBottom="10dp"
+                                    style="@style/LorgeText"
+                                    android:textSize="10dp"
+                                    android:textColor="@color/black"
+                                    android:text=""
+                                    android:id="@+id/payment_statues_comp1"
+                                    android:layout_width="150dp"
+                                    android:layout_height="wrap_content" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:gravity="center"
+                                android:orientation="horizontal"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent">
+                                <ImageView
+                                    android:gravity="center"
+                                    android:id="@+id/payment_img1"
+                                    android:layout_width="25dp"
+                                    android:visibility="gone"
+                                    android:layout_height="25dp"/>
+
+                                <Button
+                                    android:id="@+id/step3payment_but"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="30dp"
+                                    android:text="Complete Now"
+                                    android:layout_gravity="center"
+                                    android:gravity="center"
+                                    android:textColor="@color/white"
+                                    android:textSize="10sp"
+                                    android:background="@drawable/but_shape"/>
+                            </LinearLayout>
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+                <LinearLayout
+                    android:visibility="gone"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0.9dp"
+                        android:background="@color/white"/>
+                </LinearLayout>
+                <androidx.cardview.widget.CardView
+                    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/Submiteed_to_Loanwiser"
+                    android:layout_marginLeft="3dp"
+                    android:layout_marginRight="3dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <LinearLayout
+                        android:background="@color/white"
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <LinearLayout
+                                android:gravity="center"
+                                android:orientation="horizontal"
+                                android:layout_width="80dp"
+                                android:layout_height="match_parent">
+                                <ImageView
+                                    android:id="@+id/loan_submit_statues_img"
+                                    android:visibility="visible"
+                                    android:gravity="center"
+                                    android:layout_width="25dp"
+                                    android:layout_height="25dp" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:orientation="vertical">
+
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    style="@style/SmallText"
+                                    android:id="@+id/loan_submit_statues_txt"
+                                    android:textColor="@color/colorPrimary"
+                                    android:text="Submitted to Loanwiser "
+                                    android:layout_width="wrap_content"
+                                    android:textSize="14dp"
+                                    android:layout_height="wrap_content" />
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:layout_marginBottom="10dp"
+                                    style="@style/LorgeText"
+                                    android:textSize="10dp"
+                                    android:textColor="#00ceb4"
+                                    android:text="Completed(19-09-2020)"
+                                    android:id="@+id/loan_submit_statues_txt1"
+                                    android:layout_width="150dp"
+                                    android:layout_height="wrap_content" />
+                            </LinearLayout>
+
+
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0.9dp"
+                        android:background="@color/white"/>
+                </LinearLayout>
+                <androidx.cardview.widget.CardView
+                    android:visibility="gone"
+                    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/eligibility_card"
+                    android:layout_marginLeft="3dp"
+                    android:layout_marginRight="3dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <LinearLayout
+                        android:background="@color/white"
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <LinearLayout
+                                android:gravity="center"
+                                android:orientation="horizontal"
+                                android:layout_width="80dp"
+                                android:layout_height="match_parent">
+                                <ImageView
+                                    android:id="@+id/eligiblitity_status"
+                                    android:visibility="visible"
+                                    android:gravity="center"
+                                    android:background="@drawable/ic_warning"
+                                    android:layout_width="25dp"
+                                    android:layout_height="25dp" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:orientation="vertical">
+
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:id="@+id/eligibility_report"
+                                    style="@style/SmallText"
+                                    android:textColor="@color/colorPrimary"
+                                    android:text="Eligibility Report"
+                                    android:textSize="14dp"
+                                    android:layout_width="150dp"
+                                    android:layout_height="wrap_content" />
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:layout_marginBottom="10dp"
+                                    style="@style/LorgeText"
+                                    android:id="@+id/eligibility_Report"
+                                    android:textSize="10dp"
+                                    android:textColor="@color/black"
+                                    android:text=""
+                                    android:layout_width="150dp"
+                                    android:layout_height="wrap_content" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:gravity="center"
+                                android:orientation="horizontal"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent">
+                                <ImageView
+                                    android:gravity="center"
+                                    android:id="@+id/eligibility_statues_img"
+                                    android:layout_width="25dp"
+                                    android:layout_height="25dp"
+                                    android:visibility="gone"/>
+
+                                <Button
+                                    android:id="@+id/eligibility_but"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="30dp"
+                                    android:text="Complete View"
+                                    android:layout_gravity="center"
+                                    android:gravity="center"
+                                    android:textColor="@color/white"
+                                    android:textSize="10sp"
+                                    android:background="@drawable/but_shape"/>
+                            </LinearLayout>
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+                <LinearLayout
+                    android:visibility="gone"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0.9dp"
+                        android:background="@color/white"/>
+                </LinearLayout>
+
+                <androidx.cardview.widget.CardView
+                    android:visibility="gone"
+                    android:id="@+id/offer_generation"
+                    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                    android:layout_marginLeft="3dp"
+                    android:layout_marginBottom="25dp"
+                    android:layout_marginRight="3dp"
+                    android:layout_marginTop="3dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    app:cardCornerRadius="4dp">
+
+                    <LinearLayout
+                        android:background="@color/gray12"
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <LinearLayout
+                                android:gravity="center"
+                                android:orientation="horizontal"
+                                android:layout_width="80dp"
+                                android:layout_height="match_parent">
+                                <ImageView
+                                    android:gravity="center"
+                                    android:background="@drawable/offer_details"
+                                    android:layout_width="45dp"
+                                    android:layout_height="45dp" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_gravity="center"
+                                android:layout_width="200dp"
+                                android:orientation="vertical"
+                                android:layout_height="wrap_content">
+                                <LinearLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:orientation="vertical">
+                                    <androidx.appcompat.widget.AppCompatTextView
+                                        android:layout_gravity="center"
+                                        style="@style/LorgeText"
+                                        android:id="@+id/step4"
+                                        android:textSize="16dp"
+                                        android:textColor="#1592E6"
+                                        android:text="Step 4"
+                                        android:layout_width="200dp"
+                                        android:layout_height="wrap_content" />
+                                    <androidx.appcompat.widget.AppCompatTextView
+                                        android:layout_gravity="center"
+                                        android:id="@+id/app_offer"
+                                        style="@style/LorgeText"
+                                        android:textSize="12dp"
+                                        android:textColor="@color/colorPrimary"
+                                        android:text="Offers Details"
+                                        android:layout_width="200dp"
+                                        android:layout_height="wrap_content" />
+                                </LinearLayout>
+
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:visibility="gone"
+                                    android:layout_gravity="center"
+                                    android:id="@+id/callcenter_offer"
+                                    style="@style/SmallText"
+                                    android:textSize="12sp"
+                                    android:textColor="@color/gray"
+                                    android:text="@string/app_offer_updated"
+                                    android:layout_width="200dp"
+                                    android:layout_height="wrap_content" />
+
+                            </LinearLayout>
+
+
+                            <LinearLayout
+                                android:gravity="center"
+                                android:orientation="horizontal"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent">
+                                <ImageView
+                                    android:background="@drawable/ic_not_tick"
+                                    android:gravity="center"
+                                    android:id="@+id/app_offer_img"
+                                    android:layout_width="30dp"
+                                    android:layout_height="30dp" />
+                            </LinearLayout>
+                        </LinearLayout>
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+                <androidx.cardview.widget.CardView
+                    android:visibility="gone"
+                    android:layout_marginBottom="20dp"
+                    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginLeft="3dp"
+                    android:layout_marginRight="3dp"
+                    android:id="@+id/CD_app_track"
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    card_view:cardCornerRadius="4dp">
+
+                    <LinearLayout
+                        android:background="@drawable/ripple_effect"
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <LinearLayout
+
+                            android:orientation="horizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <LinearLayout
+                                android:gravity="center"
+                                android:orientation="horizontal"
+                                android:layout_width="90dp"
+                                android:layout_height="match_parent">
+                                <ImageView
+                                    android:gravity="center"
+
+                                    android:layout_width="45dp"
+                                    android:layout_height="45dp" />
+                            </LinearLayout>
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:layout_gravity="center"
+                                style="@style/LorgeText"
+                                android:id="@+id/app_track"
+                                android:textColor="@color/colorPrimaryDark"
+                                android:text="@string/app_track"
+                                android:layout_width="200dp"
+                                android:layout_height="wrap_content" />
+                            <LinearLayout
+                                android:gravity="center"
+                                android:orientation="horizontal"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent">
+                                <ImageView
+                                    android:gravity="center"
+                                    android:id="@+id/app_track_img"
+                                    android:layout_width="30dp"
+                                    android:layout_height="30dp" />
+                            </LinearLayout>
+                        </LinearLayout>
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+            </LinearLayout>
+
+
+
+        <LinearLayout
+            android:id="@+id/Loan_Statue_submit_layout"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <androidx.cardview.widget.CardView
+                xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/Loan_Statues_crd"
+                android:layout_marginLeft="3dp"
+                android:layout_marginRight="3dp"
+                android:layout_marginTop="3dp"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                app:cardCornerRadius="4dp">
+
+                <LinearLayout
+                    android:background="@color/gray12"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <LinearLayout
+                            android:gravity="center"
+                            android:orientation="horizontal"
+                            android:layout_width="80dp"
+                            android:layout_height="match_parent">
+                            <ImageView
+                                android:gravity="center"
+                                android:background="@drawable/document_verification_icon"
+                                android:layout_width="45dp"
+                                android:layout_height="45dp" />
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_gravity="center"
+                            android:layout_width="200dp"
+                            android:orientation="vertical"
+                            android:layout_height="wrap_content">
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:orientation="vertical">
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:layout_gravity="center"
+                                    style="@style/LorgeText"
+                                    android:id="@+id/step4_loan"
+                                    android:textSize="16dp"
+                                    android:textColor="#1592E6"
+                                    android:text="Step 4"
+                                    android:layout_width="200dp"
+                                    android:layout_height="wrap_content" />
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:layout_gravity="center"
+                                    style="@style/LorgeText"
+                                    android:id="@+id/loan_status_txt"
+                                    android:textSize="12dp"
+                                    android:textColor="@color/colorPrimary"
+                                    android:text="@string/track_status"
+                                    android:layout_width="200dp"
+                                    android:layout_height="wrap_content" />
+                            </LinearLayout>
+
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:gravity="center"
+                            android:orientation="horizontal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent">
+                            <ImageView
+                                android:background="@drawable/ic_down_arrow"
+                                android:gravity="center"
+                                android:id="@+id/loan_statues_"
+                                android:layout_width="30dp"
+                                android:layout_height="30dp" />
+                            <ImageView
+                                android:visibility="gone"
+                                android:background="@drawable/ic_uparrow_icon"
+                                android:gravity="center"
+                                android:id="@+id/loan_statues_1"
+                                android:layout_width="45dp"
+                                android:layout_height="45dp"/>
+                        </LinearLayout>
+                    </LinearLayout>
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+            <LinearLayout
+                android:id="@+id/Loan_Submit_tracStatues"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/Document_verification"
+                    android:layout_marginLeft="3dp"
+                    android:layout_marginRight="3dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <LinearLayout
+                        android:background="@color/white"
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <LinearLayout
+                                android:gravity="center"
+                                android:orientation="horizontal"
+                                android:layout_width="80dp"
+                                android:layout_height="match_parent">
+
+                                <ImageView
+                                    android:id="@+id/Document_verification_img"
+                                    android:layout_width="25dp"
+                                    android:layout_height="25dp"
+
+                                    android:gravity="center"
+                                    android:visibility="visible" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:orientation="vertical">
+
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:id="@+id/Document_verification_txt"
+                                    style="@style/SmallText"
+                                    android:textColor="@color/colorPrimary"
+                                    android:text="Document Verification"
+                                    android:textSize="14dp"
+                                    android:layout_width="150dp"
+                                    android:layout_height="wrap_content" />
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    style="@style/LorgeText"
+                                    android:textSize="10dp"
+                                    android:layout_marginBottom="10dp"
+                                    android:textColor="#00ceb4"
+                                    android:text="Completed(19-09-2020)"
+                                    android:id="@+id/Document_verification_txt1"
+                                    android:layout_width="150dp"
+                                    android:layout_height="wrap_content" />
+                            </LinearLayout>
+                        </LinearLayout>
+
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0.9dp"
+                        android:background="@color/white"/>
+                </LinearLayout>
+                <androidx.cardview.widget.CardView
+                    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/Applied_to_Bank"
+                    android:layout_marginLeft="3dp"
+                    android:layout_marginRight="3dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <LinearLayout
+                        android:background="@color/white"
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <LinearLayout
+                                android:gravity="center"
+                                android:orientation="horizontal"
+                                android:layout_width="80dp"
+                                android:layout_height="match_parent">
+                                <ImageView
+                                    android:id="@+id/applied_to_bank_img"
+                                    android:visibility="visible"
+                                    android:gravity="center"
+                                    android:layout_width="25dp"
+                                    android:layout_height="25dp" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:orientation="vertical">
+
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:id="@+id/Applied_to_Bank_txt"
+                                    style="@style/SmallText"
+                                    android:textColor="@color/colorPrimary"
+                                    android:text="Applied to Bank"
+                                    android:textSize="14dp"
+                                    android:layout_width="150dp"
+                                    android:layout_height="wrap_content" />
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    style="@style/LorgeText"
+                                    android:textSize="10dp"
+                                    android:layout_marginBottom="10dp"
+                                    android:textColor="#00ceb4"
+                                    android:text="Completed(19-09-2020)"
+                                    android:id="@+id/Applied_to_Bank_txt1"
+                                    android:layout_width="150dp"
+                                    android:layout_height="wrap_content" />
+                            </LinearLayout>
+                        </LinearLayout>
+                        <LinearLayout
+                            android:id="@+id/bank_is_yes"
+                            android:gravity="center"
+                            android:layout_marginBottom="20dp"
+                            android:layout_marginLeft="3dp"
+                            android:layout_marginRight="3dp"
+                            android:orientation="vertical"
+                            android:layout_width="match_parent"
+                            android:layout_height="300dp">
+
+                            <androidx.cardview.widget.CardView
+                                android:background="@color/gray1"
+                                android:layout_marginLeft="20dp"
+                                android:layout_marginRight="10dp"
+                                android:layout_marginTop="10dp"
+                                android:layout_marginBottom="3dp"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent">
+                            <ExpandableListView
+                                android:padding="10dp"
+                                android:id="@+id/lvExp"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:divider="@color/green"
+                                android:dividerHeight="0.5dp"
+                                android:layout_alignParentLeft="true"
+                                android:indicatorRight="?android:attr/expandableListPreferredItemIndicatorLeft"
+                                />
+                            </androidx.cardview.widget.CardView>
+                        </LinearLayout>
+                    </LinearLayout>
+
+                </androidx.cardview.widget.CardView>
+            </LinearLayout>
+
+
+
+        </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+    </ScrollView>
+</LinearLayout>
+

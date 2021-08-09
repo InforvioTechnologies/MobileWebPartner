@@ -12,12 +12,13 @@
 
         <androidx.cardview.widget.CardView
         android:layout_width="240dp"
-        android:layout_height="wrap_content"
+        android:layout_height="300dp"
         android:layout_margin="10dp">
 
             <LinearLayout
+                android:padding="5dp"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="300dp"
                 android:layout_marginBottom="10dp"
                 android:orientation="vertical">
 
@@ -31,13 +32,14 @@
 
 
         <androidx.appcompat.widget.AppCompatTextView
-
             android:id="@+id/titletxt"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="5dp"
             android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
             android:text="TEST"
+
             android:gravity="center"
             android:layout_gravity="center"
             android:textSize="12dp"
@@ -55,29 +57,48 @@
                     android:textSize="14sp"
                     android:textColor="@color/black"/>
 
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/viewpdf"
-                    android:layout_width="150dp"
-                    android:layout_height="35dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginLeft="10dp"
-                    android:background="@color/green"
-                    android:text="View PDF"
-                    android:gravity="center"
-                    android:layout_gravity="center"
-                    android:textColor="@color/white"/>
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1">
+                        <androidx.appcompat.widget.AppCompatButton
+                            android:id="@+id/viewpdf"
+                            android:layout_width="match_parent"
+                            android:layout_height="30dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginLeft="10dp"
+                            android:background="@color/green"
+                            android:text="View PDF"
+                            android:textSize="10dp"
+                            android:gravity="center"
+                            android:layout_gravity="center"
+                            android:textColor="@color/white"/>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1">
+                        <androidx.appcompat.widget.AppCompatButton
+                            android:id="@+id/viewvideo"
+                            android:layout_width="match_parent"
+                            android:layout_height="30dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginLeft="10dp"
+                            android:gravity="center"
+                            android:textSize="10dp"
+                            android:layout_gravity="center"
+                            android:background="@color/green"
+                            android:text="View Video"
+                            android:textColor="@color/white"/>
+                    </LinearLayout>
+                </LinearLayout>
 
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/viewvideo"
-                    android:layout_width="150dp"
-                    android:layout_height="35dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginLeft="10dp"
-                    android:gravity="center"
-                    android:layout_gravity="center"
-                    android:background="@color/green"
-                    android:text="View Video"
-                    android:textColor="@color/white"/>
+
+
 
 
 

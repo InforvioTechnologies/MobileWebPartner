@@ -107,7 +107,7 @@ public class Resent_webinars extends RecyclerView.Adapter<Resent_webinars.Custom
             holder.watch_webinar.setVisibility(View.VISIBLE);
         }
 
-        holder.watch_webinar.setVisibility(View.VISIBLE);
+        holder.watch_webinar.setVisibility(View.GONE);
         holder.watch_webinar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -98,6 +98,8 @@ public class ShareActivity extends SimpleActivity {
 
         Log.i("TAG", "onCreate:imgurl "+imgurl);
         Log.e("the value",imgurl);
+        Log.e("the value",content);
+        Log.e("the value",app_content);
         contenttxt.setText(title);
         if(!app_content.equals("null") && !app_content.isEmpty())
         {

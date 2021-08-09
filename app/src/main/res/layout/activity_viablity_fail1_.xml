@@ -29,7 +29,20 @@
                 android:layout_marginTop="25dp"
                 android:orientation="vertical"
                 >
+                <LinearLayout
+                    android:gravity="end"
+                    android:layout_gravity="end"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <ImageView
+                        android:id="@+id/close"
+                        android:layout_width="36dp"
+                        android:layout_height="36dp"
 
+                        android:layout_gravity="end"
+                        android:src="@drawable/ic_close_icon"/>
+                </LinearLayout>
                 <ImageView
                     android:layout_width="36dp"
                     android:layout_height="36dp"
@@ -164,6 +177,7 @@
                 </LinearLayout>
 
                     <LinearLayout
+                        android:visibility="gone"
                         android:layout_marginLeft="10dp"
                         android:background="@color/white"
                         android:orientation="vertical"
@@ -418,13 +432,14 @@
                     android:orientation="vertical">
 
                     <androidx.appcompat.widget.AppCompatButton
+                        android:visibility="gone"
                         android:id="@+id/nextahed1"
                         android:layout_width="240dp"
                         android:layout_height="40dp"
                         android:layout_gravity="center"
                         android:gravity="center"
                         android:layout_marginBottom="20dp"
-                        android:text="@string/proceednext"
+                        android:text="Close"
                         android:textStyle="bold"
                         android:textColor="@color/white"
                         android:background="#C2C2C2"
@@ -467,7 +482,7 @@
                         android:layout_gravity="center"
                         android:gravity="center"
                         android:layout_marginBottom="20dp"
-                        android:text="@string/go_back"
+                        android:text="Close"
                         android:textStyle="bold"
                         android:textColor="@color/white"
                         android:background="@drawable/capsul_button4"

@@ -56,7 +56,7 @@ public class Applicant_Info_new extends SimpleActivity {
 
     AppCompatTextView loan_type_newcat,loan_type_new_val_type,type_of_employee_new_val_type,Loan_amount_new_txt,
             app_name1_pan_txt,app_Email_txt,app_mobile1_new_txt,app_mobile1_co_applicant,
-            type_of_employee_new_val_type_co_applica,app_mobile1_new_txt_whats_app;
+            type_of_employee_new_val_type_co_applica,app_mobile1_new_txt_whats_app,lastnametxt;
 
     JSONObject applicant_info_object,applicant_info_object2;
 
@@ -84,6 +84,7 @@ public class Applicant_Info_new extends SimpleActivity {
         app_mobile1_co_applicant = (AppCompatTextView)findViewById(R.id.app_mobile1_co_applicant) ;
         type_of_employee_new_val_type_co_applica = (AppCompatTextView)findViewById(R.id.type_of_employee_new_val_type_co_applica);
         app_mobile1_new_txt_whats_app = (AppCompatTextView)findViewById(R.id.app_mobile1_new_txt_whats_app) ;
+        lastnametxt = (AppCompatTextView)findViewById(R.id.lastnametxt) ;
         loan_amount_new = (LinearLayout) findViewById(R.id.loan_amount_new) ;
         type_of_emploe=findViewById(R.id.type_of_emploe);
 
@@ -127,6 +128,8 @@ public class Applicant_Info_new extends SimpleActivity {
                             app_mobile1_new_txt.setText(mobile_no);
                             String whats_app=applicant_info_object.getString("whatsapp_mobile");
                             app_mobile1_new_txt_whats_app.setText(whats_app);
+                            String lastname=applicant_info_object.getString("last_name");
+                            lastnametxt.setText(lastname);
 
                             applicant_info_object2=object.getJSONObject("appinfo2");
                             loan_cat_id=applicant_info_object2.getString("loan_categoryid");

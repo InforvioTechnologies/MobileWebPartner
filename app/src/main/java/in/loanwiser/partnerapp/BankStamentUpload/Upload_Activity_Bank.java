@@ -4,6 +4,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.widget.AppCompatAutoCompleteTextView;
+import androidx.appcompat.widget.AppCompatButton;
+import androidx.appcompat.widget.AppCompatEditText;
 import androidx.appcompat.widget.AppCompatTextView;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -22,6 +25,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Build;
@@ -33,13 +37,19 @@ import android.provider.DocumentsContract;
 import android.provider.MediaStore;
 import android.provider.OpenableColumns;
 import android.provider.Settings;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.animation.LinearInterpolator;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
@@ -50,6 +60,7 @@ import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -76,6 +87,7 @@ import org.json.JSONObject;
 import java.io.File;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -85,12 +97,14 @@ import java.util.UUID;
 import java.util.stream.Stream;
 
 import adhoc.app.applibrary.Config.AppUtils.Objs;
+import adhoc.app.applibrary.Config.AppUtils.Params;
 import adhoc.app.applibrary.Config.AppUtils.Pref.Pref;
 import adhoc.app.applibrary.Config.AppUtils.Urls;
 import adhoc.app.applibrary.Config.AppUtils.VolleySignleton.AppController;
 import dmax.dialog.SpotsDialog;
 import eu.inmite.android.lib.validations.form.iface.IFieldAdapter;
 import in.loanwiser.partnerapp.BankStamentUpload.modelglib.GlibResponse;
+import in.loanwiser.partnerapp.Documents.Applicant_Doc_Details_revamp;
 import in.loanwiser.partnerapp.Documents.SingleUploadBroadcastReceiver;
 import in.loanwiser.partnerapp.PartnerActivitys.Dashboard_Activity;
 import in.loanwiser.partnerapp.PartnerActivitys.ExpandableListAdapter1;
@@ -111,6 +125,8 @@ import retrofit2.Callback;
 import retrofit2.http.Part;
 
 import static adhoc.app.applibrary.Config.AppUtils.Objs.a;
+
+import static adhoc.app.applibrary.Config.AppUtils.Urls.bank_statementlist_uat;
 import static android.Manifest.permission.READ_EXTERNAL_STORAGE;
 import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
 import static android.os.Build.VERSION.SDK_INT;
@@ -124,10 +140,11 @@ public class Upload_Activity_Bank extends SimpleActivity implements  View.OnClic
 
     private static final int PICK_PDF_REQUEST = 1;
     private static final String TAG =Upload_Activity_Bank.class.getSimpleName() ;
-
+    Typeface font;
     RecyclerView recyclerView,bankstatement_recycleview;
     ListView listview;
-    Button upload, submit;
+    LinearLayout listviewlay;
+    AppCompatButton upload, submit;
     Button view_analysisbut;
     private Uri filePath;
     private Uri fileUri;
@@ -158,8 +175,11 @@ public class Upload_Activity_Bank extends SimpleActivity implements  View.OnClic
     TextView sub_banktextlay;
     Button upload_requirebtn;
 
-    JSONArray ja1;
+    JSONArray ja1,ja1_bank_list;
+    LinearLayout Password_ly;
 
+    Spinner spinn_uploading_for,account_type_spnr,password_protedted_spnr,banK_stm_type_spnr,
+            Bank_name_spnr;
 
 
     private final SingleUploadBroadcastReceiver uploadReceiver =
@@ -181,6 +201,30 @@ public class Upload_Activity_Bank extends SimpleActivity implements  View.OnClic
     //Declare PickiT
     PickiT pickiT;
 
+    String[] You_ur_uploading_for,BANK_list,Bank_statement_type,Bank_accounty_type,
+    is_password_protected,Bank_Name;
+
+    String  account_number_edit_txt_,Password_edit_txt_;
+    ArrayAdapter<String> Your_Uploading_Bank,Bank_Name_dapter,Bank_statemt_type_adapter,
+            Bank_accounty_type_adapter,Is_password_protected_adapter,Bank_Name_adapter;
+
+    AutoCompleteTextView bank_name_auto_complete;
+
+    AppCompatEditText account_number_edit_txt,Password_edit_txt;
+
+    String your_uploading_for_ID,your_uploading_for_value,Bank_stm_type_account_ID,Bank_stm_type_account_value,
+    Bank_accounty_type_id,Bank_accounty_type_value,Is_Password_protected_id,Is_Password_protected_value,
+            Bank_Name_id,Bank_Name_value;
+    String bank_accountno,bank_name,bank_status,bank_type,bank_pass;
+
+    LinearLayout your_uploadin_ly;
+    LinearLayout Bank_Name_sp,bank_Name_edt,ac_typ_spin,ac_type_edt,
+            bank_state_type_sp,bank_state_type_edt,pass_word_sp,pass_word_edt,
+            upload_section;
+    JSONArray bank_list, bankstacc_type,bankststatement_type;
+    AppCompatEditText bank_name_edt,account_type_edit_txt,bank_state_type_edt_txt,
+            pass_word_edt_txt;
+
     @SuppressLint("WrongViewCast")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -191,8 +235,24 @@ public class Upload_Activity_Bank extends SimpleActivity implements  View.OnClic
         setContentView(R.layout.activity_simple);
         Objs.a.setStubId(this, R.layout.activity_bank_statement);
         initTools(R.string.bank_statment);
+
         upload = findViewById(R.id.uploads);
+        bank_state_type_sp = findViewById(R.id.bank_state_type_sp);
+        bank_state_type_edt = findViewById(R.id.bank_state_type_edt);
+        bank_Name_edt = findViewById(R.id.bank_Name_edt);
+        bank_name_edt = findViewById(R.id.bank_name_edt);
+        bank_state_type_edt_txt = findViewById(R.id.bank_state_type_edt_txt);
+        pass_word_edt_txt = findViewById(R.id.pass_word_edt_txt);
+        pass_word_edt = findViewById(R.id.pass_word_edt);
+        pass_word_sp = findViewById(R.id.pass_word_sp);
+        upload_section = findViewById(R.id.upload_section);
+        Bank_Name_sp = findViewById(R.id.Bank_Name_sp);
+
+        ac_typ_spin = findViewById(R.id.ac_typ_spin);
+        ac_type_edt = findViewById(R.id.ac_type_edt);
+        account_type_edit_txt = findViewById(R.id.account_type_edit_txt);
         listview = findViewById(R.id.listview);
+        listviewlay = findViewById(R.id.listviewlay);
         submit = findViewById(R.id.submit);
         bankstatement_recycleview=findViewById(R.id.bankstatement_recycleview);
         Bank_Statement_radio_list = (RadioGroup) findViewById(R.id.hour_radio_group);
@@ -208,7 +268,43 @@ public class Upload_Activity_Bank extends SimpleActivity implements  View.OnClic
         bankhorizontallist=findViewById(R.id.bankhorizontallist);
         banklisttxt_lay=findViewById(R.id.banklisttxt_lay);
         sub_banktextlay=findViewById(R.id.sub_banktextlay);
+        spinn_uploading_for=findViewById(R.id.spinn_uploading_for);
+        account_type_spnr=findViewById(R.id.account_type_spnr);
+        banK_stm_type_spnr=findViewById(R.id.banK_stm_type_spnr);
+        password_protedted_spnr=findViewById(R.id.password_protedted_spnr);
+        Bank_name_spnr=findViewById(R.id.Bank_name_spnr);
+        Password_ly=findViewById(R.id.Password_ly);
+        account_number_edit_txt=findViewById(R.id.account_number_edit_txt);
+        Password_edit_txt=findViewById(R.id.Password_edit_txt);
+        your_uploadin_ly=findViewById(R.id.your_uploadin_ly);
         //LineChartView lineChartView = findViewById(R.id.helolinechart);
+
+        bank_name_auto_complete = (AppCompatAutoCompleteTextView) findViewById(R.id.bank_name_auto_complete);
+        makeJsonObjReq1();
+
+        Bank_Name_Searc();
+        bank_name_auto_complete.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                String workpincode = bank_name_auto_complete.getText().toString();
+
+                if(workpincode.length()> 2){
+                 //   Bank_Name_Searc(workpincode);
+                }
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                Log.e("hi","hi11");
+
+                // imm.hideSoftInputFromWindow(company_pincode_txt.getWindowToken(), 0);
+            }
+        });
 
         submitbanktxt_lay=findViewById(R.id.submitbanktxt_lay);
         recyclerView=(RecyclerView)findViewById(R.id.banklist_recycleview);
@@ -234,6 +330,8 @@ public class Upload_Activity_Bank extends SimpleActivity implements  View.OnClic
                 }
             }
         });
+
+
 
         items=new ArrayList<>();
 
@@ -306,6 +404,7 @@ public class Upload_Activity_Bank extends SimpleActivity implements  View.OnClic
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == PICK_PDF_REQUEST && resultCode == RESULT_OK) {
+            listviewlay.setVisibility(View.VISIBLE);
             listview.setVisibility(View.VISIBLE);
             if (data.getClipData() != null) {
                 int totalItemsSelected = data.getClipData().getItemCount();
@@ -331,7 +430,7 @@ public class Upload_Activity_Bank extends SimpleActivity implements  View.OnClic
                     Log.i("Upload_Activity_Bank", "ActivityResult_filename: " + fileName);
                 }
             } else {
-
+                listviewlay.setVisibility(View.VISIBLE);
                 fileUri = data.getData();
                 fileget = String.valueOf(data.getData());
                 fileName = getFileName(data.getData());
@@ -369,146 +468,717 @@ public class Upload_Activity_Bank extends SimpleActivity implements  View.OnClic
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.submit:
-                if (checkradiobutton_value!=null) {
-                    if (uriarrayList.isEmpty()) {
-                        Toast.makeText(Upload_Activity_Bank.this, "Please Select Bank statement", Toast.LENGTH_SHORT).show();
-                    } else if (uriarrayList.size() == 0) {
-                        Toast.makeText(Upload_Activity_Bank.this, "Please upload document", Toast.LENGTH_SHORT).show();
-                    } else {
-                        //    uploadMultipart();
-                        pathlist = new ArrayList<>();
-                        for (int i = 0; i < uriarrayList.size(); i++) {
-                            Log.e("the Upload issues", uriarrayList.get(i).toString());
-                            String uri_test = uriarrayList.get(i).toString();
-                            Log.e("the Upload issues", uri_test);
-                            String filename = uri_test.substring(uri_test.lastIndexOf("/") + 1);
-                            String pdf1 = filename.substring(filename.lastIndexOf(".") + 1);
-                            //  uploadMultipart();
-                            String a = "pdf";
 
-                            if (pdf1.equals(a)) {
-
-                                for(i=0;i<uriarrayList_pic.size();i++)
-                                {
-                                    orginalFile_pic = uriarrayList_pic.get(i);
-
-
-                                    String path = String.valueOf(orginalFile_pic);
-
-                                    pathlist.add(path);
-
-                                    long fileSizeInBytes = orginalFile_pic.length();
-                                    long fileSizeInKB = fileSizeInBytes / 1024;
-                                    long fileSizeInMB = fileSizeInKB / 1024;
-                                    Log.e("the Size is", String.valueOf(fileSizeInMB));
-                                    if (fileSizeInMB < 3) {
-                                        CheckUploadcondition();
-                                    }else
-                                    {
-                                        pdf_error();
-                                        // Toast.makeText(this,"Please upload file less than 3MB.",Toast.LENGTH_SHORT).show();
-
-                                    }
-                                    // uploadMultipart();
-
-                                    //  MultifileUploadRetrofit();
-
-                                    //  Log.e("path", orginalFile_pic);
-                                    Log.e("Activity_Ban path1", String.valueOf(orginalFile_pic));
-                                }
-                               /* if (SDK_INT < 11) {
-                                    orginalFile = new File(FileUtils1.getRealPathFromURI_BelowAPI11(Upload_Activity_Bank.this, uriarrayList.get(i)));
-                                }
-                                // SDK >= 11 && SDK < 19
-                                else if (SDK_INT < 19) {
-                                    orginalFile = new File(FileUtils1.getRealPathFromURI_API11to18(Upload_Activity_Bank.this, uriarrayList.get(i)));
-                                }
-                                // SDK > 19 (Android 4.4) and up
-                                else {
-                                    Log.e("path", "api 19 called");
-                                    orginalFile = new File(FileUtils1.getRealPathFromURI_API19(Upload_Activity_Bank.this, uriarrayList.get(i)));
-
-                                }
-                                String path = String.valueOf(orginalFile);
-
-                                pathlist.add(path);
-
-                                long fileSizeInBytes = orginalFile.length();
-                                long fileSizeInKB = fileSizeInBytes / 1024;
-                                long fileSizeInMB = fileSizeInKB / 1024;
-                                Log.e("the Size is", String.valueOf(fileSizeInMB));
-                                if (fileSizeInMB < 3) {
-
-                                    CheckUploadcondition();
-                                }else
-                                {
-                                    pdf_error();
-
-                                    // Toast.makeText(this,"Please upload file less than 3MB.",Toast.LENGTH_SHORT).show();
-
-                                }
-                                // uploadMultipart();
-
-                                //  MultifileUploadRetrofit();
-
-                                Log.e("path", path);
-                                Log.e("Upload_Activity_Ban", String.valueOf(orginalFile));*/
-
-                            } else {
-
-
-                                 for(i=0;i<uriarrayList_pic.size();i++)
-                                {
-                                    orginalFile_pic = uriarrayList_pic.get(i);
-
-
-                                String path = String.valueOf(orginalFile_pic);
-
-                                pathlist.add(path);
-
-                                long fileSizeInBytes = orginalFile_pic.length();
-                                long fileSizeInKB = fileSizeInBytes / 1024;
-                                long fileSizeInMB = fileSizeInKB / 1024;
-                                Log.e("the Size is", String.valueOf(fileSizeInMB));
-                                if (fileSizeInMB < 3) {
-                                    CheckUploadcondition();
-                                }else
-                                {
-                                    pdf_error();
-                                   // Toast.makeText(this,"Please upload file less than 3MB.",Toast.LENGTH_SHORT).show();
-
-                                }
-                                // uploadMultipart();
-
-                                //  MultifileUploadRetrofit();
-
-                              //  Log.e("path", orginalFile_pic);
-                                Log.e("Activity_Ban path", String.valueOf(orginalFile_pic));
-                                }
-                            }
-
-
-                        }
+                if(ja1_bank_list.length()==0)
+                {
+                    your_uploading_for_ID ="New";
+                    bank_new();
+                }else
+                {
+                    if(your_uploading_for_ID.equals("New"))
+                    {
+                        bank_new();
+                    }else
+                    {
+                        bank_statement_upload();
                     }
-                }
-                else{
-                    Toast.makeText(this,"Select bank Statement Type",Toast.LENGTH_SHORT).show();
+
                 }
 
+
+
+                //
                 break;
 
 
         }
     }
 
+    public void bank_new()
+    {
+                    if (Bank_Name_id.equals("0")) {
+                        Toast.makeText(this, "Select Bank Name", Toast.LENGTH_SHORT).show();
+
+                    } else {
+                        if (!validate_account_NO()) {
+                            return;
+                        }
+                        if (Bank_accounty_type_id.equals("0")) {
+                            Toast.makeText(this, "Select bank Account Type", Toast.LENGTH_SHORT).show();
+
+                        } else {
+                            if (Bank_stm_type_account_ID.equals("0")) {
+                                Toast.makeText(this, "Select bank Statement Type", Toast.LENGTH_SHORT).show();
+
+                            } else {
+
+                                if (Is_Password_protected_id.equals("0")) {
+                                    Toast.makeText(this, "Select Password protected?", Toast.LENGTH_SHORT).show();
+
+                                } else if (Is_Password_protected_id.equals("1")) {
+                                    if (!validate_password()) {
+                                        return;
+                                    }
+                                    bank_statement_upload();
+                                } else if (Is_Password_protected_id.equals("2")) {
+                                    bank_statement_upload();
+                                }
+
+
+                            }
+                        }
+
+                    //
+                }
+    }
+    public void bank_statement_upload()
+    {
+
+            if (uriarrayList.isEmpty()) {
+                Toast.makeText(Upload_Activity_Bank.this, "Please Select Bank statement", Toast.LENGTH_SHORT).show();
+            } else if (uriarrayList.size() == 0) {
+                Toast.makeText(Upload_Activity_Bank.this, "Please upload document", Toast.LENGTH_SHORT).show();
+            } else {
+                //    uploadMultipart();
+                pathlist = new ArrayList<>();
+                for (int i = 0; i < uriarrayList.size(); i++) {
+                    Log.e("the Upload issues", uriarrayList.get(i).toString());
+                    String uri_test = uriarrayList.get(i).toString();
+                    Log.e("the Upload issues", uri_test);
+                    String filename = uri_test.substring(uri_test.lastIndexOf("/") + 1);
+                    String pdf1 = filename.substring(filename.lastIndexOf(".") + 1);
+                    //  uploadMultipart();
+                    String a = "pdf";
+
+                    if (pdf1.equals(a)) {
+
+                        for(i=0;i<uriarrayList_pic.size();i++)
+                        {
+                            orginalFile_pic = uriarrayList_pic.get(i);
+
+
+                            String path = String.valueOf(orginalFile_pic);
+
+                            pathlist.add(path);
+
+                            long fileSizeInBytes = orginalFile_pic.length();
+                            long fileSizeInKB = fileSizeInBytes / 1024;
+                            long fileSizeInMB = fileSizeInKB / 1024;
+                            Log.e("the Size is", String.valueOf(fileSizeInMB));
+                            if (fileSizeInMB < 3) {
+                                CheckUploadcondition();
+                            }else
+                            {
+                                pdf_error();
+                                // Toast.makeText(this,"Please upload file less than 3MB.",Toast.LENGTH_SHORT).show();
+
+                            }
+
+                            Log.e("Activity_Ban path1", String.valueOf(orginalFile_pic));
+                        }
+                                               /* if (SDK_INT < 11) {
+                                                    orginalFile = new File(FileUtils1.getRealPathFromURI_BelowAPI11(Upload_Activity_Bank.this, uriarrayList.get(i)));
+                                                }
+                                                // SDK >= 11 && SDK < 19
+                                                else if (SDK_INT < 19) {
+                                                    orginalFile = new File(FileUtils1.getRealPathFromURI_API11to18(Upload_Activity_Bank.this, uriarrayList.get(i)));
+                                                }
+                                                // SDK > 19 (Android 4.4) and up
+                                                else {
+                                                    Log.e("path", "api 19 called");
+                                                    orginalFile = new File(FileUtils1.getRealPathFromURI_API19(Upload_Activity_Bank.this, uriarrayList.get(i)));
+
+                                                }
+                                                String path = String.valueOf(orginalFile);
+
+                                                pathlist.add(path);
+
+                                                long fileSizeInBytes = orginalFile.length();
+                                                long fileSizeInKB = fileSizeInBytes / 1024;
+                                                long fileSizeInMB = fileSizeInKB / 1024;
+                                                Log.e("the Size is", String.valueOf(fileSizeInMB));
+                                                if (fileSizeInMB < 3) {
+
+                                                    CheckUploadcondition();
+                                                }else
+                                                {
+                                                    pdf_error();
+
+                                                    // Toast.makeText(this,"Please upload file less than 3MB.",Toast.LENGTH_SHORT).show();
+
+                                                }
+                                                // uploadMultipart();
+
+                                                //  MultifileUploadRetrofit();
+
+                                                Log.e("path", path);
+                                                Log.e("Upload_Activity_Ban", String.valueOf(orginalFile));*/
+
+                    } else {
+
+
+                        for(i=0;i<uriarrayList_pic.size();i++)
+                        {
+                            orginalFile_pic = uriarrayList_pic.get(i);
+
+
+                            String path = String.valueOf(orginalFile_pic);
+
+                            pathlist.add(path);
+
+                            long fileSizeInBytes = orginalFile_pic.length();
+                            long fileSizeInKB = fileSizeInBytes / 1024;
+                            long fileSizeInMB = fileSizeInKB / 1024;
+                            Log.e("the Size is", String.valueOf(fileSizeInMB));
+                            if (fileSizeInMB < 3) {
+                                CheckUploadcondition();
+                            }else
+                            {
+                                pdf_error();
+                                // Toast.makeText(this,"Please upload file less than 3MB.",Toast.LENGTH_SHORT).show();
+
+                            }
+                            // uploadMultipart();
+
+                            //  MultifileUploadRetrofit();
+
+                            //  Log.e("path", orginalFile_pic);
+                            Log.e("Activity_Ban path", String.valueOf(orginalFile_pic));
+                        }
+                    }
+
+
+                }
+            }
+
+    }
+
+
     private void CheckUploadcondition() {
-        if (checkradiobutton_value.equalsIgnoreCase("1")){
+
+
+
+          if(your_uploading_for_ID.equals("New"))
+           {
+               Log.e("uploading for ",your_uploading_for_ID);
+               Log.e("Bank_Name",Bank_Name_id);
+
+               account_number_edit_txt_ = account_number_edit_txt.getText().toString();
+               Password_edit_txt_ = Password_edit_txt.getText().toString();
+               Log.e("account_numbe",account_number_edit_txt_);
+               Log.e("accounty_type",Bank_accounty_type_id);
+               Log.e("bank stam type",Bank_stm_type_account_ID);
+               Log.e("Is_Password_prot",Is_Password_protected_id);
+               Log.e("Password_edit_txt_",Password_edit_txt_);
+               MultifileUploadRetrofit();
+           }else
+          {
+
+              account_number_edit_txt_ = bank_accountno;
+              Password_edit_txt_ = bank_pass;
+              Bank_Name_id = bank_name;
+              Bank_stm_type_account_ID =bank_type;
+              MultifileUploadRetrofit();
+
+          }
+
+
+       /* if (checkradiobutton_value.equalsIgnoreCase("1")){
             MultifileUploadRetrofit();
         }else{
             MultifileUploadRetrofitGlib();
-        }
+        }*/
     }
 
+
+
+    private void makeJsonObjReq1() {
+        JSONObject J= null;
+        try {
+            J = new JSONObject();
+            J.put("name","name");
+
+        }catch (JSONException e)
+        {
+            e.printStackTrace();
+        }
+
+        Log.e("state_id", String.valueOf(J));
+
+        progressDialog.show();
+        Log.e("Request Dreopdown", "called");
+        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, Urls.Get_Dropdown, J,
+                new Response.Listener<JSONObject>() {
+
+                    @Override
+                    public void onResponse(JSONObject object) {
+
+                        progressDialog.dismiss();
+
+                        Log.e("respose Dreopdown", object.toString());
+                        /// msgResponse.setText(response.toString());
+                        //  Objs.a.showToast(getContext(), String.valueOf(object));
+                        try {
+
+                            bankstacc_type =object.getJSONArray("bankstacc_type");
+                            bankststatement_type =object.getJSONArray("bankststatement_type");
+                           JSONArray is_passprotect =object.getJSONArray("is_passprotect");
+                            Bank_statement_type(bankststatement_type);
+                            Bank_account_type(bankstacc_type);
+                            IS_password_protected(is_passprotect);
+                          //  Log.e("Business_type_own_busin",String.valueOf(Business_type_own_business));
+
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        // Toast.makeText(mCon, response.toString(),Toast.LENGTH_SHORT).show();
+
+                    }
+                }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                VolleyLog.d("TAG", "Error: " + error.getMessage());
+                progressDialog.dismiss();
+            }
+        }) {
+
+            /**
+             * Passing some request headers
+             * */
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("Content-Type", "application/json");
+                return headers;
+            }
+        };
+        // Adding request to request queue
+        AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
+
+    }
+
+    private void Your_uploading_for(final JSONArray has_pancard_ar) throws JSONException {
+        //   SPINNERLIST = new String[ja.length()];
+        You_ur_uploading_for = new String[has_pancard_ar.length()];
+        for (int i=0;i<has_pancard_ar.length();i++){
+            JSONObject J =  has_pancard_ar.getJSONObject(i);
+            You_ur_uploading_for[i] = J.getString("value");
+            final List<String> loan_type_list = new ArrayList<>(Arrays.asList(You_ur_uploading_for));
+            Your_Uploading_Bank = new ArrayAdapter<String>(context, R.layout.view_spinner_item, loan_type_list){
+                public View getView(int position, View convertView, ViewGroup parent) {
+                    font = Typeface.createFromAsset(context.getAssets(),"Lato-Regular.ttf");
+                    TextView v = (TextView) super.getView(position, convertView, parent);
+                    v.setTypeface(font);
+                    return v;
+                }
+
+                public View getDropDownView(int position, View convertView, ViewGroup parent) {
+                    TextView v = (TextView) super.getView(position, convertView, parent);
+                    v.setTypeface(font);
+                    return v;
+                }
+            };
+
+            Your_Uploading_Bank.setDropDownViewResource(R.layout.view_spinner_item);
+            spinn_uploading_for.setAdapter(Your_Uploading_Bank);
+            spinn_uploading_for.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                    try {
+
+                        //  City_loc_uniqueID = ja.getJSONObject(position).getString("city_id");
+                        your_uploading_for_ID = has_pancard_ar.getJSONObject(position).getString("id");
+                        your_uploading_for_value = has_pancard_ar.getJSONObject(position).getString("value");
+                        //CAT_ID = ja.getJSONObject(position).getString("category_id");
+
+                        if(your_uploading_for_ID.equals("New"))
+                        {
+                            Bank_Name_sp.setVisibility(View.VISIBLE);
+                            bank_Name_edt.setVisibility(View.GONE);
+
+                            ac_typ_spin.setVisibility(View.VISIBLE);
+                             ac_type_edt.setVisibility(View.GONE);
+
+                            bank_state_type_sp.setVisibility(View.VISIBLE);
+                            bank_state_type_edt.setVisibility(View.GONE);
+
+                            pass_word_sp.setVisibility(View.VISIBLE);
+                            pass_word_edt.setVisibility(View.GONE);
+                            upload_section.setVisibility(View.VISIBLE);
+                        }else
+                        {
+                            upload_section.setVisibility(View.VISIBLE);
+                            Bank_Name_sp.setVisibility(View.GONE);
+                            bank_Name_edt.setVisibility(View.VISIBLE);
+                            bank_name_edt.setEnabled(false);
+                            account_number_edit_txt.setEnabled(false);
+
+                            ac_typ_spin.setVisibility(View.GONE);
+                            ac_type_edt.setVisibility(View.VISIBLE);
+                            account_type_edit_txt.setEnabled(false);
+
+                            bank_state_type_sp.setVisibility(View.GONE);
+                            bank_state_type_edt.setVisibility(View.VISIBLE);
+                            bank_state_type_edt_txt.setEnabled(false);
+
+                            pass_word_sp.setVisibility(View.GONE);
+                            pass_word_edt.setVisibility(View.VISIBLE);
+                            pass_word_edt_txt.setEnabled(false);
+
+                            Bank_statement_Vale(your_uploading_for_value);
+                        }
+
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+
+                }
+            });
+            spinn_uploading_for.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View view, MotionEvent motionEvent) {
+                    // imm.hideSoftInputFromWindow(edt_buyer_address.getWindowToken(), 0);
+                    return false;
+                }
+            });
+        }
+
+    }
+
+    private void Bank_statement_type(final JSONArray has_pancard_ar) throws JSONException {
+        //   SPINNERLIST = new String[ja.length()];
+        Bank_statement_type = new String[has_pancard_ar.length()];
+        for (int i=0;i<has_pancard_ar.length();i++){
+            JSONObject J =  has_pancard_ar.getJSONObject(i);
+            Bank_statement_type[i] = J.getString("value");
+            final List<String> loan_type_list = new ArrayList<>(Arrays.asList(Bank_statement_type));
+            Bank_statemt_type_adapter = new ArrayAdapter<String>(context, R.layout.view_spinner_item, loan_type_list){
+                public View getView(int position, View convertView, ViewGroup parent) {
+                    font = Typeface.createFromAsset(context.getAssets(),"Lato-Regular.ttf");
+                    TextView v = (TextView) super.getView(position, convertView, parent);
+                    v.setTypeface(font);
+                    return v;
+                }
+
+                public View getDropDownView(int position, View convertView, ViewGroup parent) {
+                    TextView v = (TextView) super.getView(position, convertView, parent);
+                    v.setTypeface(font);
+                    return v;
+                }
+            };
+
+            Bank_statemt_type_adapter.setDropDownViewResource(R.layout.view_spinner_item);
+            banK_stm_type_spnr.setAdapter(Bank_statemt_type_adapter);
+            banK_stm_type_spnr.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                    try {
+
+                        //  City_loc_uniqueID = ja.getJSONObject(position).getString("city_id");
+                        Bank_stm_type_account_ID = has_pancard_ar.getJSONObject(position).getString("id");
+                        Bank_stm_type_account_value = has_pancard_ar.getJSONObject(position).getString("value");
+                        //CAT_ID = ja.getJSONObject(position).getString("category_id");
+
+
+
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+
+                }
+            });
+            banK_stm_type_spnr.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View view, MotionEvent motionEvent) {
+                    // imm.hideSoftInputFromWindow(edt_buyer_address.getWindowToken(), 0);
+                    return false;
+                }
+            });
+        }
+
+    }
+
+    private void Bank_account_type(final JSONArray has_pancard_ar) throws JSONException {
+        //   SPINNERLIST = new String[ja.length()];
+        Bank_accounty_type = new String[has_pancard_ar.length()];
+        for (int i=0;i<has_pancard_ar.length();i++){
+            JSONObject J =  has_pancard_ar.getJSONObject(i);
+            Bank_accounty_type[i] = J.getString("value");
+            final List<String> loan_type_list = new ArrayList<>(Arrays.asList(Bank_accounty_type));
+            Bank_accounty_type_adapter = new ArrayAdapter<String>(context, R.layout.view_spinner_item, loan_type_list){
+                public View getView(int position, View convertView, ViewGroup parent) {
+                    font = Typeface.createFromAsset(context.getAssets(),"Lato-Regular.ttf");
+                    TextView v = (TextView) super.getView(position, convertView, parent);
+                    v.setTypeface(font);
+                    return v;
+                }
+
+                public View getDropDownView(int position, View convertView, ViewGroup parent) {
+                    TextView v = (TextView) super.getView(position, convertView, parent);
+                    v.setTypeface(font);
+                    return v;
+                }
+            };
+
+            Bank_accounty_type_adapter.setDropDownViewResource(R.layout.view_spinner_item);
+            account_type_spnr.setAdapter(Bank_accounty_type_adapter);
+            account_type_spnr.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                    try {
+
+                        //  City_loc_uniqueID = ja.getJSONObject(position).getString("city_id");
+                        Bank_accounty_type_id = has_pancard_ar.getJSONObject(position).getString("id");
+                        Bank_accounty_type_value = has_pancard_ar.getJSONObject(position).getString("value");
+                        //CAT_ID = ja.getJSONObject(position).getString("category_id");
+
+
+
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+
+                }
+            });
+            account_type_spnr.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View view, MotionEvent motionEvent) {
+                    // imm.hideSoftInputFromWindow(edt_buyer_address.getWindowToken(), 0);
+                    return false;
+                }
+            });
+        }
+
+    }
+
+    private void IS_password_protected(final JSONArray has_pancard_ar) throws JSONException {
+        //   SPINNERLIST = new String[ja.length()];
+        is_password_protected = new String[has_pancard_ar.length()];
+        for (int i=0;i<has_pancard_ar.length();i++){
+            JSONObject J =  has_pancard_ar.getJSONObject(i);
+            is_password_protected[i] = J.getString("value");
+            final List<String> loan_type_list = new ArrayList<>(Arrays.asList(is_password_protected));
+            Is_password_protected_adapter = new ArrayAdapter<String>(context, R.layout.view_spinner_item, loan_type_list){
+                public View getView(int position, View convertView, ViewGroup parent) {
+                    font = Typeface.createFromAsset(context.getAssets(),"Lato-Regular.ttf");
+                    TextView v = (TextView) super.getView(position, convertView, parent);
+                    v.setTypeface(font);
+                    return v;
+                }
+
+                public View getDropDownView(int position, View convertView, ViewGroup parent) {
+                    TextView v = (TextView) super.getView(position, convertView, parent);
+                    v.setTypeface(font);
+                    return v;
+                }
+            };
+
+            Is_password_protected_adapter.setDropDownViewResource(R.layout.view_spinner_item);
+            password_protedted_spnr.setAdapter(Is_password_protected_adapter);
+            password_protedted_spnr.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                    try {
+
+                        //  City_loc_uniqueID = ja.getJSONObject(position).getString("city_id");
+                        Is_Password_protected_id = has_pancard_ar.getJSONObject(position).getString("id");
+                        Is_Password_protected_value = has_pancard_ar.getJSONObject(position).getString("value");
+                        //CAT_ID = ja.getJSONObject(position).getString("category_id");
+
+                            if(Is_Password_protected_id.equals("1"))
+                            {
+                                Password_ly.setVisibility(View.VISIBLE);
+                            }else{
+                                Password_ly.setVisibility(View.GONE);
+                            }
+
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+
+                }
+            });
+            password_protedted_spnr.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View view, MotionEvent motionEvent) {
+                    // imm.hideSoftInputFromWindow(edt_buyer_address.getWindowToken(), 0);
+                    return false;
+                }
+            });
+        }
+
+    }
+
+    //
+    private boolean validate_account_NO(){
+        if (account_number_edit_txt.getText().toString().isEmpty()) {
+            account_number_edit_txt.setError(getText(R.string.error_rise));
+            account_number_edit_txt.requestFocus();
+            return false;
+        } else {
+            account_number_edit_txt.setError(null);
+            //inputLayoutLname.setErrorEnabled(false);
+        }
+
+        return true;
+    }
+
+    private boolean validate_password(){
+        if (Password_edit_txt.getText().toString().isEmpty()) {
+            Password_edit_txt.setError(getText(R.string.error_rise));
+            Password_edit_txt.requestFocus();
+            return false;
+        } else {
+            Password_edit_txt.setError(null);
+            //inputLayoutLname.setErrorEnabled(false);
+        }
+
+        return true;
+    }
+
+    private void BANK_Name_list(final JSONArray has_pancard_ar) throws JSONException {
+        //   SPINNERLIST = new String[ja.length()];
+        Bank_Name = new String[has_pancard_ar.length()];
+        for (int i=0;i<has_pancard_ar.length();i++){
+            JSONObject J =  has_pancard_ar.getJSONObject(i);
+            Bank_Name[i] = J.getString("value");
+            final List<String> loan_type_list = new ArrayList<>(Arrays.asList(Bank_Name));
+            Bank_Name_adapter = new ArrayAdapter<String>(context, R.layout.view_spinner_item, loan_type_list){
+
+                public View getDropDownView(int position, View convertView, ViewGroup parent) {
+                    TextView v = (TextView) super.getView(position, convertView, parent);
+                    v.setTypeface(font);
+                    return v;
+                }
+            };
+
+            Bank_Name_adapter.setDropDownViewResource(R.layout.view_spinner_item);
+            Bank_name_spnr.setAdapter(Bank_Name_adapter);
+            Bank_name_spnr.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                    try {
+
+                        //  City_loc_uniqueID = ja.getJSONObject(position).getString("city_id");
+                        Bank_Name_id = has_pancard_ar.getJSONObject(position).getString("id");
+                        Bank_Name_value = has_pancard_ar.getJSONObject(position).getString("value");
+                        //CAT_ID = ja.getJSONObject(position).getString("category_id");
+
+
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+
+                }
+            });
+            Bank_name_spnr.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View view, MotionEvent motionEvent) {
+                    // imm.hideSoftInputFromWindow(edt_buyer_address.getWindowToken(), 0);
+                    return false;
+                }
+            });
+        }
+
+    }
+
+    private void Bank_Name_Searc() {
+      //  progressDialog.show();
+        JSONObject J =new JSONObject();
+        try {
+            J.put("name", "name");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, Urls.get_banklist, J,
+                new Response.Listener<JSONObject>() {
+
+                    @Override
+                    public void onResponse(JSONObject object) {
+                        try {
+
+                                 bank_list = object.getJSONArray("bank_list");
+                                Log.e("Pincode", String.valueOf(bank_list));
+
+                                if(bank_list.length()>0)
+                                {
+                                    BANK_Name_list(bank_list);
+                                }
+
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        // Toast.makeText(mCon, response.toString(),Toast.LENGTH_SHORT).show();
+                       // progressDialog.dismiss();
+                    }
+                }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                VolleyLog.d("TAG", "Error: " + error.getMessage());
+              //  progressDialog.dismiss();
+            }
+        }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("Content-Type", "application/json");
+                return headers;
+            }
+        };
+        AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
+
+    }
+    private void set_Bank_Name(final JSONArray ja) throws JSONException {
+
+        BANK_list = new String[ja.length()];
+        for (int i=0;i<ja.length();i++){
+            JSONObject J =  ja.getJSONObject(i);
+            BANK_list[i] = J.getString("value");
+            final List<String> area_list = new ArrayList<>(Arrays.asList(BANK_list));
+            Bank_Name_dapter = new ArrayAdapter<String>(getApplicationContext(), R.layout.view_spinner_item, area_list){};
+            String workpincode = bank_name_auto_complete.getText().toString();
+            //  String workpincode1 = residence_pincode1_edit_txt.getText().toString();
+        }
+
+        bank_name_auto_complete.setAdapter(Bank_Name_dapter);
+        Bank_Name_dapter.notifyDataSetChanged();
+        if(ja.length() < 40) bank_name_auto_complete.setThreshold(1);
+        else bank_name_auto_complete.setThreshold(2);
+    }
 
 
 
@@ -795,6 +1465,7 @@ public class Upload_Activity_Bank extends SimpleActivity implements  View.OnClic
         try {
             J = new JSONObject();
             J.put("transaction_id", Pref.getTRANSACTIONID(getApplicationContext()));
+            J.put("from_partstatus", "2");
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -827,15 +1498,142 @@ public class Upload_Activity_Bank extends SimpleActivity implements  View.OnClic
                                  //   Toast.makeText(Upload_Activity_Bank.this, "Bank Statement Analysis Failed", Toast.LENGTH_SHORT).show();
                                 }else
                                 {
-                                    Intent intent = new Intent(Upload_Activity_Bank.this, BankAnalysis.class);
+                                   /* Intent intent = new Intent(Upload_Activity_Bank.this, BankAnalysis.class);
                                     //  Intent in=new Intent(context,BankAnalysis.class);
                                     intent.putExtra("adapter","upload");
+                                    startActivity(intent);*/
+                                    Intent intent = new Intent(Upload_Activity_Bank.this, Applicant_Doc_Details_revamp.class);
                                     startActivity(intent);
+                                    finish();
                                 }
 
                                // finish();
                             }
 
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        progressDialog.dismiss();
+                    }
+                }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                progressDialog.dismiss();
+                Log.e("Applicant Entry request", String.valueOf(error));
+                Toast.makeText(Upload_Activity_Bank.this, error.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("content-type", "application/json");
+                return headers;
+            }
+        };
+        AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
+    }
+
+    public void Bank_statement_Vale(String your_uploading_for_value) {
+
+        // final String step_status11 = step_status1;
+        String typecnt;
+        String applicant_c =Pref.getCoAPPAVAILABLE(getApplicationContext());
+
+        if(applicant_c.equals("1"))
+        {
+            typecnt = "0";
+        }else
+        {
+            typecnt = "1";
+        }
+        JSONObject jsonObject = new JSONObject();
+        JSONObject J = null;
+        try {
+            J = new JSONObject();
+            J.put("transaction_id", Pref.getTRANSACTIONID(getApplicationContext()));
+            J.put("albankstacc_no", your_uploading_for_value);
+            J.put("type_cnt", typecnt);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        progressDialog.show();
+        Log.e("Applicant Entry request", String.valueOf(J));
+
+        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, Urls.get_bankdetils, J,
+                new Response.Listener<JSONObject>() {
+                    @SuppressLint("LongLogTag")
+                    @Override
+                    public void onResponse(JSONObject response) {
+
+                        Log.e("Bank_data", String.valueOf(response));
+
+                        try {
+                             bank_accountno= response.getString("bank_accountno");
+                            account_number_edit_txt.setText(bank_accountno);
+                             bank_name= response.getString("bank_name");
+
+                           // String bank_name
+                           // Log.e("loancat_name1", String.valueOf(bank_name1));
+
+
+                            for (int k=0;k<bank_list.length();k++){
+
+                                JSONObject object2 = bank_list.getJSONObject(k);
+
+                                String id_type1 = object2.getString("id");
+
+                                Log.e("Bank Name", String.valueOf(bank_name));
+                                if(bank_name.equals(id_type1)){
+
+                                    String loan_type1 = object2.getString("value");
+                                    bank_name_edt.setText(loan_type1);
+                                    // Objs.a.showToast(mCom, loan_type);
+                                    Log.e("FindBank", String.valueOf(loan_type1));
+                                   // Bank_name_spnr.setSelection(Integer.parseInt(loan_type1));
+                                }
+                            }
+
+                             bank_status= response.getString("bank_status");
+                            for (int k=0;k<bankstacc_type.length();k++){
+
+                                JSONObject object2 = bankstacc_type.getJSONObject(k);
+
+                                String id_type1 = object2.getString("id");
+
+                                Log.e("accountType", String.valueOf(bank_status));
+                                Log.e("bank_sta", String.valueOf(bank_status));
+                                if(bank_status.equals(id_type1)){
+
+                                    String loan_type1 = object2.getString("value");
+                                    account_type_edit_txt.setText(loan_type1);
+                                    // Objs.a.showToast(mCom, loan_type);
+                                    Log.e("FindBank", String.valueOf(loan_type1));
+                                    // Bank_name_spnr.setSelection(Integer.parseInt(loan_type1));
+                                }
+                            }
+                             bank_type= response.getString("bank_type");
+                            for (int k=0;k<bankststatement_type.length();k++){
+
+                                JSONObject object2 = bankststatement_type.getJSONObject(k);
+
+                                String id_type1 = object2.getString("id");
+
+                                Log.e("bank_status", String.valueOf(bank_type));
+                                if(bank_type.equals(id_type1)){
+
+                                    String loan_type1 = object2.getString("value");
+                                    bank_state_type_edt_txt.setText(loan_type1);
+                                    // Objs.a.showToast(mCom, loan_type);
+                                    Log.e("FindBank", String.valueOf(loan_type1));
+                                    // Bank_name_spnr.setSelection(Integer.parseInt(loan_type1));
+                                }
+                            }
+
+                             bank_pass= response.getString("bank_pass");
+                            pass_word_edt_txt.setText(bank_pass);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -894,19 +1692,19 @@ public class Upload_Activity_Bank extends SimpleActivity implements  View.OnClic
 
 
     public void ExitAlert(Context context) {
-        androidx.appcompat.app.AlertDialog.Builder builder = new androidx.appcompat.app.AlertDialog.Builder(context, adhoc.app.applibrary.R.style.MyAlertDialogStyle);
+        AlertDialog.Builder builder = new AlertDialog.Builder(context, adhoc.app.applibrary.R.style.MyAlertDialogStyle);
         builder.setTitle(context.getResources().getString(adhoc.app.applibrary.R.string.attention));
         builder.setIcon(context.getResources().getDrawable(adhoc.app.applibrary.R.drawable.ic_info_outline_black_24dp));
         builder.setMessage("Unable get correct pdf format. Please select the correct PDF file from File Directory/Internal Storage.");
         builder.setNegativeButton("Okay", null);
 
-        androidx.appcompat.app.AlertDialog alert = builder.create();
+        AlertDialog alert = builder.create();
         alert.show();
         a.DialogStyle(context, alert);
     }
 
     public void ExitAlert1(Context context) {
-        androidx.appcompat.app.AlertDialog.Builder builder = new androidx.appcompat.app.AlertDialog.Builder(context, adhoc.app.applibrary.R.style.MyAlertDialogStyle);
+        AlertDialog.Builder builder = new AlertDialog.Builder(context, adhoc.app.applibrary.R.style.MyAlertDialogStyle);
         builder.setTitle(context.getResources().getString(adhoc.app.applibrary.R.string.attention));
         builder.setIcon(context.getResources().getDrawable(R.drawable.ic_check));
         builder.setMessage("Bank Statement Uploaded Sucessfully.");
@@ -916,7 +1714,7 @@ public class Upload_Activity_Bank extends SimpleActivity implements  View.OnClic
 
             }
         });
-        androidx.appcompat.app.AlertDialog alert = builder.create();
+        AlertDialog alert = builder.create();
         alert.show();
         a.DialogStyle(context, alert);
     }
@@ -924,7 +1722,7 @@ public class Upload_Activity_Bank extends SimpleActivity implements  View.OnClic
     private void Submit_upload_sucess() {
         final Dialog dialog = new Dialog(this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         dialog.setContentView(R.layout.bank_statement_sucess);
         //  dialog.getWindow().setLayout(display.getWidth() * 90 / 100, LinearLayout.LayoutParams.WRAP_CONTENT);
         dialog.setCancelable(true);
@@ -941,7 +1739,10 @@ public class Upload_Activity_Bank extends SimpleActivity implements  View.OnClic
             @Override
             public void onClick(View v) {
                 dialog.dismiss();
-                Bank_statues();
+                Intent intent = new Intent(Upload_Activity_Bank.this, Applicant_Doc_Details_revamp.class);
+                startActivity(intent);
+                finish();
+              //  Bank_statues();
 
             }
         });
@@ -962,7 +1763,7 @@ public class Upload_Activity_Bank extends SimpleActivity implements  View.OnClic
     private void Submit_upload_filePath() {
         final Dialog dialog = new Dialog(this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         dialog.setContentView(R.layout.bank_statement_file);
         //  dialog.getWindow().setLayout(display.getWidth() * 90 / 100, LinearLayout.LayoutParams.WRAP_CONTENT);
         dialog.setCancelable(true);
@@ -1022,19 +1823,30 @@ public class Upload_Activity_Bank extends SimpleActivity implements  View.OnClic
         Log.i(TAG, "makeJsonObjReq1: "+"Make");
         final JSONObject jsonObject = new JSONObject();
         JSONObject J = null;
+        String typecnt;
+        String applicant_c =Pref.getCoAPPAVAILABLE(getApplicationContext());
+
+        if(applicant_c.equals("1"))
+        {
+             typecnt = "0";
+        }else
+        {
+             typecnt = "1";
+        }
 
         J = new JSONObject();
         try {
             J.put("transaction_id", Pref.getTRANSACTIONID(getApplicationContext()));
-          //  J.put("relationship_type","0");
-            J.put("relationship_type",Pref.getCoAPPAVAILABLE(getApplicationContext()));
+          //  J.put("transaction_id","66431");
+           //J.put("relationship_type","1");
+           J.put("typecnt",typecnt);
             Log.i(TAG, "Banklist:Request "+J.toString());
         } catch (JSONException e) {
             e.printStackTrace();
         }
         progressDialog.show();
-        Log.e("Request Dreopdown", "called");
-        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, "https://cscapi.loanwiser.in/mobile/partner_loanapi_test.php?call=bank_statementlist", J,
+        Log.e("Request Dreopdown", J.toString());
+        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, Urls.bank_statementlist, J,
                 new Response.Listener<JSONObject>() {
                     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
                     @SuppressLint("ResourceType")
@@ -1042,13 +1854,24 @@ public class Upload_Activity_Bank extends SimpleActivity implements  View.OnClic
                     public void onResponse(JSONObject object) {
                         JSONArray cast = null;
                         JSONArray ja = null;
-
+                        Log.e("response Dreopdown", object.toString());
                         try {
 
                             String s=object.getString("display_select");
                             Log.i(TAG, "onResponse: "+s);
                             ja = object.getJSONArray("bank_statementarr");
-                            ja1 = object.getJSONArray("ban_statementlist");
+                            ja1_bank_list = object.getJSONArray("inputs_array");
+
+
+                            if(ja1_bank_list.length()>0)
+                            {
+                                Your_uploading_for(ja1_bank_list);
+                                your_uploadin_ly.setVisibility(View.VISIBLE);
+                            }else
+                            {
+                                your_uploadin_ly.setVisibility(View.GONE);
+                            }
+
 
                             if (ja.length()==0 && ja!=null){
 
@@ -1070,23 +1893,24 @@ public class Upload_Activity_Bank extends SimpleActivity implements  View.OnClic
                                 bankstatement_recycleview.setAdapter(statementlist);
 
                             }
+                          /*  ja1 = object.getJSONArray("ban_statementlist");
                             Log.i(TAG, "onResponse: ja 1length"+ja1.length());
                             RadioButton button = new RadioButton(Upload_Activity_Bank.this);
                             button.setId(View.generateViewId());
                             button.setText("new");
-                            Bank_Statement_radio_list.addView(button);
+                            Bank_Statement_radio_list.addView(button);*/
 
-                            if (ja1!=null){
+                           /* if (ja1!=null){
                                 for (int i=0;i<ja1.length();i++){
                                     JSONObject J = ja1.getJSONObject(i);
                                    // String entity_id1 = J.getString("entity_id");
                                     String acc_number = J.getString("acc_number");
-                                                  /*  Log.i(TAG, "onResponse:entity_id "+entity_id);
+                                                  *//*  Log.i(TAG, "onResponse:entity_id "+entity_id);
                                                     RadioButton rdbtn = new RadioButton(Upload_Activity_Bank.this);
                                                     rdbtn.setId(View.generateViewId());
                                                     rdbtn.setText(entity_id + rdbtn.getId());
                                                     //rdbtn.setOnClickListener(this);
-                                                    Bank_Statement_radio_list.addView(rdbtn);*/
+                                                    Bank_Statement_radio_list.addView(rdbtn);*//*
                                     RadioButton button1 = new RadioButton(Upload_Activity_Bank.this);
                                     button1.setId(View.generateViewId());
                                     button1.setText(acc_number);
@@ -1118,7 +1942,7 @@ public class Upload_Activity_Bank extends SimpleActivity implements  View.OnClic
                                     Log.e("the selected value is",selectedtext);
                                     entity_id="";
                                 }
-                            });
+                            });*/
 
                             bankstatement_recycleview.setAdapter(statementlist);
 
@@ -1224,58 +2048,50 @@ public class Upload_Activity_Bank extends SimpleActivity implements  View.OnClic
         String transcation_id="60775";
         String analysis_status="1";
         String workorder_id="";
+        String typecnt;
+        String applicant_c=Pref.getCoAPPAVAILABLE(getApplicationContext());
 
         String pdf_password=docpass_edt_txt.getText().toString().trim();
         final String relationship_type="1";
-        RequestBody transaction_id1 = RequestBody.create(MediaType.parse("multipart/form-data"), Pref.getTRANSACTIONID(getApplicationContext()));
-        RequestBody analysis_status1 = RequestBody.create(MediaType.parse("multipart/form-data"), checkradiobutton_value);
-        RequestBody workorder_id1 = RequestBody.create(MediaType.parse("multipart/form-data"), entity_id);
-        RequestBody entity_id1 = RequestBody.create(MediaType.parse("multipart/form-data"), entity_id);
-        RequestBody pdf_password1 = RequestBody.create(MediaType.parse("multipart/form-data"), pdf_password);
-        RequestBody relationship_type1 = RequestBody.create(MediaType.parse("multipart/form-data"), Pref.getCoAPPAVAILABLE(getApplicationContext()));
 
-        Call<UploadFileResponse> call =getResponse.submitNew("Auth Token", fileParts,transaction_id1,analysis_status1,workorder_id1,entity_id1,relationship_type1,pdf_password1);
+        if(applicant_c.equals("1"))
+        {
+            typecnt = "0";
+        }else
+        {
+            typecnt = "1";
+        }
+        RequestBody transaction_id1 = RequestBody.create(MediaType.parse("multipart/form-data"), Pref.getTRANSACTIONID(getApplicationContext()));
+
+        RequestBody Bank_Name = RequestBody.create(MediaType.parse("multipart/form-data"), Bank_Name_id);
+        RequestBody account_number = RequestBody.create(MediaType.parse("multipart/form-data"), account_number_edit_txt_);
+        RequestBody Bank_stm_type_ = RequestBody.create(MediaType.parse("multipart/form-data"), Bank_stm_type_account_ID);
+        RequestBody Password_edt = RequestBody.create(MediaType.parse("multipart/form-data"), Password_edit_txt_);
+
+        RequestBody relationship_type1 = RequestBody.create(MediaType.parse("multipart/form-data"), typecnt);
+
+        Call<UploadFileResponse> call =getResponse.submitNew("Auth Token", fileParts,transaction_id1,Bank_Name
+                ,account_number,relationship_type1,Bank_stm_type_,Password_edt);
         call.enqueue(new Callback<UploadFileResponse>() {
             @Override
             public void onResponse(Call<UploadFileResponse> call, retrofit2.Response<UploadFileResponse> response) {
                 progressDialog.dismiss();
+                Toast.makeText(Upload_Activity_Bank.this, "Submitted Successfully",Toast.LENGTH_SHORT).show();
+                Log.i(TAG, "response file uploded"+response);
                 if (response.isSuccessful()){
                     UploadFileResponse response1=(UploadFileResponse) response.body();
-
                     int status=response1.getResponse().getStatus();
-
-                    bankstatement_msg=response1.getResponse().getMessage();
-                    Log.i(TAG, "onResponse:status "+status);
-                    if (status==1){
+                    Log.i(TAG, "onResponse: "+status);
+                    if(status==1){
                         Submit_upload_sucess();
-                    }else if (status==4){
-                        bankstatement_msg=response1.getResponse().getMessage();
-                        ErrorStatus();
-                    }else if (status==5){
-                        bankstatement_msg=response1.getResponse().getMessage();
-                        ErrorStatus();
-                    }else if (status==6){
-                        bankstatement_msg=response1.getResponse().getMessage();
-                        ErrorStatus();
-                    }else if (status==7){
-                        ErrorStatus();
-                        bankstatement_msg=response1.getResponse().getMessage();
-                    }else if(status==3)
-                    {
-                        bankstatement_msg=response1.getResponse().getMessage();
-                        Log.e("the response 3",bankstatement_msg);
-                        ErrorStatus1();
-                       // Toast.makeText(Upload_Activity_Bank.this,bankstatement_msg,Toast.LENGTH_SHORT).show();
-
                     }
+                    //    Toast.makeText(Upload_Activity_Bank.this, "Submitted Successfully",Toast.LENGTH_SHORT).show();
                 }
-
-
-
             }
             @Override
             public void onFailure(Call<UploadFileResponse> call, Throwable t) {
                 progressDialog.dismiss();
+                Log.e(TAG, "response fail uploded"+t.toString());
                 Toast.makeText(Upload_Activity_Bank.this,"Network issue",Toast.LENGTH_SHORT).show();
                 Log.i(TAG, "onFailure: "+t.getMessage());
             }
@@ -1356,87 +2172,7 @@ public class Upload_Activity_Bank extends SimpleActivity implements  View.OnClic
     }
 
 
-    private void BankItemhorizontallist() {
-        Log.i(TAG, "makeJsonObjReq1: "+"Make");
-        final JSONObject jsonObject = new JSONObject();
-        JSONObject J = null;
-        J = new JSONObject();
-        try {
-            J.put("transaction_id", Pref.getTRANSACTIONID(getApplicationContext()));
-            //J.put("transaction_id","60775");
-           // J.put("relationship_type","0");
-            J.put("relationship_type",Pref.getCoAPPAVAILABLE(getApplicationContext()));
-            Log.i(TAG, "Bankitems:Request "+J.toString());
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        progressDialog.show();
-        Log.e("Request Dreopdown", "called");
-        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, "https://cscapi.loanwiser.in/mobile/partner_loanapi_test.php?call=bank_statementlist", J,
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject object) {
-                        JSONArray cast = null;
-                        JSONArray ja = null;
-                        JSONArray ja1=null;
-                        try {
-                            String s=object.getString("display_select");
-                            Log.i(TAG, "onResponse: "+s);
-                            ja = object.getJSONArray("ban_statementlist");
-                            if (ja!=null && ja.length() > 0){
-                                banklisttxt_lay.setVisibility(View.VISIBLE);
-                                bankhorizontallist.setVisibility(View.VISIBLE);
-                                ja = object.getJSONArray("ban_statementlist");
-                                for(int i = 0;i<ja.length();i++){
-                                    JSONObject J = ja.getJSONObject(i);
-                                    String acc_number=J.getString("acc_number");
-                                    String entity_id=J.getString("entity_id");
-                                    String bank_name=J.getString("bank_name");
-                                    String achold_name=J.getString("acchold_name");
-                                    String status_int=J.getString("status_int");
-                                    items1.add(new Bankdetails_model(J.getString("acc_number"),J.getString("entity_id"),J.getString("bank_name"),J.getString("acchold_name"),J.getString("status_int")));
-                                    recyclerView.setLayoutManager(new LinearLayoutManager(Upload_Activity_Bank.this, LinearLayoutManager.HORIZONTAL, false));
-                                    recyclerView.setHasFixedSize(true);
-                                    banklistAdapter = new BanklistAdapter(Upload_Activity_Bank.this, items1);
-                                    recyclerView.setAdapter(banklistAdapter);
-                                    banklistAdapter.notifyDataSetChanged();
 
-                                }
-                            }
-                            else{
-                                Log.i(TAG, "arraynull: "+"arraynull");
-                                bankhorizontallist.setVisibility(View.GONE);
-                                banklisttxt_lay.setVisibility(View.GONE);
-                                submitbanktxt_lay.setVisibility(View.GONE);
-                            }
-                        } catch (JSONException ex) {
-                            ex.printStackTrace();
-                        }
-                        // Toast.makeText(mCon, response.toString(),Toast.LENGTH_SHORT).show();
-                        progressDialog.dismiss();
-                    }
-                }, new Response.ErrorListener() {
-
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                VolleyLog.d("TAG", "Error: " + error.getMessage());
-                progressDialog.dismiss();
-            }
-        }) {
-
-
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                HashMap<String, String> headers = new HashMap<String, String>();
-                headers.put("Content-Type", "application/json");
-                return headers;
-            }
-        };
-
-        // Adding request to request queue
-        AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
-
-    }
 
 
 
@@ -1445,7 +2181,7 @@ public class Upload_Activity_Bank extends SimpleActivity implements  View.OnClic
     private void ErrorStatus() {
         final Dialog dialog = new Dialog(this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         dialog.setContentView(R.layout.bankstatement_error);
         //  dialog.getWindow().setLayout(display.getWidth() * 90 / 100, LinearLayout.LayoutParams.WRAP_CONTENT);
         dialog.setCancelable(true);
@@ -1478,7 +2214,7 @@ public class Upload_Activity_Bank extends SimpleActivity implements  View.OnClic
     private void ErrorStatus1() {
         final Dialog dialog = new Dialog(this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         dialog.setContentView(R.layout.bankstatement_error1);
         //  dialog.getWindow().setLayout(display.getWidth() * 90 / 100, LinearLayout.LayoutParams.WRAP_CONTENT);
         dialog.setCancelable(true);
@@ -1512,7 +2248,7 @@ public class Upload_Activity_Bank extends SimpleActivity implements  View.OnClic
     private void GlibErrorStatus() {
         final Dialog dialog = new Dialog(this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         dialog.setContentView(R.layout.glibstatement_error);
         //  dialog.getWindow().setLayout(display.getWidth() * 90 / 100, LinearLayout.LayoutParams.WRAP_CONTENT);
         dialog.setCancelable(true);
@@ -1544,7 +2280,7 @@ public class Upload_Activity_Bank extends SimpleActivity implements  View.OnClic
     private void Bank_analysis_ErrorStatus() {
         final Dialog dialog = new Dialog(this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         dialog.setContentView(R.layout.bank_statement_analysis_error);
         //  dialog.getWindow().setLayout(display.getWidth() * 90 / 100, LinearLayout.LayoutParams.WRAP_CONTENT);
         dialog.setCancelable(true);
@@ -1575,7 +2311,7 @@ public class Upload_Activity_Bank extends SimpleActivity implements  View.OnClic
     private void pdf_error() {
         final Dialog dialog = new Dialog(this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         dialog.setContentView(R.layout.pdf_error);
         //  dialog.getWindow().setLayout(display.getWidth() * 90 / 100, LinearLayout.LayoutParams.WRAP_CONTENT);
         dialog.setCancelable(true);
@@ -1904,7 +2640,6 @@ public class Upload_Activity_Bank extends SimpleActivity implements  View.OnClic
             pickiT.deleteTemporaryFile(this);
         }
     }
-
 
 }
 

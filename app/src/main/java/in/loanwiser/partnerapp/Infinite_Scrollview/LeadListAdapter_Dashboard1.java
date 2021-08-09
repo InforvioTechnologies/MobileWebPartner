@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -14,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -45,10 +47,13 @@ import adhoc.app.applibrary.Config.AppUtils.Pref.Pref;
 import adhoc.app.applibrary.Config.AppUtils.Urls;
 import adhoc.app.applibrary.Config.AppUtils.VolleySignleton.AppController;
 import dmax.dialog.SpotsDialog;
+import in.loanwiser.Old_Partner.Home_Old;
 import in.loanwiser.partnerapp.PartnerActivitys.Applicant_Details_Activity;
+import in.loanwiser.partnerapp.PartnerActivitys.Applicant_Entry1;
 import in.loanwiser.partnerapp.PartnerActivitys.Dashboard_Activity;
 import in.loanwiser.partnerapp.PartnerActivitys.Home;
 import in.loanwiser.partnerapp.R;
+import in.loanwiser.partnerapp.Step_Changes_Screen.Lead_Crration_Activity_old;
 import in.loanwiser.partnerapp.Step_Changes_Screen.Viability_Screen_revamp;
 import in.loanwiser.partnerapp.Step_Changes_Screen.Viability_Screen_revamp_Pl_BL;
 
@@ -62,7 +67,7 @@ public class LeadListAdapter_Dashboard1 extends RecyclerView.Adapter<LeadListAda
         this.context = context;
     }
     String Loan_amount,sub_categoryid,transaction_id1,subtask_id,loan_type_id,loan_type,
-            payment,applicant_id1;
+            payment,applicant_id1, new_user,last_status;
     private String tag_json_obj = "jobj_req", tag_json_arry = "jarray_req";
   //  private String tag_json_obj = "jobj_req", tag_json_arry = "jarray_req";
 
@@ -74,7 +79,7 @@ public class LeadListAdapter_Dashboard1 extends RecyclerView.Adapter<LeadListAda
     @NonNull
     @Override
     public CustomViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new CustomViewHolder(LayoutInflater.from(context).inflate(R.layout.ly_new_lead_status, parent, false));
+        return new CustomViewHolder(LayoutInflater.from(context).inflate(R.layout.leaddetails, parent, false));
     }
 
     @Override
@@ -95,15 +100,18 @@ public class LeadListAdapter_Dashboard1 extends RecyclerView.Adapter<LeadListAda
         AppCompatTextView type,doc_steps,doc_status,font1,font2,loantype,assigned;
         AppCompatTextView Statues_update_dot,
                 Lead_Name,loan_amount,app_id,loan_type,payment_plane,step_com,statues_new,
-                status_Ask,Statues_update_view,Statues_update_view1,Lead_crated_;
+                status_Ask,Lead_crated_;
         ImageView v_Image;
         ProgressBar progressBar;
         AppCompatButton appCompatButtonSelect,add_notes,pipline,archive;
         AppCompatImageView loan_type_image;
+        AppCompatButton Statues_update_view1,Statues_update_view;
 
-        LinearLayout Over_all,cobrand;
+        LinearLayout lead_navigation,cobrand;
+        RelativeLayout test;
         View view;
         String loantype1,statues12,step_status,transaction_id,id,id1;
+        AppCompatTextView paymentplanlabel,completeduptolabel,labellead,ask,loanfrom,loanfromtxt;
 
         public CustomViewHolder(View view) {
             super(view);
@@ -116,12 +124,49 @@ public class LeadListAdapter_Dashboard1 extends RecyclerView.Adapter<LeadListAda
             Statues_update_dot  = (AppCompatTextView) itemView.findViewById(R.id.Statues_update_dot);
             statues_new  = (AppCompatTextView) itemView.findViewById(R.id.statues_new);
             status_Ask  = (AppCompatTextView) itemView.findViewById(R.id.status_Ask);
-            Over_all = (LinearLayout) itemView.findViewById(R.id.Over_all);
+            lead_navigation = (LinearLayout) itemView.findViewById(R.id.lead_navigation);
+           // Statues_update_view = (AppCompatButton) itemView.findViewById(R.id.Statues_update_view);
             cobrand = (LinearLayout) itemView.findViewById(R.id.cobrand);
-            Statues_update_view  = (AppCompatTextView) itemView.findViewById(R.id.Statues_update_view);
-            Statues_update_view1  = (AppCompatTextView) itemView.findViewById(R.id.Statues_update_view1);
+            Statues_update_view  = (AppCompatButton) itemView.findViewById(R.id.Statues_update_view);
+            Statues_update_view1  = (AppCompatButton) itemView.findViewById(R.id.Statues_update_view1);
             Lead_crated_  = (AppCompatTextView) itemView.findViewById(R.id.Lead_crated_);
+
+            paymentplanlabel  = (AppCompatTextView) itemView.findViewById(R.id.paymentplanlabel);
+            completeduptolabel  = (AppCompatTextView) itemView.findViewById(R.id.completeduptolabel);
+            labellead  = (AppCompatTextView) itemView.findViewById(R.id.labellead);
+            ask  = (AppCompatTextView) itemView.findViewById(R.id.ask);
+            loanfrom  = (AppCompatTextView) itemView.findViewById(R.id.loanfrom);
+            loanfromtxt  = (AppCompatTextView) itemView.findViewById(R.id.loanfromtxt);
+
+
             progressDialog = new SpotsDialog(context, R.style.Custom);
+
+
+            Typeface font = Typeface.createFromAsset(context.getAssets(), "segoe_ui.ttf");
+            paymentplanlabel.setTypeface(font);
+            completeduptolabel.setTypeface(font);
+            labellead.setTypeface(font);
+            ask.setTypeface(font);
+            loanfrom.setTypeface(font);
+            loanfromtxt.setTypeface(font);
+
+
+
+            Lead_Name.setTypeface(font);
+            loan_amount.setTypeface(font);
+            app_id.setTypeface(font);
+            loan_type.setTypeface(font);
+            payment_plane.setTypeface(font);
+            step_com.setTypeface(font);
+            Statues_update_dot.setTypeface(font);
+            statues_new.setTypeface(font);
+            status_Ask.setTypeface(font);
+
+            Statues_update_view.setTypeface(font);
+            Statues_update_view1.setTypeface(font);
+            Lead_crated_.setTypeface(font);
+
+
         }
 
         public void bindPost(Lead_item post) {
@@ -130,6 +175,9 @@ public class LeadListAdapter_Dashboard1 extends RecyclerView.Adapter<LeadListAda
             loantype.setText(post.getloan_typename()); */
 
             //doc_steps.setText(post.getstep_status());
+
+
+
             String statues = post.getstatus_disp();
             Lead_Name.setText(post.getusername());
             String loan_amount_name = post.getloan_typename();
@@ -232,60 +280,182 @@ public class LeadListAdapter_Dashboard1 extends RecyclerView.Adapter<LeadListAda
                 statues_new.setText("Cobranded website");
 
             }*/
-            Over_all.setOnClickListener(new View.OnClickListener() {
+          /*  Statues_update_view1.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
 
 
-                        if(step_status.contains("Rejected"))
-                        {
-                            Log.e("the lead List","intiated ");
-                            Objs.a.showToast(context, "This Lead is Rejected");
-                            Applicant_Status(id1,step_status);
-                        }
-                        else
-                        {
-                            String from_cobrand = post.getfrom_cobrand();
-                            String mobile_cobrank = post.getcobrand_mobile();
+                    if(step_status.contains("Rejected"))
+                    {
+                        Log.e("the lead List","intiated ");
+                        // Objs.a.showToast(context, "This Lead is Rejected");
+                        Toast.makeText(context,"This Lead is Rejected", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(context,Home.class);
+                        context.startActivity(intent);
 
-                            if(from_cobrand.equals("1"))
+                        // Applicant_Status(id1,step_status);
+                    }
+                    else
+                    {
+                        String from_cobrand = post.getfrom_cobrand();
+                        String mobile_cobrank = post.getcobrand_mobile();
+
+                        if(from_cobrand.equals("1"))
+                        {
+                            if(mobile_cobrank.equals("no"))
                             {
-                                if(mobile_cobrank.equals("no"))
+
+                                String loan_type  = post.getloan_typename();
+                                String loan_type_id = post.getloan_type();
+                                Pref.putLoanType(context,loan_type_id);
+                                if(loan_type.equals("Personal Loan (Salaried)")||loan_type.equals("Business Loan (Self Employed)"))
                                 {
-
-                                      String loan_type  = post.getloan_typename();
-                                    String loan_type_id = post.getloan_type();
-                                    Pref.putLoanType(context,loan_type_id);
-                                    if(loan_type.equals("Personal Loan (Salaried)")||loan_type.equals("Business Loan (Self Employed)"))
-                                    {
-                                        Intent intent = new Intent(context, Viability_Screen_revamp_Pl_BL.class);
-                                        context.startActivity(intent);
-                                    }else
-                                    {
-                                        Intent intent = new Intent(context, Viability_Screen_revamp.class);
-                                        context.startActivity(intent);
-
-                                    }
-
+                                    Intent intent = new Intent(context, Viability_Screen_revamp_Pl_BL.class);
+                                    context.startActivity(intent);
                                 }else
                                 {
-                                    Log.e("the lead List","intiated ");
-                                    Applicant_Status(id1,step_status);
+                                    Intent intent = new Intent(context, Viability_Screen_revamp.class);
+                                    context.startActivity(intent);
+
                                 }
+
                             }else
                             {
-
+                                Log.e("the lead List","intiated ");
+                                Applicant_Status(id1,step_status);
                             }
+                        }else
+                        {
 
-
-                           // Applicant_Status(id);
                         }
+
+
+                        // Applicant_Status(id);
+                    }
+
+
+                }
+            });*/
+
+            Statues_update_view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                    id1 = post.getid1();
+                    String from_cobrand = post.getfrom_cobrand();
+                    String mobile_cobrank = post.getcobrand_mobile();
+                    if(step_status.contains("Rejected")|| step_status.contains("Auto Rejected"))
+                    {
+                        Log.e("the lead List","intiated ");
+                        //  Objs.a.showToast(context, "This Lead is Rejected");
+
+                        Applicant_Status(id1,step_status);
+                       /* Toast.makeText(context,"This Lead is Rejected", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(context, Home.class);
+                        context.startActivity(intent);
+                        Toast.makeText(context,"This Lead is Rejected", Toast.LENGTH_SHORT).show();*/
+
+                    }
+                    else
+                    {
+
+                        if(from_cobrand.equals("1"))
+                        {
+                            if(mobile_cobrank.equals("no"))
+                            {
+
+                                //  String loan_type  = items.get(position).getloan_type();
+                                String loan_type  = post.getloan_typename();
+                                String loan_type_id = post.getloan_type();
+                                Pref.putLoanType(context,loan_type_id);
+                                if(loan_type.equals("Personal Loan (Salaried)")||loan_type.equals("Business Loan (Self Employed)"))
+                                {
+                                    Intent intent = new Intent(context, Viability_Screen_revamp_Pl_BL.class);
+                                    context.startActivity(intent);
+                                }else
+                                {
+                                    Intent intent = new Intent(context, Viability_Screen_revamp.class);
+                                    context.startActivity(intent);
+
+                                }
+
+                            }else
+                            {
+                                Intent intent = new Intent(context, Applicant_Details_Activity.class);
+                                context.startActivity(intent);
+                            }
+                        }else
+                        {
+                            Applicant_Status(id1,step_status);
+                        }
+
+
+                        // Applicant_Status(id);
+                    }
 
 
                 }
             });
 
+            Statues_update_view1.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
 
+                    id1 = post.getid1();
+                    String from_cobrand = post.getfrom_cobrand();
+                    String mobile_cobrank = post.getcobrand_mobile();
+                    if(step_status.contains("Rejected")|| step_status.contains("Auto Rejected"))
+                    {
+                        Log.e("the lead List","intiated ");
+                        //  Objs.a.showToast(context, "This Lead is Rejected");
+
+                        Applicant_Status(id1,step_status);
+                       /* Toast.makeText(context,"This Lead is Rejected", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(context, Home.class);
+                        context.startActivity(intent);
+                        Toast.makeText(context,"This Lead is Rejected", Toast.LENGTH_SHORT).show();*/
+
+                    }
+                    else
+                    {
+
+                        if(from_cobrand.equals("1"))
+                        {
+                            if(mobile_cobrank.equals("no"))
+                            {
+
+                                //  String loan_type  = items.get(position).getloan_type();
+                                String loan_type  = post.getloan_typename();
+                                String loan_type_id = post.getloan_type();
+                                Pref.putLoanType(context,loan_type_id);
+                                if(loan_type.equals("Personal Loan (Salaried)")||loan_type.equals("Business Loan (Self Employed)"))
+                                {
+                                    Intent intent = new Intent(context, Viability_Screen_revamp_Pl_BL.class);
+                                    context.startActivity(intent);
+                                }else
+                                {
+                                    Intent intent = new Intent(context, Viability_Screen_revamp.class);
+                                    context.startActivity(intent);
+
+                                }
+
+                            }else
+                            {
+                                Intent intent = new Intent(context, Applicant_Details_Activity.class);
+                                context.startActivity(intent);
+                            }
+                        }else
+                        {
+                            Applicant_Status(id1,step_status);
+                        }
+
+
+                        // Applicant_Status(id);
+                    }
+
+
+                }
+            });
 
             // Objs.a.OutfitNormalFontStyle(mCon, R.id.doc_typename_all);
             // Objs.a.OutfitNormalFontStyle(mCon, R.id.doc_steps);
@@ -362,20 +532,51 @@ public class LeadListAdapter_Dashboard1 extends RecyclerView.Adapter<LeadListAda
                                 applicant_id1 =  "APP-"+user_id;
 
 
+                                new_user =  jsonObject2.getString("new_user");
+                                last_status =  jsonObject2.getString("last_status");
+                                applicant_id1 =  "APP-"+user_id;
+                                // Toast.makeText(getApplicationContext(),new_user, Toast.LENGTH_SHORT).show();
+
                                 // String statues2 = "3";
                                 Pref.putUSERID(context,user_id);
-                                String _Emp_staus_jsonArray = jsonArray.toString();
 
                                 SharedPreferences.Editor prefEditor = PreferenceManager.getDefaultSharedPreferences(context).edit();
                                 prefEditor.putString("user_id", user_id);
                                 prefEditor.apply();
+                                String _Emp_staus_jsonArray = jsonArray.toString();
 
-                                Objs.ac.StartActivityPutExtra(context, Home.class,
-                                        Params.user_id,user_id,
-                                        Params.transaction_id,transaction_id1,
-                                        Params.applicant_id,applicant_id1,
-                                        Params.sub_taskid,subtask_id, Params.Applicant_status,_Emp_staus_jsonArray,
-                                        Params.loan_type_id,loan_type_id,Params.loan_type,loan_type);
+                                if(new_user.equals("0"))
+                                {
+                                    if(last_status.equals("1")&& payment.equals("error"))
+                                    {
+
+                                        Pref.putLoanType(context,loan_type_id);
+                                        //String Loantype_name = "Loan Against Property";
+                                        Pref.putLoanTypename(context,loan_type);
+                                        Pref.putnew_user(context,new_user);
+                                        Intent intent=new Intent(context, Lead_Crration_Activity_old.class);
+                                        context.startActivity(intent);
+                                    }else
+                                    {
+                                        Objs.ac.StartActivityPutExtra(context, Home_Old.class,
+                                                Params.user_id,user_id,
+                                                Params.transaction_id,transaction_id1,
+                                                Params.applicant_id,applicant_id1,
+                                                Params.sub_taskid,subtask_id, Params.Applicant_status,_Emp_staus_jsonArray,
+                                                Params.loan_type_id,loan_type_id,Params.loan_type,loan_type);
+
+                                    }
+
+                                }else
+                                {
+                                    Objs.ac.StartActivityPutExtra(context, Home.class,
+                                            Params.user_id,user_id,
+                                            Params.transaction_id,transaction_id1,
+                                            Params.applicant_id,applicant_id1,
+                                            Params.sub_taskid,subtask_id, Params.Applicant_status,_Emp_staus_jsonArray,
+                                            Params.loan_type_id,loan_type_id,Params.loan_type,loan_type);
+
+                                }
 
 
                               /*  if(payment.equals("error"))

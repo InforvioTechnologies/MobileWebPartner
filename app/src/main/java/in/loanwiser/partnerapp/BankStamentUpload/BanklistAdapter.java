@@ -97,15 +97,21 @@ public class BanklistAdapter extends RecyclerView.Adapter<BanklistAdapter.ViewHo
         holder.viewbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                final String acno=items1.get(position).getAcc_number();
+                final String entitynumber=items1.get(position).getEntity_id();
+                final String bankname=items1.get(position).getBank_name();
+                final String acchold_name=items1.get(position).getAcchold_name();
+                final String statusint=items1.get(position).getStatus_int();
                 Bankdetails_model model=new Bankdetails_model(acno,entitynumber,bankname,acchold_name,statusint);
-                String path =acno;
+                String Account_no =acno;
                 String statusintvalue=statusint;
                 String entityvalue=entitynumber;
                /* Objs.ac.StartActivityPutExtra(context, BankAnalysis.class,
                         Params.document,path);*/
                 Intent in=new Intent(context,BankAnalysis.class);
                 in.putExtra("adapter","adapter");
-                in.putExtra("document",path);
+                in.putExtra("Account_no",Account_no);
                 in.putExtra("statusint",statusint);
                 in.putExtra("entitynumber",entityvalue);
                 context.startActivity(in);

@@ -173,11 +173,14 @@
         </LinearLayout>
 
             <LinearLayout
+                android:visibility="gone"
+                android:padding="5dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:gravity="center"
                 android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
                 android:orientation="vertical">
 
                 <LinearLayout
@@ -220,10 +223,12 @@
 
                         <androidx.appcompat.widget.AppCompatTextView
                             android:id="@+id/cusben_textviewone"
-                            android:layout_width="wrap_content"
+                            android:layout_width="250dp"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="10dp"
-                            android:text="Instant Loan Viability &amp; CRIF Report"
+                            android:layout_marginRight="20dp"
+                            android:layout_marginLeft="20dp"
+
+                            android:text="Eligibility Report/ Credit Report/ Bank Stmt Analyis Charges - Applicant"
                             android:textColor="#2680EB"
                             android:textSize="12sp" />
 
@@ -275,9 +280,10 @@
 
                         <androidx.appcompat.widget.AppCompatTextView
                             android:id="@+id/partner_textviewone"
-                            android:layout_width="match_parent"
+                            android:layout_width="250dp"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="10dp"
+                            android:layout_marginRight="20dp"
+                            android:layout_marginLeft="20dp"
                             android:text="50 Credit Coins will be credited in LoanWiser Wallet on successful lead submission to Loanwiser."
                             android:textSize="12sp"
                             android:textColor="#2680EB"/>
@@ -299,7 +305,7 @@
                 <androidx.cardview.widget.CardView
                     android:id="@+id/plancardview"
                     android:layout_width="match_parent"
-                    android:layout_height="400dp"
+                    android:layout_height="wrap_content"
                     android:layout_margin="30dp"
                     android:layout_marginBottom="20dp"
                     app:cardCornerRadius="30dp"
@@ -342,6 +348,7 @@
                                 android:background="#d0d8e8" />
                         </LinearLayout>
                         <LinearLayout
+                            android:padding="10dp"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="30dp"
@@ -359,19 +366,30 @@
                                     android:buttonTint="#002B5D"
                                     android:layout_marginLeft="30dp" />
 
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content">
+
+
+
                                 <androidx.appcompat.widget.AppCompatTextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:layout_marginRight="10dp"
                                     android:layout_marginLeft="10dp"
                                     android:text="@string/paylink_cus"
                                     android:textStyle="bold"
+                                    android:textSize="14sp"
                                     android:textColor="#002B5D" />
+
+                                </LinearLayout>
 
 
                             </LinearLayout>
                         </LinearLayout>
 
                         <LinearLayout
+                            android:padding="10dp"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="15dp"
@@ -388,14 +406,24 @@
                                     android:buttonTint="#002B5D"
                                     android:layout_marginLeft="30dp" />
 
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content">
+
+
+
                                 <androidx.appcompat.widget.AppCompatTextView
                                     android:id="@+id/loancredit_textview"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:layout_marginRight="10dp"
                                     android:layout_marginLeft="10dp"
                                     android:text="@string/pay_coin"
+                                    android:textSize="14sp"
                                     android:textStyle="bold"
                                     android:textColor="#002B5D" />
+
+                                </LinearLayout>
 
 
                             </LinearLayout>
@@ -403,6 +431,7 @@
                         </LinearLayout>
 
                         <LinearLayout
+                            android:padding="10dp"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="15dp"
@@ -419,13 +448,21 @@
                                     android:buttonTint="#002B5D"
                                     android:layout_marginLeft="30dp" />
 
-                                <androidx.appcompat.widget.AppCompatTextView
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content">
+
+                                    <androidx.appcompat.widget.AppCompatTextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:layout_marginRight="10dp"
                                     android:layout_marginLeft="10dp"
                                     android:text="@string/collect_cash"
                                     android:textStyle="bold"
+                                    android:textSize="14sp"
                                     android:textColor="#002B5D" />
+
+                                </LinearLayout>
 
 
                             </LinearLayout>
@@ -451,15 +488,17 @@
                         </LinearLayout>
 
                         <LinearLayout
+                            android:layout_marginBottom="20dp"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="0dp"
                             android:layout_marginLeft="20dp"
+                            android:layout_marginRight="20dp"
                             android:orientation="vertical">
 
                             <androidx.appcompat.widget.AppCompatTextView
                                 android:id="@+id/notestxt"
-                                android:layout_width="wrap_content"
+                                android:layout_width="300dp"
                                 android:layout_height="wrap_content"
                                 android:text="In the next screen, You will have to enter customer mobile number, to which a payment link has to be sent. Customer can make payment himself by clicking on that link."
                                 android:textColor="#002B5D"

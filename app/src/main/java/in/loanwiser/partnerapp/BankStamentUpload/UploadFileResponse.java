@@ -225,6 +225,7 @@ class Response {
 
     public Integer getUploadStatus() {
         return uploadStatus;
+
     }
 
     public void setUploadStatus(Integer uploadStatus) {

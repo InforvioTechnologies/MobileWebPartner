@@ -17,6 +17,7 @@
 
 
             <LinearLayout
+            android:padding="5dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
@@ -30,20 +31,232 @@
                 android:layout_height="wrap_content"
                 android:text="@string/acd_learn"
                 android:layout_gravity="center"
-                android:gravity="center"
-                android:textSize="16sp"
+                android:gravity="left"
+                android:textSize="14dp"
                 android:textColor="@color/colorPrimary"/>
 
             </LinearLayout>
 
             <LinearLayout
                 android:padding="5dp"
+                android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp">
+                android:layout_marginTop="10dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_margin="10dp"
+                    android:layout_gravity="center"
+                    android:orientation="horizontal"
+                    android:background="@drawable/academy_background">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/titleTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="Loanwiser Academy"
+                        android:textColor="@color/white"/>
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:visibility="gone"
+                        android:id="@+id/arrowimgup"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_marginEnd="20dp"
+                        android:gravity="center_horizontal"
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_keyboardarrow"
+                        android:tint="@color/white"/>
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:gravity="center_horizontal"
+                        android:id="@+id/arrowimgdown1"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_marginEnd="20dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_down_exp"
+                        android:tint="@color/white"/>
+
+
+                </LinearLayout>
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/acadmy_recyclerview"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:padding="5dp"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+               >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_margin="10dp"
+                    android:layout_gravity="center"
+                    android:orientation="horizontal"
+                    android:background="@drawable/academy_background">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/txt_sale_and_mark"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="Loanwiser Academy"
+                        android:textColor="@color/white"/>
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:visibility="gone"
+                        android:id="@+id/arrowimgup_2"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_marginEnd="20dp"
+                        android:gravity="center_horizontal"
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_keyboardarrow"
+                        android:tint="@color/white"/>
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:gravity="center_horizontal"
+                        android:id="@+id/arrowimgdown1_2"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_marginEnd="20dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_down_exp"
+                        android:tint="@color/white"/>
+
+
+                </LinearLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/acadmy_recyclerview_sales"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:padding="5dp"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_margin="10dp"
+                    android:layout_gravity="center"
+                    android:orientation="horizontal"
+                    android:background="@drawable/academy_background">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/txt_leead_process"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="Loanwiser Academy"
+                        android:textColor="@color/white"/>
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:visibility="gone"
+                        android:id="@+id/arrowimgup_3"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_marginEnd="20dp"
+                        android:gravity="center_horizontal"
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_keyboardarrow"
+                        android:tint="@color/white"/>
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:gravity="center_horizontal"
+                        android:id="@+id/arrowimgdown1_3"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_marginEnd="20dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_down_exp"
+                        android:tint="@color/white"/>
+
+
+                </LinearLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/acadmy_recyclerview_leead_process"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:padding="5dp"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_margin="10dp"
+                    android:layout_gravity="center"
+                    android:orientation="horizontal"
+                    android:background="@drawable/academy_background">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/txt_loan_Product"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="Loanwiser Academy"
+                        android:textColor="@color/white"/>
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:visibility="gone"
+                        android:id="@+id/arrowimgup_4"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_marginEnd="20dp"
+                        android:gravity="center_horizontal"
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_keyboardarrow"
+                        android:tint="@color/white"/>
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:gravity="center_horizontal"
+                        android:id="@+id/arrowimgdown1_4"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_marginEnd="20dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_down_exp"
+                        android:tint="@color/white"/>
+
+
+                </LinearLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/acadmy_recyclerview_loan_Product"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
 

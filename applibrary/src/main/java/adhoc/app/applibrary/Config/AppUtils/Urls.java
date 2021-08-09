@@ -11,31 +11,38 @@ import java.util.Map;
  */
 public class Urls {
 
- /*UAT*/
- /*  public static String Urls = "http://cscapitest.propwiser.com/mobile/mortgage_updated.php?call=";
-   public static String Urls_step = "http://cscapitest.propwiser.com/mobile/partner_loanapi.php?call=";
-   public static String Urls_phamplet = "http://cscapitest.propwiser.com/mobile/pamphlet_distributor.php?call=";*/
 
-    /*Live*/
+   // Live 24/06/2021
+    public static String Urls_Old = "https://cscapi.loanwiser.in/mobile/mortgage_updated_test.php?call=";
+    public static String Urls_step_Old = "https://cscapi.loanwiser.in/mobile/partner_loanapi_test.php?call=";
+    public static String Urls_phamplet_Old = "https://cscapi.loanwiser.in/mobile/pamphlet_distributor_test.php?call=";
 
-  /*  public static String Urls = "https://cscapi.propwiser.com/mobile/mortgage_updated_test.php?call=";
-    public static String Urls_step = "https://cscapi.propwiser.com/mobile/partner_loanapi_test.php?call=";
-    public static String Urls_phamplet = "https://cscapi.propwiser.com/mobile/pamphlet_distributor_test.php?call=";
-    public static  String Url_version = "http://cscapi.propwiser.com/mobile/appversion.php?call=";*/
+    public static String Urls_Bank_Old = "https://cscapi.loanwiser.in/integration/bank_statement.php?call=";
+    public static String Urls_Bank1_Old = "https://apiuat.loanwiser.in/integration/bank_statement.php?call=";
 
-   /* public static String Urls = "https://apiuat.loanwiser.in/mobile/mortgage_updated_test.php?call=";
-    public static String Urls_step = "https://apiuat.loanwiser.in/mobile/partner_loanapi_test.php?call=";
-    public static String Urls_phamplet = "https://apiuat.loanwiser.in/mobile/pamphlet_distributor_test.php?call=";
+    //Live 19/07/2021
+     public static String Urls = "https://cscapi.loanwiser.in/mobile/mortgage_updated_test_new.php?call=";
+    public static String Urls_step = "https://cscapi.loanwiser.in/mobile/partner_loanapi_test_new.php?call=";
+    public static String Urls_phamplet = "https://cscapi.loanwiser.in/mobile/pamphlet_distributor_test_new.php?call=";
+    public static String Urls_Bank = "https://cscapi.loanwiser.in/integration/bank_statement_new.php?call=";
+    public static String Urls_Bank1 = "https://cscapi.loanwiser.in/integration/bank_statement.php?call=";
+    public static String Urls_CRIF = "https://cscapi.loanwiser.in/integration/crif_integration.php?call=";
+    public static String Urls_step1 = "https://cscapi.loanwiser.in/mobile/partner_loanapi_second.php?call=";
 
+ /*   ///UAT 24/06/2021
+   public static String Urls = "https://apiuat.loanwiser.in/mobile/mortgage_updated_test_new.php?call=";
+    public static String Urls_step = "https://apiuat.loanwiser.in/mobile/partner_loanapi_test_new.php?call=";
+    public static String Urls_phamplet = "https://apiuat.loanwiser.in/mobile/pamphlet_distributor_test_new.php?call=";
+    public static String Urls_Bank = "https://apiuat.loanwiser.in/integration/bank_statement_new.php?call=";
+    public static String Urls_Bank1 = "https://apiuat.loanwiser.in/integration/bank_statement.php?call=";
+    public static String Urls_CRIF = "https://apiuat.loanwiser.in/integration/crif_integration.php?call=";
+    public static String Urls_step1 = "https://apiuat.loanwiser.in/mobile/partner_loanapi_second.php?call=";
+    //// END ///*/
 
-    public static  String Url_version = "https://apiuat.loanwiser.in/mobile/appversion.php?call=";*/
-
-    public static String Urls = "https://cscapi.loanwiser.in/mobile/mortgage_updated_test.php?call=";
-    public static String Urls_step = "https://cscapi.loanwiser.in/mobile/partner_loanapi_test.php?call=";
-    public static String Urls_phamplet = "https://cscapi.loanwiser.in/mobile/pamphlet_distributor_test.php?call=";
-
-    public static String Urls_Bank = "https://cscapi.loanwiser.in/integration/bank_statement.php?call=";
-
+    public static String Get_Dropdown  = Urls + "get_dropdown";
+    public static String get_banklist  = Urls + "get_banklist";
+    public static String bank_statementlist_uat  = Urls_step + "bank_statementlist";
+    ///
 
     public static  String Url_version = "https://cscapi.loanwiser.in/mobile/appversion.php?call=";
 
@@ -58,6 +65,10 @@ public class Urls {
     public static String LOAN_TYPE_POST11  = Urls + "getloantypelist1";
     public static String GET_DROPDOWN_LIST  = Urls + "get_dropdown";
     public static String relationship_mangement  = Urls_step + "relationship_mangement";
+    public static String bank_statementlist  = Urls_step + "bank_statementlist";
+    public static String bank_statementlist_old  = Urls_step_Old + "bank_statementlist";
+    public static String status_update  = Urls_step + "status_update";
+    public static String doc_uploadsubmit  = Urls_step + "doc_uploadsubmit";
     public static String get_selfemployvocation  = Urls + "get_selfemployvocation";
     public static String CITY_TYPE_POST  = Urls + "getDistrict";
     public static String GET_STATE_POST  = Urls + "getState";
@@ -78,14 +89,20 @@ public class Urls {
     public static String GET_FLAG_WALLET  = Urls_step + "getflag_wallet";
     public static String walletreg  = Urls_step + "walletreg";
 
+
+
     public static  String GETBUSINESSCARD= Urls_step+"getuser_vscard";
     public static  String websitelink_stracking= Urls_step+"websitelink_stracking";
     public static  String UPDATEBSCARD= Urls_step+"updateuser_vscard";
 
     public static String LEAD_STATUES_LIST  = Urls + "get_status";
     public static String UPDATE_STATUS_DOC  = Urls + "update_uploadstatus";
+
     public static String submit_loanwiser  = Urls_step + "submit_loanwiser";
+    public static String submit_loanwiser_old  = Urls_step_Old + "submit_loanwiser";
+
     public static String generate_docuverifyrule  = Urls_step + "generate_docuverifyrule";
+    public static String generate_docuverifyrule_old  = Urls_step_Old + "generate_docuverifyrule";
     public static String BANK_DETAILS_POST  = Urls + "partner_banksearch";
     public static String PROFILE_DETAILS_POST  = Urls + "partner_profilesearch";
 
@@ -112,6 +129,7 @@ public class Urls {
 
     //Step changes
     public static String Lead_Creation = Urls_step + "Lead_Creation";
+    public static String lastname_update = Urls_step1 + "lastname_update";
     public static String VIABILITY_CHECK = Urls_step + "viability_check";
     public static String VIABILITY_CHECK_applicant = Urls_step + "viability_applicant";
     public static String VIABILITY_CHECK_applicant1 = Urls_step + "viability_fields_applicant";
@@ -119,9 +137,18 @@ public class Urls {
     public static String VIABILITY_CHECK_co_applicant1 = Urls_step + "viability_fields_coapplicant";
 
     public static String BANK_STATEMENT_LIST = Urls_step + "bank_statementlist";
+
+   // https://cscapi.loanwiser.in/integration/bank_statement.php?call=get_bankstatement_det
+    //"https://cscapi.loanwiser.in/integration/bank_statement.php?call=get_bankstatement_detnew"
     public static String BANK_STATEMENT_DETAILS = Urls_Bank + "get_bankstatement_det";
+    public static String get_bankstatement_detnew = Urls_Bank + "get_bankstatement_detnew";
+
+    public static String bankst_anaysisres = Urls_step + "bankst_anaysisres";
+    public static String upload_bankstanalysis = Urls_step + "upload_bankstanalysis";
+    public static String sift_statuscheck = Urls_Bank1 + "sift_statuscheck";
 
     public static String view_crifscore = Urls_step + "view_crifscore";
+    public static String Get_BankcomDetails = Urls_step1 + "Get_BankcomDetails";
    // public static String VIABILITY_CHECK = Urls_step + "insert_family";
     public static String Eligibility_Check = Urls_step + "eligibility_check";
     public static String Eligibility_Check_applicant = Urls_step + "eligibility_applicant";
@@ -131,15 +158,26 @@ public class Urls {
     public static String PAYMENT_CONFIRMATION = Urls_step + "payarr";
     public static String PAYMENT_SCHEDULE = Urls_step + "get_payschedule";
     public static String DOCUMENT_CHECK_LIST = Urls_step + "get_documentcklist";
+    public static String DOCUMENT_CHECK_LIST_old = Urls_step_Old + "get_documentcklist";
+
     public static String get_partbankup = Urls_step + "get_partbankup";
+    public static String get_partbankup_old = Urls_step_Old + "get_partbankup";
+
     public static String Eligible_Banklist = Urls_step + "Eligible_Banklist";
+    public static String Eligible_Banklist_Old = Urls_step_Old + "Eligible_Banklist";
+
     public static String Activity_Notes = Urls_step + "Activity_Notes";
     public static String bank_status_fetch = Urls_step + "bank_status_fetch";
+    public static String bank_status_fetch_old = Urls_step_Old + "bank_status_fetch";
     public static String Get_DocumentcklistProp = Urls_step + "Get_DocumentcklistProp";
+    public static String Get_DocumentcklistProp_old = Urls_step_Old + "Get_DocumentcklistProp";
     public static String APPLICANT_INFO = Urls_step + "applicant_info";
     public static String UPDATED_ENABLE = Urls_step + "update_enable";
     public static String PARTNER_STATUES = Urls_step + "part_status";
+    public static String PARTNER_STATUES_old = Urls_step_Old + "part_status";
+   // public static String PARTNER_STATUES = Urls_step + "Part_Status_new";
     public static String PARTNER_STATUES_IDs = Urls_step + "appid_view";
+    public static String PARTNER_STATUES_IDs_old = Urls_step_Old + "appid_view";
 
     public static String webinar_register = Urls_step + "webinar_register";
     public static String webinar_join = Urls_step + "webinar_join";
@@ -148,14 +186,20 @@ public class Urls {
     public static String GET_DROPDOWN_LISTVEHICLEMODEL  = Urls_step + "vh_modal";
 
     public static String get_bankstaterules = Urls_step + "get_bankstaterules";
+    public static String doccklist_ruleres = Urls_step + "doccklist_ruleres";
     public static final String Bankstatement_URl=Urls_step+"bank_statement_upload";
     public static String ask_countdisp = Urls_step + "ask_countdisp";
     public static String update_bankstatementstatus = Urls_step + "update_bankstatementstatus";
+    public static String get_bankdetils = Urls_Bank1 + "get_bankdetils";
+    public static String update_bankstatementstatus_old = Urls_step_Old + "update_bankstatementstatus";
     public static String CAMERA_IMAGE_Upload = Urls_step + "multi_doc";
     public static String PDF_Document_Upload = Urls_step + "multi_docpdf";
     public static String DOC_IMAGE_VIEW = Urls_step + "docu_view";
     public static String validate_upldoc = Urls_step + "validate_upldoc";
+
     public static String Check_Uploadsubmit = Urls_step + "Check_Uploadsubmit";
+    public static String Check_Uploadsubmit_old = Urls_step_Old + "Check_Uploadsubmit";
+
     public static String validate_checklist = Urls_step + "validate_checklist";
     public static String fetch_bankstatements = Urls_step + "fetch_bankstatements";
 
@@ -163,11 +207,16 @@ public class Urls {
 
  public static String Payment_Initialize  = Urls_step + "payment_initialize";
  public static String Report_Activity  = Urls_step + "crif_mail_gen";
+
+ public static String Report_Activity_old  = Urls_step_Old + "crif_mail_gen";
  public static String Lead_Details_statues  = Urls_step + "lead_details";
+ public static String Lead_Details_statues_Old  = Urls_step_Old + "lead_details";
 
     public static String CRIF_Generation  = Urls_step + "crif_generation";
+    public static String CRIF_Generation_old  = Urls_step_Old + "crif_generation";
     public static String payment_schedule  = Urls_step + "payment_schedule";
     public static String submit_question  = Urls_step + "submit_question";
+    public static String submit_question_old  = Urls_step_Old + "submit_question";
     public static String report_links  = Urls_step + "report_links";
     public static String VIEW_VIABILITYDATA = Urls_step + "view_viabilitydata";
     public static String CRIF_DATA_Populate = Urls_step + "crifdata_view";
@@ -180,6 +229,9 @@ public class Urls {
     public static String CRIF_SCORE_CHECK = Urls_step + "get_crif_score";
     public static String CRIF_Gerneration = Urls_step + "crif_reportgen";
     public static String step2_complete  = Urls_step + "step2_complete";
+    public static String InvoiceReport  = Urls_step1 + "InvoiceReport";
+    public static String step2_complete_old  = Urls_step_Old + "step2_complete";
+    public static String creditrep_anaysisres  = Urls_step + "creditrep_anaysisres";
 
 
     public static String cibil_report1  = Urls_step + "cibil_report1";
@@ -215,6 +267,17 @@ public class Urls {
     public static String DOC_CHECKLIST  = Urls_step + "Get_allDocumentcklist";
     public static String generate_doccklist  = Urls_step + "generate_doccklist";
     public static String CHECKLIST  = Urls_step + "fetch_loanchecklist";
+
+
+
+    ///STEP3 Api////
+
+    public static String GET_BANKDROPDOWN_LIST  = Urls + "get_banklist_step2";
+    public static String GENEARTEDOCVERIFYRULE  = Urls_step + "generate_docuverifyrule";
+    public static String VIABLEBANKS  = Urls_step + "Viable_Banks";
+    public static String DOCLISTRULES  = Urls_step + "doccklist_ruleres";
+
+    public static String COMPANYLIST = Urls_step + "getCompanyList";
 
    // public static String DOCUMENT_CHECK  = Urls_step + "Get_allDocumentcklist";
 

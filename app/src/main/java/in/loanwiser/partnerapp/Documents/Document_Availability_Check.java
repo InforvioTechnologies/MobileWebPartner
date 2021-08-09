@@ -25,11 +25,13 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.ProgressBar;
+import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.widget.AppCompatButton;
+import androidx.appcompat.widget.AppCompatImageView;
 import androidx.appcompat.widget.AppCompatTextView;
 import androidx.cardview.widget.CardView;
 import androidx.core.content.ContextCompat;
@@ -63,6 +65,8 @@ import in.loanwiser.partnerapp.BankStamentUpload.Upload_Activity_Bank;
 import in.loanwiser.partnerapp.PartnerActivitys.Home;
 import in.loanwiser.partnerapp.PartnerActivitys.SimpleActivity;
 import in.loanwiser.partnerapp.PartnerActivitys.Submitsuccess_Activity;
+import in.loanwiser.partnerapp.Payment.PaymentActivity;
+import in.loanwiser.partnerapp.Payment.Payment_Sucess_Screen;
 import in.loanwiser.partnerapp.R;
 import in.loanwiser.partnerapp.Step_Changes_Screen.DocumentChecklist_Fragment;
 
@@ -70,7 +74,7 @@ public class Document_Availability_Check extends SimpleActivity {
 
     private Context mCon = this;
     String doc_id,emp_state,type,applicant_name;
-    private AppCompatTextView appl_id,cat_c;
+    private AppCompatTextView appl_id,cat_c,cat_c1;
     private CardView app_id_card;
     private ProgressDialog pDialog;
     private String tag_json_obj = "jobj_req", tag_json_arry = "jarray_req";
@@ -84,12 +88,14 @@ public class Document_Availability_Check extends SimpleActivity {
 
     CardView Applicant_ly,Co_Applicant_ly,Property;
     LinearLayout Applicant_ly1,Co_Applicant_ly1,Property1,Document_,
-            bank_eligible_not_met,bank_eligible_met,bank_statement_met_ly,bank_statement_not_met_ly;
+            bank_eligible_not_met,bank_eligible_met,bank_statement_met_ly,bank_statement_not_met_ly,
+            bank_eligible_not_met1;
 
     String Applicant_what,co_app,Applicant_what1,Applicant_what2,applicant_count,property_identify,loan_categoryid;
-    AppCompatTextView In_Progress_txt,co_applicant_txt,applicant_txt;
+    AppCompatTextView In_Progress_txt,co_applicant_txt,applicant_txt,sucess_msg;
     RecyclerView imagelist1,imagelist;
-    RecyclerView recycler_view_bank_eligible,recycler_view_not_bank_eligible;
+    RecyclerView recycler_view_bank_eligible,recycler_view_not_bank_eligible,
+            recycler_view_not_bank_eligible1;
 
     AppCompatButton submit_update_status;
     PopupWindow popupWindow;
@@ -103,7 +109,7 @@ public class Document_Availability_Check extends SimpleActivity {
         setContentView(R.layout.activity_simple);
         Objs.a.setStubId(this, R.layout.activity_document_availability_check);
        // applicant_name =  Objs.a.getBundle(this, Params.applicant_name);
-        String document= "Document Availability Check";
+        String document= "Bank Eligibility Check";
      //   Log.e("doc",document);
         initTools1(document);
       //  initTools1(applicant_name);
@@ -120,7 +126,11 @@ public class Document_Availability_Check extends SimpleActivity {
 
         bank_statement_met_ly = (LinearLayout) findViewById(R.id.bank_statement_met_ly);
         bank_statement_not_met_ly = (LinearLayout) findViewById(R.id.bank_statement_not_met_ly);
+        bank_eligible_not_met1 = (LinearLayout) findViewById(R.id.bank_eligible_not_met1);
+        bank_eligible_not_met1.setVisibility(View.GONE);
         cat_c = (AppCompatTextView) findViewById(R.id.cat_c);
+        sucess_msg = (AppCompatTextView) findViewById(R.id.sucess_msg);
+        cat_c1 = (AppCompatTextView) findViewById(R.id.cat_c1);
 
 
         In_Progress_txt = (AppCompatTextView) findViewById(R.id.In_Progress_txt);
@@ -131,7 +141,8 @@ public class Document_Availability_Check extends SimpleActivity {
 
         recycler_view_not_bank_eligible = (RecyclerView) findViewById(R.id.recycler_view_not_bank_eligible);
         recycler_view_bank_eligible = (RecyclerView) findViewById(R.id.recycler_view_bank_eligible);
-
+        recycler_view_not_bank_eligible1 = (RecyclerView) findViewById(R.id.recycler_view_not_bank_eligible1);
+        recycler_view_not_bank_eligible1.setVisibility(View.GONE);
        // co_app = Pref.getCoAPPAVAILABLE(getApplicationContext());
       //  property_identified = Pref.getProperty_id(getApplicationContext());
         Log.i(TAG, "onCreate:property_identified "+property_identified);
@@ -153,7 +164,7 @@ public class Document_Availability_Check extends SimpleActivity {
         submit_update_status.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Document_Statues();
+                Bank_Eligibility_Check();
 
             }
         });
@@ -360,96 +371,44 @@ public class Document_Availability_Check extends SimpleActivity {
         AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
     }
 
-    private void Document_Statues() {
+    private void Bank_Eligibility_Check() {
         JSONObject jsonObject =new JSONObject();
         JSONObject J= null;
         try {
             J =new JSONObject();
-            //  J.put(Params.user_id, id);
-            J.put("transaction_id",Pref.getTRANSACTIONID(getApplicationContext()));
+            J.put("transaction_id", Pref.getTRANSACTIONID(getApplicationContext()));
+            J.put("user_id",Pref.getUSERID(getApplicationContext()));
+            J.put("b2b_userid", Pref.getID(getApplicationContext()));
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        Log.e("the Document",J.toString());
+        Log.e("submit_loanwiser", String.valueOf(J));
         progressDialog.show();
-        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, Urls.Check_Uploadsubmit, J,
+        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, Urls.doc_uploadsubmit, J,
                 new Response.Listener<JSONObject>() {
+                    @SuppressLint("RestrictedApi")
                     @Override
                     public void onResponse(JSONObject response) {
-
-                        Log.e("the reponse",response.toString());
+                        Log.e("Bank_eligible", String.valueOf(response));
+                        progressDialog.dismiss();
                         try {
-
-
-                            String status  = response.getString("status");
-                           if(status.equals("success"))
-                           {
-                               progressDialog.dismiss();
-                               Documnet_upload_Status();
-                           }else
-                           {
-
-                               JSONObject jsonObject1 = response.getJSONObject("response");
-                               JSONArray  label_arr=jsonObject1.getJSONArray("message");
-                               for (int i = 0; i < label_arr.length(); i++) {
-                                   // String value="12";
-                                   if(label_arr.getString(i).isEmpty())
-                                   {
-                                       if(i==0)
-                                       {
-                                           document_available = "no";
-
-                                       }else  if(i==1)
-                                       {
-                                           bank_available="no";
-                                       }
-                                   }else
-                                   {
-                                       String value3= label_arr.getString(i);
-                                       Log.e("json", i+"="+value3);
-                                       String value=label_arr.getString(i);
-                                       if(i==0)
-                                       {
-                                           document_available = "yes";
-                                           message_list.add("Please upload missing document -"+String.valueOf(value) +"\n\n");
-                                       }else if(i==1)
-                                       {
-                                           bank_available="yes";
-                                           message_list.add("Please provide following missing months in bank statement. Otherwise you'll not be able to submit this lead"+"\n\n" +
-                                                   ""+String.valueOf(value) +"\n");
-                                       }
-
-                                       //submit_update_status.setEnabled(false);
-
-                                       progressDialog.dismiss();
-                                   }
-
-
-                                   // x.add(value3);
-                                   // Log.e("json", i+"="+value3);
-                               }
-
-                               Submit_Co_Applicant();
-
-                              // Toast.makeText(getApplicationContext(),"Please Upload the mandatory Documents", Toast.LENGTH_SHORT).show();
-
-                           }
-
-                            //   JSONArray ja = response.getJSONArray(Params.emp_states);
-
+                            String eligible_status = response.getString("eligible_status");
+                            if(eligible_status.equals("1"))
+                            {
+                                upload_Status();
+                            }else
+                            {
+                                Bank_analysis_ErrorStatus();
+                            }
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
-
-
                     }
                 }, new Response.ErrorListener() {
 
             @Override
             public void onErrorResponse(VolleyError error) {
                 progressDialog.dismiss();
-
-                Log.e("the error",error.toString());
                 Toast.makeText(getApplicationContext(),error.getMessage(), Toast.LENGTH_SHORT).show();
             }
         }) {
@@ -462,45 +421,58 @@ public class Document_Availability_Check extends SimpleActivity {
         };
         AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
     }
+    private void Bank_analysis_ErrorStatus() {
+        final Dialog dialog = new Dialog(this);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+        dialog.setContentView(R.layout.doc_availability_analysis_error);
+        //  dialog.getWindow().setLayout(display.getWidth() * 90 / 100, LinearLayout.LayoutParams.WRAP_CONTENT);
+        dialog.setCancelable(true);
+        dialog.setCanceledOnTouchOutside(false);
+        AppCompatTextView bankstatement_message=(AppCompatTextView) dialog.findViewById(R.id.bankstatement_message);
+        Button cancelbtn = (Button) dialog.findViewById(R.id.cancelbtn);
+        Button submitbtn = (Button) dialog.findViewById(R.id.submitbtn);
+
+        submitbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+
+
+            }
+        });
 
 
 
-    private void Documnet_upload_Status() {
+        if (!dialog.isShowing()) {
+            dialog.show();
+        }
+
+    }
+    private void upload_Status() {
         JSONObject jsonObject =new JSONObject();
         JSONObject J= null;
         try {
             J =new JSONObject();
             J.put(Params.transaction_id, Pref.getTRANSACTIONID(getApplicationContext()));
+            J.put("comp_status", "3");
+            J.put("subcomp_status", "2");
 
         } catch (JSONException e) {
             e.printStackTrace();
         }
         Log.e("submit_loanwiser", String.valueOf(J));
         progressDialog.show();
-        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, Urls.submit_loanwiser, J,
+        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, Urls.status_update, J,
                 new Response.Listener<JSONObject>() {
                     @SuppressLint("RestrictedApi")
                     @Override
                     public void onResponse(JSONObject response) {
                         Log.e("Documnet_upload_Status1", String.valueOf(response));
                         //{"request":{"transaction_id":"10194"},"response":true,"status":"success"}
-                        try {
-
-                            if(response.getString(Params.status).equals("success")){
-                                Intent intent = new Intent(Document_Availability_Check.this, Submitsuccess_Activity.class);
-                                startActivity(intent);
-
-                                finish();
-
-
-                            }else {
-                                Toast.makeText(getApplicationContext(),"Something went wrong, Please check!!!", Toast.LENGTH_SHORT).show();
-
-                            }
-
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
+                        Intent intent = new Intent(Document_Availability_Check.this, PaymentActivity.class);
+                        startActivity(intent);
+                        finish();
                         progressDialog.dismiss();
                     }
                 }, new Response.ErrorListener() {
@@ -547,15 +519,47 @@ public class Document_Availability_Check extends SimpleActivity {
                             {
                                 JSONObject jsonObject1 = response.getJSONObject("response");
                                 String bankeligible_sts = jsonObject1.getString("bankeligible_sts");
+                                String eligible_bank_cnt = jsonObject1.optString("eligible_bank_cnt");
+                                String not_eligible_bank_cnt = jsonObject1.optString("not_eligible_bank_cnt");
                                 String banknoteligible_sts = jsonObject1.getString("banknoteligible_sts");
+                                String bankrulenoteligible_sts = jsonObject1.getString("bankrulenoteligible_sts");
+
+                                if(bankeligible_sts.equals("0"))
+                                {
+
+                                    bank_statement_met_ly.setVisibility(View.GONE);
+                                    if(banknoteligible_sts.equals("0") )
+                                    {
+                                        bank_statement_not_met_ly.setVisibility(View.GONE);
+                                        if(bankrulenoteligible_sts.equals("1"))
+                                        {
+                                            bank_statement_met_ly.setVisibility(View.GONE);
+                                            bank_statement_not_met_ly.setVisibility(View.GONE);
+                                            bank_eligible_not_met1.setVisibility(View.VISIBLE);
+                                        }
+
+                                    }else
+                                    {
+
+                                        bank_statement_not_met_ly.setVisibility(View.VISIBLE);
+                                        bank_eligible_not_met1.setVisibility(View.GONE);
+                                    }
+                                }else
+                                {
+                                    String count = "4";
+                                    sucess_msg.setText("● Congrats You have  Successfully met Eligible and Doc Requirement for"+" "+eligible_bank_cnt+" "+"Lenders and Eligible and Docs need are"+" "+ not_eligible_bank_cnt +" "+"lenders.");
+                                    bank_statement_met_ly.setVisibility(View.VISIBLE);
+                                    bank_statement_not_met_ly.setVisibility(View.GONE);
+                                    bank_eligible_not_met1.setVisibility(View.GONE);
+                                }
+
                                 if(bankeligible_sts.equals("1"))
                                 {
                                     JSONArray bank_eligiblearr = jsonObject1.getJSONArray("bank_eligiblearr");
                                     if(bank_eligiblearr.length()>0)
                                     {
                                         recycler_view_bank_eligible.setVisibility(View.VISIBLE);
-                                        bank_statement_not_met_ly.setVisibility(View.GONE);
-                                        bank_statement_met_ly.setVisibility(View.VISIBLE);
+
                                         setAdapter(bank_eligiblearr);
                                     }
                                 }else{
@@ -570,17 +574,9 @@ public class Document_Availability_Check extends SimpleActivity {
                                         recycler_view_not_bank_eligible.setVisibility(View.VISIBLE);
                                         if(bankeligible_sts.equals("1")) {
                                             JSONArray bank_eligiblearr = jsonObject1.getJSONArray("bank_eligiblearr");
-                                            if(bank_eligiblearr.length()>0)
-                                            {
-                                                bank_statement_met_ly.setVisibility(View.VISIBLE);
-                                                bank_statement_not_met_ly.setVisibility(View.GONE);
-                                            }else
-                                            {
-                                                bank_statement_not_met_ly.setVisibility(View.VISIBLE);
-                                            }
+
                                         }
 
-                                        bank_statement_not_met_ly.setVisibility(View.VISIBLE);
                                         setAdapter_not_eligible(bank_nteligiblearr);
 
                                     }
@@ -591,12 +587,31 @@ public class Document_Availability_Check extends SimpleActivity {
                                             "You have not met the document requirement for any of the eligible and available bank near you.");
                                 }
 
+                                if(bankrulenoteligible_sts.equals("1"))
+                                {
+
+                                    Log.e("the value",bankrulenoteligible_sts);
+                                    JSONArray bankneligible_arr = jsonObject1.getJSONArray("bankneligible_arr");
+                                    Log.e("the value",bankneligible_arr.toString());
+                                    recycler_view_not_bank_eligible1.setVisibility(View.VISIBLE);
+
+
+                                    setAdapter_not_eligible1(bankneligible_arr);
+                                }else{
+                                    recycler_view_not_bank_eligible1.setVisibility(View.GONE);
+
+
+                                    cat_c1.setText("Sorry....!\n" +
+                                            "Available Banks - For Which \\n Eligibility Requirements Not Met");
+                                }
+
                             }else
                             {
                                 Toast.makeText(getApplicationContext(),"Something went wrong, Please check!!!", Toast.LENGTH_SHORT).show();
 
 
                             }
+
 
 
 
@@ -648,7 +663,14 @@ public class Document_Availability_Check extends SimpleActivity {
         recycler_view_not_bank_eligible.setAdapter(adapter);
         //Objs.a.getRecyleview(this).setAdapter(adapter);
     }
-
+    private void setAdapter_not_eligible1(JSONArray ja) {
+        ListItemAdapter_not_ele adapter = new ListItemAdapter_not_ele(mCon,ja);
+        recycler_view_not_bank_eligible1.setHasFixedSize(true);
+        recycler_view_not_bank_eligible1.setNestedScrollingEnabled(false);
+        recycler_view_not_bank_eligible1.setLayoutManager(new LinearLayoutManager(this));
+        recycler_view_not_bank_eligible1.setAdapter(adapter);
+        //Objs.a.getRecyleview(this).setAdapter(adapter);
+    }
    /* private void setAdapter_chile(JSONArray ja) {
               ListItemAdapter_chiled adapter = new ListItemAdapter_chiled(mCon,ja);
         imagelist1.setVisibility(View.GONE);
@@ -722,10 +744,11 @@ public class Document_Availability_Check extends SimpleActivity {
                 String bank_name= J.getString("bank_name");
                 String bank_logo= J.getString("bank_logo");
                 String bank_logo_cc= J.getString("bank_logo_cc");
+                String bank_url= J.getString("bank_url");
                 String bank_category= J.getString("bank_category");
                 String bank_categorystr= J.getString("bank_categorystr");
                 Log.e("bank_logo",bank_logo_cc);
-                Objs.a.loadPicasso(mCon,bank_logo_cc,holder.uploaded_yes,holder.progressBarMaterial);
+                Objs.a.loadPicasso(mCon,bank_url,holder.uploaded_yes,holder.progressBarMaterial);
                 holder.cat_A.setText(bank_categorystr);
 
                 if(bank_category.equals("1"))
@@ -739,6 +762,181 @@ public class Document_Availability_Check extends SimpleActivity {
                     holder.cat_A.setBackgroundResource(R.drawable.capsul_button412);
                 }
 
+                holder.missing.setVisibility(View.GONE);
+
+
+                holder.arrowimgup.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        holder.arrowimgup.setVisibility(View.GONE);
+                        holder.arrowimgdown1.setVisibility(View.VISIBLE);
+                        holder.eligible_available.setVisibility(View.GONE);
+                    }
+                });
+
+
+                holder.arrowimgdown1.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        // holder.check_list_name.removeAllViews();
+                        holder.arrowimgup.setVisibility(View.VISIBLE);
+                        holder.arrowimgdown1.setVisibility(View.GONE);
+                        holder.eligible_available.setVisibility(View.VISIBLE);
+                        String typecnt1;
+
+                        final String relationship_type=Pref.getCoAPPAVAILABLE(getApplicationContext());
+
+                        if(relationship_type.equals("1"))
+                        {
+                            typecnt1="0";
+                        }else
+                        {
+                            typecnt1="1";
+                        }
+                        try {
+                            Bank_ID= J.getString("id");
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        holder.tabel_row.removeAllViews();
+                        // final String step_status11 = step_status1;
+                        JSONObject jsonObject = new JSONObject();
+                        JSONObject J = null;
+                        try {
+                            J = new JSONObject();
+
+                            J.put("bank_id", Bank_ID);
+                            //  J.put("bank_id", id);
+                            J.put("transaction_id", Pref.getTRANSACTIONID(getApplicationContext()));
+                            J.put("user_id",Pref.getUSERID(getApplicationContext()));
+                            J.put("automated_underwriting","1");
+                            J.put("type_cnt",typecnt1);
+
+                           /* J.put("bank_id", 23);
+                            //  J.put("bank_id", id);
+                            J.put("transaction_id", "58815");
+                            J.put("user_id","57205");
+                            J.put("automated_underwriting","1");
+                            J.put("type_cnt","0");
+*/
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                        progressDialog.show();
+                        Log.e("bank state rule request", String.valueOf(J));
+
+                        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, Urls.doccklist_ruleres, J,
+                                new Response.Listener<JSONObject>() {
+                                    @SuppressLint({"LongLogTag", "ResourceType"})
+                                    @Override
+                                    public void onResponse(JSONObject response) {
+
+
+
+
+                                            TableRow tr_head = new TableRow(getApplicationContext());
+                                            tr_head.setId(10);
+                                            tr_head.setBackgroundColor(Color.GRAY);
+                                            tr_head.setLayoutParams(new ViewGroup.LayoutParams(
+                                                    ViewGroup.LayoutParams.FILL_PARENT,
+                                                    ViewGroup.LayoutParams.WRAP_CONTENT));
+
+                                            TextView label_date = new TextView(getApplicationContext());
+                                            label_date.setId(20);
+                                            label_date.setText("Criteria" + "  ");
+                                            label_date.setTextColor(Color.WHITE);
+                                            label_date.setPadding(5, 5, 5, 5);
+                                            tr_head.addView(label_date);// add the column to the table row here
+
+                                            TextView label_weight_kg = new TextView(getApplicationContext());
+                                            label_weight_kg.setId(21);// define id that must be unique
+                                            label_weight_kg.setText("Status" + "  "); // set the text for the header
+                                            label_weight_kg.setTextColor(Color.WHITE); // set the color
+                                            label_weight_kg.setPadding(5, 5, 5, 5); // set the padding (if required)
+                                            tr_head.addView(label_weight_kg); // add the column to the table row here
+
+                                            holder.tabel_row.addView(tr_head, new TableLayout.LayoutParams(
+                                                    ViewGroup.LayoutParams.FILL_PARENT,
+                                                    ViewGroup.LayoutParams.WRAP_CONTENT));
+
+
+                                        for(int i=0;i<2;i++)
+                                        {
+                                        TableRow tr = new TableRow(getApplicationContext());
+                                        tr.setId(100 + 10);
+                                        tr.setLayoutParams(new ViewGroup.LayoutParams(
+                                                ViewGroup.LayoutParams.FILL_PARENT,
+                                                ViewGroup.LayoutParams.WRAP_CONTENT));
+
+                                        if(i==0)
+                                        {
+                                            TextView rule_description = new TextView(getApplicationContext());
+                                            rule_description.setId(200 + 10);
+                                            rule_description.setText("CRIF-Eligibility"+ "  ");
+                                            rule_description.setTextColor(Color.parseColor("#33b48d"));
+                                            label_weight_kg.setPadding(5, 5, 5, 5);
+                                            tr.addView(rule_description);
+
+                                            TextView fail_message1 = new TextView(getApplicationContext());
+                                            fail_message1.setId(300 + 10);
+                                            fail_message1.setText("Pass" + "  ");
+                                            fail_message1.setTextColor(Color.parseColor("#33b48d"));
+                                            label_weight_kg.setPadding(5, 5, 5, 5);
+                                            tr.addView(fail_message1);
+
+                                            holder.tabel_row.addView(tr, new TableLayout.LayoutParams(
+                                                    ViewGroup.LayoutParams.FILL_PARENT,
+                                                    ViewGroup.LayoutParams.WRAP_CONTENT));
+                                        }else if(i==1)
+                                        {
+                                            TextView rule_description = new TextView(getApplicationContext());
+                                            rule_description.setId(200 + 10);
+                                            rule_description.setText("Bank-Statement Eligibility"+ "  ");
+                                            rule_description.setTextColor(Color.parseColor("#33b48d"));
+                                            label_weight_kg.setPadding(20, 5, 20, 5);
+
+                                            tr.addView(rule_description);
+
+                                            TextView fail_message1 = new TextView(getApplicationContext());
+                                            fail_message1.setId(300 + 10);
+                                            fail_message1.setText("Pass" + "  ");
+                                            fail_message1.setTextColor(Color.parseColor("#33b48d"));
+                                            label_weight_kg.setPadding(20, 5, 20, 5);
+                                            tr.addView(fail_message1);
+
+                                            holder.tabel_row.addView(tr, new TableLayout.LayoutParams(
+                                                    ViewGroup.LayoutParams.FILL_PARENT,
+                                                    ViewGroup.LayoutParams.WRAP_CONTENT));
+                                        }
+
+
+                                        }
+
+                                        // TableLayout prices = (TableLayout) holder.findViewById(R.id.prices);
+
+
+                                        progressDialog.dismiss();
+                                    }
+                                }, new Response.ErrorListener() {
+
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+                                progressDialog.dismiss();
+                                Log.e("Applicant Entry request", String.valueOf(error));
+                                Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
+                            }
+                        }) {
+                            @Override
+                            public Map<String, String> getHeaders() throws AuthFailureError {
+                                HashMap<String, String> headers = new HashMap<String, String>();
+                                headers.put("content-type", "application/json");
+                                return headers;
+                            }
+                        };
+                        AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
+                    }
+                });
 
                // holder.uploaded_yes.setText(bank_categorystr);
 
@@ -761,22 +959,31 @@ public class Document_Availability_Check extends SimpleActivity {
 
         public class ViewHolder extends RecyclerView.ViewHolder {
 
-            AppCompatTextView cat_A,mandatory_do;
+            AppCompatTextView cat_A,missing;
             CardView card_view_class_name;
             View view;
             ImageView image_doc,uploaded_yes;
             Button uploadbtn;
             RecyclerView recycler_view_chiled;
             ProgressBar progressBarMaterial;
+            AppCompatImageView arrowimgup,arrowimgdown1;
+            LinearLayout eligible_ly,eligible_available;
+            TableLayout tabel_row;
             public ViewHolder(View itemView) {
                 super(itemView);
 
                 cat_A  = (AppCompatTextView) itemView.findViewById(R.id.cat_A);
+                missing  = (AppCompatTextView) itemView.findViewById(R.id.missing);
                 uploaded_yes  = (ImageView) itemView.findViewById(R.id.uploaded_yes);
                // uploaded_yes  = (ImageView) itemView.findViewById(R.id.uploaded_yes);
 
                 card_view_class_name  = (CardView) itemView.findViewById(R.id.card_view_class_name);
                 progressBarMaterial = (ProgressBar) itemView.findViewById(R.id.progressBarMaterial);
+                arrowimgup = (AppCompatImageView) itemView.findViewById(R.id.arrowimgup);
+                arrowimgdown1 = (AppCompatImageView) itemView.findViewById(R.id.arrowimgdown1);
+                eligible_ly = (LinearLayout) itemView.findViewById(R.id.eligible_ly);
+                eligible_available = (LinearLayout) itemView.findViewById(R.id.eligible_available);
+                tabel_row  = (TableLayout) itemView.findViewById(R.id.tabel_row);
 
             }
         }
@@ -829,6 +1036,7 @@ public class Document_Availability_Check extends SimpleActivity {
                 String bank_logo_cc= J.getString("bank_logo_cc");
               //  String bank_logo_cc= "https://consumer.loanwiser.in/images/paysense.png";
                 Log.e("bank_logo_cc",bank_logo_cc);
+                String bank_url= J.getString("bank_url");
                 String bank_category= J.getString("bank_category");
                 String bank_categorystr= J.getString("bank_categorystr");
                 holder.done_tick.setImageDrawable(getResources().getDrawable(R.drawable.ic_caution));
@@ -836,7 +1044,7 @@ public class Document_Availability_Check extends SimpleActivity {
 
 
                // Objs.a.loadPicasso(mCon,bank_logo_cc,holder.uploaded_yes,holder.progressBarMaterial);
-                Glide.with(mCon).load(bank_logo_cc).into(holder.uploaded_yes);
+                Glide.with(mCon).load(bank_url).into(holder.uploaded_yes);
 
 
                 if(bank_category.equals("1"))
@@ -849,29 +1057,51 @@ public class Document_Availability_Check extends SimpleActivity {
                 {
                     holder.cat_A.setBackgroundResource(R.drawable.capsul_button412);
                 }
-                holder.missing_document.setText("Missing Documents");
+                holder.missing_document.setText("Passed in Eligibility and doc need");
                 holder.missing_document.setTextColor(Color.parseColor("#EC9022"));
+                holder.missing.setVisibility(View.VISIBLE);
 
                 holder.upload.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Intent intent=new Intent(Document_Availability_Check.this, DocumentChecklist_Fragment.class);
+                        Intent intent=new Intent(Document_Availability_Check.this, Applicant_Doc_Details_revamp.class);
                         startActivity(intent);
 
                     }
                 });
 
-                holder.uploaded_yes.setOnClickListener(new View.OnClickListener() {
+                holder.arrowimgup.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+                        holder.arrowimgup.setVisibility(View.GONE);
+                        holder.arrowimgdown1.setVisibility(View.VISIBLE);
                         holder.check_list_name.removeAllViews();
+                        holder.upload.setVisibility(View.GONE);
+                    }
+                });
 
+                holder.arrowimgdown1.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        holder.arrowimgup.setVisibility(View.VISIBLE);
+                        holder.arrowimgdown1.setVisibility(View.GONE);
+                        holder.check_list_name.removeAllViews();
+                        J = getItem(position);
+
+                        // holder.class_name.setText(Objs.a.capitalize(J.getString("key")));
+                        // Objs.a.NewNormalFontStyle(mCon,holder.class_name);
+
+                        try {
+                            Bank_ID= J.getString("id");
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
                         JSONObject jsonObject =new JSONObject();
                         JSONObject J= null;
                         try {
                             J =new JSONObject();
                             // J.put("transaction_id", transaction_id);
-                          //  J.put("transaction_id", "61359");
+                            //  J.put("transaction_id", "61359");
                             J.put("transaction_id",Pref.getTRANSACTIONID(getApplicationContext()));
                             J.put("applicant_type", applicant_count);
                             J.put("bank_id", Bank_ID);
@@ -960,7 +1190,7 @@ public class Document_Availability_Check extends SimpleActivity {
                                                             tvs.setText("Please Upload any one of the following");
                                                             tvs.setTextColor(Color.parseColor("#E17E29"));
                                                             holder.check_list_name.addView(tvs);
-                                                           String doc_typename = null;
+                                                            String doc_typename = null;
                                                             for (int k=0;k<document_arr.length();k++) {
                                                                 JSONObject rec5 = null;
                                                                 try {
@@ -1062,7 +1292,7 @@ public class Document_Availability_Check extends SimpleActivity {
 
         public class ViewHolder extends RecyclerView.ViewHolder {
 
-            AppCompatTextView cat_A,missing_document;
+            AppCompatTextView cat_A,missing_document,missing;
             CardView card_view_class_name;
             View view;
             ImageView image_doc,uploaded_yes,done_tick;
@@ -1070,9 +1300,11 @@ public class Document_Availability_Check extends SimpleActivity {
             RecyclerView recycler_view_chiled;
             ProgressBar progressBarMaterial;
             LinearLayout check_list_name;
+            AppCompatImageView arrowimgup,arrowimgdown1;
             AppCompatButton upload;
             public ViewHolder(View itemView) {
                 super(itemView);
+                missing  = (AppCompatTextView) itemView.findViewById(R.id.missing);
 
                 cat_A  = (AppCompatTextView) itemView.findViewById(R.id.cat_A);
                 missing_document  = (AppCompatTextView) itemView.findViewById(R.id.missing_document);
@@ -1083,12 +1315,338 @@ public class Document_Availability_Check extends SimpleActivity {
                 card_view_class_name  = (CardView) itemView.findViewById(R.id.card_view_class_name);
                 check_list_name  = (LinearLayout)itemView.findViewById(R.id.check_list_name);
                 upload  = (AppCompatButton) itemView.findViewById(R.id.upload);
-
+                arrowimgup  = (AppCompatImageView) itemView.findViewById(R.id.arrowimgup);
+                arrowimgdown1  = (AppCompatImageView) itemView.findViewById(R.id.arrowimgdown1);
 
             }
         }
     }
+    public class ListItemAdapter_not_ele extends RecyclerView.Adapter<ListItemAdapter_not_ele.ViewHolder> {
 
+        JSONArray list = new JSONArray();
+        Context mCon;
+        JSONObject J;
+
+        public ListItemAdapter_not_ele(Context mCon, JSONArray list) {
+            this.list = list;
+            this.mCon = mCon;
+        }
+
+        @Override
+        public int getItemCount() {
+            return list.length();
+        }
+
+        public JSONObject getItem(int i) {
+            try {
+                return list.getJSONObject(i);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        @Override
+        public ListItemAdapter_not_ele.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+            View itemView = LayoutInflater.from(parent.getContext())
+                    .inflate(R.layout.ly_bank_list_elible_rule, parent, false);
+            return new ListItemAdapter_not_ele.ViewHolder(itemView);
+        }
+
+        @Override
+        public void onBindViewHolder(final ListItemAdapter_not_ele.ViewHolder holder, final int position) {
+            try {
+                String rupee = getResources().getString(R.string.Rs);
+                J = getItem(position);
+
+                // holder.class_name.setText(Objs.a.capitalize(J.getString("key")));
+                // Objs.a.NewNormalFontStyle(mCon,holder.class_name);
+
+                Bank_ID= J.getString("id");
+                String bank_name= J.getString("bank_name");
+                String bank_logo= J.getString("bank_logo");
+                //   String bank_logo_cc= J.getString("bank_logo_cc");
+                String bank_url= J.getString("bank_url");
+                //  String bank_logo_cc= "https://consumer.loanwiser.in/images/paysense.png";
+                // Log.e("bank_logo_cc",bank_logo_cc);
+                String bank_category= J.getString("bank_category");
+                String bank_categorystr= J.getString("bank_categorystr");
+                holder.done_tick.setImageDrawable(getResources().getDrawable(R.drawable.ic_caution));
+                holder.cat_A.setText(bank_categorystr);
+
+
+                // Objs.a.loadPicasso(mCon,bank_logo_cc,holder.uploaded_yes,holder.progressBarMaterial);
+                Glide.with(mCon).load(bank_url).into(holder.uploaded_yes);
+
+
+                if(bank_category.equals("1"))
+                {
+                    holder.cat_A.setBackgroundResource(R.drawable.capsul_button41);
+                }else if(bank_category.equals("2"))
+                {
+                    holder.cat_A.setBackgroundResource(R.drawable.but_shape_reject);
+                } else
+                {
+                    holder.cat_A.setBackgroundResource(R.drawable.capsul_button412);
+                }
+                holder.missing_document.setText("Failed in Eligibility");
+                holder.missing_document.setTextColor(Color.parseColor("#D34D53"));
+
+                holder.upload.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Intent intent=new Intent(Document_Availability_Check.this, Applicant_Doc_Details_revamp.class);
+                        startActivity(intent);
+
+                    }
+                });
+                holder.arrowimgup.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        holder.arrowimgup.setVisibility(View.GONE);
+                        holder.arrowimgdown1.setVisibility(View.VISIBLE);
+                        holder.eligible_available.setVisibility(View.GONE);
+                    }
+                });
+                holder.arrowimgdown1.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        // holder.check_list_name.removeAllViews();
+                        holder.arrowimgup.setVisibility(View.VISIBLE);
+                        holder.arrowimgdown1.setVisibility(View.GONE);
+                        holder.eligible_available.setVisibility(View.VISIBLE);
+                        String typecnt1;
+
+                        final String relationship_type=Pref.getCoAPPAVAILABLE(getApplicationContext());
+
+                        if(relationship_type.equals("1"))
+                        {
+                            typecnt1="0";
+                        }else
+                        {
+                            typecnt1="1";
+                        }
+                        try {
+                            Bank_ID= J.getString("id");
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        holder.tabel_row.removeAllViews();
+                        // final String step_status11 = step_status1;
+                        JSONObject jsonObject = new JSONObject();
+                        JSONObject J = null;
+                        try {
+                            J = new JSONObject();
+
+                            J.put("bank_id", Bank_ID);
+                            //  J.put("bank_id", id);
+                            J.put("transaction_id", Pref.getTRANSACTIONID(getApplicationContext()));
+                            J.put("user_id",Pref.getUSERID(getApplicationContext()));
+                            J.put("automated_underwriting","1");
+                            J.put("type_cnt",typecnt1);
+
+                           /* J.put("bank_id", 23);
+                            //  J.put("bank_id", id);
+                            J.put("transaction_id", "58815");
+                            J.put("user_id","57205");
+                            J.put("automated_underwriting","1");
+                            J.put("type_cnt","0");
+*/
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                        progressDialog.show();
+                        Log.e("bank state rule request", String.valueOf(J));
+
+                        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, Urls.doccklist_ruleres, J,
+                                new Response.Listener<JSONObject>() {
+                                    @SuppressLint({"LongLogTag", "ResourceType"})
+                                    @Override
+                                    public void onResponse(JSONObject response) {
+
+                                        Log.e("rule response", String.valueOf(response));
+                                        try {
+
+
+                                            TableRow tr_head = new TableRow(getApplicationContext());
+                                            tr_head.setId(10);
+                                            tr_head.setBackgroundColor(Color.GRAY);
+                                            tr_head.setLayoutParams(new ViewGroup.LayoutParams(
+                                                    ViewGroup.LayoutParams.FILL_PARENT,
+                                                    ViewGroup.LayoutParams.WRAP_CONTENT));
+
+                                            TextView label_date = new TextView(getApplicationContext());
+                                            label_date.setId(20);
+                                            label_date.setText("Rule Description" + "  ");
+                                            label_date.setTextColor(Color.WHITE);
+                                            label_date.setPadding(5, 5, 5, 5);
+                                            tr_head.addView(label_date);// add the column to the table row here
+
+                                            TextView label_weight_kg = new TextView(getApplicationContext());
+                                            label_weight_kg.setId(21);// define id that must be unique
+                                            label_weight_kg.setText("Status" + "  "); // set the text for the header
+                                            label_weight_kg.setTextColor(Color.WHITE); // set the color
+                                            label_weight_kg.setPadding(5, 5, 5, 5); // set the padding (if required)
+                                            tr_head.addView(label_weight_kg); // add the column to the table row here
+
+                                            TextView Fail_Message = new TextView(getApplicationContext());
+                                            Fail_Message.setId(21);// define id that must be unique
+                                            Fail_Message.setText("Fail Message" + "  "); // set the text for the header
+                                            Fail_Message.setTextColor(Color.WHITE); // set the color
+                                            Fail_Message.setPadding(5, 5, 5, 5); // set the padding (if required)
+                                            tr_head.addView(Fail_Message); // add the column to the table row here
+
+
+                                            holder.tabel_row.addView(tr_head, new TableLayout.LayoutParams(
+                                                    ViewGroup.LayoutParams.FILL_PARENT,
+                                                    ViewGroup.LayoutParams.WRAP_CONTENT));
+
+                                            JSONObject jsonObject1 = null;
+
+                                            JSONArray response1 = response.getJSONArray("rule_arr");
+                                            for (int i = 0; i < response1.length(); i++) {
+
+                                                JSONObject J = null;
+                                                try {
+
+                                                    J = response1.getJSONObject(i);
+
+                                                    String rule_type = J.getString("rule_desc");
+                                                    String fail_message = J.getString("fail_message");
+                                                    String rule_status = J.getString("rule_status");
+                                                    TableRow tr = new TableRow(getApplicationContext());
+                                                    tr.setId(100 + i);
+                                                    tr.setLayoutParams(new ViewGroup.LayoutParams(
+                                                            ViewGroup.LayoutParams.FILL_PARENT,
+                                                            ViewGroup.LayoutParams.WRAP_CONTENT));
+
+                                                    TextView rule_description = new TextView(getApplicationContext());
+                                                    rule_description.setId(200 + i);
+                                                    rule_description.setText(rule_type + "  ");
+                                                    label_weight_kg.setPadding(5, 5, 5, 5);
+                                                    tr.addView(rule_description);
+
+                                                    TextView fail_message1 = new TextView(getApplicationContext());
+                                                    fail_message1.setId(300 + i);
+                                                    if (rule_status.equals("2")) {
+                                                        fail_message1.setText("Pass" + "  ");
+                                                        fail_message1.setTextColor(Color.parseColor("#33b48d"));
+                                                        label_weight_kg.setPadding(5, 5, 5, 5);
+                                                        tr.addView(fail_message1);
+
+                                                    } else {
+                                                        fail_message1.setText("Fail" + "  ");
+                                                        fail_message1.setTextColor(Color.parseColor("#c82128"));
+
+                                                        label_weight_kg.setPadding(5, 5, 5, 5);
+                                                        tr.addView(fail_message1);
+
+                                                    }
+
+
+                                                    TextView rule_status1 = new TextView(getApplicationContext());
+                                                    rule_status1.setId(300 + i);
+                                                    rule_status1.setText(fail_message + "  ");
+                                                    label_weight_kg.setPadding(5, 5, 5, 5);
+                                                    tr.addView(rule_status1);
+
+                                                    holder.tabel_row.addView(tr, new TableLayout.LayoutParams(
+                                                            ViewGroup.LayoutParams.FILL_PARENT,
+                                                            ViewGroup.LayoutParams.WRAP_CONTENT));
+                                                } catch (JSONException e) {
+                                                    e.printStackTrace();
+                                                }
+
+
+                                            }
+
+
+
+                                        } catch (JSONException e) {
+                                            e.printStackTrace();
+                                        }
+
+                                        JSONObject jsonObject1 = new JSONObject();
+
+
+                                        // TableLayout prices = (TableLayout) holder.findViewById(R.id.prices);
+
+
+                                        progressDialog.dismiss();
+                                    }
+                                }, new Response.ErrorListener() {
+
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+                                progressDialog.dismiss();
+                                Log.e("Applicant Entry request", String.valueOf(error));
+                                Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
+                            }
+                        }) {
+                            @Override
+                            public Map<String, String> getHeaders() throws AuthFailureError {
+                                HashMap<String, String> headers = new HashMap<String, String>();
+                                headers.put("content-type", "application/json");
+                                return headers;
+                            }
+                        };
+                        AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
+                    }
+                });
+
+                // holder.uploaded_yes.setText(bank_categorystr);
+
+            } catch (NullPointerException e) {
+                Objs.a.showToast(mCon, e.toString());
+            } catch (Exception e) {
+                Objs.a.showToast(mCon, e.toString());
+            }
+        }
+
+        private void update(JSONArray list1) {
+            list = list1;
+        }
+
+
+        @Override
+        public void onAttachedToRecyclerView(RecyclerView recyclerView) {
+            super.onAttachedToRecyclerView(recyclerView);
+        }
+
+        public class ViewHolder extends RecyclerView.ViewHolder {
+
+            AppCompatTextView cat_A,missing_document;
+            CardView card_view_class_name;
+            View view;
+            ImageView image_doc,uploaded_yes,done_tick;
+            Button uploadbtn;
+            RecyclerView recycler_view_chiled;
+            ProgressBar progressBarMaterial;
+            LinearLayout check_list_name,eligible_available;
+            AppCompatButton upload;
+            TableLayout tabel_row;
+            AppCompatImageView arrowimgup,arrowimgdown1;
+            public ViewHolder(View itemView) {
+                super(itemView);
+
+                cat_A  = (AppCompatTextView) itemView.findViewById(R.id.cat_A);
+                tabel_row  = (TableLayout) itemView.findViewById(R.id.tabel_row);
+                missing_document  = (AppCompatTextView) itemView.findViewById(R.id.missing_document);
+                uploaded_yes  = (ImageView) itemView.findViewById(R.id.uploaded_yes);
+                done_tick  = (ImageView) itemView.findViewById(R.id.done_tick);
+                // uploaded_yes  = (ImageView) itemView.findViewById(R.id.uploaded_yes);
+                progressBarMaterial = (ProgressBar) itemView.findViewById(R.id.progressBarMaterial);
+                card_view_class_name  = (CardView) itemView.findViewById(R.id.card_view_class_name);
+                check_list_name  = (LinearLayout)itemView.findViewById(R.id.check_list_name);
+                upload  = (AppCompatButton) itemView.findViewById(R.id.upload);
+                arrowimgup  = (AppCompatImageView) itemView.findViewById(R.id.arrowimgup);
+                arrowimgdown1  = (AppCompatImageView) itemView.findViewById(R.id.arrowimgdown1);
+                eligible_available  = (LinearLayout) itemView.findViewById(R.id.eligible_available);
+
+            }
+        }
+    }
     public class ListItemAdapter_chiled extends RecyclerView.Adapter<ListItemAdapter_chiled.ViewHolder> {
 
         JSONArray list = new JSONArray();
@@ -1221,7 +1779,7 @@ public class Document_Availability_Check extends SimpleActivity {
 
         public class ViewHolder extends RecyclerView.ViewHolder {
 
-            AppCompatTextView class_name,mandatory_do;
+            AppCompatTextView class_name,mandatory_do,missing;
             CardView card_view_class_name_child;
             View view;
             ImageView image_doc,uploaded_yes;
@@ -1858,7 +2416,7 @@ public class Document_Availability_Check extends SimpleActivity {
 
     }
 
-    @Override
+  /*  @Override
     public void onBackPressed() {
 
         Pref.removeDOC(mCon);
@@ -1870,5 +2428,5 @@ public class Document_Availability_Check extends SimpleActivity {
             finish();
             super.onBackPressed();
 
-    }
+    }*/
 }

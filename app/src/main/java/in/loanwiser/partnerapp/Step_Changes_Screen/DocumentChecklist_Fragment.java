@@ -45,7 +45,9 @@ import adhoc.app.applibrary.Config.AppUtils.Pref.Pref;
 import adhoc.app.applibrary.Config.AppUtils.Urls;
 import adhoc.app.applibrary.Config.AppUtils.VolleySignleton.AppController;
 import dmax.dialog.SpotsDialog;
-import in.loanwiser.partnerapp.Documents.Applicant_Doc_Details_revamp;
+import in.loanwiser.Old_Partner.Applicant_Doc_Details_revamp_old;
+
+import in.loanwiser.Old_Partner.Home_Old;
 import in.loanwiser.partnerapp.PartnerActivitys.Home;
 import in.loanwiser.partnerapp.Payment.PaymentActivity;
 import in.loanwiser.partnerapp.R;
@@ -55,7 +57,7 @@ public class DocumentChecklist_Fragment extends SimpleActivity implements TabLay
 
     //This is our tablayout
     private TabLayout tabLayout;
-
+    
     //This is our viewPager
     private ViewPager viewPager;
     String get_jsonArray,userstatus,transaction_id,user_type,emp_states,applicant_count,property_identify,loan_categoryid;
@@ -344,7 +346,7 @@ public class DocumentChecklist_Fragment extends SimpleActivity implements TabLay
         Pref.removeTID(mCon);
         Pref.removeEID(mCon);
         Pref.removeAEID(mCon);
-        Intent intent = new Intent(DocumentChecklist_Fragment.this,Home.class);
+        Intent intent = new Intent(DocumentChecklist_Fragment.this, Home_Old.class);
         startActivity(intent);
         finish();
         super.onBackPressed();

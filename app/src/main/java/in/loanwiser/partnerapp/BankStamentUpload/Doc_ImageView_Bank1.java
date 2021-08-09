@@ -25,6 +25,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.Window;
 
+import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -85,41 +86,54 @@ public class Doc_ImageView_Bank1 extends SimpleActivity {
         setContentView(R.layout.activity_simple);
 
         progressDialog = new SpotsDialog(this, R.style.Custom);
-        Objs.a.setStubId(this, R.layout.activity_doc__image_view_no_preview);
-        report =  Objs.a.getBundle(this, Params.report);
+        Objs.a.setStubId(this, R.layout.activity_doc__image_view);
+      //  report =  Objs.a.getBundle(this, Params.report);
+        report =  "Payment Check WebView";
         initTools1(report);
         Ly_image_reader = (LinearLayout)findViewById(R.id.Ly_image_reader);
         Rl_pdf_reader = (RelativeLayout)findViewById(R.id.Rl_pdf_reader);
         float_chat = (FloatingActionButton) findViewById(R.id.float_chat);
-        document =  Objs.a.getBundle(this, Params.document);
-        viable_url_view =  Objs.a.getBundle(this, Params.viable_url_view);
+    
 
-      //  document =  "https://callcenter.loanwiser.in/viewdocuments.php?imp=87c2c2771fd18671e386b8a02f145102&id=761404";
+        document =  "https://partner.loanwiser.in/steps.php?user_id=alU2RitmTjN4b05NdXBtelBpNE5LQT09&b2b_userid=MG5rOExHL2R1K013dHdhTzhtQ3UyUT09&from_partner=1&testing_log=2";
         Log.e("pfd",document);
-      //  Log.e("viable_url_view",viable_url_view);
-       // Log.e("type",type);
-       // hash =  Objs.a.getBundle(this, Params.transaction_id);
+     
         progressbar = (ProgressBar) findViewById(R.id.progressbar);
-     /*   webview = (WebView)findViewById(R.id.webview);
-            Rl_pdf_reader.setVisibility(View.VISIBLE);
-            Ly_image_reader.setVisibility(View.GONE);
+        webview = (WebView)findViewById(R.id.webview);
+          //  Rl_pdf_reader.setVisibility(View.VISIBLE);
+          //  Ly_image_reader.setVisibility(View.GONE);
             webview.getSettings().setJavaScriptEnabled(true);
              filename =  document;
 
-        try {
-            filename=URLEncoder.encode(document,"UTF-8"); //Url Convert to UTF-8 It important.
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        }
-        try {
-            webview.loadUrl("https://docs.google.com/gview?embedded=true&url=" + URLEncoder.encode(filename, "ISO-8859-1"));
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        }
-        //  webview.loadUrl("https://stackoverflow.com/questions/18838779/how-to-compare-two-edittext-fields-in-android/29399267");
-          //  webview.loadUrl(filename);
 
-        webview.setWebViewClient(new HelloWebViewClient());
+
+
+     /*   webview.setWebViewClient(new WebViewClient()
+        {
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, String url)
+            {
+                //view.loadUrl(url);
+                System.out.println("hello");
+                return false;
+            }
+        });
+        webview.loadUrl(document);*/
+        webview.setWebChromeClient(new WebChromeClient(){
+            @Override
+            public void onReceivedTitle(WebView view, String title) {
+                getWindow().setTitle(title); //Set Activity tile to page title.
+            }
+        });
+
+        webview.setWebViewClient(new WebViewClient() {
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                view.loadUrl(url);
+                return false;
+            }
+        });
+        webview.loadUrl(document);
         // Enable Javascript
         WebSettings webSettings = webview.getSettings();
         webSettings.setJavaScriptEnabled(true);
@@ -127,24 +141,10 @@ public class Doc_ImageView_Bank1 extends SimpleActivity {
         webview.getSettings().setAllowUniversalAccessFromFileURLs(true);
         webview.getSettings().setBuiltInZoomControls(true);
 
-        // Force links and redirects to open in the WebView instead of in a browser
-       // webview.setWebViewClient(new WebViewClient());
-          webview.setWebViewClient(new HelloWebViewClient() {
-
-                public void onPageFinished(WebView view, String url) {
-                    if (view.getTitle().equals(""))
-                    {
-                        view.reload();
-                    }else
-                    {
-                        progressbar.setVisibility(View.GONE);
-                    }
 
 
-                }
-            });
         permissionUtils = new PermissionUtils();
-       *//* String extStorageDirectory = Environment.getExternalStorageDirectory()
+        String extStorageDirectory = Environment.getExternalStorageDirectory()
                 .toString();
         File folder = new File(extStorageDirectory, "Reports");
         folder.mkdir();
@@ -153,22 +153,18 @@ public class Doc_ImageView_Bank1 extends SimpleActivity {
             file.createNewFile();
         } catch (IOException e1) {
             e1.printStackTrace();
-        }*//*
+        }
         float_chat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               // Downloader.DownloadFile(document, file);
-              //  new DownloadFileFromURL().execute(document);
+
                 Toast.makeText(mCon, "your file is downloading, Please wait...",Toast.LENGTH_SHORT).show();
 
                 haveStoragePermission();
 
             }
-        });*/
+        });
 
-
-
-     //   showPdf();
 
 
     }

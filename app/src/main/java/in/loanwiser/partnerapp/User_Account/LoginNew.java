@@ -584,6 +584,7 @@ public class LoginNew extends AppCompatActivity implements GoogleApiClient.Conne
             @Override
             public void onErrorResponse(VolleyError error) {
                 VolleyLog.d(TAG, "Error: " + error.getMessage());
+                Log.e("the issues", error.toString());
                 Toast.makeText(getApplicationContext(),error.getMessage(),Toast.LENGTH_SHORT).show();
                 progressDialog.dismiss();
             }

@@ -30,6 +30,7 @@ import android.os.RemoteException;
 import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -81,6 +82,7 @@ public class Splash_Screen extends AppCompatActivity {
     AppCompatTextView earntxt,typeloan;
     Animation animFadein;
     private final String prefKey = "checkedInstallReferrer";
+    LinearLayout splash;
 
     private final Executor backgroundExecutor = Executors.newSingleThreadExecutor();
 
@@ -92,7 +94,8 @@ public class Splash_Screen extends AppCompatActivity {
         pDialog.setMessage("Loading...");
         spinner=(ProgressBar)findViewById(R.id.ProgressBar);
         spinner.setVisibility(View.GONE);
-        fab = (FloatingActionButton) findViewById(R.id.fab);
+      //  fab = (FloatingActionButton) findViewById(R.id.fab);
+        splash = (LinearLayout) findViewById(R.id.splash);
 
         checkInstallReferrer();
         initCode();
@@ -250,7 +253,13 @@ public class Splash_Screen extends AppCompatActivity {
         } else {
             message = "Sorry! Not connected to internet";
             color = Color.WHITE;
-            Snackbar snackbar = Snackbar.make(findViewById(R.id.fab), message, Snackbar.LENGTH_INDEFINITE).setAction("Retry", new View.OnClickListener() {
+           // Snackbar.make(findViewById(android.R.id.fab), resp.getMessage(), Snackbar.LENGTH_LONG).show();
+          /*  Snackbar snackbar = Snackbar
+                    .make(fab,
+                            "Please check internet",
+                            Snackbar.LENGTH_LONG);*/
+
+            Snackbar snackbar = Snackbar.make(splash, message, Snackbar.LENGTH_INDEFINITE).setAction("Retry", new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     if(checkConnection()==true){

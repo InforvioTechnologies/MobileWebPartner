@@ -6,9 +6,12 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
+import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -37,6 +40,7 @@ import adhoc.app.applibrary.Config.AppUtils.Pref.Pref;
 import adhoc.app.applibrary.Config.AppUtils.Urls;
 import adhoc.app.applibrary.Config.AppUtils.VolleySignleton.AppController;
 import dmax.dialog.SpotsDialog;
+import in.loanwiser.Old_Partner.Home_Old;
 import in.loanwiser.partnerapp.Infinite_Scrollview.InfiniteScrollProvider;
 import in.loanwiser.partnerapp.Infinite_Scrollview.LeadListAdapter_Dashboard;
 import in.loanwiser.partnerapp.Infinite_Scrollview.Lead_item;
@@ -48,6 +52,7 @@ import in.loanwiser.partnerapp.PartnerActivitys.Home;
 import in.loanwiser.partnerapp.Partner_Statues.DashBoard_new;
 import in.loanwiser.partnerapp.R;
 import in.loanwiser.partnerapp.SimpleActivity;
+import in.loanwiser.partnerapp.Step_Changes_Screen.Lead_Crration_Activity_old;
 
 import static java.sql.Types.TIMESTAMP;
 
@@ -60,12 +65,13 @@ public class Push_Notification_List extends SimpleActivity implements OnLoadMore
 
     List<Notification_item> items;
     Notification_Adapter_Dashboard Notification_Adapter;
-
+    private Context context = this;
     private ProgressBar progressBar;
     private int count12 = -1;
     private AlertDialog progressDialog;
     private String tag_json_obj = "jobj_req", tag_json_arry = "jarray_req";
-
+    String Loan_amount,sub_categoryid,transaction_id1,subtask_id,loan_type_id,loan_type,
+            payment,applicant_id1, new_user,last_status;
     LinearLayout Notification_yes,no_notification;
 
     @Override
@@ -153,8 +159,15 @@ public class Push_Notification_List extends SimpleActivity implements OnLoadMore
                                         String btn_invoke = J.getString("btn_invoke");
                                         String status1 = J.getString("status");
 
+                                        String content = J.getString("content");
+                                        String app_content = J.getString("app_content");
+                                        String imgurl = J.getString("imgurl");
+                                        String post_title = J.getString("post_title");
 
-                                        items.add(new Notification_item(title,message,created_at,user_id,btn_invoke,id,status1));
+
+
+                                        items.add(new Notification_item(title,message,created_at,user_id,btn_invoke,id,status1,
+                                                content,app_content,imgurl,post_title));
                                         Notification_Adapter.notifyDataSetChanged();
                                     }
                                     //   Log.e("leadListA", String.valueOf(leadListAdapter_dashboard));
@@ -260,26 +273,83 @@ public class Push_Notification_List extends SimpleActivity implements OnLoadMore
                                 JSONArray jsonArray = jsonObject2.getJSONArray("emp_states");
 
                                 String user_id = jsonObject2.getString("user_id");
-                                String Loan_amount = jsonObject2.getString("loan_amount");
-                                String sub_categoryid =   jsonObject2.getString("sub_categoryid");
-                                String transaction_id1 =  jsonObject2.getString("transaction_id");
-                                String  subtask_id =  jsonObject2.getString("subtask_id");
-                                String loan_type_id =  jsonObject2.getString("loan_type_id");
-                                String loan_type =  jsonObject2.getString("loan_type");
-                                String payment =  jsonObject2.getString("payment");
-                                String applicant_id1 =  "APP-"+user_id;
+                                Loan_amount = jsonObject2.getString("loan_amount");
+                                sub_categoryid =   jsonObject2.getString("sub_categoryid");
+                                transaction_id1 =  jsonObject2.getString("transaction_id");
+                                subtask_id =  jsonObject2.getString("subtask_id");
+                                loan_type_id =  jsonObject2.getString("loan_type_id");
+                                loan_type =  jsonObject2.getString("loan_type");
+                                payment =  jsonObject2.getString("payment");
+                                applicant_id1 =  "APP-"+user_id;
+
+
+                                new_user =  jsonObject2.getString("new_user");
+                                last_status =  jsonObject2.getString("last_status");
+                                applicant_id1 =  "APP-"+user_id;
+                                // Toast.makeText(getApplicationContext(),new_user, Toast.LENGTH_SHORT).show();
 
                                 // String statues2 = "3";
-                                Pref.putUSERID(mCon,user_id);
+                                Pref.putUSERID(context,user_id);
+
+                                SharedPreferences.Editor prefEditor = PreferenceManager.getDefaultSharedPreferences(context).edit();
+                                prefEditor.putString("user_id", user_id);
+                                prefEditor.apply();
                                 String _Emp_staus_jsonArray = jsonArray.toString();
 
-                                Objs.ac.StartActivityPutExtra(mCon, Home.class,
-                                        Params.user_id,user_id,
-                                        Params.transaction_id,transaction_id1,
-                                        Params.applicant_id,applicant_id1,
-                                        Params.sub_taskid,subtask_id, Params.Applicant_status,_Emp_staus_jsonArray,
-                                        Params.loan_type_id,loan_type_id,Params.loan_type,loan_type);
-                                finish();
+
+                               /* if(new_user.equals("0"))
+                                {
+                                    Objs.ac.StartActivityPutExtra(context, Home.class,
+                                            Params.user_id,user_id,
+                                            Params.transaction_id,transaction_id1,
+                                            Params.applicant_id,applicant_id1,
+                                            Params.sub_taskid,subtask_id, Params.Applicant_status,_Emp_staus_jsonArray,
+                                            Params.loan_type_id,loan_type_id,Params.loan_type,loan_type);
+
+                                }else
+                                {
+                                    Objs.ac.StartActivityPutExtra(context, Home.class,
+                                            Params.user_id,user_id,
+                                            Params.transaction_id,transaction_id1,
+                                            Params.applicant_id,applicant_id1,
+                                            Params.sub_taskid,subtask_id, Params.Applicant_status,_Emp_staus_jsonArray,
+                                            Params.loan_type_id,loan_type_id,Params.loan_type,loan_type);
+                                }*/
+
+                                if(new_user.equals("0"))
+                                {
+                                    if(last_status.equals("1")&& payment.equals("error"))
+                                    {
+
+                                        Pref.putLoanType(context,loan_type_id);
+                                        //String Loantype_name = "Loan Against Property";
+                                        Pref.putLoanTypename(context,loan_type);
+                                        Pref.putnew_user(context,new_user);
+                                        Intent intent=new Intent(context, Lead_Crration_Activity_old.class);
+                                        context.startActivity(intent);
+                                    }else
+                                    {
+                                        Objs.ac.StartActivityPutExtra(context, Home_Old.class,
+                                                Params.user_id,user_id,
+                                                Params.transaction_id,transaction_id1,
+                                                Params.applicant_id,applicant_id1,
+                                                Params.sub_taskid,subtask_id, Params.Applicant_status,_Emp_staus_jsonArray,
+                                                Params.loan_type_id,loan_type_id,Params.loan_type,loan_type);
+
+                                    }
+
+                                }else
+                                {
+                                    Objs.ac.StartActivityPutExtra(context, Home.class,
+                                            Params.user_id,user_id,
+                                            Params.transaction_id,transaction_id1,
+                                            Params.applicant_id,applicant_id1,
+                                            Params.sub_taskid,subtask_id, Params.Applicant_status,_Emp_staus_jsonArray,
+                                            Params.loan_type_id,loan_type_id,Params.loan_type,loan_type);
+
+                                }
+
+
                               /*  if(payment.equals("error"))
                                 {
                                     Intent intent = new Intent(Dashboard_Activity.this, Payment_Details_Activity.class);
@@ -312,7 +382,7 @@ public class Push_Notification_List extends SimpleActivity implements OnLoadMore
             public void onErrorResponse(VolleyError error) {
                 progressDialog.dismiss();
                 Log.e("Applicant Entry request", String.valueOf(error));
-                Toast.makeText(getApplicationContext(),error.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(context,error.getMessage(), Toast.LENGTH_SHORT).show();
             }
         }) {
             @Override

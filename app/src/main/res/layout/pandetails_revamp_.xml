@@ -49,7 +49,7 @@
                 android:textSize="18dp"
                 android:textStyle="bold"
                 android:textColor="@color/gray_sade1"
-                android:text="PAN Details"
+                android:text="Personal Details"
                 android:layout_height="wrap_content" />
         </LinearLayout>
 
@@ -151,6 +151,7 @@
             android:padding="5dp"
             android:id="@+id/employement_selection_ly"
             android:orientation="vertical"
+            android:visibility="visible"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <LinearLayout
@@ -202,6 +203,7 @@
        <LinearLayout
            android:layout_marginTop="10dp"
            android:padding="5dp"
+           android:visibility="visible"
                     android:orientation="vertical"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
@@ -286,6 +288,59 @@
                     android:textColor="@color/black"/>
             </LinearLayout>
         </LinearLayout>
+                <LinearLayout
+                    android:layout_marginTop="10dp"
+                    android:padding="5dp"
+                    android:id="@+id/gender_ly"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:gravity="left"
+                            android:layout_marginLeft="2dp"
+                            android:layout_width="wrap_content"
+                            style="@style/LorgeText2"
+                            android:visibility="gone"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:textColorHint="@color/colorPrimaryDark"
+                            android:layout_height="wrap_content" />
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:gravity="left"
+                            android:layout_marginLeft="2dp"
+                            android:layout_width="match_parent"
+                            android:textSize="14dp"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:textColorHint="@color/colorPrimaryDark"
+                            android:text="@string/gender"
+                            android:layout_height="wrap_content" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+                            <Spinner
+                                android:id="@+id/gender_spinner"
+                                style="@style/Base.Widget.AppCompat.Spinner.Underlined"
+                                android:backgroundTint="@color/black"
+                                android:backgroundTintMode="src_in"
+                                android:spinnerMode="dropdown"
+                                android:layout_marginLeft="2dp"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+                </LinearLayout>
         <LinearLayout
             android:layout_marginTop="10dp"
             android:padding="5dp"
@@ -427,6 +482,158 @@
 
             </LinearLayout>
         </LinearLayout>
+                <LinearLayout
+                    android:layout_marginTop="10dp"
+                    android:padding="5dp"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:gravity="left"
+                            android:visibility="gone"
+                            android:layout_marginLeft="2dp"
+                            android:layout_width="wrap_content"
+                            style="@style/LorgeText2"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:textColorHint="@color/colorPrimaryDark"
+                            android:layout_height="wrap_content" />
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:gravity="left"
+                            android:layout_marginLeft="2dp"
+                            android:layout_width="match_parent"
+                            android:textSize="14dp"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:textColorHint="@color/colorPrimaryDark"
+                            android:text="Number of Dependents in Family*"
+                            android:layout_height="wrap_content" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+                        <androidx.appcompat.widget.AppCompatEditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textSize="14dp"
+                            android:layout_marginLeft="2dp"
+                            android:imeOptions="actionNext"
+                            android:inputType="number"
+                            android:maxLines="2"
+                            android:id="@+id/noof_dependenttxt"
+                            android:textColor="@color/black"/>
+                    </LinearLayout>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_marginTop="10dp"
+                    android:padding="5dp"
+                    android:id="@+id/education_lay"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:gravity="left"
+                            android:layout_marginLeft="2dp"
+                            android:layout_width="wrap_content"
+                            style="@style/LorgeText2"
+                            android:visibility="gone"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:textColorHint="@color/colorPrimaryDark"
+                            android:layout_height="wrap_content" />
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:gravity="left"
+                            android:layout_marginLeft="2dp"
+                            android:layout_width="match_parent"
+                            android:textSize="14dp"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:textColorHint="@color/colorPrimaryDark"
+                            android:text="@string/education_qualification"
+                            android:layout_height="wrap_content" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+                            <Spinner
+                                android:id="@+id/educational_qualificationspinner"
+                                style="@style/Base.Widget.AppCompat.Spinner.Underlined"
+                                android:backgroundTint="@color/black"
+                                android:backgroundTintMode="src_in"
+                                android:spinnerMode="dropdown"
+                                android:layout_marginLeft="2dp"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_marginTop="10dp"
+                    android:padding="5dp"
+                    android:id="@+id/assetown_lay"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:gravity="left"
+                            android:layout_marginLeft="2dp"
+                            android:layout_width="wrap_content"
+                            style="@style/LorgeText2"
+                            android:visibility="gone"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:textColorHint="@color/colorPrimaryDark"
+                            android:layout_height="wrap_content" />
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:gravity="left"
+                            android:layout_marginLeft="2dp"
+                            android:layout_width="match_parent"
+                            android:textSize="14dp"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:textColorHint="@color/colorPrimaryDark"
+                            android:text="@string/assets_owns"
+                            android:layout_height="wrap_content" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+                            <com.thomashaertel.widget.MultiSpinner
+                                style="@style/Base.Widget.AppCompat.Spinner.Underlined"
+                                android:backgroundTint="@color/black"
+                                android:backgroundTintMode="src_in"
+                                android:spinnerMode="dropdown"
+                                android:layout_marginLeft="2dp"
+                                android:id="@+id/assetsowned"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+                </LinearLayout>
+
             </LinearLayout>
 
     </LinearLayout>

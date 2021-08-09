@@ -90,7 +90,7 @@ public class MyearningFragment extends  Fragment {
         my_earning = (AppCompatTextView) v.findViewById(R.id.my_earning);
 
         linearLayout = v.findViewById(R.id.linearLayout);
-        linearLayout2 = v.findViewById(R.id.linearLayout2);
+       // linearLayout2 = v.findViewById(R.id.linearLayout2);
         network_stat = v.findViewById(R.id.network_stat);
         permissionUtils = new PermissionUtils();
 
@@ -216,8 +216,8 @@ public class MyearningFragment extends  Fragment {
                             String potential_earning = response.getString("potential_earning");
                             String wallet_coins = response.getString("wallet_coins");
 
-                            total_earnings.setText(commission_earned);
-                            potential_earnings.setText(potential_earning);
+                            total_earnings.setText(getResources().getString(R.string.rs)+ " "+commission_earned);
+                            potential_earnings.setText(getResources().getString(R.string.rs)+" " +potential_earning);
                             disbursal_of_leads.setText(wallet_coins);
 
                             setupViewPager(viewPager);

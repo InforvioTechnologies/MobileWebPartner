@@ -110,6 +110,15 @@
                             android:layout_height="wrap_content">
                             <include layout="@layout/residence_det_revamp_"/>
                         </LinearLayout>
+
+                        <LinearLayout
+                            android:visibility="gone"
+                            android:id="@+id/creditbanklay"
+                            android:orientation="vertical"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+                            <include layout="@layout/creditbankdetailslay"/>
+                        </LinearLayout>
                     </LinearLayout>
                     <LinearLayout
                         android:padding="5dp"
@@ -294,6 +303,24 @@
                                 android:id="@+id/residence_btn"
                                 android:visibility="gone"
                                 android:text="Next"
+                                android:textColor="@color/white"
+                                android:layout_width="250dp"
+                                android:layout_height="45dp"
+                                android:layout_gravity="start"
+                                android:background="@drawable/capsul_button4"
+                                />
+                        </LinearLayout>
+                        <LinearLayout
+
+                            android:layout_marginRight="10dp"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
+                            <androidx.appcompat.widget.AppCompatButton
+                                android:id="@+id/creditbankbtn"
+                                android:visibility="gone"
+                                android:text="@string/next"
                                 android:textColor="@color/white"
                                 android:layout_width="250dp"
                                 android:layout_height="45dp"

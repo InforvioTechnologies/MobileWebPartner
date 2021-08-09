@@ -64,6 +64,7 @@ import adhoc.app.applibrary.Config.AppUtils.Pref.Pref;
 import adhoc.app.applibrary.Config.AppUtils.Urls;
 import adhoc.app.applibrary.Config.AppUtils.VolleySignleton.AppController;
 import dmax.dialog.SpotsDialog;
+import in.loanwiser.partnerapp.PartnerActivitys.profile;
 import in.loanwiser.partnerapp.Refer_Earn.ReferEarnActivity;
 import in.loanwiser.partnerapp.BankStamentUpload.Doc_ImageView_pay_structur;
 import in.loanwiser.partnerapp.My_Earnings.My_Earnings;
@@ -373,10 +374,10 @@ public class DashBoard_new extends AppCompatActivity  implements NavigationView.
         int id = item.getItemId();
 
         if (id == R.id.nav_profile) {
-            Intent intent = new Intent(DashBoard_new.this,ProfileSettings.class);
+            //Intent intent = new Intent(DashBoard_new.this,ProfileSettings.class);
+            Intent intent = new Intent(DashBoard_new.this, profile.class);
             startActivity(intent);
-
-        } else if (id == R.id.nav_bank) {
+        }  else if (id == R.id.nav_bank) {
             Intent intent = new Intent(DashBoard_new.this,BankDetails.class);
             startActivity(intent);
 
@@ -582,8 +583,8 @@ public class DashBoard_new extends AppCompatActivity  implements NavigationView.
 
 
                 } else {
-                    Toast.makeText(DashBoard_new.this, "GET_ACCOUNTS Denied",
-                            Toast.LENGTH_SHORT).show();
+                    /*Toast.makeText(DashBoard_new.this, "GET_ACCOUNTS Denied",
+                            Toast.LENGTH_SHORT).show();*/
                 }
                 break;
             default:

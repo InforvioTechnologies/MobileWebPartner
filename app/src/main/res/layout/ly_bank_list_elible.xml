@@ -30,6 +30,7 @@
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -46,26 +47,17 @@
                             android:layout_height="match_parent">
 
                             <LinearLayout
-                                android:layout_marginRight="20dp"
-                                android:layout_gravity="center"
+                                android:padding="5dp"
+                                android:layout_marginRight="10dp"
+                                android:layout_marginLeft="10dp"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:orientation="vertical">
-                                <androidx.cardview.widget.CardView
-                                    xmlns:android="http://schemas.android.com/apk/res/android"
-                                    xmlns:app="http://schemas.android.com/apk/res-auto"
-                                    xmlns:card_view="http://schemas.android.com/tools"
-                                    app:cardCornerRadius="4dp"
-                                    android:clipToPadding="false"
-                                    app:cardUseCompatPadding="true"
-                                    app:cardElevation="4dp"
-                                    android:layout_gravity="center"
-                                    android:layout_marginTop="3dp"
-                                    android:layout_marginLeft="3dp"
-                                    android:layout_marginRight="3dp"
-                                    android:layout_width="wrap_content"
+                                android:orientation="horizontal">
+                                <LinearLayout
+                                    android:layout_width="300dp"
                                     android:layout_height="wrap_content"
-                                    >
+                                    android:orientation="horizontal">
+
                                     <ImageView
                                         android:padding="5dp"
                                         android:layout_gravity="center_horizontal"
@@ -75,76 +67,130 @@
                                         android:gravity="center"
                                         android:layout_width="358px"
                                         android:layout_height="150px" />
-                                </androidx.cardview.widget.CardView>
 
-                                <ProgressBar
-                                    android:visibility="gone"
-                                    android:id="@+id/progressBarMaterial"
-                                    style="@style/Widget.AppCompat.ProgressBar"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
-                                    android:gravity="center"
-                                    android:theme="@style/CircularProgress" />
-                            </LinearLayout>
-
-                            <LinearLayout
-                                android:layout_marginBottom="10dp"
-                                android:layout_gravity="center"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:orientation="vertical">
-                                <androidx.appcompat.widget.AppCompatTextView
-                                    android:layout_marginTop="10dp"
-                                    android:layout_marginRight="20dp"
-                                    android:layout_gravity="center"
-                                    android:id="@+id/cat_A"
-                                    android:gravity="center"
-                                    android:text="CAT_A"
-                                    android:textSize="12dp"
-                                    android:textColor="@color/white"
-                                    android:background="@drawable/capsul_button41"
-                                    android:layout_width="128px"
-                                    android:layout_height="51px" />
-                            </LinearLayout>
-
-                            <LinearLayout
-                                android:layout_marginBottom="10dp"
-                                android:layout_marginTop="10dp"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:orientation="horizontal">
+                                    <LinearLayout
+                                        android:padding="5dp"
+                                        android:layout_gravity="center"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content">
+                                        <ImageView
+                                            android:visibility="gone"
+                                            android:layout_gravity="right"
+                                            android:id="@+id/done_tick"
+                                            android:gravity="right"
+                                            android:background="@drawable/ic_green_tick"
+                                            android:layout_width="25dp"
+                                            android:layout_height="25dp" />
+                                        <androidx.appcompat.widget.AppCompatTextView
+                                            android:id="@+id/missing_document"
+                                            android:layout_gravity="center"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="Passed in Eligibility and Doc Requirement met"
+                                            android:textColor="#3FC58F"
+                                            />
+                                    </LinearLayout>
+                                </LinearLayout>
                                 <LinearLayout
+                                    android:id="@+id/eligible_ly"
+                                    android:layout_gravity="center"
+                                    android:background="@drawable/academy_background1"
+                                    android:layout_width="30dp"
+                                    android:layout_height="30dp">
+                                    <androidx.appcompat.widget.AppCompatImageView
+                                        android:visibility="gone"
+                                        android:id="@+id/arrowimgup"
+                                        android:layout_width="30dp"
+                                        android:layout_height="30dp"
+                                        android:layout_marginEnd="20dp"
+                                        android:gravity="center_horizontal"
+                                        android:layout_gravity="center"
+                                        android:src="@drawable/ic_keyboardarrow"
+                                        android:tint="@color/white"/>
+                                    <androidx.appcompat.widget.AppCompatImageView
+                                        android:gravity="center_horizontal"
+                                        android:id="@+id/arrowimgdown1"
+                                        android:layout_width="30dp"
+                                        android:layout_height="30dp"
+                                        android:layout_marginEnd="20dp"
+                                        android:layout_gravity="center"
+                                        android:src="@drawable/ic_down_exp"
+                                        android:tint="@color/white"/>
+
+                                </LinearLayout>
+
+
+                            </LinearLayout>
+
+                            <LinearLayout
+
+                                android:orientation="horizontal"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+
+                                <LinearLayout
+                                    android:visibility="gone"
                                     android:layout_weight="1"
                                     android:gravity="center"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content">
-
-                                    <ImageView
-
-                                        android:layout_marginRight="20dp"
-                                        android:layout_gravity="top"
-                                        android:id="@+id/done_tick"
-                                        android:gravity="right"
-                                        android:background="@drawable/ic_green_tick"
-                                        android:layout_width="25dp"
-                                        android:layout_height="25dp" />
                                     <androidx.appcompat.widget.AppCompatTextView
-                                        android:id="@+id/missing_document"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:text="Document matched"
-                                        android:textColor="#3FC58F"
-                                        />
+
+                                        android:layout_gravity="center"
+                                        android:id="@+id/cat_A"
+                                        android:gravity="center"
+                                        android:text="CAT_A"
+                                        android:textSize="12dp"
+                                        android:textColor="@color/white"
+                                        android:background="@drawable/capsul_button41"
+                                        android:layout_width="90dp"
+                                        android:layout_height="29dp" />
                                 </LinearLayout>
 
+
+                            </LinearLayout>
+                            <ProgressBar
+                                android:visibility="gone"
+                                android:id="@+id/progressBarMaterial"
+                                style="@style/Widget.AppCompat.ProgressBar"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:gravity="center"
+                                android:theme="@style/CircularProgress" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+                            <LinearLayout
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:visibility="gone"
+                                    android:id="@+id/missing"
+                                    android:layout_width="400dp"
+                                    android:layout_gravity="center"
+                                    android:gravity="center"
+                                    android:layout_height="wrap_content"
+                                    android:text="please click bank logo to see the missing documents"
+                                    android:textColor="@color/pending_color"
+                                    />
                             </LinearLayout>
 
                         </LinearLayout>
-                    </LinearLayout>
 
+
+
+                    </LinearLayout>
                 </LinearLayout>
+
             </LinearLayout>
+
             <LinearLayout
                 android:layout_marginBottom="10dp"
                 android:orientation="vertical"
@@ -164,7 +210,6 @@
                 <LinearLayout
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
-                    android:layout_marginBottom="10dp"
                     android:id="@+id/check_list_name"
                     android:orientation="vertical"
                     android:layout_width="match_parent"
@@ -201,7 +246,36 @@
 
 
                 </LinearLayout>
+                <LinearLayout
+                    android:layout_marginRight="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:id="@+id/eligible_available"
+                    android:layout_marginEnd="10dp"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    >
+                    <HorizontalScrollView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <TableLayout
+                            android:padding="5dp"
+                            xmlns:android="http://schemas.android.com/apk/res/android"
+                            xmlns:app="http://schemas.android.com/apk/res-auto"
+                            android:orientation="vertical"
+                            android:id="@+id/tabel_row"
+                            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:cacheColorHint="@android:color/transparent"
+                            android:background="@color/white"
+                            android:clipToPadding="false"
+                            android:fadeScrollbars="true"
+                            android:scrollbars="none" />
+                    </HorizontalScrollView>
+                </LinearLayout>
             </LinearLayout>
         </LinearLayout>
+
     </androidx.cardview.widget.CardView>
 </LinearLayout>

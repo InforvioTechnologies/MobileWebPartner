@@ -133,6 +133,7 @@ public class LeadeFragment extends Fragment implements OnLoadMoreListener {
         progressDialog = new SpotsDialog(getContext(), R.style.Custom);
 
         if (isConnected()==false){
+
             progressDialog.dismiss();
             network_stat.setVisibility(View.VISIBLE);
             mainlay.setVisibility(View.INVISIBLE);

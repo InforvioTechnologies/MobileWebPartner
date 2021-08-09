@@ -44,6 +44,33 @@
             android:name=".Partner_Statues.DashBoard_new"
             android:label="@string/title_activity_dash_board_new"
             android:theme="@style/AppTheme.NoActionBar" />
+
+        <activity
+            android:name="in.loanwiser.Old_Partner.Home_Old"
+            android:theme="@style/NoAction2"
+            android:windowSoftInputMode="stateHidden" />
+
+        <activity
+            android:name="in.loanwiser.Old_Partner.Upload_Activity_Bank_Old"
+            android:theme="@style/NoAction2"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name="in.loanwiser.Old_Partner.BankAnalysis_old"
+            android:theme="@style/NoAction2"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name="in.loanwiser.Old_Partner.Applicant_Doc_Details_revamp_old"
+            android:theme="@style/NoAction2"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name="in.loanwiser.Old_Partner.Document_Availability_Check_old"
+            android:theme="@style/NoAction2"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name="in.loanwiser.Old_Partner.ManiActivity_Image2_old"
+            android:theme="@style/NoAction2"
+            android:windowSoftInputMode="stateHidden" />
+
         <!--
  <activity
             android:name=".Bottom_Navigation.Dashboard_Bottom_Navigation_Activity"
@@ -107,8 +134,8 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-
-        <activity android:name=".Partner_Statues.Share_Activity_Notification"
+        <activity
+            android:name=".Partner_Statues.Share_Activity_Notification"
             android:theme="@style/NoAction2"
             android:windowSoftInputMode="stateHidden">
             <intent-filter>
@@ -117,16 +144,26 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".Partner_Statues.BusinessCardActivity"
+            android:theme="@style/NoAction2"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".PartnerActivitys.profile"
+            android:theme="@style/NoAction2"
+            android:windowSoftInputMode="stateHidden" />
+        <activity android:name=".Step3_Changes.Elegibility_Report"
+            android:theme="@style/NoAction2"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".Step3_Changes.Automater_Under_write"
             android:theme="@style/NoAction2"
             android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".Refer_Earn.ReferEarnActivity"
             android:theme="@style/NoAction2"
             android:windowSoftInputMode="stateHidden" />
-        <activity android:name=".Push_Notification.Refer_and_Earn_Activity"></activity>
+        <activity android:name=".Push_Notification.Refer_and_Earn_Activity" />
         <activity
             android:name=".Partner_Statues.WebsiteActivity"
             android:theme="@style/NoAction2"
@@ -192,10 +229,18 @@
             android:name=".BankStamentUpload.BankAnalysis"
             android:theme="@style/NoAction2"
             android:windowSoftInputMode="stateHidden" />
+
+        <activity
+            android:name=".BankStamentUpload.BankAnalysis1"
+            android:theme="@style/NoAction2"
+            android:windowSoftInputMode="stateHidden" />
+
         <activity
             android:name=".BankStamentUpload.Upload_Activity_Bank"
             android:theme="@style/NoAction2"
             android:windowSoftInputMode="stateHidden" />
+
+
         <activity
             android:name=".Documents.Document_Availability_Check"
             android:theme="@style/NoAction2"
@@ -209,6 +254,14 @@
             android:theme="@style/NoAction2"
             android:windowSoftInputMode="stateHidden" />
         <activity
+            android:name=".Documents.Bank_Availability_Check"
+            android:theme="@style/NoAction2"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".Step_Changes_Screen.ViablityReportActivity"
+            android:theme="@style/NoAction2"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
             android:name=".Documents.ActivityStreamActivity"
             android:theme="@style/NoAction2"
             android:windowSoftInputMode="stateHidden" />
@@ -218,6 +271,14 @@
             android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".Step_Changes_Screen.RelationshipContact"
+            android:theme="@style/NoAction2"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".Step_Changes_Screen.ViableBankActivity"
+            android:theme="@style/NoAction2"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".PartnerActivitys.ViablityfailureActivity"
             android:theme="@style/NoAction2"
             android:windowSoftInputMode="stateHidden" />
         <activity
@@ -236,6 +297,8 @@
             android:name=".BankStamentUpload.Doc_ImageView_Bank"
             android:theme="@style/NoAction2"
             android:windowSoftInputMode="stateHidden" />
+
+
         <activity
             android:name=".BankStamentUpload.Doc_ImageView_Bank1"
             android:theme="@style/NoAction2"
@@ -276,6 +339,12 @@
             android:name=".Credit_Vehicle_.Viability_Data_revamp"
             android:theme="@style/NoAction2"
             android:windowSoftInputMode="stateHidden" />
+
+        <activity
+            android:name=".Credit_Vehicle_.Viability_Data_revamp_old"
+            android:theme="@style/NoAction2"
+            android:windowSoftInputMode="stateHidden" />
+
         <activity
             android:name=".Push_Notification.Push_Notification_List"
             android:theme="@style/NoAction2"
@@ -379,6 +448,10 @@
             android:theme="@style/NoAction2"
             android:windowSoftInputMode="stateHidden" />
         <activity
+            android:name=".Step_Changes_Screen.Lead_Crration_Activity_old"
+            android:theme="@style/NoAction2"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
             android:name=".Step_Changes_Screen.CRIF_Report_Activity"
             android:theme="@style/NoAction2"
             android:windowSoftInputMode="stateHidden" />
@@ -434,6 +507,12 @@
             android:name=".PartnerActivitys.Ask_user_Dashboard_Activity"
             android:theme="@style/NoAction2"
             android:windowSoftInputMode="stateHidden" />
+
+        <activity
+            android:name=".PartnerActivitys.Viability_Data_revamp_old"
+            android:theme="@style/NoAction2"
+            android:windowSoftInputMode="stateHidden" />
+
         <activity
             android:name=".Step_Changes_Screen.Eligibility_Check_PL"
             android:theme="@style/NoAction2"

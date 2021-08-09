@@ -31,7 +31,10 @@
                     app:popupTheme="@style/Theme.AppCompat"/>
 
             </com.google.android.material.appbar.AppBarLayout>
-
+            <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+                android:id="@+id/swife"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -44,7 +47,7 @@
                     android:layout_height="match_parent"
                     app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-                <LinearLayout
+                       <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
@@ -127,8 +130,10 @@
 
                 </LinearLayout>
 
+
                 </androidx.core.widget.NestedScrollView>
             </LinearLayout>
+            </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 
 

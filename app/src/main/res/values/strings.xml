@@ -81,7 +81,7 @@
     <string name="state_type">Select the State</string>
     <string name="mobileerror">Enter a valid mobile number</string>
     <string name="no_leads_data" tools:ignore="ExtraTranslation">You have not added any lead yet.
-        Your leads will \n appear hear once you start adding them </string>
+        Your leads will \n appear here once you start adding them </string>
     <string name="noask_leads_data" tools:ignore="ExtraTranslation">No Ask Leads found</string>
     <string name="listapp">List of Applications</string>
 
@@ -108,7 +108,7 @@
     <string name="branch">Bank Branch</string>
     <string name="pay_mode">Mode of Payment through</string>
     <string name="proceed">Proceed</string>
-    <string name="notestr">Note*-Please submit to Loanwiser by clicking on the button if you want to process for below Banks.</string>
+    <string name="notestr">Please submit to Loanwiser by clicking on the button if you want to process for below Banks.</string>
     <string name="pay_out_details">Payout Details</string>
     <string name="ifsc">IFSC code</string>
     <string name="internet">Internet</string>
@@ -129,10 +129,9 @@
         the document requirement for \n at least one of the eligible banks. \n\n\n To make this applicant
         eligible for \n multiple banks, try submitting \n documents for other eligible banks, \n if any.</string>-->
 
-    <string name="bank_analysis_not_met">Sorry, you have not met the document \n requirement of
-        any of the eligible \n banks. Please try to provide
-        the \n documents for at least one of the bank \n listed below. \n\n\n
-    Without the required Documents, this \n lead cannot be processed further.</string>
+    <string name="bank_analysis_not_met">you have not met the document requirement of
+        any of the eligible banks. Please try to provide
+        the documents for at least one of the bank listed below. Without the required Documents, this lead cannot be processed further.</string>
     <string name="internet_b">Internet Banking</string>
     <string name="mbank_b">Mobile Banking</string>
     <string name="open_my">Open My</string>
@@ -266,6 +265,11 @@
     <string name="emp_type">Type of Employee</string>
     <string name="emp_count">No of Employee in company</string>
     <string name="salary_credit">Salary Credit Method</string>
+    <string name="uploading_for">You are Uploading For</string>
+    <string name="bank_name_step">Bank Name</string>
+    <string name="account_type1">Account Type</string>
+    <string name="banK_stm_type">Bank Statement Type</string>
+    <string name="password_protedted">Is Password Protected?</string>
     <string name="area">Area</string>
     <string name="cur_res_proof">Current residence address Proof</string>
 
@@ -282,6 +286,7 @@
     <string name="ln_typ">Loan Type</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
+
     <string name="rem_tnr">Remaining Tenor</string>
     <string name="occupation_">Occupation</string>
     <string name="rent_paid">Rent Paid for House</string>
@@ -292,6 +297,8 @@
     <string name="nodf">No Of Dependents in Family</string>
     <string name="rent_paid_">Rent paid for House</string>
     <string name="montly">Monthly Net Salary</string>
+    <string name="ac_number">Account No</string>
+    <string name="pass_word">Password</string>
     <string name="other_income_">Other Income (if any)</string>
     <string name="other_income">Monthly income</string>
     <string name="home_purpose2"> Purchase house</string>
@@ -503,6 +510,7 @@
     //Step changes
     <string name="eligi_check">Eligibility Check</string>
     <string name="CRIF_REPORT">CRIF REPORT ACTIVITY</string>
+
     <string name="VIABILITY">VIABILITY REPORT ACTIVITY</string>
     <string name="emp_type1">Type of Employee</string>
     <string name="residence_pin">Residence Pincode</string>
@@ -712,6 +720,8 @@
     <string name="error_bus_setup_invest">Enter the business set up investment</string>
     <string name="error_value_of_machinaries">Enter the Value of machinaries</string>
     <string name="payment1">Payment</string>
+    <string name="au_Un_Wr">Automated Underwriting</string>
+    <string name="elegibility">Eligibility Report</string>
     <string name="doc_availability">Bank Availability Check</string>
     <string name="crif_request">CRIF Request</string>
 
@@ -880,11 +890,23 @@
 
     <string name="text_with_bullet">\u2022</string>
 
-    <string name="bank_analysis_met">Congrats.! You have successfully \n met
-    the document requirement for \n at least one of the eligible banks.</string>
+    <string name="bank_analysis_met">You have successfully met
+    the document requirement for at least one of the eligible banks.</string>
     <string name="bank_analysis_mets">To make this applicant
     eligible for multiple banks, try submitting documents for other eligible banks,if any.</string>
 
+    <string name="ban_elegible_"> ● Congrats You have  Successfully met Eligible and Doc Requirement for 3
+        Lenders and Eligible and Docs need are  3 lenders.</string>
+
+    <string name="ban_elegible_1"> - You have  to Successfully meet Eligible and
+        Doc Requirement for at least one lender to submit the lead.</string>
+
+    <string name="ban_elegible_doc_missing"> ● Sorry, You have not met the document requirement of any of the Eligible banks.
+        Please try to provide the documents for at least one of the banks listed below.</string>
+
+    <string name="ban_elegible_failed"> ● After assessing your profile we found that
+        you are not met the Eligible requirement of below listed banks.
+        we are sorry to inform that we are unable to process your lead.</string>
     //my earnings
     <string name="total_earnings">Total Earnings</string>
     <string name="potencial_earn">Potential Earnings*</string>
@@ -917,19 +939,19 @@
         <item>Week schedule</item>
 -->
     </string-array>
-    <string name="step_one">Step 1</string>
-    <string name="step_two">Step 2</string>
-    <string name="step_three">Step 3</string>
-    <string name="basic_lead">Basic Lead Details</string>
+    <string name="step_one">● Step 1</string>
+    <string name="step_two">● Step 2</string>
+    <string name="step_three">● Step 3</string>
+    <string name="basic_lead">-  Basic Lead Details</string>
     <string name="basic_leaddesc">You will get 50% of your Total Partner Benefit</string>
-    <string name="viabilitycheck">Viability Check</string>
-    <string name="viabilitycheck1">Viability Check Report</string>
+    <string name="viabilitycheck">-  Viability Check</string>
+    <string name="viabilitycheck1">-  Viability Check Report</string>
     <string name="via_descone">You will get 60% of your Total Partner Benefit</string>
     <string name="instant_credit">Instant Credit Assessment</string>
     <string name="instant_desc">You will get 80% of your Total Partner Benefit</string>
     <string name="eligiblity_des">You will get 80% of your Total Partner Benefit</string>
     <string name="eligiblity_check">Eligibility Check</string>
-    <string name="document_title">Document Upload</string>
+    <string name="document_title">-  Document Upload</string>
     <string name="document_desc">you will get 100% of your Total Partner Benefit</string>
     <string name="note"><b>Note:</b> More steps you complete, More you can earn! 🏆</string>
 
@@ -976,7 +998,7 @@
     <string name="doc_check">Document Checklist</string>
 
 
-    <string name="pandetails">PAN Details</string>
+    <string name="pandetails">Personal Details</string>
     <string name="pancard_num">Pancard Number</string>
     <string name="dateofbith">Date of Birth</string>
     <string name="fathername">Father\'s Name</string>
@@ -1032,8 +1054,8 @@
     <string name="viewreport2">Co Applicant CRIF Report</string>
 
 
-    <string name="leadpass">Your Lead has Successfully Passed the Viability Check</string>
-    <string name="leadfail">Sorry Your Lead Has Failed the viability check</string>
+    <string name="leadpass">Your Lead has Successfully Passed the CRIF Check</string>
+    <string name="leadfail">Sorry Your Lead Has Failed the CRIF check</string>
     <string name="crifscore">Applicant <b>CRIF Score</b> </string>
     <string name="viewreport">Viablity Report</string>
     <string name="notevialblepass">You can also download the Viability Report from Lead Detail Dashboard.</string>
@@ -1119,7 +1141,9 @@
     <string name="register">Register</string>
     <string name="notes_txt"><b>Note:</b> Payment do not assure a guaranteed loan.</string>
     <string name="firstone">In the next screen, You will have to enter customer mobile number, to which a payment link has to be sent. Customer can make payment himself by clicking on that link.</string>
-    <string name="secondone"><br>You\'ll be charged 100 Credit Coins from your Loanwiser credit coin wallet.\n\n</br> </string>
+    <string name="secondone"><br>You\'ll be charged </br> </string>
+
+    <string name="secondone1"><br>Credit Coins from your Loanwiser credit coin wallet.\n\n</br> </string>
     <string name="thrdone">You\'ve chosen to pay from your account and collect cash from customer. You should collect the exact amount mentioned above. We will call the customer for verification.</string>
     <string name="sharepromo">Share Promos</string>
 
@@ -1146,5 +1170,58 @@
     <string name="whatsinclude">What\'s included in this price</string>
 
     <string name="check"><b>50 Credit Coins</b> will be credited in LoanWiser Wallet on successful lead submission.</string>
+
+
+    <!--STEP2 string revamp-->
+
+    <string name="creditdetails">\u25CF Credit Details</string>
+    <string name="bankdetails">\u25CF Bank Details</string>
+    <string name="closecredit">"Do you have any running loan /closed loan/ Credit card or Consumer loan? * "</string>
+    <string name="legalwriteof">"Do you have any Legal / write off/ Settlement in Past Loans * "</string>
+    <string name="creditscore">Do you Know your Credit Score?*</string>
+    <string name="didpay">Did you pay Any EMI More than one Month late?*</string>
+    <string name="banknamecredit">Which bank name your salary is credited to?*</string>
+    <string name="bankpdf">Can you arrange a Bank Generated PDF Bank Statement?*</string>
+    <string name="gender">Gender</string>
+    <string name="doornum">Company Door Number/Street name*</string>
+    <string name="currenresidence">Current Residence Address Proof*</string>
+    <string name="rentpaidhouse">Rent Paid for House*</string>
+    <string name="livein">Live in Current residence (months) *</string>
+    <string name="aboutbusiness">About the Business</string>
+    <string name="haveaddress_proof">Have Address Proof for office ?</string>
+    <string name="fileitr">Do you File ITR?</string>
+
+    <string name="viablebankss">Viable Bank</string>
+    <string name="viablebanks">\u25CF Viable Bank</string>
+    <string name="viablebankali">Profile information given in viability check has to substantiate with documents.</string>
+    <string name="documentrequirement">Document Requirements</string>
+    <string name="eligiblity_report">Eligiblity Report</string>
+    <string name="acgbank">What\'s your Avarage Bank Balance</string>
+    <string name="bankingturnover">Banking Turnover?</string>
+    <string name="transacarry">Which Bank Business Transcation is Carried</string>
+    <string name="majortran">Major Transcation Through?</string>
+    <string name="bankactype">Bank Account Type?</string>
+    <string name="avgtxt">What\'s your Average Bank Balance</string>
+    <string name="bankturnstr">Banking Turnover</string>
+    <string name="viablityreport">Viablity Report</string>
+    <string name="viablityreport_f">Viablity Faild</string>
+    <string name="viabilebank">Viable Bank</string>
+    <string name="vali_names">Please Enter the Value</string>
+    <string name="viablebank">Viable Banks</string>
+    <string name="leadviable">Your Lead Viability Report Status Check</string>
+    <string name="assets_owns">Assets owned in</string>
+    <string name="type_of_emps">Type of employee</string>
+    <string name="documentrequirement1">View Required Document</string>
+    <string name="viablitystatus">Viablity Status</string>
+    <string name="coemploy_detail">Co Applicant Employment Details</string>
+    <string name="pandetailsco">Co Applicant Personal Details</string>
+    <string name="rs">\u20A8</string>
+    <string name="total_Creditcoins">Total Credit Coins</string>
+    <string name="detailearn">Detailed Earning Structure</string>
+    <string name="sharefriend">Share with Social network</string>
+
+    <string name="employe_proof">Employement Proof</string>
+    <string name="oficmail">Official Mail id</string>
+    <string name="viablebankali1">Viability Analysis Based On Qualification Criteria</string>
 
 </resources>

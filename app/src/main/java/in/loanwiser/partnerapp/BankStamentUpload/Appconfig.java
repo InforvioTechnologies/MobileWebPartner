@@ -13,6 +13,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class Appconfig {
     Retrofit retrofit;
     private static String BASE_URL = "https://cscapi.loanwiser.in/mobile/";
+ //   private static String BASE_URL = "https://apiuat.loanwiser.in/mobile/";
 
 
 

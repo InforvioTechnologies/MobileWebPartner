@@ -80,6 +80,8 @@
                 android:layout_height="wrap_content">
                 <include layout="@layout/secure_extensionloan"/>
             </LinearLayout>
+
+
             <LinearLayout
                 android:id="@+id/pandetails_txtlay"
                 android:layout_width="match_parent"
@@ -206,6 +208,52 @@
                             </LinearLayout>
                         </LinearLayout>
 
+
+                        <LinearLayout
+                            android:id="@+id/gendet"
+                            android:padding="5dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1">
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textColor="#8A8A8A"
+                                    android:id="@+id/genderhead"
+                                    style="@style/SmallText"
+                                    android:text="@string/gender"
+                                    android:textSize="16sp"/>
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:gravity="end"
+                                    android:textColor="@color/colorPrimary"
+                                    style="@style/SmallText"
+                                    android:text=":"/>
+                            </LinearLayout>
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1">
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textColor="#032C58"
+                                    android:textStyle="bold"
+                                    android:id="@+id/gendertxt"
+                                    style="@style/SmallText"
+
+                                    />
+                            </LinearLayout>
+                        </LinearLayout>
+
+
+
                         <LinearLayout
                             android:id="@+id/type_of_emploe"
                             android:padding="5dp"
@@ -292,6 +340,136 @@
                             </LinearLayout>
                         </LinearLayout>
 
+
+
+                        <LinearLayout
+                            android:id="@+id/depentlay"
+                            android:padding="5dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="horizontal"
+                                android:layout_weight="1">
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textColor="#8A8A8A"
+                                    style="@style/SmallText"
+                                    android:text="No of dependents"
+                                    android:textSize="16sp"/>
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:gravity="end"
+                                    android:textColor="@color/colorPrimary"
+                                    style="@style/SmallText"
+                                    android:text=":"/>
+                            </LinearLayout>
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1">
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textColor="#032C58"
+                                    android:textStyle="bold"
+                                    android:id="@+id/nooddependents"
+                                    style="@style/SmallText"
+
+                                    />
+                            </LinearLayout>
+                        </LinearLayout>
+
+
+                        <LinearLayout
+                            android:id="@+id/educalay"
+                            android:padding="5dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="horizontal"
+                                android:layout_weight="1">
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textColor="#8A8A8A"
+                                    style="@style/SmallText"
+                                    android:text="Education Qualification"
+                                    android:textSize="16sp"/>
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:gravity="end"
+                                    android:textColor="@color/colorPrimary"
+                                    style="@style/SmallText"
+                                    android:text=":"/>
+                            </LinearLayout>
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1">
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textColor="#032C58"
+                                    android:textStyle="bold"
+                                    android:id="@+id/educationqualtxt"
+                                    style="@style/SmallText"
+
+                                    />
+                            </LinearLayout>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/assetlay"
+                            android:padding="5dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="horizontal"
+                                android:layout_weight="1">
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textColor="#8A8A8A"
+                                    style="@style/SmallText"
+                                    android:text="Assets Owned in"
+                                    android:textSize="16sp"/>
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:gravity="end"
+                                    android:textColor="@color/colorPrimary"
+                                    style="@style/SmallText"
+                                    android:text=":"/>
+                            </LinearLayout>
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1">
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textColor="#032C58"
+                                    android:textStyle="bold"
+                                    android:id="@+id/assetstxt"
+                                    style="@style/SmallText"
+
+                                    />
+                            </LinearLayout>
+                        </LinearLayout>
+
+
                         <LinearLayout
                             android:id="@+id/jus"
                             android:padding="5dp"
@@ -365,6 +543,42 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <include layout="@layout/unsecure_resdetails"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:visibility="gone"
+                android:orientation="vertical"
+                android:id="@+id/creditbanklay"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <include layout="@layout/creditbanklayshow"/>
+
+            </LinearLayout>
+            <LinearLayout
+                android:visibility="gone"
+                android:orientation="vertical"
+                android:id="@+id/coapplicant_pandetails"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <include layout="@layout/coapplicant_pandetails"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:visibility="gone"
+                android:orientation="vertical"
+                android:id="@+id/coapplicant_employementdeatilslay"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <include layout="@layout/coapplicant_employement"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:visibility="gone"
+                android:orientation="vertical"
+                android:id="@+id/coapplicant_selfemployementdeatilslay"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <include layout="@layout/coapplicant_selfemployed"/>
             </LinearLayout>
 
 

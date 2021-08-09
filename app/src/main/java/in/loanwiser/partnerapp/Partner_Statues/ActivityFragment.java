@@ -9,6 +9,7 @@ import android.graphics.Typeface;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.RemoteException;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -27,6 +28,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.android.installreferrer.api.InstallReferrerClient;
 import com.android.installreferrer.api.InstallReferrerStateListener;
@@ -69,7 +71,8 @@ import in.loanwiser.partnerapp.User_Account.Welcome_Page;
 import static android.content.Context.MODE_PRIVATE;
 
 
-public class ActivityFragment extends Fragment implements NavigationView.OnNavigationItemSelectedListener, BaseSliderView.OnSliderClickListener, ViewPagerEx.OnPageChangeListener {
+public class ActivityFragment extends Fragment implements NavigationView.OnNavigationItemSelectedListener, BaseSliderView.OnSliderClickListener
+       ,ViewPagerEx.OnPageChangeListener {
 
     public ActivityFragment() {
         // Required empty public constructor
@@ -115,7 +118,7 @@ public class ActivityFragment extends Fragment implements NavigationView.OnNavig
     private AppCompatTextView profile,recent_leads,Document_cheklist,fhas,share_material;
 
     LinearLayout firstlay,secondlay,thirdlay,Ly_allocate,ly_helth_assement_,ly_document_assement_,network_stat,
-            view_all_ly, ask_Ly_allocate,asklay,view_all_ly1;
+            view_all_ly, ask_Ly_allocate,asklay,view_all_ly1,oveall_view;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -158,6 +161,7 @@ public class ActivityFragment extends Fragment implements NavigationView.OnNavig
         recycler_view_share = (RecyclerView)view.findViewById(R.id.recycler_view_share);
         framelayout = (FrameLayout) view.findViewById(R.id.framelayout);
 
+      //  mSwipeRefreshLayout.setOnRefreshListener((SwipeRefreshLayout.OnRefreshListener) getContext());
 
 
         firstlay=view.findViewById(R.id.firstlay);
@@ -168,6 +172,7 @@ public class ActivityFragment extends Fragment implements NavigationView.OnNavig
         ly_helth_assement_=view.findViewById(R.id.ly_helth_assement_);
         ly_document_assement_=view.findViewById(R.id.ly_document_assement_);
         network_stat=view.findViewById(R.id.network_stat);
+        oveall_view=view.findViewById(R.id.oveall_view);
         share_material=view.findViewById(R.id.share_material);
 
         button_businessview=view.findViewById(R.id.button_businessview);
@@ -260,12 +265,16 @@ public class ActivityFragment extends Fragment implements NavigationView.OnNavig
 
         if(isConnected()==false){
             network_stat.setVisibility(View.VISIBLE);
+            oveall_view.setVisibility(View.GONE);
             firstlay.setVisibility(View.GONE);
             secondlay.setVisibility(View.GONE);
             thirdlay.setVisibility(View.GONE);
             Ly_allocate.setVisibility(View.GONE);
             ly_helth_assement_.setVisibility(View.GONE);
             ly_document_assement_.setVisibility(View.GONE);
+        }else
+        {
+            oveall_view.setVisibility(View.VISIBLE);
         }
 
 
@@ -569,6 +578,7 @@ public class ActivityFragment extends Fragment implements NavigationView.OnNavig
                             }
 
                             if (ja2.length()>0){
+
                                 for(int i = 0;i<ja2.length();i++){
                                     if( i < 3) {
                                         JSONObject J = ja2.getJSONObject(i);
@@ -664,7 +674,6 @@ public class ActivityFragment extends Fragment implements NavigationView.OnNavig
 
 
 
- 
 
 
 }

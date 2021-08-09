@@ -48,7 +48,8 @@ import adhoc.app.applibrary.Config.AppUtils.Pref.Pref;
 import adhoc.app.applibrary.Config.AppUtils.Urls;
 import adhoc.app.applibrary.Config.AppUtils.VolleySignleton.AppController;
 import dmax.dialog.SpotsDialog;
-import in.loanwiser.partnerapp.Documents.Applicant_Doc_Details_revamp;
+
+import in.loanwiser.Old_Partner.Applicant_Doc_Details_revamp_old;
 import in.loanwiser.partnerapp.R;
 
 
@@ -170,7 +171,7 @@ public class PropertyFragment extends Fragment implements CompoundButton.OnCheck
             @Override
             public void onClick(View view) {
 
-                Intent intent = new Intent(getActivity(), Applicant_Doc_Details_revamp.class);
+                Intent intent = new Intent(getActivity(), Applicant_Doc_Details_revamp_old.class);
                 startActivity(intent);
                 getActivity().finish();
             }

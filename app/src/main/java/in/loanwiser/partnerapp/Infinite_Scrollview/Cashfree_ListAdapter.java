@@ -129,7 +129,8 @@ public class Cashfree_ListAdapter extends RecyclerView.Adapter<Cashfree_ListAdap
             payment_plan = post.getpayment_plan();
 
             date.setText(date_disp);
-            lead_detail.setText(user_name + "\n"+ app_id+"" +current_step);
+           // lead_detail.setText(user_name + "\n"+ app_id+"" +current_step);
+            lead_detail.setText(user_name + "\n"+ app_id);
             loan_details.setText(loan_amount + "\n"+ loan_type);
             purpose.setText(name_of_source + "\n"+ payment_plan);
 

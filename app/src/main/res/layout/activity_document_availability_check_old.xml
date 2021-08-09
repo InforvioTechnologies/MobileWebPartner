@@ -1,0 +1,544 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="in.loanwiser.partnerapp.Documents.Applicant_Doc_Details">
+<!--
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?android:attr/actionBarSize"
+        android:elevation="5dp"
+        android:background="@drawable/greadient"
+        app:theme="@style/ThemeOverlay.AppCompat"
+        tools:ignore="NewApi" />-->
+
+<androidx.core.widget.NestedScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+    <LinearLayout
+        android:id="@+id/Document_"
+        android:padding="1dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:background="@color/gray1"
+        android:layout_height="51dp">
+        <LinearLayout
+            android:id="@+id/Applicant_ly1"
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent">
+            <androidx.cardview.widget.CardView
+                android:id="@+id/Applicant_ly"
+                xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                app:cardBackgroundColor="@color/colorWhite"
+                android:clickable="true"
+                app:cardElevation="5dp"
+                app:cardCornerRadius="1dp"
+                android:clipToPadding="true"
+                android:layout_marginRight="1dp"
+
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <LinearLayout
+                    android:gravity="center"
+                    android:background="@color/white"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                        <LinearLayout
+                            android:gravity="center"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:orientation="vertical">
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:layout_gravity="center"
+
+                                style="@style/SmallText"
+                                android:id="@+id/applicant_txt"
+                                android:textColor="@color/blue"
+                                android:text="Applicant"
+                                android:textStyle="bold"
+                                android:layout_width="match_parent"
+                                android:textSize="14dp"
+                                android:layout_height="match_parent" />
+
+                        </LinearLayout>
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/Co_Applicant_ly1"
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent">
+            <androidx.cardview.widget.CardView
+                android:id="@+id/Co_Applicant_ly"
+                xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                android:layout_width="match_parent"
+                app:cardBackgroundColor="@color/colorWhite"
+                android:clickable="true"
+                app:cardElevation="5dp"
+                app:cardCornerRadius="1dp"
+                android:clipToPadding="true"
+
+                android:layout_marginLeft="1dp"
+                android:layout_height="match_parent">
+                <LinearLayout
+                    android:gravity="center"
+                    android:background="@color/white"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:orientation="vertical">
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:layout_gravity="center"
+                                style="@style/SmallText"
+                                android:textColor="@color/blue"
+                                android:text="Co Applicant"
+                                android:id="@+id/co_applicant_txt"
+                                android:layout_width="wrap_content"
+                                android:textSize="14dp"
+                                android:textStyle="bold"
+                                android:layout_height="wrap_content" />
+                        </LinearLayout>
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/Property1"
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent">
+            <androidx.cardview.widget.CardView
+                xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/Property"
+                android:layout_marginLeft="3dp"
+                android:layout_marginRight="3dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <LinearLayout
+                    android:gravity="center"
+                    android:background="@color/white"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:orientation="vertical">
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:layout_gravity="center"
+                                android:id="@+id/In_Progress_txt"
+                                style="@style/SmallText"
+                                android:textColor="@color/blue"
+                                android:text="Property"
+                                android:layout_width="wrap_content"
+                                android:textSize="14dp"
+                                android:textStyle="bold"
+                                android:layout_height="wrap_content" />
+
+                        </LinearLayout>
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+        </LinearLayout>
+
+    </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <LinearLayout
+                android:padding="4dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:background="@drawable/capsul_button_rect_viability"
+
+                    android:id="@+id/bank_statement_met_ly"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="20dp"
+                    android:padding="2dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_height="match_parent"
+                        android:layout_width="match_parent"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_marginTop="10dp"
+                            android:layout_gravity="center"
+                            android:orientation="horizontal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
+
+                            <androidx.appcompat.widget.AppCompatImageView
+                                android:layout_marginRight="10dp"
+                                android:layout_gravity="center"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/ic_green_tick"/>
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:layout_gravity="center"
+                                android:gravity="center"
+                                android:text="Congrats.!"
+                                android:textSize="12dp"
+                                android:textColor="@color/black"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content" />
+
+                        </LinearLayout>
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_marginTop="10dp"
+                            android:layout_marginRight="20dp"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginBottom="10dp"
+                            android:layout_gravity="left"
+                            android:gravity="left"
+                            android:text="@string/bank_analysis_met"
+                            android:textSize="12dp"
+                            android:textColor="@color/black"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
+
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_gravity="center"
+                        android:layout_marginTop="10dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+
+
+
+                        <LinearLayout
+                            android:id="@+id/bank_eligible_met2"
+                            android:layout_marginBottom="10dp"
+                            android:layout_gravity="center"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:layout_marginTop="10dp"
+                                android:layout_marginRight="20dp"
+                                android:layout_marginLeft="10dp"
+                                android:layout_gravity="left"
+                                android:id="@+id/cat_A2"
+                                android:gravity="left"
+                                android:text="@string/bank_analysis_mets"
+                                android:textSize="12dp"
+                                android:textColor="@color/black"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/bank_eligible_met1"
+                            android:layout_marginBottom="10dp"
+                            android:layout_gravity="left"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:layout_marginTop="10dp"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginRight="20dp"
+                                android:layout_gravity="left"
+                                android:gravity="left"
+                                android:text="Note:"
+                                android:textSize="14dp"
+                                android:textColor="@color/color_error"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content" />
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:layout_marginTop="10dp"
+                                android:layout_marginRight="20dp"
+                                android:layout_marginLeft="10dp"
+                                android:layout_gravity="left"
+                                android:id="@+id/cat_A1"
+                                android:gravity="left"
+                                android:text="@string/notestr"
+                                android:textSize="12dp"
+                                android:textColor="#FF922B"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content" />
+                        </LinearLayout>
+                        <LinearLayout
+                            android:id="@+id/bank_eligible_met"
+                            android:layout_marginBottom="10dp"
+                            android:layout_gravity="center"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:layout_marginTop="10dp"
+                                android:layout_marginRight="20dp"
+                                android:layout_gravity="left"
+                                android:id="@+id/cat_A"
+                                android:layout_marginLeft="10dp"
+                                android:gravity="left"
+                                android:text="Banks For Which Document Requirements Successfully Met"
+                                android:textSize="14dp"
+                                android:textColor="@color/black"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content" />
+                        </LinearLayout>
+                    </LinearLayout>
+                </LinearLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    xmlns:android="http://schemas.android.com/apk/res/android"
+                    xmlns:app="http://schemas.android.com/apk/res-auto"
+                    android:visibility="gone"
+                    android:orientation="vertical"
+                    android:id="@+id/recycler_view_bank_eligible"
+                    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:cacheColorHint="@android:color/transparent"
+                    android:background="@color/white"
+                    android:clipToPadding="false"
+                    android:fadeScrollbars="true"
+                    android:scrollbars="none" />
+
+                <LinearLayout
+
+                    android:id="@+id/bank_statement_not_met_ly"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="20dp"
+                    android:padding="2dp"
+                    android:background="@drawable/capsul_button_rect_viability1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+
+                        android:layout_marginBottom="10dp"
+                        android:layout_gravity="center"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+                        <LinearLayout
+                            android:layout_marginTop="10dp"
+                            android:layout_gravity="center"
+                            android:orientation="horizontal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
+                            <androidx.appcompat.widget.AppCompatImageView
+                                android:layout_marginRight="10dp"
+                                android:layout_gravity="center"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/ic_caution_1"/>
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:layout_gravity="center"
+                                android:gravity="center"
+                                android:text=" Sorry.!"
+                                android:textSize="12dp"
+                                android:textColor="@color/black"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content" />
+                        </LinearLayout>
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_marginTop="10dp"
+                            android:layout_marginRight="20dp"
+                            android:layout_marginLeft="10dp"
+                            android:layout_gravity="left"
+                            android:gravity="left"
+                            android:text="@string/bank_analysis_not_met"
+                            android:textSize="12dp"
+                            android:textColor="@color/black"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_marginTop="10dp"
+                            android:layout_marginRight="20dp"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginBottom="10dp"
+                            android:layout_gravity="left"
+                            android:gravity="left"
+                            android:text="@string/bank_analay_txt"
+                            android:textSize="12dp"
+                            android:textColor="@color/black"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/bank_eligible_not_met"
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_marginTop="10dp"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginRight="20dp"
+                            android:layout_gravity="left"
+                            android:id="@+id/cat_B"
+                            android:gravity="left"
+                            android:text="Other Eligible and Available Banks - For Which \n Document Requirements Not Met"
+                            android:textSize="16dp"
+                            android:textColor="@color/black"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_marginTop="10dp"
+                            android:layout_marginRight="20dp"
+                            android:layout_marginLeft="10dp"
+                            android:layout_gravity="left"
+                            android:id="@+id/cat_c"
+                            android:gravity="left"
+                            android:layout_marginBottom="10dp"
+                            android:text="Select the bank name to view the list of missing \n documents required for that bank"
+                            android:textSize="12dp"
+                            android:textColor="@color/black"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+
+                    xmlns:android="http://schemas.android.com/apk/res/android"
+                    xmlns:app="http://schemas.android.com/apk/res-auto"
+                    android:visibility="gone"
+                    android:orientation="vertical"
+                    android:id="@+id/recycler_view_not_bank_eligible"
+                    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:cacheColorHint="@android:color/transparent"
+                    android:background="@color/white"
+                    android:clipToPadding="false"
+                    android:fadeScrollbars="true"
+                    android:scrollbars="none" />
+
+                <LinearLayout
+                    android:visibility="gone"
+                    android:background="@drawable/capsul_button_rect_viability1"
+                    android:layout_marginTop="10dp"
+                    android:id="@+id/bank_eligible_not_met1"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:padding="2dp"
+                    android:layout_gravity="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <LinearLayout
+                        android:background="@drawable/capsul_button_bank_not"
+
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_marginTop="10dp"
+                            android:layout_marginRight="20dp"
+                            android:layout_gravity="left"
+                            android:layout_marginLeft="10dp"
+                            android:id="@+id/cat_B1"
+                            android:gravity="left"
+                            android:text="Available Banks - For Which Eligibility Requirements Not Met"
+                            android:textSize="16dp"
+                            android:textColor="@color/black"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_marginTop="10dp"
+                            android:layout_marginRight="10dp"
+                            android:layout_marginLeft="10dp"
+                            android:layout_gravity="center"
+                            android:id="@+id/cat_c1"
+                            android:gravity="left"
+                            android:text="Select the bank name to view the list of Failed Reason for that bank"
+                            android:textSize="12dp"
+                            android:textColor="@color/black"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                    </LinearLayout>
+                </LinearLayout>
+                <androidx.recyclerview.widget.RecyclerView
+
+                    xmlns:android="http://schemas.android.com/apk/res/android"
+                    xmlns:app="http://schemas.android.com/apk/res-auto"
+                    android:visibility="gone"
+                    android:orientation="vertical"
+                    android:id="@+id/recycler_view_not_bank_eligible1"
+                    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:cacheColorHint="@android:color/transparent"
+                    android:background="@color/white"
+                    android:clipToPadding="false"
+                    android:fadeScrollbars="true"
+                    android:scrollbars="none" />
+            </LinearLayout>
+
+
+        </LinearLayout>
+    <LinearLayout
+        android:layout_gravity="center"
+        android:gravity="bottom"
+        android:layout_marginBottom="20dp"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/submit_update_status"
+            android:layout_gravity="center"
+            android:layout_width="200dp"
+            android:text="@string/submit_loanwiser"
+            android:textColor="@color/white"
+            android:background="@drawable/capsul_button4"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>
+</LinearLayout>

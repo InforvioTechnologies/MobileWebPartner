@@ -64,6 +64,7 @@ public final class Pref {
     public static String ask_id = "ask_id";
     public static String Galary_Path = "Galary_Path";
     public static String Push_Notification_Title = "Push_Notification_Title";
+    public static String new_user = "new_user";
 
     public static SharedPreferences get(final Context context) {
         return context.getSharedPreferences(context.getResources().getString(R.string.app_name),Context.MODE_PRIVATE);
@@ -529,6 +530,21 @@ public static void putapplicant_name(final Context context, String aUserId) {
         SharedPreferences prefs = Pref.get(context);
         SharedPreferences.Editor editor = prefs.edit();
         editor.remove(LOANTYPENAME);
+        editor.commit();
+    }
+
+    public static void putnew_user(final Context context, String aUserId) {
+        Pref.putPref(context, new_user, aUserId);
+    }
+
+    public static String getnew_user(final Context context) {
+        return Pref.getPref(context, new_user, null);
+    }
+
+    public static void removenew_user(final Context context) {
+        SharedPreferences prefs = Pref.get(context);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.remove(new_user);
         editor.commit();
     }
 

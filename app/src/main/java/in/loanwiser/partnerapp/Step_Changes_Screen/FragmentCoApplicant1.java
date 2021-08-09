@@ -50,7 +50,8 @@ import adhoc.app.applibrary.Config.AppUtils.Pref.Pref;
 import adhoc.app.applibrary.Config.AppUtils.Urls;
 import adhoc.app.applibrary.Config.AppUtils.VolleySignleton.AppController;
 import dmax.dialog.SpotsDialog;
-import in.loanwiser.partnerapp.Documents.Applicant_Doc_Details_revamp;
+
+import in.loanwiser.Old_Partner.Applicant_Doc_Details_revamp_old;
 import in.loanwiser.partnerapp.R;
 
 
@@ -256,7 +257,7 @@ public class FragmentCoApplicant1 extends Fragment implements CompoundButton.OnC
                         handler.postDelayed(new Runnable() {
                             public void run() {
                                // Document_Statues();
-                                Intent intent = new Intent(getActivity(), Applicant_Doc_Details_revamp.class);
+                                Intent intent = new Intent(getActivity(), Applicant_Doc_Details_revamp_old.class);
                                 startActivity(intent);
                                 getActivity().finish();
                             }
@@ -275,7 +276,7 @@ public class FragmentCoApplicant1 extends Fragment implements CompoundButton.OnC
         Docum_ch_step1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), Applicant_Doc_Details_revamp.class);
+                Intent intent = new Intent(getActivity(), Applicant_Doc_Details_revamp_old.class);
                 startActivity(intent);
                 getActivity().finish();
             }
@@ -898,7 +899,7 @@ public class FragmentCoApplicant1 extends Fragment implements CompoundButton.OnC
                             {
 
                                 progressDialog.dismiss();
-                                Intent intent = new Intent(getActivity(), Applicant_Doc_Details_revamp.class);
+                                Intent intent = new Intent(getActivity(), Applicant_Doc_Details_revamp_old.class);
                                 startActivity(intent);
                                 getActivity().finish();
                             }else

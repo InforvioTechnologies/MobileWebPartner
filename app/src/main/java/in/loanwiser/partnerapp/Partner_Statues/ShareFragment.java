@@ -158,10 +158,10 @@ public class ShareFragment extends Fragment{
         network_stat =  view.findViewById(R.id.network_stat);
         mainlay =  view.findViewById(R.id.mainlay);
 
-        if(isConnected()==false){
+      /*  if(isConnected()==false){
             network_stat.setVisibility(View.VISIBLE);
             mainlay.setVisibility(View.GONE);
-        }
+        }*/
 
 
         progressDialog = new SpotsDialog(getContext(), R.style.Custom);
@@ -177,7 +177,7 @@ public class ShareFragment extends Fragment{
                 share.setPackage("com.whatsapp");//package name of the app
                 startActivity(Intent.createChooser(share, "Share Image"));*/
 
-                Bitmap bm = BitmapFactory.decodeResource(getActivity().getResources(), R.drawable.personal);
+                Bitmap bm = BitmapFactory.decodeResource(getContext().getResources(), R.drawable.personal);
 
                 File filesDir = getContext().getFilesDir();
                 File imageFile = new File(filesDir, "ABeautifulFilename.png");
@@ -199,7 +199,7 @@ public class ShareFragment extends Fragment{
                 intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
 
 // generate URI, I defined authority as the application ID in the Manifest, the last param is file I want to open
-                Uri uri = FileProvider.getUriForFile(getActivity(), BuildConfig.APPLICATION_ID, imageFile);
+                Uri uri = FileProvider.getUriForFile(getContext(), BuildConfig.APPLICATION_ID, imageFile);
                 intent.putExtra(Intent.EXTRA_STREAM, uri);
                 intent.putExtra(Intent.EXTRA_TEXT,"Personal loan Available Here!!!!");
 
@@ -232,7 +232,7 @@ public class ShareFragment extends Fragment{
                     startActivity(shareIntent);
                 } catch (android.content.ActivityNotFoundException ex) {
 
-                    Toast.makeText(getActivity(),"Whatsapp not installed",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(),"Whatsapp not installed",Toast.LENGTH_SHORT).show();
                 }
 
             }
@@ -255,7 +255,7 @@ public class ShareFragment extends Fragment{
                                 Intent intent = new Intent(Intent.ACTION_SEND);
                                 intent.putExtra(Intent.EXTRA_TEXT, "Hey view/download this image");
 
-                                String path = MediaStore.Images.Media.insertImage(getActivity().getContentResolver(), resource, "", null);
+                                String path = MediaStore.Images.Media.insertImage(getContext().getContentResolver(), resource, "", null);
                                 Log.i("quoteswahttodo", "is onresoursereddy" + path);
                                 Uri screenshotUri = Uri.parse(path);
                                 Log.i("quoteswahttodo", "is onresoursereddy" + screenshotUri);
@@ -266,20 +266,20 @@ public class ShareFragment extends Fragment{
                                     startActivity(Intent.createChooser(intent, "Share image via..."));
 
                                 } catch (Exception e) {
-                                    Toast.makeText(getActivity(), "It seem like Whatsapp is not been installed", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(getContext(), "It seem like Whatsapp is not been installed", Toast.LENGTH_SHORT).show();
                                     e.printStackTrace();
                                 }
 
                             }
                             @Override public void onLoadFailed(Exception e, Drawable errorDrawable) {
                                 progressDialog.dismiss();
-                                Toast.makeText(getActivity(), "Something went wrong", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getContext(), "Something went wrong", Toast.LENGTH_SHORT).show();
                                 super.onLoadFailed(e, errorDrawable);
                             }
 
                             @Override public void onLoadStarted(Drawable placeholder) {
                                 progressDialog.show();
-                                Toast.makeText(getActivity(), "Please wait", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getContext(), "Please wait", Toast.LENGTH_SHORT).show();
                             }
 
 
@@ -297,7 +297,7 @@ public class ShareFragment extends Fragment{
     public boolean isConnected() {
         boolean connected = false;
         try {
-            ConnectivityManager cm = (ConnectivityManager)getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
+            ConnectivityManager cm = (ConnectivityManager)getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
             NetworkInfo nInfo = cm.getActiveNetworkInfo();
             connected = nInfo != null && nInfo.isAvailable() && nInfo.isConnected();
             return connected;
@@ -319,7 +319,7 @@ public class ShareFragment extends Fragment{
 
                         Intent intent = new Intent(Intent.ACTION_SEND);
                         intent.putExtra(Intent.EXTRA_TEXT, "Hey view/download this image");
-                        String path = MediaStore.Images.Media.insertImage(getActivity().getContentResolver(), resource, "", null);
+                        String path = MediaStore.Images.Media.insertImage(getContext().getContentResolver(), resource, "", null);
                         Log.i("quoteswahttodo", "is onresoursereddy" + path);
                         Uri screenshotUri = Uri.parse(path);
                         Log.i("quoteswahttodo", "is onresoursereddy" + screenshotUri);
@@ -330,20 +330,20 @@ public class ShareFragment extends Fragment{
                             startActivity(Intent.createChooser(intent, "Share image via..."));
 
                         } catch (Exception e) {
-                            Toast.makeText(getActivity(), "It seem like Whatsapp is not been installed", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getContext(), "It seem like Whatsapp is not been installed", Toast.LENGTH_SHORT).show();
                             e.printStackTrace();
                         }
 
                     }
                     @Override public void onLoadFailed(Exception e, Drawable errorDrawable) {
                         progressDialog.dismiss();
-                        Toast.makeText(getActivity(), "Something went wrong", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), "Something went wrong", Toast.LENGTH_SHORT).show();
                         super.onLoadFailed(e, errorDrawable);
                     }
 
                     @Override public void onLoadStarted(Drawable placeholder) {
 
-                        Toast.makeText(getActivity(), "Starting", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), "Starting", Toast.LENGTH_SHORT).show();
                     }
 
 
@@ -357,7 +357,7 @@ public class ShareFragment extends Fragment{
         try {
             J =new JSONObject();
 
-            J.put("b2buser_id", Pref.getID(getActivity()));
+            J.put("b2buser_id", Pref.getID(getContext()));
 
         } catch (JSONException e) {
             e.printStackTrace();
@@ -375,7 +375,7 @@ public class ShareFragment extends Fragment{
                             if (ja.length()>0){
                                 setAdapter(ja);
                             }else {
-                                Objs.a.ShowHideNoItems(getActivity(),true);
+                                Objs.a.ShowHideNoItems(getContext(),true);
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -402,18 +402,23 @@ public class ShareFragment extends Fragment{
     }
 
     private void setAdapter(JSONArray ja) {
-        ShareFragment.ListItemAdapter adapter = new ShareFragment.ListItemAdapter(getActivity(),ja);
+        ListItemAdapter adapter = new ListItemAdapter(getContext(),ja);
         // Objs.a.getRecyleview_horizontal(this).setAdapter(adapter);
-        RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(getActivity(), 2);
-        recyclerView.setLayoutManager(mLayoutManager);
-        recyclerView.addItemDecoration(new ShareFragment.GridSpacingItemDecoration(2, dpToPx(10), true));
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
+      /*  RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(getContext(), 2);
+        recyclerView.setLayoutManager(mLayoutManager);*/
+
+
+                recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
+
+
+      //  recyclerView.addItemDecoration(new ShareFragment.GridSpacingItemDecoration(2, dpToPx(10), true));
+       // recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(adapter);
 
     }
 
     //Adapter Class list
-    public class ListItemAdapter extends RecyclerView.Adapter<ShareFragment.ListItemAdapter.ViewHolder> {
+    public class ListItemAdapter extends RecyclerView.Adapter<ListItemAdapter.ViewHolder> {
 
         JSONArray list = new JSONArray();
         Context mCon;
@@ -435,12 +440,12 @@ public class ShareFragment extends Fragment{
             return null;
         }
         @Override
-        public ShareFragment.ListItemAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.ly_share_image_list, parent, false);
-            return new ShareFragment.ListItemAdapter.ViewHolder(itemView);
+            return new ViewHolder(itemView);
         }
         @Override
-        public void onBindViewHolder(final ShareFragment.ListItemAdapter.ViewHolder holder, final int position) {
+        public void onBindViewHolder(final ViewHolder holder, final int position) {
             try {
                 J = getItem(position);
 
@@ -496,12 +501,12 @@ public class ShareFragment extends Fragment{
                         }
 
 
-                        Intent intent=new Intent(getActivity(),ShareActivity.class);
+                        Intent intent=new Intent(getContext(),ShareActivity.class);
                         intent.putExtra("content",content_);
                         intent.putExtra("app_content",app_content);
                         intent.putExtra("imgurl",img_url1_);
                         intent.putExtra("title",title1);
-                        getActivity().startActivity(intent);
+                        getContext().startActivity(intent);
 
                     }
                 });
@@ -534,9 +539,9 @@ public class ShareFragment extends Fragment{
                                             try {
                                                 Intent intent = new Intent(Intent.ACTION_SEND);
                                                 intent.putExtra(Intent.EXTRA_TEXT, content);
-                                                String path = MediaStore.Images.Media.insertImage(getActivity().getContentResolver(), resource, "IMG_" + Calendar.getInstance().getTime(), null);
+                                                String path = MediaStore.Images.Media.insertImage(getContext().getContentResolver(), resource, "IMG_" + Calendar.getInstance().getTime(), null);
 
-                                               // String path = MediaStore.Images.Media.insertImage(getActivity().getContentResolver(), resource, "", null);
+                                               // String path = MediaStore.Images.Media.insertImage(getContext().getContentResolver(), resource, "", null);
                                                 Log.i("quoteswahttodo", "is onresoursereddy" + path);
                                                 Uri screenshotUri = Uri.parse(path);
                                                 Log.i("quoteswahttodo", "is onresoursereddy" + screenshotUri);
@@ -545,7 +550,7 @@ public class ShareFragment extends Fragment{
                                                 startActivity(Intent.createChooser(intent, "Share image via..."));
 
                                             } catch (Exception e) {
-                                                Toast.makeText(getActivity(), "It seem like Whatsapp is not been installed", Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(getContext(), "It seem like Whatsapp is not been installed", Toast.LENGTH_SHORT).show();
                                                 e.printStackTrace();
                                             }
 
@@ -554,14 +559,14 @@ public class ShareFragment extends Fragment{
                                         @Override
                                         public void onLoadFailed(Exception e, Drawable errorDrawable) {
                                             progressDialog.dismiss();
-                                            Toast.makeText(getActivity(), "Something went wrong, Try Again", Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(getContext(), "Something went wrong, Try Again", Toast.LENGTH_SHORT).show();
                                             super.onLoadFailed(e, errorDrawable);
                                         }
 
                                         @Override
                                         public void onLoadStarted(Drawable placeholder) {
                                             progressDialog.show();
-                                            // Toast.makeText(getActivity(), "Starting", Toast.LENGTH_SHORT).show();
+                                            // Toast.makeText(getContext(), "Starting", Toast.LENGTH_SHORT).show();
                                         }
 
 
@@ -598,9 +603,9 @@ public class ShareFragment extends Fragment{
                                             try {
                                                 Intent intent = new Intent(Intent.ACTION_SEND);
                                                 intent.putExtra(Intent.EXTRA_TEXT, content);
-                                                String path = MediaStore.Images.Media.insertImage(getActivity().getContentResolver(), resource, "IMG_" + Calendar.getInstance().getTime(), null);
+                                                String path = MediaStore.Images.Media.insertImage(getContext().getContentResolver(), resource, "IMG_" + Calendar.getInstance().getTime(), null);
 
-                                                // String path = MediaStore.Images.Media.insertImage(getActivity().getContentResolver(), resource, "", null);
+                                                // String path = MediaStore.Images.Media.insertImage(getContext().getContentResolver(), resource, "", null);
                                                 Log.i("quoteswahttodo", "is onresoursereddy" + path);
                                                 Uri screenshotUri = Uri.parse(path);
                                                 Log.i("quoteswahttodo", "is onresoursereddy" + screenshotUri);
@@ -610,7 +615,7 @@ public class ShareFragment extends Fragment{
                                                 startActivity(Intent.createChooser(intent, "Share image via..."));
 
                                             } catch (Exception e) {
-                                                Toast.makeText(getActivity(), "Something went wrong, Try Again", Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(getContext(), "Something went wrong, Try Again", Toast.LENGTH_SHORT).show();
                                                 e.printStackTrace();
                                                 Log.e("the error,", String.valueOf(e));
                                             }
@@ -620,7 +625,7 @@ public class ShareFragment extends Fragment{
                                         @Override
                                         public void onLoadFailed(Exception e, Drawable errorDrawable) {
                                             progressDialog.dismiss();
-                                            Toast.makeText(getActivity(), "It seem like Whatsapp is not been installed", Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(getContext(), "It seem like Whatsapp is not been installed", Toast.LENGTH_SHORT).show();
 
                                             super.onLoadFailed(e, errorDrawable);
                                         }
@@ -628,7 +633,7 @@ public class ShareFragment extends Fragment{
                                         @Override
                                         public void onLoadStarted(Drawable placeholder) {
                                             progressDialog.show();
-                                            // Toast.makeText(getActivity(), "Please wait it is loading!!!", Toast.LENGTH_SHORT).show();
+                                            // Toast.makeText(getContext(), "Please wait it is loading!!!", Toast.LENGTH_SHORT).show();
                                         }
 
                                     });
@@ -662,8 +667,8 @@ public class ShareFragment extends Fragment{
             WebView webview;
             AppCompatTextView Title;
             ProgressBar progressbar;
-            LinearLayout Ly_image_reader,Ly_Rl_pdf_reader,Ly_item;
-            CardView cardView;
+            LinearLayout Ly_image_reader,Ly_Rl_pdf_reader,Ly_item,cardView;
+           // CardView cardView;
 
             public ViewHolder(View itemView) {
                 super(itemView);
@@ -673,7 +678,7 @@ public class ShareFragment extends Fragment{
                 //  progressbar = (ProgressBar) itemView.findViewById(R.id.progressbar);
                 v_Image = (ImageView) itemView.findViewById(R.id.image_Product);
                 image_Pdf = (ImageView) itemView.findViewById(R.id.image_Pdf);
-                cardView = (CardView) itemView.findViewById(R.id.cardView);
+               cardView = (LinearLayout) itemView.findViewById(R.id.cardView);
 
                 share_image = (AppCompatImageView) itemView.findViewById(R.id.share_image);
                 whats_app_share = (AppCompatImageView) itemView.findViewById(R.id.whats_app_share);
@@ -791,7 +796,7 @@ public class ShareFragment extends Fragment{
         try {
             J =new JSONObject();
 
-            J.put("partner_id", Pref.getID(getActivity()));
+            J.put("partner_id", Pref.getID(getContext()));
             J.put("post_id", post_id);
             Log.i("TAG", "Request "+J.toString());
 
@@ -824,7 +829,7 @@ public class ShareFragment extends Fragment{
 
                             }else
                             {
-                                Toast.makeText(getActivity(),"error",Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getContext(),"error",Toast.LENGTH_SHORT).show();
 
                             }
 

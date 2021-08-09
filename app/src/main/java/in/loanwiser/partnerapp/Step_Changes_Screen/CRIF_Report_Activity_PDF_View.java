@@ -51,6 +51,7 @@ import adhoc.app.applibrary.Config.AppUtils.Pref.Pref;
 import adhoc.app.applibrary.Config.AppUtils.Urls;
 import adhoc.app.applibrary.Config.AppUtils.VolleySignleton.AppController;
 import dmax.dialog.SpotsDialog;
+import in.loanwiser.Old_Partner.Home_Old;
 import in.loanwiser.partnerapp.BankStamentUpload.Doc_ImageView_Bank;
 import in.loanwiser.partnerapp.PDF_Dounloader.PermissionUtils;
 
@@ -143,14 +144,14 @@ public class CRIF_Report_Activity_PDF_View extends SimpleActivity {
         try {
             J.put("transaction_id",Pref.getTRANSACTIONID(getApplicationContext()));
             J.put("user_id",Pref.getUSERID(getApplicationContext()));
-            J.put("relationship_type",applicant_id);
+            J.put("relationship_type",Pref.getCoAPPAVAILABLE(getApplicationContext()));
 
         } catch (JSONException e) {
             e.printStackTrace();
         }
         progressDialog.show();
         Log.e("Crif Generation", String.valueOf(J));
-        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, Urls.CRIF_Generation, J,
+        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, Urls.CRIF_Generation_old, J,
                 new Response.Listener<JSONObject>() {
 
                     @Override
@@ -280,7 +281,7 @@ public class CRIF_Report_Activity_PDF_View extends SimpleActivity {
             e.printStackTrace();
         }
         Log.e("Step2 Complete request",J.toString());
-        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, Urls.step2_complete, J,
+        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, Urls.step2_complete_old, J,
                 new Response.Listener<JSONObject>() {
 
                     @Override
@@ -336,7 +337,7 @@ public class CRIF_Report_Activity_PDF_View extends SimpleActivity {
         }
         progressDialog.show();
         Log.e("Crif Generation", String.valueOf(J));
-        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, Urls.submit_question, J,
+        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, Urls.submit_question_old, J,
                 new Response.Listener<JSONObject>() {
 
                     @Override
@@ -403,7 +404,7 @@ public class CRIF_Report_Activity_PDF_View extends SimpleActivity {
         }
         Log.e("Report Request ",String.valueOf(J));
         progressDialog.show();
-        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, Urls.Report_Activity, J,
+        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, Urls.Report_Activity_old, J,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
@@ -591,7 +592,7 @@ public class CRIF_Report_Activity_PDF_View extends SimpleActivity {
 
     @Override
     public void onBackPressed() {
-        Objs.ac.StartActivity(mCon, Home.class);
+        Objs.ac.StartActivity(mCon, Home_Old.class);
         finish();
         super.onBackPressed();
     }

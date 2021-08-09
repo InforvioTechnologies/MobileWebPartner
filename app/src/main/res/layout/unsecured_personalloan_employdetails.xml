@@ -621,6 +621,49 @@
                                 </LinearLayout>
                             </LinearLayout>
 
+
+                            <LinearLayout
+                                android:padding="5dp"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1">
+                                    <androidx.appcompat.widget.AppCompatTextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:textColor="#8A8A8A"
+                                        style="@style/SmallText"
+                                        android:text="EPF deduct"
+                                        android:textSize="16sp"/>
+                                    <androidx.appcompat.widget.AppCompatTextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:gravity="end"
+                                        android:textColor="@color/colorPrimary"
+                                        style="@style/SmallText"
+                                        android:text=":"/>
+                                </LinearLayout>
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1">
+                                    <androidx.appcompat.widget.AppCompatTextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:textColor="#032C58"
+                                        android:textStyle="bold"
+                                        android:id="@+id/epfdeductsalarytxt"
+                                        style="@style/SmallText"
+
+                                        />
+                                </LinearLayout>
+                            </LinearLayout>
+
+
                             <LinearLayout
                                 android:id="@+id/epflay"
                                 android:padding="5dp"
@@ -794,6 +837,179 @@
                                         />
                                 </LinearLayout>
                             </LinearLayout>
+
+
+                            <LinearLayout
+                                android:padding="5dp"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1">
+                                    <androidx.appcompat.widget.AppCompatTextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:textColor="#8A8A8A"
+                                        style="@style/SmallText"
+                                        android:text="Type of Employee"
+                                        android:textSize="16sp"/>
+                                    <androidx.appcompat.widget.AppCompatTextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:gravity="end"
+                                        android:textColor="@color/colorPrimary"
+                                        style="@style/SmallText"
+                                        android:text=":"/>
+                                </LinearLayout>
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1">
+                                    <androidx.appcompat.widget.AppCompatTextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:textColor="#032C58"
+                                        android:textStyle="bold"
+                                        android:id="@+id/typeodemployetxt"
+                                        style="@style/SmallText"
+
+                                        />
+                                </LinearLayout>
+                            </LinearLayout>
+
+
+                            <LinearLayout
+                                android:id="@+id/employementprooflay"
+                                android:padding="5dp"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1">
+                                    <androidx.appcompat.widget.AppCompatTextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:textColor="#8A8A8A"
+                                        style="@style/SmallText"
+                                        android:text="Employement Proof"
+                                        android:textSize="16sp"/>
+                                    <androidx.appcompat.widget.AppCompatTextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:gravity="end"
+                                        android:textColor="@color/colorPrimary"
+                                        style="@style/SmallText"
+                                        android:text=":"/>
+                                </LinearLayout>
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1">
+                                    <androidx.appcompat.widget.AppCompatTextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:textColor="#032C58"
+                                        android:textStyle="bold"
+                                        android:id="@+id/employementprooftxtshow"
+                                        style="@style/SmallText"
+
+                                        />
+                                </LinearLayout>
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:id="@+id/officialmailidlay"
+                                android:padding="5dp"
+                                android:visibility="gone"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1">
+                                    <androidx.appcompat.widget.AppCompatTextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:textColor="#8A8A8A"
+                                        style="@style/SmallText"
+                                        android:text="Official Mailid"
+                                        android:textSize="16sp"/>
+                                    <androidx.appcompat.widget.AppCompatTextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:gravity="end"
+                                        android:textColor="@color/colorPrimary"
+                                        style="@style/SmallText"
+                                        android:text=":"/>
+                                </LinearLayout>
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1">
+                                    <androidx.appcompat.widget.AppCompatTextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:textColor="#032C58"
+                                        android:textStyle="bold"
+                                        android:id="@+id/officialmailidtxt"
+                                        style="@style/SmallText"
+
+                                        />
+                                </LinearLayout>
+                            </LinearLayout>
+
+
+                            <LinearLayout
+                                android:padding="5dp"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1">
+                                    <androidx.appcompat.widget.AppCompatTextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:textColor="#8A8A8A"
+                                        style="@style/SmallText"
+                                        android:text="Company door Street name"
+                                        android:textSize="16sp"/>
+                                    <androidx.appcompat.widget.AppCompatTextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:gravity="end"
+                                        android:textColor="@color/colorPrimary"
+                                        style="@style/SmallText"
+                                        android:text=":"/>
+                                </LinearLayout>
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1">
+                                    <androidx.appcompat.widget.AppCompatTextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:textColor="#032C58"
+                                        android:textStyle="bold"
+                                        android:id="@+id/companydoortxt"
+                                        style="@style/SmallText"
+
+                                        />
+                                </LinearLayout>
+                            </LinearLayout>
+
+
+
                             <LinearLayout
                                 android:padding="5dp"
                                 android:layout_width="match_parent"
@@ -979,7 +1195,7 @@
                                         android:textColor="#8A8A8A"
                                         android:id="@+id/otherincomethead"
                                         style="@style/SmallText"
-                                        android:text="@string/othericome_source"
+                                        android:text="Have other Income"
                                         android:textSize="16sp"/>
                                     <androidx.appcompat.widget.AppCompatTextView
                                         android:layout_width="match_parent"
@@ -998,7 +1214,7 @@
                                         android:layout_height="wrap_content"
                                         android:textColor="#032C58"
                                         android:textStyle="bold"
-                                        android:id="@+id/otherincome"
+                                        android:id="@+id/otherincometxt"
                                         style="@style/SmallText"
 
                                         />

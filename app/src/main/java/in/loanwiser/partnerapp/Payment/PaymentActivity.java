@@ -105,9 +105,9 @@ public class PaymentActivity extends SimpleActivity implements CompoundButton.On
 
         UI_Fields();
         Click();
-     //   makeJsonObjReq1();
+     //  makeJsonObjReq1();
        // get_pay_shedule();
-        send_payment_link();
+        payment_check_link();
     }
 
 
@@ -219,7 +219,7 @@ public class PaymentActivity extends SimpleActivity implements CompoundButton.On
 
     }
 
-    private void send_payment_link() {
+    private void payment_check_link() {
         progressDialog.show();
         JSONObject J =new JSONObject();
         try {
@@ -241,7 +241,9 @@ public class PaymentActivity extends SimpleActivity implements CompoundButton.On
                             String Staues_pay = object.getString("status");
                             if(Staues_pay.equals("success"))
                             {
-                                viability_check_pass();
+                                Intent intent = new Intent(PaymentActivity.this, Payment_Sucess_Screen.class);
+                                startActivity(intent);
+                                finish();
                             }else {
                                // progressDialog.dismiss();
                                 makeJsonObjReq1();
@@ -376,6 +378,7 @@ public class PaymentActivity extends SimpleActivity implements CompoundButton.On
                             if (Statues.contains("success")) {
 
                                 Applicant_Status();
+
                             }else
                             {
 
@@ -561,24 +564,7 @@ public class PaymentActivity extends SimpleActivity implements CompoundButton.On
         };
         AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
     }
-/*    public void onRadioButtonClicked(View view) {
-        boolean checked = ((RadioButton) view).isChecked();
 
-        switch (view.getId()) {
-            case R.id.standard_radio:
-                if (checked)
-              *//*      standard_radio.setSelected(true);
-                    custom_radio.setSelected(false);*//*
-                    Toast.makeText(this, "standard", Toast.LENGTH_SHORT).show();
-                break;
-            case R.id.custom_radio:
-                if (checked)
-                    *//*custom_radio.setSelected(true);
-                    standard_radio.setSelected(false);*//*
-                    Toast.makeText(this, "Cusstom", Toast.LENGTH_SHORT).show();
-                break;
-        }
-    }*/
 
     @SuppressLint("LongLogTag")
     private void Validate()
@@ -908,7 +894,7 @@ public class PaymentActivity extends SimpleActivity implements CompoundButton.On
                 paymentcustomer_radio.setChecked(false);
                 paycollect_radio.setChecked(false);
                 loancredit_radio.setChecked(true);
-                notestxt.setText(getString(R.string.secondone));
+                notestxt.setText(getString(R.string.secondone)+" "+paymentamoubt+" "+getString(R.string.secondone1));
                 PAY_OPTION = "2";
             }
 

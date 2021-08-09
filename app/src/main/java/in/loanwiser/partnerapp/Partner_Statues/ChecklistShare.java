@@ -81,6 +81,7 @@ public class ChecklistShare extends AppCompatActivity {
     private String loan_type;
     LinearLayout viewlayout,twolay;
     TextView mandatory_doc,anyone_doc;
+    String classname;
 
 
     @Override
@@ -123,7 +124,7 @@ public class ChecklistShare extends AppCompatActivity {
             whatsapp_button_salaried.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Toast.makeText(ChecklistShare.this,"Home Salaried",Toast.LENGTH_SHORT).show();
+                  //  Toast.makeText(ChecklistShare.this,"Home Salaried",Toast.LENGTH_SHORT).show();
                     Whatsappshare();
 
                 }
@@ -132,7 +133,7 @@ public class ChecklistShare extends AppCompatActivity {
             other_network_salaried.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Toast.makeText(ChecklistShare.this,"Home Salaried",Toast.LENGTH_SHORT).show();
+                  //  Toast.makeText(ChecklistShare.this,"Home Salaried",Toast.LENGTH_SHORT).show();
                     Othernetworkshare();
                 }
             });
@@ -141,7 +142,7 @@ public class ChecklistShare extends AppCompatActivity {
             whatsapp_button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Toast.makeText(ChecklistShare.this,"Home Self employed",Toast.LENGTH_SHORT).show();
+                  //  Toast.makeText(ChecklistShare.this,"Home Self employed",Toast.LENGTH_SHORT).show();
                     Whatsappshare2();
 
 
@@ -151,7 +152,7 @@ public class ChecklistShare extends AppCompatActivity {
             other_network.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Toast.makeText(ChecklistShare.this,"Home Self employed",Toast.LENGTH_SHORT).show();
+                  //  Toast.makeText(ChecklistShare.this,"Home Self employed",Toast.LENGTH_SHORT).show();
                     OtherNetwork2();
                 }
             });
@@ -168,7 +169,7 @@ public class ChecklistShare extends AppCompatActivity {
             whatsapp_button_salaried.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Toast.makeText(ChecklistShare.this,"Home Salaried",Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(ChecklistShare.this,"Home Salaried",Toast.LENGTH_SHORT).show();
                     Whatsappshare();
 
                 }
@@ -177,7 +178,7 @@ public class ChecklistShare extends AppCompatActivity {
             other_network_salaried.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Toast.makeText(ChecklistShare.this,"Home Salaried",Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(ChecklistShare.this,"Home Salaried",Toast.LENGTH_SHORT).show();
                     Othernetworkshare();
                 }
             });
@@ -186,7 +187,7 @@ public class ChecklistShare extends AppCompatActivity {
             whatsapp_button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Toast.makeText(ChecklistShare.this,"Home Self employed",Toast.LENGTH_SHORT).show();
+                   // Toast.makeText(ChecklistShare.this,"Home Self employed",Toast.LENGTH_SHORT).show();
                     Whatsappshare2();
 
 
@@ -196,7 +197,7 @@ public class ChecklistShare extends AppCompatActivity {
             other_network.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Toast.makeText(ChecklistShare.this,"Home Self employed",Toast.LENGTH_SHORT).show();
+                  //  Toast.makeText(ChecklistShare.this,"Home Self employed",Toast.LENGTH_SHORT).show();
                     OtherNetwork2();
                 }
             });
@@ -205,7 +206,7 @@ public class ChecklistShare extends AppCompatActivity {
             whatsapp_button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Toast.makeText(ChecklistShare.this,"Business loan",Toast.LENGTH_SHORT).show();
+                  //  Toast.makeText(ChecklistShare.this,"Business loan",Toast.LENGTH_SHORT).show();
                     Whatsappshare();
 
 
@@ -215,7 +216,7 @@ public class ChecklistShare extends AppCompatActivity {
             other_network.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Toast.makeText(ChecklistShare.this,"Business loan",Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(ChecklistShare.this,"Business loan",Toast.LENGTH_SHORT).show();
                     Othernetworkshare();
                 }
             });
@@ -225,7 +226,7 @@ public class ChecklistShare extends AppCompatActivity {
             whatsapp_button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Toast.makeText(ChecklistShare.this,"Personal loan",Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(ChecklistShare.this,"Personal loan",Toast.LENGTH_SHORT).show();
                     Whatsappshare();
 
 
@@ -235,7 +236,7 @@ public class ChecklistShare extends AppCompatActivity {
             other_network.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Toast.makeText(ChecklistShare.this,"Personal loan",Toast.LENGTH_SHORT).show();
+                  //  Toast.makeText(ChecklistShare.this,"Personal loan",Toast.LENGTH_SHORT).show();
                     Othernetworkshare();
                 }
             });
@@ -373,7 +374,7 @@ public class ChecklistShare extends AppCompatActivity {
                     J.put("employement_type", "1");
                 }
             }
-            Log.d("Document_Checklist", String.valueOf(J));
+            Log.e("Document_Checklist", String.valueOf(J));
 
         } catch (JSONException e) {
             e.printStackTrace();
@@ -396,7 +397,75 @@ public class ChecklistShare extends AppCompatActivity {
                                 Jsonobject2=response.getJSONObject("loan_typearr");
                                 loan_type=Jsonobject2.getString("loan_type");
 
-                                // first Array
+
+                                Iterator iterator = jsonObject1.keys();
+                                while(iterator.hasNext()){
+                                    String key = (String)iterator.next();
+                                    JSONArray issue = jsonObject1.getJSONArray(key);
+                                    for (int i = 0; i < issue.length(); i++) {
+                                        JSONObject jsonObject2 = issue.getJSONObject(i);
+                                        classname = jsonObject2.getString("class_name");
+                                        String docreq = jsonObject2.getString("doc_req");
+                                        itemlist.add(classname);
+
+                                        listview.setAdapter(new ArrayAdapter<String>(ChecklistShare.this, layout.simple_list_item_1, itemlist) {
+                                            @Override
+                                            public View getView(int position, View convertView, ViewGroup parent) {
+                                                View row = super.getView(position, convertView, parent);
+                                                Log.i(TAG, "getView: "+getItem(position));
+                                                TextView textView = (TextView) super.getView(position, convertView, parent);
+                                                textView.setTextColor(Color.RED);
+                                                return row;
+                                            }
+                                        });
+
+
+                                        JSONArray moreDetails = jsonObject2.getJSONArray("doc_type_names");
+                                        for (int j = 0; j < moreDetails.length(); j++) {
+                                            JSONObject jsonObject3 = moreDetails.getJSONObject(j);
+                                            String doctypename = jsonObject3.getString("document_name");
+                                            itemlist.add(doctypename);
+                                            // shalist.add("===================================");
+                                            // itemlist.addAll(contentlist);
+                                        }
+
+                                    }
+
+                                }
+
+                                listview.setAdapter(new ArrayAdapter<String>(ChecklistShare.this, layout.simple_list_item_1, itemlist) {
+                                    @Override
+                                    public View getView(int position, View convertView, ViewGroup parent) {
+                                        View row = super.getView(position, convertView, parent);
+                                        TextView textView = (TextView) super.getView(position, convertView, parent);
+                                        Log.i(TAG, "getView: "+getItem(position));
+                                        switch (getItem(position)){
+                                           // case getItem(position).equalsIgnoreCase(classname):
+                                            case "Identity Proof ":
+                                            case "Address Proof (Current Residence) Rented":
+                                            case "Address Proof (Current Residence) Owned":
+                                            case "Signature Verification Document ":
+                                            case "Bank Statement - Last 12 Months ":
+                                            case "Business Vintage Proof ":
+                                            case "Income Proof ":
+                                            case "Residence/Property Ownership Proof ":
+                                            case "Photo Proof ":
+                                                textView.setTextColor(Color.parseColor("#012B5D"));
+                                                break;
+                                            default:
+                                                textView.setTextColor(Color.parseColor("#8A8A8A"));
+                                                break;
+                                        }
+                                        return row;
+                                    }
+                                });
+
+
+
+
+
+
+                              /*  // first Array
                                 JSONArray jsonArray = jsonObject1.getJSONArray("Identity Proof");
                                 for (int i = 0; i < jsonArray.length(); i++) {
                                     JSONObject jsonObject2 = jsonArray.getJSONObject(i);
@@ -444,12 +513,12 @@ public class ChecklistShare extends AppCompatActivity {
 
                                         }
 
-                                     /*   if (getItem(position).equalsIgnoreCase("Identity Proof *")){
+                                     *//*   if (getItem(position).equalsIgnoreCase("Identity Proof *")){
                                             textView.setTextColor(Color.parseColor("#2196F3"));
 
                                         }else{
                                             textView.setTextColor(Color.parseColor("#000000"));
-                                        }*/
+                                        }*//*
                                         return row;
                                     }
                                 });
@@ -470,7 +539,7 @@ public class ChecklistShare extends AppCompatActivity {
                                         // itemlist.addAll(contentlist);
                                     }
                                 }
-                          /*      listview.setAdapter(new ArrayAdapter<String>(ChecklistShare.this, layout.simple_list_item_1, itemlist) {
+                          *//*      listview.setAdapter(new ArrayAdapter<String>(ChecklistShare.this, layout.simple_list_item_1, itemlist) {
                                     @Override
                                     public View getView(int position, View convertView, ViewGroup parent) {
 
@@ -478,7 +547,7 @@ public class ChecklistShare extends AppCompatActivity {
                                         textView.setTextColor(Color.parseColor("#B4B4B4"));
                                         return textView;
                                     }
-                                });*/
+                                });*//*
 
                                 //third array
                                 JSONArray jsonArrays3 = jsonObject1.getJSONArray("Address Proof (Current Residence) Owned");
@@ -595,7 +664,7 @@ public class ChecklistShare extends AppCompatActivity {
                                         itemlist.add(doctypename);
                                         // itemlist.addAll(contentlist);
                                     }
-                                }
+                                }*/
 
 
                             /*    listview.setAdapter(new ArrayAdapter<String>(ChecklistShare.this, layout.simple_list_item_1, itemlist) {
@@ -608,7 +677,7 @@ public class ChecklistShare extends AppCompatActivity {
                                 });*/
 
 
-                                Log.i(TAG, "onResponse:jsonArray " + jsonArray);
+                              //  Log.i(TAG, "onResponse:jsonArray " + jsonArray);
                                 Log.i(TAG, "Response: on" + jsonObject1);
                             } catch (JSONException e) {
                                 e.printStackTrace();
@@ -627,67 +696,46 @@ public class ChecklistShare extends AppCompatActivity {
                                 loan_type=Jsonobject2.getString("loan_type");
 
                                 // first Array
-                                JSONArray jsonArray = jsonObject1.getJSONArray("Identity Proof");
-                                for (int i = 0; i < jsonArray.length(); i++) {
-                                    JSONObject jsonObject2 = jsonArray.getJSONObject(i);
-                                    String classname = jsonObject2.getString("class_name");
-                                 /*   SpannableStringBuilder builder = new SpannableStringBuilder();
-                                    String red = "(Mandatory document)";
-                                    SpannableString redSpannable= new SpannableString(red);
-                                    redSpannable.setSpan(new ForegroundColorSpan(Color.RED), 0, red.length(), 0);
-                                    builder.append(redSpannable);*/
-                                   // itemlist.add(classname + "*" +builder);
 
-                                    Log.i(TAG, "classname: " + classname);
-                                    itemlist.add(classname +"*");
 
-                                    JSONArray moreDetails = jsonObject2.getJSONArray("doc_type_names");
-                                    for (int j = 0; j < moreDetails.length(); j++) {
-                                        JSONObject jsonObject3 = moreDetails.getJSONObject(j);
-                                        String doctypename = jsonObject3.getString("document_name");
-                                        itemlist.add(doctypename);
-                                        // itemlist.addAll(contentlist);
+                                Iterator iterator = jsonObject1.keys();
+                                while(iterator.hasNext()){
+                                    String key = (String)iterator.next();
+                                    JSONArray issue = jsonObject1.getJSONArray(key);
+                                    for (int i = 0; i < issue.length(); i++) {
+                                        JSONObject jsonObject2 = issue.getJSONObject(i);
+                                        classname = jsonObject2.getString("class_name");
+                                        String docreq = jsonObject2.getString("doc_req");
+                                        itemlist.add(classname);
+
+
+                                        JSONArray moreDetails = jsonObject2.getJSONArray("doc_type_names");
+                                        for (int j = 0; j < moreDetails.length(); j++) {
+                                            JSONObject jsonObject3 = moreDetails.getJSONObject(j);
+                                            String doctypename = jsonObject3.getString("document_name");
+                                            itemlist.add(doctypename);
+                                            // shalist.add("===================================");
+                                            // itemlist.addAll(contentlist);
+                                        }
+
                                     }
-                                }
-                             /*   listview.setAdapter(new ArrayAdapter<String>(ChecklistShare.this, layout.simple_list_item_1,itemlist) {
-                                    @Override
-                                    public View getView(int position, View convertView, ViewGroup parent) {
-                                        TextView textView = (TextView) super.getView(position, convertView, parent);
-                                        textView.setTextColor(Color.parseColor("#B4B4B4"));
-                                        return textView;
-                                    }
-                                });*/
-                                //second array
-                                JSONArray jsonArrays = jsonObject1.getJSONArray("Address Proof (Current Residence) Rented");
-                                for (int i = 0; i < jsonArrays.length(); i++) {
-                                    JSONObject jsonObject2 = jsonArrays.getJSONObject(i);
-                                    String classname = jsonObject2.getString("class_name");
-                                    Log.i(TAG, "classname: " + classname);
-                                   // itemlist.add(classname);
-                                    itemlist.add(classname +"*");
-                                    JSONArray moreDetails = jsonObject2.getJSONArray("doc_type_names");
-                                    for (int j = 0; j < moreDetails.length(); j++) {
-                                        JSONObject jsonObject3 = moreDetails.getJSONObject(j);
-                                        String doctypename = jsonObject3.getString("document_name");
-                                        itemlist.add(doctypename);
-                                        // itemlist.addAll(contentlist);
-                                    }
+
                                 }
 
                                 listview.setAdapter(new ArrayAdapter<String>(ChecklistShare.this, layout.simple_list_item_1, itemlist) {
                                     @Override
                                     public View getView(int position, View convertView, ViewGroup parent) {
                                         View row = super.getView(position, convertView, parent);
-                                        Log.i(TAG, "getView: "+getItem(position));
                                         TextView textView = (TextView) super.getView(position, convertView, parent);
-
+                                        Log.i(TAG, "getView: "+getItem(position));
                                         switch (getItem(position)){
-                                            case "Identity Proof *":
-                                            case "Address Proof (Current Residence) Rented*":
-                                            case "Address Proof (Current Residence) Owned*":
-                                            case "Signature Verification Document *":
-                                            case "Bank Statement - Last 12 Months *":
-                                            case "Business Vintage Proof *":
+                                            // case getItem(position).equalsIgnoreCase(classname):
+                                            case "Identity Proof ":
+                                            case "Address Proof (Current Residence) Rented":
+                                            case "Address Proof (Current Residence) Owned":
+                                            case "Signature Verification Document ":
+                                            case "Bank Statement - Last 12 Months ":
+                                            case "Business Vintage Proof ":
                                             case "Income Proof ":
                                             case "Residence/Property Ownership Proof ":
                                             case "Photo Proof ":
@@ -696,119 +744,10 @@ public class ChecklistShare extends AppCompatActivity {
                                             default:
                                                 textView.setTextColor(Color.parseColor("#8A8A8A"));
                                                 break;
-
                                         }
                                         return row;
                                     }
                                 });
-
-                                //third array
-                                JSONArray jsonArrays3 = jsonObject1.getJSONArray("Address Proof (Current Residence) Owned");
-                                for (int i = 0; i < jsonArrays3.length(); i++) {
-                                    JSONObject jsonObject2 = jsonArrays3.getJSONObject(i);
-                                    String classname = jsonObject2.getString("class_name");
-                                    Log.i(TAG, "classname: " + classname);
-                                   // itemlist.add(classname);
-                                    itemlist.add(classname +"*");
-
-                                    JSONArray moreDetails = jsonObject2.getJSONArray("doc_type_names");
-                                    for (int j = 0; j < moreDetails.length(); j++) {
-                                        JSONObject jsonObject3 = moreDetails.getJSONObject(j);
-                                        String doctypename = jsonObject3.getString("document_name");
-                                        itemlist.add(doctypename);
-                                        // itemlist.addAll(contentlist);
-                                    }
-                                }
-
-                                //forth array
-
-                                JSONArray jsonArrays4 = jsonObject1.getJSONArray("Signature Verification Document");
-                                for (int i = 0; i < jsonArrays4.length(); i++) {
-                                    JSONObject jsonObject2 = jsonArrays4.getJSONObject(i);
-                                    String classname = jsonObject2.getString("class_name");
-                                    Log.i(TAG, "classname: " + classname);
-                                   // itemlist.add(classname);
-                                    itemlist.add(classname +"*");
-
-                                    JSONArray moreDetails = jsonObject2.getJSONArray("doc_type_names");
-                                    for (int j = 0; j < moreDetails.length(); j++) {
-                                        JSONObject jsonObject3 = moreDetails.getJSONObject(j);
-                                        String doctypename = jsonObject3.getString("document_name");
-                                        itemlist.add(doctypename);
-                                        // itemlist.addAll(contentlist);
-                                    }
-                                }
-
-                                //fifth array
-
-                                JSONArray jsonArrays5 = jsonObject1.getJSONArray("Bank Statement - Last 6 Months");
-                                for (int i = 0; i < jsonArrays5.length(); i++) {
-                                    JSONObject jsonObject2 = jsonArrays5.getJSONObject(i);
-                                    String classname = jsonObject2.getString("class_name");
-                                    Log.i(TAG, "classname: " + classname);
-                                  //  itemlist.add(classname);
-                                    itemlist.add(classname +"*");
-                                    JSONArray moreDetails = jsonObject2.getJSONArray("doc_type_names");
-                                    for (int j = 0; j < moreDetails.length(); j++) {
-                                        JSONObject jsonObject3 = moreDetails.getJSONObject(j);
-                                        String doctypename = jsonObject3.getString("document_name");
-                                        itemlist.add(doctypename);
-                                        // itemlist.addAll(contentlist);
-                                    }
-                                }
-
-                                //sixth array
-
-                                JSONArray jsonArrays6 = jsonObject1.getJSONArray("Salary Proof");
-                                for (int i = 0; i < jsonArrays6.length(); i++) {
-                                    JSONObject jsonObject2 = jsonArrays6.getJSONObject(i);
-                                    String classname = jsonObject2.getString("class_name");
-                                    Log.i(TAG, "classname: " + classname);
-                                    //itemlist.add(classname);
-                                    itemlist.add(classname +"*");
-
-                                    JSONArray moreDetails = jsonObject2.getJSONArray("doc_type_names");
-                                    for (int j = 0; j < moreDetails.length(); j++) {
-                                        JSONObject jsonObject3 = moreDetails.getJSONObject(j);
-                                        String doctypename = jsonObject3.getString("document_name");
-                                        itemlist.add(doctypename);
-                                        // itemlist.addAll(contentlist);
-                                    }
-                                }
-
-                                //seventh array
-                                JSONArray jsonArrays7 = jsonObject1.getJSONArray("Income Proof");
-                                for (int i = 0; i < jsonArrays7.length(); i++) {
-                                    JSONObject jsonObject2 = jsonArrays7.getJSONObject(i);
-                                    String classname = jsonObject2.getString("class_name");
-                                    Log.i(TAG, "classname: " + classname);
-                                    itemlist.add(classname);
-                                    // itemlist.add(classname);
-                                    JSONArray moreDetails = jsonObject2.getJSONArray("doc_type_names");
-                                    for (int j = 0; j < moreDetails.length(); j++) {
-                                        JSONObject jsonObject3 = moreDetails.getJSONObject(j);
-                                        String doctypename = jsonObject3.getString("document_name");
-                                        itemlist.add(doctypename);
-                                        // itemlist.addAll(contentlist);
-                                    }
-                                }
-
-                                //eight array
-
-                                JSONArray jsonArrays8 = jsonObject1.getJSONArray("Residence/Property Ownership Proof");
-                                for (int i = 0; i < jsonArrays8.length(); i++) {
-                                    JSONObject jsonObject2 = jsonArrays8.getJSONObject(i);
-                                    String classname = jsonObject2.getString("class_name");
-                                    Log.i(TAG, "classname: " + classname);
-                                    itemlist.add(classname);
-                                    JSONArray moreDetails = jsonObject2.getJSONArray("doc_type_names");
-                                    for (int j = 0; j < moreDetails.length(); j++) {
-                                        JSONObject jsonObject3 = moreDetails.getJSONObject(j);
-                                        String doctypename = jsonObject3.getString("document_name");
-                                        itemlist.add(doctypename);
-                                        // itemlist.addAll(contentlist);
-                                    }
-                                }
 
 
                                 progressDialog.dismiss();
@@ -830,145 +769,61 @@ public class ChecklistShare extends AppCompatActivity {
                                 Jsonobject2=response.getJSONObject("loan_typearr");
                                 loan_type=Jsonobject2.getString("loan_type");
 
-                                // first Array
-                                JSONArray jsonArray = jsonObject1.getJSONArray("Identity Proof");
-                                for (int i = 0; i < jsonArray.length(); i++) {
-                                    JSONObject jsonObject2 = jsonArray.getJSONObject(i);
-                                    String classname = jsonObject2.getString("class_name");
-                                    Log.i(TAG, "classname: " + classname);
-                                    itemlist.add(classname+ "*");
 
-                                    JSONArray moreDetails = jsonObject2.getJSONArray("doc_type_names");
-                                    for (int j = 0; j < moreDetails.length(); j++) {
-                                        JSONObject jsonObject3 = moreDetails.getJSONObject(j);
-                                        String doctypename = jsonObject3.getString("document_name");
-                                        itemlist.add(doctypename);
-                                        // itemlist.addAll(contentlist);
+
+                                Iterator iterator = jsonObject1.keys();
+                                while(iterator.hasNext()){
+                                    String key = (String)iterator.next();
+                                    JSONArray issue = jsonObject1.getJSONArray(key);
+                                    for (int i = 0; i < issue.length(); i++) {
+                                        JSONObject jsonObject2 = issue.getJSONObject(i);
+                                        classname = jsonObject2.getString("class_name");
+                                        String docreq = jsonObject2.getString("doc_req");
+                                        itemlist.add(classname);
+
+
+                                        JSONArray moreDetails = jsonObject2.getJSONArray("doc_type_names");
+                                        for (int j = 0; j < moreDetails.length(); j++) {
+                                            JSONObject jsonObject3 = moreDetails.getJSONObject(j);
+                                            String doctypename = jsonObject3.getString("document_name");
+                                            itemlist.add(doctypename);
+                                            // shalist.add("===================================");
+                                            // itemlist.addAll(contentlist);
+                                        }
+
                                     }
+
                                 }
-                             /*   listview.setAdapter(new ArrayAdapter<String>(ChecklistShare.this, layout.simple_list_item_1,itemlist) {
+
+                                listview.setAdapter(new ArrayAdapter<String>(ChecklistShare.this, layout.simple_list_item_1, itemlist) {
                                     @Override
                                     public View getView(int position, View convertView, ViewGroup parent) {
+                                        View row = super.getView(position, convertView, parent);
                                         TextView textView = (TextView) super.getView(position, convertView, parent);
-                                        textView.setTextColor(Color.parseColor("#B4B4B4"));
-                                        return textView;
+                                        Log.i(TAG, "getView: "+getItem(position));
+                                        switch (getItem(position)){
+                                            // case getItem(position).equalsIgnoreCase(classname):
+                                            case "Identity Proof ":
+                                            case "Address Proof (Current Residence) Rented":
+                                            case "Address Proof (Current Residence) Owned":
+                                            case "Signature Verification Document ":
+                                            case "Bank Statement - Last 12 Months ":
+                                            case "Business Vintage Proof ":
+                                            case "Income Proof ":
+                                            case "Residence/Property Ownership Proof ":
+                                            case "Photo Proof ":
+                                                textView.setTextColor(Color.parseColor("#012B5D"));
+                                                break;
+                                            default:
+                                                textView.setTextColor(Color.parseColor("#8A8A8A"));
+                                                break;
+                                        }
+                                        return row;
                                     }
-                                });*/
-                                //second array
-                                JSONArray jsonArrays = jsonObject1.getJSONArray("Address Proof (Current Residence) Rented");
-                                for (int i = 0; i < jsonArrays.length(); i++) {
-                                    JSONObject jsonObject2 = jsonArrays.getJSONObject(i);
-                                    String classname = jsonObject2.getString("class_name");
-                                    Log.i(TAG, "classname: " + classname);
-                                    itemlist.add(classname+ "*");
-                                    JSONArray moreDetails = jsonObject2.getJSONArray("doc_type_names");
-                                    for (int j = 0; j < moreDetails.length(); j++) {
-                                        JSONObject jsonObject3 = moreDetails.getJSONObject(j);
-                                        String doctypename = jsonObject3.getString("document_name");
-                                        itemlist.add(doctypename);
-                                        // itemlist.addAll(contentlist);
-                                    }
-                                }
+                                });
 
-                                //third array
-                                JSONArray jsonArrays3 = jsonObject1.getJSONArray("Address Proof (Current Residence) Owned");
-                                for (int i = 0; i < jsonArrays3.length(); i++) {
-                                    JSONObject jsonObject2 = jsonArrays3.getJSONObject(i);
-                                    String classname = jsonObject2.getString("class_name");
-                                    Log.i(TAG, "classname: " + classname);
-                                    itemlist.add(classname+ "*");
-                                    JSONArray moreDetails = jsonObject2.getJSONArray("doc_type_names");
-                                    for (int j = 0; j < moreDetails.length(); j++) {
-                                        JSONObject jsonObject3 = moreDetails.getJSONObject(j);
-                                        String doctypename = jsonObject3.getString("document_name");
-                                        itemlist.add(doctypename);
-                                        // itemlist.addAll(contentlist);
-                                    }
-                                }
 
-                                //forth array
 
-                                JSONArray jsonArrays4 = jsonObject1.getJSONArray("Signature Verification Document");
-                                for (int i = 0; i < jsonArrays4.length(); i++) {
-                                    JSONObject jsonObject2 = jsonArrays4.getJSONObject(i);
-                                    String classname = jsonObject2.getString("class_name");
-                                    Log.i(TAG, "classname: " + classname);
-                                    itemlist.add(classname+ "*");
-                                    JSONArray moreDetails = jsonObject2.getJSONArray("doc_type_names");
-                                    for (int j = 0; j < moreDetails.length(); j++) {
-                                        JSONObject jsonObject3 = moreDetails.getJSONObject(j);
-                                        String doctypename = jsonObject3.getString("document_name");
-                                        itemlist.add(doctypename);
-                                        // itemlist.addAll(contentlist);
-                                    }
-                                }
-
-                                //fifth array
-
-                                JSONArray jsonArrays5 = jsonObject1.getJSONArray("Bank Statement - Last 6 Months");
-                                for (int i = 0; i < jsonArrays5.length(); i++) {
-                                    JSONObject jsonObject2 = jsonArrays5.getJSONObject(i);
-                                    String classname = jsonObject2.getString("class_name");
-                                    Log.i(TAG, "classname: " + classname);
-                                    itemlist.add(classname+ "*");
-                                    JSONArray moreDetails = jsonObject2.getJSONArray("doc_type_names");
-                                    for (int j = 0; j < moreDetails.length(); j++) {
-                                        JSONObject jsonObject3 = moreDetails.getJSONObject(j);
-                                        String doctypename = jsonObject3.getString("document_name");
-                                        itemlist.add(doctypename);
-                                        // itemlist.addAll(contentlist);
-                                    }
-                                }
-
-                                //sixth array
-
-                                JSONArray jsonArrays6 = jsonObject1.getJSONArray("Salary Proof");
-                                for (int i = 0; i < jsonArrays6.length(); i++) {
-                                    JSONObject jsonObject2 = jsonArrays6.getJSONObject(i);
-                                    String classname = jsonObject2.getString("class_name");
-                                    Log.i(TAG, "classname: " + classname);
-                                    itemlist.add(classname+ "*");
-                                    JSONArray moreDetails = jsonObject2.getJSONArray("doc_type_names");
-                                    for (int j = 0; j < moreDetails.length(); j++) {
-                                        JSONObject jsonObject3 = moreDetails.getJSONObject(j);
-                                        String doctypename = jsonObject3.getString("document_name");
-                                        itemlist.add(doctypename);
-                                        // itemlist.addAll(contentlist);
-                                    }
-                                }
-
-                                //seventh array
-                                JSONArray jsonArrays7 = jsonObject1.getJSONArray("Income Proof");
-                                for (int i = 0; i < jsonArrays7.length(); i++) {
-                                    JSONObject jsonObject2 = jsonArrays7.getJSONObject(i);
-                                    String classname = jsonObject2.getString("class_name");
-                                    Log.i(TAG, "classname: " + classname);
-                                    itemlist.add(classname);
-                                    JSONArray moreDetails = jsonObject2.getJSONArray("doc_type_names");
-                                    for (int j = 0; j < moreDetails.length(); j++) {
-                                        JSONObject jsonObject3 = moreDetails.getJSONObject(j);
-                                        String doctypename = jsonObject3.getString("document_name");
-                                        itemlist.add(doctypename);
-                                        // itemlist.addAll(contentlist);
-                                    }
-                                }
-
-                                //eight array
-
-                                JSONArray jsonArrays8 = jsonObject1.getJSONArray("Residence/Property Ownership Proof");
-                                for (int i = 0; i < jsonArrays8.length(); i++) {
-                                    JSONObject jsonObject2 = jsonArrays8.getJSONObject(i);
-                                    String classname = jsonObject2.getString("class_name");
-                                    Log.i(TAG, "classname: " + classname);
-                                    itemlist.add(classname);
-                                    JSONArray moreDetails = jsonObject2.getJSONArray("doc_type_names");
-                                    for (int j = 0; j < moreDetails.length(); j++) {
-                                        JSONObject jsonObject3 = moreDetails.getJSONObject(j);
-                                        String doctypename = jsonObject3.getString("document_name");
-                                        itemlist.add(doctypename);
-                                        // itemlist.addAll(contentlist);
-                                    }
-                                }
 
                                 //property array
 
@@ -1035,147 +890,59 @@ public class ChecklistShare extends AppCompatActivity {
                                 Jsonobject2=response.getJSONObject("loan_typearr");
                                 loan_type=Jsonobject2.getString("loan_type");
 
-                                // first Array
-                                JSONArray jsonArray = jsonObject1.getJSONArray("Identity Proof");
-                                for (int i = 0; i < jsonArray.length(); i++) {
-                                    JSONObject jsonObject2 = jsonArray.getJSONObject(i);
-                                    String classname = jsonObject2.getString("class_name");
-                                    Log.i(TAG, "classname: " + classname);
-                                    itemlist.add(classname +"*");
 
-                                    JSONArray moreDetails = jsonObject2.getJSONArray("doc_type_names");
-                                    for (int j = 0; j < moreDetails.length(); j++) {
-                                        JSONObject jsonObject3 = moreDetails.getJSONObject(j);
-                                        String doctypename = jsonObject3.getString("document_name");
-                                        itemlist.add(doctypename);
-                                        // itemlist.addAll(contentlist);
+
+                                Iterator iterator = jsonObject1.keys();
+                                while(iterator.hasNext()){
+                                    String key = (String)iterator.next();
+                                    JSONArray issue = jsonObject1.getJSONArray(key);
+                                    for (int i = 0; i < issue.length(); i++) {
+                                        JSONObject jsonObject2 = issue.getJSONObject(i);
+                                        classname = jsonObject2.getString("class_name");
+                                        String docreq = jsonObject2.getString("doc_req");
+                                        itemlist.add(classname);
+
+
+                                        JSONArray moreDetails = jsonObject2.getJSONArray("doc_type_names");
+                                        for (int j = 0; j < moreDetails.length(); j++) {
+                                            JSONObject jsonObject3 = moreDetails.getJSONObject(j);
+                                            String doctypename = jsonObject3.getString("document_name");
+                                            itemlist.add(doctypename);
+                                            // shalist.add("===================================");
+                                            // itemlist.addAll(contentlist);
+                                        }
+
                                     }
+
                                 }
-                             /*   listview.setAdapter(new ArrayAdapter<String>(ChecklistShare.this, layout.simple_list_item_1,itemlist) {
+
+                                listview.setAdapter(new ArrayAdapter<String>(ChecklistShare.this, layout.simple_list_item_1, itemlist) {
                                     @Override
                                     public View getView(int position, View convertView, ViewGroup parent) {
+                                        View row = super.getView(position, convertView, parent);
                                         TextView textView = (TextView) super.getView(position, convertView, parent);
-                                        textView.setTextColor(Color.parseColor("#B4B4B4"));
-                                        return textView;
+                                        Log.i(TAG, "getView: "+getItem(position));
+                                        switch (getItem(position)){
+                                            // case getItem(position).equalsIgnoreCase(classname):
+                                            case "Identity Proof ":
+                                            case "Address Proof (Current Residence) Rented":
+                                            case "Address Proof (Current Residence) Owned":
+                                            case "Signature Verification Document ":
+                                            case "Bank Statement - Last 12 Months ":
+                                            case "Business Vintage Proof ":
+                                            case "Income Proof ":
+                                            case "Residence/Property Ownership Proof ":
+                                            case "Photo Proof ":
+                                                textView.setTextColor(Color.parseColor("#012B5D"));
+                                                break;
+                                            default:
+                                                textView.setTextColor(Color.parseColor("#8A8A8A"));
+                                                break;
+                                        }
+                                        return row;
                                     }
-                                });*/
-                                //second array
-                                JSONArray jsonArrays = jsonObject1.getJSONArray("Address Proof (Current Residence) Rented");
-                                for (int i = 0; i < jsonArrays.length(); i++) {
-                                    JSONObject jsonObject2 = jsonArrays.getJSONObject(i);
-                                    String classname = jsonObject2.getString("class_name");
-                                    Log.i(TAG, "classname: " + classname);
-                                    itemlist.add(classname +"*");
-                                    JSONArray moreDetails = jsonObject2.getJSONArray("doc_type_names");
-                                    for (int j = 0; j < moreDetails.length(); j++) {
-                                        JSONObject jsonObject3 = moreDetails.getJSONObject(j);
-                                        String doctypename = jsonObject3.getString("document_name");
-                                        itemlist.add(doctypename);
-                                        // itemlist.addAll(contentlist);
-                                    }
-                                }
+                                });
 
-                                //third array
-                                JSONArray jsonArrays3 = jsonObject1.getJSONArray("Address Proof (Current Residence) Owned");
-                                for (int i = 0; i < jsonArrays3.length(); i++) {
-                                    JSONObject jsonObject2 = jsonArrays3.getJSONObject(i);
-                                    String classname = jsonObject2.getString("class_name");
-                                    Log.i(TAG, "classname: " + classname);
-                                    itemlist.add(classname +"*");
-                                    JSONArray moreDetails = jsonObject2.getJSONArray("doc_type_names");
-                                    for (int j = 0; j < moreDetails.length(); j++) {
-                                        JSONObject jsonObject3 = moreDetails.getJSONObject(j);
-                                        String doctypename = jsonObject3.getString("document_name");
-                                        itemlist.add(doctypename);
-                                        // itemlist.addAll(contentlist);
-                                    }
-                                }
-
-                                //forth array
-
-                                JSONArray jsonArrays4 = jsonObject1.getJSONArray("Signature Verification Document");
-                                for (int i = 0; i < jsonArrays4.length(); i++) {
-                                    JSONObject jsonObject2 = jsonArrays4.getJSONObject(i);
-                                    String classname = jsonObject2.getString("class_name");
-                                    Log.i(TAG, "classname: " + classname);
-                                    itemlist.add(classname +"*");
-                                    JSONArray moreDetails = jsonObject2.getJSONArray("doc_type_names");
-                                    for (int j = 0; j < moreDetails.length(); j++) {
-                                        JSONObject jsonObject3 = moreDetails.getJSONObject(j);
-                                        String doctypename = jsonObject3.getString("document_name");
-                                        itemlist.add(doctypename);
-                                        // itemlist.addAll(contentlist);
-                                    }
-                                }
-
-                                //fifth array
-
-                                JSONArray jsonArrays5 = jsonObject1.getJSONArray("Bank Statement - Last 6 Months");
-                                for (int i = 0; i < jsonArrays5.length(); i++) {
-                                    JSONObject jsonObject2 = jsonArrays5.getJSONObject(i);
-                                    String classname = jsonObject2.getString("class_name");
-                                    Log.i(TAG, "classname: " + classname);
-                                    itemlist.add(classname +"*");
-                                    JSONArray moreDetails = jsonObject2.getJSONArray("doc_type_names");
-                                    for (int j = 0; j < moreDetails.length(); j++) {
-                                        JSONObject jsonObject3 = moreDetails.getJSONObject(j);
-                                        String doctypename = jsonObject3.getString("document_name");
-                                        itemlist.add(doctypename);
-                                        // itemlist.addAll(contentlist);
-                                    }
-                                }
-
-                                //sixth array
-
-                                JSONArray jsonArrays6 = jsonObject1.getJSONArray("Salary Proof");
-                                for (int i = 0; i < jsonArrays6.length(); i++) {
-                                    JSONObject jsonObject2 = jsonArrays6.getJSONObject(i);
-                                    String classname = jsonObject2.getString("class_name");
-                                    Log.i(TAG, "classname: " + classname);
-                                    itemlist.add(classname +"*");
-                                    JSONArray moreDetails = jsonObject2.getJSONArray("doc_type_names");
-                                    for (int j = 0; j < moreDetails.length(); j++) {
-                                        JSONObject jsonObject3 = moreDetails.getJSONObject(j);
-                                        String doctypename = jsonObject3.getString("document_name");
-                                        itemlist.add(doctypename);
-                                        // itemlist.addAll(contentlist);
-                                    }
-                                }
-
-                                //seventh array
-                                JSONArray jsonArrays7 = jsonObject1.getJSONArray("Income Proof");
-                                for (int i = 0; i < jsonArrays7.length(); i++) {
-                                    JSONObject jsonObject2 = jsonArrays7.getJSONObject(i);
-                                    String classname = jsonObject2.getString("class_name");
-                                    Log.i(TAG, "classname: " + classname);
-                                    itemlist.add(classname);
-                                    JSONArray moreDetails = jsonObject2.getJSONArray("doc_type_names");
-                                    for (int j = 0; j < moreDetails.length(); j++) {
-                                        JSONObject jsonObject3 = moreDetails.getJSONObject(j);
-                                        String doctypename = jsonObject3.getString("document_name");
-                                        itemlist.add(doctypename);
-                                        // itemlist.addAll(contentlist);
-                                    }
-                                }
-
-                                //eight array
-
-                                JSONArray jsonArrays8 = jsonObject1.getJSONArray("Residence/Property Ownership Proof");
-                                for (int i = 0; i < jsonArrays8.length(); i++) {
-                                    JSONObject jsonObject2 = jsonArrays8.getJSONObject(i);
-                                    String classname = jsonObject2.getString("class_name");
-                                    Log.i(TAG, "classname: " + classname);
-                                    itemlist.add(classname);
-                                    JSONArray moreDetails = jsonObject2.getJSONArray("doc_type_names");
-                                    for (int j = 0; j < moreDetails.length(); j++) {
-                                        JSONObject jsonObject3 = moreDetails.getJSONObject(j);
-                                        String doctypename = jsonObject3.getString("document_name");
-                                        itemlist.add(doctypename);
-                                        // itemlist.addAll(contentlist);
-                                    }
-                                }
-
-                                //property array
 
                                 JSONArray jsonArrayp = propertyObject.getJSONArray("Property Document");
                                 for (int i = 0; i < jsonArrayp.length(); i++) {
@@ -1224,9 +991,6 @@ public class ChecklistShare extends AppCompatActivity {
                                         return row;
                                     }
                                 });
-
-                             /*  listview.setAdapter(adapter);
-                               adapter.notifyDataSetChanged();*/
 
                                 progressDialog.dismiss();
                                 LapSelfemploy();
@@ -1289,160 +1053,63 @@ public class ChecklistShare extends AppCompatActivity {
                         try {
                             jsonObject1 = response.getJSONObject("Applicant");
                             Jsonobject2=response.getJSONObject("loan_typearr");
-
                             loan_type=Jsonobject2.getString("loan_type");
 
-                            // first Array
-                            JSONArray jsonArray = jsonObject1.getJSONArray("Identity Proof");
-                            for (int i = 0; i < jsonArray.length(); i++) {
-                                JSONObject jsonObject2 = jsonArray.getJSONObject(i);
-                                String classname = jsonObject2.getString("class_name");
-                                Log.i(TAG, "classname: " + classname);
-                                selflist.add(classname+ "*");
+                            Iterator iterator = jsonObject1.keys();
+                            while(iterator.hasNext()){
+                                String key = (String)iterator.next();
+                                JSONArray issue = jsonObject1.getJSONArray(key);
+                                for (int i = 0; i < issue.length(); i++) {
+                                    JSONObject jsonObject2 = issue.getJSONObject(i);
+                                    classname = jsonObject2.getString("class_name");
+                                    String docreq = jsonObject2.getString("doc_req");
+                                    selflist.add(classname);
 
-                                JSONArray moreDetails = jsonObject2.getJSONArray("doc_type_names");
-                                for (int j = 0; j < moreDetails.length(); j++) {
-                                    JSONObject jsonObject3 = moreDetails.getJSONObject(j);
-                                    String doctypename = jsonObject3.getString("document_name");
-                                    selflist.add(doctypename);
-                                    // itemlist.addAll(contentlist);
+
+                                    JSONArray moreDetails = jsonObject2.getJSONArray("doc_type_names");
+                                    for (int j = 0; j < moreDetails.length(); j++) {
+                                        JSONObject jsonObject3 = moreDetails.getJSONObject(j);
+                                        String doctypename = jsonObject3.getString("document_name");
+                                        selflist.add(doctypename);
+                                        // shalist.add("===================================");
+                                        // itemlist.addAll(contentlist);
+                                    }
+
                                 }
 
                             }
 
-
-                            //second array
-                            JSONArray jsonArrays = jsonObject1.getJSONArray("Address Proof (Current Residence) Rented");
-                            for (int i = 0; i < jsonArrays.length(); i++) {
-                                JSONObject jsonObject2 = jsonArrays.getJSONObject(i);
-                                String classname = jsonObject2.getString("class_name");
-                                Log.i(TAG, "classname: " + classname);
-                                selflist.add(classname+ "*");
-                                JSONArray moreDetails = jsonObject2.getJSONArray("doc_type_names");
-                                for (int j = 0; j < moreDetails.length(); j++) {
-                                    JSONObject jsonObject3 = moreDetails.getJSONObject(j);
-                                    String doctypename = jsonObject3.getString("document_name");
-                                    selflist.add(doctypename);
-                                    // itemlist.addAll(contentlist);
+                            listView1.setAdapter(new ArrayAdapter<String>(ChecklistShare.this, layout.simple_list_item_1, selflist) {
+                                @Override
+                                public View getView(int position, View convertView, ViewGroup parent) {
+                                    View row = super.getView(position, convertView, parent);
+                                    TextView textView = (TextView) super.getView(position, convertView, parent);
+                                    Log.i(TAG, "getView: "+getItem(position));
+                                    switch (getItem(position)){
+                                        // case getItem(position).equalsIgnoreCase(classname):
+                                        case "Identity Proof ":
+                                        case "Address Proof (Current Residence) Rented":
+                                        case "Address Proof (Current Residence) Owned":
+                                        case "Signature Verification Document ":
+                                        case "Bank Statement - Last 12 Months ":
+                                        case "Business Vintage Proof ":
+                                        case "Income Proof ":
+                                        case "Residence/Property Ownership Proof ":
+                                        case "Property Document ":
+                                        case "Photo Proof ":
+                                            textView.setTextColor(Color.parseColor("#012B5D"));
+                                            break;
+                                        default:
+                                            textView.setTextColor(Color.parseColor("#8A8A8A"));
+                                            break;
+                                    }
+                                    return row;
                                 }
-                            }
+                            });
 
-                            //third array
-                            JSONArray jsonArrays3 = jsonObject1.getJSONArray("Address Proof (Current Residence) Owned");
-                            for (int i = 0; i < jsonArrays3.length(); i++) {
-                                JSONObject jsonObject2 = jsonArrays3.getJSONObject(i);
-                                String classname = jsonObject2.getString("class_name");
-                                Log.i(TAG, "classname: " + classname);
-                                selflist.add(classname+ "*");
-                                JSONArray moreDetails = jsonObject2.getJSONArray("doc_type_names");
-                                for (int j = 0; j < moreDetails.length(); j++) {
-                                    JSONObject jsonObject3 = moreDetails.getJSONObject(j);
-                                    String doctypename = jsonObject3.getString("document_name");
-                                    selflist.add(doctypename);
-                                    // itemlist.addAll(contentlist);
-                                }
-                            }
 
-                            //forth array
 
-                            JSONArray jsonArrays4 = jsonObject1.getJSONArray("Signature Verification Document");
-                            for (int i = 0; i < jsonArrays4.length(); i++) {
-                                JSONObject jsonObject2 = jsonArrays4.getJSONObject(i);
-                                String classname = jsonObject2.getString("class_name");
-                                Log.i(TAG, "classname: " + classname);
-                                selflist.add(classname+ "*");
-                                JSONArray moreDetails = jsonObject2.getJSONArray("doc_type_names");
-                                for (int j = 0; j < moreDetails.length(); j++) {
-                                    JSONObject jsonObject3 = moreDetails.getJSONObject(j);
-                                    String doctypename = jsonObject3.getString("document_name");
-                                    selflist.add(doctypename);
-                                    // itemlist.addAll(contentlist);
-                                }
-                            }
 
-                            //fifth array
-
-                            JSONArray jsonArrays5 = jsonObject1.getJSONArray("Bank Statement - Last 12 Months");
-                            for (int i = 0; i < jsonArrays5.length(); i++) {
-                                JSONObject jsonObject2 = jsonArrays5.getJSONObject(i);
-                                String classname = jsonObject2.getString("class_name");
-                                Log.i(TAG, "classname: " + classname);
-                                selflist.add(classname+ "*");
-                                JSONArray moreDetails = jsonObject2.getJSONArray("doc_type_names");
-                                for (int j = 0; j < moreDetails.length(); j++) {
-                                    JSONObject jsonObject3 = moreDetails.getJSONObject(j);
-                                    String doctypename = jsonObject3.getString("document_name");
-                                    selflist.add(doctypename);
-                                    // itemlist.addAll(contentlist);
-                                }
-                            }
-
-                            //sixth array
-
-                            JSONArray jsonArrays6 = jsonObject1.getJSONArray("Business Vintage Proof");
-                            for (int i = 0; i < jsonArrays6.length(); i++) {
-                                JSONObject jsonObject2 = jsonArrays6.getJSONObject(i);
-                                String classname = jsonObject2.getString("class_name");
-                                Log.i(TAG, "classname: " + classname);
-                                selflist.add(classname+ "*");
-                                JSONArray moreDetails = jsonObject2.getJSONArray("doc_type_names");
-                                for (int j = 0; j < moreDetails.length(); j++) {
-                                    JSONObject jsonObject3 = moreDetails.getJSONObject(j);
-                                    String doctypename = jsonObject3.getString("document_name");
-                                    selflist.add(doctypename);
-                                    // itemlist.addAll(contentlist);
-                                }
-                            }
-
-                            //seventh array
-                            JSONArray jsonArrays7 = jsonObject1.getJSONArray("Income Proof");
-                            for (int i = 0; i < jsonArrays7.length(); i++) {
-                                JSONObject jsonObject2 = jsonArrays7.getJSONObject(i);
-                                String classname = jsonObject2.getString("class_name");
-                                Log.i(TAG, "classname: " + classname);
-                                selflist.add(classname);
-                                JSONArray moreDetails = jsonObject2.getJSONArray("doc_type_names");
-                                for (int j = 0; j < moreDetails.length(); j++) {
-                                    JSONObject jsonObject3 = moreDetails.getJSONObject(j);
-                                    String doctypename = jsonObject3.getString("document_name");
-                                    selflist.add(doctypename);
-                                    // itemlist.addAll(contentlist);
-                                }
-                            }
-
-                            //eight array
-
-                            JSONArray jsonArrays8 = jsonObject1.getJSONArray("Residence/Property Ownership Proof");
-                            for (int i = 0; i < jsonArrays8.length(); i++) {
-                                JSONObject jsonObject2 = jsonArrays8.getJSONObject(i);
-                                String classname = jsonObject2.getString("class_name");
-                                Log.i(TAG, "classname: " + classname);
-                                selflist.add(classname);
-                                JSONArray moreDetails = jsonObject2.getJSONArray("doc_type_names");
-                                for (int j = 0; j < moreDetails.length(); j++) {
-                                    JSONObject jsonObject3 = moreDetails.getJSONObject(j);
-                                    String doctypename = jsonObject3.getString("document_name");
-                                    selflist.add(doctypename);
-                                    // itemlist.addAll(contentlist);
-                                }
-                            }
-
-                            //ninth array
-
-                            JSONArray jsonArrays9 = jsonObject1.getJSONArray("Photo Proof");
-                            for (int i = 0; i < jsonArrays9.length(); i++) {
-                                JSONObject jsonObject2 = jsonArrays9.getJSONObject(i);
-                                String classname = jsonObject2.getString("class_name");
-                                Log.i(TAG, "classname: " + classname);
-                                selflist.add(classname);
-                                JSONArray moreDetails = jsonObject2.getJSONArray("doc_type_names");
-                                for (int j = 0; j < moreDetails.length(); j++) {
-                                    JSONObject jsonObject3 = moreDetails.getJSONObject(j);
-                                    String doctypename = jsonObject3.getString("document_name");
-                                    selflist.add(doctypename);
-                                    // itemlist.addAll(contentlist);
-                                }
-                            }
 
                             //property array
 
@@ -1490,7 +1157,7 @@ public class ChecklistShare extends AppCompatActivity {
                                     return row;
                                 }
                             });
-                            Log.i(TAG, "onResponse:jsonArray " + jsonArray);
+                           // Log.i(TAG, "onResponse:jsonArray " + jsonArray);
                             Log.i(TAG, "Response: on" + jsonObject1);
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -1547,160 +1214,63 @@ public class ChecklistShare extends AppCompatActivity {
                         try {
                             jsonObject1 = response.getJSONObject("Applicant");
                             Jsonobject2=response.getJSONObject("loan_typearr");
-
                             loan_type=Jsonobject2.getString("loan_type");
 
-                            // first Array
-                            JSONArray jsonArray = jsonObject1.getJSONArray("Identity Proof");
-                            for (int i = 0; i < jsonArray.length(); i++) {
-                                JSONObject jsonObject2 = jsonArray.getJSONObject(i);
-                                String classname = jsonObject2.getString("class_name");
-                                Log.i(TAG, "classname: " + classname);
-                                selflist.add(classname+ "*");
+                            Iterator iterator = jsonObject1.keys();
+                            while(iterator.hasNext()){
+                                String key = (String)iterator.next();
+                                JSONArray issue = jsonObject1.getJSONArray(key);
+                                for (int i = 0; i < issue.length(); i++) {
+                                    JSONObject jsonObject2 = issue.getJSONObject(i);
+                                    classname = jsonObject2.getString("class_name");
+                                    String docreq = jsonObject2.getString("doc_req");
+                                    selflist.add(classname);
 
-                                JSONArray moreDetails = jsonObject2.getJSONArray("doc_type_names");
-                                for (int j = 0; j < moreDetails.length(); j++) {
-                                    JSONObject jsonObject3 = moreDetails.getJSONObject(j);
-                                    String doctypename = jsonObject3.getString("document_name");
-                                    selflist.add(doctypename);
-                                    // itemlist.addAll(contentlist);
+
+                                    JSONArray moreDetails = jsonObject2.getJSONArray("doc_type_names");
+                                    for (int j = 0; j < moreDetails.length(); j++) {
+                                        JSONObject jsonObject3 = moreDetails.getJSONObject(j);
+                                        String doctypename = jsonObject3.getString("document_name");
+                                        selflist.add(doctypename);
+                                        // shalist.add("===================================");
+                                        // itemlist.addAll(contentlist);
+                                    }
+
                                 }
 
                             }
 
-
-                            //second array
-                            JSONArray jsonArrays = jsonObject1.getJSONArray("Address Proof (Current Residence) Rented");
-                            for (int i = 0; i < jsonArrays.length(); i++) {
-                                JSONObject jsonObject2 = jsonArrays.getJSONObject(i);
-                                String classname = jsonObject2.getString("class_name");
-                                Log.i(TAG, "classname: " + classname);
-                                selflist.add(classname+ "*");
-                                JSONArray moreDetails = jsonObject2.getJSONArray("doc_type_names");
-                                for (int j = 0; j < moreDetails.length(); j++) {
-                                    JSONObject jsonObject3 = moreDetails.getJSONObject(j);
-                                    String doctypename = jsonObject3.getString("document_name");
-                                    selflist.add(doctypename);
-                                    // itemlist.addAll(contentlist);
+                            listView1.setAdapter(new ArrayAdapter<String>(ChecklistShare.this, layout.simple_list_item_1, selflist) {
+                                @Override
+                                public View getView(int position, View convertView, ViewGroup parent) {
+                                    View row = super.getView(position, convertView, parent);
+                                    TextView textView = (TextView) super.getView(position, convertView, parent);
+                                    Log.i(TAG, "getView: "+getItem(position));
+                                    switch (getItem(position)){
+                                        // case getItem(position).equalsIgnoreCase(classname):
+                                        case "Identity Proof ":
+                                        case "Address Proof (Current Residence) Rented":
+                                        case "Address Proof (Current Residence) Owned":
+                                        case "Signature Verification Document ":
+                                        case "Bank Statement - Last 12 Months ":
+                                        case "Business Vintage Proof ":
+                                        case "Income Proof ":
+                                        case "Residence/Property Ownership Proof ":
+                                        case "Property Document ":
+                                        case "Photo Proof ":
+                                            textView.setTextColor(Color.parseColor("#012B5D"));
+                                            break;
+                                        default:
+                                            textView.setTextColor(Color.parseColor("#8A8A8A"));
+                                            break;
+                                    }
+                                    return row;
                                 }
-                            }
+                            });
 
-                            //third array
-                            JSONArray jsonArrays3 = jsonObject1.getJSONArray("Address Proof (Current Residence) Owned");
-                            for (int i = 0; i < jsonArrays3.length(); i++) {
-                                JSONObject jsonObject2 = jsonArrays3.getJSONObject(i);
-                                String classname = jsonObject2.getString("class_name");
-                                Log.i(TAG, "classname: " + classname);
-                                selflist.add(classname+ "*");
-                                JSONArray moreDetails = jsonObject2.getJSONArray("doc_type_names");
-                                for (int j = 0; j < moreDetails.length(); j++) {
-                                    JSONObject jsonObject3 = moreDetails.getJSONObject(j);
-                                    String doctypename = jsonObject3.getString("document_name");
-                                    selflist.add(doctypename);
-                                    // itemlist.addAll(contentlist);
-                                }
-                            }
 
-                            //forth array
 
-                            JSONArray jsonArrays4 = jsonObject1.getJSONArray("Signature Verification Document");
-                            for (int i = 0; i < jsonArrays4.length(); i++) {
-                                JSONObject jsonObject2 = jsonArrays4.getJSONObject(i);
-                                String classname = jsonObject2.getString("class_name");
-                                Log.i(TAG, "classname: " + classname);
-                                selflist.add(classname+ "*");
-                                JSONArray moreDetails = jsonObject2.getJSONArray("doc_type_names");
-                                for (int j = 0; j < moreDetails.length(); j++) {
-                                    JSONObject jsonObject3 = moreDetails.getJSONObject(j);
-                                    String doctypename = jsonObject3.getString("document_name");
-                                    selflist.add(doctypename);
-                                    // itemlist.addAll(contentlist);
-                                }
-                            }
 
-                            //fifth array
-
-                            JSONArray jsonArrays5 = jsonObject1.getJSONArray("Bank Statement - Last 12 Months");
-                            for (int i = 0; i < jsonArrays5.length(); i++) {
-                                JSONObject jsonObject2 = jsonArrays5.getJSONObject(i);
-                                String classname = jsonObject2.getString("class_name");
-                                Log.i(TAG, "classname: " + classname);
-                                selflist.add(classname+ "*");
-                                JSONArray moreDetails = jsonObject2.getJSONArray("doc_type_names");
-                                for (int j = 0; j < moreDetails.length(); j++) {
-                                    JSONObject jsonObject3 = moreDetails.getJSONObject(j);
-                                    String doctypename = jsonObject3.getString("document_name");
-                                    selflist.add(doctypename);
-                                    // itemlist.addAll(contentlist);
-                                }
-                            }
-
-                            //sixth array
-
-                            JSONArray jsonArrays6 = jsonObject1.getJSONArray("Business Vintage Proof");
-                            for (int i = 0; i < jsonArrays6.length(); i++) {
-                                JSONObject jsonObject2 = jsonArrays6.getJSONObject(i);
-                                String classname = jsonObject2.getString("class_name");
-                                Log.i(TAG, "classname: " + classname);
-                                selflist.add(classname+ "*");
-                                JSONArray moreDetails = jsonObject2.getJSONArray("doc_type_names");
-                                for (int j = 0; j < moreDetails.length(); j++) {
-                                    JSONObject jsonObject3 = moreDetails.getJSONObject(j);
-                                    String doctypename = jsonObject3.getString("document_name");
-                                    selflist.add(doctypename);
-                                    // itemlist.addAll(contentlist);
-                                }
-                            }
-
-                            //seventh array
-                            JSONArray jsonArrays7 = jsonObject1.getJSONArray("Income Proof");
-                            for (int i = 0; i < jsonArrays7.length(); i++) {
-                                JSONObject jsonObject2 = jsonArrays7.getJSONObject(i);
-                                String classname = jsonObject2.getString("class_name");
-                                Log.i(TAG, "classname: " + classname);
-                                selflist.add(classname);
-                                JSONArray moreDetails = jsonObject2.getJSONArray("doc_type_names");
-                                for (int j = 0; j < moreDetails.length(); j++) {
-                                    JSONObject jsonObject3 = moreDetails.getJSONObject(j);
-                                    String doctypename = jsonObject3.getString("document_name");
-                                    selflist.add(doctypename);
-                                    // itemlist.addAll(contentlist);
-                                }
-                            }
-
-                            //eight array
-
-                            JSONArray jsonArrays8 = jsonObject1.getJSONArray("Residence/Property Ownership Proof");
-                            for (int i = 0; i < jsonArrays8.length(); i++) {
-                                JSONObject jsonObject2 = jsonArrays8.getJSONObject(i);
-                                String classname = jsonObject2.getString("class_name");
-                                Log.i(TAG, "classname: " + classname);
-                                selflist.add(classname);
-                                JSONArray moreDetails = jsonObject2.getJSONArray("doc_type_names");
-                                for (int j = 0; j < moreDetails.length(); j++) {
-                                    JSONObject jsonObject3 = moreDetails.getJSONObject(j);
-                                    String doctypename = jsonObject3.getString("document_name");
-                                    selflist.add(doctypename);
-                                    // itemlist.addAll(contentlist);
-                                }
-                            }
-
-                            //ninth array
-
-                            JSONArray jsonArrays9 = jsonObject1.getJSONArray("Photo Proof");
-                            for (int i = 0; i < jsonArrays9.length(); i++) {
-                                JSONObject jsonObject2 = jsonArrays9.getJSONObject(i);
-                                String classname = jsonObject2.getString("class_name");
-                                Log.i(TAG, "classname: " + classname);
-                                selflist.add(classname);
-                                JSONArray moreDetails = jsonObject2.getJSONArray("doc_type_names");
-                                for (int j = 0; j < moreDetails.length(); j++) {
-                                    JSONObject jsonObject3 = moreDetails.getJSONObject(j);
-                                    String doctypename = jsonObject3.getString("document_name");
-                                    selflist.add(doctypename);
-                                    // itemlist.addAll(contentlist);
-                                }
-                            }
 
                             //property array
 
@@ -1720,7 +1290,6 @@ public class ChecklistShare extends AppCompatActivity {
                                 }
                             }
 
-
                             listView1.setAdapter(new ArrayAdapter<String>(ChecklistShare.this, layout.simple_list_item_1, selflist) {
                                 @Override
                                 public View getView(int position, View convertView, ViewGroup parent) {
@@ -1734,11 +1303,11 @@ public class ChecklistShare extends AppCompatActivity {
                                         case "Address Proof (Current Residence) Owned*":
                                         case "Signature Verification Document *":
                                         case "Bank Statement - Last 12 Months *":
-                                        case "Photo Proof":
+                                        case "Business Vintage Proof *":
                                         case "Income Proof ":
                                         case "Residence/Property Ownership Proof ":
-                                        case "Business Vintage Proof *":
-                                            case "Property Document ":
+                                        case "Photo Proof ":
+                                        case "Property Document ":
                                             textView.setTextColor(Color.parseColor("#012B5D"));
                                             break;
                                         default:
@@ -1749,7 +1318,8 @@ public class ChecklistShare extends AppCompatActivity {
                                     return row;
                                 }
                             });
-                            Log.i(TAG, "onResponse:jsonArray " + jsonArray);
+
+                           // Log.i(TAG, "onResponse:jsonArray " + jsonArray);
                             Log.i(TAG, "Response: on" + jsonObject1);
                         } catch (JSONException e) {
                             e.printStackTrace();

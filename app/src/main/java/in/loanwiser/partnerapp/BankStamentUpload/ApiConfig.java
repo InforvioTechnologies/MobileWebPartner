@@ -5,6 +5,7 @@ import com.google.android.gms.common.internal.safeparcel.SafeParcelable;
 import java.util.HashMap;
 import java.util.Map;
 
+import in.loanwiser.Old_Partner.UploadFileResponse_old;
 import in.loanwiser.partnerapp.BankStamentUpload.modelglib.GlibResponse;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
@@ -25,19 +26,62 @@ public interface ApiConfig {
     @POST("retrofit_example/upload_multiple_files.php")
     Call< ServerResponse > uploadMulFile(@Part MultipartBody.Part file1, @Part MultipartBody.Part file2);
 
+  /*  Call<UploadFileResponse> call =getResponse.submitNew("Auth Token", fileParts,transaction_id1,Bank_Name
+            ,account_number,accounty_type_id,relationship_type1,Bank_stm_type_,Password_edt);*/
+
+
+
+
+  ////OLD
+  @Multipart
+  @POST("partner_loanapi_test.php?call=bank_statement_upload")
+  Call<UploadFileResponse_old> submitNew_old(@Header("Authorization") String authHeader,
+                            /*   @Part("first-parameter") RequestBody firstParameter,
+                               @Part("second-parameter") RequestBody secondParameter,*/
+                                     @Part MultipartBody.Part[] img_url,
+                                         @Part("transaction_id") RequestBody transaction_id,
+                                         @Part("analysis_status") RequestBody analysis_status,
+                                         @Part("workorder_id") RequestBody workorder_id,
+                                         @Part("entity_id") RequestBody entity_id,
+                                         @Part("relationship_type") RequestBody relationship_type,
+                                         @Part("pdf_password") RequestBody pdf_password);
 
     @Multipart
     @POST("partner_loanapi_test.php?call=bank_statement_upload")
+    Call<GlibResponse> submitNews_old(@Header("Authorization") String authHeader,
+                            /*   @Part("first-parameter") RequestBody firstParameter,
+                               @Part("second-parameter") RequestBody secondParameter,*/
+                                  @Part MultipartBody.Part[] img_url,
+                                  @Part("transaction_id") RequestBody transaction_id,
+                                  @Part("analysis_status") RequestBody analysis_status,
+                                  @Part("workorder_id") RequestBody workorder_id,
+                                  @Part("entity_id") RequestBody entity_id,
+                                  @Part("relationship_type") RequestBody relationship_type,
+                                  @Part("pdf_password") RequestBody pdf_password);
+//
+    @Multipart
+    @POST("partner_loanapi_test_new.php?call=bank_statement_upload")
     Call<UploadFileResponse> submitNew(@Header("Authorization") String authHeader,
                             /*   @Part("first-parameter") RequestBody firstParameter,
                                @Part("second-parameter") RequestBody secondParameter,*/
                                        @Part MultipartBody.Part[] img_url,
                                        @Part("transaction_id") RequestBody transaction_id,
-                                       @Part("analysis_status") RequestBody analysis_status,
-                                       @Part("workorder_id") RequestBody workorder_id,
-                                       @Part("entity_id") RequestBody entity_id,
-                                       @Part("relationship_type") RequestBody relationship_type,
-                                       @Part("pdf_password") RequestBody pdf_password);
+                                       @Part("bankstbank_name") RequestBody Bank_Name,
+                                       @Part("bankstacc_no") RequestBody account_number,
+                                       @Part("typecnt") RequestBody relationship_type,
+                                       @Part("bankststatement_type") RequestBody Bank_stm_type_,
+                                       @Part("bankst_password") RequestBody Password_edt);
+
+    @Multipart
+    @POST("partner_loanapi_test_new.php?call=bank_statement_upload")
+    Call<UploadFileResponse> submitNew1(@Header("Authorization") String authHeader,
+                            /*   @Part("first-parameter") RequestBody firstParameter,
+                               @Part("second-parameter") RequestBody secondParameter,*/
+                                       @Part MultipartBody.Part[] img_url,
+                                       @Part("transaction_id") RequestBody transaction_id,
+                                       @Part("typecnt") RequestBody typecnt,
+                                       @Part("bankst_password") RequestBody Password_edt,
+                                       @Part("entity_id") RequestBody entity_id);
 
     @Multipart
     @POST("partner_loanapi_test.php?call=bank_statement_upload")

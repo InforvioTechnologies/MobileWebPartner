@@ -4,7 +4,9 @@ import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -43,10 +45,13 @@ import adhoc.app.applibrary.Config.AppUtils.Pref.Pref;
 import adhoc.app.applibrary.Config.AppUtils.Urls;
 import adhoc.app.applibrary.Config.AppUtils.VolleySignleton.AppController;
 import dmax.dialog.SpotsDialog;
+import in.loanwiser.Old_Partner.Home_Old;
 import in.loanwiser.partnerapp.PartnerActivitys.Applicant_Details_Activity;
+import in.loanwiser.partnerapp.PartnerActivitys.Dashboard_Activity;
 import in.loanwiser.partnerapp.PartnerActivitys.Home;
 import in.loanwiser.partnerapp.R;
 import in.loanwiser.partnerapp.Step_Changes_Screen.Lead_Crration_Activity;
+import in.loanwiser.partnerapp.Step_Changes_Screen.Lead_Crration_Activity_old;
 import in.loanwiser.partnerapp.Step_Changes_Screen.Viability_Screen_revamp;
 import in.loanwiser.partnerapp.Step_Changes_Screen.Viability_Screen_revamp_Pl_BL;
 
@@ -58,7 +63,7 @@ public class Resent_Lead_Statues extends RecyclerView.Adapter<Resent_Lead_Statue
     private AlertDialog progressDialog;
 
     String Loan_amount,sub_categoryid,transaction_id1,subtask_id,loan_type_id,loan_type,
-            payment,applicant_id1;
+            payment,applicant_id1,new_user,last_status;
     private String tag_json_obj = "jobj_req", tag_json_arry = "jarray_req";
 
     public Resent_Lead_Statues(Context context, ArrayList<Suggestion_item_freqent> items) {
@@ -309,7 +314,7 @@ public class Resent_Lead_Statues extends RecyclerView.Adapter<Resent_Lead_Statue
 
     public void Applicant_Status(final String id) {
 
-       // final String step_status11 = step_status1;
+
         JSONObject jsonObject =new JSONObject();
         JSONObject J= null;
         try {
@@ -352,16 +357,72 @@ public class Resent_Lead_Statues extends RecyclerView.Adapter<Resent_Lead_Statue
                                 applicant_id1 =  "APP-"+user_id;
 
 
+                                new_user =  jsonObject2.getString("new_user");
+                                last_status =  jsonObject2.getString("last_status");
+                                applicant_id1 =  "APP-"+user_id;
+                                // Toast.makeText(getApplicationContext(),new_user, Toast.LENGTH_SHORT).show();
+
                                 // String statues2 = "3";
                                 Pref.putUSERID(context,user_id);
+
+                                SharedPreferences.Editor prefEditor = PreferenceManager.getDefaultSharedPreferences(context).edit();
+                                prefEditor.putString("user_id", user_id);
+                                prefEditor.apply();
                                 String _Emp_staus_jsonArray = jsonArray.toString();
 
-                                Objs.ac.StartActivityPutExtra(context, Home.class,
-                                        Params.user_id,user_id,
-                                        Params.transaction_id,transaction_id1,
-                                        Params.applicant_id,applicant_id1,
-                                        Params.sub_taskid,subtask_id, Params.Applicant_status,_Emp_staus_jsonArray,
-                                        Params.loan_type_id,loan_type_id,Params.loan_type,loan_type);
+
+                               /* if(new_user.equals("0"))
+                                {
+                                    Objs.ac.StartActivityPutExtra(context, Home.class,
+                                            Params.user_id,user_id,
+                                            Params.transaction_id,transaction_id1,
+                                            Params.applicant_id,applicant_id1,
+                                            Params.sub_taskid,subtask_id, Params.Applicant_status,_Emp_staus_jsonArray,
+                                            Params.loan_type_id,loan_type_id,Params.loan_type,loan_type);
+
+                                }else
+                                {
+                                    Objs.ac.StartActivityPutExtra(context, Home.class,
+                                            Params.user_id,user_id,
+                                            Params.transaction_id,transaction_id1,
+                                            Params.applicant_id,applicant_id1,
+                                            Params.sub_taskid,subtask_id, Params.Applicant_status,_Emp_staus_jsonArray,
+                                            Params.loan_type_id,loan_type_id,Params.loan_type,loan_type);
+                                }*/
+
+                                if(new_user.equals("0"))
+                                {
+                                    if(last_status.equals("1")&& payment.equals("error"))
+                                    {
+
+                                        Pref.putLoanType(context,loan_type_id);
+                                        //String Loantype_name = "Loan Against Property";
+                                        Pref.putLoanTypename(context,loan_type);
+                                        Pref.putnew_user(context,new_user);
+                                        Intent intent=new Intent(context, Lead_Crration_Activity_old.class);
+                                        context.startActivity(intent);
+                                    }else
+                                    {
+                                        Objs.ac.StartActivityPutExtra(context, Home_Old.class,
+                                                Params.user_id,user_id,
+                                                Params.transaction_id,transaction_id1,
+                                                Params.applicant_id,applicant_id1,
+                                                Params.sub_taskid,subtask_id, Params.Applicant_status,_Emp_staus_jsonArray,
+                                                Params.loan_type_id,loan_type_id,Params.loan_type,loan_type);
+
+                                    }
+
+                                }else
+                                {
+                                    Objs.ac.StartActivityPutExtra(context, Home.class,
+                                            Params.user_id,user_id,
+                                            Params.transaction_id,transaction_id1,
+                                            Params.applicant_id,applicant_id1,
+                                            Params.sub_taskid,subtask_id, Params.Applicant_status,_Emp_staus_jsonArray,
+                                            Params.loan_type_id,loan_type_id,Params.loan_type,loan_type);
+
+                                }
+
 
                               /*  if(payment.equals("error"))
                                 {

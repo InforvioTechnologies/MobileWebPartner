@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,7 +17,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
-
+import android.widget.Toast;
 
 
 import org.json.JSONObject;
@@ -30,6 +31,7 @@ import adhoc.app.applibrary.Config.AppUtils.Objs;
 import adhoc.app.applibrary.Config.AppUtils.Pref.Pref;
 import in.loanwiser.partnerapp.PartnerActivitys.Applicant_Details_Activity;
 import in.loanwiser.partnerapp.PartnerActivitys.Dashboard_Activity;
+import in.loanwiser.partnerapp.PartnerActivitys.Home;
 import in.loanwiser.partnerapp.R;
 import in.loanwiser.partnerapp.Step_Changes_Screen.Viability_Screen_revamp;
 import in.loanwiser.partnerapp.Step_Changes_Screen.Viability_Screen_revamp_Pl_BL;
@@ -56,7 +58,7 @@ public class LeadListAdapter_Dashboard extends RecyclerView.Adapter<LeadListAdap
     @NonNull
     @Override
     public CustomViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new CustomViewHolder(LayoutInflater.from(context).inflate(R.layout.ly_new_lead_status, parent, false));
+        return new CustomViewHolder(LayoutInflater.from(context).inflate(R.layout.leaddetails, parent, false));
     }
 
     @Override
@@ -76,8 +78,7 @@ public class LeadListAdapter_Dashboard extends RecyclerView.Adapter<LeadListAdap
 
         AppCompatTextView type,doc_steps,doc_status,font1,font2,loantype,assigned;
         AppCompatTextView Statues_update_dot,
-                Lead_Name,loan_amount,app_id,loan_type,payment_plane,step_com,statues_new,
-                Statues_update_view,Statues_update_view1,status_Ask,Lead_crated_;
+                Lead_Name,loan_amount,app_id,loan_type,payment_plane,step_com,statues_new,status_Ask,Lead_crated_;
         ImageView v_Image;
         ProgressBar progressBar;
         AppCompatButton appCompatButtonSelect,add_notes,pipline,archive;
@@ -86,7 +87,8 @@ public class LeadListAdapter_Dashboard extends RecyclerView.Adapter<LeadListAdap
         LinearLayout Over_all,ly_question,cobrand;
         View view;
         String loantype1,statues12,step_status,transaction_id,id,id1;
-
+        AppCompatTextView paymentplanlabel,completeduptolabel,labellead,ask,loanfrom,loanfromtxt;
+        AppCompatButton Statues_update_view,Statues_update_view1;
         public CustomViewHolder(View view) {
             super(view);
             Lead_Name  = (AppCompatTextView) itemView.findViewById(R.id.Lead_Name);
@@ -97,15 +99,41 @@ public class LeadListAdapter_Dashboard extends RecyclerView.Adapter<LeadListAdap
             step_com  = (AppCompatTextView) itemView.findViewById(R.id.step_com);
             Statues_update_dot  = (AppCompatTextView) itemView.findViewById(R.id.Statues_update_dot);
             statues_new  = (AppCompatTextView) itemView.findViewById(R.id.statues_new);
-            Statues_update_view  = (AppCompatTextView) itemView.findViewById(R.id.Statues_update_view);
-            Statues_update_view1  = (AppCompatTextView) itemView.findViewById(R.id.Statues_update_view1);
+            Statues_update_view  = (AppCompatButton) itemView.findViewById(R.id.Statues_update_view);
+            Statues_update_view1  = (AppCompatButton) itemView.findViewById(R.id.Statues_update_view1);
             status_Ask  = (AppCompatTextView) itemView.findViewById(R.id.status_Ask);
 
             Lead_crated_  = (AppCompatTextView) itemView.findViewById(R.id.Lead_crated_);
 
+            paymentplanlabel  = (AppCompatTextView) itemView.findViewById(R.id.paymentplanlabel);
+            completeduptolabel  = (AppCompatTextView) itemView.findViewById(R.id.completeduptolabel);
+            labellead  = (AppCompatTextView) itemView.findViewById(R.id.labellead);
+            ask  = (AppCompatTextView) itemView.findViewById(R.id.ask);
+            loanfrom  = (AppCompatTextView) itemView.findViewById(R.id.loanfrom);
+            loanfromtxt  = (AppCompatTextView) itemView.findViewById(R.id.loanfromtxt);
+
             Over_all = (LinearLayout) itemView.findViewById(R.id.Over_all);
             cobrand = (LinearLayout) itemView.findViewById(R.id.cobrand);
 
+            Typeface font = Typeface.createFromAsset(context.getAssets(), "segoe_ui.ttf");
+            paymentplanlabel.setTypeface(font);
+            completeduptolabel.setTypeface(font);
+            labellead.setTypeface(font);
+            ask.setTypeface(font);
+            loanfrom.setTypeface(font);
+            loanfromtxt.setTypeface(font);
+            Lead_Name.setTypeface(font);
+            loan_amount.setTypeface(font);
+            app_id.setTypeface(font);
+            loan_type.setTypeface(font);
+            payment_plane.setTypeface(font);
+            step_com.setTypeface(font);
+            Statues_update_dot.setTypeface(font);
+            statues_new.setTypeface(font);
+            status_Ask.setTypeface(font);
+            Statues_update_view.setTypeface(font);
+            Statues_update_view1.setTypeface(font);
+            Lead_crated_.setTypeface(font);
         }
 
         public void bindPost(final Lead_item post) {
@@ -248,14 +276,14 @@ public class LeadListAdapter_Dashboard extends RecyclerView.Adapter<LeadListAdap
                 statues_new.setText("post.getstatus_disp()");
                 holder.Statues_update.setText("Cobranded website");
             }*/
-            Over_all.setOnClickListener(new View.OnClickListener() {
+            Statues_update_view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
 
                     id1 = post.getid1();
                     String from_cobrand = post.getfrom_cobrand();
                     String mobile_cobrank = post.getcobrand_mobile();
-                    if(step_status.contains("Rejected"))
+                    if(step_status.contains("Rejected")|| step_status.contains("Auto Rejected"))
                     {
                         Log.e("the lead List","intiated ");
                       //  Objs.a.showToast(context, "This Lead is Rejected");
@@ -263,6 +291,11 @@ public class LeadListAdapter_Dashboard extends RecyclerView.Adapter<LeadListAdap
                         if (context instanceof Dashboard_Activity) {
                             ((Dashboard_Activity)context).Applicant_Status(id1,step_status);
                         }
+                       /* Toast.makeText(context,"This Lead is Rejected", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(context, Home.class);
+                        context.startActivity(intent);
+                        Toast.makeText(context,"This Lead is Rejected", Toast.LENGTH_SHORT).show();*/
+
                     }
                     else
                     {
@@ -273,6 +306,69 @@ public class LeadListAdapter_Dashboard extends RecyclerView.Adapter<LeadListAdap
                             {
 
                               //  String loan_type  = items.get(position).getloan_type();
+                                String loan_type  = post.getloan_typename();
+                                String loan_type_id = post.getloan_type();
+                                Pref.putLoanType(context,loan_type_id);
+                                if(loan_type.equals("Personal Loan (Salaried)")||loan_type.equals("Business Loan (Self Employed)"))
+                                {
+                                    Intent intent = new Intent(context, Viability_Screen_revamp_Pl_BL.class);
+                                    context.startActivity(intent);
+                                }else
+                                {
+                                    Intent intent = new Intent(context, Viability_Screen_revamp.class);
+                                    context.startActivity(intent);
+
+                                }
+
+                            }else
+                            {
+                                Intent intent = new Intent(context, Applicant_Details_Activity.class);
+                                context.startActivity(intent);
+                            }
+                        }else
+                        {
+                            if (context instanceof Dashboard_Activity) {
+                                ((Dashboard_Activity)context).Applicant_Status(id1,step_status);
+                            }
+                        }
+
+
+                        // Applicant_Status(id);
+                    }
+
+
+                }
+            });
+            Statues_update_view1.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                    id1 = post.getid1();
+                    String from_cobrand = post.getfrom_cobrand();
+                    String mobile_cobrank = post.getcobrand_mobile();
+                    if(step_status.contains("Rejected")|| step_status.contains("Auto Rejected"))
+                    {
+                        Log.e("the lead List","intiated ");
+                        //  Objs.a.showToast(context, "This Lead is Rejected");
+
+                        if (context instanceof Dashboard_Activity) {
+                            ((Dashboard_Activity)context).Applicant_Status(id1,step_status);
+                        }
+                       /* Toast.makeText(context,"This Lead is Rejected", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(context, Home.class);
+                        context.startActivity(intent);
+                        Toast.makeText(context,"This Lead is Rejected", Toast.LENGTH_SHORT).show();*/
+
+                    }
+                    else
+                    {
+
+                        if(from_cobrand.equals("1"))
+                        {
+                            if(mobile_cobrank.equals("no"))
+                            {
+
+                                //  String loan_type  = items.get(position).getloan_type();
                                 String loan_type  = post.getloan_typename();
                                 String loan_type_id = post.getloan_type();
                                 Pref.putLoanType(context,loan_type_id);

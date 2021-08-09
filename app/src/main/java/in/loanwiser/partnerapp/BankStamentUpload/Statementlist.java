@@ -3,12 +3,15 @@ package in.loanwiser.partnerapp.BankStamentUpload;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Paint;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.AppCompatTextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -48,11 +51,12 @@ public class Statementlist extends RecyclerView.Adapter<Statementlist.ViewHolder
         holder.statementlist.setText("\u25CF"+" " +name);
 
 
-        holder.statementlist.setOnClickListener(new View.OnClickListener() {
+        holder.image_doc_view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
                 String path =url;
+                Log.e("the url",url);
                /* Objs.ac.StartActivityPutExtra(context, Doc_ImageView_Viability.class,
                         Params.document,path);*/
                 String report="Bank Statement";
@@ -72,10 +76,12 @@ public class Statementlist extends RecyclerView.Adapter<Statementlist.ViewHolder
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        TextView statementlist;
+        AppCompatTextView statementlist;
+        ImageView image_doc_view;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             statementlist=itemView.findViewById(R.id.uploaded_statement);
+            image_doc_view=itemView.findViewById(R.id.image_doc_view);
         }
     }
 }

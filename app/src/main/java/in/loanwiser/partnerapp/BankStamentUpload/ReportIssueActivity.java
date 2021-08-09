@@ -302,6 +302,7 @@ public class ReportIssueActivity extends SimpleActivity implements View.OnClickL
             public void onResponse(Call<IssueUpload> call, retrofit2.Response<IssueUpload> response) {
                 progressDialog.dismiss();
                 if (response.isSuccessful()) {
+
                     Toast.makeText(ReportIssueActivity.this, "Submitted Successfully",Toast.LENGTH_SHORT).show();
                     Submit_upload_sucess();
 

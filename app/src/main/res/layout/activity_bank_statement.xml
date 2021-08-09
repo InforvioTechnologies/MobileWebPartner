@@ -51,85 +51,101 @@
                         android:layout_marginTop="10dp"
                         android:orientation="vertical">
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="10dp"
-                            android:text="@string/choosepdf"
-                            android:textColor="#8A8A8A"
-                            android:textSize="12dp" />
+                        <LinearLayout
 
-
-                        <RelativeLayout
+                            android:id="@+id/bank_details"
+                            android:orientation="vertical"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="10dp"
-                            android:paddingBottom="10dp"
-                            android:background="#E9F7FF">
+                            android:layout_height="wrap_content">
+                            <include layout="@layout/bank_details_chaild_step123"/>
+                        </LinearLayout>
 
-                            <RadioButton
-                                android:id="@+id/downpdf_btns"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginLeft="10dp"
-                                android:layout_marginTop="10dp"
-                                android:text="@string/downloadver"
-                                android:textColor="#484848"
-                                android:buttonTint="@color/but_red"
-                                android:textStyle="bold"/>
-
-
-
+                        <LinearLayout
+                            android:visibility="gone"
+                            android:orientation="vertical"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="@string/contwn1"
-                                android:textAlignment="center"
-                                android:gravity="center"
-                                android:paddingStart="30dp"
-                                android:paddingEnd="10dp"
-                                android:layout_below="@+id/downpdf_btns"
-                                android:textColor="#565555"
-                                android:textSize="12sp"
-                                android:layout_gravity="center"
-                                />
-
-                        </RelativeLayout>
-
-                        <RelativeLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="10dp"
-                            android:paddingBottom="10dp"
-                            android:background="#E9F7FF">
-
-                            <RadioButton
-                                android:id="@+id/scanpdf_btns"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
                                 android:layout_marginLeft="10dp"
-                                android:layout_marginTop="10dp"
-                                android:text="@string/scanned_pdf"
-                                android:textColor="#484848"
-                                android:buttonTint="@color/but_red"
-                                android:textStyle="bold"/>
+                                android:text="@string/choosepdf"
+                                android:textColor="#8A8A8A"
+                                android:textSize="12dp" />
 
 
-
-                            <TextView
-                                android:layout_width="wrap_content"
+                            <RelativeLayout
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="@string/contwn2"
-                                android:textAlignment="center"
-                                android:gravity="center"
-                                android:paddingStart="30dp"
-                                android:paddingEnd="10dp"
-                                android:layout_below="@+id/scanpdf_btns"
-                                android:textColor="#565555"
-                                android:textSize="12sp"
-                                android:layout_gravity="center" />
+                                android:layout_margin="10dp"
+                                android:paddingBottom="10dp"
+                                android:background="#E9F7FF">
 
-                        </RelativeLayout>
+                                <RadioButton
+                                    android:id="@+id/downpdf_btns"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="10dp"
+                                    android:layout_marginTop="10dp"
+                                    android:text="@string/downloadver"
+                                    android:textColor="#484848"
+                                    android:buttonTint="@color/but_red"
+                                    android:textStyle="bold"/>
+
+
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/contwn1"
+                                    android:textAlignment="center"
+                                    android:gravity="center"
+                                    android:paddingStart="30dp"
+                                    android:paddingEnd="10dp"
+                                    android:layout_below="@+id/downpdf_btns"
+                                    android:textColor="#565555"
+                                    android:textSize="12sp"
+                                    android:layout_gravity="center"
+                                    />
+
+                            </RelativeLayout>
+
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="10dp"
+                                android:paddingBottom="10dp"
+                                android:background="#E9F7FF">
+
+                                <RadioButton
+                                    android:id="@+id/scanpdf_btns"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="10dp"
+                                    android:layout_marginTop="10dp"
+                                    android:text="@string/scanned_pdf"
+                                    android:textColor="#484848"
+                                    android:buttonTint="@color/but_red"
+                                    android:textStyle="bold"/>
+
+
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/contwn2"
+                                    android:textAlignment="center"
+                                    android:gravity="center"
+                                    android:paddingStart="30dp"
+                                    android:paddingEnd="10dp"
+                                    android:layout_below="@+id/scanpdf_btns"
+                                    android:textColor="#565555"
+                                    android:textSize="12sp"
+                                    android:layout_gravity="center" />
+
+                            </RelativeLayout>
+                        </LinearLayout>
+
 
                         <LinearLayout
                             android:id="@+id/loader"
@@ -154,6 +170,13 @@
                                 app:lazyloader_thirdDotColor="@color/text_blue" />
 
                         </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/upload_section"
+                            android:orientation="vertical"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
 
                         <RelativeLayout
                             android:layout_width="match_parent"
@@ -227,11 +250,12 @@
                         </LinearLayout>
 
                         <LinearLayout
+                            android:id="@+id/listviewlay"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="10dp"
                             android:layout_marginTop="10dp"
-                            android:visibility="visible">
+                            android:visibility="gone">
 
                             <ListView
                                 android:id="@+id/listview"
@@ -247,6 +271,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:orientation="vertical"
+                            android:layout_marginTop="10dp"
                             android:layout_gravity="center">
 
                             <Button
@@ -256,7 +281,7 @@
                                 android:gravity="center"
                                 android:background="@drawable/but_shape_blue"
                                 android:layout_gravity="center"
-                                android:text="@string/upload"
+                                android:text="Add file"
                                 android:textColor="@color/white"/>
 
                         </LinearLayout>
@@ -281,6 +306,7 @@
                         </LinearLayout>
 
                         <LinearLayout
+                            android:visibility="gone"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:orientation="vertical"
@@ -298,6 +324,7 @@
                         </LinearLayout>
 
                         <LinearLayout
+                            android:visibility="gone"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:orientation="vertical"
@@ -315,6 +342,7 @@
                         </LinearLayout>
 
                         <LinearLayout
+                            android:visibility="gone"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:orientation="vertical"
@@ -341,7 +369,7 @@
                             android:layout_marginBottom="20dp"
                             android:layout_marginLeft="10dp">
 
-                            <Button
+                            <androidx.appcompat.widget.AppCompatButton
                                 android:id="@+id/submit"
                                 android:layout_width="210dp"
                                 android:layout_height="45dp"
@@ -352,6 +380,7 @@
                                 android:text="@string/submit_bankste"/>
 
 
+                        </LinearLayout>
                         </LinearLayout>
 
                     </LinearLayout>
@@ -366,7 +395,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:visibility="gone"
+
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="10dp"
                 android:layout_marginBottom="20dp"
@@ -398,7 +427,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:visibility="gone"
                     android:layout_marginTop="5dp">
 
                     <androidx.recyclerview.widget.RecyclerView

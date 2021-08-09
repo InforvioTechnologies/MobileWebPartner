@@ -25,11 +25,14 @@ import android.view.Window;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.LinearLayout;
 import android.widget.NumberPicker;
 import android.widget.PopupWindow;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -79,23 +82,42 @@ import in.loanwiser.partnerapp.PartnerActivitys.Dashboard_Activity;
 import in.loanwiser.partnerapp.Payment.PaymentActivity;
 import in.loanwiser.partnerapp.R;
 import in.loanwiser.partnerapp.SimpleActivity;
+import in.loanwiser.partnerapp.Step_Changes_Screen.ViableBankActivity;
 
 public class Viability_Screen_revamp_Pl_BL extends SimpleActivity implements NumberPicker.OnValueChangeListener {
 
 
     private Context context = this;
-    String loan_type_id,epf_id,epf_value;
+    String loan_type_id,epf_id,epf_value,typeofemployevalue,typeofemployeid,
+            permanentresid,permanentresvalue,employeproofid,employeproofvalue;
     Typeface font;
-    AppCompatImageView prop_scroll,pan_scroll,salaried_scroll,res_scroll1_img;
-    LinearLayout residence_layout,pro_details,salaried,self_employeed,property_Scroll,Pan_scroll,salaried_Scroll,edf_lineralay,
+    AppCompatImageView prop_scroll,pan_scroll,salaried_scroll,res_scroll1_img,creditbank_scroll_img;
+    LinearLayout residence_layout,pro_details,salaried,self_employeed,
+            property_Scroll,Pan_scroll,salaried_Scroll,edf_lineralay,officialmaillay,
     property_ly,pan_ly,salaried_ly,self_ly,res_scroll,res_ly,co_applicant_ly,applicant_ly,prop_details_identified,
             employement_selection_ly;
     String ave_month_income,no_of_years_in_works,office_res_pincode,other_income_amt1_self,
-            residence_pincode1_;
-    AppCompatButton property_btn,Pan_btn,salried_self_btn,residence_btn,co_applicant_yes,co_applicant_no;
+            residence_pincode1_,educationalstatusid,educationalstatusvalue,
+            genderstatus_id,genderstatus_value,creditscoreid,creditscorevalue,
+            emilateid,emilatevalue,banklistid,banklistvalue,bankactypeid,bankactypevalue,majortransid,majortransvalue;
+    AppCompatButton property_btn,Pan_btn,salried_self_btn,residence_btn,co_applicant_yes,co_applicant_no,creditbankbtn;
     PopupWindow popupWindow;
+
+    AppCompatEditText avgbankbaltxt,bankturnovertxt,residencedoorno_txt1;
+
+
+    LinearLayout rentpaidlay,per_respincodelay,permanentresidencetypelay,liveinresidence,creditbanklay;
+
     String[] SPINNERLIST,Type_Of_Emp_SA,CO_Type_Of_Emp_SA,Have_Co_Applicant;
-    ArrayAdapter<String> Loantype_cat,Loantype1,Type_Of_Emp_Adapter,CO_Type_Of_Emp_Adapter,Have_Co_Adapter;
+    ArrayAdapter<String> Loantype_cat,Loantype1,Type_Of_Emp_Adapter,CO_Type_Of_Emp_Adapter,Have_Co_Adapter,
+            educational_adapter,Gender_statusadapter,
+            assetowned_multiselect,typeofemployeadapter,
+            banklistadapter,bankactypeadapter,majortrans_adapter,employeproofadapter;
+
+    AppCompatEditText noof_dependenttxt,doorstreet_txt,residencedoorno_txt,rentpaid_txt,
+            per_residencepincode,liveincurrent_txt;
+    RadioGroup credit_radiogroup,legal_group,arrangepdf_group;
+
 
 
     private AlertDialog progressDialog;
@@ -105,13 +127,18 @@ public class Viability_Screen_revamp_Pl_BL extends SimpleActivity implements Num
             office_shop,vehicle_Type,crop_type,sell_milk,franchise,property_identified,property_category,
             land_approval,building_approval,DA_approval, Employement,Property_Type,Property_title,Residence_ownership_ar,
             Salary_method_ar,employee_id_ar,other_earning_ar,have_pan_ar,Salary_proof_ar,Marital_Status,
-            Company_type,Office_residence,Type_of_self_employement,Other_income;
+            Company_type,Office_residence,Type_of_self_employement,Other_income,
+            educational_status,gender_status,typeofemployarray,currentres_array,employmentproof_array,autocompletearray,
+            addr_proof_rent,haveotherincome_array,creditscore_array,banksalary_array,permanentres_array,bankactype_array,majortrans_array;
 
     Spinner spnr_Property_Identified,spnr_property_title,spnr_property_type,employment_type,maritial_status,
             spinn_salary_crt_mtd,spinner_company_type,spinner_office_shop_setup_ind,
             office_spinner_residence_type,office_spinner_area,spinn_area,
             res_spinn_area,spinner_residence_type_res,emp_type,spi_vocation_type_,
-            other_income_source_salaried,other_income_source_self,spinner_epfdeduced;
+            other_income_source_salaried,other_income_source_self,spinner_epfdeduced,
+            educational_qualificationspinner,gender_spinner,typeofemploye_spinner,
+            permanentres_spinner,current_resspinner,creditscorespinner,
+            emilatespinner,banksalarycreditdropdown,accounttype_spinner,majortrans_spinner,employee_proofspinner;
 
     String[] Property_Type_SA,Property_Title,Property_Identified,EMPLOYEE_TYPE_SA,Marital_Statues_SA,Company_type_SA,
             SALARY_Method,Pincode_SA,Office_Shop_SA,Office_Shop_own_SA,Area,Area1,TYPE,
@@ -125,7 +152,8 @@ public class Viability_Screen_revamp_Pl_BL extends SimpleActivity implements Num
     ArrayAdapter<String> Property_Type_Adapter,Property_Title_Adapter,Property_Identified_Adapter,Employee_Type_adapter,
             Marital_Statues_Adapter,Company_type_Adapter,Salary_Adapter,Pincode_Adapter,Office_Shop__Adapter,
             Office_Shop_own_SA_Adapter,A_Area,A_Area1,companyproof_multiAdapter,
-            Business_Proof_type_adapter,Business_vintage_Adapter,Vocation_SA_Adapter;
+            Business_Proof_type_adapter,Business_vintage_Adapter,Vocation_SA_Adapter,
+            permanentrestypeadapter,currentrestypeadapter,creditscoreadapter,emilateadapter,autocompleteadapter;
 
     String  Property_Identified_ID,Property_Identified_Value,Property_Title_ID,Property_Title_Value,
             Propery_Type_ID,Propery_Type_Value,Employee_type_Id,Employee_type_Value,maritial_status_id,maritial_status_Value,
@@ -137,33 +165,40 @@ public class Viability_Screen_revamp_Pl_BL extends SimpleActivity implements Num
             spinner_residence_type_res_id,spinner_residence_type_res_value,self_Employee_type_Id,self_Employee_type_Value,
             Emp_vocation_type_id,Emp_vocation_type_Value,company_area, Other_income_id,Other_income_Value,
             Other_income_id_self,Other_income_Value_self,viability_report_URL,company_area1,residence_area_office1,
-            residence_area_res1;
+            residence_area_res1,closedloan_radio,legal_radio,arrangepdf_radio,currentresid,currentresvalue;
 
     AppCompatAutoCompleteTextView company_pincode_txt,office_residence_pincode_edite_txt,residence_pincode1_edit_txt,residence_pincode1_edit_txt_resi;
 
     AppCompatEditText experience_in_current_cmpy,total_experience_edit_txt,date_of_birt_txt,
             monthly_net_sal_edit_txt,Fathers_Name,PAN_Edit_text,
-            avg_monthly_incom_edit_txt,no_of_years_work_ind_edit_txt,company_name_edit_text,designation_edit_text,
-            other_income_amt_txt_edit_txt_self,other_income_amt_txt_edit_txt;
+            avg_monthly_incom_edit_txt,no_of_years_work_ind_edit_txt,designation_edit_text,
+            other_income_amt_txt_edit_txt_self,other_income_amt_txt_edit_txt,officialmailidtxt;
+
+    AppCompatTextView salarycredtextview;
+
+    AutoCompleteTextView company_name_edit_text;
+
+    LinearLayout avgbanklay,bankturnoverlay,accounttypelay,majortranslay;
 
 
 
-    MultiSpinner spinner_salary_proof,BL_self_bussiness_proof,BL_self_bus_vintage_proof;
+
+    MultiSpinner spinner_salary_proof,BL_self_bussiness_proof,BL_self_bus_vintage_proof,assetsowned;
     SharedPreferences preferences;
     boolean[] Income_proof_selected;
 
     Calendar myCalendar;
-    JSONObject Pan_Details,Employement_type,Residence;
+    JSONObject Pan_Details,Employement_type,Residence,Creditbank_Details;
     String monthly_net_salary,company_name,designation_,experience_in_current,total_experience_,company_pincode,
     other_income_amt;
     List<String> list_income_proof_self,list_income_proof_self_value,list_vintage_proof,salry_proof,salry_proof_value,
-            list_vintage_proof_value;
-    JSONArray Other_income_id_,other_income_amt_;
+            list_vintage_proof_value,assetownid,assetownvalue;
+    JSONArray Other_income_id_,other_income_amt_,assetsown,emilate_array;
 
     int total_experiance,ecperience,no_of_month_in_business;
     Button  closePopupBtn,close,view_report,sub_to_next,save_latter;
     PermissionUtils permissionUtils;
-    String  DOB,Fathers_Name_str,Pan_number;
+    String  DOB,Fathers_Name_str,Pan_number,noofdepent_str;
 
     private static final int STORAGE_PERMISSION_REQUEST_CODE = 1;
 
@@ -183,6 +218,7 @@ public class Viability_Screen_revamp_Pl_BL extends SimpleActivity implements Num
 
         Objs.a.setStubId(this,R.layout.activity_viability__screen_revamp1_pl_bl_credit);
         initTools(R.string.viy_check);
+        Log.i("TAG", "onCreate: "+"creditvehicle");
 
         loan_type_id = Pref.getLoanType(context);
         Log.i("TAG", "onCreate:loan_type_id "+loan_type_id);
@@ -201,6 +237,8 @@ public class Viability_Screen_revamp_Pl_BL extends SimpleActivity implements Num
         list_vintage_proof_value = new ArrayList<String>();
         salry_proof_value = new ArrayList<String>();
         list_income_proof_self_value = new ArrayList<String>();
+        assetownid = new ArrayList<String>();
+        assetownvalue = new ArrayList<String>();
 
         name_ly = (LinearLayout) findViewById(R.id.name_ly);
         email_ly = (LinearLayout) findViewById(R.id.email_ly);
@@ -209,7 +247,9 @@ public class Viability_Screen_revamp_Pl_BL extends SimpleActivity implements Num
         email_ly.setVisibility(View.GONE);
 
         UI();
+        BankListAPI();
         makeJsonObjReq1();
+        AutoAPi();
         imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
         click();
 
@@ -222,6 +262,7 @@ public class Viability_Screen_revamp_Pl_BL extends SimpleActivity implements Num
         pan_scroll = (AppCompatImageView) findViewById(R.id.pan_scroll);
         salaried_scroll = (AppCompatImageView) findViewById(R.id.salaried_scroll);
         res_scroll1_img = (AppCompatImageView) findViewById(R.id.res_scroll1_img);
+        creditbank_scroll_img = (AppCompatImageView) findViewById(R.id.creditbank_scroll_img);
 
         property_Scroll = (LinearLayout) findViewById(R.id.property_Scroll);
         prop_details_identified = (LinearLayout) findViewById(R.id.prop_details_identified);
@@ -232,6 +273,57 @@ public class Viability_Screen_revamp_Pl_BL extends SimpleActivity implements Num
         employment_type = (Spinner) findViewById(R.id.employment_type);
         maritial_status = (Spinner) findViewById(R.id.maritial_status);
         spinn_area = (Spinner) findViewById(R.id.spinn_area);
+
+
+        credit_radiogroup=findViewById(R.id.credit_radiogroup);
+        legal_group=findViewById(R.id.legal_group);
+        arrangepdf_group=findViewById(R.id.arrangepdf_group);
+
+        credit_radiogroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                RadioButton rb= (RadioButton) findViewById(checkedId);
+                //int mySelectedIndex = (int) rb.getTag();
+                closedloan_radio= rb.getText().toString();
+                if (closedloan_radio.equalsIgnoreCase("Yes")){
+                    closedloan_radio="1";
+                }else{
+                    closedloan_radio="2";
+                }
+                Log.i("TAG", "onCheckedChanged:closedloan_radio "+closedloan_radio);
+            }
+        });
+
+        arrangepdf_group.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                RadioButton rb= (RadioButton) findViewById(checkedId);
+                //int mySelectedIndex = (int) rb.getTag();
+                arrangepdf_radio= rb.getText().toString();
+                if (arrangepdf_radio.equalsIgnoreCase("Yes")){
+                    arrangepdf_radio="1";
+                }else{
+                    arrangepdf_radio="2";
+                }
+                Log.i("TAG", "onCheckedChanged:closedloan_radio "+closedloan_radio);
+            }
+        });
+
+        legal_group.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                RadioButton rb= (RadioButton) findViewById(checkedId);
+                //int mySelectedIndex = (int) rb.getTag();
+                legal_radio= rb.getText().toString();
+                if (legal_radio.equalsIgnoreCase("Yes")){
+                    legal_radio="1";
+                }else{
+                    legal_radio="2";
+                }
+                Log.i("TAG", "onCheckedChanged:closedloan_radio "+closedloan_radio);
+            }
+        });
+
 
         company_pincode_txt = (AppCompatAutoCompleteTextView) findViewById(R.id.company_pincode_txt);
         office_residence_pincode_edite_txt = (AppCompatAutoCompleteTextView) findViewById(R.id.office_residence_pincode_edite_txt);
@@ -252,6 +344,7 @@ public class Viability_Screen_revamp_Pl_BL extends SimpleActivity implements Num
         spi_vocation_type_ = (Spinner) findViewById(R.id.spi_vocation_type_);
         spinner_salary_proof = (MultiSpinner) findViewById(R.id.spinner_salary_proof);
         BL_self_bus_vintage_proof = (MultiSpinner) findViewById(R.id.BL_self_bus_vintage_proof);
+        assetsowned = (MultiSpinner) findViewById(R.id.assetsowned);
         BL_self_bussiness_proof = (MultiSpinner) findViewById(R.id.BL_self_bussiness_proof);
         spinner_company_type = (Spinner) findViewById(R.id.spinner_company_type);
 
@@ -264,11 +357,22 @@ public class Viability_Screen_revamp_Pl_BL extends SimpleActivity implements Num
         other_income_source_salaried = (Spinner) findViewById(R.id.other_income_source_salaried);
         other_income_source_self = (Spinner) findViewById(R.id.other_income_source_self);
         spinner_epfdeduced = (Spinner) findViewById(R.id.spinner_epfdeduced);
+        educational_qualificationspinner=findViewById(R.id.educational_qualificationspinner);
+        gender_spinner=findViewById(R.id.gender_spinner);
+        typeofemploye_spinner=findViewById(R.id.typeofemploye_spinner);
+        permanentres_spinner=findViewById(R.id.permanentres_spinner);
+        current_resspinner=findViewById(R.id.current_resspinner);
+        creditscorespinner=findViewById(R.id.creditscorespinner);
+        emilatespinner=findViewById(R.id.emilatespinner);
+        banksalarycreditdropdown=findViewById(R.id.banksalarycreditdropdown);
+        accounttype_spinner=findViewById(R.id.accounttype_spinner);
+        majortrans_spinner=findViewById(R.id.majortrans_spinner);
+        employee_proofspinner=findViewById(R.id.employee_proofspinner);
 
         experience_in_current_cmpy = (AppCompatEditText) findViewById(R.id.experience_in_current_cmpy);
         total_experience_edit_txt = (AppCompatEditText) findViewById(R.id.total_experience_edit_txt);
         no_of_years_work_ind_edit_txt = (AppCompatEditText) findViewById(R.id.no_of_years_work_ind_edit_txt);
-        company_name_edit_text = (AppCompatEditText) findViewById(R.id.company_name_edit_text);
+        company_name_edit_text = (AutoCompleteTextView) findViewById(R.id.company_name_edit_text);
         designation_edit_text = (AppCompatEditText) findViewById(R.id.designation_edit_text);
 
 
@@ -280,6 +384,7 @@ public class Viability_Screen_revamp_Pl_BL extends SimpleActivity implements Num
         avg_monthly_incom_edit_txt.addTextChangedListener(new NumberTextWatcher(avg_monthly_incom_edit_txt));
 
         other_income_amt_txt_edit_txt = (AppCompatEditText) findViewById(R.id.other_income_amt_txt_edit_txt);
+        officialmailidtxt = (AppCompatEditText) findViewById(R.id.officialmailidtxt);
 
         other_income_amt_txt_edit_txt.addTextChangedListener(new NumberTextWatcher(other_income_amt_txt_edit_txt));
         other_income_amt_txt_edit_txt_self = (AppCompatEditText) findViewById(R.id.other_income_amt_txt_edit_txt_self);
@@ -289,11 +394,37 @@ public class Viability_Screen_revamp_Pl_BL extends SimpleActivity implements Num
         res_ly = (LinearLayout) findViewById(R.id.res_ly);
         salaried_Scroll = (LinearLayout) findViewById(R.id.salaried_Scroll);
         edf_lineralay = (LinearLayout) findViewById(R.id.edf_lineralay);
+        officialmaillay = (LinearLayout) findViewById(R.id.officialmaillay);
+
+        salarycredtextview=findViewById(R.id.salarycredtextview);
+
+        avgbanklay=findViewById(R.id.avgbanklay);
+        bankturnoverlay=findViewById(R.id.bankturnoverlay);
+        accounttypelay=findViewById(R.id.accounttypelay);
+        majortranslay=findViewById(R.id.majortranslay);
+
+        noof_dependenttxt=findViewById(R.id.noof_dependenttxt);
+        doorstreet_txt=findViewById(R.id.doorstreet_txt);
+        residencedoorno_txt=findViewById(R.id.residencedoorno_txt1);
+        rentpaid_txt=findViewById(R.id.rentpaid_txt);
+        per_residencepincode=findViewById(R.id.per_residencepincode);
+        liveincurrent_txt=findViewById(R.id.liveincurrent_txt);
+        avgbankbaltxt=findViewById(R.id.avgbankbaltxt);
+        bankturnovertxt=findViewById(R.id.bankturnovertxt);
+        residencedoorno_txt1=findViewById(R.id.residencedoorno_txt1);
+
 
 
         residence_layout = (LinearLayout) findViewById(R.id.residence_layout);
         pro_details = (LinearLayout) findViewById(R.id.pro_details);
         salaried = (LinearLayout) findViewById(R.id.salaried);
+
+        rentpaidlay = (LinearLayout) findViewById(R.id.rentpaidlay);
+        per_respincodelay = (LinearLayout) findViewById(R.id.per_respincodelay);
+        permanentresidencetypelay = (LinearLayout) findViewById(R.id.permanentresidencetypelay);
+        liveinresidence = (LinearLayout) findViewById(R.id.liveinresidence);
+        creditbanklay = (LinearLayout) findViewById(R.id.creditbanklay);
+
         self_employeed = (LinearLayout) findViewById(R.id.self_employeed);
         co_applicant_ly = (LinearLayout) findViewById(R.id.co_applicant_ly);
         applicant_ly = (LinearLayout) findViewById(R.id.applicant_ly);
@@ -318,6 +449,20 @@ public class Viability_Screen_revamp_Pl_BL extends SimpleActivity implements Num
         Pan_btn = (AppCompatButton) findViewById(R.id.Pan_btn);
         salried_self_btn = (AppCompatButton) findViewById(R.id.salried_self_btn);
         residence_btn = (AppCompatButton) findViewById(R.id.residence_btn);
+        creditbankbtn = (AppCompatButton) findViewById(R.id.creditbankbtn);
+
+        if(loan_type_id.equals("33")){
+            salarycredtextview.setText("Which Bank Name Your Salary is Credited to?");
+            avgbanklay.setVisibility(View.GONE);
+            bankturnoverlay.setVisibility(View.GONE);
+            accounttypelay.setVisibility(View.GONE);
+            majortranslay.setVisibility(View.GONE);
+
+
+        }else{
+            salarycredtextview.setText("Which Bank Business Transacation is Carried out?");
+
+        }
 
         if(loan_type_id.equals("20")||loan_type_id.equals("21") )
         {
@@ -362,6 +507,7 @@ public class Viability_Screen_revamp_Pl_BL extends SimpleActivity implements Num
             pan_scroll.setBackgroundResource(R.drawable.capsul_button_icon);
             salaried_scroll.setBackgroundResource(R.drawable.capsul_button_icon1);
             res_scroll1_img.setBackgroundResource(R.drawable.capsul_button_icon1);
+            creditbank_scroll_img.setBackgroundResource(R.drawable.capsul_button_icon1);
             employement_selection_ly.setVisibility(View.GONE);
             EPFdeduct();
 
@@ -465,9 +611,23 @@ public class Viability_Screen_revamp_Pl_BL extends SimpleActivity implements Num
                         return;
                     }
 
+                    if(!validate_noofdependents()){
+                        return;
+                    }
+
                     if(maritial_status_id.equals("0"))
                     {
                         Toast.makeText(context,"Select marital Status",Toast.LENGTH_SHORT).show();
+                    }
+                    else if(educationalstatusid.equalsIgnoreCase("0")){
+                        Toast.makeText(context,"Please Select Educational Qualication",Toast.LENGTH_SHORT).show();
+                    }else if(genderstatus_id.equalsIgnoreCase("0")){
+                        Toast.makeText(context,"Please Select Gender",Toast.LENGTH_SHORT).show();
+
+                    }
+                    else if(assetownid.size()==0)
+                    {
+                        Toast.makeText(context,"Select Asset own",Toast.LENGTH_SHORT).show();
                     }else
                     {
 
@@ -476,12 +636,18 @@ public class Viability_Screen_revamp_Pl_BL extends SimpleActivity implements Num
                          DOB = date_of_birt_txt.getText().toString();
                          Fathers_Name_str = Fathers_Name.getText().toString();
                          Pan_number = PAN_Edit_text.getText().toString();
+                        noofdepent_str=noof_dependenttxt.getText().toString();
+
 
                         try {
                             Pan_Details.put("member_dob",DOB);
                             Pan_Details.put("father_name",Fathers_Name_str);
                             Pan_Details.put("pan_no",Pan_number);
                             Pan_Details.put("marital_status",maritial_status_id);
+                            Pan_Details.put("no_of_dependency",noofdepent_str);
+                            Pan_Details.put("gender",genderstatus_id);
+                            Pan_Details.put("assets",assetownid);
+                            Pan_Details.put("qualification",educationalstatusid);
                             Pan_Details.put("has_pancard","1");
 
                         } catch (JSONException e) {
@@ -556,7 +722,7 @@ public class Viability_Screen_revamp_Pl_BL extends SimpleActivity implements Num
                                     Toast.makeText(context, "Select Other income", Toast.LENGTH_SHORT).show();
                                 } else {
 
-                                    if (Other_income_id.equals("4")) {
+                                    if (Other_income_id.equals("2")) {
                                         Employement_type = new JSONObject();
                                          monthly_net_salary = monthly_net_sal_edit_txt.getText().toString();
                                          company_name = company_name_edit_text.getText().toString();
@@ -565,6 +731,8 @@ public class Viability_Screen_revamp_Pl_BL extends SimpleActivity implements Num
                                          total_experience_ = total_experience_edit_txt.getText().toString();
                                          company_pincode = company_pincode_txt.getText().toString();
                                          other_income_amt = other_income_amt_txt_edit_txt.getText().toString();
+
+
 
                                          Other_income_id_ = new JSONArray(Arrays.asList(Other_income_id));
                                          other_income_amt_ = new JSONArray(Arrays.asList(other_income_amt));
@@ -580,7 +748,12 @@ public class Viability_Screen_revamp_Pl_BL extends SimpleActivity implements Num
                                             Employement_type.put("tot_work_experience",total_experiance);
                                             Employement_type.put("work_pincode",company_pincode);
                                             Employement_type.put("ofc_area",company_area);
-                                           // Employement_type.put("is_epf_deduct ","1");
+
+                                            Employement_type.put("ofc_add_proof",employeproofid);
+                                            Employement_type.put("office_email",officialmailidtxt.getText().toString());
+
+
+                                            // Employement_type.put("is_epf_deduct","1");
                                             Employement_type.put("other_from", Other_income_id_);
                                             Employement_type.put("other_amount", other_income_amt_);
                                             Log.e("Employement_type",Employement_type.toString());
@@ -622,7 +795,12 @@ public class Viability_Screen_revamp_Pl_BL extends SimpleActivity implements Num
                                             Employement_type.put("tot_work_experience", total_experiance);
                                             Employement_type.put("work_pincode", company_pincode);
                                             Employement_type.put("ofc_area", company_area);
-                                          //  Employement_type.put("is_epf_deduct ","1");
+
+                                            Employement_type.put("ofc_add_proof",employeproofid);
+                                            Employement_type.put("office_email",officialmailidtxt.getText().toString());
+
+
+                                            //  Employement_type.put("is_epf_deduct","1");
                                             Employement_type.put("other_from", Other_income_id_);
                                             Employement_type.put("other_amount", other_income_amt_);
                                             Log.e("Employement_type", Employement_type.toString());
@@ -650,7 +828,7 @@ public class Viability_Screen_revamp_Pl_BL extends SimpleActivity implements Num
                     if (!validate_Monthly_net_salary()) {
                         return;
                     }
-                   else if(epf_id.equals("0")){
+                    if(epf_id.equals("0")){
                         Toast.makeText(context,"Select EPF deduct",Toast.LENGTH_SHORT).show();
                     }
 
@@ -665,6 +843,21 @@ public class Viability_Screen_revamp_Pl_BL extends SimpleActivity implements Num
                             Toast.makeText(context,"Select Salary Proof",Toast.LENGTH_SHORT).show();
                         }else
                         {
+                            if(typeofemployeid.equals("0")){
+                                Toast.makeText(context,"Select Type of employee",Toast.LENGTH_SHORT).show();
+
+                            }
+                            if(employeproofid.equals("0")){
+                                Toast.makeText(context,"Select Employee Proof",Toast.LENGTH_SHORT).show();
+                            }
+                            else if(employeproofid.equals("2")){
+                                if (!validate_officialmailid()) {
+                                    return;
+                                }
+
+                            }
+
+
                             if(pl_co_app_Company_id.equals("0"))
                             {
                                 Toast.makeText(context,"Select company type",Toast.LENGTH_SHORT).show();
@@ -686,6 +879,9 @@ public class Viability_Screen_revamp_Pl_BL extends SimpleActivity implements Num
                                 if (!validate_company_pincode_txt()) {
                                     return;
                                 }
+                                if (!validate_doornumber_edit_text()) {
+                                    return;
+                                }
 
                                 if(company_area.equals("0"))
                                 {
@@ -696,7 +892,7 @@ public class Viability_Screen_revamp_Pl_BL extends SimpleActivity implements Num
                                         Toast.makeText(context, "Select Other income", Toast.LENGTH_SHORT).show();
                                     } else {
 
-                                        if (Other_income_id.equals("4")) {
+                                        if (Other_income_id.equals("2")) {
                                             Employement_type = new JSONObject();
                                             monthly_net_salary = monthly_net_sal_edit_txt.getText().toString();
                                             company_name = company_name_edit_text.getText().toString();
@@ -720,9 +916,20 @@ public class Viability_Screen_revamp_Pl_BL extends SimpleActivity implements Num
                                                 Employement_type.put("tot_work_experience",total_experiance);
                                                 Employement_type.put("work_pincode",company_pincode);
                                                 Employement_type.put("ofc_area",company_area);
-                                                Employement_type.put("is_epf_deduct ",epf_id);
-                                                Employement_type.put("other_from", Other_income_id_);
-                                                Employement_type.put("other_amount", other_income_amt_);
+                                                Employement_type.put("is_epf_deduct",epf_id);
+                                              /*  Employement_type.put("other_from", Other_income_id_);
+                                                Employement_type.put("other_amount", other_income_amt_);*/
+
+                                                //Employement_type.put("is_epf_deduct",epfstatusid);
+                                                Employement_type.put("ofc_add_proof",employeproofid);
+                                                Employement_type.put("office_email",officialmailidtxt.getText().toString());
+
+
+
+                                                Employement_type.put("employee_type",typeofemployeid);
+                                                Employement_type.put("ofc_street",doorstreet_txt.getText().toString());
+                                                Employement_type.put("is_other_eranings", Other_income_id_);
+                                                Employement_type.put("other_income", other_income_amt_);
                                                 Log.e("Employement_type",Employement_type.toString());
 
                                             } catch (JSONException e) {
@@ -765,10 +972,19 @@ public class Viability_Screen_revamp_Pl_BL extends SimpleActivity implements Num
                                                 Employement_type.put("tot_work_experience", total_experiance);
                                                 Employement_type.put("work_pincode", company_pincode);
                                                 Employement_type.put("ofc_area", company_area);
-                                                Employement_type.put("is_epf_deduct ",epf_id);
+                                                Employement_type.put("is_epf_deduct",epf_id);
 
-                                                Employement_type.put("other_from", Other_income_id_);
-                                                Employement_type.put("other_amount", other_income_amt_);
+                                                Employement_type.put("ofc_add_proof",employeproofid);
+                                                Employement_type.put("office_email",officialmailidtxt.getText().toString());
+
+
+                                              /*  Employement_type.put("other_from", Other_income_id_);
+                                                Employement_type.put("other_amount", other_income_amt_);*/
+                                                Employement_type.put("employee_type",typeofemployeid);
+                                                Employement_type.put("ofc_street",doorstreet_txt.getText().toString());
+                                                Employement_type.put("is_other_eranings", Other_income_id_);
+                                                Employement_type.put("other_income", other_income_amt_);
+                                                Log.e("Employement_type",Employement_type.toString());
                                                 Log.e("Employement_type", Employement_type.toString());
 
                                             } catch (JSONException e) {
@@ -859,6 +1075,175 @@ public class Viability_Screen_revamp_Pl_BL extends SimpleActivity implements Num
             }
         });
 
+       /* creditbankbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                if(loan_type_id.equals("33")){
+                    if(creditscoreid.equals("0"))
+                    {
+                        Toast.makeText(context,"Select Credit Score",Toast.LENGTH_SHORT).show();
+                    }else if(emilateid.equalsIgnoreCase("0")){
+                        Toast.makeText(context,"Select EMI Month late",Toast.LENGTH_SHORT).show();
+                    }else if(banklistid.equalsIgnoreCase("0")){
+                        Toast.makeText(context,"Select Bank Credited Salary",Toast.LENGTH_SHORT).show();
+                    }else{
+                        Creditbank_Details = new JSONObject();
+                        try {
+
+                            Creditbank_Details.put("is_existloan", closedloan_radio);
+                            Creditbank_Details.put("is_write_off", legal_radio);
+                            Creditbank_Details.put("entered_credit_score", creditscoreid);
+                            Creditbank_Details.put("emi_late", emilateid);
+                            Creditbank_Details.put("salary_bank", banklistid);
+                            Creditbank_Details.put("arrange_bank_pdf",arrangepdf_radio);
+
+                            //what is avargebankbalance
+               *//*             Creditbank_Details.put("entered_abb", avgbankbaltxt.getText().toString());
+                            //banking turnover
+                            Creditbank_Details.put("banking_turnover", bankturnovertxt.getText().toString());
+                            //bank ac type
+                            Creditbank_Details.put("bank_ac_type", "2");
+                            //major transacation through
+                            Creditbank_Details.put("major_transaction", "1");*//*
+
+
+                            Log.e("credit", Creditbank_Details.toString());
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        viability_Applicant();
+
+
+
+                    }
+
+
+                }
+            }
+        });*/
+
+
+        creditbankbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                if(loan_type_id.equals("33")){
+                    if(creditscoreid.equals("0"))
+                    {
+                        Toast.makeText(context,"Select Credit Score",Toast.LENGTH_SHORT).show();
+                    }else if(emilateid.equalsIgnoreCase("0")){
+                        Toast.makeText(context,"Select EMI Month late",Toast.LENGTH_SHORT).show();
+                    }else if(banklistid.equalsIgnoreCase("0")){
+                        Toast.makeText(context,"Select Bank Credited Salary",Toast.LENGTH_SHORT).show();
+                    }else if(credit_radiogroup.getCheckedRadioButtonId() == -1) {
+                        Toast.makeText(context,"Please Select do you have running loan",Toast.LENGTH_SHORT).show();
+                    }else if(legal_group.getCheckedRadioButtonId() == -1) {
+                        Toast.makeText(context,"Please Select legal in Past Loans",Toast.LENGTH_SHORT).show();
+                    }else if(arrangepdf_group.getCheckedRadioButtonId() == -1) {
+                        Toast.makeText(context,"Please Select Bank Generated Pdf",Toast.LENGTH_SHORT).show();
+                    }
+                    else{
+                        Creditbank_Details = new JSONObject();
+                        try {
+
+                            Creditbank_Details.put("is_existloan", closedloan_radio);
+                            Creditbank_Details.put("is_write_off", legal_radio);
+                            Creditbank_Details.put("entered_credit_score", creditscoreid);
+                            Creditbank_Details.put("emi_late", emilateid);
+                            Creditbank_Details.put("salary_bank", banklistid);
+                            Creditbank_Details.put("arrange_bank_pdf",arrangepdf_radio);
+
+                            //what is avargebankbalance
+               /*             Creditbank_Details.put("entered_abb", avgbankbaltxt.getText().toString());
+                            //banking turnover
+                            Creditbank_Details.put("banking_turnover", bankturnovertxt.getText().toString());
+                            //bank ac type
+                            Creditbank_Details.put("bank_ac_type", "2");
+                            //major transacation through
+                            Creditbank_Details.put("major_transaction", "1");*/
+
+
+                            Log.e("credit", Creditbank_Details.toString());
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        Submit_Creditbankdetails();
+                        // viability_Applicant();
+
+
+
+                    }
+
+                }else {
+
+
+                    if(creditscoreid.equals("0"))
+                    {
+                        Toast.makeText(context,"Select Credit Score",Toast.LENGTH_SHORT).show();
+                    }else if(emilateid.equals("0")){
+                        Toast.makeText(context,"Select EMI Month late",Toast.LENGTH_SHORT).show();
+                    }else if(banklistid.equalsIgnoreCase("0")) {
+                        Toast.makeText(context, "Select Business Transcattion Carried out", Toast.LENGTH_SHORT).show();
+                    } else if (!avgbankbalance()) {
+                        return;
+                    }else if (!bankturnover()) {
+                        return;
+                    }else if(bankactypeid.equals("0")) {
+                        Toast.makeText(context, "Select Bank Account Type", Toast.LENGTH_SHORT).show();
+                    } else if(majortransid.equals("0")) {
+                        Toast.makeText(context, "Select Major transcation through?", Toast.LENGTH_SHORT).show();
+                    }else if(credit_radiogroup.getCheckedRadioButtonId() == -1) {
+                        Toast.makeText(context,"Please Select do you have running loan",Toast.LENGTH_SHORT).show();
+                    }else if(legal_group.getCheckedRadioButtonId() == -1) {
+                        Toast.makeText(context,"Please Select legal in Past Loans",Toast.LENGTH_SHORT).show();
+                    }else if(arrangepdf_group.getCheckedRadioButtonId() == -1) {
+                        Toast.makeText(context,"Please Select Bank Generated Pdf",Toast.LENGTH_SHORT).show();
+                    }
+                    else{
+
+                        Creditbank_Details = new JSONObject();
+                        try {
+
+                            Creditbank_Details.put("is_existloan", closedloan_radio);
+                            Creditbank_Details.put("is_write_off", legal_radio);
+                            Creditbank_Details.put("entered_credit_score", creditscoreid);
+                            Creditbank_Details.put("emi_late", emilateid);
+                            Creditbank_Details.put("salary_bank", banklistid);
+                            Creditbank_Details.put("arrange_bank_pdf", arrangepdf_radio);
+
+                            //what is avargebankbalance
+                            Creditbank_Details.put("entered_abb", avgbankbaltxt.getText().toString());
+                            //banking turnover
+                            Creditbank_Details.put("banking_turnover", bankturnovertxt.getText().toString());
+                            //bank ac type
+                            Creditbank_Details.put("bank_ac_type", bankactypeid);
+                            //major transacation through
+                            Creditbank_Details.put("major_transaction", majortransid);
+
+
+                            Log.e("credit", Creditbank_Details.toString());
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        Submit_Creditbankdetails();
+                        //viability_Applicant();
+
+                    }
+                }
+            }
+        });
+
+
+
+
+
+
+
+/*
         residence_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -887,6 +1272,13 @@ public class Viability_Screen_revamp_Pl_BL extends SimpleActivity implements Num
                             Residence.put("per_area",residence_area_res);
                             Residence.put("res_type",spinner_residence_type_res_id);
 
+                            Residence.put("street",residencedoorno_txt.getText().toString());
+                            Residence.put("rent_beingpaid",rentpaid_txt.getText().toString());
+                            Residence.put("perm_res_pincode",per_residencepincode.getText().toString());
+                            Residence.put("perm_residence",permanentresid);
+                            Residence.put("live_in_res",liveincurrent_txt.getText().toString());
+                            Residence.put("cur_address_proof",currentresid);
+
 
 
 
@@ -908,6 +1300,115 @@ public class Viability_Screen_revamp_Pl_BL extends SimpleActivity implements Num
 
             }
         });
+*/
+
+
+
+        residence_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                if(residencedoorno_txt.getText().toString().isEmpty()){
+                    residencedoorno_txt.setError(getText(R.string.error_rise));
+                    residencedoorno_txt.requestFocus();
+                }else if(residence_pincode1_edit_txt_resi.getText().toString().isEmpty()|| residence_pincode1_edit_txt_resi.length() <6) {
+                    residence_pincode1_edit_txt_resi.setError(getText(R.string.error_rise));
+                    residence_pincode1_edit_txt_resi.requestFocus();
+                }else if(residence_area_res.equals("0")){
+                    Toast.makeText(context,"Select residence area",Toast.LENGTH_SHORT).show();
+                }else if(spinner_residence_type_res_id.equals("0")){
+                    Toast.makeText(context,"Select residence Ownership Type",Toast.LENGTH_SHORT).show();
+                }else if(currentresid.equals("0")){
+                    Toast.makeText(context,"Select Current Residence Address Proof",Toast.LENGTH_SHORT).show();
+                }else if(spinner_residence_type_res_id.equals("1") || spinner_residence_type_res_id.equals("2")){
+                    othervalidate_residence();
+                }
+                else if(spinner_residence_type_res_id.equals("3") || spinner_residence_type_res_id.equals("4") || spinner_residence_type_res_id.equals("5") || spinner_residence_type_res_id.equals("6"))
+                {
+                    if(rentpaid_txt.getText().toString().isEmpty()){
+                        Toast.makeText(Viability_Screen_revamp_Pl_BL.this,"Please fill rent paid for house",Toast.LENGTH_SHORT).show();
+                    }
+                    else if(per_residencepincode.getText().toString().isEmpty()){
+                        Toast.makeText(Viability_Screen_revamp_Pl_BL.this,"Please fill Permanent Residence Pincode",Toast.LENGTH_SHORT).show();
+                    }else if(permanentresid.equals("0")){
+                        Toast.makeText(Viability_Screen_revamp_Pl_BL.this,"Please Select Permanent Residence Type ",Toast.LENGTH_SHORT).show();
+
+                    }else if(liveincurrent_txt.getText().toString().isEmpty()){
+                        Toast.makeText(Viability_Screen_revamp_Pl_BL.this,"Please fill live in current residence",Toast.LENGTH_SHORT).show();
+                    }else {
+                        Residence = new JSONObject();
+                        residence_pincode1_ = residence_pincode1_edit_txt_resi.getText().toString();
+
+                        try {
+
+                            Residence.put("res_pincode", residence_pincode1_);
+                            Residence.put("per_area", residence_area_res);
+                            Residence.put("res_type", spinner_residence_type_res_id);
+
+                            Residence.put("street", residencedoorno_txt.getText().toString());
+                            Residence.put("rent_beingpaid", rentpaid_txt.getText().toString());
+                            Residence.put("perm_res_pincode", per_residencepincode.getText().toString());
+                            Residence.put("perm_residence", permanentresid);
+                            Residence.put("live_in_res", liveincurrent_txt.getText().toString());
+                            Residence.put("cur_address_proof", currentresid);
+
+                            Log.e("residence", Residence.toString());
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        Submit_Residence();
+                    }
+
+
+
+
+                }
+
+            }
+
+            private void othervalidate_residence() {
+              /*  if(rentpaid_txt.getText().toString().isEmpty()){
+                    Toast.makeText(Viability_Screen_revamp_Pl_BL.this,"Please fill rent paid details",Toast.LENGTH_SHORT).show();
+                }else if(per_residencepincode.getText().toString().isEmpty()){
+                    Toast.makeText(Viability_Screen_revamp_Pl_BL.this,"Please fill Permanent Residence Pincode",Toast.LENGTH_SHORT).show();
+                }else if(permanentresid.equals("0")){
+                    Toast.makeText(Viability_Screen_revamp_Pl_BL.this,"Please Select Permanent Residence Type ",Toast.LENGTH_SHORT).show();
+
+                }else if(liveincurrent_txt.getText().toString().isEmpty()){
+                    Toast.makeText(Viability_Screen_revamp_Pl_BL.this,"Please fill rent paid details",Toast.LENGTH_SHORT).show();
+                }*/
+                Residence = new JSONObject();
+                residence_pincode1_ = residence_pincode1_edit_txt_resi.getText().toString();
+
+                try {
+
+                    Residence.put("res_pincode",residence_pincode1_);
+                    Residence.put("per_area",residence_area_res);
+                    Residence.put("res_type",spinner_residence_type_res_id);
+
+                    Residence.put("street",residencedoorno_txt.getText().toString());
+                    //   Residence.put("rent_beingpaid",rentpaid_txt.getText().toString());
+                    //   Residence.put("perm_res_pincode",per_residencepincode.getText().toString());
+                    //  Residence.put("perm_residence",permanentresid);
+                    //   Residence.put("live_in_res",liveincurrent_txt.getText().toString());
+                    Residence.put("cur_address_proof",currentresid);
+                          /*  Residence.put("addr_proof_own","1");
+                            Residence.put("addr_proof_rent","2");*/
+
+                    Log.e("residence",Residence.toString());
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                Submit_Residence();
+
+            }
+
+
+        });
+
+
 
         company_pincode_txt.addTextChangedListener(new TextWatcher() {
             @Override
@@ -1146,12 +1647,17 @@ public class Viability_Screen_revamp_Pl_BL extends SimpleActivity implements Num
         Button cancelbtn = (Button) dialog.findViewById(R.id.cancelbtn);
         Button submitbtn=(Button)dialog.findViewById(R.id.submitbtn);
 
-        AppCompatTextView Pan_No_Show,dob_Show,father_name,marital_status;
+        AppCompatTextView Pan_No_Show,dob_Show,father_name,marital_status,noofdependent_show,gendershow,
+                edu_qualshow,assetshow,salarycredtextview;
 
         Pan_No_Show = (AppCompatTextView) dialog.findViewById(R.id.Pan_No_Show);
         dob_Show = (AppCompatTextView) dialog.findViewById(R.id.dob_Show);
         father_name = (AppCompatTextView) dialog.findViewById(R.id.father_name);
         marital_status = (AppCompatTextView) dialog.findViewById(R.id.marital_status);
+        noofdependent_show = (AppCompatTextView) dialog.findViewById(R.id.noofdependent_show);
+        gendershow = (AppCompatTextView) dialog.findViewById(R.id.gendershow);
+        edu_qualshow = (AppCompatTextView) dialog.findViewById(R.id.edu_qualshow);
+        assetshow = (AppCompatTextView) dialog.findViewById(R.id.assetshow);
 
         String Fathers_Name_str1 = Fathers_Name_str.substring(0, 1).toUpperCase() + Fathers_Name_str.substring(1);
 
@@ -1159,6 +1665,11 @@ public class Viability_Screen_revamp_Pl_BL extends SimpleActivity implements Num
         dob_Show.setText(DOB);
         father_name.setText(Fathers_Name_str1);
         marital_status.setText(maritial_status_Value);
+        noofdependent_show.setText(noof_dependenttxt.getText().toString());
+        gendershow.setText(genderstatus_value);
+        edu_qualshow.setText(educationalstatusvalue);
+        String list = Arrays.toString(assetownvalue.toArray()).replace("[", "").replace("]", "");
+        assetshow.setText(list);
 
 
         submitbtn.setOnClickListener(new View.OnClickListener() {
@@ -1173,6 +1684,7 @@ public class Viability_Screen_revamp_Pl_BL extends SimpleActivity implements Num
                 pan_scroll.setBackgroundResource(R.drawable.capsul_button_icon1);
                 salaried_scroll.setBackgroundResource(R.drawable.capsul_button_icon);
                 res_scroll1_img.setBackgroundResource(R.drawable.capsul_button_icon1);
+                creditbank_scroll_img.setBackgroundResource(R.drawable.capsul_button_icon1);
 
                 property_ly.setVisibility(View.GONE);
                 pan_ly.setVisibility(View.GONE);
@@ -1180,6 +1692,7 @@ public class Viability_Screen_revamp_Pl_BL extends SimpleActivity implements Num
                 if(loan_type_id.equals("20"))
                 {
                     salaried_ly.setVisibility(View.GONE);
+
                     self_ly.setVisibility(View.VISIBLE);
 
                 }else if(loan_type_id.equals("21"))
@@ -1190,7 +1703,7 @@ public class Viability_Screen_revamp_Pl_BL extends SimpleActivity implements Num
                 //creditcard
                 else if(loan_type_id.equals("33")){
                     salaried_ly.setVisibility(View.VISIBLE);
-                    edf_lineralay.setVisibility(View.VISIBLE);
+                   edf_lineralay.setVisibility(View.VISIBLE);
                     self_ly.setVisibility(View.GONE);
                 }
 
@@ -1222,11 +1735,14 @@ public class Viability_Screen_revamp_Pl_BL extends SimpleActivity implements Num
         Button cancelbtn = (Button) dialog.findViewById(R.id.cancelbtn);
         Button submitbtn=(Button)dialog.findViewById(R.id.submitbtn);
 
+        LinearLayout officailmaildlay;
+
          other_income_amount_ly =   (LinearLayout)dialog.findViewById(R.id.other_income_amount_ly);
 
         AppCompatTextView Monthly_net_salry_Show,salary_Show,salary_proof_show,company_type_show,company_name_show,
                 designation_show,current_show,total_experience_show,company_pincode_show,area_show,
-                other_income_source_show,other_income_amount,epftxt,epf_deduct_show;
+                other_income_source_show,other_income_amount,epftxt,
+                epf_deduct_show,typeofemploye_show,companydoor_show,employeeproofshow,officialmailshow;
 
         LinearLayout epfdeductlay;
 
@@ -1245,6 +1761,14 @@ public class Viability_Screen_revamp_Pl_BL extends SimpleActivity implements Num
         epfdeductlay=(LinearLayout)dialog.findViewById(R.id.epfdeductlay);
         epftxt=(AppCompatTextView)dialog.findViewById(R.id.epftxt);
         epf_deduct_show=(AppCompatTextView)dialog.findViewById(R.id.epf_deduct_show);
+      //  epfdeductshow = (AppCompatTextView) dialog.findViewById(R.id.epfdeductshow);
+        typeofemploye_show = (AppCompatTextView) dialog.findViewById(R.id.typeofemploye_show);
+        companydoor_show = (AppCompatTextView) dialog.findViewById(R.id.companydoor_show);
+
+        employeeproofshow = (AppCompatTextView) dialog.findViewById(R.id.employeeproofshow);
+        officialmailshow = (AppCompatTextView) dialog.findViewById(R.id.officialmailshow);
+        officailmaildlay = (LinearLayout) dialog.findViewById(R.id.officailmaildlay);
+
 
         if (loan_type_id.equals("33")){
             Log.i("TAG", "Submit_EMP_salried: "+epf_value);
@@ -1257,19 +1781,31 @@ public class Viability_Screen_revamp_Pl_BL extends SimpleActivity implements Num
             company_type_show.setText(pl_co_app_Company_Value);
             company_name_show.setText(company_name);
             designation_show.setText(designation_);
+            employeeproofshow.setText(employeproofvalue);
+
             current_show.setText(experience_in_current_cmpy.getText().toString());
             total_experience_show.setText(total_experience_edit_txt.getText().toString());
             company_pincode_show.setText(company_pincode);
             area_show.setText(company_area1);
             epf_deduct_show.setText(epf_value);
+            typeofemploye_show.setText(typeofemployevalue);
+            companydoor_show.setText(doorstreet_txt.getText().toString());
+
             other_income_source_show.setText(Other_income_Value);
-            if(Other_income_id.equals("4"))
+            if(Other_income_id.equals("2"))
             {
                 other_income_amount_ly.setVisibility(View.GONE);
             }else
             {
                 other_income_amount_ly.setVisibility(View.VISIBLE);
                 other_income_amount.setText(other_income_amt);
+            }
+
+            if(employeproofid.equals("2")){
+                officailmaildlay.setVisibility(View.VISIBLE);
+                officialmailshow.setText(officialmailidtxt.getText().toString());
+            }else{
+                officailmaildlay.setVisibility(View.GONE);
             }
 
         }else{
@@ -1287,7 +1823,7 @@ public class Viability_Screen_revamp_Pl_BL extends SimpleActivity implements Num
             area_show.setText(company_area1);
 
             other_income_source_show.setText(Other_income_Value);
-            if(Other_income_id.equals("4"))
+            if(Other_income_id.equals("2"))
             {
                 other_income_amount_ly.setVisibility(View.GONE);
             }else
@@ -1316,6 +1852,7 @@ public class Viability_Screen_revamp_Pl_BL extends SimpleActivity implements Num
                     pan_scroll.setBackgroundResource(R.drawable.capsul_button_icon1);
                     salaried_scroll.setBackgroundResource(R.drawable.capsul_button_icon1);
                     res_scroll1_img.setBackgroundResource(R.drawable.capsul_button_icon);
+                    creditbank_scroll_img.setBackgroundResource(R.drawable.capsul_button_icon1);
                     //  residence_layout.setVisibility(View.GONE);
                     salaried_ly.setVisibility(View.GONE);
                     self_ly.setVisibility(View.GONE);
@@ -1408,7 +1945,7 @@ public class Viability_Screen_revamp_Pl_BL extends SimpleActivity implements Num
 
 
         other_income_source_show.setText(Other_income_Value_self);
-        if(Other_income_id_self.equals("4"))
+        if(Other_income_id_self.equals("2"))
         {
             other_income_amount_ly.setVisibility(View.GONE);
         }else
@@ -1471,14 +2008,57 @@ public class Viability_Screen_revamp_Pl_BL extends SimpleActivity implements Num
 
         AppCompatTextView residence_pincode_show,area_show,residence_ownership_show;
 
+        AppCompatTextView resdoortxt_show,rentpaidshow,perrespinodeshow,perrestype,liveincurrentres,currentresaddress;
+
+        LinearLayout liveincurlay,perres_typelay,perrespincodelay,rentpaidlay;
+
+        liveincurlay = (LinearLayout) dialog.findViewById(R.id.liveincurlay);
+        perres_typelay = (LinearLayout) dialog.findViewById(R.id.perres_typelay);
+        perrespincodelay = (LinearLayout) dialog.findViewById(R.id.perrespincodelay);
+        rentpaidlay = (LinearLayout) dialog.findViewById(R.id.rentpaidlay);
+
+
+        resdoortxt_show = (AppCompatTextView) dialog.findViewById(R.id.doornumshow);
+        rentpaidshow = (AppCompatTextView) dialog.findViewById(R.id.rentpaidshow);
+        perrespinodeshow = (AppCompatTextView) dialog.findViewById(R.id.perrespinodeshow);
+        perrestype = (AppCompatTextView) dialog.findViewById(R.id.perrestype);
+        liveincurrentres = (AppCompatTextView) dialog.findViewById(R.id.liveincurrentres);
+        currentresaddress = (AppCompatTextView) dialog.findViewById(R.id.currentresaddress);
+
+
+
         residence_pincode_show = (AppCompatTextView) dialog.findViewById(R.id.residence_pincode_show);
         area_show = (AppCompatTextView) dialog.findViewById(R.id.area_show);
         residence_ownership_show = (AppCompatTextView) dialog.findViewById(R.id.residence_ownership_show);
 
 
-        residence_pincode_show.setText(residence_pincode1_);
+        if(spinner_residence_type_res_id.equals("1") || spinner_residence_type_res_id.equals("2")){
+            liveincurlay.setVisibility(View.GONE);
+            perres_typelay.setVisibility(View.GONE);
+            perrespincodelay.setVisibility(View.GONE);
+            rentpaidlay.setVisibility(View.GONE);
+            residence_pincode_show.setText(residence_pincode1_);
+            area_show.setText(residence_area_res1);
+            residence_ownership_show.setText(spinner_residence_type_res_value);
+            currentresaddress.setText(currentresvalue);
+            resdoortxt_show.setText(residencedoorno_txt1.getText().toString());
+        }else{
+            residence_pincode_show.setText(residence_pincode1_);
+            area_show.setText(residence_area_res1);
+            residence_ownership_show.setText(spinner_residence_type_res_value);
+            currentresaddress.setText(currentresvalue);
+            resdoortxt_show.setText(residencedoorno_txt1.getText().toString());
+            liveincurrentres.setText(liveincurrent_txt.getText().toString());
+            perrestype.setText(permanentresvalue);
+            perrespinodeshow.setText(per_residencepincode.getText().toString());
+            rentpaidshow.setText(rentpaid_txt.getText().toString());
+
+        }
+
+
+      /*  residence_pincode_show.setText(residence_pincode1_);
         area_show.setText(residence_area_res1);
-        residence_ownership_show.setText(spinner_residence_type_res_value);
+        residence_ownership_show.setText(spinner_residence_type_res_value);*/
 
 
 
@@ -1486,8 +2066,31 @@ public class Viability_Screen_revamp_Pl_BL extends SimpleActivity implements Num
             @Override
             public void onClick(View v) {
                 dialog.dismiss();
-                rule_message.clear();
-                viability_Applicant();
+                if (loan_type_id.equals("33")) {
+
+                    Pan_btn.setVisibility(View.GONE);
+                    salried_self_btn.setVisibility(View.GONE);
+                    residence_btn.setVisibility(View.GONE);
+                    creditbankbtn.setVisibility(View.VISIBLE);
+
+
+                    property_ly.setVisibility(View.GONE);
+                    pan_ly.setVisibility(View.GONE);
+                    res_ly.setVisibility(View.GONE);
+
+                    pan_scroll.setBackgroundResource(R.drawable.capsul_button_icon1);
+                    salaried_scroll.setBackgroundResource(R.drawable.capsul_button_icon1);
+                    res_scroll1_img.setBackgroundResource(R.drawable.capsul_button_icon1);
+                    creditbank_scroll_img.setBackgroundResource(R.drawable.capsul_button_icon);
+                    //  residence_layout.setVisibility(View.GONE);
+                    salaried_ly.setVisibility(View.GONE);
+                    self_ly.setVisibility(View.GONE);
+                    creditbanklay.setVisibility(View.VISIBLE);
+
+                }
+
+               /* rule_message.clear();
+                viability_Applicant();*/
 
             }
         });
@@ -1537,6 +2140,44 @@ public class Viability_Screen_revamp_Pl_BL extends SimpleActivity implements Num
         if (Fathers_Name.getText().toString().trim().isEmpty() || Fathers_Name.length() < 3 || !(Pattern.matches("^[\\p{L} .'-]+$", Fathers_Name.getText()))) {
             Fathers_Name.setError(getText(R.string.vali_name));
             Fathers_Name.requestFocus();
+            return false;
+        } else {
+        }
+        return true;
+    }
+
+    private boolean avgbankbalance(){
+        if (avgbankbaltxt.getText().toString().isEmpty()) {
+            avgbankbaltxt.setError(getText(R.string.error_rise));
+            avgbankbaltxt.requestFocus();
+            return false;
+        } else {
+            avgbankbaltxt.setError(null);
+            //inputLayoutLname.setErrorEnabled(false);
+        }
+
+        return true;
+    }
+
+    private boolean bankturnover(){
+        if (bankturnovertxt.getText().toString().isEmpty()) {
+            bankturnovertxt.setError(getText(R.string.error_rise));
+            bankturnovertxt.requestFocus();
+            return false;
+        } else {
+            bankturnovertxt.setError(null);
+            //inputLayoutLname.setErrorEnabled(false);
+        }
+
+        return true;
+    }
+
+
+    private boolean validate_noofdependents(){
+        String name = noof_dependenttxt.getText().toString();
+        if (noof_dependenttxt.getText().toString().trim().isEmpty()) {
+            noof_dependenttxt.setError(getText(R.string.vali_names));
+            noof_dependenttxt.requestFocus();
             return false;
         } else {
         }
@@ -1594,6 +2235,20 @@ public class Viability_Screen_revamp_Pl_BL extends SimpleActivity implements Num
 
         return true;
     }
+
+    private boolean validate_officialmailid(){
+        if (officialmailidtxt.getText().toString().isEmpty()) {
+            officialmailidtxt.setError(getText(R.string.error_rise));
+            officialmailidtxt.requestFocus();
+            return false;
+        } else {
+            officialmailidtxt.setError(null);
+            //inputLayoutLname.setErrorEnabled(false);
+        }
+
+        return true;
+    }
+
     private boolean validate_designation_edit_text(){
         if (designation_edit_text.getText().toString().isEmpty()) {
             designation_edit_text.setError(getText(R.string.error_rise));
@@ -1639,6 +2294,19 @@ public class Viability_Screen_revamp_Pl_BL extends SimpleActivity implements Num
             return false;
         } else {
             company_pincode_txt.setError(null);
+            //inputLayoutLname.setErrorEnabled(false);
+        }
+
+        return true;
+    }
+
+    private boolean validate_doornumber_edit_text(){
+        if (doorstreet_txt.getText().toString().isEmpty()) {
+            doorstreet_txt.setError(getText(R.string.error_rise));
+            doorstreet_txt.requestFocus();
+            return false;
+        } else {
+            doorstreet_txt.setError(null);
             //inputLayoutLname.setErrorEnabled(false);
         }
 
@@ -1731,11 +2399,26 @@ public class Viability_Screen_revamp_Pl_BL extends SimpleActivity implements Num
                             Marital_Status =object.getJSONArray("Marital_Status");
                             Business_income_proof_ar =object.getJSONArray("Business_income_proof");
                             Business_Proof =object.getJSONArray("Business_Proof");
+                            typeofemployarray =object.getJSONArray("Type_employee");
+                            addr_proof_rent=object.getJSONArray("addr_proof_rent");
+                            currentres_array=object.getJSONArray("Current_Residence");
+                            haveotherincome_array =object.getJSONArray("is_other_eranings");
+                            creditscore_array=object.getJSONArray("entered_credit_score");
+
+
+
+
+
+
+
+
 
                             Property_Type =object.getJSONArray("Property_Type");
                             Property_title =object.getJSONArray("Property_title");
                             property_identified =object.getJSONArray("property_identified");
                             Type_of_self_employement  =object.getJSONArray("Type_of_self_employement");
+                            permanentres_array=object.getJSONArray("permanent_adddress");
+
                             Property_Identified_Spinner(property_identified);
                             Property_Title_Spinner(Property_title);
 
@@ -1743,13 +2426,19 @@ public class Viability_Screen_revamp_Pl_BL extends SimpleActivity implements Num
 
                             Other_income =object.getJSONArray("Other_income");
 
-                            Other_income(Other_income);
-                            Other_income_self(Other_income);
+                            Other_income(haveotherincome_array);
+                            Other_income_self(haveotherincome_array);
+                            Creditscore(creditscore_array);
+                            PermenentresType(permanentres_array);
+
 
                             ////SelfEmployes
                             Type_of_employement =object.getJSONArray("Employement");
                             Type_of_Employeement(Type_of_employement);
                             Type_of_Employeement_self_employment(Type_of_self_employement);
+
+                            employmentproof_array =object.getJSONArray("employment_proof");
+                            EmploymentProof(employmentproof_array);
 
                             Marital_Statues(Marital_Status);
 
@@ -1761,6 +2450,9 @@ public class Viability_Screen_revamp_Pl_BL extends SimpleActivity implements Num
                             pl_co_self_Office_Shop_(office_shop);
                             pl_co_self_Office_own_Rent(Office_residence);
 
+                            Typeofemployee(typeofemployarray);
+
+
                             have_pan_ar_self =object.getJSONArray("have_pan");
                             vocaton_ar =object.getJSONArray("vocaton");
                             Business_income_proof_ar =object.getJSONArray("Business_income_proof");
@@ -1771,11 +2463,29 @@ public class Viability_Screen_revamp_Pl_BL extends SimpleActivity implements Num
 
                             Business_type_own_business =object.getJSONArray("Business_income_proof");
                             Business_Proof =object.getJSONArray("Business_Proof");
+                            educational_status=object.getJSONArray("Education Qualification");
+                            gender_status =object.getJSONArray("gender");
+                            assetsown=object.getJSONArray("Assets_own");
+                            emilate_array=object.getJSONArray("emi_late");
+                            bankactype_array=object.getJSONArray("bankstacc_type");
+                            majortrans_array=object.getJSONArray("major_transaction");
+
+
+
+
 
 
 
                             Business_proof(Business_type_own_business);
                             Business_vintage_proof(Business_Proof);
+                            Educationalstatus(educational_status);
+                            Gender_Statues(gender_status);
+                            Multiselect_Assetowned(assetsown);
+                            Emilate(emilate_array);
+                            BankActype(bankactype_array);
+                            MajorTranscation(majortrans_array);
+
+
                             Assets_own =object.getJSONArray("Assets_own");
 
                             vehicle_Type =object.getJSONArray("vehicle_Type");
@@ -2403,6 +3113,55 @@ public class Viability_Screen_revamp_Pl_BL extends SimpleActivity implements Num
                         spinner_residence_type_res_id = office_shop_ar.getJSONObject(position).getString("id");
                         spinner_residence_type_res_value = office_shop_ar.getJSONObject(position).getString("value");
 
+                        if(spinner_residence_type_res_id.equals("3")) {
+                            rentpaidlay.setVisibility(View.VISIBLE);
+                            per_respincodelay.setVisibility(View.VISIBLE);
+                            permanentresidencetypelay.setVisibility(View.VISIBLE);
+                            liveinresidence.setVisibility(View.VISIBLE);
+                            Current_RentAddress(addr_proof_rent);
+                        }else if(spinner_residence_type_res_id.equals("4")){
+                            rentpaidlay.setVisibility(View.VISIBLE);
+                            per_respincodelay.setVisibility(View.VISIBLE);
+                            permanentresidencetypelay.setVisibility(View.VISIBLE);
+                            liveinresidence.setVisibility(View.VISIBLE);
+                            Current_RentAddress(addr_proof_rent);
+                        }else if(spinner_residence_type_res_id.equals("5")){
+                            rentpaidlay.setVisibility(View.VISIBLE);
+                            per_respincodelay.setVisibility(View.VISIBLE);
+                            permanentresidencetypelay.setVisibility(View.VISIBLE);
+                            liveinresidence.setVisibility(View.VISIBLE);
+                            Current_RentAddress(addr_proof_rent);
+                        }else if(spinner_residence_type_res_id.equals("6")){
+                            rentpaidlay.setVisibility(View.VISIBLE);
+                            per_respincodelay.setVisibility(View.VISIBLE);
+                            permanentresidencetypelay.setVisibility(View.VISIBLE);
+                            liveinresidence.setVisibility(View.VISIBLE);
+                            Current_RentAddress(addr_proof_rent);
+                        }else if(spinner_residence_type_res_id.equals("1")){
+                            rentpaidlay.setVisibility(View.GONE);
+                            per_respincodelay.setVisibility(View.GONE);
+                            permanentresidencetypelay.setVisibility(View.GONE);
+                            liveinresidence.setVisibility(View.GONE);
+                            CurrentresAddress(currentres_array);
+
+                        }else if(spinner_residence_type_res_id.equals("2")){
+                            rentpaidlay.setVisibility(View.GONE);
+                            per_respincodelay.setVisibility(View.GONE);
+                            permanentresidencetypelay.setVisibility(View.GONE);
+                            liveinresidence.setVisibility(View.GONE);
+                            CurrentresAddress(currentres_array);
+
+                        }
+                        else{
+                            rentpaidlay.setVisibility(View.GONE);
+                            per_respincodelay.setVisibility(View.GONE);
+                            permanentresidencetypelay.setVisibility(View.GONE);
+                            liveinresidence.setVisibility(View.GONE);
+                            CurrentresAddress(currentres_array);
+
+                        }
+
+
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
@@ -2793,7 +3552,7 @@ public class Viability_Screen_revamp_Pl_BL extends SimpleActivity implements Num
                         Other_income_id = Company_type_ar.getJSONObject(position).getString("id");
                         Other_income_Value = Company_type_ar.getJSONObject(position).getString("value");
                         //CAT_ID = ja.getJSONObject(position).getString("category_id");
-                        if( Other_income_id.equals("4"))
+                        if( Other_income_id.equals("2"))
                         {
                             other_income_amt_ly_.setVisibility(View.GONE);
                         }else
@@ -3492,6 +4251,8 @@ public class Viability_Screen_revamp_Pl_BL extends SimpleActivity implements Num
             applicant1.put("pan_details",Pan_Details);
             applicant1.put("employment_details",Employement_type);
             applicant1.put("residence",Residence);
+            applicant1.put("creditdetails",Creditbank_Details);
+
 
             if(loan_type_id.equals("20"))
             {
@@ -3614,7 +4375,7 @@ public class Viability_Screen_revamp_Pl_BL extends SimpleActivity implements Num
                                 popupWindow = new PopupWindow(customView, LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
                                 //display the popup window
                                 popupWindow.dismiss();*/
-                                Intent intent = new Intent(Viability_Screen_revamp_Pl_BL.this, PaymentActivity.class);
+                                Intent intent = new Intent(Viability_Screen_revamp_Pl_BL.this, ViableBankActivity.class);
                                 startActivity(intent);
                                 finish();
                                 Pref.putCoAPPAVAILABLE(context,"1");
@@ -3685,102 +4446,7 @@ public class Viability_Screen_revamp_Pl_BL extends SimpleActivity implements Num
                     @Override
                     public void onResponse(JSONObject response) {
                         Log.e("rule run response", String.valueOf(response));
-                        String data = String.valueOf(response);
-                        try {
-                            String Status = response.getString("status");
-                            JSONObject response_ = response.getJSONObject("response");
-                            String eligible_status = response_.getString("eligible_status");
-                            if(eligible_status.equals("1"))
-                            {
-                                progressDialog.dismiss();
-                                // viability_check_pass();
-                                Eligibility_check_doc_checklist_generate();
-                            }else
-                            {
-                                String viability_status = response_.getString("viability_status");
-                                if(viability_status.equals("1"))
-                                {
-                                    Toast.makeText(context,"Viability Failed",Toast.LENGTH_SHORT).show();
-                                    String rule_desc = null;
-                                    String age_vale = null;
-                                    String ind_salary = null;
-                                    String bank_failure = null;
-                                    JSONArray jsonArray = response.getJSONArray("rule_desc");
-                                    JSONArray jsonArray1 = response.getJSONArray("rule_message");
-                                    for (int i=0; i<jsonArray.length();i++) {
-                                        try {
-                                            JSONObject J = jsonArray.getJSONObject(i);
-                                            rule_desc = J.getString("rule_desc");
-                                            if(rule_desc.equals("Age"))
-                                            {
-                                                age_vale="Sorry.! Age Criteria Not Met | You can apply for a loan in the name of - any one of your family members, whose Age is between 20 and 55.";
-                                                rule_message.add(age_vale);
-                                            }else if(rule_desc.equals("Individual Salary"))
-                                            {
-                                                ind_salary="Sorry.! Income should not be less than \u20B9 12,000 for applying loan with us.";
-                                                rule_message.add(ind_salary);
-                                            }else
-                                            {
-                                                rule_desc = J.getString("fail_message");
-                                                bank_failure="Sorry.! Currently we have no partner banks available in applicants location" +" "+
-                                                        "We are On-boarding as many new banks as possible. Stay tuned.! ";
-                                                rule_message.add(rule_desc);
-                                            }
-                                            Log.e("rule_desc",rule_desc);
-                                        } catch (JSONException e) {
-                                            e.printStackTrace();
-                                        }
-                                    }
-                                    // Toast.makeText(context,"Viability Created Successfully",Toast.LENGTH_SHORT).show();
-                                    LayoutInflater layoutInflater = (LayoutInflater) Viability_Screen_revamp_Pl_BL.this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                                    View customView = layoutInflater.inflate(R.layout.popup_rul_fail,null);
-                                    Button godashboard = (Button) customView.findViewById(R.id.godashboard);
-                                    TextView content_txt = (TextView) customView.findViewById(R.id.content_txt);
-                                    String list = Arrays.toString(rule_message.toArray()).replace("[", "").replace("]", "");
-                                    content_txt.setText(list);
-                                    //instantiate popup window
-                                    popupWindow = new PopupWindow(customView, LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
-                                    //display the popup window
-                                    popupWindow.showAtLocation(godashboard, Gravity.CENTER, 0, 0);
-                                    //close the popup window on button click
-                                    godashboard.setOnClickListener(new View.OnClickListener() {
-                                        @Override
-                                        public void onClick(View v) {
-                                            Intent intent = new Intent(Viability_Screen_revamp_Pl_BL.this, Dashboard_Activity.class);
-                                            startActivity(intent);
-                                            finish();
-                                        }
-                                    });
-                                    progressDialog.dismiss();
-                                }else
-                                {
-                                    LayoutInflater layoutInflater = (LayoutInflater) Viability_Screen_revamp_Pl_BL.this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                                    View customView = layoutInflater.inflate(R.layout.popup_rul_fail,null);
-                                    Button godashboard = (Button) customView.findViewById(R.id.godashboard);
-                                    TextView content_txt = (TextView) customView.findViewById(R.id.content_txt);
-                                    //  String list = Arrays.toString(rule_message.toArray()).replace("[", "").replace("]", "");
-                                    content_txt.setText("Bank Requirement Not Met");
-                                    //instantiate popup window
-                                    popupWindow = new PopupWindow(customView, LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
-                                    //display the popup window
-                                    popupWindow.showAtLocation(godashboard, Gravity.CENTER, 0, 0);
-                                    //close the popup window on button click
-                                    godashboard.setOnClickListener(new View.OnClickListener() {
-                                        @Override
-                                        public void onClick(View v) {
-                                            Intent intent = new Intent(Viability_Screen_revamp_Pl_BL.this, Dashboard_Activity.class);
-                                            startActivity(intent);
-                                            finish();
-                                        }
-                                    });
-                                    progressDialog.dismiss();
-                                }
-                            }
-                            //JSONObject jsonObject1 = response.getJSONObject("response");
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                        Log.e("Lead creation", String.valueOf(response));
+                        GenerateDocverifyrule();
                     }
                 }, new Response.ErrorListener() {
             @Override
@@ -3806,6 +4472,106 @@ public class Viability_Screen_revamp_Pl_BL extends SimpleActivity implements Num
         jsonObjReq.setRetryPolicy(policy);
         AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
     }
+
+
+    private void GenerateDocverifyrule(){
+        JSONObject J= null;
+        try {
+            J = new JSONObject();
+            J.put("transaction_id",Pref.getTRANSACTIONID(getApplicationContext()));
+            J.put("user_id", Pref.getUSERID(getApplicationContext()));
+            Log.i("TAG", "Docverifyrule "+J.toString());
+        }catch (JSONException e)
+        {
+            e.printStackTrace();
+        }
+        progressDialog.show();
+        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, Urls.GENEARTEDOCVERIFYRULE, J,
+                new Response.Listener<JSONObject>() {
+
+                    @Override
+                    public void onResponse(JSONObject object) {
+                        progressDialog.dismiss();
+                        Log.e("respose docverifyrule", object.toString());
+                        Status_Update();
+                       /* Intent intent=new Intent(Viability_Screen_revamp_Pl_BL.this,ViableBankActivity.class);
+                        startActivity(intent);*/
+                    }
+                }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                VolleyLog.d("TAG", "Error: " + error.getMessage());
+                progressDialog.dismiss();
+            }
+        }) {
+
+            /**
+             * Passing some request headers
+             * */
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("Content-Type", "application/json");
+                return headers;
+            }
+        };
+        // Adding request to request queue
+        AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
+
+    }
+
+
+    private void Status_Update(){
+        JSONObject J= null;
+        try {
+            J = new JSONObject();
+            J.put("transaction_id", Pref.getTRANSACTIONID(getApplicationContext()));
+            J.put("comp_status", "2");
+            J.put("subcomp_status", "1");
+            Log.i("TAG", "Statusupdate "+J.toString());
+        }catch (JSONException e)
+        {
+            e.printStackTrace();
+        }
+        progressDialog.show();
+        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, Urls.status_update, J,
+                new Response.Listener<JSONObject>() {
+
+                    @Override
+                    public void onResponse(JSONObject object) {
+                        progressDialog.dismiss();
+                        Intent intent=new Intent(Viability_Screen_revamp_Pl_BL.this, ViableBankActivity.class);
+                        startActivity(intent);
+                        finish();
+
+
+                    }
+                }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                VolleyLog.d("TAG", "Error: " + error.getMessage());
+                progressDialog.dismiss();
+            }
+        }) {
+
+            /**
+             * Passing some request headers
+             * */
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("Content-Type", "application/json");
+                return headers;
+            }
+        };
+        // Adding request to request queue
+        AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
+
+    }
+
+
 
 
 
@@ -4212,5 +4978,1138 @@ public class Viability_Screen_revamp_Pl_BL extends SimpleActivity implements Num
         }
 
     }
+
+
+    private void Educationalstatus(final JSONArray Marital_Statues_ar) throws JSONException {
+        //   SPINNERLIST = new String[ja.length()];
+        Marital_Statues_SA = new String[Marital_Statues_ar.length()];
+        for (int i=0;i<Marital_Statues_ar.length();i++){
+            JSONObject J =  Marital_Statues_ar.getJSONObject(i);
+            Marital_Statues_SA[i] = J.getString("value");
+            final List<String> loan_type_list = new ArrayList<>(Arrays.asList( Marital_Statues_SA));
+            educational_adapter = new ArrayAdapter<String>(context, R.layout.view_spinner_item, loan_type_list){
+                public View getView(int position, View convertView, ViewGroup parent) {
+                    font = Typeface.createFromAsset(context.getAssets(),"Lato-Regular.ttf");
+                    TextView v = (TextView) super.getView(position, convertView, parent);
+                    v.setTypeface(font);
+                    return v;
+                }
+
+                public View getDropDownView(int position, View convertView, ViewGroup parent) {
+                    TextView v = (TextView) super.getView(position, convertView, parent);
+                    v.setTypeface(font);
+                    return v;
+                }
+            };
+
+            educational_adapter.setDropDownViewResource(R.layout.view_spinner_item);
+
+            educational_qualificationspinner.setAdapter(educational_adapter);
+            educational_qualificationspinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                    try {
+                        //  City_loc_uniqueID = ja.getJSONObject(position).getString("city_id");
+
+                        educationalstatusid = Marital_Statues_ar.getJSONObject(position).getString("id");
+                        educationalstatusvalue = Marital_Statues_ar.getJSONObject(position).getString("value");
+                        //CAT_ID = ja.getJSONObject(position).getString("category_id");
+
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+
+                }
+            });
+            educational_qualificationspinner.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View view, MotionEvent motionEvent) {
+                    // imm.hideSoftInputFromWindow(edt_buyer_address.getWindowToken(), 0);
+                    return false;
+                }
+            });
+        }
+
+    }
+
+    private void Gender_Statues(final JSONArray Marital_Statues_ar) throws JSONException {
+        //   SPINNERLIST = new String[ja.length()];
+        Marital_Statues_SA = new String[Marital_Statues_ar.length()];
+        for (int i=0;i<Marital_Statues_ar.length();i++){
+            JSONObject J =  Marital_Statues_ar.getJSONObject(i);
+            Marital_Statues_SA[i] = J.getString("value");
+            final List<String> loan_type_list = new ArrayList<>(Arrays.asList( Marital_Statues_SA));
+            Gender_statusadapter = new ArrayAdapter<String>(context, R.layout.view_spinner_item, loan_type_list){
+                public View getView(int position, View convertView, ViewGroup parent) {
+                    font = Typeface.createFromAsset(context.getAssets(),"Lato-Regular.ttf");
+                    TextView v = (TextView) super.getView(position, convertView, parent);
+                    v.setTypeface(font);
+                    return v;
+                }
+
+                public View getDropDownView(int position, View convertView, ViewGroup parent) {
+                    TextView v = (TextView) super.getView(position, convertView, parent);
+                    v.setTypeface(font);
+                    return v;
+                }
+            };
+
+            Gender_statusadapter.setDropDownViewResource(R.layout.view_spinner_item);
+
+            gender_spinner.setAdapter(Gender_statusadapter);
+            gender_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                    try {
+                        //  City_loc_uniqueID = ja.getJSONObject(position).getString("city_id");
+
+                        genderstatus_id = Marital_Statues_ar.getJSONObject(position).getString("id");
+                        genderstatus_value  = Marital_Statues_ar.getJSONObject(position).getString("value");
+                        //CAT_ID = ja.getJSONObject(position).getString("category_id");
+
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+
+                }
+            });
+            gender_spinner.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View view, MotionEvent motionEvent) {
+                    // imm.hideSoftInputFromWindow(edt_buyer_address.getWindowToken(), 0);
+                    return false;
+                }
+            });
+        }
+
+    }
+
+    private void Multiselect_Assetowned(final JSONArray jsonArray)throws JSONException{
+        TYPE = new String[jsonArray.length()];
+        for (int i = 0; i < jsonArray.length(); i++) {
+            JSONObject J = jsonArray.getJSONObject(i);
+            TYPE[i] = J.getString("value");
+            final List<String> Profile_List = new ArrayList<>(Arrays.asList(TYPE));
+            assetowned_multiselect = new ArrayAdapter<String>(Viability_Screen_revamp_Pl_BL.this, R.layout.view_spinner_item, Profile_List) {
+                public View getView(int position, View convertView, ViewGroup parent) {
+                    // font = Typeface.createFromAsset(mCon.getAssets(), "Lato-Regular.ttf");
+                    TextView v = (TextView) super.getView(position, convertView, parent);
+                    //  v.setTypeface(font);
+                    return v;
+                }
+                public View getDropDownView(int position, View convertView, ViewGroup parent) {
+                    TextView v = (TextView) super.getView(position, convertView, parent);
+                    //   v.setTypeface(font);
+                    return v;
+                }
+            };
+            assetsowned.setAdapter(assetowned_multiselect, false, onSelectedListenerassetowned);
+        }
+    }
+
+
+    private MultiSpinner.MultiSpinnerListener onSelectedListenerassetowned = new MultiSpinner.MultiSpinnerListener() {
+
+        public void onItemsSelected(boolean[] selected) {
+            // Do something here with the selected items
+            Log.e("the value",selected.toString());
+            assetsowned.setSelected(selected);
+
+            StringBuilder builder = new StringBuilder();
+
+            Income_proof_selected = selected;
+
+            String selected_salary_proof;
+
+            for (int i = 0; i <= selected.length-1; i++) {
+                if (selected[i]) {
+                    //  builder.append(companyproof_multiAdapter.getItem(i)).append(" ");
+                    // salry_proof.add(companyproof_multiAdapter.getItem(i));
+
+                    selected_salary_proof = assetowned_multiselect.getItem(i);
+                    for (int j = 0; j < assetsown.length(); j++) {
+                        try {
+                            JSONObject J = assetsown.getJSONObject(i);
+                            String salary_proof = J.getString("value");
+
+                            if (selected_salary_proof.equals(salary_proof)) {
+                                String vintage_proof_id = J.getString("id");
+                                String salary_proof1 = J.getString("value");
+                                // salry_proof.add(vintage_proof_id);
+                                assetownid.add(vintage_proof_id);
+                                assetownvalue.add(salary_proof1);
+                            }
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+
+            }
+            Set<String> listWithoutDuplicates = new LinkedHashSet<String>(assetownid);
+            assetownid.clear();
+            assetownid.addAll(listWithoutDuplicates);
+
+            Set<String> listWithoutDuplicates1 = new LinkedHashSet<String>(assetownvalue);
+            assetownvalue.clear();
+            assetownvalue.addAll(listWithoutDuplicates1);
+            Log.e("the selected valuesid",assetownid.toString());
+            Log.e("the selected values",assetownvalue.toString());
+            // Toast.makeText(Viability_Screen_revamp_Pl_BL.this, builder.toString(), Toast.LENGTH_SHORT).show();
+            // Toast.makeText(MainActivity.this, builder.toString(), Toast.LENGTH_SHORT).show();
+        }
+    };
+
+
+    private void Typeofemployee(final JSONArray Marital_Statues_ar) throws JSONException {
+        //   SPINNERLIST = new String[ja.length()];
+        Marital_Statues_SA = new String[Marital_Statues_ar.length()];
+        for (int i=0;i<Marital_Statues_ar.length();i++){
+            JSONObject J =  Marital_Statues_ar.getJSONObject(i);
+            Marital_Statues_SA[i] = J.getString("value");
+            final List<String> loan_type_list = new ArrayList<>(Arrays.asList( Marital_Statues_SA));
+            typeofemployeadapter = new ArrayAdapter<String>(context, R.layout.view_spinner_item, loan_type_list){
+                public View getView(int position, View convertView, ViewGroup parent) {
+                    font = Typeface.createFromAsset(context.getAssets(),"Lato-Regular.ttf");
+                    TextView v = (TextView) super.getView(position, convertView, parent);
+                    v.setTypeface(font);
+                    return v;
+                }
+
+                public View getDropDownView(int position, View convertView, ViewGroup parent) {
+                    TextView v = (TextView) super.getView(position, convertView, parent);
+                    v.setTypeface(font);
+                    return v;
+                }
+            };
+
+            typeofemployeadapter.setDropDownViewResource(R.layout.view_spinner_item);
+
+            typeofemploye_spinner.setAdapter(typeofemployeadapter);
+            typeofemploye_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                    try {
+                        //  City_loc_uniqueID = ja.getJSONObject(position).getString("city_id");
+
+                        typeofemployeid = Marital_Statues_ar.getJSONObject(position).getString("id");
+                        typeofemployevalue = Marital_Statues_ar.getJSONObject(position).getString("value");
+                        //CAT_ID = ja.getJSONObject(position).getString("category_id");
+
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+
+                }
+            });
+            typeofemploye_spinner.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View view, MotionEvent motionEvent) {
+                    // imm.hideSoftInputFromWindow(edt_buyer_address.getWindowToken(), 0);
+                    return false;
+                }
+            });
+        }
+
+    }
+
+
+    private void PermenentresType(final JSONArray Marital_Statues_ar) throws JSONException {
+        //   SPINNERLIST = new String[ja.length()];
+        Marital_Statues_SA = new String[Marital_Statues_ar.length()];
+        for (int i=0;i<Marital_Statues_ar.length();i++){
+            JSONObject J =  Marital_Statues_ar.getJSONObject(i);
+            Marital_Statues_SA[i] = J.getString("value");
+            final List<String> loan_type_list = new ArrayList<>(Arrays.asList( Marital_Statues_SA));
+            permanentrestypeadapter = new ArrayAdapter<String>(context, R.layout.view_spinner_item, loan_type_list){
+                public View getView(int position, View convertView, ViewGroup parent) {
+                    font = Typeface.createFromAsset(context.getAssets(),"Lato-Regular.ttf");
+                    TextView v = (TextView) super.getView(position, convertView, parent);
+                    v.setTypeface(font);
+                    return v;
+                }
+
+                public View getDropDownView(int position, View convertView, ViewGroup parent) {
+                    TextView v = (TextView) super.getView(position, convertView, parent);
+                    v.setTypeface(font);
+                    return v;
+                }
+            };
+
+            permanentrestypeadapter.setDropDownViewResource(R.layout.view_spinner_item);
+
+            permanentres_spinner.setAdapter(permanentrestypeadapter);
+            permanentres_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                    try {
+                        //  City_loc_uniqueID = ja.getJSONObject(position).getString("city_id");
+
+                        permanentresid = Marital_Statues_ar.getJSONObject(position).getString("id");
+                        permanentresvalue = Marital_Statues_ar.getJSONObject(position).getString("value");
+                        //CAT_ID = ja.getJSONObject(position).getString("category_id");
+
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+
+                }
+            });
+            permanentres_spinner.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View view, MotionEvent motionEvent) {
+                    // imm.hideSoftInputFromWindow(edt_buyer_address.getWindowToken(), 0);
+                    return false;
+                }
+            });
+        }
+
+    }
+
+
+    private void CurrentresAddress(final JSONArray Marital_Statues_ar) throws JSONException {
+        //   SPINNERLIST = new String[ja.length()];
+        Marital_Statues_SA = new String[Marital_Statues_ar.length()];
+        for (int i=0;i<Marital_Statues_ar.length();i++){
+            JSONObject J =  Marital_Statues_ar.getJSONObject(i);
+            Marital_Statues_SA[i] = J.getString("value");
+            final List<String> loan_type_list = new ArrayList<>(Arrays.asList( Marital_Statues_SA));
+            currentrestypeadapter = new ArrayAdapter<String>(context, R.layout.view_spinner_item, loan_type_list){
+                public View getView(int position, View convertView, ViewGroup parent) {
+                    font = Typeface.createFromAsset(context.getAssets(),"Lato-Regular.ttf");
+                    TextView v = (TextView) super.getView(position, convertView, parent);
+                    v.setTypeface(font);
+                    return v;
+                }
+
+                public View getDropDownView(int position, View convertView, ViewGroup parent) {
+                    TextView v = (TextView) super.getView(position, convertView, parent);
+                    v.setTypeface(font);
+                    return v;
+                }
+            };
+
+            currentrestypeadapter.setDropDownViewResource(R.layout.view_spinner_item);
+
+            current_resspinner.setAdapter(currentrestypeadapter);
+            current_resspinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                    try {
+                        //  City_loc_uniqueID = ja.getJSONObject(position).getString("city_id");
+
+                        currentresid = Marital_Statues_ar.getJSONObject(position).getString("id");
+                        currentresvalue = Marital_Statues_ar.getJSONObject(position).getString("value");
+                        //CAT_ID = ja.getJSONObject(position).getString("category_id");
+
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+
+                }
+            });
+            current_resspinner.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View view, MotionEvent motionEvent) {
+                    // imm.hideSoftInputFromWindow(edt_buyer_address.getWindowToken(), 0);
+                    return false;
+                }
+            });
+        }
+
+    }
+
+
+    private void Current_RentAddress(final JSONArray Marital_Statues_ar) throws JSONException {
+        //   SPINNERLIST = new String[ja.length()];
+        Marital_Statues_SA = new String[Marital_Statues_ar.length()];
+        for (int i=0;i<Marital_Statues_ar.length();i++){
+            JSONObject J =  Marital_Statues_ar.getJSONObject(i);
+            Marital_Statues_SA[i] = J.getString("value");
+            final List<String> loan_type_list = new ArrayList<>(Arrays.asList( Marital_Statues_SA));
+            currentrestypeadapter = new ArrayAdapter<String>(context, R.layout.view_spinner_item, loan_type_list){
+                public View getView(int position, View convertView, ViewGroup parent) {
+                    font = Typeface.createFromAsset(context.getAssets(),"Lato-Regular.ttf");
+                    TextView v = (TextView) super.getView(position, convertView, parent);
+                    v.setTypeface(font);
+                    return v;
+                }
+
+                public View getDropDownView(int position, View convertView, ViewGroup parent) {
+                    TextView v = (TextView) super.getView(position, convertView, parent);
+                    v.setTypeface(font);
+                    return v;
+                }
+            };
+
+            currentrestypeadapter.setDropDownViewResource(R.layout.view_spinner_item);
+
+            current_resspinner.setAdapter(currentrestypeadapter);
+            current_resspinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                    try {
+                        //  City_loc_uniqueID = ja.getJSONObject(position).getString("city_id");
+
+                        currentresid = Marital_Statues_ar.getJSONObject(position).getString("id");
+                        currentresvalue = Marital_Statues_ar.getJSONObject(position).getString("value");
+                        //CAT_ID = ja.getJSONObject(position).getString("category_id");
+
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+
+                }
+            });
+            current_resspinner.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View view, MotionEvent motionEvent) {
+                    // imm.hideSoftInputFromWindow(edt_buyer_address.getWindowToken(), 0);
+                    return false;
+                }
+            });
+        }
+
+    }
+
+
+    private void Creditscore(final JSONArray Marital_Statues_ar) throws JSONException {
+        //   SPINNERLIST = new String[ja.length()];
+        Marital_Statues_SA = new String[Marital_Statues_ar.length()];
+        for (int i=0;i<Marital_Statues_ar.length();i++){
+            JSONObject J =  Marital_Statues_ar.getJSONObject(i);
+            Marital_Statues_SA[i] = J.getString("value");
+            final List<String> loan_type_list = new ArrayList<>(Arrays.asList( Marital_Statues_SA));
+            creditscoreadapter = new ArrayAdapter<String>(context, R.layout.view_spinner_item, loan_type_list){
+                public View getView(int position, View convertView, ViewGroup parent) {
+                    font = Typeface.createFromAsset(context.getAssets(),"Lato-Regular.ttf");
+                    TextView v = (TextView) super.getView(position, convertView, parent);
+                    v.setTypeface(font);
+                    return v;
+                }
+
+                public View getDropDownView(int position, View convertView, ViewGroup parent) {
+                    TextView v = (TextView) super.getView(position, convertView, parent);
+                    v.setTypeface(font);
+                    return v;
+                }
+            };
+
+            creditscoreadapter.setDropDownViewResource(R.layout.view_spinner_item);
+
+            creditscorespinner.setAdapter(creditscoreadapter);
+            creditscorespinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                    try {
+                        //  City_loc_uniqueID = ja.getJSONObject(position).getString("city_id");
+
+                        creditscoreid = Marital_Statues_ar.getJSONObject(position).getString("id");
+                        creditscorevalue = Marital_Statues_ar.getJSONObject(position).getString("value");
+                        //CAT_ID = ja.getJSONObject(position).getString("category_id");
+
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+
+                }
+            });
+            creditscorespinner.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View view, MotionEvent motionEvent) {
+                    // imm.hideSoftInputFromWindow(edt_buyer_address.getWindowToken(), 0);
+                    return false;
+                }
+            });
+        }
+
+    }
+
+
+    private void Emilate(final JSONArray Marital_Statues_ar) throws JSONException {
+        //   SPINNERLIST = new String[ja.length()];
+        Marital_Statues_SA = new String[Marital_Statues_ar.length()];
+        for (int i=0;i<Marital_Statues_ar.length();i++){
+            JSONObject J =  Marital_Statues_ar.getJSONObject(i);
+            Marital_Statues_SA[i] = J.getString("value");
+            final List<String> loan_type_list = new ArrayList<>(Arrays.asList( Marital_Statues_SA));
+            emilateadapter = new ArrayAdapter<String>(context, R.layout.view_spinner_item, loan_type_list){
+                public View getView(int position, View convertView, ViewGroup parent) {
+                    font = Typeface.createFromAsset(context.getAssets(),"Lato-Regular.ttf");
+                    TextView v = (TextView) super.getView(position, convertView, parent);
+                    v.setTypeface(font);
+                    return v;
+                }
+
+                public View getDropDownView(int position, View convertView, ViewGroup parent) {
+                    TextView v = (TextView) super.getView(position, convertView, parent);
+                    v.setTypeface(font);
+                    return v;
+                }
+            };
+
+            emilateadapter.setDropDownViewResource(R.layout.view_spinner_item);
+
+            emilatespinner.setAdapter(emilateadapter);
+            emilatespinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                    try {
+                        //  City_loc_uniqueID = ja.getJSONObject(position).getString("city_id");
+
+                        emilateid = Marital_Statues_ar.getJSONObject(position).getString("id");
+                        emilatevalue = Marital_Statues_ar.getJSONObject(position).getString("value");
+                        //CAT_ID = ja.getJSONObject(position).getString("category_id");
+
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+
+                }
+            });
+            emilatespinner.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View view, MotionEvent motionEvent) {
+                    // imm.hideSoftInputFromWindow(edt_buyer_address.getWindowToken(), 0);
+                    return false;
+                }
+            });
+        }
+
+    }
+
+
+    private void BankListAPI() {
+        JSONObject J= null;
+        try {
+            J = new JSONObject();
+            J.put("state_id","28");
+            Log.i("TAG", "BankListAPI: "+J.toString());
+
+        }catch (JSONException e)
+        {
+            e.printStackTrace();
+        }
+
+        Log.e("state_id", String.valueOf(J));
+
+        progressDialog.show();
+        Log.e("Request Dreopdown", "called");
+        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, Urls.GET_BANKDROPDOWN_LIST, J,
+                new Response.Listener<JSONObject>() {
+
+                    @Override
+                    public void onResponse(JSONObject object) {
+
+                        progressDialog.dismiss();
+
+                        Log.e("respose Dreopdown", object.toString());
+                        /// msgResponse.setText(response.toString());
+                        //  Objs.a.showToast(getContext(), String.valueOf(object));
+                        try {
+                            banksalary_array =object.getJSONArray("bank_list");
+                            Banklist(banksalary_array);
+
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        // Toast.makeText(mCon, response.toString(),Toast.LENGTH_SHORT).show();
+
+                    }
+                }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                VolleyLog.d("TAG", "Error: " + error.getMessage());
+                progressDialog.dismiss();
+            }
+        }) {
+
+            /**
+             * Passing some request headers
+             * */
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("Content-Type", "application/json");
+                return headers;
+            }
+        };
+        // Adding request to request queue
+        AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
+
+    }
+
+
+    private void Banklist(final JSONArray Marital_Statues_ar) throws JSONException {
+        //   SPINNERLIST = new String[ja.length()];
+        Marital_Statues_SA = new String[Marital_Statues_ar.length()];
+        for (int i=0;i<Marital_Statues_ar.length();i++){
+            JSONObject J =  Marital_Statues_ar.getJSONObject(i);
+            Marital_Statues_SA[i] = J.getString("value");
+            final List<String> loan_type_list = new ArrayList<>(Arrays.asList( Marital_Statues_SA));
+            banklistadapter = new ArrayAdapter<String>(context, R.layout.view_spinner_item, loan_type_list){
+                public View getView(int position, View convertView, ViewGroup parent) {
+                    font = Typeface.createFromAsset(context.getAssets(),"Lato-Regular.ttf");
+                    TextView v = (TextView) super.getView(position, convertView, parent);
+                    v.setTypeface(font);
+                    return v;
+                }
+
+                public View getDropDownView(int position, View convertView, ViewGroup parent) {
+                    TextView v = (TextView) super.getView(position, convertView, parent);
+                    v.setTypeface(font);
+                    return v;
+                }
+            };
+
+            banklistadapter.setDropDownViewResource(R.layout.view_spinner_item);
+
+            banksalarycreditdropdown.setAdapter(banklistadapter);
+            banksalarycreditdropdown.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                    try {
+                        //  City_loc_uniqueID = ja.getJSONObject(position).getString("city_id");
+
+                        banklistid = Marital_Statues_ar.getJSONObject(position).getString("id");
+                        banklistvalue = Marital_Statues_ar.getJSONObject(position).getString("value");
+                        //CAT_ID = ja.getJSONObject(position).getString("category_id");
+
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+
+                }
+            });
+            banksalarycreditdropdown.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View view, MotionEvent motionEvent) {
+                    // imm.hideSoftInputFromWindow(edt_buyer_address.getWindowToken(), 0);
+                    return false;
+                }
+            });
+        }
+
+    }
+
+
+    private void Submit_Creditbankdetails(){
+        final Dialog dialog = new Dialog(this);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+        dialog.setContentView(R.layout.creditbanklaysconform);
+        //  dialog.getWindow().setLayout(display.getWidth() * 90 / 100, LinearLayout.LayoutParams.WRAP_CONTENT);
+        dialog.setCancelable(true);
+        dialog.setCanceledOnTouchOutside(false);
+        Button cancelbtn = (Button) dialog.findViewById(R.id.cancelbtn);
+        Button submitbtn=(Button)dialog.findViewById(R.id.submitbtn);
+
+        AppCompatTextView Pan_No_Show,dob_Show,father_name,marital_status,noofdependent_show,gendershow,
+                edu_qualshow,assetshow,salarycredtextview;
+
+        AppCompatTextView doyouhaveloan,legaltxt,creditscoreshow,didpaytxt,whatsavagtxt,bankturntxt,salatycredittxt,
+                bankactxt,majortranstxt,bankpdftxt;
+
+        LinearLayout avgbanklay,bankturnoverlays,salarycreditlay,bankaclay,majortranslay,pdfarranglay;
+
+        avgbanklay=(LinearLayout)dialog.findViewById(R.id.avgbanklay);
+        bankturnoverlays=(LinearLayout)dialog.findViewById(R.id.bankturnoverlays);
+        salarycreditlay=(LinearLayout)dialog.findViewById(R.id.salarycreditlay);
+        bankaclay=(LinearLayout)dialog.findViewById(R.id.bankaclay);
+        majortranslay=(LinearLayout)dialog.findViewById(R.id.majortranslay);
+        pdfarranglay=(LinearLayout)dialog.findViewById(R.id.pdfarranglay);
+
+        doyouhaveloan = (AppCompatTextView) dialog.findViewById(R.id.doyouhaveloan);
+        legaltxt = (AppCompatTextView) dialog.findViewById(R.id.legaltxt);
+        creditscoreshow = (AppCompatTextView) dialog.findViewById(R.id.creditscoreshow);
+        didpaytxt = (AppCompatTextView) dialog.findViewById(R.id.didpaytxt);
+        whatsavagtxt = (AppCompatTextView) dialog.findViewById(R.id.whatsavagtxt);
+        bankturntxt = (AppCompatTextView) dialog.findViewById(R.id.bankturntxt);
+        salatycredittxt = (AppCompatTextView) dialog.findViewById(R.id.salatycredittxt);
+        bankactxt = (AppCompatTextView) dialog.findViewById(R.id.bankactxt);
+        majortranstxt = (AppCompatTextView) dialog.findViewById(R.id.majortranstxt);
+        bankpdftxt = (AppCompatTextView) dialog.findViewById(R.id.bankpdftxt);
+
+        if(loan_type_id.equals("33")){
+            avgbanklay.setVisibility(View.GONE);
+            bankturnoverlays.setVisibility(View.GONE);
+            bankaclay.setVisibility(View.GONE);
+            majortranslay.setVisibility(View.GONE);
+            creditscoreshow.setText(creditscorevalue);
+            didpaytxt.setText(emilatevalue);
+            salatycredittxt.setText(banklistvalue);
+            if (closedloan_radio.equals("1")){
+                doyouhaveloan.setText("Yes");
+            }else{
+                doyouhaveloan.setText("No");
+
+            }
+            if(legal_radio.equals("1")){
+                legaltxt.setText("Yes");
+            }else{
+                legaltxt.setText("No");
+            }
+
+            if(arrangepdf_radio.equals("1"))
+            {
+                bankpdftxt.setText("Yes");
+            }else{
+                bankpdftxt.setText("No");
+
+            }
+
+        }else{
+            creditscoreshow.setText(creditscorevalue);
+            didpaytxt.setText(emilatevalue);
+            salatycredittxt.setText(banklistvalue);
+            whatsavagtxt.setText(avgbankbaltxt.getText().toString());
+            bankturntxt.setText(bankturnovertxt.getText().toString());
+            bankactxt.setText(bankactypevalue);
+            majortranstxt.setText(majortransvalue);
+            if (closedloan_radio.equals("1")){
+                doyouhaveloan.setText("Yes");
+            }else{
+                doyouhaveloan.setText("No");
+
+            }
+            if(legal_radio.equals("1")){
+                legaltxt.setText("Yes");
+            }else{
+                legaltxt.setText("No");
+            }
+
+            if(arrangepdf_radio.equals("1"))
+            {
+                bankpdftxt.setText("Yes");
+            }else{
+                bankpdftxt.setText("No");
+
+            }
+
+        }
+
+
+
+
+        submitbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+                rule_message.clear();
+                viability_Applicant();
+
+            }
+        });
+        cancelbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+
+
+        if (!dialog.isShowing()) {
+            dialog.show();
+        }
+
+    }
+
+
+
+    private void BankActype(final JSONArray Marital_Statues_ar) throws JSONException {
+        //   SPINNERLIST = new String[ja.length()];
+        Marital_Statues_SA = new String[Marital_Statues_ar.length()];
+        for (int i=0;i<Marital_Statues_ar.length();i++){
+            JSONObject J =  Marital_Statues_ar.getJSONObject(i);
+            Marital_Statues_SA[i] = J.getString("value");
+            final List<String> loan_type_list = new ArrayList<>(Arrays.asList( Marital_Statues_SA));
+            bankactypeadapter = new ArrayAdapter<String>(context, R.layout.view_spinner_item, loan_type_list){
+                public View getView(int position, View convertView, ViewGroup parent) {
+                    font = Typeface.createFromAsset(context.getAssets(),"Lato-Regular.ttf");
+                    TextView v = (TextView) super.getView(position, convertView, parent);
+                    v.setTypeface(font);
+                    return v;
+                }
+
+                public View getDropDownView(int position, View convertView, ViewGroup parent) {
+                    TextView v = (TextView) super.getView(position, convertView, parent);
+                    v.setTypeface(font);
+                    return v;
+                }
+            };
+
+            bankactypeadapter.setDropDownViewResource(R.layout.view_spinner_item);
+
+            accounttype_spinner.setAdapter(bankactypeadapter);
+            accounttype_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                    try {
+                        //  City_loc_uniqueID = ja.getJSONObject(position).getString("city_id");
+
+                        bankactypeid = Marital_Statues_ar.getJSONObject(position).getString("id");
+                        bankactypevalue = Marital_Statues_ar.getJSONObject(position).getString("value");
+                        //CAT_ID = ja.getJSONObject(position).getString("category_id");
+
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+
+                }
+            });
+            accounttype_spinner.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View view, MotionEvent motionEvent) {
+                    // imm.hideSoftInputFromWindow(edt_buyer_address.getWindowToken(), 0);
+                    return false;
+                }
+            });
+        }
+
+    }
+
+
+    private void MajorTranscation(final JSONArray Marital_Statues_ar) throws JSONException {
+        //   SPINNERLIST = new String[ja.length()];
+        Marital_Statues_SA = new String[Marital_Statues_ar.length()];
+        for (int i=0;i<Marital_Statues_ar.length();i++){
+            JSONObject J =  Marital_Statues_ar.getJSONObject(i);
+            Marital_Statues_SA[i] = J.getString("value");
+            final List<String> loan_type_list = new ArrayList<>(Arrays.asList( Marital_Statues_SA));
+            majortrans_adapter = new ArrayAdapter<String>(context, R.layout.view_spinner_item, loan_type_list){
+                public View getView(int position, View convertView, ViewGroup parent) {
+                    font = Typeface.createFromAsset(context.getAssets(),"Lato-Regular.ttf");
+                    TextView v = (TextView) super.getView(position, convertView, parent);
+                    v.setTypeface(font);
+                    return v;
+                }
+
+                public View getDropDownView(int position, View convertView, ViewGroup parent) {
+                    TextView v = (TextView) super.getView(position, convertView, parent);
+                    v.setTypeface(font);
+                    return v;
+                }
+            };
+
+            majortrans_adapter.setDropDownViewResource(R.layout.view_spinner_item);
+
+            majortrans_spinner.setAdapter(majortrans_adapter);
+            majortrans_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                    try {
+                        //  City_loc_uniqueID = ja.getJSONObject(position).getString("city_id");
+
+                        majortransid = Marital_Statues_ar.getJSONObject(position).getString("id");
+                        majortransvalue = Marital_Statues_ar.getJSONObject(position).getString("value");
+                        //CAT_ID = ja.getJSONObject(position).getString("category_id");
+
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+
+                }
+            });
+            majortrans_spinner.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View view, MotionEvent motionEvent) {
+                    // imm.hideSoftInputFromWindow(edt_buyer_address.getWindowToken(), 0);
+                    return false;
+                }
+            });
+        }
+
+    }
+
+
+    private void EmploymentProof(final JSONArray Type_of_employement_ar) throws JSONException {
+        //   SPINNERLIST = new String[ja.length()];
+        EMPLOYEE_TYPE_SA = new String[Type_of_employement_ar.length()];
+        for (int i=0;i<Type_of_employement_ar.length();i++){
+            JSONObject J =  Type_of_employement_ar.getJSONObject(i);
+            EMPLOYEE_TYPE_SA[i] = J.getString("value");
+            final List<String> loan_type_list = new ArrayList<>(Arrays.asList(EMPLOYEE_TYPE_SA));
+            employeproofadapter = new ArrayAdapter<String>(context, R.layout.view_spinner_item, loan_type_list){
+                public View getView(int position, View convertView, ViewGroup parent) {
+                    font = Typeface.createFromAsset(context.getAssets(),"Lato-Regular.ttf");
+                    TextView v = (TextView) super.getView(position, convertView, parent);
+                    v.setTypeface(font);
+                    return v;
+                }
+
+                public View getDropDownView(int position, View convertView, ViewGroup parent) {
+                    TextView v = (TextView) super.getView(position, convertView, parent);
+                    v.setTypeface(font);
+                    return v;
+                }
+            };
+
+            employeproofadapter.setDropDownViewResource(R.layout.view_spinner_item);
+            employee_proofspinner.setAdapter(employeproofadapter);
+            employee_proofspinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                    try {
+                        //  City_loc_uniqueID = ja.getJSONObject(position).getString("city_id");
+                        employeproofid = Type_of_employement_ar.getJSONObject(position).getString("id");
+                        employeproofvalue = Type_of_employement_ar.getJSONObject(position).getString("value");
+
+                        if(employeproofid.equals("2")){
+                            officialmaillay.setVisibility(View.VISIBLE);
+                        }else{
+                            officialmaillay.setVisibility(View.GONE);
+                        }
+
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+
+                }
+            });
+            employee_proofspinner.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View view, MotionEvent motionEvent) {
+                    // imm.hideSoftInputFromWindow(edt_buyer_address.getWindowToken(), 0);
+                    return false;
+                }
+            });
+        }
+
+    }
+
+
+    private void AutoAPi() {
+        JSONObject J= null;
+        try {
+            J = new JSONObject();
+            J.put("term","info");
+            Log.i("TAG", "autoapi: "+J.toString());
+
+        }catch (JSONException e)
+        {
+            e.printStackTrace();
+        }
+        progressDialog.show();
+        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, "https://cscapi.loanwiser.in/mobile/partner_loanapi_test_new.php?call=getCompanyList", J,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject object) {
+                        progressDialog.dismiss();
+                        Log.e("resposeDreopdown", object.toString());
+                        try {
+
+                            autocompletearray =object.getJSONArray("company_arr");
+                            Automenthod(autocompletearray);
+/*
+                            JSONArray jsonArray = null;
+                            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.KITKAT) {
+                                jsonArray = new JSONArray(object);
+                                String ss=object.getString("")
+                                autocompletearray =object.getJSONArray("company_arr");
+                                for(int i=0;i<autocompletearray.length();i++){
+                                    Log.i("TAG", "jsonlength"+autocompletearray.length());
+                                    JSONObject e = autocompletearray.getJSONObject(i);
+                                    String s=e.getString("employe_name");
+                                    listarray.add(s);
+                                    Log.i("TAG", "onResponse:list"+listarray.add(s));
+
+                                    ArrayAdapter<String> adapter = new ArrayAdapter<String>
+                                            (Viability_Screen_revamp_Pl_BL.this,android.R.layout.select_dialog_item, listarray);
+                                    autocompletetextview.setThreshold(2);
+                                    autocompletetextview.setAdapter(adapter);
+                                }
+
+                            }*/
+
+
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                VolleyLog.d("TAG", "Error: " + error.getMessage());
+               // Toast.makeText(in.loanwiser.p.Step_Changes_Screen.Viability_Screen_revamp_Pl_BL.this,"Error",Toast.LENGTH_SHORT).show();
+                progressDialog.dismiss();
+            }
+        }) {
+
+            /**
+             * Passing some request headers
+             * */
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("Content-Type", "application/json");
+                return headers;
+            }
+        };
+        // Adding request to request queue
+        AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
+
+    }
+
+
+
+    private void Automenthod(final JSONArray Marital_Statues_ar) throws JSONException {
+        //   SPINNERLIST = new String[ja.length()];
+        Marital_Statues_SA = new String[Marital_Statues_ar.length()];
+        for (int i=0;i<Marital_Statues_ar.length();i++){
+            JSONObject J =  Marital_Statues_ar.getJSONObject(i);
+            Marital_Statues_SA[i] = J.getString("company_code");
+            final List<String> loan_type_list = new ArrayList<>(Arrays.asList( Marital_Statues_SA));
+            autocompleteadapter = new ArrayAdapter<String>(context, R.layout.view_spinner_item, loan_type_list){
+                public View getView(int position, View convertView, ViewGroup parent) {
+                    font = Typeface.createFromAsset(context.getAssets(),"Lato-Regular.ttf");
+                    TextView v = (TextView) super.getView(position, convertView, parent);
+                    v.setTypeface(font);
+                    return v;
+                }
+
+                public View getDropDownView(int position, View convertView, ViewGroup parent) {
+                    TextView v = (TextView) super.getView(position, convertView, parent);
+                    v.setTypeface(font);
+                    return v;
+                }
+            };
+
+            autocompleteadapter.setDropDownViewResource(R.layout.view_spinner_item);
+            company_name_edit_text.setThreshold(2);
+            company_name_edit_text.setAdapter(autocompleteadapter);
+
+            //banksalarycreditdropdown.setAdapter(banklistadapter);
+           /* banksalarycreditdropdown.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                    try {
+                        //  City_loc_uniqueID = ja.getJSONObject(position).getString("city_id");
+
+                        banklistid = Marital_Statues_ar.getJSONObject(position).getString("id");
+                        banklistvalue = Marital_Statues_ar.getJSONObject(position).getString("value");
+                        //CAT_ID = ja.getJSONObject(position).getString("category_id");
+
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+
+                }
+            });*/
+         /*   banksalarycreditdropdown.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View view, MotionEvent motionEvent) {
+                    // imm.hideSoftInputFromWindow(edt_buyer_address.getWindowToken(), 0);
+                    return false;
+                }
+            });*/
+        }
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 }

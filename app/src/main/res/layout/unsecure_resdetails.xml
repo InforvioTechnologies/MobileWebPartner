@@ -34,7 +34,7 @@
                             android:id="@+id/residence_detailshead"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/residence_det"
+                            android:text="Residence Details"
                             android:textStyle="bold"
                             android:textSize="16sp"
                             android:layout_margin="10dp"
@@ -43,6 +43,46 @@
                             android:orientation="vertical"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content">
+
+                            <LinearLayout
+                                android:id="@+id/resaddresslay"
+                                android:padding="5dp"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1">
+                                    <androidx.appcompat.widget.AppCompatTextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:textColor="#8A8A8A"
+                                        style="@style/SmallText"
+                                        android:text="Door Number"
+                                        android:textSize="16sp"/>
+                                    <androidx.appcompat.widget.AppCompatTextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:gravity="end"
+                                        android:textColor="@color/colorPrimary"
+                                        style="@style/SmallText"
+                                        android:text=":"/>
+                                </LinearLayout>
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1">
+                                    <androidx.appcompat.widget.AppCompatTextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:id="@+id/companydoor"
+                                        style="@style/SmallText"
+                                        android:textColor="@color/text_blue"
+                                        android:textStyle="bold" />
+                                </LinearLayout>
+                            </LinearLayout>
 
 
 
@@ -169,13 +209,217 @@
                                             android:textColor="#032C58"
                                             android:textStyle="bold"
                                             android:id="@+id/unsecure_restype"
-                                            style="@style/SmallText"
-
-                                            />
+                                            style="@style/SmallText" />
                                     </LinearLayout>
                                 </LinearLayout>
 
+                            <LinearLayout
+                                android:id="@+id/rentpaidlay"
+                                android:padding="5dp"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
                                 <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1">
+                                    <androidx.appcompat.widget.AppCompatTextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:textColor="#8A8A8A"
+                                        style="@style/SmallText"
+                                        android:text="Rent Paid for House"
+                                        android:textSize="16sp"/>
+                                    <androidx.appcompat.widget.AppCompatTextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:gravity="end"
+                                        android:textColor="@color/colorPrimary"
+                                        style="@style/SmallText"
+                                        android:text=":"/>
+                                </LinearLayout>
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1">
+                                    <androidx.appcompat.widget.AppCompatTextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:textColor="#032C58"
+                                        android:textStyle="bold"
+                                        android:id="@+id/rentpaidforhousetxt"
+                                        style="@style/SmallText" />
+                                </LinearLayout>
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:id="@+id/permanentrespinlay"
+                                android:padding="5dp"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1">
+                                    <androidx.appcompat.widget.AppCompatTextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:textColor="#8A8A8A"
+                                        style="@style/SmallText"
+                                        android:text="Permanent Residence pincode"
+                                        android:textSize="16sp"/>
+                                    <androidx.appcompat.widget.AppCompatTextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:gravity="end"
+                                        android:textColor="@color/colorPrimary"
+                                        style="@style/SmallText"
+                                        android:text=":"/>
+                                </LinearLayout>
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1">
+                                    <androidx.appcompat.widget.AppCompatTextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:textColor="#032C58"
+                                        android:textStyle="bold"
+                                        android:id="@+id/perrespincodetxt"
+                                        style="@style/SmallText" />
+                                </LinearLayout>
+                            </LinearLayout>
+
+
+                            <LinearLayout
+                                android:id="@+id/permanentrestypelay"
+                                android:padding="5dp"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1">
+                                    <androidx.appcompat.widget.AppCompatTextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:textColor="#8A8A8A"
+                                        style="@style/SmallText"
+                                        android:text="Permanent Residence Type"
+                                        android:textSize="16sp"/>
+                                    <androidx.appcompat.widget.AppCompatTextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:gravity="end"
+                                        android:textColor="@color/colorPrimary"
+                                        style="@style/SmallText"
+                                        android:text=":"/>
+                                </LinearLayout>
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1">
+                                    <androidx.appcompat.widget.AppCompatTextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:textColor="#032C58"
+                                        android:textStyle="bold"
+                                        android:id="@+id/perrestypecodetxt"
+                                        style="@style/SmallText" />
+                                </LinearLayout>
+                            </LinearLayout>
+
+
+                            <LinearLayout
+                                android:id="@+id/liveincurrentlay"
+                                android:padding="5dp"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1">
+                                    <androidx.appcompat.widget.AppCompatTextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:textColor="#8A8A8A"
+                                        style="@style/SmallText"
+                                        android:text="Live in Current Residence"
+                                        android:textSize="16sp"/>
+                                    <androidx.appcompat.widget.AppCompatTextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:gravity="end"
+                                        android:textColor="@color/colorPrimary"
+                                        style="@style/SmallText"
+                                        android:text=":"/>
+                                </LinearLayout>
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1">
+                                    <androidx.appcompat.widget.AppCompatTextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:textColor="#032C58"
+                                        android:textStyle="bold"
+                                        android:id="@+id/liveincurrenttxt"
+                                        style="@style/SmallText" />
+                                </LinearLayout>
+                            </LinearLayout>
+
+
+                            <LinearLayout
+                                android:id="@+id/curres_addressprofflay"
+                                android:padding="5dp"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1">
+                                    <androidx.appcompat.widget.AppCompatTextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:textColor="#8A8A8A"
+                                        style="@style/SmallText"
+                                        android:text="Current Residence Address Proof"
+                                        android:textSize="16sp"/>
+                                    <androidx.appcompat.widget.AppCompatTextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:gravity="end"
+                                        android:textColor="@color/colorPrimary"
+                                        style="@style/SmallText"
+                                        android:text=":"/>
+                                </LinearLayout>
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1">
+                                    <androidx.appcompat.widget.AppCompatTextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:textColor="#032C58"
+                                        android:textStyle="bold"
+                                        android:id="@+id/curres_addressprofftxt"
+                                        style="@style/SmallText" />
+                                </LinearLayout>
+                            </LinearLayout>
+
+
+
+
+                            <LinearLayout
                                     android:id="@+id/benefitcoinlay"
                                     android:padding="5dp"
                                     android:visibility="gone"

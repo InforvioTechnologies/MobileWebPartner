@@ -5,6 +5,7 @@ import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.AppCompatSpinner;
 import androidx.appcompat.widget.AppCompatTextView;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
@@ -59,11 +60,14 @@ import in.loanwiser.partnerapp.BankStamentUpload.Doc_ImageView_Bank;
 import in.loanwiser.partnerapp.BankStamentUpload.Upload_Activity_Bank;
 import in.loanwiser.partnerapp.CameraActivity.DocGridView_List;
 import in.loanwiser.partnerapp.Documents.Doc_ImageView;
+import in.loanwiser.partnerapp.Documents.Document_Availability_Check;
 import in.loanwiser.partnerapp.PDF_Dounloader.PermissionUtils;
 import in.loanwiser.partnerapp.PDF_Viewer.MainActivity;
 import in.loanwiser.partnerapp.PartnerActivitys.Dashboard_Activity;
 import in.loanwiser.partnerapp.PartnerActivitys.Home;
 import in.loanwiser.partnerapp.R;
+import in.loanwiser.partnerapp.Step3_Changes.Automater_Under_write;
+import in.loanwiser.partnerapp.Step3_Changes.Elegibility_Report;
 
 public class Payment_Sucess_Screen extends AppCompatActivity {
 
@@ -83,7 +87,7 @@ public class Payment_Sucess_Screen extends AppCompatActivity {
     AppCompatTextView cr_app1,cr_app2;
     LinearLayout credit_card_app,co_applicant_,applicant_question,standard;
 
-    AppCompatButton view_report,view_report_fail;
+    AppCompatButton view_report,payment_invoice;
 
     AppCompatSpinner questions_spinner;
 
@@ -117,6 +121,7 @@ public class Payment_Sucess_Screen extends AppCompatActivity {
         credit_card_app = (LinearLayout) findViewById(R.id.credit_card_app);
         co_applicant_ = (LinearLayout) findViewById(R.id.co_applicant_);
         standard = (LinearLayout) findViewById(R.id.standard);
+        payment_invoice = (AppCompatButton) findViewById(R.id.payment_invoice);
 
         applicant_question = (LinearLayout) findViewById(R.id.applicant_question);
         payment_button.setOnClickListener(new View.OnClickListener() {
@@ -124,23 +129,117 @@ public class Payment_Sucess_Screen extends AppCompatActivity {
             public void onClick(View view) {
 
                 payment_button.setEnabled(false);
-                Crif_Generation();
+                upload_Status();
+              //  Crif_Generation();
 
             }
         });
+        payment_invoice.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
+                Payout_invoce();
+                //  Crif_Generation();
+
+            }
+        });
         save_latter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Payment_Sucess_Screen.this, Dashboard_Activity.class);
-                startActivity(intent);
-                finish();
+                upload_Status1();
+
             }
         });
 
 
     }
 
+    private void upload_Status() {
+        JSONObject jsonObject =new JSONObject();
+        JSONObject J= null;
+        try {
+            J =new JSONObject();
+            J.put(Params.transaction_id, Pref.getTRANSACTIONID(getApplicationContext()));
+            J.put("comp_status", "3");
+            J.put("subcomp_status", "3");
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        Log.e("submit_loanwiser", String.valueOf(J));
+        progressDialog.show();
+        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, Urls.status_update, J,
+                new Response.Listener<JSONObject>() {
+                    @SuppressLint("RestrictedApi")
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        Log.e("Documnet_upload_Status1", String.valueOf(response));
+                        //{"request":{"transaction_id":"10194"},"response":true,"status":"success"}
+                        Intent intent = new Intent(Payment_Sucess_Screen.this, Automater_Under_write.class);
+                        startActivity(intent);
+                        finish();
+                        progressDialog.dismiss();
+                    }
+                }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                progressDialog.dismiss();
+                Toast.makeText(getApplicationContext(),error.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("content-type", "application/json");
+                return headers;
+            }
+        };
+        AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
+    }
+    private void upload_Status1() {
+        JSONObject jsonObject =new JSONObject();
+        JSONObject J= null;
+        try {
+            J =new JSONObject();
+            J.put(Params.transaction_id, Pref.getTRANSACTIONID(getApplicationContext()));
+            J.put("comp_status", "3");
+            J.put("subcomp_status", "3");
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        Log.e("submit_loanwiser", String.valueOf(J));
+        progressDialog.show();
+        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, Urls.status_update, J,
+                new Response.Listener<JSONObject>() {
+                    @SuppressLint("RestrictedApi")
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        Log.e("Documnet_upload_Status1", String.valueOf(response));
+                        //{"request":{"transaction_id":"10194"},"response":true,"status":"success"}
+                        Intent intent = new Intent(Payment_Sucess_Screen.this, Dashboard_Activity.class);
+                        startActivity(intent);
+                        finish();
+                        progressDialog.dismiss();
+                    }
+                }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                progressDialog.dismiss();
+                Toast.makeText(getApplicationContext(),error.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("content-type", "application/json");
+                return headers;
+            }
+        };
+        AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
+    }
     private void viability_check_pass( ) {
 
         JSONObject J= null;
@@ -2118,6 +2217,70 @@ public class Payment_Sucess_Screen extends AppCompatActivity {
                             }else
                             {
                                 Toast.makeText(mCon, "CRIF Statues Failed",Toast.LENGTH_SHORT).show();
+                            }
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        // Toast.makeText(mCon, response.toString(),Toast.LENGTH_SHORT).show();
+                        progressDialog.dismiss();
+                    }
+                }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                VolleyLog.d("TAG", "Error: " + error.getMessage());
+                progressDialog.dismiss();
+            }
+        }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("Content-Type", "application/json");
+                return headers;
+            }
+        };
+        AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
+
+    }
+
+    private void Payout_invoce() {
+        progressDialog.show();
+
+        JSONObject J =new JSONObject();
+
+        try {
+
+            J.put("user_id",Pref.getUSERID(getApplicationContext()));
+            //  J.put("mode","view");
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        Log.e("payout request",J.toString());
+        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, Urls.InvoiceReport, J,
+                new Response.Listener<JSONObject>() {
+
+                    @Override
+                    public void onResponse(JSONObject object) {
+                        Log.e("payment response",object.toString());
+                        try {
+
+                            String status = object.getString("status");
+
+                            if(status.equals("success")) {
+
+                                String invoice_url = object.getString("invoice_url");
+                                Log.e("payout response",invoice_url);
+                                String report="Payment Invoice";
+                                Intent intent = new Intent(Payment_Sucess_Screen.this, MainActivity.class);
+                                intent.putExtra("viability_report_URL", invoice_url);
+                                intent.putExtra("report", report);
+                                startActivity(intent);
+                                //  Document_Details();
+                            }else
+                            {
+                               // Toast.makeText(mCon, "CRIF Statues Failed",Toast.LENGTH_SHORT).show();
                             }
 
                         } catch (JSONException e) {

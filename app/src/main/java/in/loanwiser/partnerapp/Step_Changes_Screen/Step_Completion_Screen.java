@@ -1,6 +1,7 @@
 package in.loanwiser.partnerapp.Step_Changes_Screen;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.widget.NestedScrollView;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -30,6 +31,8 @@ public class Step_Completion_Screen extends SimpleActivity {
     PermissionUtils permissionUtils;
     private static final int STORAGE_PERMISSION_REQUEST_CODE = 1;
 
+    NestedScrollView ScrollView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,7 +43,8 @@ public class Step_Completion_Screen extends SimpleActivity {
         Objs.a.setStubId(this, R.layout.activity_step_completion);
         initTools(R.string.listapp2);
         proceed_button=(Button)findViewById(R.id.proceed_button);
-
+        ScrollView=(NestedScrollView) findViewById(R.id.ScrollView);
+        ScrollView.fullScroll(ScrollView.FOCUS_DOWN);
         noteid=(TextView) findViewById(R.id.noteid);
         permissionUtils = new PermissionUtils();
         earning_details_id = (LinearLayout) findViewById(R.id.earning_details_id);

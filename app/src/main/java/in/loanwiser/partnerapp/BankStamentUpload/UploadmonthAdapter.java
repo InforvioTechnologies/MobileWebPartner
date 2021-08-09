@@ -1,5 +1,7 @@
 package in.loanwiser.partnerapp.BankStamentUpload;
 
+import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -14,13 +16,15 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 
+import in.loanwiser.partnerapp.Documents.Bank_Availability_Check;
 import in.loanwiser.partnerapp.R;
 
 public class UploadmonthAdapter extends RecyclerView.Adapter<UploadmonthAdapter.ViewHolder> {
 
     List<studentData> studentDataList;
     ArrayList<String> requirelist=new ArrayList<>();
-
+    int count = 0;
+    private Context context;
     public UploadmonthAdapter(List<studentData> studentDataList) {
         this.studentDataList = studentDataList;
         this.requirelist=requirelist;
@@ -38,6 +42,7 @@ public class UploadmonthAdapter extends RecyclerView.Adapter<UploadmonthAdapter.
         final String requiremonth=studentDataList.get(position).getUpload_detstatus();
         studentData data=studentDataList.get(position);
         if (requiremonth.equalsIgnoreCase("required")){
+            count = 1;
             holder.yeartext.setText(data.name);
             holder.yeartext.setTextColor(Color.parseColor("#CE0000"));
             holder.rightcarnerlay.setBackgroundColor(Color.parseColor("#FFDBDB"));
@@ -56,7 +61,18 @@ public class UploadmonthAdapter extends RecyclerView.Adapter<UploadmonthAdapter.
         }
         Log.i("TAG", "onBindViewHolder:requiremonth "+requiremonth);
 
+       /* if(count>=1)
+        {
 
+        }else
+        {
+            Log.e("the count", String.valueOf(count));
+            Intent intent = new Intent(context, Bank_Availability_Check.class);
+            //  Intent in=new Intent(context,BankAnalysis.class);
+            intent.putExtra("adapter","upload");
+             context.startActivity(intent);
+
+        }*/
     }
 
     @Override

@@ -55,6 +55,7 @@ import adhoc.app.applibrary.Config.AppUtils.Pref.Pref;
 import adhoc.app.applibrary.Config.AppUtils.Urls;
 import adhoc.app.applibrary.Config.AppUtils.VolleySignleton.AppController;
 import dmax.dialog.SpotsDialog;
+import in.loanwiser.Old_Partner.Home_Old;
 import in.loanwiser.partnerapp.Infinite_Scrollview.InfiniteScrollProvider;
 import in.loanwiser.partnerapp.Infinite_Scrollview.LeadListAdapter_Dashboard;
 import in.loanwiser.partnerapp.Infinite_Scrollview.Lead_item;
@@ -62,6 +63,9 @@ import in.loanwiser.partnerapp.Infinite_Scrollview.OnLoadMoreListener;
 import in.loanwiser.partnerapp.PDF_Dounloader.PermissionUtils;
 import in.loanwiser.partnerapp.Partner_Statues.DashBoard_new;
 import in.loanwiser.partnerapp.R;
+import in.loanwiser.partnerapp.Step_Changes_Screen.Lead_Crration_Activity;
+import in.loanwiser.partnerapp.Step_Changes_Screen.Lead_Crration_Activity_old;
+import in.loanwiser.partnerapp.Step_Changes_Screen.Step_Completion_Activity;
 import in.loanwiser.partnerapp.User_Account.Welcome_Page;
 
 import static adhoc.app.applibrary.Config.AppUtils.Objs.a;
@@ -84,7 +88,7 @@ public class Dashboard_Activity extends AppCompatActivity implements OnLoadMoreL
     String email,username,mobileno,id,step_status,status,loan_type,loan_categoryid,payment;
 
     String applicant_id,sub_taskid,transaction_id,Mobile,Mobile1,loan_typename,sub_categoryid,
-            transaction_id1,subtask_id,applicant_id1,loan_type_id;
+            transaction_id1,subtask_id,applicant_id1,loan_type_id,new_user,last_status;
 
     AppCompatButton logout1,leads_float_chat;
     AppCompatTextView no_leads_data,txt_bank,txt_profile,txt_get_callback,label_status;
@@ -742,7 +746,10 @@ public class Dashboard_Activity extends AppCompatActivity implements OnLoadMoreL
                                 loan_type_id =  jsonObject2.getString("loan_type_id");
                                 loan_type =  jsonObject2.getString("loan_type");
                                 payment =  jsonObject2.getString("payment");
+                                new_user =  jsonObject2.getString("new_user");
+                                last_status =  jsonObject2.getString("last_status");
                                 applicant_id1 =  "APP-"+user_id;
+                                Toast.makeText(getApplicationContext(),new_user, Toast.LENGTH_SHORT).show();
 
                                 // String statues2 = "3";
                                 Pref.putUSERID(mCon,user_id);
@@ -753,14 +760,40 @@ public class Dashboard_Activity extends AppCompatActivity implements OnLoadMoreL
                                 String _Emp_staus_jsonArray = jsonArray.toString();
 
 
+                                if(new_user.equals("0"))
+                                {
+                                    if(last_status.equals("1")&& payment.equals("error"))
+                                    {
 
-                                Objs.ac.StartActivityPutExtra(mCon, Home.class,
-                                        Params.user_id,user_id,
-                                        Params.transaction_id,transaction_id1,
-                                        Params.applicant_id,applicant_id1,
-                                        Params.sub_taskid,subtask_id, Params.Applicant_status,_Emp_staus_jsonArray,
-                                        Params.loan_type_id,loan_type_id,Params.loan_type,loan_type);
-                                finish();
+                                        Pref.putLoanType(mCon,loan_type_id);
+                                        //String Loantype_name = "Loan Against Property";
+                                        Pref.putLoanTypename(mCon,loan_type);
+                                        Pref.putnew_user(mCon,new_user);
+                                        Intent intent=new Intent(Dashboard_Activity.this, Lead_Crration_Activity_old.class);
+                                        startActivity(intent);
+                                    }else
+                                    {
+                                        Objs.ac.StartActivityPutExtra(mCon, Home_Old.class,
+                                                Params.user_id,user_id,
+                                                Params.transaction_id,transaction_id1,
+                                                Params.applicant_id,applicant_id1,
+                                                Params.sub_taskid,subtask_id, Params.Applicant_status,_Emp_staus_jsonArray,
+                                                Params.loan_type_id,loan_type_id,Params.loan_type,loan_type);
+                                        finish();
+                                    }
+
+                                }else
+                                {
+                                    Objs.ac.StartActivityPutExtra(mCon, Home.class,
+                                            Params.user_id,user_id,
+                                            Params.transaction_id,transaction_id1,
+                                            Params.applicant_id,applicant_id1,
+                                            Params.sub_taskid,subtask_id, Params.Applicant_status,_Emp_staus_jsonArray,
+                                            Params.loan_type_id,loan_type_id,Params.loan_type,loan_type);
+                                    finish();
+                                }
+
+
 
                               /*  if(payment.equals("error"))
                                 {
