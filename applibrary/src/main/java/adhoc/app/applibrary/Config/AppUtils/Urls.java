@@ -24,20 +24,23 @@ public class Urls {
      public static String Urls = "https://cscapi.loanwiser.in/mobile/mortgage_updated_test_new.php?call=";
     public static String Urls_step = "https://cscapi.loanwiser.in/mobile/partner_loanapi_test_new.php?call=";
     public static String Urls_phamplet = "https://cscapi.loanwiser.in/mobile/pamphlet_distributor_test_new.php?call=";
+
     public static String Urls_Bank = "https://cscapi.loanwiser.in/integration/bank_statement_new.php?call=";
     public static String Urls_Bank1 = "https://cscapi.loanwiser.in/integration/bank_statement.php?call=";
+
     public static String Urls_CRIF = "https://cscapi.loanwiser.in/integration/crif_integration.php?call=";
     public static String Urls_step1 = "https://cscapi.loanwiser.in/mobile/partner_loanapi_second.php?call=";
 
- /*   ///UAT 24/06/2021
-   public static String Urls = "https://apiuat.loanwiser.in/mobile/mortgage_updated_test_new.php?call=";
-    public static String Urls_step = "https://apiuat.loanwiser.in/mobile/partner_loanapi_test_new.php?call=";
-    public static String Urls_phamplet = "https://apiuat.loanwiser.in/mobile/pamphlet_distributor_test_new.php?call=";
-    public static String Urls_Bank = "https://apiuat.loanwiser.in/integration/bank_statement_new.php?call=";
-    public static String Urls_Bank1 = "https://apiuat.loanwiser.in/integration/bank_statement.php?call=";
-    public static String Urls_CRIF = "https://apiuat.loanwiser.in/integration/crif_integration.php?call=";
-    public static String Urls_step1 = "https://apiuat.loanwiser.in/mobile/partner_loanapi_second.php?call=";
-    //// END ///*/
+  /*  ///UAT 24/06/2021
+   public static String Urls = "http://apiuat.loanwiser.in/uatapi/mobile/mortgage_updated_test_new.php?call=";
+    public static String Urls_step = "http://apiuat.loanwiser.in/uatapi/mobile/partner_loanapi_test_new.php?call=";
+    public static String Urls_phamplet = "http://apiuat.loanwiser.in/uatapi/mobile/pamphlet_distributor_test_new.php?call=";
+
+    public static String Urls_Bank = "http://apiuat.loanwiser.in/uatapi/mobile/integration/bank_statement_new.php?call=";
+    public static String Urls_Bank1 = "http://apiuat.loanwiser.in/uatapi/integration/bank_statement.php?call=";
+    public static String Urls_CRIF = "http://apiuat.loanwiser.in/uatapi/integration/crif_integration.php?call=";
+    public static String Urls_step1 = "http://apiuat.loanwiser.in/uatapi/partner_loanapi_second.php?call=";*/
+    //// END ///
 
     public static String Get_Dropdown  = Urls + "get_dropdown";
     public static String get_banklist  = Urls + "get_banklist";
@@ -137,6 +140,9 @@ public class Urls {
     public static String VIABILITY_CHECK_co_applicant1 = Urls_step + "viability_fields_coapplicant";
 
     public static String BANK_STATEMENT_LIST = Urls_step + "bank_statementlist";
+
+    public static String AddLead_Web = "https://apiuat.loanwiser.in/uatapi/mobile/partner_loanapi_second.php?call=getdecrypt_data";
+    public static String Applicant_User_Status_Web = "https://apiuat.loanwiser.in/uatapi/mobile/partner_loanapi_second.php?call=getdecrypt_existingdata";
 
    // https://cscapi.loanwiser.in/integration/bank_statement.php?call=get_bankstatement_det
     //"https://cscapi.loanwiser.in/integration/bank_statement.php?call=get_bankstatement_detnew"
